@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans          
+           http://www.springframework.org/schema/beans/spring-beans.xsd
+           http://www.springframework.org/schema/context 
+		   http://www.springframework.org/schema/context/spring-context.xsd
+		   http://www.springframework.org/schema/tx
+		   http://www.springframework.org/schema/tx/spring-tx.xsd">
+
+	<bean id="emf" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+		<property name="persistenceUnitName" value="dev" />
+		<property name="dataSource" ref="sisat"/>
+	</bean>
+	<bean id="sisat" class="org.springframework.jndi.JndiObjectFactoryBean">
+		<property name="jndiName" value="java:comp/env/sisat"/>
+	</bean>
+	<bean id="txManager" class="org.springframework.orm.jpa.JpaTransactionManager">
+		<property name="entityManagerFactory" ref="emf" />
+	</bean>
+	
+	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <!-- one of the properties available; the maximum file size in bytes -->
+       	<!-- <property name="maxUploadSize" value="100000"/> -->
+    </bean>
+	
+	<tx:annotation-driven transaction-manager="txManager" proxy-target-class="true" />
+ 
+	<context:component-scan base-package="br.com.ufc.quixada.npi.sisat.repository" />
+	<context:component-scan base-package="br.com.ufc.quixada.npi.sisat.service" />
+	<context:component-scan base-package="br.com.ufc.quixada.npi.sisat.controller" />
+</beans>
