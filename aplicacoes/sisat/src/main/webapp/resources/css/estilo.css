@@ -1,0 +1,96 @@
+div.container{
+	margin-bottom: 70px;
+}
+
+#header-page{
+	width: 100%;
+	background-color:#0064A1;
+	padding-top:20px;
+	padding-bottom:20px;
+}
+
+div.row {
+	width: 100%;
+}
+
+.navbar {
+	background-color: #f5f5f5;
+}
+.navbar-nav > li > a, .navbar-brand{
+	color: black !important;
+}
+.navbar-nav > li > a:HOVER, .navbar-brand:HOVER {
+	color: #0064A1 !important;
+}
+
+#footer{
+	position: fixed;
+    bottom: 0px;
+    width: 100%;
+    height: 50px;
+    background-color: #eee;
+}
+
+#text-ufc{
+	margin-top:20px;
+	text-align: center;
+}
+
+.controls{
+	width:50%;
+}
+
+.acoes{
+	margin-top:5%;
+}
+
+table#details {
+	border: none;
+	width: 100%;
+	font-size: 15px;
+}
+
+table#details tr td.head {
+	text-align: right;
+	width: 30%;
+	padding: 8px;
+	
+	font-weight: bold;
+}
+
+table#details tr td.content {
+	width: 70%;
+	padding: 8px;
+	font-style: normal;
+	color: #0064A1;
+}
+
+.nav-tabs > li.active > a {
+	background-color: #f5f5f5;
+	font-weight: bold;
+}
+.nav-tabs > li.active > a:hover {
+	background-color: #f5f5f5;
+}
+.nav-tabs > li.active > a:focus {
+    color: black;
+    background-color: #f5f5f5;  
+}
+.nav-tabs > li > a {
+	font-weight: bold;
+}
+
+div.alert {
+	text-align: center;
+}
+
+div.files {
+	text-align: left;
+}
+tr.processing {
+	display: none;
+}
+
+table#file-upload {
+	margin-top: 20px;
+}
