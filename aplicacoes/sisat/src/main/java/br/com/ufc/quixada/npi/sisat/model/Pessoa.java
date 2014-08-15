@@ -33,10 +33,10 @@ public class Pessoa {
 	private boolean habilitado;
 	
 	@ManyToMany
-	@JoinTable(name = "papel_usuario", joinColumns = @JoinColumn(name = "usuario_id"), inverseJoinColumns = @JoinColumn(name = "papel_id"))
+	@JoinTable(name = "papel_pessoa", joinColumns = @JoinColumn(name = "pessoa_id"), inverseJoinColumns = @JoinColumn(name = "papel_id"))
 	private List<Papel> papeis;
 	
-	@OneToMany(mappedBy="usuario")
+	@OneToMany(mappedBy="pessoa")
 	private List<Servidor> servidores;
 	
 	private String cpf;
