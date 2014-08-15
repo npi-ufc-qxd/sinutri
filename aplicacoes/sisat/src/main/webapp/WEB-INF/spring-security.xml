@@ -13,7 +13,8 @@
  		<intercept-url pattern="/login*" access="IS_AUTHENTICATED_ANONYMOUSLY" /> 
  		<intercept-url pattern="/webjars/**" access="IS_AUTHENTICATED_ANONYMOUSLY" /> 		
  		<intercept-url pattern="/*/nutricao/**" access="ROLE_NUTRICAO" />
- 		
+ 		<intercept-url pattern="/**" access="ROLE_NUTRICAO, ROLE_PSICOLOGIA" />
+
  		<form-login login-page="/login" default-target-url="/" 
  			authentication-failure-url="/loginfailed" />
  		<logout logout-success-url="/login" invalidate-session="true"/> 	
