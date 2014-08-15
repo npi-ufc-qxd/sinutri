@@ -16,16 +16,16 @@ public class Servidor {
 	private String siap;
 
 	@ManyToOne
-	private Pessoa usuario;
+	private Pessoa pessoa;
 
 	public Servidor() {
 		super();
 	}
 
-	public Servidor(String siap, Pessoa usuario) {
+	public Servidor(String siap, Pessoa pessoa) {
 		super();
 		this.siap = siap;
-		this.usuario = usuario;
+		this.pessoa = pessoa;
 	}
 
 	public String getSiap() {
@@ -37,11 +37,11 @@ public class Servidor {
 	}
 
 	public Pessoa getUsuario() {
-		return usuario;
+		return pessoa;
 	}
 
-	public void setUsuario(Pessoa usuario) {
-		this.usuario = usuario;
+	public void setUsuario(Pessoa pessoa) {
+		this.pessoa = pessoa;
 	}
 
 	public Long getId() {
