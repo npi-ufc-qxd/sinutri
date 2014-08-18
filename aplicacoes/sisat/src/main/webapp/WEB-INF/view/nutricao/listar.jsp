@@ -8,11 +8,19 @@
 
 <html>
 <head>
+	<jsp:include page="../modulos/header-estrutura.jsp" />
 	<title>Inicio</title>
 </head>
 <body>
-	<div class="form" align="center">
-		<h1>Sistema de Atendimento Nutricional 11</h1>
+	<jsp:include page="../modulos/header.jsp" />
+	
+	<div class="container">
+		<div class="form" align="center">
+			<h1>Sistema de Atendimento Nutricional</h1>
+		</div>
 	</div>
+
+	<jsp:include page="../modulos/footer.jsp" />
+
 </body>
 </html>
