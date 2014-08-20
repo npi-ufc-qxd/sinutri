@@ -18,14 +18,47 @@
 </head>
 <body>
      <jsp:include page="../modulos/header.jsp" />
-     
      <div class="container">
 		<div class="frequencia-alimentar" align="left">
 			<div class="form" align="center">
-               <h2>Formulario para Frequência Alimentar</h2>
 				<form:form id="frequenciaAlimentar" role="form" commandName="frequenciaAlimentar" servletRelativeAction="/nutricao/formulario_frequência_alimentar" method="POST" cssClass="form-horizontal">
-				
-				     <div class="form-group">
+			
+			<ul class="nav nav-tabs">
+			<li class="active"><a href="#">Exames Laboratoriais</a></li>
+			<li><a href="#">Avaliação nutricional</a></li>
+			<li><a href="#">Questionario de frequencia alimentar</a></li>
+		</ul>
+				   <fieldset>
+				     <legend>07:00 - Desjejum</legend>
+						<table class="table table-bordered table-hover table-condensed">
+							<thead>
+								<tr>
+									<th>Alimento/Preparo</th>
+									<th>Porção</th>
+									<th>Ação</th>
+								</tr>
+							</thead>
+							<thead>
+							<tbody>
+								
+							</tbody>
+						</table>
+					   </fieldset>
+					   
+					   
+						<form class="form-inline">
+							<label for="alimento""></label>
+							<div class="col-sm-6">
+								<form:input id="alimento" path="alimento" cssClass="form-control" placeholder="Digite o Alimento" />
+							</div>
+
+							<label for="porcaoteste""></label>
+							<div class="col-sm-2">
+								<form:input id="porcaoteste" path="porcaoteste" cssClass="form-control" placeholder="Digite a Porcao" />
+							</div>
+						</form>
+
+						<div class="form-group">
 						   <label for="horario" class="col-sm-2 control-label">Horário:</label>
 						   <div class="col-sm-5">
 						   <form:input id="horario" path="horario" cssClass="form-control" placeholder="Horario"/>
