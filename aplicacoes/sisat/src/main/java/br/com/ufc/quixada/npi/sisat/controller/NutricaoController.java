@@ -14,5 +14,11 @@ public class NutricaoController {
 		return "nutricao/listar";
 	}
 
+	
+
+		@RequestMapping(value = {"/consulta"}, method = RequestMethod.GET)
+		public String consulta() {
+			return "nutricao/consulta";
+		}
 
 }

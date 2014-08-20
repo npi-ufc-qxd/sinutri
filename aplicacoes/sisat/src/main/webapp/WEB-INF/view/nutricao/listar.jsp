@@ -19,8 +19,9 @@
 			<h1>Sistema de Atendimento Nutricional</h1>
 		</div>
 	</div>
-
 	<jsp:include page="../modulos/footer.jsp" />
 
+
+	
 </body>
 </html>
