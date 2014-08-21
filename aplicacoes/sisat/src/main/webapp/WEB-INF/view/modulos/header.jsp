@@ -24,6 +24,8 @@
 						class="icon-bar"></span>
 				</button>
 				<a class="navbar-brand" href="<c:url value="/nutricao/index" />">Nutrição</a>
+				<a class="navbar-brand" href="<c:url value="/nutricao/paciente/cadastrar" />">Cadastrar paciente</a>
+				
 			</div>
 	
 			<div class="collapse navbar-collapse"
