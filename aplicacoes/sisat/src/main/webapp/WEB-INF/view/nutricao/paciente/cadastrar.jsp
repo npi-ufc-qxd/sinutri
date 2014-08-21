@@ -19,33 +19,48 @@
 
 
 	<div class="container">
-		<div class="Cadastro paciente" align="left">
+		<div class="novo-paciente" align="left">
+
+		<c:if test="${not empty erro }">
+			<div class="alert alert-danger" role="alert">${erro}</div>
+		</c:if>
+		<c:if test="${not empty info }">
+			<div class="alert alert-info" role="alert">${info}</div>
+		</c:if>
 			
+			<form:form id="adicionarPacienteForm" role="form"
+				commandName="paciente" servletRelativeAction="/nutricao/paciente/cadastrar"
+				method="POST" cssClass="form-horizontal">
 
-				<form>
-					<fieldset>
-						<legend>Cadastro de paciente</legend>
-						
-						<label>CPF: </label> 
-						<input type="text" placeholder="CPF do paciente">
-						
-						<label>Altura: </label>
-						<input type="text" placeholder="Altura do paciente">
-						
-						<button type="submit" class="btn">Adicionar</button>
-					</fieldset>
-				</form>
+				<div class="form-group">
+					<label for="pessoa.cpf" class="col-sm-2 control-label">Cpf:</label>
+					<div class="col-sm-10">
+						<form:input id="pessoa.cpf" path="pessoa.cpf" cssClass="form-control"	placeholder="Cpf do paciente" />
+					</div>
+				</div>
 				
-				<form:form id="adicionarPacienteForm" role="form" commandName="paciente" servletRelativeAction="/projeto/cadastrar" method="POST" cssClass="form-horizontal">
-				
-				</form:form>
+				<div class="form-group">
+					<label for="altura" class="col-sm-2 control-label">Altura:</label>
+					<div class="col-sm-10">
+						<form:input id="altura" path="altura" cssClass="form-control"	placeholder="Altura do paciente" />
+					</div>
+				</div>
+
+				<div class="controls">
+					<input name="submit" type="submit" class="btn btn-primary"
+						value="Cadastrar" /> 
+						
+						<a href="<c:url value="/nutricao/"></c:url>" class="btn btn-default">Cancelar</a>
+				</div>
+
+			</form:form>
 
 
-			
+
 		</div>
 	</div>
-	
-	
+
+
 
 
 

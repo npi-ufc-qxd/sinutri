@@ -26,6 +26,20 @@ public class PessoaServiceImpl extends GenericServiceImpl<Pessoa> implements Pes
 		Pessoa usuariologado = pessoaRepository.find(QueryType.JPQL, "from Pessoa where login = :login", params).get(0);
 		return usuariologado;
 	}
+	
+	@Override
+	public Pessoa getPessoaByCpf(String cpf) {
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put( "cpf", cpf);
+		List<Pessoa> usuarios = pessoaRepository.find(QueryType.JPQL, "from Pessoa where cpf = :cpf", params);
+		
+		if(usuarios.isEmpty()){
+			return null;
+		}else{
+			return usuarios.get(0);			
+		}
+	}
+
 
 	@Override
 	public List<Pessoa> getPareceristas(Long id) {
