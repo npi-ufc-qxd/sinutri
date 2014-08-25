@@ -29,52 +29,45 @@
 		</ul>
 		
 		<br><br>
-		<div class="col-xs-4" align="left">
+		
+	<div class="col-xs-5" align="left">
 			<form>
 				<fieldset>
-					<label>Glicemia:</label> <input type="text" >
-					<span class="help-block"> </span> <label class="checkbox"> </label>
-					
-					<label>LDL: </label> <input type="text" > 
-					<span class="help-block"> </span> <label class="checkbox"> </label>
-					
-				</fieldset>
+				<label class="form-inline">Glicemia:</label> <input type="text">
+				 <input	type="text" placeholder="Classificação"> </br></br></br>
+			
+				<label class="form-inline">LDL:</label> <input type="text">
+				<input	type="text" placeholder="Classificação"></br></br></br>
+			
+				<label class="form-inline">TGL:</label> <input type="text">
+				<input	type="text" placeholder="Classificação"></br></br></br>
+			</fieldset>
 			</form>
-
-		</div>
-
-		<div class="col-xs-4" align="center">
+		</div>	
+			<div class="col-xs-4" align="center">
 			<form>
 				<fieldset>
-				
-					<label>TGL: </label> <input type="text" >
-					<span class="help-block"> </span> <label class="checkbox"> </label>
-					
-					 <label>HDL: </label> <input type="text" >
-					 <span class="help-block"> </span> <label class="checkbox"> </label>
+				<label class="form-inline">HDL:</label> <input type="text">
+				<input	type="text" placeholder="Classificação"></br></br></br>
+			
+				<label class="form-inline">HB:</label> <input type="text">
+				<input	type="text" placeholder="Classificação"></br></br></br>
+			
+				<label class="form-inline">HT:</label> <input type="text">
+				<input	type="text" placeholder="Classificação"></br></br></br>
 
+
+			</fieldset>
+			</form>
+		</div>	 
 					
-					<div class="col-xs-offset-2 col-xs-10">
+					
+					<div class="col-xs-offset-0 col-xs-10" align="center">
 							<button type="submit" class="btn btn-success">Finalizar Consulta</button>
 					</div>
 						
-				</fieldset>
-			</form>
-		</div>
-		
-		<div class="col-xs-4" align="center">
-			<form>
-				<fieldset>
-					
-					<label>HB: </label> <input type="text" >
-					<span class="help-block"> </span> <label class="checkbox"> </label>
-					
-					<label>HT: </label> <input type="text" > 
-					<span class="help-block"></span> <label class="checkbox"> </label>
 				
-				</fieldset>
-			</form>
-		</div>
+		
 
 
 		<div class="error-validation">
