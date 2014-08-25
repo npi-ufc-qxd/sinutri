@@ -14,12 +14,26 @@ public class FrequenciaAlimentar {
 	
 	private String porcaoteste;
 	
+	
 	public enum Refeicao {
-		 DESJEJUM, LANCHE, ALMOCO, JANTAR, CEIA;
-		
+		 DESJEJUM("Desjejum"), LANCHE("Lanche"), ALMOCO("Almoço"), JANTAR("Jantar"), CEIA("Ceia");
+		 
+		 private final String nome;
+		 
+		 Refeicao(String nome){
+			this.nome = nome;
+			 
+		 }
+		 
+		 public String getNome(){
+			 return this.nome;
+		 }
+		 
 	}
-
+	
 	private Refeicao refeicao;
+
+	
 	
 	private String porcao;
 	
@@ -75,6 +89,14 @@ public class FrequenciaAlimentar {
 		this.alimento = alimento;
 	}
 
+	public Refeicao getRefeicao() {
+		return refeicao;
+	}
+
+	public void setRefeicao(Refeicao refeicao) {
+		this.refeicao = refeicao;
+	}
+
 	public String getPorcaoteste() {
 		return porcaoteste;
 	}
@@ -83,6 +105,7 @@ public class FrequenciaAlimentar {
 		this.porcaoteste = porcaoteste;
 	}
 
+	
 	
 	
 	
