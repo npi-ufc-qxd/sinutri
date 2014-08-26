@@ -31,6 +31,10 @@
 			<li><a href="#">Questionario de frequencia alimentar</a></li>
 		</ul>
 		
+		<div class="col-sm-1">
+		<a><input type="button" value="Adicionar" id="incluir"/></a>
+		</div>
+		
 		
 	   <fieldset>
 		 <legend>07:00 - Desjejum</legend>
@@ -43,32 +47,13 @@
 			   </tr>
 			  </thead>
 				<tbody>
-				  <tr>
-                    <td>Café</td>
-                    <td>2 xc</td>
-                    <td>X</td>
-                     </tr>
+				 
                      
-                     
-				       
-							</tbody>
+               </tbody>
 							
-				<tfoot>
-				<form:form commandName="frequenciaAlimentar" servletRelativeAction="nutricao/frequenciaAlimentar" method="post" cssClass="form-control">
-					<td>
-					  <div class="col-sm-12">
-						<form:input id="alimento" path="alimento" cssClass="form-control" placeholder="Digite o Alimento" />
-					  </div>
-					</td>
-					   <td>
-						<div class="col-sm-8">
-						<form:input id="porcao" path="porcao" cssClass="form-control" placeholder="Digite a Porcao" />
-										</div>
-									</td>
-
-									<td><input type="button" value="Adicionar" onclick="inserirLinhaTabela()" /></td>
-								</form:form>
-							</tfoot>
+				
+									
+				
 							
 		<script language="javascript">
         
@@ -85,7 +70,7 @@
  
             </script>
 			</table>
-		    </fieldset> </br></br></br>
+		    </fieldset> </br></br>
 		    
 		    
 		 <form class="form-inline">
@@ -106,6 +91,10 @@
 						<div class="col-sm-3">
 								<input type="submit" value="Adicionar refeição">
 							</div> </br></br></br>
+
+
+
+
 					
 					
 		</form>
@@ -118,4 +107,19 @@
 	
 	<jsp:include page="../modulos/footer.jsp" />            
 </body>
+
+<script type="text/javascript" src="http://code.jquery.com/jquery-2.1.1.min.js">
+</script>
+<script type="text/javascript">
+	var cont = 0;
+	$(document).ready(function() {
+		$("#incluir").click(function() {
+			cont++;
+			alert(cont);
+			$("#frequenciaalimentar").append("<tr id='+cont+'><td><div class=col-sm-5><input type='text' name='campo1' cssClass='form-control' placeholder='Digite o alimento'/></div></td> <td><input type='text' name='campo2'cssClass='form-control' placeholder='Digite a porcao'/></td><td><input type='button' value='Salvar' id='bot2'/</td></tr>");
+			
+		});
+		
+	});
+</script>
 </html>

@@ -32,11 +32,11 @@ public class NutricaoController {
 		return "nutricao/formulario_frequencia_alimentar";
 	}
 
-	@RequestMapping(value = "/exemplo", method = RequestMethod.GET)
-	public String formHorarios(Model model) {
-		System.out.println("/formHorarioAtendimento");
+	@RequestMapping(value = "/teste", method = RequestMethod.GET)
+	public String teste(Model model) {
+		System.out.println("/teste");
 		model.addAttribute("exemplo", new Exemplo());
-		return "nutricao/exemplo";
+		return "nutricao/teste";
 	}
 	
 	
