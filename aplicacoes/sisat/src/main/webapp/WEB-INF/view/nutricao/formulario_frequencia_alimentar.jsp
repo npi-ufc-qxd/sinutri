@@ -21,10 +21,7 @@
      <div class="container">
 		<div class="frequencia-alimentar" align="left">
 			<div class="form" align="center">
-				<form:form id="frequenciaAlimentar" role="form" commandName="frequenciaAlimentar" 
-				servletRelativeAction="/nutricao/formulario_frequência_alimentar" 
-				method="POST" cssClass="form-horizontal">
-			
+				<form:form id="frequenciaAlimentar" role="form" commandName="frequenciaAlimentar" servletRelativeAction="/nutricao/formulario_frequência_alimentar" method="POST" cssClass="form-horizontal">
 			<ul class="nav nav-tabs">
 			<li class="active"><a href="#">Exames Laboratoriais</a></li>
 			<li><a href="#">Avaliação nutricional</a></li>
@@ -112,11 +109,15 @@
 </script>
 <script type="text/javascript">
 	var cont = 0;
+	$("#bot2").click(function(){
+		alert("Row index is: ");
+	});	
+	
+	
 	$(document).ready(function() {
 		$("#incluir").click(function() {
 			cont++;
-			alert(cont);
-			$("#frequenciaalimentar").append("<tr id='+cont+'><td><div class=col-sm-5><input type='text' name='campo1' cssClass='form-control' placeholder='Digite o alimento'/></div></td> <td><input type='text' name='campo2'cssClass='form-control' placeholder='Digite a porcao'/></td><td><input type='button' value='Salvar' id='bot2'/</td></tr>");
+			$("#frequenciaalimentar").append("<tr id='+cont+'><td><div class=col-sm-5><input type='text' name='campo1' cssClass='form-control' placeholder='Digite o alimento'/></div></td> <td><input type='text' name='campo2'cssClass='form-control' placeholder='Digite a porcao'/></td><td><input type='button' value='Excluir' id='bot2'/</td></tr>");
 			
 		});
 		
