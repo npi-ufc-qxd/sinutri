@@ -16,9 +16,14 @@ public class NutricaoController {
 
 	
 
-		@RequestMapping(value = {"/consulta"}, method = RequestMethod.GET)
-		public String consulta() {
-			return "nutricao/consulta";
+		@RequestMapping(value = {"/examesLaboratoriais"}, method = RequestMethod.GET)
+		public String examesLaboratoriais() {
+			return "nutricao/examesLaboratoriais";
+		}
+		
+		@RequestMapping(value = {"/Avaliacaonutricional"}, method = RequestMethod.GET)
+		public String avaliacaoNutricional() {
+			return "nutricao/AvaliacaoNutricional";
 		}
 
 }
