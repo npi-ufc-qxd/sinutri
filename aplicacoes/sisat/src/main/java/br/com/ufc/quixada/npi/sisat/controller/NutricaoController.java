@@ -9,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -34,11 +35,10 @@ public class NutricaoController {
 	}
 
 
-	@RequestMapping(value = {"/paciente/cadastrar"}, method = RequestMethod.GET)
-	public String teste(Model model) {
-		model.addAttribute("paciente", new Paciente());
-		System.out.println("oi??");
-		return "nutricao/paciente/cadastrar";
+	@RequestMapping(value = {"/consulta"}, method = RequestMethod.GET)
+	public String consulta(Model model) {
+		System.out.println("consulta");
+		return "nutricao/consulta";
 	}
 
 	//Cadastrar paciente
@@ -63,6 +63,11 @@ public class NutricaoController {
 		//return "redirect:/nutricao/paciente/listar";		//ainda não existe essa view
 		
 		return "/nutricao/paciente/cadastrar";
+	}
+	
+	@RequestMapping(value = "/{id}/mostrar")
+	public String getDetalhes(/*Consulta p, @PathVariable("id") Long id, Model model, HttpSession session, RedirectAttributes redirectAttributes*/) {
+			return "redirect:/projeto/listar";
 	}
 
 }
