@@ -1,44 +1,52 @@
 package br.com.ufc.quixada.npi.sisat.controller;
 
-import java.util.ArrayList;
-import java.util.List;
+import javax.inject.Inject;
+import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import br.com.ufc.quixada.npi.sisat.model.Exemplo;
-import br.com.ufc.quixada.npi.sisat.model.FrequenciaAlimentar;
-import br.com.ufc.quixada.npi.sisat.model.FrequenciaAlimentar.Refeicao;
+//import br.com.ufc.quixada.npi.sisat.model.Paciente;
+import br.com.ufc.quixada.npi.sisat.model.Pessoa;
+//import br.com.ufc.quixada.npi.sisat.service.PacienteService;
+import br.com.ufc.quixada.npi.sisat.service.PessoaService;
 
 @Controller
 @RequestMapping("nutricao")
 public class NutricaoController {
 	
-	//private List<FrequenciaAlimentar> frequenciasAlimentares = new ArrayList<FrequenciaAlimentar>();
+	//@Inject
+	//private PacienteService servicePaciente;
+	
+	//@Inject
+	private PessoaService servicePessoa;
 
 	@RequestMapping(value = {"/", "/index", "listar"}, method = RequestMethod.GET)
 	public String index() {
 		return "nutricao/listar";
 	}
-	
-	@RequestMapping(value = "/frequenciaAlimentar", method = RequestMethod.GET)
-	public String formulario(Model model){
-		System.out.println("/frequenciaAlimentar");
-		model.addAttribute("frequenciaAlimentar", new FrequenciaAlimentar());
-		//model.addAttribute("frequenciasAlimentares", frequenciasAlimentares);
-		model.addAttribute("refeicoes",Refeicao.values());
-		return "nutricao/formulario_frequencia_alimentar";
+
+
+	@RequestMapping(value = {"/consulta"}, method = RequestMethod.GET)
+	public String consulta(Model model) {
+		System.out.println("consulta");
+		return "nutricao/consulta";
 	}
 
-	@RequestMapping(value = "/teste", method = RequestMethod.GET)
-	public String teste(Model model) {
-		System.out.println("/teste");
-		model.addAttribute("exemplo", new Exemplo());
-		return "nutricao/teste";
+	//Cadastrar paciente
+
+	
+	@RequestMapping(value = "/{id}/mostrar")
+	public String getDetalhes(/*Consulta p, @PathVariable("id") Long id, Model model, HttpSession session, RedirectAttributes redirectAttributes*/) {
+			return "redirect:/projeto/listar";
 	}
-	
-	
 
 }

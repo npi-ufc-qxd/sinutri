@@ -23,12 +23,15 @@
 						class="icon-bar"></span> <span class="icon-bar"></span> <span
 						class="icon-bar"></span>
 				</button>
-				<a class="navbar-brand" href="<c:url value="/nutricao/index" />">Nutrição</a>
+				<a class="navbar-brand" href="<c:url value="/nutricao/index" />">Nutrição</a>				
 			</div>
 	
-			<div class="collapse navbar-collapse"
-				id="bs-example-navbar-collapse-1">
+			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 				<ul class="nav navbar-nav">
+					<!--<li>
+						<a href="<c:url value="/end" />">Link <span class="glyphicon glyphicon-list"></span></a>
+					</li>-->
+
 					<li>
 						<a href="<c:url value="/j_spring_security_logout" />">Sair <span class="glyphicon glyphicon-off"></span></a>
 					</li>
