@@ -1,4 +1,4 @@
-package br.com.ufc.quixada.npi.sisat.controller;
+		package br.com.ufc.quixada.npi.sisat.controller;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
