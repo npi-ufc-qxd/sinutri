@@ -1,4 +1,4 @@
-		package br.com.ufc.quixada.npi.sisat.controller;
+package br.com.ufc.quixada.npi.sisat.controller;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
@@ -9,10 +9,8 @@ import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import br.com.ufc.quixada.npi.sisat.model.Paciente;
 import br.com.ufc.quixada.npi.sisat.model.Pessoa;

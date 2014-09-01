@@ -278,8 +278,5 @@ public class ConsultaNutricional {
 		this.bebidaAlcoolicaFrequencia = bebidaAlcoolicaFrequencia;
 	}
 	
-	
-	
-	
-	
+
 }
