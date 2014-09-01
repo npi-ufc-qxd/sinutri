@@ -9,7 +9,11 @@ public interface PessoaService extends GenericService<Pessoa> {
 	public abstract Pessoa getPessoaByLogin(String login);
 	
 	public abstract Pessoa getPessoaByCpf(String cpf);
+	public abstract List<Pessoa> getPessoasByCpf(String cpf);
 
+	public abstract Pessoa getPessoaByNome(String nome);
+	public abstract List<Pessoa> getPessoasByNome(String nome);
+	
 	public abstract List<Pessoa> getPareceristas(Long id);
 
 	public abstract boolean isNutricao(Pessoa pessoa);
