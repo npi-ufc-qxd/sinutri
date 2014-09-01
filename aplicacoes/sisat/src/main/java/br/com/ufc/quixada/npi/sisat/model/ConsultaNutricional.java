@@ -35,40 +35,56 @@ public class ConsultaNutricional {
 	private int hb;
 
 	private String condutaNutricional;
-	
-	
+
 	private Boolean medicamento;
-	
+
 	private String medicamentoComentario;
-	
-	
+
 	private Boolean mastigacao;
-	
+
 	private String mastigacaoComentario;
-	
-	
+
 	private Boolean disfagia;
-	
+
 	private Boolean pirose;
-	
+
 	private Boolean nausea;
-	
-	
+
 	private Boolean vomito;
-	
+
 	private Boolean diarreia;
-	
+
 	private Boolean constipacao;
-	
-	
+
 	private String agua;
-	
+
 	private String carneVermelhaFrequencia;
-	
-	
+
 	private Boolean bebidaAlcoolica;
-	
-	private int bebidaAlcoolicaFrequencia;
+
+	private int bebidaAlcoolicaFrequenciaSemanal;
+
+	private String bebidadaAlcoolicaComentario;
+
+	private Boolean atividadeFisica;
+
+	private int atividadeFisicaFrequenciaSemanal;
+
+	private String atividadeFisicaComentario;
+
+	private Boolean diabetes;
+
+	private Boolean hipertensao;
+
+	private Boolean outrasPatologias;
+
+	private String outrasPatologiasComentario;
+
+	private Boolean alergia;
+
+	private String alergiaComentario;
+
+	private String objetivoConsulta;
 
 	public Long getId() {
 		return id;
@@ -270,13 +286,104 @@ public class ConsultaNutricional {
 		this.bebidaAlcoolica = bebidaAlcoolica;
 	}
 
-	public int getBebidaAlcoolicaFrequencia() {
-		return bebidaAlcoolicaFrequencia;
+	public int getBebidaAlcoolicaFrequenciaSemanal() {
+		return bebidaAlcoolicaFrequenciaSemanal;
 	}
 
-	public void setBebidaAlcoolicaFrequencia(int bebidaAlcoolicaFrequencia) {
-		this.bebidaAlcoolicaFrequencia = bebidaAlcoolicaFrequencia;
+	public void setBebidaAlcoolicaFrequenciaSemanal(
+			int bebidaAlcoolicaFrequenciaSemanal) {
+		this.bebidaAlcoolicaFrequenciaSemanal = bebidaAlcoolicaFrequenciaSemanal;
 	}
+
+	public String getBebidadaAlcoolicaComentario() {
+		return bebidadaAlcoolicaComentario;
+	}
+
+	public void setBebidadaAlcoolicaComentario(String bebidadaAlcoolicaComentario) {
+		this.bebidadaAlcoolicaComentario = bebidadaAlcoolicaComentario;
+	}
+
+	public Boolean getAtividadeFisica() {
+		return atividadeFisica;
+	}
+
+	public void setAtividadeFisica(Boolean atividadeFisica) {
+		this.atividadeFisica = atividadeFisica;
+	}
+
+	public int getAtividadeFisicaFrequenciaSemanal() {
+		return atividadeFisicaFrequenciaSemanal;
+	}
+
+	public void setAtividadeFisicaFrequenciaSemanal(
+			int atividadeFisicaFrequenciaSemanal) {
+		this.atividadeFisicaFrequenciaSemanal = atividadeFisicaFrequenciaSemanal;
+	}
+
+	public String getAtividadeFisicaComentario() {
+		return atividadeFisicaComentario;
+	}
+
+	public void setAtividadeFisicaComentario(String atividadeFisicaComentario) {
+		this.atividadeFisicaComentario = atividadeFisicaComentario;
+	}
+
+	public Boolean getDiabetes() {
+		return diabetes;
+	}
+
+	public void setDiabetes(Boolean diabetes) {
+		this.diabetes = diabetes;
+	}
+
+	public Boolean getHipertensao() {
+		return hipertensao;
+	}
+
+	public void setHipertensao(Boolean hipertensao) {
+		this.hipertensao = hipertensao;
+	}
+
+	public Boolean getOutrasPatologias() {
+		return outrasPatologias;
+	}
+
+	public void setOutrasPatologias(Boolean outrasPatologias) {
+		this.outrasPatologias = outrasPatologias;
+	}
+
+	public String getOutrasPatologiasComentario() {
+		return outrasPatologiasComentario;
+	}
+
+	public void setOutrasPatologiasComentario(String outrasPatologiasComentario) {
+		this.outrasPatologiasComentario = outrasPatologiasComentario;
+	}
+
+	public Boolean getAlergia() {
+		return alergia;
+	}
+
+	public void setAlergia(Boolean alergia) {
+		this.alergia = alergia;
+	}
+
+	public String getAlergiaComentario() {
+		return alergiaComentario;
+	}
+
+	public void setAlergiaComentario(String alergiaComentario) {
+		this.alergiaComentario = alergiaComentario;
+	}
+
+	public String getObjetivoConsulta() {
+		return objetivoConsulta;
+	}
+
+	public void setObjetivoConsulta(String objetivoConsulta) {
+		this.objetivoConsulta = objetivoConsulta;
+	}
+
 	
 
 }
