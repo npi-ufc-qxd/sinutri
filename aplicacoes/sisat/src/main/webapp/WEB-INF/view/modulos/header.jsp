@@ -23,7 +23,10 @@
 						class="icon-bar"></span> <span class="icon-bar"></span> <span
 						class="icon-bar"></span>
 				</button>
-				<a class="navbar-brand" href="<c:url value="/nutricao/consulta/" />">Nutrição</a>				
+
+
+				<a class="navbar-brand" href="<c:url value="/nutricao/index" />">Nutrição</a>				
+
 			</div>
 	
 			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
