@@ -38,8 +38,7 @@ $(document).ready(function(){
 
 			<div>
 				Consumo de água <input type="text" name="consumoagua" size="10"> 
-				<select
-					style="width: 70px" class="form-control-inline">
+				<select style="width: 70px" class="form-control-inline">
 					<option value="dia">Dia</option>
 				</select>
 				

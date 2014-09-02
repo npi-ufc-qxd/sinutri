@@ -8,8 +8,9 @@
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 
 <html>
+
 <head>
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta charset= iso-8859-1/>
 	<jsp:include page="../modulos/header-estrutura.jsp" />
 	<title>Consulta</title>
 </head>
