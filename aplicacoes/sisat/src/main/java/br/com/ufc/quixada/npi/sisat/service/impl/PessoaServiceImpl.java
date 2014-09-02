@@ -35,11 +35,51 @@ public class PessoaServiceImpl extends GenericServiceImpl<Pessoa> implements Pes
 		
 		if(usuarios.isEmpty()){
 			return null;
+		}else{ 
+			return usuarios.get(0);						
+		}
+	}
+	
+	@Override
+	public List<Pessoa> getPessoasByCpf(String cpf) {
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put( "cpf", cpf);
+		List<Pessoa> usuarios = pessoaRepository.find(QueryType.JPQL, "from Pessoa where cpf = :cpf", params);
+		
+		if(usuarios.isEmpty()){
+			return null;
+		}else{
+			return usuarios;						
+		}
+	}
+	
+	@Override
+	public Pessoa getPessoaByNome(String nome) {
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put( "nome", nome);
+		List<Pessoa> usuarios = pessoaRepository.find(QueryType.JPQL, "from Pessoa where nome like :nome", params);
+		
+		if(usuarios.isEmpty()){
+			return null;
 		}else{
 			return usuarios.get(0);			
 		}
 	}
-
+	@Override
+	public List<Pessoa> getPessoasByNome(String nome) {
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put( "nome", nome);
+		List<Pessoa> usuarios = pessoaRepository.find(QueryType.JPQL, "FROM pessoa WHERE UPPER(nome) LIKE '%' || UPPER(':nom') || '%'", params);
+//		List<Pessoa> usuarios = pessoaRepository.find(QueryType.JPQL, "from Pessoa where nome ~* :nome ORDER BY nome", params);
+		
+		
+		
+		if(usuarios.isEmpty()){
+			return null;
+		}else{
+			return usuarios;			
+		}
+	}
 
 	@Override
 	public List<Pessoa> getPareceristas(Long id) {
