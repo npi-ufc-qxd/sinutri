@@ -45,6 +45,11 @@
 				<jsp:include page="abas/questionario.jsp" />
 	        </div>
 	    </div>
+
+		<div class="col-xs-offset-0 col-xs-10" align="center">
+			<button type="submit" class="btn btn-success">Finalizar Consulta</button>
+		</div>
+
 	</form:form>
 </div>
 
