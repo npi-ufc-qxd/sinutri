@@ -19,7 +19,7 @@
 				<th>Porção</th>
 				<th>
 					<div class="col-sm-1">
-						<a><input type="button" value="Adicionar" id="incluir" /></a>
+						<a><input type="button" value="Adicionar" id="desjejumAdd" /></a>
 					</div>
 				</th>
 			</tr>
@@ -34,9 +34,17 @@
 <script type="text/javascript" src="http://code.jquery.com/jquery-2.1.1.min.js"></script>
 
 <script type="text/javascript">
+var cont;
 	$(document).ready(function() {
-		$("#incluir").click(function() {
-			$("#frequenciaalimentar").append("<tr id='+cont+'><td><div class=col-sm-5><input type='text' name='campo1' cssClass='form-control' placeholder='Digite o alimento'/></div></td> <td><input type='text' name='campo2'cssClass='form-control' placeholder='Digite a porcao'/></td><td><input type='button' value='Excluir' id='bot2'/</td></tr>");
+		$("#desjejumAdd").click(function() {
+			
+			if(cont>=0 && cont<5){
+			  var des = cont;
+			}
+			alert (cont);
+			
+			$("#frequenciaalimentar").append("<tr id='refeiçoes[des].alimentos'><td><div class=col-sm-5><input type='text' name='des' cssClass='form-control' placeholder='Digite o alimento'/></div></td> <td><input type='text' name='campo2'cssClass='form-control' placeholder='Digite a porcao'/></td><td><input type='button' value='Excluir' id='bot2'/</td></tr>");
 		});
+		cont++;
 	});
 </script>
