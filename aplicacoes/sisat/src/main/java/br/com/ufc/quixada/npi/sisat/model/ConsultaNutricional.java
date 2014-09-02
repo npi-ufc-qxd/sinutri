@@ -1,20 +1,58 @@
 package br.com.ufc.quixada.npi.sisat.model;
 
+import java.sql.Date;
+
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.xml.crypto.Data;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+@Entity
 public class ConsultaNutricional {
+
+	@Override
+	public String toString() {
+		return "ConsultaNutricional [id=" + id + ", data=" + data + ", peso="
+				+ peso + ", altura=" + altura + ", circunferenciaCintura="
+				+ circunferenciaCintura + ", glicemia=" + glicemia
+				+ ", clasificacaoGlicemia=" + classificacaoGlicemia + ", tgl="
+				+ tgl + ", clasificacaoTgl=" + classificacaoTgl + ", hdl=" + hdl
+				+ ", clasificacaoHdl=" + classificacaoHdl + ", idl=" + idl
+				+ ", clasificacaoIdl=" + classificacaoIdl + ", ht=" + ht
+				+ ", clasificacaoHt=" + classificacaoHt + ", hb=" + hb
+				+ ", clasificacaoHb=" + classificacaoHb
+				+ ", condutaNutricional=" + condutaNutricional
+				+ ", medicamento=" + medicamento + ", medicamentoComentario="
+				+ medicamentoComentario + ", mastigacao=" + mastigacao
+				+ ", mastigacaoComentario=" + mastigacaoComentario
+				+ ", disfagia=" + disfagia + ", pirose=" + pirose + ", nausea="
+				+ nausea + ", vomito=" + vomito + ", diarreia=" + diarreia
+				+ ", constipacao=" + constipacao + ", agua=" + agua
+				+ ", carneVermelhaFrequencia=" + carneVermelhaFrequencia
+				+ ", bebidaAlcoolica=" + bebidaAlcoolica
+				+ ", bebidaAlcoolicaFrequenciaSemanal="
+				+ bebidaAlcoolicaFrequenciaSemanal
+				+ ", bebidadaAlcoolicaComentario="
+				+ bebidadaAlcoolicaComentario + ", atividadeFisica="
+				+ atividadeFisica + ", atividadeFisicaFrequenciaSemanal="
+				+ atividadeFisicaFrequenciaSemanal
+				+ ", atividadeFisicaComentario=" + atividadeFisicaComentario
+				+ ", diabetes=" + diabetes + ", hipertensao=" + hipertensao
+				+ ", outrasPatologias=" + outrasPatologias
+				+ ", outrasPatologiasComentario=" + outrasPatologiasComentario
+				+ ", alergia=" + alergia + ", alergiaComentario="
+				+ alergiaComentario + ", objetivoConsulta=" + objetivoConsulta
+				+ "]";
+	}
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
 	@DateTimeFormat
-	private Data data;
+	private Date data;
 
 	private Double peso;
 
@@ -23,17 +61,23 @@ public class ConsultaNutricional {
 	private Double circunferenciaCintura;
 
 	private int glicemia;
+	private String classificacaoGlicemia;
 
 	private int tgl;
-
+	private String classificacaoTgl;
+	
 	private int hdl;
-
+	private String classificacaoHdl;
+	
 	private int idl;
-
+	private String classificacaoIdl;
+	
 	private int ht;
-
+	private String classificacaoHt;
+	
 	private int hb;
-
+	private String classificacaoHb;
+	
 	private String condutaNutricional;
 
 	private Boolean medicamento;
@@ -94,11 +138,11 @@ public class ConsultaNutricional {
 		this.id = id;
 	}
 
-	public Data getData() {
+	public Date getData() {
 		return data;
 	}
 
-	public void setData(Data data) {
+	public void setData(Date data) {
 		this.data = data;
 	}
 
@@ -382,6 +426,54 @@ public class ConsultaNutricional {
 
 	public void setObjetivoConsulta(String objetivoConsulta) {
 		this.objetivoConsulta = objetivoConsulta;
+	}
+
+	public String getClassificacaoGlicemia() {
+		return classificacaoGlicemia;
+	}
+
+	public void setClassificacaoGlicemia(String classificacaoGlicemia) {
+		this.classificacaoGlicemia = classificacaoGlicemia;
+	}
+
+	public String getClassificacaoTgl() {
+		return classificacaoTgl;
+	}
+
+	public void setClassificacaoTgl(String classificacaoTgl) {
+		this.classificacaoTgl = classificacaoTgl;
+	}
+
+	public String getClassificacaoHdl() {
+		return classificacaoHdl;
+	}
+
+	public void setClassificacaoHdl(String classificacaoHdl) {
+		this.classificacaoHdl = classificacaoHdl;
+	}
+
+	public String getClassificacaoIdl() {
+		return classificacaoIdl;
+	}
+
+	public void setClassificacaoIdl(String classificacaoIdl) {
+		this.classificacaoIdl = classificacaoIdl;
+	}
+
+	public String getClassificacaoHt() {
+		return classificacaoHt;
+	}
+
+	public void setClassificacaoHt(String classificacaoHt) {
+		this.classificacaoHt = classificacaoHt;
+	}
+
+	public String getClassificacaoHb() {
+		return classificacaoHb;
+	}
+
+	public void setClassificacaoHb(String classificacaoHb) {
+		this.classificacaoHb = classificacaoHb;
 	}
 
 	
