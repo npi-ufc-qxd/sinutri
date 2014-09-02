@@ -41,7 +41,7 @@ var cont;
 			if(cont>=0 && cont<5){
 			  var des = cont;
 			}
-		
+			alert (cont);
 			
 			$("#frequenciaalimentar").append("<tr id='refeiçoes[des].alimentos'><td><div class=col-sm-5><input type='text' name='des' cssClass='form-control' placeholder='Digite o alimento'/></div></td> <td><input type='text' name='campo2'cssClass='form-control' placeholder='Digite a porcao'/></td><td><input type='button' value='Excluir' id='bot2'/</td></tr>");
 		});
