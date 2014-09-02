@@ -9,12 +9,12 @@
 
 <html>
 <head>
-<jsp:include page="../../modulos/header-estrutura.jsp" />
+<jsp:include page="../modulos/header-estrutura.jsp" />
 <title>Buscar paciente</title>
 </head>
 <body>
 
-	<jsp:include page="../../modulos/header.jsp" />
+	<jsp:include page="../modulos/header.jsp" />
 
 
 
@@ -27,30 +27,37 @@
 			<c:if test="${not empty info }">
 				<div class="alert alert-info" role="alert">${info}</div>
 			</c:if>
-			
-			
-			<form:form id="buscarPacienteForm" role="form" commandName="pessoa" servletRelativeAction="/nutricao/paciente/buscar" method="POST" cssClass="form-horizontal">
-				
+
+
+			<form:form id="buscarPacienteForm" role="form" commandName="pessoa"
+				servletReltiveAction="/nutricao/buscar" method="POST"
+				cssClass="form-horizontal">
+
+
 				<div class="form-group">
 					<label for="cpf" class="col-sm-2 control-label">Cpf:</label>
 					<div class="col-sm-10">
-						<form:input id="cpf" path="cpf"	cssClass="form-control" placeholder="Cpf do paciente" />
+						<form:input id="cpf" path="cpf" cssClass="col-sm-2 form-control"
+							placeholder="Cpf do paciente" />
 					</div>
 				</div>
-				
+
 				<div class="form-group">
 					<label for="nome" class="col-sm-2 control-label">Nome:</label>
 					<div class="col-sm-10">
-						<form:input id="nome" path="nome"
-							cssClass="form-control" placeholder="Nome do paciente" />
+						<form:input id="nome" path="nome" cssClass="form-control"
+							placeholder="Nome do paciente" />
 					</div>
 				</div>
-				
+
 				<div class="controls">
-					<input name="submit" type="submit" class="btn btn-primary" value="Buscar" />
+					<input name="submit" type="submit" class="btn btn-primary"
+						value="Buscar" />
 				</div>
-				
+
 			</form:form>
+			
+			
 
 
 
@@ -74,11 +81,10 @@
 						<tbody>
 							<c:forEach var="pessoa" items="${pessoas}">
 								<tr class="linha">
-									<td><a href="<c:url value="www.google.com"></c:url>">${pessoa.nome}
+									<td><a href="<c:url value="/nutricao/${pessoa.id}/detalhes"></c:url>">${pessoa.nome}
 									</a></td>
 									<td><a id="detalhes" data-toggle="modal"
-										href="http://www.google.com"
-										data-href="<c:url value="www.google.com" ></c:url>">
+										href="${pessoa.id}/detalhes">
 											<button class="btn btn-info">
 												Detalhes <span class="glyphicon glyphicon-eye-open"></span>
 											</button>
@@ -91,7 +97,12 @@
 			</c:if>
 		</div>
 	</div>
-	<jsp:include page="../../modulos/footer.jsp" />
+	<jsp:include page="../modulos/footer.jsp" />
 
 </body>
+<script type="text/javascript">
+$('#select').onselect(function() {
+	alert("oioioi");
+});
+</script>
 </html>
