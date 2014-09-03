@@ -8,6 +8,10 @@
 
 <html>
 <head>
+<<<<<<< HEAD
+=======
+	<meta charset="UTF-8"/>
+>>>>>>> 1c0b2553b96857632ac90cd1c1280abf0ac3173c
 	<jsp:include page="../modulos/header-estrutura.jsp" />
 	<title>Inicio</title>
 </head>

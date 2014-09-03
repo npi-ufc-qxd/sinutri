@@ -12,6 +12,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 @Entity
 public class ConsultaNutricional {
 
+<<<<<<< HEAD
 	@Override
 	public String toString() {
 		return "ConsultaNutricional [id=" + id + ", data=" + data + ", peso="
@@ -51,6 +52,12 @@ public class ConsultaNutricional {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
+=======
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
+
+>>>>>>> 1c0b2553b96857632ac90cd1c1280abf0ac3173c
 	@DateTimeFormat
 	private Date data;
 
@@ -476,6 +483,44 @@ public class ConsultaNutricional {
 		this.classificacaoHb = classificacaoHb;
 	}
 
+<<<<<<< HEAD
 	
 
+=======
+	@Override
+	public String toString() {
+		return "ConsultaNutricional [id=" + id + ", data=" + data + ", peso="
+				+ peso + ", altura=" + altura + ", circunferenciaCintura="
+				+ circunferenciaCintura + ", glicemia=" + glicemia
+				+ ", clasificacaoGlicemia=" + classificacaoGlicemia + ", tgl="
+				+ tgl + ", clasificacaoTgl=" + classificacaoTgl + ", hdl=" + hdl
+				+ ", clasificacaoHdl=" + classificacaoHdl + ", idl=" + idl
+				+ ", clasificacaoIdl=" + classificacaoIdl + ", ht=" + ht
+				+ ", clasificacaoHt=" + classificacaoHt + ", hb=" + hb
+				+ ", clasificacaoHb=" + classificacaoHb
+				+ ", condutaNutricional=" + condutaNutricional
+				+ ", medicamento=" + medicamento + ", medicamentoComentario="
+				+ medicamentoComentario + ", mastigacao=" + mastigacao
+				+ ", mastigacaoComentario=" + mastigacaoComentario
+				+ ", disfagia=" + disfagia + ", pirose=" + pirose + ", nausea="
+				+ nausea + ", vomito=" + vomito + ", diarreia=" + diarreia
+				+ ", constipacao=" + constipacao + ", agua=" + agua
+				+ ", carneVermelhaFrequencia=" + carneVermelhaFrequencia
+				+ ", bebidaAlcoolica=" + bebidaAlcoolica
+				+ ", bebidaAlcoolicaFrequenciaSemanal="
+				+ bebidaAlcoolicaFrequenciaSemanal
+				+ ", bebidadaAlcoolicaComentario="
+				+ bebidadaAlcoolicaComentario + ", atividadeFisica="
+				+ atividadeFisica + ", atividadeFisicaFrequenciaSemanal="
+				+ atividadeFisicaFrequenciaSemanal
+				+ ", atividadeFisicaComentario=" + atividadeFisicaComentario
+				+ ", diabetes=" + diabetes + ", hipertensao=" + hipertensao
+				+ ", outrasPatologias=" + outrasPatologias
+				+ ", outrasPatologiasComentario=" + outrasPatologiasComentario
+				+ ", alergia=" + alergia + ", alergiaComentario="
+				+ alergiaComentario + ", objetivoConsulta=" + objetivoConsulta
+				+ "]";
+	}
+	
+>>>>>>> 1c0b2553b96857632ac90cd1c1280abf0ac3173c
 }

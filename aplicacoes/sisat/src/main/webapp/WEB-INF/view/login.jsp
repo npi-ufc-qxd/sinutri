@@ -3,6 +3,7 @@
 	pageEncoding="UTF-8"%>
 <html>
 <head>
+<meta charset="UTF-8"/>
 <title>Página de Login</title>
 <link
 	href="<c:url value="/webjars/bootstrap/3.1.1/css/bootstrap.min.css" />"

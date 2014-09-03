@@ -10,7 +10,11 @@
 <html>
 
 <head>
+<<<<<<< HEAD
 	<meta charset= iso-8859-1/>
+=======
+	<meta charset="UTF-8"/>
+>>>>>>> 1c0b2553b96857632ac90cd1c1280abf0ac3173c
 	<jsp:include page="../modulos/header-estrutura.jsp" />
 	<title>Consulta</title>
 </head>
@@ -21,13 +25,21 @@
 	<div class="container">
     <ul class="nav nav-tabs">
         <li class="active"><a data-toggle="tab" href="#avaliacao">Avaliação Nutricional</a></li>
+<<<<<<< HEAD
 
+=======
+        
+>>>>>>> 1c0b2553b96857632ac90cd1c1280abf0ac3173c
         <li><a data-toggle="tab" href="#exame">Exames Laboratoriais</a></li>
         
         <li><a data-toggle="tab" href="#questionario">Questionario de Frequencia Alimentar</a></li>
     </ul>
 
+<<<<<<< HEAD
 	<form:form id="adicionarConsulta" role="form" commandName="consulta" servletRelativeAction="/nutricao/consulta" method="POST">
+=======
+	<form:form servletRelativeAction="consulta" method="POST" modelAttribute="consulta">
+>>>>>>> 1c0b2553b96857632ac90cd1c1280abf0ac3173c
 	    <div class="tab-content">
 		
 			<!-- ABA DE AVALIACAO NUTRICIONAL -->
@@ -45,10 +57,22 @@
 				<jsp:include page="abas/questionario.jsp" />
 	        </div>
 	    </div>
+<<<<<<< HEAD
+=======
+
+		<div class="col-xs-offset-0 col-xs-10" align="center">
+			<button type="submit" class="btn btn-success">Finalizar Consulta</button>
+		</div>
+
+>>>>>>> 1c0b2553b96857632ac90cd1c1280abf0ac3173c
 	</form:form>
 </div>
 
 <jsp:include page="../modulos/footer.jsp" />
 </body>
+<<<<<<< HEAD
 
 </html>
+=======
+</html>
+>>>>>>> 1c0b2553b96857632ac90cd1c1280abf0ac3173c
