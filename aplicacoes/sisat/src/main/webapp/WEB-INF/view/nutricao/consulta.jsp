@@ -27,7 +27,7 @@
         <li><a data-toggle="tab" href="#questionario">Questionario de Frequencia Alimentar</a></li>
     </ul>
 
-	<form:form>
+	<form:form servletRelativeAction="consulta" method="POST" modelAttribute="consulta">
 	    <div class="tab-content">
 		
 			<!-- ABA DE AVALIACAO NUTRICIONAL -->
