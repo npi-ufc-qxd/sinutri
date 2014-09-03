@@ -1,12 +1,11 @@
 package br.com.ufc.quixada.npi.sisat.model;
 
 import java.sql.Date;
+import java.util.List;
 
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-
-import br.com.ufc.quixada.npi.sisat.enumerator.Refeicoes;
 
 public class FrequenciaAlimentar {
 
@@ -16,7 +15,7 @@ public class FrequenciaAlimentar {
 	
 	private Date horario;
 	
-	private Refeicoes refeicao;
+	private List<Refeicao> refeicoes;
 
 	public Date getHorario() {
 		return horario;
@@ -26,11 +25,21 @@ public class FrequenciaAlimentar {
 		this.horario = horario;
 	}
 
-	public Refeicoes getRefeicao() {
-		return refeicao;
+	public Long getId() {
+		return id;
 	}
 
-	public void setRefeicao(Refeicoes refeicao) {
-		this.refeicao = refeicao;
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public List<Refeicao> getRefeicoes() {
+		return refeicoes;
+	}
+
+	public void setRefeicoes(List<Refeicao> refeicoes) {
+		this.refeicoes = refeicoes;
 	}
 }
+
+
