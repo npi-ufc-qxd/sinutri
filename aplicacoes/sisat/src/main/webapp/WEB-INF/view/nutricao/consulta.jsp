@@ -8,8 +8,9 @@
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 
 <html>
+
 <head>
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta charset= iso-8859-1/>
 	<jsp:include page="../modulos/header-estrutura.jsp" />
 	<title>Consulta</title>
 </head>
@@ -20,13 +21,13 @@
 	<div class="container">
     <ul class="nav nav-tabs">
         <li class="active"><a data-toggle="tab" href="#avaliacao">Avaliação Nutricional</a></li>
-        
+
         <li><a data-toggle="tab" href="#exame">Exames Laboratoriais</a></li>
         
         <li><a data-toggle="tab" href="#questionario">Questionario de Frequencia Alimentar</a></li>
     </ul>
 
-	<form:form>
+	<form:form id="adicionarConsulta" role="form" commandName="consulta" servletRelativeAction="/nutricao/consulta" method="POST">
 	    <div class="tab-content">
 		
 			<!-- ABA DE AVALIACAO NUTRICIONAL -->
@@ -49,4 +50,5 @@
 
 <jsp:include page="../modulos/footer.jsp" />
 </body>
+
 </html>

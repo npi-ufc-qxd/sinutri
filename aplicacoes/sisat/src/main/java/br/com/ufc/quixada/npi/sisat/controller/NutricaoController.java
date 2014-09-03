@@ -9,9 +9,12 @@ import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import br.com.ufc.quixada.npi.sisat.model.ConsultaNutricional;
 import br.com.ufc.quixada.npi.sisat.model.Paciente;
 import br.com.ufc.quixada.npi.sisat.model.Pessoa;
 import br.com.ufc.quixada.npi.sisat.service.PacienteService;
@@ -39,10 +42,9 @@ public class NutricaoController {
 		return "nutricao/consulta";
 	}
 
-	//Cadastrar paciente
-	@RequestMapping(value = "/paciente/cadastrar", method = RequestMethod.POST)
-	public String adicionarPaciente(@Valid @ModelAttribute("paciente") Paciente paciente, BindingResult result, HttpSession session, ModelMap map) {
-		System.out.println("aqui o/");
+	@RequestMapping(value = {"/consulta"}, method = RequestMethod.POST)
+	public String consulta(@ModelAttribute("consulta") ConsultaNutricional consulta) {
+		System.out.println("consulta post");
 		
 		if (result.hasErrors()) {
 			return ("/paciente/cadastrar");
@@ -60,12 +62,8 @@ public class NutricaoController {
 		}
 		//return "redirect:/nutricao/paciente/listar";		//ainda não existe essa view
 		
-		return "/nutricao/paciente/cadastrar";
-	}
-	
-	@RequestMapping(value = "/{id}/mostrar")
-	public String getDetalhes(/*Consulta p, @PathVariable("id") Long id, Model model, HttpSession session, RedirectAttributes redirectAttributes*/) {
-			return "redirect:/projeto/listar";
+		consultaNutricionalService.save(consulta);
+		return "nutricao/consulta";
 	}
 
 }
