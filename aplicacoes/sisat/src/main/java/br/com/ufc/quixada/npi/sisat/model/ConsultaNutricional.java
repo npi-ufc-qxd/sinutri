@@ -12,45 +12,10 @@ import org.springframework.format.annotation.DateTimeFormat;
 @Entity
 public class ConsultaNutricional {
 
-	@Override
-	public String toString() {
-		return "ConsultaNutricional [id=" + id + ", data=" + data + ", peso="
-				+ peso + ", altura=" + altura + ", circunferenciaCintura="
-				+ circunferenciaCintura + ", glicemia=" + glicemia
-				+ ", clasificacaoGlicemia=" + classificacaoGlicemia + ", tgl="
-				+ tgl + ", clasificacaoTgl=" + classificacaoTgl + ", hdl=" + hdl
-				+ ", clasificacaoHdl=" + classificacaoHdl + ", idl=" + idl
-				+ ", clasificacaoIdl=" + classificacaoIdl + ", ht=" + ht
-				+ ", clasificacaoHt=" + classificacaoHt + ", hb=" + hb
-				+ ", clasificacaoHb=" + classificacaoHb
-				+ ", condutaNutricional=" + condutaNutricional
-				+ ", medicamento=" + medicamento + ", medicamentoComentario="
-				+ medicamentoComentario + ", mastigacao=" + mastigacao
-				+ ", mastigacaoComentario=" + mastigacaoComentario
-				+ ", disfagia=" + disfagia + ", pirose=" + pirose + ", nausea="
-				+ nausea + ", vomito=" + vomito + ", diarreia=" + diarreia
-				+ ", constipacao=" + constipacao + ", agua=" + agua
-				+ ", carneVermelhaFrequencia=" + carneVermelhaFrequencia
-				+ ", bebidaAlcoolica=" + bebidaAlcoolica
-				+ ", bebidaAlcoolicaFrequenciaSemanal="
-				+ bebidaAlcoolicaFrequenciaSemanal
-				+ ", bebidadaAlcoolicaComentario="
-				+ bebidadaAlcoolicaComentario + ", atividadeFisica="
-				+ atividadeFisica + ", atividadeFisicaFrequenciaSemanal="
-				+ atividadeFisicaFrequenciaSemanal
-				+ ", atividadeFisicaComentario=" + atividadeFisicaComentario
-				+ ", diabetes=" + diabetes + ", hipertensao=" + hipertensao
-				+ ", outrasPatologias=" + outrasPatologias
-				+ ", outrasPatologiasComentario=" + outrasPatologiasComentario
-				+ ", alergia=" + alergia + ", alergiaComentario="
-				+ alergiaComentario + ", objetivoConsulta=" + objetivoConsulta
-				+ "]";
-	}
-
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
+
 	@DateTimeFormat
 	private Date data;
 
@@ -69,8 +34,8 @@ public class ConsultaNutricional {
 	private int hdl;
 	private String classificacaoHdl;
 	
-	private int idl;
-	private String classificacaoIdl;
+	private int ldl;
+	private String classificacaoLdl;
 	
 	private int ht;
 	private String classificacaoHt;
@@ -194,12 +159,12 @@ public class ConsultaNutricional {
 		this.hdl = hdl;
 	}
 
-	public int getIdl() {
-		return idl;
+	public int getLdl() {
+		return ldl;
 	}
 
-	public void setIdl(int idl) {
-		this.idl = idl;
+	public void setLdl(int ldl) {
+		this.ldl = ldl;
 	}
 
 	public int getHt() {
@@ -452,12 +417,12 @@ public class ConsultaNutricional {
 		this.classificacaoHdl = classificacaoHdl;
 	}
 
-	public String getClassificacaoIdl() {
-		return classificacaoIdl;
+	public String getClassificacaoLdl() {
+		return classificacaoLdl;
 	}
 
-	public void setClassificacaoIdl(String classificacaoIdl) {
-		this.classificacaoIdl = classificacaoIdl;
+	public void setClassificacaoLdl(String classificacaoLdl) {
+		this.classificacaoLdl = classificacaoLdl;
 	}
 
 	public String getClassificacaoHt() {
@@ -476,9 +441,39 @@ public class ConsultaNutricional {
 		this.classificacaoHb = classificacaoHb;
 	}
 
-	
-	
-	
-	
+	@Override
+	public String toString() {
+		return "ConsultaNutricional [id=" + id + ", data=" + data + ", peso="
+				+ peso + ", altura=" + altura + ", circunferenciaCintura="
+				+ circunferenciaCintura + ", glicemia=" + glicemia
+				+ ", clasificacaoGlicemia=" + classificacaoGlicemia + ", tgl="
+				+ tgl + ", clasificacaoTgl=" + classificacaoTgl + ", hdl=" + hdl
+				+ ", clasificacaoHdl=" + classificacaoHdl + ", ldl=" + ldl
+				+ ", classificacaoLdl=" + classificacaoLdl + ", ht=" + ht
+				+ ", clasificacaoHt=" + classificacaoHt + ", hb=" + hb
+				+ ", clasificacaoHb=" + classificacaoHb
+				+ ", condutaNutricional=" + condutaNutricional
+				+ ", medicamento=" + medicamento + ", medicamentoComentario="
+				+ medicamentoComentario + ", mastigacao=" + mastigacao
+				+ ", mastigacaoComentario=" + mastigacaoComentario
+				+ ", disfagia=" + disfagia + ", pirose=" + pirose + ", nausea="
+				+ nausea + ", vomito=" + vomito + ", diarreia=" + diarreia
+				+ ", constipacao=" + constipacao + ", agua=" + agua
+				+ ", carneVermelhaFrequencia=" + carneVermelhaFrequencia
+				+ ", bebidaAlcoolica=" + bebidaAlcoolica
+				+ ", bebidaAlcoolicaFrequenciaSemanal="
+				+ bebidaAlcoolicaFrequenciaSemanal
+				+ ", bebidadaAlcoolicaComentario="
+				+ bebidadaAlcoolicaComentario + ", atividadeFisica="
+				+ atividadeFisica + ", atividadeFisicaFrequenciaSemanal="
+				+ atividadeFisicaFrequenciaSemanal
+				+ ", atividadeFisicaComentario=" + atividadeFisicaComentario
+				+ ", diabetes=" + diabetes + ", hipertensao=" + hipertensao
+				+ ", outrasPatologias=" + outrasPatologias
+				+ ", outrasPatologiasComentario=" + outrasPatologiasComentario
+				+ ", alergia=" + alergia + ", alergiaComentario="
+				+ alergiaComentario + ", objetivoConsulta=" + objetivoConsulta
+				+ "]";
+	}
 	
 }
