@@ -10,7 +10,7 @@
 <html>
 
 <head>
-	<meta charset= iso-8859-1/>
+	<meta charset="UTF-8"/>
 	<jsp:include page="../modulos/header-estrutura.jsp" />
 	<title>Consulta</title>
 </head>
@@ -45,6 +45,11 @@
 				<jsp:include page="abas/questionario.jsp" />
 	        </div>
 	    </div>
+
+		<div class="col-xs-offset-0 col-xs-10" align="center">
+			<button type="submit" class="btn btn-success">Finalizar Consulta</button>
+		</div>
+
 	</form:form>
 </div>
 
