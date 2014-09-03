@@ -1,8 +1,8 @@
-.metadata
-.settings
-.classpath
-.project
-target
+aplicacoes/sisat/.metadata
+aplicacoes/sisat/.settings
+aplicacoes/sisat/.classpath
+aplicacoes/sisat/.project
+aplicacoes/sisat/target
 *.class
 *.jar
 *.war

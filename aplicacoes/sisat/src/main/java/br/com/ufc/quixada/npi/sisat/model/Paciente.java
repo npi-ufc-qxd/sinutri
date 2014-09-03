@@ -26,8 +26,6 @@ public class Paciente implements Serializable {
 	private List<Agendamento> agendamentos;
 	 */	
 	
-	
-	
 	public Pessoa getPessoa() {
 		return pessoa;
 	}
