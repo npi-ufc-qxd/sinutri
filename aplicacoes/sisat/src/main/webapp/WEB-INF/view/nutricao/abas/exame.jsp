@@ -1,33 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 
-<div class="content"></br></br>
+<div class="content">
 
-<div class="col-xs-5" align="center">
-	<label class="form-inline">Glicemia:</label><input type="text" id="glicemia" name="glicemia">
-	<label class="form-inline">Classificação de Glicemia:</label><input type="text" id="classificacao" name="classificacaoGlicemia">
-	 </br></br></br>
-	
-	
-	<label class="form-inline">LDL:</label> <input type="text">
-	<input	type="text" placeholder="Classificação"></br></br></br>
-	<label class="form-inline">TGL:</label> <input type="text">
-	<input	type="text" placeholder="Classificação"></br></br></br>
-</div>	
+	<div class="col-xs-5" align="center">
+		<label for="glicemia" >Glicemia:</label>
+		<form:input type="text" path="glicemia" id="glicemia" name="glicemia"></form:input>
+	</div>	
 
-<div class="col-xs-4" align="center">
-	<fieldset>
-		<label class="form-inline">HDL:</label> <input type="text">
-		<input	type="text" placeholder="Classificação"></br></br></br>
-			
-		<label class="form-inline">HB:</label> <input type="text">
-		<input	type="text" placeholder="Classificação"></br></br></br>
-			
-		<label class="form-inline">HT:</label> <input type="text">
-		<input	type="text" placeholder="Classificação"></br></br></br>	
-	</div>
-
-	<div class="col-xs-offset-0 col-xs-10" align="center">
-		<button type="submit" class="btn btn-success">Finalizar Consulta</button>
+	<div class="col-xs-4" align="center">
 	</div>
 
 </div>
