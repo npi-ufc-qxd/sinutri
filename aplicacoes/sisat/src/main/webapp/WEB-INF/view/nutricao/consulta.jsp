@@ -10,7 +10,7 @@
 <html>
 
 <head>
-	<meta charset= iso-8859-1/>
+	<meta charset="UTF-8"/>
 	<jsp:include page="../modulos/header-estrutura.jsp" />
 	<title>Consulta</title>
 </head>
