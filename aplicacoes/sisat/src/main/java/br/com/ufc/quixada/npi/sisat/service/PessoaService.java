@@ -17,4 +17,5 @@ public interface PessoaService extends GenericService<Pessoa> {
 	public abstract List<Pessoa> getPareceristas(Long id);
 
 	public abstract boolean isNutricao(Pessoa pessoa);
+
 }
