@@ -25,23 +25,29 @@ public class ConsultaNutricional {
 
 	private Double circunferenciaCintura;
 
-	private int glicemia;
+	private Integer glicemia;
 	private String classificacaoGlicemia;
 
-	private int tgl;
+	private Integer tgl;
 	private String classificacaoTgl;
 	
-	private int hdl;
+	private Integer hdl;
 	private String classificacaoHdl;
 	
-	private int ldl;
+	private Integer ldl;
 	private String classificacaoLdl;
 	
-	private int ht;
+	private Integer ht;
 	private String classificacaoHt;
 	
-	private int hb;
+	private Integer hb;
 	private String classificacaoHb;
+	
+	private Integer tgo;
+	private String classificacaoTgo;
+	
+	private Integer tgp;
+	private String classificacaoTgp;
 	
 	private String condutaNutricional;
 
@@ -95,6 +101,10 @@ public class ConsultaNutricional {
 
 	private String objetivoConsulta;
 
+	
+	
+	
+	
 	public Long getId() {
 		return id;
 	}
@@ -135,52 +145,132 @@ public class ConsultaNutricional {
 		this.circunferenciaCintura = circunferenciaCintura;
 	}
 
-	public int getGlicemia() {
+	public Integer getGlicemia() {
 		return glicemia;
 	}
 
-	public void setGlicemia(int glicemia) {
+	public void setGlicemia(Integer glicemia) {
 		this.glicemia = glicemia;
 	}
 
-	public int getTgl() {
+	public String getClassificacaoGlicemia() {
+		return classificacaoGlicemia;
+	}
+
+	public void setClassificacaoGlicemia(String classificacaoGlicemia) {
+		this.classificacaoGlicemia = classificacaoGlicemia;
+	}
+
+	public Integer getTgl() {
 		return tgl;
 	}
 
-	public void setTgl(int tgl) {
+	public void setTgl(Integer tgl) {
 		this.tgl = tgl;
 	}
 
-	public int getHdl() {
+	public String getClassificacaoTgl() {
+		return classificacaoTgl;
+	}
+
+	public void setClassificacaoTgl(String classificacaoTgl) {
+		this.classificacaoTgl = classificacaoTgl;
+	}
+
+	public Integer getHdl() {
 		return hdl;
 	}
 
-	public void setHdl(int hdl) {
+	public void setHdl(Integer hdl) {
 		this.hdl = hdl;
 	}
 
-	public int getLdl() {
+	public String getClassificacaoHdl() {
+		return classificacaoHdl;
+	}
+
+	public void setClassificacaoHdl(String classificacaoHdl) {
+		this.classificacaoHdl = classificacaoHdl;
+	}
+
+	public Integer getLdl() {
 		return ldl;
 	}
 
-	public void setLdl(int ldl) {
+	public void setLdl(Integer ldl) {
 		this.ldl = ldl;
 	}
 
-	public int getHt() {
+	public String getClassificacaoLdl() {
+		return classificacaoLdl;
+	}
+
+	public void setClassificacaoLdl(String classificacaoLdl) {
+		this.classificacaoLdl = classificacaoLdl;
+	}
+
+	public Integer getHt() {
 		return ht;
 	}
 
-	public void setHt(int ht) {
+	public void setHt(Integer ht) {
 		this.ht = ht;
 	}
 
-	public int getHb() {
+	public String getClassificacaoHt() {
+		return classificacaoHt;
+	}
+
+	public void setClassificacaoHt(String classificacaoHt) {
+		this.classificacaoHt = classificacaoHt;
+	}
+
+	public Integer getHb() {
 		return hb;
 	}
 
-	public void setHb(int hb) {
+	public void setHb(Integer hb) {
 		this.hb = hb;
+	}
+
+	public String getClassificacaoHb() {
+		return classificacaoHb;
+	}
+
+	public void setClassificacaoHb(String classificacaoHb) {
+		this.classificacaoHb = classificacaoHb;
+	}
+
+	public Integer getTgo() {
+		return tgo;
+	}
+
+	public void setTgo(Integer tgo) {
+		this.tgo = tgo;
+	}
+
+	public String getClassificacaoTgo() {
+		return classificacaoTgo;
+	}
+
+	public void setClassificacaoTgo(String classificacaoTgo) {
+		this.classificacaoTgo = classificacaoTgo;
+	}
+
+	public Integer getTgp() {
+		return tgp;
+	}
+
+	public void setTgp(Integer tgp) {
+		this.tgp = tgp;
+	}
+
+	public String getClassificacaoTgp() {
+		return classificacaoTgp;
+	}
+
+	public void setClassificacaoTgp(String classificacaoTgp) {
+		this.classificacaoTgp = classificacaoTgp;
 	}
 
 	public String getCondutaNutricional() {
@@ -393,65 +483,19 @@ public class ConsultaNutricional {
 		this.objetivoConsulta = objetivoConsulta;
 	}
 
-	public String getClassificacaoGlicemia() {
-		return classificacaoGlicemia;
-	}
-
-	public void setClassificacaoGlicemia(String classificacaoGlicemia) {
-		this.classificacaoGlicemia = classificacaoGlicemia;
-	}
-
-	public String getClassificacaoTgl() {
-		return classificacaoTgl;
-	}
-
-	public void setClassificacaoTgl(String classificacaoTgl) {
-		this.classificacaoTgl = classificacaoTgl;
-	}
-
-	public String getClassificacaoHdl() {
-		return classificacaoHdl;
-	}
-
-	public void setClassificacaoHdl(String classificacaoHdl) {
-		this.classificacaoHdl = classificacaoHdl;
-	}
-
-	public String getClassificacaoLdl() {
-		return classificacaoLdl;
-	}
-
-	public void setClassificacaoLdl(String classificacaoLdl) {
-		this.classificacaoLdl = classificacaoLdl;
-	}
-
-	public String getClassificacaoHt() {
-		return classificacaoHt;
-	}
-
-	public void setClassificacaoHt(String classificacaoHt) {
-		this.classificacaoHt = classificacaoHt;
-	}
-
-	public String getClassificacaoHb() {
-		return classificacaoHb;
-	}
-
-	public void setClassificacaoHb(String classificacaoHb) {
-		this.classificacaoHb = classificacaoHb;
-	}
-
 	@Override
 	public String toString() {
 		return "ConsultaNutricional [id=" + id + ", data=" + data + ", peso="
 				+ peso + ", altura=" + altura + ", circunferenciaCintura="
 				+ circunferenciaCintura + ", glicemia=" + glicemia
-				+ ", clasificacaoGlicemia=" + classificacaoGlicemia + ", tgl="
-				+ tgl + ", clasificacaoTgl=" + classificacaoTgl + ", hdl=" + hdl
-				+ ", clasificacaoHdl=" + classificacaoHdl + ", ldl=" + ldl
-				+ ", classificacaoLdl=" + classificacaoLdl + ", ht=" + ht
-				+ ", clasificacaoHt=" + classificacaoHt + ", hb=" + hb
-				+ ", clasificacaoHb=" + classificacaoHb
+				+ ", classificacaoGlicemia=" + classificacaoGlicemia + ", tgl="
+				+ tgl + ", classificacaoTgl=" + classificacaoTgl + ", hdl="
+				+ hdl + ", classificacaoHdl=" + classificacaoHdl + ", ldl="
+				+ ldl + ", classificacaoLdl=" + classificacaoLdl + ", ht=" + ht
+				+ ", classificacaoHt=" + classificacaoHt + ", hb=" + hb
+				+ ", classificacaoHb=" + classificacaoHb + ", tgo=" + tgo
+				+ ", classificacaoTgo=" + classificacaoTgo + ", tgp=" + tgp
+				+ ", classificacaoTgp=" + classificacaoTgp
 				+ ", condutaNutricional=" + condutaNutricional
 				+ ", medicamento=" + medicamento + ", medicamentoComentario="
 				+ medicamentoComentario + ", mastigacao=" + mastigacao
@@ -476,4 +520,6 @@ public class ConsultaNutricional {
 				+ "]";
 	}
 	
+	
+
 }
