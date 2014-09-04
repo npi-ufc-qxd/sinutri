@@ -1,5 +1,5 @@
 # Autodetect text files
-* text eol=lf
+* -text
 # Definitively text files
 *.xml text
 *.java text
