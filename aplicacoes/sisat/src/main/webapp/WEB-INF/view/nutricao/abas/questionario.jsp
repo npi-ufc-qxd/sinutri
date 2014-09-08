@@ -71,14 +71,14 @@ var almoco = 0;
 			alert (cont);
 			
 			$("#tabelaDesjejum").append(
-					"<tr path='refeiçoes[" + cont + "].alimentos'>" +
+					"<tr path='frequenciasAlimentares[" + cont + "]'>" +
 						"<td>" +
 							"<div class=col-sm-5>" +
-								"<input type='text' name='" + des + "' cssClass='form-control' placeholder='Digite o alimento'/>" +
+								"<input type='text' name='frequenciasAlimentares[" + cont + "].refeicoes[" + des + "].alimento' cssClass='form-control' placeholder='Digite o alimento'/>" +
 							"</div>" +
 						"</td> " +
 						"<td>" +
-							"<input type='text' name='" + des + "'cssClass='form-control' placeholder='Digite a porcao'/>" +
+							"<input type='text' name='frequenciasAlimentares[" + cont + "].refeicoes[" + des + "].porcao'cssClass='form-control' placeholder='Digite a porcao'/>" +
 						"</td>" +
 						"<td>" +
 							"<input type='button' value='Excluir' id='bot2'/>" +

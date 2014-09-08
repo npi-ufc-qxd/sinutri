@@ -1,0 +1,50 @@
+package br.com.ufc.quixada.npi.sisat.model;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
+@Entity
+public class Alimentacao {
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
+	
+	private String alimento;
+	
+	private String porcao;
+	
+	@ManyToOne
+	@JoinColumn(name= "frequenciaAlimentar_id")
+	private FrequenciaAlimentar frequenciaAlimentar;
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public String getAlimento() {
+		return alimento;
+	}
+
+	public void setAlimento(String alimento) {
+		this.alimento = alimento;
+	}
+
+	public String getPorcao() {
+		return porcao;
+	}
+
+	public void setPorcao(String porcao) {
+		this.porcao = porcao;
+	}
+	
+
+}
