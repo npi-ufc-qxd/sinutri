@@ -29,42 +29,39 @@
 			</c:if>
 
 
-			<form:form id="buscarPacienteForm" role="form" commandName="pessoa"
+				<table >
+				<div class="inline">
+			<form:form id="buscarPacienteForm" role="form"
 				servletReltiveAction="/nutricao/buscar" method="POST"
 				cssClass="form-horizontal">
-
-
-				<div class="form-group">
-					<label for="cpf" class="col-sm-2 control-label">Cpf:</label>
-					<div class="col-sm-10">
-						<form:input id="cpf" path="cpf" cssClass="col-sm-2 form-control"
-							placeholder="Cpf do paciente" />
+					<div class="form-group">
+						<td>
+							<select name="pesq">
+								<option value="nome">Nome</option>
+								<option value="cpf">CPF</option>
+							</select>
+							</td>
+							<td> 
+							<input id="campo" name="campo" cssClass="form-control"
+								placeholder="" size="40" required="required"/>
+								</td>
 					</div>
-				</div>
-
-				<div class="form-group">
-					<label for="nome" class="col-sm-2 control-label">Nome:</label>
-					<div class="col-sm-10">
-						<form:input id="nome" path="nome" cssClass="form-control"
-							placeholder="Nome do paciente" />
+					<div class="controls">
+					<td>
+						<input name="submit" type="submit" class="btn btn-primary"
+							value="Buscar" />
+					</td>
 					</div>
-				</div>
-
-				<div class="controls">
-					<input name="submit" type="submit" class="btn btn-primary"
-						value="Buscar" />
-				</div>
-
 			</form:form>
-			
-			
+				</div>
+				</table>
 
 
 
-			<c:if test="${empty pessoas}">
+			<%-- <c:if test="${empty pessoas}">
 				<div class="alert alert-warning" role="alert">Pessoa não
 					encontrada.</div>
-			</c:if>
+			</c:if> --%>
 			<c:if test="${not empty pessoas}">
 				<div class="panel panel-default">
 
@@ -83,8 +80,7 @@
 								<tr class="linha">
 									<td><a href="<c:url value="/nutricao/${pessoa.id}/detalhes"></c:url>">${pessoa.nome}
 									</a></td>
-									<td><a id="detalhes" data-toggle="modal"
-										href="${pessoa.id}/detalhes">
+									<td><a id="detalhes" data-toggle="modal" href="${pessoa.id}/detalhes">
 											<button class="btn btn-info">
 												Detalhes <span class="glyphicon glyphicon-eye-open"></span>
 											</button>
@@ -100,9 +96,5 @@
 	<jsp:include page="../modulos/footer.jsp" />
 
 </body>
-<script type="text/javascript">
-$('#select').onselect(function() {
-	alert("oioioi");
-});
-</script>
+
 </html>

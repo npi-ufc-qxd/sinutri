@@ -1,5 +1,6 @@
 package br.com.ufc.quixada.npi.sisat.model;
 
+import java.sql.Date;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -44,6 +45,13 @@ public class Pessoa {
 	private String nome;
 	
 	private String email;
+	
+	@Column(columnDefinition="char(1)")
+	private char sexo;
+	
+	private Date dataNascimento;
+	
+	private String telefone;
 	
 	public Pessoa(){
 		super();
@@ -114,6 +122,24 @@ public class Pessoa {
 		this.servidores = servidores;
 	}
 	
+	public char getSexo() {
+		return sexo;
+	}
+	public void setSexo(char sexo) {
+		this.sexo = sexo;
+	}
+	public Date getDataNascimento() {
+		return dataNascimento;
+	}
+	public void setDataNascimento(Date dataNascimento) {
+		this.dataNascimento = dataNascimento;
+	}
+	public String getTelefone() {
+		return telefone;
+	}
+	public void setTelefone(String telefone) {
+		this.telefone = telefone;
+	}
 	@Override
 	public boolean equals(Object obj) {
 		if(obj instanceof Pessoa) {

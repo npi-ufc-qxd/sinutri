@@ -1,6 +1,7 @@
 package br.com.ufc.quixada.npi.sisat.model;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.persistence.*;
 
@@ -17,11 +18,12 @@ public class Paciente implements Serializable {
 	private double altura;
 
 	
-	/*
 	 //
-	@OneToMany(mappedBy="paciente")
+	@OneToMany
+	@JoinColumn(name="paciente_id")
 	private List<ConsultaNutricional> consultas;
 	
+	/*
 	@OneToMany(mappedBy="paciente")
 	private List<Agendamento> agendamentos;
 	 */	

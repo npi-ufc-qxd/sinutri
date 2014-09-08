@@ -26,14 +26,14 @@
 					<tr>
 						<td>Nome: ${pessoa.nome }</td>
 	
-						<td>Sexo: ??</td>
+						<td>Sexo: ${pessoa.sexo }</td>
 
-						<td>Idade: ?? anos</td>
+						<td>Idade: ${pessoa.dataNascimento }</td>
 					</tr>
 					<tr>
 						<td>E-mail: ${pessoa.email }    </td>
 						
-						<td colspan="2" >Telefone: (xx) 0000-0000</td>
+						<td colspan="2" >Telefone: ${pessoa.telefone }</td>
 					</tr>
 					
 					
