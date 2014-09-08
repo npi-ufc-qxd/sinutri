@@ -1,41 +1,40 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
 <div class="col-sm-12">
-	<label style="cursor: pointer;"> <input type="checkbox" id="check" onclick="habilitar();" /> Medicamentos
-	</label> <input type=text size='50' disabled="disabled" id="inputText"> <br/><br/>
+	<div style="cursor: pointer;"></div>
+	<input type="checkbox" name="medicamento" id="checkMedicamento" onclick="habilitar();"/><label>Medicamentos</label>
+	<input type=text name="medicamentoComentario" size='123' disabled="disabled" id="inputTextMedicamento"/> <br/><br/>
 </div>
 
 <div class="col-sm-12">
-	Alterações Gastrointestinais <br/>
-	<label class="col-sm-2"><input type="checkbox" id="check1" onclick="verificar();" name="opcao"/>Disfagia</label>
-	<label class="col-sm-2"><input type="checkbox" name="opcao" value="false"/>Pirose</label>
-	<label class="col-sm-2"><input type="checkbox" name="opcao" value="false"/>Náusea</label>
-	<label class="col-sm-2"><input type="checkbox" name="opcao" value="false"/>Vômitos</label>
-	<label class="col-sm-2"><input type="checkbox" name="opcao" value="false"/>Diarreia</label>
-	<label class="col-sm-2"><input type="checkbox" name="opcao" value="false"/>Constipação</label> <br/>
+	<label>Alterações Gastrointestinais</label> <br/>
+	<div class="col-sm-2"><input type="checkbox" name="disfagia" value="true"/><label>Disfagia</label></div>
+	<div class="col-sm-2"><input type="checkbox" name="pirose" value="true"/><label>Pirose</label></div>
+	<div class="col-sm-2"><input type="checkbox" name="nausea" value="true"/><label>Náusea</label></div>
+	<div class="col-sm-2"><input type="checkbox" name="vomito" value="true"/><label>Vômitos</label></div>
+	<div class="col-sm-2"><input type="checkbox" name="diarreia" value="true"/><label>Diarreia</label></div>
+	<div class="col-sm-2"><input type="checkbox" name="constipacao" value="true"/><label>Constipação</label></div>
+	
+	<div class="col-sm-12" style="cursor: pointer;">
+		<input class="col-sm-0" type="checkbox" name="mastigacao" id="checkMastigacao" onclick="habilitar();"/><label>Mastigação</label>
+		<input type=text name="mastigacaoComentario" value="" size='123' disabled="disabled" id="inputTextMastigacao"/>
+	</div>
 </div>
 
 <div class="col-sm-12">
-	<label class="col-sm-12" style="cursor: pointer;"> 
-		<input class="col-sm-0" type="checkbox" id="check" onclick="habilitar();"/>Mastigação
-		<input type=text name="mastigacaoComentario" value="" size='140' disabled="disabled" id="inputText">
-	</label> 
-</div> <br/> <br/>
-
-<div class="col-sm-12">
-	Alergia Alimentar <br/>
-	<textarea rows="2" cols="75" name="alergiaComentario"/></textarea> <br/><br/>
+	<br/><label>Alergia Alimentar</label><br/>
+	<textarea rows="2" cols="140" name="alergiaComentario"/></textarea> <br/><br/>
 </div>		
 	
 <div class="col-sm-6">
-	Consumo de água <input type="text" name="agua" size="10"> 
+	<label>Consumo de água</label><input type="text" name="agua" size="10"> 
 	<select style="width: 70px" class="form-control-inline">
 		<option>Dia</option>
 	</select>
 </div>		
 
 <div class="col-sm-6">	
-	Consumo de carne vermelha <input type="text" name="carneVermelhaFrequencia" size="10"> 
+	<label>Consumo de carne vermelha</label><input type="text" name="carneVermelhaFrequencia" size="10"/> 
 	<select
 		style="width: 70px" class="form-control-inline">
 		<option>Dia</option>
@@ -44,13 +43,13 @@
 	
 <div class="form-group">
 	<div class="col-sm-3">
- 		Consumo de álcool
- 		<input type="radio" name="bebidaAlcoolica" value="true">Sim
-		<input type="radio" name="bebidaAlcoolica" value="false">Nao
+ 		<label>Consumo de álcool</label>
+ 		<input type="radio" name="bebidaAlcoolica" value="true"><label>Sim</label>
+		<input type="radio" name="bebidaAlcoolica" value="false"><label>Nao</label>
 	</div>
 			
-	<div class="col-sm-3">	
-		Frequência em dias
+	<div class="col-sm-4">	
+		<label>Frequência em dias</label>
 		<select name="bebidaAlcoolicaFrequenciaSemanal" id="bebidaAlcoolicaFrequenciaSemanal" style="width: 70px" class="form-control-inline">
 			<option value="0">0</option>
 			<option value="1">1</option>
@@ -61,49 +60,42 @@
 			<option value="6">6</option>
 			<option value="7">7</option>
 		</select>
-		/semana
+		<label>/semana</label>
 	</div>
 	
 	<div class="col-sm-3">
-		Tipos de bebidas: <input type="text" name="bebidadaAlcoolicaComentario" size="10">
+		<label>Tipos de bebidas:</label> <input type="text" name="bebidadaAlcoolicaComentario" size="10">
 	</div>
 </div> <br/>
 
 <div class="col-sm-12">
-	<label style="cursor: pointer;"> <input type="checkbox"
-		id="checkPatologia" onclick="habilitar();" /> Patologias
-	</label> <br/>
-	<textarea rows="2" cols="75" name="outrasPatologiasComentario" disabled="disabled" id="inputTextPatologia"></textarea> <br/><br/>
+	<div style="cursor: pointer;"></div> <br/>
+	<input type="checkbox" name="outrasPatologias" id="checkPatologia" onclick="habilitar();"/><label>Patologias</label>
+	<textarea rows="2" cols="140" name="outrasPatologiasComentario" disabled="disabled" id="inputTextPatologia"></textarea> <br/><br/>
 </div>
 
 <div class="col-sm-12">
-	Objetivo da Consulta <br/>
-	<textarea rows="2" cols="75" name="objetivoConsulta"> </textarea> <br/><br/>
+	<label>Objetivo da Consulta</label> <br/>
+	<textarea rows="2" cols="140" name="objetivoConsulta"> </textarea> <br/><br/>
 </div>
 
 	
 <script>
 	function habilitar() {
-		if (document.getElementById('check').checked) {
-			document.getElementById('inputText').disabled = false;
+		if (document.getElementById('checkMedicamento').checked) {
+			document.getElementById('inputTextMedicamento').disabled = false;
 		} else {
-			document.getElementById('inputText').disabled = true;
+			document.getElementById('inputTextMedicamento').disabled = true;
+		}
+		if (document.getElementById('checkMastigacao').checked) {
+			document.getElementById('inputTextMastigacao').disabled = false;
+		} else {
+			document.getElementById('inputTextMastigacao').disabled = true;
 		}
 		if (document.getElementById('checkPatologia').checked) {
 			document.getElementById('inputTextPatologia').disabled = false;
 		} else {
 			document.getElementById('inputTextPatologia').disabled = true;
-		}
-	}
-</script>
-
-<script>
-	verificar();
-	function verificar() {
-		if (document.getElementById('check1').checked) {
-			document.getElementById('check1').value = true;
-		} else {
-			document.getElementById('check1').value = false;
 		}
 	}
 </script>
