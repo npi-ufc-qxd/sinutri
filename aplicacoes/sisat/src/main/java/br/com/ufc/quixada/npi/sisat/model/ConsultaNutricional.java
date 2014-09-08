@@ -9,6 +9,8 @@ import javax.persistence.Id;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+import br.com.ufc.quixada.npi.sisat.enumerator.Classificacao;
+
 @Entity
 public class ConsultaNutricional {
 
@@ -28,8 +30,8 @@ public class ConsultaNutricional {
 	private Integer glicemia;
 	private String classificacaoGlicemia;
 
-	private Integer tgl;
-	private String classificacaoTgl;
+	private Integer ct;
+	private String classificacaoCt;
 	
 	private Integer hdl;
 	private String classificacaoHdl;
@@ -37,8 +39,8 @@ public class ConsultaNutricional {
 	private Integer ldl;
 	private String classificacaoLdl;
 	
-	private Integer ht;
-	private String classificacaoHt;
+	private Integer tg;
+	private Classificacao classificacaoTg;
 	
 	private Integer hb;
 	private String classificacaoHb;
@@ -51,25 +53,25 @@ public class ConsultaNutricional {
 	
 	private String condutaNutricional;
 
-	private Boolean medicamento;
+	private Boolean medicamento=false;
 
 	private String medicamentoComentario;
 
-	private Boolean mastigacao;
+	private Boolean mastigacao=false;
 
 	private String mastigacaoComentario;
 
-	private Boolean disfagia;
+	private Boolean disfagia=false;
 
-	private Boolean pirose;
+	private Boolean pirose=false;
 
-	private Boolean nausea;
+	private Boolean nausea=false;
 
-	private Boolean vomito;
+	private Boolean vomito=false;
 
-	private Boolean diarreia;
+	private Boolean diarreia=false;
 
-	private Boolean constipacao;
+	private Boolean constipacao=false;
 
 	private String agua;
 
@@ -91,7 +93,7 @@ public class ConsultaNutricional {
 
 	private Boolean hipertensao;
 
-	private Boolean outrasPatologias;
+	private Boolean outrasPatologias=false;
 
 	private String outrasPatologiasComentario;
 
@@ -161,20 +163,20 @@ public class ConsultaNutricional {
 		this.classificacaoGlicemia = classificacaoGlicemia;
 	}
 
-	public Integer getTgl() {
-		return tgl;
+	public Integer getCt() {
+		return ct;
 	}
 
-	public void setTgl(Integer tgl) {
-		this.tgl = tgl;
+	public void setCt(Integer ct) {
+		this.ct = ct;
 	}
 
-	public String getClassificacaoTgl() {
-		return classificacaoTgl;
+	public String getClassificacaoCt() {
+		return classificacaoCt;
 	}
 
-	public void setClassificacaoTgl(String classificacaoTgl) {
-		this.classificacaoTgl = classificacaoTgl;
+	public void setClassificacaoCt(String classificacaoCt) {
+		this.classificacaoCt = classificacaoCt;
 	}
 
 	public Integer getHdl() {
@@ -209,20 +211,20 @@ public class ConsultaNutricional {
 		this.classificacaoLdl = classificacaoLdl;
 	}
 
-	public Integer getHt() {
-		return ht;
+	public Integer getTg() {
+		return tg;
 	}
 
-	public void setHt(Integer ht) {
-		this.ht = ht;
+	public void setTg(Integer tg) {
+		this.tg = tg;
 	}
 
-	public String getClassificacaoHt() {
-		return classificacaoHt;
+	public Classificacao getClassificacaoTg() {
+		return classificacaoTg;
 	}
 
-	public void setClassificacaoHt(String classificacaoHt) {
-		this.classificacaoHt = classificacaoHt;
+	public void setClassificacaoTg(Classificacao classificacaoTg) {
+		this.classificacaoTg = classificacaoTg;
 	}
 
 	public Integer getHb() {
@@ -488,11 +490,11 @@ public class ConsultaNutricional {
 		return "ConsultaNutricional [id=" + id + ", data=" + data + ", peso="
 				+ peso + ", altura=" + altura + ", circunferenciaCintura="
 				+ circunferenciaCintura + ", glicemia=" + glicemia
-				+ ", classificacaoGlicemia=" + classificacaoGlicemia + ", tgl="
-				+ tgl + ", classificacaoTgl=" + classificacaoTgl + ", hdl="
+				+ ", classificacaoGlicemia=" + classificacaoGlicemia + ", ct="
+				+ ct + ", classificacaoCt=" + classificacaoCt + ", hdl="
 				+ hdl + ", classificacaoHdl=" + classificacaoHdl + ", ldl="
-				+ ldl + ", classificacaoLdl=" + classificacaoLdl + ", ht=" + ht
-				+ ", classificacaoHt=" + classificacaoHt + ", hb=" + hb
+				+ ldl + ", classificacaoLdl=" + classificacaoLdl + ", tg=" + tg
+				+ ", classificacaoTg=" + classificacaoTg + ", hb=" + hb
 				+ ", classificacaoHb=" + classificacaoHb + ", tgo=" + tgo
 				+ ", classificacaoTgo=" + classificacaoTgo + ", tgp=" + tgp
 				+ ", classificacaoTgp=" + classificacaoTgp
