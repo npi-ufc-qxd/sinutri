@@ -15,8 +15,7 @@ public class Paciente implements Serializable {
 	
 	private double altura;
 
-	@OneToMany
-	@JoinColumn(name="paciente_id")
+	@OneToMany(mappedBy="paciente")
 	private List<ConsultaNutricional> consultas;
 	
 	/*
