@@ -45,25 +45,25 @@ public class ConsultaNutricional {
 	
 	private String condutaNutricional;
 
-	private Boolean medicamento;
+	private Boolean medicamento=false;
 
 	private String medicamentoComentario;
 
-	private Boolean mastigacao;
+	private Boolean mastigacao=false;
 
 	private String mastigacaoComentario;
 
-	private Boolean disfagia;
+	private Boolean disfagia=false;
 
-	private Boolean pirose;
+	private Boolean pirose=false;
 
-	private Boolean nausea;
+	private Boolean nausea=false;
 
-	private Boolean vomito;
+	private Boolean vomito=false;
 
-	private Boolean diarreia;
+	private Boolean diarreia=false;
 
-	private Boolean constipacao;
+	private Boolean constipacao=false;
 
 	private String agua;
 
@@ -85,11 +85,11 @@ public class ConsultaNutricional {
 
 	private Boolean hipertensao;
 
-	private Boolean outrasPatologias;
+	private Boolean outrasPatologias=false;
 
 	private String outrasPatologiasComentario;
 
-	private Boolean alergia;
+	private Boolean alergia=false;
 
 	private String alergiaComentario;
 

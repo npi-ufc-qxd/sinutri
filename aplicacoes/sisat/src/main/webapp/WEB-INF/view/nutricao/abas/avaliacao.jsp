@@ -22,8 +22,9 @@
 </div>
 
 <div class="col-sm-12">
-	<br/><label>Alergia Alimentar</label><br/>
-	<textarea rows="2" cols="140" name="alergiaComentario"/></textarea> <br/><br/>
+	<div style="cursor: pointer;"></div> <br/>
+	<input type="checkbox" name="alergia" id="checkAlergia" onclick="habilitar();"/><label>Alergia Alimentar</label>
+	<textarea rows="2" cols="140" name="alergiaComentario" disabled="disabled" id="inputTextAlergia"></textarea> <br/><br/>
 </div>		
 	
 <div class="col-sm-6">
@@ -79,7 +80,6 @@
 	<textarea rows="2" cols="140" name="objetivoConsulta"> </textarea> <br/><br/>
 </div>
 
-	
 <script>
 	function habilitar() {
 		if (document.getElementById('checkMedicamento').checked) {
@@ -91,6 +91,11 @@
 			document.getElementById('inputTextMastigacao').disabled = false;
 		} else {
 			document.getElementById('inputTextMastigacao').disabled = true;
+		}
+		if (document.getElementById('checkAlergia').checked) {
+			document.getElementById('inputTextAlergia').disabled = false;
+		} else {
+			document.getElementById('inputTextAlergia').disabled = true;
 		}
 		if (document.getElementById('checkPatologia').checked) {
 			document.getElementById('inputTextPatologia').disabled = false;

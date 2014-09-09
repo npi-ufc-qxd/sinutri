@@ -79,6 +79,15 @@ public class NutricaoController {
 	public String consulta(@ModelAttribute("consulta") ConsultaNutricional consulta) {
 		System.out.println("consulta post");
 		System.out.println(consulta);
+		if(consulta.getAgua().length()==0){
+			consulta.setAgua(null);
+		}
+		if(consulta.getCarneVermelhaFrequencia().length()==0){
+			consulta.setCarneVermelhaFrequencia(null);
+		}
+		if(consulta.getBebidadaAlcoolicaComentario().length()==0){
+			consulta.setBebidadaAlcoolicaComentario(null);
+		}
 		consultaNutricionalService.save(consulta);
 		return "nutricao/consulta";
 	}
