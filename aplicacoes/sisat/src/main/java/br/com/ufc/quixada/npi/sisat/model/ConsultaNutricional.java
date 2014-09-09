@@ -40,7 +40,7 @@ public class ConsultaNutricional {
 	private String classificacaoLdl;
 	
 	private Integer tg;
-	private Classificacao classificacaoTg;
+	private String classificacaoTg;
 	
 	private Integer hb;
 	private String classificacaoHb;
@@ -219,11 +219,11 @@ public class ConsultaNutricional {
 		this.tg = tg;
 	}
 
-	public Classificacao getClassificacaoTg() {
+	public String getClassificacaoTg() {
 		return classificacaoTg;
 	}
 
-	public void setClassificacaoTg(Classificacao classificacaoTg) {
+	public void setClassificacaoTg(String classificacaoTg) {
 		this.classificacaoTg = classificacaoTg;
 	}
 

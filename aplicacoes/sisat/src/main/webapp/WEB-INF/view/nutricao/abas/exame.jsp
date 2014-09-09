@@ -1,3 +1,4 @@
+<%@page import="com.itextpdf.text.pdf.codec.Base64.OutputStream"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -11,10 +12,9 @@
 			<form:input id="glicemia" path="glicemia" cssClass="form-control" type="text"/>
 			
 			<select name="classificacaoGlicemia" id="classificacaoGlicemia" path="classificacaoGlicemia" class="col-xs-8">
-			  <option value="Riscodediabetes">Elevado risco de diabetes</option>
-			  <option value="Toleranciadiminuida">Tolerância diminuida a glicose</option>
-			  <option value="Normal">Normal</option>
-			  <option value="Baixa">Baixa</option>
+			  <c:forEach var="c" items="${classificacao}" varStatus="i">
+  						<option value="${c.tipo}">${c.tipo}</option>
+				</c:forEach>
 			</select><br/><br/><br/>
 			
 				<!-- CT -->
@@ -22,9 +22,9 @@
 			<form:input id="ct" path="ct" cssClass="form-control" type="text"/>
 		
 			<select name="classificacaoCt" id="classificacaoCt" class="col-xs-5" path="classificacaoCt">
-			  <option value="Desejável">Desejável</option>
-			  <option value="Lemítrofe">Lemítrofe</option>
-			  <option value="Alto">Alto</option>
+			  <c:forEach var="c" items="${classificacao}" varStatus="i">
+  						<option value="${c.tipo}">${c.tipo}</option>
+				</c:forEach>
 			</select><br/><br/><br/>
 			
 			<!-- LDL-C -->
@@ -32,10 +32,9 @@
 			<form:input id="ldl" path="ldl" cssClass="form-control" type="text"/>
 			
 			<select name="classificacaoLdl" id="classificacaoLdl" class="col-xs-5" path="classificacaoLdl" >
-			  <option value="Desejável">Desejável</option>
-			  <option value="Lemítrofe">Lemítrofe</option>
-			  <option value="Alto">Alto</option>
-			  <option value="Muito alto">Muito alto</option>
+			  <c:forEach var="c" items="${classificacao}" varStatus="i">
+  						<option value="${c.tipo}">${c.tipo}</option>
+				</c:forEach>
 			</select><br/><br/><br/>
 			
 			<!-- HDL-C -->
@@ -43,9 +42,9 @@
 			<form:input id="hdl" path="hdl" cssClass="form-control" type="text"/>
 			
 			<select name="classificacaoHdl" id="classificacaoHdl" class="col-xs-5" path="classificacaoHdl" >
-			  <option value="Lemítrofe">Lemítrofe</option>
-			  <option value="Alto">Alto</option>
-			  <option value="Muito alto">Muito alto</option>
+			  <c:forEach var="c" items="${classificacao}" varStatus="i">
+  						<option value="${c.tipo}">${c.tipo}</option>
+				</c:forEach>
 			</select>
 			
 		</div>
@@ -60,15 +59,11 @@
 			<form:input id="tg" path="tg" cssClass="form-control" type="text"/>
 			
 			<select name="classificacaoTg" id="classificacaoTg" class="col-xs-5" path="classificacaoTg" >
-			
-			<c:forEach var="classificacao" items="${classificacaoTg}">
-			
-			 	<option value="${classificacao}" ></option>
-			
-			
-			</c:forEach>
-			
-			
+				
+				<c:forEach var="c" items="${classificacao}" varStatus="i">
+  						<option value="${c.tipo}">${c.tipo}</option>
+				</c:forEach>
+				
 			
 			</select><br/><br/><br/>
 			
@@ -77,9 +72,9 @@
 			<form:input id="hb" path="hb" cssClass="form-control" type="text"/>
 			
 			<select name="classificacaoHb" id="classificacaoHb" class="col-xs-5" path="classificacaoHb" >
-			  <option value="Baixa">Baixa</option>
-			  <option value="Normal">Normal</option>
-			  <option value="Elevada">Elevada</option>
+			  <c:forEach var="c" items="${classificacao}" varStatus="i">
+  						<option value="${c.tipo}">${c.tipo}</option>
+				</c:forEach>
 			</select><br/><br/><br/>
 			
 			<!-- TGO(AST) -->
@@ -87,10 +82,9 @@
 			<form:input id="tgo" path="tgo" cssClass="form-control" type="text"/>
 			
 			<select name="classificacaoTgo" id="classificacaoTgo" class="col-xs-5" path="classificacaoTgo" >
-			  <option value="Desejável">Desejável</option>
-			  <option value="Lemítrofe">Lemítrofe</option>
-			  <option value="Alto">Alto</option>
-			  <option value="Muitoalto">Muito alto</option>
+			  <c:forEach var="c" items="${classificacao}" varStatus="i">
+  						<option value="${c.tipo}">${c.tipo}</option>
+				</c:forEach>
 			</select><br/><br/><br/>
 			
 			<!-- TGP(ALT) -->
@@ -98,10 +92,9 @@
 			<form:input id="tgp" path="tgp" cssClass="form-control" type="text"/>
 			
 			<form:select name="classificacaoTgp" id="classificacaoTgp" class="col-xs-5" path="classificacaoTgp" >
-			  <option value="Desejável">Desejável</option>
-			  <option value="Lemítrofe">Lemítrofe</option>
-			  <option value="Alto">Alto</option>
-			  <option value="Muitoalto">Muito alto</option>
+			  <c:forEach var="c" items="${classificacao}" varStatus="i">
+  						<option value="${c.tipo}">${c.tipo}</option>
+				</c:forEach>
 			</form:select><br/><br/><br/>
 			
 			

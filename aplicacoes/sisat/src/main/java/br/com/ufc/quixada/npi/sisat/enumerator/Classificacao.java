@@ -1,10 +1,14 @@
 package br.com.ufc.quixada.npi.sisat.enumerator;
 
 public enum Classificacao {
+		
+	DESEJAVEL("Desejavel"),
+	LIMITROFE("Limitrofe"),
+	ALTO("Alto"),
+	BAIXO("Baixo"),
+	MUITOALTO("Muito Alto"),	
+	MUITOBAIXO("Muito Baixo");
 
-		
-		normal("normal"), baixo("baixo"), alto("alto");
-		
 	private String tipo;
 		
 	private Classificacao(String tipo){
@@ -14,7 +18,5 @@ public enum Classificacao {
 	public String getTipo() {
 		return tipo;
 	}
-	
-	
 	
 }
