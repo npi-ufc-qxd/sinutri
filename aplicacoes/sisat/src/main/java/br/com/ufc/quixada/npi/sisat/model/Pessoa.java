@@ -1,6 +1,8 @@
 package br.com.ufc.quixada.npi.sisat.model;
 
 import java.sql.Date;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -139,6 +141,23 @@ public class Pessoa {
 	}
 	public void setTelefone(String telefone) {
 		this.telefone = telefone;
+	}
+	public int getIdade(){
+		Calendar dateOfBirth = new GregorianCalendar();
+		dateOfBirth.setTime(this.dataNascimento);
+		
+		// Cria um objeto calendar com a data atual
+		Calendar today = Calendar.getInstance();
+		
+		// Obtém a idade baseado no ano
+		int age = today.get(Calendar.YEAR) - dateOfBirth.get(Calendar.YEAR);
+		dateOfBirth.add(Calendar.YEAR, age);
+		
+		//se a data de hoje é antes da data de Nascimento, então diminui 1(um)
+		if (today.before(dateOfBirth)) {
+			age--;
+		}
+		return age;
 	}
 	@Override
 	public boolean equals(Object obj) {

@@ -28,7 +28,9 @@
 	
 						<td>Sexo: ${pessoa.sexo }</td>
 
-						<td>Idade: ${pessoa.dataNascimento }</td>
+						<td>
+							Idade: ${pessoa.idade }
+						</td>
 					</tr>
 					<tr>
 						<td>E-mail: ${pessoa.email }    </td>
