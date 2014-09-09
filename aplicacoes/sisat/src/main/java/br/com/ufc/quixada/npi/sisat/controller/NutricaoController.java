@@ -39,16 +39,14 @@ public class NutricaoController {
 	
 	@RequestMapping(value = {"/buscar"}, method = RequestMethod.GET)
 	public String buscarPaciente(Model model) {
-		//model.addAttribute("pessoa", new Pessoa());
-		
 		return "nutricao/buscar";
 	}
 	
 	@RequestMapping(value = "/buscar", method = RequestMethod.POST)
-	public String buscarPaciente(@RequestParam("pesq") String pes, @RequestParam("campo") String campo, ModelMap map) {
-		if(pes.equals("cpf")){
+	public String buscarPaciente(@RequestParam("tipoPesquisa") String tipoPesquisa, @RequestParam("campo") String campo, ModelMap map) {
+		if(tipoPesquisa.equals("cpf")){
 			map.addAttribute("pessoas", servicePessoa.getPessoasByCpf(campo));
-		}else {
+		}else if(tipoPesquisa.equals("nome")){
 			map.addAttribute("pessoas", servicePessoa.getPessoasByNome(campo));
 		}
 		return "/nutricao/buscar";

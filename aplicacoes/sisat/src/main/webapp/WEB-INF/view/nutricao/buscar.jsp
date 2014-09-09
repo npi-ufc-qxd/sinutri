@@ -36,7 +36,7 @@
 				cssClass="form-horizontal">
 					<div class="form-group">
 						<td>
-							<select name="pesq">
+							<select name="tipoPesquisa">
 								<option value="nome">Nome</option>
 								<option value="cpf">CPF</option>
 							</select>

@@ -8,8 +8,6 @@ import javax.persistence.*;
 
 @Entity
 public class Paciente implements Serializable {
-	
-	
 	@Id
 	@OneToOne
     @JoinColumn(name="id", nullable=false)
@@ -17,8 +15,6 @@ public class Paciente implements Serializable {
 	
 	private double altura;
 
-	
-	 //
 	@OneToMany
 	@JoinColumn(name="paciente_id")
 	private List<ConsultaNutricional> consultas;
