@@ -57,12 +57,10 @@ public class NutricaoController {
 	@RequestMapping(value = {"/{id}/detalhes"})
 	public String getDetalhes(Pessoa p, @PathVariable("id") Long id, Model model, RedirectAttributes redirectAttributes){
 		Pessoa pessoa = servicePessoa.find(Pessoa.class, id);
-		System.out.println("estou aqui!!!");
 		if(pessoa == null){
 			redirectAttributes.addFlashAttribute("erro", "Paciente não encontrado.");
 			return "nutricao/buscar";
 		}
-		System.out.println(pessoa.getNome());
 		model.addAttribute("pessoa", pessoa);
 		return "nutricao/detalhes";
 	}
