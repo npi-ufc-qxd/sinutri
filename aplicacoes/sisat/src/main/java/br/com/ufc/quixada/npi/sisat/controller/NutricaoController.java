@@ -15,6 +15,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import br.com.ufc.quixada.npi.sisat.enumerator.Classificacao;
 import br.com.ufc.quixada.npi.sisat.model.ConsultaNutricional;
+import br.com.ufc.quixada.npi.sisat.model.Paciente;
 import br.com.ufc.quixada.npi.sisat.model.Pessoa;
 import br.com.ufc.quixada.npi.sisat.service.ConsultaNutricionalService;
 import br.com.ufc.quixada.npi.sisat.service.PacienteService;
@@ -56,11 +57,22 @@ public class NutricaoController {
 	@RequestMapping(value = {"/{id}/detalhes"})
 	public String getDetalhes(Pessoa p, @PathVariable("id") Long id, Model model, RedirectAttributes redirectAttributes){
 		Pessoa pessoa = servicePessoa.find(Pessoa.class, id);
+		System.out.println("oioioioi");
 		if(pessoa == null){
 			redirectAttributes.addFlashAttribute("erro", "Paciente não encontrado.");
 			return "nutricao/buscar";
 		}
 		model.addAttribute("pessoa", pessoa);
+		System.out.println("det = " + pessoa.toString());
+		if (pessoa.getPaciente()!= null){
+			if (pessoa.getPaciente().getConsultas() != null){
+				
+				System.out.println("\n\n\n\n\n\n\n\n");
+				System.out.println("sfsf = " + pessoa.getPaciente().getConsultas().toString());
+				System.out.println("\n\n\n\n\n\n\n\n");
+				
+			}
+		}
 		return "nutricao/detalhes";
 	}
 	
@@ -73,6 +85,15 @@ public class NutricaoController {
 		Classificacao[] cla= Classificacao.values();
 		model.addAttribute("classificacao", cla);
 		return "nutricao/consulta";
+	}
+
+	@RequestMapping(value = {"/{id}/realizar"}, method = RequestMethod.GET)
+	public void realizarConsulta(Model model, @PathVariable("id") Long id) {
+		System.out.println("realizarConsulta teste " + id);
+		Pessoa pessoa = servicePessoa.find(Pessoa.class, id);
+		Paciente paciente = new Paciente();
+		paciente.setPessoa(pessoa);
+		servicePaciente.save(paciente);
 	}
 
 	@RequestMapping(value = {"/consulta"}, method = RequestMethod.POST)

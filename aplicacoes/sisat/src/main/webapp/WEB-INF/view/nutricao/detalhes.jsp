@@ -10,7 +10,7 @@
 <html>
 <head>
 <jsp:include page="../modulos/header-estrutura.jsp" />
-<title>Buscar paciente</title>
+<title>Detalhes: ${pessoa.nome}</title>
 </head>
 <body>
 
@@ -19,6 +19,13 @@
 
 
 	<div class="container" style="margin-bottom: 70px;">
+				<div class="controls">
+					<a href="<c:url value="/nutricao/buscar"></c:url>"
+						class="btn btn-default">Voltar</a>
+				
+					<a href="<c:url value="/nutricao/${ pessoa.id }/realizar"></c:url>"
+						class="btn btn-default">Realizar consulta</a>
+				</div>
 		<div class="novo-projeto" align="left">
 			<div class="form">
 				<h2>Paciente</h2>
@@ -41,12 +48,43 @@
 					
 				</table>
 				
-				<div class="controls">
-					<a href="<c:url value="/nutricao/buscar"></c:url>"
-						class="btn btn-default">Voltar</a>
-				</div>
 			</div>
 		</div>
+		
+		<c:if test="${not empty pessoa}">
+				<div class="panel panel-default">
+
+					<div class="panel-heading" align="center"></div>
+
+					<!-- Table -->
+					<table class="table" id="table">
+						<thead>
+							<tr>
+								<th>Id</th>
+								<th>Data</th>
+								<th>Ações</th>
+							</tr>
+						</thead>
+						<tbody>
+							<c:forEach var="pessoa" items="${pessoas}">
+								<tr class="linha">
+									<td><a href="<c:url value="/nutricao/${pessoa.id}/detalhes"></c:url>">
+										${pessoa.}
+									</a></td>
+									<td><a href="<c:url value="/nutricao/${pessoa.id}/detalhes"></c:url>">
+										${pessoa.nome}
+									</a></td>
+									<td><a id="detalhes" data-toggle="modal" href="${pessoa.id}/detalhes">
+											<button class="btn btn-info">
+												Detalhes <span class="glyphicon glyphicon-eye-open"></span>
+											</button>
+									</a></td>
+								</tr>
+							</c:forEach>
+						</tbody>
+					</table>
+				</div>
+			</c:if>
 	</div>
 	<jsp:include page="../modulos/footer.jsp" />
 

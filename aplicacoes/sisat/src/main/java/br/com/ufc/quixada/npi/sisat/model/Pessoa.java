@@ -5,6 +5,7 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -14,6 +15,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
@@ -24,6 +27,10 @@ public class Pessoa {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	
+	@OneToOne(cascade = CascadeType.ALL)
+	@PrimaryKeyJoinColumn
+	private Paciente paciente;
 	
 	
 	@Column(nullable = false)
@@ -159,6 +166,12 @@ public class Pessoa {
 		}
 		return age;
 	}
+	public Paciente getPaciente() {
+		return paciente;
+	}
+	public void setPaciente(Paciente paciente) {
+		this.paciente = paciente;
+	}
 	@Override
 	public boolean equals(Object obj) {
 		if(obj instanceof Pessoa) {
@@ -169,6 +182,20 @@ public class Pessoa {
 		}
 		return false;
 	}
+	
+	@Override
+	public String toString() {
+		return "Pessoa [id=" + id + ", paciente=" + paciente + ", login="
+				+ login + ", password=" + password + ", habilitado="
+				+ habilitado + ", papeis=" + papeis + ", servidores="
+				+ servidores + ", cpf=" + cpf + ", nome=" + nome + ", email="
+				+ email + ", sexo=" + sexo + ", dataNascimento="
+				+ dataNascimento + ", telefone=" + telefone + "]";
+	}
+	
+	
+	
+	
 	
 }
 
