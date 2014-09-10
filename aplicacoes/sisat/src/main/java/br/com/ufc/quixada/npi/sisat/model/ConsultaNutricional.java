@@ -45,25 +45,25 @@ public class ConsultaNutricional {
 	
 	private String condutaNutricional;
 
-	private Boolean medicamento=false;
+	private boolean medicamento;
 
 	private String medicamentoComentario;
 
-	private Boolean mastigacao=false;
+	private boolean mastigacao;
 
 	private String mastigacaoComentario;
 
-	private Boolean disfagia=false;
+	private boolean disfagia;
 
-	private Boolean pirose=false;
+	private boolean pirose;
 
-	private Boolean nausea=false;
+	private boolean nausea;
 
-	private Boolean vomito=false;
+	private boolean vomito;
 
-	private Boolean diarreia=false;
+	private boolean diarreia;
 
-	private Boolean constipacao=false;
+	private boolean constipacao;
 
 	private String agua;
 
@@ -85,16 +85,16 @@ public class ConsultaNutricional {
 
 	private Boolean hipertensao;
 
-	private Boolean outrasPatologias=false;
+	private boolean outrasPatologias;
 
 	private String outrasPatologiasComentario;
 
-	private Boolean alergia=false;
+	private boolean alergia;
 
 	private String alergiaComentario;
 
-	private String objetivoConsulta;
-
+	private String objetivoConsulta;	
+	
 	public Long getId() {
 		return id;
 	}
@@ -143,12 +143,28 @@ public class ConsultaNutricional {
 		this.glicemia = glicemia;
 	}
 
+	public String getClassificacaoGlicemia() {
+		return classificacaoGlicemia;
+	}
+
+	public void setClassificacaoGlicemia(String classificacaoGlicemia) {
+		this.classificacaoGlicemia = classificacaoGlicemia;
+	}
+
 	public int getTgl() {
 		return tgl;
 	}
 
 	public void setTgl(int tgl) {
 		this.tgl = tgl;
+	}
+
+	public String getClassificacaoTgl() {
+		return classificacaoTgl;
+	}
+
+	public void setClassificacaoTgl(String classificacaoTgl) {
+		this.classificacaoTgl = classificacaoTgl;
 	}
 
 	public int getHdl() {
@@ -159,12 +175,28 @@ public class ConsultaNutricional {
 		this.hdl = hdl;
 	}
 
+	public String getClassificacaoHdl() {
+		return classificacaoHdl;
+	}
+
+	public void setClassificacaoHdl(String classificacaoHdl) {
+		this.classificacaoHdl = classificacaoHdl;
+	}
+
 	public int getIdl() {
 		return idl;
 	}
 
 	public void setIdl(int idl) {
 		this.idl = idl;
+	}
+
+	public String getClassificacaoIdl() {
+		return classificacaoIdl;
+	}
+
+	public void setClassificacaoIdl(String classificacaoIdl) {
+		this.classificacaoIdl = classificacaoIdl;
 	}
 
 	public int getHt() {
@@ -175,12 +207,28 @@ public class ConsultaNutricional {
 		this.ht = ht;
 	}
 
+	public String getClassificacaoHt() {
+		return classificacaoHt;
+	}
+
+	public void setClassificacaoHt(String classificacaoHt) {
+		this.classificacaoHt = classificacaoHt;
+	}
+
 	public int getHb() {
 		return hb;
 	}
 
 	public void setHb(int hb) {
 		this.hb = hb;
+	}
+
+	public String getClassificacaoHb() {
+		return classificacaoHb;
+	}
+
+	public void setClassificacaoHb(String classificacaoHb) {
+		this.classificacaoHb = classificacaoHb;
 	}
 
 	public String getCondutaNutricional() {
@@ -191,11 +239,11 @@ public class ConsultaNutricional {
 		this.condutaNutricional = condutaNutricional;
 	}
 
-	public Boolean getMedicamento() {
+	public boolean isMedicamento() {
 		return medicamento;
 	}
 
-	public void setMedicamento(Boolean medicamento) {
+	public void setMedicamento(boolean medicamento) {
 		this.medicamento = medicamento;
 	}
 
@@ -207,11 +255,11 @@ public class ConsultaNutricional {
 		this.medicamentoComentario = medicamentoComentario;
 	}
 
-	public Boolean getMastigacao() {
+	public boolean isMastigacao() {
 		return mastigacao;
 	}
 
-	public void setMastigacao(Boolean mastigacao) {
+	public void setMastigacao(boolean mastigacao) {
 		this.mastigacao = mastigacao;
 	}
 
@@ -223,51 +271,51 @@ public class ConsultaNutricional {
 		this.mastigacaoComentario = mastigacaoComentario;
 	}
 
-	public Boolean getDisfagia() {
+	public boolean isDisfagia() {
 		return disfagia;
 	}
 
-	public void setDisfagia(Boolean disfagia) {
+	public void setDisfagia(boolean disfagia) {
 		this.disfagia = disfagia;
 	}
 
-	public Boolean getPirose() {
+	public boolean isPirose() {
 		return pirose;
 	}
 
-	public void setPirose(Boolean pirose) {
+	public void setPirose(boolean pirose) {
 		this.pirose = pirose;
 	}
 
-	public Boolean getNausea() {
+	public boolean isNausea() {
 		return nausea;
 	}
 
-	public void setNausea(Boolean nausea) {
+	public void setNausea(boolean nausea) {
 		this.nausea = nausea;
 	}
 
-	public Boolean getVomito() {
+	public boolean isVomito() {
 		return vomito;
 	}
 
-	public void setVomito(Boolean vomito) {
+	public void setVomito(boolean vomito) {
 		this.vomito = vomito;
 	}
 
-	public Boolean getDiarreia() {
+	public boolean isDiarreia() {
 		return diarreia;
 	}
 
-	public void setDiarreia(Boolean diarreia) {
+	public void setDiarreia(boolean diarreia) {
 		this.diarreia = diarreia;
 	}
 
-	public Boolean getConstipacao() {
+	public boolean isConstipacao() {
 		return constipacao;
 	}
 
-	public void setConstipacao(Boolean constipacao) {
+	public void setConstipacao(boolean constipacao) {
 		this.constipacao = constipacao;
 	}
 
@@ -353,11 +401,11 @@ public class ConsultaNutricional {
 		this.hipertensao = hipertensao;
 	}
 
-	public Boolean getOutrasPatologias() {
+	public boolean isOutrasPatologias() {
 		return outrasPatologias;
 	}
 
-	public void setOutrasPatologias(Boolean outrasPatologias) {
+	public void setOutrasPatologias(boolean outrasPatologias) {
 		this.outrasPatologias = outrasPatologias;
 	}
 
@@ -369,11 +417,11 @@ public class ConsultaNutricional {
 		this.outrasPatologiasComentario = outrasPatologiasComentario;
 	}
 
-	public Boolean getAlergia() {
+	public boolean isAlergia() {
 		return alergia;
 	}
 
-	public void setAlergia(Boolean alergia) {
+	public void setAlergia(boolean alergia) {
 		this.alergia = alergia;
 	}
 
@@ -393,65 +441,17 @@ public class ConsultaNutricional {
 		this.objetivoConsulta = objetivoConsulta;
 	}
 
-	public String getClassificacaoGlicemia() {
-		return classificacaoGlicemia;
-	}
-
-	public void setClassificacaoGlicemia(String classificacaoGlicemia) {
-		this.classificacaoGlicemia = classificacaoGlicemia;
-	}
-
-	public String getClassificacaoTgl() {
-		return classificacaoTgl;
-	}
-
-	public void setClassificacaoTgl(String classificacaoTgl) {
-		this.classificacaoTgl = classificacaoTgl;
-	}
-
-	public String getClassificacaoHdl() {
-		return classificacaoHdl;
-	}
-
-	public void setClassificacaoHdl(String classificacaoHdl) {
-		this.classificacaoHdl = classificacaoHdl;
-	}
-
-	public String getClassificacaoIdl() {
-		return classificacaoIdl;
-	}
-
-	public void setClassificacaoIdl(String classificacaoIdl) {
-		this.classificacaoIdl = classificacaoIdl;
-	}
-
-	public String getClassificacaoHt() {
-		return classificacaoHt;
-	}
-
-	public void setClassificacaoHt(String classificacaoHt) {
-		this.classificacaoHt = classificacaoHt;
-	}
-
-	public String getClassificacaoHb() {
-		return classificacaoHb;
-	}
-
-	public void setClassificacaoHb(String classificacaoHb) {
-		this.classificacaoHb = classificacaoHb;
-	}
-
 	@Override
 	public String toString() {
 		return "ConsultaNutricional [id=" + id + ", data=" + data + ", peso="
 				+ peso + ", altura=" + altura + ", circunferenciaCintura="
 				+ circunferenciaCintura + ", glicemia=" + glicemia
-				+ ", clasificacaoGlicemia=" + classificacaoGlicemia + ", tgl="
-				+ tgl + ", clasificacaoTgl=" + classificacaoTgl + ", hdl=" + hdl
-				+ ", clasificacaoHdl=" + classificacaoHdl + ", idl=" + idl
-				+ ", clasificacaoIdl=" + classificacaoIdl + ", ht=" + ht
-				+ ", clasificacaoHt=" + classificacaoHt + ", hb=" + hb
-				+ ", clasificacaoHb=" + classificacaoHb
+				+ ", classificacaoGlicemia=" + classificacaoGlicemia + ", tgl="
+				+ tgl + ", classificacaoTgl=" + classificacaoTgl + ", hdl="
+				+ hdl + ", classificacaoHdl=" + classificacaoHdl + ", idl="
+				+ idl + ", classificacaoIdl=" + classificacaoIdl + ", ht=" + ht
+				+ ", classificacaoHt=" + classificacaoHt + ", hb=" + hb
+				+ ", classificacaoHb=" + classificacaoHb
 				+ ", condutaNutricional=" + condutaNutricional
 				+ ", medicamento=" + medicamento + ", medicamentoComentario="
 				+ medicamentoComentario + ", mastigacao=" + mastigacao
@@ -475,5 +475,5 @@ public class ConsultaNutricional {
 				+ alergiaComentario + ", objetivoConsulta=" + objetivoConsulta
 				+ "]";
 	}
-	
+
 }
