@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import br.com.ufc.quixada.npi.sisat.enumerator.Classificacao;
 import br.com.ufc.quixada.npi.sisat.model.ConsultaNutricional;
 import br.com.ufc.quixada.npi.sisat.model.Pessoa;
 import br.com.ufc.quixada.npi.sisat.service.ConsultaNutricionalService;
@@ -68,10 +69,12 @@ public class NutricaoController {
 	
 	
 	@RequestMapping(value = {"/consulta"}, method = RequestMethod.GET)
-	public String consulta(Model model) {
+	public String consulta(Model model, HttpSession session) {
 		System.out.println("consulta get");
 		ConsultaNutricional consultaNutricional = new ConsultaNutricional();
 		model.addAttribute("consulta", consultaNutricional);
+		Classificacao[] cla= Classificacao.values();
+		model.addAttribute("classificacao", cla);
 		return "nutricao/consulta";
 	}
 
