@@ -69,10 +69,7 @@ public class PessoaServiceImpl extends GenericServiceImpl<Pessoa> implements Pes
 	public List<Pessoa> getPessoasByNome(String nome) {
 		Map<String, Object> params = new HashMap<String, Object>();
 		params.put( "nome", nome);
-		List<Pessoa> usuarios = pessoaRepository.find(QueryType.JPQL, "FROM pessoa WHERE UPPER(nome) LIKE '%' || UPPER(':nom') || '%'", params);
-//		List<Pessoa> usuarios = pessoaRepository.find(QueryType.JPQL, "from Pessoa where nome ~* :nome ORDER BY nome", params);
-		
-		
+		List<Pessoa> usuarios = pessoaRepository.find(QueryType.JPQL, "FROM Pessoa WHERE UPPER(nome) LIKE '%' || UPPER(:nome) || '%' ORDER BY nome", params);	
 		
 		if(usuarios.isEmpty()){
 			return null;
