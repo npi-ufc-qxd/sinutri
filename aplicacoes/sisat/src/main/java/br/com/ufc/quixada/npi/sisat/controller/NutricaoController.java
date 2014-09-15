@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+
 import br.com.ufc.quixada.npi.sisat.enumerator.Classificacao;
 import br.com.ufc.quixada.npi.sisat.model.ConsultaNutricional;
 import br.com.ufc.quixada.npi.sisat.model.Pessoa;
@@ -52,6 +53,17 @@ public class NutricaoController {
 		}
 		return "/nutricao/buscar";
 	}
+		
+	@RequestMapping(value = "/{id}/editarConsulta", method = RequestMethod.GET)
+	public String editarConsulta(@PathVariable("id") long id, Model model, HttpSession session, RedirectAttributes redirectAttributes) {
+		//Pessoa pessoa = servicePessoa.find(Pessoa.class, id);
+		System.out.println("editarConsulta");
+		model.addAttribute("consultaNutricional", consultaNutricionalService.find(ConsultaNutricional.class, id));
+		Classificacao[] cla= Classificacao.values();
+		model.addAttribute("classificacao", cla);
+		return "/nutricao/editarConsulta";
+	}
+	
 	
 	@RequestMapping(value = {"/{id}/detalhes"})
 	public String getDetalhes(Pessoa p, @PathVariable("id") Long id, Model model, RedirectAttributes redirectAttributes){
