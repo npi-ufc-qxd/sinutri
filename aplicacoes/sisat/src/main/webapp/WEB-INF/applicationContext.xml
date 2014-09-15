@@ -15,7 +15,7 @@
 		<property name="dataSource" ref="sisat"/>
 	</bean>
 	<bean id="sisat" class="org.springframework.jndi.JndiObjectFactoryBean">
-		<property name="jndiName" value="java:comp/env/jdbc/sisat"/>
+		<property name="jndiName" value="java:comp/env/sisat"/>
 	</bean>
 	<bean id="txManager" class="org.springframework.orm.jpa.JpaTransactionManager">
 		<property name="entityManagerFactory" ref="emf" />
