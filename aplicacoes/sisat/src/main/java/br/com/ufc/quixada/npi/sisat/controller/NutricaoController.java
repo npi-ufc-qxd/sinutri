@@ -63,16 +63,6 @@ public class NutricaoController {
 			return "nutricao/buscar";
 		}
 		model.addAttribute("pessoa", pessoa);
-		System.out.println("det = " + pessoa.toString());
-		if (pessoa.getPaciente()!= null){
-			if (pessoa.getPaciente().getConsultas() != null){
-				
-				System.out.println("\n\n\n\n\n\n\n\n");
-				System.out.println("sfsf = " + pessoa.getPaciente().getConsultas().toString());
-				System.out.println("\n\n\n\n\n\n\n\n");
-				
-			}
-		}
 		return "nutricao/detalhes";
 	}
 	

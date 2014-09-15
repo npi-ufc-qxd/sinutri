@@ -60,23 +60,28 @@
 					<table class="table" id="table">
 						<thead>
 							<tr>
-								<th>Id</th>
+								<th width="5%">Id</th>
 								<th>Data</th>
-								<th>Ações</th>
+								<th colspan="2" width="20%">Ações</th>
 							</tr>
 						</thead>
 						<tbody>
-							<c:forEach var="pessoa" items="${pessoas}">
+							<c:forEach var="consulta" items="${pessoa.paciente.consultas}">
 								<tr class="linha">
-									<td><a href="<c:url value="/nutricao/${pessoa.id}/detalhes"></c:url>">
-										${pessoa.}
+									<td><a href="<c:url value="#"></c:url>">
+										${consulta.id}
 									</a></td>
-									<td><a href="<c:url value="/nutricao/${pessoa.id}/detalhes"></c:url>">
-										${pessoa.nome}
+									<td><a href="<c:url value="#"></c:url>">
+										${consulta.data}
 									</a></td>
-									<td><a id="detalhes" data-toggle="modal" href="${pessoa.id}/detalhes">
+									<td><a id="detalhes" data-toggle="modal" href="#">
 											<button class="btn btn-info">
 												Detalhes <span class="glyphicon glyphicon-eye-open"></span>
+											</button>
+									</a></td>
+									<td><a id="editar" data-toggle="modal" href="#">
+											<button class="btn btn-warning">
+												Editar <span class="glyphicon glyphicon-edit"></span>
 											</button>
 									</a></td>
 								</tr>
