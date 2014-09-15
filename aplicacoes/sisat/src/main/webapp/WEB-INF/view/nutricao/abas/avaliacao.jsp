@@ -1,7 +1,20 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
 <div class="col-sm-12">
-	<div style="cursor: pointer;"></div>
+	<label>Paciente</label> <br/>
+	<div class="col-sm-3">
+		<label>Altura</label><input type="text" name="altura" size="10">
+	</div>
+	<div class="col-sm-3">
+		<label>Peso</label><input type="text" name="peso" size="10">
+	</div>
+	<div class="col-sm-3">
+		<label>CC</label><input type="text" name="circunferenciaCintura" size="10">
+	</div>
+</div>
+
+<div class="col-sm-12">
+	<div style="cursor: pointer;"></div> <br/>
 	<input type="checkbox" name="medicamento" id="checkMedicamento" onclick="habilitar();"/><label>Medicamentos</label>
 	<input type=text name="medicamentoComentario" size='123' disabled="disabled" id="inputTextMedicamento"/> <br/><br/>
 </div>
@@ -26,7 +39,19 @@
 	<input type="checkbox" name="alergia" id="checkAlergia" onclick="habilitar();"/><label>Alergia Alimentar</label>
 	<textarea rows="2" cols="140" name="alergiaComentario" disabled="disabled" id="inputTextAlergia"></textarea> <br/><br/>
 </div>		
-	
+
+<div class="col-sm-12">
+	<div style="cursor: pointer;"></div> <br/>
+	<input type="checkbox" name="atividadeFisica" id="checkAtividadeFisica" onclick="habilitar();"/><label>Atividade Física</label>
+	<input type=text name="atividadeFisicaComentario" size='20' disabled="disabled" id="inputTextAtividadeFisica"/>
+</div>
+
+<div class="col-sm-12">
+	<div style="cursor: pointer;"></div>
+	<input type="checkbox" name="bebidaAlcoolica" id="checkBebidaAlcoolica" onclick="habilitar();"/><label>Consumo de bebida alcoólica</label>
+	<input type=text name="bebidadaAlcoolicaComentario" size='20' disabled="disabled" id="inputTextBebidaAlcoolica"/> <br/><br/>
+</div>
+
 <div class="col-sm-6">
 	<label>Consumo de água</label><input type="text" name="agua" size="10"> 
 	<select style="width: 70px" class="form-control-inline">
@@ -96,6 +121,16 @@
 			document.getElementById('inputTextAlergia').disabled = false;
 		} else {
 			document.getElementById('inputTextAlergia').disabled = true;
+		}
+		if (document.getElementById('checkAtividadeFisica').checked) {
+			document.getElementById('inputTextAtividadeFisica').disabled = false;
+		} else {
+			document.getElementById('inputTextAtividadeFisica').disabled = true;
+		}
+		if (document.getElementById('checkBebidaAlcoolica').checked) {
+			document.getElementById('inputTextBebidaAlcoolica').disabled = false;
+		} else {
+			document.getElementById('inputTextBebidaAlcoolica').disabled = true;
 		}
 		if (document.getElementById('checkPatologia').checked) {
 			document.getElementById('inputTextPatologia').disabled = false;

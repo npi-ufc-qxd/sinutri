@@ -69,13 +69,13 @@ public class ConsultaNutricional {
 
 	private String carneVermelhaFrequencia;
 
-	private Boolean bebidaAlcoolica;
+	private boolean bebidaAlcoolica;
 
 	private int bebidaAlcoolicaFrequenciaSemanal;
 
 	private String bebidadaAlcoolicaComentario;
 
-	private Boolean atividadeFisica;
+	private boolean atividadeFisica;
 
 	private int atividadeFisicaFrequenciaSemanal;
 
@@ -335,11 +335,11 @@ public class ConsultaNutricional {
 		this.carneVermelhaFrequencia = carneVermelhaFrequencia;
 	}
 
-	public Boolean getBebidaAlcoolica() {
+	public boolean getBebidaAlcoolica() {
 		return bebidaAlcoolica;
 	}
 
-	public void setBebidaAlcoolica(Boolean bebidaAlcoolica) {
+	public void setBebidaAlcoolica(boolean bebidaAlcoolica) {
 		this.bebidaAlcoolica = bebidaAlcoolica;
 	}
 
@@ -360,11 +360,11 @@ public class ConsultaNutricional {
 		this.bebidadaAlcoolicaComentario = bebidadaAlcoolicaComentario;
 	}
 
-	public Boolean getAtividadeFisica() {
+	public boolean getAtividadeFisica() {
 		return atividadeFisica;
 	}
 
-	public void setAtividadeFisica(Boolean atividadeFisica) {
+	public void setAtividadeFisica(boolean atividadeFisica) {
 		this.atividadeFisica = atividadeFisica;
 	}
 
