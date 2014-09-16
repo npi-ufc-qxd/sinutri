@@ -31,16 +31,16 @@
 			<form:form id="buscarPacienteForm" role="form"
 				servletReltiveAction="/nutricao/buscar" method="POST"
 				cssClass="form-horizontal" class="inline">
-				<select name="tipoPesquisa">
+				<select name="tipoPesquisa" cssClass="form-control">
 					<option value="nome">Nome</option>
 					<option value="cpf">CPF</option>
 				</select>
 				<input id="campo" name="campo" cssClass="form-control"
-					placeholder="" size="40" required="required" />
+					placeholder="" size="40" required="required" autofocus="true"/>
 				</td>
-				<button class="btn btn-warning" name="submit" type="submit" class="btn btn-primary"
+				<button class="btn btn-primary" name="submit" type="submit" class="btn btn-primary"
 					value="Buscar" >
-					 Editar
+					 Buscar
 					 <span class="glyphicon glyphicon-search"/> 
 				</button>
 				
