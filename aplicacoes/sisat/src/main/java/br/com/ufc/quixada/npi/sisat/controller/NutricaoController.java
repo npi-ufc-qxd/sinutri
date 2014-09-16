@@ -82,11 +82,23 @@ public class NutricaoController {
 		if(consulta.getAgua().length()==0){
 			consulta.setAgua(null);
 		}
-		if(consulta.getCarneVermelhaFrequencia().length()==0){
-			consulta.setCarneVermelhaFrequencia(null);
+		if(consulta.getMedicamentoComentario()!=null && consulta.getMedicamentoComentario().isEmpty()){
+			consulta.setMedicamentoComentario(null);
 		}
-		if(consulta.getBebidadaAlcoolicaComentario().length()==0){
-			consulta.setBebidadaAlcoolicaComentario(null);
+		if(consulta.getMastigacaoComentario()!=null && consulta.getMastigacaoComentario().isEmpty()){
+			consulta.setMastigacaoComentario(null);
+		}
+		if(consulta.getAlergiaComentario()!=null && consulta.getAlergiaComentario().isEmpty()){
+			consulta.setAlergiaComentario(null);
+		}
+		if(consulta.getCarneVermelhaComentario()!=null && consulta.getCarneVermelhaComentario().isEmpty()){
+			consulta.setCarneVermelhaComentario(null);
+		}
+		if(consulta.getAtividadeFisicaComentario()!=null && consulta.getAtividadeFisicaComentario().isEmpty()){
+			consulta.setAtividadeFisicaComentario(null);
+		}
+		if(consulta.getBebidaAlcoolicaComentario()!=null && consulta.getBebidaAlcoolicaComentario().isEmpty()){
+			consulta.setBebidaAlcoolicaComentario(null);
 		}
 		consultaNutricionalService.save(consulta);
 		return "nutricao/consulta";

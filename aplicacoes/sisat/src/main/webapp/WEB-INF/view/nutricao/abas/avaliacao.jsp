@@ -3,7 +3,7 @@
 <div class="col-sm-12">
 	<label>Paciente</label> <br/>
 	<div class="col-sm-3">
-		<label>Altura</label><input type="text" name="altura" size="10">
+		<label>Altura</label><input type="text" name="altura" size="10" disabled="disabled">
 	</div>
 	<div class="col-sm-3">
 		<label>Peso</label><input type="text" name="peso" size="10">
@@ -37,62 +37,69 @@
 <div class="col-sm-12">
 	<div style="cursor: pointer;"></div> <br/>
 	<input type="checkbox" name="alergia" id="checkAlergia" onclick="habilitar();"/><label>Alergia Alimentar</label>
-	<textarea rows="2" cols="140" name="alergiaComentario" disabled="disabled" id="inputTextAlergia"></textarea> <br/><br/>
-</div>		
+	<textarea rows="2" cols="140" name="alergiaComentario" disabled="disabled" id="inputTextAlergia"></textarea>
+</div>
 
 <div class="col-sm-12">
-	<div style="cursor: pointer;"></div> <br/>
-	<input type="checkbox" name="atividadeFisica" id="checkAtividadeFisica" onclick="habilitar();"/><label>Atividade Física</label>
-	<input type=text name="atividadeFisicaComentario" size='20' disabled="disabled" id="inputTextAtividadeFisica"/>
+	<label>Consumo de água</label><input type="text" name="agua" size="10"> 
 </div>
 
 <div class="col-sm-12">
 	<div style="cursor: pointer;"></div>
-	<input type="checkbox" name="bebidaAlcoolica" id="checkBebidaAlcoolica" onclick="habilitar();"/><label>Consumo de bebida alcoólica</label>
-	<input type=text name="bebidadaAlcoolicaComentario" size='20' disabled="disabled" id="inputTextBebidaAlcoolica"/> <br/><br/>
+		<input type="checkbox" name="carneVermelha" id="checkCarneVermelha" onclick="habilitar();"/><label>Carne Vermelha</label>
+		<input type=text name="carneVermelhaComentario" size='20' disabled="disabled" id="inputTextCarneVermelha"/>
+	
+	<label>Frequência em dias</label>
+	<select name="carneVermelhaFrequenciaSemanal" id="carneVermelhaFrequenciaSemanal" style="width: 70px" class="form-control-inline">
+		<option value="0">0</option>
+		<option value="1">1</option>
+		<option value="2">2</option>
+		<option value="3">3</option>
+		<option value="4">4</option>
+		<option value="5">5</option>
+		<option value="6">6</option>
+		<option value="7">7</option>
+	</select>
+	<label>/semana</label>
 </div>
 
-<div class="col-sm-6">
-	<label>Consumo de água</label><input type="text" name="agua" size="10"> 
-	<select style="width: 70px" class="form-control-inline">
-		<option>Dia</option>
-	</select>
-</div>		
+<div class="col-sm-12">
+	<div style="cursor: pointer;"></div>
+		<input type="checkbox" name="atividadeFisica" id="checkAtividadeFisica" onclick="habilitar();"/><label>Atividade Física</label>
+		<input type=text name="atividadeFisicaComentario" size='20' disabled="disabled" id="inputTextAtividadeFisica"/>
 
-<div class="col-sm-6">	
-	<label>Consumo de carne vermelha</label><input type="text" name="carneVermelhaFrequencia" size="10"/> 
-	<select
-		style="width: 70px" class="form-control-inline">
-		<option>Dia</option>
-	</select> <br/>
+	<label>Frequência em dias</label>
+	<select name="atividadeFisicaFrequenciaSemanal" id="atividadeFisicaFrequenciaSemanal" style="width: 70px" class="form-control-inline">
+		<option value="0">0</option>
+		<option value="1">1</option>
+		<option value="2">2</option>
+		<option value="3">3</option>
+		<option value="4">4</option>
+		<option value="5">5</option>
+		<option value="6">6</option>
+		<option value="7">7</option>
+	</select>
+	<label>/semana</label>
+</div>
+
+<div class="col-sm-12">
+	<div style="cursor: pointer;"></div>
+	<input type="checkbox" name="bebidaAlcoolica" id="checkBebidaAlcoolica" onclick="habilitar();"/><label>Bebida alcoólica</label>
+	<input type=text name="bebidaAlcoolicaComentario" size='20' disabled="disabled" id="inputTextBebidaAlcoolica"/>
+
+	<label>Frequência em dias</label>
+	<select name="bebidaAlcoolicaFrequenciaSemanal" id="bebidaAlcoolicaFrequenciaSemanal" style="width: 70px" class="form-control-inline">
+		<option value="0">0</option>
+		<option value="1">1</option>
+		<option value="2">2</option>
+		<option value="3">3</option>
+		<option value="4">4</option>
+		<option value="5">5</option>
+		<option value="6">6</option>
+		<option value="7">7</option>
+	</select>
+	<label>/semana</label>
 </div>	
-	
-<div class="form-group">
-	<div class="col-sm-3">
- 		<label>Consumo de álcool</label>
- 		<input type="radio" name="bebidaAlcoolica" value="true"><label>Sim</label>
-		<input type="radio" name="bebidaAlcoolica" value="false"><label>Nao</label>
-	</div>
-			
-	<div class="col-sm-4">	
-		<label>Frequência em dias</label>
-		<select name="bebidaAlcoolicaFrequenciaSemanal" id="bebidaAlcoolicaFrequenciaSemanal" style="width: 70px" class="form-control-inline">
-			<option value="0">0</option>
-			<option value="1">1</option>
-			<option value="2">2</option>
-			<option value="3">3</option>
-			<option value="4">4</option>
-			<option value="5">5</option>
-			<option value="6">6</option>
-			<option value="7">7</option>
-		</select>
-		<label>/semana</label>
-	</div>
-	
-	<div class="col-sm-3">
-		<label>Tipos de bebidas:</label> <input type="text" name="bebidadaAlcoolicaComentario" size="10">
-	</div>
-</div> <br/>
 
 <div class="col-sm-12">
 	<div style="cursor: pointer;"></div> <br/>
@@ -121,6 +128,11 @@
 			document.getElementById('inputTextAlergia').disabled = false;
 		} else {
 			document.getElementById('inputTextAlergia').disabled = true;
+		}
+		if (document.getElementById('checkCarneVermelha').checked) {
+			document.getElementById('inputTextCarneVermelha').disabled = false;
+		} else {
+			document.getElementById('inputTextCarneVermelha').disabled = true;
 		}
 		if (document.getElementById('checkAtividadeFisica').checked) {
 			document.getElementById('inputTextAtividadeFisica').disabled = false;

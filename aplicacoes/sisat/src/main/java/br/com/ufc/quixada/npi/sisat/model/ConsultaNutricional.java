@@ -21,8 +21,6 @@ public class ConsultaNutricional {
 
 	private Double peso;
 
-	private Double altura;
-
 	private Double circunferenciaCintura;
 
 	private int glicemia;
@@ -46,11 +44,9 @@ public class ConsultaNutricional {
 	private String condutaNutricional;
 
 	private boolean medicamento;
-
 	private String medicamentoComentario;
 
 	private boolean mastigacao;
-
 	private String mastigacaoComentario;
 
 	private boolean disfagia;
@@ -67,18 +63,16 @@ public class ConsultaNutricional {
 
 	private String agua;
 
-	private String carneVermelhaFrequencia;
+	private boolean carneVermelha;
+	private int carneVermelhaFrequenciaSemanal;
+	private String carneVermelhaComentario;
 
 	private boolean bebidaAlcoolica;
-
 	private int bebidaAlcoolicaFrequenciaSemanal;
-
-	private String bebidadaAlcoolicaComentario;
+	private String bebidaAlcoolicaComentario;
 
 	private boolean atividadeFisica;
-
 	private int atividadeFisicaFrequenciaSemanal;
-
 	private String atividadeFisicaComentario;
 
 	private Boolean diabetes;
@@ -86,11 +80,9 @@ public class ConsultaNutricional {
 	private Boolean hipertensao;
 
 	private boolean outrasPatologias;
-
 	private String outrasPatologiasComentario;
 
 	private boolean alergia;
-
 	private String alergiaComentario;
 
 	private String objetivoConsulta;	
@@ -117,14 +109,6 @@ public class ConsultaNutricional {
 
 	public void setPeso(Double peso) {
 		this.peso = peso;
-	}
-
-	public Double getAltura() {
-		return altura;
-	}
-
-	public void setAltura(Double altura) {
-		this.altura = altura;
 	}
 
 	public Double getCircunferenciaCintura() {
@@ -327,12 +311,28 @@ public class ConsultaNutricional {
 		this.agua = agua;
 	}
 
-	public String getCarneVermelhaFrequencia() {
-		return carneVermelhaFrequencia;
+	public boolean isCarneVermelha() {
+		return carneVermelha;
 	}
 
-	public void setCarneVermelhaFrequencia(String carneVermelhaFrequencia) {
-		this.carneVermelhaFrequencia = carneVermelhaFrequencia;
+	public void setCarneVermelha(boolean carneVermelha) {
+		this.carneVermelha = carneVermelha;
+	}
+
+	public int getCarneVermelhaFrequenciaSemanal() {
+		return carneVermelhaFrequenciaSemanal;
+	}
+
+	public void setCarneVermelhaFrequenciaSemanal(int carneVermelhaFrequenciaSemanal) {
+		this.carneVermelhaFrequenciaSemanal = carneVermelhaFrequenciaSemanal;
+	}
+
+	public String getCarneVermelhaComentario() {
+		return carneVermelhaComentario;
+	}
+
+	public void setCarneVermelhaComentario(String carneVermelhaComentario) {
+		this.carneVermelhaComentario = carneVermelhaComentario;
 	}
 
 	public boolean getBebidaAlcoolica() {
@@ -352,12 +352,12 @@ public class ConsultaNutricional {
 		this.bebidaAlcoolicaFrequenciaSemanal = bebidaAlcoolicaFrequenciaSemanal;
 	}
 
-	public String getBebidadaAlcoolicaComentario() {
-		return bebidadaAlcoolicaComentario;
+	public String getBebidaAlcoolicaComentario() {
+		return bebidaAlcoolicaComentario;
 	}
 
-	public void setBebidadaAlcoolicaComentario(String bebidadaAlcoolicaComentario) {
-		this.bebidadaAlcoolicaComentario = bebidadaAlcoolicaComentario;
+	public void setBebidaAlcoolicaComentario(String bebidaAlcoolicaComentario) {
+		this.bebidaAlcoolicaComentario = bebidaAlcoolicaComentario;
 	}
 
 	public boolean getAtividadeFisica() {
@@ -444,12 +444,12 @@ public class ConsultaNutricional {
 	@Override
 	public String toString() {
 		return "ConsultaNutricional [id=" + id + ", data=" + data + ", peso="
-				+ peso + ", altura=" + altura + ", circunferenciaCintura="
-				+ circunferenciaCintura + ", glicemia=" + glicemia
-				+ ", classificacaoGlicemia=" + classificacaoGlicemia + ", tgl="
-				+ tgl + ", classificacaoTgl=" + classificacaoTgl + ", hdl="
-				+ hdl + ", classificacaoHdl=" + classificacaoHdl + ", idl="
-				+ idl + ", classificacaoIdl=" + classificacaoIdl + ", ht=" + ht
+				+ peso + ", circunferenciaCintura=" + circunferenciaCintura
+				+ ", glicemia=" + glicemia + ", classificacaoGlicemia="
+				+ classificacaoGlicemia + ", tgl=" + tgl
+				+ ", classificacaoTgl=" + classificacaoTgl + ", hdl=" + hdl
+				+ ", classificacaoHdl=" + classificacaoHdl + ", idl=" + idl
+				+ ", classificacaoIdl=" + classificacaoIdl + ", ht=" + ht
 				+ ", classificacaoHt=" + classificacaoHt + ", hb=" + hb
 				+ ", classificacaoHb=" + classificacaoHb
 				+ ", condutaNutricional=" + condutaNutricional
@@ -459,13 +459,15 @@ public class ConsultaNutricional {
 				+ ", disfagia=" + disfagia + ", pirose=" + pirose + ", nausea="
 				+ nausea + ", vomito=" + vomito + ", diarreia=" + diarreia
 				+ ", constipacao=" + constipacao + ", agua=" + agua
-				+ ", carneVermelhaFrequencia=" + carneVermelhaFrequencia
-				+ ", bebidaAlcoolica=" + bebidaAlcoolica
-				+ ", bebidaAlcoolicaFrequenciaSemanal="
+				+ ", carneVermelha=" + carneVermelha
+				+ ", carneVermelhaFrequenciaSemanal="
+				+ carneVermelhaFrequenciaSemanal + ", carneVermelhaComentario="
+				+ carneVermelhaComentario + ", bebidaAlcoolica="
+				+ bebidaAlcoolica + ", bebidaAlcoolicaFrequenciaSemanal="
 				+ bebidaAlcoolicaFrequenciaSemanal
-				+ ", bebidadaAlcoolicaComentario="
-				+ bebidadaAlcoolicaComentario + ", atividadeFisica="
-				+ atividadeFisica + ", atividadeFisicaFrequenciaSemanal="
+				+ ", bebidaAlcoolicaComentario=" + bebidaAlcoolicaComentario
+				+ ", atividadeFisica=" + atividadeFisica
+				+ ", atividadeFisicaFrequenciaSemanal="
 				+ atividadeFisicaFrequenciaSemanal
 				+ ", atividadeFisicaComentario=" + atividadeFisicaComentario
 				+ ", diabetes=" + diabetes + ", hipertensao=" + hipertensao
@@ -475,5 +477,4 @@ public class ConsultaNutricional {
 				+ alergiaComentario + ", objetivoConsulta=" + objetivoConsulta
 				+ "]";
 	}
-
 }
