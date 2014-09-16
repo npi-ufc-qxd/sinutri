@@ -6,7 +6,10 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
+import org.hibernate.annotations.ManyToAny;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import br.com.ufc.quixada.npi.sisat.enumerator.Classificacao;
@@ -14,6 +17,7 @@ import br.com.ufc.quixada.npi.sisat.enumerator.Classificacao;
 @Entity
 public class ConsultaNutricional {
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 	@Override
@@ -58,20 +62,23 @@ public class ConsultaNutricional {
 =======
 =======
 >>>>>>> 529617fb93702199d51fe6a94f6f6b4e85592e64
+=======
+>>>>>>> 11c921d8889917ea0a87247423e36bcae6ce4ced
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 1c0b2553b96857632ac90cd1c1280abf0ac3173c
 =======
 >>>>>>> 529617fb93702199d51fe6a94f6f6b4e85592e64
+=======
+>>>>>>> 11c921d8889917ea0a87247423e36bcae6ce4ced
 	@DateTimeFormat
 	private Date data;
 
 	private Double peso;
-
-	private Double altura;
 
 	private Double circunferenciaCintura;
 
@@ -150,6 +157,10 @@ public class ConsultaNutricional {
 	private String alergiaComentario;
 
 	private String objetivoConsulta;
+	
+	@ManyToOne
+	@JoinColumn(name="paciente_id")
+	private Paciente paciente;
 
 	
 	
@@ -179,14 +190,6 @@ public class ConsultaNutricional {
 		this.peso = peso;
 	}
 
-	public Double getAltura() {
-		return altura;
-	}
-
-	public void setAltura(Double altura) {
-		this.altura = altura;
-	}
-
 	public Double getCircunferenciaCintura() {
 		return circunferenciaCintura;
 	}
@@ -213,6 +216,7 @@ public class ConsultaNutricional {
 
 	public Integer getCt() {
 		return ct;
+<<<<<<< HEAD
 	}
 
 	public void setCt(Integer ct) {
@@ -223,6 +227,18 @@ public class ConsultaNutricional {
 		return classificacaoCt;
 	}
 
+=======
+	}
+
+	public void setCt(Integer ct) {
+		this.ct = ct;
+	}
+
+	public String getClassificacaoCt() {
+		return classificacaoCt;
+	}
+
+>>>>>>> 11c921d8889917ea0a87247423e36bcae6ce4ced
 	public void setClassificacaoCt(String classificacaoCt) {
 		this.classificacaoCt = classificacaoCt;
 	}
@@ -237,6 +253,7 @@ public class ConsultaNutricional {
 
 	public String getClassificacaoHdl() {
 		return classificacaoHdl;
+<<<<<<< HEAD
 	}
 
 	public void setClassificacaoHdl(String classificacaoHdl) {
@@ -259,6 +276,30 @@ public class ConsultaNutricional {
 		this.classificacaoLdl = classificacaoLdl;
 	}
 
+=======
+	}
+
+	public void setClassificacaoHdl(String classificacaoHdl) {
+		this.classificacaoHdl = classificacaoHdl;
+	}
+
+	public Integer getLdl() {
+		return ldl;
+	}
+
+	public void setLdl(Integer ldl) {
+		this.ldl = ldl;
+	}
+
+	public String getClassificacaoLdl() {
+		return classificacaoLdl;
+	}
+
+	public void setClassificacaoLdl(String classificacaoLdl) {
+		this.classificacaoLdl = classificacaoLdl;
+	}
+
+>>>>>>> 11c921d8889917ea0a87247423e36bcae6ce4ced
 	public Integer getTg() {
 		return tg;
 	}
@@ -534,6 +575,7 @@ public class ConsultaNutricional {
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	public String getClassificacaoGlicemia() {
 		return classificacaoGlicemia;
 	}
@@ -588,10 +630,12 @@ public class ConsultaNutricional {
 =======
 =======
 >>>>>>> 529617fb93702199d51fe6a94f6f6b4e85592e64
+=======
+>>>>>>> 11c921d8889917ea0a87247423e36bcae6ce4ced
 	@Override
 	public String toString() {
 		return "ConsultaNutricional [id=" + id + ", data=" + data + ", peso="
-				+ peso + ", altura=" + altura + ", circunferenciaCintura="
+				+ peso + ", circunferenciaCintura="
 				+ circunferenciaCintura + ", glicemia=" + glicemia
 				+ ", classificacaoGlicemia=" + classificacaoGlicemia + ", ct="
 				+ ct + ", classificacaoCt=" + classificacaoCt + ", hdl="
@@ -626,9 +670,12 @@ public class ConsultaNutricional {
 	}
 	
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 1c0b2553b96857632ac90cd1c1280abf0ac3173c
 }
 =======
+=======
+>>>>>>> 11c921d8889917ea0a87247423e36bcae6ce4ced
 	
 
 }

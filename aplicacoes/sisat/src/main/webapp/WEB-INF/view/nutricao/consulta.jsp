@@ -71,6 +71,7 @@
 <jsp:include page="../modulos/footer.jsp" />
 </body>
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 </html>
 =======
@@ -79,3 +80,6 @@
 >>>>>>> 1c0b2553b96857632ac90cd1c1280abf0ac3173c
 =======
 >>>>>>> 529617fb93702199d51fe6a94f6f6b4e85592e64
+=======
+</html>
+>>>>>>> 11c921d8889917ea0a87247423e36bcae6ce4ced

@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import br.com.ufc.quixada.npi.sisat.enumerator.Classificacao;
@@ -64,17 +65,15 @@ public class NutricaoController {
 	
 	@RequestMapping(value = {"/buscar"}, method = RequestMethod.GET)
 	public String buscarPaciente(Model model) {
-		model.addAttribute("pessoa", new Pessoa());
-		
 		return "nutricao/buscar";
 	}
 	
 	@RequestMapping(value = "/buscar", method = RequestMethod.POST)
-	public String buscarPaciente(@ModelAttribute("pessoa") Pessoa pessoa, ModelMap map) {
-		if(!pessoa.getCpf().isEmpty()){
-			map.addAttribute("pessoas", servicePessoa.getPessoasByCpf(pessoa.getCpf()));
-		}else if(!pessoa.getNome().isEmpty()){
-			map.addAttribute("pessoas", servicePessoa.getPessoasByNome(pessoa.getNome()));
+	public String buscarPaciente(@RequestParam("tipoPesquisa") String tipoPesquisa, @RequestParam("campo") String campo, ModelMap map) {
+		if(tipoPesquisa.equals("cpf")){
+			map.addAttribute("pessoas", servicePessoa.getPessoasByCpf(campo));
+		}else if(tipoPesquisa.equals("nome")){
+			map.addAttribute("pessoas", servicePessoa.getPessoasByNome(campo));
 		}
 		return "/nutricao/buscar";
 	}
@@ -82,14 +81,12 @@ public class NutricaoController {
 	@RequestMapping(value = {"/{id}/detalhes"})
 	public String getDetalhes(Pessoa p, @PathVariable("id") Long id, Model model, RedirectAttributes redirectAttributes){
 		Pessoa pessoa = servicePessoa.find(Pessoa.class, id);
-		System.out.println("estou aqui!!!");
 		if(pessoa == null){
 			redirectAttributes.addFlashAttribute("erro", "Paciente não encontrado.");
-			return "redirect:/nutricao/buscar";
+			return "nutricao/buscar";
 		}
-		System.out.println(pessoa.getNome());
 		model.addAttribute("pessoa", pessoa);
-		return "redirect:/nutricao/detalhes";
+		return "nutricao/detalhes";
 	}
 	
 	
@@ -99,11 +96,16 @@ public class NutricaoController {
 		ConsultaNutricional consultaNutricional = new ConsultaNutricional();
 		model.addAttribute("consulta", consultaNutricional);
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 1c0b2553b96857632ac90cd1c1280abf0ac3173c
 =======
 		Classificacao[] cla= Classificacao.values();
 		model.addAttribute("classificacao", cla);
 >>>>>>> 529617fb93702199d51fe6a94f6f6b4e85592e64
+=======
+		Classificacao[] cla= Classificacao.values();
+		model.addAttribute("classificacao", cla);
+>>>>>>> 11c921d8889917ea0a87247423e36bcae6ce4ced
 		return "nutricao/consulta";
 	}
 
