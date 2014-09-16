@@ -11,7 +11,7 @@
 			<label for="glicemia" class="col-sm-3 control-label">Glicemia:</label>
 			<form:input id="glicemia" path="glicemia" cssClass="form-control" type="text"/>
 			
-			<select name="classificacaoGlicemia" id="classificacaoGlicemia" path="classificacaoGlicemia" class="col-xs-8">
+			<select name="classificacaoGlicemia" id="classificacaoGlicemia" path="classificacaoGlicemia" class="col-xs-4">
 			  <c:forEach var="c" items="${classificacao}" varStatus="i">
   						<option value="${c.tipo}">${c.tipo}</option>
 				</c:forEach>
@@ -21,7 +21,7 @@
 			<label for="ct" class="col-sm-3 control-label">CT:</label>
 			<form:input id="ct" path="ct" cssClass="form-control" type="text"/>
 		
-			<select name="classificacaoCt" id="classificacaoCt" class="col-xs-5" path="classificacaoCt">
+			<select name="classificacaoCt" id="classificacaoCt" class="col-xs-4" path="classificacaoCt">
 			  <c:forEach var="c" items="${classificacao}" varStatus="i">
   						<option value="${c.tipo}">${c.tipo}</option>
 				</c:forEach>
@@ -31,7 +31,7 @@
 			<label for="ldl" class="col-sm-3 control-label">LDL-C:</label>
 			<form:input id="ldl" path="ldl" cssClass="form-control" type="text"/>
 			
-			<select name="classificacaoLdl" id="classificacaoLdl" class="col-xs-5" path="classificacaoLdl" >
+			<select name="classificacaoLdl" id="classificacaoLdl" class="col-xs-4" path="classificacaoLdl" >
 			  <c:forEach var="c" items="${classificacao}" varStatus="i">
   						<option value="${c.tipo}">${c.tipo}</option>
 				</c:forEach>
@@ -41,7 +41,7 @@
 			<label for="hdl" class="col-sm-3 control-label">HDL-C:</label>
 			<form:input id="hdl" path="hdl" cssClass="form-control" type="text"/>
 			
-			<select name="classificacaoHdl" id="classificacaoHdl" class="col-xs-5" path="classificacaoHdl" >
+			<select name="classificacaoHdl" id="classificacaoHdl" class="col-xs-4" path="classificacaoHdl" >
 			  <c:forEach var="c" items="${classificacao}" varStatus="i">
   						<option value="${c.tipo}">${c.tipo}</option>
 				</c:forEach>
@@ -55,10 +55,10 @@
 		<div class="form-group">
 			 
 			 <!-- TG -->
-			<label for="tg" class="col-sm-2 control-label">TG:</label>
+			<label for="tg" class="col-sm-3 control-label">TG:</label>
 			<form:input id="tg" path="tg" cssClass="form-control" type="text"/>
 			
-			<select name="classificacaoTg" id="classificacaoTg" class="col-xs-5" path="classificacaoTg" >
+			<select name="classificacaoTg" id="classificacaoTg" class="col-xs-4" path="classificacaoTg" >
 				
 				<c:forEach var="c" items="${classificacao}" varStatus="i">
   						<option value="${c.tipo}">${c.tipo}</option>
@@ -71,7 +71,7 @@
 			<label for="hb" class="col-sm-2 control-label">HB:</label>
 			<form:input id="hb" path="hb" cssClass="form-control" type="text"/>
 			
-			<select name="classificacaoHb" id="classificacaoHb" class="col-xs-5" path="classificacaoHb" >
+			<select name="classificacaoHb" id="classificacaoHb" class="col-xs-4" path="classificacaoHb" >
 			  <c:forEach var="c" items="${classificacao}" varStatus="i">
   						<option value="${c.tipo}">${c.tipo}</option>
 				</c:forEach>
@@ -81,7 +81,7 @@
 			<label for="tgo" class="col-sm-4 control-label">TGO (AST):</label>
 			<form:input id="tgo" path="tgo" cssClass="form-control" type="text"/>
 			
-			<select name="classificacaoTgo" id="classificacaoTgo" class="col-xs-5" path="classificacaoTgo" >
+			<select name="classificacaoTgo" id="classificacaoTgo" class="col-xs-4" path="classificacaoTgo" >
 			  <c:forEach var="c" items="${classificacao}" varStatus="i">
   						<option value="${c.tipo}">${c.tipo}</option>
 				</c:forEach>
@@ -91,11 +91,11 @@
 			<label for="tgp" class="col-sm-4 control-label">TGP (ALT):</label>
 			<form:input id="tgp" path="tgp" cssClass="form-control" type="text"/>
 			
-			<form:select name="classificacaoTgp" id="classificacaoTgp" class="col-xs-5" path="classificacaoTgp" >
+			<select name="classificacaoTgp" id="classificacaoTgp" class="col-xs-4" path="classificacaoTgp" >
 			  <c:forEach var="c" items="${classificacao}" varStatus="i">
   						<option value="${c.tipo}">${c.tipo}</option>
 				</c:forEach>
-			</form:select><br/><br/><br/>
+			</select><br/><br/><br/>
 			
 			
 		</div>

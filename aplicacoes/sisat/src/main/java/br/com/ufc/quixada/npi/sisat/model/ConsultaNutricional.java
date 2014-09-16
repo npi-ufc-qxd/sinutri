@@ -3,6 +3,8 @@ package br.com.ufc.quixada.npi.sisat.model;
 import java.sql.Date;
 
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -29,28 +31,36 @@ public class ConsultaNutricional {
 	private Double circunferenciaCintura;
 
 	private Integer glicemia;
-	private String classificacaoGlicemia;
+	@Enumerated(EnumType.STRING)
+	private Classificacao classificacaoGlicemia;
 
 	private Integer ct;
-	private String classificacaoCt;
+	@Enumerated(EnumType.STRING)
+	private Classificacao classificacaoCt;
 	
 	private Integer hdl;
-	private String classificacaoHdl;
+	@Enumerated(EnumType.STRING)
+	private Classificacao classificacaoHdl;
 	
 	private Integer ldl;
-	private String classificacaoLdl;
+	@Enumerated(EnumType.STRING)
+	private Classificacao classificacaoLdl;
 	
 	private Integer tg;
-	private String classificacaoTg;
+	@Enumerated(EnumType.STRING)
+	private Classificacao classificacaoTg;
 	
 	private Integer hb;
-	private String classificacaoHb;
+	@Enumerated(EnumType.STRING)
+	private Classificacao classificacaoHb;
 	
 	private Integer tgo;
-	private String classificacaoTgo;
+	@Enumerated(EnumType.STRING)
+	private Classificacao classificacaoTgo;
 	
 	private Integer tgp;
-	private String classificacaoTgp;
+	@Enumerated(EnumType.STRING)
+	private Classificacao classificacaoTgp;
 	
 	private String condutaNutricional;
 
@@ -108,10 +118,6 @@ public class ConsultaNutricional {
 	@JoinColumn(name="paciente_id")
 	private Paciente paciente;
 
-	
-	
-	
-	
 	public Long getId() {
 		return id;
 	}
@@ -152,11 +158,11 @@ public class ConsultaNutricional {
 		this.glicemia = glicemia;
 	}
 
-	public String getClassificacaoGlicemia() {
+	public Classificacao getClassificacaoGlicemia() {
 		return classificacaoGlicemia;
 	}
 
-	public void setClassificacaoGlicemia(String classificacaoGlicemia) {
+	public void setClassificacaoGlicemia(Classificacao classificacaoGlicemia) {
 		this.classificacaoGlicemia = classificacaoGlicemia;
 	}
 
@@ -168,11 +174,11 @@ public class ConsultaNutricional {
 		this.ct = ct;
 	}
 
-	public String getClassificacaoCt() {
+	public Classificacao getClassificacaoCt() {
 		return classificacaoCt;
 	}
 
-	public void setClassificacaoCt(String classificacaoCt) {
+	public void setClassificacaoCt(Classificacao classificacaoCt) {
 		this.classificacaoCt = classificacaoCt;
 	}
 
@@ -184,11 +190,11 @@ public class ConsultaNutricional {
 		this.hdl = hdl;
 	}
 
-	public String getClassificacaoHdl() {
+	public Classificacao getClassificacaoHdl() {
 		return classificacaoHdl;
 	}
 
-	public void setClassificacaoHdl(String classificacaoHdl) {
+	public void setClassificacaoHdl(Classificacao classificacaoHdl) {
 		this.classificacaoHdl = classificacaoHdl;
 	}
 
@@ -200,11 +206,11 @@ public class ConsultaNutricional {
 		this.ldl = ldl;
 	}
 
-	public String getClassificacaoLdl() {
+	public Classificacao getClassificacaoLdl() {
 		return classificacaoLdl;
 	}
 
-	public void setClassificacaoLdl(String classificacaoLdl) {
+	public void setClassificacaoLdl(Classificacao classificacaoLdl) {
 		this.classificacaoLdl = classificacaoLdl;
 	}
 
@@ -216,11 +222,11 @@ public class ConsultaNutricional {
 		this.tg = tg;
 	}
 
-	public String getClassificacaoTg() {
+	public Classificacao getClassificacaoTg() {
 		return classificacaoTg;
 	}
 
-	public void setClassificacaoTg(String classificacaoTg) {
+	public void setClassificacaoTg(Classificacao classificacaoTg) {
 		this.classificacaoTg = classificacaoTg;
 	}
 
@@ -232,11 +238,11 @@ public class ConsultaNutricional {
 		this.hb = hb;
 	}
 
-	public String getClassificacaoHb() {
+	public Classificacao getClassificacaoHb() {
 		return classificacaoHb;
 	}
 
-	public void setClassificacaoHb(String classificacaoHb) {
+	public void setClassificacaoHb(Classificacao classificacaoHb) {
 		this.classificacaoHb = classificacaoHb;
 	}
 
@@ -248,11 +254,11 @@ public class ConsultaNutricional {
 		this.tgo = tgo;
 	}
 
-	public String getClassificacaoTgo() {
+	public Classificacao getClassificacaoTgo() {
 		return classificacaoTgo;
 	}
 
-	public void setClassificacaoTgo(String classificacaoTgo) {
+	public void setClassificacaoTgo(Classificacao classificacaoTgo) {
 		this.classificacaoTgo = classificacaoTgo;
 	}
 
@@ -264,11 +270,11 @@ public class ConsultaNutricional {
 		this.tgp = tgp;
 	}
 
-	public String getClassificacaoTgp() {
+	public Classificacao getClassificacaoTgp() {
 		return classificacaoTgp;
 	}
 
-	public void setClassificacaoTgp(String classificacaoTgp) {
+	public void setClassificacaoTgp(Classificacao classificacaoTgp) {
 		this.classificacaoTgp = classificacaoTgp;
 	}
 
@@ -482,29 +488,36 @@ public class ConsultaNutricional {
 		this.objetivoConsulta = objetivoConsulta;
 	}
 
+	public Paciente getPaciente() {
+		return paciente;
+	}
+
+	public void setPaciente(Paciente paciente) {
+		this.paciente = paciente;
+	}
+
 	@Override
 	public String toString() {
 		return "ConsultaNutricional [id=" + id + ", data=" + data + ", peso="
-				+ peso + ", circunferenciaCintura="
-				+ circunferenciaCintura + ", glicemia=" + glicemia
-				+ ", classificacaoGlicemia=" + classificacaoGlicemia + ", ct="
-				+ ct + ", classificacaoCt=" + classificacaoCt + ", hdl="
-				+ hdl + ", classificacaoHdl=" + classificacaoHdl + ", ldl="
-				+ ldl + ", classificacaoLdl=" + classificacaoLdl + ", tg=" + tg
-				+ ", classificacaoTg=" + classificacaoTg + ", hb=" + hb
-				+ ", classificacaoHb=" + classificacaoHb + ", tgo=" + tgo
-				+ ", classificacaoTgo=" + classificacaoTgo + ", tgp=" + tgp
-				+ ", classificacaoTgp=" + classificacaoTgp
-				+ ", condutaNutricional=" + condutaNutricional
-				+ ", medicamento=" + medicamento + ", medicamentoComentario="
-				+ medicamentoComentario + ", mastigacao=" + mastigacao
-				+ ", mastigacaoComentario=" + mastigacaoComentario
-				+ ", disfagia=" + disfagia + ", pirose=" + pirose + ", nausea="
-				+ nausea + ", vomito=" + vomito + ", diarreia=" + diarreia
-				+ ", constipacao=" + constipacao + ", agua=" + agua
-				+ ", carneVermelhaFrequencia=" + carneVermelhaFrequencia
-				+ ", bebidaAlcoolica=" + bebidaAlcoolica
-				+ ", bebidaAlcoolicaFrequenciaSemanal="
+				+ peso + ", circunferenciaCintura=" + circunferenciaCintura
+				+ ", glicemia=" + glicemia + ", classificacaoGlicemia="
+				+ classificacaoGlicemia + ", ct=" + ct + ", classificacaoCt="
+				+ classificacaoCt + ", hdl=" + hdl + ", classificacaoHdl="
+				+ classificacaoHdl + ", ldl=" + ldl + ", classificacaoLdl="
+				+ classificacaoLdl + ", tg=" + tg + ", classificacaoTg="
+				+ classificacaoTg + ", hb=" + hb + ", classificacaoHb="
+				+ classificacaoHb + ", tgo=" + tgo + ", classificacaoTgo="
+				+ classificacaoTgo + ", tgp=" + tgp + ", classificacaoTgp="
+				+ classificacaoTgp + ", condutaNutricional="
+				+ condutaNutricional + ", medicamento=" + medicamento
+				+ ", medicamentoComentario=" + medicamentoComentario
+				+ ", mastigacao=" + mastigacao + ", mastigacaoComentario="
+				+ mastigacaoComentario + ", disfagia=" + disfagia + ", pirose="
+				+ pirose + ", nausea=" + nausea + ", vomito=" + vomito
+				+ ", diarreia=" + diarreia + ", constipacao=" + constipacao
+				+ ", agua=" + agua + ", carneVermelhaFrequencia="
+				+ carneVermelhaFrequencia + ", bebidaAlcoolica="
+				+ bebidaAlcoolica + ", bebidaAlcoolicaFrequenciaSemanal="
 				+ bebidaAlcoolicaFrequenciaSemanal
 				+ ", bebidadaAlcoolicaComentario="
 				+ bebidadaAlcoolicaComentario + ", atividadeFisica="
@@ -516,9 +529,10 @@ public class ConsultaNutricional {
 				+ ", outrasPatologiasComentario=" + outrasPatologiasComentario
 				+ ", alergia=" + alergia + ", alergiaComentario="
 				+ alergiaComentario + ", objetivoConsulta=" + objetivoConsulta
-				+ "]";
+				+ ", paciente=" + paciente + "]";
 	}
-	
-	
 
+	
+	
+	
 }
