@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import br.com.ufc.quixada.npi.sisat.enumerator.Classificacao;
 import br.com.ufc.quixada.npi.sisat.model.ConsultaNutricional;
 <<<<<<< HEAD
 import br.com.ufc.quixada.npi.sisat.model.Paciente;
@@ -93,11 +94,16 @@ public class NutricaoController {
 	
 	
 	@RequestMapping(value = {"/consulta"}, method = RequestMethod.GET)
-	public String consulta(Model model) {
+	public String consulta(Model model, HttpSession session) {
 		System.out.println("consulta get");
 		ConsultaNutricional consultaNutricional = new ConsultaNutricional();
 		model.addAttribute("consulta", consultaNutricional);
+<<<<<<< HEAD
 >>>>>>> 1c0b2553b96857632ac90cd1c1280abf0ac3173c
+=======
+		Classificacao[] cla= Classificacao.values();
+		model.addAttribute("classificacao", cla);
+>>>>>>> 529617fb93702199d51fe6a94f6f6b4e85592e64
 		return "nutricao/consulta";
 	}
 

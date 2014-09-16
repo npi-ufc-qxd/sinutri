@@ -9,9 +9,13 @@
 <html>
 <head>
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 	<meta charset="UTF-8"/>
 >>>>>>> 1c0b2553b96857632ac90cd1c1280abf0ac3173c
+=======
+	<meta charset="UTF-8"/>
+>>>>>>> 529617fb93702199d51fe6a94f6f6b4e85592e64
 	<jsp:include page="../modulos/header-estrutura.jsp" />
 	<title>Inicio</title>
 </head>

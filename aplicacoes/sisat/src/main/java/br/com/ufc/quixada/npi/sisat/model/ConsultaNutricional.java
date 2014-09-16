@@ -9,9 +9,12 @@ import javax.persistence.Id;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+import br.com.ufc.quixada.npi.sisat.enumerator.Classificacao;
+
 @Entity
 public class ConsultaNutricional {
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	@Override
 	public String toString() {
@@ -53,11 +56,16 @@ public class ConsultaNutricional {
 	private Long id;
 	
 =======
+=======
+>>>>>>> 529617fb93702199d51fe6a94f6f6b4e85592e64
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
+<<<<<<< HEAD
 >>>>>>> 1c0b2553b96857632ac90cd1c1280abf0ac3173c
+=======
+>>>>>>> 529617fb93702199d51fe6a94f6f6b4e85592e64
 	@DateTimeFormat
 	private Date data;
 
@@ -67,45 +75,51 @@ public class ConsultaNutricional {
 
 	private Double circunferenciaCintura;
 
-	private int glicemia;
+	private Integer glicemia;
 	private String classificacaoGlicemia;
 
-	private int tgl;
-	private String classificacaoTgl;
+	private Integer ct;
+	private String classificacaoCt;
 	
-	private int hdl;
+	private Integer hdl;
 	private String classificacaoHdl;
 	
-	private int idl;
-	private String classificacaoIdl;
+	private Integer ldl;
+	private String classificacaoLdl;
 	
-	private int ht;
-	private String classificacaoHt;
+	private Integer tg;
+	private String classificacaoTg;
 	
-	private int hb;
+	private Integer hb;
 	private String classificacaoHb;
+	
+	private Integer tgo;
+	private String classificacaoTgo;
+	
+	private Integer tgp;
+	private String classificacaoTgp;
 	
 	private String condutaNutricional;
 
-	private Boolean medicamento;
+	private Boolean medicamento=false;
 
 	private String medicamentoComentario;
 
-	private Boolean mastigacao;
+	private Boolean mastigacao=false;
 
 	private String mastigacaoComentario;
 
-	private Boolean disfagia;
+	private Boolean disfagia=false;
 
-	private Boolean pirose;
+	private Boolean pirose=false;
 
-	private Boolean nausea;
+	private Boolean nausea=false;
 
-	private Boolean vomito;
+	private Boolean vomito=false;
 
-	private Boolean diarreia;
+	private Boolean diarreia=false;
 
-	private Boolean constipacao;
+	private Boolean constipacao=false;
 
 	private String agua;
 
@@ -127,7 +141,7 @@ public class ConsultaNutricional {
 
 	private Boolean hipertensao;
 
-	private Boolean outrasPatologias;
+	private Boolean outrasPatologias=false;
 
 	private String outrasPatologiasComentario;
 
@@ -137,6 +151,10 @@ public class ConsultaNutricional {
 
 	private String objetivoConsulta;
 
+	
+	
+	
+	
 	public Long getId() {
 		return id;
 	}
@@ -177,52 +195,132 @@ public class ConsultaNutricional {
 		this.circunferenciaCintura = circunferenciaCintura;
 	}
 
-	public int getGlicemia() {
+	public Integer getGlicemia() {
 		return glicemia;
 	}
 
-	public void setGlicemia(int glicemia) {
+	public void setGlicemia(Integer glicemia) {
 		this.glicemia = glicemia;
 	}
 
-	public int getTgl() {
-		return tgl;
+	public String getClassificacaoGlicemia() {
+		return classificacaoGlicemia;
 	}
 
-	public void setTgl(int tgl) {
-		this.tgl = tgl;
+	public void setClassificacaoGlicemia(String classificacaoGlicemia) {
+		this.classificacaoGlicemia = classificacaoGlicemia;
 	}
 
-	public int getHdl() {
+	public Integer getCt() {
+		return ct;
+	}
+
+	public void setCt(Integer ct) {
+		this.ct = ct;
+	}
+
+	public String getClassificacaoCt() {
+		return classificacaoCt;
+	}
+
+	public void setClassificacaoCt(String classificacaoCt) {
+		this.classificacaoCt = classificacaoCt;
+	}
+
+	public Integer getHdl() {
 		return hdl;
 	}
 
-	public void setHdl(int hdl) {
+	public void setHdl(Integer hdl) {
 		this.hdl = hdl;
 	}
 
-	public int getIdl() {
-		return idl;
+	public String getClassificacaoHdl() {
+		return classificacaoHdl;
 	}
 
-	public void setIdl(int idl) {
-		this.idl = idl;
+	public void setClassificacaoHdl(String classificacaoHdl) {
+		this.classificacaoHdl = classificacaoHdl;
 	}
 
-	public int getHt() {
-		return ht;
+	public Integer getLdl() {
+		return ldl;
 	}
 
-	public void setHt(int ht) {
-		this.ht = ht;
+	public void setLdl(Integer ldl) {
+		this.ldl = ldl;
 	}
 
-	public int getHb() {
+	public String getClassificacaoLdl() {
+		return classificacaoLdl;
+	}
+
+	public void setClassificacaoLdl(String classificacaoLdl) {
+		this.classificacaoLdl = classificacaoLdl;
+	}
+
+	public Integer getTg() {
+		return tg;
+	}
+
+	public void setTg(Integer tg) {
+		this.tg = tg;
+	}
+
+	public String getClassificacaoTg() {
+		return classificacaoTg;
+	}
+
+	public void setClassificacaoTg(String classificacaoTg) {
+		this.classificacaoTg = classificacaoTg;
+	}
+
+	public Integer getHb() {
 		return hb;
 	}
 
-	public void setHb(int hb) {
+	public void setHb(Integer hb) {
 		this.hb = hb;
+	}
+
+	public String getClassificacaoHb() {
+		return classificacaoHb;
+	}
+
+	public void setClassificacaoHb(String classificacaoHb) {
+		this.classificacaoHb = classificacaoHb;
+	}
+
+	public Integer getTgo() {
+		return tgo;
+	}
+
+	public void setTgo(Integer tgo) {
+		this.tgo = tgo;
+	}
+
+	public String getClassificacaoTgo() {
+		return classificacaoTgo;
+	}
+
+	public void setClassificacaoTgo(String classificacaoTgo) {
+		this.classificacaoTgo = classificacaoTgo;
+	}
+
+	public Integer getTgp() {
+		return tgp;
+	}
+
+	public void setTgp(Integer tgp) {
+		this.tgp = tgp;
+	}
+
+	public String getClassificacaoTgp() {
+		return classificacaoTgp;
+	}
+
+	public void setClassificacaoTgp(String classificacaoTgp) {
+		this.classificacaoTgp = classificacaoTgp;
 	}
 
 	public String getCondutaNutricional() {
@@ -435,6 +533,7 @@ public class ConsultaNutricional {
 		this.objetivoConsulta = objetivoConsulta;
 	}
 
+<<<<<<< HEAD
 	public String getClassificacaoGlicemia() {
 		return classificacaoGlicemia;
 	}
@@ -487,17 +586,21 @@ public class ConsultaNutricional {
 	
 
 =======
+=======
+>>>>>>> 529617fb93702199d51fe6a94f6f6b4e85592e64
 	@Override
 	public String toString() {
 		return "ConsultaNutricional [id=" + id + ", data=" + data + ", peso="
 				+ peso + ", altura=" + altura + ", circunferenciaCintura="
 				+ circunferenciaCintura + ", glicemia=" + glicemia
-				+ ", clasificacaoGlicemia=" + classificacaoGlicemia + ", tgl="
-				+ tgl + ", clasificacaoTgl=" + classificacaoTgl + ", hdl=" + hdl
-				+ ", clasificacaoHdl=" + classificacaoHdl + ", idl=" + idl
-				+ ", clasificacaoIdl=" + classificacaoIdl + ", ht=" + ht
-				+ ", clasificacaoHt=" + classificacaoHt + ", hb=" + hb
-				+ ", clasificacaoHb=" + classificacaoHb
+				+ ", classificacaoGlicemia=" + classificacaoGlicemia + ", ct="
+				+ ct + ", classificacaoCt=" + classificacaoCt + ", hdl="
+				+ hdl + ", classificacaoHdl=" + classificacaoHdl + ", ldl="
+				+ ldl + ", classificacaoLdl=" + classificacaoLdl + ", tg=" + tg
+				+ ", classificacaoTg=" + classificacaoTg + ", hb=" + hb
+				+ ", classificacaoHb=" + classificacaoHb + ", tgo=" + tgo
+				+ ", classificacaoTgo=" + classificacaoTgo + ", tgp=" + tgp
+				+ ", classificacaoTgp=" + classificacaoTgp
 				+ ", condutaNutricional=" + condutaNutricional
 				+ ", medicamento=" + medicamento + ", medicamentoComentario="
 				+ medicamentoComentario + ", mastigacao=" + mastigacao
@@ -522,5 +625,11 @@ public class ConsultaNutricional {
 				+ "]";
 	}
 	
+<<<<<<< HEAD
 >>>>>>> 1c0b2553b96857632ac90cd1c1280abf0ac3173c
 }
+=======
+	
+
+}
+>>>>>>> 529617fb93702199d51fe6a94f6f6b4e85592e64
