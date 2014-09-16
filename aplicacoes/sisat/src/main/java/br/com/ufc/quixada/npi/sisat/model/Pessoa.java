@@ -45,7 +45,6 @@ public class Pessoa {
 	@PrimaryKeyJoinColumn
 	private Paciente paciente;
 	
-	
 	@Column(nullable = false)
 	private String login;
 	
@@ -69,7 +68,7 @@ public class Pessoa {
 	private String email;
 	
 	@Column(columnDefinition="char(1)")
-	private char sexo;
+	private String sexo;
 	
 	private Date dataNascimento;
 	
@@ -144,10 +143,10 @@ public class Pessoa {
 		this.servidores = servidores;
 	}
 	
-	public char getSexo() {
+	public String getSexo() {
 		return sexo;
 	}
-	public void setSexo(char sexo) {
+	public void setSexo(String sexo) {
 		this.sexo = sexo;
 	}
 	public Date getDataNascimento() {
@@ -162,22 +161,28 @@ public class Pessoa {
 	public void setTelefone(String telefone) {
 		this.telefone = telefone;
 	}
-	public int getIdade(){
-		Calendar dateOfBirth = new GregorianCalendar();
-		dateOfBirth.setTime(this.dataNascimento);
-		
-		// Cria um objeto calendar com a data atual
-		Calendar today = Calendar.getInstance();
-		
-		// Obtém a idade baseado no ano
-		int age = today.get(Calendar.YEAR) - dateOfBirth.get(Calendar.YEAR);
-		dateOfBirth.add(Calendar.YEAR, age);
-		
-		//se a data de hoje é antes da data de Nascimento, então diminui 1(um)
-		if (today.before(dateOfBirth)) {
-			age--;
+	public String getIdade(){
+		String idade;
+		if(this.dataNascimento != null){
+			Calendar dateOfBirth = new GregorianCalendar();
+			dateOfBirth.setTime(this.dataNascimento);
+			
+			// Cria um objeto calendar com a data atual
+			Calendar today = Calendar.getInstance();
+			
+			// Obtém a idade baseado no ano
+			int age = today.get(Calendar.YEAR) - dateOfBirth.get(Calendar.YEAR);
+			dateOfBirth.add(Calendar.YEAR, age);
+			
+			//se a data de hoje é antes da data de Nascimento, então diminui 1(um)
+			if (today.before(dateOfBirth)) {
+				age--;
+			}
+			idade = "" + age;
+		}else{
+			idade = " ";
 		}
-		return age;
+		return idade;
 	}
 	public Paciente getPaciente() {
 		return paciente;
@@ -205,8 +210,7 @@ public class Pessoa {
 		}
 		return false;
 	}
-	
-	@Override
+
 	public String toString() {
 		return "Pessoa [id=" + id + ", paciente=" + paciente + ", login="
 				+ login + ", password=" + password + ", habilitado="

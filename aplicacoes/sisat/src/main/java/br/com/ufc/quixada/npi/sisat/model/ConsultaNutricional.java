@@ -26,8 +26,6 @@ public class ConsultaNutricional {
 
 	private Double peso;
 
-	private Double altura;
-
 	private Double circunferenciaCintura;
 
 	private Integer glicemia;
@@ -136,14 +134,6 @@ public class ConsultaNutricional {
 
 	public void setPeso(Double peso) {
 		this.peso = peso;
-	}
-
-	public Double getAltura() {
-		return altura;
-	}
-
-	public void setAltura(Double altura) {
-		this.altura = altura;
 	}
 
 	public Double getCircunferenciaCintura() {
@@ -495,7 +485,7 @@ public class ConsultaNutricional {
 	@Override
 	public String toString() {
 		return "ConsultaNutricional [id=" + id + ", data=" + data + ", peso="
-				+ peso + ", altura=" + altura + ", circunferenciaCintura="
+				+ peso + ", circunferenciaCintura="
 				+ circunferenciaCintura + ", glicemia=" + glicemia
 				+ ", classificacaoGlicemia=" + classificacaoGlicemia + ", ct="
 				+ ct + ", classificacaoCt=" + classificacaoCt + ", hdl="
