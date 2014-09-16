@@ -20,6 +20,7 @@ public class ConsultaNutricional {
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 	@Override
 	public String toString() {
 		return "ConsultaNutricional [id=" + id + ", data=" + data + ", peso="
@@ -64,10 +65,13 @@ public class ConsultaNutricional {
 >>>>>>> 529617fb93702199d51fe6a94f6f6b4e85592e64
 =======
 >>>>>>> 11c921d8889917ea0a87247423e36bcae6ce4ced
+=======
+>>>>>>> b89e50eef52631a7eb6a7082e39764f20a1c4686
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 >>>>>>> 1c0b2553b96857632ac90cd1c1280abf0ac3173c
@@ -75,6 +79,8 @@ public class ConsultaNutricional {
 >>>>>>> 529617fb93702199d51fe6a94f6f6b4e85592e64
 =======
 >>>>>>> 11c921d8889917ea0a87247423e36bcae6ce4ced
+=======
+>>>>>>> b89e50eef52631a7eb6a7082e39764f20a1c4686
 	@DateTimeFormat
 	private Date data;
 
@@ -108,6 +114,7 @@ public class ConsultaNutricional {
 	
 	private String condutaNutricional;
 
+<<<<<<< HEAD
 	private Boolean medicamento=false;
 
 	private String medicamentoComentario;
@@ -127,35 +134,56 @@ public class ConsultaNutricional {
 	private Boolean diarreia=false;
 
 	private Boolean constipacao=false;
+=======
+	private boolean medicamento;
+	private String medicamentoComentario;
+
+	private boolean mastigacao;
+	private String mastigacaoComentario;
+
+	private boolean disfagia;
+
+	private boolean pirose;
+
+	private boolean nausea;
+
+	private boolean vomito;
+
+	private boolean diarreia;
+
+	private boolean constipacao;
+>>>>>>> b89e50eef52631a7eb6a7082e39764f20a1c4686
 
 	private String agua;
 
-	private String carneVermelhaFrequencia;
+	private boolean carneVermelha;
+	private int carneVermelhaFrequenciaSemanal;
+	private String carneVermelhaComentario;
 
-	private Boolean bebidaAlcoolica;
-
+	private boolean bebidaAlcoolica;
 	private int bebidaAlcoolicaFrequenciaSemanal;
+	private String bebidaAlcoolicaComentario;
 
-	private String bebidadaAlcoolicaComentario;
-
-	private Boolean atividadeFisica;
-
+	private boolean atividadeFisica;
 	private int atividadeFisicaFrequenciaSemanal;
-
 	private String atividadeFisicaComentario;
 
 	private Boolean diabetes;
 
 	private Boolean hipertensao;
 
+<<<<<<< HEAD
 	private Boolean outrasPatologias=false;
 
+=======
+	private boolean outrasPatologias;
+>>>>>>> b89e50eef52631a7eb6a7082e39764f20a1c4686
 	private String outrasPatologiasComentario;
 
-	private Boolean alergia;
-
+	private boolean alergia;
 	private String alergiaComentario;
 
+<<<<<<< HEAD
 	private String objetivoConsulta;
 	
 	@ManyToOne
@@ -165,6 +193,9 @@ public class ConsultaNutricional {
 	
 	
 	
+=======
+	private String objetivoConsulta;	
+>>>>>>> b89e50eef52631a7eb6a7082e39764f20a1c4686
 	
 	public Long getId() {
 		return id;
@@ -214,6 +245,7 @@ public class ConsultaNutricional {
 		this.classificacaoGlicemia = classificacaoGlicemia;
 	}
 
+<<<<<<< HEAD
 	public Integer getCt() {
 		return ct;
 <<<<<<< HEAD
@@ -221,12 +253,17 @@ public class ConsultaNutricional {
 
 	public void setCt(Integer ct) {
 		this.ct = ct;
+=======
+	public int getTgl() {
+		return tgl;
+>>>>>>> b89e50eef52631a7eb6a7082e39764f20a1c4686
 	}
 
 	public String getClassificacaoCt() {
 		return classificacaoCt;
 	}
 
+<<<<<<< HEAD
 =======
 	}
 
@@ -244,6 +281,17 @@ public class ConsultaNutricional {
 	}
 
 	public Integer getHdl() {
+=======
+	public String getClassificacaoTgl() {
+		return classificacaoTgl;
+	}
+
+	public void setClassificacaoTgl(String classificacaoTgl) {
+		this.classificacaoTgl = classificacaoTgl;
+	}
+
+	public int getHdl() {
+>>>>>>> b89e50eef52631a7eb6a7082e39764f20a1c4686
 		return hdl;
 	}
 
@@ -254,20 +302,29 @@ public class ConsultaNutricional {
 	public String getClassificacaoHdl() {
 		return classificacaoHdl;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> b89e50eef52631a7eb6a7082e39764f20a1c4686
 	}
 
 	public void setClassificacaoHdl(String classificacaoHdl) {
 		this.classificacaoHdl = classificacaoHdl;
 	}
 
+<<<<<<< HEAD
 	public Integer getLdl() {
 		return ldl;
+=======
+	public int getIdl() {
+		return idl;
+>>>>>>> b89e50eef52631a7eb6a7082e39764f20a1c4686
 	}
 
 	public void setLdl(Integer ldl) {
 		this.ldl = ldl;
 	}
 
+<<<<<<< HEAD
 	public String getClassificacaoLdl() {
 		return classificacaoLdl;
 	}
@@ -281,12 +338,25 @@ public class ConsultaNutricional {
 
 	public void setClassificacaoHdl(String classificacaoHdl) {
 		this.classificacaoHdl = classificacaoHdl;
+=======
+	public String getClassificacaoIdl() {
+		return classificacaoIdl;
+	}
+
+	public void setClassificacaoIdl(String classificacaoIdl) {
+		this.classificacaoIdl = classificacaoIdl;
+	}
+
+	public int getHt() {
+		return ht;
+>>>>>>> b89e50eef52631a7eb6a7082e39764f20a1c4686
 	}
 
 	public Integer getLdl() {
 		return ldl;
 	}
 
+<<<<<<< HEAD
 	public void setLdl(Integer ldl) {
 		this.ldl = ldl;
 	}
@@ -317,6 +387,17 @@ public class ConsultaNutricional {
 	}
 
 	public Integer getHb() {
+=======
+	public String getClassificacaoHt() {
+		return classificacaoHt;
+	}
+
+	public void setClassificacaoHt(String classificacaoHt) {
+		this.classificacaoHt = classificacaoHt;
+	}
+
+	public int getHb() {
+>>>>>>> b89e50eef52631a7eb6a7082e39764f20a1c4686
 		return hb;
 	}
 
@@ -332,6 +413,7 @@ public class ConsultaNutricional {
 		this.classificacaoHb = classificacaoHb;
 	}
 
+<<<<<<< HEAD
 	public Integer getTgo() {
 		return tgo;
 	}
@@ -364,6 +446,8 @@ public class ConsultaNutricional {
 		this.classificacaoTgp = classificacaoTgp;
 	}
 
+=======
+>>>>>>> b89e50eef52631a7eb6a7082e39764f20a1c4686
 	public String getCondutaNutricional() {
 		return condutaNutricional;
 	}
@@ -372,11 +456,11 @@ public class ConsultaNutricional {
 		this.condutaNutricional = condutaNutricional;
 	}
 
-	public Boolean getMedicamento() {
+	public boolean isMedicamento() {
 		return medicamento;
 	}
 
-	public void setMedicamento(Boolean medicamento) {
+	public void setMedicamento(boolean medicamento) {
 		this.medicamento = medicamento;
 	}
 
@@ -388,11 +472,11 @@ public class ConsultaNutricional {
 		this.medicamentoComentario = medicamentoComentario;
 	}
 
-	public Boolean getMastigacao() {
+	public boolean isMastigacao() {
 		return mastigacao;
 	}
 
-	public void setMastigacao(Boolean mastigacao) {
+	public void setMastigacao(boolean mastigacao) {
 		this.mastigacao = mastigacao;
 	}
 
@@ -404,51 +488,51 @@ public class ConsultaNutricional {
 		this.mastigacaoComentario = mastigacaoComentario;
 	}
 
-	public Boolean getDisfagia() {
+	public boolean isDisfagia() {
 		return disfagia;
 	}
 
-	public void setDisfagia(Boolean disfagia) {
+	public void setDisfagia(boolean disfagia) {
 		this.disfagia = disfagia;
 	}
 
-	public Boolean getPirose() {
+	public boolean isPirose() {
 		return pirose;
 	}
 
-	public void setPirose(Boolean pirose) {
+	public void setPirose(boolean pirose) {
 		this.pirose = pirose;
 	}
 
-	public Boolean getNausea() {
+	public boolean isNausea() {
 		return nausea;
 	}
 
-	public void setNausea(Boolean nausea) {
+	public void setNausea(boolean nausea) {
 		this.nausea = nausea;
 	}
 
-	public Boolean getVomito() {
+	public boolean isVomito() {
 		return vomito;
 	}
 
-	public void setVomito(Boolean vomito) {
+	public void setVomito(boolean vomito) {
 		this.vomito = vomito;
 	}
 
-	public Boolean getDiarreia() {
+	public boolean isDiarreia() {
 		return diarreia;
 	}
 
-	public void setDiarreia(Boolean diarreia) {
+	public void setDiarreia(boolean diarreia) {
 		this.diarreia = diarreia;
 	}
 
-	public Boolean getConstipacao() {
+	public boolean isConstipacao() {
 		return constipacao;
 	}
 
-	public void setConstipacao(Boolean constipacao) {
+	public void setConstipacao(boolean constipacao) {
 		this.constipacao = constipacao;
 	}
 
@@ -460,19 +544,35 @@ public class ConsultaNutricional {
 		this.agua = agua;
 	}
 
-	public String getCarneVermelhaFrequencia() {
-		return carneVermelhaFrequencia;
+	public boolean isCarneVermelha() {
+		return carneVermelha;
 	}
 
-	public void setCarneVermelhaFrequencia(String carneVermelhaFrequencia) {
-		this.carneVermelhaFrequencia = carneVermelhaFrequencia;
+	public void setCarneVermelha(boolean carneVermelha) {
+		this.carneVermelha = carneVermelha;
 	}
 
-	public Boolean getBebidaAlcoolica() {
+	public int getCarneVermelhaFrequenciaSemanal() {
+		return carneVermelhaFrequenciaSemanal;
+	}
+
+	public void setCarneVermelhaFrequenciaSemanal(int carneVermelhaFrequenciaSemanal) {
+		this.carneVermelhaFrequenciaSemanal = carneVermelhaFrequenciaSemanal;
+	}
+
+	public String getCarneVermelhaComentario() {
+		return carneVermelhaComentario;
+	}
+
+	public void setCarneVermelhaComentario(String carneVermelhaComentario) {
+		this.carneVermelhaComentario = carneVermelhaComentario;
+	}
+
+	public boolean getBebidaAlcoolica() {
 		return bebidaAlcoolica;
 	}
 
-	public void setBebidaAlcoolica(Boolean bebidaAlcoolica) {
+	public void setBebidaAlcoolica(boolean bebidaAlcoolica) {
 		this.bebidaAlcoolica = bebidaAlcoolica;
 	}
 
@@ -485,19 +585,19 @@ public class ConsultaNutricional {
 		this.bebidaAlcoolicaFrequenciaSemanal = bebidaAlcoolicaFrequenciaSemanal;
 	}
 
-	public String getBebidadaAlcoolicaComentario() {
-		return bebidadaAlcoolicaComentario;
+	public String getBebidaAlcoolicaComentario() {
+		return bebidaAlcoolicaComentario;
 	}
 
-	public void setBebidadaAlcoolicaComentario(String bebidadaAlcoolicaComentario) {
-		this.bebidadaAlcoolicaComentario = bebidadaAlcoolicaComentario;
+	public void setBebidaAlcoolicaComentario(String bebidaAlcoolicaComentario) {
+		this.bebidaAlcoolicaComentario = bebidaAlcoolicaComentario;
 	}
 
-	public Boolean getAtividadeFisica() {
+	public boolean getAtividadeFisica() {
 		return atividadeFisica;
 	}
 
-	public void setAtividadeFisica(Boolean atividadeFisica) {
+	public void setAtividadeFisica(boolean atividadeFisica) {
 		this.atividadeFisica = atividadeFisica;
 	}
 
@@ -534,11 +634,11 @@ public class ConsultaNutricional {
 		this.hipertensao = hipertensao;
 	}
 
-	public Boolean getOutrasPatologias() {
+	public boolean isOutrasPatologias() {
 		return outrasPatologias;
 	}
 
-	public void setOutrasPatologias(Boolean outrasPatologias) {
+	public void setOutrasPatologias(boolean outrasPatologias) {
 		this.outrasPatologias = outrasPatologias;
 	}
 
@@ -550,11 +650,11 @@ public class ConsultaNutricional {
 		this.outrasPatologiasComentario = outrasPatologiasComentario;
 	}
 
-	public Boolean getAlergia() {
+	public boolean isAlergia() {
 		return alergia;
 	}
 
-	public void setAlergia(Boolean alergia) {
+	public void setAlergia(boolean alergia) {
 		this.alergia = alergia;
 	}
 
@@ -574,6 +674,7 @@ public class ConsultaNutricional {
 		this.objetivoConsulta = objetivoConsulta;
 	}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 	public String getClassificacaoGlicemia() {
@@ -645,6 +746,19 @@ public class ConsultaNutricional {
 				+ ", classificacaoHb=" + classificacaoHb + ", tgo=" + tgo
 				+ ", classificacaoTgo=" + classificacaoTgo + ", tgp=" + tgp
 				+ ", classificacaoTgp=" + classificacaoTgp
+=======
+	@Override
+	public String toString() {
+		return "ConsultaNutricional [id=" + id + ", data=" + data + ", peso="
+				+ peso + ", circunferenciaCintura=" + circunferenciaCintura
+				+ ", glicemia=" + glicemia + ", classificacaoGlicemia="
+				+ classificacaoGlicemia + ", tgl=" + tgl
+				+ ", classificacaoTgl=" + classificacaoTgl + ", hdl=" + hdl
+				+ ", classificacaoHdl=" + classificacaoHdl + ", idl=" + idl
+				+ ", classificacaoIdl=" + classificacaoIdl + ", ht=" + ht
+				+ ", classificacaoHt=" + classificacaoHt + ", hb=" + hb
+				+ ", classificacaoHb=" + classificacaoHb
+>>>>>>> b89e50eef52631a7eb6a7082e39764f20a1c4686
 				+ ", condutaNutricional=" + condutaNutricional
 				+ ", medicamento=" + medicamento + ", medicamentoComentario="
 				+ medicamentoComentario + ", mastigacao=" + mastigacao
@@ -652,13 +766,15 @@ public class ConsultaNutricional {
 				+ ", disfagia=" + disfagia + ", pirose=" + pirose + ", nausea="
 				+ nausea + ", vomito=" + vomito + ", diarreia=" + diarreia
 				+ ", constipacao=" + constipacao + ", agua=" + agua
-				+ ", carneVermelhaFrequencia=" + carneVermelhaFrequencia
-				+ ", bebidaAlcoolica=" + bebidaAlcoolica
-				+ ", bebidaAlcoolicaFrequenciaSemanal="
+				+ ", carneVermelha=" + carneVermelha
+				+ ", carneVermelhaFrequenciaSemanal="
+				+ carneVermelhaFrequenciaSemanal + ", carneVermelhaComentario="
+				+ carneVermelhaComentario + ", bebidaAlcoolica="
+				+ bebidaAlcoolica + ", bebidaAlcoolicaFrequenciaSemanal="
 				+ bebidaAlcoolicaFrequenciaSemanal
-				+ ", bebidadaAlcoolicaComentario="
-				+ bebidadaAlcoolicaComentario + ", atividadeFisica="
-				+ atividadeFisica + ", atividadeFisicaFrequenciaSemanal="
+				+ ", bebidaAlcoolicaComentario=" + bebidaAlcoolicaComentario
+				+ ", atividadeFisica=" + atividadeFisica
+				+ ", atividadeFisicaFrequenciaSemanal="
 				+ atividadeFisicaFrequenciaSemanal
 				+ ", atividadeFisicaComentario=" + atividadeFisicaComentario
 				+ ", diabetes=" + diabetes + ", hipertensao=" + hipertensao
@@ -668,6 +784,7 @@ public class ConsultaNutricional {
 				+ alergiaComentario + ", objetivoConsulta=" + objetivoConsulta
 				+ "]";
 	}
+<<<<<<< HEAD
 	
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -680,3 +797,6 @@ public class ConsultaNutricional {
 
 }
 >>>>>>> 529617fb93702199d51fe6a94f6f6b4e85592e64
+=======
+}
+>>>>>>> b89e50eef52631a7eb6a7082e39764f20a1c4686

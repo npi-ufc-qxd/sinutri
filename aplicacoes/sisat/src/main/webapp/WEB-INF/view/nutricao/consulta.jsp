@@ -11,10 +11,14 @@
 
 <head>
 <<<<<<< HEAD
+<<<<<<< HEAD
 	<meta charset= iso-8859-1/>
 =======
 	<meta charset="UTF-8"/>
 >>>>>>> 1c0b2553b96857632ac90cd1c1280abf0ac3173c
+=======
+	<meta charset="UTF-8"/>
+>>>>>>> b89e50eef52631a7eb6a7082e39764f20a1c4686
 	<jsp:include page="../modulos/header-estrutura.jsp" />
 	<title>Consulta</title>
 </head>
@@ -58,18 +62,25 @@
 	        </div>
 	    </div>
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> b89e50eef52631a7eb6a7082e39764f20a1c4686
 
 		<div class="col-xs-offset-0 col-xs-10" align="center">
 			<button type="submit" class="btn btn-success">Finalizar Consulta</button>
 		</div>
 
+<<<<<<< HEAD
 >>>>>>> 1c0b2553b96857632ac90cd1c1280abf0ac3173c
+=======
+>>>>>>> b89e50eef52631a7eb6a7082e39764f20a1c4686
 	</form:form>
 </div>
 
 <jsp:include page="../modulos/footer.jsp" />
 </body>
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 
@@ -83,3 +94,6 @@
 =======
 </html>
 >>>>>>> 11c921d8889917ea0a87247423e36bcae6ce4ced
+=======
+</html>
+>>>>>>> b89e50eef52631a7eb6a7082e39764f20a1c4686
