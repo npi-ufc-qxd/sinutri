@@ -17,7 +17,7 @@ public class Alimentacao {
 	private String alimento;
 	
 	private String porcao;
-	
+
 	@ManyToOne
 	@JoinColumn(name= "frequenciaAlimentar_id")
 	private FrequenciaAlimentar frequenciaAlimentar;
@@ -45,6 +45,19 @@ public class Alimentacao {
 	public void setPorcao(String porcao) {
 		this.porcao = porcao;
 	}
-	
+
+	public FrequenciaAlimentar getFrequenciaAlimentar() {
+		return frequenciaAlimentar;
+	}
+
+	public void setFrequenciaAlimentar(FrequenciaAlimentar frequenciaAlimentar) {
+		this.frequenciaAlimentar = frequenciaAlimentar;
+	}
+
+	@Override
+	public String toString() {
+		return "\n               Alimentacao [id=" + id + ", alimento=" + alimento + ", porcao="
+				+ porcao + "]";
+	}
 
 }

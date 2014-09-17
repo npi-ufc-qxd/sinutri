@@ -8,6 +8,9 @@ import javax.persistence.*;
 
 @Entity
 public class Paciente implements Serializable {
+
+	private static final long serialVersionUID = 6651490753121518188L;
+
 	@Id
     private Long id;
 	
@@ -17,14 +20,6 @@ public class Paciente implements Serializable {
 	private Pessoa pessoa;
 	
 	private double altura;
-
-	@OneToMany(mappedBy="paciente")
-	private List<ConsultaNutricional> consultas;
-	
-	/*
-	@OneToMany(mappedBy="paciente")
-	private List<Agendamento> agendamentos;
-	 */	
 	
 	public Pessoa getPessoa() {
 		return pessoa;
@@ -38,10 +33,4 @@ public class Paciente implements Serializable {
 	public void setAltura(double altura) {
 		this.altura = altura;
 	}
-	public List<ConsultaNutricional> getConsultas() {
-		return consultas;
-	}
-	public void setConsultas(List<ConsultaNutricional> consultas) {
-		this.consultas = consultas;
-	} 
 }

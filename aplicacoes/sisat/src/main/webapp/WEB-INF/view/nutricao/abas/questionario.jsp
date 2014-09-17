@@ -8,7 +8,7 @@
 			
 			<div class="form-group">
 				<label for="horaAdd" class="col-sm-2 control-label">Horario:</label>
-				<input id="horaAdd" name="horaAdd"/>
+				<input id="horaAdd" type="time" name="horaAdd"/>
 			</div>
 			
 			<div class="form-group">	
@@ -47,16 +47,16 @@ $(document).ready(function() {
 			var fieldset = $("<fieldset>");
 			fieldset.append($("<legend>").text(horaFrequencia + ", " + refeicaoFrequencia));
 			
-			fieldset.append($("<input type='hidden' name='frequenciasAlimentares["+contFrequencia+"].horario' cssClass='form-control' value="+horaFrequencia+">"));
-			fieldset.append($("<input type='hidden' name='frequenciasAlimentares["+contFrequencia+"].refeicao' cssClass='form-control' value="+refeicaoFrequencia+">"));
-			
+			fieldset.append($("<input type='hidden' name='frequencias["+contFrequencia+"].horario' cssClass='form-control' value="+horaFrequencia+">"));
+			fieldset.append($("<input type='hidden' name='frequencias["+contFrequencia+"].refeicao' cssClass='form-control' value="+refeicaoFrequencia+">"));
+
 			fieldset.append(
 					$("<table class='table'>")
 					.append($("<thead>")
 							.append($("<tr>")
-									.append($("<td>").text("Alimento/Preparo"))
+									.append($("<td  width='40%'>").text("Alimento/Preparo"))
 									.append($("<td>").text("Porção"))
-									.append($("<td width='20%'>").append($("<a class='addAlimento' data-frequenciaAlimentar='"+contFrequencia+"'>adicionar alimentos</a>")))
+									.append($("<td>").append($("<a class='addAlimento btn btn-primary' data-frequenciaAlimentar='"+contFrequencia+"'>adicionar alimentos</a>")))
 							)
 					)
 					.append($("<tbody id='frequenciaAlimentar"+contFrequencia+"'>"))
@@ -76,8 +76,8 @@ $(document).ready(function() {
   		//alert("Adicionando o amigo = " + contContatoAmigo  + " ao coração( "+recipiente +" ) do contato = " + contato);
   		$(recipiente)
   			.append($("<tr>")
-  					.append($("<td>").append($("<input name='frequenciasAlimentares["+frequenciaAlimentar+"].alimentos["+contAlimentos+"].alimento' cssClass='form-control'/>")))
-  					.append($("<td>").append($("<input size='40' name='frequenciasAlimentares["+frequenciaAlimentar+"].alimentos["+contAlimentos+"].porcao' cssClass='form-control'/>")))
+  					.append($("<td>").append($("<input size='50' name='frequencias["+frequenciaAlimentar+"].alimentos["+contAlimentos+"].alimento' cssClass='form-control'/>")))
+  					.append($("<td>").append($("<input size='10' name='frequencias["+frequenciaAlimentar+"].alimentos["+contAlimentos+"].porcao' cssClass='form-control'/>")))
   					.append($("<td>").append($("<a href='javascript:deletarLinha(" + frequenciaAlimentar + ", " + contAlimentos + ")' class='delAlimento btn btn-danger glyphicon glyphicon-edit'>Deletar alimentos</a>")))
   					
   			);
@@ -99,8 +99,8 @@ $(document).ready(function() {
 			size = $("table > "+recipiente+" tr" ).length;
 			for( var i = 0; i < size; ++i){
 				$( "table > "+recipiente+" tr:eq(" + i + ") td > a" ).attr("href", "javascript:deletarLinha(" + frequenciaAlimentar +", " + i + ")");
-				$( "table > "+recipiente+" tr:eq(" + i + ") td > input[name$='alimento']" ).attr("name", "frequenciasAlimentares[" + frequenciaAlimentar + "].alimentos[" + i + "].alimento");
-				$( "table > "+recipiente+" tr:eq(" + i + ") td > input[name$='porcao']" ).attr("name", "frequenciasAlimentares[" + frequenciaAlimentar + "].alimentos[" + i + "].porcao");
+				$( "table > "+recipiente+" tr:eq(" + i + ") td > input[name$='alimento']" ).attr("name", "frequencias[" + frequenciaAlimentar + "].alimentos[" + i + "].alimento");
+				$( "table > "+recipiente+" tr:eq(" + i + ") td > input[name$='porcao']" ).attr("name", "frequencias[" + frequenciaAlimentar + "].alimentos[" + i + "].porcao");
 			}
 			//alert("No coração("+recipiente+") do contato "+ contato +" só tem " + size + " amigo(s)" );
 			

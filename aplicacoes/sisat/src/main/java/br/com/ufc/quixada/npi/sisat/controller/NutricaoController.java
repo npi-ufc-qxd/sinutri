@@ -14,10 +14,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import br.com.ufc.quixada.npi.sisat.enumerator.Classificacao;
+import br.com.ufc.quixada.npi.sisat.model.Alimentacao;
 import br.com.ufc.quixada.npi.sisat.model.ConsultaNutricional;
+import br.com.ufc.quixada.npi.sisat.model.FrequenciaAlimentar;
 import br.com.ufc.quixada.npi.sisat.model.Paciente;
 import br.com.ufc.quixada.npi.sisat.model.Pessoa;
 import br.com.ufc.quixada.npi.sisat.service.ConsultaNutricionalService;
+import br.com.ufc.quixada.npi.sisat.service.GenericService;
 import br.com.ufc.quixada.npi.sisat.service.PacienteService;
 import br.com.ufc.quixada.npi.sisat.service.PessoaService;
 
@@ -33,6 +36,12 @@ public class NutricaoController {
 	
 	@Inject
 	private ConsultaNutricionalService consultaNutricionalService;
+	
+	@Inject
+	private GenericService<FrequenciaAlimentar> serviceFrequencia;
+	
+	@Inject
+	private GenericService<Alimentacao> serviceAlimentacao;
 
 	@RequestMapping(value = {"/", "/index"}, method = RequestMethod.GET)
 	public String index() {
@@ -69,8 +78,8 @@ public class NutricaoController {
 	@RequestMapping(value = {"/consulta"}, method = RequestMethod.GET)
 	public String consulta(Model model, HttpSession session) {
 		System.out.println("consulta get");
-		ConsultaNutricional consultaNutricional = new ConsultaNutricional();
-		model.addAttribute("consulta", consultaNutricional);
+		ConsultaNutricional consulta = new ConsultaNutricional();
+		model.addAttribute("consulta", consulta);
 		Classificacao[] cla= Classificacao.values();
 		model.addAttribute("classificacao", cla);
 		return "nutricao/consulta";
@@ -87,9 +96,17 @@ public class NutricaoController {
 
 	@RequestMapping(value = {"/consulta"}, method = RequestMethod.POST)
 	public String consulta(@ModelAttribute("consulta") ConsultaNutricional consulta) {
-		System.out.println("consulta post");
-		System.out.println(consulta);
+		System.out.println("E = " + consulta.toString());
 		consultaNutricionalService.save(consulta);
+		for (FrequenciaAlimentar frequenciaAlimentar : consulta.getFrequencias()){
+			frequenciaAlimentar.setConsultaNutricional(consulta);
+			serviceFrequencia.update(frequenciaAlimentar );
+			for (Alimentacao alimentacao : frequenciaAlimentar.getAlimentos()) {
+				alimentacao.setFrequenciaAlimentar(frequenciaAlimentar);
+				serviceAlimentacao.update(alimentacao);
+			}
+		}
+				
 		return "nutricao/consulta";
 	}
 
