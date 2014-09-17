@@ -37,7 +37,6 @@
 				</select>
 				<input id="campo" name="campo" cssClass="form-control"
 					placeholder="Digite sua busca aqui..." size="40" required="required" autofocus="true"/>
-				</td>
 				<button class="btn btn-primary" name="submit" type="submit" class="btn btn-primary"
 					value="Buscar" >
 					 Buscar
