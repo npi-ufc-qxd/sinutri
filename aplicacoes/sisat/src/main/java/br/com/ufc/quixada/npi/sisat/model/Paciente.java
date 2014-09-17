@@ -9,9 +9,12 @@ import javax.persistence.*;
 @Entity
 public class Paciente implements Serializable {
 	@Id
-	@OneToOne
-    @JoinColumn(name="id", nullable=false)
-    private Pessoa pessoa;
+    private Long id;
+	
+	@MapsId
+	@OneToOne(mappedBy = "paciente")
+	@JoinColumn(name = "id")
+	private Pessoa pessoa;
 	
 	private double altura;
 
@@ -26,16 +29,19 @@ public class Paciente implements Serializable {
 	public Pessoa getPessoa() {
 		return pessoa;
 	}
-	
 	public void setPessoa(Pessoa pessoa) {
 		this.pessoa = pessoa;
 	}
-	
 	public double getAltura() {
 		return altura;
 	}
-	
 	public void setAltura(double altura) {
 		this.altura = altura;
+	}
+	public List<ConsultaNutricional> getConsultas() {
+		return consultas;
+	}
+	public void setConsultas(List<ConsultaNutricional> consultas) {
+		this.consultas = consultas;
 	} 
 }
