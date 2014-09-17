@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 <%@page import="com.itextpdf.text.pdf.codec.Base64.OutputStream"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
@@ -103,5 +102,3 @@
 	</div>
 
 </div>
-=======
->>>>>>> b89e50eef52631a7eb6a7082e39764f20a1c4686
