@@ -23,7 +23,7 @@
 	<h2>${pessoa.paciente.id }</h2>
     <ul class="nav nav-tabs">
         <li class="active"><a data-toggle="tab" href="#avaliacao">Avaliação Nutricional</a></li>
-        
+
         <li><a data-toggle="tab" href="#exame">Exames Laboratoriais</a></li>
         
         <li><a data-toggle="tab" href="#questionario">Questionario de Frequencia Alimentar</a></li>
@@ -51,7 +51,6 @@
 		<div class="col-xs-offset-0 col-xs-10" align="center">
 			<button type="submit" class="btn btn-success">Finalizar Consulta</button>
 		</div>
-
 	</form:form>
 </div>
 

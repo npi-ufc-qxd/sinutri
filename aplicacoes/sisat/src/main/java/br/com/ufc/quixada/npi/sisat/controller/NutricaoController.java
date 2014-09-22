@@ -8,6 +8,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -42,7 +43,7 @@ public class NutricaoController {
 	}
 	
 	@RequestMapping(value = {"/buscar"}, method = RequestMethod.GET)
-	public String buscarPaciente(Model model) {
+	public String buscarPaciente(Model model) {		
 		return "nutricao/buscar";
 	}
 	
@@ -95,11 +96,33 @@ public class NutricaoController {
 	}
 
 	@RequestMapping(value = {"/consulta"}, method = RequestMethod.POST)
-	public String consulta(@ModelAttribute("consulta") ConsultaNutricional consulta) {
-		System.out.println("consulta post");
-		System.out.println(consulta);
+	public String consulta(@ModelAttribute("consulta") ConsultaNutricional consulta, BindingResult result) {
+		if (result.hasErrors()) {
+			return ("/paciente/cadastrar");
+		}
+		if(consulta.getAgua().length()==0){
+			consulta.setAgua(null);
+		}
+		if(consulta.getMedicamentoComentario()!=null && consulta.getMedicamentoComentario().isEmpty()){
+			consulta.setMedicamentoComentario(null);
+		}
+		if(consulta.getMastigacaoComentario()!=null && consulta.getMastigacaoComentario().isEmpty()){
+			consulta.setMastigacaoComentario(null);
+		}
+		if(consulta.getAlergiaComentario()!=null && consulta.getAlergiaComentario().isEmpty()){
+			consulta.setAlergiaComentario(null);
+		}
+		if(consulta.getCarneVermelhaComentario()!=null && consulta.getCarneVermelhaComentario().isEmpty()){
+			consulta.setCarneVermelhaComentario(null);
+		}
+		if(consulta.getAtividadeFisicaComentario()!=null && consulta.getAtividadeFisicaComentario().isEmpty()){
+			consulta.setAtividadeFisicaComentario(null);
+		}
+		if(consulta.getBebidaAlcoolicaComentario()!=null && consulta.getBebidaAlcoolicaComentario().isEmpty()){
+			consulta.setBebidaAlcoolicaComentario(null);
+		}
 		consultaNutricionalService.save(consulta);
 		return "nutricao/consulta";
 	}
-
 }
+
