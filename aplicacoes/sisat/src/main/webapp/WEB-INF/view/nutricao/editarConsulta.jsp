@@ -27,11 +27,12 @@
         <li><a data-toggle="tab" href="#questionario">Questionario de Frequencia Alimentar</a></li>
     </ul>
 
-	<form:form servletRelativeAction="consulta" method="POST" modelAttribute="consulta">
+	<form:form servletRelativeAction="/nutricao/${consultaNutricional.id}/editarConsulta" method="POST" modelAttribute="consultaNutricional">
 	    <div class="tab-content">
 		
 			<!-- ABA DE AVALIACAO NUTRICIONAL -->
 	        <div id="avaliacao" class="tab-pane fade in active">
+	        <h1>${consultaNutricional.id }</h1>
 				<jsp:include page="abas/editaAvaliacao.jsp" />
 	        </div>
 	
@@ -47,7 +48,7 @@
 	    </div>
 
 		<div class="col-xs-offset-0 col-xs-10" align="center">
-			<button type="submit" class="btn btn-success">Finalizar Consulta</button>
+			<button type="submit" class="btn btn-success">Salvar</button>
 		</div>
 
 	</form:form>

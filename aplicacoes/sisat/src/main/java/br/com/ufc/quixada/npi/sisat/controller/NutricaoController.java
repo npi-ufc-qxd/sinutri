@@ -56,15 +56,24 @@ public class NutricaoController {
 		
 	@RequestMapping(value = "/{id}/editarConsulta", method = RequestMethod.GET)
 	public String editarConsulta(@PathVariable("id") long id, Model model, HttpSession session, RedirectAttributes redirectAttributes) {
-		//Pessoa pessoa = servicePessoa.find(Pessoa.class, id);
-		System.out.println("editarConsulta");
-		model.addAttribute("consultaNutricional", consultaNutricionalService.find(ConsultaNutricional.class, id));
+		System.out.println("get editarConsulta");
+		ConsultaNutricional consultaNutricional = consultaNutricionalService.find(ConsultaNutricional.class, id);
+		System.out.println("ididididididiididididid = " + consultaNutricional.getId());
+		model.addAttribute("consultaNutricional", consultaNutricional);
+
 		Classificacao[] cla= Classificacao.values();
 		model.addAttribute("classificacao", cla);
 		return "/nutricao/editarConsulta";
+		
 	}
 	
-	
+	@RequestMapping(value = {"/{id}/editarConsulta"}, method = RequestMethod.POST)
+	public String editarConsulta(@ModelAttribute("consultaNutricional") ConsultaNutricional consulta, @PathVariable("id") long id) {
+		System.out.println("post editarConsulta" + consulta.getId());
+		consultaNutricionalService.update(consulta);
+		return "nutricao/detalhes";
+	}
+
 	@RequestMapping(value = {"/{id}/detalhes"})
 	public String getDetalhes(Pessoa p, @PathVariable("id") Long id, Model model, RedirectAttributes redirectAttributes){
 		Pessoa pessoa = servicePessoa.find(Pessoa.class, id);
@@ -73,7 +82,7 @@ public class NutricaoController {
 			return "nutricao/buscar";
 		}
 		model.addAttribute("pessoa", pessoa);
-		return "nutricao/detalhes";
+		return "redirect:nutricao/"+ 1 +"/detalhes";
 	}
 	
 	

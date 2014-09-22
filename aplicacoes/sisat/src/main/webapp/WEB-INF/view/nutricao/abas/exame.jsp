@@ -13,7 +13,7 @@
 			
 			<select name="classificacaoGlicemia" id="classificacaoGlicemia" path="classificacaoGlicemia" class="col-xs-4">
 			  <c:forEach var="c" items="${classificacao}" varStatus="i">
-  						<option value="${c.tipo}">${c.tipo}</option>
+  						<option value="${c}">${c.tipo}</option>
 				</c:forEach>
 			</select><br/><br/><br/>
 			
@@ -23,7 +23,7 @@
 		
 			<select name="classificacaoCt" id="classificacaoCt" class="col-xs-4" path="classificacaoCt">
 			  <c:forEach var="c" items="${classificacao}" varStatus="i">
-  						<option value="${c.tipo}">${c.tipo}</option>
+  						<option value="${c}">${c.tipo}</option>
 				</c:forEach>
 			</select><br/><br/><br/>
 			
@@ -33,7 +33,7 @@
 			
 			<select name="classificacaoLdl" id="classificacaoLdl" class="col-xs-4" path="classificacaoLdl" >
 			  <c:forEach var="c" items="${classificacao}" varStatus="i">
-  						<option value="${c.tipo}">${c.tipo}</option>
+  						<option value="${c}">${c.tipo}</option>
 				</c:forEach>
 			</select><br/><br/><br/>
 			
@@ -43,7 +43,7 @@
 			
 			<select name="classificacaoHdl" id="classificacaoHdl" class="col-xs-4" path="classificacaoHdl" >
 			  <c:forEach var="c" items="${classificacao}" varStatus="i">
-  						<option value="${c.tipo}">${c.tipo}</option>
+  						<option value="${c}">${c.tipo}</option>
 				</c:forEach>
 			</select>
 			
@@ -61,7 +61,7 @@
 			<select name="classificacaoTg" id="classificacaoTg" class="col-xs-4" path="classificacaoTg" >
 				
 				<c:forEach var="c" items="${classificacao}" varStatus="i">
-  						<option value="${c.tipo}">${c.tipo}</option>
+  						<option value="${c}">${c.tipo}</option>
 				</c:forEach>
 				
 			
@@ -73,7 +73,7 @@
 			
 			<select name="classificacaoHb" id="classificacaoHb" class="col-xs-4" path="classificacaoHb" >
 			  <c:forEach var="c" items="${classificacao}" varStatus="i">
-  						<option value="${c.tipo}">${c.tipo}</option>
+  						<option value="${c}">${c.tipo}</option>
 				</c:forEach>
 			</select><br/><br/><br/>
 			
@@ -83,7 +83,7 @@
 			
 			<select name="classificacaoTgo" id="classificacaoTgo" class="col-xs-4" path="classificacaoTgo" >
 			  <c:forEach var="c" items="${classificacao}" varStatus="i">
-  						<option value="${c.tipo}">${c.tipo}</option>
+  						<option value="${c}">${c.tipo}</option>
 				</c:forEach>
 			</select><br/><br/><br/>
 			
@@ -93,7 +93,7 @@
 			
 			<select name="classificacaoTgp" id="classificacaoTgp" class="col-xs-4" path="classificacaoTgp" >
 			  <c:forEach var="c" items="${classificacao}" varStatus="i">
-  						<option value="${c.tipo}">${c.tipo}</option>
+  						<option value="${c}">${c.tipo}</option>
 				</c:forEach>
 			</select><br/><br/><br/>
 			
