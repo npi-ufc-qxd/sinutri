@@ -36,8 +36,7 @@
 					<option value="cpf">CPF</option>
 				</select>
 				<input id="campo" name="campo" cssClass="form-control"
-					placeholder="" size="40" required="required" autofocus="true"/>
-				</td>
+					placeholder="Digite sua busca aqui..." size="40" required="required" autofocus="true"/>
 				<button class="btn btn-primary" name="submit" type="submit" class="btn btn-primary"
 					value="Buscar" >
 					 Buscar
@@ -46,11 +45,6 @@
 				
  			</form:form>
 
-
-			<%-- <c:if test="${empty pessoas}">
-				<div class="alert alert-warning" role="alert">Pessoa não
-					encontrada.</div>
-			</c:if> --%>
 			<c:if test="${not empty pessoas}">
 				<div class="panel panel-default">
 

@@ -1,5 +1,7 @@
 package br.com.ufc.quixada.npi.sisat.controller;
 
+import java.util.List;
+
 import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
 
@@ -46,11 +48,18 @@ public class NutricaoController {
 	}
 	
 	@RequestMapping(value = "/buscar", method = RequestMethod.POST)
-	public String buscarPaciente(@RequestParam("tipoPesquisa") String tipoPesquisa, @RequestParam("campo") String campo, ModelMap map) {
+	public String buscarPaciente(@RequestParam("tipoPesquisa") String tipoPesquisa, @RequestParam("campo") String campo, ModelMap map, RedirectAttributes redirectAttributes) {
+		List<Pessoa> pessoas = null;
 		if(tipoPesquisa.equals("cpf")){
-			map.addAttribute("pessoas", servicePessoa.getPessoasByCpf(campo));
-		}else if(tipoPesquisa.equals("nome")){
-			map.addAttribute("pessoas", servicePessoa.getPessoasByNome(campo));
+			pessoas = servicePessoa.getPessoasByCpf(campo);
+		}else {
+			pessoas = servicePessoa.getPessoasByNome(campo);
+		}
+		if(!pessoas.isEmpty()){
+			map.addAttribute("pessoas",pessoas); 
+		}else{
+			redirectAttributes.addFlashAttribute("erro", "Paciente de " + tipoPesquisa + " " + campo + " não encontrado.");
+			return "redirect:/nutricao/buscar";
 		}
 		return "/nutricao/buscar";
 	}
