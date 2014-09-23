@@ -28,40 +28,23 @@
 				<div class="alert alert-info" role="alert">${info}</div>
 			</c:if>
 
-
-				<table >
-				<div class="inline">
 			<form:form id="buscarPacienteForm" role="form"
 				servletReltiveAction="/nutricao/buscar" method="POST"
-				cssClass="form-horizontal">
-					<div class="form-group">
-						<td>
-							<select name="tipoPesquisa">
-								<option value="nome">Nome</option>
-								<option value="cpf">CPF</option>
-							</select>
-							</td>
-							<td> 
-							<input id="campo" name="campo" cssClass="form-control"
-								placeholder="" size="40" required="required"/>
-								</td>
-					</div>
-					<div class="controls">
-					<td>
-						<input name="submit" type="submit" class="btn btn-primary"
-							value="Buscar" />
-					</td>
-					</div>
-			</form:form>
-				</div>
-				</table>
+				cssClass="form-horizontal" class="inline">
+				<select name="tipoPesquisa" cssClass="form-control">
+					<option value="nome">Nome</option>
+					<option value="cpf">CPF</option>
+				</select>
+				<input id="campo" name="campo" cssClass="form-control"
+					placeholder="Digite sua busca aqui..." size="40" required="required" autofocus="true"/>
+				<button class="btn btn-primary" name="submit" type="submit" class="btn btn-primary"
+					value="Buscar" >
+					 Buscar
+					 <span class="glyphicon glyphicon-search"/> 
+				</button>
+				
+ 			</form:form>
 
-
-
-			<%-- <c:if test="${empty pessoas}">
-				<div class="alert alert-warning" role="alert">Pessoa não
-					encontrada.</div>
-			</c:if> --%>
 			<c:if test="${not empty pessoas}">
 				<div class="panel panel-default">
 

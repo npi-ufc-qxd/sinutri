@@ -1,11 +1,14 @@
 package br.com.ufc.quixada.npi.sisat.controller;
 
+import java.util.List;
+
 import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,6 +19,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import br.com.ufc.quixada.npi.sisat.enumerator.Classificacao;
 import br.com.ufc.quixada.npi.sisat.model.ConsultaNutricional;
+import br.com.ufc.quixada.npi.sisat.model.Paciente;
 import br.com.ufc.quixada.npi.sisat.model.Pessoa;
 import br.com.ufc.quixada.npi.sisat.service.ConsultaNutricionalService;
 import br.com.ufc.quixada.npi.sisat.service.PacienteService;
@@ -40,16 +44,23 @@ public class NutricaoController {
 	}
 	
 	@RequestMapping(value = {"/buscar"}, method = RequestMethod.GET)
-	public String buscarPaciente(Model model) {
+	public String buscarPaciente(Model model) {		
 		return "nutricao/buscar";
 	}
 	
 	@RequestMapping(value = "/buscar", method = RequestMethod.POST)
-	public String buscarPaciente(@RequestParam("tipoPesquisa") String tipoPesquisa, @RequestParam("campo") String campo, ModelMap map) {
+	public String buscarPaciente(@RequestParam("tipoPesquisa") String tipoPesquisa, @RequestParam("campo") String campo, ModelMap map, RedirectAttributes redirectAttributes) {
+		List<Pessoa> pessoas = null;
 		if(tipoPesquisa.equals("cpf")){
-			map.addAttribute("pessoas", servicePessoa.getPessoasByCpf(campo));
-		}else if(tipoPesquisa.equals("nome")){
-			map.addAttribute("pessoas", servicePessoa.getPessoasByNome(campo));
+			pessoas = servicePessoa.getPessoasByCpf(campo);
+		}else {
+			pessoas = servicePessoa.getPessoasByNome(campo);
+		}
+		if(!pessoas.isEmpty()){
+			map.addAttribute("pessoas",pessoas); 
+		}else{
+			redirectAttributes.addFlashAttribute("erro", "Paciente de " + tipoPesquisa + " " + campo + " não encontrado.");
+			return "redirect:/nutricao/buscar";
 		}
 		return "/nutricao/buscar";
 	}
@@ -79,7 +90,7 @@ public class NutricaoController {
 		Pessoa pessoa = servicePessoa.find(Pessoa.class, id);
 		if(pessoa == null){
 			redirectAttributes.addFlashAttribute("erro", "Paciente não encontrado.");
-			return "nutricao/buscar";
+			return "redirect:/nutricao/buscar";
 		}
 		model.addAttribute("pessoa", pessoa);
 		return "redirect:nutricao/"+ 1 +"/detalhes";
@@ -96,12 +107,43 @@ public class NutricaoController {
 		return "nutricao/consulta";
 	}
 
+	@RequestMapping(value = {"/{id}/realizar"}, method = RequestMethod.GET)
+	public void realizarConsulta(Model model, @PathVariable("id") Long id) {
+		System.out.println("realizarConsulta teste " + id);
+		Pessoa pessoa = servicePessoa.find(Pessoa.class, id);
+		Paciente paciente = new Paciente();
+		paciente.setPessoa(pessoa);
+		servicePaciente.save(paciente);
+	}
+
 	@RequestMapping(value = {"/consulta"}, method = RequestMethod.POST)
-	public String consulta(@ModelAttribute("consulta") ConsultaNutricional consulta) {
-		System.out.println("consulta post");
-		System.out.println(consulta);
+	public String consulta(@ModelAttribute("consulta") ConsultaNutricional consulta, BindingResult result) {
+		if (result.hasErrors()) {
+			return ("/paciente/cadastrar");
+		}
+		if(consulta.getAgua().length()==0){
+			consulta.setAgua(null);
+		}
+		if(consulta.getMedicamentoComentario()!=null && consulta.getMedicamentoComentario().isEmpty()){
+			consulta.setMedicamentoComentario(null);
+		}
+		if(consulta.getMastigacaoComentario()!=null && consulta.getMastigacaoComentario().isEmpty()){
+			consulta.setMastigacaoComentario(null);
+		}
+		if(consulta.getAlergiaComentario()!=null && consulta.getAlergiaComentario().isEmpty()){
+			consulta.setAlergiaComentario(null);
+		}
+		if(consulta.getCarneVermelhaComentario()!=null && consulta.getCarneVermelhaComentario().isEmpty()){
+			consulta.setCarneVermelhaComentario(null);
+		}
+		if(consulta.getAtividadeFisicaComentario()!=null && consulta.getAtividadeFisicaComentario().isEmpty()){
+			consulta.setAtividadeFisicaComentario(null);
+		}
+		if(consulta.getBebidaAlcoolicaComentario()!=null && consulta.getBebidaAlcoolicaComentario().isEmpty()){
+			consulta.setBebidaAlcoolicaComentario(null);
+		}
 		consultaNutricionalService.save(consulta);
 		return "nutricao/consulta";
 	}
-
 }
+

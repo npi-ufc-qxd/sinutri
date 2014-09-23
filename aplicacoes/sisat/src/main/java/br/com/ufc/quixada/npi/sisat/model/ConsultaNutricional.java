@@ -21,7 +21,7 @@ public class ConsultaNutricional {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-
+	
 	@DateTimeFormat
 	private Date data;
 
@@ -62,53 +62,56 @@ public class ConsultaNutricional {
 	private Classificacao classificacaoTgp;
 	
 	private String condutaNutricional;
-
-	private Boolean medicamento=false;
-
+	
+	private boolean medicamento;
+	
 	private String medicamentoComentario;
 
-	private Boolean mastigacao=false;
-
+	private boolean mastigacao;
+	
 	private String mastigacaoComentario;
 
-	private Boolean disfagia=false;
+	private boolean disfagia;
 
-	private Boolean pirose=false;
+	private boolean pirose;
 
-	private Boolean nausea=false;
+	private boolean nausea;
 
-	private Boolean vomito=false;
+	private boolean vomito;
 
-	private Boolean diarreia=false;
+	private boolean diarreia;
 
-	private Boolean constipacao=false;
+	private boolean constipacao;
 
 	private String agua;
 
-	private String carneVermelhaFrequencia;
+	private boolean carneVermelha;
+	
+	private int carneVermelhaFrequenciaSemanal;
+	
+	private String carneVermelhaComentario;
 
-	private Boolean bebidaAlcoolica;
-
+	private boolean bebidaAlcoolica;
+	
 	private int bebidaAlcoolicaFrequenciaSemanal;
+	
+	private String bebidaAlcoolicaComentario;
 
-	private String bebidadaAlcoolicaComentario;
-
-	private Boolean atividadeFisica;
-
+	private boolean atividadeFisica;
+	
 	private int atividadeFisicaFrequenciaSemanal;
-
+	
 	private String atividadeFisicaComentario;
 
 	private Boolean diabetes;
 
 	private Boolean hipertensao;
 
-	private Boolean outrasPatologias=false;
+	private boolean outrasPatologias;
 
 	private String outrasPatologiasComentario;
 
-	private Boolean alergia;
-
+	private boolean alergia;
 	private String alergiaComentario;
 
 	private String objetivoConsulta;
@@ -178,6 +181,7 @@ public class ConsultaNutricional {
 	}
 
 	public void setClassificacaoCt(Classificacao classificacaoCt) {
+
 		this.classificacaoCt = classificacaoCt;
 	}
 
@@ -199,6 +203,7 @@ public class ConsultaNutricional {
 
 	public Integer getLdl() {
 		return ldl;
+		
 	}
 
 	public void setLdl(Integer ldl) {
@@ -212,7 +217,7 @@ public class ConsultaNutricional {
 	public void setClassificacaoLdl(Classificacao classificacaoLdl) {
 		this.classificacaoLdl = classificacaoLdl;
 	}
-
+	
 	public Integer getTg() {
 		return tg;
 	}
@@ -285,11 +290,11 @@ public class ConsultaNutricional {
 		this.condutaNutricional = condutaNutricional;
 	}
 
-	public Boolean getMedicamento() {
+	public boolean isMedicamento() {
 		return medicamento;
 	}
 
-	public void setMedicamento(Boolean medicamento) {
+	public void setMedicamento(boolean medicamento) {
 		this.medicamento = medicamento;
 	}
 
@@ -301,11 +306,11 @@ public class ConsultaNutricional {
 		this.medicamentoComentario = medicamentoComentario;
 	}
 
-	public Boolean getMastigacao() {
+	public boolean isMastigacao() {
 		return mastigacao;
 	}
 
-	public void setMastigacao(Boolean mastigacao) {
+	public void setMastigacao(boolean mastigacao) {
 		this.mastigacao = mastigacao;
 	}
 
@@ -317,51 +322,51 @@ public class ConsultaNutricional {
 		this.mastigacaoComentario = mastigacaoComentario;
 	}
 
-	public Boolean getDisfagia() {
+	public boolean isDisfagia() {
 		return disfagia;
 	}
 
-	public void setDisfagia(Boolean disfagia) {
+	public void setDisfagia(boolean disfagia) {
 		this.disfagia = disfagia;
 	}
 
-	public Boolean getPirose() {
+	public boolean isPirose() {
 		return pirose;
 	}
 
-	public void setPirose(Boolean pirose) {
+	public void setPirose(boolean pirose) {
 		this.pirose = pirose;
 	}
 
-	public Boolean getNausea() {
+	public boolean isNausea() {
 		return nausea;
 	}
 
-	public void setNausea(Boolean nausea) {
+	public void setNausea(boolean nausea) {
 		this.nausea = nausea;
 	}
 
-	public Boolean getVomito() {
+	public boolean isVomito() {
 		return vomito;
 	}
 
-	public void setVomito(Boolean vomito) {
+	public void setVomito(boolean vomito) {
 		this.vomito = vomito;
 	}
 
-	public Boolean getDiarreia() {
+	public boolean isDiarreia() {
 		return diarreia;
 	}
 
-	public void setDiarreia(Boolean diarreia) {
+	public void setDiarreia(boolean diarreia) {
 		this.diarreia = diarreia;
 	}
 
-	public Boolean getConstipacao() {
+	public boolean isConstipacao() {
 		return constipacao;
 	}
 
-	public void setConstipacao(Boolean constipacao) {
+	public void setConstipacao(boolean constipacao) {
 		this.constipacao = constipacao;
 	}
 
@@ -373,19 +378,35 @@ public class ConsultaNutricional {
 		this.agua = agua;
 	}
 
-	public String getCarneVermelhaFrequencia() {
-		return carneVermelhaFrequencia;
+	public boolean isCarneVermelha() {
+		return carneVermelha;
 	}
 
-	public void setCarneVermelhaFrequencia(String carneVermelhaFrequencia) {
-		this.carneVermelhaFrequencia = carneVermelhaFrequencia;
+	public void setCarneVermelha(boolean carneVermelha) {
+		this.carneVermelha = carneVermelha;
 	}
 
-	public Boolean getBebidaAlcoolica() {
+	public int getCarneVermelhaFrequenciaSemanal() {
+		return carneVermelhaFrequenciaSemanal;
+	}
+
+	public void setCarneVermelhaFrequenciaSemanal(int carneVermelhaFrequenciaSemanal) {
+		this.carneVermelhaFrequenciaSemanal = carneVermelhaFrequenciaSemanal;
+	}
+
+	public String getCarneVermelhaComentario() {
+		return carneVermelhaComentario;
+	}
+
+	public void setCarneVermelhaComentario(String carneVermelhaComentario) {
+		this.carneVermelhaComentario = carneVermelhaComentario;
+	}
+
+	public boolean getBebidaAlcoolica() {
 		return bebidaAlcoolica;
 	}
 
-	public void setBebidaAlcoolica(Boolean bebidaAlcoolica) {
+	public void setBebidaAlcoolica(boolean bebidaAlcoolica) {
 		this.bebidaAlcoolica = bebidaAlcoolica;
 	}
 
@@ -398,19 +419,19 @@ public class ConsultaNutricional {
 		this.bebidaAlcoolicaFrequenciaSemanal = bebidaAlcoolicaFrequenciaSemanal;
 	}
 
-	public String getBebidadaAlcoolicaComentario() {
-		return bebidadaAlcoolicaComentario;
+	public String getBebidaAlcoolicaComentario() {
+		return bebidaAlcoolicaComentario;
 	}
 
-	public void setBebidadaAlcoolicaComentario(String bebidadaAlcoolicaComentario) {
-		this.bebidadaAlcoolicaComentario = bebidadaAlcoolicaComentario;
+	public void setBebidaAlcoolicaComentario(String bebidaAlcoolicaComentario) {
+		this.bebidaAlcoolicaComentario = bebidaAlcoolicaComentario;
 	}
 
-	public Boolean getAtividadeFisica() {
+	public boolean getAtividadeFisica() {
 		return atividadeFisica;
 	}
 
-	public void setAtividadeFisica(Boolean atividadeFisica) {
+	public void setAtividadeFisica(boolean atividadeFisica) {
 		this.atividadeFisica = atividadeFisica;
 	}
 
@@ -447,11 +468,11 @@ public class ConsultaNutricional {
 		this.hipertensao = hipertensao;
 	}
 
-	public Boolean getOutrasPatologias() {
+	public boolean isOutrasPatologias() {
 		return outrasPatologias;
 	}
 
-	public void setOutrasPatologias(Boolean outrasPatologias) {
+	public void setOutrasPatologias(boolean outrasPatologias) {
 		this.outrasPatologias = outrasPatologias;
 	}
 
@@ -463,11 +484,11 @@ public class ConsultaNutricional {
 		this.outrasPatologiasComentario = outrasPatologiasComentario;
 	}
 
-	public Boolean getAlergia() {
+	public boolean isAlergia() {
 		return alergia;
 	}
 
-	public void setAlergia(Boolean alergia) {
+	public void setAlergia(boolean alergia) {
 		this.alergia = alergia;
 	}
 
@@ -514,13 +535,15 @@ public class ConsultaNutricional {
 				+ mastigacaoComentario + ", disfagia=" + disfagia + ", pirose="
 				+ pirose + ", nausea=" + nausea + ", vomito=" + vomito
 				+ ", diarreia=" + diarreia + ", constipacao=" + constipacao
-				+ ", agua=" + agua + ", carneVermelhaFrequencia="
-				+ carneVermelhaFrequencia + ", bebidaAlcoolica="
+				+ ", agua=" + agua + ", carneVermelha=" + carneVermelha
+				+ ", carneVermelhaFrequenciaSemanal="
+				+ carneVermelhaFrequenciaSemanal + ", carneVermelhaComentario="
+				+ carneVermelhaComentario + ", bebidaAlcoolica="
 				+ bebidaAlcoolica + ", bebidaAlcoolicaFrequenciaSemanal="
 				+ bebidaAlcoolicaFrequenciaSemanal
-				+ ", bebidadaAlcoolicaComentario="
-				+ bebidadaAlcoolicaComentario + ", atividadeFisica="
-				+ atividadeFisica + ", atividadeFisicaFrequenciaSemanal="
+				+ ", bebidaAlcoolicaComentario=" + bebidaAlcoolicaComentario
+				+ ", atividadeFisica=" + atividadeFisica
+				+ ", atividadeFisicaFrequenciaSemanal="
 				+ atividadeFisicaFrequenciaSemanal
 				+ ", atividadeFisicaComentario=" + atividadeFisicaComentario
 				+ ", diabetes=" + diabetes + ", hipertensao=" + hipertensao
@@ -531,7 +554,4 @@ public class ConsultaNutricional {
 				+ ", paciente=" + paciente + "]";
 	}
 
-	
-	
-	
 }

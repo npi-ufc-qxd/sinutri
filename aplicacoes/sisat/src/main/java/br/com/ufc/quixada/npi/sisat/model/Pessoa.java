@@ -5,6 +5,7 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -13,9 +14,24 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
+
+@NamedQueries({
+	@NamedQuery(name="Pessoa.findPessoasByCpf",
+			 query="select p from Pessoa p where p.cpf = :cpf"),
+	@NamedQuery(name="Pessoa.findPessoasByNome",
+			 query="SELECT p FROM Pessoa p WHERE UPPER(p.nome) LIKE :nome ORDER BY p.nome"),
+	@NamedQuery(name="Pessoa.findPessoaByLogin",
+ 			query="select p from Pessoa p where p.login = :login"),
+	@NamedQuery(name="Pessoa.findPareceristas",
+ 			query="select p from Pessoa p where p.id <> :id")	//  '<>' diferente
+	})
 
 @Entity
 @Table(uniqueConstraints=@UniqueConstraint(columnNames = {"id", "login"}))
@@ -25,6 +41,9 @@ public class Pessoa {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
+	@OneToOne(cascade = CascadeType.ALL)
+	@PrimaryKeyJoinColumn
+	private Paciente paciente;
 	
 	@Column(nullable = false)
 	private String login;
@@ -165,6 +184,22 @@ public class Pessoa {
 		}
 		return idade;
 	}
+	public Paciente getPaciente() {
+		return paciente;
+	}
+	public void setPaciente(Paciente paciente) {
+		this.paciente = paciente;
+	}
+	
+	public boolean isNutricao() {
+		for(Papel p: this.papeis){
+			if(p.getNome().equals("ROLE_NUTRICAO")){
+				return true;
+			}
+		}
+		return false;
+	}
+	
 	@Override
 	public boolean equals(Object obj) {
 		if(obj instanceof Pessoa) {
@@ -175,5 +210,14 @@ public class Pessoa {
 		}
 		return false;
 	}
-	
+
+	public String toString() {
+		return "Pessoa [id=" + id + ", paciente=" + paciente + ", login="
+				+ login + ", password=" + password + ", habilitado="
+				+ habilitado + ", papeis=" + papeis + ", servidores="
+				+ servidores + ", cpf=" + cpf + ", nome=" + nome + ", email="
+				+ email + ", sexo=" + sexo + ", dataNascimento="
+				+ dataNascimento + ", telefone=" + telefone + "]";
+	}
 }
+
