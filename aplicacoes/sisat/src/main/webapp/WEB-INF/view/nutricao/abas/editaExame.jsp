@@ -40,7 +40,7 @@
 						</c:otherwise>
 					</c:choose>
 				</c:forEach>
-			</select><br/><br/><br/><br/>
+			</select><br/><br/><br/>
 
 		
 			<!-- LDL-C -->

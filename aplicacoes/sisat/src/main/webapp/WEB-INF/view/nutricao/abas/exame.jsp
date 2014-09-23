@@ -15,7 +15,8 @@
 			  <c:forEach var="c" items="${classificacao}" varStatus="i">
   						<option value="${c}">${c.tipo}</option>
 				</c:forEach>
-			</select><br/><br/><br/>
+			</select>
+			<br/><br/><br/>
 			
 				<!-- CT -->
 			<label for="ct" class="col-sm-3 control-label">CT:</label>
