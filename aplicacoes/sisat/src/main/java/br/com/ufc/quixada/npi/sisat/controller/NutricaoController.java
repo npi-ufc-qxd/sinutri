@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import br.com.ufc.quixada.npi.sisat.enumerator.Classificacao;
+import br.com.ufc.quixada.npi.sisat.enumerator.Refeicoes;
 import br.com.ufc.quixada.npi.sisat.model.Alimentacao;
 import br.com.ufc.quixada.npi.sisat.model.ConsultaNutricional;
 import br.com.ufc.quixada.npi.sisat.model.FrequenciaAlimentar;
@@ -82,6 +83,8 @@ public class NutricaoController {
 		model.addAttribute("consulta", consulta);
 		Classificacao[] cla= Classificacao.values();
 		model.addAttribute("classificacao", cla);
+		Refeicoes[] refeicoes = Refeicoes.values();
+		model.addAttribute("refeicoes", refeicoes);
 		return "nutricao/consulta";
 	}
 
@@ -96,7 +99,10 @@ public class NutricaoController {
 
 	@RequestMapping(value = {"/consulta"}, method = RequestMethod.POST)
 	public String consulta(@ModelAttribute("consulta") ConsultaNutricional consulta) {
+		Long c = consulta.getId();
+		System.out.println("post" + c);
 		System.out.println("E = " + consulta.toString());
+
 		consultaNutricionalService.save(consulta);
 		for (FrequenciaAlimentar frequenciaAlimentar : consulta.getFrequencias()){
 			frequenciaAlimentar.setConsultaNutricional(consulta);
@@ -106,8 +112,6 @@ public class NutricaoController {
 				serviceAlimentacao.update(alimentacao);
 			}
 		}
-				
 		return "nutricao/consulta";
 	}
-
 }

@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <html>
 
 <fieldset>
@@ -10,11 +11,24 @@
 				<label for="horaAdd" class="col-sm-2 control-label">Horario:</label>
 				<input id="horaAdd" type="time" name="horaAdd"/>
 			</div>
-			
+
 			<div class="form-group">	
 				<label for="refeicaoAdd" class="col-sm-2 control-label">Refeicao:</label>
-				<input id="refeicaoAdd" name="refeicaoAdd" />
+				
+			  <select name="refeicaoAdd" id="refeicaoAdd" class="col-xs-2">
+				  <option value="DESJEJUM">desjejum</option>
+				  <option value="LANCHEMANHA">Lanche da Manhã</option>
+				  <option value="ALMOCO">Alomoço</option>
+				  <option value="LANCHETARDE">Lanche da Tarde</option>
+				  <option value="JANTAR">Jantar</option>
+				  <option value="CEIA">Ceia</option>
+			</select>
+			
 			</div>	
+			
+			
+			
+			
 			      <div class="col-sm-1">
 						<a><input type="button" class="btn btn-primary" value="Adiciona Frequencia" id="addFrequencia" /></a>
 					</div>
@@ -45,7 +59,8 @@ $(document).ready(function() {
 			
     	} else if(contFrequencia < 6){
 			var fieldset = $("<fieldset>");
-			fieldset.append($("<legend>").text(horaFrequencia + ", " + refeicaoFrequencia));
+			var divnone = $("<div style='display:none;'>");
+			fieldset.append($("<legend>").text($("#horaAdd").text() + ", " + refeicaoFrequencia));
 			
 			fieldset.append($("<input type='hidden' name='frequencias["+contFrequencia+"].horario' cssClass='form-control' value="+horaFrequencia+">"));
 			fieldset.append($("<input type='hidden' name='frequencias["+contFrequencia+"].refeicao' cssClass='form-control' value="+refeicaoFrequencia+">"));
@@ -73,7 +88,6 @@ $(document).ready(function() {
   		if(frequenciaAlimentar >= 0 && frequenciaAlimentar < 6){
   		var recipiente = "tbody#frequenciaAlimentar" + frequenciaAlimentar;
   		var contAlimentos = $(recipiente + " tr").length;				//siz = $( "#tabela > tbody tr" ).length;
-  		//alert("Adicionando o amigo = " + contContatoAmigo  + " ao coração( "+recipiente +" ) do contato = " + contato);
   		$(recipiente)
   			.append($("<tr>")
   					.append($("<td>").append($("<input size='50' name='frequencias["+frequenciaAlimentar+"].alimentos["+contAlimentos+"].alimento' cssClass='form-control'/>")))
@@ -82,8 +96,7 @@ $(document).ready(function() {
   					
   			);
   		contAlimentos = $(recipiente + " tr").length;
-  		//alert("O contato " + contato + " tem " + contContatoAmigo + " amigo(s)");
-  	}
+ 	}
 
     });
 
@@ -92,7 +105,6 @@ $(document).ready(function() {
 		if(frequenciaAlimentar >= 0 && frequenciaAlimentar < 6){
 			var recipiente = "tbody#frequenciaAlimentar" + frequenciaAlimentar;
 			alert(recipiente);
-			//alert("O contato " + contato + " tirou do seu coração( " + recipiente + " ) o amigo " + index);
 			var size = $("table > "+recipiente+" tr" ).length;
 			$( "table > "+recipiente+" tr" ).eq( index ).remove();
             
@@ -102,8 +114,6 @@ $(document).ready(function() {
 				$( "table > "+recipiente+" tr:eq(" + i + ") td > input[name$='alimento']" ).attr("name", "frequencias[" + frequenciaAlimentar + "].alimentos[" + i + "].alimento");
 				$( "table > "+recipiente+" tr:eq(" + i + ") td > input[name$='porcao']" ).attr("name", "frequencias[" + frequenciaAlimentar + "].alimentos[" + i + "].porcao");
 			}
-			//alert("No coração("+recipiente+") do contato "+ contato +" só tem " + size + " amigo(s)" );
-			
 		}
 	}
  
