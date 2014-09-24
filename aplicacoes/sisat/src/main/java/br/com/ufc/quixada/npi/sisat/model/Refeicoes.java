@@ -4,7 +4,7 @@ public enum Refeicoes {
 	
 	DESJEJUM, 
 	LANCHEMANHA, 
-	ALMOÇO, 
+	ALMOCO, 
 	LANCHETARDE, 
 	JANTA, 
 	CEIA 
