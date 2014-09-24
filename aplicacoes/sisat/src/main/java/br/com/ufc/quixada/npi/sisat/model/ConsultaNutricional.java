@@ -511,8 +511,9 @@ public class ConsultaNutricional {
 
 	@Override
 	public String toString() {
-		return "ConsultaNutricional [id=" + id + ", data=" + data + ", peso="
-				+ peso + ", circunferenciaCintura=" + circunferenciaCintura
+		return "ConsultaNutricional [id=" + id + ", frequencias=" + frequencias
+				+ ", data=" + data + ", peso=" + peso
+				+ ", circunferenciaCintura=" + circunferenciaCintura
 				+ ", glicemia=" + glicemia + ", classificacaoGlicemia="
 				+ classificacaoGlicemia + ", ct=" + ct + ", classificacaoCt="
 				+ classificacaoCt + ", hdl=" + hdl + ", classificacaoHdl="
@@ -528,8 +529,10 @@ public class ConsultaNutricional {
 				+ mastigacaoComentario + ", disfagia=" + disfagia + ", pirose="
 				+ pirose + ", nausea=" + nausea + ", vomito=" + vomito
 				+ ", diarreia=" + diarreia + ", constipacao=" + constipacao
-				+ ", agua=" + agua
+				+ ", agua=" + agua + ", carneVermelha=" + carneVermelha
 				+ ", carneVermelhaFrequenciaSemanal="
+				+ carneVermelhaFrequenciaSemanal + ", carneVermelhaComentario="
+				+ carneVermelhaComentario + ", bebidaAlcoolica="
 				+ bebidaAlcoolica + ", bebidaAlcoolicaFrequenciaSemanal="
 				+ bebidaAlcoolicaFrequenciaSemanal
 				+ ", bebidaAlcoolicaComentario=" + bebidaAlcoolicaComentario
@@ -543,7 +546,7 @@ public class ConsultaNutricional {
 				+ ", alergia=" + alergia + ", alergiaComentario="
 				+ alergiaComentario + ", objetivoConsulta=" + objetivoConsulta
 				+ ", paciente=" + paciente + "]";
-
 	}
 
+	
 }
