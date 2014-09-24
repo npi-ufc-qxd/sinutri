@@ -31,7 +31,24 @@ public class FrequenciaAlimentar {
 	private ConsultaNutricional consultaNutricional;
     
 	@OneToMany(mappedBy = "frequenciaAlimentar", cascade = CascadeType.ALL)
-	private List<Alimentacao> alimentos;    
+	private List<Alimentacao> alimentos;
+	
+	public enum Refeicoes {
+
+		 DESJEJUM("Desjejum"), LANCHE_DA_MANHA("Lanche da Manha"), ALMOCO("Almoço"), LANCHE_DA_TARDE("Lanche da Tarde"), JANTAR("Jantar"), CEIA("Ceia");
+		 
+		 private final String nome;
+		 
+		 Refeicoes(String nome){
+			this.nome = nome;
+			 
+		 }
+		 
+		 public String getNome(){
+			 return this.nome;
+		 }
+	}
+	
 
 	public Long getId() {
 		return id;
