@@ -17,10 +17,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import br.com.ufc.quixada.npi.sisat.enumerator.Classificacao;
+import br.com.ufc.quixada.npi.sisat.model.Alimentacao;
 import br.com.ufc.quixada.npi.sisat.model.ConsultaNutricional;
+import br.com.ufc.quixada.npi.sisat.model.FrequenciaAlimentar;
 import br.com.ufc.quixada.npi.sisat.model.Paciente;
 import br.com.ufc.quixada.npi.sisat.model.Pessoa;
+import br.com.ufc.quixada.npi.sisat.model.Refeicoes;
 import br.com.ufc.quixada.npi.sisat.service.ConsultaNutricionalService;
+import br.com.ufc.quixada.npi.sisat.service.GenericService;
 import br.com.ufc.quixada.npi.sisat.service.PacienteService;
 import br.com.ufc.quixada.npi.sisat.service.PessoaService;
 
@@ -29,13 +33,19 @@ import br.com.ufc.quixada.npi.sisat.service.PessoaService;
 public class NutricaoController {
 	
 	@Inject
-	private PacienteService servicePaciente;
+	private PacienteService pacienteService;
 	
 	@Inject
-	private PessoaService servicePessoa;
+	private PessoaService pessoaService;
 	
 	@Inject
 	private ConsultaNutricionalService consultaNutricionalService;
+	
+	@Inject
+	private GenericService<FrequenciaAlimentar> frequenciaService;
+	
+	@Inject
+	private GenericService<Alimentacao> alimentacaoService;
 
 	@RequestMapping(value = {"/", "/index"}, method = RequestMethod.GET)
 	public String index() {
@@ -43,7 +53,7 @@ public class NutricaoController {
 	}
 	
 	@RequestMapping(value = {"/buscar"}, method = RequestMethod.GET)
-	public String buscarPaciente(Model model) {		
+	public String buscarPaciente(Model model) {
 		return "nutricao/buscar";
 	}
 	
@@ -51,9 +61,9 @@ public class NutricaoController {
 	public String buscarPaciente(@RequestParam("tipoPesquisa") String tipoPesquisa, @RequestParam("campo") String campo, ModelMap map, RedirectAttributes redirectAttributes) {
 		List<Pessoa> pessoas = null;
 		if(tipoPesquisa.equals("cpf")){
-			pessoas = servicePessoa.getPessoasByCpf(campo);
+			pessoas = pessoaService.getPessoasByCpf(campo);
 		}else {
-			pessoas = servicePessoa.getPessoasByNome(campo);
+			pessoas = pessoaService.getPessoasByNome(campo);
 		}
 		if(!pessoas.isEmpty()){
 			map.addAttribute("pessoas",pessoas); 
@@ -66,7 +76,7 @@ public class NutricaoController {
 	
 	@RequestMapping(value = {"/{id}/detalhes"})
 	public String getDetalhes(Pessoa p, @PathVariable("id") Long id, Model model, RedirectAttributes redirectAttributes){
-		Pessoa pessoa = servicePessoa.find(Pessoa.class, id);
+		Pessoa pessoa = pessoaService.find(Pessoa.class, id);
 		if(pessoa == null){
 			redirectAttributes.addFlashAttribute("erro", "Paciente não encontrado.");
 			return "redirect:/nutricao/buscar";
@@ -77,22 +87,19 @@ public class NutricaoController {
 	
 	
 	@RequestMapping(value = {"/consulta"}, method = RequestMethod.GET)
-	public String consulta(Model model, HttpSession session) {
-		System.out.println("consulta get");
-		ConsultaNutricional consultaNutricional = new ConsultaNutricional();
-		model.addAttribute("consulta", consultaNutricional);
-		Classificacao[] cla= Classificacao.values();
-		model.addAttribute("classificacao", cla);
+	public String consulta(Model model, HttpSession session) {	
+		model.addAttribute("consulta", new ConsultaNutricional());
+		model.addAttribute("classificacao", Classificacao.values());
+		model.addAttribute("refeicoes", Refeicoes.values());
 		return "nutricao/consulta";
 	}
 
 	@RequestMapping(value = {"/{id}/realizar"}, method = RequestMethod.GET)
 	public void realizarConsulta(Model model, @PathVariable("id") Long id) {
-		System.out.println("realizarConsulta teste " + id);
-		Pessoa pessoa = servicePessoa.find(Pessoa.class, id);
+		Pessoa pessoa = pessoaService.find(Pessoa.class, id);
 		Paciente paciente = new Paciente();
 		paciente.setPessoa(pessoa);
-		servicePaciente.save(paciente);
+		pacienteService.save(paciente);
 	}
 
 	@RequestMapping(value = {"/consulta"}, method = RequestMethod.POST)
@@ -121,8 +128,16 @@ public class NutricaoController {
 		if(consulta.getBebidaAlcoolicaComentario()!=null && consulta.getBebidaAlcoolicaComentario().isEmpty()){
 			consulta.setBebidaAlcoolicaComentario(null);
 		}
+		
 		consultaNutricionalService.save(consulta);
+		for (FrequenciaAlimentar frequenciaAlimentar : consulta.getFrequencias()){
+			frequenciaAlimentar.setConsultaNutricional(consulta);
+			frequenciaService.update(frequenciaAlimentar );
+			for (Alimentacao alimentacao : frequenciaAlimentar.getAlimentos()) {
+				alimentacao.setFrequenciaAlimentar(frequenciaAlimentar);
+				alimentacaoService.update(alimentacao);
+			}
+		}
 		return "nutricao/consulta";
 	}
 }
-

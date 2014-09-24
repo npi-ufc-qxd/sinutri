@@ -1,18 +1,18 @@
 package br.com.ufc.quixada.npi.sisat.model;
 
-import java.sql.Date;
+import java.util.Date;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
-import org.hibernate.annotations.ManyToAny;
 import org.springframework.format.annotation.DateTimeFormat;
-
-import br.com.ufc.quixada.npi.sisat.enumerator.Classificacao;
 
 @Entity
 public class ConsultaNutricional {
@@ -20,10 +20,13 @@ public class ConsultaNutricional {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+
+	@OneToMany(mappedBy = "consultaNutricional", cascade = CascadeType.ALL)
+	private List<FrequenciaAlimentar> frequencias;	
 	
 	@DateTimeFormat
 	private Date data;
-
+	
 	private Double peso;
 
 	private Double circunferenciaCintura;
@@ -110,15 +113,23 @@ public class ConsultaNutricional {
 	@ManyToOne
 	@JoinColumn(name="paciente_id")
 	private Paciente paciente;
-	
+
 	public Long getId() {
 		return id;
 	}
 
 	public void setId(Long id) {
 		this.id = id;
+	}	
+	
+	public List<FrequenciaAlimentar> getFrequencias() {
+		return frequencias;
 	}
 
+	public void setFrequencias(List<FrequenciaAlimentar> frequencias) {
+		this.frequencias = frequencias;
+	}
+	
 	public Date getData() {
 		return data;
 	}
@@ -391,7 +402,7 @@ public class ConsultaNutricional {
 	public void setCarneVermelhaComentario(String carneVermelhaComentario) {
 		this.carneVermelhaComentario = carneVermelhaComentario;
 	}
-
+	
 	public boolean getBebidaAlcoolica() {
 		return bebidaAlcoolica;
 	}
@@ -500,8 +511,9 @@ public class ConsultaNutricional {
 
 	@Override
 	public String toString() {
-		return "ConsultaNutricional [id=" + id + ", data=" + data + ", peso="
-				+ peso + ", circunferenciaCintura=" + circunferenciaCintura
+		return "ConsultaNutricional [id=" + id + ", frequencias=" + frequencias
+				+ ", data=" + data + ", peso=" + peso
+				+ ", circunferenciaCintura=" + circunferenciaCintura
 				+ ", glicemia=" + glicemia + ", classificacaoGlicemia="
 				+ classificacaoGlicemia + ", ct=" + ct + ", classificacaoCt="
 				+ classificacaoCt + ", hdl=" + hdl + ", classificacaoHdl="
@@ -535,4 +547,6 @@ public class ConsultaNutricional {
 				+ alergiaComentario + ", objetivoConsulta=" + objetivoConsulta
 				+ ", paciente=" + paciente + "]";
 	}
+
+	
 }
