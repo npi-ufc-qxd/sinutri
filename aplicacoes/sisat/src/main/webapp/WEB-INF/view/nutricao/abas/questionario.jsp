@@ -54,7 +54,7 @@ $(document).ready(function() {
     	var horaFrequencia = $("#horaAdd").val();
     	var refeicaoFrequencia = $("#refeicaoAdd").val();	
     	if(!$('#horaAdd').val() || !$('#refeicaoAdd').val() ) {
-			alert('Nome e email obrigatorio');		
+			//alert('Nome e email obrigatorio');		
 			return false;
 			
     	} else if(contFrequencia < 6){
