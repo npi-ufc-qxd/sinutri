@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
 <div class="col-sm-12">
-	<label>Paciente</label> <br/>
+	<br/><br/>
+	<label>Informações do Paciente</label> <br/><br/>
 	<div class="col-sm-3">
 		<label>Altura</label><input type="text" name="altura" size="10" disabled="disabled">
 	</div>
@@ -41,7 +42,7 @@
 </div>
 
 <div class="col-sm-12">
-	<label>Consumo de água</label><input type="text" name="agua" size="10"> 
+	<label>Consumo de água</label><input type="text" name="agua" size="10"><label>Litros</label>
 </div>
 
 <div class="col-sm-12">
@@ -49,7 +50,7 @@
 		<input type="checkbox" name="carneVermelha" id="checkCarneVermelha" onclick="habilitar();"/><label>Carne Vermelha</label>
 		<input type=text name="carneVermelhaComentario" size='20' disabled="disabled" id="inputTextCarneVermelha"/>
 	
-	<label>Frequência em dias</label>
+	<label>Frequência de</label>
 	<select name="carneVermelhaFrequenciaSemanal" id="carneVermelhaFrequenciaSemanal" style="width: 70px" class="form-control-inline">
 		<option value="0">0</option>
 		<option value="1">1</option>
@@ -60,7 +61,7 @@
 		<option value="6">6</option>
 		<option value="7">7</option>
 	</select>
-	<label>/semana</label>
+	<label>dias por semana</label>
 </div>
 
 <div class="col-sm-12">
@@ -68,7 +69,7 @@
 		<input type="checkbox" name="atividadeFisica" id="checkAtividadeFisica" onclick="habilitar();"/><label>Atividade Física</label>
 		<input type=text name="atividadeFisicaComentario" size='20' disabled="disabled" id="inputTextAtividadeFisica"/>
 
-	<label>Frequência em dias</label>
+	<label>Frequência de</label>
 	<select name="atividadeFisicaFrequenciaSemanal" id="atividadeFisicaFrequenciaSemanal" style="width: 70px" class="form-control-inline">
 		<option value="0">0</option>
 		<option value="1">1</option>
@@ -79,7 +80,7 @@
 		<option value="6">6</option>
 		<option value="7">7</option>
 	</select>
-	<label>/semana</label>
+	<label>dias por semana</label>
 </div>
 
 <div class="col-sm-12">
@@ -87,7 +88,7 @@
 	<input type="checkbox" name="bebidaAlcoolica" id="checkBebidaAlcoolica" onclick="habilitar();"/><label>Bebida alcoólica</label>
 	<input type=text name="bebidaAlcoolicaComentario" size='20' disabled="disabled" id="inputTextBebidaAlcoolica"/>
 
-	<label>Frequência em dias</label>
+	<label>Frequência de</label>
 	<select name="bebidaAlcoolicaFrequenciaSemanal" id="bebidaAlcoolicaFrequenciaSemanal" style="width: 70px" class="form-control-inline">
 		<option value="0">0</option>
 		<option value="1">1</option>
@@ -98,12 +99,12 @@
 		<option value="6">6</option>
 		<option value="7">7</option>
 	</select>
-	<label>/semana</label>
+	<label>dias por semana</label>
 </div>	
 
 <div class="col-sm-12">
 	<div style="cursor: pointer;"></div> <br/>
-	<input type="checkbox" name="outrasPatologias" id="checkPatologia" onclick="habilitar();"/><label>Patologias</label>
+	<input type="checkbox" name="outrasPatologias" id="checkPatologia" onclick="habilitar();"/><label>Patologias</label><br/>
 	<textarea rows="2" cols="140" name="outrasPatologiasComentario" disabled="disabled" id="inputTextPatologia"></textarea> <br/><br/>
 </div>
 

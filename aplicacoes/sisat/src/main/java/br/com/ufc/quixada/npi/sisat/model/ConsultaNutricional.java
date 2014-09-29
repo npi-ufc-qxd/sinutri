@@ -22,8 +22,6 @@ public class ConsultaNutricional {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@DateTimeFormat
-	private Date data;
 
 	private Double peso;
 
@@ -128,13 +126,7 @@ public class ConsultaNutricional {
 		this.id = id;
 	}
 
-	public Date getData() {
-		return data;
-	}
 
-	public void setData(Date data) {
-		this.data = data;
-	}
 
 	public Double getPeso() {
 		return peso;
@@ -518,8 +510,8 @@ public class ConsultaNutricional {
 
 	@Override
 	public String toString() {
-		return "ConsultaNutricional [id=" + id + ", data=" + data + ", peso="
-				+ peso + ", circunferenciaCintura=" + circunferenciaCintura
+		return "ConsultaNutricional [id=" + id + ", peso=" + peso
+				+ ", circunferenciaCintura=" + circunferenciaCintura
 				+ ", glicemia=" + glicemia + ", classificacaoGlicemia="
 				+ classificacaoGlicemia + ", ct=" + ct + ", classificacaoCt="
 				+ classificacaoCt + ", hdl=" + hdl + ", classificacaoHdl="
@@ -553,5 +545,6 @@ public class ConsultaNutricional {
 				+ alergiaComentario + ", objetivoConsulta=" + objetivoConsulta
 				+ ", paciente=" + paciente + "]";
 	}
+
 
 }

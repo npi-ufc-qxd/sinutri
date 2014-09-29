@@ -20,11 +20,11 @@
 
 	<div class="container">
     <ul class="nav nav-tabs">
-        <li class="active"><a data-toggle="tab" href="#avaliacao">Avaliação Nutricional</a></li>
+        <li class="active"><a data-toggle="tab" href="#avaliacao">Editar avaliação Nutricional</a></li>
         
-        <li><a data-toggle="tab" href="#exame">Exames Laboratoriais</a></li>
+        <li><a data-toggle="tab" href="#exame">Editar exames Laboratoriais</a></li>
         
-        <li><a data-toggle="tab" href="#questionario">Questionario de Frequencia Alimentar</a></li>
+        <li><a data-toggle="tab" href="#questionario">Editar questionario de Frequencia Alimentar</a></li>
     </ul>
 
 	<form:form servletRelativeAction="/nutricao/${consultaNutricional.id}/editarConsulta" method="POST" modelAttribute="consultaNutricional">
@@ -32,7 +32,6 @@
 		
 			<!-- ABA DE AVALIACAO NUTRICIONAL -->
 	        <div id="avaliacao" class="tab-pane fade in active">
-	        <h1>${consultaNutricional.id }</h1>
 				<jsp:include page="abas/editaAvaliacao.jsp" />
 	        </div>
 	
@@ -43,12 +42,12 @@
 	
 			<!-- ABA DE QUESTIONARIO DE FRENQUENCIA ALIMENTAR -->
 	        <div id="questionario" class="tab-pane fade">
-				<jsp:include page="abas/editaQuestionario.jsp" />
+				
 	        </div>
 	    </div>
 
 		<div class="col-xs-offset-0 col-xs-10" align="center">
-			<button type="submit" class="btn btn-success">Salvar</button>
+			<button type="submit" class="btn btn-success">Editar</button>
 		</div>
 
 	</form:form>
