@@ -16,7 +16,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import br.com.ufc.quixada.npi.sisat.enumerator.Classificacao;
+import br.com.ufc.quixada.npi.service.GenericService;
+import br.com.ufc.quixada.npi.sisat.enumeration.Classificacao;
 import br.com.ufc.quixada.npi.sisat.model.Alimentacao;
 import br.com.ufc.quixada.npi.sisat.model.ConsultaNutricional;
 import br.com.ufc.quixada.npi.sisat.model.FrequenciaAlimentar;
@@ -24,7 +25,6 @@ import br.com.ufc.quixada.npi.sisat.model.Paciente;
 import br.com.ufc.quixada.npi.sisat.model.Pessoa;
 import br.com.ufc.quixada.npi.sisat.model.Refeicoes;
 import br.com.ufc.quixada.npi.sisat.service.ConsultaNutricionalService;
-import br.com.ufc.quixada.npi.sisat.service.GenericService;
 import br.com.ufc.quixada.npi.sisat.service.PacienteService;
 import br.com.ufc.quixada.npi.sisat.service.PessoaService;
 

@@ -2,6 +2,7 @@ package br.com.ufc.quixada.npi.sisat.service.impl;
 
 import javax.inject.Named;
 
+import br.com.ufc.quixada.npi.service.impl.GenericServiceImpl;
 import br.com.ufc.quixada.npi.sisat.model.Paciente;
 import br.com.ufc.quixada.npi.sisat.service.PacienteService;
 
