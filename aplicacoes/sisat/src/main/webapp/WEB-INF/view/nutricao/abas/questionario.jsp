@@ -60,7 +60,7 @@ $(document).ready(function() {
     	} else if(contFrequencia < 6){
 			var fieldset = $("<fieldset>");
 			var divnone = $("<div style='display:none;'>");
-			fieldset.append($("<legend>").text($("#horaAdd").text() + ", " + refeicaoFrequencia));
+			fieldset.append($("<legend>").text(horaFrequencia + ", " + refeicaoFrequencia));
 			
 			fieldset.append($("<input type='hidden' name='frequencias["+contFrequencia+"].horario' cssClass='form-control' value="+horaFrequencia+">"));
 			fieldset.append($("<input type='hidden' name='frequencias["+contFrequencia+"].refeicao' cssClass='form-control' value="+refeicaoFrequencia+">"));

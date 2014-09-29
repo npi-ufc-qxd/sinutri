@@ -21,7 +21,8 @@ public class ConsultaNutricional {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@OneToMany(mappedBy = "consultaNutricional", cascade = CascadeType.ALL)
+	@OneToMany(cascade = CascadeType.ALL)
+	@JoinColumn(name = "consulta_id")
 	private List<FrequenciaAlimentar> frequencias;	
 	
 	@DateTimeFormat
