@@ -19,6 +19,9 @@ public class Paciente implements Serializable {
 	@JoinColumn(name = "id")
 	private Pessoa pessoa;
 	
+	@OneToMany(mappedBy="paciente")
+ 	private List<ConsultaNutricional> consultas;
+	
 	private double altura;
 	
 	public Pessoa getPessoa() {
@@ -32,5 +35,11 @@ public class Paciente implements Serializable {
 	}
 	public void setAltura(double altura) {
 		this.altura = altura;
+	}
+	public List<ConsultaNutricional> getConsultas() {
+		return consultas;
+	}
+	public void setConsultas(List<ConsultaNutricional> consultas) {
+		this.consultas = consultas;
 	}
 }
