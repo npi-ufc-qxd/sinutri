@@ -20,7 +20,7 @@
 
 	<div class="container">
 	
-	<h2>${pessoa.paciente.id }</h2>
+	<h2>${pessoa.paciente.id }- ${pessoa.nome } ${consulta.id}</h2>
     <ul class="nav nav-tabs">
         <li class="active"><a data-toggle="tab" href="#avaliacao">Avaliação Nutricional</a></li>
 

@@ -85,21 +85,31 @@ public class NutricaoController {
 		return "nutricao/detalhes";
 	}
 	
+	@RequestMapping(value = {"/{id}/realizar"}, method = RequestMethod.GET)
+	public String realizarConsulta(Model model, @PathVariable("id") Long id, RedirectAttributes redirectAttributes) {
+		Pessoa pessoa = pessoaService.find(Pessoa.class, id);
+		if(pessoa == null){
+			redirectAttributes.addFlashAttribute("erro", "Paciente não encontrado.");
+			return "redirect:/nutricao/buscar";
+		}
+		model.addAttribute("pessoa", pessoa);
+		
+		return "redirect:/nutricao/consulta";
+		
+		//return "nutricao/consulta";
+	}
 	
 	@RequestMapping(value = {"/consulta"}, method = RequestMethod.GET)
-	public String consulta(Model model, HttpSession session) {	
+	public String consulta(Model model, RedirectAttributes redirectAttributes) {	
+		System.out.println(model.toString());
+		ConsultaNutricional consulta = new ConsultaNutricional();
+		//map<String> mapa = redirectAttributes.getFlashAttributes();
+		//Pessoa pessoa = 
 		model.addAttribute("consulta", new ConsultaNutricional());
+		
 		model.addAttribute("classificacao", Classificacao.values());
 		model.addAttribute("refeicoes", Refeicoes.values());
 		return "nutricao/consulta";
-	}
-
-	@RequestMapping(value = {"/{id}/realizar"}, method = RequestMethod.GET)
-	public void realizarConsulta(Model model, @PathVariable("id") Long id) {
-		Pessoa pessoa = pessoaService.find(Pessoa.class, id);
-		Paciente paciente = new Paciente();
-		paciente.setPessoa(pessoa);
-		pacienteService.save(paciente);
 	}
 
 	@RequestMapping(value = {"/consulta"}, method = RequestMethod.POST)
