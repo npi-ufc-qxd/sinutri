@@ -114,7 +114,7 @@
 
 <div class="col-sm-12">
 	<label>Objetivo da Consulta</label> <br/>
-	<textarea rows="2" cols="140" name="objetivoConsulta"> ${ consultaNutricional.objetivoConsulta }</textarea> <br/><br/>
+	<textarea rows="2" cols="140" name="objetivoConsulta">${ consultaNutricional.objetivoConsulta }</textarea> <br/><br/>
 </div>
 
 <script>

@@ -42,7 +42,7 @@
 	
 			<!-- ABA DE QUESTIONARIO DE FRENQUENCIA ALIMENTAR -->
 	        <div id="questionario" class="tab-pane fade">
-				
+				<jsp:include page="abas/editaQuestionario.jsp" />
 	        </div>
 	    </div>
 

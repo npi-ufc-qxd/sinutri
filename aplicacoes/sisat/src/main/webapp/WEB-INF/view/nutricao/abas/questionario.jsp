@@ -16,7 +16,7 @@
 				<label for="refeicaoAdd" class="col-sm-2 control-label">Refeicao:</label>
 				
 			  <select name="refeicaoAdd" id="refeicaoAdd" class="col-xs-2">
-				  <option value="DESJEJUM">desjejum</option>
+				  <option value="DESJEJUM">Desjejum</option>
 				  <option value="LANCHEMANHA">Lanche da Manhã</option>
 				  <option value="ALMOCO">Alomoço</option>
 				  <option value="LANCHETARDE">Lanche da Tarde</option>
