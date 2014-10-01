@@ -21,14 +21,12 @@ public class Paciente implements Serializable {
 	
 	@OneToMany(mappedBy="paciente")
  	private List<ConsultaNutricional> consultas;
-<<<<<<< HEAD
+
 	/*
 	@OneToMany(mappedBy="paciente")
 	private List<Agendamento> agendamentos;
 	 */
-=======
-	
->>>>>>> 470cd58f6fa271aedf094206c6bd1cc88e91eb50
+
 	private double altura;
 	
 	public Pessoa getPessoa() {
