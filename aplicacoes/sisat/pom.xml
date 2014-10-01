@@ -51,7 +51,7 @@
 	<repositories>
 		<repository>
 			<id>npi-core-api</id>
-			<url>https://raw.github.com/npi-ufc-qxd/npi-core-api/mvn-repo</url>
+			<url>http://npi-ufc-qxd.github.io/npi-core-api/</url>
 			<snapshots>
 				<enabled>true</enabled>
 				<updatePolicy>always</updatePolicy>
@@ -240,9 +240,9 @@
 		</dependency>
 
 		<dependency>
-			<groupId>npi.quixada.ufc.br</groupId>
+			<groupId>br.ufc.quixada.npi</groupId>
 			<artifactId>npi-core-api</artifactId>
-			<version>0.0.1</version>
+			<version>0.0.6</version>
 		</dependency>
 	</dependencies>
 	<build>

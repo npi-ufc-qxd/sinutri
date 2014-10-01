@@ -1,13 +1,13 @@
-package br.com.ufc.quixada.npi.sisat.service.impl;
+package br.ufc.quixada.npi.sisat.service.impl;
 
 import java.util.List;
 
 import javax.inject.Named;
 
-import br.com.ufc.quixada.npi.service.impl.GenericServiceImpl;
-import br.com.ufc.quixada.npi.sisat.model.Pessoa;
-import br.com.ufc.quixada.npi.sisat.service.PessoaService;
-import br.com.ufc.quixada.npi.util.NamedParams;
+import br.ufc.quixada.npi.service.impl.GenericServiceImpl;
+import br.ufc.quixada.npi.sisat.model.Pessoa;
+import br.ufc.quixada.npi.sisat.service.PessoaService;
+import br.ufc.quixada.npi.util.NamedParams;
 
 @Named
 public class PessoaServiceImpl extends GenericServiceImpl<Pessoa> implements PessoaService {
