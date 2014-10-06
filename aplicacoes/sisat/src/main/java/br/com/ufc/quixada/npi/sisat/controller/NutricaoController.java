@@ -84,6 +84,9 @@ public class NutricaoController {
 		model.addAttribute("pessoa", pessoa);
 		return "nutricao/detalhes";
 	}
+
+	
+	
 	
 	@RequestMapping(value = {"/{id}/realizar"}, method = RequestMethod.GET)
 	public String realizarConsulta(Model model, @PathVariable("id") Long id, RedirectAttributes redirectAttributes) {
@@ -92,31 +95,41 @@ public class NutricaoController {
 			redirectAttributes.addFlashAttribute("erro", "Paciente não encontrado.");
 			return "redirect:/nutricao/buscar";
 		}
-		model.addAttribute("pessoa", pessoa);
-		
-		return "redirect:/nutricao/consulta";
-		
-		//return "nutricao/consulta";
-	}
-	
-	@RequestMapping(value = {"/consulta"}, method = RequestMethod.GET)
-	public String consulta(Model model, RedirectAttributes redirectAttributes) {	
-		System.out.println(model.toString());
+		if(pessoa.getPaciente() == null){
+			pessoa.setPaciente(new Paciente());
+			pessoa.getPaciente().setPessoa(pessoa);
+			pessoaService.update(pessoa);
+		}
 		ConsultaNutricional consulta = new ConsultaNutricional();
-		//map<String> mapa = redirectAttributes.getFlashAttributes();
-		//Pessoa pessoa = 
-		model.addAttribute("consulta", new ConsultaNutricional());
 		
+		model.addAttribute("consulta", consulta);
 		model.addAttribute("classificacao", Classificacao.values());
 		model.addAttribute("refeicoes", Refeicoes.values());
 		return "nutricao/consulta";
 	}
+	
+	
+	@RequestMapping(value = {"/consulta"}, method = RequestMethod.GET)
+	public String consulta(Model model, RedirectAttributes redirectAttributes) {	
+
+		model.addAttribute("consulta", new ConsultaNutricional());
+		model.addAttribute("classificacao", Classificacao.values());
+		model.addAttribute("refeicoes", Refeicoes.values());
+		
+		return "nutricao/consulta";
+	}
+
 
 	@RequestMapping(value = {"/consulta"}, method = RequestMethod.POST)
 	public String consulta(@ModelAttribute("consulta") ConsultaNutricional consulta, BindingResult result) {
 		if (result.hasErrors()) {
-			return ("/paciente/cadastrar");
+			System.out.println(result.toString());
+			return ("nutricao/buscar");
 		}
+		
+		Paciente paciente = pacienteService.find(Paciente.class, consulta.getPaciente().getId());
+		consulta.setPaciente(paciente);
+		
 		if(consulta.getAgua().length()==0){
 			consulta.setAgua(null);
 		}
@@ -138,7 +151,6 @@ public class NutricaoController {
 		if(consulta.getBebidaAlcoolicaComentario()!=null && consulta.getBebidaAlcoolicaComentario().isEmpty()){
 			consulta.setBebidaAlcoolicaComentario(null);
 		}
-		
 		consultaNutricionalService.save(consulta);
 		if (consulta.getFrequencias() != null) {
 			for (FrequenciaAlimentar frequenciaAlimentar : consulta.getFrequencias()){
