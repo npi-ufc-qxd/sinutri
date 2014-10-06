@@ -16,12 +16,12 @@
 				<label for="refeicaoAdd" class="col-sm-2 control-label">Refeicao:</label>
 				
 			  <select name="refeicaoAdd" id="refeicaoAdd" class="col-xs-2">
-				  <option value="DESJEJUM">desjejum</option>
-				  <option value="LANCHEMANHA">Lanche da Manhã</option>
-				  <option value="ALMOCO">Alomoço</option>
-				  <option value="LANCHETARDE">Lanche da Tarde</option>
-				  <option value="JANTAR">Jantar</option>
-				  <option value="CEIA">Ceia</option>
+				  <option value="Desjejum">Desjejum</option>
+				  <option value="Lanche da Manha">Lanche da Manhã</option>
+				  <option value="Almoco">Alomoço</option>
+				  <option value="Lanche da Tarde">Lanche da Tarde</option>
+				  <option value="Jantar">Jantar</option>
+				  <option value="Ceia">Ceia</option>
 			</select>
 			
 			</div>	
@@ -54,13 +54,16 @@ $(document).ready(function() {
     	var horaFrequencia = $("#horaAdd").val();
     	var refeicaoFrequencia = $("#refeicaoAdd").val();	
     	if(!$('#horaAdd').val() || !$('#refeicaoAdd').val() ) {
-			alert('Nome e email obrigatorio');		
+				
 			return false;
 			
     	} else if(contFrequencia < 6){
 			var fieldset = $("<fieldset>");
 			var divnone = $("<div style='display:none;'>");
 			fieldset.append($("<legend>").text(horaFrequencia + ", " + refeicaoFrequencia));
+			//fieldset.append($("<a id='deletarfrequencia="+contFrequencia+"'> Deletar Refeicao</a>"));
+			fieldset.append($("<a href='javascript:deletarFrequencia(" + contFrequencia + ")' id='deletarfrequencia"+contFrequencia+"'>Deletar alimentos</a>"));
+			
 			
 			fieldset.append($("<input type='hidden' name='frequencias["+contFrequencia+"].horario' cssClass='form-control' value="+horaFrequencia+">"));
 			fieldset.append($("<input type='hidden' name='frequencias["+contFrequencia+"].refeicao' cssClass='form-control' value="+refeicaoFrequencia+">"));
@@ -87,7 +90,7 @@ $(document).ready(function() {
   	  var frequenciaAlimentar = $(this).data("frequenciaalimentar");
   		if(frequenciaAlimentar >= 0 && frequenciaAlimentar < 6){
   		var recipiente = "tbody#frequenciaAlimentar" + frequenciaAlimentar;
-  		var contAlimentos = $(recipiente + " tr").length;				//siz = $( "#tabela > tbody tr" ).length;
+  		var contAlimentos = $(recipiente + " tr").length;				
   		$(recipiente)
   			.append($("<tr>")
   					.append($("<td>").append($("<input size='50' name='frequencias["+frequenciaAlimentar+"].alimentos["+contAlimentos+"].alimento' cssClass='form-control'/>")))
@@ -99,8 +102,9 @@ $(document).ready(function() {
  	}
 
     });
-
-  });
+    
+   
+  
   function deletarLinha(frequenciaAlimentar, index) {
 		if(frequenciaAlimentar >= 0 && frequenciaAlimentar < 6){
 			var recipiente = "tbody#frequenciaAlimentar" + frequenciaAlimentar;
@@ -116,6 +120,23 @@ $(document).ready(function() {
 			}
 		}
 	}
+  
+  
+  function deletarFrequencia(contFrequencia){
+	    //$("#frequenciasAdds").on('click', 'a.deletarfrequencia', function() {
+	    	//alert("teste");
+			//alert($("a.deletarfrequencia").parent().parent().html());
+			if(contFrequencia >= 0 && contFrequencia < 6){
+			var deletar = "a#deletarfrequencia" + contFrequencia;
+			$(deletar).eq( contFrequencia ).parent().remove();
+	        //$("a.deletarfrequencia").parent().remove();
+	      
+	    }
+	    }
+	});
+  
+  
+  
  
 				
 </script>

@@ -41,7 +41,7 @@ public class FrequenciaAlimentar {
 	
 	public enum Refeicoes {
 
-		DESJEJUM("Desjejum"), LANCHE_DA_MANHA("Lanche da Manha"), ALMOCO("Almoço"), LANCHE_DA_TARDE("Lanche da Tarde"), JANTAR("Jantar"), CEIA("Ceia");
+		Desjejum("Desjejum"), Lanche_da_Manha("Lanche da Manha"), Almoco("Almoço"), Lanche_da_Tarde("Lanche da Tarde"), Jantar("Jantar"), Ceia("Ceia");
 
 		private final String nome;
 
