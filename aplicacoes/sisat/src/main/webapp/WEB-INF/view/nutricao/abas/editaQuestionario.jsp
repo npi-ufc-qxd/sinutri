@@ -53,13 +53,13 @@
 						<thead><tr>
 							<td width="40%">Alimento/Preparo</td>
 							<td>Porção</td>
-							<td><a class="addAlimento btn btn-primary" data-frequenciaalimentar="0">adicionar alimentos</a></td>
+							<td><a class="addAlimento btn btn-primary" data-frequenciaalimentar="${i.count-1}">adicionar alimentos</a></td>
 						</tr>
 						</thead>
 
+					<tbody id="frequenciaAlimentar${i.count-1}">
 					<c:forEach var="a" items="${f.alimentos}" varStatus="j">
 						<label>${j.count}  next   -->  </label>
-					<tbody id="frequenciaAlimentar0">
 												
 						
 						<tr>
@@ -67,8 +67,8 @@
 						<td><input size="10" name="frequencias[${j.count }].alimentos[${j.count}].porcao" cssclass="form-control" value="${ a.porcao }"></td>
 						<td><a href="javascript:deletarLinha(0, 0)" class="delAlimento btn btn-danger glyphicon glyphicon-edit">Deletar alimentos</a></td>
 						</tr>
-					</tbody>
 				</c:forEach>
+					</tbody>
 				
 				</table>
 				
