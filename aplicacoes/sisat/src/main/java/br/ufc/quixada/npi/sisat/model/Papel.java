@@ -1,4 +1,4 @@
-package br.com.ufc.quixada.npi.sisat.model;
+package br.ufc.quixada.npi.sisat.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

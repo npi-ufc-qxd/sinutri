@@ -1,9 +1,9 @@
-package br.com.ufc.quixada.npi.sisat.service;
+package br.ufc.quixada.npi.sisat.service;
 
 import java.util.List;
 
-import br.com.ufc.quixada.npi.service.GenericService;
-import br.com.ufc.quixada.npi.sisat.model.Pessoa;
+import br.ufc.quixada.npi.service.GenericService;
+import br.ufc.quixada.npi.sisat.model.Pessoa;
 
 public interface PessoaService extends GenericService<Pessoa> {
 
