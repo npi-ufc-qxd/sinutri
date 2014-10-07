@@ -1,4 +1,4 @@
-package br.com.ufc.quixada.npi.sisat.controller;
+package br.ufc.quixada.npi.sisat.controller;
 
 import java.util.List;
 
@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
 
 import br.com.ufc.quixada.npi.sisat.enumerator.Classificacao;
 import br.com.ufc.quixada.npi.sisat.model.Alimentacao;

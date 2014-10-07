@@ -1,4 +1,4 @@
-package br.com.ufc.quixada.npi.sisat.controller;
+package br.ufc.quixada.npi.sisat.controller;
 
 import java.security.Principal;
 
