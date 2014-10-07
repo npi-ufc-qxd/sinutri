@@ -24,6 +24,10 @@ public class ConsultaNutricional {
 	@OneToMany(mappedBy = "consultaNutricional", cascade = CascadeType.ALL)
 	private List<FrequenciaAlimentar> frequencias;	
 	
+	@ManyToOne
+	@JoinColumn(name="paciente_id")
+	private Paciente paciente;
+
 	@DateTimeFormat
 	private Date data;
 	
@@ -110,9 +114,6 @@ public class ConsultaNutricional {
 
 	private String objetivoConsulta;
 	
-	@ManyToOne
-	@JoinColumn(name="paciente_id")
-	private Paciente paciente;
 
 	public Long getId() {
 		return id;
@@ -546,6 +547,14 @@ public class ConsultaNutricional {
 				+ ", alergia=" + alergia + ", alergiaComentario="
 				+ alergiaComentario + ", objetivoConsulta=" + objetivoConsulta
 				+ ", paciente=" + paciente + "]";
+	}
+
+	public Paciente getPaciente() {
+		return paciente;
+	}
+
+	public void setPaciente(Paciente paciente) {
+		this.paciente = paciente;
 	}
 
 	

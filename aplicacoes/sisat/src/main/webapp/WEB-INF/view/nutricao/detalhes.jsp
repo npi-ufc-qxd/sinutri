@@ -23,7 +23,7 @@
 					<a href="<c:url value="/nutricao/buscar"></c:url>"
 						class="btn btn-default">Voltar</a>
 				
-					<a href="<c:url value="#"></c:url>"
+					<a href="<c:url value="/nutricao/${pessoa.id }/realizar"></c:url>"
 						class="btn btn-default">Realizar consulta</a>
 				</div>
 		<div class="novo-projeto" align="left">
