@@ -18,7 +18,7 @@
 			  <select name="refeicaoAdd" id="refeicaoAdd" class="col-xs-2">
 				  <option value="Desjejum">Desjejum</option>
 				  <option value="Lanche da Manha">Lanche da Manhã</option>
-				  <option value="Almoco">Alomoço</option>
+				  <option value="Almoco">Almoço</option>
 				  <option value="Lanche da Tarde">Lanche da Tarde</option>
 				  <option value="Jantar">Jantar</option>
 				  <option value="Ceia">Ceia</option>
@@ -62,8 +62,8 @@ $(document).ready(function() {
 			var divnone = $("<div style='display:none;'>");
 			fieldset.append($("<legend>").text(horaFrequencia + ", " + refeicaoFrequencia));
 			//fieldset.append($("<a id='deletarfrequencia="+contFrequencia+"'> Deletar Refeicao</a>"));
-			fieldset.append($("<a href='javascript:deletarFrequencia(" + contFrequencia + ")' id='deletarfrequencia"+contFrequencia+"'>Deletar alimentos</a>"));
-			
+			fieldset.append($("<a href='javascript:deletarfrequencia(" + contFrequencia + ")' id='deletarfrequencia"+contFrequencia+"'>Deletar alimentos</a>"));
+			        
 			
 			fieldset.append($("<input type='hidden' name='frequencias["+contFrequencia+"].horario' cssClass='form-control' value="+horaFrequencia+">"));
 			fieldset.append($("<input type='hidden' name='frequencias["+contFrequencia+"].refeicao' cssClass='form-control' value="+refeicaoFrequencia+">"));
@@ -102,41 +102,46 @@ $(document).ready(function() {
  	}
 
     });
-    
-   
+  });
   
-  function deletarLinha(frequenciaAlimentar, index) {
-		if(frequenciaAlimentar >= 0 && frequenciaAlimentar < 6){
-			var recipiente = "tbody#frequenciaAlimentar" + frequenciaAlimentar;
-			alert(recipiente);
-			var size = $("table > "+recipiente+" tr" ).length;
-			$( "table > "+recipiente+" tr" ).eq( index ).remove();
-            
-			size = $("table > "+recipiente+" tr" ).length;
-			for( var i = 0; i < size; ++i){
-				$( "table > "+recipiente+" tr:eq(" + i + ") td > a" ).attr("href", "javascript:deletarLinha(" + frequenciaAlimentar +", " + i + ")");
-				$( "table > "+recipiente+" tr:eq(" + i + ") td > input[name$='alimento']" ).attr("name", "frequencias[" + frequenciaAlimentar + "].alimentos[" + i + "].alimento");
-				$( "table > "+recipiente+" tr:eq(" + i + ") td > input[name$='porcao']" ).attr("name", "frequencias[" + frequenciaAlimentar + "].alimentos[" + i + "].porcao");
+  
+	 function deletarLinha(frequenciaAlimentar, index) {
+			if(frequenciaAlimentar >= 0 && frequenciaAlimentar < 6){
+				alert("teste");
+				var recipiente = "tbody#frequenciaAlimentar" + frequenciaAlimentar;
+				alert(recipiente);
+				var size = $("table > "+recipiente+" tr" ).length;
+				$( "table > "+recipiente+" tr" ).eq( index ).remove();
+	            
+				size = $("table > "+recipiente+" tr" ).length;
+				for( var i = 0; i < size; ++i){
+					$( "table > "+recipiente+" tr:eq(" + i + ") td > a" ).attr("href", "javascript:deletarLinha(" + frequenciaAlimentar +", " + i + ")");
+					$( "table > "+recipiente+" tr:eq(" + i + ") td > input[name$='alimento']" ).attr("name", "frequencias[" + frequenciaAlimentar + "].alimentos[" + i + "].alimento");
+					$( "table > "+recipiente+" tr:eq(" + i + ") td > input[name$='porcao']" ).attr("name", "frequencias[" + frequenciaAlimentar + "].alimentos[" + i + "].porcao");
+				}
 			}
 		}
-	}
-  
-  
-  function deletarFrequencia(contFrequencia){
-	    //$("#frequenciasAdds").on('click', 'a.deletarfrequencia', function() {
-	    	//alert("teste");
+	 
+	 
+	 function deletarfrequencia(contFrequencia){
+	   // $("#frequenciasAdds").on('click', 'a.deletarfrequencia', function() {
+	    	alert("teste" + $("#frequenciasAdds fieldset").length);
 			//alert($("a.deletarfrequencia").parent().parent().html());
 			if(contFrequencia >= 0 && contFrequencia < 6){
-			var deletar = "a#deletarfrequencia" + contFrequencia;
-			$(deletar).eq( contFrequencia ).parent().remove();
+			   var deletar = "a#deletarfrequencia" + contFrequencia;
+			   $(deletar).parent().remove();
+			   
+			   var size = $("#frequenciasAdds fieldset").length;
+			   
+			   for(var i = 0; i < size; ++i){
+				   $( "fieldset + input[type$='hidden']" ).attr("type", "deletarfrequencia[" + i + "]");
+				  
 	        //$("a.deletarfrequencia").parent().remove();
 	      
 	    }
-	    }
-	});
-  
-  
-  
+	 //}
+	   }
+	 }
  
 				
 </script>
