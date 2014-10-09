@@ -16,7 +16,7 @@ import javax.persistence.OneToMany;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
-import br.com.ufc.quixada.npi.sisat.enumerator.Classificacao;
+import br.ufc.quixada.npi.sisat.enumeration.Classificacao;
 
 @Entity
 public class ConsultaNutricional {
