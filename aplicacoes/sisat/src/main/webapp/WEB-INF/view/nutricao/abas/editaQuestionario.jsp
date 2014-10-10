@@ -63,9 +63,9 @@
 												
 						
 						<tr>
-						<td><input size="50" name="frequencias[${ j.count }].alimentos[${j.count}].alimento" cssclass="form-control" value="${ a.alimento }"></td>
-						<td><input size="10" name="frequencias[${j.count }].alimentos[${j.count}].porcao" cssclass="form-control" value="${ a.porcao }"></td>
-						<td><a href="javascript:deletarLinha(0, 0)" class="delAlimento btn btn-danger glyphicon glyphicon-edit">Deletar alimentos</a></td>
+						<td><input size="50" name="frequencias[${ j.count-1 }].alimentos[${j.count-1}].alimento" cssclass="form-control" value="${ a.alimento }"></td>
+						<td><input size="10" name="frequencias[${j.count-1 }].alimentos[${j.count-1}].porcao" cssclass="form-control" value="${ a.porcao }"></td>
+						<td><a href="javascript:deletarLinha(${j.count-1}, ${j.count-1})" class="delAlimento btn btn-danger glyphicon glyphicon-edit">Deletar alimentos</a></td>
 						</tr>
 				</c:forEach>
 					</tbody>

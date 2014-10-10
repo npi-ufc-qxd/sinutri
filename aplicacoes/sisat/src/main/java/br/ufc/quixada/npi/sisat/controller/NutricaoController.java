@@ -150,16 +150,7 @@ public class NutricaoController {
 		}
 		
 		consultaNutricionalService.save(consulta);
-		if (consulta.getFrequencias() != null) {
-			for (FrequenciaAlimentar frequenciaAlimentar : consulta.getFrequencias()){
-				frequenciaAlimentar.setConsultaNutricional(consulta);
-				frequenciaService.update(frequenciaAlimentar );
-				for (Alimentacao alimentacao : frequenciaAlimentar.getAlimentos()) {
-					alimentacao.setFrequenciaAlimentar(frequenciaAlimentar);
-					alimentacaoService.update(alimentacao);
-				}
-			}
-		}
+
 		return "nutricao/consulta";
 	}
 }

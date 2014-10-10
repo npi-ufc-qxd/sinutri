@@ -19,7 +19,6 @@ public class Alimentacao {
 	private String porcao;
 
 	@ManyToOne
-	@JoinColumn(name= "frequenciaAlimentar_id")
 	private FrequenciaAlimentar frequenciaAlimentar;
 
 	public Long getId() {

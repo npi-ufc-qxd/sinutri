@@ -25,11 +25,11 @@ public class FrequenciaAlimentar {
 	@Enumerated(EnumType.STRING)
 	private Refeicoes refeicao;
 	
-    @ManyToOne
-    @JoinColumn(name = "consulta_id")
+	@ManyToOne
 	private ConsultaNutricional consultaNutricional;
     
-	@OneToMany(mappedBy = "frequenciaAlimentar", cascade = CascadeType.ALL)
+	@OneToMany(cascade = CascadeType.ALL)
+	@JoinColumn(name= "frequenciaAlimentar_id")
 	private List<Alimentacao> alimentos;
 	
 	public enum Refeicoes {
