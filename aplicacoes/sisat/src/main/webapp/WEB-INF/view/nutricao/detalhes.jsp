@@ -44,10 +44,7 @@
 						
 						<td colspan="2" >Telefone: ${pessoa.telefone }</td>
 					</tr>
-					
-					
 				</table>
-				
 			</div>
 		</div>
 		
@@ -60,7 +57,6 @@
 					<table class="table" id="table">
 						<thead>
 							<tr>
-								<th width="5%">Id</th>
 								<th>Data</th>
 								<th colspan="2" width="20%">Ações</th>
 							</tr>
@@ -68,11 +64,8 @@
 						<tbody>
 							<c:forEach var="consulta" items="${pessoa.paciente.consultas}">
 								<tr class="linha">
-									<td><a href="<c:url value="#"></c:url>">
-										${consulta.id}
-									</a></td>
-									<td><a href="<c:url value="#"></c:url>">
-										${consulta.data}
+									<td><a href="../${consulta.id}/detalhesConsulta">
+									<fmt:formatDate type="both" pattern="dd-MM-yyyy HH-mm" value="${consulta.data}" />
 									</a></td>
 									<td><a id="detalhes" data-toggle="modal" href="../${consulta.id}/detalhesConsulta">
 											<button class="btn btn-info">

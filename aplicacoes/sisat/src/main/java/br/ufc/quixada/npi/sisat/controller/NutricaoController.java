@@ -1,5 +1,6 @@
 package br.ufc.quixada.npi.sisat.controller;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -119,7 +120,10 @@ public class NutricaoController {
 		Paciente paciente = pacienteService.find(Paciente.class, consulta.getPaciente().getId());
 		double altura = consulta.getPaciente().getAltura();
 		
-		System.out.println("peso: " + consulta.getPeso());
+		Date data = new Date(System.currentTimeMillis());
+		System.out.println("data: " + data);
+		consulta.setData(data);
+		
 		consulta.setPaciente(paciente);
 		consulta.getPaciente().setAltura(altura);
 		

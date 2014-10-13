@@ -550,23 +550,17 @@ public class ConsultaNutricional {
 				+ ", paciente=" + paciente + "]";
 	}
 	public String getImc(){
-		System.out.println("getImc()");
 		
-		System.out.println("peso = " + this.peso);
 		if(this.peso == null){
-			System.out.println("sem dados de peso do paciente");
 			return "sem dados de peso do paciente";
 		}
 		
 		Double altura = this.paciente.getAltura();
-		System.out.println("altura = " + altura);
 		if(altura == null){
-			System.out.println("sem dados de altura do paciente");
 			return "sem dados de altura do paciente";
 		}
 		
 		double imc = this.peso / (altura * altura);
-		System.out.println("imc = " + imc);
 		return new DecimalFormat("0.00").format(imc) + "    " + ClassificacaoImc(imc); 
 	}
 	
@@ -611,9 +605,8 @@ public class ConsultaNutricional {
 	}
 	
 	public String getClassificacaoCc(){
-		System.out.println("CC: " + this.circunferenciaCintura);
 		if(this.circunferenciaCintura == null){
-			return "sem dados de CC do paciente";
+			return "";
 		}
 		if(this.paciente.getPessoa().getSexo().equalsIgnoreCase("m")){
 			if(this.circunferenciaCintura < 0.94){

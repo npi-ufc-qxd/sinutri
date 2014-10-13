@@ -23,7 +23,6 @@
 	
 	
 	<h2>${consulta.id}</h2>
-	id paciente: ${id}
 	
     <ul class="nav nav-tabs">
         <li class="active"><a data-toggle="tab" href="#avaliacao">Avaliação Nutricional</a></li>
