@@ -121,7 +121,6 @@ public class NutricaoController {
 		double altura = consulta.getPaciente().getAltura();
 		
 		Date data = new Date(System.currentTimeMillis());
-		System.out.println("data: " + data);
 		consulta.setData(data);
 		
 		consulta.setPaciente(paciente);
@@ -165,7 +164,7 @@ public class NutricaoController {
 	
 	//Consulta Nutricional --> Read
 	@RequestMapping(value = {"/{id}/detalhesConsulta"})
-		public String getDetalhesConsulta(ConsultaNutricional c, @PathVariable("id") Long id, Model model, RedirectAttributes redirectAttributes){
+		public String getDetalhesConsulta(@PathVariable("id") Long id, Model model, RedirectAttributes redirectAttributes){
 			ConsultaNutricional consulta = consultaNutricionalService.find(ConsultaNutricional.class, id);
 			if(consulta == null){
 				redirectAttributes.addFlashAttribute("erro", "Consulta não encontrado.");

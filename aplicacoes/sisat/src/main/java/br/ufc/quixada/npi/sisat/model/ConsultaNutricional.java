@@ -561,10 +561,10 @@ public class ConsultaNutricional {
 		}
 		
 		double imc = this.peso / (altura * altura);
-		return new DecimalFormat("0.00").format(imc) + "    " + ClassificacaoImc(imc); 
+		return new DecimalFormat("0.00").format(imc) + "    " + getClassificacaoImc(imc); 
 	}
 	
-	public String ClassificacaoImc(double imc){
+	public String getClassificacaoImc(double imc){
 		if(imc < 25){
 			if(imc < 17){
 				if(imc < 16){
