@@ -1,4 +1,4 @@
-package br.ufc.quixada.npi.sisat.enumeration;
+package br.ufc.quixada.npi.sisat.model.enumerator;
 
 public enum Classificacao {
 		

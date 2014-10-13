@@ -74,7 +74,7 @@
 									<td><a href="<c:url value="#"></c:url>">
 										${consulta.data}
 									</a></td>
-									<td><a id="detalhes" data-toggle="modal" href="#">
+									<td><a id="detalhes" data-toggle="modal" href="../${consulta.id}/detalhesConsulta">
 											<button class="btn btn-info">
 												Detalhes <span class="glyphicon glyphicon-eye-open"></span>
 											</button>
