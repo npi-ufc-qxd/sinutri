@@ -1,5 +1,6 @@
 package br.ufc.quixada.npi.sisat.model;
 
+import java.text.DecimalFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -24,6 +25,10 @@ public class ConsultaNutricional {
 	@OneToMany(mappedBy = "consultaNutricional", cascade = CascadeType.ALL)
 	private List<FrequenciaAlimentar> frequencias;	
 	
+	@ManyToOne
+	@JoinColumn(name="paciente_id")
+	private Paciente paciente;
+
 	@DateTimeFormat
 	private Date data;
 	
@@ -110,9 +115,6 @@ public class ConsultaNutricional {
 
 	private String objetivoConsulta;
 	
-	@ManyToOne
-	@JoinColumn(name="paciente_id")
-	private Paciente paciente;
 
 	public Long getId() {
 		return id;
@@ -546,6 +548,97 @@ public class ConsultaNutricional {
 				+ ", alergia=" + alergia + ", alergiaComentario="
 				+ alergiaComentario + ", objetivoConsulta=" + objetivoConsulta
 				+ ", paciente=" + paciente + "]";
+	}
+	public String getImc(){
+		
+		if(this.peso == null){
+			return "sem dados de peso do paciente";
+		}
+		
+		Double altura = this.paciente.getAltura();
+		if(altura == null){
+			return "sem dados de altura do paciente";
+		}
+		
+		double imc = this.peso / (altura * altura);
+		return new DecimalFormat("0.00").format(imc) + "    " + getClassificacaoImc(imc); 
+	}
+	
+	public String getClassificacaoImc(double imc){
+		if(imc < 25){
+			if(imc < 17){
+				if(imc < 16){
+					//<16	 Desnutrição grau III
+					return "Desnutrição grau III";
+				}else {
+					//16  a  16,9	 Desnutrição grau II
+					return "Desnutrição grau II";
+				}
+			}else {
+				if(imc < 18.5){
+					//17 a 18,4 	Desnutrição grau I
+					return "Desnutrição grau I";
+				}else {
+					//18,5 a 24,9 	 Eutrofia
+					return "Eutrofia";
+				}	
+			}
+		}else {
+			if(imc < 35) {
+				if(imc < 30){
+					//25 a 29,9 	 Sobrepeso
+					return "Sobrepeso";
+				}else {
+					//30 a 34,9	 Obesidade grau I
+					return "Obesidade grau I";
+				}
+			}else {
+				if(imc < 40){
+					//35 a 39,9	 Obesidade grau  II
+					return "Obesidade grau  II";
+				}else{
+					//≥ 40	 Obesidade grau III
+					return "Obesidade grau III";
+				}
+			}
+		}
+	}
+	
+	public String getClassificacaoCc(){
+		if(this.circunferenciaCintura == null){
+			return "";
+		}
+		if(this.paciente.getPessoa().getSexo().equalsIgnoreCase("m")){
+			if(this.circunferenciaCintura < 0.94){
+				return "Normal";
+			}else {
+				if(this.circunferenciaCintura < 1.02){
+					return "Risco aumentado";
+				}else {
+					return "Risco muito aumentado";
+				}
+			}
+		}else if(this.paciente.getPessoa().getSexo().equalsIgnoreCase("f")){
+			if(this.circunferenciaCintura < 0.80){
+				return "Normal";
+			}else {
+				if(this.circunferenciaCintura < 0.88){
+					return "Risco aumentado";
+				}else {
+					return "Risco muito aumentado";
+				}
+			}
+		}else {
+			return "erro";
+		}
+	}
+
+	public Paciente getPaciente() {
+		return paciente;
+	}
+
+	public void setPaciente(Paciente paciente) {
+		this.paciente = paciente;
 	}
 
 	

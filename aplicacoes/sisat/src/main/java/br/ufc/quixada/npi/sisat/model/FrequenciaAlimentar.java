@@ -13,6 +13,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
+import br.ufc.quixada.npi.sisat.model.enumerator.Refeicoes;
+
 @Entity
 public class FrequenciaAlimentar {
 	
@@ -32,21 +34,7 @@ public class FrequenciaAlimentar {
 	@OneToMany(mappedBy = "frequenciaAlimentar", cascade = CascadeType.ALL)
 	private List<Alimentacao> alimentos;
 	
-	public enum Refeicoes {
-
-		DESJEJUM("Desjejum"), LANCHE_DA_MANHA("Lanche da Manha"), ALMOCO("Almoço"), LANCHE_DA_TARDE("Lanche da Tarde"), JANTAR("Jantar"), CEIA("Ceia");
-
-		private final String nome;
-
-		Refeicoes(String nome){
-			this.nome = nome;
-
-		}
-
-		public String getNome(){
-			return this.nome;
-		}
-	}
+	
 
 	public Long getId() {
 		return id;
