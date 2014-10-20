@@ -5,8 +5,6 @@ import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -16,8 +14,6 @@ import javax.persistence.OneToMany;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
-import br.ufc.quixada.npi.sisat.enumeration.Classificacao;
-
 @Entity
 public class ConsultaNutricional {
 
@@ -25,45 +21,44 @@ public class ConsultaNutricional {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@OneToMany(cascade = CascadeType.ALL)
-	@JoinColumn(name = "consultanutricional_id")
+	@OneToMany(mappedBy = "consultaNutricional", cascade = CascadeType.ALL)
 	private List<FrequenciaAlimentar> frequencias;	
+	
+
+	@ManyToOne
+	@JoinColumn(name="paciente_id")
+	private Paciente paciente;
+
+	@DateTimeFormat
+	private Date data;
 	
 	private Double peso;
 
 	private Double circunferenciaCintura;
 
 	private Integer glicemia;
-	@Enumerated(EnumType.STRING)
-	private Classificacao classificacaoGlicemia;
+	private String classificacaoGlicemia;
 
 	private Integer ct;
-	@Enumerated(EnumType.STRING)
-	private Classificacao classificacaoCt;
+	private String classificacaoCt;
 	
 	private Integer hdl;
-	@Enumerated(EnumType.STRING)
-	private Classificacao classificacaoHdl;
+	private String classificacaoHdl;
 	
 	private Integer ldl;
-	@Enumerated(EnumType.STRING)
-	private Classificacao classificacaoLdl;
+	private String classificacaoLdl;
 	
 	private Integer tg;
-	@Enumerated(EnumType.STRING)
-	private Classificacao classificacaoTg;
+	private String classificacaoTg;
 	
 	private Integer hb;
-	@Enumerated(EnumType.STRING)
-	private Classificacao classificacaoHb;
+	private String classificacaoHb;
 	
 	private Integer tgo;
-	@Enumerated(EnumType.STRING)
-	private Classificacao classificacaoTgo;
+	private String classificacaoTgo;
 	
 	private Integer tgp;
-	@Enumerated(EnumType.STRING)
-	private Classificacao classificacaoTgp;
+	private String classificacaoTgp;
 	
 	private String condutaNutricional;
 	
@@ -120,9 +115,6 @@ public class ConsultaNutricional {
 
 	private String objetivoConsulta;
 	
-	@ManyToOne
-	@JoinColumn(name="paciente_id")
-	private Paciente paciente;
 
 	public Long getId() {
 		return id;
@@ -140,7 +132,13 @@ public class ConsultaNutricional {
 		this.frequencias = frequencias;
 	}
 	
+	public Date getData() {
+		return data;
+	}
 
+	public void setData(Date data) {
+		this.data = data;
+	}
 
 	public Double getPeso() {
 		return peso;
@@ -166,11 +164,11 @@ public class ConsultaNutricional {
 		this.glicemia = glicemia;
 	}
 
-	public Classificacao getClassificacaoGlicemia() {
+	public String getClassificacaoGlicemia() {
 		return classificacaoGlicemia;
 	}
 
-	public void setClassificacaoGlicemia(Classificacao classificacaoGlicemia) {
+	public void setClassificacaoGlicemia(String classificacaoGlicemia) {
 		this.classificacaoGlicemia = classificacaoGlicemia;
 	}
 
@@ -182,12 +180,11 @@ public class ConsultaNutricional {
 		this.ct = ct;
 	}
 
-	public Classificacao getClassificacaoCt() {
+	public String getClassificacaoCt() {
 		return classificacaoCt;
 	}
-
-	public void setClassificacaoCt(Classificacao classificacaoCt) {
-
+	
+	public void setClassificacaoCt(String classificacaoCt) {
 		this.classificacaoCt = classificacaoCt;
 	}
 
@@ -199,11 +196,11 @@ public class ConsultaNutricional {
 		this.hdl = hdl;
 	}
 
-	public Classificacao getClassificacaoHdl() {
+	public String getClassificacaoHdl() {
 		return classificacaoHdl;
 	}
 
-	public void setClassificacaoHdl(Classificacao classificacaoHdl) {
+	public void setClassificacaoHdl(String classificacaoHdl) {
 		this.classificacaoHdl = classificacaoHdl;
 	}
 
@@ -216,11 +213,11 @@ public class ConsultaNutricional {
 		this.ldl = ldl;
 	}
 
-	public Classificacao getClassificacaoLdl() {
+	public String getClassificacaoLdl() {
 		return classificacaoLdl;
 	}
 
-	public void setClassificacaoLdl(Classificacao classificacaoLdl) {
+	public void setClassificacaoLdl(String classificacaoLdl) {
 		this.classificacaoLdl = classificacaoLdl;
 	}
 	
@@ -232,11 +229,11 @@ public class ConsultaNutricional {
 		this.tg = tg;
 	}
 
-	public Classificacao getClassificacaoTg() {
+	public String getClassificacaoTg() {
 		return classificacaoTg;
 	}
 
-	public void setClassificacaoTg(Classificacao classificacaoTg) {
+	public void setClassificacaoTg(String classificacaoTg) {
 		this.classificacaoTg = classificacaoTg;
 	}
 
@@ -248,11 +245,11 @@ public class ConsultaNutricional {
 		this.hb = hb;
 	}
 
-	public Classificacao getClassificacaoHb() {
+	public String getClassificacaoHb() {
 		return classificacaoHb;
 	}
 
-	public void setClassificacaoHb(Classificacao classificacaoHb) {
+	public void setClassificacaoHb(String classificacaoHb) {
 		this.classificacaoHb = classificacaoHb;
 	}
 
@@ -264,11 +261,11 @@ public class ConsultaNutricional {
 		this.tgo = tgo;
 	}
 
-	public Classificacao getClassificacaoTgo() {
+	public String getClassificacaoTgo() {
 		return classificacaoTgo;
 	}
 
-	public void setClassificacaoTgo(Classificacao classificacaoTgo) {
+	public void setClassificacaoTgo(String classificacaoTgo) {
 		this.classificacaoTgo = classificacaoTgo;
 	}
 
@@ -280,11 +277,11 @@ public class ConsultaNutricional {
 		this.tgp = tgp;
 	}
 
-	public Classificacao getClassificacaoTgp() {
+	public String getClassificacaoTgp() {
 		return classificacaoTgp;
 	}
 
-	public void setClassificacaoTgp(Classificacao classificacaoTgp) {
+	public void setClassificacaoTgp(String classificacaoTgp) {
 		this.classificacaoTgp = classificacaoTgp;
 	}
 
@@ -514,35 +511,27 @@ public class ConsultaNutricional {
 		this.objetivoConsulta = objetivoConsulta;
 	}
 
-	public Paciente getPaciente() {
-		return paciente;
-	}
-
-	public void setPaciente(Paciente paciente) {
-		this.paciente = paciente;
-	}
-
 	@Override
 	public String toString() {
 		return "ConsultaNutricional [id=" + id + ", frequencias=" + frequencias
-				+ ", peso=" + peso + ", circunferenciaCintura="
-				+ circunferenciaCintura + ", glicemia=" + glicemia
-				+ ", classificacaoGlicemia=" + classificacaoGlicemia + ", ct="
-				+ ct + ", classificacaoCt=" + classificacaoCt + ", hdl=" + hdl
-				+ ", classificacaoHdl=" + classificacaoHdl + ", ldl=" + ldl
-				+ ", classificacaoLdl=" + classificacaoLdl + ", tg=" + tg
-				+ ", classificacaoTg=" + classificacaoTg + ", hb=" + hb
-				+ ", classificacaoHb=" + classificacaoHb + ", tgo=" + tgo
-				+ ", classificacaoTgo=" + classificacaoTgo + ", tgp=" + tgp
-				+ ", classificacaoTgp=" + classificacaoTgp
-				+ ", condutaNutricional=" + condutaNutricional
-				+ ", medicamento=" + medicamento + ", medicamentoComentario="
-				+ medicamentoComentario + ", mastigacao=" + mastigacao
-				+ ", mastigacaoComentario=" + mastigacaoComentario
-				+ ", disfagia=" + disfagia + ", pirose=" + pirose + ", nausea="
-				+ nausea + ", vomito=" + vomito + ", diarreia=" + diarreia
-				+ ", constipacao=" + constipacao + ", agua=" + agua
-				+ ", carneVermelha=" + carneVermelha
+				+ ", data=" + data + ", peso=" + peso
+				+ ", circunferenciaCintura=" + circunferenciaCintura
+				+ ", glicemia=" + glicemia + ", classificacaoGlicemia="
+				+ classificacaoGlicemia + ", ct=" + ct + ", classificacaoCt="
+				+ classificacaoCt + ", hdl=" + hdl + ", classificacaoHdl="
+				+ classificacaoHdl + ", ldl=" + ldl + ", classificacaoLdl="
+				+ classificacaoLdl + ", tg=" + tg + ", classificacaoTg="
+				+ classificacaoTg + ", hb=" + hb + ", classificacaoHb="
+				+ classificacaoHb + ", tgo=" + tgo + ", classificacaoTgo="
+				+ classificacaoTgo + ", tgp=" + tgp + ", classificacaoTgp="
+				+ classificacaoTgp + ", condutaNutricional="
+				+ condutaNutricional + ", medicamento=" + medicamento
+				+ ", medicamentoComentario=" + medicamentoComentario
+				+ ", mastigacao=" + mastigacao + ", mastigacaoComentario="
+				+ mastigacaoComentario + ", disfagia=" + disfagia + ", pirose="
+				+ pirose + ", nausea=" + nausea + ", vomito=" + vomito
+				+ ", diarreia=" + diarreia + ", constipacao=" + constipacao
+				+ ", agua=" + agua + ", carneVermelha=" + carneVermelha
 				+ ", carneVermelhaFrequenciaSemanal="
 				+ carneVermelhaFrequenciaSemanal + ", carneVermelhaComentario="
 				+ carneVermelhaComentario + ", bebidaAlcoolica="
@@ -559,6 +548,97 @@ public class ConsultaNutricional {
 				+ ", alergia=" + alergia + ", alergiaComentario="
 				+ alergiaComentario + ", objetivoConsulta=" + objetivoConsulta
 				+ ", paciente=" + paciente + "]";
+	}
+	public String getImc(){
+		
+		if(this.peso == null){
+			return "sem dados de peso do paciente";
+		}
+		
+		Double altura = this.paciente.getAltura();
+		if(altura == null){
+			return "sem dados de altura do paciente";
+		}
+		
+		double imc = this.peso / (altura * altura);
+		return new DecimalFormat("0.00").format(imc) + "    " + getClassificacaoImc(imc); 
+	}
+	
+	public String getClassificacaoImc(double imc){
+		if(imc < 25){
+			if(imc < 17){
+				if(imc < 16){
+					//<16	 Desnutrição grau III
+					return "Desnutrição grau III";
+				}else {
+					//16  a  16,9	 Desnutrição grau II
+					return "Desnutrição grau II";
+				}
+			}else {
+				if(imc < 18.5){
+					//17 a 18,4 	Desnutrição grau I
+					return "Desnutrição grau I";
+				}else {
+					//18,5 a 24,9 	 Eutrofia
+					return "Eutrofia";
+				}	
+			}
+		}else {
+			if(imc < 35) {
+				if(imc < 30){
+					//25 a 29,9 	 Sobrepeso
+					return "Sobrepeso";
+				}else {
+					//30 a 34,9	 Obesidade grau I
+					return "Obesidade grau I";
+				}
+			}else {
+				if(imc < 40){
+					//35 a 39,9	 Obesidade grau  II
+					return "Obesidade grau  II";
+				}else{
+					//≥ 40	 Obesidade grau III
+					return "Obesidade grau III";
+				}
+			}
+		}
+	}
+	
+	public String getClassificacaoCc(){
+		if(this.circunferenciaCintura == null){
+			return "";
+		}
+		if(this.paciente.getPessoa().getSexo().equalsIgnoreCase("m")){
+			if(this.circunferenciaCintura < 0.94){
+				return "Normal";
+			}else {
+				if(this.circunferenciaCintura < 1.02){
+					return "Risco aumentado";
+				}else {
+					return "Risco muito aumentado";
+				}
+			}
+		}else if(this.paciente.getPessoa().getSexo().equalsIgnoreCase("f")){
+			if(this.circunferenciaCintura < 0.80){
+				return "Normal";
+			}else {
+				if(this.circunferenciaCintura < 0.88){
+					return "Risco aumentado";
+				}else {
+					return "Risco muito aumentado";
+				}
+			}
+		}else {
+			return "erro";
+		}
+	}
+
+	public Paciente getPaciente() {
+		return paciente;
+	}
+
+	public void setPaciente(Paciente paciente) {
+		this.paciente = paciente;
 	}
 
 	

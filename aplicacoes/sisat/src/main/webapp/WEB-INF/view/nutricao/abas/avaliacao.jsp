@@ -4,7 +4,7 @@
 	<br/><br/>
 	<label>Informações do Paciente</label> <br/><br/>
 	<div class="col-sm-3">
-		<label>Altura</label><input type="text" name="altura" size="10" disabled="disabled">
+		<label>Altura</label><input type="text" name="paciente.altura" size="10" value="${paciente.altura }">
 	</div>
 	<div class="col-sm-3">
 		<label>Peso</label><input type="text" name="peso" size="10">

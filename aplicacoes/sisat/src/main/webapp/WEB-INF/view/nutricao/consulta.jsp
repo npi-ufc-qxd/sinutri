@@ -20,7 +20,10 @@
 
 	<div class="container">
 	
-	<h2>${pessoa.paciente.id }</h2>
+	
+	
+	<h2>${consulta.id}</h2>
+	
     <ul class="nav nav-tabs">
         <li class="active"><a data-toggle="tab" href="#avaliacao">Avaliação Nutricional</a></li>
 
@@ -29,8 +32,9 @@
         <li><a data-toggle="tab" href="#questionario">Questionario de Frequencia Alimentar</a></li>
     </ul>
 
-	<form:form servletRelativeAction="consulta" method="POST" modelAttribute="consulta">
+	<form:form servletRelativeAction="../consulta" method="POST" modelAttribute="consulta">
 	    <div class="tab-content">
+	    <input type="hidden" name="paciente.id" value="${id}">
 		
 			<!-- ABA DE AVALIACAO NUTRICIONAL -->
 	        <div id="avaliacao" class="tab-pane fade in active">
