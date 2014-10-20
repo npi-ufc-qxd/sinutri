@@ -77,7 +77,7 @@ public class NutricaoController {
 
 		
 	@RequestMapping(value = "/{id}/editarConsulta", method = RequestMethod.GET)
-	public String editarConsulta(@PathVariable("id") long id, Model model, HttpSession session, RedirectAttributes redirectAttributes) {
+	public String editarConsulta(@PathVariable("id") long id, Model model, RedirectAttributes redirectAttributes) {
 		System.out.println("get editarConsulta");
 		ConsultaNutricional consultaNutricional = consultaNutricionalService.find(ConsultaNutricional.class, id);
 		System.out.println("ididididididiididididid = " + consultaNutricional.getId());
@@ -174,7 +174,6 @@ public class NutricaoController {
 		consultaNutricionalService.save(consulta);
 
 		
-		return "nutricao/consulta";
 
 		if (consulta.getFrequencias() != null) {
 			for (FrequenciaAlimentar frequenciaAlimentar : consulta.getFrequencias()){
@@ -185,6 +184,7 @@ public class NutricaoController {
 					alimentacaoService.update(alimentacao);
 				}
 			}
+			
 		}
 		redirectAttributes.addFlashAttribute("success", "Consulta de <strong>id = " + consulta.getId() + "</strong> e paciente <strong>" + consulta.getPaciente().getPessoa().getNome() + "</strong> realizada com sucesso.");
 		return "redirect:/nutricao/buscar";

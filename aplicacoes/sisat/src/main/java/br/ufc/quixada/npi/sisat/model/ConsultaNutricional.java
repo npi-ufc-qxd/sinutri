@@ -1,5 +1,6 @@
 package br.ufc.quixada.npi.sisat.model;
 
+import java.text.DecimalFormat;
 import java.util.Date;
 import java.util.List;
 
