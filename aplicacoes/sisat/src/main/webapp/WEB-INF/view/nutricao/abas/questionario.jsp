@@ -47,6 +47,7 @@
 	var cont = 0;
 	var contFrequencia = 0;
 	
+	
 $(document).ready(function() {
 		
 		//ADICIONA FREQUENCIA
@@ -57,8 +58,8 @@ $(document).ready(function() {
 				
 			return false;
 			
-    	} else if(contFrequencia < 6){
-			var fieldset = $("<fieldset>");
+    	} else if(cont < 6){
+			var fieldset = $("<fieldset id='f"+contFrequencia+"'>");
 			var divnone = $("<div style='display:none;'>");
 			fieldset.append($("<legend>").text(horaFrequencia + ", " + refeicaoFrequencia));
 			//fieldset.append($("<a id='deletarfrequencia="+contFrequencia+"'> Deletar Refeicao</a>"));
@@ -81,6 +82,7 @@ $(document).ready(function() {
 			);
 			$("#frequenciasAdds").append(fieldset);
 			contFrequencia++;
+			cont++;
 		}			
     });
 		
@@ -125,16 +127,33 @@ $(document).ready(function() {
 	 
 	 function deletarfrequencia(contFrequencia){
 	   // $("#frequenciasAdds").on('click', 'a.deletarfrequencia', function() {
-	    	alert("teste" + $("#frequenciasAdds fieldset").length);
+	    	//alert("teste" + $("#frequenciasAdds fieldset").length);
 			//alert($("a.deletarfrequencia").parent().parent().html());
-			if(contFrequencia >= 0 && contFrequencia < 6){
+			console.log(cont);
+			if(cont >= 0 && cont <= 6){
+			cont--;
+			
 			   var deletar = "a#deletarfrequencia" + contFrequencia;
 			   $(deletar).parent().remove();
 			   
 			   var size = $("#frequenciasAdds fieldset").length;
+			   var seletor = " fieldset";
+			   
+			   console.log($("#frequenciasAdds fieldset").attr("id"));
+			   console.log($("#frequenciasAdds fieldset + fieldset").attr("id"));
+
 			   
 			   for(var i = 0; i < size; ++i){
-				   $( "fieldset + input[type$='hidden']" ).attr("type", "deletarfrequencia[" + i + "]");
+				   console.log("oioi " + i + "div#frequenciasAdds " + seletor);
+				   $("div#frequenciasAdds" + seletor).attr("id", "f"+i);
+				   seletor += " + fieldset";
+			   }
+			   
+			   
+			   for(var i = 0; i < 6; ++i){
+				   console.log(i);
+				   $( "fieldset#f" + i + " input" ).attr("name", "frequencias[" + i + "].horario");
+				   $( "fieldset#f" + i + " input + input" ).attr("name", "frequencias[" + i + "].refeicao");
 				  
 	        //$("a.deletarfrequencia").parent().remove();
 	      
