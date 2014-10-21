@@ -17,10 +17,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import br.ufc.quixada.npi.service.GenericService;
-import br.ufc.quixada.npi.sisat.model.Alimentacao;
 import br.ufc.quixada.npi.sisat.model.ConsultaNutricional;
-import br.ufc.quixada.npi.sisat.model.FrequenciaAlimentar;
 import br.ufc.quixada.npi.sisat.model.Paciente;
 import br.ufc.quixada.npi.sisat.model.Pessoa;
 import br.ufc.quixada.npi.sisat.model.enumerator.Classificacao;
@@ -42,12 +39,6 @@ public class NutricaoController {
 	@Inject
 	private ConsultaNutricionalService consultaNutricionalService;
 	
-	@Inject
-	private GenericService<FrequenciaAlimentar> frequenciaService;
-	
-	@Inject
-	private GenericService<Alimentacao> alimentacaoService;
-
 	@RequestMapping(value = {"/", "/index"}, method = RequestMethod.GET)
 	public String index() {
 		return "nutricao/buscar";
@@ -75,7 +66,34 @@ public class NutricaoController {
 		}
 		return "/nutricao/buscar";
 	}
+
+		
+	@RequestMapping(value = "/{id}/editarConsulta", method = RequestMethod.GET)
+	public String editarConsulta(@PathVariable("id") long id, Model model) {
+		ConsultaNutricional consultaNutricional = consultaNutricionalService.find(ConsultaNutricional.class, id);
+		model.addAttribute("consultaNutricional", consultaNutricional);
+		Classificacao[] cla= Classificacao.values();
+		model.addAttribute("classificacao", cla);
+		return "/nutricao/editarConsulta";
+		
+	}
+	
+	@RequestMapping(value = {"/{id}/editarConsulta"}, method = RequestMethod.POST)
+	public String editarConsulta(@ModelAttribute("consultaNutricional") ConsultaNutricional consulta, @PathVariable("id") long id) {
+		
+		for(int i = 0; i<consulta.getFrequencias().size(); i++){
+			consulta.getFrequencias().get(i).setConsultaNutricional(consulta);
+			for (int j = 0; j < consulta.getFrequencias().get(i).getAlimentos().size(); j++) {
+				consulta.getFrequencias().get(i).getAlimentos().get(j).setFrequenciaAlimentar(consulta.getFrequencias().get(i));
+			}
+		}
+		consultaNutricionalService.update(consulta);
+		return "nutricao/detalhes";
+	}
+
+
 	//Detalhes de paciente
+
 	@RequestMapping(value = {"/{id}/detalhes"})
 	public String getDetalhes(Pessoa p, @PathVariable("id") Long id, Model model, RedirectAttributes redirectAttributes){
 		Pessoa pessoa = pessoaService.find(Pessoa.class, id);
@@ -115,7 +133,6 @@ public class NutricaoController {
 	@RequestMapping(value = {"/consulta"}, method = RequestMethod.POST)
 	public String consulta(@ModelAttribute("consulta") ConsultaNutricional consulta, BindingResult result, RedirectAttributes redirectAttributes) {
 		if (result.hasErrors()) {
-			System.out.println(result.toString());
 			return ("nutricao/buscar");
 		}
 		Paciente paciente = pacienteService.find(Paciente.class, consulta.getPaciente().getId());
@@ -149,18 +166,12 @@ public class NutricaoController {
 			consulta.setBebidaAlcoolicaComentario(null);
 		}
 		consultaNutricionalService.save(consulta);
-		if (consulta.getFrequencias() != null) {
-			for (FrequenciaAlimentar frequenciaAlimentar : consulta.getFrequencias()){
-				frequenciaAlimentar.setConsultaNutricional(consulta);
-				frequenciaService.update(frequenciaAlimentar );
-				for (Alimentacao alimentacao : frequenciaAlimentar.getAlimentos()) {
-					alimentacao.setFrequenciaAlimentar(frequenciaAlimentar);
-					alimentacaoService.update(alimentacao);
-				}
-			}
-		}
+
+		
+
 		redirectAttributes.addFlashAttribute("success", "Consulta de <strong>id = " + consulta.getId() + "</strong> e paciente <strong>" + consulta.getPaciente().getPessoa().getNome() + "</strong> realizada com sucesso.");
 		return "redirect:/nutricao/buscar";
+
 	}
 	
 	//Consulta Nutricional --> Read

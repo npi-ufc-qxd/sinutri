@@ -22,9 +22,11 @@ public class ConsultaNutricional {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@OneToMany(mappedBy = "consultaNutricional", cascade = CascadeType.ALL)
+	@OneToMany(cascade = CascadeType.ALL)
+	@JoinColumn(name= "consultanutricional_id")
 	private List<FrequenciaAlimentar> frequencias;	
 	
+
 	@ManyToOne
 	@JoinColumn(name="paciente_id")
 	private Paciente paciente;

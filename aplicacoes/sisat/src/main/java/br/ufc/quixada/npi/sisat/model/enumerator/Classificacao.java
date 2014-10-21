@@ -2,11 +2,11 @@ package br.ufc.quixada.npi.sisat.model.enumerator;
 
 public enum Classificacao {
 		
-	DESEJAVEL("Desejavel"),
-	LIMITROFE("Limitrofe"),
-	ALTO("Alto"),
-	BAIXO("Baixo"),
+	VAZIO(null),
 	MUITOALTO("Muito Alto"),	
+	ALTO("Alto"),
+	DESEJAVEL("Desejavel"),
+	BAIXO("Baixo"),
 	MUITOBAIXO("Muito Baixo");
 
 	private String tipo;

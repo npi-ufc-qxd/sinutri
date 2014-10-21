@@ -8,14 +8,15 @@
 		<div class="form-group">
 		
 			<!-- Glicemia -->
-			<label for="glicemia" class="col-sm-2 control-label">Glicemia:</label>
+			<label for="glicemia" class="col-sm-3 control-label">Glicemia:</label>
 			<form:input id="glicemia" path="glicemia" cssClass="form-control" type="text"/>
 			
-			<select name="classificacaoGlicemia" id="classificacaoGlicemia" path="classificacaoGlicemia" class="col-xs-8">
+			<select name="classificacaoGlicemia" id="classificacaoGlicemia" path="classificacaoGlicemia" class="col-xs-5">
 			  <c:forEach var="c" items="${classificacao}" varStatus="i">
-  						<option value="${c.tipo}">${c.tipo}</option>
+  						<option value="${c}">${c.tipo}</option>
 				</c:forEach>
-			</select><br/><br/><br/>
+			</select>
+			<br/><br/><br/>
 			
 				<!-- CT -->
 			<label for="ct" class="col-sm-3 control-label">CT:</label>
@@ -23,7 +24,7 @@
 		
 			<select name="classificacaoCt" id="classificacaoCt" class="col-xs-5" path="classificacaoCt">
 			  <c:forEach var="c" items="${classificacao}" varStatus="i">
-  						<option value="${c.tipo}">${c.tipo}</option>
+  						<option value="${c}">${c.tipo}</option>
 				</c:forEach>
 			</select><br/><br/><br/>
 			
@@ -33,7 +34,7 @@
 			
 			<select name="classificacaoLdl" id="classificacaoLdl" class="col-xs-5" path="classificacaoLdl" >
 			  <c:forEach var="c" items="${classificacao}" varStatus="i">
-  						<option value="${c.tipo}">${c.tipo}</option>
+  						<option value="${c}">${c.tipo}</option>
 				</c:forEach>
 			</select><br/><br/><br/>
 			
@@ -43,7 +44,7 @@
 			
 			<select name="classificacaoHdl" id="classificacaoHdl" class="col-xs-5" path="classificacaoHdl" >
 			  <c:forEach var="c" items="${classificacao}" varStatus="i">
-  						<option value="${c.tipo}">${c.tipo}</option>
+  						<option value="${c}">${c.tipo}</option>
 				</c:forEach>
 			</select>
 			
@@ -55,13 +56,13 @@
 		<div class="form-group">
 			 
 			 <!-- TG -->
-			<label for="tg" class="col-sm-2 control-label">TG:</label>
+			<label for="tg" class="col-sm-3 control-label">TG:</label>
 			<form:input id="tg" path="tg" cssClass="form-control" type="text"/>
 			
 			<select name="classificacaoTg" id="classificacaoTg" class="col-xs-5" path="classificacaoTg" >
 				
 				<c:forEach var="c" items="${classificacao}" varStatus="i">
-  						<option value="${c.tipo}">${c.tipo}</option>
+  						<option value="${c}">${c.tipo}</option>
 				</c:forEach>
 				
 			
@@ -73,7 +74,7 @@
 			
 			<select name="classificacaoHb" id="classificacaoHb" class="col-xs-5" path="classificacaoHb" >
 			  <c:forEach var="c" items="${classificacao}" varStatus="i">
-  						<option value="${c.tipo}">${c.tipo}</option>
+  						<option value="${c}">${c.tipo}</option>
 				</c:forEach>
 			</select><br/><br/><br/>
 			
@@ -83,7 +84,7 @@
 			
 			<select name="classificacaoTgo" id="classificacaoTgo" class="col-xs-5" path="classificacaoTgo" >
 			  <c:forEach var="c" items="${classificacao}" varStatus="i">
-  						<option value="${c.tipo}">${c.tipo}</option>
+  						<option value="${c}">${c.tipo}</option>
 				</c:forEach>
 			</select><br/><br/><br/>
 			
@@ -91,11 +92,11 @@
 			<label for="tgp" class="col-sm-4 control-label">TGP (ALT):</label>
 			<form:input id="tgp" path="tgp" cssClass="form-control" type="text"/>
 			
-			<form:select name="classificacaoTgp" id="classificacaoTgp" class="col-xs-5" path="classificacaoTgp" >
+			<select name="classificacaoTgp" id="classificacaoTgp" class="col-xs-5" path="classificacaoTgp" >
 			  <c:forEach var="c" items="${classificacao}" varStatus="i">
-  						<option value="${c.tipo}">${c.tipo}</option>
+  						<option value="${c}">${c.tipo}</option>
 				</c:forEach>
-			</form:select><br/><br/><br/>
+			</select><br/><br/><br/>
 			
 			
 		</div>

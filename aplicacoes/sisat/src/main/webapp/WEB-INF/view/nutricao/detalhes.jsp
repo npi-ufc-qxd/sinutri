@@ -72,7 +72,7 @@
 												Detalhes <span class="glyphicon glyphicon-eye-open"></span>
 											</button>
 									</a></td>
-									<td><a id="editar" data-toggle="modal" href="#">
+									<td><a id="editar" data-toggle="modal" href="../${consulta.id}/editarConsulta">
 											<button class="btn btn-warning">
 												Editar <span class="glyphicon glyphicon-edit"></span>
 											</button>
