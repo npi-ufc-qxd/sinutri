@@ -16,18 +16,10 @@
 			<div class="form-group">	
 				<label for="refeicaoAdd" class="col-sm-2 control-label">Refeicao:</label>
 				
-			  <select name="refeicaoAdd" id="refeicaoAdd" class="col-xs-2">
-				  <option value="DESJEJUM">Desjejum</option>
-				  <option value="LANCHEMANHA">Lanche da Manhã</option>
-				  <option value="ALMOCO">Alomoço</option>
-				  <option value="LANCHETARDE">Lanche da Tarde</option>
-				  <option value="JANTAR">Jantar</option>
-				  <option value="CEIA">Ceia</option>
 			<select name="refeicaoAdd" id="refeicaoAdd" class="col-xs-2">
 			  <c:forEach var="r" items="${refeicoes}">
   						<option value="${r}">${r.nome}</option>
 				</c:forEach>
-
 			</select>
 			
 			</div>	
@@ -64,11 +56,12 @@ $(document).ready(function() {
     	if(!$('#horaAdd').val() || !$('#refeicaoAdd').val() ) {
 			return false;
 			
-    	} else if(contFrequencia < 6){
-			var fieldset = $("<fieldset>");
+    	} else if(cont < 6){
+			var fieldset = $("<fieldset id='f"+contFrequencia+"'>");
 			var divnone = $("<div style='display:none;'>");
 			fieldset.append($("<legend>").text(horaFrequencia + ", " + titulo));
-			
+			fieldset.append($("<a href='javascript:deletarfrequencia(" + contFrequencia + ")' id='deletarfrequencia"+contFrequencia+"'>Deletar alimentos</a>"));
+			        
 			fieldset.append($("<input type='hidden' name='frequencias["+contFrequencia+"].horario' cssClass='form-control' value="+horaFrequencia+">"));
 			fieldset.append($("<input type='hidden' name='frequencias["+contFrequencia+"].refeicao' cssClass='form-control' value="+refeicaoFrequencia+">"));
 
@@ -85,6 +78,7 @@ $(document).ready(function() {
 			);
 			$("#frequenciasAdds").append(fieldset);
 			contFrequencia++;
+			cont++;
 		}			
     });
 		
@@ -94,7 +88,7 @@ $(document).ready(function() {
   	  var frequenciaAlimentar = $(this).data("frequenciaalimentar");
   		if(frequenciaAlimentar >= 0 && frequenciaAlimentar < 6){
   		var recipiente = "tbody#frequenciaAlimentar" + frequenciaAlimentar;
-  		var contAlimentos = $(recipiente + " tr").length;				//siz = $( "#tabela > tbody tr" ).length;
+  		var contAlimentos = $(recipiente + " tr").length;				
   		$(recipiente)
   			.append($("<tr>")
   					.append($("<td>").append($("<input size='50' name='frequencias["+frequenciaAlimentar+"].alimentos["+contAlimentos+"].alimento' cssClass='form-control'/>")))
@@ -106,23 +100,59 @@ $(document).ready(function() {
  	}
 
     });
-
   });
-  function deletarLinha(frequenciaAlimentar, index) {
-		if(frequenciaAlimentar >= 0 && frequenciaAlimentar < 6){
-			var recipiente = "tbody#frequenciaAlimentar" + frequenciaAlimentar;
-			alert(recipiente);
-			var size = $("table > "+recipiente+" tr" ).length;
-			$( "table > "+recipiente+" tr" ).eq( index ).remove();
-            
-			size = $("table > "+recipiente+" tr" ).length;
-			for( var i = 0; i < size; ++i){
-				$( "table > "+recipiente+" tr:eq(" + i + ") td > a" ).attr("href", "javascript:deletarLinha(" + frequenciaAlimentar +", " + i + ")");
-				$( "table > "+recipiente+" tr:eq(" + i + ") td > input[name$='alimento']" ).attr("name", "frequencias[" + frequenciaAlimentar + "].alimentos[" + i + "].alimento");
-				$( "table > "+recipiente+" tr:eq(" + i + ") td > input[name$='porcao']" ).attr("name", "frequencias[" + frequenciaAlimentar + "].alimentos[" + i + "].porcao");
+  
+  
+	 function deletarLinha(frequenciaAlimentar, index) {
+			if(frequenciaAlimentar >= 0 && frequenciaAlimentar < 6){
+				var recipiente = "tbody#frequenciaAlimentar" + frequenciaAlimentar;
+				alert(recipiente);
+				var size = $("table > "+recipiente+" tr" ).length;
+				$( "table > "+recipiente+" tr" ).eq( index ).remove();
+	            
+				size = $("table > "+recipiente+" tr" ).length;
+				for( var i = 0; i < size; ++i){
+					$( "table > "+recipiente+" tr:eq(" + i + ") td > a" ).attr("href", "javascript:deletarLinha(" + frequenciaAlimentar +", " + i + ")");
+					$( "table > "+recipiente+" tr:eq(" + i + ") td > input[name$='alimento']" ).attr("name", "frequencias[" + frequenciaAlimentar + "].alimentos[" + i + "].alimento");
+					$( "table > "+recipiente+" tr:eq(" + i + ") td > input[name$='porcao']" ).attr("name", "frequencias[" + frequenciaAlimentar + "].alimentos[" + i + "].porcao");
+				}
 			}
 		}
-	}
+	 
+	 
+	 function deletarfrequencia(contFrequencia){
+			console.log(cont);
+			if(cont >= 0 && cont <= 6){
+			cont--;
+			
+			   var deletar = "a#deletarfrequencia" + contFrequencia;
+			   $(deletar).parent().remove();
+			   
+			   var size = $("#frequenciasAdds fieldset").length;
+			   var seletor = " fieldset";
+			   
+			   console.log($("#frequenciasAdds fieldset").attr("id"));
+			   console.log($("#frequenciasAdds fieldset + fieldset").attr("id"));
+
+			   
+			   for(var i = 0; i < size; ++i){
+				   console.log("oioi " + i + "div#frequenciasAdds " + seletor);
+				   $("div#frequenciasAdds" + seletor).attr("id", "f"+i);
+				   seletor += " + fieldset";
+			   }
+			   
+			   
+			   for(var i = 0; i < 6; ++i){
+				   console.log(i);
+				   $( "fieldset#f" + i + " input" ).attr("name", "frequencias[" + i + "].horario");
+				   $( "fieldset#f" + i + " input + input" ).attr("name", "frequencias[" + i + "].refeicao");
+				  
+	        
+	      
+	    }
+
+	   }
+	 }
  
 				
 </script>
