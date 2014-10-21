@@ -10,7 +10,7 @@
        	   http://www.springframework.org/schema/mvc/spring-mvc.xsd">
 
 	<mvc:annotation-driven />
-	<context:component-scan base-package="br.com.ufc.quixada.npi.sisat.controller" />
+	<context:component-scan base-package="br.ufc.quixada.npi.sisat.controller" />
 
 	<bean
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">

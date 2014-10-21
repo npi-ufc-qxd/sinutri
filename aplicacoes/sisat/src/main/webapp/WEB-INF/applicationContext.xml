@@ -28,7 +28,8 @@
 	
 	<tx:annotation-driven transaction-manager="txManager" proxy-target-class="true" />
  
-	<context:component-scan base-package="br.com.ufc.quixada.npi.sisat.repository" />
-	<context:component-scan base-package="br.com.ufc.quixada.npi.sisat.service" />
-	<context:component-scan base-package="br.com.ufc.quixada.npi.sisat.controller" />
+	<context:component-scan base-package="br.ufc.quixada.npi.repository" />
+	<context:component-scan base-package="br.ufc.quixada.npi.service" />
+	<context:component-scan base-package="br.ufc.quixada.npi.sisat.service" />
+	<context:component-scan base-package="br.ufc.quixada.npi.sisat.controller" />
 </beans>

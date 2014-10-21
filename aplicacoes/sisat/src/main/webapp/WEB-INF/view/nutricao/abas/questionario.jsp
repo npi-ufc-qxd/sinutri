@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <html>
 
 <fieldset>
@@ -15,14 +16,14 @@
 			<div class="form-group">	
 				<label for="refeicaoAdd" class="col-sm-2 control-label">Refeicao:</label>
 				
-			  <select name="refeicaoAdd" id="refeicaoAdd" class="col-xs-2">
-				  <option value="Desjejum">Desjejum</option>
-				  <option value="Lanche da Manha">Lanche da Manhã</option>
-				  <option value="Almoco">Almoço</option>
-				  <option value="Lanche da Tarde">Lanche da Tarde</option>
-				  <option value="Jantar">Jantar</option>
-				  <option value="Ceia">Ceia</option>
+
+			<select name="refeicaoAdd" id="refeicaoAdd" class="col-xs-2">
+			  <c:forEach var="r" items="${refeicoes}">
+  						<option value="${r}">${r.nome}</option>
+				</c:forEach>
 			</select>
+				
+
 			
 			</div>	
 			
@@ -54,18 +55,18 @@ $(document).ready(function() {
     $("#addFrequencia").click(function() {
     	var horaFrequencia = $("#horaAdd").val();
     	var refeicaoFrequencia = $("#refeicaoAdd").val();	
+    	var titulo = $("#refeicaoAdd [value='"+refeicaoFrequencia+"']").text();
+    	console.log("refeicaoFrequencia = " + refeicaoFrequencia);
     	if(!$('#horaAdd').val() || !$('#refeicaoAdd').val() ) {
-				
+
 			return false;
 			
     	} else if(cont < 6){
 			var fieldset = $("<fieldset id='f"+contFrequencia+"'>");
 			var divnone = $("<div style='display:none;'>");
-			fieldset.append($("<legend>").text(horaFrequencia + ", " + refeicaoFrequencia));
-			//fieldset.append($("<a id='deletarfrequencia="+contFrequencia+"'> Deletar Refeicao</a>"));
+			fieldset.append($("<legend>").text(horaFrequencia + ", " + titulo));
 			fieldset.append($("<a href='javascript:deletarfrequencia(" + contFrequencia + ")' id='deletarfrequencia"+contFrequencia+"'>Deletar alimentos</a>"));
 			        
-			
 			fieldset.append($("<input type='hidden' name='frequencias["+contFrequencia+"].horario' cssClass='form-control' value="+horaFrequencia+">"));
 			fieldset.append($("<input type='hidden' name='frequencias["+contFrequencia+"].refeicao' cssClass='form-control' value="+refeicaoFrequencia+">"));
 
@@ -126,9 +127,6 @@ $(document).ready(function() {
 	 
 	 
 	 function deletarfrequencia(contFrequencia){
-	   // $("#frequenciasAdds").on('click', 'a.deletarfrequencia', function() {
-	    	//alert("teste" + $("#frequenciasAdds fieldset").length);
-			//alert($("a.deletarfrequencia").parent().parent().html());
 			console.log(cont);
 			if(cont >= 0 && cont <= 6){
 			cont--;
@@ -155,10 +153,10 @@ $(document).ready(function() {
 				   $( "fieldset#f" + i + " input" ).attr("name", "frequencias[" + i + "].horario");
 				   $( "fieldset#f" + i + " input + input" ).attr("name", "frequencias[" + i + "].refeicao");
 				  
-	        //$("a.deletarfrequencia").parent().remove();
+	        
 	      
 	    }
-	 //}
+
 	   }
 	 }
  
@@ -166,10 +164,6 @@ $(document).ready(function() {
 </script>
 
 <style type="text/css">
-
-
-
-
 </style>
 
 
