@@ -42,10 +42,10 @@ public class NutricaoController {
 	private ConsultaNutricionalService consultaNutricionalService;
 	
 	@Inject
-	private GenericService<FrequenciaAlimentar> frequenciaService;
+	private GenericService<FrequenciaAlimentar> fs;
 	
 	@Inject
-	private GenericService<Alimentacao> alimentacaoService;
+	private GenericService<Alimentacao> as;
 
 	@RequestMapping(value = {"/", "/index"}, method = RequestMethod.GET)
 	public String index() {
@@ -82,7 +82,7 @@ public class NutricaoController {
 		ConsultaNutricional consultaNutricional = consultaNutricionalService.find(ConsultaNutricional.class, id);
 		System.out.println("ididididididiididididid = " + consultaNutricional.getId());
 		model.addAttribute("consultaNutricional", consultaNutricional);
-
+		System.out.println(consultaNutricional);
 		Classificacao[] cla= Classificacao.values();
 		model.addAttribute("classificacao", cla);
 		return "/nutricao/editarConsulta";
@@ -92,6 +92,15 @@ public class NutricaoController {
 	@RequestMapping(value = {"/{id}/editarConsulta"}, method = RequestMethod.POST)
 	public String editarConsulta(@ModelAttribute("consultaNutricional") ConsultaNutricional consulta, @PathVariable("id") long id) {
 		System.out.println("post editarConsulta" + consulta.getId());
+		
+		for(int i = 0; i<consulta.getFrequencias().size(); i++){
+			consulta.getFrequencias().get(i).setConsultaNutricional(consulta);
+			for (int j = 0; j < consulta.getFrequencias().get(i).getAlimentos().size(); j++) {
+				consulta.getFrequencias().get(i).getAlimentos().get(j).setFrequenciaAlimentar(consulta.getFrequencias().get(i));
+				System.out.println("SSSSSS = "+consulta.getFrequencias().get(i).getId());
+			}
+		}
+		System.out.println(consulta);
 		consultaNutricionalService.update(consulta);
 		return "nutricao/detalhes";
 	}
@@ -175,17 +184,17 @@ public class NutricaoController {
 
 		
 
-		if (consulta.getFrequencias() != null) {
-			for (FrequenciaAlimentar frequenciaAlimentar : consulta.getFrequencias()){
-				frequenciaAlimentar.setConsultaNutricional(consulta);
-				frequenciaService.update(frequenciaAlimentar );
-				for (Alimentacao alimentacao : frequenciaAlimentar.getAlimentos()) {
-					alimentacao.setFrequenciaAlimentar(frequenciaAlimentar);
-					alimentacaoService.update(alimentacao);
-				}
-			}
-			
-		}
+//		if (consulta.getFrequencias() != null) {
+//			for (FrequenciaAlimentar frequenciaAlimentar : consulta.getFrequencias()){
+//				frequenciaAlimentar.setConsultaNutricional(consulta);
+//				fs.update(frequenciaAlimentar );
+//				for (Alimentacao alimentacao : frequenciaAlimentar.getAlimentos()) {
+//					alimentacao.setFrequenciaAlimentar(frequenciaAlimentar);
+//					as.update(alimentacao);
+//				}
+//			}
+//			
+//		}
 		redirectAttributes.addFlashAttribute("success", "Consulta de <strong>id = " + consulta.getId() + "</strong> e paciente <strong>" + consulta.getPaciente().getPessoa().getNome() + "</strong> realizada com sucesso.");
 		return "redirect:/nutricao/buscar";
 

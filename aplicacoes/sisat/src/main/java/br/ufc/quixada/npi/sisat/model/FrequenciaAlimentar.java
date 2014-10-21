@@ -31,11 +31,16 @@ public class FrequenciaAlimentar {
 	private ConsultaNutricional consultaNutricional;
     
 	@OneToMany(cascade = CascadeType.ALL)
-	@JoinColumn(name= "frequenciaAlimentar_id")
+	@JoinColumn(name= "frequenciaalimentar_id")
 	private List<Alimentacao> alimentos;
 	
 	
-
+	@Override
+	public String toString() {
+		return "FrequenciaAlimentar [id=" + id + ", horario=" + horario
+				+ ", refeicao=" + refeicao + ", \n   alimentos=" + alimentos + "]";
+	}
+	
 	public Long getId() {
 		return id;
 	}
@@ -61,11 +66,7 @@ public class FrequenciaAlimentar {
 		this.consultaNutricional = consultaNutricional;
 	}
 
-	@Override
-	public String toString() {
-		return "FrequenciaAlimentar [id=" + id + ", horario=" + horario
-				+ ", refeicao=" + refeicao + ", \n   alimentos=" + alimentos + "]";
-	}
+
 
 	public void setHorario(String horario) {
 		this.horario = horario;

@@ -43,12 +43,9 @@
 			<c:forEach var="f" items="${consultaNutricional.frequencias}" varStatus="i">
 				<fieldset>
 					<legend>${ f.horario }, ${ f.refeicao} </legend>
-						<input type="hidden" name="frequencias[0].horario" value="${ f.horario }">
-						<input type="hidden" name="frequencias[0].refeicao" value="${ f.refeicao }">		
-				
-				
-					
-					
+						<input type="hidden" name="frequencias[${i.index }].id" value="${ f.id }">
+						<input type="hidden" name="frequencias[${i.index }].horario" value="${ f.horario }">
+						<input type="hidden" name="frequencias[${i.index }].refeicao" value="${ f.refeicao }">		
 						<table class="table">
 						<thead><tr>
 							<td width="40%">Alimento/Preparo</td>
@@ -57,15 +54,15 @@
 						</tr>
 						</thead>
 
-					<tbody id="frequenciaAlimentar${i.count-1}">
+
+					<tbody id="frequenciaAlimentar${i.index}"> <%-- i.count-1 --%>
 					<c:forEach var="a" items="${f.alimentos}" varStatus="j">
 						<label>${j.count}  next   -->  </label>
-												
-						
 						<tr>
-						<td><input size="50" name="frequencias[${ j.count-1 }].alimentos[${j.count-1}].alimento" cssclass="form-control" value="${ a.alimento }"></td>
-						<td><input size="10" name="frequencias[${j.count-1 }].alimentos[${j.count-1}].porcao" cssclass="form-control" value="${ a.porcao }"></td>
-						<td><a href="javascript:deletarLinha(${j.count-1}, ${j.count-1})" class="delAlimento btn btn-danger glyphicon glyphicon-edit">Deletar alimentos</a></td>
+						<input type="hidden" name="frequencias[${ i.index}].alimentos[${j.index}].id" value="${ a.id }">
+						<td><input size="50" name="frequencias[${ i.index}].alimentos[${j.index}].alimento" cssclass="form-control" value="${ a.alimento }"></td>
+						<td><input size="10" name="frequencias[${i.index}].alimentos[${j.index}].porcao" cssclass="form-control" value="${ a.porcao }"></td>
+						<td><a href="javascript:deletarLinha(${i.index}, ${j.index})" class="delAlimento btn btn-danger glyphicon glyphicon-edit">Deletar alimentos</a></td>
 						</tr>
 				</c:forEach>
 					</tbody>
