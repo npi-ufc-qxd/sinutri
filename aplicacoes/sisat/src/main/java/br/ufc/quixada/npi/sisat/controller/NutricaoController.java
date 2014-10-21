@@ -68,7 +68,7 @@ public class NutricaoController {
 
 		
 	@RequestMapping(value = "/{id}/editarConsulta", method = RequestMethod.GET)
-	public String editarConsulta(@PathVariable("id") long id, Model model, RedirectAttributes redirectAttributes) {
+	public String editarConsulta(@PathVariable("id") long id, Model model) {
 		ConsultaNutricional consultaNutricional = consultaNutricionalService.find(ConsultaNutricional.class, id);
 		model.addAttribute("consultaNutricional", consultaNutricional);
 		Classificacao[] cla= Classificacao.values();
