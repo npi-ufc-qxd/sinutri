@@ -57,7 +57,6 @@
 
 					<tbody id="frequenciaAlimentar${i.index}"> <%-- i.count-1 --%>
 					<c:forEach var="a" items="${f.alimentos}" varStatus="j">
-						<label>${j.count}  next   -->  </label>
 						<tr>
 						<input type="hidden" name="frequencias[${ i.index}].alimentos[${j.index}].id" value="${ a.id }">
 						<td><input size="50" name="frequencias[${ i.index}].alimentos[${j.index}].alimento" cssclass="form-control" value="${ a.alimento }"></td>
