@@ -1,5 +1,6 @@
 package br.ufc.quixada.npi.sisat.model;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -12,6 +13,10 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 import br.ufc.quixada.npi.sisat.model.enumerator.Refeicoes;
 
@@ -22,7 +27,9 @@ public class FrequenciaAlimentar {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	private String horario;
+	@Temporal(TemporalType.TIME)
+	@DateTimeFormat(pattern="hh:mm")
+	private Date horario;
 	
 	@Enumerated(EnumType.STRING)
 	private Refeicoes refeicao;
@@ -31,10 +38,9 @@ public class FrequenciaAlimentar {
     @JoinColumn(name = "consulta_id")
 	private ConsultaNutricional consultaNutricional;
     
-	@OneToMany(mappedBy = "frequenciaAlimentar", cascade = CascadeType.ALL)
+	@OneToMany(cascade = CascadeType.ALL)
+	@JoinColumn(name= "frequenciaAlimentar_id")
 	private List<Alimentacao> alimentos;
-	
-	
 
 	public Long getId() {
 		return id;
@@ -67,9 +73,6 @@ public class FrequenciaAlimentar {
 				+ ", refeicao=" + refeicao + ", \n   alimentos=" + alimentos + "]";
 	}
 
-	public void setHorario(String horario) {
-		this.horario = horario;
-	}
 
 	public void setRefeicao(Refeicoes refeicao) {
 		this.refeicao = refeicao;
@@ -79,9 +82,14 @@ public class FrequenciaAlimentar {
 		return refeicao;
 	}
 
-	public String getHorario() {
+	public Date getHorario() {
 		return horario;
-	}   
+	}
+
+	public void setHorario(Date horario) {
+		this.horario = horario;
+	}
+	   
 }
 
 
