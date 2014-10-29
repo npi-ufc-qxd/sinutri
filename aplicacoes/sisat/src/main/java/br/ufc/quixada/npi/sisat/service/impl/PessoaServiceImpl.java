@@ -28,4 +28,9 @@ public class PessoaServiceImpl extends GenericServiceImpl<Pessoa> implements Pes
 	public List<Pessoa> getPareceristas(Long id) {
 		return find("Pessoa.findPareceristas", new NamedParams("id", id));
 	}
+
+	@Override
+	public List<Pessoa> getPessoasByNomeOuCpf(String busca) {
+		return find("Pessoa.findPessoasByNomeOrCpf", new NamedParams("busca", "%" + busca.toUpperCase() + "%", "cpf", busca));
+	}
 }

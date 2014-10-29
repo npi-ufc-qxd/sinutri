@@ -94,3 +94,18 @@ tr.processing {
 table#file-upload {
 	margin-top: 20px;
 }
+
+table#table {
+    border-collapse: separate;
+    border-spacing: 0 5px;
+}
+
+table#table thead th {
+    background-color: #428BCA;
+    color: white;
+}
+
+table#table tbody td {
+    background-color: rgba(238, 238, 238, 0.39);
+    vertical-align: middle;
+}

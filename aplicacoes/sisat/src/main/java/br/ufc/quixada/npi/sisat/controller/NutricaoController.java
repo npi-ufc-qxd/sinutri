@@ -1,10 +1,8 @@
 package br.ufc.quixada.npi.sisat.controller;
 
 import java.util.Date;
-import java.util.List;
 
 import javax.inject.Inject;
-import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -51,19 +49,9 @@ public class NutricaoController {
 	}
 	//Buscar paciente (post)
 	@RequestMapping(value = "/buscar", method = RequestMethod.POST)
-	public String buscarPaciente(@RequestParam("tipoPesquisa") String tipoPesquisa, @RequestParam("campo") String campo, ModelMap map, RedirectAttributes redirectAttributes) {
-		List<Pessoa> pessoas = null;
-		if(tipoPesquisa.equals("cpf")){
-			pessoas = pessoaService.getPessoasByCpf(campo);
-		}else {
-			pessoas = pessoaService.getPessoasByNome(campo);
-		}
-		if(!pessoas.isEmpty()){
-			map.addAttribute("pessoas",pessoas); 
-		}else{
-			redirectAttributes.addFlashAttribute("erro", "Paciente de " + tipoPesquisa + " " + campo + " não encontrado.");
-			return "redirect:/nutricao/buscar";
-		}
+	public String buscarPaciente(@RequestParam("busca") String busca, ModelMap map) {
+		map.addAttribute("busca", busca);
+		map.addAttribute("pessoas", pessoaService.getPessoasByNomeOuCpf(busca));
 		return "/nutricao/buscar";
 	}
 
