@@ -37,7 +37,7 @@ div.row {
 }
 
 .controls{
-	width:50%;
+	text-align: right;
 }
 
 .acoes{
@@ -95,17 +95,30 @@ table#file-upload {
 	margin-top: 20px;
 }
 
-table#table {
+table.table {
     border-collapse: separate;
     border-spacing: 0 5px;
 }
 
-table#table thead th {
+table.table thead th {
     background-color: #428BCA;
     color: white;
 }
 
-table#table tbody td {
+table.table tbody td {
     background-color: rgba(238, 238, 238, 0.39);
     vertical-align: middle;
 }
+
+div#dados-pessoais {
+	margin-bottom: 20px;
+	border-bottom: medium 2px;
+}
+
+h3 {
+	padding: 10px;
+    border-bottom-style: solid;
+    border-bottom-width: thin;
+    border-bottom-color: gray;
+}
+

@@ -30,8 +30,7 @@
 			</c:if>
 
 
-			<h2>Buscar Paciente</h2>
-			<hr>
+			<h3>Buscar Paciente</h3>
 			<form:form id="buscarPacienteForm" role="form" servletReltiveAction="/nutricao/buscar" method="POST" class="form-horizontal">
 				<div class="form-group">
 					<div class="col-sm-10">
