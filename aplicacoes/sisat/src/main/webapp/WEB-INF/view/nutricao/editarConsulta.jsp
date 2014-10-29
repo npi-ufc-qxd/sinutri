@@ -25,6 +25,8 @@
         <li><a data-toggle="tab" href="#exame">Editar exames Laboratoriais</a></li>
         
         <li><a data-toggle="tab" href="#questionario">Editar questionario de Frequencia Alimentar</a></li>
+        
+        <li><a data-toggle="tab" href="#orientacoes">Editar Orientações Individuais</a></li>
     </ul>
 
 	<form:form servletRelativeAction="/nutricao/${consultaNutricional.id}/editarConsulta" method="POST" modelAttribute="consultaNutricional">
@@ -43,6 +45,11 @@
 			<!-- ABA DE QUESTIONARIO DE FRENQUENCIA ALIMENTAR -->
 	        <div id="questionario" class="tab-pane fade">
 				<jsp:include page="abas/editaQuestionario.jsp" />
+	        </div>
+	        
+	        <!-- ABA DE ORIENTAÇÃO -->
+	        <div id="orientacoes" class="tab-pane fade">
+				<jsp:include page="abas/editaOrientacoes.jsp" />
 	        </div>
 	    </div>
 

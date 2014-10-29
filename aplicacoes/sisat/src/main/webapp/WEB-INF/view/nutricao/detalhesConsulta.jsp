@@ -35,6 +35,8 @@
 
 			<li><a data-toggle="tab" href="#questionario">Questionario
 					de Frequencia Alimentar</a></li>
+					
+			<li><a data-toggle="tab" href="#orientacoes">Orientações Individuais</a></li>
 		</ul>
 
 		<div class="tab-content">
@@ -52,6 +54,11 @@
 			<!-- ABA DE QUESTIONARIO DE FRENQUENCIA ALIMENTAR -->
 			<div id="questionario" class="tab-pane fade">
 				<jsp:include page="abas/detalhesQuestionario.jsp" /> 
+			</div>
+			
+			<!-- ABA DE ORIENTACOES -->
+			<div id="orientacoes" class="tab-pane fade">
+				<jsp:include page="abas/detalhesOrientacoes.jsp" /> 
 			</div>
 		</div>
 	</div>

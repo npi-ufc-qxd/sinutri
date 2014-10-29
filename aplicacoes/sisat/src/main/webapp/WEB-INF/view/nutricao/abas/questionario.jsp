@@ -1,7 +1,7 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<!DOCTYPE html>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<html>
 
 <fieldset>
 			<legend>Adicione as refeições</legend>
@@ -60,7 +60,8 @@ $(document).ready(function() {
 			var fieldset = $("<fieldset id='f"+contFrequencia+"'>");
 			var divnone = $("<div style='display:none;'>");
 			fieldset.append($("<legend>").text(horaFrequencia + ", " + titulo));
-			fieldset.append($("<a href='javascript:deletarfrequencia(" + contFrequencia + ")' id='deletarfrequencia"+contFrequencia+"'>Deletar alimentos</a>"));
+			fieldset.append($("<a href='javascript:deletarfrequencia(" + contFrequencia + ")' id='deletarfrequencia"+contFrequencia+"'>Deletar Refeição</a>"));
+			
 			        
 			fieldset.append($("<input type='hidden' name='frequencias["+contFrequencia+"].horario' cssClass='form-control' value="+horaFrequencia+">"));
 			fieldset.append($("<input type='hidden' name='frequencias["+contFrequencia+"].refeicao' cssClass='form-control' value="+refeicaoFrequencia+">"));
@@ -161,5 +162,5 @@ $(document).ready(function() {
 </style>
 
 
-</html>
+
 

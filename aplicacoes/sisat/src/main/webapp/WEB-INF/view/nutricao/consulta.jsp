@@ -30,9 +30,11 @@
         <li><a data-toggle="tab" href="#exame">Exames Laboratoriais</a></li>
         
         <li><a data-toggle="tab" href="#questionario">Questionario de Frequencia Alimentar</a></li>
+        
+        <li><a data-toggle="tab" href="#orientacoes">Orientações Individuais</a></li>
     </ul>
 
-	<form:form servletRelativeAction="../consulta" method="POST" modelAttribute="consulta">
+	<form:form servletRelativeAction="../consulta" method="POST" modelAttribute="consulta" acceptCharset="UTF-8">
 	    <div class="tab-content">
 	    <input type="hidden" name="paciente.id" value="${id}">
 		
@@ -49,6 +51,11 @@
 			<!-- ABA DE QUESTIONARIO DE FRENQUENCIA ALIMENTAR -->
 	        <div id="questionario" class="tab-pane fade">
 				<jsp:include page="abas/questionario.jsp" />
+	        </div>
+	        
+	        <!-- ABA DE ORIENTAÇÕES INDIVIDUAIS -->
+	         <div id="orientacoes" class="tab-pane fade">
+				<jsp:include page="abas/orientacoes.jsp" />
 	        </div>
 	    </div>
 
