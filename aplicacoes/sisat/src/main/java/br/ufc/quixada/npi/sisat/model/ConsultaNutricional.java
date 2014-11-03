@@ -125,7 +125,7 @@ public class ConsultaNutricional {
 	
 	private String condutaNutricional;
 	
-	@Lob
+	@Column(columnDefinition = "TEXT")
 	private String orientacoesIndividuais;
 
 	
@@ -655,13 +655,12 @@ public class ConsultaNutricional {
 	}
 
 	public String getOrientacoesIndividuais() {
-		System.out.println(orientacoesIndividuais);
 		return orientacoesIndividuais;
 	}
 
 	public void setOrientacoesIndividuais(String orientacoesIndividuais) {
 		this.orientacoesIndividuais = orientacoesIndividuais;
-		System.out.println(orientacoesIndividuais);
+		
 	}
 
 	
