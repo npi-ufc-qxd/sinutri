@@ -1,48 +1,75 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="sec"
+	uri="http://www.springframework.org/security/tags"%>
 
 
 <div id="header-page">
 	<div class="row">
-		<div class="col-md-6">
-			<img width="370"
-				src="<c:url value="/resources/images/brasao-qxd.png" />"
-				alt="Brasão UFC Quixadá">
+		<div class="col-md-4">
+			<a href="http://www.quixada.ufc.br/" target="_blank"> <img
+				width="370" src="<c:url value="/resources/images/brasao-qxd.png" />"
+				alt="UFC Quixadá"
+				title="Clique aqui para acessar o site da UFC Quixadá">
+			</a>
 		</div>
-		<div class="col-md-6"></div>
+		<div class="col-md-4">
+			<a href="/sisat/nutricao/buscar">
+			<h1 style="color: #FFFFFF; text-align: center">
+				<strong style="font-size: 125%">Sis</strong>tema de <strong
+					style="font-size: 120%">At</strong>endimento
+			</h1>
+			<h4 style="color: #FFFFFF; text-align: center" align="rigth">Módulo
+				Nutricional</h4>
+			</a>
+		</div>
 	</div>
 </div>
 <div>
 	<nav class="navbar navbar-default" role="navigation">
 		<div class="container-fluid">
-			<div class="navbar-header">
-				<button type="button" class="navbar-toggle" data-toggle="collapse"
-					data-target="#bs-example-navbar-collapse-1">
-					<span class="sr-only">Toggle navigation</span> <span
-						class="icon-bar"></span> <span class="icon-bar"></span> <span
-						class="icon-bar"></span>
-				</button>
-				<a class="navbar-brand" href="<c:url value="/nutricao/buscar" />">Nutrição</a>
-			</div>
-	
-			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-				<ul class="nav navbar-nav">
-					<!--<li>
-						<a href="<c:url value="/end" />">Link <span class="glyphicon glyphicon-list"></span></a>
-					</li>-->
+		
 
-					<li>
-						<a href="<c:url value="/j_spring_security_logout" />">Sair <span class="glyphicon glyphicon-off"></span></a>
+			<div class="collapse navbar-collapse"
+				id="bs-example-navbar-collapse-1">
+				<ul class="nav navbar-nav">
+					<li><a class="navbar-brand"
+						href="<c:url value="/nutricao/buscar" />">Paciente</a></li>
+
+					<li class="dropdown"><a href="#" class="dropdown-toggle navbar-brand"
+						data-toggle="dropdown">Agendamentos <span class="caret"></span></a>
+						<ul class="dropdown-menu" role="menu">
+							<li><a href="#">Listar</a></li>
+							<li><a href="#">Deletar</a></li>
+							<li><a href="#">Editar</a></li>
+						</ul>
 					</li>
-					
 				</ul>
 				<ul class="nav navbar-nav navbar-right">
-					<li>
-						<a style="font-weight: bold;">Bem vindo, ${sessionScope.usuario.nome}!</a> 
-					</li>
+					<li><a style="font-weight: bold; text-transform: capitalize">Bem
+							vindo, <sec:authentication property="principal.username" />!
+					</a></li>
+					<li><a style="font-weight: bold"
+						href="<c:url value="/j_spring_security_logout" />">Sair <span
+							class="glyphicon glyphicon-off"></span></a></li>
 				</ul>
 			</div>
 		</div>
 	</nav>
+	
+	<!-- Mensagens -->
+
+	<c:if test="${not empty success }">
+		<div class="alert alert-success" role="alert">${success}</div>
+	</c:if>
+	<c:if test="${not empty info }">
+		<div class="alert alert-info" role="alert">${info}</div>
+	</c:if>
+	<c:if test="${not empty warning }">
+		<div class="alert alert-warning" role="alert">${warning}</div>
+	</c:if>
+	<c:if test="${not empty danger }">
+		<div class="alert alert-danger" role="alert">${danger}</div>
+	</c:if>
 </div>

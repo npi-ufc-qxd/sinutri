@@ -4,13 +4,13 @@
 	<br/><br/>
 	<label>Informações do Paciente</label> <br/><br/>
 	<div class="col-sm-3">
-		<label>Altura</label><input type="text" name="paciente.altura" size="10" value="${paciente.altura }">
+		<label>Altura*</label><input type="text" name="paciente.altura" size="10" value="${paciente.altura }" required="required">
 	</div>
 	<div class="col-sm-3">
-		<label>Peso</label><input type="text" name="peso" size="10">
+		<label>Peso*</label><input type="text" name="peso" size="10" required="required">
 	</div>
 	<div class="col-sm-3">
-		<label>CC</label><input type="text" name="circunferenciaCintura" size="10">
+		<label>CC*</label><input type="text" name="circunferenciaCintura" size="10" required="required">
 	</div>
 </div>
 
@@ -28,6 +28,8 @@
 	<div class="col-sm-2"><input type="checkbox" name="vomito" value="true"/><label>Vômitos</label></div>
 	<div class="col-sm-2"><input type="checkbox" name="diarreia" value="true"/><label>Diarreia</label></div>
 	<div class="col-sm-2"><input type="checkbox" name="constipacao" value="true"/><label>Constipação</label></div>
+	<div class="col-sm-2"><input type="checkbox" name="diabetes" value="true"/><label>Diabetes</label></div>
+	<div class="col-sm-2"><input type="checkbox" name="hipertensao" value="true"/><label>Hipertensão</label></div>
 	
 	<div class="col-sm-12" style="cursor: pointer;">
 		<input class="col-sm-0" type="checkbox" name="mastigacao" id="checkMastigacao" onclick="habilitar();"/><label>Mastigação</label>
@@ -42,16 +44,16 @@
 </div>
 
 <div class="col-sm-12">
-	<label>Consumo de água</label><input type="text" name="agua" size="10"><label>Litros</label>
+	<label>Consumo de água*</label><input type="text" name="agua" size="10" required="required"><label>Litros</label>
 </div>
 
 <div class="col-sm-12">
 	<div style="cursor: pointer;"></div>
-		<input type="checkbox" name="carneVermelha" id="checkCarneVermelha" onclick="habilitar();"/><label>Carne Vermelha</label>
-		<input type=text name="carneVermelhaComentario" size='20' disabled="disabled" id="inputTextCarneVermelha"/>
+		<label>Carne Vermelha*</label>
+		<input type=text name="carneVermelhaComentario" size='20' id="inputTextCarneVermelha"/>
 	
 	<label>Frequência de</label>
-	<select name="carneVermelhaFrequenciaSemanal" id="carneVermelhaFrequenciaSemanal" style="width: 70px" class="form-control-inline">
+	<select name="carneVermelhaFrequenciaSemanal" id="carneVermelhaFrequenciaSemanal" style="width: 70px" class="form-control-inline" required="required">
 		<option value="0">0</option>
 		<option value="1">1</option>
 		<option value="2">2</option>
@@ -129,11 +131,6 @@
 			document.getElementById('inputTextAlergia').disabled = false;
 		} else {
 			document.getElementById('inputTextAlergia').disabled = true;
-		}
-		if (document.getElementById('checkCarneVermelha').checked) {
-			document.getElementById('inputTextCarneVermelha').disabled = false;
-		} else {
-			document.getElementById('inputTextCarneVermelha').disabled = true;
 		}
 		if (document.getElementById('checkAtividadeFisica').checked) {
 			document.getElementById('inputTextAtividadeFisica').disabled = false;

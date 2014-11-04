@@ -22,8 +22,12 @@
 	
 	
 	
-	<h2>${consulta.id}</h2>
+	<form:form servletRelativeAction="../consulta" method="POST" modelAttribute="consulta">
 	
+		<div  align="right">
+			<button type="submit" class="btn btn-success">Finalizar Consulta</button>
+		</div>
+		<br/>
     <ul class="nav nav-tabs">
         <li class="active"><a data-toggle="tab" href="#avaliacao">Avaliação Nutricional</a></li>
 
@@ -32,7 +36,6 @@
         <li><a data-toggle="tab" href="#questionario">Questionario de Frequencia Alimentar</a></li>
     </ul>
 
-	<form:form servletRelativeAction="../consulta" method="POST" modelAttribute="consulta">
 	    <div class="tab-content">
 	    <input type="hidden" name="paciente.id" value="${id}">
 		
@@ -51,10 +54,7 @@
 				<jsp:include page="abas/questionario.jsp" />
 	        </div>
 	    </div>
-
-		<div class="col-xs-offset-0 col-xs-10" align="center">
-			<button type="submit" class="btn btn-success">Finalizar Consulta</button>
-		</div>
+		<p class="text-left"><em>*Itens obrigatórios</em></p>
 	</form:form>
 </div>
 
