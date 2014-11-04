@@ -80,22 +80,20 @@ public class NutricaoController {
 	
 	@RequestMapping(value = {"/{id}/editarConsulta"}, method = RequestMethod.POST)
 	public String editarConsulta(@ModelAttribute("consultaNutricional") ConsultaNutricional consulta, @PathVariable("id") long id) {
-		System.out.println();
-		
+
 		if(consulta.getFrequencias() != null){
 			for(int i = 0; i<consulta.getFrequencias().size(); i++){
 				consulta.getFrequencias().get(i).setConsultaNutricional(consulta);
-			if(consulta.getFrequencias().get(i).getAlimentos() != null){
-				for (int j = 0; j < consulta.getFrequencias().get(i).getAlimentos().size(); j++) {
-					consulta.getFrequencias().get(i).getAlimentos().get(j).setFrequenciaAlimentar(consulta.getFrequencias().get(i));
-				}				
+				if(consulta.getFrequencias().get(i).getAlimentos() != null){
+					for (int j = 0; j < consulta.getFrequencias().get(i).getAlimentos().size(); j++) {
+						consulta.getFrequencias().get(i).getAlimentos().get(j).setFrequenciaAlimentar(consulta.getFrequencias().get(i));
+					}				
+				}
 			}
 		}
-			
 		
-		}
 		consultaNutricionalService.update(consulta);
-		return "nutricao/detalhes";
+		return "redirect:/nutricao/" + consulta.getPaciente().getId() + "/detalhes";
 	}
 
 
@@ -139,8 +137,9 @@ public class NutricaoController {
 	
 	@RequestMapping(value = {"/consulta"}, method = RequestMethod.POST)
 	public String consulta(@ModelAttribute("consulta") ConsultaNutricional consulta, BindingResult result, RedirectAttributes redirectAttributes) {
+		System.out.println();
 		if (result.hasErrors()) {
-			return ("nutricao/buscar");
+			return ("nutricao/consulta");
 		}
 		Paciente paciente = pacienteService.find(Paciente.class, consulta.getPaciente().getId());
 		double altura = consulta.getPaciente().getAltura();
