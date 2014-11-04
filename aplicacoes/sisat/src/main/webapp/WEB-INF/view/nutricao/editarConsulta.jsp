@@ -29,6 +29,8 @@
 
 	<form:form servletRelativeAction="/nutricao/${consultaNutricional.id}/editarConsulta" method="POST" modelAttribute="consultaNutricional">
 	    <div class="tab-content">
+	    <input type="hidden" name="paciente.id" value="${consultaNutricional.paciente.id}">
+	    <input type="hidden" name="paciente.altura" value="${consultaNutricional.paciente.altura}">
 		
 			<!-- ABA DE AVALIACAO NUTRICIONAL -->
 	        <div id="avaliacao" class="tab-pane fade in active">
