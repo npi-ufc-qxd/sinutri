@@ -21,15 +21,7 @@
 	<div class="container">
 		<div class="buscar-paciente" align="left">
 
-			<c:if test="${not empty erro }">
-				<div class="alert alert-danger" role="alert">${erro}</div>
-			</c:if>
-			<c:if test="${not empty info }">
-				<div class="alert alert-info" role="alert">${info}</div>
-			</c:if>
-			<c:if test="${not empty success }">
-				<div class="alert alert-success" role="alert">${success}</div>
-			</c:if>
+			
 			
 
 			<form:form id="buscarPacienteForm" role="form"
@@ -44,7 +36,7 @@
 				<button class="btn btn-primary" name="submit" type="submit" class="btn btn-primary"
 					value="Buscar" >
 					 Buscar
-					 <span class="glyphicon glyphicon-search"/> 
+					 <span class="glyphicon glyphicon-search"></span>
 				</button>
 				
  			</form:form>

@@ -21,12 +21,7 @@
 	<div class="container">
 		<div class="novo-paciente" align="left">
 
-		<c:if test="${not empty erro }">
-			<div class="alert alert-danger" role="alert">${erro}</div>
-		</c:if>
-		<c:if test="${not empty info }">
-			<div class="alert alert-info" role="alert">${info}</div>
-		</c:if>
+		
 			
 			<form:form id="adicionarPacienteForm" role="form"
 				commandName="paciente" servletRelativeAction="/nutricao/paciente/cadastrar"

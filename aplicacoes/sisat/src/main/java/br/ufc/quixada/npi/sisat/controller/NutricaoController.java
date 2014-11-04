@@ -4,8 +4,6 @@ import java.util.Date;
 import java.util.List;
 
 import javax.inject.Inject;
-import javax.servlet.http.HttpSession;
-
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -61,7 +59,7 @@ public class NutricaoController {
 		if(!pessoas.isEmpty()){
 			map.addAttribute("pessoas",pessoas); 
 		}else{
-			redirectAttributes.addFlashAttribute("erro", "Paciente de " + tipoPesquisa + " " + campo + " não encontrado.");
+			redirectAttributes.addFlashAttribute("danger", "Paciente de " + tipoPesquisa + " " + campo + " não encontrado.");
 			return "redirect:/nutricao/buscar";
 		}
 		return "/nutricao/buscar";
@@ -81,6 +79,7 @@ public class NutricaoController {
 	@RequestMapping(value = {"/{id}/editarConsulta"}, method = RequestMethod.POST)
 	public String editarConsulta(@ModelAttribute("consultaNutricional") ConsultaNutricional consulta, @PathVariable("id") long id) {
 		
+		
 		for(int i = 0; i<consulta.getFrequencias().size(); i++){
 			consulta.getFrequencias().get(i).setConsultaNutricional(consulta);
 			for (int j = 0; j < consulta.getFrequencias().get(i).getAlimentos().size(); j++) {
@@ -98,7 +97,7 @@ public class NutricaoController {
 	public String getDetalhes(Pessoa p, @PathVariable("id") Long id, Model model, RedirectAttributes redirectAttributes){
 		Pessoa pessoa = pessoaService.find(Pessoa.class, id);
 		if(pessoa == null){
-			redirectAttributes.addFlashAttribute("erro", "Paciente não encontrado.");
+			redirectAttributes.addFlashAttribute("danger", "Paciente não encontrado.");
 			return "redirect:/nutricao/buscar";
 		}
 		model.addAttribute("pessoa", pessoa);
@@ -113,7 +112,7 @@ public class NutricaoController {
 	public String realizarConsulta(Model model, @PathVariable("id") Long id, RedirectAttributes redirectAttributes) {
 		Pessoa pessoa = pessoaService.find(Pessoa.class, id);
 		if(pessoa == null){
-			redirectAttributes.addFlashAttribute("erro", "Paciente não encontrado.");
+			redirectAttributes.addFlashAttribute("danger", "Paciente não encontrado.");
 			return "redirect:/nutricao/buscar";
 		}
 		if(pessoa.getPaciente() == null){
@@ -133,7 +132,8 @@ public class NutricaoController {
 	@RequestMapping(value = {"/consulta"}, method = RequestMethod.POST)
 	public String consulta(@ModelAttribute("consulta") ConsultaNutricional consulta, BindingResult result, RedirectAttributes redirectAttributes) {
 		if (result.hasErrors()) {
-			return ("nutricao/buscar");
+			redirectAttributes.addFlashAttribute("danger", result.toString());
+			return "redirect:/nutricao/buscar";
 		}
 		Paciente paciente = pacienteService.find(Paciente.class, consulta.getPaciente().getId());
 		double altura = consulta.getPaciente().getAltura();
@@ -179,7 +179,7 @@ public class NutricaoController {
 		public String getDetalhesConsulta(@PathVariable("id") Long id, Model model, RedirectAttributes redirectAttributes){
 			ConsultaNutricional consulta = consultaNutricionalService.find(ConsultaNutricional.class, id);
 			if(consulta == null){
-				redirectAttributes.addFlashAttribute("erro", "Consulta não encontrado.");
+				redirectAttributes.addFlashAttribute("danger", "Consulta não encontrado.");
 				return "redirect:/nutricao/buscar";
 			}
 			model.addAttribute("consulta", consulta);

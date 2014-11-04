@@ -19,6 +19,10 @@
 				Naúsea</td>
 			<td>${consulta.vomito ? "<span class='glyphicon glyphicon-ok'></span>" : "<span class='glyphicon glyphicon-remove'></span>" }
 				Vômitos</td>
+			<td>${consulta.diabetes ? "<span class='glyphicon glyphicon-ok'></span>" : "<span class='glyphicon glyphicon-remove'></span>" }
+				Diabetes</td>
+			<td>${consulta.hipertensao ? "<span class='glyphicon glyphicon-ok'></span>" : "<span class='glyphicon glyphicon-remove'></span>" }
+				Hipertensão</td>
 		</tr>
 		<tr>
 			<td><strong>Altura: </strong> ${consulta.paciente.altura }</td>
