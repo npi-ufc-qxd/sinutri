@@ -16,12 +16,12 @@
 		</div>
 		<div class="col-md-4">
 			<a href="/sisat/nutricao/buscar">
-			<h1 style="color: #FFFFFF; text-align: center">
-				<strong style="font-size: 125%">Sis</strong>tema de <strong
-					style="font-size: 120%">At</strong>endimento
-			</h1>
-			<h4 style="color: #FFFFFF; text-align: center" align="rigth">Módulo
-				Nutricional</h4>
+				<h1 style="color: #FFFFFF; text-align: center">
+					<strong style="font-size: 125%">Sis</strong>tema de <strong
+						style="font-size: 120%">At</strong>endimento
+				</h1>
+				<h4 style="color: #FFFFFF; text-align: center" align="rigth">Módulo
+					Nutricional</h4>
 			</a>
 		</div>
 	</div>
@@ -29,22 +29,18 @@
 <div>
 	<nav class="navbar navbar-default" role="navigation">
 		<div class="container-fluid">
-		
+
 
 			<div class="collapse navbar-collapse"
 				id="bs-example-navbar-collapse-1">
 				<ul class="nav navbar-nav">
 					<li><a class="navbar-brand"
 						href="<c:url value="/nutricao/buscar" />">Paciente</a></li>
+					
+					<li><a class="navbar-brand" href="<c:url value="#" />">Agendamentos
+					</a></li>
 
-					<li class="dropdown"><a href="#" class="dropdown-toggle navbar-brand"
-						data-toggle="dropdown">Agendamentos <span class="caret"></span></a>
-						<ul class="dropdown-menu" role="menu">
-							<li><a href="#">Listar</a></li>
-							<li><a href="#">Deletar</a></li>
-							<li><a href="#">Editar</a></li>
-						</ul>
-					</li>
+
 				</ul>
 				<ul class="nav navbar-nav navbar-right">
 					<li><a style="font-weight: bold; text-transform: capitalize">Bem
@@ -57,7 +53,7 @@
 			</div>
 		</div>
 	</nav>
-	
+
 	<!-- Mensagens -->
 
 	<c:if test="${not empty success }">
