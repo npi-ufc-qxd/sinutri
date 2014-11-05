@@ -40,28 +40,29 @@
 		
 		<div id="frequenciasAdds">
 			
-			<c:forEach var="f" items="${consultaNutricional.frequencias}" varStatus="i">
+			<c:forEach var="frequencia" items="${consultaNutricional.frequencias}" varStatus="contFreq">
 				<fieldset>
-					<legend>${ f.horario }, ${ f.refeicao} </legend>
-						<input type="hidden" name="frequencias[${i.index }].id" value="${ f.id }">
-						<input type="hidden" name="frequencias[${i.index }].horario" value="${ f.horario }">
-						<input type="hidden" name="frequencias[${i.index }].refeicao" value="${ f.refeicao }">		
+					<legend>${ frequencia.horario }, ${ frequencia.refeicao.nome} </legend>
+						<input type="hidden" name="frequencias[${contFreq.index }].id" value="${ frequencia.id }">
+						<input type="hidden" name="frequencias[${contFreq.index }].horario" value="${ frequencia.horario }">
+						<input type="hidden" name="frequencias[${contFreq.index }].refeicao" value="${ frequencia.refeicao }">		
 						<table class="table">
 						<thead><tr>
 							<td width="40%">Alimento/Preparo</td>
 							<td>Porção</td>
-							<td><a class="addAlimento btn btn-primary" data-frequenciaalimentar="${i.count-1}">adicionar alimentos</a></td>
+							<td><a class="addAlimento btn btn-primary" data-frequenciaalimentar="${contFreq.index}">adicionar alimentos</a></td>
 						</tr>
 						</thead>
 
 
-					<tbody id="frequenciaAlimentar${i.index}"> <%-- i.count-1 --%>
-					<c:forEach var="a" items="${f.alimentos}" varStatus="j">
+					<tbody id="frequenciaAlimentar${contFreq.index}"> <%-- i.count-1 --%>
+					<c:forEach var="alimento" items="${frequencia.alimentos}" varStatus="contAlim">
 						<tr>
-						<input type="hidden" name="frequencias[${ i.index}].alimentos[${j.index}].id" value="${ a.id }">
-						<td><input size="50" name="frequencias[${ i.index}].alimentos[${j.index}].alimento" cssclass="form-control" value="${ a.alimento }"></td>
-						<td><input size="10" name="frequencias[${i.index}].alimentos[${j.index}].porcao" cssclass="form-control" value="${ a.porcao }"></td>
-						<td><a href="javascript:deletarLinha(${i.index}, ${j.index})" class="delAlimento btn btn-danger glyphicon glyphicon-edit">Deletar alimentos</a></td>
+						<td><input type="hidden" name="frequencias[${ contFreq.index}].alimentos[${contAlim.index}].id" value="${ alimento.id }"></td>
+						<td><input size="50" name="frequencias[${ contFreq.index}].alimentos[${contAlim.index}].alimento" cssclass="form-control" value="${ alimento.alimento }"></td>
+						<td><input size="10" name="frequencias[${contFreq.index}].alimentos[${contAlim.index}].porcao" cssclass="form-control" value="${ alimento.porcao }"></td>
+
+						<td><a href="javascript:deletarLinha(${contFreq.index}, ${contAlim.index})" class="delAlimento btn btn-danger glyphicon glyphicon-edit">Deletar alimentos</a></td>
 						</tr>
 				</c:forEach>
 					</tbody>
