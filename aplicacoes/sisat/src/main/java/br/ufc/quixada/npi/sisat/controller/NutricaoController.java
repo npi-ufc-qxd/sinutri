@@ -4,7 +4,6 @@ import java.util.Date;
 import java.util.List;
 
 import javax.inject.Inject;
-import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,6 +16,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import br.ufc.quixada.npi.service.GenericService;
+import br.ufc.quixada.npi.sisat.model.Agendamento;
 import br.ufc.quixada.npi.sisat.model.Alimentacao;
 import br.ufc.quixada.npi.sisat.model.ConsultaNutricional;
 import br.ufc.quixada.npi.sisat.model.FrequenciaAlimentar;
@@ -40,6 +41,9 @@ public class NutricaoController {
 	
 	@Inject
 	private ConsultaNutricionalService consultaNutricionalService;
+	
+	@Inject
+	private GenericService<Agendamento> agendamentoService;
 	
 	@RequestMapping(value = {"/", "/index"}, method = RequestMethod.GET)
 	public String index() {
@@ -194,5 +198,14 @@ public class NutricaoController {
 			model.addAttribute("consulta", consulta);
 			return "nutricao/detalhesConsulta";
 		}
+	
+	//deletar agendamento //Wanrly
+	@RequestMapping(value = {"/{id}/deletarAgendamento"}, method = RequestMethod.GET)
+	public String deletarAgendamento(@PathVariable("id") Long id, RedirectAttributes redirectAttributes){
+		agendamentoService.delete(agendamentoService.find(Agendamento.class, id));
+		redirectAttributes.addFlashAttribute("success", "Agendamento deletado com sucesso");
+		return "redirect:/nutricao/buscar_agendamento";
+	}
+	
 	
 }
