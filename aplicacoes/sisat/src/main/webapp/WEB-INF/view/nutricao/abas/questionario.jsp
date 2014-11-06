@@ -62,7 +62,7 @@ $(document).ready(function() {
 			fieldset.append($("<legend>").text(horaFrequencia + ", " + titulo));
 			fieldset.append($("<a href='javascript:deletarfrequencia(" + contFrequencia + ")' id='deletarfrequencia"+contFrequencia+"'>Deletar alimentos</a>"));
 			        
-			fieldset.append($("<input type='hidden' name='frequencias["+contFrequencia+"].horario' cssClass='form-control' value="+horaFrequencia+">"));
+			fieldset.append($("<input type='hidden' name='frequencias["+contFrequencia+"].horario' cssClass='form-control' value="+horaFrequencia+":00>"));
 			fieldset.append($("<input type='hidden' name='frequencias["+contFrequencia+"].refeicao' cssClass='form-control' value="+refeicaoFrequencia+">"));
 
 			fieldset.append(
