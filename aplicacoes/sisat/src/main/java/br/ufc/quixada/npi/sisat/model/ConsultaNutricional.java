@@ -1,17 +1,23 @@
 package br.ufc.quixada.npi.sisat.model;
 
 import java.text.DecimalFormat;
+
 import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+
+
+
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -62,7 +68,6 @@ public class ConsultaNutricional {
 	private Integer tgp;
 	private String classificacaoTgp;
 	
-	private String condutaNutricional;
 	
 	private boolean medicamento;
 	
@@ -113,11 +118,17 @@ public class ConsultaNutricional {
 	private String outrasPatologiasComentario;
 
 	private boolean alergia;
+	
 	private String alergiaComentario;
 
 	private String objetivoConsulta;
 	
+	private String condutaNutricional;
+	
+	@Column(columnDefinition = "TEXT")
+	private String orientacoesIndividuais;
 
+	
 	public Long getId() {
 		return id;
 	}
@@ -643,5 +654,15 @@ public class ConsultaNutricional {
 		this.paciente = paciente;
 	}
 
+	public String getOrientacoesIndividuais() {
+		return orientacoesIndividuais;
+	}
+
+	public void setOrientacoesIndividuais(String orientacoesIndividuais) {
+		this.orientacoesIndividuais = orientacoesIndividuais;
+		
+	}
+
+	
 	
 }
