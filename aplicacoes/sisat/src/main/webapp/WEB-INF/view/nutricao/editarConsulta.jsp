@@ -31,7 +31,8 @@
 
 	<form:form servletRelativeAction="/nutricao/${consultaNutricional.id}/editarConsulta" method="POST" modelAttribute="consultaNutricional">
 	    <div class="tab-content">
-		
+		    <input type="hidden" name="paciente.id" value="${consultaNutricional.paciente.id}">
+		    
 			<!-- ABA DE AVALIACAO NUTRICIONAL -->
 	        <div id="avaliacao" class="tab-pane fade in active">
 				<jsp:include page="abas/editaAvaliacao.jsp" />

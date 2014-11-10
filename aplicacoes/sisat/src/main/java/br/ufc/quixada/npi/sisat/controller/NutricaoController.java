@@ -80,13 +80,15 @@ public class NutricaoController {
 	
 	@RequestMapping(value = {"/{id}/editarConsulta"}, method = RequestMethod.POST)
 	public String editarConsulta(@ModelAttribute("consultaNutricional") ConsultaNutricional consulta) {
-		System.out.println();
-		for(int i = 0; i<consulta.getFrequencias().size(); i++){
-			consulta.getFrequencias().get(i).setConsultaNutricional(consulta);
-			for (int j = 0; j < consulta.getFrequencias().get(i).getAlimentos().size(); j++) {
-				consulta.getFrequencias().get(i).getAlimentos().get(j).setFrequenciaAlimentar(consulta.getFrequencias().get(i));
-			}
-		}
+	ConsultaNutricional cn = consultaNutricionalService.find(ConsultaNutricional.class, consulta.getId());
+	consulta.setData(cn.getData());
+//    consulta.setFrequencias(cn.getFrequencias());
+//		for(int i = 0; i<consulta.getFrequencias().size(); i++){
+//			consulta.getFrequencias().get(i).setConsultaNutricional(consulta);
+//			for (int j = 0; j < consulta.getFrequencias().get(i).getAlimentos().size(); j++) {
+//				consulta.getFrequencias().get(i).getAlimentos().get(j).setFrequenciaAlimentar(consulta.getFrequencias().get(i));
+//			}
+//		}
 		System.out.println("out = " + consulta.getOrientacoesIndividuais() +" - " + consulta.getCondutaNutricional());
 		consultaNutricionalService.update(consulta);
 		return "nutricao/detalhes";
