@@ -28,14 +28,14 @@ public class FrequenciaAlimentar {
 	private Long id;
 	
 	@Temporal(TemporalType.TIME)
-	@DateTimeFormat(pattern="hh:mm")
+	@DateTimeFormat(pattern="HH:mm:ss")
 	private Date horario;
 	
 	@Enumerated(EnumType.STRING)
 	private Refeicoes refeicao;
 	
     @ManyToOne
-    @JoinColumn(name = "consulta_id")
+    @JoinColumn(name = "consultaNutricional_id")
 	private ConsultaNutricional consultaNutricional;
     
 	@OneToMany(cascade = CascadeType.ALL)

@@ -4,7 +4,6 @@ import java.util.Date;
 import java.util.List;
 
 import javax.inject.Inject;
-import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,7 +16,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import br.ufc.quixada.npi.service.GenericService;
+import br.ufc.quixada.npi.sisat.model.Agendamento;
+import br.ufc.quixada.npi.sisat.model.Alimentacao;
 import br.ufc.quixada.npi.sisat.model.ConsultaNutricional;
+import br.ufc.quixada.npi.sisat.model.FrequenciaAlimentar;
 import br.ufc.quixada.npi.sisat.model.Paciente;
 import br.ufc.quixada.npi.sisat.model.Pessoa;
 import br.ufc.quixada.npi.sisat.model.enumerator.Classificacao;
@@ -38,6 +41,9 @@ public class NutricaoController {
 	
 	@Inject
 	private ConsultaNutricionalService consultaNutricionalService;
+	
+	@Inject
+	private GenericService<Agendamento> agendamentoService;
 	
 	@RequestMapping(value = {"/", "/index"}, method = RequestMethod.GET)
 	public String index() {
@@ -79,22 +85,25 @@ public class NutricaoController {
 	}
 	
 	@RequestMapping(value = {"/{id}/editarConsulta"}, method = RequestMethod.POST)
-	public String editarConsulta(@ModelAttribute("consultaNutricional") ConsultaNutricional consulta) {
-	ConsultaNutricional cn = consultaNutricionalService.find(ConsultaNutricional.class, consulta.getId());
-	consulta.setData(cn.getData());
-//    consulta.setFrequencias(cn.getFrequencias());
-//		for(int i = 0; i<consulta.getFrequencias().size(); i++){
-//			consulta.getFrequencias().get(i).setConsultaNutricional(consulta);
-//			for (int j = 0; j < consulta.getFrequencias().get(i).getAlimentos().size(); j++) {
-//				consulta.getFrequencias().get(i).getAlimentos().get(j).setFrequenciaAlimentar(consulta.getFrequencias().get(i));
-//			}
-//		}
-		System.out.println("out = " + consulta.getOrientacoesIndividuais() +" - " + consulta.getCondutaNutricional());
-		consultaNutricionalService.update(consulta);
-		return "nutricao/detalhes";
+	public String editarConsulta(@ModelAttribute("consultaNutricional") ConsultaNutricional consulta, @PathVariable("id") long id) {
+		consultaNutricionalService.update(atualizarConsulta(consulta));
+		return "redirect:/nutricao/" + consulta.getPaciente().getId() + "/detalhes";
 	}
 
-
+	private ConsultaNutricional atualizarConsulta(ConsultaNutricional consulta) {
+		if (consulta.getFrequencias() != null) {
+			for (FrequenciaAlimentar frequencia : consulta.getFrequencias()) {
+				frequencia.setConsultaNutricional(consulta);
+				if (frequencia.getAlimentos() != null) {
+					for (Alimentacao alimentacao : frequencia.getAlimentos()) {
+						alimentacao.setFrequenciaAlimentar(frequencia);
+					}
+				}
+			}
+		}
+		return consulta;
+	}
+	
 	//Detalhes de paciente
 
 	@RequestMapping(value = {"/{id}/detalhes"})
@@ -135,8 +144,9 @@ public class NutricaoController {
 	
 	@RequestMapping(value = {"/consulta"}, method = RequestMethod.POST)
 	public String consulta(@ModelAttribute("consulta") ConsultaNutricional consulta, BindingResult result, RedirectAttributes redirectAttributes) {
+		System.out.println();
 		if (result.hasErrors()) {
-			return ("nutricao/buscar");
+			return ("nutricao/consulta");
 		}
 		Paciente paciente = pacienteService.find(Paciente.class, consulta.getPaciente().getId());
 		double altura = consulta.getPaciente().getAltura();
@@ -188,5 +198,14 @@ public class NutricaoController {
 			model.addAttribute("consulta", consulta);
 			return "nutricao/detalhesConsulta";
 		}
+	
+	//deletar agendamento //Wanrly
+	@RequestMapping(value = {"/{id}/deletarAgendamento"}, method = RequestMethod.GET)
+	public String deletarAgendamento(@PathVariable("id") Long id, RedirectAttributes redirectAttributes){
+		agendamentoService.delete(agendamentoService.find(Agendamento.class, id));
+		redirectAttributes.addFlashAttribute("success", "Agendamento deletado com sucesso");
+		return "redirect:/nutricao/buscar_agendamento";
+	}
+	
 	
 }
