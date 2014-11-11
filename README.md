@@ -7,8 +7,8 @@ senha: teste1234 - sha256: "97e7ae26dd76600646701e97840d52b6ab7cb23cd03f8fa8e506
 ````
 
 ```sql
-insert into pessoa (email, habilitado, login, password) values ('nutri@ufc.br',true, 'nutri', '97e7ae26dd76600646701e97840d52b6ab7cb23cd03f8fa8e50640d84b52b5e1');
-insert into pessoa (email, habilitado, login, password) values ('psico@ufc.br',true, 'psico', '97e7ae26dd76600646701e97840d52b6ab7cb23cd03f8fa8e50640d84b52b5e1');
+insert into pessoa (nome, email, habilitado, login, password) values ('Usuário Nutrição', nutri@ufc.br', true, 'nutri', '97e7ae26dd76600646701e97840d52b6ab7cb23cd03f8fa8e50640d84b52b5e1');
+insert into pessoa (nome, email, habilitado, login, password) values ('Usuário Psicologia', 'psico@ufc.br', true, 'psico', '97e7ae26dd76600646701e97840d52b6ab7cb23cd03f8fa8e50640d84b52b5e1');
 
 insert into papel (nome) values ('ROLE_NUTRICAO');
 insert into papel (nome) values ('ROLE_PSICOLOGIA');
