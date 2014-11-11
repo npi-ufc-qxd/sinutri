@@ -1,7 +1,6 @@
 package br.ufc.quixada.npi.sisat.model;
 
 import java.text.DecimalFormat;
-
 import java.util.Date;
 import java.util.List;
 
@@ -18,6 +17,10 @@ import javax.persistence.OneToMany;
 
 
 
+
+
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -37,7 +40,8 @@ public class ConsultaNutricional {
 	@JoinColumn(name="paciente_id")
 	private Paciente paciente;
 
-	@DateTimeFormat
+	@Temporal(TemporalType.DATE)
+	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	private Date data;
 	
 	private Double peso;

@@ -1,9 +1,17 @@
 <!DOCTYPE html>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <div class="col-sm-12">
+		
+	<fmt:formatDate value="${consulta.data}"  
+                type="date" 
+                pattern="dd/MM/yyyy"
+                var="dataFormatada" />	
+	<br/>
+	<label>Data da Consulta</label><input name="data" class="data" value="${consultaNutricional.data}">
+	
 	<br/><br/>
 	<label>Informações do Paciente</label> <br/><br/>
 	<div class="col-sm-3">
@@ -154,4 +162,13 @@
 			document.getElementById('inputTextPatologia').disabled = true;
 		}
 	}
+	
+	$("input#inputData").datepicker({
+		format : "dd/mm/yyyy",
+		todayBtn : "linked",
+		autoclose : true,
+		language : "pt-BR",
+		todayHighlight : true,
+	});
+	
 </script>
