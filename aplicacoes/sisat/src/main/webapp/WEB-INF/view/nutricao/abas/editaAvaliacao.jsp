@@ -6,7 +6,7 @@
 	<fmt:formatDate value="${consultaNutricional.data}"  
                 type="date" 
                 pattern="dd/MM/yyyy"
-                var="dataFormatada" />	
+                var="dataFormatada"/>	
 	<br/>
 	<label>Data da Consulta</label><input name="data" class="data" value="${ dataFormatada }">
 	
