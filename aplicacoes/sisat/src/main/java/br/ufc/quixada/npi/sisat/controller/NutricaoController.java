@@ -132,7 +132,6 @@ public class NutricaoController {
 	@RequestMapping(value = {"/consulta"}, method = RequestMethod.POST)
 	public String consulta(@ModelAttribute("consulta") ConsultaNutricional consulta, BindingResult result, RedirectAttributes redirectAttributes) {
 		if (result.hasErrors()) {
-			redirectAttributes.addFlashAttribute("danger", result.toString());
 			return "redirect:/nutricao/buscar";
 		}
 		Paciente paciente = pacienteService.find(Paciente.class, consulta.getPaciente().getId());
@@ -179,7 +178,7 @@ public class NutricaoController {
 		public String getDetalhesConsulta(@PathVariable("id") Long id, Model model, RedirectAttributes redirectAttributes){
 			ConsultaNutricional consulta = consultaNutricionalService.find(ConsultaNutricional.class, id);
 			if(consulta == null){
-				redirectAttributes.addFlashAttribute("danger", "Consulta não encontrado.");
+				redirectAttributes.addFlashAttribute("danger", "Consulta não encontrada.");
 				return "redirect:/nutricao/buscar";
 			}
 			model.addAttribute("consulta", consulta);
