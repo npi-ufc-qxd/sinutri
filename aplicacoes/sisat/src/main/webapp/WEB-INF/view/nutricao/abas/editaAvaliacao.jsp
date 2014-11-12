@@ -3,12 +3,12 @@
 
 <div class="col-sm-12">
 
-	<fmt:formatDate value="${consulta.data}"  
+	<fmt:formatDate value="${consultaNutricional.data}"  
                 type="date" 
                 pattern="dd/MM/yyyy"
                 var="dataFormatada" />	
 	<br/>
-	<label>Data da Consulta</label><input name="data" class="data" value="${ consultaNutricional.data }">
+	<label>Data da Consulta</label><input name="data" class="data" value="${ dataFormatada }">
 	
 	<br/><br/>
 	<label>Informações do paciente</label> <br/>

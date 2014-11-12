@@ -4,13 +4,9 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <div class="col-sm-12">
-		
-	<fmt:formatDate value="${consulta.data}"  
-                type="date" 
-                pattern="dd/MM/yyyy"
-                var="dataFormatada" />	
+			
 	<br/>
-	<label>Data da Consulta</label><input name="data" class="data" value="${consultaNutricional.data}">
+	<label>Data da Consulta</label><input name="data" class="data">
 	
 	<br/><br/>
 	<label>Informações do Paciente</label> <br/><br/>
