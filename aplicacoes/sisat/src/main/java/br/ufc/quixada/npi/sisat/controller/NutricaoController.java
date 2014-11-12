@@ -134,6 +134,8 @@ public class NutricaoController {
 			pessoaService.update(pessoa);
 		}
 		ConsultaNutricional consulta = new ConsultaNutricional();
+		Date data = new Date(System.currentTimeMillis());
+		consulta.setData(data);
 		model.addAttribute("paciente", pessoa.getPaciente());
 		model.addAttribute("consulta", consulta);
 		model.addAttribute("classificacao", Classificacao.values());
@@ -151,8 +153,7 @@ public class NutricaoController {
 		Paciente paciente = pacienteService.find(Paciente.class, consulta.getPaciente().getId());
 		double altura = consulta.getPaciente().getAltura();
 		
-		Date data = new Date(System.currentTimeMillis());
-		consulta.setData(data);
+		
 		
 		consulta.setPaciente(paciente);
 		consulta.getPaciente().setAltura(altura);

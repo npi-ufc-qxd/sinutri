@@ -1,7 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <div class="col-sm-12">
-	<label>Paciente</label> <br/>
+
+	<fmt:formatDate value="${consultaNutricional.data}"  
+                type="date" 
+                pattern="dd/MM/yyyy"
+                var="dataFormatada"/>	
+	<br/>
+	<label>Data da Consulta</label><input name="data" class="data" value="${ dataFormatada }">
+	
+	<br/><br/>
+	<label>Informações do paciente</label> <br/>
 	<div class="col-sm-3">
 		<label>Altura</label><input type="text" name="altura" size="10" disabled="disabled">
 	</div>
@@ -105,6 +115,9 @@
 	</select>
 	<label>/semana</label>
 </div>	
+
+	<div class="col-sm-2"><input type="checkbox" name="diabetes" ${consultaNutricional.diabetes == 'TRUE' ? 'checked' : ''} /><label>Diabetes</label></div>
+	<div class="col-sm-2"><input type="checkbox" name="hipertensao" ${consultaNutricional.hipertensao == 'TRUE' ? 'checked' : ''} /><label>Hipertensão</label></div>
 
 <div class="col-sm-12">
 	<div style="cursor: pointer;"></div> <br/>

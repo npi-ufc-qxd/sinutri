@@ -1,13 +1,17 @@
 <!DOCTYPE html>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <div class="col-sm-12">
+			
+	<br/>
+	<label>Data da Consulta</label><input name="data" class="data">
+	
 	<br/><br/>
 	<label>Informações do Paciente</label> <br/><br/>
 	<div class="col-sm-3">
-		<label>Altura</label><input type="text" name="paciente.altura" size="10" value="${paciente.altura }">
+		<label>Altura</label><input type="text" name="paciente.altura" size="10" value="${ paciente.altura }">
 	</div>
 	<div class="col-sm-3">
 		<label>Peso</label><input type="text" name="peso" size="10">
@@ -154,4 +158,13 @@
 			document.getElementById('inputTextPatologia').disabled = true;
 		}
 	}
+	
+	$("input#inputData").datepicker({
+		format : "dd/mm/yyyy",
+		todayBtn : "linked",
+		autoclose : true,
+		language : "pt-BR",
+		todayHighlight : true,
+	});
+	
 </script>
