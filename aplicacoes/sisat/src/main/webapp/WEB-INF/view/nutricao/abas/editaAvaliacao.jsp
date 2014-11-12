@@ -116,6 +116,9 @@
 	<label>/semana</label>
 </div>	
 
+	<div class="col-sm-2"><input type="checkbox" name="diabetes" ${consultaNutricional.diabetes == 'TRUE' ? 'checked' : ''} /><label>Diabetes</label></div>
+	<div class="col-sm-2"><input type="checkbox" name="hipertensao" ${consultaNutricional.hipertensao == 'TRUE' ? 'checked' : ''} /><label>Hipertensão</label></div>
+
 <div class="col-sm-12">
 	<div style="cursor: pointer;"></div> <br/>
 	<input type="checkbox" name="outrasPatologias" id="checkPatologia" onclick="habilitar(); "${consultaNutricional.outrasPatologias == 'TRUE' ? 'checked' : ''}/><label>Patologias</label><br/>
