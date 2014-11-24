@@ -1,5 +1,5 @@
-# automatic end-of-line normalization should be attempted in text files
-* text=auto
+# end-of-line normalization should be attempted in text files
+* text eol=lf
 # Definitively text files
 *.xml text
 *.java text
