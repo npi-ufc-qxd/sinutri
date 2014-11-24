@@ -7,6 +7,9 @@
 *.xhtml text
 *.jsp text
 *.jsf text
+*.css
+*.js
+*.sql
 *.txt text
 *.c text
 *.h text
