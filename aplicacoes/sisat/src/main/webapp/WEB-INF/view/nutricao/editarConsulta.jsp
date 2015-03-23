@@ -29,10 +29,11 @@
         <li><a data-toggle="tab" href="#orientacoes">Editar Orientações Individuais</a></li>
     </ul>
 
-	<form:form servletRelativeAction="/nutricao/${consultaNutricional.id}/editarConsulta" method="POST" modelAttribute="consultaNutricional">
-	    <div class="tab-content">
+	<form:form servletRelativeAction="/nutricao/consulta" method="POST" modelAttribute="consultaNutricional">
+	    <div class="tab-content">	    
 	    <input type="hidden" name="paciente.id" value="${consultaNutricional.paciente.id}">
 	    <input type="hidden" name="paciente.altura" value="${consultaNutricional.paciente.altura}">
+	    <input type="hidden" name="id" value="${consultaNutricional.id}">
 		
 			<!-- ABA DE AVALIACAO NUTRICIONAL -->
 	        <div id="avaliacao" class="tab-pane fade in active">
