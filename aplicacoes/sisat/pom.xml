@@ -137,6 +137,7 @@
 			<groupId>org.postgresql</groupId>
 			<artifactId>postgresql</artifactId>
 			<version>${postgresql.version}</version>
+			<scope>provided</scope>
 		</dependency>
 
 		<!-- Logging with SLF4J & LogBack -->

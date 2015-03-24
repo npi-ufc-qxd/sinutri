@@ -34,7 +34,7 @@
         <li><a data-toggle="tab" href="#orientacoes">Orientações Individuais</a></li>
     </ul>
 
-	<form:form servletRelativeAction="../consulta" method="POST" modelAttribute="consulta" acceptCharset="UTF-8">
+	<form:form servletRelativeAction="/nutricao/consulta" method="POST" modelAttribute="consulta" acceptCharset="UTF-8">
 	    <div class="tab-content">
 	    <input type="hidden" name="paciente.id" value="${id}">
 		
@@ -42,21 +42,16 @@
 	        <div id="avaliacao" class="tab-pane fade in active">
 				<jsp:include page="abas/avaliacao.jsp" />
 	        </div>
-	
-			<!-- ABA DE EXAMES LABORATORIAS -->
-	        <div id="exame" class="tab-pane fade">
+	        <div id="exame" class="tab-pane fade in active">
 				<jsp:include page="abas/exame.jsp" />
 	        </div>
-	
-			<!-- ABA DE QUESTIONARIO DE FRENQUENCIA ALIMENTAR -->
-	        <div id="questionario" class="tab-pane fade">
+	        <div id="questionario" class="tab-pane fade in active">
 				<jsp:include page="abas/questionario.jsp" />
 	        </div>
-	        
-	        <!-- ABA DE ORIENTAÇÕES INDIVIDUAIS -->
-	         <div id="orientacoes" class="tab-pane fade">
+	        <div id="orientacoes" class="tab-pane fade in active">
 				<jsp:include page="abas/orientacoes.jsp" />
 	        </div>
+	        
 	    </div>
 
 		<div class="col-xs-offset-0 col-xs-10" align="center">

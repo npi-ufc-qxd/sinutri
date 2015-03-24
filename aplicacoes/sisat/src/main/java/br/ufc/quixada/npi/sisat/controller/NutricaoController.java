@@ -50,16 +50,13 @@ public class NutricaoController {
 		return "nutricao/buscar";
 	}
 
-	@RequestMapping(value = "/uniao-consulta", method = RequestMethod.GET)
-	public String integrar() {
-		return "nutricao/integracao/uniao-consulta";
-	}
 	
 	//Buscar paciente (get)
 	@RequestMapping(value = {"/buscar"}, method = RequestMethod.GET)
 	public String buscarPaciente(Model model) {
 		return "nutricao/buscar";
 	}
+	
 	//Buscar paciente (post)
 	@RequestMapping(value = "/buscar", method = RequestMethod.POST)
 	public String buscarPaciente(@RequestParam("tipoPesquisa") String tipoPesquisa, @RequestParam("campo") String campo, ModelMap map, RedirectAttributes redirectAttributes) {
@@ -84,9 +81,8 @@ public class NutricaoController {
 		ConsultaNutricional consultaNutricional = consultaNutricionalService.find(ConsultaNutricional.class, id);
 		model.addAttribute("consultaNutricional", consultaNutricional);
 		Classificacao[] cla= Classificacao.values();
-		model.addAttribute("classificacao", cla);
-		model.addAttribute("acao", "editar");
-		return "/nutricao/editarConsulta";
+		model.addAttribute("classificacao", cla);		
+		return "/nutricao/consulta";
 	}
 	
 //	@RequestMapping(value = {"/{id}/editarConsulta"}, method = RequestMethod.POST)
@@ -125,38 +121,37 @@ public class NutricaoController {
 	
 	//=========================== Consulta Nutricional ===========================
 	//Consulta Nutricional --> Create
-	@RequestMapping(value = {"/{id}/realizar"}, method = RequestMethod.GET)
+	@RequestMapping(value = {"/{id}/consulta"}, method = RequestMethod.GET)
 	public String realizarConsulta(Model model, @PathVariable("id") Long id, RedirectAttributes redirectAttributes) {
 		Pessoa pessoa = pessoaService.find(Pessoa.class, id);
 		if(pessoa == null){
 			redirectAttributes.addFlashAttribute("erro", "Paciente não encontrado.");
 			return "redirect:/nutricao/buscar";
 		}
+		
 		if(pessoa.getPaciente() == null){
 			pessoa.setPaciente(new Paciente());
 			pessoa.getPaciente().setPessoa(pessoa);
 			pessoaService.update(pessoa);
 		}
+		
 		ConsultaNutricional consulta = new ConsultaNutricional();
 		model.addAttribute("paciente", pessoa.getPaciente());
 		model.addAttribute("consulta", consulta);
 		model.addAttribute("classificacao", Classificacao.values());
-		model.addAttribute("refeicoes", Refeicoes.values());
+		model.addAttribute("refeicoes", Refeicoes.values());		
 		
-		model.addAttribute("acao", "salvar");
 		return "nutricao/consulta";
 	}
 	
 	@RequestMapping(value = {"/consulta"}, method = RequestMethod.POST)
-	public String consulta(@ModelAttribute("consulta") ConsultaNutricional consulta, BindingResult result, RedirectAttributes redirectAttributes) {
-		
+	public String consulta(@ModelAttribute("consulta") ConsultaNutricional consulta, BindingResult result, RedirectAttributes redirectAttributes) {		
 		
 		if (result.hasErrors()) {
 			return ("nutricao/consulta");
 		}
 		
-		if(consulta.getId() != 0){
-		
+		if(consulta.getId() != null){
 			consultaNutricionalService.update(atualizarConsulta(consulta));
 			redirectAttributes.addFlashAttribute("success", "Consulta de <strong>id = " + consulta.getId() + "</strong> e paciente  atualizada com sucesso.");
 			return "redirect:/nutricao/buscar";
@@ -193,12 +188,8 @@ public class NutricaoController {
 			consulta.setBebidaAlcoolicaComentario(null);
 		}
 		
-		
-		
-		
-			
-			consultaNutricionalService.save(consulta);
-			redirectAttributes.addFlashAttribute("success", "Consulta de <strong>id = " + consulta.getId() + "</strong> e paciente <strong>" + consulta.getPaciente().getPessoa().getNome() + "</strong> realizada com sucesso.");
+		consultaNutricionalService.save(consulta);
+		redirectAttributes.addFlashAttribute("success", "Consulta de <strong>id = " + consulta.getId() + "</strong> e paciente <strong>" + consulta.getPaciente().getPessoa().getNome() + "</strong> realizada com sucesso.");
 		
 
 		return "redirect:/nutricao/buscar";
