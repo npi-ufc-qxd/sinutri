@@ -25,13 +25,13 @@
 	<h2>${consulta.id}</h2>
 	
     <ul class="nav nav-tabs">
-        <li class="active"><a data-toggle="tab" href="#avaliacao">Avaliação Nutricional</a></li>
+        <li ><a data-toggle="tab" href="#avaliacao">Avaliação Nutricional</a></li>
 
         <li><a data-toggle="tab" href="#exame">Exames Laboratoriais</a></li>
         
         <li><a data-toggle="tab" href="#questionario">Questionario de Frequencia Alimentar</a></li>
         
-        <li><a data-toggle="tab" href="#orientacoes">Orientações Individuais</a></li>
+        <li ><a data-toggle="tab" href="#orientacoes">Orientações Individuais</a></li>
     </ul>
 
 	<form:form servletRelativeAction="/nutricao/consulta" method="POST" modelAttribute="consulta" acceptCharset="UTF-8">
@@ -42,13 +42,13 @@
 	        <div id="avaliacao" class="tab-pane fade in active">
 				<jsp:include page="abas/avaliacao.jsp" />
 	        </div>
-	        <div id="exame" class="tab-pane fade in active">
+	        <div id="exame" class="tab-pane fade in ">
 				<jsp:include page="abas/exame.jsp" />
 	        </div>
-	        <div id="questionario" class="tab-pane fade in active">
+	        <div id="questionario" class="tab-pane fade in ">
 				<jsp:include page="abas/questionario.jsp" />
 	        </div>
-	        <div id="orientacoes" class="tab-pane fade in active">
+	        <div id="orientacoes" class="tab-pane fade in ">
 				<jsp:include page="abas/orientacoes.jsp" />
 	        </div>
 	        

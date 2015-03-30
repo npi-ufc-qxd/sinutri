@@ -79,6 +79,7 @@ public class NutricaoController {
 	@RequestMapping(value = "/{id}/editarConsulta", method = RequestMethod.GET)
 	public String editarConsulta(@PathVariable("id") long id, Model model) {
 		ConsultaNutricional consultaNutricional = consultaNutricionalService.find(ConsultaNutricional.class, id);
+		double altura  = consultaNutricional.getPaciente().getAltura();
 		model.addAttribute("consultaNutricional", consultaNutricional);
 		Classificacao[] cla= Classificacao.values();
 		model.addAttribute("classificacao", cla);		
@@ -124,14 +125,19 @@ public class NutricaoController {
 	@RequestMapping(value = {"/{id}/consulta"}, method = RequestMethod.GET)
 	public String realizarConsulta(Model model, @PathVariable("id") Long id, RedirectAttributes redirectAttributes) {
 		Pessoa pessoa = pessoaService.find(Pessoa.class, id);
+		
+		
+		
 		if(pessoa == null){
 			redirectAttributes.addFlashAttribute("erro", "Paciente não encontrado.");
 			return "redirect:/nutricao/buscar";
 		}
 		
 		if(pessoa.getPaciente() == null){
+			System.err.println("Emtrou aqui");
 			pessoa.setPaciente(new Paciente());
 			pessoa.getPaciente().setPessoa(pessoa);
+			
 			pessoaService.update(pessoa);
 		}
 		
@@ -153,13 +159,18 @@ public class NutricaoController {
 		
 		if(consulta.getId() != null){
 			consultaNutricionalService.update(atualizarConsulta(consulta));
+			
 			redirectAttributes.addFlashAttribute("success", "Consulta de <strong>id = " + consulta.getId() + "</strong> e paciente  atualizada com sucesso.");
 			return "redirect:/nutricao/buscar";
 		}
 		
-		Paciente paciente = pacienteService.find(Paciente.class, consulta.getPaciente().getId());
-		double altura = consulta.getPaciente().getAltura();
+		System.err.println("----------------"+consulta.getPaciente().getId());
 		
+		Paciente paciente = pacienteService.find(Paciente.class, consulta.getPaciente().getId());
+		
+		
+		double altura = consulta.getPaciente().getAltura();
+	
 		Date data = new Date(System.currentTimeMillis());
 		consulta.setData(data);
 		
