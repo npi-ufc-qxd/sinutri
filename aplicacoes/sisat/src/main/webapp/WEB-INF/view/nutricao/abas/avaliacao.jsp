@@ -16,7 +16,7 @@
 
 <div class="col-sm-12">
 	<div style="cursor: pointer;"></div> <br/>
-	<input type="checkbox" name="medicamento" id="checkMedicamento" onclick="habilitarEditaAvaliacao();" ${consultaNutricional.medicamento == 'TRUE' ? 'checked' : ''}/><label>Medicamentos</label>
+	<input type="checkbox" name="medicamento" id="checkMedicamento" onclick="habilitar();" ${consultaNutricional.medicamento == 'TRUE' ? 'checked' : ''}/><label>Medicamentos</label>
 	<input type="text" name="medicamentoComentario" size='123' id="inputTextMedicamento" value="${ consultaNutricional.medicamentoComentario }" ${consultaNutricional.medicamento == 'TRUE' ? '' : 'disabled'}/> <br/><br/>
 </div>
 
@@ -30,14 +30,14 @@
 	<div class="col-sm-2"><input type="checkbox" name="constipacao" ${consultaNutricional.constipacao == 'TRUE' ? 'checked' : ''} /><label>Constipação</label></div>
 	
 	<div class="col-sm-12" style="cursor: pointer;">
-		<input class="col-sm-0" type="checkbox" name="mastigacao" id="checkMastigacao" onclick="habilitarEditaAvaliacao();" ${consultaNutricional.mastigacao == 'TRUE' ? 'checked' : ''} /><label>Mastigação</label>
+		<input class="col-sm-0" type="checkbox" name="mastigacao" id="checkMastigacao" onclick="habilitar();" ${consultaNutricional.mastigacao == 'TRUE' ? 'checked' : ''} /><label>Mastigação</label>
 		<input type=text name="mastigacaoComentario" size='123' id="inputTextMastigacao" value="${ consultaNutricional.mastigacaoComentario }" ${consultaNutricional.mastigacao == 'TRUE' ? '' : 'disabled'}/>
 	</div>
 </div>
 
 <div class="col-sm-12">
 	<div style="cursor: pointer;"></div> <br/>
-	<input type="checkbox" name="alergia" id="checkAlergia" onclick="habilitarEditaAvaliacao();" ${consultaNutricional.alergia == 'TRUE' ? 'checked' : ''} /><label>Alergia Alimentar</label>
+	<input type="checkbox" name="alergia" id="checkAlergia" onclick="habilitar();" ${consultaNutricional.alergia == 'TRUE' ? 'checked' : ''} /><label>Alergia Alimentar</label>
 	<textarea rows="2" cols="140" name="alergiaComentario" ${consultaNutricional.alergia == 'TRUE' ? '' : 'disabled'} id="inputTextAlergia">${ consultaNutricional.alergiaComentario }</textarea>
 </div>
 
@@ -49,7 +49,7 @@
 
 <div class="col-sm-12">
 	<div style="cursor: pointer;"></div>
-		<input type="checkbox" name="atividadeFisica" id="checkAtividadeFisica" onclick="habilitarEditaAvaliacao();" ${consultaNutricional.atividadeFisica == 'TRUE' ? 'checked' : ''}/><label>Atividade Física</label>
+		<input type="checkbox" name="atividadeFisica" id="checkAtividadeFisica" onclick="habilitar();" ${consultaNutricional.atividadeFisica == 'TRUE' ? 'checked' : ''}/><label>Atividade Física</label>
 		<input type=text name="atividadeFisicaComentario" size='20' id="inputTextAtividadeFisica" value="${ consultaNutricional.atividadeFisicaComentario }" ${consultaNutricional.atividadeFisica == 'TRUE' ? '' : 'disabled'}/>
 
 	<label>Frequência em dias</label>
@@ -69,7 +69,7 @@
 
 <div class="col-sm-12">
 	<div style="cursor: pointer;"></div>
-		<input type="checkbox" name="carneVermelha" id="checkCarneVermelha" onclick="habilitarEditaAvaliacao();" ${consultaNutricional.carneVermelha == 'TRUE' ? 'checked' : ''}/><label>Carne Vermelha</label>
+		<input type="checkbox" name="carneVermelha" id="checkCarneVermelha" onclick="habilitar();" ${consultaNutricional.carneVermelha == 'TRUE' ? 'checked' : ''}/><label>Carne Vermelha</label>
 		<input type=text name="carneVermelhaComentario" size='20' id="inputTextCarneVermelha" value="${ consultaNutricional.carneVermelhaComentario }" ${consultaNutricional.carneVermelha == 'TRUE' ? '' : 'disabled'}/>
 	
 	<label>Frequência em dias</label>
@@ -89,7 +89,7 @@
 
 <div class="col-sm-12">
 	<div style="cursor: pointer;"></div>
-	<input type="checkbox" name="bebidaAlcoolica" id="checkBebidaAlcoolica" onclick="habilitarEditaAvaliacao();"${consultaNutricional.bebidaAlcoolica == 'TRUE' ? 'checked' : ''}/><label>Bebida alcoólica</label>
+	<input type="checkbox" name="bebidaAlcoolica" id="checkBebidaAlcoolica" onclick="habilitar();"${consultaNutricional.bebidaAlcoolica == 'TRUE' ? 'checked' : ''}/><label>Bebida alcoólica</label>
 	<input type=text name="bebidaAlcoolicaComentario" size='20' id="inputTextBebidaAlcoolica" value="${ consultaNutricional.bebidaAlcoolicaComentario }" ${consultaNutricional.bebidaAlcoolica == 'TRUE' ? '' : 'disabled'}/>
 
 	<label>Frequência em dias</label>
@@ -109,7 +109,7 @@
 
 <div class="col-sm-12">
 	<div style="cursor: pointer;"></div> <br/>
-	<input type="checkbox" name="outrasPatologias" id="checkPatologia" onclick="habilitarEditaAvaliacao(); "${consultaNutricional.outrasPatologias == 'TRUE' ? 'checked' : ''}/><label>Patologias</label><br/>
+	<input type="checkbox" name="outrasPatologias" id="checkPatologia" onclick="habilitar(); "${consultaNutricional.outrasPatologias == 'TRUE' ? 'checked' : ''}/><label>Patologias</label><br/>
 	<textarea rows="2" cols="140" name="outrasPatologiasComentario" id="inputTextPatologia" ${consultaNutricional.outrasPatologias == 'TRUE' ? '' : 'disabled'}>${ consultaNutricional.outrasPatologiasComentario }</textarea> <br/><br/>
 </div>
 
@@ -117,3 +117,42 @@
 	<label>Objetivo da Consulta</label> <br/>
 	<textarea rows="2" cols="140" name="objetivoConsulta">${ consultaNutricional.objetivoConsulta }</textarea> <br/><br/>
 </div>
+<script>
+function habilitar() {
+	if (document.getElementById('checkMedicamento').checked) {
+		document.getElementById('inputTextMedicamento').disabled = false;
+	} else {
+		document.getElementById('inputTextMedicamento').disabled = true;
+	}
+	if (document.getElementById('checkMastigacao').checked) {
+		document.getElementById('inputTextMastigacao').disabled = false;
+	} else {
+		document.getElementById('inputTextMastigacao').disabled = true;
+	}
+	if (document.getElementById('checkAlergia').checked) {
+		document.getElementById('inputTextAlergia').disabled = false;
+	} else {
+		document.getElementById('inputTextAlergia').disabled = true;
+	}
+	if (document.getElementById('checkCarneVermelha').checked) {
+		document.getElementById('inputTextCarneVermelha').disabled = false;
+	} else {
+		document.getElementById('inputTextCarneVermelha').disabled = true;
+	}
+	if (document.getElementById('checkAtividadeFisica').checked) {
+		document.getElementById('inputTextAtividadeFisica').disabled = false;
+	} else {
+		document.getElementById('inputTextAtividadeFisica').disabled = true;
+	}
+	if (document.getElementById('checkBebidaAlcoolica').checked) {
+		document.getElementById('inputTextBebidaAlcoolica').disabled = false;
+	} else {
+		document.getElementById('inputTextBebidaAlcoolica').disabled = true;
+	}
+	if (document.getElementById('checkPatologia').checked) {
+		document.getElementById('inputTextPatologia').disabled = false;
+	} else {
+		document.getElementById('inputTextPatologia').disabled = true;
+	}
+}
+</script>

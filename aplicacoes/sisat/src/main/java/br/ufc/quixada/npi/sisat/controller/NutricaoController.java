@@ -84,10 +84,16 @@ public class NutricaoController {
 	}
 
 	@RequestMapping(value = {"/editarConsulta"}, method = RequestMethod.POST)
-	public String editarConsulta(@ModelAttribute("consultaNutricional") ConsultaNutricional consulta) {
-		System.err.println("Aqui!!!");
-		System.err.println(consulta.getPaciente().getId());
+	public String editarConsulta(@ModelAttribute("consultaNutricional") ConsultaNutricional consulta, BindingResult result, RedirectAttributes redirectAttributes) {
+		Paciente paciente = pacienteService.find(Paciente.class, consulta.getPaciente().getId());
+		
+		Date data = consultaNutricionalService.find(ConsultaNutricional.class, consulta.getId()).getData(); 
+		
+		consulta.setData(data);
+		consulta.setPaciente(paciente);
+
 		consultaNutricionalService.update(atualizarConsulta(consulta));
+		redirectAttributes.addFlashAttribute("success", "Consulta do paciente <strong>" + consulta.getPaciente().getPessoa().getNome() + "</strong> atualizada com sucesso.");
 		return "redirect:/nutricao/" + consulta.getPaciente().getId() + "/detalhes";
 	}
 
@@ -113,6 +119,7 @@ public class NutricaoController {
 			redirectAttributes.addFlashAttribute("erro", "Paciente não encontrado.");
 			return "redirect:/nutricao/buscar";
 		}
+		
 		model.addAttribute("pessoa", pessoa);
 		return "nutricao/detalhes";
 	}
@@ -154,7 +161,6 @@ public class NutricaoController {
 	public String consulta(@ModelAttribute("consulta") ConsultaNutricional consulta, BindingResult result, RedirectAttributes redirectAttributes) {		
 
 		if (result.hasErrors()) {
-			System.err.println(result.toString());
 			return ("nutricao/consulta");
 		}
 		
@@ -188,7 +194,7 @@ public class NutricaoController {
 		}
 		consultaNutricionalService.save(consulta);
 
-redirectAttributes.addFlashAttribute("success", "Consulta de <strong>id = " + consulta.getId() + "</strong> e paciente <strong>" + consulta.getPaciente().getPessoa().getNome() + "</strong> realizada com sucesso.");
+		redirectAttributes.addFlashAttribute("success", "Consulta de <strong>id = " + consulta.getId() + "</strong> e paciente <strong>" + consulta.getPaciente().getPessoa().getNome() + "</strong> realizada com sucesso.");
 		return "redirect:/nutricao/buscar";
 
 	}

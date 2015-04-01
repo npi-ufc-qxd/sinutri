@@ -33,7 +33,7 @@
 			<c:set var="botao" value="Atualizar Consulta"></c:set>
 		</c:if>
 	
-		<h2 > Consulta =  ${consultaNutricional.id}  Paciente = ${consultaNutricional.paciente.id} </h2>
+	
 		<h2> ${titulo}</h2>
 		
 		<ul class="nav nav-tabs">
@@ -54,8 +54,10 @@
 			<div class="tab-content">
 
 				<input type="hidden" name="paciente.id" value="${consultaNutricional.paciente.id}" >
-				
-					
+				<input type="hidden" name="id" value="${consultaNutricional.id}" >
+				<input type="hidden" name="data" value="${consultaNutricional.data}" >
+				<fmt:formatDate value="${consultaNutricional.data}" pattern="MM/dd/yyyy' -- 'hh:mm:ss"/> 
+								
 				<!-- ABA DE AVALIACAO NUTRICIONAL -->
 				<div id="avaliacao" class="tab-pane fade in active">
 					<jsp:include page="abas/avaliacao.jsp" />
