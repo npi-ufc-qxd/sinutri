@@ -4,13 +4,13 @@
 <div class="col-sm-12">
 	<label>Paciente</label> <br/>
 	<div class="col-sm-3">
-		<label>Altura</label><input type="text" name="paciente.altura" size="10" value="${consultaNutricional.paciente.altura}">
+		<label>Altura</label><input type="text" name="paciente.altura" size="10" value="${consultaNutricional.paciente.altura}" onkeypress="return digitos(event, this);">
 	</div>
 	<div class="col-sm-3">
-		<label>Peso</label><input type="text" name="peso" size="10" value="${ consultaNutricional.peso }">
+		<label>Peso</label><input type="text" name="peso" size="10" value="${ consultaNutricional.peso }" onkeypress="return digitos(event, this);">
 	</div>
 	<div class="col-sm-3">
-		<label>CC</label><input type="text" name="circunferenciaCintura" size="10" value="${ consultaNutricional.circunferenciaCintura }">
+		<label>CC</label><input type="text" name="circunferenciaCintura" size="10" value="${ consultaNutricional.circunferenciaCintura }" onkeypress="return digitos(event, this);">
 	</div>
 </div>
 
@@ -42,7 +42,7 @@
 </div>
 
 <div class="col-sm-12">
-	<label>Consumo de água</label><input type="text" name="agua" size="10" value="${ consultaNutricional.agua }"> 
+	<label>Consumo de água</label><input type="text" name="agua" size="10" value="${ consultaNutricional.agua }" onkeypress="return digitos(event, this);"> 
 </div>
 
 
@@ -117,42 +117,3 @@
 	<label>Objetivo da Consulta</label> <br/>
 	<textarea rows="2" cols="140" name="objetivoConsulta">${ consultaNutricional.objetivoConsulta }</textarea> <br/><br/>
 </div>
-<script>
-function habilitar() {
-	if (document.getElementById('checkMedicamento').checked) {
-		document.getElementById('inputTextMedicamento').disabled = false;
-	} else {
-		document.getElementById('inputTextMedicamento').disabled = true;
-	}
-	if (document.getElementById('checkMastigacao').checked) {
-		document.getElementById('inputTextMastigacao').disabled = false;
-	} else {
-		document.getElementById('inputTextMastigacao').disabled = true;
-	}
-	if (document.getElementById('checkAlergia').checked) {
-		document.getElementById('inputTextAlergia').disabled = false;
-	} else {
-		document.getElementById('inputTextAlergia').disabled = true;
-	}
-	if (document.getElementById('checkCarneVermelha').checked) {
-		document.getElementById('inputTextCarneVermelha').disabled = false;
-	} else {
-		document.getElementById('inputTextCarneVermelha').disabled = true;
-	}
-	if (document.getElementById('checkAtividadeFisica').checked) {
-		document.getElementById('inputTextAtividadeFisica').disabled = false;
-	} else {
-		document.getElementById('inputTextAtividadeFisica').disabled = true;
-	}
-	if (document.getElementById('checkBebidaAlcoolica').checked) {
-		document.getElementById('inputTextBebidaAlcoolica').disabled = false;
-	} else {
-		document.getElementById('inputTextBebidaAlcoolica').disabled = true;
-	}
-	if (document.getElementById('checkPatologia').checked) {
-		document.getElementById('inputTextPatologia').disabled = false;
-	} else {
-		document.getElementById('inputTextPatologia').disabled = true;
-	}
-}
-</script>

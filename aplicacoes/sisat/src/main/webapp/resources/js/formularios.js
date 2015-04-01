@@ -1,4 +1,4 @@
-function habilitarAvaliacao() {
+function habilitar() {
 	if (document.getElementById('checkMedicamento').checked) {
 		document.getElementById('inputTextMedicamento').disabled = false;
 	} else {
@@ -73,3 +73,17 @@ function habilitarEditaAvaliacao() {
 		document.getElementById('inputTextPatologia').disabled = true;
 	}
 }
+
+function digitos(event){
+	  if (window.event) {
+	    // IE
+	    key = event.keyCode;
+	  } 
+	  else if (event.which) {
+	    // netscape
+	    key = event.which;
+	  }
+	  if (key != 8 || key != 13 || key < 48 || key > 57)
+	    return (((key > 47) && (key < 58)) || (key == 8 ) || (key == 13) || (key == 46));
+	    return true;
+	}

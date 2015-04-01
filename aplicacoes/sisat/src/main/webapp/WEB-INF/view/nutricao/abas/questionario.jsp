@@ -60,7 +60,7 @@
 						<tr>
 						<td><input type="hidden" name="frequencias[${ contFreq.index}].alimentos[${contAlim.index}].id" value="${ alimento.id }"></td>
 						<td><input size="50" name="frequencias[${ contFreq.index}].alimentos[${contAlim.index}].alimento" cssclass="form-control" value="${ alimento.alimento }"></td>
-						<td><input size="10" name="frequencias[${contFreq.index}].alimentos[${contAlim.index}].porcao" cssclass="form-control" value="${ alimento.porcao }"></td>
+						<td><input size="10" name="frequencias[${contFreq.index}].alimentos[${contAlim.index}].porcao" cssclass="form-control"  onkeypress="return digitos(event, this);" value="${ alimento.porcao }"></td>
 
 						<td><a href="javascript:deletarLinha(${contFreq.index}, ${contAlim.index})" class="delAlimento btn btn-danger glyphicon glyphicon-edit">Deletar alimentos</a></td>
 						</tr>
