@@ -56,7 +56,7 @@
 				<input type="hidden" name="paciente.id" value="${consultaNutricional.paciente.id}" >
 				<input type="hidden" name="id" value="${consultaNutricional.id}" >
 				<input type="hidden" name="data" value="${consultaNutricional.data}" >
-				<fmt:formatDate value="${consultaNutricional.data}" pattern="MM/dd/yyyy' -- 'hh:mm:ss"/> 
+				 
 								
 				<!-- ABA DE AVALIACAO NUTRICIONAL -->
 				<div id="avaliacao" class="tab-pane fade in active">
