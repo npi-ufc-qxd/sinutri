@@ -8,10 +8,9 @@
 
     <br/>
     <label>Conduta Nutricional</label> <br/>
-	<textarea rows="5" cols="140" name="condutaNutricional"> </textarea> <br/><br/>
+	<textarea rows="5" cols="140" name="condutaNutricional"> ${consultaNutricional.condutaNutricional}</textarea> <br/><br/>
 
 	<label>Orientações Individuais</label> <br/>
-	<textarea rows="10" cols="140" name="orientacoesIndividuais"> </textarea> <br/><br/>
-	
+	<textarea rows="10" cols="140" name="orientacoesIndividuais"> ${consultaNutricional.orientacoesIndividuais}</textarea> <br/><br/>
 	
 </div>

@@ -46,7 +46,7 @@
 		bebida alcoolica: </strong>
 	<c:choose>
 		<c:when test="${consulta.bebidaAlcoolica }">
-						${consulta.bebidadaAlcoolicaComentario }
+						${consulta.bebidaAlcoolicaComentario }
 						<strong>Vezes por semana: </strong> ${consulta.bebidaAlcoolicaFrequenciaSemanal }
 					</c:when>
 		<c:otherwise>

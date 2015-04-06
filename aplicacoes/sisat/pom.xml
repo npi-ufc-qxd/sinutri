@@ -47,13 +47,7 @@
 
 	</properties>
 
-	<!-- In Project repository -->
-	<repositories>
-		<repository>
-			<id>npi-mvn-repo</id>
-			<url>http://npi-ufc-qxd.github.io/npi-mvn-repo/</url>
-		</repository>
-	</repositories>
+
 
 	<dependencies>
 
@@ -137,6 +131,7 @@
 			<groupId>org.postgresql</groupId>
 			<artifactId>postgresql</artifactId>
 			<version>${postgresql.version}</version>
+			<scope>provided</scope>
 		</dependency>
 
 		<!-- Logging with SLF4J & LogBack -->
@@ -238,7 +233,7 @@
 		<dependency>
 			<groupId>br.ufc.quixada.npi</groupId>
 			<artifactId>npi-core-api</artifactId>
-			<version>0.0.6</version>
+			<version>0.1.0</version>
 		</dependency>
 	</dependencies>
 	<build>
