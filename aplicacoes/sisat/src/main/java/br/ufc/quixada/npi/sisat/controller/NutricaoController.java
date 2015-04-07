@@ -21,8 +21,8 @@ import br.ufc.quixada.npi.sisat.model.ConsultaNutricional;
 import br.ufc.quixada.npi.sisat.model.FrequenciaAlimentar;
 import br.ufc.quixada.npi.sisat.model.Paciente;
 import br.ufc.quixada.npi.sisat.model.Pessoa;
-import br.ufc.quixada.npi.sisat.model.enumerator.Classificacao;
-import br.ufc.quixada.npi.sisat.model.enumerator.Refeicoes;
+import br.ufc.quixada.npi.sisat.model.enuns.Classificacao;
+import br.ufc.quixada.npi.sisat.model.enuns.Refeicao;
 import br.ufc.quixada.npi.sisat.service.ConsultaNutricionalService;
 import br.ufc.quixada.npi.sisat.service.PacienteService;
 import br.ufc.quixada.npi.sisat.service.PessoaService;
@@ -152,7 +152,7 @@ public class NutricaoController {
 		consulta.setPaciente(paciente);
 		model.addAttribute("consultaNutricional", consulta);
 		model.addAttribute("classificacao", Classificacao.values());
-		model.addAttribute("refeicoes", Refeicoes.values());		
+		model.addAttribute("refeicoes", Refeicao.values());		
 
 		return "nutricao/consulta";
 	}
