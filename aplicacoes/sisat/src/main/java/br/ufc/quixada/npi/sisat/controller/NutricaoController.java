@@ -81,6 +81,7 @@ public class NutricaoController {
 		Classificacao[] cla= Classificacao.values();
 		model.addAttribute("classificacao", cla);		
 		return "/nutricao/consulta";
+		
 	}
 
 	@RequestMapping(value = {"/editarConsulta"}, method = RequestMethod.POST) 
