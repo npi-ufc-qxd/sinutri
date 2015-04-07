@@ -83,7 +83,7 @@ public class NutricaoController {
 		return "/nutricao/consulta";
 	}
 
-	@RequestMapping(value = {"/editarConsulta"}, method = RequestMethod.POST)
+	@RequestMapping(value = {"/editarConsulta"}, method = RequestMethod.POST) 
 	public String editarConsulta(@ModelAttribute("consultaNutricional") ConsultaNutricional consulta, BindingResult result, RedirectAttributes redirectAttributes) {
 		Paciente paciente = pacienteService.find(Paciente.class, consulta.getPaciente().getId());
 		
