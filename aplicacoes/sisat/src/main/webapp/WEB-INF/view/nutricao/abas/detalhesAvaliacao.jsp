@@ -24,8 +24,8 @@
 			<td><strong>Altura: </strong> ${consulta.paciente.altura }</td>
 			<td><strong>Peso: </strong> ${consulta.peso}</td>
 			<td><strong>IMC: </strong> ${consulta.imc}</td>
-			<td><strong>CC: </strong> ${consulta.circunferenciaCintura}
-				${consulta.classificacaoCc}</td>
+			<td><strong>CC: </strong>  ${consulta.circunferenciaCintura}
+			 	${consulta.classificacaoCc}  </td> 
 			<td></td>
 		</tr>
 	</table>

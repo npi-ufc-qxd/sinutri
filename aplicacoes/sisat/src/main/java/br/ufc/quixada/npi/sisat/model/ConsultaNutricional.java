@@ -615,29 +615,36 @@ public class ConsultaNutricional {
 		if (this.circunferenciaCintura == null) {
 			return "";
 		}
-		if (this.paciente.getPessoa().getSexo().equalsIgnoreCase("m")) {
-			if (this.circunferenciaCintura < 0.94) {
-				return "Normal";
-			} else {
-				if (this.circunferenciaCintura < 1.02) {
-					return "Risco aumentado";
+		
+		
+		
+		if(this.paciente.getPessoa().getSexo() != null) {
+			if (this.paciente.getPessoa().getSexo().equalsIgnoreCase("m")) {
+				if (this.circunferenciaCintura < 0.94) {
+					return "Normal";
 				} else {
-					return "Risco muito aumentado";
+					if (this.circunferenciaCintura < 1.02) {
+						return "Risco aumentado";
+					} else {
+						return "Risco muito aumentado";
+					}
+				}
+			} else if (this.paciente.getPessoa().getSexo().equalsIgnoreCase("f")) {
+				if (this.circunferenciaCintura < 0.80) {
+					return "Normal";
+				} else {
+					if (this.circunferenciaCintura < 0.88) {
+						return "Risco aumentado";
+					} else {
+						return "Risco muito aumentado";
+					}
 				}
 			}
-		} else if (this.paciente.getPessoa().getSexo().equalsIgnoreCase("f")) {
-			if (this.circunferenciaCintura < 0.80) {
-				return "Normal";
-			} else {
-				if (this.circunferenciaCintura < 0.88) {
-					return "Risco aumentado";
-				} else {
-					return "Risco muito aumentado";
-				}
-			}
-		} else {
+		}
+		else {
 			return "erro";
 		}
+		return "";
 	}
 
 	public Paciente getPaciente() {
