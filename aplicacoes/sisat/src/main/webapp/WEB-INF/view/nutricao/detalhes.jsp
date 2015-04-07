@@ -23,7 +23,7 @@
 					<a href="<c:url value="/nutricao/buscar"></c:url>"
 						class="btn btn-default">Voltar</a>
 				
-					<a href="<c:url value="/nutricao/${pessoa.id }/consulta"></c:url>"
+					<a href="<c:url value="/nutricao/consulta/${pessoa.id }"></c:url>"
 						class="btn btn-default">Realizar consulta</a>
 				</div>
 		<div class="novo-projeto" align="left">
@@ -64,15 +64,15 @@
 						<tbody>
 							<c:forEach var="consulta" items="${pessoa.paciente.consultas}">
 								<tr class="linha">
-									<td><a href="../${consulta.id}/detalhesConsulta">
+									<td><a href="../detalhesConsulta/${consulta.id}">
 									<fmt:formatDate type="both" pattern="dd-MM-yyyy HH-mm" value="${consulta.data}" />
 									</a></td>
-									<td><a id="detalhes" data-toggle="modal" href="../${consulta.id}/detalhesConsulta">
+									<td><a id="detalhes" data-toggle="modal" href="../detalhesConsulta/${consulta.id}">
 											<button class="btn btn-info">
 												Detalhes <span class="glyphicon glyphicon-eye-open"></span>
 											</button>
 									</a></td>
-									<td><a id="editar" data-toggle="modal" href="../${consulta.id}/editarConsulta">
+									<td><a id="editar" data-toggle="modal" href="../editarConsulta/${consulta.id}">
 											<button class="btn btn-warning">
 												Editar <span class="glyphicon glyphicon-edit"></span>
 											</button>

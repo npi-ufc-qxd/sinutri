@@ -22,7 +22,7 @@
 		<div class="controls inline">
 			<h2>
 				<a
-					href="<c:url value="/nutricao/${ consulta.paciente.pessoa.id}/detalhes"></c:url>"
+					href="<c:url value="/nutricao/detalhes/${consulta.paciente.pessoa.id}"></c:url>"
 					class="btn btn-default glyphicon glyphicon-arrow-left"> </a>
 				Paciente
 			</h2>

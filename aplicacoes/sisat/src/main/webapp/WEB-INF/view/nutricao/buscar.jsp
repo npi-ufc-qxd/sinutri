@@ -65,17 +65,17 @@
 						<tbody>
 							<c:forEach var="pessoa" items="${pessoas}">
 								<tr class="linha">
-									<td><a href="<c:url value="/nutricao/${pessoa.id}/detalhes"></c:url>">${pessoa.nome}
+									<td><a href="<c:url value="/nutricao/detalhes/${pessoa.id}"></c:url>">${pessoa.nome}
 									</a></td>
 									<td align="right">
-										<a id="detalhes" data-toggle="modal" href="${pessoa.id}/detalhes">
+										<a id="detalhes" data-toggle="modal" href="detalhes/${pessoa.id}">
 											<button class="btn btn-info">
 												<span class="glyphicon glyphicon-eye-open"></span>
 												Detalhes 
 											</button>
 											
 										</a>
-										<a id="consulta" data-toggle="modal" href="${pessoa.id}/consulta">
+										<a id="consulta" data-toggle="modal" href="consulta/${pessoa.id}">
 											<button class="btn btn-info">
 												<span class="glyphicon glyphicon-plus"></span>
 												Consulta 
