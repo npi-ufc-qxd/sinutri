@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -21,8 +22,8 @@ import br.ufc.quixada.npi.sisat.model.ConsultaNutricional;
 import br.ufc.quixada.npi.sisat.model.FrequenciaAlimentar;
 import br.ufc.quixada.npi.sisat.model.Paciente;
 import br.ufc.quixada.npi.sisat.model.Pessoa;
-import br.ufc.quixada.npi.sisat.model.enumerator.Classificacao;
-import br.ufc.quixada.npi.sisat.model.enumerator.Refeicoes;
+import br.ufc.quixada.npi.sisat.model.enuns.Classificacao;
+import br.ufc.quixada.npi.sisat.model.enuns.Refeicao;
 import br.ufc.quixada.npi.sisat.service.ConsultaNutricionalService;
 import br.ufc.quixada.npi.sisat.service.PacienteService;
 import br.ufc.quixada.npi.sisat.service.PessoaService;
@@ -55,13 +56,20 @@ public class NutricaoController {
 
 	//Buscar paciente (post)
 	@RequestMapping(value = "/buscar", method = RequestMethod.POST)
-	public String buscarPaciente(@RequestParam("tipoPesquisa") String tipoPesquisa, @RequestParam("campo") String campo, ModelMap map, RedirectAttributes redirectAttributes) {
+	public String buscarPaciente(@RequestParam("tipoPesquisa") String tipoPesquisa, @RequestParam("campo") String campo, ModelMap map, RedirectAttributes redirectAttributes, Authentication authentication) {
 		List<Pessoa> pessoas = null;
+		
+		Pessoa pessoa = null;
+		pessoa = pessoaService.getPessoaByLogin(authentication.getName());		
+		
 		if(tipoPesquisa.equals("cpf")){
 			pessoas = pessoaService.getPessoasByCpf(campo);
 		}else {
 			pessoas = pessoaService.getPessoasByNome(campo);
 		}
+		
+		pessoas.remove(pessoa);
+		
 		if(!pessoas.isEmpty()){
 			map.addAttribute("pessoas",pessoas); 
 		}else{
@@ -152,7 +160,7 @@ public class NutricaoController {
 		consulta.setPaciente(paciente);
 		model.addAttribute("consultaNutricional", consulta);
 		model.addAttribute("classificacao", Classificacao.values());
-		model.addAttribute("refeicoes", Refeicoes.values());		
+		model.addAttribute("refeicoes", Refeicao.values());		
 
 		return "nutricao/consulta";
 	}
@@ -203,10 +211,12 @@ public class NutricaoController {
 	@RequestMapping(value = {"/{id}/detalhesConsulta"})
 	public String getDetalhesConsulta(@PathVariable("id") Long id, Model model, RedirectAttributes redirectAttributes){
 		ConsultaNutricional consulta = consultaNutricionalService.find(ConsultaNutricional.class, id);
+		
 		if(consulta == null){
 			redirectAttributes.addFlashAttribute("erro", "Consulta não encontrado.");
 			return "redirect:/nutricao/buscar";
 		}
+		
 		model.addAttribute("consulta", consulta);
 		return "nutricao/detalhesConsulta";
 	}
