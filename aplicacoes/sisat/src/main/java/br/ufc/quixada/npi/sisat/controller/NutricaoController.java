@@ -208,6 +208,7 @@ public class NutricaoController {
 			redirectAttributes.addFlashAttribute("erro", "Consulta não encontrado.");
 			return "redirect:/nutricao/buscar";
 		}
+		
 		model.addAttribute("consulta", consulta);
 		return "nutricao/detalhesConsulta";
 	}
