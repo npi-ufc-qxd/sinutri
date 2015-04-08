@@ -30,7 +30,7 @@
 		<hibernate.version>4.3.1.Final</hibernate.version>
 
 		<!-- Database access -->
-		<postgresql.version>9.3-1102-jdbc41</postgresql.version>
+		<postgresql.version>9.1-901.jdbc4</postgresql.version>
 
 		<!-- Spring Security -->
 		<spring.security.version>3.2.1.RELEASE</spring.security.version>
@@ -128,10 +128,9 @@
 
 		<!-- Databases - Uses POSTGRESQL by default -->
 		<dependency>
-			<groupId>org.postgresql</groupId>
+			<groupId>postgresql</groupId>
 			<artifactId>postgresql</artifactId>
 			<version>${postgresql.version}</version>
-			<scope>provided</scope>
 		</dependency>
 
 		<!-- Logging with SLF4J & LogBack -->

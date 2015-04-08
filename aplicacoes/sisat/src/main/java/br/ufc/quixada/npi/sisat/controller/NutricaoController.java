@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -55,13 +56,20 @@ public class NutricaoController {
 
 	//Buscar paciente (post)
 	@RequestMapping(value = "/buscar", method = RequestMethod.POST)
-	public String buscarPaciente(@RequestParam("tipoPesquisa") String tipoPesquisa, @RequestParam("campo") String campo, ModelMap map, RedirectAttributes redirectAttributes) {
+	public String buscarPaciente(@RequestParam("tipoPesquisa") String tipoPesquisa, @RequestParam("campo") String campo, ModelMap map, RedirectAttributes redirectAttributes, Authentication authentication) {
 		List<Pessoa> pessoas = null;
+		
+		Pessoa pessoa = null;
+		pessoa = pessoaService.getPessoaByLogin(authentication.getName());		
+		
 		if(tipoPesquisa.equals("cpf")){
 			pessoas = pessoaService.getPessoasByCpf(campo);
 		}else {
 			pessoas = pessoaService.getPessoasByNome(campo);
 		}
+		
+		pessoas.remove(pessoa);
+		
 		if(!pessoas.isEmpty()){
 			map.addAttribute("pessoas",pessoas); 
 		}else{
