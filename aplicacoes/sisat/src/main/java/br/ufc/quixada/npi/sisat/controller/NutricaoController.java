@@ -203,10 +203,12 @@ public class NutricaoController {
 	@RequestMapping(value = {"/{id}/detalhesConsulta"})
 	public String getDetalhesConsulta(@PathVariable("id") Long id, Model model, RedirectAttributes redirectAttributes){
 		ConsultaNutricional consulta = consultaNutricionalService.find(ConsultaNutricional.class, id);
+		
 		if(consulta == null){
 			redirectAttributes.addFlashAttribute("erro", "Consulta não encontrado.");
 			return "redirect:/nutricao/buscar";
 		}
+		
 		model.addAttribute("consulta", consulta);
 		return "nutricao/detalhesConsulta";
 	}

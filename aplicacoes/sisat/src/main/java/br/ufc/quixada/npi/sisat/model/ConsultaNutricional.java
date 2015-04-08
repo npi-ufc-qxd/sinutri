@@ -3,7 +3,6 @@ package br.ufc.quixada.npi.sisat.model;
 import java.text.DecimalFormat;
 import java.util.Date;
 import java.util.List;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -13,8 +12,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-
 import org.springframework.format.annotation.DateTimeFormat;
+
 
 @Entity
 public class ConsultaNutricional {
@@ -557,21 +556,58 @@ public class ConsultaNutricional {
 
 	public String getImc() {
 
-		if (this.peso == null) {
-			return "sem dados de peso do paciente";
+		double imc = calculaIMC(this);
+		
+		if(imc == 0.0){
+			return "Não foi possivel calcular o IMC do paciente!";
 		}
-
-		Double altura = this.paciente.getAltura();
-		if (altura == null) {
-			return "sem dados de altura do paciente";
-		}
-
-		double imc = this.peso / (altura * altura);
+				
 		return new DecimalFormat("0.00").format(imc) + "    "
 				+ getClassificacaoImc(imc);
 	}
 
 	public String getClassificacaoImc(double imc) {
+		String classificacao = classificaIMC(imc);
+		return classificacao;
+	}
+
+	public String getClassificacaoCc() {
+		String classificacao = classificaCircunferenciaCintura(this);
+		return classificacao;
+	}
+	
+	public Paciente getPaciente() {
+		return paciente;
+	}
+
+	public void setPaciente(Paciente paciente) {
+		this.paciente = paciente;
+	}
+
+	public String getOrientacoesIndividuais() {
+		return orientacoesIndividuais;
+	}
+
+	public void setOrientacoesIndividuais(String orientacoesIndividuais) {
+		this.orientacoesIndividuais = orientacoesIndividuais;
+
+	}
+
+	private double calculaIMC(ConsultaNutricional consulta){
+		
+		try{
+			double peso = consulta.getPeso();
+			double altura = consulta.getPaciente().getAltura();
+			double imc = peso / (altura * altura);
+			return imc;
+		}catch(NullPointerException e){
+			return 0.0;
+		}
+		
+	}
+	
+	private String classificaIMC(double imc){
+		
 		if (imc < 25) {
 			if (imc < 17) {
 				if (imc < 16) {
@@ -609,52 +645,46 @@ public class ConsultaNutricional {
 				}
 			}
 		}
+		
+		
 	}
-
-	public String getClassificacaoCc() {
-		if (this.circunferenciaCintura == null) {
+	
+	private String classificaCircunferenciaCintura(ConsultaNutricional consulta){
+		
+		if (consulta.getCircunferenciaCintura() == null) {
 			return "";
 		}
-		if (this.paciente.getPessoa().getSexo().equalsIgnoreCase("m")) {
-			if (this.circunferenciaCintura < 0.94) {
-				return "Normal";
-			} else {
-				if (this.circunferenciaCintura < 1.02) {
-					return "Risco aumentado";
+		
+		Double circunferencia = consulta.getCircunferenciaCintura();
+		String sexo = consulta.getPaciente().getPessoa().getSexo();
+		
+		if(sexo != null) {
+			if (sexo.equalsIgnoreCase("m")) {
+				if (circunferencia < 0.94) {
+					return "Normal";
 				} else {
-					return "Risco muito aumentado";
+					if (circunferencia < 1.02) {
+						return "Risco aumentado";
+					} else {
+						return "Risco muito aumentado";
+					}
+				}
+			} else if (sexo.equalsIgnoreCase("f")) {
+				if (circunferencia < 0.80) {
+					return "Normal";
+				} else {
+					if (circunferencia < 0.88) {
+						return "Risco aumentado";
+					} else {
+						return "Risco muito aumentado";
+					}
 				}
 			}
-		} else if (this.paciente.getPessoa().getSexo().equalsIgnoreCase("f")) {
-			if (this.circunferenciaCintura < 0.80) {
-				return "Normal";
-			} else {
-				if (this.circunferenciaCintura < 0.88) {
-					return "Risco aumentado";
-				} else {
-					return "Risco muito aumentado";
-				}
-			}
-		} else {
-			return "erro";
+		}else {
+			return "Erro - Sexo da paciente não está indefinido";
 		}
+		return "";
 	}
 
-	public Paciente getPaciente() {
-		return paciente;
-	}
-
-	public void setPaciente(Paciente paciente) {
-		this.paciente = paciente;
-	}
-
-	public String getOrientacoesIndividuais() {
-		return orientacoesIndividuais;
-	}
-
-	public void setOrientacoesIndividuais(String orientacoesIndividuais) {
-		this.orientacoesIndividuais = orientacoesIndividuais;
-
-	}
-
+	
 }
