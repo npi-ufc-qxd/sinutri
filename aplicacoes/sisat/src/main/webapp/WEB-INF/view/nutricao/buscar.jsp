@@ -70,7 +70,7 @@
 												Detalhes <span class="glyphicon glyphicon-eye-open"></span>
 											</button>
 										</a>
-										<a id="consulta" data-toggle="modal" href="${pessoa.id}/realizar">
+										<a id="consulta" data-toggle="modal" href="${pessoa.id}/consulta">
 											<button class="btn btn-default">
 												Consulta <span class="glyphicon glyphicon-plus"></span>
 											</button>

@@ -30,7 +30,7 @@
 		<hibernate.version>4.3.1.Final</hibernate.version>
 
 		<!-- Database access -->
-		<postgresql.version>9.1-901.jdbc4</postgresql.version>
+		<postgresql.version>9.4-1201-jdbc41</postgresql.version>
 
 		<!-- Spring Security -->
 		<spring.security.version>3.2.1.RELEASE</spring.security.version>
@@ -47,13 +47,7 @@
 
 	</properties>
 
-	<!-- In Project repository -->
-	<repositories>
-		<repository>
-			<id>npi-mvn-repo</id>
-			<url>http://npi-ufc-qxd.github.io/npi-mvn-repo/</url>
-		</repository>
-	</repositories>
+
 
 	<dependencies>
 
@@ -134,9 +128,10 @@
 
 		<!-- Databases - Uses POSTGRESQL by default -->
 		<dependency>
-			<groupId>postgresql</groupId>
+			<groupId>org.postgresql</groupId>
 			<artifactId>postgresql</artifactId>
 			<version>${postgresql.version}</version>
+			<scope>provided</scope>
 		</dependency>
 
 		<!-- Logging with SLF4J & LogBack -->
@@ -238,7 +233,7 @@
 		<dependency>
 			<groupId>br.ufc.quixada.npi</groupId>
 			<artifactId>npi-core-api</artifactId>
-			<version>0.0.6</version>
+			<version>0.1.0</version>
 		</dependency>
 	</dependencies>
 	<build>

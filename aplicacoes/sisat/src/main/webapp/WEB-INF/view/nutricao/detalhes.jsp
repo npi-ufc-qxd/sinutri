@@ -45,7 +45,7 @@
 					<div class="col-sm-2">
 						<label id="nome" class="control-label">${pessoa.telefone }</label>
 					</div>
-				</div>
+			</div>
 			</div>
 		</div>
 		
@@ -91,7 +91,7 @@
 
 		<div class="controls">
 			<a href="<c:url value="/nutricao/buscar"></c:url>" class="btn btn-default">Voltar</a>
-			<a href="<c:url value="/nutricao/${pessoa.id }/realizar"></c:url>" class="btn btn-primary">Realizar consulta</a>
+			<a href="<c:url value="/nutricao/${pessoa.id }/consulta"></c:url>" class="btn btn-primary">Realizar consulta</a>
 		</div>
 	</div>
 	<jsp:include page="../modulos/footer.jsp" />

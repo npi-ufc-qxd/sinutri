@@ -1,4 +1,4 @@
-# End-of-line normalization should not be attempted in text files
+# end-of-line normalization should not be attempted in text files
 * -text
 # Definitively text files
 *.xml text
@@ -7,6 +7,9 @@
 *.xhtml text
 *.jsp text
 *.jsf text
+*.css
+*.js
+*.sql
 *.txt text
 *.c text
 *.h text

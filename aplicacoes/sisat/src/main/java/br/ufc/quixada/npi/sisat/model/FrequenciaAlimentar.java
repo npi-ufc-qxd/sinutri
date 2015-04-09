@@ -18,7 +18,7 @@ import javax.persistence.TemporalType;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
-import br.ufc.quixada.npi.sisat.model.enumerator.Refeicoes;
+import br.ufc.quixada.npi.sisat.model.enuns.Refeicao;
 
 @Entity
 public class FrequenciaAlimentar {
@@ -28,14 +28,14 @@ public class FrequenciaAlimentar {
 	private Long id;
 	
 	@Temporal(TemporalType.TIME)
-	@DateTimeFormat(pattern="hh:mm")
+	@DateTimeFormat(pattern="HH:mm:ss")
 	private Date horario;
 	
 	@Enumerated(EnumType.STRING)
-	private Refeicoes refeicao;
+	private Refeicao refeicao;
 	
     @ManyToOne
-    @JoinColumn(name = "consulta_id")
+    @JoinColumn(name = "consultaNutricional_id")
 	private ConsultaNutricional consultaNutricional;
     
 	@OneToMany(cascade = CascadeType.ALL)
@@ -74,11 +74,11 @@ public class FrequenciaAlimentar {
 	}
 
 
-	public void setRefeicao(Refeicoes refeicao) {
+	public void setRefeicao(Refeicao refeicao) {
 		this.refeicao = refeicao;
 	}
 
-	public Refeicoes getRefeicao() {
+	public Refeicao getRefeicao() {
 		return refeicao;
 	}
 

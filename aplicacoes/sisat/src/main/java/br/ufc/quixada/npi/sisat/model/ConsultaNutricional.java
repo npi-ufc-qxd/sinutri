@@ -3,8 +3,8 @@ package br.ufc.quixada.npi.sisat.model;
 import java.text.DecimalFormat;
 import java.util.Date;
 import java.util.List;
-
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -12,8 +12,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-
 import org.springframework.format.annotation.DateTimeFormat;
+
 
 @Entity
 public class ConsultaNutricional {
@@ -23,17 +23,16 @@ public class ConsultaNutricional {
 	private Long id;
 
 	@OneToMany(cascade = CascadeType.ALL)
-	@JoinColumn(name= "consultanutricional_id")
-	private List<FrequenciaAlimentar> frequencias;	
-	
+	@JoinColumn(name = "consultanutricional_id")
+	private List<FrequenciaAlimentar> frequencias;
 
 	@ManyToOne
-	@JoinColumn(name="paciente_id")
+	@JoinColumn(name = "paciente_id")
 	private Paciente paciente;
 
 	@DateTimeFormat
 	private Date data;
-	
+
 	private Double peso;
 
 	private Double circunferenciaCintura;
@@ -43,80 +42,83 @@ public class ConsultaNutricional {
 
 	private Integer ct;
 	private String classificacaoCt;
-	
+
 	private Integer hdl;
 	private String classificacaoHdl;
-	
+
 	private Integer ldl;
 	private String classificacaoLdl;
-	
+
 	private Integer tg;
 	private String classificacaoTg;
-	
+
 	private Integer hb;
 	private String classificacaoHb;
-	
+
 	private Integer tgo;
 	private String classificacaoTgo;
-	
+
 	private Integer tgp;
 	private String classificacaoTgp;
-	
-	private String condutaNutricional;
-	
-	private boolean medicamento;
-	
+
+	private Boolean medicamento;
+
 	private String medicamentoComentario;
 
-	private boolean mastigacao;
-	
+	private Boolean mastigacao;
+
 	private String mastigacaoComentario;
 
-	private boolean disfagia;
+	private Boolean disfagia;
 
-	private boolean pirose;
+	private Boolean pirose;
 
-	private boolean nausea;
+	private Boolean nausea;
 
-	private boolean vomito;
+	private Boolean vomito;
 
-	private boolean diarreia;
+	private Boolean diarreia;
 
-	private boolean constipacao;
+	private Boolean constipacao;
 
 	private String agua;
 
-	private boolean carneVermelha;
-	
-	private int carneVermelhaFrequenciaSemanal;
-	
+	private Boolean carneVermelha;
+
+	private Integer carneVermelhaFrequenciaSemanal;
+
 	private String carneVermelhaComentario;
 
-	private boolean bebidaAlcoolica;
-	
-	private int bebidaAlcoolicaFrequenciaSemanal;
-	
+	private Boolean bebidaAlcoolica;
+
+	private Integer bebidaAlcoolicaFrequenciaSemanal;
+
 	private String bebidaAlcoolicaComentario;
 
-	private boolean atividadeFisica;
-	
-	private int atividadeFisicaFrequenciaSemanal;
-	
+	private Boolean atividadeFisica;
+
+	private Integer atividadeFisicaFrequenciaSemanal;
+
 	private String atividadeFisicaComentario;
 
 	private Boolean diabetes;
 
 	private Boolean hipertensao;
 
-	private boolean outrasPatologias;
+	private Boolean outrasPatologias;
 
 	private String outrasPatologiasComentario;
 
-	private boolean alergia;
+	private Boolean alergia;
+
 	private String alergiaComentario;
 
 	private String objetivoConsulta;
-	
+
+	private String condutaNutricional;
+
+	@Column(columnDefinition = "TEXT")
+	private String orientacoesIndividuais;
 
 	public Long getId() {
 		return id;
@@ -124,8 +126,8 @@ public class ConsultaNutricional {
 
 	public void setId(Long id) {
 		this.id = id;
-	}	
-	
+	}
+
 	public List<FrequenciaAlimentar> getFrequencias() {
 		return frequencias;
 	}
@@ -133,7 +135,7 @@ public class ConsultaNutricional {
 	public void setFrequencias(List<FrequenciaAlimentar> frequencias) {
 		this.frequencias = frequencias;
 	}
-	
+
 	public Date getData() {
 		return data;
 	}
@@ -185,7 +187,7 @@ public class ConsultaNutricional {
 	public String getClassificacaoCt() {
 		return classificacaoCt;
 	}
-	
+
 	public void setClassificacaoCt(String classificacaoCt) {
 		this.classificacaoCt = classificacaoCt;
 	}
@@ -208,7 +210,6 @@ public class ConsultaNutricional {
 
 	public Integer getLdl() {
 		return ldl;
-		
 	}
 
 	public void setLdl(Integer ldl) {
@@ -222,7 +223,7 @@ public class ConsultaNutricional {
 	public void setClassificacaoLdl(String classificacaoLdl) {
 		this.classificacaoLdl = classificacaoLdl;
 	}
-	
+
 	public Integer getTg() {
 		return tg;
 	}
@@ -287,19 +288,11 @@ public class ConsultaNutricional {
 		this.classificacaoTgp = classificacaoTgp;
 	}
 
-	public String getCondutaNutricional() {
-		return condutaNutricional;
-	}
-
-	public void setCondutaNutricional(String condutaNutricional) {
-		this.condutaNutricional = condutaNutricional;
-	}
-
-	public boolean isMedicamento() {
+	public Boolean getMedicamento() {
 		return medicamento;
 	}
 
-	public void setMedicamento(boolean medicamento) {
+	public void setMedicamento(Boolean medicamento) {
 		this.medicamento = medicamento;
 	}
 
@@ -311,11 +304,11 @@ public class ConsultaNutricional {
 		this.medicamentoComentario = medicamentoComentario;
 	}
 
-	public boolean isMastigacao() {
+	public Boolean getMastigacao() {
 		return mastigacao;
 	}
 
-	public void setMastigacao(boolean mastigacao) {
+	public void setMastigacao(Boolean mastigacao) {
 		this.mastigacao = mastigacao;
 	}
 
@@ -327,51 +320,51 @@ public class ConsultaNutricional {
 		this.mastigacaoComentario = mastigacaoComentario;
 	}
 
-	public boolean isDisfagia() {
+	public Boolean getDisfagia() {
 		return disfagia;
 	}
 
-	public void setDisfagia(boolean disfagia) {
+	public void setDisfagia(Boolean disfagia) {
 		this.disfagia = disfagia;
 	}
 
-	public boolean isPirose() {
+	public Boolean getPirose() {
 		return pirose;
 	}
 
-	public void setPirose(boolean pirose) {
+	public void setPirose(Boolean pirose) {
 		this.pirose = pirose;
 	}
 
-	public boolean isNausea() {
+	public Boolean getNausea() {
 		return nausea;
 	}
 
-	public void setNausea(boolean nausea) {
+	public void setNausea(Boolean nausea) {
 		this.nausea = nausea;
 	}
 
-	public boolean isVomito() {
+	public Boolean getVomito() {
 		return vomito;
 	}
 
-	public void setVomito(boolean vomito) {
+	public void setVomito(Boolean vomito) {
 		this.vomito = vomito;
 	}
 
-	public boolean isDiarreia() {
+	public Boolean getDiarreia() {
 		return diarreia;
 	}
 
-	public void setDiarreia(boolean diarreia) {
+	public void setDiarreia(Boolean diarreia) {
 		this.diarreia = diarreia;
 	}
 
-	public boolean isConstipacao() {
+	public Boolean getConstipacao() {
 		return constipacao;
 	}
 
-	public void setConstipacao(boolean constipacao) {
+	public void setConstipacao(Boolean constipacao) {
 		this.constipacao = constipacao;
 	}
 
@@ -383,19 +376,20 @@ public class ConsultaNutricional {
 		this.agua = agua;
 	}
 
-	public boolean isCarneVermelha() {
+	public Boolean getCarneVermelha() {
 		return carneVermelha;
 	}
 
-	public void setCarneVermelha(boolean carneVermelha) {
+	public void setCarneVermelha(Boolean carneVermelha) {
 		this.carneVermelha = carneVermelha;
 	}
 
-	public int getCarneVermelhaFrequenciaSemanal() {
+	public Integer getCarneVermelhaFrequenciaSemanal() {
 		return carneVermelhaFrequenciaSemanal;
 	}
 
-	public void setCarneVermelhaFrequenciaSemanal(int carneVermelhaFrequenciaSemanal) {
+	public void setCarneVermelhaFrequenciaSemanal(
+			Integer carneVermelhaFrequenciaSemanal) {
 		this.carneVermelhaFrequenciaSemanal = carneVermelhaFrequenciaSemanal;
 	}
 
@@ -406,21 +400,21 @@ public class ConsultaNutricional {
 	public void setCarneVermelhaComentario(String carneVermelhaComentario) {
 		this.carneVermelhaComentario = carneVermelhaComentario;
 	}
-	
-	public boolean getBebidaAlcoolica() {
+
+	public Boolean getBebidaAlcoolica() {
 		return bebidaAlcoolica;
 	}
 
-	public void setBebidaAlcoolica(boolean bebidaAlcoolica) {
+	public void setBebidaAlcoolica(Boolean bebidaAlcoolica) {
 		this.bebidaAlcoolica = bebidaAlcoolica;
 	}
 
-	public int getBebidaAlcoolicaFrequenciaSemanal() {
+	public Integer getBebidaAlcoolicaFrequenciaSemanal() {
 		return bebidaAlcoolicaFrequenciaSemanal;
 	}
 
 	public void setBebidaAlcoolicaFrequenciaSemanal(
-			int bebidaAlcoolicaFrequenciaSemanal) {
+			Integer bebidaAlcoolicaFrequenciaSemanal) {
 		this.bebidaAlcoolicaFrequenciaSemanal = bebidaAlcoolicaFrequenciaSemanal;
 	}
 
@@ -432,20 +426,20 @@ public class ConsultaNutricional {
 		this.bebidaAlcoolicaComentario = bebidaAlcoolicaComentario;
 	}
 
-	public boolean getAtividadeFisica() {
+	public Boolean getAtividadeFisica() {
 		return atividadeFisica;
 	}
 
-	public void setAtividadeFisica(boolean atividadeFisica) {
+	public void setAtividadeFisica(Boolean atividadeFisica) {
 		this.atividadeFisica = atividadeFisica;
 	}
 
-	public int getAtividadeFisicaFrequenciaSemanal() {
+	public Integer getAtividadeFisicaFrequenciaSemanal() {
 		return atividadeFisicaFrequenciaSemanal;
 	}
 
 	public void setAtividadeFisicaFrequenciaSemanal(
-			int atividadeFisicaFrequenciaSemanal) {
+			Integer atividadeFisicaFrequenciaSemanal) {
 		this.atividadeFisicaFrequenciaSemanal = atividadeFisicaFrequenciaSemanal;
 	}
 
@@ -473,11 +467,11 @@ public class ConsultaNutricional {
 		this.hipertensao = hipertensao;
 	}
 
-	public boolean isOutrasPatologias() {
+	public Boolean getOutrasPatologias() {
 		return outrasPatologias;
 	}
 
-	public void setOutrasPatologias(boolean outrasPatologias) {
+	public void setOutrasPatologias(Boolean outrasPatologias) {
 		this.outrasPatologias = outrasPatologias;
 	}
 
@@ -489,11 +483,11 @@ public class ConsultaNutricional {
 		this.outrasPatologiasComentario = outrasPatologiasComentario;
 	}
 
-	public boolean isAlergia() {
+	public Boolean getAlergia() {
 		return alergia;
 	}
 
-	public void setAlergia(boolean alergia) {
+	public void setAlergia(Boolean alergia) {
 		this.alergia = alergia;
 	}
 
@@ -511,6 +505,14 @@ public class ConsultaNutricional {
 
 	public void setObjetivoConsulta(String objetivoConsulta) {
 		this.objetivoConsulta = objetivoConsulta;
+	}
+
+	public String getCondutaNutricional() {
+		return condutaNutricional;
+	}
+
+	public void setCondutaNutricional(String condutaNutricional) {
+		this.condutaNutricional = condutaNutricional;
 	}
 
 	@Override
@@ -551,96 +553,137 @@ public class ConsultaNutricional {
 				+ alergiaComentario + ", objetivoConsulta=" + objetivoConsulta
 				+ ", paciente=" + paciente + "]";
 	}
-	public String getImc(){
+
+	public String getImc() {
+
+		double imc = calculaIMC(this);
 		
-		if(this.peso == null){
-			return "sem dados de peso do paciente";
+		if(imc == 0.0){
+			return "Não foi possivel calcular o IMC do paciente!";
 		}
-		
-		Double altura = this.paciente.getAltura();
-		if(altura == null){
-			return "sem dados de altura do paciente";
-		}
-		
-		double imc = this.peso / (altura * altura);
-		return new DecimalFormat("0.00").format(imc) + "    " + getClassificacaoImc(imc); 
-	}
-	
-	public String getClassificacaoImc(double imc){
-		if(imc < 25){
-			if(imc < 17){
-				if(imc < 16){
-					//<16	 Desnutrição grau III
-					return "Desnutrição grau III";
-				}else {
-					//16  a  16,9	 Desnutrição grau II
-					return "Desnutrição grau II";
-				}
-			}else {
-				if(imc < 18.5){
-					//17 a 18,4 	Desnutrição grau I
-					return "Desnutrição grau I";
-				}else {
-					//18,5 a 24,9 	 Eutrofia
-					return "Eutrofia";
-				}	
-			}
-		}else {
-			if(imc < 35) {
-				if(imc < 30){
-					//25 a 29,9 	 Sobrepeso
-					return "Sobrepeso";
-				}else {
-					//30 a 34,9	 Obesidade grau I
-					return "Obesidade grau I";
-				}
-			}else {
-				if(imc < 40){
-					//35 a 39,9	 Obesidade grau  II
-					return "Obesidade grau  II";
-				}else{
-					//≥ 40	 Obesidade grau III
-					return "Obesidade grau III";
-				}
-			}
-		}
-	}
-	
-	public String getClassificacaoCc(){
-		if(this.circunferenciaCintura == null){
-			return "";
-		}
-		if(this.paciente.getPessoa().getSexo().equalsIgnoreCase("m")){
-			if(this.circunferenciaCintura < 0.94){
-				return "Normal";
-			}else {
-				if(this.circunferenciaCintura < 1.02){
-					return "Risco aumentado";
-				}else {
-					return "Risco muito aumentado";
-				}
-			}
-		}else if(this.paciente.getPessoa().getSexo().equalsIgnoreCase("f")){
-			if(this.circunferenciaCintura < 0.80){
-				return "Normal";
-			}else {
-				if(this.circunferenciaCintura < 0.88){
-					return "Risco aumentado";
-				}else {
-					return "Risco muito aumentado";
-				}
-			}
-		}else {
-			return "erro";
-		}
+				
+		return new DecimalFormat("0.00").format(imc) + "    "
+				+ getClassificacaoImc(imc);
 	}
 
+	public String getClassificacaoImc(double imc) {
+		String classificacao = classificaIMC(imc);
+		return classificacao;
+	}
+
+	public String getClassificacaoCc() {
+		String classificacao = classificaCircunferenciaCintura(this);
+		return classificacao;
+	}
+	
 	public Paciente getPaciente() {
 		return paciente;
 	}
 
 	public void setPaciente(Paciente paciente) {
 		this.paciente = paciente;
+	}
+
+	public String getOrientacoesIndividuais() {
+		return orientacoesIndividuais;
+	}
+
+	public void setOrientacoesIndividuais(String orientacoesIndividuais) {
+		this.orientacoesIndividuais = orientacoesIndividuais;
+
+	}
+
+	private double calculaIMC(ConsultaNutricional consulta){
+		
+		try{
+			double peso = consulta.getPeso();
+			double altura = consulta.getPaciente().getAltura();
+			double imc = peso / (altura * altura);
+			return imc;
+		}catch(NullPointerException e){
+			return 0.0;
+		}
+		
+	}
+	
+	private String classificaIMC(double imc){
+		
+		if (imc < 25) {
+			if (imc < 17) {
+				if (imc < 16) {
+					// <16 Desnutrição grau III
+					return "Desnutrição grau III";
+				} else {
+					// 16 a 16,9 Desnutrição grau II
+					return "Desnutrição grau II";
+				}
+			} else {
+				if (imc < 18.5) {
+					// 17 a 18,4 Desnutrição grau I
+					return "Desnutrição grau I";
+				} else {
+					// 18,5 a 24,9 Eutrofia
+					return "Eutrofia";
+				}
+			}
+		} else {
+			if (imc < 35) {
+				if (imc < 30) {
+					// 25 a 29,9 Sobrepeso
+					return "Sobrepeso";
+				} else {
+					// 30 a 34,9 Obesidade grau I
+					return "Obesidade grau I";
+				}
+			} else {
+				if (imc < 40) {
+					// 35 a 39,9 Obesidade grau II
+					return "Obesidade grau  II";
+				} else {
+					// ≥ 40 Obesidade grau III
+					return "Obesidade grau III";
+				}
+			}
+		}
+		
+		
+	}
+	
+	private String classificaCircunferenciaCintura(ConsultaNutricional consulta){
+		
+		if (consulta.getCircunferenciaCintura() == null) {
+			return "";
+		}
+		
+		Double circunferencia = consulta.getCircunferenciaCintura();
+		String sexo = consulta.getPaciente().getPessoa().getSexo();
+		
+		if(sexo != null) {
+			if (sexo.equalsIgnoreCase("m")) {
+				if (circunferencia < 0.94) {
+					return "Normal";
+				} else {
+					if (circunferencia < 1.02) {
+						return "Risco aumentado";
+					} else {
+						return "Risco muito aumentado";
+					}
+				}
+			} else if (sexo.equalsIgnoreCase("f")) {
+				if (circunferencia < 0.80) {
+					return "Normal";
+				} else {
+					if (circunferencia < 0.88) {
+						return "Risco aumentado";
+					} else {
+						return "Risco muito aumentado";
+					}
+				}
+			}
+		}else {
+			return "Erro - Sexo da paciente não está indefinido";
+		}
+		return "";
 	}
 
 	

@@ -24,8 +24,8 @@
 			<td><strong>Altura: </strong> ${consulta.paciente.altura }</td>
 			<td><strong>Peso: </strong> ${consulta.peso}</td>
 			<td><strong>IMC: </strong> ${consulta.imc}</td>
-			<td><strong>CC: </strong> ${consulta.circunferenciaCintura}
-				${consulta.classificacaoCc}</td>
+			<td><strong>CC: </strong>  ${consulta.circunferenciaCintura}
+			 	${consulta.classificacaoCc}  </td> 
 			<td></td>
 		</tr>
 	</table>
@@ -46,7 +46,7 @@
 		bebida alcoolica: </strong>
 	<c:choose>
 		<c:when test="${consulta.bebidaAlcoolica }">
-						${consulta.bebidadaAlcoolicaComentario }
+						${consulta.bebidaAlcoolicaComentario }
 						<strong>Vezes por semana: </strong> ${consulta.bebidaAlcoolicaFrequenciaSemanal }
 					</c:when>
 		<c:otherwise>
