@@ -82,7 +82,7 @@ public class NutricaoController {
 //		return "/nutricao/buscar";
 //	}	
 
-	@RequestMapping(value = "/{id}/editarConsulta", method = RequestMethod.GET)
+	@RequestMapping(value = "editarConsulta/{id}", method = RequestMethod.GET)
 	public String editarConsulta(@PathVariable("id") long id, Model model) {
 
 		ConsultaNutricional consultaNutricional = consultaNutricionalService.find(ConsultaNutricional.class, id);
@@ -104,7 +104,7 @@ public class NutricaoController {
 
 		consultaNutricionalService.update(atualizarConsulta(consulta));
 		redirectAttributes.addFlashAttribute("success", "Consulta do paciente <strong>" + consulta.getPaciente().getPessoa().getNome() + "</strong> atualizada com sucesso.");
-		return "redirect:/nutricao/" + consulta.getPaciente().getId() + "/detalhes";
+		return "redirect:/nutricao/detalhes/" + consulta.getPaciente().getId();
 	}
 
 	private ConsultaNutricional atualizarConsulta(ConsultaNutricional consulta) {
@@ -122,7 +122,7 @@ public class NutricaoController {
 	}
 
 	//Detalhes de paciente
-	@RequestMapping(value = {"/{id}/detalhes"})
+	@RequestMapping(value = {"detalhes/{id}"})
 	public String getDetalhes(Pessoa p, @PathVariable("id") Long id, Model model, RedirectAttributes redirectAttributes){
 		Pessoa pessoa = pessoaService.find(Pessoa.class, id);
 		if(pessoa == null){
@@ -138,7 +138,7 @@ public class NutricaoController {
 
 	//=========================== Consulta Nutricional ===========================
 	//Consulta Nutricional --> Create
-	@RequestMapping(value = {"/{id}/consulta"}, method = RequestMethod.GET)
+	@RequestMapping(value = {"consulta/{id}"}, method = RequestMethod.GET)
 	public String realizarConsulta(Model model, @PathVariable("id") Long id, RedirectAttributes redirectAttributes) {
 		Pessoa pessoa = pessoaService.find(Pessoa.class, id);
 
@@ -210,7 +210,7 @@ public class NutricaoController {
 	}
 
 	//Consulta Nutricional --> Read
-	@RequestMapping(value = {"/{id}/detalhesConsulta"})
+	@RequestMapping(value = {"detalhesConsulta/{id}"})
 	public String getDetalhesConsulta(@PathVariable("id") Long id, Model model, RedirectAttributes redirectAttributes){
 		ConsultaNutricional consulta = consultaNutricionalService.find(ConsultaNutricional.class, id);
 		
@@ -224,7 +224,7 @@ public class NutricaoController {
 	}
 
 	//deletar agendamento //Wanrly
-	@RequestMapping(value = {"/{id}/deletarAgendamento"}, method = RequestMethod.GET)
+	@RequestMapping(value = {"deletarAgendamento/{id}"}, method = RequestMethod.GET)
 	public String deletarAgendamento(@PathVariable("id") Long id, RedirectAttributes redirectAttributes){
 		//agendamentoService.delete(agendamentoService.find(Agendamento.class, id));
 		redirectAttributes.addFlashAttribute("success", "Agendamento deletado com sucesso");
