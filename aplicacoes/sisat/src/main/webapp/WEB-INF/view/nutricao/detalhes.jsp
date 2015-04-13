@@ -19,70 +19,80 @@
 
 
 	<div class="container" style="margin-bottom: 70px;">
-				<div class="controls">
-					<a href="<c:url value="/nutricao/buscar"></c:url>"
-						class="btn btn-default">Voltar</a>
-				
-					<a href="<c:url value="/nutricao/consulta/${pessoa.id }"></c:url>"
-						class="btn btn-default">Realizar consulta</a>
+		<div id="dados-pessoais" align="left">
+			<h3>Paciente</h3>
+			<div class="form-horizontal">
+				<div class="form-group">
+					<label for="nome" class="col-sm-2 control-label">Nome:</label>
+					<div class="col-sm-4">
+						<label id="nome" class="control-label">${pessoa.nome }</label>
+					</div>
+					<label for="nome" class="col-sm-2 control-label">Email:</label>
+					<div class="col-sm-4">
+						<label id="nome" class="control-label">${pessoa.email }</label>
+					</div>
 				</div>
-		<div class="novo-projeto" align="left">
-			<div class="form">
-				<h2>Paciente</h2>
-				<table id="paciente" style="width:70%" >
-					<tr>
-						<td>Nome: ${pessoa.nome }</td>
-	
-						<td>Sexo: ${pessoa.sexo }</td>
-
-						<td>
-							Idade: ${pessoa.idade }
-						</td>
-					</tr>
-					<tr>
-						<td>E-mail: ${pessoa.email }    </td>
-						
-						<td colspan="2" >Telefone: ${pessoa.telefone }</td>
-					</tr>
-				</table>
+				<div class="form-group">
+					<label for="nome" class="col-sm-2 control-label">Sexo:</label>
+					<div class="col-sm-2">
+						<label id="nome" class="control-label">${pessoa.sexo }</label>
+					</div>
+					<label for="nome" class="col-sm-2 control-label">Idade:</label>
+					<div class="col-sm-2">
+						<label id="nome" class="control-label">${pessoa.idade }</label>
+					</div>
+					<label for="nome" class="col-sm-2 control-label">Telefone:</label>
+					<div class="col-sm-2">
+						<label id="nome" class="control-label">${pessoa.telefone }</label>
+					</div>
+			</div>
 			</div>
 		</div>
 		
-		<c:if test="${not empty pessoa}">
-				<div class="panel panel-default">
+		<h3>Consultas</h3>
 
-					<div class="panel-heading" align="center"></div>
+		<c:if test="${not empty pessoa.paciente.consultas}">
+			<!-- Table -->
+			<table class="table" id="consultas">
+				<thead>
+					<tr>
+						<th>Data</th>
+						<th colspan="2" width="20%">Ações</th>
+					</tr>
+				</thead>
+				<tbody>
+					<c:forEach var="consulta" items="${pessoa.paciente.consultas}">
+						<tr class="linha">
+							<td><a href="../detalhesConsulta/${consulta.id}/"> <fmt:formatDate
+										type="both" pattern="dd-MM-yyyy HH-mm"
+										value="${consulta.data}" />
+							</a></td>
+							<td><a id="detalhes" data-toggle="modal"
+								href="../detalhesConsulta/${consulta.id}">
+									<button class="btn btn-info">
+										Detalhes <span class="glyphicon glyphicon-eye-open"></span>
+									</button>
+							</a></td>
+							<td><a id="editar" data-toggle="modal"
+								href="../editarConsulta/${consulta.id}">
+									<button class="btn btn-warning">
+										Editar <span class="glyphicon glyphicon-edit"></span>
+									</button>
+							</a></td>
+						</tr>
+					</c:forEach>
+				</tbody>
+			</table>
+		</c:if>
+		
+		<c:if test="${empty pessoa.paciente.consultas}">
+			<div class="alert alert-warning" role="alert">Não há consultas cadastradas para esse paciente.</div>
+		</c:if>
 
-					<!-- Table -->
-					<table class="table" id="table">
-						<thead>
-							<tr>
-								<th>Data</th>
-								<th colspan="2" width="20%">Ações</th>
-							</tr>
-						</thead>
-						<tbody>
-							<c:forEach var="consulta" items="${pessoa.paciente.consultas}">
-								<tr class="linha">
-									<td><a href="../detalhesConsulta/${consulta.id}">
-									<fmt:formatDate type="both" pattern="dd-MM-yyyy HH-mm" value="${consulta.data}" />
-									</a></td>
-									<td><a id="detalhes" data-toggle="modal" href="../detalhesConsulta/${consulta.id}">
-											<button class="btn btn-info">
-												Detalhes <span class="glyphicon glyphicon-eye-open"></span>
-											</button>
-									</a></td>
-									<td><a id="editar" data-toggle="modal" href="../editarConsulta/${consulta.id}">
-											<button class="btn btn-warning">
-												Editar <span class="glyphicon glyphicon-edit"></span>
-											</button>
-									</a></td>
-								</tr>
-							</c:forEach>
-						</tbody>
-					</table>
-				</div>
-			</c:if>
+		<div class="controls">
+			<a href="<c:url value="/nutricao/buscar"></c:url>" class="btn btn-default">Voltar</a>
+			<a href="<c:url value="/nutricao/consulta/${pessoa.id }"></c:url>" class="btn btn-primary">Realizar consulta</a>
+		</div>
 	</div>
 	<jsp:include page="../modulos/footer.jsp" />
 

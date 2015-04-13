@@ -13,6 +13,8 @@ public interface PessoaService extends GenericService<Pessoa> {
 
 	public abstract List<Pessoa> getPessoasByNome(String nome);
 	
+	public abstract List<Pessoa> getPessoasByNomeOuCpf(String busca);
+	
 	public abstract List<Pessoa> getPareceristas(Long id);
 
 }

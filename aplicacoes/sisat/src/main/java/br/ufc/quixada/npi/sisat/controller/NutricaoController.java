@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -21,8 +22,8 @@ import br.ufc.quixada.npi.sisat.model.ConsultaNutricional;
 import br.ufc.quixada.npi.sisat.model.FrequenciaAlimentar;
 import br.ufc.quixada.npi.sisat.model.Paciente;
 import br.ufc.quixada.npi.sisat.model.Pessoa;
-import br.ufc.quixada.npi.sisat.model.enumerator.Classificacao;
-import br.ufc.quixada.npi.sisat.model.enumerator.Refeicoes;
+import br.ufc.quixada.npi.sisat.model.enuns.Classificacao;
+import br.ufc.quixada.npi.sisat.model.enuns.Refeicao;
 import br.ufc.quixada.npi.sisat.service.ConsultaNutricionalService;
 import br.ufc.quixada.npi.sisat.service.PacienteService;
 import br.ufc.quixada.npi.sisat.service.PessoaService;
@@ -55,24 +56,33 @@ public class NutricaoController {
 
 	//Buscar paciente (post)
 	@RequestMapping(value = "/buscar", method = RequestMethod.POST)
-	public String buscarPaciente(@RequestParam("tipoPesquisa") String tipoPesquisa, @RequestParam("campo") String campo, ModelMap map, RedirectAttributes redirectAttributes) {
-		List<Pessoa> pessoas = null;
-		if(tipoPesquisa.equals("cpf")){
-			pessoas = pessoaService.getPessoasByCpf(campo);
-		}else {
-			pessoas = pessoaService.getPessoasByNome(campo);
-		}
+	public String buscarPaciente(@RequestParam("busca") String busca, ModelMap map, RedirectAttributes redirectAttributes, Authentication authentication) {
+		map.addAttribute("busca", busca);
+
+		List<Pessoa> pessoas = pessoaService.getPessoasByNomeOuCpf(busca);
+		
+		Pessoa pessoa = pessoaService.getPessoaByLogin(authentication.getName());;		
+
+		pessoas.remove(pessoa);
+		
 		if(!pessoas.isEmpty()){
-			map.addAttribute("pessoas",pessoas); 
+			map.addAttribute("pessoas", pessoas); 
 		}else{
-			redirectAttributes.addFlashAttribute("erro", "Paciente de " + tipoPesquisa + " " + campo + " não encontrado.");
+			redirectAttributes.addFlashAttribute("erro", "Paciente não encontrado.");
 			return "redirect:/nutricao/buscar";
 		}
+
 		return "/nutricao/buscar";
 	}
 
+//	@RequestMapping(value = "/buscar", method = RequestMethod.POST)
+//	public String buscarPaciente(@RequestParam("busca") String busca, ModelMap map) {
+//		map.addAttribute("busca", busca);
+//		map.addAttribute("pessoas", pessoaService.getPessoasByNomeOuCpf(busca));
+//		return "/nutricao/buscar";
+//	}	
 
-	@RequestMapping(value = "/editarConsulta/{id}", method = RequestMethod.GET)
+	@RequestMapping(value = "editarConsulta/{id}", method = RequestMethod.GET)
 	public String editarConsulta(@PathVariable("id") long id, Model model) {
 
 		ConsultaNutricional consultaNutricional = consultaNutricionalService.find(ConsultaNutricional.class, id);
@@ -81,10 +91,9 @@ public class NutricaoController {
 		Classificacao[] cla= Classificacao.values();
 		model.addAttribute("classificacao", cla);		
 		return "/nutricao/consulta";
-		
 	}
 
-	@RequestMapping(value = {"/editarConsulta"}, method = RequestMethod.POST) 
+	@RequestMapping(value = {"/editarConsulta"}, method = RequestMethod.POST)
 	public String editarConsulta(@ModelAttribute("consultaNutricional") ConsultaNutricional consulta, BindingResult result, RedirectAttributes redirectAttributes) {
 		Paciente paciente = pacienteService.find(Paciente.class, consulta.getPaciente().getId());
 		
@@ -95,7 +104,7 @@ public class NutricaoController {
 
 		consultaNutricionalService.update(atualizarConsulta(consulta));
 		redirectAttributes.addFlashAttribute("success", "Consulta do paciente <strong>" + consulta.getPaciente().getPessoa().getNome() + "</strong> atualizada com sucesso.");
-		return "redirect:/nutricao/detalhes/" + consulta.getPaciente().getId();
+		return "redirect:/nutricao/" + consulta.getPaciente().getId() + "/detalhes";
 	}
 
 	private ConsultaNutricional atualizarConsulta(ConsultaNutricional consulta) {
@@ -113,7 +122,7 @@ public class NutricaoController {
 	}
 
 	//Detalhes de paciente
-	@RequestMapping(value = {"/detalhes/{id}"})
+	@RequestMapping(value = {"detalhes/{id}"})
 	public String getDetalhes(Pessoa p, @PathVariable("id") Long id, Model model, RedirectAttributes redirectAttributes){
 		Pessoa pessoa = pessoaService.find(Pessoa.class, id);
 		if(pessoa == null){
@@ -129,7 +138,7 @@ public class NutricaoController {
 
 	//=========================== Consulta Nutricional ===========================
 	//Consulta Nutricional --> Create
-	@RequestMapping(value = {"/consulta/{id}"}, method = RequestMethod.GET)
+	@RequestMapping(value = {"consulta/{id}"}, method = RequestMethod.GET)
 	public String realizarConsulta(Model model, @PathVariable("id") Long id, RedirectAttributes redirectAttributes) {
 		Pessoa pessoa = pessoaService.find(Pessoa.class, id);
 
@@ -153,7 +162,7 @@ public class NutricaoController {
 		consulta.setPaciente(paciente);
 		model.addAttribute("consultaNutricional", consulta);
 		model.addAttribute("classificacao", Classificacao.values());
-		model.addAttribute("refeicoes", Refeicoes.values());		
+		model.addAttribute("refeicoes", Refeicao.values());		
 
 		return "nutricao/consulta";
 	}
@@ -201,19 +210,21 @@ public class NutricaoController {
 	}
 
 	//Consulta Nutricional --> Read
-	@RequestMapping(value = {"/detalhesConsulta/{id}"})
+	@RequestMapping(value = {"detalhesConsulta/{id}"})
 	public String getDetalhesConsulta(@PathVariable("id") Long id, Model model, RedirectAttributes redirectAttributes){
 		ConsultaNutricional consulta = consultaNutricionalService.find(ConsultaNutricional.class, id);
+		
 		if(consulta == null){
 			redirectAttributes.addFlashAttribute("erro", "Consulta não encontrado.");
 			return "redirect:/nutricao/buscar";
 		}
+		
 		model.addAttribute("consulta", consulta);
 		return "nutricao/detalhesConsulta";
 	}
 
 	//deletar agendamento //Wanrly
-	@RequestMapping(value = {"/deletarAgendamento/{id}"}, method = RequestMethod.GET)
+	@RequestMapping(value = {"deletarAgendamento/{id}"}, method = RequestMethod.GET)
 	public String deletarAgendamento(@PathVariable("id") Long id, RedirectAttributes redirectAttributes){
 		//agendamentoService.delete(agendamentoService.find(Agendamento.class, id));
 		redirectAttributes.addFlashAttribute("success", "Agendamento deletado com sucesso");

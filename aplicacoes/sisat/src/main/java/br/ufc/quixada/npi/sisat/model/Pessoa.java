@@ -28,6 +28,8 @@ import br.ufc.quixada.npi.sisat.model.Papel;
 			 query="select p from Pessoa p where p.cpf = :cpf"),
 	@NamedQuery(name="Pessoa.findPessoasByNome",
 			 query="SELECT p FROM Pessoa p WHERE UPPER(p.nome) LIKE :nome ORDER BY p.nome"),
+	@NamedQuery(name="Pessoa.findPessoasByNomeOrCpf",
+			 query="SELECT p FROM Pessoa p WHERE UPPER(p.nome) LIKE :busca or p.cpf = :cpf ORDER BY p.nome"),
 	@NamedQuery(name="Pessoa.findPessoaByLogin",
  			query="select p from Pessoa p where p.login = :login"),
 	@NamedQuery(name="Pessoa.findPareceristas",
