@@ -16,8 +16,6 @@
 
 	<jsp:include page="../modulos/header.jsp" />
 
-
-
 	<div class="container">
 		<div class="buscar-paciente" align="left">
 
@@ -30,55 +28,51 @@
 			<c:if test="${not empty success }">
 				<div class="alert alert-success" role="alert">${success}</div>
 			</c:if>
-			
 
-			<form:form id="buscarPacienteForm" role="form"
-				servletReltiveAction="/nutricao/buscar" method="POST"
-				cssClass="form-horizontal" class="inline">
-				<select name="tipoPesquisa" cssClass="form-control">
-					<option value="nome">Nome</option>
-					<option value="cpf">CPF</option>
-				</select>
-				<input id="campo" name="campo" cssClass="form-control"
-					placeholder="Digite sua busca aqui..." size="40" required="required" autofocus="true"/>
-				<button class="btn btn-primary" name="submit" type="submit" class="btn btn-primary"
-					value="Buscar" >
-					 Buscar
-					 <span class="glyphicon glyphicon-search"/> 
-				</button>
+
+			<h3>Buscar Paciente</h3>
+			<form:form id="buscarPacienteForm" role="form" servletReltiveAction="/nutricao/buscar" method="POST" class="form-horizontal">
+				<div class="form-group">
+					<div class="col-sm-10">
+						<input id="busca" name="busca" class="form-control" placeholder="Nome ou CPF" size="40"
+						required="required" value="${busca }"/>
+					</div>
+					<div class="col-sm-2">
+						<button class="btn btn-primary" name="submit" type="submit"
+							class="btn btn-primary" value="Buscar">
+							Buscar <span class="glyphicon glyphicon-search"></span>
+						</button>
+				    </div>
+				</div>
 				
- 			</form:form>
+
+			</form:form>
 
 			<c:if test="${not empty pessoas}">
-				<div class="panel panel-default">
-
-					<div class="panel-heading" align="center"></div>
 
 					<!-- Table -->
 					<table class="table" id="table">
 						<thead>
 							<tr>
 								<th>Nome</th>
-								<th align="right" >Ações</th>
+								<th align="right"></th>
 							</tr>
 						</thead>
 						<tbody>
 							<c:forEach var="pessoa" items="${pessoas}">
 								<tr class="linha">
-									<td><a href="<c:url value="/nutricao/${pessoa.id}/detalhes"></c:url>">${pessoa.nome}
-									</a></td>
+									<td>
+										<a href="<c:url value="/nutricao/${pessoa.id}/detalhes"></c:url>">${pessoa.nome}</a>
+									</td>
 									<td align="right">
 										<a id="detalhes" data-toggle="modal" href="${pessoa.id}/detalhes">
-											<button class="btn btn-info">
-												<span class="glyphicon glyphicon-eye-open"></span>
-												Detalhes 
+											<button class="btn btn-default">
+												Detalhes <span class="glyphicon glyphicon-eye-open"></span>
 											</button>
-											
 										</a>
 										<a id="consulta" data-toggle="modal" href="${pessoa.id}/consulta">
-											<button class="btn btn-info">
-												<span class="glyphicon glyphicon-plus"></span>
-												Consulta 
+											<button class="btn btn-default">
+												Consulta <span class="glyphicon glyphicon-plus"></span>
 											</button>
 										</a>
 									</td>
@@ -86,7 +80,11 @@
 							</c:forEach>
 						</tbody>
 					</table>
-				</div>
+						
+			</c:if>
+			
+			<c:if test="${not empty busca and empty pessoas}">
+				<div class="alert alert-warning" role="alert">Nenhum resultado encontrado</div>
 			</c:if>
 		</div>
 	</div>
