@@ -45,11 +45,11 @@
 				<form:hidden path="paciente.id"/>
 				<form:hidden path="data"/>
 			
-				<div id="avaliacao" class="tab-pane fade in "><jsp:include page="abas/avaliacao_spring.jsp" /></div>
+				<div id="avaliacao" class="tab-pane fade in active"><jsp:include page="abas/avaliacao.jsp" /></div>
 
-				<div id="exame" class="tab-pane fade in active"><jsp:include page="abas/exame_spring.jsp" /></div>
+				<div id="exame" class="tab-pane fade"><jsp:include page="abas/exame.jsp" /></div>
 
-				<div id="questionario" class="tab-pane fade in "><jsp:include page="abas/questionario_spring.jsp" /></div>
+				<div id="questionario" class="tab-pane fade in "><jsp:include page="abas/questionario.jsp" /></div>
 
 				<div id="orientacoes" class="tab-pane fade in "><jsp:include page="abas/orientacoes.jsp" /></div>
 			</div>
