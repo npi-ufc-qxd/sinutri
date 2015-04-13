@@ -2,7 +2,7 @@ package br.ufc.quixada.npi.sisat.model.enumerator;
 
 public enum Classificacao {
 		
-	VAZIO(null),
+	VAZIO("Vazio"),
 	MUITOALTO("Muito Alto"),	
 	ALTO("Alto"),
 	DESEJAVEL("Desejavel"),

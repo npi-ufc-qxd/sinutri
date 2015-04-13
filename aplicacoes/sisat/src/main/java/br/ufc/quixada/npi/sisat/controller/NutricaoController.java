@@ -146,11 +146,8 @@ public class NutricaoController {
 
 			pessoaService.update(pessoa);
 		}
-
-		ConsultaNutricional consulta = new ConsultaNutricional();
-		Paciente paciente = pessoa.getPaciente();
-		consulta.setPaciente(paciente);
-		model.addAttribute("consultaNutricional", consulta);
+		ConsultaNutricional c = new ConsultaNutricional(pessoa.getPaciente());
+		model.addAttribute("consultaNutricional", c);
 		model.addAttribute("classificacao", Classificacao.values());
 		model.addAttribute("refeicoes", Refeicoes.values());		
 
