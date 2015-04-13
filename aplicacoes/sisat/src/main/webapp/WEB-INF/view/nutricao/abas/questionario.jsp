@@ -1,43 +1,32 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <html>
-
 <fieldset>
-			<legend>Adicione as refeições</legend>
-			
-			
-			
-			<div class="form-group">
-				<label for="horaAdd" class="col-sm-2 control-label">Horario:</label>
-				<input id="horaAdd" type="time" name="horaAdd"/>
-			</div>
+	<h3>Adicione as refeições</h3>
 
-			<div class="form-group">	
-				<label for="refeicaoAdd" class="col-sm-2 control-label">Refeicao:</label>
-				
-			  <select name="refeicaoAdd" id="refeicaoAdd" class="col-xs-2">
-				  <option value="DESJEJUM">Desjejum</option>
-				  <option value="LANCHEMANHA">Lanche da Manhã</option>
-				  <option value="ALMOCO">Alomoço</option>
-				  <option value="LANCHETARDE">Lanche da Tarde</option>
-				  <option value="JANTAR">Jantar</option>
-				  <option value="CEIA">Ceia</option>
-			</select>
-			
-			</div>	
-			
-			
-			
-			
-			      <div class="col-sm-1">
-						<a><input type="button" class="btn btn-primary" value="Adiciona Frequencia" id="addFrequencia" /></a>
-					</div>
-			      <!--  <a id="addFrequencia">Adiciona Frequencia</a>	-->
-			      
-			      
-		</fieldset><br><br>
-		
+	<div class="form-group">
+		<label for="horaAdd" class="col-sm-1 control-label">Horario:</label>
+		<div class="col-sm-2">
+			<form:input id="horaAdd" type="time" path=""  name="horaAdd" cssClass="form-control" placeholder="horario"/>
+		</div>
+
+		<label for="refeicaoAdd" class="col-sm-1 control-label">Refeicao:</label>
+		<div class="col-sm-2">
+			<form:select path="" id="refeicaoAdd" name="refeicaoAdd" cssClass="form-control">
+				<form:options items="${refeicoes}" itemLabel="nome"/>
+			</form:select>
+		</div>
+	
+		<div class="col-sm-2">
+			<a><input type="button" class="btn btn-primary" value="Adiciona Frequencia" id="addFrequencia" /></a>
+		</div>
+	</div>
+</fieldset>
+
+
+
 		<div id="frequenciasAdds">
 			
 			<c:forEach var="frequencia" items="${consultaNutricional.frequencias}" varStatus="contFreq">
@@ -59,8 +48,8 @@
 					<c:forEach var="alimento" items="${frequencia.alimentos}" varStatus="contAlim">
 						<tr>
 						<td><input type="hidden" name="frequencias[${ contFreq.index}].alimentos[${contAlim.index}].id" value="${ alimento.id }"></td>
-						<td><input size="50" name="frequencias[${ contFreq.index}].alimentos[${contAlim.index}].alimento" cssclass="form-control" value="${ alimento.alimento }"></td>
-						<td><input size="10" name="frequencias[${contFreq.index}].alimentos[${contAlim.index}].porcao" cssclass="form-control"  onkeypress="return digitos(event, this);" value="${ alimento.porcao }"></td>
+						<td><input size="50" name="frequencias[${ contFreq.index}].alimentos[${contAlim.index}].alimento" class="form-control" value="${ alimento.alimento }"></td>
+						<td><input size="10" name="frequencias[${contFreq.index}].alimentos[${contAlim.index}].porcao" class="form-control"  onkeypress="return digitos(event, this);" value="${ alimento.porcao }"></td>
 
 						<td><a href="javascript:deletarLinha(${contFreq.index}, ${contAlim.index})" class="delAlimento btn btn-danger glyphicon glyphicon-edit">Deletar alimentos</a></td>
 						</tr>

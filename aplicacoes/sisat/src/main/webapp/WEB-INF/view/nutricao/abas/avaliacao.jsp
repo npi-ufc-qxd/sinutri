@@ -1,119 +1,183 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 
-
-<div class="col-sm-12">
-	<label>Paciente</label> <br/>
-	<div class="col-sm-3">
-		<label>Altura</label><input type="text" name="paciente.altura" size="10" value="${consultaNutricional.paciente.altura}" onkeypress="return digitos(event, this);">
+<h3>Paciente</h3>
+	<div class="form-group">
+		<label for="altura" class="col-sm-2 control-label">Altura:</label>
+		<div class="col-sm-3">
+			<form:input id="altura" type="text" path="paciente.altura" cssClass="form-control" placeholder="altura"/>
+			<div class="error-validation">
+				<form:errors path="paciente.altura"></form:errors>
+			</div>
+		</div>
 	</div>
-	<div class="col-sm-3">
-		<label>Peso</label><input type="text" name="peso" size="10" value="${ consultaNutricional.peso }" onkeypress="return digitos(event, this);">
-	</div>
-	<div class="col-sm-3">
-		<label>CC</label><input type="text" name="circunferenciaCintura" size="10" value="${ consultaNutricional.circunferenciaCintura }" onkeypress="return digitos(event, this);">
-	</div>
-</div>
 
-<div class="col-sm-12">
-	<div style="cursor: pointer;"></div> <br/>
-	<input type="checkbox" name="medicamento" id="checkMedicamento" onclick="habilitar();" ${consultaNutricional.medicamento == 'TRUE' ? 'checked' : ''}/><label>Medicamentos</label>
-	<input type="text" name="medicamentoComentario" size='123' id="inputTextMedicamento" value="${ consultaNutricional.medicamentoComentario }" ${consultaNutricional.medicamento == 'TRUE' ? '' : 'disabled'}/> <br/><br/>
-</div>
+	<div class="form-group">
+		<label for="peso" class="col-sm-2 control-label">Peso:</label>
+		<div class="col-sm-3">
+			<form:input id="peso" type="text" path="peso" cssClass="form-control" placeholder="Peso"/>
+			<div class="error-validation">
+				<form:errors path="peso"></form:errors>
+			</div>
+		</div>
+	</div>
 
-<div class="col-sm-12">
-	<label>Alterações Gastrointestinais</label> <br/>
-	<div class="col-sm-2"><input type="checkbox" name="disfagia" ${consultaNutricional.disfagia == 'TRUE' ? 'checked' : ''} /><label>Disfagia</label></div>
-	<div class="col-sm-2"><input type="checkbox" name="pirose" ${consultaNutricional.pirose == 'TRUE' ? 'checked' : ''} /><label>Pirose</label></div>
-	<div class="col-sm-2"><input type="checkbox" name="nausea" ${consultaNutricional.nausea == 'TRUE' ? 'checked' : ''} /><label>Náusea</label></div>
-	<div class="col-sm-2"><input type="checkbox" name="vomito" ${consultaNutricional.vomito == 'TRUE' ? 'checked' : ''} /><label>Vômitos</label></div>
-	<div class="col-sm-2"><input type="checkbox" name="diarreia" ${consultaNutricional.diarreia == 'TRUE' ? 'checked' : ''} /><label>Diarreia</label></div>
-	<div class="col-sm-2"><input type="checkbox" name="constipacao" ${consultaNutricional.constipacao == 'TRUE' ? 'checked' : ''} /><label>Constipação</label></div>
+	<div class="form-group">
+		<label for="cc" class="col-sm-2 control-label">CC:</label>
+		<div class="col-sm-3" >
+			<form:input id="cc" placeholder="Circunferência da cintura" path="circunferenciaCintura" cssClass="form-control" min="0"/>
+			<div class="error-validation">
+				<form:errors path="circunferenciaCintura"></form:errors>
+			</div>
+		</div>
+	</div>
+
+	<div class="form-group">
+		<label for="checkMedicamento" class="col-sm-2 control-label"><form:checkbox id="checkMedicamento" onclick="habilitar();" path="medicamento"/> Medicamentos:</label>
+		<div class="col-sm-10" >
+			<form:input id="inputTextMedicamento" path="medicamentoComentario" cssClass="form-control" placeholder="Quais medicamentos você usa?" disabled="${not consultaNutricional.medicamento}"/>
+			<div class="error-validation">
+				<form:errors path="medicamentoComentario"></form:errors>
+			</div>
+		</div>
+	</div>
+
+<h3>Alterações Gastrointestinais</h3>
+	<div class="form-group">
+		<label for="disfagia" class="col-sm-2 control-label"><form:checkbox id="disfagia" path="disfagia"/> Disfagia&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+		<label for="pirose" class="col-sm-1 control-label"><form:checkbox id="pirose" path="pirose"/> Pirose</label>
+		<label for="nausea" class="col-sm-2 control-label"><form:checkbox id="nausea" path="nausea"/> Náusea</label>
+		<label for="vomito" class="col-sm-2 control-label"><form:checkbox id="vomito" path="vomito"/> Vômitos</label>
+		<label for="diarreia" class="col-sm-2 control-label"><form:checkbox id="diarreia" path="diarreia"/> Diarreia</label>
+		<label for="constipacao" class="col-sm-2 control-label"><form:checkbox id="constipacao" path="constipacao"/> Constipação</label>
+	</div>
+	<div class="form-group">
+		<label for="checkMastigacao" class="col-sm-2 control-label"><form:checkbox id="checkMastigacao" onclick="habilitar();" path="mastigacao"/> Mastigação:</label>
+		<div class="col-sm-10" >
+			<form:input id="inputTextMastigacao" path="mastigacaoComentario" cssClass="form-control" placeholder="Como é sua mastigação?" disabled="${not consultaNutricional.mastigacao}"/>
+			<div class="error-validation">
+				<form:errors path="mastigacaoComentario"></form:errors>
+			</div>
+		</div>
+	</div>
+
+	<div class="form-group">
+		<label for="checkAlergia" class="col-sm-2 control-label"><form:checkbox id="checkAlergia" onclick="habilitar();" path="alergia"/> Alergia Alimentar:</label>
+		<div class="col-sm-10" >
+			<form:textarea id="inputTextAlergia" path="alergiaComentario" class="form-control" rows="5" placeholder="Qual sua alergia Alimentar?" disabled="${not consultaNutricional.alergia}"/>
+			<div class="error-validation">
+				<form:errors path="alergiaComentario"></form:errors>
+			</div>
+		</div>
+	</div>
+
+	<div class="form-group form-item" align="left">
+		<label for="agua" class="col-sm-2 control-label">Consumo de água:</label>
+		<div class="col-sm-10">
+			<form:input id="agua" name="agua" path="agua" cssClass="form-control" placeholder="Consumo de água"/>
+			<div class="error-validation">
+				<form:errors path="agua"></form:errors>
+			</div>
+		</div>
+	</div>
 	
-	<div class="col-sm-12" style="cursor: pointer;">
-		<input class="col-sm-0" type="checkbox" name="mastigacao" id="checkMastigacao" onclick="habilitar();" ${consultaNutricional.mastigacao == 'TRUE' ? 'checked' : ''} /><label>Mastigação</label>
-		<input type=text name="mastigacaoComentario" size='123' id="inputTextMastigacao" value="${ consultaNutricional.mastigacaoComentario }" ${consultaNutricional.mastigacao == 'TRUE' ? '' : 'disabled'}/>
+	<div class="form-group">
+		<div class="form-item">
+			<label for="checkAtividadeFisica" class="col-sm-2 control-label"><form:checkbox id="checkAtividadeFisica" onclick="habilitar();" path="atividadeFisica"/> Atividade Física:</label>
+			<div class="col-sm-7" >
+				<form:input id="inputTextAtividadeFisica" path="atividadeFisicaComentario" cssClass="form-control" placeholder="Qual atividade?" disabled="${not consultaNutricional.atividadeFisica}"/>
+				<div class="error-validation">
+					<form:errors path="atividadeFisicaComentario"></form:errors>
+				</div>
+			</div>
+		</div>
+
+		<div class="form-item">
+			<div class="col-sm-3" >
+				<form:select path="atividadeFisicaFrequenciaSemanal" cssClass="form-control">
+					<form:option value="">Quantas vezes por semana?</form:option>
+					<form:option value="1">1</form:option>
+					<form:option value="2">2</form:option>
+					<form:option value="3">3</form:option>
+					<form:option value="4">4</form:option>
+					<form:option value="5">5</form:option>
+					<form:option value="6">6</form:option>
+					<form:option value="7">7</form:option>
+				</form:select>
+			</div>
+		</div>
 	</div>
-</div>
-
-<div class="col-sm-12">
-	<div style="cursor: pointer;"></div> <br/>
-	<input type="checkbox" name="alergia" id="checkAlergia" onclick="habilitar();" ${consultaNutricional.alergia == 'TRUE' ? 'checked' : ''} /><label>Alergia Alimentar</label>
-	<textarea rows="2" cols="140" name="alergiaComentario" ${consultaNutricional.alergia == 'TRUE' ? '' : 'disabled'} id="inputTextAlergia">${ consultaNutricional.alergiaComentario }</textarea>
-</div>
-
-<div class="col-sm-12">
-	<label>Consumo de água</label><input type="text" name="agua" size="10" value="${ consultaNutricional.agua }" onkeypress="return digitos(event, this);"> 
-</div>
-
-
-
-<div class="col-sm-12">
-	<div style="cursor: pointer;"></div>
-		<input type="checkbox" name="atividadeFisica" id="checkAtividadeFisica" onclick="habilitar();" ${consultaNutricional.atividadeFisica == 'TRUE' ? 'checked' : ''}/><label>Atividade Física</label>
-		<input type=text name="atividadeFisicaComentario" size='20' id="inputTextAtividadeFisica" value="${ consultaNutricional.atividadeFisicaComentario }" ${consultaNutricional.atividadeFisica == 'TRUE' ? '' : 'disabled'}/>
-
-	<label>Frequência em dias</label>
-	<select name="atividadeFisicaFrequenciaSemanal" id="atividadeFisicaFrequenciaSemanal" style="width: 70px" class="form-control-inline">
-		<option value="${consultaNutricional.atividadeFisicaFrequenciaSemanal}">${consultaNutricional.atividadeFisicaFrequenciaSemanal}</option>
-		<option value="0">0</option>
-		<option value="1">1</option>
-		<option value="2">2</option>
-		<option value="3">3</option>
-		<option value="4">4</option>
-		<option value="5">5</option>
-		<option value="6">6</option>
-		<option value="7">7</option>
-	</select>
-	<label>/semana</label>
-</div>
-
-<div class="col-sm-12">
-	<div style="cursor: pointer;"></div>
-		<input type="checkbox" name="carneVermelha" id="checkCarneVermelha" onclick="habilitar();" ${consultaNutricional.carneVermelha == 'TRUE' ? 'checked' : ''}/><label>Carne Vermelha</label>
-		<input type=text name="carneVermelhaComentario" size='20' id="inputTextCarneVermelha" value="${ consultaNutricional.carneVermelhaComentario }" ${consultaNutricional.carneVermelha == 'TRUE' ? '' : 'disabled'}/>
 	
-	<label>Frequência em dias</label>
-	<select name="carneVermelhaFrequenciaSemanal" id="carneVermelhaFrequenciaSemanal" style="width: 70px" class="form-control-inline">
-		<option value="${consultaNutricional.carneVermelhaFrequenciaSemanal}">${consultaNutricional.carneVermelhaFrequenciaSemanal}</option>
-		<option value="0">0</option>
-		<option value="1">1</option>
-		<option value="2">2</option>
-		<option value="3">3</option>
-		<option value="4">4</option>
-		<option value="5">5</option>
-		<option value="6">6</option>
-		<option value="7">7</option>
-	</select>
-	<label>/semana</label>
-</div>
+	<div class="form-group">
+		<div class="form-item">
+			<label for="checkCarneVermelha" class="col-sm-2 control-label"><form:checkbox id="checkCarneVermelha" onclick="habilitar();" path="carneVermelha"/> Carne Vermelha:</label>
+			<div class="col-sm-7" >
+				<form:input id="inputTextCarneVermelha" path="carneVermelhaComentario" cssClass="form-control" placeholder="Que tipo de carne?" disabled="${not consultaNutricional.carneVermelha}"/>
+				<div class="error-validation">
+					<form:errors path="carneVermelhaComentario"></form:errors>
+				</div>
+			</div>
+		</div>
 
-<div class="col-sm-12">
-	<div style="cursor: pointer;"></div>
-	<input type="checkbox" name="bebidaAlcoolica" id="checkBebidaAlcoolica" onclick="habilitar();"${consultaNutricional.bebidaAlcoolica == 'TRUE' ? 'checked' : ''}/><label>Bebida alcoólica</label>
-	<input type=text name="bebidaAlcoolicaComentario" size='20' id="inputTextBebidaAlcoolica" value="${ consultaNutricional.bebidaAlcoolicaComentario }" ${consultaNutricional.bebidaAlcoolica == 'TRUE' ? '' : 'disabled'}/>
+		<div class="form-item">
+			<div class="col-sm-3" >
+				<form:select path="carneVermelhaFrequenciaSemanal" cssClass="form-control">
+					<form:option value="">Quantas vezes por semana?</form:option>
+					<form:option value="1">1</form:option>
+					<form:option value="2">2</form:option>
+					<form:option value="3">3</form:option>
+					<form:option value="4">4</form:option>
+					<form:option value="5">5</form:option>
+					<form:option value="6">6</form:option>
+					<form:option value="7">7</form:option>
+				</form:select>
+			</div>
+		</div>
+	</div>
 
-	<label>Frequência em dias</label>
-	<select name="bebidaAlcoolicaFrequenciaSemanal" id="bebidaAlcoolicaFrequenciaSemanal" style="width: 70px" class="form-control-inline">
-		<option value="${consultaNutricional.bebidaAlcoolicaFrequenciaSemanal}">${consultaNutricional.bebidaAlcoolicaFrequenciaSemanal}</option>
-		<option value="0">0</option>
-		<option value="1">1</option>
-		<option value="2">2</option>
-		<option value="3">3</option>
-		<option value="4">4</option>
-		<option value="5">5</option>
-		<option value="6">6</option>
-		<option value="7">7</option>
-	</select>
-	<label>/semana</label>
-</div>	
+	<div class="form-group">
+		<div class="form-item">
+			<label for="checkBebidaAlcoolica" class="col-sm-2 control-label"><form:checkbox id="checkBebidaAlcoolica" onclick="habilitar();" path="bebidaAlcoolica"/> Bebida alcoólica:</label>
+			<div class="col-sm-7" >
+				<form:input id="inputTextBebidaAlcoolica" path="bebidaAlcoolicaComentario" cssClass="form-control" placeholder="Qual atividade?" disabled="${not consultaNutricional.bebidaAlcoolica}"/>
+				<div class="error-validation">
+					<form:errors path="bebidaAlcoolicaComentario"></form:errors>
+				</div>
+			</div>
+		</div>
 
-<div class="col-sm-12">
-	<div style="cursor: pointer;"></div> <br/>
-	<input type="checkbox" name="outrasPatologias" id="checkPatologia" onclick="habilitar(); "${consultaNutricional.outrasPatologias == 'TRUE' ? 'checked' : ''}/><label>Patologias</label><br/>
-	<textarea rows="2" cols="140" name="outrasPatologiasComentario" id="inputTextPatologia" ${consultaNutricional.outrasPatologias == 'TRUE' ? '' : 'disabled'}>${ consultaNutricional.outrasPatologiasComentario }</textarea> <br/><br/>
-</div>
+		<div class="form-item">
+			<div class="col-sm-3" >
+				<form:select path="bebidaAlcoolicaFrequenciaSemanal" cssClass="form-control">
+					<form:option value="">Quantas vezes por semana?</form:option>
+					<form:option value="1">1</form:option>
+					<form:option value="2">2</form:option>
+					<form:option value="3">3</form:option>
+					<form:option value="4">4</form:option>
+					<form:option value="5">5</form:option>
+					<form:option value="6">6</form:option>
+					<form:option value="7">7</form:option>
+				</form:select>
+			</div>
+		</div>
+	</div>
 
-<div class="col-sm-12">
-	<label>Objetivo da Consulta</label> <br/>
-	<textarea rows="2" cols="140" name="objetivoConsulta">${ consultaNutricional.objetivoConsulta }</textarea> <br/><br/>
-</div>
+	<div class="form-group">
+		<label for="checkPatologia" class="col-sm-2 control-label"><form:checkbox id="checkPatologia" onclick="habilitar();" path="outrasPatologias"/> Patologias:</label>
+		<div class="col-sm-10" >
+			<form:textarea id="inputTextPatologia" path="outrasPatologiasComentario" class="form-control" rows="5" placeholder="Descreva aqui as patologias" disabled="${not consultaNutricional.outrasPatologias}"/>
+			<div class="error-validation">
+				<form:errors path="outrasPatologiasComentario"></form:errors>
+			</div>
+		</div>
+	</div>
+
+	<div class="form-group">
+		<label for="objetivoConsulta" class="col-sm-2 control-label"> Objetivo da Consulta:</label>
+		<div class="col-sm-10" >
+			<form:textarea id="objetivoConsulta" path="objetivoConsulta" class="form-control" rows="5" placeholder="Descreva aqui o objetivo da consulta..."/>
+			<div class="error-validation">
+				<form:errors path="objetivoConsulta"></form:errors>
+			</div>
+		</div>
+	</div>

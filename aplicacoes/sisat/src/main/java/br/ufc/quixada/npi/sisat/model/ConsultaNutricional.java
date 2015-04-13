@@ -61,55 +61,55 @@ public class ConsultaNutricional {
 	private Integer tgp;
 	private String classificacaoTgp;
 
-	private Boolean medicamento;
+	private boolean medicamento;
 
 	private String medicamentoComentario;
 
-	private Boolean mastigacao;
+	private boolean mastigacao;
 
 	private String mastigacaoComentario;
 
-	private Boolean disfagia;
+	private boolean disfagia;
 
-	private Boolean pirose;
+	private boolean pirose;
 
-	private Boolean nausea;
+	private boolean nausea;
 
-	private Boolean vomito;
+	private boolean vomito;
 
-	private Boolean diarreia;
+	private boolean diarreia;
 
-	private Boolean constipacao;
+	private boolean constipacao;
 
 	private String agua;
 
-	private Boolean carneVermelha;
+	private boolean carneVermelha;
 
 	private Integer carneVermelhaFrequenciaSemanal;
 
 	private String carneVermelhaComentario;
 
-	private Boolean bebidaAlcoolica;
+	private boolean bebidaAlcoolica;
 
 	private Integer bebidaAlcoolicaFrequenciaSemanal;
 
 	private String bebidaAlcoolicaComentario;
 
-	private Boolean atividadeFisica;
+	private boolean atividadeFisica;
 
 	private Integer atividadeFisicaFrequenciaSemanal;
 
 	private String atividadeFisicaComentario;
 
-	private Boolean diabetes;
+	private boolean diabetes;
 
-	private Boolean hipertensao;
+	private boolean hipertensao;
 
-	private Boolean outrasPatologias;
+	private boolean outrasPatologias;
 
 	private String outrasPatologiasComentario;
 
-	private Boolean alergia;
+	private boolean alergia;
 
 	private String alergiaComentario;
 
@@ -119,6 +119,13 @@ public class ConsultaNutricional {
 
 	@Column(columnDefinition = "TEXT")
 	private String orientacoesIndividuais;
+	
+	public ConsultaNutricional(){
+	}
+	
+	public ConsultaNutricional(Paciente paciente){
+		setPaciente(paciente);
+	}
 
 	public Long getId() {
 		return id;
@@ -288,11 +295,11 @@ public class ConsultaNutricional {
 		this.classificacaoTgp = classificacaoTgp;
 	}
 
-	public Boolean getMedicamento() {
+	public boolean getMedicamento() {
 		return medicamento;
 	}
 
-	public void setMedicamento(Boolean medicamento) {
+	public void setMedicamento(boolean medicamento) {
 		this.medicamento = medicamento;
 	}
 
@@ -304,11 +311,11 @@ public class ConsultaNutricional {
 		this.medicamentoComentario = medicamentoComentario;
 	}
 
-	public Boolean getMastigacao() {
+	public boolean getMastigacao() {
 		return mastigacao;
 	}
 
-	public void setMastigacao(Boolean mastigacao) {
+	public void setMastigacao(boolean mastigacao) {
 		this.mastigacao = mastigacao;
 	}
 
@@ -320,51 +327,51 @@ public class ConsultaNutricional {
 		this.mastigacaoComentario = mastigacaoComentario;
 	}
 
-	public Boolean getDisfagia() {
+	public boolean getDisfagia() {
 		return disfagia;
 	}
 
-	public void setDisfagia(Boolean disfagia) {
+	public void setDisfagia(boolean disfagia) {
 		this.disfagia = disfagia;
 	}
 
-	public Boolean getPirose() {
+	public boolean getPirose() {
 		return pirose;
 	}
 
-	public void setPirose(Boolean pirose) {
+	public void setPirose(boolean pirose) {
 		this.pirose = pirose;
 	}
 
-	public Boolean getNausea() {
+	public boolean getNausea() {
 		return nausea;
 	}
 
-	public void setNausea(Boolean nausea) {
+	public void setNausea(boolean nausea) {
 		this.nausea = nausea;
 	}
 
-	public Boolean getVomito() {
+	public boolean getVomito() {
 		return vomito;
 	}
 
-	public void setVomito(Boolean vomito) {
+	public void setVomito(boolean vomito) {
 		this.vomito = vomito;
 	}
 
-	public Boolean getDiarreia() {
+	public boolean getDiarreia() {
 		return diarreia;
 	}
 
-	public void setDiarreia(Boolean diarreia) {
+	public void setDiarreia(boolean diarreia) {
 		this.diarreia = diarreia;
 	}
 
-	public Boolean getConstipacao() {
+	public boolean getConstipacao() {
 		return constipacao;
 	}
 
-	public void setConstipacao(Boolean constipacao) {
+	public void setConstipacao(boolean constipacao) {
 		this.constipacao = constipacao;
 	}
 
@@ -376,11 +383,11 @@ public class ConsultaNutricional {
 		this.agua = agua;
 	}
 
-	public Boolean getCarneVermelha() {
+	public boolean getCarneVermelha() {
 		return carneVermelha;
 	}
 
-	public void setCarneVermelha(Boolean carneVermelha) {
+	public void setCarneVermelha(boolean carneVermelha) {
 		this.carneVermelha = carneVermelha;
 	}
 
@@ -401,11 +408,11 @@ public class ConsultaNutricional {
 		this.carneVermelhaComentario = carneVermelhaComentario;
 	}
 
-	public Boolean getBebidaAlcoolica() {
+	public boolean getBebidaAlcoolica() {
 		return bebidaAlcoolica;
 	}
 
-	public void setBebidaAlcoolica(Boolean bebidaAlcoolica) {
+	public void setBebidaAlcoolica(boolean bebidaAlcoolica) {
 		this.bebidaAlcoolica = bebidaAlcoolica;
 	}
 
@@ -426,11 +433,11 @@ public class ConsultaNutricional {
 		this.bebidaAlcoolicaComentario = bebidaAlcoolicaComentario;
 	}
 
-	public Boolean getAtividadeFisica() {
+	public boolean getAtividadeFisica() {
 		return atividadeFisica;
 	}
 
-	public void setAtividadeFisica(Boolean atividadeFisica) {
+	public void setAtividadeFisica(boolean atividadeFisica) {
 		this.atividadeFisica = atividadeFisica;
 	}
 
@@ -451,27 +458,27 @@ public class ConsultaNutricional {
 		this.atividadeFisicaComentario = atividadeFisicaComentario;
 	}
 
-	public Boolean getDiabetes() {
+	public boolean getDiabetes() {
 		return diabetes;
 	}
 
-	public void setDiabetes(Boolean diabetes) {
+	public void setDiabetes(boolean diabetes) {
 		this.diabetes = diabetes;
 	}
 
-	public Boolean getHipertensao() {
+	public boolean getHipertensao() {
 		return hipertensao;
 	}
 
-	public void setHipertensao(Boolean hipertensao) {
+	public void setHipertensao(boolean hipertensao) {
 		this.hipertensao = hipertensao;
 	}
 
-	public Boolean getOutrasPatologias() {
+	public boolean getOutrasPatologias() {
 		return outrasPatologias;
 	}
 
-	public void setOutrasPatologias(Boolean outrasPatologias) {
+	public void setOutrasPatologias(boolean outrasPatologias) {
 		this.outrasPatologias = outrasPatologias;
 	}
 
@@ -483,11 +490,11 @@ public class ConsultaNutricional {
 		this.outrasPatologiasComentario = outrasPatologiasComentario;
 	}
 
-	public Boolean getAlergia() {
+	public boolean getAlergia() {
 		return alergia;
 	}
 
-	public void setAlergia(Boolean alergia) {
+	public void setAlergia(boolean alergia) {
 		this.alergia = alergia;
 	}
 
