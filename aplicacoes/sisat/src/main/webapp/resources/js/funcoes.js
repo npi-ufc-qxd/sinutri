@@ -12,6 +12,7 @@ $(document).ready(function() {
 	$("#hb").mask("99999");
 	$("#tgo").mask("99999");
 	$("#tgp").mask("99999");
+	$("#Hora").mask("99:99");
 	
 	
 	$('div.error-validation:has(span)').find('span').css('color', '#a94442');

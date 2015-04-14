@@ -9,7 +9,7 @@
 	<div class="form-group">
 		<label for="horaAdd" class="col-sm-1 control-label">Horario:</label>
 		<div class="col-sm-2">
-			<form:input id="horaAdd" type="time" path=""  name="horaAdd" cssClass="form-control" placeholder="horario"/>
+			<form:input id="Hora" type="time" path=""  name="Hora" cssClass="form-control" placeholder="horario"/>
 		</div>
 
 		<label for="refeicaoAdd" class="col-sm-1 control-label">Refeicao:</label>
