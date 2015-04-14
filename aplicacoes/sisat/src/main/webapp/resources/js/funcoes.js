@@ -1,6 +1,6 @@
 $(document).ready(function() {
 	
-	$("#altura").mask("9.99");
+//	$("#altura").mask("9.9");
 	$("#peso").mask("99.99");
 	$("#cc").mask("99.99");
 	$("#agua").mask("99.99");

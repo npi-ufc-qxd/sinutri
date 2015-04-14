@@ -3,6 +3,7 @@ package br.ufc.quixada.npi.sisat.model;
 import java.text.DecimalFormat;
 import java.util.Date;
 import java.util.List;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -12,6 +13,9 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.validation.constraints.NotNull;
+
+import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.format.annotation.DateTimeFormat;
 
 
@@ -33,8 +37,10 @@ public class ConsultaNutricional {
 	@DateTimeFormat
 	private Date data;
 
+	@NotNull(message = "Por favor, informe o peso do paciente!")
 	private Double peso;
 
+	@NotNull(message = "Por favor, informe a cincunferencia da cintura do paciente!")
 	private Double circunferenciaCintura;
 
 	private Integer glicemia;
@@ -61,6 +67,7 @@ public class ConsultaNutricional {
 	private Integer tgp;
 	private String classificacaoTgp;
 
+	@NotNull(message = "Por favor, informe se o paciente ingere algum tipo de medicamento!")
 	private boolean medicamento;
 
 	private String medicamentoComentario;
@@ -89,12 +96,14 @@ public class ConsultaNutricional {
 
 	private String carneVermelhaComentario;
 
+	@NotNull(message = "Por favor, informe se o paciente ingere algum tipo de bebida alcoolica!")
 	private boolean bebidaAlcoolica;
 
 	private Integer bebidaAlcoolicaFrequenciaSemanal;
 
 	private String bebidaAlcoolicaComentario;
 
+	@NotNull(message = "Por favor, informe se o paciente pratica alguma atividade fisica!")
 	private boolean atividadeFisica;
 
 	private Integer atividadeFisicaFrequenciaSemanal;
@@ -105,6 +114,7 @@ public class ConsultaNutricional {
 
 	private boolean hipertensao;
 
+	@NotNull(message = "Por favor, informe se o paciente possui outras patologias!")
 	private boolean outrasPatologias;
 
 	private String outrasPatologiasComentario;
@@ -113,6 +123,8 @@ public class ConsultaNutricional {
 
 	private String alergiaComentario;
 
+	@NotNull(message = "Por favor, informe o objetivo da consulta!")
+	@NotEmpty(message = "Por favor, informe o objetivo da consulta!")
 	private String objetivoConsulta;
 
 	private String condutaNutricional;

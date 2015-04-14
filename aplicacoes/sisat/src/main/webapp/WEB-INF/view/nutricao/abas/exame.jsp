@@ -7,7 +7,7 @@
 		<div class="form-item">
 			<label for="glicemia" class="col-sm-2 control-label">Glicemia:</label>
 			<div class="col-sm-2">
-				<form:input id="glicemia" type="text" path="glicemia" cssClass="form-control" placeholder="glicemia" />
+				<form:input id="glicemia" type="number" path="glicemia" cssClass="form-control" placeholder="glicemia" />
 				<div class="error-validation">
 					<form:errors path="glicemia"></form:errors>
 				</div>
@@ -28,7 +28,7 @@
 		<div class="form-item">
 			<label for="ct" class="col-sm-2 control-label">CT:</label>
 			<div class="col-sm-2">
-				<form:input id="ct" type="text" path="ct" cssClass="form-control" placeholder="ct" />
+				<form:input id="ct" type="number" path="ct" cssClass="form-control" placeholder="ct" />
 				<div class="error-validation">
 					<form:errors path="ct"></form:errors>
 				</div>
@@ -49,7 +49,7 @@
 		<div class="form-item">
 			<label for="ldl" class="col-sm-2 control-label">LDL-C:</label>
 			<div class="col-sm-2">
-				<form:input id="ldl" type="text" path="ldl" cssClass="form-control" placeholder="LDL-C" />
+				<form:input id="ldl" type="number" path="ldl" cssClass="form-control" placeholder="LDL-C" />
 				<div class="error-validation">
 					<form:errors path="ldl"></form:errors>
 				</div>
@@ -70,7 +70,7 @@
 		<div class="form-item">
 			<label for="hdl" class="col-sm-2 control-label">HDL-C:</label>
 			<div class="col-sm-2">
-				<form:input id="hdl" type="text" path="hdl" cssClass="form-control" placeholder="HDL-C" />
+				<form:input id="hdl" type="number" path="hdl" cssClass="form-control" placeholder="HDL-C" />
 				<div class="error-validation">
 					<form:errors path="hdl"></form:errors>
 				</div>
@@ -91,7 +91,7 @@
 		<div class="form-item">
 			<label for="tg" class="col-sm-2 control-label">TG:</label>
 			<div class="col-sm-2">
-				<form:input id="tg" type="text" path="tg" cssClass="form-control" placeholder="TG" />
+				<form:input id="tg" type="number" path="tg" cssClass="form-control" placeholder="TG" />
 				<div class="error-validation">
 					<form:errors path="tg"></form:errors>
 				</div>
@@ -112,7 +112,7 @@
 		<div class="form-item">
 			<label for="hb" class="col-sm-2 control-label">HB:</label>
 			<div class="col-sm-2">
-				<form:input id="hb" type="text" path="hb" cssClass="form-control" placeholder="HB" />
+				<form:input id="hb" type="number" path="hb" cssClass="form-control" placeholder="HB" />
 				<div class="error-validation">
 					<form:errors path="hb"></form:errors>
 				</div>
@@ -133,7 +133,7 @@
 		<div class="form-item">
 			<label for="tgo" class="col-sm-2 control-label">TGO (AST):</label>
 			<div class="col-sm-2">
-				<form:input id="tgo" type="text" path="tgo" cssClass="form-control" placeholder="tgo" />
+				<form:input id="tgo" type="number" path="tgo" cssClass="form-control" placeholder="tgo" />
 				<div class="error-validation">
 					<form:errors path="tgo"></form:errors>
 				</div>
@@ -154,7 +154,7 @@
 		<div class="form-item">
 			<label for="tgp" class="col-sm-2 control-label">TGP (ALT):</label>
 			<div class="col-sm-2">
-				<form:input id="tgp" type="text" path="tgp" cssClass="form-control" placeholder="TGP (ALT)" />
+				<form:input id="tgp" type="number" path="tgp" cssClass="form-control" placeholder="TGP (ALT)" />
 				<div class="error-validation">
 					<form:errors path="tgp"></form:errors>
 				</div>

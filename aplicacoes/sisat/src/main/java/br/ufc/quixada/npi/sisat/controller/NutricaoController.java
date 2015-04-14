@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.List;
 
 import javax.inject.Inject;
+import javax.validation.Valid;
 
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
@@ -94,7 +95,13 @@ public class NutricaoController {
 	}
 
 	@RequestMapping(value = {"/editarConsulta"}, method = RequestMethod.POST)
-	public String editarConsulta(@ModelAttribute("consultaNutricional") ConsultaNutricional consulta, BindingResult result, RedirectAttributes redirectAttributes) {
+	public String editarConsulta(Model model, @Valid ConsultaNutricional consulta, BindingResult result, RedirectAttributes redirectAttributes) {
+		model.addAttribute("action", "editar");
+		
+		if (result.hasErrors()) {
+			return ("nutricao/consulta");
+		}		
+	
 		Paciente paciente = pacienteService.find(Paciente.class, consulta.getPaciente().getId());
 		
 		Date data = consultaNutricionalService.find(ConsultaNutricional.class, consulta.getId()).getData(); 
@@ -140,9 +147,10 @@ public class NutricaoController {
 	//Consulta Nutricional --> Create
 	@RequestMapping(value = {"/{id}/consulta"}, method = RequestMethod.GET)
 	public String realizarConsulta(Model model, @PathVariable("id") Long id, RedirectAttributes redirectAttributes) {
-		Pessoa pessoa = pessoaService.find(Pessoa.class, id);
-
+		
 		model.addAttribute("action", "cadastrar");
+		
+		Pessoa pessoa = pessoaService.find(Pessoa.class, id);		
 
 		if(pessoa == null){
 			redirectAttributes.addFlashAttribute("erro", "Paciente não encontrado.");
@@ -168,8 +176,9 @@ public class NutricaoController {
 	}
 
 	@RequestMapping(value = {"/consultar"}, method = RequestMethod.POST)
-	public String consulta(@ModelAttribute("consulta") ConsultaNutricional consulta, BindingResult result, RedirectAttributes redirectAttributes) {		
-
+	public String consulta(Model model, @Valid ConsultaNutricional consulta, BindingResult result, RedirectAttributes redirectAttributes) {		
+		model.addAttribute("action", "cadastrar");
+		
 		if (result.hasErrors()) {
 			return ("nutricao/consulta");
 		}
@@ -230,6 +239,4 @@ public class NutricaoController {
 		redirectAttributes.addFlashAttribute("success", "Agendamento deletado com sucesso");
 		return "redirect:/nutricao/buscar_agendamento";
 	}
-
-
 }

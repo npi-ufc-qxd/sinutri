@@ -5,7 +5,7 @@
 	<div class="form-group">
 		<label for="altura" class="col-sm-2 control-label">Altura:</label>
 		<div class="col-sm-3">
-			<form:input id="altura" type="text" path="paciente.altura" cssClass="form-control" placeholder="Altura" />
+			<form:input id="altura" type="number" path="paciente.altura" cssClass="form-control" placeholder="Altura" />
 			<div class="error-validation">
 				<form:errors path="paciente.altura"></form:errors>
 			</div>
@@ -15,7 +15,7 @@
 	<div class="form-group">
 		<label for="peso" class="col-sm-2 control-label">Peso:</label>
 		<div class="col-sm-3">
-			<form:input id="peso" type="text" path="peso" cssClass="form-control" placeholder="Peso"/>
+			<form:input id="peso" type="number" path="peso" cssClass="form-control" placeholder="Peso"/>
 			<div class="error-validation">
 				<form:errors path="peso"></form:errors>
 			</div>
@@ -25,7 +25,7 @@
 	<div class="form-group">
 		<label for="cc" class="col-sm-2 control-label">CC:</label>
 		<div class="col-sm-3" >
-			<form:input id="cc" type="text" placeholder="Circunferência da cintura" path="circunferenciaCintura" cssClass="form-control" min="0"/>
+			<form:input id="cc" type="number" placeholder="Circunferência da cintura" path="circunferenciaCintura" cssClass="form-control" min="0"/>
 			<div class="error-validation">
 				<form:errors path="circunferenciaCintura"></form:errors>
 			</div>
@@ -74,7 +74,7 @@
 	<div class="form-group form-item" align="left">
 		<label for="agua" class="col-sm-2 control-label">Consumo de água:</label>
 		<div class="col-sm-10">
-			<form:input id="agua" name="agua" tye="text" path="agua" cssClass="form-control" placeholder="Consumo de água"/>
+			<form:input id="agua" name="agua" type="number" path="agua" cssClass="form-control" placeholder="Consumo de água"/>
 			<div class="error-validation">
 				<form:errors path="agua"></form:errors>
 			</div>
