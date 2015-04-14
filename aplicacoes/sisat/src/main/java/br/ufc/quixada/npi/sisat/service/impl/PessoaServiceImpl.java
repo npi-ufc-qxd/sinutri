@@ -34,4 +34,10 @@ public class PessoaServiceImpl extends GenericServiceImpl<Pessoa> implements Pes
 	public List<Pessoa> getPessoasByNomeOuCpf(String busca) {
 		return find("Pessoa.findPessoasByNomeOrCpf", new NamedParams("busca", "%" + busca.toUpperCase() + "%", "cpf", busca));
 	}
+
+	@Override
+	public Pessoa getPessoaByCPF(String cpf) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

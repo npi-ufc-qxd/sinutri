@@ -2,8 +2,10 @@ package br.ufc.quixada.npi.sisat.controller;
 
 import java.security.Principal;
 
+import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
 
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -11,8 +13,15 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import br.ufc.quixada.npi.sisat.model.Pessoa;
+import br.ufc.quixada.npi.sisat.service.PessoaService;
+import br.ufc.quixada.npi.sisat.util.Constant;
+
 @Controller
 public class PessoaController {
+	@Inject
+	private PessoaService pessoaService;
+
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public ModelAndView login(
 			@RequestParam(value = "error", required = false) String error,
@@ -58,5 +67,12 @@ public class PessoaController {
 			"Você não tem permissão para acessar essa página!");
 		}
 		return "403";
+	}
+	private Pessoa getUsuarioLogado(HttpSession session) {
+		if (session.getAttribute(Constant.USUARIO_LOGADO) == null) {
+			Pessoa pessoa = pessoaService.getPessoaByCPF(SecurityContextHolder.getContext().getAuthentication().getName());
+			session.setAttribute(Constant.USUARIO_LOGADO, pessoa);
+		}
+		return (Pessoa) session.getAttribute(Constant.USUARIO_LOGADO);
 	}
 }

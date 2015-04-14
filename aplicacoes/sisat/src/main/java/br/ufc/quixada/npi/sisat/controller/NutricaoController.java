@@ -4,8 +4,10 @@ import java.util.Date;
 import java.util.List;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -17,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+
 import br.ufc.quixada.npi.sisat.model.Alimentacao;
 import br.ufc.quixada.npi.sisat.model.ConsultaNutricional;
 import br.ufc.quixada.npi.sisat.model.FrequenciaAlimentar;
@@ -27,6 +30,7 @@ import br.ufc.quixada.npi.sisat.model.enuns.Refeicao;
 import br.ufc.quixada.npi.sisat.service.ConsultaNutricionalService;
 import br.ufc.quixada.npi.sisat.service.PacienteService;
 import br.ufc.quixada.npi.sisat.service.PessoaService;
+import br.ufc.quixada.npi.sisat.util.Constant;
 
 @Controller
 @RequestMapping("nutricao")
@@ -43,14 +47,16 @@ public class NutricaoController {
 
 
 	@RequestMapping(value = {"/", "/index"}, method = RequestMethod.GET)
-	public String index() {
+	public String index(HttpSession session) {
+		getUsuarioLogado(session);
 		return "nutricao/buscar";
 	}
 
 
 	//Buscar paciente (get)
 	@RequestMapping(value = {"/buscar"}, method = RequestMethod.GET)
-	public String buscarPaciente(Model model) {
+	public String buscarPaciente(Model model, HttpSession session) {
+		getUsuarioLogado(session);
 		return "nutricao/buscar";
 	}
 
@@ -58,7 +64,7 @@ public class NutricaoController {
 	@RequestMapping(value = "/buscar", method = RequestMethod.POST)
 	public String buscarPaciente(@RequestParam("busca") String busca, ModelMap map, RedirectAttributes redirectAttributes, Authentication authentication) {
 		map.addAttribute("busca", busca);
-
+		
 		List<Pessoa> pessoas = pessoaService.getPessoasByNomeOuCpf(busca);
 		
 		Pessoa pessoa = pessoaService.getPessoaByLogin(authentication.getName());;		
@@ -84,7 +90,7 @@ public class NutricaoController {
 
 	@RequestMapping(value = "editarConsulta/{id}", method = RequestMethod.GET)
 	public String editarConsulta(@PathVariable("id") long id, Model model) {
-
+		System.err.println();
 		ConsultaNutricional consultaNutricional = consultaNutricionalService.find(ConsultaNutricional.class, id);
 		model.addAttribute("action", "editar");
 		model.addAttribute("consultaNutricional", consultaNutricional);
@@ -150,7 +156,7 @@ public class NutricaoController {
 		}
 
 		if(pessoa.getPaciente() == null){
-			System.out.println();
+			
 			pessoa.setPaciente(new Paciente());
 			pessoa.getPaciente().setPessoa(pessoa);
 
@@ -229,6 +235,14 @@ public class NutricaoController {
 		//agendamentoService.delete(agendamentoService.find(Agendamento.class, id));
 		redirectAttributes.addFlashAttribute("success", "Agendamento deletado com sucesso");
 		return "redirect:/nutricao/buscar_agendamento";
+	}
+
+	private Pessoa getUsuarioLogado(HttpSession session) {
+		if (session.getAttribute(Constant.USUARIO_LOGADO) == null) {
+			Pessoa pessoa = pessoaService.getPessoaByLogin(SecurityContextHolder.getContext().getAuthentication().getName());
+			session.setAttribute(Constant.USUARIO_LOGADO, pessoa);
+		}
+		return (Pessoa) session.getAttribute(Constant.USUARIO_LOGADO);
 	}
 
 
