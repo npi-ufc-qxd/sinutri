@@ -25,3 +25,6 @@
 <script src="<c:url value="/resources/js/bootbox.min.js" />"></script>
 <script src="<c:url value="/resources/js/bootstrapValidator.min.js" />"></script>
 <script	src="<c:url value="/resources/js/formularios.js" />"></script>
+<script	src="<c:url value="/resources/js/jquery.appendGrid-1.5.2.js" />"></script>
+<script	src="<c:url value="/resources/js/jquery-ui-1.11.1.min.js" />"></script>
+
