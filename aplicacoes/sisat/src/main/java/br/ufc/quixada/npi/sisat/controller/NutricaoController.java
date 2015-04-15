@@ -235,9 +235,9 @@ public class NutricaoController {
 		redirectAttributes.addFlashAttribute("success", "Agendamento deletado com sucesso");
 		return "redirect:/nutricao/buscar_agendamento";
 	}
-	 
+	
 	private Pessoa getUsuarioLogado(HttpSession session) {
-		final String USUARIO_LOGADO = "usuario";
+		final String USUARIO_LOGADO = "usuario"; 
 		if (session.getAttribute(USUARIO_LOGADO) == null) {
 			Pessoa pessoa = pessoaService.getPessoaByLogin(SecurityContextHolder.getContext().getAuthentication().getName());
 			session.setAttribute(USUARIO_LOGADO, pessoa);
