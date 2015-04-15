@@ -3,7 +3,17 @@ package br.ufc.quixada.npi.sisat.model;
 import java.io.Serializable;
 import java.util.List;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.MapsId;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+
+import org.hibernate.validator.constraints.NotEmpty;
+import org.springframework.beans.factory.annotation.Value;
 
 
 @Entity
@@ -25,7 +35,10 @@ public class Paciente implements Serializable {
 	@OneToMany(mappedBy="paciente")
 	private List<Agendamento> agendamentos;
 	 */
-	private double altura;
+	
+	
+	@NotNull(message = "Por favor, informe a altura do paciente!")
+	private Double altura;
 	
 	
 	//gets and sets
@@ -35,10 +48,10 @@ public class Paciente implements Serializable {
 	public void setPessoa(Pessoa pessoa) {
 		this.pessoa = pessoa;
 	}
-	public double getAltura() {
+	public Double getAltura() {
 		return altura;
 	}
-	public void setAltura(double altura) {
+	public void setAltura(Double altura) {
 		this.altura = altura;
 	}
 	public List<ConsultaNutricional> getConsultas() {

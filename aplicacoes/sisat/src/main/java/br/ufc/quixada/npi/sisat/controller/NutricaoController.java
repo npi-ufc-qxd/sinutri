@@ -4,13 +4,13 @@ import java.util.Date;
 import java.util.List;
 
 import javax.inject.Inject;
+import javax.validation.Valid;
 
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -94,7 +94,12 @@ public class NutricaoController {
 	}
 
 	@RequestMapping(value = {"/editarConsulta"}, method = RequestMethod.POST)
-	public String editarConsulta(@ModelAttribute("consultaNutricional") ConsultaNutricional consulta, BindingResult result, RedirectAttributes redirectAttributes) {
+	public String editarConsulta(Model model, @Valid ConsultaNutricional consulta, BindingResult result, RedirectAttributes redirectAttributes) {
+		model.addAttribute("action", "editar");
+		
+		if (result.hasErrors()) {
+			return ("nutricao/consulta");
+		}		
 		Paciente paciente = pacienteService.find(Paciente.class, consulta.getPaciente().getId());
 		
 		Date data = consultaNutricionalService.find(ConsultaNutricional.class, consulta.getId()).getData(); 
@@ -122,7 +127,7 @@ public class NutricaoController {
 	}
 
 	//Detalhes de paciente
-	@RequestMapping(value = {"detalhes/{id}"})
+@RequestMapping(value = {"detalhes/{id}"})
 	public String getDetalhes(Pessoa p, @PathVariable("id") Long id, Model model, RedirectAttributes redirectAttributes){
 		Pessoa pessoa = pessoaService.find(Pessoa.class, id);
 		if(pessoa == null){
@@ -140,10 +145,12 @@ public class NutricaoController {
 	//Consulta Nutricional --> Create
 	@RequestMapping(value = {"consulta/{id}"}, method = RequestMethod.GET)
 	public String realizarConsulta(Model model, @PathVariable("id") Long id, RedirectAttributes redirectAttributes) {
-		Pessoa pessoa = pessoaService.find(Pessoa.class, id);
-
+		
 		model.addAttribute("action", "cadastrar");
-
+		
+		Pessoa pessoa = pessoaService.find(Pessoa.class, id);		
+	
+	
 		if(pessoa == null){
 			redirectAttributes.addFlashAttribute("erro", "Paciente não encontrado.");
 			return "redirect:/nutricao/buscar";
@@ -168,8 +175,9 @@ public class NutricaoController {
 	}
 
 	@RequestMapping(value = {"/consultar"}, method = RequestMethod.POST)
-	public String consulta(@ModelAttribute("consulta") ConsultaNutricional consulta, BindingResult result, RedirectAttributes redirectAttributes) {		
-
+	public String consulta(Model model, @Valid ConsultaNutricional consulta, BindingResult result, RedirectAttributes redirectAttributes) {		
+		model.addAttribute("action", "cadastrar");
+		
 		if (result.hasErrors()) {
 			return ("nutricao/consulta");
 		}
