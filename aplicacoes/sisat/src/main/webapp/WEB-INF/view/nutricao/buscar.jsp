@@ -91,5 +91,8 @@
 	<jsp:include page="../modulos/footer.jsp" />
 
 </body>
+<<<<<<< HEAD
 
+=======
+>>>>>>> 88d933e72eb56c54b28995840e3afe598848976e
 </html>
