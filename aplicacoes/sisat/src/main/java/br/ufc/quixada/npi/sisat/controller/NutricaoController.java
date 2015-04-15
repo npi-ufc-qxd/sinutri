@@ -30,7 +30,7 @@ import br.ufc.quixada.npi.sisat.model.enuns.Refeicao;
 import br.ufc.quixada.npi.sisat.service.ConsultaNutricionalService;
 import br.ufc.quixada.npi.sisat.service.PacienteService;
 import br.ufc.quixada.npi.sisat.service.PessoaService;
-import br.ufc.quixada.npi.sisat.util.Constant;
+
 
 @Controller
 @RequestMapping("nutricao")
@@ -44,11 +44,11 @@ public class NutricaoController {
 
 	@Inject
 	private ConsultaNutricionalService consultaNutricionalService;
-
+	
+	
 
 	@RequestMapping(value = {"/", "/index"}, method = RequestMethod.GET)
-	public String index(HttpSession session) {
-		getUsuarioLogado(session);
+	public String index() {
 		return "nutricao/buscar";
 	}
 
@@ -90,7 +90,6 @@ public class NutricaoController {
 
 	@RequestMapping(value = "editarConsulta/{id}", method = RequestMethod.GET)
 	public String editarConsulta(@PathVariable("id") long id, Model model) {
-		System.err.println();
 		ConsultaNutricional consultaNutricional = consultaNutricionalService.find(ConsultaNutricional.class, id);
 		model.addAttribute("action", "editar");
 		model.addAttribute("consultaNutricional", consultaNutricional);
@@ -236,13 +235,14 @@ public class NutricaoController {
 		redirectAttributes.addFlashAttribute("success", "Agendamento deletado com sucesso");
 		return "redirect:/nutricao/buscar_agendamento";
 	}
-
+	 
 	private Pessoa getUsuarioLogado(HttpSession session) {
-		if (session.getAttribute(Constant.USUARIO_LOGADO) == null) {
+		final String USUARIO_LOGADO = "usuario";
+		if (session.getAttribute(USUARIO_LOGADO) == null) {
 			Pessoa pessoa = pessoaService.getPessoaByLogin(SecurityContextHolder.getContext().getAuthentication().getName());
-			session.setAttribute(Constant.USUARIO_LOGADO, pessoa);
+			session.setAttribute(USUARIO_LOGADO, pessoa);
 		}
-		return (Pessoa) session.getAttribute(Constant.USUARIO_LOGADO);
+		return (Pessoa) session.getAttribute(USUARIO_LOGADO);
 	}
 
 
