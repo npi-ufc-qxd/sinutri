@@ -12,6 +12,7 @@ import javax.persistence.OneToOne;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
+import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.beans.factory.annotation.Value;
 
 
@@ -35,8 +36,8 @@ public class Paciente implements Serializable {
 	private List<Agendamento> agendamentos;
 	 */
 	
+	
 	@NotNull(message = "Por favor, informe a altura do paciente!")
-	@Min( value = 0, message = "Por favor, informe a altura do paciente!")
 	private Double altura;
 	
 	

@@ -123,7 +123,7 @@ public class ConsultaNutricional {
 
 	private String alergiaComentario;
 
-	@NotNull(message = "Por favor, informe o objetivo da consulta!")
+	
 	@NotEmpty(message = "Por favor, informe o objetivo da consulta!")
 	private String objetivoConsulta;
 
