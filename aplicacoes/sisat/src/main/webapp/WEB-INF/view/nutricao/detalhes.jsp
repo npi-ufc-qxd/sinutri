@@ -63,18 +63,23 @@
 				<tbody>
 					<c:forEach var="consulta" items="${pessoa.paciente.consultas}">
 						<tr class="linha">
-							<td><a href="../${consulta.id}/detalhesConsulta"> <fmt:formatDate
+
+							<td><a href="../detalhesConsulta/${consulta.id}/"> <fmt:formatDate
+
 										type="both" pattern="dd-MM-yyyy HH-mm"
 										value="${consulta.data}" />
 							</a></td>
 							<td><a id="detalhes" data-toggle="modal"
-								href="../${consulta.id}/detalhesConsulta">
+
+								href="../detalhesConsulta/${consulta.id}">
+
 									<button class="btn btn-info">
 										Detalhes <span class="glyphicon glyphicon-eye-open"></span>
 									</button>
 							</a></td>
 							<td><a id="editar" data-toggle="modal"
-								href="../${consulta.id}/editarConsulta">
+
+								href="../editarConsulta/${consulta.id}">
 									<button class="btn btn-warning">
 										Editar <span class="glyphicon glyphicon-edit"></span>
 									</button>
@@ -91,7 +96,9 @@
 
 		<div class="controls">
 			<a href="<c:url value="/nutricao/buscar"></c:url>" class="btn btn-default">Voltar</a>
-			<a href="<c:url value="/nutricao/${pessoa.id }/consulta"></c:url>" class="btn btn-primary">Realizar consulta</a>
+
+			<a href="<c:url value="/nutricao/consulta/${pessoa.id }"></c:url>" class="btn btn-primary">Realizar consulta</a>
+
 		</div>
 	</div>
 	<jsp:include page="../modulos/footer.jsp" />
