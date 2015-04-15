@@ -53,8 +53,8 @@
 							initRows : 0,
 							hideRowNumColumn : true,
 							columns : [ {
-								name : 'Alemento',
-								display : 'Alemento',
+								name : 'Alimento',
+								display : 'Alimento',
 								ctrlCss : {
 									'width' : '200px'
 								}
