@@ -90,13 +90,10 @@
 <fieldset>
 	<h3>Adicione as refeições</h3>
 	<div class="form-group">
+
 		<table id="tblAppendGrid">
 		</table>
 	</div>
 </fieldset>
-
-<script
-	src="<c:url value="../../resources/js/questionario-frequencia-alimentar.js" />"></script>
-
 </html>
 

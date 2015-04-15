@@ -66,11 +66,14 @@
 									</td>
 									<td align="right">
 										<a id="detalhes" data-toggle="modal" href="detalhes/${pessoa.id}">
+
 											<button class="btn btn-default">
 												Detalhes <span class="glyphicon glyphicon-eye-open"></span>
 											</button>
 										</a>
+
 										<a id="consulta" data-toggle="modal" href="consulta/${pessoa.id}">
+
 											<button class="btn btn-default">
 												Consulta <span class="glyphicon glyphicon-plus"></span>
 											</button>
