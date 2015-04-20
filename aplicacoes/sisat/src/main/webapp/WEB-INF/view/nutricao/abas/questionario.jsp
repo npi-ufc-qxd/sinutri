@@ -89,6 +89,7 @@
 
 <fieldset>
 	<h3>Adicione as refeições</h3>
+	${consultaNutricional.frequencias }
 	<div class="form-group">
 
 		<table id="tblAppendGrid">
