@@ -1,6 +1,6 @@
 $(document).ready(function() {
 	
-//	$("#altura").mask("9.9");
+	$("#altura").mask("9.9");
 	$("#peso").mask("99.99");
 	$("#cc").mask("99.99");
 	$("#agua").mask("99.99");
@@ -11,8 +11,7 @@ $(document).ready(function() {
 	$("#tg").mask("99999");
 	$("#hb").mask("99999");
 	$("#tgo").mask("99999");
-	$("#tgp").mask("99999");
-	$("#Hora").mask("99:99");
+	$("#tgp").mask("99999");	
 	
 	
 	$('div.error-validation:has(span)').find('span').css('color', '#a94442');

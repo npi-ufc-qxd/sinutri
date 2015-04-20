@@ -34,7 +34,8 @@
 						ctrlCss : {
 							width : '50px',
 							'text-align' : 'right'
-						}
+						},
+						ctrlClass: 'hora'
 					} ],
 					initData : [
 
@@ -43,6 +44,7 @@
 					],
 					useSubPanel : true,
 					subPanelBuilder : function(cell, uniqueIndex) {
+						$(".hora").mask("99:99");
 						// Create a table object and add to sub panel
 						var subgrid = $('<table></table>').attr('id',
 								'tblSubGrid_' + uniqueIndex).appendTo(cell);
