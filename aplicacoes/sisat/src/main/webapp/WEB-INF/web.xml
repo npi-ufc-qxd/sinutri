@@ -23,11 +23,6 @@
 	    </jsp-property-group>
 	</jsp-config>
 
-    <!-- used so we can use forms of method type 'PUT' and 'DELETE' (such as in the Pet form)
-see here: http://static.springsource.org/spring/docs/current/spring-framework-reference/html/view.html#rest-method-conversion
--->
-		
-
     <filter>
         <filter-name>httpMethodFilter</filter-name>
         <filter-class>org.springframework.web.filter.HiddenHttpMethodFilter</filter-class>
@@ -72,14 +67,5 @@ see here: http://static.springsource.org/spring/docs/current/spring-framework-re
 	    <filter-name>encodingFilter</filter-name>  
 	    <url-pattern>/*</url-pattern>  
 	</filter-mapping>
-	
-	<filter>
-		<filter-name>OpenEntityManagerInViewFilter</filter-name>
-		<filter-class>org.springframework.orm.jpa.support.OpenEntityManagerInViewFilter</filter-class>
-	</filter>
-	<filter-mapping>
-		<filter-name>OpenEntityManagerInViewFilter</filter-name>
-		<url-pattern>/*</url-pattern>
-	</filter-mapping> 
-		
+
 </web-app>
