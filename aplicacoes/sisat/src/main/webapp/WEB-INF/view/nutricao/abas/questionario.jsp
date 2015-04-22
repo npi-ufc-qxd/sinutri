@@ -6,6 +6,7 @@
 <html>
 
 <script id="jsSource" type="text/javascript">
+	
 	$(function() {
 		// Initialize appendGrid
 		$('#tblAppendGrid').appendGrid(
@@ -35,11 +36,17 @@
 							width : '50px',
 							'text-align' : 'right'
 						},
-						ctrlClass: 'hora'
+						ctrlClass : 'hora'
 					} ],
 					initData : [
-
-					//Aqui ficam os valores 
+					            {
+				                    'Tipo': 3, 'Hora': '12:00',
+				                    'SubGridData': [{ Alimento: 'Poster', Porcao: 1}]
+				                },
+				               {
+				                    'Tipo': 3, 'Hora': '14:00',
+				                    'SubGridData': [{ Alimento: 'Poster', Porcao: 1}, { Alimento: 'Poster', Porcao: 1}   ]
+				                },
 
 					],
 					useSubPanel : true,
@@ -91,7 +98,7 @@
 
 <fieldset>
 	<h3>Adicione as refeições</h3>
-	${consultaNutricional.frequencias }
+<!-- 	${consultaNutricional.frequencias}  -->
 	<div class="form-group">
 
 		<table id="tblAppendGrid">

@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.List;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
@@ -86,7 +87,13 @@ public class NutricaoController {
 		model.addAttribute("classificacao", cla);		
 		return "/nutricao/consulta";
 	}
-
+	
+	@RequestMapping(value = "obterFrequenciaAlimentar/{id}", method = RequestMethod.GET)
+	public void obterFrequenciaAlimentar(@PathVariable("id") long id, Model model) {
+			
+		System.err.println(id);
+	}
+	
 	@RequestMapping(value = {"/editarConsulta"}, method = RequestMethod.POST)
 	public String editarConsulta(Model model, @Valid ConsultaNutricional consulta, BindingResult result, RedirectAttributes redirectAttributes) {
 		model.addAttribute("action", "editar");
@@ -105,6 +112,7 @@ public class NutricaoController {
 		redirectAttributes.addFlashAttribute("success", "Consulta do paciente <strong>" + consulta.getPaciente().getPessoa().getNome() + "</strong> atualizada com sucesso.");
 		return "redirect:/nutricao/detalhes/" + consulta.getPaciente().getId();
 	}
+
 
 	private ConsultaNutricional atualizarConsulta(ConsultaNutricional consulta) {
 		if (consulta.getFrequencias() != null) {
