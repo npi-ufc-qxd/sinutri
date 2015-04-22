@@ -38,6 +38,11 @@
 						},
 						ctrlClass : 'hora'
 					} ],
+					 nameFormatter: function (idPrefix, name, uniqueIndex) {
+				          
+				            return name;
+				        }
+				    });
 					initData : [
 					            {
 				                    'Tipo': 3, 'Hora': '12:00',
