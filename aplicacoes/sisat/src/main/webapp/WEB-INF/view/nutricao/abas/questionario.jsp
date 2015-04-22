@@ -38,11 +38,6 @@
 						},
 						ctrlClass : 'hora'
 					} ],
-					 nameFormatter: function (idPrefix, name, uniqueIndex) {
-				          
-				            return name;
-				        }
-				    });
 					initData : [
 					            {
 				                    'Tipo': 3, 'Hora': '12:00',
@@ -88,7 +83,7 @@
 						return $('#tblSubGrid_' + uniqueIndex).appendGrid(
 								'getAllValue', true);
 					},
-					rowDataLoaded : function(caller, record, rowIndex,
+					rowDataLoaded : function(caller, record, rowIndex,"src/main/webapp/WEB-INF/view/nutricao/abas/questionario.jsp"
 							uniqueIndex) {
 						// Check SubGridData exist in the record data
 						if (record.SubGridData) {
@@ -103,7 +98,7 @@
 
 <fieldset>
 	<h3>Adicione as refeições</h3>
-<!-- 	${consultaNutricional.frequencias}  -->
+<!-- 	${consultaNutricional.frequencias}
 	<div class="form-group">
 
 		<table id="tblAppendGrid">
