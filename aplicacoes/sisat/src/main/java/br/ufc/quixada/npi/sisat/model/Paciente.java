@@ -4,16 +4,13 @@ import java.io.Serializable;
 import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.MapsId;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
-import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
-
-import org.hibernate.validator.constraints.NotEmpty;
-import org.springframework.beans.factory.annotation.Value;
 
 
 @Entity
@@ -29,7 +26,7 @@ public class Paciente implements Serializable {
 	@JoinColumn(name = "id")
 	private Pessoa pessoa;
 	
-	@OneToMany(mappedBy="paciente")
+	@OneToMany(mappedBy="paciente", fetch=FetchType.EAGER)
  	private List<ConsultaNutricional> consultas;
 	/*
 	@OneToMany(mappedBy="paciente")
