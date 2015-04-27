@@ -6,7 +6,6 @@
 <html>
 
 <script id="jsSource" type="text/javascript">
-	
 	$(function() {
 		// Initialize appendGrid
 		$('#tblAppendGrid').appendGrid(
@@ -14,7 +13,7 @@
 					caption : 'Tabela de refeições',
 					initRows : 0,
 					columns : [ {
-						name : 'Tipo',
+						name : 'refeicao',
 						display : 'Tipo de refição',
 						type : 'select',
 						ctrlOptions : {
@@ -26,7 +25,7 @@
 							5 : 'Ceia'
 						}
 					}, {
-						name : 'Hora',
+						name : 'horario',
 						display : 'Hora',
 						type : 'text',
 						ctrlAttr : {
@@ -38,15 +37,28 @@
 						},
 						ctrlClass : 'hora'
 					} ],
-					initData : [
-					            {
-				                    'Tipo': 3, 'Hora': '12:00',
-				                    'SubGridData': [{ Alimento: 'Poster', Porcao: 1}]
-				                },
-				               {
-				                    'Tipo': 3, 'Hora': '14:00',
-				                    'SubGridData': [{ Alimento: 'Poster', Porcao: 1}, { Alimento: 'Poster', Porcao: 1}   ]
-				                },
+					nameFormatter : function(idPrefix, name, uniqueIndex) {
+						
+						return "frequencias["+uniqueIndex+"]."+name;
+					},
+					initData : [ {
+						'refeicao' : 3,
+						'horario' : '12:00',
+						'SubGridData' : [ {
+							Alimento : 'Poster',
+							Porcao : 1
+						} ]
+					}, {
+						'refeicao' : 3,
+						'horario' : '14:00',
+						'SubGridData' : [ {
+							Alimento : 'Poster',
+							Porcao : 1
+						}, {
+							Alimento : 'Poster',
+							Porcao : 1
+						} ]
+					},
 
 					],
 					useSubPanel : true,
@@ -75,7 +87,11 @@
 									'text-align' : 'right'
 								},
 								value : 1
-							} ]
+							} ],
+						nameFormatter : function(idPrefix, name, uniqueIndex) {
+							
+							return "frequencias["+uniqueIndex+"]."+name;
+						},
 						});
 					},
 					subPanelGetter : function(uniqueIndex) {
@@ -83,9 +99,9 @@
 						return $('#tblSubGrid_' + uniqueIndex).appendGrid(
 								'getAllValue', true);
 					},
-					rowDataLoaded : function(caller, record, rowIndex,"src/main/webapp/WEB-INF/view/nutricao/abas/questionario.jsp"
+					rowDataLoaded : function(caller, record, rowIndex,
 							uniqueIndex) {
-						// Check SubGridData exist in the record data
+
 						if (record.SubGridData) {
 							// Fill the sub grid
 							$('#tblSubGrid_' + uniqueIndex, caller).appendGrid(
@@ -98,9 +114,8 @@
 
 <fieldset>
 	<h3>Adicione as refeições</h3>
-<!-- 	${consultaNutricional.frequencias}
+	<!-- 	${consultaNutricional.frequencias} -->
 	<div class="form-group">
-
 		<table id="tblAppendGrid">
 		</table>
 	</div>
