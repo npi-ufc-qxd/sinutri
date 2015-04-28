@@ -1,5 +1,7 @@
 package br.ufc.quixada.npi.sisat.model;
 
+import java.util.Date;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -8,6 +10,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 import org.hibernate.annotations.Type;
+import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 public class Documento {
@@ -28,6 +31,9 @@ public class Documento {
 	@ManyToOne
 	@JoinColumn(name = "consultaNutricional_id")
 	private ConsultaNutricional consultaNutricional;
+
+	@DateTimeFormat
+	private Date data;
 
 	public Documento() {
 		super();
@@ -89,6 +95,14 @@ public class Documento {
 
 	public void setConsultaNutricional(ConsultaNutricional consultaNutricional) {
 		this.consultaNutricional = consultaNutricional;
+	}
+
+	public Date getData() {
+		return data;
+	}
+
+	public void setData(Date data) {
+		this.data = data;
 	}
 
 	@Override

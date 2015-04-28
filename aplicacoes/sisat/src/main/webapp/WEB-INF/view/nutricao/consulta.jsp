@@ -33,10 +33,11 @@
 		<h2> ${titulo}</h2>
 		
 		<ul class="nav nav-tabs">
-			<li><a data-toggle="tab" href="#avaliacao">Avaliaçã Nutricional</a></li>
+			<li><a data-toggle="tab" href="#avaliacao">Avaliação Nutricional</a></li>
 			<li><a data-toggle="tab" href="#exame">Exames Laboratoriais</a></li>
 			<li><a data-toggle="tab" href="#questionario">Questionario de Frequencia Alimentar</a></li>
 			<li><a data-toggle="tab" href="#orientacoes">Orientações Individuais</a></li>
+			<li><a data-toggle="tab" href="#documentos">Documentos</a></li>
 		</ul>
 
 		<form:form servletRelativeAction="${url}" method="POST" modelAttribute="consultaNutricional" acceptCharset="UTF-8" cssClass="form-horizontal">
@@ -52,6 +53,8 @@
 				<div id="questionario" class="tab-pane fade in "><jsp:include page="abas/questionario.jsp" /></div>
 
 				<div id="orientacoes" class="tab-pane fade in "><jsp:include page="abas/orientacoes.jsp" /></div>
+				
+				<div id="documentos" class="tab-pane fade in "><jsp:include page="abas/documentos.jsp" /></div>
 			</div>
 
 			<div class="col-xs-offset-0 col-xs-10" align="center">
