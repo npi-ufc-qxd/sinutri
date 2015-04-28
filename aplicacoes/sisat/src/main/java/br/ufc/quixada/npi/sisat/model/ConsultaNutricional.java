@@ -14,6 +14,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotEmpty;
@@ -39,9 +40,11 @@ public class ConsultaNutricional {
 	private Date data;
 
 	@NotNull(message = "Por favor, informe o peso do paciente!")
+	@Min (value = 1)
 	private Double peso;
 
 	@NotNull(message = "Por favor, informe a cincunferencia da cintura do paciente!")
+	@Min (value = 1)
 	private Double circunferenciaCintura;
 
 	private Integer glicemia;
