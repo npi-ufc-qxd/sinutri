@@ -16,10 +16,7 @@
 <title>Consulta</title>
 
 <script type="text/javascript">
-function obterFrequencia(id) {
-	alert(id);
-  $.get("obterFrequenciaAlimentar/" + id);
-}
+	
 </script>
 
 
@@ -48,8 +45,7 @@ function obterFrequencia(id) {
 			<li><a data-toggle="tab" href="#avaliacao">Avaliação
 					Nutricional</a></li>
 			<li><a data-toggle="tab" href="#exame">Exames Laboratoriais</a></li>
-			<li><a data-toggle="tab" href="#questionario"
-				onclick="obterFrequencia(${consultaNutricional.id})">Questionario
+			<li><a data-toggle="tab" href="#questionario">Questionario
 					de Frequencia Alimentar</a></li>
 			<li><a data-toggle="tab" href="#orientacoes">Orientações
 					Individuais</a></li>
