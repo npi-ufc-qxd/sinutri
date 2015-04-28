@@ -19,7 +19,6 @@ import javax.validation.constraints.NotNull;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.format.annotation.DateTimeFormat;
 
-
 @Entity
 public class ConsultaNutricional {
 
@@ -27,13 +26,17 @@ public class ConsultaNutricional {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@OneToMany(cascade = CascadeType.ALL, fetch=FetchType.EAGER)
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinColumn(name = "consultanutricional_id")
 	private List<FrequenciaAlimentar> frequencias;
 
 	@ManyToOne
 	@JoinColumn(name = "paciente_id")
 	private Paciente paciente;
+
+	@OneToMany(mappedBy = "consultaNutricional", cascade = {
+			CascadeType.REMOVE, CascadeType.PERSIST })
+	private List<Documento> documentos;
 
 	@DateTimeFormat
 	private Date data;
@@ -124,7 +127,6 @@ public class ConsultaNutricional {
 
 	private String alergiaComentario;
 
-	
 	@NotEmpty(message = "Por favor, informe o objetivo da consulta!")
 	private String objetivoConsulta;
 
@@ -132,11 +134,11 @@ public class ConsultaNutricional {
 
 	@Column(columnDefinition = "TEXT")
 	private String orientacoesIndividuais;
-	
-	public ConsultaNutricional(){
+
+	public ConsultaNutricional() {
 	}
-	
-	public ConsultaNutricional(Paciente paciente){
+
+	public ConsultaNutricional(Paciente paciente) {
 		setPaciente(paciente);
 	}
 
@@ -577,11 +579,11 @@ public class ConsultaNutricional {
 	public String getImc() {
 
 		double imc = calculaIMC(this);
-		
-		if(imc == 0.0){
+
+		if (imc == 0.0) {
 			return "Não foi possivel calcular o IMC do paciente!";
 		}
-				
+
 		return new DecimalFormat("0.00").format(imc) + "    "
 				+ getClassificacaoImc(imc);
 	}
@@ -595,13 +597,21 @@ public class ConsultaNutricional {
 		String classificacao = classificaCircunferenciaCintura(this);
 		return classificacao;
 	}
-	
+
 	public Paciente getPaciente() {
 		return paciente;
 	}
 
 	public void setPaciente(Paciente paciente) {
 		this.paciente = paciente;
+	}
+
+	public List<Documento> getDocumentos() {
+		return documentos;
+	}
+
+	public void setDocumentos(List<Documento> documentos) {
+		this.documentos = documentos;
 	}
 
 	public String getOrientacoesIndividuais() {
@@ -613,21 +623,21 @@ public class ConsultaNutricional {
 
 	}
 
-	private double calculaIMC(ConsultaNutricional consulta){
-		
-		try{
+	private double calculaIMC(ConsultaNutricional consulta) {
+
+		try {
 			double peso = consulta.getPeso();
 			double altura = consulta.getPaciente().getAltura();
 			double imc = peso / (altura * altura);
 			return imc;
-		}catch(NullPointerException e){
+		} catch (NullPointerException e) {
 			return 0.0;
 		}
-		
+
 	}
-	
-	private String classificaIMC(double imc){
-		
+
+	private String classificaIMC(double imc) {
+
 		if (imc < 25) {
 			if (imc < 17) {
 				if (imc < 16) {
@@ -665,20 +675,19 @@ public class ConsultaNutricional {
 				}
 			}
 		}
-		
-		
+
 	}
-	
-	private String classificaCircunferenciaCintura(ConsultaNutricional consulta){
-		
+
+	private String classificaCircunferenciaCintura(ConsultaNutricional consulta) {
+
 		if (consulta.getCircunferenciaCintura() == null) {
 			return "";
 		}
-		
+
 		Double circunferencia = consulta.getCircunferenciaCintura();
 		String sexo = consulta.getPaciente().getPessoa().getSexo();
-		
-		if(sexo != null) {
+
+		if (sexo != null) {
 			if (sexo.equalsIgnoreCase("m")) {
 				if (circunferencia < 0.94) {
 					return "Normal";
@@ -700,11 +709,10 @@ public class ConsultaNutricional {
 					}
 				}
 			}
-		}else {
+		} else {
 			return "Erro - Sexo da paciente não está indefinido";
 		}
 		return "";
 	}
 
-	
 }
