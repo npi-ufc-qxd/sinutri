@@ -10,6 +10,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.MapsId;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
 
@@ -35,6 +36,7 @@ public class Paciente implements Serializable {
 	
 	
 	@NotNull(message = "Por favor, informe a altura do paciente!")
+	@Min (value = 1)
 	private Double altura;
 	
 	
