@@ -17,12 +17,14 @@ $(function() {
 			display : 'Tipo de refição',
 			type : 'select',
 			ctrlOptions : {
-				0 : 'Desjejum',
-				1 : 'Lanche da Manhã',
-				2 : 'Almoço',
-				3 : 'Lanche da Tarde',
-				4 : 'Jantar',
-				5 : 'Ceia'
+				
+				DESJEJUM : 'Desjejum',
+				LANCHE_DA_MANHA : 'Lanche da Manhã',
+				ALMOCO : 'Almoço',
+				LANCHE_DA_TARDE : 'Lanche da Tarde',
+				JANTAR :'Jantar',
+				CEIA : 'Ceia'
+				
 			}
 		}, {
 			name : 'horario',
@@ -48,12 +50,11 @@ $(function() {
 	initData : [ 
 			
 		
-	
 		],
 		useSubPanel : true,
 		subPanelBuilder : function(cell, uniqueIndex) {
 			var idPanel = --uniqueIndex;
-			$(".hora").mask("99:99");
+			$(".hora").mask("99:99:99");
 			var subgrid = $('<table></table>').attr('id',
 					'tblSubGrid_' + uniqueIndex).appendTo(cell);
 			subgrid.addClass('alternate');
@@ -75,7 +76,7 @@ $(function() {
 						'width' : '60px',
 						'text-align' : 'right'
 					},
-					value : 1
+					
 				} ],
 			
 			i18n: {
@@ -87,7 +88,6 @@ $(function() {
 			});
 		},
 		subPanelGetter : function(uniqueIndex) {
-			// Return the sub grid value inside sub panel for `getAllValue` and `getRowValue` methods
 			return $('#tblSubGrid_' + uniqueIndex).appendGrid(
 					'getAllValue', true);
 		},
