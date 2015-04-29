@@ -127,7 +127,7 @@ public class ConsultaNutricional {
 
 	
 	@NotEmpty(message = "Por favor, informe o objetivo da consulta!")
-	@Size(min = 50, max = 5000)
+	@Size(min = 50, max = 250)
 	private String objetivoConsulta;
 
 	private String condutaNutricional;
