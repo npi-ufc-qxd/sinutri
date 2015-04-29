@@ -26,7 +26,7 @@ public class ConsultaNutricional {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@OneToMany(cascade = CascadeType.ALL)
 	@JoinColumn(name = "consultanutricional_id")
 	private List<FrequenciaAlimentar> frequencias;
 
