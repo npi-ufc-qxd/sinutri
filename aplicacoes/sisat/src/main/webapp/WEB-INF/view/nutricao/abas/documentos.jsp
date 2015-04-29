@@ -17,8 +17,10 @@
 			<thead class="files">
 				<tr>
 					<th>Nome do Arquivo</th>
-					<th>Data de Upload</th>
-					<th>Excluir?</th>
+					<th>Data</th>
+					<th>Tipo</th>
+					<th>Excluir</th>
+					<th>Baixar</th>
 				</tr>
 			</thead>
 			<tbody class="files">
@@ -26,11 +28,19 @@
 					<tr class="template-upload fade in">					
 						<td>${documento.nome}<strong class="error text-danger"></strong></td>
 						<td>${documento.data}<strong class="error text-danger"></strong></td>
+						<td>${documento.tipo}<strong class="error text-danger"></strong></td>
+						<td><a id="${documento.id}" href="#" class="save-document">
+								<button type="button" class="btn btn-primary">
+									Baixar <span class="glyphicon glyphicon-save"></span>
+								</button>
+						</a></td>
+						
 						<td><a id="${documento.id}" href="#" class="delete-document">
 								<button type="button" class="btn btn-danger">
 									Excluir <span class="glyphicon glyphicon-trash"></span>
 								</button>
 						</a></td>
+						
 					</tr>
 				</c:forEach>
 			</tbody>

@@ -19,8 +19,6 @@ public class Documento {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	private String nomeOriginal;
-
 	private String nome;
 
 	private String tipo;
@@ -39,10 +37,9 @@ public class Documento {
 		super();
 	}
 
-	public Documento(String nomeOriginal, String nome, String tipo,
-			byte[] arquivo, ConsultaNutricional consultaNutricional) {
+	public Documento(String nome, String tipo, byte[] arquivo,
+			ConsultaNutricional consultaNutricional) {
 		super();
-		this.nomeOriginal = nomeOriginal;
 		this.nome = nome;
 		this.tipo = tipo;
 		this.arquivo = arquivo;
@@ -55,14 +52,6 @@ public class Documento {
 
 	public void setId(Long id) {
 		this.id = id;
-	}
-
-	public String getNomeOriginal() {
-		return nomeOriginal;
-	}
-
-	public void setNomeOriginal(String nomeOriginal) {
-		this.nomeOriginal = nomeOriginal;
 	}
 
 	public String getNome() {
