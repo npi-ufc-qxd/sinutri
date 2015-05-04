@@ -15,6 +15,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -128,6 +129,7 @@ public class ConsultaNutricional {
 	private String alergiaComentario;
 
 	@NotEmpty(message = "Por favor, informe o objetivo da consulta!")
+	@Size(min = 50, max = 250)
 	private String objetivoConsulta;
 
 	private String condutaNutricional;
