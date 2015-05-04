@@ -36,7 +36,7 @@ public class ConsultaNutricional {
 	private Paciente paciente;
 
 	@OneToMany(mappedBy = "consultaNutricional", cascade = {
-			CascadeType.REMOVE, CascadeType.PERSIST }, fetch = FetchType.EAGER)
+			CascadeType.REMOVE, CascadeType.PERSIST })
 	private List<Documento> documentos;
 
 	@DateTimeFormat
