@@ -3,11 +3,13 @@ package br.ufc.quixada.npi.sisat.controller;
 import java.util.Date;
 import java.util.List;
 
+import javassist.expr.NewArray;
+
 import javax.inject.Inject;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
+import org.springframework.http.MediaType;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -18,6 +20,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import br.ufc.quixada.npi.sisat.model.Alimentacao;
@@ -113,6 +116,13 @@ public class NutricaoController {
 		return "redirect:/nutricao/detalhes/" + consulta.getPaciente().getId();
 	}
 
+	@RequestMapping(value = "/frequencia-alimentar.json", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public @ResponseBody List<FrequenciaAlimentar> getFrequencias() {
+		Long id = (long) 14;
+		List<FrequenciaAlimentar> frequenciaAlimentars = consultaNutricionalService.getConsultaNutricionalWithFrequenciaByID(id).getFrequencias();
+		
+		return frequenciaAlimentars;
+	}
 
 	private ConsultaNutricional atualizarConsulta(ConsultaNutricional consulta) {
 		if (consulta.getFrequencias() != null) {
@@ -232,13 +242,6 @@ public class NutricaoController {
 		return "nutricao/detalhesConsulta";
 	}
 
-	//deletar agendamento //Wanrly
-	@RequestMapping(value = {"deletarAgendamento/{id}"}, method = RequestMethod.GET)
-	public String deletarAgendamento(@PathVariable("id") Long id, RedirectAttributes redirectAttributes){
-		//agendamentoService.delete(agendamentoService.find(Agendamento.class, id));
-		redirectAttributes.addFlashAttribute("success", "Agendamento deletado com sucesso");
-		return "redirect:/nutricao/buscar_agendamento";
-	}
 
 	private Pessoa getUsuarioLogado(HttpSession session) {
 		if (session.getAttribute("usuario") == null) {
