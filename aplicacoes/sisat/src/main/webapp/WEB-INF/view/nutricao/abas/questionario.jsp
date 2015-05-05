@@ -11,8 +11,9 @@
 		$('#tblAppendGrid')
 				.appendGrid(
 						{
-							caption : 'My CD Collections',
+							caption : 'Refeições',
 							initRows : 1,
+							maxRowsAllowed: 6,
 							columns : [ {
 								name : 'refeicao',
 
@@ -51,7 +52,8 @@
 										+ "]." + name;
 							},
 							initData : [
-
+							            
+							           
 							],
 							useSubPanel : true,
 							subPanelBuilder : function(cell, uniqueIndex) {
@@ -116,16 +118,10 @@
 
 <fieldset>
 	<h3>Adicione as refeições</h3>
-	<!-- 	${consultaNutricional.frequencias} -->
+	${consultaNutricional.frequencias}
 	<div class="form-group">
 		<table id="tblAppendGrid">
 		</table>
-		<br />
-		<button id="btnGetAllValue1" type="button">Demo: getAllValue,
-			Array Mode</button>
-		<button id="btnGetAllValue2" type="button">Demo: getAllValue,
-			Object Mode</button>
-		
 	</div>
 </fieldset>
 </html>
