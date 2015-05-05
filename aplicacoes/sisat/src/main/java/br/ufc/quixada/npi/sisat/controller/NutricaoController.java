@@ -183,10 +183,9 @@ public class NutricaoController {
 		}
 
 		if(pessoa.getPaciente() == null){
-			Paciente paciente = new Paciente();
-			paciente.setAltura(0.0);
-			pessoa.setPaciente(paciente);
+			pessoa.setPaciente(new Paciente());
 			pessoa.getPaciente().setPessoa(pessoa);
+			pessoa.getPaciente().setAltura(1.0);
 
 			pessoaService.update(pessoa);
 		}
