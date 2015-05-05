@@ -7,7 +7,6 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -542,6 +541,7 @@ public class ConsultaNutricional {
 	@Override
 	public String toString() {
 		return "ConsultaNutricional [id=" + id + ", frequencias=" + frequencias
+				+ ", paciente=" + paciente + ", documentos=" + documentos
 				+ ", data=" + data + ", peso=" + peso
 				+ ", circunferenciaCintura=" + circunferenciaCintura
 				+ ", glicemia=" + glicemia + ", classificacaoGlicemia="
@@ -552,8 +552,7 @@ public class ConsultaNutricional {
 				+ classificacaoTg + ", hb=" + hb + ", classificacaoHb="
 				+ classificacaoHb + ", tgo=" + tgo + ", classificacaoTgo="
 				+ classificacaoTgo + ", tgp=" + tgp + ", classificacaoTgp="
-				+ classificacaoTgp + ", condutaNutricional="
-				+ condutaNutricional + ", medicamento=" + medicamento
+				+ classificacaoTgp + ", medicamento=" + medicamento
 				+ ", medicamentoComentario=" + medicamentoComentario
 				+ ", mastigacao=" + mastigacao + ", mastigacaoComentario="
 				+ mastigacaoComentario + ", disfagia=" + disfagia + ", pirose="
@@ -575,7 +574,8 @@ public class ConsultaNutricional {
 				+ ", outrasPatologiasComentario=" + outrasPatologiasComentario
 				+ ", alergia=" + alergia + ", alergiaComentario="
 				+ alergiaComentario + ", objetivoConsulta=" + objetivoConsulta
-				+ ", paciente=" + paciente + "]";
+				+ ", condutaNutricional=" + condutaNutricional
+				+ ", orientacoesIndividuais=" + orientacoesIndividuais + "]";
 	}
 
 	public String getImc() {

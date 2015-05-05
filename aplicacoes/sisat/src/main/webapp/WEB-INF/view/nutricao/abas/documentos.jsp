@@ -33,8 +33,7 @@
 								<button type="button" class="btn btn-primary">
 									<span class="glyphicon glyphicon-save"></span>
 								</button>
-						</a></td>
-						
+						</a></td>						
 						<td><a id="${documento.id}" href="#" class="delete-document">
 								<button type="button" class="btn btn-danger">
 									<span class="glyphicon glyphicon-trash"></span>
