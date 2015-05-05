@@ -37,15 +37,6 @@ public class Documento {
 		super();
 	}
 
-	public Documento(String nome, String tipo, byte[] arquivo,
-			ConsultaNutricional consultaNutricional) {
-		super();
-		this.nome = nome;
-		this.tipo = tipo;
-		this.arquivo = arquivo;
-		this.consultaNutricional = consultaNutricional;
-	}
-
 	public Long getId() {
 		return id;
 	}
