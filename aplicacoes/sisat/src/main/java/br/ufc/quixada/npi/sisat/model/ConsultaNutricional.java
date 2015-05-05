@@ -21,7 +21,7 @@ import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.format.annotation.DateTimeFormat;
 
 
-@NamedQuery(name = "ConsultaNutricional.findConsultaNutricionalWithDocumentos", query = "select c from ConsultaNutricional c left join fetch c.documentos")
+@NamedQuery(name = "ConsultaNutricional.findConsultaNutricionalWithDocumentosByID", query = "select c from ConsultaNutricional c left join fetch c.documentos where c.id=:id")
 @Entity
 public class ConsultaNutricional {
 

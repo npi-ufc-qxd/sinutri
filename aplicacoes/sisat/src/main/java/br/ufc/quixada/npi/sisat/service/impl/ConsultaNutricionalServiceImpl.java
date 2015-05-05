@@ -12,8 +12,8 @@ import br.ufc.quixada.npi.util.SimpleMap;
 public class ConsultaNutricionalServiceImpl extends GenericServiceImpl<ConsultaNutricional> implements ConsultaNutricionalService {
 
 	@Override
-	public ConsultaNutricional getConsultaNutricionalWithDocumentos() {
-		return null; 
+	public ConsultaNutricional getConsultaNutricionalWithDocumentosByID(Long id) {
+		return (ConsultaNutricional) findFirst("ConsultaNutricional.findConsultaNutricionalWithDocumentosByID", new SimpleMap<String, Object>("id", id)); 
 	}	
 
 }
