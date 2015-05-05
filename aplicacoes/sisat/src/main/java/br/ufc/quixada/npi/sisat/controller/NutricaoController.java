@@ -1,5 +1,7 @@
 package br.ufc.quixada.npi.sisat.controller;
 
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -17,10 +19,12 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import br.ufc.quixada.npi.sisat.model.Alimentacao;
 import br.ufc.quixada.npi.sisat.model.ConsultaNutricional;
+import br.ufc.quixada.npi.sisat.model.Documento;
 import br.ufc.quixada.npi.sisat.model.FrequenciaAlimentar;
 import br.ufc.quixada.npi.sisat.model.Paciente;
 import br.ufc.quixada.npi.sisat.model.Pessoa;
@@ -79,7 +83,7 @@ public class NutricaoController {
 
 	@RequestMapping(value = "editarConsulta/{id}", method = RequestMethod.GET)
 	public String editarConsulta(@PathVariable("id") long id, Model model) {
-		ConsultaNutricional consultaNutricional = consultaNutricionalService.find(ConsultaNutricional.class, id);
+		ConsultaNutricional consultaNutricional = consultaNutricionalService.getConsultaNutricionalWithDocumentosById(id);
 		model.addAttribute("action", "editar");
 		model.addAttribute("consultaNutricional", consultaNutricional);
 		Classificacao[] cla= Classificacao.values();
@@ -88,15 +92,43 @@ public class NutricaoController {
 	}
 
 	@RequestMapping(value = {"/editarConsulta"}, method = RequestMethod.POST)
-	public String editarConsulta(Model model, @Valid ConsultaNutricional consulta, BindingResult result, RedirectAttributes redirectAttributes) {
+	public String editarConsulta(Model model, @Valid ConsultaNutricional consulta, BindingResult result, RedirectAttributes redirectAttributes, @RequestParam("files") List<MultipartFile> files) {
 		model.addAttribute("action", "editar");
-
+	
 		if (result.hasErrors()) {
 			return ("nutricao/consulta");
 		}		
 		Paciente paciente = pacienteService.find(Paciente.class, consulta.getPaciente().getId());
 
-		Date data = consultaNutricionalService.find(ConsultaNutricional.class, consulta.getId()).getData(); 
+		Date data = consultaNutricionalService.find(ConsultaNutricional.class, consulta.getId()).getData();
+		
+		// verificar se os documentos foram anexados
+				List<Documento> documentos = new ArrayList<Documento>();
+				if (files != null && !files.isEmpty() && files.get(0).getSize() > 0) {
+					
+					for (MultipartFile mfiles : files) {
+						try {
+							if (mfiles.getBytes() != null && mfiles.getBytes().length != 0) {
+								Documento documento = new Documento();
+								documento.setArquivo(mfiles.getBytes());
+								documento.setNome(mfiles.getOriginalFilename());
+								documento.setTipo(mfiles.getContentType());
+								documento.setConsultaNutricional(consulta);
+								documento.setData(new Date());
+								documentos.add(documento);
+							}
+						} catch (IOException e) {
+							model.addAttribute("erro", "Não foi possivel salvar os documentos.");
+							return "selecao/cadastrar";
+						}
+					}
+					
+					if(!documentos.isEmpty()){
+						consulta.setDocumentos(documentos);
+					}
+				}else{
+					model.addAttribute("anexoError", "Adicione anexo a seleção");					
+				}
 
 		consulta.setData(data);
 		consulta.setPaciente(paciente);
@@ -169,7 +201,7 @@ public class NutricaoController {
 	}
 
 	@RequestMapping(value = {"/consultar"}, method = RequestMethod.POST)
-	public String consulta(Model model, @Valid ConsultaNutricional consulta, BindingResult result, RedirectAttributes redirectAttributes) {		
+	public String consulta(Model model, @Valid ConsultaNutricional consulta, BindingResult result, RedirectAttributes redirectAttributes, @RequestParam("files") List<MultipartFile> files) {		
 		model.addAttribute("action", "cadastrar");
 
 		if (result.hasErrors()) {
@@ -182,6 +214,36 @@ public class NutricaoController {
 		consulta.setData(data);
 		consulta.setPaciente(paciente);
 		consulta.getPaciente().setAltura(altura);
+		
+		// verificar se os documentos foram anexados
+		List<Documento> documentos = new ArrayList<Documento>();
+		if (files != null && !files.isEmpty() && files.get(0).getSize() > 0) {
+			
+			for (MultipartFile mfiles : files) {
+				try {
+					if (mfiles.getBytes() != null && mfiles.getBytes().length != 0) {
+						Documento documento = new Documento();
+						documento.setArquivo(mfiles.getBytes());
+						documento.setNome(mfiles.getOriginalFilename());
+						documento.setTipo(mfiles.getContentType());
+						documento.setConsultaNutricional(consulta);
+						documento.setData(new Date());
+						documentos.add(documento);
+					}
+				} catch (IOException e) {
+					model.addAttribute("erro", "Não foi possivel salvar os documentos.");
+					return "selecao/cadastrar";
+				}
+			}
+			
+			if(!documentos.isEmpty()){
+				consulta.setDocumentos(documentos);
+			}
+		}else{
+			model.addAttribute("anexoError", "Adicione anexo a seleção");					
+		}
+		
+		
 
 		if(consulta.getAgua().length()==0){
 			consulta.setAgua(null);
