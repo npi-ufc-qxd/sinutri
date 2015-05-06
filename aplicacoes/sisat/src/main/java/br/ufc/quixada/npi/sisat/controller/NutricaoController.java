@@ -120,7 +120,7 @@ public class NutricaoController {
 	public @ResponseBody List<FrequenciaAlimentar> getFrequencias() {
 		Long id = (long) 14;
 		List<FrequenciaAlimentar> frequenciaAlimentars = consultaNutricionalService.getConsultaNutricionalWithFrequenciaByID(id).getFrequencias();
-		
+		System.err.println(frequenciaAlimentars.size()); 
 		return frequenciaAlimentars;
 	}
 

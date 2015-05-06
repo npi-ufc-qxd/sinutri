@@ -12,6 +12,7 @@ import javax.persistence.OneToOne;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
+import org.codehaus.jackson.annotate.JsonIgnore;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.beans.factory.annotation.Value;
 
@@ -27,9 +28,11 @@ public class Paciente implements Serializable {
 	@MapsId
 	@OneToOne(mappedBy = "paciente")
 	@JoinColumn(name = "id")
+	@JsonIgnore
 	private Pessoa pessoa;
 	
 	@OneToMany(mappedBy="paciente")
+	@JsonIgnore
  	private List<ConsultaNutricional> consultas;
 	/*
 	@OneToMany(mappedBy="paciente")

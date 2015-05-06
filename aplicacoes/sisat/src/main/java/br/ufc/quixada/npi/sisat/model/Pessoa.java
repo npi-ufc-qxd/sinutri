@@ -21,6 +21,9 @@ import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
+
+import org.codehaus.jackson.annotate.JsonIgnore;
+
 import br.ufc.quixada.npi.sisat.model.Papel;
 
 @NamedQueries({
@@ -62,6 +65,7 @@ public class Pessoa {
 	private List<Papel> papeis;
 	
 	@OneToMany(mappedBy="pessoa")
+	@JsonIgnore
 	private List<Servidor> servidores;
 	
 	private String cpf;

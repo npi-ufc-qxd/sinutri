@@ -16,6 +16,8 @@ import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
 
+import org.codehaus.jackson.annotate.JsonBackReference;
+import org.codehaus.jackson.annotate.JsonIgnore;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -28,7 +30,8 @@ public class ConsultaNutricional {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@OneToMany(mappedBy="consultaNutricional", cascade = CascadeType.ALL)	
+	@OneToMany(mappedBy="consultaNutricional", cascade = CascadeType.ALL)
+	@JsonIgnore
 	private List<FrequenciaAlimentar> frequencias;
 
 	@ManyToOne

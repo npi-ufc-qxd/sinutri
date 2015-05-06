@@ -36,21 +36,24 @@ $(function() {
 
 							            $.ajax({
 							            	type: "GET",
-							            	url: 'sisat/nutricao/frequencia-alimentar.json',
+							            	url: '/sisat/nutricao/frequencia-alimentar.json',
 							            })
 							            .success(function(result) {
 							            	$.each( result, function( key, value ) {
-							            		alert( key + ": " + value );
+							            		console.log(key +" : " + value.id);
+							            		console.log(key +" : " + value.refiecao);
+							            		console.log(key +" : " + value.h);
 							            	});
 
 							            })
 							            .error(function(error) {
-							            	alert( error );
-
-							            })
+							            	$.each( error, function( key, value ) {
+							            		console.log(key +"--"+value);
+							            	});
+							            }),
 
 							            
-			            	/*
+			            	
 								{
 									'refeicao' : 'LANCHE_DA_MANHA',
 									'horario': '12:00:00',
@@ -60,7 +63,7 @@ $(function() {
 													
 									               ]
 								},
-								*/
+								
 								
 							],
 							useSubPanel : true,
@@ -75,6 +78,8 @@ $(function() {
 								subgrid.addClass('alternate');
 								// Initial the sub grid
 								subgrid
+								
+								
 										.appendGrid({
 											initRows : 0,
 											hideRowNumColumn : true,
@@ -115,3 +120,30 @@ $(function() {
 						});
 
 	});
+
+//
+//$.ajax({
+//	type: "GET",
+//	url: '/sisat/nutricao/frequencia-alimentar.json',
+//})
+//.success(function(result) {
+//	$.each( result, function( key, value ) {
+//	    $('#tblAppendGrid').appendGrid('insertRow', [
+//	       {
+//	       	 'refeicao' : value.refiecao,
+//	       	 'horario': value.horario,
+//	       	} 
+//
+//
+//	       		,], value.id);
+//	});
+//})
+//.error(function(error) {
+//	$.each( error, function( key, value ) {
+//		console.log(key +"--"+value);
+//	});
+//})							],
+//
+//
+//
+//
