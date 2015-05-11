@@ -9,6 +9,7 @@ import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -22,6 +23,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import br.ufc.quixada.npi.service.GenericService;
 import br.ufc.quixada.npi.sisat.model.Alimentacao;
 import br.ufc.quixada.npi.sisat.model.ConsultaNutricional;
 import br.ufc.quixada.npi.sisat.model.Documento;
@@ -46,6 +48,10 @@ public class NutricaoController {
 
 	@Inject
 	private ConsultaNutricionalService consultaNutricionalService;
+	
+	@Inject
+	@Qualifier("genericServiceImpl")
+	private GenericService<Documento> documentoService;
 
 	@RequestMapping(value = {"/", "/index"}, method = RequestMethod.GET)
 	public String index() {
@@ -294,6 +300,15 @@ public class NutricaoController {
 		redirectAttributes.addFlashAttribute("success", "Agendamento deletado com sucesso");
 		return "redirect:/nutricao/buscar_agendamento";
 	}
+	
+	//deletar agendamento //Wanrly
+		@RequestMapping(value = {"deletarDocumento/{id}"}, method = RequestMethod.GET)
+		public String deletarDocumento(@PathVariable("id") Long id, RedirectAttributes redirectAttributes){
+			Documento documento = documentoService.find(Documento.class, id);
+			documentoService.delete(documento);
+			redirectAttributes.addFlashAttribute("success", "Documento deletado com sucesso");
+			return "redirect:/nutricao/editarConsulta/"+documento.getConsultaNutricional().getId();
+		}
 
 	private Pessoa getUsuarioLogado(HttpSession session) {
 		if (session.getAttribute("usuario") == null) {

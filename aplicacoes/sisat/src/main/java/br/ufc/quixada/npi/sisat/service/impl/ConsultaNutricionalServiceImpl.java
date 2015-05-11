@@ -1,7 +1,6 @@
 package br.ufc.quixada.npi.sisat.service.impl;
 
 import javax.inject.Named;
-import javax.management.Query;
 
 import br.ufc.quixada.npi.service.impl.GenericServiceImpl;
 import br.ufc.quixada.npi.sisat.model.ConsultaNutricional;
@@ -15,5 +14,4 @@ public class ConsultaNutricionalServiceImpl extends GenericServiceImpl<ConsultaN
 	public ConsultaNutricional getConsultaNutricionalWithDocumentosById(Long id) {
 		return (ConsultaNutricional) findFirst("ConsultaNutricional.findConsultaNutricionalWithDocumentosById", new SimpleMap<String, Object>("id", id)); 
 	}	
-
 }

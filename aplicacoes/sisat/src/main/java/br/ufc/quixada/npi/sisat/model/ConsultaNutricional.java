@@ -17,6 +17,7 @@ import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import org.codehaus.jackson.annotate.JsonIgnore;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -39,6 +40,7 @@ public class ConsultaNutricional {
 
 	@OneToMany(mappedBy = "consultaNutricional", cascade = {
 			CascadeType.REMOVE, CascadeType.PERSIST })
+	@JsonIgnore
 	private List<Documento> documentos;
 
 	@DateTimeFormat
