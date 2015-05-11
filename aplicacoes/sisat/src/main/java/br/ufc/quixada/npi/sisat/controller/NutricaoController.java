@@ -33,6 +33,7 @@ import br.ufc.quixada.npi.sisat.model.Pessoa;
 import br.ufc.quixada.npi.sisat.model.enuns.Classificacao;
 import br.ufc.quixada.npi.sisat.model.enuns.Refeicao;
 import br.ufc.quixada.npi.sisat.service.ConsultaNutricionalService;
+import br.ufc.quixada.npi.sisat.service.DocumentoService;
 import br.ufc.quixada.npi.sisat.service.PacienteService;
 import br.ufc.quixada.npi.sisat.service.PessoaService;
 
@@ -49,9 +50,8 @@ public class NutricaoController {
 	@Inject
 	private ConsultaNutricionalService consultaNutricionalService;
 	
-	@Inject
-	@Qualifier("genericServiceImpl")
-	private GenericService<Documento> documentoService;
+	@Inject	
+	private DocumentoService documentoService;
 
 	@RequestMapping(value = {"/", "/index"}, method = RequestMethod.GET)
 	public String index() {
@@ -301,14 +301,20 @@ public class NutricaoController {
 		return "redirect:/nutricao/buscar_agendamento";
 	}
 	
-	//deletar agendamento //Wanrly
-		@RequestMapping(value = {"deletarDocumento/{id}"}, method = RequestMethod.GET)
-		public String deletarDocumento(@PathVariable("id") Long id, RedirectAttributes redirectAttributes){
-			Documento documento = documentoService.find(Documento.class, id);
-			documentoService.delete(documento);
-			redirectAttributes.addFlashAttribute("success", "Documento deletado com sucesso");
-			return "redirect:/nutricao/editarConsulta/"+documento.getConsultaNutricional().getId();
-		}
+	@RequestMapping(value = {"deletarDocumento/{id}"}, method = RequestMethod.GET)
+	public String deletarDocumento(@PathVariable("id") Long id, RedirectAttributes redirectAttributes){
+		Documento documento = documentoService.find(Documento.class, id);
+		documentoService.delete(documento);
+		redirectAttributes.addFlashAttribute("success", "Documento deletado com sucesso");
+		return "redirect:nutricao/editarConsulta/"+documento.getConsultaNutricional().getId();
+	}
+	
+	@RequestMapping(value = {"downloadDocumento/{id}"}, method = RequestMethod.GET)
+	public void downloadDocumento(@PathVariable("id") Long id, RedirectAttributes redirectAttributes){
+		Documento documento = documentoService.find(Documento.class, id);
+		//Codificar Aqui
+		redirectAttributes.addFlashAttribute("success", "Download do Documento realizado com sucesso");		
+	}
 
 	private Pessoa getUsuarioLogado(HttpSession session) {
 		if (session.getAttribute("usuario") == null) {
