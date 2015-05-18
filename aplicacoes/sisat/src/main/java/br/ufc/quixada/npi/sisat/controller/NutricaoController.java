@@ -104,12 +104,12 @@ public class NutricaoController {
 		if (result.hasErrors()) {
 			return ("nutricao/consulta");
 		}		
-		Paciente paciente = pacienteService.find(Paciente.class, consulta.getPaciente().getId());
-
+		Paciente paciente = pacienteService.find(Paciente.class, consulta.getPaciente().getId());		
 		Date data = consultaNutricionalService.find(ConsultaNutricional.class, consulta.getId()).getData();
 		
 		// verificar se os documentos foram anexados
 				List<Documento> documentos = new ArrayList<Documento>();
+				documentos = documentoService.getDocumentosByIdConsultaNutricional(consulta.getId());
 				if (files != null && !files.isEmpty() && files.get(0).getSize() > 0) {
 					
 					for (MultipartFile mfiles : files) {
@@ -125,7 +125,7 @@ public class NutricaoController {
 							}
 						} catch (IOException e) {
 							model.addAttribute("erro", "Não foi possivel salvar os documentos.");
-							return "selecao/cadastrar";
+							return ("nutricao/consulta");
 						}
 					}
 					
@@ -238,7 +238,7 @@ public class NutricaoController {
 					}
 				} catch (IOException e) {
 					model.addAttribute("erro", "Não foi possivel salvar os documentos.");
-					return "selecao/cadastrar";
+					return ("nutricao/consulta");
 				}
 			}
 			
@@ -306,7 +306,7 @@ public class NutricaoController {
 		Documento documento = documentoService.find(Documento.class, id);
 		documentoService.delete(documento);
 		redirectAttributes.addFlashAttribute("success", "Documento deletado com sucesso");
-		return "redirect:nutricao/editarConsulta/"+documento.getConsultaNutricional().getId();
+		return "redirect:nutricao/editarConsulta/" + documento.getConsultaNutricional().getId();
 	}
 	
 	@RequestMapping(value = {"downloadDocumento/{id}"}, method = RequestMethod.GET)

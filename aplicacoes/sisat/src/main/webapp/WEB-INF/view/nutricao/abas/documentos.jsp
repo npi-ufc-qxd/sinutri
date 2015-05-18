@@ -34,7 +34,7 @@
 									<span class="glyphicon glyphicon-save"></span>
 								</button>
 						</a></td>						
-						<td><a id="save[${documento.id}]" href="nutricao/deletarDocumento/${documento.id}" class="delete-document">
+						<td><a id="delete[${documento.id}]" href="nutricao/deletarDocumento/${documento.id}" class="delete-document">
 								<button type="button" class="btn btn-danger">
 									<span class="glyphicon glyphicon-trash"></span>
 								</button>

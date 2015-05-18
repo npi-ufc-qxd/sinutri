@@ -31,7 +31,7 @@ $(document).ready(function() {
 	});
 	
 	$('#confirm-delete').on('show.bs.modal', function(e) {
-	    $(this).find('.btn-danger').attr('href', $(e.relatedTarget).data('href'));
+		$(this).find('.btn-danger').attr('href', $(e.relatedTarget).data('href'));
 	});
 	
 	$('#confirm-submit').on('show.bs.modal', function(e) {
@@ -40,10 +40,10 @@ $(document).ready(function() {
 	
 	$('.delete-document').on('click', function (e) {
 		var line = this;
-		var id = $(this).attr('id');
+		var href = $(this).attr('href');
 		e.preventDefault();
 		bootbox.dialog({
-			  message: "Tem certeza de que deseja excluir esse arquivo?",
+			  message: "Tem certeza de que deseja excluir esse documento?",
 			  title: "Excluir",
 			  buttons: {
 			    danger: {
@@ -51,8 +51,8 @@ $(document).ready(function() {
 			      className: "btn-danger",
 			      callback: function() {
 			    	  $.ajax({
-			    		  type: "POST",
-			    		  url: "/gpa-pesquisa/documento/ajax/remover/"+id
+			    		  type: "GET",
+			    		  url: "../../"+href
 			    	  })
 		    		  .success(function( result ) {
 		    			  if(result.result == 'ok') {

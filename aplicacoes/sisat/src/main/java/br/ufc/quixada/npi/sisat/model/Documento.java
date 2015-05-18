@@ -8,9 +8,12 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQuery;
 
 import org.hibernate.annotations.Type;
 import org.springframework.format.annotation.DateTimeFormat;
+
+@NamedQuery(name = "Documento.findDocumentosByIdConsulta", query = "select d from Documento d where d.consultaNutricional.id=:id")
 
 @Entity
 public class Documento {
