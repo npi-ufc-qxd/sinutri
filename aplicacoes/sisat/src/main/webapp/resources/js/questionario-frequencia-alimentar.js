@@ -1,10 +1,43 @@
+	$.ajax({
+		type: "GET",
+		url: '/sisat/nutricao/frequencia-alimentar.json',
+	})
+	.success(function(result) {
+		
+		$.each( result, function( key, frequenciaAlimentar ) {
+			$('#tblAppendGrid').appendGrid('insertRow', [{
+				'refeicao' : frequenciaAlimentar.refeicao,
+				'horario': frequenciaAlimentar.horario,
+				
+			} ,], frequenciaAlimentar.id);
+
+			$.each( frequenciaAlimentar.alimentos, function( key, alimento ) {
+				alert(alimento.alimento)
+				$('#tblAppendGrid').appendGrid('insertRow', [{
+					'SubGridData': [
+                     {
+                       'alimento': alimento.alimento,
+	                   'porcao': alimento.porcao
+	                 },
+                    ]
+				} ,], frequenciaAlimentar.id);
+			});
+		});
+	})
+	.error(function(error) {
+		$.each( error, function( key, value ) {
+			console.log(key +"--"+value);
+		});
+	});
+
+
 $(function() {
 		// Initialize appendGrid
 		$('#tblAppendGrid')
 				.appendGrid(
 						{
 							caption : 'Refeições',
-							initRows : 1,
+							initRows : 0,
 							maxRowsAllowed : 6,
 							columns : [ {
 								name : 'refeicao',
@@ -31,56 +64,18 @@ $(function() {
 							nameFormatter : function(idPrefix, name, uniqueIndex) {
 								return "frequencias[" + (uniqueIndex - 1)+ "]." + name;
 							},
-							initData : [
-							            
-
-							            $.ajax({
-							            	type: "GET",
-							            	url: '/sisat/nutricao/frequencia-alimentar.json',
-							            })
-							            .success(function(result) {
-							            	$.each( result, function( key, value ) {
-							            		console.log(key +" : " + value.id);
-							            		console.log(key +" : " + value.refiecao);
-							            		console.log(key +" : " + value.h);
-							            	});
-
-							            })
-							            .error(function(error) {
-							            	$.each( error, function( key, value ) {
-							            		console.log(key +"--"+value);
-							            	});
-							            }),
-
-							            
-			            	
-								{
-									'refeicao' : 'LANCHE_DA_MANHA',
-									'horario': '12:00:00',
-									'SubGridData':[
-													
-													{ alimento: 'Arroz', porcao: '200g' },
-													
-									               ]
-								},
-								
-								
-							],
 							useSubPanel : true,
 							subPanelBuilder : function(cell, uniqueIndex) {
 								var idPanel = uniqueIndex-1;
 
 								$(".hora").mask("99:99:99");
-								// Create a table object and add to sub panel
+				
 								var subgrid = $('<table></table>').attr('id',
 										'tblSubGrid_' + uniqueIndex).appendTo(cell);
-								// Optional. Add a class which is the CSS scope specified when you download jQuery UI
+		
 								subgrid.addClass('alternate');
-								// Initial the sub grid
-								subgrid
-								
-								
-										.appendGrid({
+						
+								subgrid.appendGrid({
 											initRows : 0,
 											hideRowNumColumn : true,
 											columns : [ {
@@ -120,30 +115,3 @@ $(function() {
 						});
 
 	});
-
-//
-//$.ajax({
-//	type: "GET",
-//	url: '/sisat/nutricao/frequencia-alimentar.json',
-//})
-//.success(function(result) {
-//	$.each( result, function( key, value ) {
-//	    $('#tblAppendGrid').appendGrid('insertRow', [
-//	       {
-//	       	 'refeicao' : value.refiecao,
-//	       	 'horario': value.horario,
-//	       	} 
-//
-//
-//	       		,], value.id);
-//	});
-//})
-//.error(function(error) {
-//	$.each( error, function( key, value ) {
-//		console.log(key +"--"+value);
-//	});
-//})							],
-//
-//
-//
-//
