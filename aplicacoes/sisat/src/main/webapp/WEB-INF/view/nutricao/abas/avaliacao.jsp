@@ -32,7 +32,7 @@
 		</div>
 	</div>
 
-	<div class="form-group">
+	<div class="form-group form-item">
 		<label for="checkMedicamento" class="col-sm-2 control-label"><form:checkbox id="checkMedicamento" onclick="habilitar();" path="medicamento"/> Medicamentos:</label>
 		<div class="col-sm-10" >
 			<form:input id="inputTextMedicamento" path="medicamentoComentario" cssClass="form-control" placeholder="Quais medicamentos você usa?" disabled="${not consultaNutricional.medicamento}"/>
@@ -51,7 +51,7 @@
 		<label for="diarreia" class="col-sm-2 control-label"><form:checkbox id="diarreia" path="diarreia"/> Diarreia</label>
 		<label for="constipacao" class="col-sm-2 control-label"><form:checkbox id="constipacao" path="constipacao"/> Constipação</label>
 	</div>
-	<div class="form-group">
+	<div class="form-group form-item">
 		<label for="checkMastigacao" class="col-sm-2 control-label"><form:checkbox id="checkMastigacao" onclick="habilitar();" path="mastigacao"/> Mastigação:</label>
 		<div class="col-sm-10" >
 			<form:input id="inputTextMastigacao" path="mastigacaoComentario" cssClass="form-control" placeholder="Como é sua mastigação?" disabled="${not consultaNutricional.mastigacao}"/>
@@ -61,7 +61,7 @@
 		</div>
 	</div>
 
-	<div class="form-group">
+	<div class="form-group form-item">
 		<label for="checkAlergia" class="col-sm-2 control-label"><form:checkbox id="checkAlergia" onclick="habilitar();" path="alergia"/> Alergia Alimentar:</label>
 		<div class="col-sm-10" >
 			<form:textarea id="inputTextAlergia" path="alergiaComentario" class="form-control" rows="5" placeholder="Qual sua alergia Alimentar?" disabled="${not consultaNutricional.alergia}"/>
@@ -162,7 +162,7 @@
 		</div>
 	</div>
 
-	<div class="form-group">
+	<div class="form-group form-item">
 		<label for="checkPatologia" class="col-sm-2 control-label"><form:checkbox id="checkPatologia" onclick="habilitar();" path="outrasPatologias"/> Patologias:</label>
 		<div class="col-sm-10" >
 			<form:textarea id="inputTextPatologia" path="outrasPatologiasComentario" class="form-control" rows="5" placeholder="Descreva aqui as patologias" disabled="${not consultaNutricional.outrasPatologias}"/>
@@ -172,7 +172,7 @@
 		</div>
 	</div>
 
-	<div class="form-group">
+	<div class="form-group form-item">
 		<label for="objetivoConsulta" class="col-sm-2 control-label"> Objetivo da Consulta:</label>
 		<div class="col-sm-10" >
 			<form:textarea id="objetivoConsulta" path="objetivoConsulta" class="form-control" rows="5" placeholder="Descreva aqui o objetivo da consulta..."/>
