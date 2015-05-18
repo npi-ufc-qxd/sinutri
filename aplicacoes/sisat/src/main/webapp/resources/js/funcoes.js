@@ -78,6 +78,5 @@ $(document).ready(function() {
 	
 	$('.delete-file').click(function(){
 		alert($(this).attr('id'));
-	});
-	
+	});	
 });

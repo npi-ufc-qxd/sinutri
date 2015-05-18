@@ -15,7 +15,7 @@ public class DocumentoServiceImpl extends GenericServiceImpl<Documento>
 
 	@Override
 	public List<Documento> getDocumentosByIdConsultaNutricional(Long id) {
-		return (List<Documento>) findFirst("Documento.findDocumentosByIdConsulta", new SimpleMap<String, Object>("id", id));
+		return find("Documento.findDocumentosByIdConsulta", new SimpleMap<String, Object>("id", id));
 	}
 
 }

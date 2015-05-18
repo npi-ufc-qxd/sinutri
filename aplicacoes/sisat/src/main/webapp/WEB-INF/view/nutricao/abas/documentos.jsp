@@ -29,13 +29,13 @@
 						<td>${documento.nome}<strong class="error text-danger"></strong></td>
 						<td>${documento.data}<strong class="error text-danger"></strong></td>
 						<td>${documento.tipo}<strong class="error text-danger"></strong></td>
-						<td><a id="download[${documento.id}]" href="/nutricao/downloadDocumento/${documento.id}" class="save-document">
+						<td><a id="download[${documento.id}]" href="../../nutricao/downloadDocumento/${documento.id}" class="save-document">
 								<button type="button" class="btn btn-primary">
 									<span class="glyphicon glyphicon-save"></span>
 								</button>
 						</a></td>						
 						<td><a id="delete[${documento.id}]" href="nutricao/deletarDocumento/${documento.id}" class="delete-document">
-								<button type="button" class="btn btn-danger">
+								<button type="button" class="btn btn-danger" onclick="RemoveTableRow(this)">
 									<span class="glyphicon glyphicon-trash"></span>
 								</button>
 						</a></td>

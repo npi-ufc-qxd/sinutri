@@ -1,15 +1,23 @@
 package br.ufc.quixada.npi.sisat.controller;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -155,6 +163,13 @@ public class NutricaoController {
 				}
 			}
 		}
+		
+		if(consulta.getDocumentos() != null){
+			for(Documento documento : consulta.getDocumentos()){
+				documento.setConsultaNutricional(consulta);
+			}
+		}
+		
 		return consulta;
 	}
 
@@ -306,14 +321,23 @@ public class NutricaoController {
 		Documento documento = documentoService.find(Documento.class, id);
 		documentoService.delete(documento);
 		redirectAttributes.addFlashAttribute("success", "Documento deletado com sucesso");
-		return "redirect:nutricao/editarConsulta/" + documento.getConsultaNutricional().getId();
+		return "redirect:../../nutricao/editarConsulta/" + documento.getConsultaNutricional().getId();
 	}
 	
 	@RequestMapping(value = {"downloadDocumento/{id}"}, method = RequestMethod.GET)
-	public void downloadDocumento(@PathVariable("id") Long id, RedirectAttributes redirectAttributes){
+	public HttpEntity<byte[]> downloadDocumento(@PathVariable("id") Long id, RedirectAttributes redirectAttributes){
 		Documento documento = documentoService.find(Documento.class, id);
-		//Codificar Aqui
-		redirectAttributes.addFlashAttribute("success", "Download do Documento realizado com sucesso");		
+		byte[] arquivo = documento.getArquivo();
+		String[] tipo = documento.getTipo().split("/");
+		
+		HttpHeaders headers = new HttpHeaders();
+		headers.setContentType(new MediaType(tipo[0], tipo[1]));
+		headers.set("Content-Disposition", "attachment; filename=" + documento.getNome().replace(" ", "_"));
+	    headers.setContentLength(arquivo.length);
+	    
+		redirectAttributes.addFlashAttribute("success", "Download do Documento realizado com sucesso");
+		return new HttpEntity<byte[]>(arquivo, headers);
+
 	}
 
 	private Pessoa getUsuarioLogado(HttpSession session) {
