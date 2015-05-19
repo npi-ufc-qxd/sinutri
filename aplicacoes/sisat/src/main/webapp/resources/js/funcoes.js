@@ -1,7 +1,96 @@
 $(document).ready(function() {
 	
-	$("#altura").mask("9.9");
-	$("#peso").mask("99.99");
+	$('.check').change(function(){
+		var itemForm = $(this).parent().parent(); 		
+		if($('.check').is(':checked')){
+			$(itemForm).find("input").prop("disabled",false);			
+		}else {
+			$(itemForm).find("input[type=text]").prop("disabled",true);
+			$(itemForm).removeClass('has-error');
+			$(itemForm).find('span').remove();
+			$(itemForm).find("input[type=text]").val(''); 
+		}
+	});
+	
+	$('#consultaNutricional').validate({
+        rules: {
+        	objetivoConsulta:{ 
+        		required: true,
+                maxlength: 250,
+                minlength: 50
+        	},
+        	medicamentoComentario:{
+        		required: $('#checkMedicamento').val(),
+        		required: true
+			},
+			mastigacaoComentario:{
+        		required: $('#checkMastigacao').val(),
+        		required: true
+			},
+			alergiaComentario:{
+        		required: $('#checkAlergia').val(),
+        		required: true
+			},
+			atividadeFisicaComentario:{
+        		required: $('#checkAtividadeFisica').val(),
+        		required: true
+			},
+			carneVermelhaComentario:{
+        		required: $('#checkCarneVermelha').val(),
+        		required: true
+			},
+			bebidaAlcoolicaComentario:{
+        		required: $('#checkBebidaAlcoolica').val(),
+        		required: true
+			},
+			outrasPatologiasComentario:{
+        		required: $('#checkPatologia').val(),
+        		required: true
+			}
+			
+        },
+        highlight: function(element) {
+            $(element).closest('.form-item').addClass('has-error');
+        },
+        unhighlight: function(element) {
+            $(element).closest('.form-item').removeClass('has-error');
+        },
+        errorElement: 'span',
+        errorClass: 'help-block',
+        errorPlacement: function(error, element) {
+            error.insertAfter(element.parent().children().last());
+        },
+        messages:{
+        	objetivoConsulta:{
+                required:"Preencha o campo de objetivo da consulta para o paciente.",
+            },
+            medicamentoComentario:{
+            	required:"Preencha o campo de medicamentos da consulta.",
+            },	
+            mastigacaoComentario:{
+            	required:"Preencha o campo de mastigação da consulta.",
+            },
+            alergiaComentario:{
+            	required:"Preencha o campo de Alergia Alimentar da consulta.",
+            },
+            atividadeFisicaComentario:{
+            	required:"Preencha o campo de Atividade Fisica da consulta.",
+            },
+            carneVermelhaComentario:{
+            	required:"Preencha o campo de Carne Vermelha da consulta.",
+            },
+            bebidaAlcoolicaComentario:{
+            	required:"Preencha o campo de Bebida Alcoólica da consulta.",
+            },
+            outrasPatologiasComentario:{
+            	required:"Preencha o campo de Patologia da consulta.",
+            }
+        }
+    });
+	
+	
+	$("#altura").mask("9.99");
+	$("#peso").mask("999.99");
 	$("#cc").mask("99.99");
 	$("#agua").mask("99.99");
 	$("#glicemia").mask("99999");
