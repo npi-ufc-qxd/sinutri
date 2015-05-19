@@ -8,7 +8,7 @@
 <fieldset>
 	<h3>Adicione as refeições</h3>
 	<div class="form-group">
-		<table id="tblAppendGrid">
+		<table id="questionarioFrequenciaAlimentar">
 		</table>
 	</div>
 </fieldset>
