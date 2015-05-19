@@ -1,8 +1,7 @@
 $(document).ready(function() {
 	
 	$('.check').change(function(){
-		var itemForm = $(this).parent().parent(); 
-		
+		var itemForm = $(this).parent().parent(); 		
 		if($('.check').is(':checked')){
 			$(itemForm).find("input").prop("disabled",false);			
 		}else {
