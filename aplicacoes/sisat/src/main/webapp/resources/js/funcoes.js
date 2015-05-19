@@ -1,4 +1,18 @@
 $(document).ready(function() {
+	
+	$('.check').change(function(){
+		var itemForm = $(this).parent().parent(); 
+		
+		if($('.check').is(':checked')){
+			$(itemForm).find("input").prop("disabled",false);			
+		}else {
+			$(itemForm).find("input[type=text]").prop("disabled",true);
+			$(itemForm).removeClass('has-error');
+			$(itemForm).find('span').remove();
+			$(itemForm).find("input[type=text]").val(''); 
+		}
+	});
+	
 	$('#consultaNutricional').validate({
         rules: {
         	objetivoConsulta:{ 
