@@ -56,7 +56,7 @@
 			modelAttribute="consultaNutricional" acceptCharset="UTF-8"
 			cssClass="form-horizontal">
 			<div class="tab-content">
-				<form:hidden path="id" />
+				<form:hidden path="id"/>
 				<form:hidden path="paciente.id" />
 				<form:hidden path="data" />
 

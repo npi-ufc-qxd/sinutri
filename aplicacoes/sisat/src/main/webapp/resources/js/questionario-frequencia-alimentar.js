@@ -1,6 +1,7 @@
+var data = $('#data').val;
+alert(data);
 $.ajax({
 		type: "GET",
-		
 		url: '/sisat/nutricao/frequencia-alimentar.json',
 	})
 	.success(function(result) {
