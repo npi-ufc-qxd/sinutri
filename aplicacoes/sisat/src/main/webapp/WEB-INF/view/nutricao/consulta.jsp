@@ -40,7 +40,7 @@
 			<li><a data-toggle="tab" href="#documentos">Documentos</a></li>
 		</ul>
 
-		<form:form servletRelativeAction="${url}" method="POST" modelAttribute="consultaNutricional" acceptCharset="UTF-8" cssClass="form-horizontal" enctype="multipart/form-data">
+		<form:form servletRelativeAction="${url}" method="POST" id = "consultaNutricional" modelAttribute="consultaNutricional" acceptCharset="UTF-8" cssClass="form-horizontal" enctype="multipart/form-data">
 			<div class="tab-content">
 				<form:hidden path="id"/>
 				<form:hidden path="paciente.id"/>
