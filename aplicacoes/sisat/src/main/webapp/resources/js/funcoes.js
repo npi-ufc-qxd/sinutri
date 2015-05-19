@@ -55,12 +55,7 @@ $(document).ready(function() {
 			    		  url: href
 			    	  })
 		    		  .success(function( result ) {
-		    			  if(result.result == 'ok') {
-		    				  alert("Eu sou um alert!");
-		    			  } else {
-		    				  bootbox.alert(result.mensagem, function() {
-		    				  });
-		    			  }    			  
+		    			  var tr = $(line).parent().parent().remove();		    			  
 		    		  });
 			      }
 			    },
@@ -80,15 +75,3 @@ $(document).ready(function() {
 		alert($(this).attr('id'));
 	});	
 });
-
-
-
-function removeTableRow (handler) {
-	    var tr = $(handler).closest('tr');
-
-	    tr.fadeOut(400, function(){ 
-	      tr.remove();	      
-	    }); 
-
-	    return false;
-	  }
