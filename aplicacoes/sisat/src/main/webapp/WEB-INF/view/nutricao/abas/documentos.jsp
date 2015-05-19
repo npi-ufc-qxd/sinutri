@@ -34,8 +34,8 @@
 									<span class="glyphicon glyphicon-save"></span>
 								</button>
 						</a></td>						
-						<td><a id="delete[${documento.id}]" href="nutricao/deletarDocumento/${documento.id}" class="delete-document">
-								<button type="button" class="btn btn-danger" onclick="RemoveTableRow(this)">
+						<td><a id="delete[${documento.id}]" href="../../nutricao/deletarDocumento/${documento.id}" class="delete-document">
+								<button type="button" class="btn btn-danger">
 									<span class="glyphicon glyphicon-trash"></span>
 								</button>
 						</a></td>

@@ -129,7 +129,7 @@ public class NutricaoController {
 								documento.setTipo(mfiles.getContentType());
 								documento.setConsultaNutricional(consulta);
 								documento.setData(new Date());
-								documentos.add(documento);
+								documentos.add(documento);								
 							}
 						} catch (IOException e) {
 							model.addAttribute("erro", "Não foi possivel salvar os documentos.");

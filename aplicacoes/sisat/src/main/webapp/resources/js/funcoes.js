@@ -52,15 +52,15 @@ $(document).ready(function() {
 			      callback: function() {
 			    	  $.ajax({
 			    		  type: "GET",
-			    		  url: "../../"+href
+			    		  url: href
 			    	  })
 		    		  .success(function( result ) {
 		    			  if(result.result == 'ok') {
-		    				  $(line).parent().parent().remove();
+		    				  alert("Eu sou um alert!");
 		    			  } else {
 		    				  bootbox.alert(result.mensagem, function() {
 		    				  });
-		    			  }
+		    			  }    			  
 		    		  });
 			      }
 			    },
@@ -80,3 +80,15 @@ $(document).ready(function() {
 		alert($(this).attr('id'));
 	});	
 });
+
+
+
+function removeTableRow (handler) {
+	    var tr = $(handler).closest('tr');
+
+	    tr.fadeOut(400, function(){ 
+	      tr.remove();	      
+	    }); 
+
+	    return false;
+	  }
