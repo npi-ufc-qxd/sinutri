@@ -9,6 +9,9 @@ import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -31,6 +34,7 @@ import br.ufc.quixada.npi.sisat.model.Pessoa;
 import br.ufc.quixada.npi.sisat.model.enuns.Classificacao;
 import br.ufc.quixada.npi.sisat.model.enuns.Refeicao;
 import br.ufc.quixada.npi.sisat.service.ConsultaNutricionalService;
+import br.ufc.quixada.npi.sisat.service.DocumentoService;
 import br.ufc.quixada.npi.sisat.service.PacienteService;
 import br.ufc.quixada.npi.sisat.service.PessoaService;
 
@@ -46,6 +50,9 @@ public class NutricaoController {
 
 	@Inject
 	private ConsultaNutricionalService consultaNutricionalService;
+	
+	@Inject	
+	private DocumentoService documentoService;
 
 	@RequestMapping(value = {"/", "/index"}, method = RequestMethod.GET)
 	public String index() {
@@ -98,12 +105,12 @@ public class NutricaoController {
 		if (result.hasErrors()) {
 			return ("nutricao/consulta");
 		}		
-		Paciente paciente = pacienteService.find(Paciente.class, consulta.getPaciente().getId());
-
+		Paciente paciente = pacienteService.find(Paciente.class, consulta.getPaciente().getId());		
 		Date data = consultaNutricionalService.find(ConsultaNutricional.class, consulta.getId()).getData();
 		
 		// verificar se os documentos foram anexados
 				List<Documento> documentos = new ArrayList<Documento>();
+				documentos = documentoService.getDocumentosByIdConsultaNutricional(consulta.getId());
 				if (files != null && !files.isEmpty() && files.get(0).getSize() > 0) {
 					
 					for (MultipartFile mfiles : files) {
@@ -115,11 +122,11 @@ public class NutricaoController {
 								documento.setTipo(mfiles.getContentType());
 								documento.setConsultaNutricional(consulta);
 								documento.setData(new Date());
-								documentos.add(documento);
+								documentos.add(documento);								
 							}
 						} catch (IOException e) {
 							model.addAttribute("erro", "Não foi possivel salvar os documentos.");
-							return "selecao/cadastrar";
+							return ("nutricao/consulta");
 						}
 					}
 					
@@ -131,9 +138,9 @@ public class NutricaoController {
 				}
 
 		consulta.setData(data);
-		consulta.setPaciente(paciente);
-
-		consultaNutricionalService.update(atualizarConsulta(consulta));
+		consulta.setPaciente(paciente);		
+				
+		consultaNutricionalService.update(atualizarConsulta(consulta));	
 		redirectAttributes.addFlashAttribute("success", "Consulta do paciente <strong>" + consulta.getPaciente().getPessoa().getNome() + "</strong> atualizada com sucesso.");
 		return "redirect:/nutricao/detalhes/" + consulta.getPaciente().getId();
 	}
@@ -149,6 +156,13 @@ public class NutricaoController {
 				}
 			}
 		}
+		
+		if(consulta.getDocumentos() != null){
+			for(Documento documento : consulta.getDocumentos()){
+				documento.setConsultaNutricional(consulta);
+			}
+		}
+		
 		return consulta;
 	}
 
@@ -232,7 +246,7 @@ public class NutricaoController {
 					}
 				} catch (IOException e) {
 					model.addAttribute("erro", "Não foi possivel salvar os documentos.");
-					return "selecao/cadastrar";
+					return ("nutricao/consulta");
 				}
 			}
 			
@@ -293,6 +307,30 @@ public class NutricaoController {
 		//agendamentoService.delete(agendamentoService.find(Agendamento.class, id));
 		redirectAttributes.addFlashAttribute("success", "Agendamento deletado com sucesso");
 		return "redirect:/nutricao/buscar_agendamento";
+	}
+	
+	@RequestMapping(value = {"deletarDocumento/{id}"}, method = RequestMethod.GET)
+	public String deletarDocumento(@PathVariable("id") Long id, RedirectAttributes redirectAttributes){
+		Documento documento = documentoService.find(Documento.class, id);
+		documentoService.delete(documento);
+		redirectAttributes.addFlashAttribute("success", "Documento deletado com sucesso");
+		return "redirect:../../nutricao/editarConsulta/" + documento.getConsultaNutricional().getId();
+	}
+	
+	@RequestMapping(value = {"downloadDocumento/{id}"}, method = RequestMethod.GET)
+	public HttpEntity<byte[]> downloadDocumento(@PathVariable("id") Long id, RedirectAttributes redirectAttributes){
+		Documento documento = documentoService.find(Documento.class, id);
+		byte[] arquivo = documento.getArquivo();
+		String[] tipo = documento.getTipo().split("/");
+		
+		HttpHeaders headers = new HttpHeaders();
+		headers.setContentType(new MediaType(tipo[0], tipo[1]));
+		headers.set("Content-Disposition", "attachment; filename=" + documento.getNome().replace(" ", "_"));
+	    headers.setContentLength(arquivo.length);
+	    
+		redirectAttributes.addFlashAttribute("success", "Download do Documento realizado com sucesso");
+		return new HttpEntity<byte[]>(arquivo, headers);
+
 	}
 
 	private Pessoa getUsuarioLogado(HttpSession session) {
