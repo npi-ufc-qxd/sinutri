@@ -38,8 +38,7 @@ public class ConsultaNutricional {
 	@JoinColumn(name = "paciente_id")
 	private Paciente paciente;
 
-	@OneToMany(mappedBy = "consultaNutricional", cascade = {
-			CascadeType.REMOVE, CascadeType.PERSIST })
+	@OneToMany(mappedBy = "consultaNutricional", cascade = CascadeType.ALL)
 	@JsonIgnore
 	private List<Documento> documentos;
 

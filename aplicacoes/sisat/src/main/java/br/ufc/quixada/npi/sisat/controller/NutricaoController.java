@@ -138,9 +138,9 @@ public class NutricaoController {
 				}
 
 		consulta.setData(data);
-		consulta.setPaciente(paciente);
-
-		consultaNutricionalService.update(atualizarConsulta(consulta));
+		consulta.setPaciente(paciente);		
+				
+		consultaNutricionalService.update(atualizarConsulta(consulta));	
 		redirectAttributes.addFlashAttribute("success", "Consulta do paciente <strong>" + consulta.getPaciente().getPessoa().getNome() + "</strong> atualizada com sucesso.");
 		return "redirect:/nutricao/detalhes/" + consulta.getPaciente().getId();
 	}
