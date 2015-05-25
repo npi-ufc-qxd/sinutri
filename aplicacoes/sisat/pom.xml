@@ -63,6 +63,13 @@
 			<version>${jackson.version}</version>
 		</dependency>
 
+		<!-- Dependência Jasper Reports -->
+		<dependency>
+			<groupId>net.sf.jasperreports</groupId>
+			<artifactId>jasperreports</artifactId>
+			<version>4.5.1</version>
+		</dependency>
+
 		<!-- Java EE / Java SE dependencies -->
 		<dependency>
 			<groupId>javax.servlet</groupId>

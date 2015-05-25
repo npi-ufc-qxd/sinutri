@@ -9,6 +9,11 @@ import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
+import net.sf.jasperreports.engine.JRDataSource;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
+
+import org.springframework.context.ApplicationContext;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
@@ -24,6 +29,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.web.servlet.view.jasperreports.JasperReportsMultiFormatView;
 
 import br.ufc.quixada.npi.sisat.model.Alimentacao;
 import br.ufc.quixada.npi.sisat.model.ConsultaNutricional;
@@ -41,6 +47,9 @@ import br.ufc.quixada.npi.sisat.service.PessoaService;
 @Controller
 @RequestMapping("nutricao")
 public class NutricaoController {
+	
+	@Inject
+	private ApplicationContext a;
 
 	@Inject
 	private PacienteService pacienteService;
@@ -331,6 +340,15 @@ public class NutricaoController {
 		redirectAttributes.addFlashAttribute("success", "Download do Documento realizado com sucesso");
 		return new HttpEntity<byte[]>(arquivo, headers);
 
+	}
+	
+	@RequestMapping(value = "/orientacoes-individuais", method = RequestMethod.GET)
+	public String relatorio( ModelMap model, HttpSession session) throws JRException {
+		Object a = session.getServletContext().getAttribute("orientacoesIndividuais");
+		JRDataSource jrDatasource = new JRBeanCollectionDataSource(consultaNutricionalService.find(ConsultaNutricional.class));
+		model.addAttribute("datasource", jrDatasource);
+		model.addAttribute("format", "pdf");
+		return "orientacoesIndividuais";
 	}
 
 	private Pessoa getUsuarioLogado(HttpSession session) {

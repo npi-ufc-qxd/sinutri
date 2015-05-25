@@ -26,6 +26,11 @@
        	<!-- <property name="maxUploadSize" value="100000"/> -->
     </bean>
 	
+	<bean class="org.springframework.web.servlet.view.XmlViewResolver">
+		<property name="location" value="WEB-INF/jasper-views.xml" />
+		<property name="order" value="0"/>
+	</bean>
+	
 	<tx:annotation-driven transaction-manager="txManager" proxy-target-class="true" />
  
 	<context:component-scan base-package="br.ufc.quixada.npi.repository" />
