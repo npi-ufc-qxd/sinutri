@@ -175,7 +175,7 @@ $(document).ready(function() {
 			      callback: function() {
 			    	  $.ajax({
 			    		  type: "GET",
-			    		  data : 
+			    		  data: {"mensagem" : $('mensagem').val()},
 			    		  url: href
 			    	  })
 		    		  .success(function( result ) {

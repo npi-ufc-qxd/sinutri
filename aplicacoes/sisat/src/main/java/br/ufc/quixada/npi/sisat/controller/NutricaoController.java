@@ -323,6 +323,15 @@ public class NutricaoController {
 		return "redirect:../../nutricao/editarConsulta/" + documento.getConsultaNutricional().getId();
 	}
 	
+	@RequestMapping(value = {"enviarDocumento/{id}"}, method = RequestMethod.GET)
+	public String enviarDocumento(@PathVariable("id") Long id, @PathVariable("mensagem") String mensagem, RedirectAttributes redirectAttributes){
+		Documento documento = documentoService.find(Documento.class, id);
+		
+		redirectAttributes.addFlashAttribute("success", "Documento enviado com sucesso");
+		return "redirect:../../nutricao/editarConsulta/" + documento.getConsultaNutricional().getId();
+	}
+	
+	
 	@RequestMapping(value = {"downloadDocumento/{id}"}, method = RequestMethod.GET)
 	public HttpEntity<byte[]> downloadDocumento(@PathVariable("id") Long id, RedirectAttributes redirectAttributes){
 		Documento documento = documentoService.find(Documento.class, id);
