@@ -91,6 +91,10 @@ public class NutricaoController {
 	@RequestMapping(value = "editarConsulta/{id}", method = RequestMethod.GET)
 	public String editarConsulta(@PathVariable("id") long id, Model model) {
 		ConsultaNutricional consultaNutricional = consultaNutricionalService.getConsultaNutricionalWithDocumentosById(id);
+		List<Documento> documentosEnvio = documentoService.getDocumentosEnviar(id);
+		List<Documento> documentosNutricionista = documentoService.getDocumentosNutricionista(id);
+		model.addAttribute("documentosEnvio", documentosEnvio);
+		model.addAttribute("documentosNutricionista", documentosNutricionista);
 		model.addAttribute("action", "editar");
 		model.addAttribute("consultaNutricional", consultaNutricional);
 		Classificacao[] cla= Classificacao.values();
@@ -99,7 +103,7 @@ public class NutricaoController {
 	}
 
 	@RequestMapping(value = {"/editarConsulta"}, method = RequestMethod.POST)
-	public String editarConsulta(Model model, @Valid ConsultaNutricional consulta, BindingResult result, RedirectAttributes redirectAttributes, @RequestParam("files") List<MultipartFile> files) {
+	public String editarConsulta(Model model, @Valid ConsultaNutricional consulta, BindingResult result, RedirectAttributes redirectAttributes, @RequestParam("files") List<MultipartFile> files, @RequestParam("enviar") boolean enviar) {
 		model.addAttribute("action", "editar");
 	
 		if (result.hasErrors()) {
@@ -120,6 +124,7 @@ public class NutricaoController {
 								documento.setArquivo(mfiles.getBytes());
 								documento.setNome(mfiles.getOriginalFilename());
 								documento.setTipo(mfiles.getContentType());
+								documento.setEnviar(enviar);
 								documento.setConsultaNutricional(consulta);
 								documento.setData(new Date());
 								documentos.add(documento);								
@@ -215,7 +220,7 @@ public class NutricaoController {
 	}
 
 	@RequestMapping(value = {"/consultar"}, method = RequestMethod.POST)
-	public String consulta(Model model, @Valid ConsultaNutricional consulta, BindingResult result, RedirectAttributes redirectAttributes, @RequestParam("files") List<MultipartFile> files) {		
+	public String consulta(Model model, @Valid ConsultaNutricional consulta, BindingResult result, RedirectAttributes redirectAttributes, @RequestParam("files") List<MultipartFile> files, @RequestParam("enviar") boolean enviar) {		
 		model.addAttribute("action", "cadastrar");
 
 		if (result.hasErrors()) {
@@ -240,6 +245,7 @@ public class NutricaoController {
 						documento.setArquivo(mfiles.getBytes());
 						documento.setNome(mfiles.getOriginalFilename());
 						documento.setTipo(mfiles.getContentType());
+						documento.setEnviar(enviar);
 						documento.setConsultaNutricional(consulta);
 						documento.setData(new Date());
 						documentos.add(documento);

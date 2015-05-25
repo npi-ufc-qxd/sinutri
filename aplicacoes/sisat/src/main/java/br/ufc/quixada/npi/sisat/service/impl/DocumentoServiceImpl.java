@@ -18,4 +18,14 @@ public class DocumentoServiceImpl extends GenericServiceImpl<Documento>
 		return find("Documento.findDocumentosByIdConsulta", new SimpleMap<String, Object>("id", id));
 	}
 
+	@Override
+	public List<Documento> getDocumentosEnviar(Long id) {	
+		return find("Documento.findDocumentosEnvio", new SimpleMap<String, Object>("id", id));
+	}
+
+	@Override
+	public List<Documento> getDocumentosNutricionista(Long id) {
+		return find("Documento.findDocumentosNutricionista", new SimpleMap<String, Object>("id", id));
+	}
+	
 }
