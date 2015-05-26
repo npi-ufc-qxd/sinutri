@@ -7,4 +7,6 @@ public interface ConsultaNutricionalService extends
 		GenericService<ConsultaNutricional> {
 	public abstract ConsultaNutricional getConsultaNutricionalWithDocumentosById(
 			Long id);
+	public abstract ConsultaNutricional getConsultaNutricionalWithFrequenciasById(
+			Long id);
 }
