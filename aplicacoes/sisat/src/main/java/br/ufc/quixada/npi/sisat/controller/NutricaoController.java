@@ -28,8 +28,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import org.springframework.web.servlet.view.jasperreports.JasperReportsMultiFormatView;
 
 import br.ufc.quixada.npi.sisat.model.Alimentacao;
 import br.ufc.quixada.npi.sisat.model.ConsultaNutricional;
@@ -342,13 +342,17 @@ public class NutricaoController {
 
 	}
 	
-	@RequestMapping(value = "/orientacoes-individuais", method = RequestMethod.GET)
-	public String relatorio( ModelMap model, HttpSession session) throws JRException {
-		Object a = session.getServletContext().getAttribute("orientacoesIndividuais");
-		JRDataSource jrDatasource = new JRBeanCollectionDataSource(consultaNutricionalService.find(ConsultaNutricional.class));
+	@RequestMapping(value = "/relatorio-orientacoes-individuais/{id}", method = RequestMethod.GET)
+	public ModelAndView relatorio(@PathVariable("id") Long id, ModelMap model, ModelAndView modelAndView) throws JRException {		
+		ConsultaNutricional consultaNutricional = consultaNutricionalService.find(ConsultaNutricional.class, id);
+		List<ConsultaNutricional> lista = new ArrayList<>();
+		lista.add(consultaNutricional);
+		JRDataSource jrDatasource = new JRBeanCollectionDataSource(lista);
 		model.addAttribute("datasource", jrDatasource);
+		model.addAttribute("consulta",consultaNutricional);
 		model.addAttribute("format", "pdf");
-		return "orientacoesIndividuais";
+		modelAndView = new ModelAndView("orientacoesIndividuais", model);
+		return modelAndView;
 	}
 
 	private Pessoa getUsuarioLogado(HttpSession session) {
