@@ -44,7 +44,7 @@
 									<span class="glyphicon glyphicon-trash"></span>
 								</button>
 						</a></td>
-						<td><a id="send[${documento.id}]" href="../../nutricao/enviarDocumento/${documento.id}" class="send-document">
+						<td><a id="send[${documento.id}]" href="../../nutricao/enviarDocumento/${documento.id}/" class="send-document">
 								<button class="btn btn-warning">
 									<span class="glyphicon glyphicon-send"></span>
 								</button>

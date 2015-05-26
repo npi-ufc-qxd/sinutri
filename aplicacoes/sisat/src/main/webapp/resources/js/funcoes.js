@@ -162,25 +162,25 @@ $(document).ready(function() {
 	//Enviar
 	$('.send-document').on('click', function (e) {
 		var line = this;
-		var href = $(this).attr('href');
+		var href = $(line).attr('href');
+		
 		e.preventDefault();
 		bootbox.dialog({
-			  message: "<textarea id = 'mensagem' name='mensagem' rows='6' cols='72' >   </textarea>",
+			  message: "<textarea id = 'mensagem' name='mensagem' rows='6' cols='72'></textarea>",
 			  title: "Mensagem para o paciente",
-			  
 			  buttons: {
 			    danger: {
 			      label: "Enviar",
 			      className: "btn btn-warning",
 			      callback: function() {
+			    	  var mensagem = $('#mensagem').val();
+			    	  href+=mensagem;
 			    	  $.ajax({
 			    		  type: "GET",
-			    		  data: {"mensagem" : $('mensagem').val()},
 			    		  url: href
 			    	  })
 		    		  .success(function( result ) {
-		    			  //var tr = $(line).parent().parent().remove();
-		    			  alert('Enviado')
+		    			  
 		    		  });
 			      }
 			    },

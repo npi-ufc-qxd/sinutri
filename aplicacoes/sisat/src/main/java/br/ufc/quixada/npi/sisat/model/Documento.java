@@ -113,4 +113,12 @@ public class Documento {
 		}
 		return false;
 	}
+
+	@Override
+	public String toString() {
+		return "Documento [id=" + id + ", nome=" + nome + ", tipo=" + tipo
+				+ ", data=" + data + ", enviar=" + enviar + "]";
+	}
+	
+	
 }
