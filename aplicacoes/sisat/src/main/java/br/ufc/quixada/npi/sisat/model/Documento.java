@@ -8,13 +8,17 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 
 import org.hibernate.annotations.Type;
 import org.springframework.format.annotation.DateTimeFormat;
 
-@NamedQuery(name = "Documento.findDocumentosByIdConsulta", query = "select d from Documento d where d.consultaNutricional.id=:id")
-
+@NamedQueries({
+	@NamedQuery(name = "Documento.findDocumentosByIdConsulta", query = "select d from Documento d where d.consultaNutricional.id=:id"),
+	@NamedQuery(name = "Documento.findDocumentosEnvio", query ="select d from Documento d where d.consultaNutricional.id=:id and d.enviar = TRUE" ),
+	@NamedQuery(name = "Documento.findDocumentosNutricionista", query ="select d from Documento d where d.consultaNutricional.id=:id and d.enviar = FALSE")
+})
 @Entity
 public class Documento {
 
@@ -35,6 +39,8 @@ public class Documento {
 
 	@DateTimeFormat
 	private Date data;
+	
+	private boolean enviar;
 
 	public Documento() {
 		super();
@@ -87,6 +93,14 @@ public class Documento {
 	public void setData(Date data) {
 		this.data = data;
 	}
+	
+	public boolean isEnviar() {
+		return enviar;
+	}
+
+	public void setEnviar(boolean enviar) {
+		this.enviar = enviar;
+	}
 
 	@Override
 	public boolean equals(Object obj) {
@@ -99,4 +113,12 @@ public class Documento {
 		}
 		return false;
 	}
+
+	@Override
+	public String toString() {
+		return "Documento [id=" + id + ", nome=" + nome + ", tipo=" + tipo
+				+ ", data=" + data + ", enviar=" + enviar + "]";
+	}
+	
+	
 }

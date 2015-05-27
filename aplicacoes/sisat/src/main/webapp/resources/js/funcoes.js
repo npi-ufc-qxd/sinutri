@@ -158,6 +158,43 @@ $(document).ready(function() {
 			});
     });
 	
+	
+	//Enviar
+	$('.send-document').on('click', function (e) {
+		var line = this;
+		var href = $(line).attr('href');
+		
+		e.preventDefault();
+		bootbox.dialog({
+			  message: "<textarea id = 'mensagem' name='mensagem' rows='6' cols='72'></textarea>",
+			  title: "Mensagem para o paciente",
+			  buttons: {
+			    danger: {
+			      label: "Enviar",
+			      className: "btn btn-warning",
+			      callback: function() {
+			    	  var mensagem = $('#mensagem').val();
+			    	  href+=mensagem;
+			    	  $.ajax({
+			    		  type: "GET",
+			    		  url: href
+			    	  })
+		    		  .success(function( result ) {
+		    			  
+		    		  });
+			      }
+			    },
+			    main: {
+			      label: "Cancelar",
+			      className: "btn-default",
+			      callback: function() {
+			      }
+			    }
+			  }
+			});
+    });
+	
+	
 	$('input[type=file]').bootstrapFileInput();
 	
 	$('.delete-file').click(function(){
