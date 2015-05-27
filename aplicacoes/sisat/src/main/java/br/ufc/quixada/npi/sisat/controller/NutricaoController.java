@@ -304,7 +304,7 @@ public class NutricaoController {
 	//Consulta Nutricional --> Read
 	@RequestMapping(value = {"detalhesConsulta/{id}"})
 	public String getDetalhesConsulta(@PathVariable("id") Long id, Model model, RedirectAttributes redirectAttributes){
-		ConsultaNutricional consulta = consultaNutricionalService.find(ConsultaNutricional.class, id);
+		ConsultaNutricional consulta = consultaNutricionalService.getConsultaNutricionalWithFrequenciasById(id);
 
 		if(consulta == null){
 			redirectAttributes.addFlashAttribute("erro", "Consulta não encontrado.");

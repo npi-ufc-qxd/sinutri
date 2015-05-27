@@ -22,7 +22,14 @@ import org.codehaus.jackson.annotate.JsonIgnore;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.format.annotation.DateTimeFormat;
 
+<<<<<<< HEAD
 @NamedQuery(name = "ConsultaNutricional.findConsultaNutricionalWithDocumentosById", query = "select c from ConsultaNutricional c left join fetch c.documentos where c.id=:id")
+=======
+@NamedQueries({
+	@NamedQuery(name = "ConsultaNutricional.findConsultaNutricionalWithDocumentosById", query = "select c from ConsultaNutricional c left join fetch c.documentos where c.id=:id"),
+	@NamedQuery(name = "ConsultaNutricional.findConsultaNutricionalWithFrequenciasById", query = "select c from ConsultaNutricional c left join fetch c.frequencias where c.id=:id")	
+})
+>>>>>>> 2f4051106d4391fa110e441498e1df4276d57536
 @Entity
 public class ConsultaNutricional {
 
@@ -30,8 +37,8 @@ public class ConsultaNutricional {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@OneToMany(cascade = CascadeType.ALL)
-	@JoinColumn(name = "consultanutricional_id")
+	@OneToMany(mappedBy = "consultaNutricional", cascade = CascadeType.ALL)
+	@JsonIgnore
 	private List<FrequenciaAlimentar> frequencias;
 
 	@ManyToOne

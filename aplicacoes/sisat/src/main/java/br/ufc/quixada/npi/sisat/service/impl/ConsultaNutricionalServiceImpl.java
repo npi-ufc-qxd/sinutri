@@ -22,4 +22,13 @@ public class ConsultaNutricionalServiceImpl extends
 				new SimpleMap<String, Object>("id", id));
 	}
 
+<<<<<<< HEAD
+=======
+	@Override
+	public ConsultaNutricional getConsultaNutricionalWithFrequenciasById(Long id) {
+		return (ConsultaNutricional) findFirst(
+				"ConsultaNutricional.findConsultaNutricionalWithFrequenciasById",
+				new SimpleMap<String, Object>("id", id));
+	}
+>>>>>>> 2f4051106d4391fa110e441498e1df4276d57536
 }

@@ -35,8 +35,8 @@ public class FrequenciaAlimentar {
 	@Enumerated(EnumType.STRING)
 	private Refeicao refeicao;
 	
-    @ManyToOne
-    @JoinColumn(name = "consultaNutricional_id")
+	@ManyToOne
+	@JoinColumn(name = "consultaNutricional_id")
 	private ConsultaNutricional consultaNutricional;
     
 	@OneToMany(cascade = CascadeType.ALL, fetch=FetchType.EAGER)
