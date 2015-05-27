@@ -6,6 +6,7 @@ import java.util.Date;
 import java.util.List;
 
 import javax.inject.Inject;
+import javax.mail.MessagingException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
@@ -26,6 +27,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import br.ufc.quixada.npi.model.Attachment;
 import br.ufc.quixada.npi.model.Email;
 import br.ufc.quixada.npi.service.EmailService;
 import br.ufc.quixada.npi.sisat.model.Alimentacao;
@@ -344,22 +346,28 @@ public class NutricaoController {
 	@RequestMapping(value = {"enviarDocumento/{id}/{mensagem}"}, method = RequestMethod.GET)
 	public String enviarDocumento(@PathVariable("id") Long id, @PathVariable("mensagem") String mensagem, RedirectAttributes redirectAttributes){
 		Documento documento = documentoService.find(Documento.class, id);
+		Pessoa p = documento.getConsultaNutricional().getPaciente().getPessoa();
 		
-		final String msg = mensagem;
-
-
+		final Email email = new Email();
+		email.setFrom("nutricao@quixada.ufc.br");
+		email.setTo(p.getEmail());
+		email.setText(mensagem);
+		Attachment anexo = new Attachment();
+		anexo.setData(documento.getArquivo());
+		anexo.setFilename(documento.getNome());
+		anexo.setMimeType(documento.getTipo());
+		email.addAttachment(anexo);
+		email.setSubject("não-responda [Envio de documento]");
+	
 		Runnable enviarEmail = new Runnable() {
 
 			@Override
 			public void run() {
-				Email email = new Email();
-				email.setFrom("guilhermeestevo@gmail.com");
-				email.setTo("matheussouza.inf@gmail.com");
-				email.setText(msg);
-
+				
 				try {
 					emailService.sendEmail(email);
 				} catch (MessagingException e) {
+					System.out.println(e.getMessage());
 				}
 
 			}
@@ -368,8 +376,6 @@ public class NutricaoController {
 
 		Thread threadEnviarEmail = new Thread(enviarEmail);
 		threadEnviarEmail.start();
-
-
 
 		redirectAttributes.addFlashAttribute("success", "Documento enviado com sucesso");
 		return "redirect:../../editarConsulta/" + documento.getConsultaNutricional().getId();
