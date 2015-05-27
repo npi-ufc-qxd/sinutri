@@ -59,12 +59,12 @@
 <tr>
 	<td>type</td>
 	<td>id=cc</td>
-	<td>50</td>
+	<td>5555</td>
 </tr>
 <tr>
 	<td>type</td>
 	<td>id=objetivoConsulta</td>
-	<td>perder peso</td>
+	<td>perca de peso, ganho de massa muscular, evitar doenças cardiacas, diabetes e demais problemas gerados pela obesidade.</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -81,7 +81,6 @@
 	<td>css=div.form-group</td>
 	<td>*Preencha campo corretamente*</td>
 </tr>
-
 </tbody></table>
 </body>
 </html>
