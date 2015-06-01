@@ -56,9 +56,6 @@ import br.ufc.quixada.npi.sisat.service.PessoaService;
 public class NutricaoController {
 	
 	@Inject
-	private ApplicationContext a;
-
-	@Inject
 	private PacienteService pacienteService;
 
 	@Inject
