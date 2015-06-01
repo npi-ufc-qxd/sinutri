@@ -3,13 +3,16 @@ package br.ufc.quixada.npi.sisat.controller;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import net.sf.jasperreports.engine.JRDataSource;
+import net.sf.jasperreports.engine.JREmptyDataSource;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 
@@ -28,6 +31,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import br.ufc.quixada.npi.sisat.model.Alimentacao;
@@ -61,8 +65,6 @@ public class NutricaoController {
 	
 	@Inject	
 	private DocumentoService documentoService;
-	
-	private JRDataSource jrDatasource;
 
 	@RequestMapping(value = {"/", "/index"}, method = RequestMethod.GET)
 	public String index() {
@@ -344,18 +346,15 @@ public class NutricaoController {
 	}
 	
 	@RequestMapping(value = "/relatorio-orientacoes-individuais/{id}", method = RequestMethod.GET)
-	public String relatorio(@PathVariable("id") Long id, ModelMap model) throws JRException {		
-		ConsultaNutricional consultaNutricional = consultaNutricionalService.find(ConsultaNutricional.class, id);
-		model.addAttribute("orientacoesIndividuais", consultaNutricional.getOrientacoesIndividuais());
-		List<ConsultaNutricional> consultas = new ArrayList<>();
-		consultas.add(consultaNutricional);
+	public ModelAndView relatorio(@PathVariable("id") Long id, ModelAndView model) throws JRException {
+		String orientacoesIndividuais = consultaNutricionalService.getOrientacoesIndividuaisById(id);
 		
-		jrDatasource = new JRBeanCollectionDataSource(consultas);
-		
-		model.addAttribute("datasource", jrDatasource);
-		model.addAttribute("format", "pdf");		
-		
-		return "orientacoesIndividuais";
+		Map<String, Object> parameter = new HashMap<String, Object>();		
+		parameter.put("format", "pdf");
+		parameter.put("orientacoesIndividuais", orientacoesIndividuais);
+		parameter.put("datasource", new JREmptyDataSource());
+		model = new ModelAndView("orientacoesIndividuais", parameter);
+		return model;
 	}
 
 	private Pessoa getUsuarioLogado(HttpSession session) {

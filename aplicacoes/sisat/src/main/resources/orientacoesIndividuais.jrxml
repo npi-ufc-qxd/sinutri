@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.1.0.final using JasperReports Library version 6.1.0  -->
-<!-- 2015-05-27T14:35:43 -->
+<!-- 2015-06-01T15:20:15 -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="orientacoesIndividuais" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
@@ -10,9 +10,9 @@
 	<detail>
 		<band height="795" splitType="Stretch">
 			<staticText>
-				<reportElement x="160" y="45" width="370" height="79"/>
+				<reportElement x="160" y="45" width="370" height="79" />
 				<textElement textAlignment="Center">
-					<font fontName="Arial" size="14" isBold="true"/>
+					<font fontName="Ubuntu" size="14" isBold="true"/>
 				</textElement>
 				<text><![CDATA[UNIVERSIDADE FEDERAL DO CEARÁ
  CAMPUS DE QUIXADÁ
@@ -20,14 +20,14 @@
 NUTRIÇÃO]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="0" y="258" width="555" height="20" />
+				<reportElement x="0" y="258" width="555" height="20"/>
 				<textElement textAlignment="Center">
-					<font fontName="Arial" size="14" isBold="true" isUnderline="true" isStrikeThrough="false"/>
+					<font fontName="Ubuntu" size="14" isBold="true" isUnderline="true" isStrikeThrough="false"/>
 				</textElement>
 				<text><![CDATA[ORIENTAÇÕES INDIVIDUAIS]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="90" y="640" width="375" height="47"/>
+				<reportElement x="90" y="640" width="375" height="47" />
 				<textElement textAlignment="Center">
 					<font size="12"/>
 				</textElement>
@@ -46,7 +46,7 @@ Tel.: (88) 3412 0919	E-mail: nutricao@quixada.ufc.br]]></text>
 				<imageExpression><![CDATA["./ufc.jpg"]]></imageExpression>
 			</image>
 			<textField>
-				<reportElement x="103" y="315" width="375" height="145"/>
+				<reportElement x="103" y="315" width="375" height="145" />
 				<textElement textAlignment="Justified">
 					<font size="12"/>
 				</textElement>
