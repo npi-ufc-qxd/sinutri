@@ -7,6 +7,8 @@ import br.ufc.quixada.npi.sisat.model.ConsultaNutricional;
 import br.ufc.quixada.npi.sisat.service.ConsultaNutricionalService;
 import br.ufc.quixada.npi.util.SimpleMap;
 
+
+
 @Named
 public class ConsultaNutricionalServiceImpl extends
 		GenericServiceImpl<ConsultaNutricional> implements
@@ -18,7 +20,7 @@ public class ConsultaNutricionalServiceImpl extends
 				"ConsultaNutricional.findConsultaNutricionalWithDocumentosById",
 				new SimpleMap<String, Object>("id", id));
 	}
-
+	
 	@Override
 	public ConsultaNutricional getConsultaNutricionalWithFrequenciasById(Long id) {
 		return (ConsultaNutricional) findFirst(
