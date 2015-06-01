@@ -57,29 +57,37 @@
 				<thead>
 					<tr>
 						<th>Data</th>
-						<th colspan="2" width="20%">Ações</th>
+						<th colspan="3" width="20%">Ações</th>
 					</tr>
 				</thead>
 				<tbody>
 					<c:forEach var="consulta" items="${pessoa.paciente.consultas}">
 						<tr class="linha">
 
-							<td><a href="../detalhesConsulta/${consulta.id}/"> <fmt:formatDate
+							<td><a href="<c:url value="../detalhesConsulta/${consulta.id}/"/>"> <fmt:formatDate
 
 										type="both" pattern="dd-MM-yyyy HH-mm"
 										value="${consulta.data}" />
 							</a></td>
 							<td><a id="detalhes" data-toggle="modal"
 
-								href="../detalhesConsulta/${consulta.id}">
+								href="<c:url value="../detalhesConsulta/${consulta.id}"/>">
 
 									<button class="btn btn-info">
 										Detalhes <span class="glyphicon glyphicon-eye-open"></span>
 									</button>
 							</a></td>
+							<td><a id="relatorio" data-toggle="modal"
+								
+								href="<c:url value="../relatorio-orientacoes-individuais/${consulta.id}"/>">
+									<button class="btn btn-info">
+										Relatório <span class="glyphicon glyphicon-file"></span>
+									</button>
+							</a></td>
+							
 							<td><a id="editar" data-toggle="modal"
 
-								href="../editarConsulta/${consulta.id}">
+								href="<c:url value="../editarConsulta/${consulta.id}"/>">
 									<button class="btn btn-warning">
 										Editar <span class="glyphicon glyphicon-edit"></span>
 									</button>

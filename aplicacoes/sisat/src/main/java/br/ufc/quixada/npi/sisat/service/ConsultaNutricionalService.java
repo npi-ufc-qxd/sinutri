@@ -12,4 +12,7 @@ public interface ConsultaNutricionalService extends
 			Long id);
 	public abstract ConsultaNutricional getConsultaNutricionalWithFrequenciasById(
 			Long id);
+	
+	public abstract String getOrientacoesIndividuaisById(
+			Long id);
 }

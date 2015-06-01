@@ -3,13 +3,21 @@ package br.ufc.quixada.npi.sisat.controller;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 import javax.mail.MessagingException;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
+import net.sf.jasperreports.engine.JRDataSource;
+import net.sf.jasperreports.engine.JREmptyDataSource;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
+
+import org.springframework.context.ApplicationContext;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
@@ -24,6 +32,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import br.ufc.quixada.npi.model.Attachment;
@@ -45,7 +54,7 @@ import br.ufc.quixada.npi.sisat.service.PessoaService;
 @Controller
 @RequestMapping("nutricao")
 public class NutricaoController {
-
+	
 	@Inject
 	private PacienteService pacienteService;
 
@@ -394,6 +403,18 @@ public class NutricaoController {
 		redirectAttributes.addFlashAttribute("success", "Download do Documento realizado com sucesso");
 		return new HttpEntity<byte[]>(arquivo, headers);
 
+	}
+	
+	@RequestMapping(value = "/relatorio-orientacoes-individuais/{id}", method = RequestMethod.GET)
+	public ModelAndView relatorio(@PathVariable("id") Long id, ModelAndView model) throws JRException {
+		String orientacoesIndividuais = consultaNutricionalService.getOrientacoesIndividuaisById(id);
+		
+		Map<String, Object> parameter = new HashMap<String, Object>();		
+		parameter.put("format", "pdf");
+		parameter.put("orientacoesIndividuais", orientacoesIndividuais);
+		parameter.put("datasource", new JREmptyDataSource());
+		model = new ModelAndView("orientacoesIndividuais", parameter);
+		return model;
 	}
 
 	private Pessoa getUsuarioLogado(HttpSession session) {

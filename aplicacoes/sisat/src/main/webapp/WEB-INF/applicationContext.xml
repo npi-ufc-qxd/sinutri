@@ -27,6 +27,7 @@
 		<!-- <property name="maxUploadSize" value="100000"/> -->
 	</bean>
 
+
 	<bean id="mailSession" class="org.springframework.jndi.JndiObjectFactoryBean">
 		<property name="jndiName" value="java:comp/env/mail/Session" />
 	</bean>
@@ -34,11 +35,16 @@
 		<property name="session" ref="mailSession" />
 	</bean>
 
+	<bean class="org.springframework.web.servlet.view.XmlViewResolver">
+		<property name="location" value="WEB-INF/jasper-views.xml" />
+		<property name="order" value="0" />
+	</bean>
+
 	<tx:annotation-driven transaction-manager="txManager"
 		proxy-target-class="true" />
 
+
 	<context:component-scan base-package="br.ufc.quixada.npi.repository" />
-	<context:component-scan
-		base-package="br.ufc.quixada.npi.service.impl" />
+	<context:component-scan base-package="br.ufc.quixada.npi.service.impl" />
 	<context:component-scan base-package="br.ufc.quixada.npi.sisat" />
 </beans>
