@@ -3,22 +3,35 @@ $.ajax({
 		type: "GET",
 		data: {"id": id},
 		url: '/sisat/nutricao/frequencia-alimentar.json',
-	})
-	.success(function(result) {
-		$.each( result, function( key, frequenciaAlimentar ) {
-
-			$('#questionarioFrequenciaAlimentar').appendGrid(function() {
+		success: function(result) {
+			$.each( result, function( key, frequenciaAlimentar ) {
+				console.log("refeição : "+frequenciaAlimentar.refeicao);
+				console.log("Horário : "+frequenciaAlimentar.horario);
+				
 				$.each( frequenciaAlimentar.alimentos, function( key, alimento ) {
 					console.log(alimento.alimento + ' - ' + alimento.porcao);
 				});
+				
 			});
+		},
+		error: function(error) {
+			
+		}
+		
+});
+/*	
+success(function(result) {
+		
+		$.each( result, function( key, frequenciaAlimentar ) {
 
-//			$('#questionarioFrequenciaAlimentar').appendGrid('insertRow', [{
-//				'refeicao' : frequenciaAlimentar.refeicao,
-//				'horario': frequenciaAlimentar.horario,
-//				
-//			} ,], frequenciaAlimentar.id);
-//
+			
+
+			$('#questionarioFrequenciaAlimentar').appendGrid('insertRow', [{
+				'refeicao' : frequenciaAlimentar.refeicao,
+				'horario': frequenciaAlimentar.horario,
+				
+			} ,], frequenciaAlimentar.id);
+
 //			$.each( frequenciaAlimentar.alimentos, function( key, alimento ) {
 //				console.log(alimento.alimento + ' - ' + alimento.porcao);
 //			});
@@ -30,15 +43,14 @@ $.ajax({
 //			
 //		} ,], frequenciaAlimentar.id);
 		
-
-		});
-	})
-	.error(function(error) {
+	
+	},
+	error(function(error) {
 		$.each( error, function( key, value ) {
 			console.log(key +"--"+value);
 		});
-	});
-
+	}
+*/
 
 $(function() {
 		// Initialize appendGrid
