@@ -1,7 +1,96 @@
 $(document).ready(function() {
 	
-	$("#altura").mask("9.9");
-	$("#peso").mask("99.99");
+	$('.check').change(function(){
+		var itemForm = $(this).parent().parent(); 		
+		if($('.check').is(':checked')){
+			$(itemForm).find("input").prop("disabled",false);			
+		}else {
+			$(itemForm).find("input[type=text]").prop("disabled",true);
+			$(itemForm).removeClass('has-error');
+			$(itemForm).find('span').remove();
+			$(itemForm).find("input[type=text]").val(''); 
+		}
+	});
+	
+	$('#consultaNutricional').validate({
+        rules: {
+        	objetivoConsulta:{ 
+        		required: true,
+                maxlength: 250,
+                minlength: 50
+        	},
+        	medicamentoComentario:{
+        		required: $('#checkMedicamento').val(),
+        		required: true
+			},
+			mastigacaoComentario:{
+        		required: $('#checkMastigacao').val(),
+        		required: true
+			},
+			alergiaComentario:{
+        		required: $('#checkAlergia').val(),
+        		required: true
+			},
+			atividadeFisicaComentario:{
+        		required: $('#checkAtividadeFisica').val(),
+        		required: true
+			},
+			carneVermelhaComentario:{
+        		required: $('#checkCarneVermelha').val(),
+        		required: true
+			},
+			bebidaAlcoolicaComentario:{
+        		required: $('#checkBebidaAlcoolica').val(),
+        		required: true
+			},
+			outrasPatologiasComentario:{
+        		required: $('#checkPatologia').val(),
+        		required: true
+			}
+			
+        },
+        highlight: function(element) {
+            $(element).closest('.form-item').addClass('has-error');
+        },
+        unhighlight: function(element) {
+            $(element).closest('.form-item').removeClass('has-error');
+        },
+        errorElement: 'span',
+        errorClass: 'help-block',
+        errorPlacement: function(error, element) {
+            error.insertAfter(element.parent().children().last());
+        },
+        messages:{
+        	objetivoConsulta:{
+                required:"Preencha o campo de objetivo da consulta para o paciente.",
+            },
+            medicamentoComentario:{
+            	required:"Preencha o campo de medicamentos da consulta.",
+            },	
+            mastigacaoComentario:{
+            	required:"Preencha o campo de mastigação da consulta.",
+            },
+            alergiaComentario:{
+            	required:"Preencha o campo de Alergia Alimentar da consulta.",
+            },
+            atividadeFisicaComentario:{
+            	required:"Preencha o campo de Atividade Fisica da consulta.",
+            },
+            carneVermelhaComentario:{
+            	required:"Preencha o campo de Carne Vermelha da consulta.",
+            },
+            bebidaAlcoolicaComentario:{
+            	required:"Preencha o campo de Bebida Alcoólica da consulta.",
+            },
+            outrasPatologiasComentario:{
+            	required:"Preencha o campo de Patologia da consulta.",
+            }
+        }
+    });
+	
+	
+	$("#altura").mask("9.99");
+	$("#peso").mask("999.99");
 	$("#cc").mask("99.99");
 	$("#agua").mask("99.99");
 	$("#glicemia").mask("99999");
@@ -31,7 +120,7 @@ $(document).ready(function() {
 	});
 	
 	$('#confirm-delete').on('show.bs.modal', function(e) {
-	    $(this).find('.btn-danger').attr('href', $(e.relatedTarget).data('href'));
+		$(this).find('.btn-danger').attr('href', $(e.relatedTarget).data('href'));
 	});
 	
 	$('#confirm-submit').on('show.bs.modal', function(e) {
@@ -40,10 +129,10 @@ $(document).ready(function() {
 	
 	$('.delete-document').on('click', function (e) {
 		var line = this;
-		var id = $(this).attr('id');
+		var href = $(this).attr('href');
 		e.preventDefault();
 		bootbox.dialog({
-			  message: "Tem certeza de que deseja excluir esse arquivo?",
+			  message: "Tem certeza de que deseja excluir esse documento?",
 			  title: "Excluir",
 			  buttons: {
 			    danger: {
@@ -51,16 +140,11 @@ $(document).ready(function() {
 			      className: "btn-danger",
 			      callback: function() {
 			    	  $.ajax({
-			    		  type: "POST",
-			    		  url: "/gpa-pesquisa/documento/ajax/remover/"+id
+			    		  type: "GET",
+			    		  url: href
 			    	  })
 		    		  .success(function( result ) {
-		    			  if(result.result == 'ok') {
-		    				  $(line).parent().parent().remove();
-		    			  } else {
-		    				  bootbox.alert(result.mensagem, function() {
-		    				  });
-		    			  }
+		    			  var tr = $(line).parent().parent().remove();		    			  
 		    		  });
 			      }
 			    },
@@ -74,10 +158,46 @@ $(document).ready(function() {
 			});
     });
 	
+	
+	//Enviar
+	$('.send-document').on('click', function (e) {
+		var line = this;
+		var href = $(line).attr('href');
+		
+		e.preventDefault();
+		bootbox.dialog({
+			  message: "<textarea id = 'mensagem' name='mensagem' rows='6' cols='72'></textarea>",
+			  title: "Mensagem para o paciente",
+			  buttons: {
+			    danger: {
+			      label: "Enviar",
+			      className: "btn btn-warning",
+			      callback: function() {
+			    	  var mensagem = $('#mensagem').val();
+			    	  href+=mensagem;
+			    	  $.ajax({
+			    		  type: "GET",
+			    		  url: href
+			    	  })
+		    		  .success(function( result ) {
+		    			  
+		    		  });
+			      }
+			    },
+			    main: {
+			      label: "Cancelar",
+			      className: "btn-default",
+			      callback: function() {
+			      }
+			    }
+			  }
+			});
+    });
+	
+	
 	$('input[type=file]').bootstrapFileInput();
 	
 	$('.delete-file').click(function(){
 		alert($(this).attr('id'));
-	});
-	
+	});	
 });

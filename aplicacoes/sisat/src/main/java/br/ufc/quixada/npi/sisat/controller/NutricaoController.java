@@ -1,14 +1,20 @@
 package br.ufc.quixada.npi.sisat.controller;
 
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 import javassist.expr.NewArray;
 
 import javax.inject.Inject;
+import javax.mail.MessagingException;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -21,16 +27,22 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import br.ufc.quixada.npi.model.Attachment;
+import br.ufc.quixada.npi.model.Email;
+import br.ufc.quixada.npi.service.EmailService;
 import br.ufc.quixada.npi.sisat.model.Alimentacao;
 import br.ufc.quixada.npi.sisat.model.ConsultaNutricional;
+import br.ufc.quixada.npi.sisat.model.Documento;
 import br.ufc.quixada.npi.sisat.model.FrequenciaAlimentar;
 import br.ufc.quixada.npi.sisat.model.Paciente;
 import br.ufc.quixada.npi.sisat.model.Pessoa;
 import br.ufc.quixada.npi.sisat.model.enuns.Classificacao;
 import br.ufc.quixada.npi.sisat.model.enuns.Refeicao;
 import br.ufc.quixada.npi.sisat.service.ConsultaNutricionalService;
+import br.ufc.quixada.npi.sisat.service.DocumentoService;
 import br.ufc.quixada.npi.sisat.service.PacienteService;
 import br.ufc.quixada.npi.sisat.service.PessoaService;
 
@@ -46,6 +58,12 @@ public class NutricaoController {
 
 	@Inject
 	private ConsultaNutricionalService consultaNutricionalService;
+
+	@Inject	
+	private DocumentoService documentoService;
+
+	@Inject
+	private EmailService emailService;
 
 	@RequestMapping(value = {"/", "/index"}, method = RequestMethod.GET)
 	public String index() {
@@ -83,7 +101,11 @@ public class NutricaoController {
 
 	@RequestMapping(value = "editarConsulta/{id}", method = RequestMethod.GET)
 	public String editarConsulta(@PathVariable("id") long id, Model model) {
-		ConsultaNutricional consultaNutricional = consultaNutricionalService.find(ConsultaNutricional.class, id);
+		ConsultaNutricional consultaNutricional = consultaNutricionalService.getConsultaNutricionalWithDocumentosById(id);
+		List<Documento> documentosEnvio = documentoService.getDocumentosEnviar(id);
+		List<Documento> documentosNutricionista = documentoService.getDocumentosNutricionista(id);
+		model.addAttribute("documentosEnvio", documentosEnvio);
+		model.addAttribute("documentosNutricionista", documentosNutricionista);
 		model.addAttribute("action", "editar");
 		model.addAttribute("consultaNutricional", consultaNutricional);
 		Classificacao[] cla= Classificacao.values();
@@ -91,35 +113,60 @@ public class NutricaoController {
 		return "/nutricao/consulta";
 	}
 	
-	@RequestMapping(value = "obterFrequenciaAlimentar/{id}", method = RequestMethod.GET)
-	public void obterFrequenciaAlimentar(@PathVariable("id") long id, Model model) {
-			
-		System.err.println(id);
-	}
 	
 	@RequestMapping(value = {"/editarConsulta"}, method = RequestMethod.POST)
-	public String editarConsulta(Model model, @Valid ConsultaNutricional consulta, BindingResult result, RedirectAttributes redirectAttributes) {
+	public String editarConsulta(Model model, @Valid ConsultaNutricional consulta, BindingResult result, RedirectAttributes redirectAttributes, @RequestParam("files") List<MultipartFile> files, @RequestParam(value = "enviar", required = false) boolean enviar) {
 		model.addAttribute("action", "editar");
 
 		if (result.hasErrors()) {
 			return ("nutricao/consulta");
 		}		
-		Paciente paciente = pacienteService.find(Paciente.class, consulta.getPaciente().getId());
+		Paciente paciente = pacienteService.find(Paciente.class, consulta.getPaciente().getId());		
+		Date data = consultaNutricionalService.find(ConsultaNutricional.class, consulta.getId()).getData();
 
-		Date data = consultaNutricionalService.find(ConsultaNutricional.class, consulta.getId()).getData(); 
+		// verificar se os documentos foram anexados
+		List<Documento> documentos = new ArrayList<Documento>();
+		documentos = documentoService.getDocumentosByIdConsultaNutricional(consulta.getId());
+		if (files != null && !files.isEmpty() && files.get(0).getSize() > 0) {
+
+			for (MultipartFile mfiles : files) {
+				try {
+					if (mfiles.getBytes() != null && mfiles.getBytes().length != 0) {
+						Documento documento = new Documento();
+						documento.setArquivo(mfiles.getBytes());
+						documento.setNome(mfiles.getOriginalFilename());
+						documento.setTipo(mfiles.getContentType());
+						documento.setEnviar(enviar);
+						documento.setConsultaNutricional(consulta);
+						documento.setData(new Date());
+						documentos.add(documento);								
+					}
+				} catch (IOException e) {
+					model.addAttribute("erro", "Não foi possivel salvar os documentos.");
+					return ("nutricao/consulta");
+				}
+			}
+
+			if(!documentos.isEmpty()){
+				consulta.setDocumentos(documentos);
+			}
+		}else{
+			model.addAttribute("anexoError", "Adicione anexo a seleção");					
+		}
 
 		consulta.setData(data);
-		consulta.setPaciente(paciente);
+		consulta.setPaciente(paciente);		
 
-		consultaNutricionalService.update(atualizarConsulta(consulta));
+		consultaNutricionalService.update(atualizarConsulta(consulta));	
 		redirectAttributes.addFlashAttribute("success", "Consulta do paciente <strong>" + consulta.getPaciente().getPessoa().getNome() + "</strong> atualizada com sucesso.");
 		return "redirect:/nutricao/detalhes/" + consulta.getPaciente().getId();
 	}
 
 	@RequestMapping(value = "/frequencia-alimentar.json", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-	public @ResponseBody List<FrequenciaAlimentar> getFrequencias() {
-		Long id = (long) 14;
-		List<FrequenciaAlimentar> frequenciaAlimentars = consultaNutricionalService.getConsultaNutricionalWithFrequenciaByID(id).getFrequencias();
+	public @ResponseBody List<FrequenciaAlimentar> getFrequencias(HttpServletRequest request) {
+		long id = Long.parseLong(request.getParameter("id"));
+		List<FrequenciaAlimentar> frequenciaAlimentars = new ArrayList<FrequenciaAlimentar>();
+		frequenciaAlimentars = consultaNutricionalService.getConsultaNutricionalWithFrequenciasById(id).getFrequencias();
 		return frequenciaAlimentars;
 	}
 
@@ -134,6 +181,13 @@ public class NutricaoController {
 				}
 			}
 		}
+
+		if(consulta.getDocumentos() != null){
+			for(Documento documento : consulta.getDocumentos()){
+				documento.setConsultaNutricional(consulta);
+			}
+		}
+
 		return consulta;
 	}
 
@@ -170,6 +224,7 @@ public class NutricaoController {
 		if(pessoa.getPaciente() == null){
 			pessoa.setPaciente(new Paciente());
 			pessoa.getPaciente().setPessoa(pessoa);
+			pessoa.getPaciente().setAltura(1.0);
 
 			pessoaService.update(pessoa);
 		}
@@ -185,7 +240,7 @@ public class NutricaoController {
 	}
 
 	@RequestMapping(value = {"/consultar"}, method = RequestMethod.POST)
-	public String consulta(Model model, @Valid ConsultaNutricional consulta, BindingResult result, RedirectAttributes redirectAttributes) {		
+	public String consulta(Model model, @Valid ConsultaNutricional consulta, BindingResult result, RedirectAttributes redirectAttributes, @RequestParam("files") List<MultipartFile> files, @RequestParam(value = "enviar", required = false) boolean enviar) {		
 		model.addAttribute("action", "cadastrar");
 
 		if (result.hasErrors()) {
@@ -198,6 +253,36 @@ public class NutricaoController {
 		consulta.setData(data);
 		consulta.setPaciente(paciente);
 		consulta.getPaciente().setAltura(altura);
+
+		// verificar se os documentos foram anexados
+		List<Documento> documentos = new ArrayList<Documento>();
+		if (files != null && !files.isEmpty() && files.get(0).getSize() > 0) {
+
+			for (MultipartFile mfiles : files) {
+				try {
+					if (mfiles.getBytes() != null && mfiles.getBytes().length != 0) {
+						Documento documento = new Documento();
+						documento.setArquivo(mfiles.getBytes());
+						documento.setNome(mfiles.getOriginalFilename());
+						documento.setTipo(mfiles.getContentType());
+						documento.setEnviar(enviar);
+						documento.setConsultaNutricional(consulta);
+						documento.setData(new Date());
+						documentos.add(documento);
+					}
+				} catch (IOException e) {
+					model.addAttribute("erro", "Não foi possivel salvar os documentos.");
+					return ("nutricao/consulta");
+				}
+			}
+
+			if(!documentos.isEmpty()){
+				consulta.setDocumentos(documentos);
+			}
+		}else{
+			model.addAttribute("anexoError", "Adicione anexo a seleção");					
+		}
+
 
 		if(consulta.getAgua().length()==0){
 			consulta.setAgua(null);
@@ -230,7 +315,7 @@ public class NutricaoController {
 	//Consulta Nutricional --> Read
 	@RequestMapping(value = {"detalhesConsulta/{id}"})
 	public String getDetalhesConsulta(@PathVariable("id") Long id, Model model, RedirectAttributes redirectAttributes){
-		ConsultaNutricional consulta = consultaNutricionalService.find(ConsultaNutricional.class, id);
+		ConsultaNutricional consulta = consultaNutricionalService.getConsultaNutricionalWithFrequenciasById(id);
 
 		if(consulta == null){
 			redirectAttributes.addFlashAttribute("erro", "Consulta não encontrado.");
@@ -241,6 +326,69 @@ public class NutricaoController {
 		return "nutricao/detalhesConsulta";
 	}
 
+
+	@RequestMapping(value = {"deletarDocumento/{id}"}, method = RequestMethod.GET)
+	public String deletarDocumento(@PathVariable("id") Long id, RedirectAttributes redirectAttributes){
+		Documento documento = documentoService.find(Documento.class, id);
+		documentoService.delete(documento);
+		redirectAttributes.addFlashAttribute("success", "Documento deletado com sucesso");
+		return "redirect:../../nutricao/editarConsulta/" + documento.getConsultaNutricional().getId();
+	}
+
+
+	@RequestMapping(value = {"enviarDocumento/{id}/{mensagem}"}, method = RequestMethod.GET)
+	public String enviarDocumento(@PathVariable("id") Long id, @PathVariable("mensagem") String mensagem, RedirectAttributes redirectAttributes){
+		Documento documento = documentoService.find(Documento.class, id);
+		Pessoa p = documento.getConsultaNutricional().getPaciente().getPessoa();
+		
+		final Email email = new Email();
+		email.setFrom("nutricao@quixada.ufc.br");
+		email.setTo(p.getEmail());
+		email.setText(mensagem);
+		Attachment anexo = new Attachment();
+		anexo.setData(documento.getArquivo());
+		anexo.setFilename(documento.getNome());
+		anexo.setMimeType(documento.getTipo());
+		email.addAttachment(anexo);
+		email.setSubject("não-responda [Envio de documento]");
+	
+		Runnable enviarEmail = new Runnable() {
+
+			@Override
+			public void run() {
+				
+				try {
+					emailService.sendEmail(email);
+				} catch (MessagingException e) {
+					System.out.println(e.getMessage());
+				}
+
+			}
+
+		};
+
+		Thread threadEnviarEmail = new Thread(enviarEmail);
+		threadEnviarEmail.start();
+
+		redirectAttributes.addFlashAttribute("success", "Documento enviado com sucesso");
+		return "redirect:../../editarConsulta/" + documento.getConsultaNutricional().getId();
+	}
+
+	@RequestMapping(value = {"downloadDocumento/{id}"}, method = RequestMethod.GET)
+	public HttpEntity<byte[]> downloadDocumento(@PathVariable("id") Long id, RedirectAttributes redirectAttributes){
+		Documento documento = documentoService.find(Documento.class, id);
+		byte[] arquivo = documento.getArquivo();
+		String[] tipo = documento.getTipo().split("/");
+
+		HttpHeaders headers = new HttpHeaders();
+		headers.setContentType(new MediaType(tipo[0], tipo[1]));
+		headers.set("Content-Disposition", "attachment; filename=" + documento.getNome().replace(" ", "_"));
+		headers.setContentLength(arquivo.length);
+
+		redirectAttributes.addFlashAttribute("success", "Download do Documento realizado com sucesso");
+		return new HttpEntity<byte[]>(arquivo, headers);
+
+	}
 
 	private Pessoa getUsuarioLogado(HttpSession session) {
 		if (session.getAttribute("usuario") == null) {

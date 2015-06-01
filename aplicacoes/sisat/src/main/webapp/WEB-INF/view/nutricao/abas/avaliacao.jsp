@@ -32,8 +32,8 @@
 		</div>
 	</div>
 
-	<div class="form-group">
-		<label for="checkMedicamento" class="col-sm-2 control-label"><form:checkbox id="checkMedicamento" onclick="habilitar();" path="medicamento"/> Medicamentos:</label>
+	<div class="form-group form-item">
+		<label for="checkMedicamento" class="col-sm-2 control-label"><form:checkbox id="checkMedicamento"  path="medicamento" class="check"/> Medicamentos:</label>
 		<div class="col-sm-10" >
 			<form:input id="inputTextMedicamento" path="medicamentoComentario" cssClass="form-control" placeholder="Quais medicamentos você usa?" disabled="${not consultaNutricional.medicamento}"/>
 			<div class="error-validation">
@@ -51,8 +51,8 @@
 		<label for="diarreia" class="col-sm-2 control-label"><form:checkbox id="diarreia" path="diarreia"/> Diarreia</label>
 		<label for="constipacao" class="col-sm-2 control-label"><form:checkbox id="constipacao" path="constipacao"/> Constipação</label>
 	</div>
-	<div class="form-group">
-		<label for="checkMastigacao" class="col-sm-2 control-label"><form:checkbox id="checkMastigacao" onclick="habilitar();" path="mastigacao"/> Mastigação:</label>
+	<div class="form-group form-item">
+		<label for="checkMastigacao" class="col-sm-2 control-label"><form:checkbox id="checkMastigacao"  path="mastigacao" class="check"/> Mastigação:</label>
 		<div class="col-sm-10" >
 			<form:input id="inputTextMastigacao" path="mastigacaoComentario" cssClass="form-control" placeholder="Como é sua mastigação?" disabled="${not consultaNutricional.mastigacao}"/>
 			<div class="error-validation">
@@ -61,8 +61,8 @@
 		</div>
 	</div>
 
-	<div class="form-group">
-		<label for="checkAlergia" class="col-sm-2 control-label"><form:checkbox id="checkAlergia" onclick="habilitar();" path="alergia"/> Alergia Alimentar:</label>
+	<div class="form-group form-item">
+		<label for="checkAlergia" class="col-sm-2 control-label"><form:checkbox id="checkAlergia"  path="alergia" class="check"/> Alergia Alimentar:</label>
 		<div class="col-sm-10" >
 			<form:textarea id="inputTextAlergia" path="alergiaComentario" class="form-control" rows="5" placeholder="Qual sua alergia Alimentar?" disabled="${not consultaNutricional.alergia}"/>
 			<div class="error-validation">
@@ -83,7 +83,7 @@
 	
 	<div class="form-group">
 		<div class="form-item">
-			<label for="checkAtividadeFisica" class="col-sm-2 control-label"><form:checkbox id="checkAtividadeFisica" onclick="habilitar();" path="atividadeFisica"/> Atividade Física:</label>
+			<label for="checkAtividadeFisica" class="col-sm-2 control-label"><form:checkbox id="checkAtividadeFisica"  path="atividadeFisica" class="check"/> Atividade Física:</label>
 			<div class="col-sm-7" >
 				<form:input id="inputTextAtividadeFisica" path="atividadeFisicaComentario" cssClass="form-control" placeholder="Qual atividade?" disabled="${not consultaNutricional.atividadeFisica}"/>
 				<div class="error-validation">
@@ -110,7 +110,7 @@
 	
 	<div class="form-group">
 		<div class="form-item">
-			<label for="checkCarneVermelha" class="col-sm-2 control-label"><form:checkbox id="checkCarneVermelha" onclick="habilitar();" path="carneVermelha"/> Carne Vermelha:</label>
+			<label for="checkCarneVermelha" class="col-sm-2 control-label"><form:checkbox id="checkCarneVermelha"  path="carneVermelha" class="check"/> Carne Vermelha:</label>
 			<div class="col-sm-7" >
 				<form:input id="inputTextCarneVermelha" path="carneVermelhaComentario" cssClass="form-control" placeholder="Que tipo de carne?" disabled="${not consultaNutricional.carneVermelha}"/>
 				<div class="error-validation">
@@ -137,7 +137,7 @@
 
 	<div class="form-group">
 		<div class="form-item">
-			<label for="checkBebidaAlcoolica" class="col-sm-2 control-label"><form:checkbox id="checkBebidaAlcoolica" onclick="habilitar();" path="bebidaAlcoolica"/> Bebida alcoólica:</label>
+			<label for="checkBebidaAlcoolica" class="col-sm-2 control-label"><form:checkbox id="checkBebidaAlcoolica"  path="bebidaAlcoolica" class="check"/> Bebida alcoólica:</label>
 			<div class="col-sm-7" >
 				<form:input id="inputTextBebidaAlcoolica" path="bebidaAlcoolicaComentario" cssClass="form-control" placeholder="Qual atividade?" disabled="${not consultaNutricional.bebidaAlcoolica}"/>
 				<div class="error-validation">
@@ -162,8 +162,8 @@
 		</div>
 	</div>
 
-	<div class="form-group">
-		<label for="checkPatologia" class="col-sm-2 control-label"><form:checkbox id="checkPatologia" onclick="habilitar();" path="outrasPatologias"/> Patologias:</label>
+	<div class="form-group form-item">
+		<label for="checkPatologia" class="col-sm-2 control-label"><form:checkbox id="checkPatologia"  path="outrasPatologias" class="check"/> Patologias:</label>
 		<div class="col-sm-10" >
 			<form:textarea id="inputTextPatologia" path="outrasPatologiasComentario" class="form-control" rows="5" placeholder="Descreva aqui as patologias" disabled="${not consultaNutricional.outrasPatologias}"/>
 			<div class="error-validation">
@@ -172,7 +172,7 @@
 		</div>
 	</div>
 
-	<div class="form-group">
+	<div class="form-group form-item">
 		<label for="objetivoConsulta" class="col-sm-2 control-label"> Objetivo da Consulta:</label>
 		<div class="col-sm-10" >
 			<form:textarea id="objetivoConsulta" path="objetivoConsulta" class="form-control" rows="5" placeholder="Descreva aqui o objetivo da consulta..."/>
