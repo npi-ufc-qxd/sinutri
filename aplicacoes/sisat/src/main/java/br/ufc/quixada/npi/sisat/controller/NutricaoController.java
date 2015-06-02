@@ -401,6 +401,7 @@ public class NutricaoController {
 	
 	@RequestMapping(value = "/relatorio-orientacoes-individuais/{id}", method = RequestMethod.GET)
 	public String relatorio(@PathVariable("id") Long id, Model model, HttpSession session) throws JRException {
+		
 		String orientacoesIndividuais = consultaNutricionalService.getOrientacoesIndividuaisById(id);	
 		String nome = consultaNutricionalService.getPacientePessoaNomeById(id);
 		String nutricionista = getNomeUsuarioLogado(session);
