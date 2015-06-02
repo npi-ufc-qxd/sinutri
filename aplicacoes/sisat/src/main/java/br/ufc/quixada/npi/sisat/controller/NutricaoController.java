@@ -12,12 +12,9 @@ import javax.mail.MessagingException;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
-import net.sf.jasperreports.engine.JRDataSource;
 import net.sf.jasperreports.engine.JREmptyDataSource;
 import net.sf.jasperreports.engine.JRException;
-import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 
-import org.springframework.context.ApplicationContext;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
@@ -406,15 +403,16 @@ public class NutricaoController {
 	}
 	
 	@RequestMapping(value = "/relatorio-orientacoes-individuais/{id}", method = RequestMethod.GET)
-	public ModelAndView relatorio(@PathVariable("id") Long id, ModelAndView model) throws JRException {
-		String orientacoesIndividuais = consultaNutricionalService.getOrientacoesIndividuaisById(id);
+	public String relatorio(@PathVariable("id") Long id, Model model) throws JRException {
+		String orientacoesIndividuais = consultaNutricionalService.getOrientacoesIndividuaisById(id);	
+		String nome = consultaNutricionalService.getPacientePessoaNomeById(id);
+				
+		model.addAttribute("format", "pdf");
+		model.addAttribute("orientacoesIndividuais", orientacoesIndividuais);
+		model.addAttribute("paciente", nome);
+		model.addAttribute("datasource", new JREmptyDataSource());
 		
-		Map<String, Object> parameter = new HashMap<String, Object>();		
-		parameter.put("format", "pdf");
-		parameter.put("orientacoesIndividuais", orientacoesIndividuais);
-		parameter.put("datasource", new JREmptyDataSource());
-		model = new ModelAndView("orientacoesIndividuais", parameter);
-		return model;
+		return "orientacoesIndividuais";
 	}
 
 	private Pessoa getUsuarioLogado(HttpSession session) {
