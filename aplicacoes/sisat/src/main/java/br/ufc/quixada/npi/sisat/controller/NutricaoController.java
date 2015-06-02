@@ -3,9 +3,7 @@ package br.ufc.quixada.npi.sisat.controller;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.inject.Inject;
 import javax.mail.MessagingException;
@@ -29,7 +27,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import br.ufc.quixada.npi.model.Attachment;
@@ -403,13 +400,15 @@ public class NutricaoController {
 	}
 	
 	@RequestMapping(value = "/relatorio-orientacoes-individuais/{id}", method = RequestMethod.GET)
-	public String relatorio(@PathVariable("id") Long id, Model model) throws JRException {
+	public String relatorio(@PathVariable("id") Long id, Model model, HttpSession session) throws JRException {
 		String orientacoesIndividuais = consultaNutricionalService.getOrientacoesIndividuaisById(id);	
 		String nome = consultaNutricionalService.getPacientePessoaNomeById(id);
+		String nutricionista = getNomeUsuarioLogado(session);
 				
 		model.addAttribute("format", "pdf");
 		model.addAttribute("orientacoesIndividuais", orientacoesIndividuais);
 		model.addAttribute("paciente", nome);
+		model.addAttribute("nutricionista", nutricionista);
 		model.addAttribute("datasource", new JREmptyDataSource());
 		
 		return "orientacoesIndividuais";
@@ -421,5 +420,14 @@ public class NutricaoController {
 			session.setAttribute("usuario", pessoa);
 		}
 		return (Pessoa) session.getAttribute("usuario");
+	}
+	
+	private String getNomeUsuarioLogado(HttpSession session) {
+		if (session.getAttribute("usuario") == null) {
+			Pessoa pessoa = pessoaService.getPessoaByLogin(SecurityContextHolder.getContext().getAuthentication().getName());
+			session.setAttribute("usuario", pessoa);
+		}
+		Pessoa pessoa = (Pessoa) session.getAttribute("usuario");
+		return pessoa.getNome();
 	}
 }

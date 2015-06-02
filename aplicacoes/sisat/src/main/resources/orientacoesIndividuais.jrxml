@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.1.0.final using JasperReports Library version 6.1.0  -->
-<!-- 2015-06-01T16:54:59 -->
+<!-- 2015-06-02T15:41:55 -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="orientacoesIndividuais" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
@@ -8,6 +8,7 @@
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
 	<parameter name="orientacoesIndividuais" class="java.lang.String"/>
 	<parameter name="paciente" class="java.lang.String"/>
+	<parameter name="nutricionista" class="java.lang.String"/>
 	<detail>
 		<band height="795" splitType="Stretch">
 			<staticText>
@@ -28,16 +29,15 @@ NUTRIÇÃO]]></text>
 				<text><![CDATA[ORIENTAÇÕES INDIVIDUAIS]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="90" y="640" width="375" height="47" />
+				<reportElement stretchType="RelativeToTallestObject" x="90" y="640" width="375" height="47"/>
 				<textElement textAlignment="Center">
 					<font size="12"/>
 				</textElement>
-				<text><![CDATA[Priscila Fabíola dos Santos Silva
-Nutricionista Responsável
+				<text><![CDATA[Nutricionista Responsável
 UFC – Campus Quixadá]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="103" y="766" width="375" height="29" />
+				<reportElement x="103" y="766" width="375" height="29"/>
 				<textElement textAlignment="Center"/>
 				<text><![CDATA[Av. José de Freitas Queiroz, 5003 – CEP: 63.900-000 – Quixadá-Ceará
 Tel.: (88) 3412 0919	E-mail: nutricao@quixada.ufc.br]]></text>
@@ -61,25 +61,32 @@ Tel.: (88) 3412 0919	E-mail: nutricao@quixada.ufc.br]]></text>
 				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="250" y="460" width="110" height="30" />
+				<reportElement x="250" y="460" width="110" height="30"/>
 				<textElement>
 					<font size="12"/>
 				</textElement>
 				<text><![CDATA[Quixadá - CE, de]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="47" y="189" width="73" height="30" />
+				<reportElement x="47" y="189" width="63" height="30" />
 				<textElement>
 					<font size="12"/>
 				</textElement>
 				<text><![CDATA[Paciente:]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="120" y="190" width="100" height="30" />
+				<reportElement x="110" y="189" width="100" height="30" />
 				<textElement>
 					<font size="12"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{paciente}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="90" y="620" width="375" height="30" />
+				<textElement textAlignment="Center">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{nutricionista}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>
