@@ -19,6 +19,18 @@ $(document).ready(function() {
                 maxlength: 250,
                 minlength: 50
         	},
+        	altura:{
+        		requered: true,
+        		number: true
+        	},
+        	peso:{
+        		requered: true,
+        		number: true
+        	},
+        	cc:{
+        		requered: true,
+        		number: true
+        	},
         	medicamentoComentario:{
         		required: $('#checkMedicamento').val(),
         		required: true
@@ -61,6 +73,15 @@ $(document).ready(function() {
             error.insertAfter(element.parent().children().last());
         },
         messages:{
+        	altura:{
+        		required:"Somente valores numericos.",
+        	},      
+        	peso:{
+        		required:"Somente valores numericos.",
+        	},      
+        	cc:{
+        		required:"Somente valores numericos.",
+        	},      
         	objetivoConsulta:{
                 required:"Preencha o campo de objetivo da consulta para o paciente.",
             },
@@ -87,11 +108,8 @@ $(document).ready(function() {
             }
         }
     });
+		
 	
-	
-	$("#altura").mask("9.99");
-	$("#peso").mask("999.99");
-	$("#cc").mask("99.99");
 	$("#agua").mask("99.99");
 	$("#glicemia").mask("99999");
 	$("#ct").mask("99999");
