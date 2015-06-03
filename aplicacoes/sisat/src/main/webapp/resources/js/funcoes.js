@@ -75,13 +75,13 @@ $(document).ready(function() {
         messages:{
         	altura:{
         		required:"Somente valores numericos.",
-        	},      
-        	peso:{
-        		required:"Somente valores numericos.",
-        	},      
+        	},
         	cc:{
         		required:"Somente valores numericos.",
-        	},      
+        	},        
+        	peso:{
+        		required:"Somente valores numericos.",
+        	},  
         	objetivoConsulta:{
                 required:"Preencha o campo de objetivo da consulta para o paciente.",
             },
