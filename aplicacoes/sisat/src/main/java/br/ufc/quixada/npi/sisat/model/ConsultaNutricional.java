@@ -98,7 +98,8 @@ public class ConsultaNutricional {
 	private boolean diarreia;
 
 	private boolean constipacao;
-
+	
+	@NotNull(message = "Por favor, informe a quantidade de agua do paciente!")
 	private String agua;
 
 	private boolean carneVermelha;
