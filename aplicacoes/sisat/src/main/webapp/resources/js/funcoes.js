@@ -34,9 +34,6 @@ $(document).ready(function() {
 	
 	$('#consultaNutricional').validate({
         rules: {
-        	peso:{
-        		required: true
-        	},
         	circunferenciaCintura:{
         		required: true
         	},
@@ -47,6 +44,18 @@ $(document).ready(function() {
         		required: true,
                 maxlength: 250,
                 minlength: 50
+        	},
+        	altura:{
+        		requered: true,
+        		number: true
+        	},
+        	peso:{
+        		requered: true,
+        		number: true
+        	},
+        	cc:{
+        		requered: true,
+        		number: true
         	},
         	medicamentoComentario:{
         		required: $('#checkMedicamento').val(),
@@ -126,7 +135,6 @@ $(document).ready(function() {
             error.insertAfter(element.parent().children().last());
         },
         messages:{
-
         	peso:{
         		required: "Informe o peso do paciente."
         	},
@@ -136,6 +144,12 @@ $(document).ready(function() {
         	agua:{
         		required: "Informe o consumo de água do paciente"
         	},
+        	altura:{
+        		required:"Somente valores numericos.",
+        	},
+        	cc:{
+        		required:"Somente valores numericos.",
+        	}, 
         	objetivoConsulta:{
                 required:"Preencha o campo de objetivo da consulta para o paciente.",
             },
@@ -195,11 +209,8 @@ $(document).ready(function() {
 			}			
         }
     });
+		
 	
-	
-	$("#altura").mask("9.99");
-	$("#peso").mask("999.99");
-	$("#cc").mask("99.99");
 	$("#agua").mask("99.99");
 	$("#glicemia").mask("99999");
 	$("#ct").mask("99999");

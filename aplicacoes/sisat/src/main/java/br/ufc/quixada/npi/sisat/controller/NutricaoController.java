@@ -10,6 +10,9 @@ import javax.mail.MessagingException;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
+import net.sf.jasperreports.engine.JREmptyDataSource;
+import net.sf.jasperreports.engine.JRException;
+
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
@@ -45,7 +48,7 @@ import br.ufc.quixada.npi.sisat.service.PessoaService;
 @Controller
 @RequestMapping("nutricao")
 public class NutricaoController {
-
+	
 	@Inject
 	private PacienteService pacienteService;
 
@@ -395,6 +398,22 @@ public class NutricaoController {
 		return new HttpEntity<byte[]>(arquivo, headers);
 
 	}
+	
+	@RequestMapping(value = "/relatorio-orientacoes-individuais/{id}", method = RequestMethod.GET)
+	public String relatorio(@PathVariable("id") Long id, Model model, HttpSession session) throws JRException {
+		
+		String orientacoesIndividuais = consultaNutricionalService.getOrientacoesIndividuaisById(id);	
+		String nome = consultaNutricionalService.getPacientePessoaNomeById(id);
+		String nutricionista = getNomeUsuarioLogado(session);
+				
+		model.addAttribute("format", "pdf");
+		model.addAttribute("orientacoesIndividuais", orientacoesIndividuais);
+		model.addAttribute("paciente", nome);
+		model.addAttribute("nutricionista", nutricionista);
+		model.addAttribute("datasource", new JREmptyDataSource());
+		
+		return "orientacoesIndividuais";
+	}
 
 	private Pessoa getUsuarioLogado(HttpSession session) {
 		if (session.getAttribute("usuario") == null) {
@@ -402,5 +421,14 @@ public class NutricaoController {
 			session.setAttribute("usuario", pessoa);
 		}
 		return (Pessoa) session.getAttribute("usuario");
+	}
+	
+	private String getNomeUsuarioLogado(HttpSession session) {
+		if (session.getAttribute("usuario") == null) {
+			Pessoa pessoa = pessoaService.getPessoaByLogin(SecurityContextHolder.getContext().getAuthentication().getName());
+			session.setAttribute("usuario", pessoa);
+		}
+		Pessoa pessoa = (Pessoa) session.getAttribute("usuario");
+		return pessoa.getNome();
 	}
 }
