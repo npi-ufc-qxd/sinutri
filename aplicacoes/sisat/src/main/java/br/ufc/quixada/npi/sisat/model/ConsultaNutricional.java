@@ -50,10 +50,10 @@ public class ConsultaNutricional {
 	@DateTimeFormat
 	private Date data;
 
-	@NotNull(message = "Por favor, informe o peso do paciente!")
+	@NotNull(message = "Informe o peso do paciente")
 	private Double peso;
 
-	@NotNull(message = "Por favor, informe a cincunferencia da cintura do paciente!")
+	@NotNull(message = "Informe a cincunferencia da cintura do paciente")
 	private Double circunferenciaCintura;
 
 	private Integer glicemia;
@@ -80,7 +80,7 @@ public class ConsultaNutricional {
 	private Integer tgp;
 	private String classificacaoTgp;
 
-	@NotNull(message = "Por favor, informe se o paciente ingere algum tipo de medicamento!")
+	@NotNull(message = "Informe se o paciente ingere algum tipo de medicamento")
 	private boolean medicamento;
 
 	private String medicamentoComentario;
@@ -100,8 +100,9 @@ public class ConsultaNutricional {
 	private boolean diarreia;
 
 	private boolean constipacao;
-
-	private String agua;
+	
+	@NotNull(message = "Informe a quantidade de água consumida pelo paciente")
+	private Integer agua;
 
 	private boolean carneVermelha;
 
@@ -109,14 +110,14 @@ public class ConsultaNutricional {
 
 	private String carneVermelhaComentario;
 
-	@NotNull(message = "Por favor, informe se o paciente ingere algum tipo de bebida alcoolica!")
+	@NotNull(message = "Informe se o paciente ingere algum tipo de bebida alcoolica")
 	private boolean bebidaAlcoolica;
 
 	private Integer bebidaAlcoolicaFrequenciaSemanal;
 
 	private String bebidaAlcoolicaComentario;
 
-	@NotNull(message = "Por favor, informe se o paciente pratica alguma atividade fisica!")
+	@NotNull(message = "Informe se o paciente pratica alguma atividade fisica")
 	private boolean atividadeFisica;
 
 	private Integer atividadeFisicaFrequenciaSemanal;
@@ -127,7 +128,7 @@ public class ConsultaNutricional {
 
 	private boolean hipertensao;
 
-	@NotNull(message = "Por favor, informe se o paciente possui outras patologias!")
+	@NotNull(message = "Informe se o paciente possui outras patologias")
 	private boolean outrasPatologias;
 
 	private String outrasPatologiasComentario;
@@ -136,7 +137,7 @@ public class ConsultaNutricional {
 
 	private String alergiaComentario;
 
-	@NotEmpty(message = "Por favor, informe o objetivo da consulta!")
+	@NotEmpty(message = "Informe o objetivo da consulta")
 	@Size(min = 50, max = 250)
 	private String objetivoConsulta;
 
@@ -400,11 +401,11 @@ public class ConsultaNutricional {
 		this.constipacao = constipacao;
 	}
 
-	public String getAgua() {
+	public Integer getAgua() {
 		return agua;
 	}
 
-	public void setAgua(String agua) {
+	public void setAgua(Integer agua) {
 		this.agua = agua;
 	}
 

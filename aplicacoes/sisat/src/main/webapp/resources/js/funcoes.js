@@ -1,19 +1,45 @@
 $(document).ready(function() {
 	
 	$('.check').change(function(){
-		var itemForm = $(this).parent().parent(); 		
+		var itemForm = $(this).parent().parent(); 	
+		alert($('#classificacaoGlicemia').val());
 		if($('.check').is(':checked')){
-			$(itemForm).find("input").prop("disabled",false);			
+			$(itemForm).find("input").prop("disabled",false);	
+			$(itemForm).find("textarea").prop("disabled",false);
+			$(itemForm).find("select").prop("disabled",false);
 		}else {
 			$(itemForm).find("input[type=text]").prop("disabled",true);
+			$(itemForm).find("textarea").prop("disabled",true);
+			$(itemForm).find("select").prop("disabled",true);
 			$(itemForm).removeClass('has-error');
 			$(itemForm).find('span').remove();
 			$(itemForm).find("input[type=text]").val(''); 
+			$(itemForm).find("textarea").val('');
+			$(itemForm).find("select").val('');
 		}
+	});
+
+	$("input[type='number']").change(function() {
+		var itemForm = $(this).parent().parent();
+		if($(this).val() == '' || $(this).val() <= 0 ){			
+			$(itemForm).find("select").prop("disabled",true);
+		}else{			
+			$(itemForm).find("select").prop("disabled",false);
+			$(itemForm).removeClass('has-error');
+			$(itemForm).find('span').remove();
+			$(itemForm).find("select").val('');			
+		}
+
 	});
 	
 	$('#consultaNutricional').validate({
         rules: {
+        	circunferenciaCintura:{
+        		required: true
+        	},
+        	agua:{
+        		required: true
+        	},
         	objetivoConsulta:{ 
         		required: true,
                 maxlength: 250,
@@ -47,18 +73,54 @@ $(document).ready(function() {
         		required: $('#checkAtividadeFisica').val(),
         		required: true
 			},
+			atividadeFisicaFrequenciaSemanal:{
+				required: $('#checkAtividadeFisica').val(),
+				required: true
+			},
 			carneVermelhaComentario:{
         		required: $('#checkCarneVermelha').val(),
         		required: true
+			},
+			carneVermelhaFrequenciaSemanal:{
+        		required: $('#checkCarneVermelha').val(),
+        		required: true				
 			},
 			bebidaAlcoolicaComentario:{
         		required: $('#checkBebidaAlcoolica').val(),
         		required: true
 			},
+			bebidaAlcoolicaFrequenciaSemanal:{
+        		required: $('#checkBebidaAlcoolica').val(),
+        		required: true
+			},			
 			outrasPatologiasComentario:{
         		required: $('#checkPatologia').val(),
         		required: true
-			}
+			},
+			classificacaoGlicemia:{
+				required: true
+			},
+            classificacaoLdl:{
+            	required: true
+			},
+			classificacaoTg:{
+				required: true
+			},
+			classificacaoTgo:{
+				required: true
+			},
+			classificacaoCt:{
+				required: true
+			},
+			classificacaoHdl:{
+				required: true
+			},
+			classificacaoHb:{
+				required: true
+			},			
+			classificacaoTgp:{
+				required: true
+			}			
 			
         },
         highlight: function(element) {
@@ -73,15 +135,21 @@ $(document).ready(function() {
             error.insertAfter(element.parent().children().last());
         },
         messages:{
+        	peso:{
+        		required: "Informe o peso do paciente."
+        	},
+        	circunferenciaCintura:{
+        		required: "Informe o comprimento da cintura do Paciente."
+        	},
+        	agua:{
+        		required: "Informe o consumo de água do paciente"
+        	},
         	altura:{
         		required:"Somente valores numericos.",
         	},
         	cc:{
         		required:"Somente valores numericos.",
-        	},        
-        	peso:{
-        		required:"Somente valores numericos.",
-        	},  
+        	}, 
         	objetivoConsulta:{
                 required:"Preencha o campo de objetivo da consulta para o paciente.",
             },
@@ -97,15 +165,48 @@ $(document).ready(function() {
             atividadeFisicaComentario:{
             	required:"Preencha o campo de Atividade Fisica da consulta.",
             },
+            atividadeFisicaFrequenciaSemanal:{
+            	required: "Preencha a frequência semanal"
+            },
             carneVermelhaComentario:{
             	required:"Preencha o campo de Carne Vermelha da consulta.",
+            },
+            carneVermelhaFrequenciaSemanal:{
+            	required: "Preencha a frequência semanal."
             },
             bebidaAlcoolicaComentario:{
             	required:"Preencha o campo de Bebida Alcoólica da consulta.",
             },
+            bebidaAlcoolicaFrequenciaSemanal:{
+            	required: "Informe a frequência semanal."
+            },
             outrasPatologiasComentario:{
             	required:"Preencha o campo de Patologia da consulta.",
-            }
+            },
+            classificacaoGlicemia:{
+				required: "Informe a classificação da Glicemia."
+			},
+            classificacaoLdl:{
+				required: "Informe a classificação da LDL."
+			},
+			classificacaoTg:{
+				required: "Informe a classificação da TG."
+			},
+			classificacaoTgo:{
+				required: "Informe a classificação da TGO."
+			},
+			classificacaoCt:{
+				required: "Informe a classificação da CT."
+			},
+			classificacaoHdl:{
+				required: "Informe a classificação da HDL-C."
+			},
+			classificacaoHb:{
+				required: "Informe a classificação da HB."
+			},			
+			classificacaoTgp:{
+				required: "Informe a classificação da TGP."
+			}			
         }
     });
 		
