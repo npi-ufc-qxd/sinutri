@@ -15,6 +15,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
@@ -51,9 +52,11 @@ public class ConsultaNutricional {
 	private Date data;
 
 	@NotNull(message = "Informe o peso do paciente")
+	@Min(value = 1)
 	private Double peso;
 
 	@NotNull(message = "Informe a cincunferencia da cintura do paciente")
+	@Min(value = 1)
 	private Double circunferenciaCintura;
 
 	private Integer glicemia;
@@ -144,6 +147,7 @@ public class ConsultaNutricional {
 	private String condutaNutricional;
 
 	@Column(columnDefinition = "TEXT")
+	@NotNull(message = "Informe as orientações para o paciente.")
 	private String orientacoesIndividuais;
 
 	public ConsultaNutricional() {
