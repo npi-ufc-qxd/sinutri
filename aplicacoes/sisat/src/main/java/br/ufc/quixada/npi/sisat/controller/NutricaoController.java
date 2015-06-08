@@ -272,7 +272,7 @@ public class NutricaoController {
 
 
 
-		if(consulta.getAgua().length()==0){
+		if(consulta.getAgua().equals(0)){
 			consulta.setAgua(null);
 		}
 		if(consulta.getMedicamentoComentario()!=null && consulta.getMedicamentoComentario().isEmpty()){
