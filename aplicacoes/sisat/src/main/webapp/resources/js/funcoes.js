@@ -38,7 +38,8 @@ $(document).ready(function() {
         		required: true
         	},
         	agua:{
-        		required: true
+        		required: true,
+        		number: true
         	},
         	objetivoConsulta:{ 
         		required: true,
@@ -211,7 +212,6 @@ $(document).ready(function() {
     });
 		
 	
-	$("#agua").mask("99.99");
 	$("#glicemia").mask("99999");
 	$("#ct").mask("99999");
 	$("#ldl").mask("99999");

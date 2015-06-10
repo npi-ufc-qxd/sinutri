@@ -105,6 +105,7 @@ public class ConsultaNutricional {
 	private boolean constipacao;
 	
 	@NotNull(message = "Informe a quantidade de água consumida pelo paciente")
+	@Min(value = 1)
 	private Integer agua;
 
 	private boolean carneVermelha;
