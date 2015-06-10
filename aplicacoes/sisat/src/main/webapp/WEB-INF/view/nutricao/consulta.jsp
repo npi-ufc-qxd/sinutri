@@ -80,5 +80,7 @@
 	</div>
 
 	<jsp:include page="../modulos/footer.jsp" />
+	<script	src="<c:url value="/resources/js/questionario-frequencia-alimentar.js" />"></script>
+	
 </body>
 </html>

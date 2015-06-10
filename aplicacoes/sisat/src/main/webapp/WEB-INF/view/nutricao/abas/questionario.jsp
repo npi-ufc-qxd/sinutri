@@ -4,7 +4,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <html>
-<script	src="<c:url value="/resources/js/questionario-frequencia-alimentar.js" />"></script>
 <fieldset>
 	<h3>Adicione as refeições</h3>
 	<div class="form-group">

@@ -5,7 +5,7 @@
 	<div class="form-group">
 		<label for="altura" class="col-sm-2 control-label">Altura:</label>
 		<div class="col-sm-3">
-			<form:input id="altura" type="number" path="paciente.altura" cssClass="form-control" placeholder="Altura" />
+			<form:input id="altura" name="altura" type="number" path="paciente.altura" cssClass="form-control" placeholder="0.00" />
 			<div class="error-validation">
 				<form:errors path="paciente.altura"></form:errors>
 			</div>
@@ -15,7 +15,7 @@
 	<div class="form-group">
 		<label for="peso" class="col-sm-2 control-label">Peso:</label>
 		<div class="col-sm-3">
-			<form:input id="peso" type="number" path="peso" cssClass="form-control" placeholder="Peso"/>
+			<form:input id="peso" name="peso" type="number" path="peso" cssClass="form-control" placeholder="00.00"/>
 			<div class="error-validation">
 				<form:errors path="peso"></form:errors>
 			</div>
@@ -25,7 +25,7 @@
 	<div class="form-group">
 		<label for="cc" class="col-sm-2 control-label">CC:</label>
 		<div class="col-sm-3" >
-			<form:input id="cc" type="number" placeholder="Circunferência da cintura" path="circunferenciaCintura" cssClass="form-control" min="0"/>
+			<form:input id="cc" name="cc" type="number" placeholder="00.00" path="circunferenciaCintura" cssClass="form-control" min="0"/>
 			<div class="error-validation">
 				<form:errors path="circunferenciaCintura"></form:errors>
 			</div>
@@ -90,20 +90,20 @@
 					<form:errors path="atividadeFisicaComentario"></form:errors>
 				</div>
 			</div>
-		</div>
 
-		<div class="form-item">
-			<div class="col-sm-3" >
-				<form:select path="atividadeFisicaFrequenciaSemanal" cssClass="form-control">
-					<form:option value="">Quantas vezes por semana?</form:option>
-					<form:option value="1">1</form:option>
-					<form:option value="2">2</form:option>
-					<form:option value="3">3</form:option>
-					<form:option value="4">4</form:option>
-					<form:option value="5">5</form:option>
-					<form:option value="6">6</form:option>
-					<form:option value="7">7</form:option>
-				</form:select>
+			<div class="form-item">
+				<div class="col-sm-3" >
+					<form:select id="atividadeFisicaFrequenciaSemanal" path="atividadeFisicaFrequenciaSemanal" cssClass="form-control" disabled="${not consultaNutricional.atividadeFisica}">
+						<form:option value="">Quantas vezes por semana?</form:option>
+						<form:option value="1">1</form:option>
+						<form:option value="2">2</form:option>
+						<form:option value="3">3</form:option>
+						<form:option value="4">4</form:option>
+						<form:option value="5">5</form:option>
+						<form:option value="6">6</form:option>
+						<form:option value="7">7</form:option>
+					</form:select>
+				</div>
 			</div>
 		</div>
 	</div>
@@ -111,26 +111,27 @@
 	<div class="form-group">
 		<div class="form-item">
 			<label for="checkCarneVermelha" class="col-sm-2 control-label"><form:checkbox id="checkCarneVermelha"  path="carneVermelha" class="check"/> Carne Vermelha:</label>
+			
 			<div class="col-sm-7" >
 				<form:input id="inputTextCarneVermelha" path="carneVermelhaComentario" cssClass="form-control" placeholder="Que tipo de carne?" disabled="${not consultaNutricional.carneVermelha}"/>
 				<div class="error-validation">
 					<form:errors path="carneVermelhaComentario"></form:errors>
 				</div>
 			</div>
-		</div>
 
-		<div class="form-item">
-			<div class="col-sm-3" >
-				<form:select path="carneVermelhaFrequenciaSemanal" cssClass="form-control">
-					<form:option value="">Quantas vezes por semana?</form:option>
-					<form:option value="1">1</form:option>
-					<form:option value="2">2</form:option>
-					<form:option value="3">3</form:option>
-					<form:option value="4">4</form:option>
-					<form:option value="5">5</form:option>
-					<form:option value="6">6</form:option>
-					<form:option value="7">7</form:option>
-				</form:select>
+			<div class="form-item">
+				<div class="col-sm-3" >
+					<form:select path="carneVermelhaFrequenciaSemanal" cssClass="form-control select" disabled="${not consultaNutricional.carneVermelha}">
+						<form:option value="">Quantas vezes por semana?</form:option>
+						<form:option value="1">1</form:option>
+						<form:option value="2">2</form:option>
+						<form:option value="3">3</form:option>
+						<form:option value="4">4</form:option>
+						<form:option value="5">5</form:option>
+						<form:option value="6">6</form:option>
+						<form:option value="7">7</form:option>
+					</form:select>
+				</div>
 			</div>
 		</div>
 	</div>
@@ -144,20 +145,20 @@
 					<form:errors path="bebidaAlcoolicaComentario"></form:errors>
 				</div>
 			</div>
-		</div>
 
-		<div class="form-item">
-			<div class="col-sm-3" >
-				<form:select path="bebidaAlcoolicaFrequenciaSemanal" cssClass="form-control">
-					<form:option value="">Quantas vezes por semana?</form:option>
-					<form:option value="1">1</form:option>
-					<form:option value="2">2</form:option>
-					<form:option value="3">3</form:option>
-					<form:option value="4">4</form:option>
-					<form:option value="5">5</form:option>
-					<form:option value="6">6</form:option>
-					<form:option value="7">7</form:option>
-				</form:select>
+			<div class="form-item">
+				<div class="col-sm-3" >
+					<form:select path="bebidaAlcoolicaFrequenciaSemanal" cssClass="form-control" disabled="${not consultaNutricional.bebidaAlcoolica}">
+						<form:option value="">Quantas vezes por semana?</form:option>
+						<form:option value="1">1</form:option>
+						<form:option value="2">2</form:option>
+						<form:option value="3">3</form:option>
+						<form:option value="4">4</form:option>
+						<form:option value="5">5</form:option>
+						<form:option value="6">6</form:option>
+						<form:option value="7">7</form:option>
+					</form:select>
+				</div>
 			</div>
 		</div>
 	</div>
