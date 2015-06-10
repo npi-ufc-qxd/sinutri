@@ -76,7 +76,13 @@ $(function() {
 							},
 							ctrlClass : 'hora'
 						} ],
-					
+
+						
+						hideButtons: {
+				            moveUp: true,
+				            moveDown : true,
+				            insert: true
+				        },	
 						
 						i18n : {
 							rowEmpty : "Nenhum alimentação foi adicionada!"
@@ -117,6 +123,11 @@ $(function() {
 											},
 
 										} ],
+										hideButtons: {
+								            moveUp: true,
+								            moveDown : true,
+								            insert: true
+								        },											
 										i18n : {
 											rowEmpty : "Nenhum alimento foi adicionado!"
 										},
