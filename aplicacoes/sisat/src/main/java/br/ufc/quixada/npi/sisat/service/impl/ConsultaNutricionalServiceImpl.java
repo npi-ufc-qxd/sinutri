@@ -8,11 +8,8 @@ import br.ufc.quixada.npi.sisat.service.ConsultaNutricionalService;
 import br.ufc.quixada.npi.util.SimpleMap;
 
 
-
 @Named
-public class ConsultaNutricionalServiceImpl extends
-		GenericServiceImpl<ConsultaNutricional> implements
-		ConsultaNutricionalService {
+public class ConsultaNutricionalServiceImpl extends GenericServiceImpl<ConsultaNutricional> implements ConsultaNutricionalService {
 
 	@Override
 	public ConsultaNutricional getConsultaNutricionalWithDocumentosById(Long id) {

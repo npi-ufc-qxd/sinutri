@@ -1,73 +1,154 @@
-	var cont = 0;
-	var contFrequencia = 0;
-	
-$(document).ready(function() {
-		
-		//ADICIONA FREQUENCIA
-    $("#addFrequencia").click(function() {
-    	var horaFrequencia = $("#horaAdd").val();
-    	var refeicaoFrequencia = $("#refeicaoAdd").val();	
-    	if(!$('#horaAdd').val() || !$('#refeicaoAdd').val() ) {
-			//alert('Nome e email obrigatorio');		
-			return false;
+var id = $("#id").val();
+
+$.ajax({
+		type: "GET",
+		data: {"id": id},
+		url: '/sisat/nutricao/frequencia-alimentar.json',
+		success: function(result) {
+			loadQuestionarios(result);
+		},
+		error: function(error) {
 			
-    	} else if(contFrequencia < 6){
-			var fieldset = $("<fieldset>");
-			var divnone = $("<div style='display:none;'>");
-			fieldset.append($("<legend>").text($("#horaAdd").text() + ", " + refeicaoFrequencia));
-			
-			fieldset.append($("<input type='hidden' name='frequencias["+contFrequencia+"].horario' cssClass='form-control' value="+horaFrequencia+">"));
-			fieldset.append($("<input type='hidden' name='frequencias["+contFrequencia+"].refeicao' cssClass='form-control' value="+refeicaoFrequencia+">"));
-
-			fieldset.append(
-					$("<table class='table'>")
-					.append($("<thead>")
-							.append($("<tr>")
-									.append($("<td  width='40%'>").text("Alimento/Preparo"))
-									.append($("<td>").text("Porção"))
-									.append($("<td>").append($("<a class='addAlimento btn btn-primary' data-frequenciaAlimentar='"+contFrequencia+"'>adicionar alimentos</a>")))
-							)
-					)
-					.append($("<tbody id='frequenciaAlimentar"+contFrequencia+"'>"))
-			);
-			$("#frequenciasAdds").append(fieldset);
-			contFrequencia++;
-		}			
-    });
-		
-
-	 
-    $("#frequenciasAdds").on('click', 'a.addAlimento', function() {
-  	  var frequenciaAlimentar = $(this).data("frequenciaalimentar");
-  		if(frequenciaAlimentar >= 0 && frequenciaAlimentar < 6){
-  		var recipiente = "tbody#frequenciaAlimentar" + frequenciaAlimentar;
-  		var contAlimentos = $(recipiente + " tr").length;				//siz = $( "#tabela > tbody tr" ).length;
-  		$(recipiente)
-  			.append($("<tr>")
-  					.append($("<td>").append($("<input size='50' name='frequencias["+frequenciaAlimentar+"].alimentos["+contAlimentos+"].alimento' cssClass='form-control'/>")))
-  					.append($("<td>").append($("<input size='10' name='frequencias["+frequenciaAlimentar+"].alimentos["+contAlimentos+"].porcao' cssClass='form-control'/>")))
-  					.append($("<td>").append($("<a href='javascript:deletarLinha(" + frequenciaAlimentar + ", " + contAlimentos + ")' class='delAlimento btn btn-danger glyphicon glyphicon-edit'>Deletar alimentos</a>")))
-  					
-  			);
-  		contAlimentos = $(recipiente + " tr").length;
- 	}
-
-    });
-
-  });
-  function deletarLinha(frequenciaAlimentar, index) {
-		if(frequenciaAlimentar >= 0 && frequenciaAlimentar < 6){
-			var recipiente = "tbody#frequenciaAlimentar" + frequenciaAlimentar;
-			alert(recipiente);
-			var size = $("table > "+recipiente+" tr" ).length;
-			$( "table > "+recipiente+" tr" ).eq( index ).remove();
-            
-			size = $("table > "+recipiente+" tr" ).length;
-			for( var i = 0; i < size; ++i){
-				$( "table > "+recipiente+" tr:eq(" + i + ") td > a" ).attr("href", "javascript:deletarLinha(" + frequenciaAlimentar +", " + i + ")");
-				$( "table > "+recipiente+" tr:eq(" + i + ") td > input[name$='alimento']" ).attr("name", "frequencias[" + frequenciaAlimentar + "].alimentos[" + i + "].alimento");
-				$( "table > "+recipiente+" tr:eq(" + i + ") td > input[name$='porcao']" ).attr("name", "frequencias[" + frequenciaAlimentar + "].alimentos[" + i + "].porcao");
-			}
 		}
-	}
- 
+		
+});
+
+
+function loadQuestionarios(result) {
+	var i = 0;
+	var frequencias = [];
+
+	$.each( result, function( key, frequenciaAlimentar ) {
+		var alimentos = [];
+		var y = 0;
+
+		$.each( frequenciaAlimentar.alimentos, function( key, alimento ) {
+			alimentos[y] = { 
+				'id': alimento.id,
+				'alimento': alimento.alimento, 
+				'porcao': alimento.porcao 
+			};
+			y++;
+		});
+
+		frequencias[i] = {
+				'id' : frequenciaAlimentar.id,
+            	'refeicao': frequenciaAlimentar.refeicao, 
+             	'horario': frequenciaAlimentar.horario,
+             	'SubGridData' : alimentos,
+   	   };
+	   i++;
+	});
+
+	$('#questionarioFrequenciaAlimentar').appendGrid('load', frequencias);
+}
+
+
+$(function() {
+	
+	$('#questionarioFrequenciaAlimentar')
+			.appendGrid(
+					{
+						caption : 'Refeições',
+						initRows : 0,
+						maxRowsAllowed : 6,
+						columns : [{
+							name : 'id',
+							type : 'hidden',
+						}, 
+						  
+						{
+							name : 'refeicao',
+							display : 'Tipo de refição',
+							type : 'select',
+							ctrlOptions : 'DESJEJUM:Desjejum;LANCHE_DA_MANHA:Lanche da Manhã;ALMOCO:Almoço;LANCHE_DA_TARDE:Lanche da Tarde;JANTAR:Jantar;CEIA:Ceia'
+									
+						}, {
+							name : 'horario',
+							display : 'Hora',
+							type : 'text',
+							ctrlAttr : {
+								maxlength : 15
+							},
+							ctrlCss : {
+								width : '70px',
+								'text-align' : 'right'
+							},
+							ctrlClass : 'hora'
+						} ],
+
+						
+						hideButtons: {
+				            moveUp: true,
+				            moveDown : true,
+				            insert: true
+				        },	
+						
+						i18n : {
+							rowEmpty : "Nenhum alimentação foi adicionada!"
+						},
+						nameFormatter : function(idPrefix, name, uniqueIndex) {
+							return "frequencias[" + (uniqueIndex - 1)+ "]." + name;
+						},
+						useSubPanel : true,
+						subPanelBuilder : function(cell, uniqueIndex) {
+							var idPanel = uniqueIndex-1;
+
+							$(".hora").mask("99:99:99");
+			
+							var subgrid = $('<table></table>').attr('id',
+									'tblSubGrid_' + uniqueIndex).appendTo(cell);
+	
+							subgrid.addClass('alternate');
+					
+							subgrid.appendGrid({
+										initRows : 0,
+										hideRowNumColumn : true,
+										columns : [{
+											name : 'id',
+											type : 'hidden',
+										},          
+										{
+											name : 'alimento',
+											display : 'Alimento',
+											ctrlCss : {
+												'width' : '200px'
+											}
+										}, {
+											name : 'porcao',
+											display : 'Porção',
+											ctrlCss : {
+												'width' : '100px',
+												'text-align' : 'right'
+											},
+
+										} ],
+										hideButtons: {
+								            moveUp: true,
+								            moveDown : true,
+								            insert: true
+								        },											
+										i18n : {
+											rowEmpty : "Nenhum alimento foi adicionado!"
+										},
+										nameFormatter : function(idPrefix, name, uniqueIndex) {
+											return "frequencias["+ (idPanel)+ "].alimentos["+ (uniqueIndex - 1)+ "]." + name;
+										},
+									});
+						},
+						subPanelGetter : function(uniqueIndex) {
+							// Return the sub grid value inside sub panel for `getAllValue` and `getRowValue` methods
+							return $('#tblSubGrid_' + uniqueIndex).appendGrid('getAllValue', true);
+						},
+						rowDataLoaded : function(caller, record, rowIndex, uniqueIndex) {
+							// Check SubGridData exist in the record data
+							if (record.SubGridData) {
+								// Fill the sub grid
+								$('#tblSubGrid_' + uniqueIndex, caller).appendGrid('load',record.SubGridData);
+							}
+						}
+					});
+
+});
+
+

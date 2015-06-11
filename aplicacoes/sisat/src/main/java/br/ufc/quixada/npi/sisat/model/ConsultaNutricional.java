@@ -18,7 +18,6 @@ import javax.persistence.OneToMany;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-
 import org.codehaus.jackson.annotate.JsonIgnore;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -29,6 +28,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 	@NamedQuery(name = "ConsultaNutricional.findOrientacoesIndividuaisById", query = "select c.orientacoesIndividuais from ConsultaNutricional c where c.id=:id"),
 	@NamedQuery(name = "ConsultaNutricional.findPacientePessoaNomeById", query = "select c.paciente.pessoa.nome from ConsultaNutricional c where c.id=:id")
 })
+
 @Entity
 public class ConsultaNutricional {
 
@@ -36,7 +36,7 @@ public class ConsultaNutricional {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@OneToMany(mappedBy = "consultaNutricional", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy="consultaNutricional", cascade = CascadeType.ALL)
 	@JsonIgnore
 	private List<FrequenciaAlimentar> frequencias;
 

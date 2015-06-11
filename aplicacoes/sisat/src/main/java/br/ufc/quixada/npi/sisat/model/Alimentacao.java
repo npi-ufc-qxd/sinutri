@@ -7,6 +7,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import org.codehaus.jackson.annotate.JsonIgnore;
+
 @Entity
 public class Alimentacao {
 	
@@ -19,6 +21,7 @@ public class Alimentacao {
 	private String porcao;
 
 	@ManyToOne
+	@JsonIgnore
 	private FrequenciaAlimentar frequenciaAlimentar;
 
 	public Long getId() {

@@ -5,8 +5,11 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javassist.expr.NewArray;
+
 import javax.inject.Inject;
 import javax.mail.MessagingException;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
@@ -26,6 +29,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -111,7 +115,8 @@ public class NutricaoController {
 		model.addAttribute("classificacao", cla);		
 		return "/nutricao/consulta";
 	}
-
+	
+	
 	@RequestMapping(value = {"/editarConsulta"}, method = RequestMethod.POST)
 	public String editarConsulta(Model model, @Valid ConsultaNutricional consulta, BindingResult result, RedirectAttributes redirectAttributes, @RequestParam("files") List<MultipartFile> files, @RequestParam(value = "enviar", required = false) boolean enviar) {
 		model.addAttribute("action", "editar");
@@ -158,6 +163,14 @@ public class NutricaoController {
 		consultaNutricionalService.update(atualizarConsulta(consulta));	
 		redirectAttributes.addFlashAttribute("success", "Consulta do paciente <strong>" + consulta.getPaciente().getPessoa().getNome() + "</strong> atualizada com sucesso.");
 		return "redirect:/nutricao/detalhes/" + consulta.getPaciente().getId();
+	}
+
+	@RequestMapping(value = "/frequencia-alimentar.json", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public @ResponseBody List<FrequenciaAlimentar> getFrequencias(HttpServletRequest request) {
+		long id = Long.parseLong(request.getParameter("id"));
+		List<FrequenciaAlimentar> frequenciaAlimentars = new ArrayList<FrequenciaAlimentar>();
+		frequenciaAlimentars = consultaNutricionalService.getConsultaNutricionalWithFrequenciasById(id).getFrequencias();
+		return frequenciaAlimentars;
 	}
 
 	private ConsultaNutricional atualizarConsulta(ConsultaNutricional consulta) {
@@ -274,7 +287,6 @@ public class NutricaoController {
 		}
 
 
-
 		if(consulta.getAgua().equals(0)){
 			consulta.setAgua(null);
 		}
@@ -317,13 +329,6 @@ public class NutricaoController {
 		return "nutricao/detalhesConsulta";
 	}
 
-	//deletar agendamento //Wanrly
-	@RequestMapping(value = {"deletarAgendamento/{id}"}, method = RequestMethod.GET)
-	public String deletarAgendamento(@PathVariable("id") Long id, RedirectAttributes redirectAttributes){
-		//agendamentoService.delete(agendamentoService.find(Agendamento.class, id));
-		redirectAttributes.addFlashAttribute("success", "Agendamento deletado com sucesso");
-		return "redirect:/nutricao/buscar_agendamento";
-	}
 
 	@RequestMapping(value = {"deletarDocumento/{id}"}, method = RequestMethod.GET)
 	public String deletarDocumento(@PathVariable("id") Long id, RedirectAttributes redirectAttributes){
@@ -332,17 +337,6 @@ public class NutricaoController {
 		redirectAttributes.addFlashAttribute("success", "Documento deletado com sucesso");
 		return "redirect:../../nutricao/editarConsulta/" + documento.getConsultaNutricional().getId();
 	}
-
-	/*
-	@RequestMapping(value = {"enviarDocumento"}, method = RequestMethod.GET)
-	public String enviarDocumento(HttpServletRequest request, RedirectAttributes redirectAttributes){
-		long id = Long.parseLong(request.getParameter("id"));
-		String mensagem = request.getParameter("mensagem");		
-		Documento documento = documentoService.find(Documento.class, id);
-		redirectAttributes.addFlashAttribute("success", "Documento enviado com sucesso");
-		return "redirect: nutricao/editarConsulta/" + documento.getConsultaNutricional().getId();
-	}
-	 */
 
 
 	@RequestMapping(value = {"enviarDocumento/{id}/{mensagem}"}, method = RequestMethod.GET)

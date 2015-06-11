@@ -13,6 +13,8 @@
 .appendGrid
 {
     border-collapse: collapse;
+    margin: 0 auto;
+    
 }
 .appendGrid td
 {
