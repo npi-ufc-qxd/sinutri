@@ -656,7 +656,7 @@ public class ConsultaNutricional {
 
 		try {
 			double peso = consulta.getPeso();
-			double altura = consulta.getPaciente().getAltura();
+			double altura = consulta.getPaciente().getAlturaAtual();
 			double imc = peso / (altura * altura);
 			return imc;
 		} catch (NullPointerException e) {

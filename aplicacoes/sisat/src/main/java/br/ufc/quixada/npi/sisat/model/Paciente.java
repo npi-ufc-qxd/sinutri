@@ -12,9 +12,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
+
 import org.codehaus.jackson.annotate.JsonIgnore;
-import org.hibernate.validator.constraints.NotEmpty;
-import org.springframework.beans.factory.annotation.Value;
 
 @Entity
 public class Paciente implements Serializable {
@@ -33,26 +32,32 @@ public class Paciente implements Serializable {
 	@JsonIgnore
 	private List<ConsultaNutricional> consultas;
 
-
-	@NotNull(message = "Por favor, informe a altura do paciente!")
+	@NotNull(message = "Informe a altura do paciente!")
 	@Min(value = 1)
-	private Double altura;
+	private Double alturaAtual;
 
-	// gets and sets
+	@NotNull(message = "Informe o peso do paciente!")
+	@Min(value = 1)
+	private Double pesoAtual;
+
+	@NotNull(message = "Informe a circunferencia da cintura do paciente!")
+	@Min(value = 1)
+	private Double circunferenciaCinturaAtual;
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
 	public Pessoa getPessoa() {
 		return pessoa;
 	}
 
 	public void setPessoa(Pessoa pessoa) {
 		this.pessoa = pessoa;
-	}
-
-	public Double getAltura() {
-		return altura;
-	}
-
-	public void setAltura(Double altura) {
-		this.altura = altura;
 	}
 
 	public List<ConsultaNutricional> getConsultas() {
@@ -63,17 +68,28 @@ public class Paciente implements Serializable {
 		this.consultas = consultas;
 	}
 
-	public Long getId() {
-		return id;
+	public Double getAlturaAtual() {
+		return alturaAtual;
 	}
 
-	@Override
-	public String toString() {
-		return "Paciente [id=" + id + ", pessoa=" + pessoa + ", consultas="
-				+ consultas + ", altura=" + altura + "]";
+	public void setAlturaAtual(Double alturaAtual) {
+		this.alturaAtual = alturaAtual;
 	}
 
-	public void setId(Long id) {
-		this.id = id;
+	public Double getPesoAtual() {
+		return pesoAtual;
 	}
+
+	public void setPesoAtual(Double pesoAtual) {
+		this.pesoAtual = pesoAtual;
+	}
+
+	public Double getCircunferenciaCinturaAtual() {
+		return circunferenciaCinturaAtual;
+	}
+
+	public void setCircunferenciaCinturaAtual(Double circunferenciaCinturaAtual) {
+		this.circunferenciaCinturaAtual = circunferenciaCinturaAtual;
+	}
+
 }
