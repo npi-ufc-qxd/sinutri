@@ -51,9 +51,9 @@
 					<div class="form-group">
 						<label for="altura" class="col-sm-2 control-label">Altura:</label>
 						<div class="col-sm-3">
-							<form:input id="altura" name="altura" type="number" path="paciente.altura" cssClass="form-control" placeholder="0.00" />
+							<form:input id="altura" name="altura" type="number" path="paciente.alturaAtual" cssClass="form-control" placeholder="0.00" />
 
-							<div class="error-validation"><form:errors path="paciente.altura"></form:errors></div>
+							<div class="error-validation"><form:errors path="paciente.alturaAtual"></form:errors></div>
 						</div>
 					</div>
 				

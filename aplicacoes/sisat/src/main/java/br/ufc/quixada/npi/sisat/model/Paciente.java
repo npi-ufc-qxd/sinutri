@@ -28,6 +28,7 @@ public class Paciente implements Serializable {
 	@JoinColumn(name = "id")
 	@JsonIgnore
 	private Pessoa pessoa;
+	
 	@OneToMany(mappedBy = "paciente", fetch = FetchType.EAGER)
 	@JsonIgnore
 	private List<ConsultaNutricional> consultas;
