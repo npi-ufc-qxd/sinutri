@@ -164,11 +164,13 @@ public class NutricaoController {
 	}
 
 	@RequestMapping(value = "/frequencia-alimentar.json", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-	public @ResponseBody List<FrequenciaAlimentar> getFrequencias(HttpServletRequest request) {
-		long id = Long.parseLong(request.getParameter("id"));
-		List<FrequenciaAlimentar> frequenciaAlimentars = new ArrayList<FrequenciaAlimentar>();
-		frequenciaAlimentars = consultaNutricionalService.getConsultaNutricionalWithFrequenciasById(id).getFrequencias();
-		return frequenciaAlimentars;
+	public @ResponseBody List<FrequenciaAlimentar> getFrequencias(@RequestParam("id") Long id) {
+		if(id != null){
+			List<FrequenciaAlimentar> frequenciaAlimentars = new ArrayList<FrequenciaAlimentar>();
+			frequenciaAlimentars = consultaNutricionalService.getConsultaNutricionalWithFrequenciasById(id).getFrequencias();
+			return frequenciaAlimentars;
+		}
+		return null;
 	}
 
 	private ConsultaNutricional atualizarConsulta(ConsultaNutricional consulta) {
@@ -251,7 +253,7 @@ public class NutricaoController {
 		}
 
 		Paciente paciente = pacienteService.find(Paciente.class, consulta.getPaciente().getId());
-		double altura = consulta.getPaciente().getAlturaAtual();
+		Double altura = consulta.getAltura();
 		Date data = new Date(System.currentTimeMillis());
 		consulta.setData(data);
 		consulta.setPaciente(paciente);
