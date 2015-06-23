@@ -50,6 +50,10 @@ public class ConsultaNutricional {
 
 	@DateTimeFormat
 	private Date data;
+	
+	@NotNull(message = "Informe a altura do paciente")
+	@Min(value = 1)
+	private Double altura;
 
 	@NotNull(message = "Informe o peso do paciente")
 	@Min(value = 1)
@@ -176,6 +180,14 @@ public class ConsultaNutricional {
 
 	public Date getData() {
 		return data;
+	}
+
+	public Double getAltura() {
+		return altura;
+	}
+
+	public void setAltura(Double altura) {
+		this.altura = altura;
 	}
 
 	public void setData(Date data) {
