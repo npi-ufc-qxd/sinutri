@@ -73,6 +73,11 @@ public class NutricaoController {
 		return "nutricao/buscar";
 	}
 
+	@RequestMapping(value = {"/layout"}, method = RequestMethod.GET)
+	public String layout(Model model, HttpSession session) {
+		getUsuarioLogado(session);
+		return "nutricao/layout";
+	}
 
 	//Buscar paciente (get)
 	@RequestMapping(value = {"/buscar"}, method = RequestMethod.GET)
