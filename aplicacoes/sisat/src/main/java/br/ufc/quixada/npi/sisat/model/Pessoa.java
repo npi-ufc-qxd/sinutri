@@ -1,4 +1,4 @@
-package br.ufc.quixada.npi.sisat.model;
+package br.ufc.quixada.npi.sisat.model;	
 
 import java.sql.Date;
 import java.util.Calendar;
@@ -23,8 +23,6 @@ import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
 import org.codehaus.jackson.annotate.JsonIgnore;
-
-import br.ufc.quixada.npi.sisat.model.Papel;
 
 @NamedQueries({
 		@NamedQuery(name = "Pessoa.findPessoasByCpf", query = "select p from Pessoa p where p.cpf = :cpf"),
@@ -248,10 +246,5 @@ public class Pessoa {
 				+ servidores + ", cpf=" + cpf + ", nome=" + nome + ", email="
 				+ email + ", sexo=" + sexo + ", dataNascimento="
 				+ dataNascimento + ", telefone=" + telefone + "]";
-	}
-
-	private String pacienteToString() {
-		return "Paciente [consultas=" + paciente.getConsultas() + ", altura="
-				+ paciente.getAltura() + "]";
 	}
 }

@@ -5,8 +5,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import javassist.expr.NewArray;
-
 import javax.inject.Inject;
 import javax.mail.MessagingException;
 import javax.servlet.http.HttpServletRequest;
@@ -166,11 +164,13 @@ public class NutricaoController {
 	}
 
 	@RequestMapping(value = "/frequencia-alimentar.json", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-	public @ResponseBody List<FrequenciaAlimentar> getFrequencias(HttpServletRequest request) {
-		long id = Long.parseLong(request.getParameter("id"));
-		List<FrequenciaAlimentar> frequenciaAlimentars = new ArrayList<FrequenciaAlimentar>();
-		frequenciaAlimentars = consultaNutricionalService.getConsultaNutricionalWithFrequenciasById(id).getFrequencias();
-		return frequenciaAlimentars;
+	public @ResponseBody List<FrequenciaAlimentar> getFrequencias(@RequestParam("id") Long id) {
+		if(id != null){
+			List<FrequenciaAlimentar> frequenciaAlimentars = new ArrayList<FrequenciaAlimentar>();
+			frequenciaAlimentars = consultaNutricionalService.getConsultaNutricionalWithFrequenciasById(id).getFrequencias();
+			return frequenciaAlimentars;
+		}
+		return null;
 	}
 
 	private ConsultaNutricional atualizarConsulta(ConsultaNutricional consulta) {
@@ -227,7 +227,9 @@ public class NutricaoController {
 		if(pessoa.getPaciente() == null){
 			pessoa.setPaciente(new Paciente());
 			pessoa.getPaciente().setPessoa(pessoa);
-			pessoa.getPaciente().setAltura(1.0);
+			pessoa.getPaciente().setAlturaAtual(1.0);
+			pessoa.getPaciente().setCircunferenciaCinturaAtual(1.0);
+			pessoa.getPaciente().setPesoAtual(1.0);
 
 			pessoaService.update(pessoa);
 		}
@@ -251,11 +253,13 @@ public class NutricaoController {
 		}
 
 		Paciente paciente = pacienteService.find(Paciente.class, consulta.getPaciente().getId());
-		double altura = consulta.getPaciente().getAltura();
+		Double altura = consulta.getAltura();
 		Date data = new Date(System.currentTimeMillis());
 		consulta.setData(data);
 		consulta.setPaciente(paciente);
-		consulta.getPaciente().setAltura(altura);
+		consulta.getPaciente().setAlturaAtual(altura);
+		consulta.getPaciente().setCircunferenciaCinturaAtual(consulta.getCircunferenciaCintura());
+		consulta.getPaciente().setPesoAtual(consulta.getPeso());
 
 		// verificar se os documentos foram anexados
 		List<Documento> documentos = new ArrayList<Documento>();

@@ -51,9 +51,9 @@
 					<div class="form-group">
 						<label for="altura" class="col-sm-2 control-label">Altura:</label>
 						<div class="col-sm-3">
-							<form:input id="altura" name="altura" type="number" path="paciente.altura" cssClass="form-control" placeholder="0.00" />
+							<form:input id="altura" name="altura" type="number" path="altura" cssClass="form-control" placeholder="0.00"/>
 
-							<div class="error-validation"><form:errors path="paciente.altura"></form:errors></div>
+							<div class="error-validation"><form:errors path="altura"></form:errors></div>
 						</div>
 					</div>
 				
@@ -65,6 +65,15 @@
 							<div class="error-validation"><form:errors path="peso"></form:errors></div>
 						</div>
 					</div>
+					
+					<div class="form-group">
+						<label for="pesoDesejado" class="col-sm-2 control-label">Peso Desejado:</label>
+						<div class="col-sm-3">
+							<form:input id="pesoDesejado" name="pesoDesejado" type="number" path="pesoDesejado" cssClass="form-control" placeholder="00.00"/>
+							
+							<div class="error-validation"><form:errors path="pesoDesejado"></form:errors></div>
+						</div>
+					</div>
 				
 					<div class="form-group">
 						<label for="cc" class="col-sm-2 control-label">CC:</label>
@@ -72,6 +81,15 @@
 							<form:input id="cc" name="cc" type="number" placeholder="00.00" path="circunferenciaCintura" cssClass="form-control" min="0"/>
 							
 							<div class="error-validation"><form:errors path="circunferenciaCintura"></form:errors></div>
+						</div>
+					</div>
+					
+					<div class="form-group">
+						<label for="ccd" class="col-sm-2 control-label">CCD:</label>
+						<div class="col-sm-3" >
+							<form:input id="ccd" name="ccd" type="number" placeholder="00.00" path="circunferenciaCinturaDesejada" cssClass="form-control" min="0"/>
+							
+							<div class="error-validation"><form:errors path="circunferenciaCinturaDesejada"></form:errors></div>
 						</div>
 					</div>
 				

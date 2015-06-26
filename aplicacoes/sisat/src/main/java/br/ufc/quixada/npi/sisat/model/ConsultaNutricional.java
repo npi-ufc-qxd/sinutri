@@ -50,14 +50,26 @@ public class ConsultaNutricional {
 
 	@DateTimeFormat
 	private Date data;
+	
+	@NotNull(message = "Informe a altura do paciente")
+	@Min(value = 1)
+	private Double altura;
 
 	@NotNull(message = "Informe o peso do paciente")
 	@Min(value = 1)
 	private Double peso;
+	
+	@NotNull(message = "Informe o peso desejado do paciente")
+	@Min(value = 1)
+	private Double pesoDesejado;
 
 	@NotNull(message = "Informe a cincunferencia da cintura do paciente")
 	@Min(value = 1)
 	private Double circunferenciaCintura;
+	
+	@NotNull(message = "Informe a cincunferencia desejada da cintura do paciente")
+	@Min(value = 1)
+	private Double circunferenciaCinturaDesejada;
 
 	private Integer glicemia;
 	private String classificacaoGlicemia;
@@ -178,6 +190,14 @@ public class ConsultaNutricional {
 		return data;
 	}
 
+	public Double getAltura() {
+		return altura;
+	}
+
+	public void setAltura(Double altura) {
+		this.altura = altura;
+	}
+
 	public void setData(Date data) {
 		this.data = data;
 	}
@@ -196,6 +216,23 @@ public class ConsultaNutricional {
 
 	public void setCircunferenciaCintura(Double circunferenciaCintura) {
 		this.circunferenciaCintura = circunferenciaCintura;
+	}
+
+	public Double getPesoDesejado() {
+		return pesoDesejado;
+	}
+
+	public void setPesoDesejado(Double pesoDesejado) {
+		this.pesoDesejado = pesoDesejado;
+	}
+
+	public Double getCircunferenciaCinturaDesejada() {
+		return circunferenciaCinturaDesejada;
+	}
+
+	public void setCircunferenciaCinturaDesejada(
+			Double circunferenciaCinturaDesejada) {
+		this.circunferenciaCinturaDesejada = circunferenciaCinturaDesejada;
 	}
 
 	public Integer getGlicemia() {
@@ -644,7 +681,7 @@ public class ConsultaNutricional {
 
 		try {
 			double peso = consulta.getPeso();
-			double altura = consulta.getPaciente().getAltura();
+			double altura = consulta.getPaciente().getAlturaAtual();
 			double imc = peso / (altura * altura);
 			return imc;
 		} catch (NullPointerException e) {
