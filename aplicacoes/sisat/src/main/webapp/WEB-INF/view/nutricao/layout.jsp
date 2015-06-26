@@ -8,7 +8,11 @@
 <html>
 	<head>
 <link href="<c:url value="/webjars/bootstrap/3.3.2/css/bootstrap.min.css" />" rel="stylesheet" />
-<link href="<c:url value="/resources/css/styles.css" />" rel="stylesheet" />
+<%-- <link href="<c:url value="/resources/css/bootstrap-journal.min.css" />" rel="stylesheet" /> --%>
+
+
+<link href="<c:url value="/resources/css/bootstrap-flatly.min.css" />" rel="stylesheet" />
+<%-- <link href="<c:url value="/resources/css/styles.css" />" rel="stylesheet" /> --%>
 
 		<title>Layout</title>
 		<style type="text/css">
@@ -25,13 +29,16 @@
 			.logo-sinutri {
 			  border: 0;
 			  width: 222px;
-			  margin: -14px -10px -2px -6px;
+			  margin: -18px -10px -2px -6px;
 			  height: 60px;
 			}
 
 		</style>
 	</head>
 <body>
+
+
+
 <nav class="navbar navbar-static">
     <div class="container">
       <a class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
@@ -44,7 +51,7 @@
 				<span class="icon-bar"></span>
 			</button>
 			<a class="navbar-brand" href="<c:url value="/nutricao/buscar" />">
-			<img src="<c:url value="/resources/images/logo-sinutri-2.png" />" alt="SiNutri" class="logo-sinutri">
+			<img src="<c:url value="/resources/images/logo-sinutri.png" />" alt="SiNutri" class="logo-sinutri">
 			</a>
 		</div>
 		
@@ -68,27 +75,75 @@
     </div>
 </nav>
 
+<!--     <div class="container"> -->
+<div class="bs-component">
+              <nav class="navbar navbar-static navbar-inverse">
+                <div class="container">
+                  <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-2">
+                      <span class="sr-only">Toggle navigation</span>
+                      <span class="icon-bar"></span>
+                      <span class="icon-bar"></span>
+                      <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="#"><img src="<c:url value="/resources/images/logo-sinutri.png" />" alt="SiNutri" class="logo-sinutri"></a>
+                  </div>
 
-
+                  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-2">
+                    <ul class="nav navbar-nav">
+                      <li class="active"><a href="#">Link <span class="sr-only">(current)</span></a></li>
+                      <li><a href="#">Link</a></li>
+                      <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Dropdown <span class="caret"></span></a>
+                        <ul class="dropdown-menu" role="menu">
+                          <li><a href="#">Action</a></li>
+                          <li><a href="#">Another action</a></li>
+                          <li><a href="#">Something else here</a></li>
+                          <li class="divider"></li>
+                          <li><a href="#">Separated link</a></li>
+                          <li class="divider"></li>
+                          <li><a href="#">One more separated link</a></li>
+                        </ul>
+                      </li>
+                    </ul>
+                    <form class="navbar-form navbar-left" role="search">
+                      <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Search">
+                      </div>
+                      <button type="submit" class="btn btn-default">Submit</button>
+                    </form>
+                    <ul class="nav navbar-nav navbar-right">
+                      <li><a href="#">Link</a></li>
+                    </ul>
+                  </div>
+                </div>
+              </nav>
+            <div id="source-button" class="btn btn-primary btn-xs" style="display: none;">&lt; &gt;</div></div>
+ 
 	<div class="container">
 	
-	<form class="form-inline" role="form">
-        <div class="form-group">
-            <label class="sr-only" for="inputEmail">Email</label>
-            <input type="email" class="form-control" id="inputEmail" placeholder="Email">
-        </div>
-        <button type="submit" class="btn btn-primary">Login</button>
-    </form>
+			<h3>Buscar Paciente</h3>
+			<form:form id="buscarPacienteForm" role="form" servletReltiveAction="/nutricao/buscar" method="POST" class="form-horizontal">
+				<div class="form-group">
+					<div class="col-sm-9">
+						<input id="busca" name="busca" class="form-control" placeholder="Nome ou CPF" size="40" required="required" value="${busca }"/>
+					</div>
+					<div class="col-sm-3">
+						<button class="btn btn-primary" name="submit" type="submit" class="btn btn-primary" value="Buscar">Buscar <span class="glyphicon glyphicon-search"></span></button>
+				    </div>
+				</div>
+			</form:form>	
+	
+		<div class="row">
+			<form class="row form-inline" role="form">
+		        <div class="form-group col-sm-9">
+		            <label class="sr-only" for="inputEmail">Email</label>
+		            <input type="email" class="col-sm-10 form-control" placeholder="Email">
+		        </div>
+		        <button type="submit" class="btn btn-primary">Login</button>
+		    </form>
+		</div>
 
-	
-<br>	
-<br>	
-<br>	
-<br>	
-<br>	
-<br>	
-<br>	
-	
 		<div class="buscar-paciente">
 
 			<c:if test="${not empty erro }"><div class="alert alert-danger" role="alert">${erro}</div></c:if>
@@ -98,16 +153,13 @@
 			<c:if test="${not empty success }"><div class="alert alert-success" role="alert">${success}</div></c:if>
 
 			<h3>Buscar Paciente</h3>
-
 			<form:form id="buscarPacienteForm" role="form" servletReltiveAction="/nutricao/buscar" method="POST" class="form-horizontal">
 				<div class="form-group">
-					<div class="col-sm-10">
+					<div class="col-sm-9">
 						<input id="busca" name="busca" class="form-control" placeholder="Nome ou CPF" size="40" required="required" value="${busca }"/>
 					</div>
-					<div class="col-sm-2">
-						<button class="btn btn-primary" name="submit" type="submit" class="btn btn-primary" value="Buscar"> 
-							Buscar <span class="glyphicon glyphicon-search"></span>
-						</button>
+					<div class="col-sm-3">
+						<button class="btn btn-primary" name="submit" type="submit" class="btn btn-primary" value="Buscar">Buscar <span class="glyphicon glyphicon-search"></span></button>
 				    </div>
 				</div>
 			</form:form>
