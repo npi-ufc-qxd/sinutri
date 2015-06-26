@@ -3,13 +3,13 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head profile="http://selenium-ide.openqa.org/profiles/test-case">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<link rel="selenium.base" href="http://localhost:8080/" />
-<title>NovaConsulta</title>
+<link rel="selenium.base" href="http://localhost:9090/" />
+<title>CampoObrigatorioObjetivodaConsultaEmBranco</title>
 </head>
 <body>
 <table cellpadding="1" cellspacing="1" border="1">
 <thead>
-<tr><td rowspan="1" colspan="3">NovaConsulta</td></tr>
+<tr><td rowspan="1" colspan="3">CampoObrigatorioObjetivodaConsultaEmBranco</td></tr>
 </thead><tbody>
 <tr>
 	<td>open</td>
@@ -25,6 +25,11 @@
 	<td>type</td>
 	<td>name=j_password</td>
 	<td>teste1234</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=submit</td>
+	<td></td>
 </tr>
 <tr>
 	<td>type</td>
@@ -74,12 +79,22 @@
 <tr>
 	<td>type</td>
 	<td>id=objetivoConsulta</td>
-	<td>Perder peso, reeducar a alimentação, melhorar condicionamento físico, corrigir horários alimentares. diminuir porções,aumentar frequencia alimentar.</td>
+	<td></td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
 	<td>css=button.btn.btn-success</td>
 	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>id=objetivoConsulta.errors</td>
+	<td>*Campo obrigatório*</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=objetivoConsulta.errors</td>
+	<td>*Campo obrigatório*</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
