@@ -53,7 +53,7 @@
 				Vômitos</td>
 		</tr>
 		<tr>
-			<td><strong>Altura: </strong> ${consulta.paciente.altura }</td>
+			<td><strong>Altura: </strong> ${consulta.paciente.alturaAtual }</td>
 			<td><strong>Peso: </strong> ${consulta.peso}</td>
 			<td><strong>IMC: </strong> ${consulta.imc}</td>
 			<td><strong>CC: </strong>  ${consulta.circunferenciaCintura}

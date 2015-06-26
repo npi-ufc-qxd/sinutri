@@ -58,7 +58,7 @@
 </tr>
 <tr>
 	<td>click</td>
-	<td>//a[contains(text(),'Questionario<br />					de Frequencia Alimentar')]</td>
+	<td>link=Questionario de Frequencia Alimentar</td>
 	<td></td>
 </tr>
 <tr>

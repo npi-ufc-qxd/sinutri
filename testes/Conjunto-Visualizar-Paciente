@@ -8,8 +8,11 @@
 <body>
 <table id="suiteTable" cellpadding="1" cellspacing="1" border="1" class="selenium"><tbody>
 <tr><td><b>Test Suite</b></td></tr>
-<tr><td><a href="VisualizarHistoricoConsultas/VisualizarHistorico">VisualizarHistorico</a></td></tr>
-<tr><td><a href="VisualizarHistoricoConsultas/VisualizarInformaçõesConsulta">VisualizarInformaçõesConsulta</a></td></tr>
+<tr><td><a href="Visualizar-Paciente/Buscar-Paciente-Inexistente">PacienteInexistente</a></td></tr>
+<tr><td><a href="Visualizar-Paciente/Buscar-Paciente-Inexistente">Buscar-Paciente-Inexistente</a></td></tr>
+<tr><td><a href="Visualizar-Paciente/Buscar-Por-CPF">Buscar-Por-CPF</a></td></tr>
+<tr><td><a href="Visualizar-Paciente/Buscar-Por-Nome">Buscar-Por-Nome</a></td></tr>
+<tr><td><a href="Visualizar-Paciente/Visualizar-Detalhes-Paciente">Visualizar-Detalhes-Paciente</a></td></tr>
 </tbody></table>
 </body>
 </html>
