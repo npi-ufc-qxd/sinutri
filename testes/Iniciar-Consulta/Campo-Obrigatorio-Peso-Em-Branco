@@ -4,12 +4,12 @@
 <head profile="http://selenium-ide.openqa.org/profiles/test-case">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <link rel="selenium.base" href="http://localhost:9090/" />
-<title>Campo-Alergia-Marcado-Em-Branco</title>
+<title>Campo-Peso-Obrigatorio</title>
 </head>
 <body>
 <table cellpadding="1" cellspacing="1" border="1">
 <thead>
-<tr><td rowspan="1" colspan="3">Campo-Alergia-Marcado-Em-Branco</td></tr>
+<tr><td rowspan="1" colspan="3">Campo-Peso-Obrigatorio</td></tr>
 </thead><tbody>
 <tr>
 	<td>open</td>
@@ -54,12 +54,12 @@
 <tr>
 	<td>type</td>
 	<td>id=peso</td>
-	<td>62</td>
+	<td></td>
 </tr>
 <tr>
 	<td>type</td>
 	<td>id=pesoDesejado</td>
-	<td>60</td>
+	<td>62</td>
 </tr>
 <tr>
 	<td>type</td>
@@ -77,16 +77,6 @@
 	<td>4</td>
 </tr>
 <tr>
-	<td>click</td>
-	<td>id=checkAlergia</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertAlert</td>
-	<td></td>
-	<td></td>
-</tr>
-<tr>
 	<td>type</td>
 	<td>id=objetivoConsulta</td>
 	<td>Perder peso, reeducar a alimentação, melhorar condicionamento físico, corrigir horários alimentares. diminuir porções,aumentar frequencia alimentar.</td>
@@ -98,20 +88,19 @@
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td></td>
+	<td>id=peso.errors</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyText</td>
-	<td></td>
-	<td>*Preencha campo marcado*</td>
+	<td>id=peso.errors</td>
+	<td>*Informe o peso do paciente*</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
 	<td>link=Sair</td>
 	<td></td>
 </tr>
-
 </tbody></table>
 </body>
 </html>

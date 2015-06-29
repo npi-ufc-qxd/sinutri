@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <meta content="text/html; charset=UTF-8" http-equiv="content-type" />
+  <title>Test Suite</title>
+</head>
+<body>
+<table id="suiteTable" cellpadding="1" cellspacing="1" border="1" class="selenium"><tbody>
+<tr><td><b>Test Suite</b></td></tr>
+<tr><td><a href="Adicionar-Refeição/Adicionar-Alimento-A-Refeição">Adicionar-Alimento-A-Refeição</a></td></tr>
+<tr><td><a href="Adicionar-Refeição/Adicionar-Alimento-Preenche-Só-Porção-A-Refeição">Adicionar-Alimento-Preenche-Só-Porção-A-Refeição</a></td></tr>
+<tr><td><a href="Adicionar-Refeição/Adicionar-Alimentos-Sem-Preencher-Porção-A-Refeição">Adicionar-Alimentos-Sem-Preencher-Porção-A-Refeição</a></td></tr>
+<tr><td><a href="Adicionar-Refeição/Adicionar-Alimento-varias-Vezes-E-Não-Preencher">Adicionar-Alimento-varias-Vezes-E-Não-Preencher</a></td></tr>
+<tr><td><a href="Adicionar-Refeição/Adicionar-Frequencia-Alimentar">Adicionar-Frequencia-Alimentar</a></td></tr>
+<tr><td><a href="Adicionar-Refeição/Adicionar-Refeição-Sem-Alimento">Adicionar-Refeição-Sem-Alimento</a></td></tr>
+<tr><td><a href="Adicionar-Refeição/Remover-Alimento">Remover-Alimento</a></td></tr>
+<tr><td><a href="Adicionar-Refeição/Remover-Refeição">Remover-Refeição</a></td></tr>
+</tbody></table>
+</body>
+</html>

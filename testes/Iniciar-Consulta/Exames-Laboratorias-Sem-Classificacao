@@ -4,12 +4,12 @@
 <head profile="http://selenium-ide.openqa.org/profiles/test-case">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <link rel="selenium.base" href="http://localhost:9090/" />
-<title>Patologia-Marcado-Sem-Preencher</title>
+<title>Exames-Laboratorias-Preenchido</title>
 </head>
 <body>
 <table cellpadding="1" cellspacing="1" border="1">
 <thead>
-<tr><td rowspan="1" colspan="3">Patologia-Marcado-Sem-Preencher</td></tr>
+<tr><td rowspan="1" colspan="3">Exames-Laboratorias-Preenchido</td></tr>
 </thead><tbody>
 <tr>
 	<td>open</td>
@@ -83,35 +83,39 @@
 </tr>
 <tr>
 	<td>click</td>
-	<td>id=checkPatologia</td>
+	<td>link=Exames Laboratoriais</td>
 	<td></td>
 </tr>
 <tr>
-	<td>assertAlert</td>
-	<td></td>
-	<td></td>
+	<td>type</td>
+	<td>id=glicemia</td>
+	<td>70</td>
 </tr>
 <tr>
-	<td>clickAndWait</td>
-	<td>css=button.btn.btn-success</td>
-	<td></td>
+	<td>type</td>
+	<td>id=ldl</td>
+	<td>80</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=classificacaoGlicemia</td>
+	<td>label=Desejavel</td>
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td></td>
+	<td>css=span.help-block</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyText</td>
-	<td></td>
-	<td>*Preencha campo marcado*</td>
+	<td>css=span.help-block</td>
+	<td>*Informe a classificação da LDL.*</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
 	<td>link=Sair</td>
 	<td></td>
 </tr>
-
 </tbody></table>
 </body>
 </html>

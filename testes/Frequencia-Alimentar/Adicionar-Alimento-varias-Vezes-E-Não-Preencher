@@ -4,12 +4,12 @@
 <head profile="http://selenium-ide.openqa.org/profiles/test-case">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <link rel="selenium.base" href="http://localhost:9090/" />
-<title>Exames-Laboratorias-Preenchido</title>
+<title>Adicionar-Alimentos-Sem-Porção-A-Refeição</title>
 </head>
 <body>
 <table cellpadding="1" cellspacing="1" border="1">
 <thead>
-<tr><td rowspan="1" colspan="3">Exames-Laboratorias-Preenchido</td></tr>
+<tr><td rowspan="1" colspan="3">Adicionar-Alimentos-Sem-Porção-A-Refeição</td></tr>
 </thead><tbody>
 <tr>
 	<td>open</td>
@@ -83,28 +83,33 @@
 </tr>
 <tr>
 	<td>click</td>
-	<td>link=Exames Laboratoriais</td>
+	<td>link=Questionario de Frequencia Alimentar</td>
 	<td></td>
 </tr>
 <tr>
-	<td>type</td>
-	<td>id=glicemia</td>
-	<td>70</td>
+	<td>click</td>
+	<td>xpath=(//button[@type='button'])[2]</td>
+	<td></td>
 </tr>
 <tr>
-	<td>type</td>
-	<td>id=ldl</td>
-	<td>80</td>
+	<td>click</td>
+	<td>xpath=(//button[@type='button'])[3]</td>
+	<td></td>
 </tr>
 <tr>
-	<td>select</td>
-	<td>id=classificacaoGlicemia</td>
-	<td>label=Desejavel</td>
+	<td>click</td>
+	<td>xpath=(//button[@type='button'])[4]</td>
+	<td></td>
 </tr>
 <tr>
-	<td>select</td>
-	<td>id=classificacaoLdl</td>
-	<td>label=Muito Alto</td>
+	<td>click</td>
+	<td>xpath=(//button[@type='button'])[5]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>xpath=(//button[@type='button'])[6]</td>
+	<td></td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -112,21 +117,10 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
-	<td></td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyText</td>
-	<td></td>
-	<td>*Preencha campo marcado*</td>
-</tr>
-<tr>
 	<td>clickAndWait</td>
 	<td>link=Sair</td>
 	<td></td>
 </tr>
-
 </tbody></table>
 </body>
 </html>

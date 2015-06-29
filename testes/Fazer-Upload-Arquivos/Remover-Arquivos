@@ -4,12 +4,12 @@
 <head profile="http://selenium-ide.openqa.org/profiles/test-case">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <link rel="selenium.base" href="http://localhost:8080/" />
-<title>CampoOrientaçõesEmBranco</title>
+<title>Remover-Arquivos</title>
 </head>
 <body>
 <table cellpadding="1" cellspacing="1" border="1">
 <thead>
-<tr><td rowspan="1" colspan="3">CampoOrientaçõesEmBranco</td></tr>
+<tr><td rowspan="1" colspan="3">Remover-Arquivos</td></tr>
 </thead><tbody>
 <tr>
 	<td>type</td>
@@ -29,7 +29,7 @@
 <tr>
 	<td>type</td>
 	<td>id=busca</td>
-	<td>ingrid da silva</td>
+	<td>ingrid carneiro</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -38,27 +38,27 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>css=#consulta &gt; button.btn.btn-default</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>link=Orientações Individuais</td>
+	<td>css=button.btn.btn-default</td>
 	<td></td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>css=button.btn.btn-success</td>
+	<td>xpath=(//a[@id='editar']/button)[21]</td>
 	<td></td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
-	<td></td>
+	<td>click</td>
+	<td>link=Documentos</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyText</td>
+	<td>click</td>
+	<td>css=button.btn.btn-danger</td>
 	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=div.modal-footer &gt; button.btn.btn-danger</td>
 	<td></td>
 </tr>
 <tr>

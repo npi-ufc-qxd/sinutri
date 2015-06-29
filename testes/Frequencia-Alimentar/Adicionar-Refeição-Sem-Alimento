@@ -4,12 +4,12 @@
 <head profile="http://selenium-ide.openqa.org/profiles/test-case">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <link rel="selenium.base" href="http://localhost:9090/" />
-<title>Campo-Peso-Obrigatorio</title>
+<title>Exames-Laboratorias-Preenchido</title>
 </head>
 <body>
 <table cellpadding="1" cellspacing="1" border="1">
 <thead>
-<tr><td rowspan="1" colspan="3">Campo-Peso-Obrigatorio</td></tr>
+<tr><td rowspan="1" colspan="3">Exames-Laboratorias-Preenchido</td></tr>
 </thead><tbody>
 <tr>
 	<td>open</td>
@@ -54,12 +54,12 @@
 <tr>
 	<td>type</td>
 	<td>id=peso</td>
-	<td></td>
+	<td>62</td>
 </tr>
 <tr>
 	<td>type</td>
 	<td>id=pesoDesejado</td>
-	<td>62</td>
+	<td>60</td>
 </tr>
 <tr>
 	<td>type</td>
@@ -82,26 +82,40 @@
 	<td>Perder peso, reeducar a alimentação, melhorar condicionamento físico, corrigir horários alimentares. diminuir porções,aumentar frequencia alimentar.</td>
 </tr>
 <tr>
+	<td>click</td>
+	<td>link=Questionario de Frequencia Alimentar</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>xpath=(//button[@type='button'])[2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=questionarioFrequenciaAlimentar_refeicao_1</td>
+	<td>label=Lanche da Manhã</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>xpath=(//button[@type='button'])[5]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=questionarioFrequenciaAlimentar_refeicao_2</td>
+	<td>label=Almoço</td>
+</tr>
+<tr>
 	<td>clickAndWait</td>
 	<td>css=button.btn.btn-success</td>
 	<td></td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
-	<td>id=peso.errors</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyText</td>
-	<td>id=peso.errors</td>
-	<td>*Informe o peso do paciente*</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
 	<td>link=Sair</td>
 	<td></td>
 </tr>
-
 </tbody></table>
 </body>
 </html>
