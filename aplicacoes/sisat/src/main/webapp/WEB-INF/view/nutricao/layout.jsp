@@ -38,10 +38,11 @@
 		  background-color: #ECEFEF;
 		  padding: 5px 0px 5px 0px;
 		}
+
+		.text-muted {
+		  color: #22567B;
+		}
 		
-.text-muted {
-  color: #22567B;
-}		
 		.thead {
   			background: #95A5A6;		
   		}
@@ -103,7 +104,7 @@
 			  <div class="input-group">
 				<input id="busca" name="busca" type="text" class="form-control" placeholder="Nome ou CPF" size="40" required="required" value="${busca }"/>
 			    <span class="input-group-btn">
-			    	<button class="btn btn-default" name="submit" type="submit">Buscar <span class="glyphicon glyphicon-search"></span></button>
+			    	<button class="btn btn-default" name="submit" type="submit"><span class="glyphicon glyphicon-search"></span> Buscar</button>
 			    </span>
 			  </div>
 			</div>
@@ -124,8 +125,8 @@
                 <td>Rayson Santos</td>
                 <td>rayson@mail.com</td>
                 <td align="right">
-	              <a href="#" class="btn btn-info  btn-sm">Informações</a>
-	              <a href="#" class="btn btn-success  btn-sm">Consulta</a>
+	              <a href="#" class="btn btn-info btn-sm"><span class="glyphicon glyphicon-eye-open"></span> Informações</a>
+	              <a href="#" class="btn btn-success btn-sm"><span class="glyphicon glyphicon-plus"></span> Consulta</a>
                 </td>
             </tr>
             <tr>
@@ -133,8 +134,8 @@
                 <td>Rayson Santos</td>
                 <td>rayson@mail.com</td>
                 <td align="right">
-	              <a href="#" class="btn btn-info  btn-sm">Informações</a>
-	              <a href="#" class="btn btn-success  btn-sm">Consulta</a>
+	              <a href="#" class="btn btn-info btn-sm"><span class="glyphicon glyphicon-eye-open"></span> Informações</a>
+	              <a href="#" class="btn btn-success btn-sm"><span class="glyphicon glyphicon-plus"></span> Consulta</a>
                 </td>
             </tr>
             <tr>
@@ -142,8 +143,8 @@
                 <td>Rayson Santos</td>
                 <td>rayson@mail.com</td>
                 <td align="right">
-	              <a href="#" class="btn btn-info  btn-sm">Informações</a>
-	              <a href="#" class="btn btn-success  btn-sm">Consulta</a>
+	              <a href="#" class="btn btn-info btn-sm"><span class="glyphicon glyphicon-eye-open"></span> Informações</a>
+	              <a href="#" class="btn btn-success btn-sm"><span class="glyphicon glyphicon-plus"></span> Consulta</a>
                 </td>
             </tr>
         </tbody>

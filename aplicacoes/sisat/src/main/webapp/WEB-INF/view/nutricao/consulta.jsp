@@ -32,12 +32,12 @@
 
 		<h2>${titulo}</h2>
 
-		<ul class="nav nav-tabs">
-			<li><a data-toggle="tab" href="#avaliacao">Avaliação Nutricional</a></li>
-			<li><a data-toggle="tab" href="#exame">Exames Laboratoriais</a></li>
-			<li><a data-toggle="tab" href="#questionario">Questionario de Frequencia Alimentar</a></li>
-			<li><a data-toggle="tab" href="#orientacoes">Orientações Individuais</a></li>
-			<li><a data-toggle="tab" href="#documentos">Documentos</a></li>
+		<ul class="nav nav-pills">
+			<li class="active"><a data-toggle="tab" href="#avaliacao"><span class="badge">1</span> Anamnese</a></li>
+			<li><a data-toggle="tab" href="#exame"><span class="badge">2</span> Exames Laboratoriais</a></li>
+			<li><a data-toggle="tab" href="#questionario"><span class="badge">3</span> Recordatório Alimentar</a></li>
+			<li><a data-toggle="tab" href="#orientacoes"><span class="badge">4</span> Orientações Individuais</a></li>
+			<li><a data-toggle="tab" href="#documentos"><span class="badge">5</span> Documentos</a></li>
 		</ul>
 
 		<form:form servletRelativeAction="${url}" method="POST" id = "consultaNutricional" modelAttribute="consultaNutricional" acceptCharset="UTF-8" cssClass="form-horizontal" enctype="multipart/form-data">
@@ -47,10 +47,19 @@
 				<form:hidden path="data" />
 
 				<div id="avaliacao" class="tab-pane fade in active">
-					<h3>Paciente</h3>
+					<h3></h3>
+					<div class="form-group form-item">
+						<label for="objetivoConsulta" class="col-sm-2 control-label"> Objetivo da Consulta:</label>
+						<div class="col-sm-10" >
+							<form:textarea id="objetivoConsulta" path="objetivoConsulta" class="form-control" rows="5" placeholder="Descreva aqui o objetivo da consulta..."/>
+							
+							<div class="error-validation"><form:errors path="objetivoConsulta"></form:errors></div>
+						</div>
+					</div>
+					
 					<div class="form-group">
 						<label for="altura" class="col-sm-2 control-label">Altura:</label>
-						<div class="col-sm-3">
+						<div class="col-sm-4">
 							<form:input id="altura" name="altura" type="number" path="paciente.altura" cssClass="form-control" placeholder="0.00" />
 
 							<div class="error-validation"><form:errors path="paciente.altura"></form:errors></div>
@@ -59,7 +68,13 @@
 				
 					<div class="form-group">
 						<label for="peso" class="col-sm-2 control-label">Peso:</label>
-						<div class="col-sm-3">
+						<div class="col-sm-4">
+							<form:input id="peso" name="peso" type="number" path="peso" cssClass="form-control" placeholder="00.00"/>
+							
+							<div class="error-validation"><form:errors path="peso"></form:errors></div>
+						</div>
+						<label for="peso" class="col-sm-2 control-label">Peso desejado:</label>
+						<div class="col-sm-4">
 							<form:input id="peso" name="peso" type="number" path="peso" cssClass="form-control" placeholder="00.00"/>
 							
 							<div class="error-validation"><form:errors path="peso"></form:errors></div>
@@ -68,50 +83,19 @@
 				
 					<div class="form-group">
 						<label for="cc" class="col-sm-2 control-label">CC:</label>
-						<div class="col-sm-3" >
+						<div class="col-sm-4" >
+							<form:input id="cc" name="cc" type="number" placeholder="00.00" path="circunferenciaCintura" cssClass="form-control" min="0"/>
+							
+							<div class="error-validation"><form:errors path="circunferenciaCintura"></form:errors></div>
+						</div>
+						<label for="cc" class="col-sm-2 control-label">CC desejada:</label>
+						<div class="col-sm-4" >
 							<form:input id="cc" name="cc" type="number" placeholder="00.00" path="circunferenciaCintura" cssClass="form-control" min="0"/>
 							
 							<div class="error-validation"><form:errors path="circunferenciaCintura"></form:errors></div>
 						</div>
 					</div>
-				
-					<div class="form-group form-item">
-						<label for="checkMedicamento" class="col-sm-2 control-label"><form:checkbox id="checkMedicamento"  path="medicamento" class="check"/> Medicamentos:</label>
-						<div class="col-sm-10" >
-							<form:input id="inputTextMedicamento" path="medicamentoComentario" cssClass="form-control" placeholder="Quais medicamentos você usa?" disabled="${not consultaNutricional.medicamento}"/>
-							
-							<div class="error-validation"><form:errors path="medicamentoComentario"></form:errors></div>
-						</div>
-					</div>
-				
-				<h3>Alterações Gastrointestinais</h3>
 
-					<div class="form-group">
-						<label for="disfagia" class="col-sm-2 control-label"><form:checkbox id="disfagia" path="disfagia"/> Disfagia&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
-						<label for="pirose" class="col-sm-1 control-label"><form:checkbox id="pirose" path="pirose"/> Pirose</label>
-						<label for="nausea" class="col-sm-2 control-label"><form:checkbox id="nausea" path="nausea"/> Náusea</label>
-						<label for="vomito" class="col-sm-2 control-label"><form:checkbox id="vomito" path="vomito"/> Vômitos</label>
-						<label for="diarreia" class="col-sm-2 control-label"><form:checkbox id="diarreia" path="diarreia"/> Diarreia</label>
-						<label for="constipacao" class="col-sm-2 control-label"><form:checkbox id="constipacao" path="constipacao"/> Constipação</label>
-					</div>
-					<div class="form-group form-item">
-						<label for="checkMastigacao" class="col-sm-2 control-label"><form:checkbox id="checkMastigacao"  path="mastigacao" class="check"/> Mastigação:</label>
-						<div class="col-sm-10" >
-							<form:input id="inputTextMastigacao" path="mastigacaoComentario" cssClass="form-control" placeholder="Como é sua mastigação?" disabled="${not consultaNutricional.mastigacao}"/>
-							
-							<div class="error-validation"><form:errors path="mastigacaoComentario"></form:errors></div>
-						</div>
-					</div>
-				
-					<div class="form-group form-item">
-						<label for="checkAlergia" class="col-sm-2 control-label"><form:checkbox id="checkAlergia"  path="alergia" class="check"/> Alergia Alimentar:</label>
-						<div class="col-sm-10" >
-							<form:textarea id="inputTextAlergia" path="alergiaComentario" class="form-control" rows="5" placeholder="Qual sua alergia Alimentar?" disabled="${not consultaNutricional.alergia}"/>
-							
-							<div class="error-validation"><form:errors path="alergiaComentario"></form:errors></div>
-						</div>
-					</div>
-				
 					<div class="form-group form-item" align="left">
 						<label for="agua" class="col-sm-2 control-label">Consumo de água:</label>
 						<div class="col-sm-10">
@@ -199,6 +183,93 @@
 							</div>
 						</div>
 					</div>
+
+				
+					<div class="form-group form-item">
+						<label for="checkMedicamento" class="col-sm-2 control-label"><form:checkbox id="checkMedicamento"  path="medicamento" class="check"/> Medicamentos:</label>
+						<div class="col-sm-10" >
+							<form:input id="inputTextMedicamento" path="medicamentoComentario" cssClass="form-control" placeholder="Quais medicamentos você usa?" disabled="${not consultaNutricional.medicamento}"/>
+							
+							<div class="error-validation"><form:errors path="medicamentoComentario"></form:errors></div>
+						</div>
+					</div>
+				
+				
+					<div class="form-group form-item">
+						<label for="checkMastigacao" class="col-sm-2 control-label"><form:checkbox id="checkMastigacao"  path="mastigacao" class="check"/> Mastigação:</label>
+						<div class="col-sm-10" >
+							<form:input id="inputTextMastigacao" path="mastigacaoComentario" cssClass="form-control" placeholder="Como é sua mastigação?" disabled="${not consultaNutricional.mastigacao}"/>
+							
+							<div class="error-validation"><form:errors path="mastigacaoComentario"></form:errors></div>
+						</div>
+					</div>
+
+					<div class="form-group form-item">
+						<label for="disfagia" class="col-sm-2 control-label"><form:checkbox id="disfagia" path="disfagia"/> Disfagia&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+						<div class="col-sm-10" >
+							<form:input id="inputTextMastigacao" path="mastigacaoComentario" cssClass="form-control" placeholder="Como é sua mastigação?" disabled="${not consultaNutricional.mastigacao}"/>
+							
+							<div class="error-validation"><form:errors path="mastigacaoComentario"></form:errors></div>
+						</div>
+					</div>
+
+					<div class="form-group form-item">
+						<label for="disfagia" class="col-sm-2 control-label"><form:checkbox id="disfagia" path="disfagia"/> Odinofagia</label>
+						<div class="col-sm-10" >
+							<form:input id="inputTextMastigacao" path="mastigacaoComentario" cssClass="form-control" placeholder="Como é sua mastigação?" disabled="${not consultaNutricional.mastigacao}"/>
+							<div class="error-validation"><form:errors path="mastigacaoComentario"></form:errors></div>
+						</div>
+					</div>
+					
+					<div class="form-group form-item">
+						<label for="pirose" class="col-sm-2 control-label"><form:checkbox id="pirose" path="pirose"/> Pirose</label>
+						<div class="col-sm-10" >
+							<form:input id="inputTextMastigacao" path="mastigacaoComentario" cssClass="form-control" placeholder="Como é sua mastigação?" disabled="${not consultaNutricional.mastigacao}"/>
+							
+							<div class="error-validation"><form:errors path="mastigacaoComentario"></form:errors></div>
+						</div>
+					</div>
+					<div class="form-group form-item">
+						<label for="nausea" class="col-sm-2 control-label"><form:checkbox id="nausea" path="nausea"/> Náusea</label>
+						<div class="col-sm-10" >
+							<form:input id="inputTextMastigacao" path="mastigacaoComentario" cssClass="form-control" placeholder="Como é sua mastigação?" disabled="${not consultaNutricional.mastigacao}"/>
+							
+							<div class="error-validation"><form:errors path="mastigacaoComentario"></form:errors></div>
+						</div>
+					</div>
+					<div class="form-group form-item">
+						<label for="vomito" class="col-sm-2 control-label"><form:checkbox id="vomito" path="vomito"/> Vômitos</label>
+						<div class="col-sm-10" >
+							<form:input id="inputTextMastigacao" path="mastigacaoComentario" cssClass="form-control" placeholder="Como é sua mastigação?" disabled="${not consultaNutricional.mastigacao}"/>
+							
+							<div class="error-validation"><form:errors path="mastigacaoComentario"></form:errors></div>
+						</div>
+					</div>
+					<div class="form-group form-item">
+						<label for="diarreia" class="col-sm-2 control-label"><form:checkbox id="diarreia" path="diarreia"/> Diarreia</label>
+						<div class="col-sm-10" >
+							<form:input id="inputTextMastigacao" path="mastigacaoComentario" cssClass="form-control" placeholder="Como é sua mastigação?" disabled="${not consultaNutricional.mastigacao}"/>
+							
+							<div class="error-validation"><form:errors path="mastigacaoComentario"></form:errors></div>
+						</div>
+					</div>
+					<div class="form-group form-item">
+						<label for="constipacao" class="col-sm-2 control-label"><form:checkbox id="constipacao" path="constipacao"/> Constipação</label>
+						<div class="col-sm-10" >
+							<form:input id="inputTextMastigacao" path="mastigacaoComentario" cssClass="form-control" placeholder="Como é sua mastigação?" disabled="${not consultaNutricional.mastigacao}"/>
+							
+							<div class="error-validation"><form:errors path="mastigacaoComentario"></form:errors></div>
+						</div>
+					</div>
+				
+					<div class="form-group form-item">
+						<label for="checkAlergia" class="col-sm-2 control-label"><form:checkbox id="checkAlergia"  path="alergia" class="check"/> Alergia Alimentar:</label>
+						<div class="col-sm-10" >
+							<form:textarea id="inputTextAlergia" path="alergiaComentario" class="form-control" rows="5" placeholder="Qual sua alergia Alimentar?" disabled="${not consultaNutricional.alergia}"/>
+							
+							<div class="error-validation"><form:errors path="alergiaComentario"></form:errors></div>
+						</div>
+					</div>
 				
 					<div class="form-group form-item">
 						<label for="checkPatologia" class="col-sm-2 control-label"><form:checkbox id="checkPatologia"  path="outrasPatologias" class="check"/> Patologias:</label>
@@ -206,15 +277,6 @@
 							<form:textarea id="inputTextPatologia" path="outrasPatologiasComentario" class="form-control" rows="5" placeholder="Descreva aqui as patologias" disabled="${not consultaNutricional.outrasPatologias}"/>
 							
 							<div class="error-validation"><form:errors path="outrasPatologiasComentario"></form:errors></div>
-						</div>
-					</div>
-				
-					<div class="form-group form-item">
-						<label for="objetivoConsulta" class="col-sm-2 control-label"> Objetivo da Consulta:</label>
-						<div class="col-sm-10" >
-							<form:textarea id="objetivoConsulta" path="objetivoConsulta" class="form-control" rows="5" placeholder="Descreva aqui o objetivo da consulta..."/>
-							
-							<div class="error-validation"><form:errors path="objetivoConsulta"></form:errors></div>
 						</div>
 					</div>
 				</div>
@@ -391,103 +453,7 @@
 					</div>
 				</div>
 				
-				<div id="documentos" class="tab-pane fade in ">
-					<h3>Documentos</h3>
-					
-					<div class="form-group">
-						<label for="arquivo" class="col-sm-2 control-label">Arquivos:</label>
-						<div class="col-sm-5 files">
-							<input type="file" id="files" name="files" class="file"	multiple="multiple"></input> <br>
-							<input type="checkbox" id="enviar" name="enviar"> Enviar para o paciente
 
-							<div class="error-validation" id="erro-Anexo">
-								<label class="col-sm-10 control-label" id="label-erro"> ${anexoError} </label>
-							</div>
-
-							<table id="file-upload" role="presentation"	class="table table-striped">
-								<thead class="files">
-									<tr> 
-										<th colspan="6"> Ducumentos para enviar ao paciente </th>
-									</tr>
-									<tr>
-										<th>Nome do Arquivo</th>
-										<th>Data</th>
-										<th>Tipo</th>
-										<th>Baixar</th>
-										<th>Excluir</th>
-										<th> Enviar </th>
-									</tr>
-								</thead>
-
-								<tbody class="files">
-									<c:forEach items="${documentosEnvio}" var="documento">
-										<tr class="template-upload fade in">					
-											<td>${documento.nome}<strong class="error text-danger"></strong></td>
-											<td>${documento.data}<strong class="error text-danger"></strong></td>
-											<td>${documento.tipo}<strong class="error text-danger"></strong></td>
-
-											<td>
-												<a id="download[${documento.id}]" href="../../nutricao/downloadDocumento/${documento.id}" class="save-document">
-													<button type="button" class="btn btn-primary"><span class="glyphicon glyphicon-save"></span></button>
-												</a>
-											</td>						
-
-											<td>
-												<a id="delete[${documento.id}]" href="../../nutricao/deletarDocumento/${documento.id}" class="delete-document">
-													<button type="button" class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span></button>
-												</a>
-											</td>
-
-											<td>
-												<a id="send[${documento.id}]" href="../../nutricao/enviarDocumento/${documento.id}/" class="send-document">
-													<button class="btn btn-warning"><span class="glyphicon glyphicon-send"></span></button>
-												</a>
-											</td>
-										</tr>
-
-									</c:forEach>
-								</tbody>
-							</table><br>
-							
-							<table id="file-upload" role="presentation"	class="table table-striped">
-								<thead class="files">
-									<tr> 
-										<th colspan="5"> Outros documentos </th>
-									</tr>
-									
-									<tr>
-										<th>Nome do Arquivo</th>
-										<th>Data</th>
-										<th>Tipo</th>
-										<th>Baixar</th>
-										<th>Excluir</th>
-									</tr>
-								</thead>
-
-								<tbody class="files">
-									<c:forEach items="${documentosNutricionista}" var="documento">
-										<tr class="template-upload fade in">					
-											<td>${documento.nome}<strong class="error text-danger"></strong></td>
-											<td>${documento.data}<strong class="error text-danger"></strong></td>
-											<td>${documento.tipo}<strong class="error text-danger"></strong></td>
-											<td>
-												<a id="download[${documento.id}]" href="../../nutricao/downloadDocumento/${documento.id}" class="save-document">
-													<button type="button" class="btn btn-primary"><span class="glyphicon glyphicon-save"></span></button>
-												</a>
-											</td>						
-											
-											<td>
-												<a id="delete[${documento.id}]" href="../../nutricao/deletarDocumento/${documento.id}" class="delete-document">
-													<button type="button" class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span></button>
-												</a>
-											</td>
-										</tr>
-									</c:forEach>
-								</tbody>
-							</table>
-						</div>
-					</div>			
-				</div>
 			</div>
 
 			<div class="col-xs-offset-0 col-xs-10" align="center">

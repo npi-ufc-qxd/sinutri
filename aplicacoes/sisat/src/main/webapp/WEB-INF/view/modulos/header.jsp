@@ -1,48 +1,89 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 
+<html>
+<head>
+	<title>Layout</title>
 
-<div id="header-page">
-	<div class="row">
-		<div class="col-md-6">
-			<img width="370"
-				src="<c:url value="/resources/images/brasao-qxd.png" />"
-				alt="Brasão UFC Quixadá">
-		</div>
-		<div class="col-md-6"></div>
-	</div>
-</div>
-<div>
-	<nav class="navbar navbar-default" role="navigation">
-		<div class="container-fluid">
-			<div class="navbar-header">
-				<button type="button" class="navbar-toggle" data-toggle="collapse"
-					data-target="#bs-example-navbar-collapse-1">
-					<span class="sr-only">Toggle navigation</span> <span
-						class="icon-bar"></span> <span class="icon-bar"></span> <span
-						class="icon-bar"></span>
-				</button>
-				<a class="navbar-brand" href="<c:url value="/nutricao/buscar" />">Nutrição</a>
-			</div>
+	<style type="text/css">
+	body{
+		background: #F9F9F9;
+	}
+		.navbar-nav>li>a {
+		  padding-top: 20px;
+		  padding-bottom: 20px;
+		}
+		.logo-sinutri {
+		  border: 0;
+		  width: 215px;
+		  margin: -18px -10px -2px -6px;
+		  height: 60px;
+		}
+
+		.footer {
+		  position: absolute;
+		  bottom: 0;
+		  width: 100%;
+		  height: 40px;
+		  background-color: #ECEFEF;
+		  padding: 5px 0px 5px 0px;
+		}
+
+		.text-muted {
+		  color: #22567B;
+		}
+		
+		.thead {
+  			background: #95A5A6;		
+  		}
+  		
+		.table>thead>tr>th, .table>tbody>tr>th, .table>tfoot>tr>th, .table>thead>tr>td, .table>tbody>tr>td, .table>tfoot>tr>td {
+			vertical-align: middle;
+		}
+  		
+	</style>
+</head>
+
+<body>
+	<div class="bs-component">
+		<nav class="navbar navbar-static navbar-inverse">
+			<div class="container">
+				<div class="navbar-header">
+				    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-2">
+				      <span class="sr-only">SiNutri</span>
+				      <span class="icon-bar"></span>
+				      <span class="icon-bar"></span>
+				      <span class="icon-bar"></span>
+				    </button>
+				    <a class="navbar-brand" href="#"><img src="<c:url value="/resources/images/logo-sinutri.png" />" alt="SiNutri" class="logo-sinutri"></a>
+				</div>
 	
-			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-				<ul class="nav navbar-nav">
-					<!--<li>
-						<a href="<c:url value="/end" />">Link <span class="glyphicon glyphicon-list"></span></a>
-					</li>-->
+	      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-2">
+			<ul class="nav navbar-nav">  
+           		<li class="active"><a href="#">Paciente<span class="sr-only">(current)</span></a></li>
+  				<li><a href="#">Documentos</a></li>
+			</ul>
 
-					<li>
-						<a href="<c:url value="/j_spring_security_logout" />">Sair <span class="glyphicon glyphicon-off"></span></a>
-					</li>
-					
-				</ul>
-				<ul class="nav navbar-nav navbar-right">
-					<li>
-						<a style="font-weight: bold;">Bem-vindo(a), ${sessionScope.usuario.nome}!</a> 
-					</li>
-				</ul>
-			</div>
-		</div>
-	</nav>
+			<ul class="nav navbar-right navbar-nav">
+				<li class="dropdown">
+				<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="glyphicon glyphicon-user"></i> <i class="glyphicon glyphicon-chevron-down"></i></a>
+					<ul class="dropdown-menu">
+		      			<li><a href="#">Perfil</a></li>
+		      			<li><a href="#">Sair</a></li>
+		      			<li class="divider"></li>
+		      			<li><a href="#">Sobre</a></li>
+					</ul>
+				</li>  
+			</ul>
+      </div>
+    </div>
+  </nav>
 </div>
+
+</body>
+</html>

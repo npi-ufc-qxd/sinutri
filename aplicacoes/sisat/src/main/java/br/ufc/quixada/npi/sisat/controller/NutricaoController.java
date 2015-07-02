@@ -5,8 +5,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import javassist.expr.NewArray;
-
 import javax.inject.Inject;
 import javax.mail.MessagingException;
 import javax.servlet.http.HttpServletRequest;
@@ -77,6 +75,20 @@ public class NutricaoController {
 	public String layout(Model model, HttpSession session) {
 		getUsuarioLogado(session);
 		return "nutricao/layout";
+	}
+
+	@RequestMapping(value = {"/consulta-layout"}, method = RequestMethod.GET)
+	public String consultaLayout(Model model, HttpSession session) {
+		getUsuarioLogado(session);
+
+		ConsultaNutricional consulta = new ConsultaNutricional();
+		Paciente paciente = new Paciente();
+		consulta.setPaciente(paciente);
+		model.addAttribute("consultaNutricional", consulta);
+		model.addAttribute("classificacao", Classificacao.values());
+		model.addAttribute("refeicoes", Refeicao.values());		
+		
+		return "nutricao/consulta-layout";
 	}
 
 	//Buscar paciente (get)
