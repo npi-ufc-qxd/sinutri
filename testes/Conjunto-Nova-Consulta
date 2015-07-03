@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <meta content="text/html; charset=UTF-8" http-equiv="content-type" />
+  <title>Test Suite</title>
+</head>
+<body>
+<table id="suiteTable" cellpadding="1" cellspacing="1" border="1" class="selenium"><tbody>
+<tr><td><b>Test Suite</b></td></tr>
+<tr><td><a href="CadastrarOrientaçõesIndividuais/Campo-Orientações-Em-Branco">Orientações-Individuais-Em-Branco</a></td></tr>
+<tr><td><a href="IniciarConsulta/Atividade-Fisica-Marcar-Dizer-Vezes-Por-Semana-Nao-Preencher">Atividade-Fisica-Marcar-Dizer-Vezes-Por-Semana-Nao-Preencher</a></td></tr>
+<tr><td><a href="IniciarConsulta/Atividade-Fisica-Marcar-Nao-Preencher">Atividade-Fisica-Marcar-Nao-Preencher</a></td></tr>
+<tr><td><a href="IniciarConsulta/Bebida-Alcoolica-Marcar-Dizer-Vezes-Por-Semana-Nao-Preencher">Bebida-Alcoolica-Marcar-Dizer-Vezes-Por-Semana-Nao-Preencher</a></td></tr>
+<tr><td><a href="IniciarConsulta/Campo-Alergia-Alimentar-Marcado-E-Em-Branco">Campo-Alergia-Alimentar-Marcado-E-Em-Branco</a></td></tr>
+<tr><td><a href="IniciarConsulta/Campo-Bebida-Alcoolica-Marcado-E-Em-Branco">Campo-Bebida-Alcoolica-Marcado-E-Em-Branco</a></td></tr>
+<tr><td><a href="IniciarConsulta/Campo-Carne-Vermelha-Marcado-E-Em-Branco">Campo-Carne-Vermelha-Marcado-E-Em-Branco</a></td></tr>
+<tr><td><a href="IniciarConsulta/Campo-Carne-Vermelha-Marcado-E-Preenchido">Campo-Carne-Vermelha-Marcado-E-Preenchido</a></td></tr>
+<tr><td><a href="IniciarConsulta/Campo-Mastigação-Marcado-E-Em-Branco">Campo-Mastigação-Marcado-E-Em-Branco</a></td></tr>
+<tr><td><a href="IniciarConsulta/Campo-Obrigatorio-Altura-Em-Branco">Campo-Obrigatorio-Altura-Em-Branco</a></td></tr>
+<tr><td><a href="IniciarConsulta/Campo-Obrigatorio-CC-Desejada-Em-Branco">Campo-Obrigatorio-CC-Desejada-Em-Branco</a></td></tr>
+<tr><td><a href="IniciarConsulta/Campo-Obrigatorio-Consumo-Agua-Em-Branco">Campo-Obrigatorio-Consumo-Agua-Em-Branco</a></td></tr>
+<tr><td><a href="IniciarConsulta/Campo-Obrigatorio-Objetivo-Consulta-Em-Branco">Campo-Obrigatorio-Objetivo-Consulta-Em-Branco</a></td></tr>
+<tr><td><a href="IniciarConsulta/Campo-Obrigatorio-Peso-Desejado-Em-Branco">Campo-Obrigatorio-Peso-Desejado-Em-Branco</a></td></tr>
+<tr><td><a href="IniciarConsulta/Campo-Obrigatorio-Peso-Em-Branco">Campo-Obrigatorio-Peso-Em-Branco</a></td></tr>
+<tr><td><a href="IniciarConsulta/Carne-Vermelha-Marcar-Dizer-Vezes-Por-Semana">Carne-Vermelha-Marcar-Dizer-Vezes-Por-Semana</a></td></tr>
+<tr><td><a href="IniciarConsulta/Carne-Vermelha-Marcar-Dizer-Vezes-Por-Semana-Nao-Preencher">Carne-Vermelha-Marcar-Dizer-Vezes-Por-Semana-Nao-Preencher</a></td></tr>
+<tr><td><a href="IniciarConsulta/Exames-Laboratorias-Preenchidos">Exames-Laboratorias-Preenchidos</a></td></tr>
+<tr><td><a href="IniciarConsulta/Frequencia-Alimentar">Frequencia-Alimentar</a></td></tr>
+<tr><td><a href="IniciarConsulta/Marcar-Campo-Medicamento-Nao-Preencher">Marcar-Campo-Medicamento-Nao-Preencher</a></td></tr>
+<tr><td><a href="IniciarConsulta/MarcarCampoMedicamentosENaoPreencher">MarcarCampoMedicamentosENaoPreencher</a></td></tr>
+<tr><td><a href="IniciarConsulta/Nova-Consulta">Nova-Consulta</a></td></tr>
+<tr><td><a href="IniciarConsulta/Patologia-Marcado-E-Nao-Preencher">Patologia-Marcado-E-Nao-Preencher</a></td></tr>
+</tbody></table>
+</body>
+</html>

@@ -59,10 +59,9 @@
 					
 					<div class="form-group">
 						<label for="altura" class="col-sm-2 control-label">Altura:</label>
-						<div class="col-sm-4">
-							<form:input id="altura" name="altura" type="number" path="paciente.altura" cssClass="form-control" placeholder="0.00" />
-
-							<div class="error-validation"><form:errors path="paciente.altura"></form:errors></div>
+						<div class="col-sm-3">
+							<form:input id="altura" name="altura" type="number" path="altura" cssClass="form-control" placeholder="0.00"/>
+							<div class="error-validation"><form:errors path="altura"></form:errors></div>
 						</div>
 					</div>
 				
@@ -80,6 +79,15 @@
 							<div class="error-validation"><form:errors path="peso"></form:errors></div>
 						</div>
 					</div>
+					
+					<div class="form-group">
+						<label for="pesoDesejado" class="col-sm-2 control-label">Peso Desejado:</label>
+						<div class="col-sm-3">
+							<form:input id="pesoDesejado" name="pesoDesejado" type="number" path="pesoDesejado" cssClass="form-control" placeholder="00.00"/>
+							
+							<div class="error-validation"><form:errors path="pesoDesejado"></form:errors></div>
+						</div>
+					</div>
 				
 					<div class="form-group">
 						<label for="cc" class="col-sm-2 control-label">CC:</label>
@@ -90,11 +98,22 @@
 						</div>
 						<label for="cc" class="col-sm-2 control-label">CC desejada:</label>
 						<div class="col-sm-4" >
-							<form:input id="cc" name="cc" type="number" placeholder="00.00" path="circunferenciaCintura" cssClass="form-control" min="0"/>
+							<form:input id="ccd" name="ccd" type="number" placeholder="00.00" path="circunferenciaCinturaDesejada" cssClass="form-control" min="0"/>
 							
-							<div class="error-validation"><form:errors path="circunferenciaCintura"></form:errors></div>
+							<div class="error-validation"><form:errors path="circunferenciaCinturaDesejada"></form:errors></div>
 						</div>
 					</div>
+
+					<div class="form-group form-item">
+						<label for="checkMedicamento" class="col-sm-2 control-label"><form:checkbox id="checkMedicamento"  path="medicamento" class="check"/> Medicamentos:</label>
+						<div class="col-sm-10" >
+							<form:input id="inputTextMedicamento" path="medicamentoComentario" cssClass="form-control" placeholder="Quais medicamentos você usa?" disabled="${not consultaNutricional.medicamento}"/>
+							
+							<div class="error-validation"><form:errors path="medicamentoComentario"></form:errors></div>
+						</div>
+					</div>
+				
+				<h3>Alterações Gastrointestinais</h3>
 
 					<div class="form-group form-item" align="left">
 						<label for="agua" class="col-sm-2 control-label">Consumo de água:</label>

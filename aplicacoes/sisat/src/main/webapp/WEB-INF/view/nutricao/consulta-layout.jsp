@@ -11,17 +11,8 @@
 
 	<title>Layout</title>
 
-
-<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css"> -->
-<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css"> -->
-
-
-
-
 	<link href="<c:url value="/webjars/bootstrap/3.3.2/css/bootstrap.min.css" />" rel="stylesheet" />
 	<link href="<c:url value="/resources/css/bootstrap-flatly.min.css" />" rel="stylesheet" />
-	<%-- <link href="<c:url value="/resources/css/bootstrap-journal.min.css" />" rel="stylesheet" /> --%>
-	<%-- <link href="<c:url value="/resources/css/styles.css" />" rel="stylesheet" /> --%>
 
 <style type="text/css">
 .scroll-area {
@@ -287,8 +278,8 @@ ul.nav-tabs li:last-child a {
 	        <div class="row form-group">
 		        <div class="form-item col-sm-12">
 					<label for="altura" class="control-label">Altura:</label>
-					<form:input id="altura" name="altura" type="number" path="paciente.altura" cssClass="form-control" placeholder="0.00" />
-					<div class="error-validation"><form:errors path="paciente.altura"></form:errors></div>
+					<form:input id="altura" name="altura" type="number" path="altura" cssClass="form-control" placeholder="0.00" />
+					<div class="error-validation"><form:errors path="altura"></form:errors></div>
 		        </div>
 			</div>
 

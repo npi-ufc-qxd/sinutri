@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="http://localhost:9090/" />
+<title>Orientações-Individuais</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">Orientações-Individuais</td></tr>
+</thead><tbody>
+<tr>
+	<td>open</td>
+	<td>/sisat/nutricao/editarConsulta/13</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name=j_username</td>
+	<td>nutri</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name=j_password</td>
+	<td>teste1234</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=submit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Nutrição</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=busca</td>
+	<td>ingrid da silva</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=submit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=#consulta &gt; button.btn.btn-default</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=altura</td>
+	<td>1.7</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=peso</td>
+	<td>60</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=pesoDesejado</td>
+	<td>62</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=cc</td>
+	<td>60</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=ccd</td>
+	<td>55</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=agua</td>
+	<td>4</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=objetivoConsulta</td>
+	<td>Perder peso, reeducar a alimentação, melhorar condicionamento físico, corrigir horários alimentares. diminuir porções,aumentar frequencia alimentar.</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=orientacoesIndividuais</td>
+	<td>Comer mais Fibras</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=button.btn.btn-success</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Sair</td>
+	<td></td>
+</tr>
+
+</tbody></table>
+</body>
+</html>
