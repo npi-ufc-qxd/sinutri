@@ -8,48 +8,9 @@
 
 <html>
 <head>
-	<title>Layout</title>
-
-	<style type="text/css">
-	body{
-		background: #F9F9F9;
-	}
-		.navbar-nav>li>a {
-		  padding-top: 20px;
-		  padding-bottom: 20px;
-		}
-		.logo-sinutri {
-		  border: 0;
-		  width: 215px;
-		  margin: -18px -10px -2px -6px;
-		  height: 60px;
-		}
-
-		.footer {
-		  position: absolute;
-		  bottom: 0;
-		  width: 100%;
-		  height: 40px;
-		  background-color: #ECEFEF;
-		  padding: 5px 0px 5px 0px;
-		}
-
-		.text-muted {
-		  color: #22567B;
-		}
-		
-		.thead {
-  			background: #95A5A6;		
-  		}
-  		
-		.table>thead>tr>th, .table>tbody>tr>th, .table>tfoot>tr>th, .table>thead>tr>td, .table>tbody>tr>td, .table>tfoot>tr>td {
-			vertical-align: middle;
-		}
-  		
-	</style>
 </head>
-
 <body>
+
 	<div class="bs-component">
 		<nav class="navbar navbar-static navbar-inverse">
 			<div class="container">

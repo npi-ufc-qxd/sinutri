@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -10,35 +9,70 @@
 <html>
 	<head>
 		<jsp:include page="../modulos/header-estrutura.jsp" />
-		<title>Informações do(a) paciente</title>
+
+		<title>Layout</title>
+		<style type="text/css">
+	 		.footer {
+	 			position:relative;
+	 			margin-top: 30px;
+	 		}
+		</style>
 	</head>
-<body>
+
+<body data-spy="scroll" data-target="#myScrollspy">
 
 	<jsp:include page="../modulos/header.jsp" />
 
 	<div class="container">
 
-		<div class="controls inline">
-			<h2> <a href="<c:url value="/nutricao/detalhes/${consulta.paciente.pessoa.id}"></c:url>" class="btn btn-default glyphicon glyphicon-arrow-left"> </a> Paciente </h2>
-		</div>
+	    <div class="row">
+			<div class="col-sm-4"><h2>Informações da Consulta</h2></div>
 
-		<ul class="nav nav-tabs">
-			<li class="active"><a data-toggle="tab" href="#avaliacao">Avaliação Nutricional</a></li>
+			<div class="col-sm-8" align="right" style="margin-top: 15px;">
+				<a href="<c:url value="/nutricao/buscar"></c:url>" class="btn btn-default">Voltar</a>
+				<a href="<c:url value="#/nutricao/plano-alimentar"></c:url>" class="btn btn-info">Criar Plano Alimentar</a>
+				<a href="<c:url value="/consulta/paciente/${consulta.paciente.id }"></c:url>" class="btn btn-success">Realizar consulta</a>
+				<a href="<c:url value="#/consulta/editar-consulta/${consulta.id }/paciente/${consulta.paciente.id }"></c:url>" class="btn btn-warning">Editar</a>
+			</div>
+    	</div>
+	
+	    <div class="row">
+	        <div class="col-sm-3" id="myScrollspy">
+	            <ul class="nav nav-tabs nav-stacked affix-top" data-spy="affix" data-offset-top="125">
+					<li class="active">
+						<a href="#avaliacao">
+							<span class="badge">1</span> Anamnese
+						</a>
+					</li>
+					<li>
+						<a href="#recordatorio">
+							<span class="badge">2</span> Recordatório Alimentar
+						</a>
+					</li>
+					<li>
+						<a href="#exame">
+							<span class="badge">3</span> Exames Laboratoriais
+						</a>
+					</li>
+					<li>
+						<a href="#orientacoes">
+							<span class="badge">4</span> Orientações Individuais
+						</a>
+					</li>
+					<li>
+						<a href="#documentos">
+							<span class="badge">5</span> Documentos
+						</a>
+					</li>
+	            </ul>
+	
+	        </div>
+	
+		    <div class="col-sm-9">
+		    	<h3 id="avaliacao" class="section">Anamnese</h3>
 
-			<li><a data-toggle="tab" href="#exame">Exames Laboratoriais</a></li>
-
-			<li><a data-toggle="tab" href="#questionario">Questionario de Frequencia Alimentar</a></li>
-					
-			<li><a data-toggle="tab" href="#orientacoes">Orientações Individuais</a></li>
-		</ul>
-
-		<div class="tab-content">
-			<!-- ABA DE AVALIACAO NUTRICIONAL -->
-			<div id="avaliacao" class="tab-pane fade in active">
-
-<div class="content">
-	<br/>
-	<table style="width: 70%">
+		        
+	<table>
 		<tr>
 			<td>${consulta.disfagia ? "<span class='glyphicon glyphicon-ok'></span>" : "<span class='glyphicon glyphicon-remove'></span>" }
 				Disfagia</td>
@@ -62,7 +96,6 @@
 			<td></td>
 		</tr>
 	</table>
-	
 	<br /> <strong>Medicamentos: </strong>${consulta.medicamento ? consulta.medicamentoComentario  : "<em>Não usa medicamentos</em>"}
 	<br /> <strong> Alergia alimentar: </strong>${consulta.alergia ? consulta.alergiaComentario  : "<em>Não possui alergia a alimentos</em>"}
 	<br /> <strong> Atividade Fisica: </strong>
@@ -90,21 +123,54 @@
 	<br /> <strong> Patologias: </strong> ${consulta.outrasPatologias ? consulta.outrasPatologiasComentario  : "<em>Não possui outras patologias</em>"}<br />
 
 	<strong> Objetivo da consulta: </strong> ${consulta.objetivoConsulta }<br />
-</div>
-			</div>
 
-			<!-- ABA DE EXAMES LABORATORIAS -->
-			<div id="exame" class="tab-pane fade">
-				<div class="content"><br/>
-					<table class="table table-bordered table-striped" style="width:300px">
-						<thead>
-							<tr>
-								<th>Exame</th>
-								<th>Valor </th>
-								<th>Classificação </th>
-							</tr>
-						</thead>
-						
+
+
+
+		    	<h3 id="recordatorio" class="section">Recordatório</h3>
+		    	
+	    		<c:forEach var="freq" items="${consulta.frequencias}">
+		    		<div class="row">
+						<fmt:formatDate var="horaFormatada" type="time" dateStyle="short" timeStyle="short" value="${freq.horario}" />
+			    		
+			    		<div class="col-sm-2 label-horario" align="center"> 
+			    			<h4><strong class="label label-info">${freq.refeicao.nome }</strong></h4>
+		    			    <h1><span class="label label-primary">${horaFormatada}</span></h1>
+			    		</div>
+
+			    		<div class="col-sm-10">
+						    <table class="table table-striped">
+						        <thead class="thead">
+						            <tr>
+										<th>Alimento/Preparo</th>
+										<th>Porção</th>
+						            </tr>
+						        </thead>
+						        <tbody>
+									<c:forEach var="alimento" items="${freq.alimentos }">
+										<tr>
+											<td> ${alimento.alimento } </td>
+											<td> ${alimento.porcao } </td>
+										</tr>
+									</c:forEach>
+								</tbody>
+							</table>
+			    		</div>
+		    		</div>
+		    	</c:forEach>
+
+		        <h3 id="exame" class="section">Exames Laboratoriais</h3>
+		        
+
+			    <table class="table table-striped">
+			        <thead class="thead">
+			            <tr>
+							<th>Exame</th>
+							<th>Valor </th>
+							<th>Classificação</th>
+			            </tr>
+			        </thead>
+			        <tbody>
 						<tr>
 							<td> <strong>Glicemia: </strong> </td>
 							<td> ${consulta.glicemia } </td>
@@ -150,49 +216,18 @@
 							<td> ${consulta.tgp } </td>
 							<td> ${consulta.classificacaoTgp } </td>
 						</tr>
-					</table>
-				</div> 			
-			</div>
+			        </tbody>
+			    </table>
 
-			<!-- ABA DE QUESTIONARIO DE FRENQUENCIA ALIMENTAR -->
-			<div id="questionario" class="tab-pane fade">
-				<div class="content"><br/>
-				
-					<c:forEach var="freq" items="${consulta.frequencias}">
-						<table class="table table-bordered table-striped" >
-							<caption align="left"><strong>${freq.horario } - ${freq.refeicao.nome }</strong></caption>
-							<thead >
-								<tr>
-									<th> Alimento/Preparo </th>
-									<th width="20%"> Porção </th>
-								</tr>
-							</thead>
+		    	<h3 id="orientacoes" class="section">Orientações</h3>
 
-							<c:forEach var="alimento" items="${freq.alimentos }">
-								<tr>
-									<td> ${alimento.alimento } </td>
-									<td> ${alimento.porcao } </td>
-								</tr>
-							</c:forEach>
-						</table>
-					</c:forEach>
-				</div>
-			</div>
-			
-			<!-- ABA DE ORIENTACOES -->
-			<div id="orientacoes" class="tab-pane fade">
-				<div class="content"> <br/>
-					<strong>Conduta Nutricional</strong> <br/>
-					${consulta.condutaNutricional} <br/>
-					
-					<strong>Orientacões Individuais</strong> <br/>
-					${consulta.orientacoesIndividuais} <br/>
-				</div>
+		    	<h3 id="documentos" class="section">Documentos</h3>
 			</div>
 		</div>
 	</div>
-	
+
 	<jsp:include page="../modulos/footer.jsp" />
+	<script	src="<c:url value="/resources/js/questionario-frequencia-alimentar.js" />"></script>
 
 </body>
 </html>

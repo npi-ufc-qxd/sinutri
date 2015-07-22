@@ -18,63 +18,52 @@
 	<div class="container">
 		<div class="buscar-paciente" align="left">
 
+		<h3>Buscar Paciente</h3>
+		<form:form id="formBuscarPaciente" role="form" servletReltiveAction="/nutricao/buscar" method="POST" class="bs-component">	
+			<div class="form-group">
+			  <div class="input-group">
+				<input id="busca" name="busca" type="text" class="form-control" placeholder="Nome ou CPF" size="40" required="required" value="${busca }"/>
+			    <span class="input-group-btn">
+			    	<button class="btn btn-default" name="submit" type="submit"><span class="glyphicon glyphicon-search"></span> Buscar</button>
+			    </span>
+			  </div>
+			</div>
+		</form:form>
+
 			<c:if test="${not empty erro }"><div class="alert alert-danger" role="alert">${erro}</div></c:if>
 
 			<c:if test="${not empty info }"><div class="alert alert-info" role="alert">${info}</div></c:if>
 
 			<c:if test="${not empty success }"><div class="alert alert-success" role="alert">${success}</div></c:if>
 
-			<h3>Buscar Paciente</h3>
-
-			<form:form id="buscarPacienteForm" role="form" servletReltiveAction="/nutricao/buscar" method="POST" class="form-horizontal">
-				<div class="form-group">
-					<div class="col-sm-10">
-						<input id="busca" name="busca" class="form-control" placeholder="Nome ou CPF" size="40" required="required" value="${busca }"/>
-					</div>
-					<div class="col-sm-2">
-						<button class="btn btn-primary" name="submit" type="submit" class="btn btn-primary" value="Buscar"> 
-							Buscar <span class="glyphicon glyphicon-search"></span>
-						</button>
-				    </div>
-				</div>
-			</form:form>
+			<c:if test="${not empty busca and empty pessoas}"><div class="alert alert-warning" role="alert">Nenhum resultado encontrado</div></c:if>
 
 			<c:if test="${not empty pessoas}">
-				<table class="table" id="table">
-					<thead>
-						<tr>
-							<th>Nome</th>
-							<th align="right"></th>
-						</tr>
-					</thead>
-					<tbody>
+			    <table class="table table-striped">
+			        <thead class="thead">
+			            <tr>
+			                <th></th>
+			                <th>Paciente</th>
+			                <th>Email</th>
+			                <th></th>
+			            </tr>
+			        </thead>
+			        <tbody>
 						<c:forEach var="pessoa" items="${pessoas}">
-							<tr class="linha">
-								<td>
-									<a href="<c:url value="/nutricao/detalhes/${pessoa.id}"></c:url>">${pessoa.nome}</a>
-								</td>
-								<td align="right">
-									<a id="detalhes" data-toggle="modal" href="detalhes/${pessoa.id}">
-										<button class="btn btn-default">
-											Detalhes <span class="glyphicon glyphicon-eye-open"></span>
-										</button>
-									</a>
-
-									<a id="consulta" data-toggle="modal" href="consulta/${pessoa.id}">
-										<button class="btn btn-default">
-											Consulta <span class="glyphicon glyphicon-plus"></span>
-										</button>
-									</a>
-								</td>
-							</tr>
+				            <tr>
+				                <td>1</td>
+				                <td><a href="<c:url value="/nutricao/detalhes/${pessoa.id}"></c:url>">${pessoa.nome}</a></td>
+				                <td>${pessoa.email}</td>
+				                <td align="right">
+					              <a href="detalhes/${pessoa.id}" class="btn btn-info btn-sm"><span class="glyphicon glyphicon-eye-open"></span> Informações</a>
+					              <a href="consulta/${pessoa.id}" class="btn btn-success btn-sm"><span class="glyphicon glyphicon-plus"></span> Consulta</a>
+				                </td>
+				            </tr>
 						</c:forEach>
-					</tbody>
-				</table>
+			        </tbody>
+			    </table>
 			</c:if>
 			
-			<c:if test="${not empty busca and empty pessoas}">
-				<div class="alert alert-warning" role="alert">Nenhum resultado encontrado</div>
-			</c:if>
 		</div>
 	</div>
 	

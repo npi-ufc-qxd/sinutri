@@ -9,99 +9,74 @@
 <html>
 	<head>
 		<jsp:include page="../modulos/header-estrutura.jsp" />
-		<title>Detalhes: ${pessoa.nome}</title>
+		<title>Informações do(a) paciente</title>
 	</head>
 
 <body>
 	<jsp:include page="../modulos/header.jsp" />
 
-	<div class="container" style="margin-bottom: 70px;">
-		<div id="dados-pessoais" align="left">
-			<h3>Paciente</h3>
-			<div class="form-horizontal">
-				<div class="form-group">
-					<label for="nome" class="col-sm-2 control-label">Nome:</label>
-					<div class="col-sm-4">
-						<label id="nome" class="control-label">${pessoa.nome }</label>
-					</div>
 
-					<label for="nome" class="col-sm-2 control-label">Email:</label>
-					<div class="col-sm-4">
-						<label id="nome" class="control-label">${pessoa.email }</label>
-					</div>
-				</div>
+	<div class="container">
+	    <div class="row">
+			<div class="col-sm-6"><h2>Paciente: ${pessoa.nome }</h2></div>
 
-				<div class="form-group">
-					<label for="nome" class="col-sm-2 control-label">Sexo:</label>
-					<div class="col-sm-2">
-						<label id="nome" class="control-label">${pessoa.sexo }</label>
-					</div>
-
-					<label for="nome" class="col-sm-2 control-label">Idade:</label>
-					<div class="col-sm-2">
-						<label id="nome" class="control-label">${pessoa.idade }</label>
-					</div>
-
-					<label for="nome" class="col-sm-2 control-label">Telefone:</label>
-					<div class="col-sm-2">
-						<label id="nome" class="control-label">${pessoa.telefone }</label>
-					</div>
-				</div>
+			<div class="col-sm-6" align="right" style="margin-top: 15px;">
+				<a href="<c:url value="/nutricao/buscar"></c:url>" class="btn btn-primary">Voltar</a>
+				<a href="<c:url value="/nutricao/consulta/${pessoa.id }"></c:url>" class="btn btn-success">Realizar consulta</a>
 			</div>
-		</div>
+    	</div>
+	
+	    <div class="row">
+	  	  <div class="col-sm-5">
+	    
+		    <h4><b>Informações do Paciente</b></h4>
+
+		    <ul class="list-group">
+		        <li class="list-group-item"><b>Email:</b> ${pessoa.email }</li>
+		        <li class="list-group-item"><b>Telefone:</b> ${pessoa.telefone }</li>        
+		        <li class="list-group-item"><b>Sexo:</b> <c:out value="${pessoa.sexo eq 'F' ? 'Feminino' : 'Masculino'}"></c:out></li>
+		        <li class="list-group-item"><b>Idade:</b> ${pessoa.idade }</li>
+		    </ul>
+		</div>	        
+
+	        <div class="col-sm-7">
+				    <h4><b>Histórico de Consultas</b></h4>
+					<c:if test="${not empty pessoa.paciente.consultas}">
 		
-		<h3>Consultas</h3>
-
-		<c:if test="${not empty pessoa.paciente.consultas}">
-			<table class="table" id="consultas">
-				<thead>
-					<tr>
-						<th>Data</th>
-						<th colspan="3" width="20%">Ações</th>
-					</tr>
-				</thead>
-
-				<tbody>
-					<c:forEach var="consulta" items="${pessoa.paciente.consultas}">
-						<tr class="linha">
-							<td>
-								<a href="<c:url value="../detalhesConsulta/${consulta.id}/"/>"> 
-									<fmt:formatDate type="both" pattern="dd-MM-yyyy HH-mm" value="${consulta.data}" />
-								</a>
-							</td>
-							
-							<td>
-								<a id="detalhes" data-toggle="modal" href="<c:url value="../detalhesConsulta/${consulta.id}"/>">
-									<button class="btn btn-info"> Detalhes <span class="glyphicon glyphicon-eye-open"></span></button>
-								</a>
-							</td>
-							
-							<td>
-								<a id="relatorio" data-toggle="modal" href="<c:url value="../relatorio-orientacoes-individuais/${consulta.id}"/>">
-									<button class="btn btn-info"> Relatório <span class="glyphicon glyphicon-file"></span></button>
-								</a>
-							</td>
-							
-							<td>
-								<a id="editar" data-toggle="modal" href="<c:url value="../editarConsulta/${consulta.id}"/>">
-									<button class="btn btn-warning"> Editar <span class="glyphicon glyphicon-edit"></span></button>
-								</a>
-							</td>
-						</tr>
-					</c:forEach>
-				</tbody>
-			</table>
-		</c:if>
+					    <table class="table table-striped">
+					        <thead class="thead">
+					            <tr>
+					                <th>ª Consulta</th>
+									<th>Data</th>
+					                <th></th>
+					            </tr>
+					        </thead>
+					        <tbody>
+								<c:forEach var="consulta" items="${pessoa.paciente.consultas}" varStatus="cont">
+									<fmt:formatDate var="dataFormatada" type="both" pattern="dd/MM/yyyy HH:mm" value="${consulta.data}" />
+						            <tr>
+						                <td>${cont.count }ª Consulta</td>
+										<td><a href="<c:url value="../detalhesConsulta/${consulta.id}/"/>">${dataFormatada}</a></td>
 		
-		<c:if test="${empty pessoa.paciente.consultas}">
-			<div class="alert alert-warning" role="alert">Não há consultas cadastradas para esse paciente.</div>
-		</c:if>
+						                <td align="right">
+						                /editar-consulta/{idConsulta}/paciente/{idPaciente}
+							              <a href="<c:url value="/consulta/informacoes/${consulta.id}"/>" class="btn btn-info btn-sm"><span class="glyphicon glyphicon-eye-open"></span> Informações</a>
+							              <a href="<c:url value="../relatorio-orientacoes-individuais/${consulta.id}"/>" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-file"></span> Relatorio</a>
+							              <a href="<c:url value="/consulta/editar-consulta/${consulta.id}/paciente/${consulta.paciente.id}"/>" class="btn btn-warning btn-sm"><span class="glyphicon glyphicon-edit"></span> Editar</a>
+						                </td>
+						            </tr>
+								</c:forEach>
+					        </tbody>
+					    </table>
+					</c:if>
 
-		<div class="controls">
-			<a href="<c:url value="/nutricao/buscar"></c:url>" class="btn btn-default">Voltar</a>
-			<a href="<c:url value="/nutricao/consulta/${pessoa.id }"></c:url>" class="btn btn-primary">Realizar consulta</a>
-		</div>
-	</div>
+					<c:if test="${empty pessoa.paciente.consultas}">
+						<div class="alert alert-warning" role="alert">Não há consultas cadastradas para esse paciente.</div>
+					</c:if>
+  				</div>
+  				</div>
+  				</div>
+
 
 	<jsp:include page="../modulos/footer.jsp" />
 	

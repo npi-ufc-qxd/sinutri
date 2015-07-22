@@ -1,6 +1,6 @@
 package br.ufc.quixada.npi.sisat.model.enuns;
 
-public enum Classificacao {
+public enum ClassificacaoExame {
 		
 	VAZIO("Vazio"),
 	MUITOALTO("Muito Alto"),	
@@ -11,7 +11,7 @@ public enum Classificacao {
 
 	private String tipo;
 		
-	private Classificacao(String tipo){
+	private ClassificacaoExame(String tipo){
 		this.tipo = tipo;
 	}
 

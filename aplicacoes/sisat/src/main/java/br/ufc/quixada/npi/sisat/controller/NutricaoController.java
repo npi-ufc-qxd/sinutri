@@ -40,7 +40,7 @@ import br.ufc.quixada.npi.sisat.model.Documento;
 import br.ufc.quixada.npi.sisat.model.FrequenciaAlimentar;
 import br.ufc.quixada.npi.sisat.model.Paciente;
 import br.ufc.quixada.npi.sisat.model.Pessoa;
-import br.ufc.quixada.npi.sisat.model.enuns.Classificacao;
+import br.ufc.quixada.npi.sisat.model.enuns.ClassificacaoExame;
 import br.ufc.quixada.npi.sisat.model.enuns.Refeicao;
 import br.ufc.quixada.npi.sisat.service.ConsultaNutricionalService;
 import br.ufc.quixada.npi.sisat.service.DocumentoService;
@@ -85,7 +85,7 @@ public class NutricaoController {
 		Paciente paciente = new Paciente();
 		consulta.setPaciente(paciente);
 		model.addAttribute("consultaNutricional", consulta);
-		model.addAttribute("classificacao", Classificacao.values());
+		model.addAttribute("classificacao", ClassificacaoExame.values());
 		model.addAttribute("refeicoes", Refeicao.values());		
 		
 		return "nutricao/consulta-layout";
@@ -128,7 +128,7 @@ public class NutricaoController {
 		model.addAttribute("documentosNutricionista", documentosNutricionista);
 		model.addAttribute("action", "editar");
 		model.addAttribute("consultaNutricional", consultaNutricional);
-		Classificacao[] cla= Classificacao.values();
+		ClassificacaoExame[] cla= ClassificacaoExame.values();
 		model.addAttribute("classificacao", cla);		
 		return "/nutricao/consulta";
 	}
@@ -256,86 +256,12 @@ public class NutricaoController {
 		ConsultaNutricional consulta = new ConsultaNutricional();
 		Paciente paciente = pessoa.getPaciente();
 		consulta.setPaciente(paciente);
+
 		model.addAttribute("consultaNutricional", consulta);
-		model.addAttribute("classificacao", Classificacao.values());
+		model.addAttribute("classificacao", ClassificacaoExame.values());
 		model.addAttribute("refeicoes", Refeicao.values());		
 
-		return "nutricao/consulta";
-	}
-
-	@RequestMapping(value = {"/consultar"}, method = RequestMethod.POST)
-	public String consulta(Model model, @Valid ConsultaNutricional consulta, BindingResult result, RedirectAttributes redirectAttributes, @RequestParam("files") List<MultipartFile> files, @RequestParam(value = "enviar", required = false) boolean enviar) {		
-		model.addAttribute("action", "cadastrar");
-
-		if (result.hasErrors()) {
-			return ("nutricao/consulta");
-		}
-
-		Paciente paciente = pacienteService.find(Paciente.class, consulta.getPaciente().getId());
-		Double altura = consulta.getAltura();
-		Date data = new Date(System.currentTimeMillis());
-		consulta.setData(data);
-		consulta.setPaciente(paciente);
-		consulta.getPaciente().setAlturaAtual(altura);
-		consulta.getPaciente().setCircunferenciaCinturaAtual(consulta.getCircunferenciaCintura());
-		consulta.getPaciente().setPesoAtual(consulta.getPeso());
-
-		// verificar se os documentos foram anexados
-		List<Documento> documentos = new ArrayList<Documento>();
-		if (files != null && !files.isEmpty() && files.get(0).getSize() > 0) {
-
-			for (MultipartFile mfiles : files) {
-				try {
-					if (mfiles.getBytes() != null && mfiles.getBytes().length != 0) {
-						Documento documento = new Documento();
-						documento.setArquivo(mfiles.getBytes());
-						documento.setNome(mfiles.getOriginalFilename());
-						documento.setTipo(mfiles.getContentType());
-						documento.setEnviar(enviar);
-						documento.setConsultaNutricional(consulta);
-						documento.setData(new Date());
-						documentos.add(documento);
-					}
-				} catch (IOException e) {
-					model.addAttribute("erro", "Não foi possivel salvar os documentos.");
-					return ("nutricao/consulta");
-				}
-			}
-
-			if(!documentos.isEmpty()){
-				consulta.setDocumentos(documentos);
-			}
-		}else{
-			model.addAttribute("anexoError", "Adicione anexo a seleção");					
-		}
-
-
-		if(consulta.getAgua().equals(0)){
-			consulta.setAgua(null);
-		}
-		if(consulta.getMedicamentoComentario()!=null && consulta.getMedicamentoComentario().isEmpty()){
-			consulta.setMedicamentoComentario(null);
-		}
-		if(consulta.getMastigacaoComentario()!=null && consulta.getMastigacaoComentario().isEmpty()){
-			consulta.setMastigacaoComentario(null);
-		}
-		if(consulta.getAlergiaComentario()!=null && consulta.getAlergiaComentario().isEmpty()){
-			consulta.setAlergiaComentario(null);
-		}
-		if(consulta.getCarneVermelhaComentario()!=null && consulta.getCarneVermelhaComentario().isEmpty()){
-			consulta.setCarneVermelhaComentario(null);
-		}
-		if(consulta.getAtividadeFisicaComentario()!=null && consulta.getAtividadeFisicaComentario().isEmpty()){
-			consulta.setAtividadeFisicaComentario(null);
-		}
-		if(consulta.getBebidaAlcoolicaComentario()!=null && consulta.getBebidaAlcoolicaComentario().isEmpty()){
-			consulta.setBebidaAlcoolicaComentario(null);
-		}
-		consultaNutricionalService.save(consulta);
-
-		redirectAttributes.addFlashAttribute("success", "Consulta de <strong>id = " + consulta.getId() + "</strong> e paciente <strong>" + consulta.getPaciente().getPessoa().getNome() + "</strong> realizada com sucesso.");
-		return "redirect:/nutricao/buscar";
-
+		return "nutricao/consulta-layout";
 	}
 
 	//Consulta Nutricional --> Read
