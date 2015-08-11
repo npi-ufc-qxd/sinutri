@@ -47,7 +47,7 @@
 		
 		<!-- NPI -->
 		<npi.core.version>0.1.0</npi.core.version>
-		<npi.ldap.version>0.1</npi.ldap.version>
+		<npi.ldap.version>0.1.1</npi.ldap.version>
 	</properties>
 
 	<repositories>
