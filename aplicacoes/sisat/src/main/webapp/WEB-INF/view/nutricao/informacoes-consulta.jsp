@@ -10,7 +10,7 @@
 	<head>
 		<jsp:include page="../modulos/header-estrutura.jsp" />
 
-		<title>Layout</title>
+		<title>Informações da Consulta</title>
 		<style type="text/css">
 	 		.footer {
 	 			position:relative;
@@ -29,10 +29,9 @@
 			<div class="col-sm-4"><h2>Informações da Consulta</h2></div>
 
 			<div class="col-sm-8" align="right" style="margin-top: 15px;">
-				<a href="<c:url value="/nutricao/buscar"></c:url>" class="btn btn-default">Voltar</a>
+				<a href="<c:url value="/consulta/historico-paciente/${consulta.paciente.pessoa.cpf}"></c:url>" class="btn btn-primary">Voltar</a>
 				<a href="<c:url value="#/nutricao/plano-alimentar"></c:url>" class="btn btn-info">Criar Plano Alimentar</a>
-				<a href="<c:url value="/consulta/paciente/${consulta.paciente.id }"></c:url>" class="btn btn-success">Realizar consulta</a>
-				<a href="<c:url value="#/consulta/editar-consulta/${consulta.id }/paciente/${consulta.paciente.id }"></c:url>" class="btn btn-warning">Editar</a>
+				<a href="<c:url value="/consulta/editar-consulta/${consulta.id}/paciente/${consulta.paciente.pessoa.cpf}"/>" class="btn btn-warning"><span class="glyphicon glyphicon-edit"></span> Editar</a>
 			</div>
     	</div>
 	

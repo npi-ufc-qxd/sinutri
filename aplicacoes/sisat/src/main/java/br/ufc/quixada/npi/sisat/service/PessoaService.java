@@ -7,7 +7,7 @@ import br.ufc.quixada.npi.sisat.model.Pessoa;
 
 public interface PessoaService extends GenericService<Pessoa> {
 
-	public abstract Pessoa getPessoaByLogin(String login);
+	public abstract Pessoa getPessoaByCpf(String cpf);
 	
 	public abstract List<Pessoa> getPessoasByCpf(String cpf);	
 
@@ -16,6 +16,4 @@ public interface PessoaService extends GenericService<Pessoa> {
 	public abstract List<Pessoa> getPessoasByNomeOuCpf(String busca);
 	
 	public abstract List<Pessoa> getPareceristas(Long id);
-	
-
 }

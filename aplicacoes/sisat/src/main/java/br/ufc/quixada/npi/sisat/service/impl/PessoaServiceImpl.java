@@ -14,8 +14,8 @@ import br.ufc.quixada.npi.util.SimpleMap;
 public class PessoaServiceImpl extends GenericServiceImpl<Pessoa> implements PessoaService {
 
 	
-	public Pessoa getPessoaByLogin(String login) {
-		return (Pessoa) findFirst("Pessoa.findPessoaByLogin", new SimpleMap<String, Object>("login", login));
+	public Pessoa getPessoaByCpf(String cpf) {
+		return (Pessoa) findFirst("Pessoa.findPessoaByCpf", new SimpleMap<String, Object>("cpf", cpf));
 	}
 	
 	public List<Pessoa> getPessoasByCpf(String cpf) {

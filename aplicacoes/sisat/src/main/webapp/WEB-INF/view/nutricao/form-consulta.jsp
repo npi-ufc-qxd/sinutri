@@ -6,11 +6,22 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 
+<c:if test="${action eq 'cadastrar' }">
+	<c:set var="url" value="/consulta/realizar-consulta/${consultaNutricional.paciente.pessoa.cpf}"></c:set>
+	<c:set var="titulo" value="Nova Consulta "></c:set>
+	<c:set var="botao" value="Finalizar Consulta "></c:set>
+</c:if>
+<c:if test="${action eq 'editar' }">
+	<c:set var="url" value="/consulta/editar-consulta/${consultaNutricional.id}/paciente/${consultaNutricional.paciente.pessoa.cpf}"></c:set>
+	<c:set var="titulo" value="Editar Consulta  "></c:set>
+	<c:set var="botao" value="Atualizar Consulta"></c:set>
+</c:if>
+
 <html>
 	<head>
 		<jsp:include page="../modulos/header-estrutura.jsp" />
 
-		<title>Layout</title>
+		<title>${titulo}</title>
 		<style type="text/css">
 	 		.footer {
 	 			position:relative;
@@ -21,23 +32,12 @@
 
 <body data-spy="scroll" data-target="#myScrollspy">
 
-	<c:if test="${action eq 'cadastrar' }">
-		<c:set var="url" value="/consulta/paciente/${consultaNutricional.paciente.id}"></c:set>
-		<c:set var="titulo" value="Nova Consulta "></c:set>
-		<c:set var="botao" value="Finalizar Consulta "></c:set>
-	</c:if>
-	<c:if test="${action eq 'editar' }">
-		<c:set var="url" value="/nutricao/editarConsulta"></c:set>
-		<c:set var="titulo" value="Editar Consulta  "></c:set>
-		<c:set var="botao" value="Atualizar Consulta"></c:set>
-	</c:if>
-
 	<jsp:include page="../modulos/header.jsp" />
 
 	<div class="container">
 	    <div class="row">
 	    	<div class="tituloConsulta">
-		    	<h2>Consulta Nutricional</h2>
+		    	<h2>${titulo}</h2>
 	    	</div>
     	</div>
 	
@@ -318,7 +318,7 @@
 	
 			        <div class="form-item col-sm-3">
 			        	<label class="control-label">&nbsp;&nbsp;&nbsp;</label>
-						<form:select path="classificacaoGlicemia" cssClass="form-control" disabled="${not consultaNutricional.classificacaoGlicemia}">
+						<form:select path="classificacaoGlicemia" cssClass="form-control" disabled="${empty consultaNutricional.glicemia ? true : false }">
 							<form:option value="">Classificação</form:option>
 							<form:options items="${classificacaoExames}" itemLabel="tipo"/>
 						</form:select>
@@ -332,7 +332,7 @@
 	
 			        <div class="form-item col-sm-3">
 			        	<label class="control-label">&nbsp;&nbsp;&nbsp;</label>
-						<form:select path="classificacaoCt" cssClass="form-control" disabled="${not consultaNutricional.classificacaoCt}">
+						<form:select path="classificacaoCt" cssClass="form-control" disabled="${empty consultaNutricional.ct ? true : false }">
 							<form:option value="">Classificação</form:option>
 							<form:options items="${classificacaoExames}" itemLabel="tipo"/>
 						</form:select>
@@ -348,7 +348,7 @@
 	
 			        <div class="form-item col-sm-3">
 			        	<label class="control-label">&nbsp;&nbsp;&nbsp;</label>
-						<form:select path="classificacaoLdlc" cssClass="form-control" disabled="${not consultaNutricional.classificacaoLdlc}">
+						<form:select path="classificacaoLdlc" cssClass="form-control" disabled="${empty consultaNutricional.ldlc ? true : false }">
 							<form:option value="">Classificação</form:option>
 							<form:options items="${classificacaoExames}" itemLabel="tipo"/>
 						</form:select>
@@ -362,7 +362,7 @@
 	
 			        <div class="form-item col-sm-3">
 			        	<label class="control-label">&nbsp;&nbsp;&nbsp;</label>
-						<form:select path="classificacaoHdlc" cssClass="form-control" disabled="${not consultaNutricional.classificacaoHdlc}">
+						<form:select path="classificacaoHdlc" cssClass="form-control" disabled="${empty consultaNutricional.hdlc ? true : false }">
 							<form:option value="">Classificação</form:option>
 							<form:options items="${classificacaoExames}" itemLabel="tipo"/>
 						</form:select>
@@ -378,7 +378,7 @@
 	
 			        <div class="form-item col-sm-3">
 			        	<label class="control-label">&nbsp;&nbsp;&nbsp;</label>
-						<form:select path="classificacaoTg" cssClass="form-control" disabled="${not consultaNutricional.classificacaoTg}">
+						<form:select path="classificacaoTg" cssClass="form-control" disabled="${empty consultaNutricional.tg ? true : false }">
 							<form:option value="">Classificação</form:option>
 							<form:options items="${classificacaoExames}" itemLabel="tipo"/>
 						</form:select>
@@ -392,7 +392,7 @@
 	
 			        <div class="form-item col-sm-3">
 			        	<label class="control-label">&nbsp;&nbsp;&nbsp;</label>
-						<form:select path="classificacaoHb" cssClass="form-control" disabled="${not consultaNutricional.classificacaoHb}">
+						<form:select path="classificacaoHb" cssClass="form-control" disabled="${empty consultaNutricional.hb ? true : false }">
 							<form:option value="">Classificação</form:option>
 							<form:options items="${classificacaoExames}" itemLabel="tipo"/>
 						</form:select>
@@ -408,7 +408,7 @@
 	
 			        <div class="form-item col-sm-3">
 			        	<label class="control-label">&nbsp;&nbsp;&nbsp;</label>
-						<form:select path="classificacaoTgo" cssClass="form-control" disabled="${not consultaNutricional.classificacaoTgo}">
+						<form:select path="classificacaoTgo" cssClass="form-control" disabled="${empty consultaNutricional.tgo ? true : false }">
 							<form:option value="">Classificação</form:option>
 							<form:options items="${classificacaoExames}" itemLabel="tipo"/>
 						</form:select>
@@ -422,7 +422,7 @@
 	
 			        <div class="form-item col-sm-3">
 			        	<label class="control-label">&nbsp;&nbsp;&nbsp;</label>
-						<form:select path="classificacaoTgp" cssClass="form-control" disabled="${not consultaNutricional.classificacaoTgp}">
+						<form:select path="classificacaoTgp" cssClass="form-control" disabled="${empty consultaNutricional.tgp ? true : false }">
 							<form:option value="">Classificação</form:option>
 							<form:options items="${classificacaoExames}" itemLabel="tipo"/>
 						</form:select>

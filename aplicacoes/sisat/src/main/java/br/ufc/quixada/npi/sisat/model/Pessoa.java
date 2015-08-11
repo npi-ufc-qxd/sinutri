@@ -8,6 +8,7 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EntityListeners;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -20,72 +21,78 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.persistence.UniqueConstraint;
 
 import org.codehaus.jackson.annotate.JsonIgnore;
 
 @NamedQueries({
-		@NamedQuery(name = "Pessoa.findPessoasByCpf", query = "select p from Pessoa p where p.cpf = :cpf"),
-		@NamedQuery(name = "Pessoa.findPessoasByNome", query = "SELECT p FROM Pessoa p WHERE UPPER(p.nome) LIKE :nome ORDER BY p.nome"),
-		@NamedQuery(name = "Pessoa.findPessoasByNomeOrCpf", query = "SELECT p FROM Pessoa p WHERE UPPER(p.nome) LIKE :busca or p.cpf = :cpf ORDER BY p.nome"),
-		@NamedQuery(name = "Pessoa.findPessoaByLogin", query = "select p from Pessoa p where p.login = :login"),
+		@NamedQuery(name = "Pessoa.findPessoaByCpf", query = "select p from Pessoa p where p.cpf = :cpf"),
+//		@NamedQuery(name = "Pessoa.findPessoasByNome", query = "SELECT p FROM Pessoa p WHERE UPPER(p.nome) LIKE :nome ORDER BY p.nome"),
+//		@NamedQuery(name = "Pessoa.findPessoasByNomeOrCpf", query = "SELECT p FROM Pessoa p WHERE UPPER(p.nome) LIKE :busca or p.cpf = :cpf ORDER BY p.nome"),
+		@NamedQuery(name = "Pessoa.findPessoaByLogin", query = "select p from Pessoa p where p.cpf = :login"),
 		@NamedQuery(name = "Pessoa.findPareceristas", query = "select p from Pessoa p where p.id <> :id") // '<>'
 																											// diferente
 })
 @Entity
-@Table(uniqueConstraints = @UniqueConstraint(columnNames = { "id", "login" }))
+@EntityListeners(PessoaEntityListener.class)
+@Table(uniqueConstraints = @UniqueConstraint(columnNames = { "id", "cpf" }))
 public class Pessoa {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	
+	@ManyToMany
+	@JoinTable(name = "papel_pessoa", joinColumns = @JoinColumn(name = "pessoa_id"), inverseJoinColumns = @JoinColumn(name = "papel_id"))
+	private List<Papel> papeis;
+
+	@Column(unique = true)
+	private String cpf;
+
+	@Transient
+	private String nome;
+
+	@Transient
+	private String email;
 
 	@OneToOne(cascade = CascadeType.ALL)
 	@PrimaryKeyJoinColumn
 	private Paciente paciente;
 
-	@Column(nullable = false)
-	private String login;
-
-	@Column(nullable = false)
-	private String password;
-
-	@Column(nullable = false)
-	private boolean habilitado;
-
-	@ManyToMany
-	@JoinTable(name = "papel_pessoa", joinColumns = @JoinColumn(name = "pessoa_id"), inverseJoinColumns = @JoinColumn(name = "papel_id"))
-	private List<Papel> papeis;
-
 	@JsonIgnore
 	@OneToMany(mappedBy = "pessoa")
 	private List<Servidor> servidores;
 
-	private String cpf;
-
-	private String nome;
-
-	private String email;
-
 	@Column(columnDefinition = "char(1)")
 	private String sexo;
 
+	@Transient
 	private Date dataNascimento;
 
+	@Transient
 	private String telefone;
 
-	public Pessoa() {
-		super();
+	public Pessoa(){}
+
+	public Pessoa(String cpf){
+		setCpf(cpf);
 	}
 
-	public Pessoa(String cpf, String nome, String sobrenome, String email,
-			String senha) {
-		super();
-		this.cpf = cpf;
-		this.nome = nome;
+	public Long getId() {
+		return id;
+	}
 
-		this.email = email;
-		this.password = senha;
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public List<Papel> getPapeis() {
+		return papeis;
+	}
+
+	public void setPapeis(List<Papel> papeis) {
+		this.papeis = papeis;
 	}
 
 	public String getCpf() {
@@ -112,44 +119,12 @@ public class Pessoa {
 		this.email = email;
 	}
 
-	public String getPassword() {
-		return password;
+	public Paciente getPaciente() {
+		return paciente;
 	}
 
-	public void setPassword(String password) {
-		this.password = password;
-	}
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	public String getLogin() {
-		return login;
-	}
-
-	public void setLogin(String login) {
-		this.login = login;
-	}
-
-	public boolean isHabilitado() {
-		return habilitado;
-	}
-
-	public void setHabilitado(boolean habilitado) {
-		this.habilitado = habilitado;
-	}
-
-	public List<Papel> getPapeis() {
-		return papeis;
-	}
-
-	public void setPapeis(List<Papel> papeis) {
-		this.papeis = papeis;
+	public void setPaciente(Paciente paciente) {
+		this.paciente = paciente;
 	}
 
 	public List<Servidor> getServidores() {
@@ -209,14 +184,6 @@ public class Pessoa {
 		return idade;
 	}
 
-	public Paciente getPaciente() {
-		return paciente;
-	}
-
-	public void setPaciente(Paciente paciente) {
-		this.paciente = paciente;
-	}
-
 	public boolean isNutricao() {
 		for (Papel p : this.papeis) {
 			if (p.getNome().equals("ROLE_NUTRICAO")) {
@@ -226,25 +193,7 @@ public class Pessoa {
 		return false;
 	}
 
-	@Override
-	public boolean equals(Object obj) {
-		if (obj instanceof Pessoa) {
-			Pessoa other = (Pessoa) obj;
-			if (other != null && other.getId() != null && this.id != null
-					&& other.getId().equals(this.id)) {
-				return true;
-			}
-		}
-		return false;
-	}
-
-	@Override
-	public String toString() {
-		return "Pessoa [id=" + id + ", paciente=" + paciente + ", login="
-				+ login + ", password=" + password + ", habilitado="
-				+ habilitado + ", papeis=" + papeis + ", servidores="
-				+ servidores + ", cpf=" + cpf + ", nome=" + nome + ", email="
-				+ email + ", sexo=" + sexo + ", dataNascimento="
-				+ dataNascimento + ", telefone=" + telefone + "]";
-	}
 }
+
+
+

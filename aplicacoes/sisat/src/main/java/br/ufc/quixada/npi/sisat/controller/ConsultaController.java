@@ -9,6 +9,9 @@ import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
+import net.sf.jasperreports.engine.JREmptyDataSource;
+import net.sf.jasperreports.engine.JRException;
+
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,6 +23,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import br.ufc.quixada.npi.ldap.model.Usuario;
+import br.ufc.quixada.npi.ldap.service.UsuarioService;
 import br.ufc.quixada.npi.sisat.model.Alimentacao;
 import br.ufc.quixada.npi.sisat.model.ConsultaNutricional;
 import br.ufc.quixada.npi.sisat.model.Documento;
@@ -52,9 +57,27 @@ public class ConsultaController {
 	@Inject	
 	private DocumentoService documentoService;
 
-	
-	@RequestMapping(value = {"informacoes/{id}"})
-	public String getDetalhesConsulta(@PathVariable("id") Long id, Model model, RedirectAttributes redirectAttributes){
+	@Inject	
+	private UsuarioService usuarioService;
+
+	//Detalhes de paciente
+	@RequestMapping(value = "historico-paciente/{cpf}", method = RequestMethod.GET)
+	public String getPaginaHistorico(@PathVariable("cpf") String cpf, Model model, RedirectAttributes redirectAttributes){
+		
+		Pessoa pessoa = registrarPaciente(cpf);
+
+		if(pessoa == null){
+			redirectAttributes.addFlashAttribute("erro", "Paciente não encontrado. Faça um nova pesquisa");
+			return "redirect:/nutricao/buscar";
+		}
+
+		model.addAttribute("pessoa", pessoa);
+
+		return "nutricao/historico-paciente";
+	}
+
+	@RequestMapping(value = {"informacoes-consulta/{id}"} , method = RequestMethod.GET)
+	public String getPaginaInformacoesConsulta(@PathVariable("id") Long id, Model model, RedirectAttributes redirectAttributes){
 		ConsultaNutricional consulta = consultaNutricionalService.getConsultaNutricionalWithFrequenciasById(id);
 
 		if(consulta == null){
@@ -65,37 +88,24 @@ public class ConsultaController {
 		model.addAttribute("consulta", consulta);
 		return "nutricao/informacoes-consulta";
 	}
-
-	@RequestMapping(value = {"paciente/{idPaciente}"}, method = RequestMethod.GET)
-	public String realizarConsultaPaciente(Model model, @PathVariable("idPaciente") Long idPaciente, RedirectAttributes redirectAttributes) {
+	
+	@RequestMapping(value = "realizar-consulta/{cpf}", method = RequestMethod.GET)
+	public String getPaginaRealizarConsulta(@PathVariable("cpf") String cpf, Model model, RedirectAttributes redirectAttributes) {
 
 		model.addAttribute("action", "cadastrar");
 
-		Pessoa pessoa = pessoaService.find(Pessoa.class, idPaciente);
+		Pessoa pessoa = registrarPaciente(cpf);
 
 		if(pessoa == null){
-			redirectAttributes.addFlashAttribute("erro", "Paciente não encontrado.");
+			redirectAttributes.addFlashAttribute("erro", "Paciente não encontrado. Faça um nova pesquisa");
 			return "redirect:/nutricao/buscar";
-		}
-
-		if( !isPaciente(pessoa)){
-			pessoa.setPaciente(new Paciente());
-			pessoa.getPaciente().setPessoa(pessoa);
-			pessoa.getPaciente().setAlturaAtual(1.0);
-			pessoa.getPaciente().setCircunferenciaCinturaAtual(1.0);
-			pessoa.getPaciente().setPesoAtual(1.0);
-
-			pessoaService.update(pessoa);
 		}
 
 		ConsultaNutricional consulta = new ConsultaNutricional();
 		Paciente paciente = pessoa.getPaciente();
 		consulta.setPaciente(paciente);
 
-//		model.addAttribute("consultaNutricional", consulta);
 		model.addAttribute("consultaNutricional", new ConsultaNutricional(pessoa.getPaciente()));
-		
-		
 		model.addAttribute("sistemaGastrointestinal", SistemaGastrointestinal.values());		
 		model.addAttribute("classificacaoExames", ClassificacaoExame.values());
 		model.addAttribute("sistemaUrinario", SistemaUrinario.values());
@@ -103,16 +113,23 @@ public class ConsultaController {
 		model.addAttribute("frequencia", Frequencia.values());
 		model.addAttribute("refeicoes", Refeicao.values());
 
-		return "nutricao/consulta-layout";
+		return "nutricao/form-consulta";
 	}
-	
-	@RequestMapping(value = {"paciente/{idPaciente}"}, method = RequestMethod.POST)
-	public String salvarConsultaPaciente(Model model, @Valid ConsultaNutricional consulta, BindingResult result, RedirectAttributes redirectAttributes, @RequestParam("files") List<MultipartFile> files, @RequestParam(value = "enviar", required = false) boolean enviar) {		
+
+	@RequestMapping(value = {"realizar-consulta/{cpf}"}, method = RequestMethod.POST)
+	public String salvarConsulta(Model model, @PathVariable("cpf") String cpf, @Valid ConsultaNutricional consulta, BindingResult result, RedirectAttributes redirectAttributes, @RequestParam("files") List<MultipartFile> files, @RequestParam(value = "enviar", required = false) boolean enviar) {		
 		
 		model.addAttribute("action", "cadastrar");
+		
+		Pessoa pessoa = pessoaService.getPessoaByCpf(cpf);
+
+		if(pessoa == null){
+			redirectAttributes.addFlashAttribute("erro", "Paciente não encontrado. Faça um nova pesquisa");
+			return "redirect:/nutricao/buscar";
+		}
 
 		if (result.hasErrors()) {
-			return ("nutricao/consulta-layout");
+			return ("nutricao/form-consulta");
 		}
 
 		Paciente paciente = pacienteService.find(Paciente.class, consulta.getPaciente().getId());
@@ -178,12 +195,13 @@ public class ConsultaController {
 		consultaNutricionalService.save(consulta);
 
 		redirectAttributes.addFlashAttribute("success", "Consulta de <strong>id = " + consulta.getId() + "</strong> e paciente <strong>" + consulta.getPaciente().getPessoa().getNome() + "</strong> realizada com sucesso.");
-		return "redirect:/nutricao/buscar";
 
+		return "redirect:/consulta/informacoes-consulta/" + consulta.getId();
 	}
+
 	
-	@RequestMapping(value = {"/editar-consulta/{idConsulta}/paciente/{idPaciente}"}, method = RequestMethod.GET)
-	public String editarConsulta(@PathVariable("idConsulta") long idConsulta, @PathVariable("idPaciente") long idPaciente, Model model) {
+	@RequestMapping(value = {"/editar-consulta/{idConsulta}/paciente/{cpf}"}, method = RequestMethod.GET)
+	public String editarConsulta(@PathVariable("idConsulta") long idConsulta, @PathVariable("cpf") String cpf, Model model) {
 
 		ConsultaNutricional consultaNutricional = consultaNutricionalService.getConsultaNutricionalWithDocumentosById(idConsulta);
 		
@@ -202,18 +220,19 @@ public class ConsultaController {
 		model.addAttribute("frequencia", Frequencia.values());
 		model.addAttribute("refeicoes", Refeicao.values());
 
-		return "/nutricao/consulta";
+		return "nutricao/form-consulta";
 
 	}
 
-	@RequestMapping(value = {"/editar-consulta/{idConsulta}/paciente/{idPaciente}"}, method = RequestMethod.POST)
+	@RequestMapping(value = {"/editar-consulta/{idConsulta}/paciente/{cpf}"}, method = RequestMethod.POST)
 	public String editarConsulta(Model model, @Valid ConsultaNutricional consulta, BindingResult result, RedirectAttributes redirectAttributes, @RequestParam("files") List<MultipartFile> files, @RequestParam(value = "enviar", required = false) boolean enviar) {
 		model.addAttribute("action", "editar");
 
 		if (result.hasErrors()) {
-			return ("nutricao/consulta");
+			return ("nutricao/form-consulta");
 		}		
-		Paciente paciente = pacienteService.find(Paciente.class, consulta.getPaciente().getId());		
+
+		Paciente paciente = pacienteService.find(Paciente.class, consulta.getPaciente().getId());
 		Date data = consultaNutricionalService.find(ConsultaNutricional.class, consulta.getId()).getData();
 
 		// verificar se os documentos foram anexados
@@ -235,7 +254,7 @@ public class ConsultaController {
 					}
 				} catch (IOException e) {
 					model.addAttribute("erro", "Não foi possivel salvar os documentos.");
-					return ("nutricao/consulta");
+					return ("nutricao/form-consulta");
 				}
 			}
 
@@ -251,34 +270,56 @@ public class ConsultaController {
 
 		consultaNutricionalService.update(atualizarConsulta(consulta));	
 		redirectAttributes.addFlashAttribute("success", "Consulta do paciente <strong>" + consulta.getPaciente().getPessoa().getNome() + "</strong> atualizada com sucesso.");
-		return "redirect:/nutricao/detalhes/" + consulta.getPaciente().getId();
+
+		return "redirect:/consulta/informacoes-consulta/" + consulta.getId();
+	}	
+
+	@RequestMapping(value = "/relatorio-orientacoes/{id}", method = RequestMethod.GET)
+	public String relatorio(@PathVariable("id") Long id, Model model, HttpSession session) throws JRException {
+		
+		String orientacoesIndividuais = consultaNutricionalService.getOrientacoesIndividuaisById(id);
+		String cpf = consultaNutricionalService.getPacientePessoaCpfById(id);
+		String nome = usuarioService.getByCpf(cpf).getNome();
+		String nutricionista = getUsuarioLogado(session).getNome();
+				
+		model.addAttribute("format", "pdf");
+		model.addAttribute("orientacoesIndividuais", orientacoesIndividuais);
+		model.addAttribute("paciente", nome);
+		model.addAttribute("nutricionista", nutricionista);
+		model.addAttribute("datasource", new JREmptyDataSource());
+		
+		return "orientacoesIndividuais";
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
+	private Pessoa  registrarPaciente(String cpf) {
+		Pessoa pessoa = pessoaService.getPessoaByCpf(cpf);
+
+		if(pessoa == null){
+			Usuario usuario = usuarioService.getByCpf(cpf);
+
+			if(usuario != null) {
+				pessoa = new Pessoa(usuario.getCpf());
+				
+				pessoaService.save(pessoa);
+
+				pessoa.setPaciente(new Paciente());
+				pessoa.getPaciente().setPessoa(pessoa);
+				pessoa.getPaciente().setAlturaAtual(1.0);
+				pessoa.getPaciente().setCircunferenciaCinturaAtual(1.0);
+				pessoa.getPaciente().setPesoAtual(1.0);
+
+				pessoaService.update(pessoa);
+				
+				return pessoa;
+
+			} else {
+		
+				return null;
+			}
+		}
+		
+		return pessoa;
+	}
 	
 	private ConsultaNutricional atualizarConsulta(ConsultaNutricional consulta) {
 		if (consulta.getFrequencias() != null) {
@@ -300,27 +341,12 @@ public class ConsultaController {
 
 		return consulta;
 	}
-	
-	private boolean isPaciente(Pessoa pessoa) {
-		if(pessoa.getPaciente() != null)
-			return true;
-		return false;
-	}
 
 	private Pessoa getUsuarioLogado(HttpSession session) {
 		if (session.getAttribute("usuario") == null) {
-			Pessoa pessoa = pessoaService.getPessoaByLogin(SecurityContextHolder.getContext().getAuthentication().getName());
+			Pessoa pessoa = pessoaService.getPessoaByCpf(SecurityContextHolder.getContext().getAuthentication().getName());
 			session.setAttribute("usuario", pessoa);
 		}
 		return (Pessoa) session.getAttribute("usuario");
-	}
-	
-	private String getNomeUsuarioLogado(HttpSession session) {
-		if (session.getAttribute("usuario") == null) {
-			Pessoa pessoa = pessoaService.getPessoaByLogin(SecurityContextHolder.getContext().getAuthentication().getName());
-			session.setAttribute("usuario", pessoa);
-		}
-		Pessoa pessoa = (Pessoa) session.getAttribute("usuario");
-		return pessoa.getNome();
 	}
 }

@@ -22,7 +22,7 @@
 		<form:form id="formBuscarPaciente" role="form" servletReltiveAction="/nutricao/buscar" method="POST" class="bs-component">	
 			<div class="form-group">
 			  <div class="input-group">
-				<input id="busca" name="busca" type="text" class="form-control" placeholder="Nome ou CPF" size="40" required="required" value="${busca }"/>
+				<input id="busca" name="busca" type="text" class="form-control" placeholder="Nome ou CPF" size="40" required="required" value="${busca }" autofocus="autofocus"/>
 			    <span class="input-group-btn">
 			    	<button class="btn btn-default" name="submit" type="submit"><span class="glyphicon glyphicon-search"></span> Buscar</button>
 			    </span>
@@ -42,7 +42,6 @@
 			    <table class="table table-striped">
 			        <thead class="thead">
 			            <tr>
-			                <th></th>
 			                <th>Paciente</th>
 			                <th>Email</th>
 			                <th></th>
@@ -51,12 +50,11 @@
 			        <tbody>
 						<c:forEach var="pessoa" items="${pessoas}">
 				            <tr>
-				                <td>1</td>
-				                <td><a href="<c:url value="/nutricao/detalhes/${pessoa.id}"></c:url>">${pessoa.nome}</a></td>
+				                <td><a href="<c:url value="/consulta/historico-paciente/${pessoa.cpf}"></c:url>">${pessoa.nome}</a></td>
 				                <td>${pessoa.email}</td>
 				                <td align="right">
-					              <a href="detalhes/${pessoa.id}" class="btn btn-info btn-sm"><span class="glyphicon glyphicon-eye-open"></span> Informações</a>
-					              <a href="consulta/${pessoa.id}" class="btn btn-success btn-sm"><span class="glyphicon glyphicon-plus"></span> Consulta</a>
+				                	<a href="<c:url value="/consulta/historico-paciente/${pessoa.cpf}"/>" class="btn btn-info btn-sm"><span class="glyphicon glyphicon-eye-open"></span> Historico</a>
+				                	<a href="<c:url value="/consulta/realizar-consulta/${pessoa.cpf}"/>" class="btn btn-success btn-sm"><span class="glyphicon glyphicon-plus"></span> Consulta</a>
 				                </td>
 				            </tr>
 						</c:forEach>

@@ -86,3 +86,7 @@ ul.nav-tabs li:last-child a {
 .label-horario h1 {
 	margin-top: 5px;
 }
+
+.form-busca {
+	display: inline;
+}

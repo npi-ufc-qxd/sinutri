@@ -2,35 +2,41 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
 	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:jee="http://www.springframework.org/schema/jee"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans          
            http://www.springframework.org/schema/beans/spring-beans.xsd
            http://www.springframework.org/schema/context 
 		   http://www.springframework.org/schema/context/spring-context.xsd
 		   http://www.springframework.org/schema/tx
-		   http://www.springframework.org/schema/tx/spring-tx.xsd">
+		   http://www.springframework.org/schema/tx/spring-tx.xsd
+		   http://www.springframework.org/schema/jee 
+           http://www.springframework.org/schema/jee/spring-jee-3.2.xsd">
+           
+	<bean id="applicationContextProvder" class="br.ufc.quixada.npi.sisat.model.PessoaEntityListener"/>
+           
 
-	<bean id="emf"
-		class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+	<bean id="emf" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
 		<property name="persistenceUnitName" value="dev" />
 		<property name="dataSource" ref="sisat" />
 	</bean>
+
 	<bean id="sisat" class="org.springframework.jndi.JndiObjectFactoryBean">
 		<property name="jndiName" value="java:comp/env/sisat" />
 	</bean>
+
 	<bean id="txManager" class="org.springframework.orm.jpa.JpaTransactionManager">
 		<property name="entityManagerFactory" ref="emf" />
 	</bean>
 
-	<bean id="multipartResolver"
-		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
 		<!-- one of the properties available; the maximum file size in bytes -->
 		<!-- <property name="maxUploadSize" value="100000"/> -->
 	</bean>
 
-
 	<bean id="mailSession" class="org.springframework.jndi.JndiObjectFactoryBean">
 		<property name="jndiName" value="java:comp/env/mail/Session" />
 	</bean>
+	
 	<bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
 		<property name="session" ref="mailSession" />
 	</bean>
@@ -40,11 +46,38 @@
 		<property name="order" value="0" />
 	</bean>
 
-	<tx:annotation-driven transaction-manager="txManager"
-		proxy-target-class="true" />
+    <jee:jndi-lookup id="ldapUrl" jndi-name="java:comp/env/ldap/url" expected-type="java.lang.String" />
+    <jee:jndi-lookup id="ldapBase" jndi-name="java:comp/env/ldap/base" expected-type="java.lang.String" />
+    <jee:jndi-lookup id="ldapUserDn" jndi-name="java:comp/env/ldap/userdn" expected-type="java.lang.String" />
+    <jee:jndi-lookup id="ldapPassword" jndi-name="java:comp/env/ldap/password" expected-type="java.lang.String" />
+    <jee:jndi-lookup id="ldapOu" jndi-name="java:comp/env/ldapou" expected-type="java.lang.String" />
 
+    <bean id="contextSource" class="org.springframework.ldap.core.support.LdapContextSource">
+        <property name="url" ref="ldapUrl" />
+        <property name="base" ref="ldapBase" />
+        <property name="userDn" ref="ldapUserDn" />
+        <property name="password" ref="ldapPassword" />
+    </bean>
+
+    <bean id="ldapTemplate" class="org.springframework.ldap.core.LdapTemplate">
+        <constructor-arg ref="contextSource" />
+    </bean>
+    
+    <bean id="base" class="java.lang.String">
+        <constructor-arg ref="ldapOu" />
+    </bean>
+
+	<tx:annotation-driven transaction-manager="txManager" proxy-target-class="true" />
+
+	<context:annotation-config />
 
 	<context:component-scan base-package="br.ufc.quixada.npi.repository" />
 	<context:component-scan base-package="br.ufc.quixada.npi.service.impl" />
+	<context:component-scan base-package="br.ufc.quixada.npi.ldap.*" />
 	<context:component-scan base-package="br.ufc.quixada.npi.sisat" />
+
 </beans>
+
+
+
+

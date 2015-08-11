@@ -13,6 +13,6 @@ public interface ConsultaNutricionalService extends GenericService<ConsultaNutri
 	
 	public abstract String getOrientacoesIndividuaisById(Long id);
 
-	public abstract String getPacientePessoaNomeById(Long id);
+	public abstract String getPacientePessoaCpfById(Long id);
 
 }

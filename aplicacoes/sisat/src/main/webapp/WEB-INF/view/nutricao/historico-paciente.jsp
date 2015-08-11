@@ -9,7 +9,7 @@
 <html>
 	<head>
 		<jsp:include page="../modulos/header-estrutura.jsp" />
-		<title>Informações do(a) paciente</title>
+		<title>Historico</title>
 	</head>
 
 <body>
@@ -22,7 +22,7 @@
 
 			<div class="col-sm-6" align="right" style="margin-top: 15px;">
 				<a href="<c:url value="/nutricao/buscar"></c:url>" class="btn btn-primary">Voltar</a>
-				<a href="<c:url value="/nutricao/consulta/${pessoa.id }"></c:url>" class="btn btn-success">Realizar consulta</a>
+				<a href="<c:url value="/consulta/realizar-consulta/${pessoa.cpf}"/>" class="btn btn-success"><span class="glyphicon glyphicon-plus"></span> Realizar Consulta</a>
 			</div>
     	</div>
 	
@@ -56,13 +56,11 @@
 									<fmt:formatDate var="dataFormatada" type="both" pattern="dd/MM/yyyy HH:mm" value="${consulta.data}" />
 						            <tr>
 						                <td>${cont.count }ª Consulta</td>
-										<td><a href="<c:url value="../detalhesConsulta/${consulta.id}/"/>">${dataFormatada}</a></td>
+										<td><a href="<c:url value="/consulta/informacoes-consulta/${consulta.id}"/>">${dataFormatada}</a></td>
 		
 						                <td align="right">
-						                /editar-consulta/{idConsulta}/paciente/{idPaciente}
-							              <a href="<c:url value="/consulta/informacoes/${consulta.id}"/>" class="btn btn-info btn-sm"><span class="glyphicon glyphicon-eye-open"></span> Informações</a>
-							              <a href="<c:url value="../relatorio-orientacoes-individuais/${consulta.id}"/>" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-file"></span> Relatorio</a>
-							              <a href="<c:url value="/consulta/editar-consulta/${consulta.id}/paciente/${consulta.paciente.id}"/>" class="btn btn-warning btn-sm"><span class="glyphicon glyphicon-edit"></span> Editar</a>
+							              <a href="<c:url value="/consulta/relatorio-orientacoes/${consulta.id}"/>" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-file"></span> Relatorio</a>
+							              <a href="<c:url value="/consulta/editar-consulta/${consulta.id}/paciente/${consulta.paciente.pessoa.cpf}"/>" class="btn btn-warning btn-sm"><span class="glyphicon glyphicon-edit"></span> Editar</a>
 						                </td>
 						            </tr>
 								</c:forEach>

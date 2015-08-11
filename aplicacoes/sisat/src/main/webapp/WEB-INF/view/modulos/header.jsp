@@ -21,23 +21,21 @@
 				      <span class="icon-bar"></span>
 				      <span class="icon-bar"></span>
 				    </button>
-				    <a class="navbar-brand" href="#"><img src="<c:url value="/resources/images/logo-sinutri.png" />" alt="SiNutri" class="logo-sinutri"></a>
+				    <a class="navbar-brand" href="<c:url value="/nutricao/buscar"></c:url>"><img src="<c:url value="/resources/images/logo-sinutri.png" />" alt="SiNutri" class="logo-sinutri"></a>
 				</div>
 	
 	      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-2">
 			<ul class="nav navbar-nav">  
-           		<li class="active"><a href="#">Paciente<span class="sr-only">(current)</span></a></li>
-  				<li><a href="#">Documentos</a></li>
+<%--            		<li class="active"><a href="<c:url value="/nutricao/buscar"></c:url>">Paciente<span class="sr-only">(current)</span></a></li> --%>
 			</ul>
 
 			<ul class="nav navbar-right navbar-nav">
 				<li class="dropdown">
 				<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="glyphicon glyphicon-user"></i> <i class="glyphicon glyphicon-chevron-down"></i></a>
 					<ul class="dropdown-menu">
-		      			<li><a href="#">Perfil</a></li>
-		      			<li><a href="#">Sair</a></li>
+						<li><a href="<c:url value="/j_spring_security_logout" />"><i class="glyphicon glyphicon-off"></i> Sair</a></li>
 		      			<li class="divider"></li>
-		      			<li><a href="#">Sobre</a></li>
+						<li><a href="<c:url value="#sobre" />"><i class="glyphicon glyphicon-info-sign"></i> Sobre</a></li>
 					</ul>
 				</li>  
 			</ul>

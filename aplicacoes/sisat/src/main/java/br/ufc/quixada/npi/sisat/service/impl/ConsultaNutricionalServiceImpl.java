@@ -27,16 +27,13 @@ public class ConsultaNutricionalServiceImpl extends GenericServiceImpl<ConsultaN
 
 	@Override
 	public String getOrientacoesIndividuaisById(Long id) {
-
-		return (String) findFirst(
-				"ConsultaNutricional.findOrientacoesIndividuaisById",
-				new SimpleMap<String, Object>("id", id));
+		return (String) findFirst("ConsultaNutricional.findOrientacoesIndividuaisById", new SimpleMap<String, Object>("id", id));
 	}
 
 	@Override
-	public String getPacientePessoaNomeById(Long id) {
+	public String getPacientePessoaCpfById(Long id) {
 		return (String) findFirst(
-				"ConsultaNutricional.findPacientePessoaNomeById",
+				"ConsultaNutricional.findPacientePessoaCpfById",
 				new SimpleMap<String, Object>("id", id));
 	}
 }
