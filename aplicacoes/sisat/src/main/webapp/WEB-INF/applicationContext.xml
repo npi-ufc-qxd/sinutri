@@ -17,11 +17,11 @@
 
 	<bean id="emf" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
 		<property name="persistenceUnitName" value="dev" />
-		<property name="dataSource" ref="sisat" />
+		<property name="dataSource" ref="sinutri" />
 	</bean>
 
-	<bean id="sisat" class="org.springframework.jndi.JndiObjectFactoryBean">
-		<property name="jndiName" value="java:comp/env/sisat" />
+	<bean id="sinutri" class="org.springframework.jndi.JndiObjectFactoryBean">
+		<property name="jndiName" value="java:comp/env/sinutri" />
 	</bean>
 
 	<bean id="txManager" class="org.springframework.orm.jpa.JpaTransactionManager">
