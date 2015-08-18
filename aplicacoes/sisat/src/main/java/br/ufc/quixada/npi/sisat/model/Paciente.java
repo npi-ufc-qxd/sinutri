@@ -34,15 +34,12 @@ public class Paciente implements Serializable {
 	private List<ConsultaNutricional> consultas;
 
 	@NotNull(message = "Informe a altura do paciente!")
-	@Min(1)
 	private Double alturaAtual;
 
 	@NotNull(message = "Informe o peso do paciente!")
-	@Min(1)
 	private Double pesoAtual;
 
 	@NotNull(message = "Informe a circunferencia da cintura do paciente!")
-	@Min(1)
 	private Double circunferenciaCinturaAtual;
 
 	public Long getId() {
