@@ -1,6 +1,5 @@
 var id = $("#id").val();
 
-
 $.ajax({
 		type: "GET",
 		data: {"id": id},
@@ -13,7 +12,6 @@ $.ajax({
 		}
 		
 });
-
 
 function loadQuestionarios(result) {
 	var i = 0;
@@ -149,7 +147,4 @@ $(function() {
 							}
 						}
 					});
-
 });
-
-

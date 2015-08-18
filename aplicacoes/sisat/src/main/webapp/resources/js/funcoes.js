@@ -1,50 +1,31 @@
 $(document).ready(function() {
-	
-	$('.check').change(function(){
-		var itemForm = $(this).parent().parent(); 	
-		alert($('#classificacaoGlicemia').val());
-		if($('.check').is(':checked')){
-			$(itemForm).find("input").prop("disabled",false);	
-			$(itemForm).find("textarea").prop("disabled",false);
-			$(itemForm).find("select").prop("disabled",false);
-		}else {
-			$(itemForm).find("input[type=text]").prop("disabled",true);
-			$(itemForm).find("textarea").prop("disabled",true);
-			$(itemForm).find("select").prop("disabled",true);
-			$(itemForm).removeClass('has-error');
-			$(itemForm).find('span').remove();
-			$(itemForm).find("input[type=text]").val(''); 
-			$(itemForm).find("textarea").val('');
-			$(itemForm).find("select").val('');
+
+	$("input[type='checkbox']").change(function() {
+	var itemForm = $(this).parent().parent().parent();
+
+		if ($(this).is(":checked")) {
+			$(itemForm).find("input[type='text']").attr("disabled", false);
+			$(itemForm).find("select").attr("disabled", false);
+			$(itemForm).find("textarea").attr("disabled", false);
+		}               
+
+		else if ($(this).not(":checked")) {
+			var valueEmpty = "";
+			$(itemForm).find("input[type='text']").attr ('value', valueEmpty);
+			$(itemForm).find("input[type='text']").attr("disabled", true);
+			$(itemForm).find("textarea").attr("disabled", true);
+			$(itemForm).find("select").attr("disabled", true);
 		}
 	});
 
-	$("input[type='number']").change(function() {
-		var itemForm = $(this).parent().parent();
-		if($(this).val() == '' || $(this).val() <= 0 ){			
-			$(itemForm).find("select").prop("disabled",true);
-		}else{			
-			$(itemForm).find("select").prop("disabled",false);
-			$(itemForm).removeClass('has-error');
-			$(itemForm).find('span').remove();
-			$(itemForm).find("select").val('');			
-		}
-
-	});
-	
 	$('#consultaNutricional').validate({
         rules: {
-        	circunferenciaCintura:{
-        		required: true
-        	},
         	agua:{
         		required: true,
-        		number: true
+        		digits: true
         	},
         	objetivoConsulta:{ 
         		required: true,
-                maxlength: 250,
-                minlength: 50
         	},
         	altura:{
         		requered: true,
@@ -54,9 +35,11 @@ $(document).ready(function() {
         		requered: true,
         		number: true
         	},
-        	cc:{
-        		requered: true,
-        		number: true
+        	circunferenciaCintura:{
+        		required: true
+        	},
+        	circunferenciaCinturaDesejada:{
+        		required: true
         	},
         	medicamentoComentario:{
         		required: $('#checkMedicamento').val(),
@@ -98,6 +81,32 @@ $(document).ready(function() {
         		required: $('#checkPatologia').val(),
         		required: true
 			},
+
+			glicemia:{
+        		digits: true
+			},
+            ldl:{
+        		digits: true
+			},
+			tg:{
+        		digits: true
+			},
+			tgo:{
+        		digits: true
+			},
+			ct:{
+        		digits: true
+			},
+			hdl:{
+        		digits: true
+			},
+			hb:{
+        		digits: true
+			},			
+			tgp:{
+        		digits: true
+			},
+			
 			classificacaoGlicemia:{
 				required: true
 			},
@@ -215,19 +224,6 @@ $(document).ready(function() {
 	
 	$('div.error-validation:has(span)').find('span').css('color', '#a94442');
 	$('div.error-validation:has(span)').find('span').parent().parent().parent().addClass('has-error has-feedback');
-	
-	$("input.data").datepicker({
-		format : "dd/mm/yyyy",
-		todayBtn : "linked",
-		autoclose : true,
-		language : "pt-BR",
-		todayHighlight : true
-	});
-	
-	$('.tab a').click(function (e) {
-	  e.preventDefault();
-	  $(this).tab('show');
-	});
 	
 	$('#confirm-delete').on('show.bs.modal', function(e) {
 		$(this).find('.btn-danger').attr('href', $(e.relatedTarget).data('href'));

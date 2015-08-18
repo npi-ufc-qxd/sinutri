@@ -11,10 +11,13 @@
 		   http://www.springframework.org/schema/tx/spring-tx.xsd
 		   http://www.springframework.org/schema/jee 
            http://www.springframework.org/schema/jee/spring-jee-3.2.xsd">
-           
+
+	<bean id="messageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+	    <property name="basename" value="/WEN-INF/messages" />
+	</bean>
+
 	<bean id="applicationContextProvder" class="br.ufc.quixada.npi.sisat.model.PessoaEntityListener"/>
            
-
 	<bean id="emf" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
 		<property name="persistenceUnitName" value="dev" />
 		<property name="dataSource" ref="sinutri" />
@@ -77,7 +80,3 @@
 	<context:component-scan base-package="br.ufc.quixada.npi.sisat" />
 
 </beans>
-
-
-
-
