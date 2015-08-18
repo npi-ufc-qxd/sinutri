@@ -128,7 +128,7 @@ public class ConsultaNutricionalValidator implements Validator {
 			errors.rejectValue(campoClassificacao, campoClassificacao, "Informe a classificação");
 		}
 
-		if (exame == null && classificacao != null) {
+		if ( (exame == null || exame.intValue() < 1) && classificacao != null) {
 			errors.rejectValue(campoExame, campoExame, "O valor minino do exame é 1");
 		}
 	}
