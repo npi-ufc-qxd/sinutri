@@ -600,26 +600,6 @@
 	</div>
 
 	<jsp:include page="../modulos/footer.jsp" />
-	<script type="text/javascript">
-		
-		$("input[type='checkbox']").change(function() {
-			var itemForm = $(this).parent().parent().parent();
-
-			if ($(this).is(":checked")) {
-				$(itemForm).find("input[type='text']").attr("disabled", false);
-				$(itemForm).find("select").attr("disabled", false);
-				$(itemForm).find("textarea").attr("disabled", false);
-			}               
-			else if ($(this).not(":checked")) {
-				var valueEmpty = "";
-				$(itemForm).find("input[type='text']").attr ('value', valueEmpty);
-				$(itemForm).find("input[type='text']").attr("disabled", true);
-				$(itemForm).find("textarea").attr("disabled", true);
-				$(itemForm).find("select").attr("disabled", true);
-			}           
-		});
-	</script>
-	
 	<script	src="<c:url value="/resources/js/questionario-frequencia-alimentar.js" />"></script>
 
 </body>

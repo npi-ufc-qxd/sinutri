@@ -1,63 +1,23 @@
 $(document).ready(function() {
-	
-	$('.ceeeeeheckInputSelec').change(function(){
-		var itemForm = $(this).parent().parent().parent();
-		
-		alert(this.name.value)
 
-		if($('.checkInputSelec').is(':checked') == true){
-			$(itemForm).find("input").prop("disabled",false);
-			$(itemForm).find("select").prop("disabled",false);
-		} else if($('.checkInputSelec').is(':checked') == false){
-			$(itemForm).find("input[type=text]").prop("disabled",true);
-			$(itemForm).find("select").prop("disabled",true);
+	$("input[type='checkbox']").change(function() {
+	var itemForm = $(this).parent().parent().parent();
+
+		if ($(this).is(":checked")) {
+			$(itemForm).find("input[type='text']").attr("disabled", false);
+			$(itemForm).find("select").attr("disabled", false);
+			$(itemForm).find("textarea").attr("disabled", false);
+		}               
+
+		else if ($(this).not(":checked")) {
+			var valueEmpty = "";
+			$(itemForm).find("input[type='text']").attr ('value', valueEmpty);
+			$(itemForm).find("input[type='text']").attr("disabled", true);
+			$(itemForm).find("textarea").attr("disabled", true);
+			$(itemForm).find("select").attr("disabled", true);
 		}
 	});
 
-	$('.checkInput').change(function(){
-		var itemForm = $(this).parent().parent().parent();
-		alert($(itemForm).html());
-
-		if($('.check').is(':checked')){
-			$(itemForm).find("input").prop("disabled",false);
-			$(itemForm).find("select").prop("disabled",false);
-		} else {
-			$(itemForm).find("input[type=text]").prop("disabled",true);
-			$(itemForm).find("select").prop("disabled",true);
-		}
-	});
-	
-	$('.checkTextArea').change(function(){
-		var itemForm = $(this).parent().parent().parent();
-		alert($(itemForm).html());
-
-		if($('.check').is(':checked')){
-		
-			$(itemForm).find("input").prop("disabled",false);
-			$(itemForm).find("select").prop("disabled",false);
-
-		} else {
-			
-			$(itemForm).find("input[type=text]").prop("disabled",true);
-			$(itemForm).find("select").prop("disabled",true);
-		}
-	});
-	
-	
-
-	$("input[type='number']").change(function() {
-		var itemForm = $(this).parent().parent();
-		if($(this).val() == '' || $(this).val() <= 0 ){			
-			$(itemForm).find("select").prop("disabled",true);
-		}else{			
-			$(itemForm).find("select").prop("disabled",false);
-			$(itemForm).removeClass('has-error');
-			$(itemForm).find('span').remove();
-			$(itemForm).find("select").val('');			
-		}
-
-	});
-	
 	$('#consultaNutricional').validate({
         rules: {
         	agua:{
