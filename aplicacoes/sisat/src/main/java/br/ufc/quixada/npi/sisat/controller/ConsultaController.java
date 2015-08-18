@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.Locale;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
@@ -13,16 +12,10 @@ import javax.validation.Valid;
 import net.sf.jasperreports.engine.JREmptyDataSource;
 import net.sf.jasperreports.engine.JRException;
 
-import org.springframework.beans.BeansException;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.ApplicationContextAware;
-import org.springframework.context.support.ReloadableResourceBundleMessageSource;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.WebDataBinder;
-import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -51,7 +44,7 @@ import br.ufc.quixada.npi.sisat.validation.ConsultaNutricionalValidator;
 
 @Controller
 @RequestMapping("consulta")
-public class ConsultaController implements ApplicationContextAware {
+public class ConsultaController {
 
 	@Inject
 	private PessoaService pessoaService;
@@ -71,14 +64,6 @@ public class ConsultaController implements ApplicationContextAware {
 	@Inject	
 	private ConsultaNutricionalValidator consultaNutricionalValidator;
 
-	private static ApplicationContext context;
-
-	
-//	@InitBinder
-//	protected void initBinder(WebDataBinder binder) {
-//		binder.setValidator(new ConsultaNutricionalValidator());
-//	}
-	//Detalhes de paciente
 	@RequestMapping(value = "historico-paciente/{cpf}", method = RequestMethod.GET)
 	public String getPaginaHistorico(@PathVariable("cpf") String cpf, Model model, RedirectAttributes redirectAttributes){
 		
@@ -162,7 +147,6 @@ public class ConsultaController implements ApplicationContextAware {
 		consulta.getPaciente().setCircunferenciaCinturaAtual(consulta.getCircunferenciaCintura());
 		consulta.getPaciente().setPesoAtual(consulta.getPeso());
 
-		// verificar se os documentos foram anexados
 		List<Documento> documentos = new ArrayList<Documento>();
 		if (files != null && !files.isEmpty() && files.get(0).getSize() > 0) {
 
@@ -371,10 +355,5 @@ public class ConsultaController implements ApplicationContextAware {
 			session.setAttribute("usuario", pessoa);
 		}
 		return (Pessoa) session.getAttribute("usuario");
-	}
-	
-	@Override
-	public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
-		context = applicationContext;
 	}
 }
