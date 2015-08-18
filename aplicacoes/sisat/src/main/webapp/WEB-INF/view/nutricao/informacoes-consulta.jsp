@@ -29,7 +29,7 @@
 		<div class="row">
 			<div class="col-sm-4">
 				<h2>
-					Informações da Consulta <small>${consulta.paciente.pessoa.nome}</small>
+					Informações da Consulta: <small>${consulta.paciente.pessoa.nome}</small>
 				</h2>
 			</div>
 
@@ -87,7 +87,7 @@
 							Vômitos</td>
 					</tr>
 					<tr>
-						<td><strong>Altura: </strong> ${consulta.paciente.alturaAtual }</td>
+						<td><strong>Altura: </strong> ${consulta.altura }</td>
 						<td><strong>Peso: </strong> ${consulta.peso}</td>
 						<td><strong>IMC: </strong> ${consulta.imc}</td>
 						<td><strong>CC: </strong> ${consulta.circunferenciaCintura}
