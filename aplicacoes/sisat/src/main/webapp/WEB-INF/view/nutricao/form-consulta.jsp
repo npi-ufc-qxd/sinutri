@@ -89,7 +89,7 @@
 
 					<div class="row form-group">
 						<div class="form-item col-sm-12">
-							<label for="altura" class="control-label">Altura:</label>
+							<label for="altura" class="control-label">Altura (cm):</label>
 							<form:input id="altura" name="altura" path="altura"
 								cssClass="form-control" placeholder="0.00" onkeyup="commaToDot(this)"/>
 							<div class="error-validation">
@@ -100,7 +100,7 @@
 
 					<div class="row form-group">
 						<div class="form-item col-sm-3">
-							<label for="peso" class="control-label">Peso:</label>
+							<label for="peso" class="control-label">Peso (Kg):</label>
 							<form:input id="peso" name="peso" path="peso"
 								cssClass="form-control" placeholder="00.00" onkeyup="commaToDot(this)" />
 							<div class="error-validation">
@@ -109,7 +109,7 @@
 						</div>
 						<div class="form-item col-sm-3">
 							<label for="pesoDesejado" class="control-label">Peso
-								desejado:</label>
+								desejado (Kg):</label>
 							<form:input id="pesoDesejado" name="pesoDesejado"
 								path="pesoDesejado" cssClass="form-control" placeholder="00.00" onkeyup="commaToDot(this)" />
 							<div class="error-validation">
@@ -118,7 +118,7 @@
 						</div>
 
 						<div class="form-item col-sm-3">
-							<label for="circunferenciaCintura" class="control-label">CC:</label>
+							<label for="circunferenciaCintura" class="control-label">CC (cm):</label>
 							<form:input id="circunferenciaCintura" name="cc"
 								placeholder="00.00" path="circunferenciaCintura"
 								cssClass="form-control" min="0" onkeyup="commaToDot(this)" />
@@ -128,7 +128,7 @@
 						</div>
 						<div class="form-item col-sm-3">
 							<label for="circunferenciaCinturaDesejada" class="control-label">CC
-								desejada:</label>
+								desejada (cm):</label>
 							<form:input id="circunferenciaCinturaDesejada" name="cc"
 								placeholder="00.00" path="circunferenciaCinturaDesejada"
 								cssClass="form-control" min="0" onkeyup="commaToDot(this)" />
@@ -140,7 +140,7 @@
 
 					<div class="row form-group">
 						<div class="form-item col-sm-12">
-							<label for="agua" class="control-label">Consumo de água:</label>
+							<label for="agua" class="control-label">Consumo de água (copos):</label>
 							<form:input id="agua" name="agua" path="agua"
 								cssClass="form-control" placeholder="Consumo de água" />
 							<div class="error-validation">

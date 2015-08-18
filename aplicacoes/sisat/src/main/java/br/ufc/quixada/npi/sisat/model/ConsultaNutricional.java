@@ -293,7 +293,7 @@ public class ConsultaNutricional {
 			return "";
 		}
 
-		Double circunferencia = consulta.getCircunferenciaCintura();
+		Double circunferencia = consulta.getCircunferenciaCintura()/100;
 		String sexo = consulta.getPaciente().getPessoa().getSexo();
 
 		if (sexo != null) {
