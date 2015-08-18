@@ -90,3 +90,7 @@ ul.nav-tabs li:last-child a {
 .form-busca {
 	display: inline;
 }
+
+small{
+	color: #2C3E50 !important;
+}
