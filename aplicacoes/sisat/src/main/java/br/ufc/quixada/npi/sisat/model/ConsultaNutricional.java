@@ -61,27 +61,27 @@ public class ConsultaNutricional {
 	@NotEmpty(message = "Informe o objetivo da consulta")
 	private String objetivoConsulta;
 
-	@NotNull(message = "Informe a altura do paciente")
+	@NotNull(message = "Informe a altura")
 	@Min(value = 1)
 	private Double altura;
 
-	@NotNull(message = "Informe o peso do paciente")
+	@NotNull(message = "Informe o peso")
 	@Min(value = 1)
 	private Double peso;
 	
-	@NotNull(message = "Informe o peso desejado do paciente")
+	@NotNull(message = "Informe o peso desejado")
 	@Min(value = 1)
 	private Double pesoDesejado;
 
-	@NotNull(message = "Informe a cincunferencia da cintura do paciente")
+	@NotNull(message = "Informe a cincunferencia da cintura")
 	@Min(value = 1)
 	private Double circunferenciaCintura;
 	
-	@NotNull(message = "Informe a cincunferencia desejada da cintura do paciente")
+	@NotNull(message = "Informe a cincunferencia desejada da cintura")
 	@Min(value = 1)
 	private Double circunferenciaCinturaDesejada;
 
-	@NotNull(message = "Informe a quantidade de água consumida pelo paciente")
+	@NotNull(message = "Informe a quantidade de copos de água consumida")
 	@Min(value = 1)
 	private Integer agua;
 
@@ -106,7 +106,6 @@ public class ConsultaNutricional {
 	@Enumerated(EnumType.STRING)
 	private SistemaUrinario sistemaUrinario;
 
-	@NotNull(message = "Informe se o paciente ingere algum tipo de medicamento")
 	private boolean medicamento;
 	private String medicamentoComentario;
 

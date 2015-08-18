@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
@@ -12,10 +13,16 @@ import javax.validation.Valid;
 import net.sf.jasperreports.engine.JREmptyDataSource;
 import net.sf.jasperreports.engine.JRException;
 
+import org.springframework.beans.BeansException;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.ApplicationContextAware;
+import org.springframework.context.support.ReloadableResourceBundleMessageSource;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -40,10 +47,11 @@ import br.ufc.quixada.npi.sisat.service.ConsultaNutricionalService;
 import br.ufc.quixada.npi.sisat.service.DocumentoService;
 import br.ufc.quixada.npi.sisat.service.PacienteService;
 import br.ufc.quixada.npi.sisat.service.PessoaService;
+import br.ufc.quixada.npi.sisat.validation.ConsultaNutricionalValidator;
 
 @Controller
 @RequestMapping("consulta")
-public class ConsultaController {
+public class ConsultaController implements ApplicationContextAware {
 
 	@Inject
 	private PessoaService pessoaService;
@@ -60,6 +68,16 @@ public class ConsultaController {
 	@Inject	
 	private UsuarioService usuarioService;
 
+	@Inject	
+	private ConsultaNutricionalValidator consultaNutricionalValidator;
+
+	private static ApplicationContext context;
+
+	
+//	@InitBinder
+//	protected void initBinder(WebDataBinder binder) {
+//		binder.setValidator(new ConsultaNutricionalValidator());
+//	}
 	//Detalhes de paciente
 	@RequestMapping(value = "historico-paciente/{cpf}", method = RequestMethod.GET)
 	public String getPaginaHistorico(@PathVariable("cpf") String cpf, Model model, RedirectAttributes redirectAttributes){
@@ -120,7 +138,7 @@ public class ConsultaController {
 	public String salvarConsulta(Model model, @PathVariable("cpf") String cpf, @Valid ConsultaNutricional consulta, BindingResult result, RedirectAttributes redirectAttributes, @RequestParam("files") List<MultipartFile> files, @RequestParam(value = "enviar", required = false) boolean enviar) {		
 		
 		model.addAttribute("action", "cadastrar");
-		
+	    
 		Pessoa pessoa = pessoaService.getPessoaByCpf(cpf);
 
 		if(pessoa == null){
@@ -128,15 +146,18 @@ public class ConsultaController {
 			return "redirect:/nutricao/buscar";
 		}
 
+		Paciente paciente = pessoa.getPaciente();
+		consulta.setPaciente(paciente);
+		
+		consultaNutricionalValidator.validate(consulta, result);
 		if (result.hasErrors()) {
+			model.addAttribute("consultaNutricional", consulta);
 			return ("nutricao/form-consulta");
 		}
 
-		Paciente paciente = pacienteService.find(Paciente.class, consulta.getPaciente().getId());
 		Double altura = consulta.getAltura();
 		Date data = new Date(System.currentTimeMillis());
 		consulta.setData(data);
-		consulta.setPaciente(paciente);
 		consulta.getPaciente().setAlturaAtual(altura);
 		consulta.getPaciente().setCircunferenciaCinturaAtual(consulta.getCircunferenciaCintura());
 		consulta.getPaciente().setPesoAtual(consulta.getPeso());
@@ -159,7 +180,7 @@ public class ConsultaController {
 					}
 				} catch (IOException e) {
 					model.addAttribute("erro", "Não foi possivel salvar os documentos.");
-					return ("nutricao/consulta");
+					return ("nutricao/form-consulta");
 				}
 			}
 
@@ -228,11 +249,14 @@ public class ConsultaController {
 	public String editarConsulta(Model model, @Valid ConsultaNutricional consulta, BindingResult result, RedirectAttributes redirectAttributes, @RequestParam("files") List<MultipartFile> files, @RequestParam(value = "enviar", required = false) boolean enviar) {
 		model.addAttribute("action", "editar");
 
+		Paciente paciente = pacienteService.find(Paciente.class, consulta.getPaciente().getId());
+		consulta.setPaciente(paciente);		
+
 		if (result.hasErrors()) {
+			model.addAttribute("consultaNutricional", consulta);
 			return ("nutricao/form-consulta");
 		}		
 
-		Paciente paciente = pacienteService.find(Paciente.class, consulta.getPaciente().getId());
 		Date data = consultaNutricionalService.find(ConsultaNutricional.class, consulta.getId()).getData();
 
 		// verificar se os documentos foram anexados
@@ -266,7 +290,6 @@ public class ConsultaController {
 		}
 
 		consulta.setData(data);
-		consulta.setPaciente(paciente);		
 
 		consultaNutricionalService.update(atualizarConsulta(consulta));	
 		redirectAttributes.addFlashAttribute("success", "Consulta do paciente <strong>" + consulta.getPaciente().getPessoa().getNome() + "</strong> atualizada com sucesso.");
@@ -348,5 +371,10 @@ public class ConsultaController {
 			session.setAttribute("usuario", pessoa);
 		}
 		return (Pessoa) session.getAttribute("usuario");
+	}
+	
+	@Override
+	public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
+		context = applicationContext;
 	}
 }
