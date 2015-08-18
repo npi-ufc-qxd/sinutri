@@ -7,9 +7,7 @@
 	<packaging>war</packaging>
 	<name>sisat</name>
 
-
 	<properties>
-
 		<!-- Jackson JSON Mapper -->
 		<jackson.version>1.9.10</jackson.version>
 
@@ -46,7 +44,7 @@
 		<jquery.maskedinput.version>1.3.1</jquery.maskedinput.version>
 		
 		<!-- NPI -->
-		<npi.core.version>0.1.0</npi.core.version>
+		<npi.core.version>0.1.1</npi.core.version>
 		<npi.ldap.version>0.1.1</npi.ldap.version>
 	</properties>
 
@@ -141,7 +139,9 @@
 			<version>${hibernate.version}</version>
 		</dependency>
 
-		<!-- Databases - Uses POSTGRESQL by default -->
+		<!-- Databases - Uses POSTGRESQL by default. 
+			 Postgres driver must be in provided by the application server.
+		 -->
 		<dependency>
 			<groupId>org.postgresql</groupId>
 			<artifactId>postgresql</artifactId>
@@ -174,7 +174,6 @@
 			<artifactId>spring-security-config</artifactId>
 			<version>${spring.security.version}</version>
 		</dependency>
-
 
 		<!-- Webjars (static dependencies distributed as JAR files) -->
 		<dependency>
@@ -220,12 +219,6 @@
 
 		<dependency>
 			<groupId>org.webjars</groupId>
-			<artifactId>jquery-maskedinput</artifactId>
-			<version>1.3.1</version>
-		</dependency>
-
-		<dependency>
-			<groupId>org.webjars</groupId>
 			<artifactId>jquery-validation</artifactId>
 			<version>1.12.0</version>
 		</dependency>
@@ -256,12 +249,6 @@
 			<groupId>br.ufc.quixada.npi</groupId>
 			<artifactId>npi-core-api</artifactId>
 			<version>${npi.core.version}</version>
-			<exclusions>
-				<exclusion>
-					<artifactId>mail</artifactId>
-					<groupId>javax.mail</groupId>
-				</exclusion>
-			</exclusions>			
 		</dependency>
 		
 		<dependency>
@@ -270,6 +257,12 @@
 			<version>${npi.ldap.version}</version>
 		</dependency>
 		
+		<dependency>
+			<groupId>javax.mail</groupId>
+			<artifactId>mail</artifactId>
+			<version>1.4.7</version>
+			<scope>provided</scope>
+		</dependency>		
 		
 	</dependencies>
 	<build>
