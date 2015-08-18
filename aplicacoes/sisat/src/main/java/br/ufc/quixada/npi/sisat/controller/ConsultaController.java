@@ -314,7 +314,7 @@ public class ConsultaController implements ApplicationContextAware {
 		return "orientacoesIndividuais";
 	}
 
-	private Pessoa  registrarPaciente(String cpf) {
+	private Pessoa registrarPaciente(String cpf) {
 		Pessoa pessoa = pessoaService.getPessoaByCpf(cpf);
 
 		if(pessoa == null){
