@@ -37,7 +37,7 @@
 	<div class="container">
 	    <div class="row">
 	    	<div class="tituloConsulta">
-		    	<h2>${titulo}</h2>
+		    	<h2>${titulo} <small>${consultaNutricional.paciente.pessoa.nome}</small></h2> 
 	    	</div>
     	</div>
 	
