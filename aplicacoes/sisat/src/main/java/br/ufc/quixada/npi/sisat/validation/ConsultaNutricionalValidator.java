@@ -1,12 +1,10 @@
 package br.ufc.quixada.npi.sisat.validation;
 
 import javax.inject.Named;
-import javax.validation.constraints.Min;
 
 import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
-import org.springframework.validation.annotation.Validated;
 
 import br.ufc.quixada.npi.sisat.model.ConsultaNutricional;
 import br.ufc.quixada.npi.sisat.model.enuns.ClassificacaoExame;
