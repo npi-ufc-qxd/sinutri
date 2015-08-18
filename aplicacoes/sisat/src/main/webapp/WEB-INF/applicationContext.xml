@@ -12,15 +12,9 @@
 		   http://www.springframework.org/schema/jee 
            http://www.springframework.org/schema/jee/spring-jee-3.2.xsd">
 
-
-
 	<bean id="messageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
 	    <property name="basename" value="/WEN-INF/messages" />
 	</bean>
-
-<!-- <bean class="org.springframework.web.servlet.i18n.CookieLocaleResolver"> -->
-<!--     <property name="defaultLocale" value="pt" /> -->
-<!-- </bean> -->
 
 	<bean id="applicationContextProvder" class="br.ufc.quixada.npi.sisat.model.PessoaEntityListener"/>
            
@@ -86,7 +80,3 @@
 	<context:component-scan base-package="br.ufc.quixada.npi.sisat" />
 
 </beans>
-
-
-
-
