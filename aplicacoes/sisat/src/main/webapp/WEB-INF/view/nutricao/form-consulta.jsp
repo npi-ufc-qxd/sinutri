@@ -7,12 +7,12 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 
 <c:if test="${action eq 'cadastrar' }">
-	<c:set var="url" value="/consulta/realizar-consulta/${consultaNutricional.paciente.pessoa.cpf}"></c:set>
+	<c:url var="url" value="/consulta/realizar-consulta/${consultaNutricional.paciente.pessoa.cpf}"></c:url>
 	<c:set var="titulo" value="Nova Consulta "></c:set>
 	<c:set var="botao" value="Finalizar Consulta "></c:set>
 </c:if>
 <c:if test="${action eq 'editar' }">
-	<c:set var="url" value="/consulta/editar-consulta/${consultaNutricional.id}/paciente/${consultaNutricional.paciente.pessoa.cpf}"></c:set>
+	<c:url var="url" value="/consulta/editar-consulta/${consultaNutricional.id}/paciente/${consultaNutricional.paciente.pessoa.cpf}"></c:url>
 	<c:set var="titulo" value="Editar Consulta  "></c:set>
 	<c:set var="botao" value="Atualizar Consulta"></c:set>
 </c:if>
@@ -22,12 +22,6 @@
 		<jsp:include page="../modulos/header-estrutura.jsp" />
 
 		<title>${titulo}</title>
-		<style type="text/css">
-	 		.footer {
-	 			position:relative;
-	 			margin-top: 30px;
-	 		}
-		</style>
 	</head>
 
 <body data-spy="scroll" data-target="#myScrollspy">
@@ -74,7 +68,7 @@
 	        </div>
 	
 		    <div class="col-sm-9">
-			<form:form servletRelativeAction="${url}" method="POST" id ="consultaNutricional" modelAttribute="consultaNutricional" acceptCharset="UTF-8" cssClass="form-horizontal" enctype="multipart/form-data">
+			<form:form servletRelativeAction="${url}" method="POST" id ="consultaNutricional" modelAttribute="consultaNutricional" commandName="consultaNutricional" acceptCharset="UTF-8" cssClass="form-horizontal" enctype="multipart/form-data">
 				<form:hidden path="id" />
 				<form:hidden path="paciente.id" />
 				<form:hidden path="data" />
@@ -92,48 +86,46 @@
 		        <div class="row form-group">
 			        <div class="form-item col-sm-12">
 						<label for="altura" class="control-label">Altura:</label>
-						<form:input id="altura" name="altura" type="number" path="altura" cssClass="form-control" placeholder="0.00" />
+						<form:input id="altura" name="altura" path="altura" cssClass="form-control" placeholder="0.00" />
 						<div class="error-validation"><form:errors path="altura"></form:errors></div>
 			        </div>
 				</div>
 	
 		        <div class="row form-group">
-			        <div class="form-item col-sm-6">
+			        <div class="form-item col-sm-3">
 							<label for="peso" class="control-label">Peso:</label>
-							<form:input id="peso" name="peso" type="number" path="peso" cssClass="form-control" placeholder="00.00"/>
+							<form:input id="peso" name="peso" path="peso" cssClass="form-control" placeholder="00.00"/>
 							<div class="error-validation"><form:errors path="peso"></form:errors></div>
 					</div>
-			        <div class="form-item col-sm-6">
+			        <div class="form-item col-sm-3">
 						<label for="pesoDesejado" class="control-label">Peso desejado:</label>
-						<form:input id="pesoDesejado" name="pesoDesejado" type="number" path="pesoDesejado" cssClass="form-control" placeholder="00.00"/>
+						<form:input id="pesoDesejado" name="pesoDesejado" path="pesoDesejado" cssClass="form-control" placeholder="00.00"/>
 						<div class="error-validation"><form:errors path="pesoDesejado"></form:errors></div>
 			        </div>
-				</div>
-	
-		        <div class="row form-group">
-			        <div class="form-item col-sm-6">
-						<label for="cc" class="control-label">CC:</label>
-						<form:input id="cc" name="cc" type="number" placeholder="00.00" path="circunferenciaCintura" cssClass="form-control" min="0"/>
+
+			        <div class="form-item col-sm-3">
+						<label for="circunferenciaCintura" class="control-label">CC:</label>
+						<form:input id="circunferenciaCintura" name="cc" placeholder="00.00" path="circunferenciaCintura" cssClass="form-control" min="0"/>
 						<div class="error-validation"><form:errors path="circunferenciaCintura"></form:errors></div>
 			        </div>
-			        <div class="form-item col-sm-6">
-						<label for="ccDesejada" class="control-label">CC desejada:</label>
-						<form:input id="ccDesejada" name="cc" type="number" placeholder="00.00" path="circunferenciaCinturaDesejada" cssClass="form-control" min="0"/>
+			        <div class="form-item col-sm-3">
+						<label for="circunferenciaCinturaDesejada" class="control-label">CC desejada:</label>
+						<form:input id="circunferenciaCinturaDesejada" name="cc" placeholder="00.00" path="circunferenciaCinturaDesejada" cssClass="form-control" min="0"/>
 						<div class="error-validation"><form:errors path="circunferenciaCinturaDesejada"></form:errors></div>
 			        </div>
-		        </div>
+				</div>
 
 		        <div class="row form-group">
 			        <div class="form-item col-sm-12">
 						<label for="agua" class="control-label">Consumo de água:</label>
-						<form:input id="agua" name="agua" type="number" path="agua" cssClass="form-control" placeholder="Consumo de água"/>
+						<form:input id="agua" name="agua" path="agua" cssClass="form-control" placeholder="Consumo de água"/>
 						<div class="error-validation"><form:errors path="agua"></form:errors></div>
 			        </div>
 				</div>
-	
+
 		        <div class="row form-group">
 			        <div class="form-item col-sm-6">
-						<label for="checkAtividadeFisica" class="control-label"><form:checkbox id="checkAtividadeFisica"  path="atividadeFisica" class="check"/> Atividade Física:</label>
+						<label for="checkAtividadeFisica" class="control-label"><form:checkbox id="checkAtividadeFisica"  path="atividadeFisica" class="checkInputSelec"/> Atividade Física:</label>
 						<form:input id="inputTextAtividadeFisica" path="atividadeFisicaComentario" cssClass="form-control" placeholder="Qual atividade?" disabled="${not consultaNutricional.atividadeFisica}"/>
 						<div class="error-validation"><form:errors path="atividadeFisicaComentario"></form:errors></div>
 			        </div>
@@ -143,11 +135,12 @@
 							<form:option value="">Quantas vezes por semana?</form:option>
 							<form:options items="${frequencia}" itemLabel="tipo"/>
 						</form:select>
+						<div class="error-validation"><form:errors path="atividadeFisicaFrequenciaSemanal"></form:errors></div>
 			        </div>
 				</div>
 		        <div class="row form-group">
 			        <div class="form-item col-sm-6">
-						<label for="checkCarneVermelha" class=" control-label"><form:checkbox id="checkCarneVermelha"  path="carneVermelha" class="check"/> Carne Vermelha:</label>
+						<label for="checkCarneVermelha" class=" control-label"><form:checkbox id="checkCarneVermelha"  path="carneVermelha" class="checkInputSelec"/> Carne Vermelha:</label>
 						<form:input id="inputTextCarneVermelha" path="carneVermelhaComentario" cssClass="form-control" placeholder="Que tipo de carne?" disabled="${not consultaNutricional.carneVermelha}"/>
 						<div class="error-validation"><form:errors path="carneVermelhaComentario"></form:errors></div>
 			        </div>
@@ -162,7 +155,7 @@
 				
 		        <div class="row form-group">
 			        <div class="form-item col-sm-6">
-						<label for="checkBebidaAlcoolica" class=" control-label"><form:checkbox id="checkBebidaAlcoolica"  path="bebidaAlcoolica" class="check"/> Bebida alcoólica:</label>
+						<label for="checkBebidaAlcoolica" class=" control-label"><form:checkbox id="checkBebidaAlcoolica"  path="bebidaAlcoolica" class="checkInputSelec"/> Bebida alcoólica:</label>
 						<form:input id="inputTextBebidaAlcoolica" path="bebidaAlcoolicaComentario" cssClass="form-control" placeholder="Qual atividade?" disabled="${not consultaNutricional.bebidaAlcoolica}"/>
 						<div class="error-validation"><form:errors path="bebidaAlcoolicaComentario"></form:errors></div>
 			        </div>
@@ -213,7 +206,7 @@
 		        <div class="row form-group">
 			        <div class="form-item col-sm-12">
 						<label for="disfagia" class=" control-label"><form:checkbox id="disfagia" path="disfagia"/> Disfagia&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
-						<form:input id="disfagiaComentario" path="disfagiaComentario" cssClass="form-control" placeholder="Disfagia" disabled="${not consultaNutricional.disfagia}"/>
+						<form:input id="disfagiaComentario" path="disfagiaComentario" cssClass="form-control" placeholder="Comentário sobre disfagia" disabled="${not consultaNutricional.disfagia}"/>
 						<div class="error-validation"><form:errors path="disfagiaComentario"></form:errors></div>
 					</div>
 				</div>
@@ -221,7 +214,7 @@
 		        <div class="row form-group">
 			        <div class="form-item col-sm-12">
 						<label for="odinofagia" class="control-label"><form:checkbox id="odinofagia" path="odinofagia"/> Odinofagia</label>
-						<form:input id="odinofagiaComentario" path="odinofagiaComentario" cssClass="form-control" placeholder="Odinofagia" disabled="${not consultaNutricional.odinofagia}"/>
+						<form:input id="odinofagiaComentario" path="odinofagiaComentario" cssClass="form-control" placeholder="Comentário sobre odinofagia" disabled="${not consultaNutricional.odinofagia}"/>
 						<div class="error-validation"><form:errors path="odinofagiaComentario"></form:errors></div>
 					</div>
 				</div>
@@ -229,15 +222,15 @@
 		        <div class="row form-group">
 			        <div class="form-item col-sm-12">
 						<label for="pirose" class=" control-label"><form:checkbox id="pirose" path="pirose"/> Pirose</label>
-						<form:input id="piroseComentario" path="piroseComentario" cssClass="form-control" placeholder="Pirose" disabled="${not consultaNutricional.pirose}"/>
-						<div class="error-validation"><form:errors path="PiroseComentario"></form:errors></div>
+						<form:input id="piroseComentario" path="piroseComentario" cssClass="form-control" placeholder="Comentário sobre pirose" disabled="${not consultaNutricional.pirose}"/>
+						<div class="error-validation"><form:errors path="piroseComentario"></form:errors></div>
 					</div>
 				</div>
 	
 		        <div class="row form-group">
 			        <div class="form-item col-sm-12">
 						<label for="nausea" class=" control-label"><form:checkbox id="nausea" path="nausea"/> Náusea</label>
-						<form:input id="nauseaComentario" path="nauseaComentario" cssClass="form-control" placeholder="Náusea" disabled="${not consultaNutricional.nausea}"/>
+						<form:input id="nauseaComentario" path="nauseaComentario" cssClass="form-control" placeholder="Comentário sobre náusea" disabled="${not consultaNutricional.nausea}"/>
 						<div class="error-validation"><form:errors path="nauseaComentario"></form:errors></div>
 					</div>
 				</div>
@@ -245,7 +238,7 @@
 		        <div class="row form-group">
 			        <div class="form-item col-sm-12">
 						<label for="vomito" class=" control-label"><form:checkbox id="vomito" path="vomito"/> Vômitos</label>
-						<form:input id="vomitoComentario" path="vomitoComentario" cssClass="form-control" placeholder="Vômitos" disabled="${not consultaNutricional.vomito}"/>
+						<form:input id="vomitoComentario" path="vomitoComentario" cssClass="form-control" placeholder="Comentário sobre vômito" disabled="${not consultaNutricional.vomito}"/>
 						<div class="error-validation"><form:errors path="vomitoComentario"></form:errors></div>
 					</div>
 				</div>
@@ -253,7 +246,7 @@
 		        <div class="row form-group">
 			        <div class="form-item col-sm-12">
 						<label for="diarreia" class=" control-label"><form:checkbox id="diarreia" path="diarreia"/> Diarreia</label>
-						<form:input id="diarreiaComentario" path="diarreiaComentario" cssClass="form-control" placeholder="Diarreia" disabled="${not consultaNutricional.diarreia}"/>
+						<form:input id="diarreiaComentario" path="diarreiaComentario" cssClass="form-control" placeholder="Comentário sobre diarreia" disabled="${not consultaNutricional.diarreia}"/>
 						<div class="error-validation"><form:errors path="diarreiaComentario"></form:errors></div>
 					</div>
 				</div>
@@ -261,7 +254,7 @@
 		        <div class="row form-group">
 			        <div class="form-item col-sm-12">
 						<label for="constipacao" class=" control-label"><form:checkbox id="constipacao" path="constipacao"/> Constipação</label>
-						<form:input id="constipacaoComentario" path="constipacaoComentario" cssClass="form-control" placeholder="Constipação" disabled="${not consultaNutricional.constipacao}"/>
+						<form:input id="constipacaoComentario" path="constipacaoComentario" cssClass="form-control" placeholder="Comentário sobre constipação" disabled="${not consultaNutricional.constipacao}"/>
 						<div class="error-validation"><form:errors path="constipacaoComentario"></form:errors></div>
 					</div>
 				</div>
@@ -309,126 +302,166 @@
 
 		        <h3 id="exame" class="section">Exames Laboratoriais</h3>
 	
-		        <div class="row form-group">
-			        <div class="form-item col-sm-3">
-						<label for="glicemia" class="control-label">Glicemia:</label>
-						<form:input id="glicemia" type="number" path="glicemia" cssClass="form-control" placeholder="glicemia" />			
-						<div class="error-validation"><form:errors path="glicemia"></form:errors></div>
-					</div>
+		        <div class="row">
+			        <div class="col-sm-3">
+				        <div class="form-item">
+							<label for="glicemia" class="control-label">Glicemia:</label>
+							<form:input id="glicemia" path="glicemia" cssClass="form-control" placeholder="glicemia" />			
+							<div class="error-validation"><form:errors path="glicemia"></form:errors></div>
+						</div>
+			        </div>
 	
-			        <div class="form-item col-sm-3">
-			        	<label class="control-label">&nbsp;&nbsp;&nbsp;</label>
-						<form:select path="classificacaoGlicemia" cssClass="form-control" disabled="${empty consultaNutricional.glicemia ? true : false }">
-							<form:option value="">Classificação</form:option>
-							<form:options items="${classificacaoExames}" itemLabel="tipo"/>
-						</form:select>
+			        <div class="col-sm-3">
+				        <div class="form-item">
+				        	<label class="control-label">&nbsp;&nbsp;&nbsp;</label>
+							<form:select path="classificacaoGlicemia" cssClass="form-control">
+								<form:option value="">Classificação</form:option>
+								<form:options items="${classificacaoExames}" itemLabel="tipo"/>
+							</form:select>
+							<div class="error-validation"><form:errors path="classificacaoGlicemia"></form:errors></div>
+						</div>
 					</div>
 					
-			        <div class="form-item col-sm-3">
-						<label for="ct" class="control-label">CT:</label>
-						<form:input id="ct" type="number" path="ct" cssClass="form-control" placeholder="ct" />
-						<div class="error-validation"><form:errors path="ct"></form:errors></div>
+			        <div class="col-sm-3">
+				        <div class="form-item">
+							<label for="ct" class="control-label">CT:</label>
+							<form:input id="ct" path="ct" cssClass="form-control" placeholder="ct" />
+							<div class="error-validation"><form:errors path="ct"></form:errors></div>
+						</div>
 					</div>
 	
-			        <div class="form-item col-sm-3">
-			        	<label class="control-label">&nbsp;&nbsp;&nbsp;</label>
-						<form:select path="classificacaoCt" cssClass="form-control" disabled="${empty consultaNutricional.ct ? true : false }">
-							<form:option value="">Classificação</form:option>
-							<form:options items="${classificacaoExames}" itemLabel="tipo"/>
-						</form:select>
+			        <div class="col-sm-3">
+				        <div class="form-item">
+				        	<label class="control-label">&nbsp;&nbsp;&nbsp;</label>
+							<form:select path="classificacaoCt" cssClass="form-control">
+								<form:option value="">Classificação</form:option>
+								<form:options items="${classificacaoExames}" itemLabel="tipo"/>
+							</form:select>
+							<div class="error-validation"><form:errors path="classificacaoCt"></form:errors></div>
+						</div>
+					</div>
+		 		</div> 
+	
+		        <div class="row">
+			        <div class="col-sm-3">
+				        <div class="form-item">
+							<label for="ldlc" class="control-label">LDL-C:</label>
+							<form:input id="ldlc" path="ldlc" cssClass="form-control" placeholder="LDL-C" />
+							<div class="error-validation"><form:errors path="ldlc"></form:errors></div>
+						</div>
+					</div>
+	
+			        <div class="col-sm-3">
+				        <div class="form-item">
+				        	<label class="control-label">&nbsp;&nbsp;&nbsp;</label>
+							<form:select path="classificacaoLdlc" cssClass="form-control">
+								<form:option value="">Classificação</form:option>
+								<form:options items="${classificacaoExames}" itemLabel="tipo"/>
+							</form:select>
+							<div class="error-validation"><form:errors path="classificacaoLdlc"></form:errors></div>
+						</div>
+					</div>
+		
+					<div class="col-sm-3">
+				        <div class="form-item">
+							<label for="hdlc" class="control-label">HDL-C:</label>
+							<form:input id="hdlc" path="hdlc" cssClass="form-control" placeholder="HDL-C" />
+							<div class="error-validation"><form:errors path="hdlc"></form:errors></div>
+						</div>
+					</div>
+		
+			        <div class="col-sm-3">
+				        <div class="form-item">
+				        	<label class="control-label">&nbsp;&nbsp;&nbsp;</label>
+							<form:select path="classificacaoHdlc" cssClass="form-control">
+								<form:option value="">Classificação</form:option>
+								<form:options items="${classificacaoExames}" itemLabel="tipo"/>
+							</form:select>
+							<div class="error-validation"><form:errors path="classificacaoHdlc"></form:errors></div>
+						</div>
+					</div>
+		 		</div> 
+	
+		        <div class="row">
+			        <div class="col-sm-3">
+				        <div class="form-item">
+							<label for="tg" class="control-label">TG:</label>
+							<form:input id="tg" path="tg" cssClass="form-control" placeholder="TG" />
+							<div class="error-validation"><form:errors path="tg"></form:errors></div>
+						</div>
+					</div>
+		
+			        <div class="col-sm-3">
+				        <div class="form-item">
+				        	<label class="control-label">&nbsp;&nbsp;&nbsp;</label>
+							<form:select path="classificacaoTg" cssClass="form-control">
+								<form:option value="">Classificação</form:option>
+								<form:options items="${classificacaoExames}" itemLabel="tipo"/>
+							</form:select>
+							<div class="error-validation"><form:errors path="classificacaoTg"></form:errors></div>
+						</div>
+					</div>
+
+			        <div class="col-sm-3">
+				        <div class="form-item">
+							<label for="hb" class="control-label">HB:</label>
+							<form:input id="hb" path="hb" cssClass="form-control" placeholder="HB" />
+							<div class="error-validation"><form:errors path="hb"></form:errors></div>
+						</div>
+					</div>
+		
+			        <div class="col-sm-3">
+				        <div class="form-item">
+				        	<label class="control-label">&nbsp;&nbsp;&nbsp;</label>
+							<form:select path="classificacaoHb" cssClass="form-control">
+								<form:option value="">Classificação</form:option>
+								<form:options items="${classificacaoExames}" itemLabel="tipo"/>
+							</form:select>
+							<div class="error-validation"><form:errors path="classificacaoHb"></form:errors></div>
+						</div>
 					</div>
 		 		</div> 
 	
 		        <div class="row form-group">
-			        <div class="form-item col-sm-3">
-						<label for="ldlc" class="control-label">LDL-C:</label>
-						<form:input id="ldlc" type="number" path="ldlc" cssClass="form-control" placeholder="LDL-C" />
-						<div class="error-validation"><form:errors path="ldlc"></form:errors></div>
+			        <div class="col-sm-3">
+				        <div class="form-item">
+							<label for="tgo" class="control-label">TGO (AST):</label>
+							<form:input id="tgo" path="tgo" cssClass="form-control" placeholder="tgo" />
+							<div class="error-validation"><form:errors path="tgo"></form:errors></div>
+						</div>
 					</div>
-	
-			        <div class="form-item col-sm-3">
-			        	<label class="control-label">&nbsp;&nbsp;&nbsp;</label>
-						<form:select path="classificacaoLdlc" cssClass="form-control" disabled="${empty consultaNutricional.ldlc ? true : false }">
-							<form:option value="">Classificação</form:option>
-							<form:options items="${classificacaoExames}" itemLabel="tipo"/>
-						</form:select>
+		
+			        <div class="col-sm-3">
+				        <div class="form-item">
+				        	<label class="control-label">&nbsp;&nbsp;&nbsp;</label>
+							<form:select path="classificacaoTgo" cssClass="form-control">
+								<form:option value="">Classificação</form:option>
+								<form:options items="${classificacaoExames}" itemLabel="tipo"/>
+							</form:select>
+							<div class="error-validation"><form:errors path="classificacaoTgo"></form:errors></div>
+						</div>
 					</div>
-	
-			        <div class="form-item col-sm-3">
-						<label for="hdlc" class="control-label">HDL-C:</label>
-						<form:input id="hdlc" type="number" path="hdlc" cssClass="form-control" placeholder="HDL-C" />
-						<div class="error-validation"><form:errors path="hdlc"></form:errors></div>
+		
+			        <div class="col-sm-3">
+				        <div class="form-item">
+							<label for="tgp" class="control-label">TGP (ALT):</label>
+							<form:input id="tgp" path="tgp" cssClass="form-control" placeholder="TGP (ALT)" />
+							<div class="error-validation"><form:errors path="tgp"></form:errors></div>
+						</div>
 					</div>
-	
-			        <div class="form-item col-sm-3">
-			        	<label class="control-label">&nbsp;&nbsp;&nbsp;</label>
-						<form:select path="classificacaoHdlc" cssClass="form-control" disabled="${empty consultaNutricional.hdlc ? true : false }">
-							<form:option value="">Classificação</form:option>
-							<form:options items="${classificacaoExames}" itemLabel="tipo"/>
-						</form:select>
-					</div>
-		 		</div> 
-	
-		        <div class="row form-group">
-			        <div class="form-item col-sm-3">
-						<label for="tg" class="control-label">TG:</label>
-						<form:input id="tg" type="number" path="tg" cssClass="form-control" placeholder="TG" />
-						<div class="error-validation"><form:errors path="tg"></form:errors></div>
-					</div>
-	
-			        <div class="form-item col-sm-3">
-			        	<label class="control-label">&nbsp;&nbsp;&nbsp;</label>
-						<form:select path="classificacaoTg" cssClass="form-control" disabled="${empty consultaNutricional.tg ? true : false }">
-							<form:option value="">Classificação</form:option>
-							<form:options items="${classificacaoExames}" itemLabel="tipo"/>
-						</form:select>
-					</div>
-	
-			        <div class="form-item col-sm-3">
-						<label for="hb" class="control-label">HB:</label>
-						<form:input id="hb" type="number" path="hb" cssClass="form-control" placeholder="HB" />
-						<div class="error-validation"><form:errors path="hb"></form:errors></div>
-					</div>
-	
-			        <div class="form-item col-sm-3">
-			        	<label class="control-label">&nbsp;&nbsp;&nbsp;</label>
-						<form:select path="classificacaoHb" cssClass="form-control" disabled="${empty consultaNutricional.hb ? true : false }">
-							<form:option value="">Classificação</form:option>
-							<form:options items="${classificacaoExames}" itemLabel="tipo"/>
-						</form:select>
+		
+			        <div class="col-sm-3">
+				        <div class="form-item">
+				        	<label class="control-label">&nbsp;&nbsp;&nbsp;</label>
+							<form:select path="classificacaoTgp" cssClass="form-control">
+								<form:option value="">Classificação</form:option>
+								<form:options items="${classificacaoExames}" itemLabel="tipo"/>
+							</form:select>
+							<div class="error-validation"><form:errors path="classificacaoTgp"></form:errors></div>
+						</div>
 					</div>
 		 		</div> 
-	
-		        <div class="row form-group">
-			        <div class="form-item col-sm-3">
-						<label for="tgo" class="control-label">TGO (AST):</label>
-						<form:input id="tgo" type="number" path="tgo" cssClass="form-control" placeholder="tgo" />
-						<div class="error-validation"><form:errors path="tgo"></form:errors></div>
-					</div>
-	
-			        <div class="form-item col-sm-3">
-			        	<label class="control-label">&nbsp;&nbsp;&nbsp;</label>
-						<form:select path="classificacaoTgo" cssClass="form-control" disabled="${empty consultaNutricional.tgo ? true : false }">
-							<form:option value="">Classificação</form:option>
-							<form:options items="${classificacaoExames}" itemLabel="tipo"/>
-						</form:select>
-					</div>
-	
-			        <div class="form-item col-sm-3">
-						<label for="tgp" class="control-label">TGP (ALT):</label>
-						<form:input id="tgp" type="number" path="tgp" cssClass="form-control" placeholder="TGP (ALT)" />
-						<div class="error-validation"><form:errors path="tgp"></form:errors></div>
-					</div>
-	
-			        <div class="form-item col-sm-3">
-			        	<label class="control-label">&nbsp;&nbsp;&nbsp;</label>
-						<form:select path="classificacaoTgp" cssClass="form-control" disabled="${empty consultaNutricional.tgp ? true : false }">
-							<form:option value="">Classificação</form:option>
-							<form:options items="${classificacaoExames}" itemLabel="tipo"/>
-						</form:select>
-					</div>
-		 		</div> 
-	
+
 		        <div class="row form-group">
 			        <div class="form-item col-sm-12">
 						<label for="informacoesComplementaresExames" class="control-label"> Informações complementares:</label>
