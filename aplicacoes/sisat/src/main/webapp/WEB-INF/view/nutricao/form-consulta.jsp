@@ -151,9 +151,7 @@
 
 					<div class="row form-group">
 						<div class="form-item col-sm-6">
-							<label for="checkAtividadeFisica" class="control-label"><form:checkbox
-									id="checkAtividadeFisica" path="atividadeFisica"
-									class="checkInputSelec" /> Atividade Física:</label>
+							<label for="checkAtividadeFisica" class="control-label"><form:checkbox id="checkAtividadeFisica" path="atividadeFisica" class="checkInputSelec" /> Atividade Física:</label>
 							<form:input id="inputTextAtividadeFisica"
 								path="atividadeFisicaComentario" cssClass="form-control"
 								placeholder="Qual atividade?"
@@ -162,6 +160,7 @@
 								<form:errors path="atividadeFisicaComentario"></form:errors>
 							</div>
 						</div>
+						
 						<div class="form-item col-sm-6">
 							<label for="agua" class="control-label">&nbsp;&nbsp;&nbsp;</label>
 							<form:select id="atividadeFisicaFrequenciaSemanal"

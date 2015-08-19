@@ -4,8 +4,7 @@ $(document)
 
 					$("input[type='checkbox']").change(
 							function() {
-								var itemForm = $(this).parent().parent()
-										.parent();
+								var itemForm = $(this).parent().parent().parent();
 
 								if ($(this).is(":checked")) {
 									$(itemForm).find("input[type='text']")
