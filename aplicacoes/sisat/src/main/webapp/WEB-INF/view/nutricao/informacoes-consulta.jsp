@@ -29,7 +29,7 @@
 		<div class="row">
 			<div class="col-sm-4">
 				<h2>
-					Informações da Consulta: <small>${consulta.paciente.pessoa.nome}</small>
+					Informações da Consulta: <em><small>${consulta.paciente.pessoa.nome}</small></em>
 				</h2>
 			</div>
 
@@ -108,8 +108,16 @@
 					</c:otherwise>
 				</c:choose>
 				<br /> <strong> Consumo de carne vermelha: </strong>
-				${cosulta.carneVermelhaFrequencia }<br /> <strong> Consumo
-					de bebida alcoolica: </strong>
+				<c:choose>
+					<c:when test="${consulta.carneVermelha }">
+						${conulta.carneVermelhaComentario }
+						<strong>Vezes por semana: </strong>${consulta.carneVermelhaFrequenciaSemanal }
+					</c:when>
+					<c:otherwise>
+						<em>Não consome carne vermelha.</em>
+					</c:otherwise>
+				</c:choose>
+				<br /> <strong> Consumo de bebida alcoolica: </strong>
 				<c:choose>
 					<c:when test="${consulta.bebidaAlcoolica }">
 						${consulta.bebidaAlcoolicaComentario }
