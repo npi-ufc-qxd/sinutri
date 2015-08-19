@@ -16,7 +16,7 @@ $(document)
 											"disabled", false);
 								}
 
-								else if ($(this).not(":checked")) {
+								else if (!$(this).is(":checked")) {
 									var valueEmpty = "";
 									$(itemForm).find("input[type='text']")
 											.attr('value', valueEmpty);
@@ -26,6 +26,10 @@ $(document)
 											"disabled", true);
 									$(itemForm).find("select").attr("disabled",
 											true);
+									$(itemForm).find("select").prop(
+											'selectedIndex', 0);
+									$('.error-validation').hide();
+									$('.form-group').removeClass('has-error');
 								}
 							});
 
@@ -168,7 +172,7 @@ $(document)
 													.addClass('has-error');
 										},
 										unhighlight : function(element) {
-											$(element).closest('.form-item')
+											$(element).closest('.form-group')
 													.removeClass('has-error');
 										},
 										errorElement : 'span',
@@ -371,6 +375,6 @@ $(document)
 
 function commaToDot(string) {
 	if (string.value.indexOf(",") >= 0) {
-		string.value = string.value.replace(/\,/g,".");
+		string.value = string.value.replace(/\,/g, ".");
 	}
 }

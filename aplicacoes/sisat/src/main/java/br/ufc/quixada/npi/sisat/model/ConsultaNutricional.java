@@ -193,7 +193,7 @@ public class ConsultaNutricional {
 			return "Não foi possivel calcular o IMC do paciente!";
 		}
 
-		return new DecimalFormat("0.00").format(imc) + "    " + getClassificacaoImc(imc);
+		return new DecimalFormat("0.00").format(imc) + " " + getClassificacaoImc(imc);
 	}
 
 	public String getClassificacaoImc(double imc) {
@@ -234,9 +234,7 @@ public class ConsultaNutricional {
 	private double calculaIMC(ConsultaNutricional consulta) {
 
 		try {
-			double peso = consulta.getPeso();
-			double altura = consulta.getPaciente().getAlturaAtual();
-			double imc = peso / (altura * altura);
+			double imc = this.peso / (this.altura * this.altura);
 			return imc;
 		} catch (NullPointerException e) {
 			return 0.0;

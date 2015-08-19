@@ -35,7 +35,7 @@
 		<div class="row">
 			<div class="tituloConsulta">
 				<h2>${titulo}
-					<small>${consultaNutricional.paciente.pessoa.nome}</small>
+					<em><small>${consultaNutricional.paciente.pessoa.nome}</small></em>
 				</h2>
 			</div>
 		</div>
@@ -89,7 +89,7 @@
 
 					<div class="row form-group">
 						<div class="form-item col-sm-12">
-							<label for="altura" class="control-label">Altura (cm):</label>
+							<label for="altura" class="control-label">Altura (m):</label>
 							<form:input id="altura" name="altura" path="altura"
 								cssClass="form-control" placeholder="0.00" onkeyup="commaToDot(this)"/>
 							<div class="error-validation">
@@ -209,7 +209,7 @@
 									class="checkInputSelec" /> Bebida alcoólica:</label>
 							<form:input id="inputTextBebidaAlcoolica"
 								path="bebidaAlcoolicaComentario" cssClass="form-control"
-								placeholder="Qual atividade?"
+								placeholder="Qual bebida alcoólica?"
 								disabled="${not consultaNutricional.bebidaAlcoolica}" />
 							<div class="error-validation">
 								<form:errors path="bebidaAlcoolicaComentario"></form:errors>
