@@ -196,6 +196,9 @@
 								<form:option value="">Quantas vezes por semana?</form:option>
 								<form:options items="${frequencia}" itemLabel="tipo" />
 							</form:select>
+							<div class="error-validation">
+								<form:errors path="carneVermelhaFrequenciaSemanal"></form:errors>
+							</div>
 						</div>
 					</div>
 
@@ -221,6 +224,9 @@
 								<form:option value="">Quantas vezes por semana?</form:option>
 								<form:options items="${frequencia}" itemLabel="tipo" />
 							</form:select>
+							<div class="error-validation">
+								<form:errors path="bebidaAlcoolicaFrequenciaSemanal"></form:errors>
+							</div>
 						</div>
 					</div>
 

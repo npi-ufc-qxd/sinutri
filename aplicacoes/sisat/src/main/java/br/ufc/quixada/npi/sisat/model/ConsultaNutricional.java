@@ -30,11 +30,10 @@ import br.ufc.quixada.npi.sisat.model.enuns.SistemaGastrointestinal;
 import br.ufc.quixada.npi.sisat.model.enuns.SistemaUrinario;
 
 @NamedQueries({
-	@NamedQuery(name = "ConsultaNutricional.findConsultaNutricionalWithDocumentosById", query = "select c from ConsultaNutricional c left join fetch c.documentos where c.id=:id"),
-	@NamedQuery(name = "ConsultaNutricional.findConsultaNutricionalWithFrequenciasById", query = "select c from ConsultaNutricional c left join fetch c.frequencias where c.id=:id"),
-	@NamedQuery(name = "ConsultaNutricional.findOrientacoesIndividuaisById", query = "select c.orientacoesIndividuais from ConsultaNutricional c where c.id=:id"),
-	@NamedQuery(name = "ConsultaNutricional.findPacientePessoaCpfById", query = "select c.paciente.pessoa.cpf from ConsultaNutricional c where c.id=:id")
-})
+		@NamedQuery(name = "ConsultaNutricional.findConsultaNutricionalWithDocumentosById", query = "select c from ConsultaNutricional c left join fetch c.documentos where c.id=:id"),
+		@NamedQuery(name = "ConsultaNutricional.findConsultaNutricionalWithFrequenciasById", query = "select c from ConsultaNutricional c left join fetch c.frequencias where c.id=:id"),
+		@NamedQuery(name = "ConsultaNutricional.findOrientacoesIndividuaisById", query = "select c.orientacoesIndividuais from ConsultaNutricional c where c.id=:id"),
+		@NamedQuery(name = "ConsultaNutricional.findPacientePessoaCpfById", query = "select c.paciente.pessoa.cpf from ConsultaNutricional c where c.id=:id") })
 
 @Entity
 public class ConsultaNutricional {
@@ -43,7 +42,7 @@ public class ConsultaNutricional {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@OneToMany(mappedBy="consultaNutricional", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "consultaNutricional", cascade = CascadeType.ALL)
 	@JsonIgnore
 	private List<FrequenciaAlimentar> frequencias;
 
@@ -57,7 +56,7 @@ public class ConsultaNutricional {
 
 	@DateTimeFormat
 	private Date data;
-	
+
 	@NotEmpty(message = "Informe o objetivo da consulta")
 	private String objetivoConsulta;
 
@@ -68,7 +67,7 @@ public class ConsultaNutricional {
 	@NotNull(message = "Informe o peso")
 	@Min(value = 1)
 	private Double peso;
-	
+
 	@NotNull(message = "Informe o peso desejado")
 	@Min(value = 1)
 	private Double pesoDesejado;
@@ -76,7 +75,7 @@ public class ConsultaNutricional {
 	@NotNull(message = "Informe a cincunferencia da cintura")
 	@Min(value = 1)
 	private Double circunferenciaCintura;
-	
+
 	@NotNull(message = "Informe a cincunferencia desejada da cintura")
 	@Min(value = 1)
 	private Double circunferenciaCinturaDesejada;
@@ -99,10 +98,10 @@ public class ConsultaNutricional {
 	private String bebidaAlcoolicaComentario;
 	@Enumerated(EnumType.STRING)
 	private Frequencia bebidaAlcoolicaFrequenciaSemanal;
-	
+
 	@Enumerated(EnumType.STRING)
 	private SistemaGastrointestinal sistemaGastrointestinal;
-	
+
 	@Enumerated(EnumType.STRING)
 	private SistemaUrinario sistemaUrinario;
 
@@ -141,7 +140,7 @@ public class ConsultaNutricional {
 
 	private boolean alergia;
 	private String alergiaComentario;
-	
+
 	private boolean outrasPatologias;
 	private String outrasPatologiasComentario;
 
@@ -172,19 +171,20 @@ public class ConsultaNutricional {
 	@Column(columnDefinition = "TEXT")
 	@NotNull(message = "Informe as orientações para o paciente.")
 	private String orientacoesIndividuais;
-	
+
 	private String informacoesComplementaresExames;
 
 	private String condutaNutricional;
 
 	private String observacooesDaConsulta;
 
-	public ConsultaNutricional() {}
+	public ConsultaNutricional() {
+	}
 
 	public ConsultaNutricional(Paciente paciente) {
 		setPaciente(paciente);
 	}
-	
+
 	public String getImc() {
 
 		double imc = calculaIMC(this);
@@ -193,10 +193,9 @@ public class ConsultaNutricional {
 			return "Não foi possivel calcular o IMC do paciente!";
 		}
 
-		return new DecimalFormat("0.00").format(imc) + "    "
-				+ getClassificacaoImc(imc);
+		return new DecimalFormat("0.00").format(imc) + "    " + getClassificacaoImc(imc);
 	}
-	
+
 	public String getClassificacaoImc(double imc) {
 		String classificacao = classificaIMC(imc);
 		return classificacao;
@@ -392,8 +391,7 @@ public class ConsultaNutricional {
 		return circunferenciaCinturaDesejada;
 	}
 
-	public void setCircunferenciaCinturaDesejada(
-			Double circunferenciaCinturaDesejada) {
+	public void setCircunferenciaCinturaDesejada(Double circunferenciaCinturaDesejada) {
 		this.circunferenciaCinturaDesejada = circunferenciaCinturaDesejada;
 	}
 
@@ -425,8 +423,7 @@ public class ConsultaNutricional {
 		return atividadeFisicaFrequenciaSemanal;
 	}
 
-	public void setAtividadeFisicaFrequenciaSemanal(
-			Frequencia atividadeFisicaFrequenciaSemanal) {
+	public void setAtividadeFisicaFrequenciaSemanal(Frequencia atividadeFisicaFrequenciaSemanal) {
 		this.atividadeFisicaFrequenciaSemanal = atividadeFisicaFrequenciaSemanal;
 	}
 
@@ -450,8 +447,7 @@ public class ConsultaNutricional {
 		return carneVermelhaFrequenciaSemanal;
 	}
 
-	public void setCarneVermelhaFrequenciaSemanal(
-			Frequencia carneVermelhaFrequenciaSemanal) {
+	public void setCarneVermelhaFrequenciaSemanal(Frequencia carneVermelhaFrequenciaSemanal) {
 		this.carneVermelhaFrequenciaSemanal = carneVermelhaFrequenciaSemanal;
 	}
 
@@ -475,8 +471,7 @@ public class ConsultaNutricional {
 		return bebidaAlcoolicaFrequenciaSemanal;
 	}
 
-	public void setBebidaAlcoolicaFrequenciaSemanal(
-			Frequencia bebidaAlcoolicaFrequenciaSemanal) {
+	public void setBebidaAlcoolicaFrequenciaSemanal(Frequencia bebidaAlcoolicaFrequenciaSemanal) {
 		this.bebidaAlcoolicaFrequenciaSemanal = bebidaAlcoolicaFrequenciaSemanal;
 	}
 
@@ -484,8 +479,7 @@ public class ConsultaNutricional {
 		return sistemaGastrointestinal;
 	}
 
-	public void setSistemaGastrointestinal(
-			SistemaGastrointestinal sistemaGastrointestinal) {
+	public void setSistemaGastrointestinal(SistemaGastrointestinal sistemaGastrointestinal) {
 		this.sistemaGastrointestinal = sistemaGastrointestinal;
 	}
 
@@ -837,8 +831,7 @@ public class ConsultaNutricional {
 		return informacoesComplementaresExames;
 	}
 
-	public void setInformacoesComplementaresExames(
-			String informacoesComplementaresExames) {
+	public void setInformacoesComplementaresExames(String informacoesComplementaresExames) {
 		this.informacoesComplementaresExames = informacoesComplementaresExames;
 	}
 
@@ -858,6 +851,4 @@ public class ConsultaNutricional {
 		this.observacooesDaConsulta = observacooesDaConsulta;
 	}
 
-
-	
 }
