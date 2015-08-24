@@ -35,7 +35,7 @@
 		<div class="row">
 			<div class="tituloConsulta">
 				<h2>${titulo}
-					<small>${consultaNutricional.paciente.pessoa.nome}</small>
+					<em><small>${consultaNutricional.paciente.pessoa.nome}</small></em>
 				</h2>
 			</div>
 		</div>
@@ -89,7 +89,7 @@
 
 					<div class="row form-group">
 						<div class="form-item col-sm-12">
-							<label for="altura" class="control-label">Altura (cm):</label>
+							<label for="altura" class="control-label">Altura (m):</label>
 							<form:input id="altura" name="altura" path="altura"
 								cssClass="form-control" placeholder="0.00" onkeyup="commaToDot(this)"/>
 							<div class="error-validation">
@@ -151,9 +151,7 @@
 
 					<div class="row form-group">
 						<div class="form-item col-sm-6">
-							<label for="checkAtividadeFisica" class="control-label"><form:checkbox
-									id="checkAtividadeFisica" path="atividadeFisica"
-									class="checkInputSelec" /> Atividade Física:</label>
+							<label for="checkAtividadeFisica" class="control-label"><form:checkbox id="checkAtividadeFisica" path="atividadeFisica" class="checkInputSelec" /> Atividade Física:</label>
 							<form:input id="inputTextAtividadeFisica"
 								path="atividadeFisicaComentario" cssClass="form-control"
 								placeholder="Qual atividade?"
@@ -162,6 +160,7 @@
 								<form:errors path="atividadeFisicaComentario"></form:errors>
 							</div>
 						</div>
+						
 						<div class="form-item col-sm-6">
 							<label for="agua" class="control-label">&nbsp;&nbsp;&nbsp;</label>
 							<form:select id="atividadeFisicaFrequenciaSemanal"
@@ -196,6 +195,9 @@
 								<form:option value="">Quantas vezes por semana?</form:option>
 								<form:options items="${frequencia}" itemLabel="tipo" />
 							</form:select>
+							<div class="error-validation">
+								<form:errors path="carneVermelhaFrequenciaSemanal"></form:errors>
+							</div>
 						</div>
 					</div>
 
@@ -206,7 +208,7 @@
 									class="checkInputSelec" /> Bebida alcoólica:</label>
 							<form:input id="inputTextBebidaAlcoolica"
 								path="bebidaAlcoolicaComentario" cssClass="form-control"
-								placeholder="Qual atividade?"
+								placeholder="Qual bebida alcoólica?"
 								disabled="${not consultaNutricional.bebidaAlcoolica}" />
 							<div class="error-validation">
 								<form:errors path="bebidaAlcoolicaComentario"></form:errors>
@@ -221,6 +223,9 @@
 								<form:option value="">Quantas vezes por semana?</form:option>
 								<form:options items="${frequencia}" itemLabel="tipo" />
 							</form:select>
+							<div class="error-validation">
+								<form:errors path="bebidaAlcoolicaFrequenciaSemanal"></form:errors>
+							</div>
 						</div>
 					</div>
 

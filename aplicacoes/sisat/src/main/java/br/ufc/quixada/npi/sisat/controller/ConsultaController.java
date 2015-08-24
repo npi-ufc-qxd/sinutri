@@ -203,7 +203,6 @@ public class ConsultaController {
 
 		return "redirect:/consulta/informacoes-consulta/" + consulta.getId();
 	}
-
 	
 	@RequestMapping(value = {"/editar-consulta/{idConsulta}/paciente/{cpf}"}, method = RequestMethod.GET)
 	public String editarConsulta(@PathVariable("idConsulta") long idConsulta, @PathVariable("cpf") String cpf, Model model) {

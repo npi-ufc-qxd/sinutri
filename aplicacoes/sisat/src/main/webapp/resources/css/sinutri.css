@@ -92,5 +92,6 @@ ul.nav-tabs li:last-child a {
 }
 
 small{
+	margin-left: 7% !important;
 	color: #2C3E50 !important;
 }
