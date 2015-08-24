@@ -136,7 +136,6 @@ $(document)
 											tgp : {
 												digits : true
 											},
-
 											classificacaoGlicemia : {
 												required : true
 											},
@@ -373,4 +372,8 @@ function commaToDot(string) {
 	if (string.value.indexOf(",") >= 0) {
 		string.value = string.value.replace(/\,/g,".");
 	}
+}
+
+function onlyNum(string) {
+	string.value = string.value.replace(/[^1-9.,]+/,'');
 }

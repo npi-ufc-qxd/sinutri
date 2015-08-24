@@ -434,7 +434,7 @@
 							<div class="form-item">
 								<label for="glicemia" class="control-label">Glicemia:</label>
 								<form:input id="glicemia" path="glicemia"
-									cssClass="form-control" placeholder="glicemia" />
+									cssClass="form-control" placeholder="glicemia" onkeyup="onlyNum(this)" />
 								<div class="error-validation">
 									<form:errors path="glicemia"></form:errors>
 								</div>
@@ -459,7 +459,7 @@
 							<div class="form-item">
 								<label for="ct" class="control-label">CT:</label>
 								<form:input id="ct" path="ct" cssClass="form-control"
-									placeholder="ct" />
+									placeholder="ct" onkeyup="onlyNum(this)" />
 								<div class="error-validation">
 									<form:errors path="ct"></form:errors>
 								</div>
@@ -485,7 +485,7 @@
 							<div class="form-item">
 								<label for="ldlc" class="control-label">LDL-C:</label>
 								<form:input id="ldlc" path="ldlc" cssClass="form-control"
-									placeholder="LDL-C" />
+									placeholder="LDL-C" onkeyup="onlyNum(this)" />
 								<div class="error-validation">
 									<form:errors path="ldlc"></form:errors>
 								</div>
@@ -509,7 +509,7 @@
 							<div class="form-item">
 								<label for="hdlc" class="control-label">HDL-C:</label>
 								<form:input id="hdlc" path="hdlc" cssClass="form-control"
-									placeholder="HDL-C" />
+									placeholder="HDL-C" onkeyup="onlyNum(this)" />
 								<div class="error-validation">
 									<form:errors path="hdlc"></form:errors>
 								</div>
@@ -535,7 +535,7 @@
 							<div class="form-item">
 								<label for="tg" class="control-label">TG:</label>
 								<form:input id="tg" path="tg" cssClass="form-control"
-									placeholder="TG" />
+									placeholder="TG" onkeyup="onlyNum(this)" />
 								<div class="error-validation">
 									<form:errors path="tg"></form:errors>
 								</div>
@@ -559,7 +559,7 @@
 							<div class="form-item">
 								<label for="hb" class="control-label">HB:</label>
 								<form:input id="hb" path="hb" cssClass="form-control"
-									placeholder="HB" />
+									placeholder="HB" onkeyup="onlyNum(this)" />
 								<div class="error-validation">
 									<form:errors path="hb"></form:errors>
 								</div>
@@ -585,7 +585,7 @@
 							<div class="form-item">
 								<label for="tgo" class="control-label">TGO (AST):</label>
 								<form:input id="tgo" path="tgo" cssClass="form-control"
-									placeholder="tgo" />
+									placeholder="tgo" onkeyup="onlyNum(this)" />
 								<div class="error-validation">
 									<form:errors path="tgo"></form:errors>
 								</div>
@@ -609,7 +609,7 @@
 							<div class="form-item">
 								<label for="tgp" class="control-label">TGP (ALT):</label>
 								<form:input id="tgp" path="tgp" cssClass="form-control"
-									placeholder="TGP (ALT)" />
+									placeholder="TGP (ALT)" onkeyup="onlyNum(this)" />
 								<div class="error-validation">
 									<form:errors path="tgp"></form:errors>
 								</div>
