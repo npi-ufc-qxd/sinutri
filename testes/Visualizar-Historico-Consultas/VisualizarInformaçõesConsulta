@@ -12,19 +12,19 @@
 <tr><td rowspan="1" colspan="3">VisualizarInformaçõesConsulta</td></tr>
 </thead><tbody>
 <tr>
-	<td>open</td>
-	<td>/sisat/login</td>
+	<td>selectWindow</td>
+	<td>null</td>
 	<td></td>
 </tr>
 <tr>
 	<td>type</td>
 	<td>name=j_username</td>
-	<td>nutri</td>
+	<td>00092349005</td>
 </tr>
 <tr>
 	<td>type</td>
 	<td>name=j_password</td>
-	<td>teste1234</td>
+	<td>1234</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -34,7 +34,7 @@
 <tr>
 	<td>type</td>
 	<td>id=busca</td>
-	<td>Ingrid Carneiro</td>
+	<td>Luiz</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -43,27 +43,12 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>css=button.btn.btn-default</td>
+	<td>xpath=(//a[contains(text(),'Historico')])[2]</td>
 	<td></td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>css=button.btn.btn-info</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>link=Exames Laboratoriais</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>link=Questionario de Frequencia Alimentar</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>link=Orientações Individuais</td>
+	<td>link=11/08/2015 15:37</td>
 	<td></td>
 </tr>
 <tr>

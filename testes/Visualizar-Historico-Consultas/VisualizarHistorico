@@ -12,6 +12,46 @@
 <tr><td rowspan="1" colspan="3">VisualizarHistoricoConsultas</td></tr>
 </thead><tbody>
 <tr>
+	<td>selectWindow</td>
+	<td>null</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name=j_username</td>
+	<td>00092349005</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name=j_password</td>
+	<td>1234</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=submit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=busca</td>
+	<td>Luiz</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=submit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>xpath=(//a[contains(text(),'Historico')])[2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Sair</td>
+	<td></td>
+</tr>
+<tr>
 	<td>open</td>
 	<td>/sisat/login</td>
 	<td></td>
