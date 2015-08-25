@@ -12,34 +12,29 @@
 <tr><td rowspan="1" colspan="3">Orientações-Individuais</td></tr>
 </thead><tbody>
 <tr>
-	<td>open</td>
-	<td>/sisat/nutricao/editarConsulta/13</td>
+	<td>selectWindow</td>
+	<td>null</td>
 	<td></td>
 </tr>
 <tr>
 	<td>type</td>
 	<td>name=j_username</td>
-	<td>nutri</td>
+	<td>00092349005</td>
 </tr>
 <tr>
 	<td>type</td>
 	<td>name=j_password</td>
-	<td>teste1234</td>
+	<td>1234</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
 	<td>name=submit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>link=Nutrição</td>
 	<td></td>
 </tr>
 <tr>
 	<td>type</td>
 	<td>id=busca</td>
-	<td>ingrid da silva</td>
+	<td>Luiz</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -48,7 +43,12 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>css=#consulta &gt; button.btn.btn-default</td>
+	<td>link=Luiz Ferreira Almeida</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Realizar Consulta</td>
 	<td></td>
 </tr>
 <tr>
@@ -68,13 +68,13 @@
 </tr>
 <tr>
 	<td>type</td>
-	<td>id=cc</td>
+	<td>id=circunferenciaCintura</td>
 	<td>60</td>
 </tr>
 <tr>
 	<td>type</td>
-	<td>id=ccd</td>
-	<td>55</td>
+	<td>id=circunferenciaCinturaDesejada</td>
+	<td>50</td>
 </tr>
 <tr>
 	<td>type</td>
@@ -89,7 +89,7 @@
 <tr>
 	<td>type</td>
 	<td>id=orientacoesIndividuais</td>
-	<td>Comer mais Fibras</td>
+	<td>Comer menos.</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -97,11 +97,15 @@
 	<td></td>
 </tr>
 <tr>
+	<td>click</td>
+	<td>css=i.glyphicon.glyphicon-chevron-down</td>
+	<td></td>
+</tr>
+<tr>
 	<td>clickAndWait</td>
 	<td>link=Sair</td>
 	<td></td>
 </tr>
-
 </tbody></table>
 </body>
 </html>

@@ -8,8 +8,7 @@
 <body>
 <table id="suiteTable" cellpadding="1" cellspacing="1" border="1" class="selenium"><tbody>
 <tr><td><b>Test Suite</b></td></tr>
-<tr><td><a href="CadastrarOrientaçõesIndividuais/Preencher-Orientações-Individuais">Orientações-Individuais</a></td></tr>
-<tr><td><a href="CadastrarOrientaçõesIndividuais/Campo-Orientações-Em-Branco">Orientações-Individuais-Em-Branco</a></td></tr>
+<tr><td><a href="Cadastrar-Orientações-Individuais/Preencher-Orientações-Individuais">Preencher-Orientações-Individuais</a></td></tr>
 </tbody></table>
 </body>
 </html>
