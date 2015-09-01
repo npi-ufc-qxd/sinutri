@@ -101,7 +101,7 @@
 				<c:choose>
 					<c:when test="${consulta.atividadeFisica }">
 						${consulta.atividadeFisicaComentario } 
-						<strong>Vezes por semana: </strong>${consulta.atividadeFisicaFrequenciaSemanal }
+						<strong>Vezes por semana: </strong>${consulta.atividadeFisicaFrequenciaSemanal.tipo }
 					</c:when>
 					<c:otherwise>
 						<em>Não pratica atividades fisicas.</em>
@@ -110,8 +110,8 @@
 				<br /> <strong> Consumo de carne vermelha: </strong>
 				<c:choose>
 					<c:when test="${consulta.carneVermelha }">
-						${conulta.carneVermelhaComentario }
-						<strong>Vezes por semana: </strong>${consulta.carneVermelhaFrequenciaSemanal }
+						${consulta.carneVermelhaComentario }
+						<strong>Vezes por semana: </strong>${consulta.carneVermelhaFrequenciaSemanal.tipo }
 					</c:when>
 					<c:otherwise>
 						<em>Não consome carne vermelha.</em>
@@ -121,7 +121,7 @@
 				<c:choose>
 					<c:when test="${consulta.bebidaAlcoolica }">
 						${consulta.bebidaAlcoolicaComentario }
-						<strong>Vezes por semana: </strong> ${consulta.bebidaAlcoolicaFrequenciaSemanal }
+						<strong>Vezes por semana: </strong> ${consulta.bebidaAlcoolicaFrequenciaSemanal.tipo }
 					</c:when>
 					<c:otherwise>
 						<em>Não consome bebidas alcoolicas.</em>
