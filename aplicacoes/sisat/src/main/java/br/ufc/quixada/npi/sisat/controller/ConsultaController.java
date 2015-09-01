@@ -3,7 +3,9 @@ package br.ufc.quixada.npi.sisat.controller;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
@@ -81,7 +83,7 @@ public class ConsultaController {
 
 	@RequestMapping(value = {"informacoes-consulta/{id}"} , method = RequestMethod.GET)
 	public String getPaginaInformacoesConsulta(@PathVariable("id") Long id, Model model, RedirectAttributes redirectAttributes){
-		ConsultaNutricional consulta = consultaNutricionalService.getConsultaNutricionalWithFrequenciasById(id);
+		ConsultaNutricional consulta = consultaNutricionalService.getConsultaNutricionalWithDocumentosAndFrequenciasById(id);
 
 		if(consulta == null){
 			redirectAttributes.addFlashAttribute("erro", "Consulta não encontrado.");
@@ -147,7 +149,7 @@ public class ConsultaController {
 		consulta.getPaciente().setCircunferenciaCinturaAtual(consulta.getCircunferenciaCintura());
 		consulta.getPaciente().setPesoAtual(consulta.getPeso());
 
-		List<Documento> documentos = new ArrayList<Documento>();
+		Set<Documento> documentos = new HashSet<Documento>();
 		if (files != null && !files.isEmpty() && files.get(0).getSize() > 0) {
 
 			for (MultipartFile mfiles : files) {
@@ -245,7 +247,7 @@ public class ConsultaController {
 		Date data = consultaNutricionalService.find(ConsultaNutricional.class, consulta.getId()).getData();
 
 		// verificar se os documentos foram anexados
-		List<Documento> documentos = new ArrayList<Documento>();
+		Set<Documento> documentos = new HashSet<Documento>();
 		documentos = documentoService.getDocumentosByIdConsultaNutricional(consulta.getId());
 		if (files != null && !files.isEmpty() && files.get(0).getSize() > 0) {
 

@@ -2,38 +2,46 @@ package br.ufc.quixada.npi.sisat.service.impl;
 
 import javax.inject.Named;
 
+import org.springframework.transaction.annotation.Transactional;
+
 import br.ufc.quixada.npi.service.impl.GenericServiceImpl;
 import br.ufc.quixada.npi.sisat.model.ConsultaNutricional;
 import br.ufc.quixada.npi.sisat.service.ConsultaNutricionalService;
 import br.ufc.quixada.npi.util.SimpleMap;
 
-
 @Named
-public class ConsultaNutricionalServiceImpl extends GenericServiceImpl<ConsultaNutricional> implements ConsultaNutricionalService {
+public class ConsultaNutricionalServiceImpl extends GenericServiceImpl<ConsultaNutricional>
+		implements ConsultaNutricionalService {
 
 	@Override
 	public ConsultaNutricional getConsultaNutricionalWithDocumentosById(Long id) {
-		return (ConsultaNutricional) findFirst(
-				"ConsultaNutricional.findConsultaNutricionalWithDocumentosById",
+		return (ConsultaNutricional) findFirst("ConsultaNutricional.findConsultaNutricionalWithDocumentosById",
 				new SimpleMap<String, Object>("id", id));
 	}
-	
+
 	@Override
 	public ConsultaNutricional getConsultaNutricionalWithFrequenciasById(Long id) {
-		return (ConsultaNutricional) findFirst(
-				"ConsultaNutricional.findConsultaNutricionalWithFrequenciasById",
+		return (ConsultaNutricional) findFirst("ConsultaNutricional.findConsultaNutricionalWithFrequenciasById",
 				new SimpleMap<String, Object>("id", id));
 	}
 
 	@Override
 	public String getOrientacoesIndividuaisById(Long id) {
-		return (String) findFirst("ConsultaNutricional.findOrientacoesIndividuaisById", new SimpleMap<String, Object>("id", id));
+		return (String) findFirst("ConsultaNutricional.findOrientacoesIndividuaisById",
+				new SimpleMap<String, Object>("id", id));
 	}
 
 	@Override
 	public String getPacientePessoaCpfById(Long id) {
-		return (String) findFirst(
-				"ConsultaNutricional.findPacientePessoaCpfById",
+		return (String) findFirst("ConsultaNutricional.findPacientePessoaCpfById",
+				new SimpleMap<String, Object>("id", id));
+	}
+
+	@Override
+	@Transactional(readOnly = true)
+	public ConsultaNutricional getConsultaNutricionalWithDocumentosAndFrequenciasById(Long id) {
+		return (ConsultaNutricional) findFirst(
+				"ConsultaNutricional.findConsultaNutricionalWithDocumentosAndFrequenciasById",
 				new SimpleMap<String, Object>("id", id));
 	}
 }

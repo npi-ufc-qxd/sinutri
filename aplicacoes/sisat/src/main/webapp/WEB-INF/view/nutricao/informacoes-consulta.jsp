@@ -234,6 +234,34 @@
 				<h3 id="orientacoes" class="section">Orientações</h3>
 
 				<h3 id="documentos" class="section">Documentos</h3>
+				<c:choose>
+					<c:when test="${not empty consulta.documentos }">
+						<table class="table table-striped">
+							<thead class="thead">
+								<tr>
+									<th>Nome</th>
+									<th>Download</th>
+								</tr>
+							</thead>
+							<tbody>
+								<c:forEach var="documento" items="${consulta.documentos }"
+									varStatus="cont">
+									<tr>
+										<td>${ documento.nome}</td>
+										<td><a
+											href="<c:url value="/nutricao/downloadDocumento/${documento.id }" ></c:url>"
+											class="btn btn-danger"> <span
+												class="glyphicon glyphicon-download"></span> Download
+										</a></td>
+									</tr>
+								</c:forEach>
+							</tbody>
+						</table>
+					</c:when>
+					<c:otherwise>
+						<h4>Essa consulta não possui nenhum documento anexado a ela.</h4>
+					</c:otherwise>
+				</c:choose>
 			</div>
 		</div>
 	</div>
