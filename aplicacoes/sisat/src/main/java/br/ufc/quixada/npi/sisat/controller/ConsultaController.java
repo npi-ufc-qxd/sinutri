@@ -134,7 +134,7 @@ public class ConsultaController {
 		Paciente paciente = pessoa.getPaciente();
 		consulta.setPaciente(paciente);
 		
-		consultaNutricionalValidator.validate(consulta, result);
+//		consultaNutricionalValidator.validate(consulta, result);
 		if (result.hasErrors()) {
 			model.addAttribute("consultaNutricional", consulta);
 			return ("nutricao/form-consulta");
@@ -235,7 +235,7 @@ public class ConsultaController {
 		Paciente paciente = pacienteService.find(Paciente.class, consulta.getPaciente().getId());
 		consulta.setPaciente(paciente);		
 
-		consultaNutricionalValidator.validate(consulta, result);
+//		consultaNutricionalValidator.validate(consulta, result);
 
 		if (result.hasErrors()) {
 			model.addAttribute("consultaNutricional", consulta);

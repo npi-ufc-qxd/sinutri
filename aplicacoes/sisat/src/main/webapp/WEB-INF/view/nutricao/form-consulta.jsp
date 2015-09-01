@@ -65,7 +65,7 @@
 
 			<div class="col-sm-9">
 				<form:form servletRelativeAction="${url}" method="POST"
-					id="consultaNutricional" modelAttribute="consultaNutricional"
+					id="form-consulta" modelAttribute="consultaNutricional"
 					commandName="consultaNutricional" acceptCharset="UTF-8"
 					cssClass="form-horizontal" enctype="multipart/form-data">
 					<form:hidden path="id" />
@@ -91,7 +91,8 @@
 						<div class="form-item col-sm-12">
 							<label for="altura" class="control-label">Altura (m):</label>
 							<form:input id="altura" name="altura" path="altura"
-								cssClass="form-control" placeholder="0.00" onkeyup="commaToDot(this)"/>
+								cssClass="form-control" placeholder="0.00"
+								onkeyup="commaToDot(this)" />
 							<div class="error-validation">
 								<form:errors path="altura"></form:errors>
 							</div>
@@ -102,7 +103,8 @@
 						<div class="form-item col-sm-3">
 							<label for="peso" class="control-label">Peso (Kg):</label>
 							<form:input id="peso" name="peso" path="peso"
-								cssClass="form-control" placeholder="00.00" onkeyup="commaToDot(this)" />
+								cssClass="form-control" placeholder="00.00"
+								onkeyup="commaToDot(this)" />
 							<div class="error-validation">
 								<form:errors path="peso"></form:errors>
 							</div>
@@ -111,14 +113,16 @@
 							<label for="pesoDesejado" class="control-label">Peso
 								desejado (Kg):</label>
 							<form:input id="pesoDesejado" name="pesoDesejado"
-								path="pesoDesejado" cssClass="form-control" placeholder="00.00" onkeyup="commaToDot(this)" />
+								path="pesoDesejado" cssClass="form-control" placeholder="00.00"
+								onkeyup="commaToDot(this)" />
 							<div class="error-validation">
 								<form:errors path="pesoDesejado"></form:errors>
 							</div>
 						</div>
 
 						<div class="form-item col-sm-3">
-							<label for="circunferenciaCintura" class="control-label">CC (cm):</label>
+							<label for="circunferenciaCintura" class="control-label">CC
+								(cm):</label>
 							<form:input id="circunferenciaCintura" name="cc"
 								placeholder="00.00" path="circunferenciaCintura"
 								cssClass="form-control" min="0" onkeyup="commaToDot(this)" />
@@ -140,7 +144,8 @@
 
 					<div class="row form-group">
 						<div class="form-item col-sm-12">
-							<label for="agua" class="control-label">Consumo de água (copos):</label>
+							<label for="agua" class="control-label">Consumo de água
+								(copos):</label>
 							<form:input id="agua" name="agua" path="agua"
 								cssClass="form-control" placeholder="Consumo de água" />
 							<div class="error-validation">
@@ -151,7 +156,9 @@
 
 					<div class="row form-group">
 						<div class="form-item col-sm-6">
-							<label for="checkAtividadeFisica" class="control-label"><form:checkbox id="checkAtividadeFisica" path="atividadeFisica" class="checkInputSelec" /> Atividade Física:</label>
+							<label for="checkAtividadeFisica" class="control-label"><form:checkbox
+									id="checkAtividadeFisica" path="atividadeFisica"
+									class="checkInputSelec" /> Atividade Física:</label>
 							<form:input id="inputTextAtividadeFisica"
 								path="atividadeFisicaComentario" cssClass="form-control"
 								placeholder="Qual atividade?"
@@ -160,7 +167,7 @@
 								<form:errors path="atividadeFisicaComentario"></form:errors>
 							</div>
 						</div>
-						
+
 						<div class="form-item col-sm-6">
 							<label for="agua" class="control-label">&nbsp;&nbsp;&nbsp;</label>
 							<form:select id="atividadeFisicaFrequenciaSemanal"
@@ -434,202 +441,225 @@
 
 					<h3 id="exame" class="section">Exames Laboratoriais</h3>
 
-					<div class="row">
-						<div class="col-sm-3">
-							<div class="form-item">
-								<label for="glicemia" class="control-label">Glicemia:</label>
-								<form:input id="glicemia" path="glicemia"
-									cssClass="form-control" placeholder="glicemia" />
-								<div class="error-validation">
-									<form:errors path="glicemia"></form:errors>
+					<div class="row form-group">
+						<div class="form-group-exame">
+							<div class="col-sm-3">
+								<div class="form-item">
+									<label for="glicemia" class="control-label">Glicemia:</label>
+									<form:input id="glicemia" path="glicemia"
+										cssClass="form-control exame" placeholder="glicemia"
+										onkeyup="onlyNum(this)" />
+									<div class="error-validation">
+										<form:errors path="glicemia"></form:errors>
+									</div>
+								</div>
+							</div>
+
+							<div class="col-sm-3">
+								<div class="form-item">
+									<label class="control-label">&nbsp;&nbsp;&nbsp;</label>
+									<form:select path="classificacaoGlicemia"
+										cssClass="form-control classificacao">
+										<form:option value="">Classificação</form:option>
+										<form:options items="${classificacaoExames}" itemLabel="tipo" />
+									</form:select>
+									<div class="error-validation">
+										<form:errors path="classificacaoGlicemia"></form:errors>
+									</div>
 								</div>
 							</div>
 						</div>
 
-						<div class="col-sm-3">
-							<div class="form-item">
-								<label class="control-label">&nbsp;&nbsp;&nbsp;</label>
-								<form:select path="classificacaoGlicemia"
-									cssClass="form-control">
-									<form:option value="">Classificação</form:option>
-									<form:options items="${classificacaoExames}" itemLabel="tipo" />
-								</form:select>
-								<div class="error-validation">
-									<form:errors path="classificacaoGlicemia"></form:errors>
+						<div class="form-group-exame">
+							<div class="col-sm-3">
+								<div class="form-item">
+									<label for="ct" class="control-label">CT:</label>
+									<form:input id="ct" path="ct" cssClass="form-control exame"
+										placeholder="ct" onkeyup="onlyNum(this)" />
+									<div class="error-validation">
+										<form:errors path="ct"></form:errors>
+									</div>
 								</div>
 							</div>
-						</div>
 
-						<div class="col-sm-3">
-							<div class="form-item">
-								<label for="ct" class="control-label">CT:</label>
-								<form:input id="ct" path="ct" cssClass="form-control"
-									placeholder="ct" />
-								<div class="error-validation">
-									<form:errors path="ct"></form:errors>
-								</div>
-							</div>
-						</div>
-
-						<div class="col-sm-3">
-							<div class="form-item">
-								<label class="control-label">&nbsp;&nbsp;&nbsp;</label>
-								<form:select path="classificacaoCt" cssClass="form-control">
-									<form:option value="">Classificação</form:option>
-									<form:options items="${classificacaoExames}" itemLabel="tipo" />
-								</form:select>
-								<div class="error-validation">
-									<form:errors path="classificacaoCt"></form:errors>
-								</div>
-							</div>
-						</div>
-					</div>
-
-					<div class="row">
-						<div class="col-sm-3">
-							<div class="form-item">
-								<label for="ldlc" class="control-label">LDL-C:</label>
-								<form:input id="ldlc" path="ldlc" cssClass="form-control"
-									placeholder="LDL-C" />
-								<div class="error-validation">
-									<form:errors path="ldlc"></form:errors>
-								</div>
-							</div>
-						</div>
-
-						<div class="col-sm-3">
-							<div class="form-item">
-								<label class="control-label">&nbsp;&nbsp;&nbsp;</label>
-								<form:select path="classificacaoLdlc" cssClass="form-control">
-									<form:option value="">Classificação</form:option>
-									<form:options items="${classificacaoExames}" itemLabel="tipo" />
-								</form:select>
-								<div class="error-validation">
-									<form:errors path="classificacaoLdlc"></form:errors>
-								</div>
-							</div>
-						</div>
-
-						<div class="col-sm-3">
-							<div class="form-item">
-								<label for="hdlc" class="control-label">HDL-C:</label>
-								<form:input id="hdlc" path="hdlc" cssClass="form-control"
-									placeholder="HDL-C" />
-								<div class="error-validation">
-									<form:errors path="hdlc"></form:errors>
-								</div>
-							</div>
-						</div>
-
-						<div class="col-sm-3">
-							<div class="form-item">
-								<label class="control-label">&nbsp;&nbsp;&nbsp;</label>
-								<form:select path="classificacaoHdlc" cssClass="form-control">
-									<form:option value="">Classificação</form:option>
-									<form:options items="${classificacaoExames}" itemLabel="tipo" />
-								</form:select>
-								<div class="error-validation">
-									<form:errors path="classificacaoHdlc"></form:errors>
-								</div>
-							</div>
-						</div>
-					</div>
-
-					<div class="row">
-						<div class="col-sm-3">
-							<div class="form-item">
-								<label for="tg" class="control-label">TG:</label>
-								<form:input id="tg" path="tg" cssClass="form-control"
-									placeholder="TG" />
-								<div class="error-validation">
-									<form:errors path="tg"></form:errors>
-								</div>
-							</div>
-						</div>
-
-						<div class="col-sm-3">
-							<div class="form-item">
-								<label class="control-label">&nbsp;&nbsp;&nbsp;</label>
-								<form:select path="classificacaoTg" cssClass="form-control">
-									<form:option value="">Classificação</form:option>
-									<form:options items="${classificacaoExames}" itemLabel="tipo" />
-								</form:select>
-								<div class="error-validation">
-									<form:errors path="classificacaoTg"></form:errors>
-								</div>
-							</div>
-						</div>
-
-						<div class="col-sm-3">
-							<div class="form-item">
-								<label for="hb" class="control-label">HB:</label>
-								<form:input id="hb" path="hb" cssClass="form-control"
-									placeholder="HB" />
-								<div class="error-validation">
-									<form:errors path="hb"></form:errors>
-								</div>
-							</div>
-						</div>
-
-						<div class="col-sm-3">
-							<div class="form-item">
-								<label class="control-label">&nbsp;&nbsp;&nbsp;</label>
-								<form:select path="classificacaoHb" cssClass="form-control">
-									<form:option value="">Classificação</form:option>
-									<form:options items="${classificacaoExames}" itemLabel="tipo" />
-								</form:select>
-								<div class="error-validation">
-									<form:errors path="classificacaoHb"></form:errors>
+							<div class="col-sm-3">
+								<div class="form-item">
+									<label class="control-label">&nbsp;&nbsp;&nbsp;</label>
+									<form:select path="classificacaoCt"
+										cssClass="form-control classificacao">
+										<form:option value="">Classificação</form:option>
+										<form:options items="${classificacaoExames}" itemLabel="tipo" />
+									</form:select>
+									<div class="error-validation">
+										<form:errors path="classificacaoCt"></form:errors>
+									</div>
 								</div>
 							</div>
 						</div>
 					</div>
 
 					<div class="row form-group">
-						<div class="col-sm-3">
-							<div class="form-item">
-								<label for="tgo" class="control-label">TGO (AST):</label>
-								<form:input id="tgo" path="tgo" cssClass="form-control"
-									placeholder="tgo" />
-								<div class="error-validation">
-									<form:errors path="tgo"></form:errors>
+						<div class="form-group-exame">
+							<div class="col-sm-3">
+								<div class="form-item">
+									<label for="ldlc" class="control-label">LDL-C:</label>
+									<form:input id="ldlc" path="ldlc" cssClass="form-control exame"
+										placeholder="LDL-C" onkeyup="onlyNum(this)" />
+									<div class="error-validation">
+										<form:errors path="ldlc"></form:errors>
+									</div>
+								</div>
+							</div>
+
+							<div class="col-sm-3">
+								<div class="form-item">
+									<label class="control-label">&nbsp;&nbsp;&nbsp;</label>
+									<form:select path="classificacaoLdlc"
+										cssClass="form-control classificacao">
+										<form:option value="">Classificação</form:option>
+										<form:options items="${classificacaoExames}" itemLabel="tipo" />
+									</form:select>
+									<div class="error-validation">
+										<form:errors path="classificacaoLdlc"></form:errors>
+									</div>
 								</div>
 							</div>
 						</div>
 
-						<div class="col-sm-3">
-							<div class="form-item">
-								<label class="control-label">&nbsp;&nbsp;&nbsp;</label>
-								<form:select path="classificacaoTgo" cssClass="form-control">
-									<form:option value="">Classificação</form:option>
-									<form:options items="${classificacaoExames}" itemLabel="tipo" />
-								</form:select>
-								<div class="error-validation">
-									<form:errors path="classificacaoTgo"></form:errors>
+						<div class="form-group-exame">
+							<div class="col-sm-3">
+								<div class="form-item">
+									<label for="hdlc" class="control-label">HDL-C:</label>
+									<form:input id="hdlc" path="hdlc" cssClass="form-control exame"
+										placeholder="HDL-C" onkeyup="onlyNum(this)" />
+									<div class="error-validation">
+										<form:errors path="hdlc"></form:errors>
+									</div>
+								</div>
+							</div>
+
+							<div class="col-sm-3">
+								<div class="form-item">
+									<label class="control-label">&nbsp;&nbsp;&nbsp;</label>
+									<form:select path="classificacaoHdlc"
+										cssClass="form-control classificacao">
+										<form:option value="">Classificação</form:option>
+										<form:options items="${classificacaoExames}" itemLabel="tipo" />
+									</form:select>
+									<div class="error-validation">
+										<form:errors path="classificacaoHdlc"></form:errors>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="row form-group">
+						<div class="form-group-exame">
+							<div class="col-sm-3">
+								<div class="form-item">
+									<label for="tg" class="control-label">TG:</label>
+									<form:input id="tg" path="tg" cssClass="form-control exame"
+										placeholder="TG" onkeyup="onlyNum(this)" />
+									<div class="error-validation">
+										<form:errors path="tg"></form:errors>
+									</div>
+								</div>
+							</div>
+
+							<div class="col-sm-3">
+								<div class="form-item">
+									<label class="control-label">&nbsp;&nbsp;&nbsp;</label>
+									<form:select path="classificacaoTg"
+										cssClass="form-control classificacao">
+										<form:option value="">Classificação</form:option>
+										<form:options items="${classificacaoExames}" itemLabel="tipo" />
+									</form:select>
+									<div class="error-validation">
+										<form:errors path="classificacaoTg"></form:errors>
+									</div>
 								</div>
 							</div>
 						</div>
 
-						<div class="col-sm-3">
-							<div class="form-item">
-								<label for="tgp" class="control-label">TGP (ALT):</label>
-								<form:input id="tgp" path="tgp" cssClass="form-control"
-									placeholder="TGP (ALT)" />
-								<div class="error-validation">
-									<form:errors path="tgp"></form:errors>
+						<div class="form-group-exame">
+							<div class="col-sm-3">
+								<div class="form-item">
+									<label for="hb" class="control-label">HB:</label>
+									<form:input id="hb" path="hb" cssClass="form-control exame"
+										placeholder="HB" onkeyup="onlyNum(this)" />
+									<div class="error-validation">
+										<form:errors path="hb"></form:errors>
+									</div>
+								</div>
+							</div>
+
+							<div class="col-sm-3">
+								<div class="form-item">
+									<label class="control-label">&nbsp;&nbsp;&nbsp;</label>
+									<form:select path="classificacaoHb"
+										cssClass="form-control classificacao">
+										<form:option value="">Classificação</form:option>
+										<form:options items="${classificacaoExames}" itemLabel="tipo" />
+									</form:select>
+									<div class="error-validation">
+										<form:errors path="classificacaoHb"></form:errors>
+									</div>
 								</div>
 							</div>
 						</div>
+					</div>
 
-						<div class="col-sm-3">
-							<div class="form-item">
-								<label class="control-label">&nbsp;&nbsp;&nbsp;</label>
-								<form:select path="classificacaoTgp" cssClass="form-control">
-									<form:option value="">Classificação</form:option>
-									<form:options items="${classificacaoExames}" itemLabel="tipo" />
-								</form:select>
-								<div class="error-validation">
-									<form:errors path="classificacaoTgp"></form:errors>
+					<div class="row form-group">
+						<div class="form-group-exame">
+							<div class="col-sm-3">
+								<div class="form-item">
+									<label for="tgo" class="control-label">TGO (AST):</label>
+									<form:input id="tgo" path="tgo" cssClass="form-control exame"
+										placeholder="tgo" onkeyup="onlyNum(this)" />
+									<div class="error-validation">
+										<form:errors path="tgo"></form:errors>
+									</div>
+								</div>
+							</div>
+
+							<div class="col-sm-3">
+								<div class="form-item">
+									<label class="control-label">&nbsp;&nbsp;&nbsp;</label>
+									<form:select path="classificacaoTgo"
+										cssClass="form-control classificacao">
+										<form:option value="">Classificação</form:option>
+										<form:options items="${classificacaoExames}" itemLabel="tipo" />
+									</form:select>
+									<div class="error-validation">
+										<form:errors path="classificacaoTgo"></form:errors>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="form-group-exame">
+							<div class="col-sm-3">
+								<div class="form-item">
+									<label for="tgp" class="control-label">TGP (ALT):</label>
+									<form:input id="tgp" path="tgp" cssClass="form-control exame"
+										placeholder="TGP (ALT)" onkeyup="onlyNum(this)" />
+									<div class="error-validation">
+										<form:errors path="tgp"></form:errors>
+									</div>
+								</div>
+							</div>
+
+							<div class="col-sm-3">
+								<div class="form-item">
+									<label class="control-label">&nbsp;&nbsp;&nbsp;</label>
+									<form:select path="classificacaoTgp"
+										cssClass="form-control classificacao">
+										<form:option value="">Classificação</form:option>
+										<form:options items="${classificacaoExames}" itemLabel="tipo" />
+									</form:select>
+									<div class="error-validation">
+										<form:errors path="classificacaoTgp"></form:errors>
+									</div>
 								</div>
 							</div>
 						</div>
