@@ -1,6 +1,7 @@
 package br.ufc.quixada.npi.sisat.service.impl;
 
 import java.util.List;
+import java.util.Set;
 
 import javax.inject.Named;
 
@@ -14,8 +15,8 @@ public class DocumentoServiceImpl extends GenericServiceImpl<Documento>
 		implements DocumentoService {
 
 	@Override
-	public List<Documento> getDocumentosByIdConsultaNutricional(Long id) {
-		return find("Documento.findDocumentosByIdConsulta", new SimpleMap<String, Object>("id", id));
+	public Set<Documento> getDocumentosByIdConsultaNutricional(Long id) {
+		return (Set<Documento>) find("Documento.findDocumentosByIdConsulta", new SimpleMap<String, Object>("id", id));
 	}
 
 	@Override

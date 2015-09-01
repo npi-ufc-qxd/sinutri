@@ -1,7 +1,9 @@
 package br.ufc.quixada.npi.sisat.controller;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.inject.Inject;
 import javax.mail.MessagingException;
@@ -90,9 +92,9 @@ public class NutricaoController {
 	}
 
 	@RequestMapping(value = "/frequencia-alimentar.json", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-	public @ResponseBody List<FrequenciaAlimentar> getFrequencias(@RequestParam("id") Long id) {
+	public @ResponseBody Set<FrequenciaAlimentar> getFrequencias(@RequestParam("id") Long id) {
 		if(id != null){
-			List<FrequenciaAlimentar> frequenciaAlimentars = new ArrayList<FrequenciaAlimentar>();
+			Set<FrequenciaAlimentar> frequenciaAlimentars = new HashSet<FrequenciaAlimentar>();
 			frequenciaAlimentars = consultaNutricionalService.getConsultaNutricionalWithFrequenciasById(id).getFrequencias();
 			return frequenciaAlimentars;
 		}

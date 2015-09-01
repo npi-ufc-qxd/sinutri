@@ -3,12 +3,14 @@ package br.ufc.quixada.npi.sisat.model;
 import java.text.DecimalFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -21,6 +23,12 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
 import org.codehaus.jackson.annotate.JsonIgnore;
+import org.hibernate.annotations.CollectionType;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+import org.hibernate.annotations.IndexColumn;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -32,6 +40,7 @@ import br.ufc.quixada.npi.sisat.model.enuns.SistemaUrinario;
 @NamedQueries({
 		@NamedQuery(name = "ConsultaNutricional.findConsultaNutricionalWithDocumentosById", query = "select c from ConsultaNutricional c left join fetch c.documentos where c.id=:id"),
 		@NamedQuery(name = "ConsultaNutricional.findConsultaNutricionalWithFrequenciasById", query = "select c from ConsultaNutricional c left join fetch c.frequencias where c.id=:id"),
+		@NamedQuery(name = "ConsultaNutricional.findConsultaNutricionalWithDocumentosAndFrequenciasById", query = "select c from ConsultaNutricional c left join fetch c.documentos left join fetch c.frequencias where c.id=:id"),
 		@NamedQuery(name = "ConsultaNutricional.findOrientacoesIndividuaisById", query = "select c.orientacoesIndividuais from ConsultaNutricional c where c.id=:id"),
 		@NamedQuery(name = "ConsultaNutricional.findPacientePessoaCpfById", query = "select c.paciente.pessoa.cpf from ConsultaNutricional c where c.id=:id") })
 
@@ -44,7 +53,7 @@ public class ConsultaNutricional {
 
 	@OneToMany(mappedBy = "consultaNutricional", cascade = CascadeType.ALL)
 	@JsonIgnore
-	private List<FrequenciaAlimentar> frequencias;
+	private Set<FrequenciaAlimentar> frequencias;
 
 	@ManyToOne
 	@JoinColumn(name = "paciente_id")
@@ -52,7 +61,7 @@ public class ConsultaNutricional {
 
 	@OneToMany(mappedBy = "consultaNutricional", cascade = CascadeType.ALL)
 	@JsonIgnore
-	private List<Documento> documentos;
+	private Set<Documento> documentos;
 
 	@DateTimeFormat
 	private Date data;
@@ -214,11 +223,11 @@ public class ConsultaNutricional {
 		this.paciente = paciente;
 	}
 
-	public List<Documento> getDocumentos() {
+	public Set<Documento> getDocumentos() {
 		return documentos;
 	}
 
-	public void setDocumentos(List<Documento> documentos) {
+	public void setDocumentos(Set<Documento> documentos) {
 		this.documentos = documentos;
 	}
 
@@ -329,11 +338,11 @@ public class ConsultaNutricional {
 		this.id = id;
 	}
 
-	public List<FrequenciaAlimentar> getFrequencias() {
+	public Set<FrequenciaAlimentar> getFrequencias() {
 		return frequencias;
 	}
 
-	public void setFrequencias(List<FrequenciaAlimentar> frequencias) {
+	public void setFrequencias(Set<FrequenciaAlimentar> frequencias) {
 		this.frequencias = frequencias;
 	}
 
