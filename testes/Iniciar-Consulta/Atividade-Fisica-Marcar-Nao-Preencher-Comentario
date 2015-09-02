@@ -3,13 +3,13 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head profile="http://selenium-ide.openqa.org/profiles/test-case">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<link rel="selenium.base" href="http://localhost:9090/" />
-<title>Campo-Carne-Vermelha-Marcado-E-vezes-semana-Preenchido</title>
+<link rel="selenium.base" href="http://localhost:9000/" />
+<title>Atividade-fisica-sem-comentario</title>
 </head>
 <body>
 <table cellpadding="1" cellspacing="1" border="1">
 <thead>
-<tr><td rowspan="1" colspan="3">Campo-Carne-Vermelha-Marcado-E-vezes-semana-Preenchido</td></tr>
+<tr><td rowspan="1" colspan="3">Atividade-fisica-sem-comentario</td></tr>
 </thead><tbody>
 <tr>
 	<td>open</td>
@@ -19,12 +19,12 @@
 <tr>
 	<td>type</td>
 	<td>name=j_username</td>
-	<td>nutri</td>
+	<td>00092349005</td>
 </tr>
 <tr>
 	<td>type</td>
 	<td>name=j_password</td>
-	<td>teste1234</td>
+	<td>1234</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -34,7 +34,7 @@
 <tr>
 	<td>type</td>
 	<td>id=busca</td>
-	<td>ingrid carneiro</td>
+	<td>ingrid</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -43,18 +43,23 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>css=#consulta &gt; button.btn.btn-default</td>
+	<td>link=Consulta</td>
 	<td></td>
 </tr>
 <tr>
 	<td>type</td>
+	<td>id=objetivoConsulta</td>
+	<td>Perder peso, Reeducação alimentar,<br />perder medidas, melhorar saúde </td>
+</tr>
+<tr>
+	<td>type</td>
 	<td>id=altura</td>
-	<td>1.7</td>
+	<td>1.69</td>
 </tr>
 <tr>
 	<td>type</td>
 	<td>id=peso</td>
-	<td>62</td>
+	<td>61.5</td>
 </tr>
 <tr>
 	<td>type</td>
@@ -63,38 +68,28 @@
 </tr>
 <tr>
 	<td>type</td>
-	<td>id=cc</td>
-	<td>60</td>
+	<td>id=circunferenciaCintura</td>
+	<td>50</td>
 </tr>
 <tr>
 	<td>type</td>
-	<td>id=ccd</td>
-	<td>55</td>
+	<td>id=circunferenciaCinturaDesejada</td>
+	<td>45</td>
 </tr>
 <tr>
 	<td>type</td>
 	<td>id=agua</td>
-	<td>4</td>
+	<td>3</td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>id=checkCarneVermelha</td>
+	<td>id=checkAtividadeFisica</td>
 	<td></td>
 </tr>
 <tr>
-	<td>type</td>
-	<td>id=inputTextCarneVermelha</td>
-	<td>boi</td>
-</tr>
-<tr>
 	<td>select</td>
-	<td>id=carneVermelhaFrequenciaSemanal</td>
-	<td>label=2</td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>id=objetivoConsulta</td>
-	<td>Perder peso, reeducar a alimentação, melhorar condicionamento físico, corrigir horários alimentares. diminuir porções,aumentar frequencia alimentar.</td>
+	<td>id=atividadeFisicaFrequenciaSemanal</td>
+	<td>label=Poucas vez por semana</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -103,19 +98,20 @@
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td></td>
+	<td>id=atividadeFisicaComentario.errors</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyText</td>
-	<td></td>
-	<td>*Preencha campo marcado*</td>
+	<td>id=atividadeFisicaComentario.errors</td>
+	<td>*Informe a atividade fisica*</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
 	<td>link=Sair</td>
 	<td></td>
 </tr>
+
 </tbody></table>
 </body>
 </html>

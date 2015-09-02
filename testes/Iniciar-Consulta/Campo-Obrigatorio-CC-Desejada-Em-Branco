@@ -3,13 +3,13 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head profile="http://selenium-ide.openqa.org/profiles/test-case">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<link rel="selenium.base" href="http://localhost:9090/" />
-<title>Campo-CCDesejada-Em-Branco</title>
+<link rel="selenium.base" href="http://localhost:9000/" />
+<title>Campo-CCdesejada-em-branco</title>
 </head>
 <body>
 <table cellpadding="1" cellspacing="1" border="1">
 <thead>
-<tr><td rowspan="1" colspan="3">Campo-CCDesejada-Em-Branco</td></tr>
+<tr><td rowspan="1" colspan="3">Campo-CCdesejada-em-branco</td></tr>
 </thead><tbody>
 <tr>
 	<td>open</td>
@@ -19,12 +19,12 @@
 <tr>
 	<td>type</td>
 	<td>name=j_username</td>
-	<td>nutri</td>
+	<td>00092349005</td>
 </tr>
 <tr>
 	<td>type</td>
 	<td>name=j_password</td>
-	<td>teste1234</td>
+	<td>1234</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -34,7 +34,7 @@
 <tr>
 	<td>type</td>
 	<td>id=busca</td>
-	<td>ingrid carneiro</td>
+	<td>ingrid</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -43,43 +43,43 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>css=#consulta &gt; button.btn.btn-default</td>
+	<td>link=Consulta</td>
 	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>id=altura</td>
-	<td>1.7</td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>id=peso</td>
-	<td>60</td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>id=pesoDesejado</td>
-	<td>62</td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>id=cc</td>
-	<td>60</td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>id=ccd</td>
-	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>id=agua</td>
-	<td>4</td>
 </tr>
 <tr>
 	<td>type</td>
 	<td>id=objetivoConsulta</td>
-	<td>Perder peso, reeducar a alimentação, melhorar condicionamento físico, corrigir horários alimentares. diminuir porções,aumentar frequencia alimentar.</td>
+	<td>Perder peso, Reeducação alimentar,<br />perder medidas, melhorar saúde </td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=altura</td>
+	<td>1.69</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=peso</td>
+	<td>61.5</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=pesoDesejado</td>
+	<td>60</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=circunferenciaCintura</td>
+	<td>50</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=agua</td>
+	<td>3</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=button.btn.btn-success</td>
+	<td></td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -94,13 +94,14 @@
 <tr>
 	<td>verifyText</td>
 	<td>id=circunferenciaCinturaDesejada.errors</td>
-	<td>*Informe a cincunferencia desejada da cintura do paciente*</td>
+	<td>*Informe a cincunferencia desejada da cintura*</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
 	<td>link=Sair</td>
 	<td></td>
 </tr>
+
 </tbody></table>
 </body>
 </html>
