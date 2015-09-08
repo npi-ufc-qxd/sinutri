@@ -3,19 +3,14 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head profile="http://selenium-ide.openqa.org/profiles/test-case">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<link rel="selenium.base" href="http://localhost:9000/" />
-<title>Consumo-agua-em-branco</title>
+<link rel="selenium.base" href="http://localhost:9090/" />
+<title>Bebida-Alcoolica-Marcado-Em-Branco</title>
 </head>
 <body>
 <table cellpadding="1" cellspacing="1" border="1">
 <thead>
-<tr><td rowspan="1" colspan="3">Consumo-agua-em-branco</td></tr>
+<tr><td rowspan="1" colspan="3">Bebida-Alcoolica-Marcado-Em-Branco</td></tr>
 </thead><tbody>
-<tr>
-	<td>open</td>
-	<td>/sisat/login</td>
-	<td></td>
-</tr>
 <tr>
 	<td>type</td>
 	<td>name=j_username</td>
@@ -74,7 +69,22 @@
 <tr>
 	<td>type</td>
 	<td>id=circunferenciaCinturaDesejada</td>
-	<td>50</td>
+	<td>45</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=agua</td>
+	<td>3</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=checkBebidaAlcoolica</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=inputTextBebidaAlcoolica</td>
+	<td>vodka</td>
 </tr>
 <tr>
 	<td>click</td>
@@ -83,13 +93,13 @@
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>//span[@id='agua']</td>
+	<td>//span[@id='bebidaAlcoolicaFrequenciaSemanal']</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyText</td>
-	<td>//span[@id='agua']</td>
-	<td>*Informe a quantidade de copos de água consumidos pelo paciente.*</td>
+	<td>//span[@id='bebidaAlcoolicaFrequenciaSemanal']</td>
+	<td>*Informe a frequência do consumo de bebiba alcoólica pelo paciente.*</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>

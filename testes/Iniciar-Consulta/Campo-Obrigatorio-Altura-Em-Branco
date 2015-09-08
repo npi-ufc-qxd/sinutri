@@ -77,31 +77,30 @@
 	<td>3</td>
 </tr>
 <tr>
-	<td>clickAndWait</td>
+	<td>selectWindow</td>
+	<td>null</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
 	<td>css=button.btn.btn-success</td>
 	<td></td>
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>id=altura.errors</td>
+	<td>//span[@id='altura']</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyText</td>
-	<td>id=altura.errors</td>
-	<td>*Informe a altura*</td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>css=i.glyphicon.glyphicon-user</td>
-	<td></td>
+	<td>//span[@id='altura']</td>
+	<td>*Informe a altura do paciente.*</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
 	<td>link=Sair</td>
 	<td></td>
 </tr>
-
 </tbody></table>
 </body>
 </html>
