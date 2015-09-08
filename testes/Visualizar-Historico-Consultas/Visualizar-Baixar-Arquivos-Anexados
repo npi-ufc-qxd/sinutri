@@ -3,14 +3,19 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head profile="http://selenium-ide.openqa.org/profiles/test-case">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<link rel="selenium.base" href="http://localhost:9090/" />
-<title>Adicionar-Alimentos-A-Refeição</title>
+<link rel="selenium.base" href="http://localhost:8080/" />
+<title>Visualizar-Baixar-Arquivos-Anexados</title>
 </head>
 <body>
 <table cellpadding="1" cellspacing="1" border="1">
 <thead>
-<tr><td rowspan="1" colspan="3">Adicionar-Alimentos-A-Refeição</td></tr>
+<tr><td rowspan="1" colspan="3">Visualizar-Baixar-Arquivos-Anexados</td></tr>
 </thead><tbody>
+<tr>
+	<td>selectWindow</td>
+	<td>null</td>
+	<td></td>
+</tr>
 <tr>
 	<td>type</td>
 	<td>name=j_username</td>
@@ -29,7 +34,7 @@
 <tr>
 	<td>type</td>
 	<td>id=busca</td>
-	<td>ingrid carneiro</td>
+	<td>Luiz</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -38,47 +43,22 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>link=Historico</td>
+	<td>xpath=(//a[contains(text(),'Historico')])[2]</td>
 	<td></td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>link=Editar</td>
+	<td>link=11/08/2015 15:37</td>
 	<td></td>
 </tr>
 <tr>
-	<td>click</td>
-	<td>xpath=(//button[@type='button'])[3]</td>
+	<td>selectWindow</td>
+	<td>null</td>
 	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>id=tblSubGrid_1_alimento_1</td>
-	<td>pão</td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>id=tblSubGrid_1_porcao_1</td>
-	<td>1</td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>xpath=(//button[@type='button'])[7]</td>
-	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>id=tblSubGrid_2_alimento_1</td>
-	<td>leite</td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>id=tblSubGrid_2_porcao_1</td>
-	<td>1</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>css=button.btn.btn-success</td>
+	<td>link=Download</td>
 	<td></td>
 </tr>
 <tr>
@@ -86,6 +66,7 @@
 	<td>link=Sair</td>
 	<td></td>
 </tr>
+
 </tbody></table>
 </body>
 </html>
