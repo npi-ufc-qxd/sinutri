@@ -70,72 +70,100 @@
 
 			<div class="col-sm-9">
 				<h3 id="avaliacao" class="section">Anamnese</h3>
+				
+				<div class="row">
+					<div class="col-sm-12">
+						<label><strong>Consumo de água: </strong></label>${consulta.agua} copos/dia<br>
 
-				<table>
-					<tr>
-						<td>${consulta.disfagia ? "<span class='glyphicon glyphicon-ok'></span>" : "<span class='glyphicon glyphicon-remove'></span>" }
-							Disfagia</td>
-						<td>${consulta.pirose ? "<span class='glyphicon glyphicon-ok'></span>" : "<span class='glyphicon glyphicon-remove'></span>" }
-							pirose</td>
-						<td>${consulta.constipacao ? "<span class='glyphicon glyphicon-ok'></span>" : "<span class='glyphicon glyphicon-remove'></span>" }
-							Constipação</td>
-						<td>${consulta.diarreia ? "<span class='glyphicon glyphicon-ok'></span>" : "<span class='glyphicon glyphicon-remove'></span>" }
-							Diarreia</td>
-						<td>${consulta.nausea ? "<span class='glyphicon glyphicon-ok'></span>" : "<span class='glyphicon glyphicon-remove'></span>" }
-							Naúsea</td>
-						<td>${consulta.vomito ? "<span class='glyphicon glyphicon-ok'></span>" : "<span class='glyphicon glyphicon-remove'></span>" }
-							Vômitos</td>
-					</tr>
-					<tr>
-						<td><strong>Altura: </strong> ${consulta.altura }</td>
-						<td><strong>Peso: </strong> ${consulta.peso}</td>
-						<td><strong>IMC: </strong> ${consulta.imc}</td>
-						<td><strong>CC: </strong> ${consulta.circunferenciaCintura}
-							${consulta.classificacaoCc}</td>
-						<td></td>
-					</tr>
-				</table>
-				<br /> <strong>Medicamentos: </strong>${consulta.medicamento ? consulta.medicamentoComentario  : "<em>Não usa medicamentos</em>"}
-				<br /> <strong> Alergia alimentar: </strong>${consulta.alergia ? consulta.alergiaComentario  : "<em>Não possui alergia a alimentos</em>"}
-				<br /> <strong> Atividade Fisica: </strong>
-				<c:choose>
-					<c:when test="${consulta.atividadeFisica }">
-						${consulta.atividadeFisicaComentario } 
-						<strong>Vezes por semana: </strong>${consulta.atividadeFisicaFrequenciaSemanal.tipo }
-					</c:when>
-					<c:otherwise>
-						<em>Não pratica atividades fisicas.</em>
-					</c:otherwise>
-				</c:choose>
-				<br /> <strong> Consumo de carne vermelha: </strong>
-				<c:choose>
-					<c:when test="${consulta.carneVermelha }">
-						${consulta.carneVermelhaComentario }
-						<strong>Vezes por semana: </strong>${consulta.carneVermelhaFrequenciaSemanal.tipo }
-					</c:when>
-					<c:otherwise>
-						<em>Não consome carne vermelha.</em>
-					</c:otherwise>
-				</c:choose>
-				<br /> <strong> Consumo de bebida alcoolica: </strong>
-				<c:choose>
-					<c:when test="${consulta.bebidaAlcoolica }">
-						${consulta.bebidaAlcoolicaComentario }
-						<strong>Vezes por semana: </strong> ${consulta.bebidaAlcoolicaFrequenciaSemanal.tipo }
-					</c:when>
-					<c:otherwise>
-						<em>Não consome bebidas alcoolicas.</em>
-					</c:otherwise>
-				</c:choose>
-				<br /> <strong> Patologias: </strong> ${consulta.outrasPatologias ? consulta.outrasPatologiasComentario  : "<em>Não possui outras patologias</em>"}<br />
+						<label><strong>Altura: </strong></label>${consulta.altura}
+						<br><label><strong>Peso: </strong></label>${consulta.peso}
+						<br><label><strong>Peso Desejado: </strong></label>${consulta.pesoDesejado}
+						<br><label><strong>CC: </strong></label>${consulta.circunferenciaCintura} - ${consulta.classificacaoCc}
+						<br><label><strong>CC Desejada: </strong></label>${consulta.circunferenciaCinturaDesejada}
+						<br><label><strong>IMC: </strong></label>${consulta.imc}
+						<br><label><strong>Medicamentos: </strong></label>${consulta.medicamento ? consulta.medicamentoComentario  : "Não usa medicamentos"}
+						<br><label><strong>Alergia alimentar: </strong></label>${consulta.alergia ? consulta.alergiaComentario  : "Não possui alergia a alimentos"}
+		
+						<br><label><strong> Atividade Fisica: </strong></label>
+						<c:choose>
+							<c:when test="${consulta.atividadeFisica }">
+								${consulta.atividadeFisicaComentario } 
+								<strong>Vezes por semana: </strong>${consulta.atividadeFisicaFrequenciaSemanal.tipo }
+							</c:when>
+							<c:otherwise>
+								<em>Não pratica atividades fisicas.</em>
+							</c:otherwise>
+						</c:choose>
+		
+						<br><label><strong> Consumo de carne vermelha: </strong></label>
+						<c:choose>
+							<c:when test="${consulta.carneVermelha }">
+								${consulta.carneVermelhaComentario } <strong>Vezes por semana: </strong>${consulta.carneVermelhaFrequenciaSemanal.tipo }
+							</c:when>
+							<c:otherwise>
+								<em>Não consome carne vermelha.</em>
+							</c:otherwise>
+						</c:choose>
+						
+						<br><label><strong> Consumo de bebida alcoolica: </strong></label>
+						<c:choose>
+							<c:when test="${consulta.bebidaAlcoolica }">
+								${consulta.bebidaAlcoolicaComentario } <strong>Vezes por semana: </strong> ${consulta.bebidaAlcoolicaFrequenciaSemanal.tipo }
+							</c:when>
+							<c:otherwise>
+								<em>Não consome bebidas alcoolicas.</em>
+							</c:otherwise>
+						</c:choose>
+						
+						<br><label><strong> Patologias: </strong></label> ${consulta.outrasPatologias ? consulta.outrasPatologiasComentario  : "<em>Não possui outras patologias</em>"}
+		
+						<br><label><strong> Objetivo da consulta: </strong></label> ${consulta.objetivoConsulta }
 
-				<strong> Objetivo da consulta: </strong> ${consulta.objetivoConsulta }<br />
-
-
-
+						<table class="table table-striped">
+							<thead class="thead">
+								<tr>
+									<th>Patologias</th>
+									<th>Cometário</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td>Disfagia</td>
+									<td>${consulta.disfagia ? consulta.disfagiaComentario : "Não apresenta disfagia" }</td>
+								</tr>
+								<tr>
+									<td>Pirose</td>
+									<td>${consulta.pirose? consulta.piroseComentario : "Não apresenta pirose" }</td>
+								</tr>
+								<tr>
+									<td>Constipacao</td>
+									<td>${consulta.constipacao? consulta.constipacaoComentario : "Não apresenta constipacao" }</td>
+								</tr>
+								<tr>
+									<td>Diarreia</td>
+									<td>${consulta.diarreia? consulta.diarreiaComentario : "Não apresenta diarreia" }</td>
+								</tr>
+								<tr>
+									<td>Nausea</td>
+									<td>${consulta.nausea? consulta.nauseaComentario : "Não apresenta nausea" }</td>
+								</tr>
+								<tr>
+									<td>Vômito</td>
+									<td>${consulta.vomito? consulta.vomitoComentario : "Não apresenta vomito" }</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
 
 				<h3 id="recordatorio" class="section">Recordatório</h3>
-
+				
+				<c:if test="${empty consulta.frequencias}">
+					<div class="alert alert-dismissible alert-info">
+						Não há informações sobre o recordatório alimentar.
+					</div>				
+				</c:if>
+				
 				<c:forEach var="freq" items="${consulta.frequencias}">
 					<div class="row">
 						<fmt:formatDate var="horaFormatada" type="time" dateStyle="short"
