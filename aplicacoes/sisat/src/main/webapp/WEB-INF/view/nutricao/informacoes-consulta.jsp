@@ -232,6 +232,14 @@
 				</table>
 
 				<h3 id="orientacoes" class="section">Orientações</h3>
+				
+				<div class="row">
+					<div class="col-sm-12">
+						<p>${consulta.orientacoesIndividuais}</p>
+					</div>
+				</div>
+				
+				
 
 				<h3 id="documentos" class="section">Documentos</h3>
 				<c:choose>
