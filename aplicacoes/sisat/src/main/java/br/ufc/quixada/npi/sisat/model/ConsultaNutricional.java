@@ -325,7 +325,7 @@ public class ConsultaNutricional {
 				}
 			}
 		} else {
-			return "Erro - Sexo da paciente não está indefinido";
+			return "É necessario o sexo para definir a classificação de circurferência";
 		}
 		return "";
 	}
