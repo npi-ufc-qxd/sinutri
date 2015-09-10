@@ -73,8 +73,8 @@
 				
 				<div class="row">
 					<div class="col-sm-12">
+						<label><strong> Objetivo da consulta: </strong></label> ${consulta.objetivoConsulta }
 						<label><strong>Consumo de água: </strong></label>${consulta.agua} copos/dia<br>
-
 						<label><strong>Altura: </strong></label>${consulta.altura}
 						<br><label><strong>Peso: </strong></label>${consulta.peso}
 						<br><label><strong>Peso Desejado: </strong></label>${consulta.pesoDesejado}
@@ -83,7 +83,8 @@
 						<br><label><strong>IMC: </strong></label>${consulta.imc}
 						<br><label><strong>Medicamentos: </strong></label>${consulta.medicamento ? consulta.medicamentoComentario  : "Não usa medicamentos"}
 						<br><label><strong>Alergia alimentar: </strong></label>${consulta.alergia ? consulta.alergiaComentario  : "Não possui alergia a alimentos"}
-		
+						<br><label><strong>Sistema Gastrointestinal: </strong></label>${consulta.sistemaGastrointestinal}
+						<br><label><strong>Sistema Urinario: </strong></label>${consulta.sistemaUrinario}
 						<br><label><strong> Atividade Fisica: </strong></label>
 						<c:choose>
 							<c:when test="${consulta.atividadeFisica }">
@@ -114,11 +115,14 @@
 								<em>Não consome bebidas alcoolicas.</em>
 							</c:otherwise>
 						</c:choose>
-						
-						<br><label><strong> Patologias: </strong></label> ${consulta.outrasPatologias ? consulta.outrasPatologiasComentario  : "<em>Não possui outras patologias</em>"}
-		
-						<br><label><strong> Objetivo da consulta: </strong></label> ${consulta.objetivoConsulta }
 
+						<br><label><strong> Mastigação: </strong></label> ${consulta.mastigacao ? consulta.mastigacaoComentario  : "Não apresenta problemas na mastigação"}
+
+						<br><label><strong> Diabetes: </strong></label> ${consulta.diabetes ? "Sim"  : "Não"}
+
+						<br><label><strong> Hipertensão: </strong></label> ${consulta.hipertensao ? "Sim"  : "Não"}
+
+						<br><label><strong> Patologias: </strong></label> ${consulta.outrasPatologias ? consulta.outrasPatologiasComentario  : "<em>Não possui outras patologias</em>"}
 						<table class="table table-striped">
 							<thead class="thead">
 								<tr>
@@ -130,6 +134,10 @@
 								<tr>
 									<td>Disfagia</td>
 									<td>${consulta.disfagia ? consulta.disfagiaComentario : "Não apresenta disfagia" }</td>
+								</tr>
+								<tr>
+									<td>Odinofagia</td>
+									<td>${consulta.odinofagia ? consulta.odinofagiaComentario : "Não apresenta disfagia" }</td>
 								</tr>
 								<tr>
 									<td>Pirose</td>
@@ -198,6 +206,8 @@
 						</div>
 					</div>
 				</c:forEach>
+				<label><strong> Informações Complementares: </strong></label> ${consulta.informacoesComplementaresExames }
+				
 
 				<h3 id="exame" class="section">Exames Laboratoriais</h3>
 
@@ -213,48 +223,88 @@
 					<tbody>
 						<tr>
 							<td><strong>Glicemia: </strong></td>
+							<c:if test="${not empty consulta.glicemia and not empty consulta.classificacaoGlicemia}">
 							<td>${consulta.glicemia }</td>
 							<td>${consulta.classificacaoGlicemia }</td>
+							</c:if>
+							<c:if test="${empty consulta.glicemia and empty consulta.classificacaoGlicemia}">
+								<td colspan="2">Não informado</td>
+							</c:if>
 						</tr>
 
 						<tr>
 							<td><strong>LDC - C: </strong></td>
-							<td>${consulta.ldlc }</td>
-							<td>${consulta.classificacaoLdlc }</td>
+							<c:if test="${not empty consulta.ldlc and not empty consulta.classificacaoLdlc}">
+								<td>${consulta.ldlc }</td>
+								<td>${consulta.classificacaoLdlc }</td>
+							</c:if>
+							<c:if test="${empty consulta.ldlc and empty consulta.classificacaoLdlc}">
+								<td colspan="2">Não informado</td>
+							</c:if>
 						</tr>
 
 						<tr>
 							<td><strong>CT: </strong></td>
-							<td>${consulta.ct }</td>
-							<td>${consulta.classificacaoCt }</td>
+							<c:if test="${not empty consulta.ct and not empty consulta.classificacaoCt}">
+								<td>${consulta.ct }</td>
+								<td>${consulta.classificacaoCt }</td>
+							</c:if>
+							<c:if test="${empty consulta.ct and empty consulta.classificacaoCt}">
+								<td colspan="2">Não informado</td>
+							</c:if>
 						</tr>
 
 						<tr>
 							<td><strong>HDL - C: </strong></td>
-							<td>${consulta.hdlc }</td>
-							<td>${consulta.classificacaoHdlc }</td>
+							<c:if test="${not empty consulta.hdlc and not empty consulta.classificacaoHdlc}">
+								<td>${consulta.hdlc }</td>
+								<td>${consulta.classificacaoHdlc }</td>
+							</c:if>
+							<c:if test="${empty consulta.hdlc and empty consulta.classificacaoHdlc}">
+								<td colspan="2">Não informado</td>
+							</c:if>
 						</tr>
 
 						<tr>
 							<td><strong>TG: </strong></td>
-							<td>${consulta.tg }</td>
-							<td>${consulta.classificacaoTg }</td>
+							<c:if test="${not empty consulta.tg and not empty consulta.classificacaoTg}">
+								<td>${consulta.tg }</td>
+								<td>${consulta.classificacaoTg }</td>
+							</c:if>
+							<c:if test="${empty consulta.tg and empty consulta.classificacaoTg}">
+								<td colspan="2">Não informado</td>
+							</c:if>
 						</tr>
 						<tr>
 							<td><strong>HB: </strong></td>
-							<td>${consulta.hb }</td>
-							<td>${consulta.classificacaoHb }</td>
+							<c:if test="${not empty consulta.hb and not empty consulta.classificacaoHb}">
+								<td>${consulta.hb }</td>
+								<td>${consulta.classificacaoHb }</td>
+							</c:if>
+							<c:if test="${empty consulta.hb and empty consulta.classificacaoHb}">
+								<td colspan="2">Não informado</td>
+							</c:if>
 						</tr>
 
 						<tr>
 							<td><strong>TGO(AST): </strong></td>
-							<td>${consulta.tgo }</td>
-							<td>${consulta.classificacaoTgo }</td>
+							<c:if test="${not empty consulta.tgo and not empty consulta.classificacaoTgo}">
+								<td>${consulta.tgo }</td>
+								<td>${consulta.classificacaoTgo }</td>
+							</c:if>
+							<c:if test="${empty consulta.tgo and empty consulta.classificacaoTgo}">
+								<td colspan="2">Não informado</td>
+							</c:if>
 						</tr>
 						<tr>
 							<td><strong>TGP(ALT): </strong></td>
-							<td>${consulta.tgp }</td>
-							<td>${consulta.classificacaoTgp }</td>
+							<c:if test="${not empty consulta.tgp and not empty consulta.classificacaoTgp}">
+								<td>${consulta.tgp }</td>
+								<td>${consulta.classificacaoTgp }</td>
+							</c:if>
+							<c:if test="${empty consulta.tgp and empty consulta.classificacaoTgp}">
+								<td colspan="2">Não informado</td>
+							</c:if>
 						</tr>
 					</tbody>
 				</table>
