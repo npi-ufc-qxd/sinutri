@@ -35,6 +35,7 @@ import br.ufc.quixada.npi.sisat.model.Papel;
 import br.ufc.quixada.npi.sisat.model.Pessoa;
 import br.ufc.quixada.npi.sisat.service.ConsultaNutricionalService;
 import br.ufc.quixada.npi.sisat.service.DocumentoService;
+import br.ufc.quixada.npi.sisat.service.PacienteService;
 import br.ufc.quixada.npi.sisat.service.PapelService;
 import br.ufc.quixada.npi.sisat.service.PessoaService;
 
@@ -58,6 +59,9 @@ public class NutricaoController {
 	private UsuarioService usuarioService;
 
 	@Inject
+	private PacienteService pacienteService;
+
+	@Inject
 	private PapelService papelService;
 
 	@RequestMapping(value = "/buscar", method = RequestMethod.GET)
@@ -74,6 +78,20 @@ public class NutricaoController {
 		return "nutricao/buscar";
 	}
 
+	@RequestMapping(value = "/informacoes-graficas", method = RequestMethod.GET)
+	public String paginaInformacoesGraficas() {
+		consultaNutricionalService.teste();
+		return "nutricao/informacoes-graficas";
+	}
+
+	@RequestMapping(value = "/informacoes-graficas/peso-by-consulta.json", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public @ResponseBody Model getPesoByConsulta(Model model) {
+
+		model.addAttribute("consulta", pacienteService.getConsultasByPaciente(6L));
+
+		return model;
+	}
+	
 	@RequestMapping(value = "/buscar", method = RequestMethod.POST)
 	public String buscarPaciente(@RequestParam("busca") String busca, ModelMap map, RedirectAttributes redirectAttributes, Authentication authentication) {
 		map.addAttribute("busca", busca);

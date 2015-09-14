@@ -26,7 +26,8 @@
 	
 	      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-2">
 			<ul class="nav navbar-nav">  
-<%--            		<li class="active"><a href="<c:url value="/nutricao/buscar"></c:url>">Paciente<span class="sr-only">(current)</span></a></li> --%>
+           		<li class="active"><a href="<c:url value="/nutricao/buscar"></c:url>">Paciente<span class="sr-only">(current)</span></a></li>
+           		<li><a href="<c:url value="/nutricao/informacoes-graficas"></c:url>">Gráfico<span class="sr-only">(current)</span></a></li>
 			</ul>
 
 			<ul class="nav navbar-right navbar-nav">

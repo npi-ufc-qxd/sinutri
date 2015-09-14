@@ -1,7 +1,6 @@
 package br.ufc.quixada.npi.sisat.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
