@@ -74,29 +74,28 @@
 <tr>
 	<td>type</td>
 	<td>id=circunferenciaCinturaDesejada</td>
-	<td>45</td>
+	<td>50</td>
 </tr>
 <tr>
-	<td>clickAndWait</td>
+	<td>click</td>
 	<td>css=button.btn.btn-success</td>
 	<td></td>
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>id=agua.errors</td>
+	<td>//span[@id='agua']</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyText</td>
-	<td>id=agua.errors</td>
-	<td>*Informe a quantidade de copos de água consumida*</td>
+	<td>//span[@id='agua']</td>
+	<td>*Informe a quantidade de copos de água consumidos pelo paciente.*</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
 	<td>link=Sair</td>
 	<td></td>
 </tr>
-
 </tbody></table>
 </body>
 </html>

@@ -12,19 +12,14 @@
 <tr><td rowspan="1" colspan="3">CampoObrigatorioObjetivodaConsultaEmBranco</td></tr>
 </thead><tbody>
 <tr>
-	<td>open</td>
-	<td>/sisat/login</td>
-	<td></td>
-</tr>
-<tr>
 	<td>type</td>
 	<td>name=j_username</td>
-	<td>nutri</td>
+	<td>00092349005</td>
 </tr>
 <tr>
 	<td>type</td>
 	<td>name=j_password</td>
-	<td>teste1234</td>
+	<td>1234</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -34,7 +29,7 @@
 <tr>
 	<td>type</td>
 	<td>id=busca</td>
-	<td>ingrid carneiro</td>
+	<td>ingrid</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -43,58 +38,53 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>css=#consulta &gt; button.btn.btn-default</td>
+	<td>link=Consulta</td>
 	<td></td>
 </tr>
 <tr>
 	<td>type</td>
 	<td>id=altura</td>
-	<td>1.7</td>
+	<td>1.69</td>
 </tr>
 <tr>
 	<td>type</td>
 	<td>id=peso</td>
-	<td>60</td>
+	<td>61.5</td>
 </tr>
 <tr>
 	<td>type</td>
 	<td>id=pesoDesejado</td>
-	<td>62</td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>id=cc</td>
 	<td>60</td>
 </tr>
 <tr>
 	<td>type</td>
-	<td>id=ccd</td>
-	<td>55</td>
+	<td>id=circunferenciaCintura</td>
+	<td>50</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=circunferenciaCinturaDesejada</td>
+	<td>50</td>
 </tr>
 <tr>
 	<td>type</td>
 	<td>id=agua</td>
-	<td>4</td>
+	<td>5</td>
 </tr>
 <tr>
-	<td>type</td>
-	<td>id=objetivoConsulta</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
+	<td>click</td>
 	<td>css=button.btn.btn-success</td>
 	<td></td>
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>id=objetivoConsulta.errors</td>
-	<td>*Campo obrigatório*</td>
+	<td>//span[@id='objetivoConsulta']</td>
+	<td></td>
 </tr>
 <tr>
 	<td>verifyText</td>
-	<td>id=objetivoConsulta.errors</td>
-	<td>*Campo obrigatório*</td>
+	<td>//span[@id='objetivoConsulta']</td>
+	<td>*Descreva o objetivo da consulta do paciente.*</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>

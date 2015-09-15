@@ -82,11 +82,6 @@
 	<td>3</td>
 </tr>
 <tr>
-	<td>selectWindow</td>
-	<td>null</td>
-	<td></td>
-</tr>
-<tr>
 	<td>click</td>
 	<td>id=checkCarneVermelha</td>
 	<td></td>
@@ -97,18 +92,18 @@
 	<td>Boi,porco</td>
 </tr>
 <tr>
-	<td>clickAndWait</td>
+	<td>click</td>
 	<td>css=button.btn.btn-success</td>
 	<td></td>
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>id=CarneVermelhaFrequenciaSemanal.errors</td>
+	<td>//span[@id='carneVermelhaFrequenciaSemanal']</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyText</td>
-	<td>id=CarneVermelhaFrequenciaSemanal.errors</td>
+	<td>//span[@id='carneVermelhaFrequenciaSemanal']</td>
 	<td>*Informe a frequência do consumo de carne vermelha pelo paciente.*</td>
 </tr>
 <tr>

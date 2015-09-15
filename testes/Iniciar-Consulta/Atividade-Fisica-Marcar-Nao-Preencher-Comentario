@@ -92,26 +92,25 @@
 	<td>label=Poucas vez por semana</td>
 </tr>
 <tr>
-	<td>clickAndWait</td>
+	<td>click</td>
 	<td>css=button.btn.btn-success</td>
 	<td></td>
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>id=atividadeFisicaComentario.errors</td>
+	<td>id=atividadeFisicaComentario</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyText</td>
-	<td>id=atividadeFisicaComentario.errors</td>
-	<td>*Informe a atividade fisica*</td>
+	<td>id=atividadeFisicaComentario</td>
+	<td>*Informe qual a(s) ativadade(s) física(s) praticada(s) pelo paciente.*</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
 	<td>link=Sair</td>
 	<td></td>
 </tr>
-
 </tbody></table>
 </body>
 </html>

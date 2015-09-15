@@ -4,12 +4,12 @@
 <head profile="http://selenium-ide.openqa.org/profiles/test-case">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <link rel="selenium.base" href="http://localhost:9090/" />
-<title>Exames-Laboratorias-Preenchido</title>
+<title>Exames-Laboratoriais-Sem-Valor-Com-Classificação</title>
 </head>
 <body>
 <table cellpadding="1" cellspacing="1" border="1">
 <thead>
-<tr><td rowspan="1" colspan="3">Exames-Laboratorias-Preenchido</td></tr>
+<tr><td rowspan="1" colspan="3">Exames-Laboratoriais-Sem-Valor-Com-Classificação</td></tr>
 </thead><tbody>
 <tr>
 	<td>type</td>
@@ -77,44 +77,44 @@
 	<td>3</td>
 </tr>
 <tr>
-	<td>type</td>
-	<td>id=glicemia</td>
-	<td>94</td>
+	<td>select</td>
+	<td>id=classificacaoGlicemia</td>
+	<td>label=Muito Alto</td>
 </tr>
 <tr>
-	<td>type</td>
-	<td>id=ct</td>
-	<td>47</td>
+	<td>select</td>
+	<td>id=classificacaoCt</td>
+	<td>label=Alto</td>
 </tr>
 <tr>
-	<td>type</td>
-	<td>id=ldlc</td>
-	<td>122</td>
+	<td>select</td>
+	<td>id=classificacaoLdlc</td>
+	<td>label=Vazio</td>
 </tr>
 <tr>
-	<td>type</td>
-	<td>id=hdlc</td>
-	<td>55</td>
+	<td>select</td>
+	<td>id=classificacaoHdlc</td>
+	<td>label=Desejavel</td>
 </tr>
 <tr>
-	<td>type</td>
-	<td>id=hb</td>
-	<td>111</td>
+	<td>select</td>
+	<td>id=classificacaoTg</td>
+	<td>label=Desejavel</td>
 </tr>
 <tr>
-	<td>type</td>
-	<td>id=tg</td>
-	<td>64</td>
+	<td>select</td>
+	<td>id=classificacaoHb</td>
+	<td>label=Baixo</td>
 </tr>
 <tr>
-	<td>type</td>
-	<td>id=tgo</td>
-	<td>265</td>
+	<td>select</td>
+	<td>id=classificacaoTgo</td>
+	<td>label=Muito Baixo</td>
 </tr>
 <tr>
-	<td>type</td>
-	<td>id=tgp</td>
-	<td>2</td>
+	<td>select</td>
+	<td>id=classificacaoTgp</td>
+	<td>label=Desejavel</td>
 </tr>
 <tr>
 	<td>click</td>
@@ -123,83 +123,83 @@
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>//span[@id='classificacaoGlicemia']</td>
+	<td>//span[@id='glicemia']</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyText</td>
-	<td>//span[@id='classificacaoGlicemia']</td>
-	<td>*Informe a classificação da glicemia do paciente.*</td>
+	<td>//span[@id='glicemia']</td>
+	<td>*Informe o nível de glicemia do paciente.*</td>
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>//span[@id='classificacaoCt']</td>
+	<td>//span[@id='ct']</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyText</td>
-	<td>//span[@id='classificacaoCt']</td>
-	<td>*Informe a classificação do CT do paciente.*</td>
+	<td>//span[@id='ct']</td>
+	<td>*Informe o nível de CT do paciente.*</td>
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>//span[@id='classificacaoLdlc']</td>
+	<td>//span[@id='ldlc']</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyText</td>
-	<td>//span[@id='classificacaoLdlc']</td>
-	<td>*Informe a classificação do LDL-C do paciente.*</td>
+	<td>//span[@id='ldlc']</td>
+	<td>*Informe o nível de LDL-C do paciente.*</td>
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>//span[@id='classificacaoHdlc']</td>
+	<td>//span[@id='hdlc']</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyText</td>
-	<td>//span[@id='classificacaoHdlc']</td>
-	<td>*Informe a classificação de HDL-C do paciente.*</td>
+	<td>//span[@id='hdlc']</td>
+	<td>*Informe o nível de HDL-C do paciente.*</td>
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>//span[@id='classificacaoTg']</td>
+	<td>//span[@id='tg']</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyText</td>
-	<td>//span[@id='classificacaoTg']</td>
-	<td>*Informe a classificação do TG do paciente.*</td>
+	<td>//span[@id='tg']</td>
+	<td>*Informe o nível de TG do paciente.*</td>
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>//span[@id='classificacaoHb']</td>
+	<td>//span[@id='hb']</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyText</td>
-	<td>//span[@id='classificacaoHb']</td>
-	<td>*Informe a classificação do HB do paciente.*</td>
+	<td>//span[@id='hb']</td>
+	<td>*Informe o nível de HB do paciente.*</td>
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>//span[@id='classificacaoTgo']</td>
+	<td>//span[@id='tgo']</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyText</td>
-	<td>//span[@id='classificacaoTgo']</td>
-	<td>*Informe a classificação de TGO do paciente.*</td>
+	<td>//span[@id='tgo']</td>
+	<td>*Informe o nível de TGO do paciente.*</td>
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>//span[@id='classificacaoTgp']</td>
+	<td>//span[@id='tgp']</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyText</td>
-	<td>//span[@id='classificacaoTgp']</td>
-	<td>*Informe a classificação do TGP do paciente.*</td>
+	<td>//span[@id='tgp']</td>
+	<td>*Informe o nível de TGP do paciente.*</td>
 </tr>
 <tr>
 	<td>click</td>
@@ -211,6 +211,7 @@
 	<td>link=Sair</td>
 	<td></td>
 </tr>
+
 </tbody></table>
 </body>
 </html>

@@ -77,31 +77,25 @@
 	<td>3</td>
 </tr>
 <tr>
-	<td>clickAndWait</td>
-	<td>css=button.btn.btn-success</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
+	<td>click</td>
 	<td>css=button.btn.btn-success</td>
 	<td></td>
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>id=circunferenciaCinturaDesejada.errors</td>
+	<td>//span[@id='circunferenciaCinturaDesejada']</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyText</td>
-	<td>id=circunferenciaCinturaDesejada.errors</td>
-	<td>*Informe a cincunferencia desejada da cintura*</td>
+	<td>//span[@id='circunferenciaCinturaDesejada']</td>
+	<td>*Informe a cincunferência da cintura desejada pelo paciente.*</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
 	<td>link=Sair</td>
 	<td></td>
 </tr>
-
 </tbody></table>
 </body>
 </html>

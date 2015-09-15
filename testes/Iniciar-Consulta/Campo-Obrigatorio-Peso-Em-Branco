@@ -77,31 +77,25 @@
 	<td>3</td>
 </tr>
 <tr>
-	<td>clickAndWait</td>
+	<td>click</td>
 	<td>css=button.btn.btn-success</td>
 	<td></td>
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>id=peso.errors</td>
+	<td>//span[@id='peso']</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyText</td>
-	<td>id=peso.errors</td>
-	<td>*Informe o peso*</td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>css=i.glyphicon.glyphicon-user</td>
-	<td></td>
+	<td>//span[@id='peso']</td>
+	<td>*Informe o peso do paciente.*</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
 	<td>link=Sair</td>
 	<td></td>
 </tr>
-
 </tbody></table>
 </body>
 </html>

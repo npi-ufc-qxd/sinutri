@@ -83,35 +83,34 @@
 </tr>
 <tr>
 	<td>click</td>
-	<td>id=checkCarneVermelha</td>
+	<td>id=checkAtividadeFisica</td>
 	<td></td>
 </tr>
 <tr>
-	<td>select</td>
-	<td>id=carneVermelhaFrequenciaSemanal</td>
-	<td>label=Diariamente</td>
+	<td>type</td>
+	<td>id=inputTextAtividadeFisica</td>
+	<td>academia</td>
 </tr>
 <tr>
-	<td>clickAndWait</td>
+	<td>click</td>
 	<td>css=button.btn.btn-success</td>
 	<td></td>
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>id=CarneVermelhaComentario.errors</td>
+	<td>//span[@id='atividadeFisicaFrequenciaSemanal']</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyText</td>
-	<td>id=CarneVermelhaComentario.errors</td>
-	<td>*Informe o tipo de carne vermelha consumida pelo paciente.*</td>
+	<td>//span[@id='atividadeFisicaFrequenciaSemanal']</td>
+	<td>*Informe qual a frequência da(s) atividade(s) física(s) praticada(s) pelo paciente.*</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
 	<td>link=Sair</td>
 	<td></td>
 </tr>
-
 </tbody></table>
 </body>
 </html>
