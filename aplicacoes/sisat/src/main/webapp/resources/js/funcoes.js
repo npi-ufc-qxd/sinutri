@@ -44,7 +44,7 @@ $(document)
 							});
 					
 					$('#fileupload').MultiFile({
-						accept : 'pdf|docx',
+						accept : 'pdf|docx|png|jpg',
 						list : '#files',
 						STRING : {
 							remove : 	'<button class="btn btn-danger delete" type="button">' + 
