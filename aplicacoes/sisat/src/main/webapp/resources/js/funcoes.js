@@ -43,6 +43,20 @@ $(document)
 								}
 							});
 					
+					$('#fileupload').MultiFile({
+						accept : 'pdf|docx',
+						list : '#files',
+						STRING : {
+							remove : 	'<button class="btn btn-danger delete" type="button">' + 
+										'<i class="glyphicon glyphicon-trash"></i>'+ 
+										'<span>Remover<span>'+
+										'</button>',
+							selected : 'Selecionado: $file',
+							denied : 'Arquivo de tipo inválido: .$ext',
+							duplicate : 'Arquivo já selecionado: \n$file'
+						}
+					});
+					
 					$('.exame').change(
 							function() {
 								var itemForm = $(this).parent().parent()

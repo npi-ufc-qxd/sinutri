@@ -709,10 +709,15 @@
 						<div class="form-group">
 							<label for="arquivo" class="col-sm-2 control-label">Arquivos:</label>
 							<div class="col-sm-5 files">
-								<span>Adicionar arquivos...</span> 
-								<input multiple type="file" id="fileupload" class="file" name="files[]"/>
-									<br>
-									<br>
+								<span class="btn btn-success fileinput-button"> <i
+									class="glyphicon glyphicon-plus"></i> <span>Adicionar
+										arquivos...</span> <input multiple type="file" id="fileupload"
+									class="file" name="files" />
+								</span> 
+								<br>
+								<br>
+								<div id="files" class="files"></div>
+								<br> 
 								<input type="checkbox" id="enviar" name="enviar"> Enviar para o paciente
 
 								<div class="error-validation" id="erro-Anexo">
