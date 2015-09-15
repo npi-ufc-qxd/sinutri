@@ -1,7 +1,6 @@
 package br.ufc.quixada.npi.sisat.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
@@ -128,9 +127,9 @@ public class ConsultaController {
 
 	@RequestMapping(value = { "upload" }, method = RequestMethod.GET)
 	public @ResponseBody String uploadDocumento() {
-		return "Você pode fazer o upload de um arquivo.";
+		return "Você pode fazer o upload de arquivos.";
 	}
-
+	
 	@RequestMapping(value = { "upload" }, method = RequestMethod.POST)
 	public @ResponseBody String uploadDocumento(Model model, @Valid ConsultaNutricional consulta,
 			@RequestParam("files") List<MultipartFile> files,

@@ -426,7 +426,6 @@
 						</div>
 					</div>
 
-
 					<h3 id="recordatorio" class="section">Recordatório</h3>
 
 					<div class="row form-group">
@@ -437,7 +436,6 @@
 							</fieldset>
 						</div>
 					</div>
-
 
 					<h3 id="exame" class="section">Exames Laboratoriais</h3>
 
@@ -705,16 +703,17 @@
 						</div>
 					</div>
 
-
 					<h3 id="documentos" class="section">Documentos</h3>
 
 					<div id="documentos" class="tab-pane fade in ">
 						<div class="form-group">
 							<label for="arquivo" class="col-sm-2 control-label">Arquivos:</label>
 							<div class="col-sm-5 files">
-								<input id="fileupload" type="file" name="files[]" multiple></input>
-								<br> <input type="checkbox" id="enviar" name="enviar">
-								Enviar para o paciente
+								<span>Adicionar arquivos...</span> 
+								<input multiple type="file" id="fileupload" class="file" name="files[]"/>
+									<br>
+									<br>
+								<input type="checkbox" id="enviar" name="enviar"> Enviar para o paciente
 
 								<div class="error-validation" id="erro-Anexo">
 									<label class="col-sm-10 control-label" id="label-erro">
@@ -831,7 +830,7 @@
 	</div>
 
 	<jsp:include page="../modulos/footer.jsp" />
-	<script src="<c:url value="/resources/js/questionario-frequencia-alimentar.js" />"></script>
+	<%-- 	<script src="<c:url value="/resources/js/questionario-frequencia-alimentar.js" />"></script> --%>
 
 </body>
 </html>

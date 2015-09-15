@@ -43,14 +43,6 @@ $(document)
 								}
 							});
 					
-					$('#fileupload').fileupload({
-						done: function (e, data) {
-							$.each(data.result.files, function (index, file) {
-								$('<p/>').text(file.name).appendTo(document.body);
-							});
-						}
-					});
-
 					$('.exame').change(
 							function() {
 								var itemForm = $(this).parent().parent()
