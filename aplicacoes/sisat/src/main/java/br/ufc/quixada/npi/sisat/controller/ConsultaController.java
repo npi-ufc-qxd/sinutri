@@ -1,7 +1,6 @@
 package br.ufc.quixada.npi.sisat.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
@@ -57,21 +56,22 @@ public class ConsultaController {
 	@Inject
 	private PacienteService pacienteService;
 
-	@Inject	
+	@Inject
 	private DocumentoService documentoService;
 
-	@Inject	
+	@Inject
 	private UsuarioService usuarioService;
 
-	@Inject	
+	@Inject
 	private ConsultaNutricionalValidator consultaNutricionalValidator;
 
 	@RequestMapping(value = "historico-paciente/{cpf}", method = RequestMethod.GET)
-	public String getPaginaHistorico(@PathVariable("cpf") String cpf, Model model, RedirectAttributes redirectAttributes){
-		
+	public String getPaginaHistorico(@PathVariable("cpf") String cpf, Model model,
+			RedirectAttributes redirectAttributes) {
+
 		Pessoa pessoa = registrarPaciente(cpf);
 
-		if(pessoa == null){
+		if (pessoa == null) {
 			redirectAttributes.addFlashAttribute("erro", "Paciente não encontrado. Faça um nova pesquisa");
 			return "redirect:/nutricao/buscar";
 		}
@@ -81,11 +81,13 @@ public class ConsultaController {
 		return "nutricao/historico-paciente";
 	}
 
-	@RequestMapping(value = {"informacoes-consulta/{id}"} , method = RequestMethod.GET)
-	public String getPaginaInformacoesConsulta(@PathVariable("id") Long id, Model model, RedirectAttributes redirectAttributes){
-		ConsultaNutricional consulta = consultaNutricionalService.getConsultaNutricionalWithDocumentosAndFrequenciasById(id);
+	@RequestMapping(value = { "informacoes-consulta/{id}" }, method = RequestMethod.GET)
+	public String getPaginaInformacoesConsulta(@PathVariable("id") Long id, Model model,
+			RedirectAttributes redirectAttributes) {
+		ConsultaNutricional consulta = consultaNutricionalService
+				.getConsultaNutricionalWithDocumentosAndFrequenciasById(id);
 
-		if(consulta == null){
+		if (consulta == null) {
 			redirectAttributes.addFlashAttribute("erro", "Consulta não encontrado.");
 			return "redirect:/nutricao/buscar";
 		}
@@ -93,15 +95,16 @@ public class ConsultaController {
 		model.addAttribute("consulta", consulta);
 		return "nutricao/informacoes-consulta";
 	}
-	
+
 	@RequestMapping(value = "realizar-consulta/{cpf}", method = RequestMethod.GET)
-	public String getPaginaRealizarConsulta(@PathVariable("cpf") String cpf, Model model, RedirectAttributes redirectAttributes) {
+	public String getPaginaRealizarConsulta(@PathVariable("cpf") String cpf, Model model,
+			RedirectAttributes redirectAttributes) {
 
 		model.addAttribute("action", "cadastrar");
 
 		Pessoa pessoa = registrarPaciente(cpf);
 
-		if(pessoa == null){
+		if (pessoa == null) {
 			redirectAttributes.addFlashAttribute("erro", "Paciente não encontrado. Faça um nova pesquisa");
 			return "redirect:/nutricao/buscar";
 		}
@@ -111,7 +114,7 @@ public class ConsultaController {
 		consulta.setPaciente(paciente);
 
 		model.addAttribute("consultaNutricional", new ConsultaNutricional(pessoa.getPaciente()));
-		model.addAttribute("sistemaGastrointestinal", SistemaGastrointestinal.values());		
+		model.addAttribute("sistemaGastrointestinal", SistemaGastrointestinal.values());
 		model.addAttribute("classificacaoExames", ClassificacaoExame.values());
 		model.addAttribute("sistemaUrinario", SistemaUrinario.values());
 		model.addAttribute("classificacao", ClassificacaoExame.values());
@@ -121,22 +124,25 @@ public class ConsultaController {
 		return "nutricao/form-consulta";
 	}
 
-	@RequestMapping(value = {"realizar-consulta/{cpf}"}, method = RequestMethod.POST)
-	public String salvarConsulta(Model model, @PathVariable("cpf") String cpf, @Valid ConsultaNutricional consulta, BindingResult result, RedirectAttributes redirectAttributes, @RequestParam("files") List<MultipartFile> files, @RequestParam(value = "enviar", required = false) boolean enviar) {		
-		
+	@RequestMapping(value = { "realizar-consulta/{cpf}" }, method = RequestMethod.POST)
+	public String salvarConsulta(Model model, @PathVariable("cpf") String cpf, @Valid ConsultaNutricional consulta,
+			BindingResult result, RedirectAttributes redirectAttributes,
+			@RequestParam("files") List<MultipartFile> files,
+			@RequestParam(value = "enviar", required = false) boolean enviar) {
+
 		model.addAttribute("action", "cadastrar");
-	    
+
 		Pessoa pessoa = pessoaService.getPessoaByCpf(cpf);
 
-		if(pessoa == null){
+		if (pessoa == null) {
 			redirectAttributes.addFlashAttribute("erro", "Paciente não encontrado. Faça um nova pesquisa");
 			return "redirect:/nutricao/buscar";
 		}
 
 		Paciente paciente = pessoa.getPaciente();
 		consulta.setPaciente(paciente);
-		
-//		consultaNutricionalValidator.validate(consulta, result);
+
+		consultaNutricionalValidator.validate(consulta, result);
 		if (result.hasErrors()) {
 			model.addAttribute("consultaNutricional", consulta);
 			return ("nutricao/form-consulta");
@@ -170,56 +176,59 @@ public class ConsultaController {
 				}
 			}
 
-			if(!documentos.isEmpty()){
+			if (!documentos.isEmpty()) {
 				consulta.setDocumentos(documentos);
 			}
-		}else{
-			model.addAttribute("anexoError", "Adicione anexo a seleção");					
+		} else {
+			model.addAttribute("anexoError", "Adicione anexo a seleção");
 		}
 
-
-		if(consulta.getAgua().equals(0)){
+		if (consulta.getAgua().equals(0)) {
 			consulta.setAgua(null);
 		}
-		if(consulta.getMedicamentoComentario()!=null && consulta.getMedicamentoComentario().isEmpty()){
+		if (consulta.getMedicamentoComentario() != null && consulta.getMedicamentoComentario().isEmpty()) {
 			consulta.setMedicamentoComentario(null);
 		}
-		if(consulta.getMastigacaoComentario()!=null && consulta.getMastigacaoComentario().isEmpty()){
+		if (consulta.getMastigacaoComentario() != null && consulta.getMastigacaoComentario().isEmpty()) {
 			consulta.setMastigacaoComentario(null);
 		}
-		if(consulta.getAlergiaComentario()!=null && consulta.getAlergiaComentario().isEmpty()){
+		if (consulta.getAlergiaComentario() != null && consulta.getAlergiaComentario().isEmpty()) {
 			consulta.setAlergiaComentario(null);
 		}
-		if(consulta.getCarneVermelhaComentario()!=null && consulta.getCarneVermelhaComentario().isEmpty()){
+		if (consulta.getCarneVermelhaComentario() != null && consulta.getCarneVermelhaComentario().isEmpty()) {
 			consulta.setCarneVermelhaComentario(null);
 		}
-		if(consulta.getAtividadeFisicaComentario()!=null && consulta.getAtividadeFisicaComentario().isEmpty()){
+		if (consulta.getAtividadeFisicaComentario() != null && consulta.getAtividadeFisicaComentario().isEmpty()) {
 			consulta.setAtividadeFisicaComentario(null);
 		}
-		if(consulta.getBebidaAlcoolicaComentario()!=null && consulta.getBebidaAlcoolicaComentario().isEmpty()){
+		if (consulta.getBebidaAlcoolicaComentario() != null && consulta.getBebidaAlcoolicaComentario().isEmpty()) {
 			consulta.setBebidaAlcoolicaComentario(null);
 		}
 		consultaNutricionalService.save(consulta);
 
-		redirectAttributes.addFlashAttribute("success", "Consulta de <strong>id = " + consulta.getId() + "</strong> e paciente <strong>" + consulta.getPaciente().getPessoa().getNome() + "</strong> realizada com sucesso.");
+		redirectAttributes.addFlashAttribute("success",
+				"Consulta de <strong>id = " + consulta.getId() + "</strong> e paciente <strong>"
+						+ consulta.getPaciente().getPessoa().getNome() + "</strong> realizada com sucesso.");
 
 		return "redirect:/consulta/informacoes-consulta/" + consulta.getId();
 	}
-	
-	@RequestMapping(value = {"/editar-consulta/{idConsulta}/paciente/{cpf}"}, method = RequestMethod.GET)
-	public String editarConsulta(@PathVariable("idConsulta") long idConsulta, @PathVariable("cpf") String cpf, Model model) {
 
-		ConsultaNutricional consultaNutricional = consultaNutricionalService.getConsultaNutricionalWithDocumentosById(idConsulta);
-		
+	@RequestMapping(value = { "/editar-consulta/{idConsulta}/paciente/{cpf}" }, method = RequestMethod.GET)
+	public String editarConsulta(@PathVariable("idConsulta") long idConsulta, @PathVariable("cpf") String cpf,
+			Model model) {
+
+		ConsultaNutricional consultaNutricional = consultaNutricionalService
+				.getConsultaNutricionalWithDocumentosById(idConsulta);
+
 		List<Documento> documentosEnvio = documentoService.getDocumentosEnviar(idConsulta);
-		
+
 		List<Documento> documentosNutricionista = documentoService.getDocumentosNutricionista(idConsulta);
 
 		model.addAttribute("action", "editar");
 		model.addAttribute("documentosEnvio", documentosEnvio);
 		model.addAttribute("documentosNutricionista", documentosNutricionista);
 		model.addAttribute("consultaNutricional", consultaNutricional);
-		model.addAttribute("sistemaGastrointestinal", SistemaGastrointestinal.values());		
+		model.addAttribute("sistemaGastrointestinal", SistemaGastrointestinal.values());
 		model.addAttribute("classificacaoExames", ClassificacaoExame.values());
 		model.addAttribute("sistemaUrinario", SistemaUrinario.values());
 		model.addAttribute("classificacao", ClassificacaoExame.values());
@@ -230,19 +239,21 @@ public class ConsultaController {
 
 	}
 
-	@RequestMapping(value = {"/editar-consulta/{idConsulta}/paciente/{cpf}"}, method = RequestMethod.POST)
-	public String editarConsulta(Model model, @Valid ConsultaNutricional consulta, BindingResult result, RedirectAttributes redirectAttributes, @RequestParam("files") List<MultipartFile> files, @RequestParam(value = "enviar", required = false) boolean enviar) {
+	@RequestMapping(value = { "/editar-consulta/{idConsulta}/paciente/{cpf}" }, method = RequestMethod.POST)
+	public String editarConsulta(Model model, @Valid ConsultaNutricional consulta, BindingResult result,
+			RedirectAttributes redirectAttributes, @RequestParam("files") List<MultipartFile> files,
+			@RequestParam(value = "enviar", required = false) boolean enviar) {
 		model.addAttribute("action", "editar");
 
 		Paciente paciente = pacienteService.find(Paciente.class, consulta.getPaciente().getId());
-		consulta.setPaciente(paciente);		
+		consulta.setPaciente(paciente);
 
-//		consultaNutricionalValidator.validate(consulta, result);
+		consultaNutricionalValidator.validate(consulta, result);
 
 		if (result.hasErrors()) {
 			model.addAttribute("consultaNutricional", consulta);
 			return ("nutricao/form-consulta");
-		}		
+		}
 
 		Date data = consultaNutricionalService.find(ConsultaNutricional.class, consulta.getId()).getData();
 
@@ -261,7 +272,7 @@ public class ConsultaController {
 						documento.setEnviar(enviar);
 						documento.setConsultaNutricional(consulta);
 						documento.setData(new Date());
-						documentos.add(documento);								
+						documentos.add(documento);
 					}
 				} catch (IOException e) {
 					model.addAttribute("erro", "Não foi possivel salvar os documentos.");
@@ -269,47 +280,48 @@ public class ConsultaController {
 				}
 			}
 
-			if(!documentos.isEmpty()){
+			if (!documentos.isEmpty()) {
 				consulta.setDocumentos(documentos);
 			}
-		}else{
-			model.addAttribute("anexoError", "Adicione anexo a seleção");					
+		} else {
+			model.addAttribute("anexoError", "Adicione anexo a seleção");
 		}
 
 		consulta.setData(data);
 
-		consultaNutricionalService.update(atualizarConsulta(consulta));	
-		redirectAttributes.addFlashAttribute("success", "Consulta do paciente <strong>" + consulta.getPaciente().getPessoa().getNome() + "</strong> atualizada com sucesso.");
+		consultaNutricionalService.update(atualizarConsulta(consulta));
+		redirectAttributes.addFlashAttribute("success", "Consulta do paciente <strong>"
+				+ consulta.getPaciente().getPessoa().getNome() + "</strong> atualizada com sucesso.");
 
 		return "redirect:/consulta/informacoes-consulta/" + consulta.getId();
-	}	
+	}
 
 	@RequestMapping(value = "/relatorio-orientacoes/{id}", method = RequestMethod.GET)
 	public String relatorio(@PathVariable("id") Long id, Model model, HttpSession session) throws JRException {
-		
+
 		String orientacoesIndividuais = consultaNutricionalService.getOrientacoesIndividuaisById(id);
 		String cpf = consultaNutricionalService.getPacientePessoaCpfById(id);
 		String nome = usuarioService.getByCpf(cpf).getNome();
 		String nutricionista = getUsuarioLogado(session).getNome();
-				
+
 		model.addAttribute("format", "pdf");
 		model.addAttribute("orientacoesIndividuais", orientacoesIndividuais);
 		model.addAttribute("paciente", nome);
 		model.addAttribute("nutricionista", nutricionista);
 		model.addAttribute("datasource", new JREmptyDataSource());
-		
+
 		return "orientacoesIndividuais";
 	}
 
 	private Pessoa registrarPaciente(String cpf) {
 		Pessoa pessoa = pessoaService.getPessoaByCpf(cpf);
 
-		if(pessoa == null){
+		if (pessoa == null) {
 			Usuario usuario = usuarioService.getByCpf(cpf);
 
-			if(usuario != null) {
+			if (usuario != null) {
 				pessoa = new Pessoa(usuario.getCpf());
-				
+
 				pessoaService.save(pessoa);
 
 				pessoa.setPaciente(new Paciente());
@@ -319,18 +331,18 @@ public class ConsultaController {
 				pessoa.getPaciente().setPesoAtual(1.0);
 
 				pessoaService.update(pessoa);
-				
+
 				return pessoa;
 
 			} else {
-		
+
 				return null;
 			}
 		}
-		
+
 		return pessoa;
 	}
-	
+
 	private ConsultaNutricional atualizarConsulta(ConsultaNutricional consulta) {
 		if (consulta.getFrequencias() != null) {
 			for (FrequenciaAlimentar frequencia : consulta.getFrequencias()) {
@@ -343,8 +355,8 @@ public class ConsultaController {
 			}
 		}
 
-		if(consulta.getDocumentos() != null){
-			for(Documento documento : consulta.getDocumentos()){
+		if (consulta.getDocumentos() != null) {
+			for (Documento documento : consulta.getDocumentos()) {
 				documento.setConsultaNutricional(consulta);
 			}
 		}
@@ -354,7 +366,8 @@ public class ConsultaController {
 
 	private Pessoa getUsuarioLogado(HttpSession session) {
 		if (session.getAttribute("usuario") == null) {
-			Pessoa pessoa = pessoaService.getPessoaByCpf(SecurityContextHolder.getContext().getAuthentication().getName());
+			Pessoa pessoa = pessoaService
+					.getPessoaByCpf(SecurityContextHolder.getContext().getAuthentication().getName());
 			session.setAttribute("usuario", pessoa);
 		}
 		return (Pessoa) session.getAttribute("usuario");

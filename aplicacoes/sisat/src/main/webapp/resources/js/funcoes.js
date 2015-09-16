@@ -42,7 +42,21 @@ $(document)
 									$(itemForm).find('.help-block').remove();
 								}
 							});
-
+					
+					$('#fileupload').MultiFile({
+						accept : 'pdf|docx|png|jpg|odt',
+						list : '#files',
+						STRING : {
+							remove : 	'<button class="btn btn-danger delete" type="button">' + 
+										'<i class="glyphicon glyphicon-trash"></i>'+ 
+										'<span>Remover<span>'+
+										'</button>',
+							selected : 'Selecionado: $file',
+							denied : 'Arquivo de tipo inválido: .$ext',
+							duplicate : 'Arquivo já selecionado: \n$file'
+						}
+					});
+					
 					$('.exame').change(
 							function() {
 								var itemForm = $(this).parent().parent()
@@ -114,7 +128,8 @@ $(document)
 													.children().last());
 											var itemForm = element.parent();
 											var id = element.attr("name");
-											$(itemForm).find("span").attr("id", id);
+											$(itemForm).find("span").attr("id",
+													id);
 										},
 										messages : {
 											objetivoConsulta : {
@@ -159,7 +174,7 @@ $(document)
 											medicamentoComentario : {
 												required : "Informe o(s) medicamento(s) utilizado(s) pelo paciente."
 											},
-											inputTextMastigacao : {
+											mastigacaoComentario : {
 												required : "Informe características da mastigação do paciente."
 											},
 											disfagiaComentario : {
@@ -172,7 +187,7 @@ $(document)
 												required : "Informe comentários sobre a pirose do paciente."
 											},
 											nauseaComentario : {
-												required : "Informe comentários sobre náuses do paciente."
+												required : "Informe comentários sobre náuseas do paciente."
 											},
 											vomitoComentario : {
 												required : "Informe comentários sobre vômitos do paciente."
