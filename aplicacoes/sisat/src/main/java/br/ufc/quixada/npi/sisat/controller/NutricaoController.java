@@ -102,11 +102,13 @@ public class NutricaoController {
 	}
 
 	@RequestMapping(value = {"deletarDocumento/{id}"}, method = RequestMethod.GET)
-	public String deletarDocumento(@PathVariable("id") Long id, RedirectAttributes redirectAttributes){
+	public @ResponseBody String deletarDocumento(@PathVariable("id") Long id, RedirectAttributes redirectAttributes){
 		Documento documento = documentoService.find(Documento.class, id);
+		documento.setConsultaNutricional(null);
 		documentoService.delete(documento);
 		redirectAttributes.addFlashAttribute("success", "Documento deletado com sucesso");
-		return "redirect:../../nutricao/editarConsulta/" + documento.getConsultaNutricional().getId();
+		
+		return "redirect:/consulta/editar-consulta/" + documento.getConsultaNutricional().getId();
 	}
 
 	@RequestMapping(value = {"enviarDocumento/{id}/{mensagem}"}, method = RequestMethod.GET)

@@ -753,7 +753,7 @@
 												</a></td>
 
 												<td><a id="delete[${documento.id}]"
-													href="../../nutricao/deletarDocumento/${documento.id}"
+													href="<c:url value="/nutricao/deletarDocumento/${documento.id }" ></c:url>"
 													class="delete-document">
 														<button type="button" class="btn btn-danger">
 															<span class="glyphicon glyphicon-trash"></span>
@@ -798,19 +798,17 @@
 												<td>${documento.data}<strong class="error text-danger"></strong></td>
 												<td>${documento.tipo}<strong class="error text-danger"></strong></td>
 												<td><a id="download[${documento.id}]"
-													href="../../nutricao/downloadDocumento/${documento.id}"
+													href="<c:url value="/nutricao/downloadDocumento/${documento.id }" ></c:url>"
 													class="save-document">
 														<button type="button" class="btn btn-primary">
 															<span class="glyphicon glyphicon-save"></span>
 														</button>
 												</a></td>
 
-												<td><a id="delete[${documento.id}]"
-													href="../../nutricao/deletarDocumento/${documento.id}"
+												<td><a id="delete[${documento.id}]" class="btn btn-danger"
+													href="<c:url value="/nutricao/deletarDocumento/${documento.id }" ></c:url>"
 													class="delete-document">
-														<button type="button" class="btn btn-danger">
 															<span class="glyphicon glyphicon-trash"></span>
-														</button>
 												</a></td>
 											</tr>
 										</c:forEach>
