@@ -17,9 +17,11 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+import javax.persistence.Transient;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
+import org.apache.xmlbeans.impl.regex.REUtil;
 import org.codehaus.jackson.annotate.JsonIgnore;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -50,7 +52,7 @@ import br.ufc.quixada.npi.sisat.model.enuns.SistemaUrinario;
 	@NamedQuery(name = "ConsultaNutricional.countFrequenciaAlergia", query = "select count(c.alergia) from ConsultaNutricional c where c.alergia = TRUE"),
 	@NamedQuery(name = "ConsultaNutricional.countFrequenciaOutrasPatologias", query = "select count(c.outrasPatologias) from ConsultaNutricional c where c.outrasPatologias = TRUE"),
 
-	@NamedQuery(name = "ConsultaNutricional.historicoPeso", query = "select new br.ufc.quixada.npi.sisat.model.ConsultaNutricional(c.data, c.peso, c.circunferenciaCintura) from ConsultaNutricional c where c.paciente.pessoa.cpf = :cpf "),
+	@NamedQuery(name = "ConsultaNutricional.historicoPeso", query = "select new br.ufc.quixada.npi.sisat.model.ConsultaNutricional(c.paciente, c.data, c.peso, c.altura, c.circunferenciaCintura) from ConsultaNutricional c where c.paciente.pessoa.cpf = :cpf "),
 
 })
 
@@ -186,6 +188,16 @@ public class ConsultaNutricional {
 
 	private Integer tgp;
 	private ClassificacaoExame classificacaoTgp;
+	
+	@Transient
+	private Double IMC;
+	
+	@Transient
+	private String classificacaoIMC;
+	
+	@Transient
+	private String classificacaoCC;
+	
 
 	@Column(columnDefinition = "TEXT")
 	@NotNull(message = "Informe as orientações para o paciente.")
@@ -204,31 +216,16 @@ public class ConsultaNutricional {
 		setPaciente(paciente);
 	}
 
-	public ConsultaNutricional(Date data, Double peso, Double circunferenciaCintura) {
+	public ConsultaNutricional(Paciente paciente, Date data, Double peso, Double altura, Double circunferenciaCintura) {
+		this.paciente = paciente;
 		this.data = data;
 		this.peso = peso;
+		this.altura = altura;
+		this.IMC = calculaIMC();
+		this.classificacaoCC = classificaCircunferenciaCintura();
 		this.circunferenciaCintura = circunferenciaCintura;
-	}
-
-	public String getImc() {
-
-		double imc = calculaIMC(this);
-
-		if (imc == 0.0) {
-			return "Não foi possivel calcular o IMC do paciente!";
-		}
-
-		return new DecimalFormat("0.00").format(imc) + " " + getClassificacaoImc(imc);
-	}
-
-	public String getClassificacaoImc(double imc) {
-		String classificacao = classificaIMC(imc);
-		return classificacao;
-	}
-
-	public String getClassificacaoCc() {
-		String classificacao = classificaCircunferenciaCintura(this);
-		return classificacao;
+		this.classificacaoCC = classificaCircunferenciaCintura();
+		System.out.println();
 	}
 
 	public Paciente getPaciente() {
@@ -254,96 +251,6 @@ public class ConsultaNutricional {
 	public void setOrientacoesIndividuais(String orientacoesIndividuais) {
 		this.orientacoesIndividuais = orientacoesIndividuais;
 
-	}
-
-	private double calculaIMC(ConsultaNutricional consulta) {
-
-		try {
-			double imc = this.peso / (this.altura * this.altura);
-			return imc;
-		} catch (NullPointerException e) {
-			return 0.0;
-		}
-
-	}
-
-	private String classificaIMC(double imc) {
-
-		if (imc < 25) {
-			if (imc < 17) {
-				if (imc < 16) {
-					// <16 Desnutrição grau III
-					return "Desnutrição grau III";
-				} else {
-					// 16 a 16,9 Desnutrição grau II
-					return "Desnutrição grau II";
-				}
-			} else {
-				if (imc < 18.5) {
-					// 17 a 18,4 Desnutrição grau I
-					return "Desnutrição grau I";
-				} else {
-					// 18,5 a 24,9 Eutrofia
-					return "Eutrofia";
-				}
-			}
-		} else {
-			if (imc < 35) {
-				if (imc < 30) {
-					// 25 a 29,9 Sobrepeso
-					return "Sobrepeso";
-				} else {
-					// 30 a 34,9 Obesidade grau I
-					return "Obesidade grau I";
-				}
-			} else {
-				if (imc < 40) {
-					// 35 a 39,9 Obesidade grau II
-					return "Obesidade grau  II";
-				} else {
-					// ≥ 40 Obesidade grau III
-					return "Obesidade grau III";
-				}
-			}
-		}
-
-	}
-
-	private String classificaCircunferenciaCintura(ConsultaNutricional consulta) {
-
-		if (consulta.getCircunferenciaCintura() == null) {
-			return "";
-		}
-
-		Double circunferencia = consulta.getCircunferenciaCintura()/100;
-		String sexo = consulta.getPaciente().getPessoa().getSexo();
-
-		if (sexo != null) {
-			if (sexo.equalsIgnoreCase("m")) {
-				if (circunferencia < 0.94) {
-					return "Normal";
-				} else {
-					if (circunferencia < 1.02) {
-						return "Risco aumentado";
-					} else {
-						return "Risco muito aumentado";
-					}
-				}
-			} else if (sexo.equalsIgnoreCase("f")) {
-				if (circunferencia < 0.80) {
-					return "Normal";
-				} else {
-					if (circunferencia < 0.88) {
-						return "Risco aumentado";
-					} else {
-						return "Risco muito aumentado";
-					}
-				}
-			}
-		} else {
-			return "É necessario o sexo para definir a classificação de circurferência";
-		}
-		return "";
 	}
 
 	public Long getId() {
@@ -874,4 +781,111 @@ public class ConsultaNutricional {
 		this.observacooesDaConsulta = observacooesDaConsulta;
 	}
 
+	public Double getIMC() {
+		return IMC;
+	}
+
+	private Double calculaIMC() {
+		try {
+			double imc = this.peso / (this.altura * this.altura);
+			return imc;
+		} catch (NullPointerException e) {
+			return 0.0;
+		}
+
+	}
+
+	public String getClassificacaoIMC() {
+		classificacaoIMC = classificaIMC();
+		return classificacaoIMC;
+	}
+
+	private String classificaIMC() {
+
+		if (this.IMC < 25) {
+			if (this.IMC < 17) {
+				if (this.IMC < 16) {
+					// <16 Desnutrição grau III
+					return "Desnutrição grau III";
+				} else {
+					// 16 a 16,9 Desnutrição grau II
+					return "Desnutrição grau II";
+				}
+			} else {
+				if (this.IMC < 18.5) {
+					// 17 a 18,4 Desnutrição grau I
+					return "Desnutrição grau I";
+				} else {
+					// 18,5 a 24,9 Eutrofia
+					return "Eutrofia";
+				}
+			}
+		} else {
+			if (this.IMC < 35) {
+				if (this.IMC < 30) {
+					// 25 a 29,9 Sobrepeso
+					return "Sobrepeso";
+				} else {
+					// 30 a 34,9 Obesidade grau I
+					return "Obesidade grau I";
+				}
+			} else {
+				if (this.IMC < 40) {
+					// 35 a 39,9 Obesidade grau II
+					return "Obesidade grau  II";
+				} else {
+					// ≥ 40 Obesidade grau III
+					return "Obesidade grau III";
+				}
+			}
+		}
+
+	}
+
+	public String getClassificacaoCC() {
+		classificacaoCC = classificaCircunferenciaCintura();
+		return classificacaoCC;
+	}
+
+	private String classificaCircunferenciaCintura() {
+
+		if (this.getCircunferenciaCintura() == null) {
+			return "";
+		}
+
+		Double circunferencia = this.getCircunferenciaCintura()/100;
+
+		if (this.getPaciente().getPessoa().getSexo() != null) {
+			String sexo = this.getPaciente().getPessoa().getSexo();
+			if (sexo.equalsIgnoreCase("m")) {
+				if (circunferencia < 0.94) {
+					return "Normal";
+				} else {
+					if (circunferencia < 1.02) {
+						return "Risco aumentado";
+					} else {
+						return "Risco muito aumentado";
+					}
+				}
+			} else if (sexo.equalsIgnoreCase("f")) {
+				if (circunferencia < 0.80) {
+					return "Normal";
+				} else {
+					if (circunferencia < 0.88) {
+						return "Risco aumentado";
+					} else {
+						return "Risco muito aumentado";
+					}
+				}
+			}
+		} else {
+			return "É necessario o sexo para definir a classificação de circurferência";
+		}
+		return "";
+	}
+
+
+
+	
+	
 }

@@ -29,6 +29,7 @@ import br.ufc.quixada.npi.ldap.service.UsuarioService;
 import br.ufc.quixada.npi.model.Attachment;
 import br.ufc.quixada.npi.model.Email;
 import br.ufc.quixada.npi.service.EmailService;
+import br.ufc.quixada.npi.sisat.model.ConsultaNutricional;
 import br.ufc.quixada.npi.sisat.model.Documento;
 import br.ufc.quixada.npi.sisat.model.FrequenciaAlimentar;
 import br.ufc.quixada.npi.sisat.model.Papel;
@@ -95,8 +96,10 @@ public class NutricaoController {
 
 	@RequestMapping(value = "/informacoes-graficas/paciente/{cpf}/historico-peso.json", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public @ResponseBody Model getPesoByConsulta(Model model, @PathVariable("cpf") String cpf) {
+		
+		List<ConsultaNutricional> consultas = pacienteService.getHistoricoPeso(cpf);
 
-		model.addAttribute("pesos", pacienteService.getHistoricoPeso(cpf));
+		model.addAttribute("pesos", consultas);
 
 		return model;
 	}

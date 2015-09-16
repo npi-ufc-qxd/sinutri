@@ -48,14 +48,6 @@ public class PacienteServiceImpl extends GenericServiceImpl<Paciente> implements
 	public List<ConsultaNutricional> getHistoricoPeso(String cpf) {
 		List<ConsultaNutricional> consultas = find(QueryType.NAMED, "ConsultaNutricional.historicoPeso", new SimpleMap<String, Object>("cpf", cpf));
 
-		Map<Date, Double> mapPesos = new HashMap<Date, Double>();
-		Map<Date, Double> mapCC = new HashMap<Date, Double>();
-
-		for(ConsultaNutricional consulta : consultas) {
-			mapPesos.put(consulta.getData(), consulta.getPeso());
-			mapCC.put(consulta.getData(), consulta.getCircunferenciaCintura());
-		}
-
 		return consultas;
 	}
 }

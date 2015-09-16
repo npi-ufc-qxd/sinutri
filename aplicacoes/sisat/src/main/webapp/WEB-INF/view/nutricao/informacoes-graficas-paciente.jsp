@@ -19,13 +19,11 @@
 		
 		<input id="cpf" type="hidden" value="${idPaciente}">
 
-		<div id="historicoPeso" style="width:100%; height:400px;"></div>
+		<div id="historicoPeso" style="width:100%; height:400px;"></div><br>
 		
-		<div id="historicoIMC" style="width:100%; height:400px;"></div>
+		<div id="historicoIMC" style="width:100%; height:400px;"></div><br>
 		
-		<div id="historicoCC" style="width:100%; height:400px;"></div>
-
-		<div id="teste" style="width:100%; height:400px;"></div>
+		<div id="historicoCC" style="width:100%; height:400px;"></div><br>
 	</div>
 	
 	<jsp:include page="../modulos/footer.jsp" />
@@ -42,19 +40,27 @@
 			success: function(result) {
 				var obj = result;
 				var cat = [];
-				var data = [];
+				var catCC = [];
+				var catIMC = [];
+				
+				var dataPesos = [];
+				var dataIMC = [];
+				var dataCC = [];
 				var i = 1;
 
-				for (var key in obj.pesos) {
-					cat.push(i + "ª Consulta<br>" + formatDate(key));
-					data.push(obj.pesos[key]);
-					i++;
-		        }
-				
+				$.each( obj.pesos, function( index, value ) {
+					cat.push(index+1 + "ª Consulta<br>" + formatDate(value.data));
+					catCC.push(value.classificacaoCC + "<br>" + (index + 1) + "ª Consulta<br>" + formatDate(value.data));
+					catIMC.push(value.classificacaoIMC + "<br>" + (index + 1) + "ª Consulta<br>" + formatDate(value.data));
+
+					dataPesos.push(value.peso);
+					dataCC.push(value.circunferenciaCintura);
+					dataIMC.push(value.imc);
+				});				
 				
 			    $('#historicoPeso').highcharts({
 			        title: {
-			            text: 'Dados do Paciente',
+			            text: 'Histórico do Peso',
 			        },
 			        xAxis: {
 			            categories: cat
@@ -67,7 +73,7 @@
 			                value: 0,
 			                width: 1,
 			                color: '#808080'
-			            }]
+			            }],		            
 			        },
 			        tooltip: {
 			            valueSuffix: 'kg'
@@ -80,15 +86,67 @@
 			        },
 			        series: [{
 			        	name: 'Peso',
-			            data: data
-			        },{
-			        	name: 'CC',
-			            data: data
-			        },{
-			        	name: 'IMC',
-			            data: data
+			            data: dataPesos
 			        }]
-			    });		
+			    });
+			    
+			    $('#historicoIMC').highcharts({
+			        title: {
+			            text: 'Histórico IMC',
+			        },
+			        xAxis: {
+			            categories: catIMC
+			        },
+			        yAxis: {
+			            title: {
+			                text: ''
+			            },
+			            plotLines: [{
+			                value: 0,
+			                width: 1,
+			                color: '#808080'
+			            }]
+			        },
+			        legend: {
+			            layout: 'vertical',
+			            align: 'right',
+			            verticalAlign: 'middle',
+			            borderWidth: 0
+			        },
+			        series: [{
+			        	name: 'IMC',
+			            data: dataIMC
+			        }]
+			    });
+			    
+			    $('#historicoCC').highcharts({
+			        title: {
+			            text: 'Histórico CC',
+			        },
+			        xAxis: {
+			            categories: catCC
+			        },
+			        yAxis: {
+			            title: {
+			                text: ''
+			            },
+			            plotLines: [{
+			                value: 0,
+			                width: 1,
+			                color: '#808080'
+			            }]
+			        },
+			        legend: {
+			            layout: 'vertical',
+			            align: 'right',
+			            verticalAlign: 'middle',
+			            borderWidth: 0
+			        },
+			        series: [{
+			        	name: 'CC',
+			            data: dataCC
+			        }]
+			    });
 			}
 		});
 
