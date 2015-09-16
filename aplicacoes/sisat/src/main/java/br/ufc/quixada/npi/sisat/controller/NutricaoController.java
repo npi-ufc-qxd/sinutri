@@ -80,15 +80,30 @@ public class NutricaoController {
 
 	@RequestMapping(value = "/informacoes-graficas", method = RequestMethod.GET)
 	public String paginaInformacoesGraficas() {
-		consultaNutricionalService.teste();
+		consultaNutricionalService.getFrequenciaPatologia();
 		return "nutricao/informacoes-graficas";
 	}
 
-	@RequestMapping(value = "/informacoes-graficas/peso-by-consulta.json", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-	public @ResponseBody Model getPesoByConsulta(Model model) {
+	@RequestMapping(value = "/informacoes-graficas/paciente/{cpf}", method = RequestMethod.GET)
+	public String paginaInformacoesGraficasPaciente(Model model, @PathVariable("cpf") Long cpf) {
+		model.addAttribute("idPaciente", cpf);
 
-		model.addAttribute("consulta", pacienteService.getConsultasByPaciente(6L));
+		consultaNutricionalService.getFrequenciaPatologia();
+		
+		return "nutricao/informacoes-graficas-paciente";
+	}
 
+	@RequestMapping(value = "/informacoes-graficas/paciente/{cpf}/historico-peso.json", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public @ResponseBody Model getPesoByConsulta(Model model, @PathVariable("cpf") String cpf) {
+
+		model.addAttribute("pesos", pacienteService.getHistoricoPeso(cpf));
+
+		return model;
+	}
+
+	@RequestMapping(value = "/informacoes-graficas/patologias-frequentes.json", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public @ResponseBody Model getPatologiasFrequentes(Model model) {
+		model.addAttribute("patologias", consultaNutricionalService.getFrequenciaPatologia());
 		return model;
 	}
 	

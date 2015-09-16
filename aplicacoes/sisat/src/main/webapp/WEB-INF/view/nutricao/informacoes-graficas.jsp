@@ -16,11 +16,11 @@
 
 	<div class="container">
 		<h3>Informações Gráficas</h3>
-		<div id="chart" style="width:100%; height:400px;"></div>
+<!-- 		<div id="chart" style="width:100%; height:400px;"></div> -->
 		
 		<div id="patologiasFrequentes" style="width:100%; height:400px;"></div>
 		
-		<div id="cursosFrequentes" style="width:100%; height:400px;"></div>
+<!-- 		<div id="cursosFrequentes" style="width:100%; height:400px;"></div> -->
 	</div>
 	
 	<jsp:include page="../modulos/footer.jsp" />
@@ -28,43 +28,43 @@
 	<script type="text/javascript">
 
 	$(function () { 
-	    $('#patologiasFrequentes').highcharts({
-	        chart: {
-	            type: 'bar'
-	        },
-	        title: {
-	            text: 'Patologias mais frequentes'
-	        },
-	        xAxis: {
-	            categories: ['pato1','pato2','pato3','pato4','pato5','pato6']
-	        },
-	        yAxis: {
-	            title: {
-	                text: 'Número de Alunos(as)'
-	            }
-	        },
-	        series: [{
-	        	name: 'CC',
-	            data: [1,2,3,4,5,6]
-	        }, {
-	        	name: 'DD',
-	            data: [1,2,3,4,5,6]
-	        }, {
-	        	name: 'EC',
-	            data: [1,2,3,4,5,6]
-	        }, {
-	        	name: 'ES',
-	            data: [1,2,3,4,5,6]
-	        }, {
-	        	name: 'RC',
-	            data: [1,2,3,4,5,6]
-	        }, {
-	        	name: 'SI',
-	            data: [1,2,3,4,5,6]
-	        }]
-	    });
+		$.ajax({
+			url: '/sisat/nutricao/informacoes-graficas/patologias-frequentes.json',
+			type: "GET",
+			success: function(result) {
+				var obj = result;
+				var cat = [];
+				var data = [];
+				for (var key in obj.patologias) {
+					cat.push(key);
+					data.push(obj.patologias[key])
+		        }
+
+				$('#patologiasFrequentes').highcharts({
+			        chart: {
+			            type: 'bar'
+			        },
+			        title: {
+			            text: 'Patologias mais frequentes'
+			        },
+			        xAxis: {
+			            categories: cat
+			        },
+			        yAxis: {
+			            title: {
+			                text: 'Número de Pacientes'
+			            }
+			        },
+			        series: [{
+			        	name: 'Total de pacientes',
+			            data: data
+			        }]
+			    });				
+			}
+		});
 	});	
 	
+
 	function graficoPesoByConsulta() {
 			$.ajax({
 				url: '/sisat/nutricao/informacoes-graficas/peso-by-consulta.json',

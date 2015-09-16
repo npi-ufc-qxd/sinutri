@@ -1,6 +1,5 @@
 package br.ufc.quixada.npi.sisat.service.impl;
 
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -52,51 +51,27 @@ public class ConsultaNutricionalServiceImpl extends GenericServiceImpl<ConsultaN
 	@Override
 	@Transactional(readOnly = true)
 	public ConsultaNutricional getConsultaNutricionalWithDocumentosAndFrequenciasById(Long id) {
-		return (ConsultaNutricional) findFirst(
-				"ConsultaNutricional.findConsultaNutricionalWithDocumentosAndFrequenciasById",
-				new SimpleMap<String, Object>("id", id));
+		return (ConsultaNutricional) findFirst("ConsultaNutricional.findConsultaNutricionalWithDocumentosAndFrequenciasById", new SimpleMap<String, Object>("id", id));
 	}
 
 	@Override
-	public void teste() {
-		
-		System.out.println("wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww 1 " + new Date());
-		List<ConsultaNutricional> c =  (List<ConsultaNutricional>) r.find(QueryType.JPQL, "SELECT "
-				+ "(CASE c.mastigacao WHEN TRUE THEN TRUE END),"
-				+ "(CASE c.disfagia WHEN TRUE THEN TRUE END),"
-				+ "(CASE c.odinofagia WHEN TRUE THEN TRUE END),"
-				+ "(CASE c.pirose WHEN TRUE THEN TRUE END),"
-				+ "(CASE c.nausea WHEN TRUE THEN TRUE END),"
-				+ "(CASE c.vomito WHEN TRUE THEN TRUE END),"
-				+ "(CASE c.diarreia WHEN TRUE THEN TRUE END),"
-				+ "(CASE c.constipacao WHEN TRUE THEN TRUE END),"
-				+ "(CASE c.diabetes WHEN TRUE THEN TRUE END),"
-				+ "(CASE c.hipertensao WHEN TRUE THEN TRUE END),"
-				+ "(CASE c.alergia WHEN TRUE THEN TRUE END),"
-				+ "(CASE c.outrasPatologias WHEN TRUE THEN TRUE END) "
-				+ "FROM ConsultaNutricional c", null);
-		
-		
-		
+	public Map<String, Object> getFrequenciaPatologia() {
 
-		System.out.println("wwwwwwwwwwwwwwwwwwwww 1 final" + new Date());
+		Map<String, Object> maps = new HashMap<String, Object>();
 
-		System.out.println("wwwwwwwwwwwwwwwwwwwwwwwwwwwwww 2 inicio" + new Date());
-		Map<String, Integer> maps = new HashMap<String, Integer>();
-		maps.put("mastigacao", r.find(QueryType.JPQL, "SELECT COUNT(c.mastigacao) FROM ConsultaNutricional c WHERE c.mastigacao = TRUE", null).size());
-		maps.put("disfagia", r.find(QueryType.JPQL, "SELECT COUNT(c.disfagia) FROM ConsultaNutricional c WHERE c.disfagia = TRUE", null).size());
-		maps.put("odinofagia", r.find(QueryType.JPQL, "SELECT COUNT(c.odinofagia) FROM ConsultaNutricional c WHERE c.odinofagia = TRUE", null).size());
-		maps.put("pirose", r.find(QueryType.JPQL, "SELECT COUNT(c.pirose) FROM ConsultaNutricional c WHERE c.pirose = TRUE", null).size());
-		maps.put("nausea", r.find(QueryType.JPQL, "SELECT COUNT(c.nausea) FROM ConsultaNutricional c WHERE c.nausea = TRUE", null).size());
-		maps.put("vômitos", r.find(QueryType.JPQL, "SELECT COUNT(c.vomito) FROM ConsultaNutricional c WHERE c.vomito = TRUE", null).size());
-		maps.put("diarreia", r.find(QueryType.JPQL, "SELECT COUNT(c.diarreia) FROM ConsultaNutricional c WHERE c.diarreia = TRUE", null).size());
-		maps.put("constipação", r.find(QueryType.JPQL, "SELECT COUNT(c.constipacao) FROM ConsultaNutricional c WHERE c.constipacao = TRUE", null).size());
-		maps.put("diabetes", r.find(QueryType.JPQL, "SELECT COUNT(c.diabetes) FROM ConsultaNutricional c WHERE c.diabetes = TRUE", null).size());
-		maps.put("hipertensão", r.find(QueryType.JPQL, "SELECT COUNT(c.hipertensao) FROM ConsultaNutricional c WHERE c.hipertensao = TRUE", null).size());
-		maps.put("alergia", r.find(QueryType.JPQL, "SELECT COUNT(c.alergia) FROM ConsultaNutricional c WHERE c.alergia = TRUE", null).size());
-		maps.put("outrasPatologias", r.find(QueryType.JPQL, "SELECT COUNT(c.outrasPatologias) FROM ConsultaNutricional c WHERE c.outrasPatologias = TRUE", null).size());		
+		maps.put("Mastigação", findFirst(QueryType.NAMED, "ConsultaNutricional.countFrequenciaMastigacao", new HashMap<String, Object>()));
+		maps.put("disfagia", findFirst(QueryType.NAMED, "ConsultaNutricional.countFrequenciaDisfagia", null));
+		maps.put("odinofagia", findFirst(QueryType.NAMED, "ConsultaNutricional.countFrequenciaOdinofagia", null));
+		maps.put("pirose", findFirst(QueryType.NAMED, "ConsultaNutricional.countFrequenciaPirose", null));
+		maps.put("nausea", findFirst(QueryType.NAMED, "ConsultaNutricional.countFrequenciaNausea", null));
+		maps.put("vômitos",findFirst(QueryType.NAMED, "ConsultaNutricional.countFrequenciaVomito", null));
+		maps.put("diarreia", findFirst(QueryType.NAMED, "ConsultaNutricional.countFrequenciaDiarreia", null));
+		maps.put("constipação", findFirst(QueryType.NAMED, "ConsultaNutricional.countFrequenciaConstipacao", null));
+		maps.put("diabetes", findFirst(QueryType.NAMED, "ConsultaNutricional.countFrequenciaDiabetes", null));
+		maps.put("hipertensao", findFirst(QueryType.NAMED, "ConsultaNutricional.countFrequenciaHipertensao", null));
+		maps.put("alergia", findFirst(QueryType.NAMED, "ConsultaNutricional.countFrequenciaAlergia", null));
+		maps.put("outrasPatologias", findFirst(QueryType.NAMED, "ConsultaNutricional.countFrequenciaOutrasPatologias", null));
 
-		System.out.println("wwwwwwwwwwwwwwwwwwwwww 2 final" + new Date());
-
-}
+		return maps;
+	}
 }

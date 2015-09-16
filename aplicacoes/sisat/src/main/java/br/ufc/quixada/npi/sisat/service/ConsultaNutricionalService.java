@@ -1,5 +1,7 @@
 package br.ufc.quixada.npi.sisat.service;
 
+import java.util.Map;
+
 import br.ufc.quixada.npi.service.GenericService;
 import br.ufc.quixada.npi.sisat.model.ConsultaNutricional;
 
@@ -15,6 +17,6 @@ public interface ConsultaNutricionalService extends GenericService<ConsultaNutri
 
 	public abstract ConsultaNutricional getConsultaNutricionalWithDocumentosAndFrequenciasById(Long id);
 
-	public abstract void teste();
+	public abstract Map<String, Object> getFrequenciaPatologia() ;
 
 }

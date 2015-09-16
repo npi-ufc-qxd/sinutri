@@ -23,6 +23,7 @@
 			<div class="col-sm-6" align="right" style="margin-top: 15px;">
 				<a href="<c:url value="/nutricao/buscar"></c:url>" class="btn btn-primary">Voltar</a>
 				<a href="<c:url value="/consulta/realizar-consulta/${pessoa.cpf}"/>" class="btn btn-success"><span class="glyphicon glyphicon-plus"></span> Realizar Consulta</a>
+				<a href="<c:url value="/nutricao/informacoes-graficas/paciente/${pessoa.cpf}"/>" class="btn btn-info"><span class="fa fa-line-chart"></span> Gráficos</a>
 			</div>
     	</div>
 	
