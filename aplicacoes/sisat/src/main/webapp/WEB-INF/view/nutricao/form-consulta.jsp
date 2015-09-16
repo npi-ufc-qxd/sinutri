@@ -745,7 +745,7 @@
 												<td>${documento.tipo}<strong class="error text-danger"></strong></td>
 
 												<td><a id="download[${documento.id}]"
-													href="../../nutricao/downloadDocumento/${documento.id}"
+													href="<c:url value="/nutricao/downloadDocumento/${documento.id }" ></c:url>"
 													class="save-document">
 														<button type="button" class="btn btn-primary">
 															<span class="glyphicon glyphicon-save"></span>
