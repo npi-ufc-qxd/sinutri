@@ -21,7 +21,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -125,38 +124,6 @@ public class ConsultaController {
 		return "nutricao/form-consulta";
 	}
 
-	@RequestMapping(value = { "upload" }, method = RequestMethod.GET)
-	public @ResponseBody String uploadDocumento() {
-		return "Você pode fazer o upload de arquivos.";
-	}
-	
-	@RequestMapping(value = { "upload" }, method = RequestMethod.POST)
-	public @ResponseBody String uploadDocumento(Model model, @Valid ConsultaNutricional consulta,
-			@RequestParam("files") List<MultipartFile> files,
-			@RequestParam(value = "enviar", required = false) boolean enviar) {
-
-		Set<Documento> documentos = new HashSet<Documento>();
-		if (files != null && !files.isEmpty() && files.get(0).getSize() > 0) {
-			for (MultipartFile mfiles : files) {
-				try {
-					if (mfiles.getBytes() != null && mfiles.getBytes().length != 0) {
-						Documento documento = new Documento();
-						documento.setArquivo(mfiles.getBytes());
-						documento.setNome(mfiles.getOriginalFilename());
-						documento.setTipo(mfiles.getContentType());
-						documento.setEnviar(enviar);
-						documento.setConsultaNutricional(consulta);
-						documento.setData(new Date());
-						documentos.add(documento);
-					}
-				} catch (IOException e) {
-					return "Uploado dos arquivos falhou " + e.getMessage() + ".";
-				}
-			}
-		}
-		return "Arquivos upados com sucesso";
-	}
-
 	@RequestMapping(value = { "realizar-consulta/{cpf}" }, method = RequestMethod.POST)
 	public String salvarConsulta(Model model, @PathVariable("cpf") String cpf, @Valid ConsultaNutricional consulta,
 			BindingResult result, RedirectAttributes redirectAttributes,
@@ -175,7 +142,7 @@ public class ConsultaController {
 		Paciente paciente = pessoa.getPaciente();
 		consulta.setPaciente(paciente);
 
-		// consultaNutricionalValidator.validate(consulta, result);
+		consultaNutricionalValidator.validate(consulta, result);
 		if (result.hasErrors()) {
 			model.addAttribute("consultaNutricional", consulta);
 			return ("nutricao/form-consulta");
@@ -281,7 +248,7 @@ public class ConsultaController {
 		Paciente paciente = pacienteService.find(Paciente.class, consulta.getPaciente().getId());
 		consulta.setPaciente(paciente);
 
-		// consultaNutricionalValidator.validate(consulta, result);
+		consultaNutricionalValidator.validate(consulta, result);
 
 		if (result.hasErrors()) {
 			model.addAttribute("consultaNutricional", consulta);
