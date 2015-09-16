@@ -42,7 +42,7 @@ $(document)
 									$(itemForm).find('.help-block').remove();
 								}
 							});
-					
+
 					$('#fileupload').MultiFile({
 						accept : 'pdf|docx|png|jpg|odt',
 						list : '#files',

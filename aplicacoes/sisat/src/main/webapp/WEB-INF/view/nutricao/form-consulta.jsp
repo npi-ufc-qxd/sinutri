@@ -705,6 +705,12 @@
 
 					<h3 id="documentos" class="section">Documentos</h3>
 
+					<div class="alert alert-success fade in">
+						<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+						<strong>Success!</strong> This alert box could indicate a
+						successful or positive action.
+					</div>
+
 					<div id="documentos" class="tab-pane fade in ">
 						<div class="form-group">
 							<label for="arquivo" class="col-sm-2 control-label">Arquivos:</label>
@@ -713,12 +719,10 @@
 									class="glyphicon glyphicon-plus"></i> <span>Adicionar
 										arquivos...</span> <input multiple type="file" id="fileupload"
 									class="file" name="files" />
-								</span> 
-								<br>
-								<br>
+								</span> <br> <br>
 								<div id="files" class="files"></div>
-								<br> 
-								<input type="checkbox" id="enviar" name="enviar"> Enviar para o paciente
+								<br> <input type="checkbox" id="enviar" name="enviar">
+								Enviar para o paciente
 
 								<div class="error-validation" id="erro-Anexo">
 									<label class="col-sm-10 control-label" id="label-erro">
@@ -763,6 +767,8 @@
 															<span class="glyphicon glyphicon-trash"></span>
 														</button>
 												</a></td>
+
+
 
 												<td><a id="send[${documento.id}]"
 													href="../../nutricao/enviarDocumento/${documento.id}/"
@@ -809,10 +815,11 @@
 														</button>
 												</a></td>
 
-												<td><a id="delete[${documento.id}]" class="btn btn-danger"
-													href="<c:url value="/nutricao/deletarDocumento/${documento.id }" ></c:url>"
-													class="delete-document">
-															<span class="glyphicon glyphicon-trash"></span>
+												<td><a id="delete[${documento.id}]"
+													class="btn btn-danger"
+													href="<c:url value="/nutricao/${consultaNutricional.id }/paciente/${consultaNutricional.paciente.pessoa.cpf }/deletarDocumento/${documento.id }" ></c:url>"
+													class="delete-document"> <span
+														class="glyphicon glyphicon-trash"></span>
 												</a></td>
 											</tr>
 										</c:forEach>
@@ -821,7 +828,6 @@
 							</div>
 						</div>
 					</div>
-
 
 					<div class="col-xs-offset-0 col-xs-10" align="center">
 						<button type="submit" class="btn btn-success">${botao}</button>
