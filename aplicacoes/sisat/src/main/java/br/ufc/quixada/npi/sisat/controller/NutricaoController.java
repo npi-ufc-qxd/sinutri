@@ -48,7 +48,7 @@ public class NutricaoController {
 	@Inject
 	private ConsultaNutricionalService consultaNutricionalService;
 
-	@Inject	
+	@Inject
 	private DocumentoService documentoService;
 
 	@Inject
@@ -65,8 +65,8 @@ public class NutricaoController {
 		String cpf = SecurityContextHolder.getContext().getAuthentication().getName();
 
 		Pessoa pessoa = registrarNutricionista(cpf);
-		
-		if(pessoa == null){
+
+		if (pessoa == null) {
 			redirectAttributes.addFlashAttribute("info", "Usuario não encontrado.");
 			return "redirect:/j_spring_security_logout";
 		}
@@ -75,15 +75,16 @@ public class NutricaoController {
 	}
 
 	@RequestMapping(value = "/buscar", method = RequestMethod.POST)
-	public String buscarPaciente(@RequestParam("busca") String busca, ModelMap map, RedirectAttributes redirectAttributes, Authentication authentication) {
+	public String buscarPaciente(@RequestParam("busca") String busca, ModelMap map,
+			RedirectAttributes redirectAttributes, Authentication authentication) {
 		map.addAttribute("busca", busca);
 		List<Usuario> usuarios = usuarioService.getByCpfOrNome(busca);
 		Usuario usuario = usuarioService.getByCpf(authentication.getName());
 		usuarios.remove(usuario);
 
-		if(!usuarios.isEmpty()){
+		if (!usuarios.isEmpty()) {
 			map.addAttribute("pessoas", usuarios);
-		}else{
+		} else {
 			redirectAttributes.addFlashAttribute("erro", "Paciente não encontrado.");
 			return "redirect:/nutricao/buscar";
 		}
@@ -93,27 +94,32 @@ public class NutricaoController {
 
 	@RequestMapping(value = "/frequencia-alimentar.json", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public @ResponseBody Set<FrequenciaAlimentar> getFrequencias(@RequestParam("id") Long id) {
-		if(id != null){
+		if (id != null) {
 			Set<FrequenciaAlimentar> frequenciaAlimentars = new HashSet<FrequenciaAlimentar>();
-			frequenciaAlimentars = consultaNutricionalService.getConsultaNutricionalWithFrequenciasById(id).getFrequencias();
+			frequenciaAlimentars = consultaNutricionalService.getConsultaNutricionalWithFrequenciasById(id)
+					.getFrequencias();
 			return frequenciaAlimentars;
 		}
 		return null;
 	}
 
-	@RequestMapping(value = {"deletarDocumento/{id}"}, method = RequestMethod.GET)
-	public String deletarDocumento(@PathVariable("id") Long id, RedirectAttributes redirectAttributes){
+	@RequestMapping(value = { "{idConsulta}/paciente/{cpf}/deletarDocumento/{id}" }, method = RequestMethod.GET)
+	public String deletarDocumento(@PathVariable("idConsulta") Long idConsulta, @PathVariable("cpf") String cpf,
+			@PathVariable("id") Long id, RedirectAttributes redirectAttributes) {
 		Documento documento = documentoService.find(Documento.class, id);
+		documento.setConsultaNutricional(null);
 		documentoService.delete(documento);
-		redirectAttributes.addFlashAttribute("success", "Documento deletado com sucesso");
-		return "redirect:../../nutricao/editarConsulta/" + documento.getConsultaNutricional().getId();
+		redirectAttributes.addFlashAttribute("info", "Documento deletado com sucesso.");
+
+		return "redirect:/consulta/editar-consulta/" + idConsulta + "/paciente/" + cpf;
 	}
 
-	@RequestMapping(value = {"enviarDocumento/{id}/{mensagem}"}, method = RequestMethod.GET)
-	public String enviarDocumento(@PathVariable("id") Long id, @PathVariable("mensagem") String mensagem, RedirectAttributes redirectAttributes){
+	@RequestMapping(value = { "enviarDocumento/{id}/{mensagem}" }, method = RequestMethod.GET)
+	public String enviarDocumento(@PathVariable("id") Long id, @PathVariable("mensagem") String mensagem,
+			RedirectAttributes redirectAttributes) {
 		Documento documento = documentoService.find(Documento.class, id);
 		Pessoa p = documento.getConsultaNutricional().getPaciente().getPessoa();
-		
+
 		final Email email = new Email();
 		email.setFrom("nutricao@quixada.ufc.br");
 		email.setTo(p.getEmail());
@@ -124,12 +130,12 @@ public class NutricaoController {
 		anexo.setMimeType(documento.getTipo());
 		email.addAttachment(anexo);
 		email.setSubject("não-responda [Envio de documento]");
-	
+
 		Runnable enviarEmail = new Runnable() {
 
 			@Override
 			public void run() {
-				
+
 				try {
 					emailService.sendEmail(email);
 				} catch (MessagingException e) {
@@ -147,8 +153,8 @@ public class NutricaoController {
 		return "redirect:../../editarConsulta/" + documento.getConsultaNutricional().getId();
 	}
 
-	@RequestMapping(value = {"downloadDocumento/{id}"}, method = RequestMethod.GET)
-	public HttpEntity<byte[]> downloadDocumento(@PathVariable("id") Long id, RedirectAttributes redirectAttributes){
+	@RequestMapping(value = { "downloadDocumento/{id}" }, method = RequestMethod.GET)
+	public HttpEntity<byte[]> downloadDocumento(@PathVariable("id") Long id, RedirectAttributes redirectAttributes) {
 		Documento documento = documentoService.find(Documento.class, id);
 		byte[] arquivo = documento.getArquivo();
 		String[] tipo = documento.getTipo().split("/");
@@ -162,21 +168,21 @@ public class NutricaoController {
 		return new HttpEntity<byte[]>(arquivo, headers);
 
 	}
-	
-	private Pessoa  registrarNutricionista(String cpf) {
+
+	private Pessoa registrarNutricionista(String cpf) {
 		Pessoa pessoa = pessoaService.getPessoaByCpf(cpf);
 
-		if(pessoa == null){
+		if (pessoa == null) {
 			Usuario usuario = usuarioService.getByCpf(cpf);
 
-			if(usuario != null) {
+			if (usuario != null) {
 				Papel papel = papelService.getPapel("ROLE_NUTRICAO");
-				
+
 				pessoa = new Pessoa(cpf);
 				pessoa.setPapeis(new ArrayList<Papel>());
 				pessoa.getPapeis().add(papel);
 				pessoaService.save(pessoa);
-				
+
 				return pessoa;
 			} else {
 				return null;

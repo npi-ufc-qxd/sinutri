@@ -42,6 +42,10 @@ $(document)
 									$(itemForm).find('.help-block').remove();
 								}
 							});
+
+					$('#confirm-delete').on('show.bs.modal', function(e) {
+			            $(this).find('.btn-ok').attr('href', $(e.relatedTarget).data('href'));
+			        });
 					
 					$('#fileupload').MultiFile({
 						accept : 'pdf|docx|png|jpg|odt',
@@ -260,63 +264,6 @@ $(document)
 					$('div.error-validation:has(span)').find('span').parent()
 							.parent().parent().addClass(
 									'has-error has-feedback');
-
-					$('#confirm-delete').on(
-							'show.bs.modal',
-							function(e) {
-								$(this).find('.btn-danger').attr('href',
-										$(e.relatedTarget).data('href'));
-							});
-
-					$('#confirm-submit').on(
-							'show.bs.modal',
-							function(e) {
-								$(this).find('.btn-primary').attr('href',
-										$(e.relatedTarget).data('href'));
-							});
-
-					$('.delete-document')
-							.on(
-									'click',
-									function(e) {
-										var line = this;
-										var href = $(this).attr('href');
-										e.preventDefault();
-										bootbox
-												.dialog({
-													message : "Tem certeza de que deseja excluir esse documento?",
-													title : "Excluir",
-													buttons : {
-														danger : {
-															label : "Excluir",
-															className : "btn-danger",
-															callback : function() {
-																$
-																		.ajax(
-																				{
-																					type : "GET",
-																					url : href
-																				})
-																		.success(
-																				function(
-																						result) {
-																					var tr = $(
-																							line)
-																							.parent()
-																							.parent()
-																							.remove();
-																				});
-															}
-														},
-														main : {
-															label : "Cancelar",
-															className : "btn-default",
-															callback : function() {
-															}
-														}
-													}
-												});
-									});
 
 					// Enviar
 					$('.send-document')
