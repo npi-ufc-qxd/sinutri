@@ -85,15 +85,6 @@ public class NutricaoController {
 		return "nutricao/informacoes-graficas";
 	}
 
-	@RequestMapping(value = "/informacoes-graficas/paciente/{cpf}", method = RequestMethod.GET)
-	public String paginaInformacoesGraficasPaciente(Model model, @PathVariable("cpf") Long cpf) {
-		model.addAttribute("idPaciente", cpf);
-
-		consultaNutricionalService.getFrequenciaPatologia();
-		
-		return "nutricao/informacoes-graficas-paciente";
-	}
-
 	@RequestMapping(value = "/informacoes-graficas/paciente/{cpf}/historico-peso.json", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public @ResponseBody Model getPesoByConsulta(Model model, @PathVariable("cpf") String cpf) {
 		

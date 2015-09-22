@@ -23,7 +23,6 @@
 			<div class="col-sm-6" align="right" style="margin-top: 15px;">
 				<a href="<c:url value="/nutricao/buscar"></c:url>" class="btn btn-primary">Voltar</a>
 				<a href="<c:url value="/consulta/realizar-consulta/${pessoa.cpf}"/>" class="btn btn-success"><span class="glyphicon glyphicon-plus"></span> Realizar Consulta</a>
-				<a href="<c:url value="/nutricao/informacoes-graficas/paciente/${pessoa.cpf}"/>" class="btn btn-info"><span class="fa fa-line-chart"></span> Gráficos</a>
 			</div>
     	</div>
 	
@@ -73,11 +72,160 @@
 						<div class="alert alert-warning" role="alert">Não há consultas cadastradas para esse paciente.</div>
 					</c:if>
   				</div>
-  				</div>
-  				</div>
+  			</div>
+  		</div>
 
+	<div class="container">
+		<h3>Informações Gráficas</h3>
+		
+		<input id="cpf" type="hidden" value="${pessoa.cpf}">
 
+		<div id="historicoPeso" style="width:100%; height:400px;"></div><br>
+		
+		<div id="historicoIMC" style="width:100%; height:400px;"></div><br>
+		
+		<div id="historicoCC" style="width:100%; height:400px;"></div><br>
+	</div>
+	
 	<jsp:include page="../modulos/footer.jsp" />
+	<script type="text/javascript">
+		$(function () { 
+			
+			var cpf = $("#cpf").val();
+			
+			$.ajax({
+				url: '/sisat/nutricao/informacoes-graficas/paciente/'+ cpf +'/historico-peso.json',
+				type: "GET",
+				success: function(result) {
+					var obj = result;
+					var cat = [];
+					var catCC = [];
+					var catIMC = [];
+					
+					var dataPesos = [];
+					var dataIMC = [];
+					var dataCC = [];
+					var i = 1;
+	
+					$.each( obj.pesos, function( index, value ) {
+						cat.push(index+1 + "ª Consulta<br>" + formatDate(value.data));
+						catCC.push(value.classificacaoCC + "<br>" + (index + 1) + "ª Consulta<br>" + formatDate(value.data));
+						catIMC.push(value.classificacaoIMC + "<br>" + (index + 1) + "ª Consulta<br>" + formatDate(value.data));
+	
+						dataPesos.push(value.peso);
+						dataCC.push(value.circunferenciaCintura);
+						dataIMC.push(value.imc);
+					});				
+					
+				    $('#historicoPeso').highcharts({
+				        title: {
+				            text: 'Histórico do Peso',
+				        },
+				        xAxis: {
+				            categories: cat
+				        },
+				        yAxis: {
+				            title: {
+				                text: ''
+				            },
+				            plotLines: [{
+				                value: 0,
+				                width: 1,
+				                color: '#808080'
+				            }],		            
+				        },
+				        tooltip: {
+				            valueSuffix: 'kg'
+				        },
+				        legend: {
+				            layout: 'vertical',
+				            align: 'right',
+				            verticalAlign: 'middle',
+				            borderWidth: 0
+				        },
+				        series: [{
+				        	name: 'Peso',
+				            data: dataPesos
+				        }]
+				    });
+				    
+				    $('#historicoIMC').highcharts({
+				        title: {
+				            text: 'Histórico IMC',
+				        },
+				        xAxis: {
+				            categories: catIMC
+				        },
+				        yAxis: {
+				            title: {
+				                text: ''
+				            },
+				            plotLines: [{
+				                value: 0,
+				                width: 1,
+				                color: '#808080'
+				            }]
+				        },
+				        legend: {
+				            layout: 'vertical',
+				            align: 'right',
+				            verticalAlign: 'middle',
+				            borderWidth: 0
+				        },
+				        series: [{
+				        	name: 'IMC',
+				            data: dataIMC
+				        }]
+				    });
+				    
+				    $('#historicoCC').highcharts({
+				        title: {
+				            text: 'Histórico CC',
+				        },
+				        xAxis: {
+				            categories: catCC
+				        },
+				        yAxis: {
+				            title: {
+				                text: ''
+				            },
+				            plotLines: [{
+				                value: 0,
+				                width: 1,
+				                color: '#808080'
+				            }]
+				        },
+				        legend: {
+				            layout: 'vertical',
+				            align: 'right',
+				            verticalAlign: 'middle',
+				            borderWidth: 0
+				        },
+				        series: [{
+				        	name: 'CC',
+				            data: dataCC
+				        }]
+				    });
+				}
+			});
+		});
+	
+		function formatDate(dateObject) {
+		    var d = new Date(dateObject);
+		    var day = d.getDate();
+		    var month = d.getMonth() + 1;
+		    var year = d.getFullYear();
+		    if (day < 10) {
+		        day = "0" + day;
+		    }
+		    if (month < 10) {
+		        month = "0" + month;
+		    }
+		    var date = day + "/" + month + "/" + year;
+	
+		    return date;
+		};
+	</script>	
 	
 </body>
 </html>
