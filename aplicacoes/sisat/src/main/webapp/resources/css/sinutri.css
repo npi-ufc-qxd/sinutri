@@ -95,3 +95,7 @@ small{
 	margin-left: 7% !important;
 	color: #2C3E50 !important;
 }
+
+.modal-backdrop {
+	z-index: auto;
+}

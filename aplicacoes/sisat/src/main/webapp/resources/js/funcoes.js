@@ -43,6 +43,24 @@ $(document)
 								}
 							});
 
+					$('#confirm-delete').on('show.bs.modal', function(e) {
+			            $(this).find('.btn-ok').attr('href', $(e.relatedTarget).data('href'));
+			        });
+					
+					$('#fileupload').MultiFile({
+						accept : 'pdf|docx|png|jpg|odt',
+						list : '#files',
+						STRING : {
+							remove : 	'<button class="btn btn-danger delete" type="button">' + 
+										'<i class="glyphicon glyphicon-trash"></i>'+ 
+										'<span>Remover<span>'+
+										'</button>',
+							selected : 'Selecionado: $file',
+							denied : 'Arquivo de tipo inválido: .$ext',
+							duplicate : 'Arquivo já selecionado: \n$file'
+						}
+					});
+					
 					$('.exame').change(
 							function() {
 								var itemForm = $(this).parent().parent()
@@ -114,7 +132,8 @@ $(document)
 													.children().last());
 											var itemForm = element.parent();
 											var id = element.attr("name");
-											$(itemForm).find("span").attr("id", id);
+											$(itemForm).find("span").attr("id",
+													id);
 										},
 										messages : {
 											objetivoConsulta : {
@@ -159,7 +178,7 @@ $(document)
 											medicamentoComentario : {
 												required : "Informe o(s) medicamento(s) utilizado(s) pelo paciente."
 											},
-											inputTextMastigacao : {
+											mastigacaoComentario : {
 												required : "Informe características da mastigação do paciente."
 											},
 											disfagiaComentario : {
@@ -172,7 +191,7 @@ $(document)
 												required : "Informe comentários sobre a pirose do paciente."
 											},
 											nauseaComentario : {
-												required : "Informe comentários sobre náuses do paciente."
+												required : "Informe comentários sobre náuseas do paciente."
 											},
 											vomitoComentario : {
 												required : "Informe comentários sobre vômitos do paciente."
@@ -245,63 +264,6 @@ $(document)
 					$('div.error-validation:has(span)').find('span').parent()
 							.parent().parent().addClass(
 									'has-error has-feedback');
-
-					$('#confirm-delete').on(
-							'show.bs.modal',
-							function(e) {
-								$(this).find('.btn-danger').attr('href',
-										$(e.relatedTarget).data('href'));
-							});
-
-					$('#confirm-submit').on(
-							'show.bs.modal',
-							function(e) {
-								$(this).find('.btn-primary').attr('href',
-										$(e.relatedTarget).data('href'));
-							});
-
-					$('.delete-document')
-							.on(
-									'click',
-									function(e) {
-										var line = this;
-										var href = $(this).attr('href');
-										e.preventDefault();
-										bootbox
-												.dialog({
-													message : "Tem certeza de que deseja excluir esse documento?",
-													title : "Excluir",
-													buttons : {
-														danger : {
-															label : "Excluir",
-															className : "btn-danger",
-															callback : function() {
-																$
-																		.ajax(
-																				{
-																					type : "GET",
-																					url : href
-																				})
-																		.success(
-																				function(
-																						result) {
-																					var tr = $(
-																							line)
-																							.parent()
-																							.parent()
-																							.remove();
-																				});
-															}
-														},
-														main : {
-															label : "Cancelar",
-															className : "btn-default",
-															callback : function() {
-															}
-														}
-													}
-												});
-									});
 
 					// Enviar
 					$('.send-document')

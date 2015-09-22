@@ -32,6 +32,26 @@
 	<jsp:include page="../modulos/header.jsp" />
 
 	<div class="container">
+
+		<c:if test="${not empty erro}">
+			<div class="alert alert-danger alert-dismissible fade in"
+				role="alert" id="alert-erro">
+				<button type="button" class="close" data-dismiss="alert">
+					<span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+				</button>
+				<c:out value="${erro}"></c:out>
+			</div>
+		</c:if>
+		<c:if test="${not empty info}">
+			<div class="alert alert-success alert-dismissible fade in"
+				role="alert" id="alert-info">
+				<button type="button" class="close" data-dismiss="alert">
+					<span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+				</button>
+				<c:out value="${info}"></c:out>
+			</div>
+		</c:if>
+
 		<div class="row">
 			<div class="tituloConsulta">
 				<h2>${titulo}
@@ -426,7 +446,6 @@
 						</div>
 					</div>
 
-
 					<h3 id="recordatorio" class="section">Recordatório</h3>
 
 					<div class="row form-group">
@@ -437,7 +456,6 @@
 							</fieldset>
 						</div>
 					</div>
-
 
 					<h3 id="exame" class="section">Exames Laboratoriais</h3>
 
@@ -705,16 +723,20 @@
 						</div>
 					</div>
 
-
 					<h3 id="documentos" class="section">Documentos</h3>
 
 					<div id="documentos" class="tab-pane fade in ">
 						<div class="form-group">
 							<label for="arquivo" class="col-sm-2 control-label">Arquivos:</label>
 							<div class="col-sm-5 files">
-								<input type="file" id="files" name="files" class="file"
-									multiple="multiple"></input> <br> <input type="checkbox"
-									id="enviar" name="enviar"> Enviar para o paciente
+								<span class="btn btn-success fileinput-button"> <i
+									class="glyphicon glyphicon-plus"></i> <span>Adicionar
+										arquivos...</span> <input multiple type="file" id="fileupload"
+									class="file" name="files" />
+								</span> <br> <br>
+								<div id="files" class="files"></div>
+								<br> <input type="checkbox" id="enviar" name="enviar">
+								Enviar para o paciente
 
 								<div class="error-validation" id="erro-Anexo">
 									<label class="col-sm-10 control-label" id="label-erro">
@@ -745,7 +767,7 @@
 												<td>${documento.tipo}<strong class="error text-danger"></strong></td>
 
 												<td><a id="download[${documento.id}]"
-													href="../../nutricao/downloadDocumento/${documento.id}"
+													href="<c:url value="/nutricao/downloadDocumento/${documento.id }" ></c:url>"
 													class="save-document">
 														<button type="button" class="btn btn-primary">
 															<span class="glyphicon glyphicon-save"></span>
@@ -753,12 +775,14 @@
 												</a></td>
 
 												<td><a id="delete[${documento.id}]"
-													href="../../nutricao/deletarDocumento/${documento.id}"
+													href="<c:url value="/nutricao/deletarDocumento/${documento.id }" ></c:url>"
 													class="delete-document">
 														<button type="button" class="btn btn-danger">
 															<span class="glyphicon glyphicon-trash"></span>
 														</button>
 												</a></td>
+
+
 
 												<td><a id="send[${documento.id}]"
 													href="../../nutricao/enviarDocumento/${documento.id}/"
@@ -790,7 +814,6 @@
 											<th>Excluir</th>
 										</tr>
 									</thead>
-
 									<tbody class="files">
 										<c:forEach items="${documentosNutricionista}" var="documento">
 											<tr class="template-upload fade in">
@@ -798,7 +821,7 @@
 												<td>${documento.data}<strong class="error text-danger"></strong></td>
 												<td>${documento.tipo}<strong class="error text-danger"></strong></td>
 												<td><a id="download[${documento.id}]"
-													href="../../nutricao/downloadDocumento/${documento.id}"
+													href="<c:url value="/nutricao/downloadDocumento/${documento.id }" ></c:url>"
 													class="save-document">
 														<button type="button" class="btn btn-primary">
 															<span class="glyphicon glyphicon-save"></span>
@@ -806,11 +829,13 @@
 												</a></td>
 
 												<td><a id="delete[${documento.id}]"
-													href="../../nutricao/deletarDocumento/${documento.id}"
-													class="delete-document">
-														<button type="button" class="btn btn-danger">
-															<span class="glyphicon glyphicon-trash"></span>
-														</button>
+													href="#"
+													class="btn btn-danger"
+													data-href="<c:url value="/nutricao/${consultaNutricional.id }/paciente/${consultaNutricional.paciente.pessoa.cpf }/deletarDocumento/${documento.id }" ></c:url>"
+													class="delete-document"  
+													data-toggle="modal" 
+													data-target="#confirm-delete"> 
+													<span class="glyphicon glyphicon-trash"></span>
 												</a></td>
 											</tr>
 										</c:forEach>
@@ -819,8 +844,7 @@
 							</div>
 						</div>
 					</div>
-
-
+					
 					<div class="col-xs-offset-0 col-xs-10" align="center">
 						<button type="submit" class="btn btn-success">${botao}</button>
 					</div>
@@ -830,9 +854,27 @@
 		</div>
 	</div>
 
+ 				<div id="confirm-delete" class="modal" role="dialog" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true">
+					<div class="modal-dialog">
+						<div class="modal-content">
+							<div class="modal-header">
+								<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+								<h4 class="modal-title" id="myModalLabel">Confirmar Deleção</h4>
+							</div>
+							<div class="modal-body">
+								<p>Você está a ponto de excluir um documento da consulta, esse procedimento é irreversível.</p>
+								<p>Você deseja continuar?</p>
+							</div>
+							<div class="modal-footer">
+								<button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+								<a class="btn btn-danger btn-ok">Deletar</a>
+							</div>
+						</div>
+					</div>
+				</div>
+
 	<jsp:include page="../modulos/footer.jsp" />
-	<script
-		src="<c:url value="/resources/js/questionario-frequencia-alimentar.js" />"></script>
+	<%-- 	<script src="<c:url value="/resources/js/questionario-frequencia-alimentar.js" />"></script> --%>
 
 </body>
 </html>
