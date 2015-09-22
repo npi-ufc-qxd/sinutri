@@ -94,7 +94,7 @@
 			var cpf = $("#cpf").val();
 			
 			$.ajax({
-				url: '/sisat/nutricao/informacoes-graficas/paciente/'+ cpf +'/historico-peso.json',
+				url: '/sisat/nutricao/informacoes-graficas/paciente/'+ cpf +'/historico-consultas.json',
 				type: "GET",
 				success: function(result) {
 					var obj = result;
@@ -107,7 +107,7 @@
 					var dataCC = [];
 					var i = 1;
 	
-					$.each( obj.pesos, function( index, value ) {
+					$.each( obj.consultas, function( index, value ) {
 						cat.push(index+1 + "ª Consulta<br>" + formatDate(value.data));
 						catCC.push(value.classificacaoCC + "<br>" + (index + 1) + "ª Consulta<br>" + formatDate(value.data));
 						catIMC.push(value.classificacaoIMC + "<br>" + (index + 1) + "ª Consulta<br>" + formatDate(value.data));
