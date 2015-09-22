@@ -775,11 +775,13 @@
 												</a></td>
 
 												<td><a id="delete[${documento.id}]"
-													href="<c:url value="/nutricao/deletarDocumento/${documento.id }" ></c:url>"
-													class="delete-document">
-														<button type="button" class="btn btn-danger">
-															<span class="glyphicon glyphicon-trash"></span>
-														</button>
+													href="#"
+													class="btn btn-danger"
+													data-href="<c:url value="/nutricao/${consultaNutricional.id }/paciente/${consultaNutricional.paciente.pessoa.cpf }/deletarDocumento/${documento.id }" ></c:url>"
+													class="delete-document"  
+													data-toggle="modal" 
+													data-target="#confirm-delete"> 
+													<span class="glyphicon glyphicon-trash"></span>
 												</a></td>
 
 

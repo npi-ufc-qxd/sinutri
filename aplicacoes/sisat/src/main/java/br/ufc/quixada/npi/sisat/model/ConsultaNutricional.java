@@ -1,6 +1,5 @@
 package br.ufc.quixada.npi.sisat.model;
 
-import java.text.DecimalFormat;
 import java.util.Date;
 import java.util.Set;
 
@@ -21,7 +20,6 @@ import javax.persistence.Transient;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
-import org.apache.xmlbeans.impl.regex.REUtil;
 import org.codehaus.jackson.annotate.JsonIgnore;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -224,8 +222,6 @@ public class ConsultaNutricional {
 		this.IMC = calculaIMC();
 		this.classificacaoCC = classificaCircunferenciaCintura();
 		this.circunferenciaCintura = circunferenciaCintura;
-		this.classificacaoCC = classificaCircunferenciaCintura();
-		System.out.println();
 	}
 
 	public Paciente getPaciente() {
@@ -782,6 +778,7 @@ public class ConsultaNutricional {
 	}
 
 	public Double getIMC() {
+		this.IMC = calculaIMC();
 		return IMC;
 	}
 
@@ -843,8 +840,12 @@ public class ConsultaNutricional {
 	}
 
 	public String getClassificacaoCC() {
-		classificacaoCC = classificaCircunferenciaCintura();
+		classificacaoCC = this.classificaCircunferenciaCintura();
 		return classificacaoCC;
+	}
+	
+	public void setClassificacaoCC(String classificacaoCC) {
+		this.classificacaoCC = classificacaoCC;
 	}
 
 	private String classificaCircunferenciaCintura() {
@@ -884,8 +885,12 @@ public class ConsultaNutricional {
 		return "";
 	}
 
+	public void setIMC(Double iMC) {
+		this.IMC = iMC;
+	}
 
+	public void setClassificacaoIMC(String classificacaoIMC) {
+		this.classificacaoIMC = classificacaoIMC;
+	}
 
-	
-	
 }
