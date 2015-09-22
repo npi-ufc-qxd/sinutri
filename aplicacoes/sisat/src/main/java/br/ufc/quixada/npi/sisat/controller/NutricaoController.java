@@ -29,12 +29,14 @@ import br.ufc.quixada.npi.ldap.service.UsuarioService;
 import br.ufc.quixada.npi.model.Attachment;
 import br.ufc.quixada.npi.model.Email;
 import br.ufc.quixada.npi.service.EmailService;
+import br.ufc.quixada.npi.sisat.model.ConsultaNutricional;
 import br.ufc.quixada.npi.sisat.model.Documento;
 import br.ufc.quixada.npi.sisat.model.FrequenciaAlimentar;
 import br.ufc.quixada.npi.sisat.model.Papel;
 import br.ufc.quixada.npi.sisat.model.Pessoa;
 import br.ufc.quixada.npi.sisat.service.ConsultaNutricionalService;
 import br.ufc.quixada.npi.sisat.service.DocumentoService;
+import br.ufc.quixada.npi.sisat.service.PacienteService;
 import br.ufc.quixada.npi.sisat.service.PapelService;
 import br.ufc.quixada.npi.sisat.service.PessoaService;
 
@@ -58,6 +60,9 @@ public class NutricaoController {
 	private UsuarioService usuarioService;
 
 	@Inject
+	private PacienteService pacienteService;
+
+	@Inject
 	private PapelService papelService;
 
 	@RequestMapping(value = "/buscar", method = RequestMethod.GET)
@@ -74,6 +79,28 @@ public class NutricaoController {
 		return "nutricao/buscar";
 	}
 
+	@RequestMapping(value = "/informacoes-graficas", method = RequestMethod.GET)
+	public String paginaInformacoesGraficas() {
+		consultaNutricionalService.getFrequenciaPatologia();
+		return "nutricao/informacoes-graficas";
+	}
+
+	@RequestMapping(value = "/informacoes-graficas/paciente/{cpf}/historico-consultas.json", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public @ResponseBody Model getPesoByConsulta(Model model, @PathVariable("cpf") String cpf) {
+		
+		List<ConsultaNutricional> consultas = pacienteService.getHistoricoPeso(cpf);
+
+		model.addAttribute("consultas", consultas);
+
+		return model;
+	}
+
+	@RequestMapping(value = "/informacoes-graficas/patologias-frequentes.json", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public @ResponseBody Model getPatologiasFrequentes(Model model) {
+		model.addAttribute("patologias", consultaNutricionalService.getFrequenciaPatologia());
+		return model;
+	}
+	
 	@RequestMapping(value = "/buscar", method = RequestMethod.POST)
 	public String buscarPaciente(@RequestParam("busca") String busca, ModelMap map,
 			RedirectAttributes redirectAttributes, Authentication authentication) {

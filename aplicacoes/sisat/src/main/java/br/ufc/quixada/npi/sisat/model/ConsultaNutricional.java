@@ -2,7 +2,6 @@ package br.ufc.quixada.npi.sisat.model;
 
 import java.text.DecimalFormat;
 import java.util.Date;
-import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -10,7 +9,6 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -19,16 +17,12 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+import javax.persistence.Transient;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
+import org.apache.xmlbeans.impl.regex.REUtil;
 import org.codehaus.jackson.annotate.JsonIgnore;
-import org.hibernate.annotations.CollectionType;
-import org.hibernate.annotations.Fetch;
-import org.hibernate.annotations.FetchMode;
-import org.hibernate.annotations.IndexColumn;
-import org.hibernate.annotations.LazyCollection;
-import org.hibernate.annotations.LazyCollectionOption;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -38,11 +32,29 @@ import br.ufc.quixada.npi.sisat.model.enuns.SistemaGastrointestinal;
 import br.ufc.quixada.npi.sisat.model.enuns.SistemaUrinario;
 
 @NamedQueries({
-		@NamedQuery(name = "ConsultaNutricional.findConsultaNutricionalWithDocumentosById", query = "select c from ConsultaNutricional c left join fetch c.documentos where c.id=:id"),
-		@NamedQuery(name = "ConsultaNutricional.findConsultaNutricionalWithFrequenciasById", query = "select c from ConsultaNutricional c left join fetch c.frequencias where c.id=:id"),
-		@NamedQuery(name = "ConsultaNutricional.findConsultaNutricionalWithDocumentosAndFrequenciasById", query = "select c from ConsultaNutricional c left join fetch c.documentos left join fetch c.frequencias where c.id=:id"),
-		@NamedQuery(name = "ConsultaNutricional.findOrientacoesIndividuaisById", query = "select c.orientacoesIndividuais from ConsultaNutricional c where c.id=:id"),
-		@NamedQuery(name = "ConsultaNutricional.findPacientePessoaCpfById", query = "select c.paciente.pessoa.cpf from ConsultaNutricional c where c.id=:id") })
+	@NamedQuery(name = "ConsultaNutricional.findConsultaNutricionalWithDocumentosById", query = "select c from ConsultaNutricional c left join fetch c.documentos where c.id=:id"),
+	@NamedQuery(name = "ConsultaNutricional.findConsultaNutricionalWithFrequenciasById", query = "select c from ConsultaNutricional c left join fetch c.frequencias where c.id=:id"),
+	@NamedQuery(name = "ConsultaNutricional.findConsultaNutricionalWithDocumentosAndFrequenciasById", query = "select c from ConsultaNutricional c left join fetch c.documentos left join fetch c.frequencias where c.id=:id"),
+	@NamedQuery(name = "ConsultaNutricional.findOrientacoesIndividuaisById", query = "select c.orientacoesIndividuais from ConsultaNutricional c where c.id=:id"),
+	@NamedQuery(name = "ConsultaNutricional.findPacientePessoaCpfById", query = "select c.paciente.pessoa.cpf from ConsultaNutricional c where c.id=:id"), 
+	
+	@NamedQuery(name = "ConsultaNutricional.countFrequenciaMastigacao", query = "select count(c.mastigacao) from ConsultaNutricional c where c.mastigacao = TRUE"),
+	@NamedQuery(name = "ConsultaNutricional.findCountFrequenciaMastigacao", query = "select count(c.mastigacao) from ConsultaNutricional c where c.mastigacao = TRUE"),
+	@NamedQuery(name = "ConsultaNutricional.countFrequenciaDisfagia", query = "select count(c.disfagia) from ConsultaNutricional c where c.disfagia = TRUE"),
+	@NamedQuery(name = "ConsultaNutricional.countFrequenciaOdinofagia", query = "select count(c.odinofagia) from ConsultaNutricional c WHERE c.odinofagia = TRUE"),
+	@NamedQuery(name = "ConsultaNutricional.countFrequenciaPirose", query = "select count(c.pirose) from ConsultaNutricional c where c.pirose = TRUE"),
+	@NamedQuery(name = "ConsultaNutricional.countFrequenciaNausea", query = "select count(c.nausea) from ConsultaNutricional c where c.nausea = TRUE"),
+	@NamedQuery(name = "ConsultaNutricional.countFrequenciaVomito", query = "select count(c.vomito) from ConsultaNutricional c where c.vomito = TRUE"),
+	@NamedQuery(name = "ConsultaNutricional.countFrequenciaDiarreia", query = "select count(c.diarreia) from ConsultaNutricional c where c.diarreia = TRUE"),
+	@NamedQuery(name = "ConsultaNutricional.countFrequenciaConstipacao", query = "select count(c.constipacao) from ConsultaNutricional c where c.constipacao = TRUE"),
+	@NamedQuery(name = "ConsultaNutricional.countFrequenciaDiabetes", query = "select count(c.diabetes) from ConsultaNutricional c where c.diabetes = TRUE"),
+	@NamedQuery(name = "ConsultaNutricional.countFrequenciaHipertensao", query = "select count(c.hipertensao) from ConsultaNutricional c where c.hipertensao = TRUE"),
+	@NamedQuery(name = "ConsultaNutricional.countFrequenciaAlergia", query = "select count(c.alergia) from ConsultaNutricional c where c.alergia = TRUE"),
+	@NamedQuery(name = "ConsultaNutricional.countFrequenciaOutrasPatologias", query = "select count(c.outrasPatologias) from ConsultaNutricional c where c.outrasPatologias = TRUE"),
+
+	@NamedQuery(name = "ConsultaNutricional.historicoPeso", query = "select new br.ufc.quixada.npi.sisat.model.ConsultaNutricional(c.paciente, c.data, c.peso, c.altura, c.circunferenciaCintura) from ConsultaNutricional c where c.paciente.pessoa.cpf = :cpf "),
+
+})
 
 @Entity
 public class ConsultaNutricional {
@@ -176,6 +188,16 @@ public class ConsultaNutricional {
 
 	private Integer tgp;
 	private ClassificacaoExame classificacaoTgp;
+	
+	@Transient
+	private Double IMC;
+	
+	@Transient
+	private String classificacaoIMC;
+	
+	@Transient
+	private String classificacaoCC;
+	
 
 	@Column(columnDefinition = "TEXT")
 	@NotNull(message = "Informe as orientações para o paciente.")
@@ -194,25 +216,16 @@ public class ConsultaNutricional {
 		setPaciente(paciente);
 	}
 
-	public String getImc() {
-
-		double imc = calculaIMC(this);
-
-		if (imc == 0.0) {
-			return "Não foi possivel calcular o IMC do paciente!";
-		}
-
-		return new DecimalFormat("0.00").format(imc) + " " + getClassificacaoImc(imc);
-	}
-
-	public String getClassificacaoImc(double imc) {
-		String classificacao = classificaIMC(imc);
-		return classificacao;
-	}
-
-	public String getClassificacaoCc() {
-		String classificacao = classificaCircunferenciaCintura(this);
-		return classificacao;
+	public ConsultaNutricional(Paciente paciente, Date data, Double peso, Double altura, Double circunferenciaCintura) {
+		this.paciente = paciente;
+		this.data = data;
+		this.peso = peso;
+		this.altura = altura;
+		this.IMC = calculaIMC();
+		this.classificacaoCC = classificaCircunferenciaCintura();
+		this.circunferenciaCintura = circunferenciaCintura;
+		this.classificacaoCC = classificaCircunferenciaCintura();
+		System.out.println();
 	}
 
 	public Paciente getPaciente() {
@@ -238,96 +251,6 @@ public class ConsultaNutricional {
 	public void setOrientacoesIndividuais(String orientacoesIndividuais) {
 		this.orientacoesIndividuais = orientacoesIndividuais;
 
-	}
-
-	private double calculaIMC(ConsultaNutricional consulta) {
-
-		try {
-			double imc = this.peso / (this.altura * this.altura);
-			return imc;
-		} catch (NullPointerException e) {
-			return 0.0;
-		}
-
-	}
-
-	private String classificaIMC(double imc) {
-
-		if (imc < 25) {
-			if (imc < 17) {
-				if (imc < 16) {
-					// <16 Desnutrição grau III
-					return "Desnutrição grau III";
-				} else {
-					// 16 a 16,9 Desnutrição grau II
-					return "Desnutrição grau II";
-				}
-			} else {
-				if (imc < 18.5) {
-					// 17 a 18,4 Desnutrição grau I
-					return "Desnutrição grau I";
-				} else {
-					// 18,5 a 24,9 Eutrofia
-					return "Eutrofia";
-				}
-			}
-		} else {
-			if (imc < 35) {
-				if (imc < 30) {
-					// 25 a 29,9 Sobrepeso
-					return "Sobrepeso";
-				} else {
-					// 30 a 34,9 Obesidade grau I
-					return "Obesidade grau I";
-				}
-			} else {
-				if (imc < 40) {
-					// 35 a 39,9 Obesidade grau II
-					return "Obesidade grau  II";
-				} else {
-					// ≥ 40 Obesidade grau III
-					return "Obesidade grau III";
-				}
-			}
-		}
-
-	}
-
-	private String classificaCircunferenciaCintura(ConsultaNutricional consulta) {
-
-		if (consulta.getCircunferenciaCintura() == null) {
-			return "";
-		}
-
-		Double circunferencia = consulta.getCircunferenciaCintura()/100;
-		String sexo = consulta.getPaciente().getPessoa().getSexo();
-
-		if (sexo != null) {
-			if (sexo.equalsIgnoreCase("m")) {
-				if (circunferencia < 0.94) {
-					return "Normal";
-				} else {
-					if (circunferencia < 1.02) {
-						return "Risco aumentado";
-					} else {
-						return "Risco muito aumentado";
-					}
-				}
-			} else if (sexo.equalsIgnoreCase("f")) {
-				if (circunferencia < 0.80) {
-					return "Normal";
-				} else {
-					if (circunferencia < 0.88) {
-						return "Risco aumentado";
-					} else {
-						return "Risco muito aumentado";
-					}
-				}
-			}
-		} else {
-			return "É necessario o sexo para definir a classificação de circurferência";
-		}
-		return "";
 	}
 
 	public Long getId() {
@@ -858,4 +781,111 @@ public class ConsultaNutricional {
 		this.observacooesDaConsulta = observacooesDaConsulta;
 	}
 
+	public Double getIMC() {
+		return IMC;
+	}
+
+	private Double calculaIMC() {
+		try {
+			double imc = this.peso / (this.altura * this.altura);
+			return imc;
+		} catch (NullPointerException e) {
+			return 0.0;
+		}
+
+	}
+
+	public String getClassificacaoIMC() {
+		classificacaoIMC = classificaIMC();
+		return classificacaoIMC;
+	}
+
+	private String classificaIMC() {
+
+		if (this.IMC < 25) {
+			if (this.IMC < 17) {
+				if (this.IMC < 16) {
+					// <16 Desnutrição grau III
+					return "Desnutrição grau III";
+				} else {
+					// 16 a 16,9 Desnutrição grau II
+					return "Desnutrição grau II";
+				}
+			} else {
+				if (this.IMC < 18.5) {
+					// 17 a 18,4 Desnutrição grau I
+					return "Desnutrição grau I";
+				} else {
+					// 18,5 a 24,9 Eutrofia
+					return "Eutrofia";
+				}
+			}
+		} else {
+			if (this.IMC < 35) {
+				if (this.IMC < 30) {
+					// 25 a 29,9 Sobrepeso
+					return "Sobrepeso";
+				} else {
+					// 30 a 34,9 Obesidade grau I
+					return "Obesidade grau I";
+				}
+			} else {
+				if (this.IMC < 40) {
+					// 35 a 39,9 Obesidade grau II
+					return "Obesidade grau  II";
+				} else {
+					// ≥ 40 Obesidade grau III
+					return "Obesidade grau III";
+				}
+			}
+		}
+
+	}
+
+	public String getClassificacaoCC() {
+		classificacaoCC = classificaCircunferenciaCintura();
+		return classificacaoCC;
+	}
+
+	private String classificaCircunferenciaCintura() {
+
+		if (this.getCircunferenciaCintura() == null) {
+			return "";
+		}
+
+		Double circunferencia = this.getCircunferenciaCintura()/100;
+
+		if (this.getPaciente().getPessoa().getSexo() != null) {
+			String sexo = this.getPaciente().getPessoa().getSexo();
+			if (sexo.equalsIgnoreCase("m")) {
+				if (circunferencia < 0.94) {
+					return "Normal";
+				} else {
+					if (circunferencia < 1.02) {
+						return "Risco aumentado";
+					} else {
+						return "Risco muito aumentado";
+					}
+				}
+			} else if (sexo.equalsIgnoreCase("f")) {
+				if (circunferencia < 0.80) {
+					return "Normal";
+				} else {
+					if (circunferencia < 0.88) {
+						return "Risco aumentado";
+					} else {
+						return "Risco muito aumentado";
+					}
+				}
+			}
+		} else {
+			return "É necessario o sexo para definir a classificação de circurferência";
+		}
+		return "";
+	}
+
+
+
+	
+	
 }
