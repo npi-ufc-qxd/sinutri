@@ -77,6 +77,12 @@
 			<version>${jackson.version}</version>
 		</dependency>
 
+		<dependency>
+			<groupId>org.codehaus.jackson</groupId>
+			<artifactId>jackson-core-asl</artifactId>
+			<version>1.9.13</version>
+		</dependency>
+
 		<!-- Dependência Jasper Reports -->
 		<dependency>
 			<groupId>net.sf.jasperreports</groupId>
