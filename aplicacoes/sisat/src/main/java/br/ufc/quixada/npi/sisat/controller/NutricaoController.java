@@ -109,7 +109,7 @@ public class NutricaoController {
 		Documento documento = documentoService.find(Documento.class, id);
 		documento.setConsultaNutricional(null);
 		documentoService.delete(documento);
-		redirectAttributes.addFlashAttribute("success", "Documento deletado com sucesso");
+		redirectAttributes.addFlashAttribute("info", "Documento deletado com sucesso.");
 
 		return "redirect:/consulta/editar-consulta/" + idConsulta + "/paciente/" + cpf;
 	}

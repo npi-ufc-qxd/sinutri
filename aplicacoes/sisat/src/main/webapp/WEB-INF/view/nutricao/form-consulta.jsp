@@ -32,6 +32,26 @@
 	<jsp:include page="../modulos/header.jsp" />
 
 	<div class="container">
+
+		<c:if test="${not empty erro}">
+			<div class="alert alert-danger alert-dismissible fade in"
+				role="alert" id="alert-erro">
+				<button type="button" class="close" data-dismiss="alert">
+					<span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+				</button>
+				<c:out value="${erro}"></c:out>
+			</div>
+		</c:if>
+		<c:if test="${not empty info}">
+			<div class="alert alert-success alert-dismissible fade in"
+				role="alert" id="alert-info">
+				<button type="button" class="close" data-dismiss="alert">
+					<span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+				</button>
+				<c:out value="${info}"></c:out>
+			</div>
+		</c:if>
+
 		<div class="row">
 			<div class="tituloConsulta">
 				<h2>${titulo}
@@ -705,12 +725,6 @@
 
 					<h3 id="documentos" class="section">Documentos</h3>
 
-					<div class="alert alert-success fade in">
-						<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-						<strong>Success!</strong> This alert box could indicate a
-						successful or positive action.
-					</div>
-
 					<div id="documentos" class="tab-pane fade in ">
 						<div class="form-group">
 							<label for="arquivo" class="col-sm-2 control-label">Arquivos:</label>
@@ -800,7 +814,6 @@
 											<th>Excluir</th>
 										</tr>
 									</thead>
-
 									<tbody class="files">
 										<c:forEach items="${documentosNutricionista}" var="documento">
 											<tr class="template-upload fade in">
@@ -816,10 +829,13 @@
 												</a></td>
 
 												<td><a id="delete[${documento.id}]"
+													href="#"
 													class="btn btn-danger"
-													href="<c:url value="/nutricao/${consultaNutricional.id }/paciente/${consultaNutricional.paciente.pessoa.cpf }/deletarDocumento/${documento.id }" ></c:url>"
-													class="delete-document"> <span
-														class="glyphicon glyphicon-trash"></span>
+													data-href="<c:url value="/nutricao/${consultaNutricional.id }/paciente/${consultaNutricional.paciente.pessoa.cpf }/deletarDocumento/${documento.id }" ></c:url>"
+													class="delete-document"  
+													data-toggle="modal" 
+													data-target="#confirm-delete"> 
+													<span class="glyphicon glyphicon-trash"></span>
 												</a></td>
 											</tr>
 										</c:forEach>
@@ -828,7 +844,7 @@
 							</div>
 						</div>
 					</div>
-
+					
 					<div class="col-xs-offset-0 col-xs-10" align="center">
 						<button type="submit" class="btn btn-success">${botao}</button>
 					</div>
@@ -837,6 +853,25 @@
 			</div>
 		</div>
 	</div>
+
+ 				<div id="confirm-delete" class="modal" role="dialog" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true">
+					<div class="modal-dialog">
+						<div class="modal-content">
+							<div class="modal-header">
+								<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+								<h4 class="modal-title" id="myModalLabel">Confirmar Deleção</h4>
+							</div>
+							<div class="modal-body">
+								<p>Você está a ponto de excluir um documento da consulta, esse procedimento é irreversível.</p>
+								<p>Você deseja continuar?</p>
+							</div>
+							<div class="modal-footer">
+								<button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+								<a class="btn btn-danger btn-ok">Deletar</a>
+							</div>
+						</div>
+					</div>
+				</div>
 
 	<jsp:include page="../modulos/footer.jsp" />
 	<%-- 	<script src="<c:url value="/resources/js/questionario-frequencia-alimentar.js" />"></script> --%>
