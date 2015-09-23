@@ -101,7 +101,7 @@ public class ConsultaNutricional {
 
 	@NotNull(message = "Informe a quantidade de copos de água consumida")
 	@Min(value = 1)
-	private Integer agua;
+	private Double agua;
 
 	private boolean atividadeFisica;
 	private String atividadeFisicaComentario;
@@ -163,28 +163,28 @@ public class ConsultaNutricional {
 	private boolean outrasPatologias;
 	private String outrasPatologiasComentario;
 
-	private Integer glicemia;
+	private Double glicemia;
 	private ClassificacaoExame classificacaoGlicemia;
 
-	private Integer ct;
+	private Double ct;
 	private ClassificacaoExame classificacaoCt;
 
-	private Integer hdlc;
+	private Double hdlc;
 	private ClassificacaoExame classificacaoHdlc;
 
-	private Integer ldlc;
+	private Double ldlc;
 	private ClassificacaoExame classificacaoLdlc;
 
-	private Integer tg;
+	private Double tg;
 	private ClassificacaoExame classificacaoTg;
 
-	private Integer hb;
+	private Double hb;
 	private ClassificacaoExame classificacaoHb;
 
-	private Integer tgo;
+	private Double tgo;
 	private ClassificacaoExame classificacaoTgo;
 
-	private Integer tgp;
+	private Double tgp;
 	private ClassificacaoExame classificacaoTgp;
 	
 	@Transient
@@ -321,11 +321,11 @@ public class ConsultaNutricional {
 		this.circunferenciaCinturaDesejada = circunferenciaCinturaDesejada;
 	}
 
-	public Integer getAgua() {
+	public Double getAgua() {
 		return agua;
 	}
 
-	public void setAgua(Integer agua) {
+	public void setAgua(Double agua) {
 		this.agua = agua;
 	}
 
@@ -625,11 +625,11 @@ public class ConsultaNutricional {
 		this.outrasPatologiasComentario = outrasPatologiasComentario;
 	}
 
-	public Integer getGlicemia() {
+	public Double getGlicemia() {
 		return glicemia;
 	}
 
-	public void setGlicemia(Integer glicemia) {
+	public void setGlicemia(Double glicemia) {
 		this.glicemia = glicemia;
 	}
 
@@ -641,11 +641,11 @@ public class ConsultaNutricional {
 		this.classificacaoGlicemia = classificacaoGlicemia;
 	}
 
-	public Integer getCt() {
+	public Double getCt() {
 		return ct;
 	}
 
-	public void setCt(Integer ct) {
+	public void setCt(Double ct) {
 		this.ct = ct;
 	}
 
@@ -657,11 +657,11 @@ public class ConsultaNutricional {
 		this.classificacaoCt = classificacaoCt;
 	}
 
-	public Integer getHdlc() {
+	public Double getHdlc() {
 		return hdlc;
 	}
 
-	public void setHdlc(Integer hdlc) {
+	public void setHdlc(Double hdlc) {
 		this.hdlc = hdlc;
 	}
 
@@ -673,11 +673,11 @@ public class ConsultaNutricional {
 		this.classificacaoHdlc = classificacaoHdlc;
 	}
 
-	public Integer getLdlc() {
+	public Double getLdlc() {
 		return ldlc;
 	}
 
-	public void setLdlc(Integer ldlc) {
+	public void setLdlc(Double ldlc) {
 		this.ldlc = ldlc;
 	}
 
@@ -689,11 +689,11 @@ public class ConsultaNutricional {
 		this.classificacaoLdlc = classificacaoLdlc;
 	}
 
-	public Integer getTg() {
+	public Double getTg() {
 		return tg;
 	}
 
-	public void setTg(Integer tg) {
+	public void setTg(Double tg) {
 		this.tg = tg;
 	}
 
@@ -705,11 +705,11 @@ public class ConsultaNutricional {
 		this.classificacaoTg = classificacaoTg;
 	}
 
-	public Integer getHb() {
+	public Double getHb() {
 		return hb;
 	}
 
-	public void setHb(Integer hb) {
+	public void setHb(Double hb) {
 		this.hb = hb;
 	}
 
@@ -721,11 +721,11 @@ public class ConsultaNutricional {
 		this.classificacaoHb = classificacaoHb;
 	}
 
-	public Integer getTgo() {
+	public Double getTgo() {
 		return tgo;
 	}
 
-	public void setTgo(Integer tgo) {
+	public void setTgo(Double tgo) {
 		this.tgo = tgo;
 	}
 
@@ -737,11 +737,11 @@ public class ConsultaNutricional {
 		this.classificacaoTgo = classificacaoTgo;
 	}
 
-	public Integer getTgp() {
+	public Double getTgp() {
 		return tgp;
 	}
 
-	public void setTgp(Integer tgp) {
+	public void setTgp(Double tgp) {
 		this.tgp = tgp;
 	}
 
