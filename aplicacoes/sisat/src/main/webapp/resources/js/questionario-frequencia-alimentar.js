@@ -48,7 +48,6 @@ $(function() {
 	$('#questionarioFrequenciaAlimentar')
 			.appendGrid(
 					{
-						caption : 'Refeições',
 						initRows : 0,
 						maxRowsAllowed : 6,
 						columns : [{
@@ -60,8 +59,8 @@ $(function() {
 							name : 'refeicao',
 							display : 'Tipo de refição',
 							type : 'select',
-							ctrlOptions : 'DESJEJUM:Desjejum;LANCHE_DA_MANHA:Lanche da Manhã;ALMOCO:Almoço;LANCHE_DA_TARDE:Lanche da Tarde;JANTAR:Jantar;CEIA:Ceia'
-									
+							ctrlOptions : 'DESJEJUM:Desjejum;LANCHE_DA_MANHA:Lanche da Manhã;ALMOCO:Almoço;LANCHE_DA_TARDE:Lanche da Tarde;JANTAR:Jantar;CEIA:Ceia',
+							ctrlClass: 'form-control col-sm-6'
 						}, {
 							name : 'horario',
 							display : 'Hora',
@@ -69,20 +68,22 @@ $(function() {
 							ctrlAttr : {
 								maxlength : 15
 							},
-							ctrlCss : {
-								width : '70px',
-								'text-align' : 'right'
-							},
-							ctrlClass : 'hora'
+							ctrlClass : 'form-control col-sm-6 hora'
 						} ],
-
-						
 						hideButtons: {
 				            moveUp: true,
 				            moveDown : true,
-				            insert: true
+				            insert: true,
+				            removeLast: true,
 				        },	
-						
+				        customGridButtons: {
+				            append: function() {
+				            	return $('<a href="#" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span> Refeição</a>');
+							},
+				            remove: function() {
+				            	return $('<a href="#" class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span></a>');
+							}
+						},
 						i18n : {
 							rowEmpty : "Nenhum alimentação foi adicionada!"
 						},
@@ -110,22 +111,17 @@ $(function() {
 										{
 											name : 'alimento',
 											display : 'Alimento',
-											ctrlCss : {
-												'width' : '200px'
-											}
+											ctrlClass: 'form-control'											
 										}, {
 											name : 'porcao',
 											display : 'Porção',
-											ctrlCss : {
-												'width' : '100px',
-												'text-align' : 'right'
-											},
-
+											ctrlClass: 'form-control'											
 										} ],
 										hideButtons: {
 								            moveUp: true,
 								            moveDown : true,
-								            insert: true
+								            insert: true,
+								            removeLast: true
 								        },											
 										i18n : {
 											rowEmpty : "Nenhum alimento foi adicionado!"
@@ -133,6 +129,17 @@ $(function() {
 										nameFormatter : function(idPrefix, name, uniqueIndex) {
 											return "frequencias["+ (idPanel)+ "].alimentos["+ (uniqueIndex - 1)+ "]." + name;
 										},
+								        customGridButtons: {
+								            append: function() {
+								            	return $('<a href="#" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span> Alimento</a>');
+											},
+								            remove: function() {
+								            	return $('<a href="#" class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span></a>');
+											},
+								        },
+										
+										
+										
 									});
 						},
 						subPanelGetter : function(uniqueIndex) {

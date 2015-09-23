@@ -353,8 +353,11 @@
 	</div>
 
 	<jsp:include page="../modulos/footer.jsp" />
-	<script
-		src="<c:url value="/resources/js/questionario-frequencia-alimentar.js" />"></script>
+	<script src="<c:url value="/resources/js/questionario-frequencia-alimentar.js" />"></script>
+	
+	<script type="text/javascript">
+		$('#menu-paciente').addClass('active');
+	</script>
 
 </body>
 </html>

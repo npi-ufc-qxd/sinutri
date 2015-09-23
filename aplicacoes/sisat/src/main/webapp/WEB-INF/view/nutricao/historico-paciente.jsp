@@ -18,10 +18,10 @@
 
 	<div class="container">
 	    <div class="row">
-			<div class="col-sm-6"><h2>Paciente: ${pessoa.nome }</h2></div>
+			<div class="col-sm-6"><h2>Paciente <strong>${pessoa.nome }</strong></h2></div>
 
 			<div class="col-sm-6" align="right" style="margin-top: 15px;">
-				<a href="<c:url value="/nutricao/buscar"></c:url>" class="btn btn-primary">Voltar</a>
+				<a href="#" class="btn btn-primary back"><span class="glyphicon glyphicon-chevron-left"></span> Voltar</a>
 				<a href="<c:url value="/consulta/realizar-consulta/${pessoa.cpf}"/>" class="btn btn-success"><span class="glyphicon glyphicon-plus"></span> Realizar Consulta</a>
 			</div>
     	</div>
@@ -90,6 +90,7 @@
 	<jsp:include page="../modulos/footer.jsp" />
 	<script type="text/javascript">
 		$(function () { 
+			$('#menu-paciente').addClass('active');
 			
 			var cpf = $("#cpf").val();
 			
