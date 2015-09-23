@@ -73,7 +73,7 @@
 				
 				<div class="row">
 					<div class="col-sm-12">
-						<label><strong> Objetivo da consulta: </strong></label> ${consulta.objetivoConsulta }
+						<label><strong> Objetivo da consulta: </strong></label> ${consulta.objetivoConsulta }<br>
 						<label><strong>Consumo de água: </strong></label>${consulta.agua} copos/dia<br>
 						<label><strong>Altura: </strong></label>${consulta.altura}
 						<br><label><strong>Peso: </strong></label>${consulta.peso}

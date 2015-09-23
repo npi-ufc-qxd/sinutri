@@ -58,7 +58,7 @@ $(document)
 			        });
 					
 					$('#fileupload').MultiFile({
-						accept : 'pdf|docx|png|jpg|odt',
+						accept : 'pdf|docx|png|jpg|odt|doc',
 						list : '#files',
 						STRING : {
 							remove : 	'<button class="btn btn-danger delete" type="button">' + 
@@ -326,13 +326,3 @@ $(document)
 						alert($(this).attr('id'));
 					});
 				});
-
-function commaToDot(string) {
-	if (string.value.indexOf(",") >= 0) {
-		string.value = string.value.replace(/\,/g, ".");
-	}
-}
-
-function onlyNum(string) {
-	string.value = string.value.replace(/^[0][0-9]*$/, '');
-}
