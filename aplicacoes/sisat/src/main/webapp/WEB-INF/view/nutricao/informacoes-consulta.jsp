@@ -299,6 +299,14 @@
 						</tr>
 					</tbody>
 				</table>
+				
+				<h3 id="orientacoes" class="section">Conduta Nutricional</h3>
+				
+				<div class="row">
+					<div class="col-sm-12">
+						<p>${consulta.condutaNutricional}</p>
+					</div>
+				</div>
 
 				<h3 id="orientacoes" class="section">Orientações</h3>
 				
