@@ -1,7 +1,11 @@
 $(document)
 		.ready(
 				function() {
-
+					$('a.back').click(function(){
+						parent.history.back();
+						return false;
+					});
+					
 					$("input[type='checkbox']").change(
 							function() {
 								var itemForm = $(this).parent().parent()
