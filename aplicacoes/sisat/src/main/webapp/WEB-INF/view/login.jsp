@@ -5,62 +5,100 @@
 <head>
 <meta charset="UTF-8"/>
 <title>Página de Login</title>
-<link
-	href="<c:url value="/webjars/bootstrap/3.1.1/css/bootstrap.min.css" />"
-	rel="stylesheet" />
-<script src="<c:url value="/webjars/jquery/2.1.0/jquery.js" />"></script>
-<script
-	src="<c:url value="/webjars/bootstrap/3.1.1/js/bootstrap.min.js" />"></script>
+	<link href="<c:url value="/webjars/bootstrap/3.3.2/css/bootstrap.min.css" />" rel="stylesheet" />
+	<link href="<c:url value="/resources/css/bootstrap-flatly.min.css" />" rel="stylesheet" />
+	<script src="<c:url value="/webjars/jquery/2.1.0/jquery.js" />"></script>
+	<script src="<c:url value="/webjars/bootstrap/3.1.1/js/bootstrap.min.js" />"></script>
 
 <style>
-.errorblock {
-	color: #ff0000;
-	background-color: #ffEEEE;
-	border: 3px solid #ff0000;
-	padding: 8px;
-	margin: 16px;
+body {
+	background-color: #149C82;
 }
 
-.center {
-	float: none;
-	margin-left: auto;
-	margin-right: auto;
+.form-signin input[type="text"] {
+	margin-bottom: 5px;
+	border-bottom-left-radius: 0;
+	border-bottom-right-radius: 0;
+}
+
+.form-signin input[type="password"] {
+	margin-bottom: 10px;
+	border-top-left-radius: 0;
+	border-top-right-radius: 0;
+}
+
+.form-signin .form-control {
+	position: relative;
+	font-size: 16px;
+	font-family: 'Open Sans', Arial, Helvetica, sans-serif;
+	height: auto;
+	padding: 10px;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+}
+
+.vertical-offset-100 {
 	padding-top: 100px;
+}
+
+.img-responsive {
+	display: block;
+	max-width: 100%;
+	height: auto;
+	margin: auto;
+}
+
+.panel {
+	margin-bottom: 20px;
+	background-color: rgba(255, 255, 255, 0.75);
+	border: 1px solid transparent;
+	border-radius: 4px;
+	-webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, .05);
+	box-shadow: 0 1px 1px rgba(0, 0, 0, .05);
+}
+
+.error {
+	color: red;
+	margin-bottom: 5px;
+}
+
+#login{
+	margin-top: 15px;
 }
 </style>
 </head>
 
 <body onload='document.f.j_username.focus();'>
-	<div class="center col-md-4">
-		<div style="text-align: center" class="panel panel-default">
-			<div class="panel-heading">
-				<h5 class="panel-title">Login</h5>
-			</div>
-			<div class="panel-body">
-
-				<c:if test="${not empty error}">
-					<div class="error">${error}</div>
-				</c:if>
-				<c:if test="${not empty msg}">
-					<div class="msg">${msg}</div>
-				</c:if>
-
-				<form name='f' action="<c:url value='j_spring_security_check' />"
-					method='POST'>
-					<div class="form-group col-md-12 form-inline">
-						<h4 class="col-md-4">Usuário:</h4>
-						<input class="col-md-8 form-control" type='text' name='j_username'
-							value=''>
+	<div class="container">
+		<div class="row vertical-offset-100">
+			<div class="col-md-4 col-md-offset-4">
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<div class="row-fluid user-row">
+							<img src="<c:url value="/resources/images/logo-sinutri.png" />" alt="SiNutri" class="logo-sinutri img-responsive">
+						</div>
 					</div>
-					<div class="form-group col-md-12 form-inline">
-						<h4 class="col-md-4">Senha:</h4>
-						<input class="col-md-8 form-control" type='password'
-							name='j_password' />
+					<div class="panel-body">
+					
+						<c:if test="${not empty error}">
+							<div class="error">${error}</div>
+						</c:if>
+						<c:if test="${not empty msg}">
+							<div class="msg">${msg}</div>
+						</c:if>
+						
+						<form name='f' action="<c:url value='j_spring_security_check' />"
+							method='POST' accept-charset="UTF-8" role="form"
+							class="form-signin">
+							<fieldset>
+								<input class="form-control" placeholder="Usuário" id="username" type="text" name='j_username' > 
+								<input class="form-control" placeholder="Senha" id="password" type="password" name='j_password' >
+								<input class="btn btn-lg btn-success btn-block" type="submit" id="login" value="Login »"> 
+							</fieldset>
+						</form>
 					</div>
-					<input class="btn btn-primary" name="submit" type="submit"
-						value="Login" value="Login" /> <input class="btn btn-default"
-						name="reset" type="reset" value="Limpar" />
-				</form>
+				</div>
 			</div>
 		</div>
 	</div>
