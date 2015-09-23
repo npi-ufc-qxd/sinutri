@@ -16,11 +16,7 @@
 
 	<div class="container">
 		<h3>Informações Gráficas</h3>
-<!-- 		<div id="chart" style="width:100%; height:400px;"></div> -->
-		
 		<div id="patologiasFrequentes" style="width:100%; height:400px;"></div>
-		
-<!-- 		<div id="cursosFrequentes" style="width:100%; height:400px;"></div> -->
 	</div>
 	
 	<jsp:include page="../modulos/footer.jsp" />
@@ -28,6 +24,9 @@
 	<script type="text/javascript">
 
 	$(function () { 
+		
+		$('#menu-graficos').addClass('active');
+		
 		$.ajax({
 			url: '/sisat/nutricao/informacoes-graficas/patologias-frequentes.json',
 			type: "GET",

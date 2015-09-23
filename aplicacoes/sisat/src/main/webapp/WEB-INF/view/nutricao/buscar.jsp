@@ -66,6 +66,10 @@
 	</div>
 	
 	<jsp:include page="../modulos/footer.jsp" />
+	
+	<script type="text/javascript">
+		$('#menu-paciente').addClass('active');
+	</script>
 
 </body>
 </html>

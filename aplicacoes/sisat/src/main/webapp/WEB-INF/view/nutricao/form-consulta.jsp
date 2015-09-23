@@ -52,13 +52,13 @@
 			</div>
 		</c:if>
 
-		<div class="row">
-			<div class="tituloConsulta">
-				<h2>${titulo}
-					<em><small>${consultaNutricional.paciente.pessoa.nome}</small></em>
-				</h2>
+	    <div class="row">
+			<div class="col-sm-9"><h2>${titulo} <strong>${consultaNutricional.paciente.pessoa.nome}</strong></h2></div>
+
+			<div class="col-sm-3" align="right" style="margin-top: 15px;">
+				<a href="#" class="btn btn-primary back"><span class="glyphicon glyphicon-chevron-left"></span> Voltar</a>
 			</div>
-		</div>
+    	</div>
 
 		<div class="row">
 			<div class="col-sm-3" id="myScrollspy">
@@ -874,7 +874,11 @@
 				</div>
 
 	<jsp:include page="../modulos/footer.jsp" />
-	<%-- 	<script src="<c:url value="/resources/js/questionario-frequencia-alimentar.js" />"></script> --%>
+	<script src="<c:url value="/resources/js/questionario-frequencia-alimentar.js" />"></script>
+	
+	<script type="text/javascript">
+		$('#menu-paciente').addClass('active');
+	</script>
 
 </body>
 </html>
