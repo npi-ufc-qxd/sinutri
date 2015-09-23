@@ -42,6 +42,12 @@ $(document)
 									$(itemForm).find('.help-block').remove();
 								}
 							});
+					$('.valid-num').keyup(function() {
+						if ($(this).val().indexOf(",") >= 0) {
+							$(this).val($(this).val().replace(/\,/g, "."));
+						}
+						$(this).val($(this).val().replace(/^[0][0-9]*$/, ''));
+					});
 
 					$('#confirm-delete').on('show.bs.modal', function(e) {
 			            $(this).find('.btn-ok').attr('href', $(e.relatedTarget).data('href'));

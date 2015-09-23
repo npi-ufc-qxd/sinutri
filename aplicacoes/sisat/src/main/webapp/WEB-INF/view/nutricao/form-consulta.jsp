@@ -111,8 +111,7 @@
 						<div class="form-item col-sm-12">
 							<label for="altura" class="control-label">Altura (m):</label>
 							<form:input id="altura" name="altura" path="altura"
-								cssClass="form-control" placeholder="0.00"
-								onkeyup="commaToDot(this); onlyNum(this)" />
+								cssClass="form-control valid-num" placeholder="0.00" />
 							<div class="error-validation">
 								<form:errors path="altura"></form:errors>
 							</div>
@@ -123,8 +122,7 @@
 						<div class="form-item col-sm-3">
 							<label for="peso" class="control-label">Peso (Kg):</label>
 							<form:input id="peso" name="peso" path="peso"
-								cssClass="form-control" placeholder="00.00"
-								onkeyup="commaToDot(this); onlyNum(this)" />
+								cssClass="form-control valid-num" placeholder="00.00" />
 							<div class="error-validation">
 								<form:errors path="peso"></form:errors>
 							</div>
@@ -133,8 +131,7 @@
 							<label for="pesoDesejado" class="control-label">Peso
 								desejado (Kg):</label>
 							<form:input id="pesoDesejado" name="pesoDesejado"
-								path="pesoDesejado" cssClass="form-control" placeholder="00.00"
-								onkeyup="commaToDot(this); onlyNum(this)" />
+								path="pesoDesejado" cssClass="form-control valid-num" placeholder="00.00" />
 							<div class="error-validation">
 								<form:errors path="pesoDesejado"></form:errors>
 							</div>
@@ -145,7 +142,7 @@
 								(cm):</label>
 							<form:input id="circunferenciaCintura" name="cc"
 								placeholder="00.00" path="circunferenciaCintura"
-								cssClass="form-control" min="0" onkeyup="commaToDot(this); onlyNum(this)" />
+								cssClass="form-control valid-num" min="0" />
 							<div class="error-validation">
 								<form:errors path="circunferenciaCintura"></form:errors>
 							</div>
@@ -155,7 +152,7 @@
 								desejada (cm):</label>
 							<form:input id="circunferenciaCinturaDesejada" name="cc"
 								placeholder="00.00" path="circunferenciaCinturaDesejada"
-								cssClass="form-control" min="0" onkeyup="commaToDot(this); onlyNum(this)" />
+								cssClass="form-control valid-num" min="0" />
 							<div class="error-validation">
 								<form:errors path="circunferenciaCinturaDesejada"></form:errors>
 							</div>
@@ -465,8 +462,7 @@
 								<div class="form-item">
 									<label for="glicemia" class="control-label">Glicemia:</label>
 									<form:input id="glicemia" path="glicemia"
-										cssClass="form-control exame" placeholder="glicemia"
-										onkeyup="commaToDot(this); onlyNum(this)" />
+										cssClass="form-control exame valid-num" placeholder="glicemia" />
 									<div class="error-validation">
 										<form:errors path="glicemia"></form:errors>
 									</div>
@@ -492,8 +488,8 @@
 							<div class="col-sm-3">
 								<div class="form-item">
 									<label for="ct" class="control-label">CT:</label>
-									<form:input id="ct" path="ct" cssClass="form-control exame"
-										placeholder="ct" onkeyup="commaToDot(this); onlyNum(this)" />
+									<form:input id="ct" path="ct" cssClass="form-control exame valid-num"
+										placeholder="ct" />
 									<div class="error-validation">
 										<form:errors path="ct"></form:errors>
 									</div>
@@ -521,8 +517,8 @@
 							<div class="col-sm-3">
 								<div class="form-item">
 									<label for="ldlc" class="control-label">LDL-C:</label>
-									<form:input id="ldlc" path="ldlc" cssClass="form-control exame"
-										placeholder="LDL-C" onkeyup="commaToDot(this); onlyNum(this)" />
+									<form:input id="ldlc" path="ldlc" cssClass="form-control exame valid-num"
+										placeholder="LDL-C" />
 									<div class="error-validation">
 										<form:errors path="ldlc"></form:errors>
 									</div>
@@ -548,8 +544,8 @@
 							<div class="col-sm-3">
 								<div class="form-item">
 									<label for="hdlc" class="control-label">HDL-C:</label>
-									<form:input id="hdlc" path="hdlc" cssClass="form-control exame"
-										placeholder="HDL-C" onkeyup="commaToDot(this); onlyNum(this)" />
+									<form:input id="hdlc" path="hdlc" cssClass="form-control exame valid-num"
+										placeholder="HDL-C" />
 									<div class="error-validation">
 										<form:errors path="hdlc"></form:errors>
 									</div>
@@ -577,8 +573,8 @@
 							<div class="col-sm-3">
 								<div class="form-item">
 									<label for="tg" class="control-label">TG:</label>
-									<form:input id="tg" path="tg" cssClass="form-control exame"
-										placeholder="TG" onkeyup="commaToDot(this); onlyNum(this)" />
+									<form:input id="tg" path="tg" cssClass="form-control exame valid-num"
+										placeholder="TG" />
 									<div class="error-validation">
 										<form:errors path="tg"></form:errors>
 									</div>
@@ -604,8 +600,8 @@
 							<div class="col-sm-3">
 								<div class="form-item">
 									<label for="hb" class="control-label">HB:</label>
-									<form:input id="hb" path="hb" cssClass="form-control exame"
-										placeholder="HB" onkeyup="commaToDot(this); onlyNum(this)" />
+									<form:input id="hb" path="hb" cssClass="form-control exame valid-num"
+										placeholder="HB" />
 									<div class="error-validation">
 										<form:errors path="hb"></form:errors>
 									</div>
@@ -633,8 +629,8 @@
 							<div class="col-sm-3">
 								<div class="form-item">
 									<label for="tgo" class="control-label">TGO (AST):</label>
-									<form:input id="tgo" path="tgo" cssClass="form-control exame"
-										placeholder="tgo" onkeyup="commaToDot(this); onlyNum(this)" />
+									<form:input id="tgo" path="tgo" cssClass="form-control exame valid-num"
+										placeholder="tgo" />
 									<div class="error-validation">
 										<form:errors path="tgo"></form:errors>
 									</div>
@@ -659,8 +655,8 @@
 							<div class="col-sm-3">
 								<div class="form-item">
 									<label for="tgp" class="control-label">TGP (ALT):</label>
-									<form:input id="tgp" path="tgp" cssClass="form-control exame"
-										placeholder="TGP (ALT)" onkeyup="commaToDot(this); onlyNum(this)" />
+									<form:input id="tgp" path="tgp" cssClass="form-control exame valid-num"
+										placeholder="TGP (ALT)" />
 									<div class="error-validation">
 										<form:errors path="tgp"></form:errors>
 									</div>
