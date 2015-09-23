@@ -324,5 +324,5 @@ function commaToDot(string) {
 }
 
 function onlyNum(string) {
-	string.value = string.value.replace(/[^1-9.,]+/, '');
+	string.value = string.value.replace(/^[0][0-9]*$/, '');
 }
