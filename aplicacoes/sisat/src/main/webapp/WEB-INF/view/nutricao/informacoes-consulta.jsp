@@ -78,9 +78,9 @@
 						<label><strong>Altura: </strong></label>${consulta.altura}
 						<br><label><strong>Peso: </strong></label>${consulta.peso}
 						<br><label><strong>Peso Desejado: </strong></label>${consulta.pesoDesejado}
-						<br><label><strong>CC: </strong></label>${consulta.circunferenciaCintura} - ${consulta.classificacaoCc}
+						<br><label><strong>CC: </strong></label>${consulta.circunferenciaCintura} - ${consulta.classificacaoCC}
 						<br><label><strong>CC Desejada: </strong></label>${consulta.circunferenciaCinturaDesejada}
-						<br><label><strong>IMC: </strong></label>${consulta.imc}
+						<br><label><strong>IMC: </strong></label> <fmt:formatNumber type="number" maxFractionDigits="3" value="${consulta.IMC}"/> 
 						<br><label><strong>Medicamentos: </strong></label>${consulta.medicamento ? consulta.medicamentoComentario  : "Não usa medicamentos"}
 						<br><label><strong>Alergia alimentar: </strong></label>${consulta.alergia ? consulta.alergiaComentario  : "Não possui alergia a alimentos"}
 						<br><label><strong>Sistema Gastrointestinal: </strong></label>${consulta.sistemaGastrointestinal}
