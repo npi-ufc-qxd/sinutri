@@ -53,10 +53,10 @@
 		</c:if>
 
 	    <div class="row">
-			<div class="col-sm-9"><h2>${titulo} <strong>${consultaNutricional.paciente.pessoa.nome}</strong></h2></div>
+			<div class="col-sm-9"><h3>${titulo} <strong>${consultaNutricional.paciente.pessoa.nome}</strong></h3></div>
 
 			<div class="col-sm-3" align="right" style="margin-top: 15px;">
-				<a href="#" class="btn btn-primary back"><span class="glyphicon glyphicon-chevron-left"></span> Voltar</a>
+				<a href="#" class="btn btn-primary btn-sm back"><span class="glyphicon glyphicon-chevron-left"></span> Voltar</a>
 			</div>
     	</div>
 
@@ -92,7 +92,7 @@
 					<form:hidden path="paciente.id" />
 					<form:hidden path="data" />
 
-					<h3 id="avaliacao" class="section">Anamnese</h3>
+					<h4 id="avaliacao" class="section"><strong>Anamnese</strong></h4>
 
 					<div class="row form-group">
 						<div class="form-item col-sm-12">
@@ -443,7 +443,7 @@
 						</div>
 					</div>
 
-					<h3 id="recordatorio" class="section">Recordatório</h3>
+					<h4 id="recordatorio" class="section"><strong>Recordatório</strong></h4>
 
 					<div class="row form-group">
 						<div class="form-item col-sm-12">
@@ -454,7 +454,7 @@
 						</div>
 					</div>
 
-					<h3 id="exame" class="section">Exames Laboratoriais</h3>
+					<h4 id="exame" class="section"><strong>Exames Laboratoriais</strong></h4>
 
 					<div class="row form-group">
 						<div class="form-group-exame">
@@ -692,7 +692,7 @@
 						</div>
 					</div>
 
-					<h3 id="orientacoes" class="section">Orientações</h3>
+					<h4 id="orientacoes" class="section"><strong>Orientações</strong></h4>
 
 					<div class="row form-group">
 						<div class="form-item col-sm-12">
@@ -719,7 +719,7 @@
 						</div>
 					</div>
 
-					<h3 id="documentos" class="section">Documentos</h3>
+					<h4 id="documentos" class="section"><strong>Documentos</strong></h4>
 
 					<div id="documentos" class="tab-pane fade in ">
 						<div class="form-group">
@@ -845,7 +845,7 @@
 					
 					<div class="col-xs-offset-0 col-xs-10" align="center">
 						<button type="submit" class="btn btn-success">${botao}</button>
-					</div>
+					</div><br><br><br><br>
 
 				</form:form>
 			</div>

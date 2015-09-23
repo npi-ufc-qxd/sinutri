@@ -18,11 +18,11 @@
 
 	<div class="container">
 	    <div class="row">
-			<div class="col-sm-6"><h2>Paciente <strong>${pessoa.nome }</strong></h2></div>
+			<div class="col-sm-6"><h3>Paciente <strong>${pessoa.nome }</strong></h3></div>
 
 			<div class="col-sm-6" align="right" style="margin-top: 15px;">
-				<a href="#" class="btn btn-primary back"><span class="glyphicon glyphicon-chevron-left"></span> Voltar</a>
-				<a href="<c:url value="/consulta/realizar-consulta/${pessoa.cpf}"/>" class="btn btn-success"><span class="glyphicon glyphicon-plus"></span> Realizar Consulta</a>
+				<a href="#" class="btn btn-primary btn-sm back"><span class="glyphicon glyphicon-chevron-left"></span> Voltar</a>
+				<a href="<c:url value="/consulta/realizar-consulta/${pessoa.cpf}"/>" class="btn btn-success btn-sm"><span class="glyphicon glyphicon-plus"></span> Realizar Consulta</a>
 			</div>
     	</div>
 	

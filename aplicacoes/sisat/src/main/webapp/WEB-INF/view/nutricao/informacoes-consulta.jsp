@@ -25,25 +25,16 @@
 	<jsp:include page="../modulos/header.jsp" />
 
 	<div class="container">
+	
+	    <div class="row">
+			<div class="col-sm-8"><h3>Informações da Consulta <strong>${consulta.paciente.pessoa.nome}</strong></h3></div>
 
-		<div class="row">
-			<div class="col-sm-4">
-				<h2>
-					Informações da Consulta: <em><small>${consulta.paciente.pessoa.nome}</small></em>
-				</h2>
+			<div class="col-sm-4" align="right" style="margin-top: 15px;">
+				<a href="#" class="btn btn-primary btn-sm back"><span class="glyphicon glyphicon-chevron-left"></span> Voltar</a>
+				<a href="<c:url value="#/nutricao/plano-alimentar"></c:url>" class="btn btn-info btn-sm">Plano Alimentar</a> 
+				<a href="<c:url value="/consulta/editar-consulta/${consulta.id}/paciente/${consulta.paciente.pessoa.cpf}"/>" class="btn btn-warning btn-sm"><span class="glyphicon glyphicon-edit"></span> Editar</a>
 			</div>
-
-			<div class="col-sm-8" align="right" style="margin-top: 15px;">
-				<a
-					href="<c:url value="/consulta/historico-paciente/${consulta.paciente.pessoa.cpf}"></c:url>"
-					class="btn btn-primary">Voltar</a> <a
-					href="<c:url value="#/nutricao/plano-alimentar"></c:url>"
-					class="btn btn-info">Criar Plano Alimentar</a> <a
-					href="<c:url value="/consulta/editar-consulta/${consulta.id}/paciente/${consulta.paciente.pessoa.cpf}"/>"
-					class="btn btn-warning"><span class="glyphicon glyphicon-edit"></span>
-					Editar</a>
-			</div>
-		</div>
+    	</div>
 
 		<div class="row">
 			<div class="col-sm-3" id="myScrollspy">
