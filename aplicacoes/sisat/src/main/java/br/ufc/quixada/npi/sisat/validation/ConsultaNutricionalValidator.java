@@ -118,15 +118,15 @@ public class ConsultaNutricionalValidator implements Validator {
 		}
 	}
 
-	private void validarExameEClassificacao(Errors errors, Integer exame, String campoExame, ClassificacaoExame classificacao, String campoClassificacao) {
+	private void validarExameEClassificacao(Errors errors, Double exame, String campoExame, ClassificacaoExame classificacao, String campoClassificacao) {
 		if (exame != null && classificacao == null) {
-			if(exame.intValue() < 1){
+			if(exame.doubleValue() < 1){
 				errors.rejectValue(campoExame, campoExame, "O valor minino do exame é 1");
 			}
 			errors.rejectValue(campoClassificacao, campoClassificacao, "Informe a classificação");
 		}
 
-		if ( (exame == null || exame.intValue() < 1) && classificacao != null) {
+		if ( (exame == null || exame.doubleValue() < 1) && classificacao != null) {
 			errors.rejectValue(campoExame, campoExame, "O valor minino do exame é 1");
 		}
 	}

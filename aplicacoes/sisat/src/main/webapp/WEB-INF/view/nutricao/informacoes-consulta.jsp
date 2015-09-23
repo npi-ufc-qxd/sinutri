@@ -215,8 +215,8 @@
 						<tr>
 							<td><strong>Glicemia: </strong></td>
 							<c:if test="${not empty consulta.glicemia and not empty consulta.classificacaoGlicemia}">
-							<td>${consulta.glicemia }</td>
-							<td>${consulta.classificacaoGlicemia }</td>
+								<td>${consulta.glicemia }</td>
+								<td>${consulta.classificacaoGlicemia }</td>
 							</c:if>
 							<c:if test="${empty consulta.glicemia and empty consulta.classificacaoGlicemia}">
 								<td colspan="2">Não informado</td>
