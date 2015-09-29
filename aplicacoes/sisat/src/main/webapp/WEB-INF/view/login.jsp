@@ -6,10 +6,9 @@
 <meta charset="UTF-8"/>
 <title>Página de Login</title>
 
-	<link href="<c:url value="/webjars/bootstrap/3.3.2/css/bootstrap.min.css" />" rel="stylesheet" />
 	<link href="<c:url value="/resources/css/bootstrap-flatly.min.css" />" rel="stylesheet" />
 	<script src="<c:url value="/webjars/jquery/2.1.0/jquery.js" />"></script>
-	<script src="<c:url value="/webjars/bootstrap/3.1.1/js/bootstrap.min.js" />"></script>
+	<script src="<c:url value="/webjars/bootstrap/3.3.2/js/bootstrap.min.js" />"></script>
 	<script src="<c:url value="/webjars/jquery-maskedinput/1.3.1/jquery.maskedinput.min.js" />"></script> 
 	<script src="<c:url value="/webjars/jquery-validation/1.12.0/jquery.validate.min.js" />"></script>
 	<script src="<c:url value="/resources/js/bootstrapValidator.min.js" />"></script>
