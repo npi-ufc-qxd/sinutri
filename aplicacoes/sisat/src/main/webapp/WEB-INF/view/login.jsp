@@ -5,10 +5,14 @@
 <head>
 <meta charset="UTF-8"/>
 <title>Página de Login</title>
+
 	<link href="<c:url value="/webjars/bootstrap/3.3.2/css/bootstrap.min.css" />" rel="stylesheet" />
 	<link href="<c:url value="/resources/css/bootstrap-flatly.min.css" />" rel="stylesheet" />
 	<script src="<c:url value="/webjars/jquery/2.1.0/jquery.js" />"></script>
 	<script src="<c:url value="/webjars/bootstrap/3.1.1/js/bootstrap.min.js" />"></script>
+	<script src="<c:url value="/webjars/jquery-maskedinput/1.3.1/jquery.maskedinput.min.js" />"></script> 
+	<script src="<c:url value="/webjars/jquery-validation/1.12.0/jquery.validate.min.js" />"></script>
+	<script src="<c:url value="/resources/js/bootstrapValidator.min.js" />"></script>
 
 <style>
 body {
@@ -90,7 +94,7 @@ body {
 						
 						<form name='f' action="<c:url value='j_spring_security_check' />"
 							method='POST' accept-charset="UTF-8" role="form"
-							class="form-signin">
+							class="form-signin" id="login-form">
 							<fieldset>
 								<input class="form-control" placeholder="Usuário" id="username" type="text" name='j_username' > 
 								<input class="form-control" placeholder="Senha" id="password" type="password" name='j_password' >
