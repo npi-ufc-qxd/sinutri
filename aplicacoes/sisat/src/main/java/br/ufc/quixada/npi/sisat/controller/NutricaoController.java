@@ -79,6 +79,26 @@ public class NutricaoController {
 		return "nutricao/buscar";
 	}
 
+	@RequestMapping(value = "/buscar", method = RequestMethod.POST)
+	public String buscarPaciente(@RequestParam("busca") String busca, ModelMap map,
+			RedirectAttributes redirectAttributes, Authentication authentication) {
+		
+		map.addAttribute("busca", busca);
+		
+		List<Usuario> usuarios = usuarioService.getByCpfOrNome(busca);
+		Usuario usuario = usuarioService.getByCpf(authentication.getName());
+		usuarios.remove(usuario);
+
+		if (!usuarios.isEmpty()) {
+			map.addAttribute("pessoas", usuarios);
+		} else {
+			redirectAttributes.addFlashAttribute("erro", "Paciente não encontrado.");
+			return "redirect:/nutricao/buscar";
+		}
+
+		return "/nutricao/buscar";
+	}
+
 	@RequestMapping(value = "/informacoes-graficas", method = RequestMethod.GET)
 	public String paginaInformacoesGraficas() {
 		consultaNutricionalService.getFrequenciaPatologia();
@@ -101,23 +121,6 @@ public class NutricaoController {
 		return model;
 	}
 	
-	@RequestMapping(value = "/buscar", method = RequestMethod.POST)
-	public String buscarPaciente(@RequestParam("busca") String busca, ModelMap map,
-			RedirectAttributes redirectAttributes, Authentication authentication) {
-		map.addAttribute("busca", busca);
-		List<Usuario> usuarios = usuarioService.getByCpfOrNome(busca);
-		Usuario usuario = usuarioService.getByCpf(authentication.getName());
-		usuarios.remove(usuario);
-
-		if (!usuarios.isEmpty()) {
-			map.addAttribute("pessoas", usuarios);
-		} else {
-			redirectAttributes.addFlashAttribute("erro", "Paciente não encontrado.");
-			return "redirect:/nutricao/buscar";
-		}
-
-		return "/nutricao/buscar";
-	}
 
 	@RequestMapping(value = "/frequencia-alimentar.json", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public @ResponseBody Set<FrequenciaAlimentar> getFrequencias(@RequestParam("id") Long id) {
