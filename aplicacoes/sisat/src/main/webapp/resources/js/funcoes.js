@@ -46,6 +46,7 @@ $(document)
 									$(itemForm).find('.help-block').remove();
 								}
 							});
+					
 					$('.valid-num').keyup(function() {
 						if ($(this).val().indexOf(",") >= 0) {
 							$(this).val($(this).val().replace(/\,/g, "."));
@@ -99,6 +100,46 @@ $(document)
 											'required');
 								}
 							});
+					
+
+
+					$('#login-form').validate({
+						rules : {
+							j_username : {
+								required : true
+							},
+							j_password : {
+								required : true
+							}
+						},
+						highlight : function(element) {
+							$(element).closest('.form-control')
+									.addClass('has-error');
+						},
+						unhighlight : function(element) {
+							$(element).closest('.form-control')
+									.removeClass('has-error');
+						},
+						errorElement : 'span',
+						errorClass : 'help-block',
+						errorPlacement : function(error,
+								element) {
+							error.insertAfter(element.parent()
+									.children().last());
+							var itemForm = element.parent();
+							var id = element.attr("name");
+							$(itemForm).find("span").attr("id",
+									id);
+						},
+						messages : {
+							j_username : {
+								required : "Preencha o CPF do usuário."
+							},
+							j_password : {
+								required : "Preencha a senha do usuário."
+							}
+						}
+					});
 
 					$('#form-consulta')
 							.validate(
