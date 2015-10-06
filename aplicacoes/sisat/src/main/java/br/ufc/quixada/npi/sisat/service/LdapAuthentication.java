@@ -24,14 +24,17 @@ public class LdapAuthentication implements AuthenticationProvider {
 	private UsuarioService usuarioService;
 
 	@Override
-	public Authentication authenticate(Authentication authentication)
-			throws AuthenticationException {
+	public Authentication authenticate(Authentication authentication) throws AuthenticationException {
 		String username = authentication.getName();
         String password = (String) authentication.getCredentials();
  
         Usuario user = usuarioService.getByCpf(username);
- 
-        Collection<? extends GrantedAuthority> authorities = user.getAuthorities();
+        
+        Collection<? extends GrantedAuthority> authorities = null;
+        
+        if(user != null) {
+        	authorities = user.getAuthorities();
+        }
 
         if (user == null || !usuarioService.autentica(username, password) || authorities.isEmpty()) {
             throw new BadCredentialsException(LOGIN_INVALIDO);

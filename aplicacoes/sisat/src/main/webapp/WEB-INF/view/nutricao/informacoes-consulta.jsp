@@ -25,16 +25,24 @@
 	<jsp:include page="../modulos/header.jsp" />
 
 	<div class="container">
-	
-	    <div class="row">
-			<div class="col-sm-8"><h3>Informações da Consulta <strong>${consulta.paciente.pessoa.nome}</strong></h3></div>
+
+		<div class="row">
+			<div class="col-sm-8">
+				<h3>
+					Informações da Consulta <strong>${consulta.paciente.pessoa.nome}</strong>
+				</h3>
+			</div>
 
 			<div class="col-sm-4" align="right" style="margin-top: 15px;">
-				<a href="#" class="btn btn-primary btn-sm back"><span class="glyphicon glyphicon-chevron-left"></span> Voltar</a>
-				<a href="<c:url value="#/nutricao/plano-alimentar"></c:url>" class="btn btn-info btn-sm">Plano Alimentar</a> 
-				<a href="<c:url value="/consulta/editar-consulta/${consulta.id}/paciente/${consulta.paciente.pessoa.cpf}"/>" class="btn btn-warning btn-sm"><span class="glyphicon glyphicon-edit"></span> Editar</a>
+				<a href="#" class="btn btn-primary btn-sm back"><span
+					class="glyphicon glyphicon-chevron-left"></span> Voltar</a> <a
+					href="<c:url value="#/nutricao/plano-alimentar"></c:url>"
+					class="btn btn-info btn-sm">Plano Alimentar</a> <a
+					href="<c:url value="/consulta/editar-consulta/${consulta.id}/paciente/${consulta.paciente.pessoa.cpf}"/>"
+					class="btn btn-warning btn-sm"><span
+					class="glyphicon glyphicon-edit"></span> Editar</a>
 			</div>
-    	</div>
+		</div>
 
 		<div class="row">
 			<div class="col-sm-3" id="myScrollspy">
@@ -61,59 +69,106 @@
 
 			<div class="col-sm-9">
 				<h3 id="avaliacao" class="section">Anamnese</h3>
-				
+
 				<div class="row">
 					<div class="col-sm-12">
-						<label><strong> Objetivo da consulta: </strong></label> ${consulta.objetivoConsulta }<br>
-						<label><strong>Consumo de água: </strong></label>${consulta.agua} copos/dia<br>
-						<label><strong>Altura: </strong></label>${consulta.altura}
-						<br><label><strong>Peso: </strong></label>${consulta.peso}
-						<br><label><strong>Peso Desejado: </strong></label>${consulta.pesoDesejado}
-						<br><label><strong>CC: </strong></label>${consulta.circunferenciaCintura} - ${consulta.classificacaoCC}
-						<br><label><strong>CC Desejada: </strong></label>${consulta.circunferenciaCinturaDesejada}
-						<br><label><strong>IMC: </strong></label> <fmt:formatNumber type="number" maxFractionDigits="3" value="${consulta.IMC}"/> 
-						<br><label><strong>Medicamentos: </strong></label>${consulta.medicamento ? consulta.medicamentoComentario  : "Não usa medicamentos"}
-						<br><label><strong>Alergia alimentar: </strong></label>${consulta.alergia ? consulta.alergiaComentario  : "Não possui alergia a alimentos"}
-						<br><label><strong>Sistema Gastrointestinal: </strong></label>${consulta.sistemaGastrointestinal}
-						<br><label><strong>Sistema Urinario: </strong></label>${consulta.sistemaUrinario}
-						<br><label><strong> Atividade Fisica: </strong></label>
-						<c:choose>
-							<c:when test="${consulta.atividadeFisica }">
-								${consulta.atividadeFisicaComentario } 
-								<strong>Vezes por semana: </strong>${consulta.atividadeFisicaFrequenciaSemanal.tipo }
-							</c:when>
-							<c:otherwise>
-								<em>Não pratica atividades fisicas.</em>
-							</c:otherwise>
-						</c:choose>
-		
-						<br><label><strong> Consumo de carne vermelha: </strong></label>
-						<c:choose>
-							<c:when test="${consulta.carneVermelha }">
-								${consulta.carneVermelhaComentario } <strong>Vezes por semana: </strong>${consulta.carneVermelhaFrequenciaSemanal.tipo }
-							</c:when>
-							<c:otherwise>
-								<em>Não consome carne vermelha.</em>
-							</c:otherwise>
-						</c:choose>
-						
-						<br><label><strong> Consumo de bebida alcoolica: </strong></label>
-						<c:choose>
-							<c:when test="${consulta.bebidaAlcoolica }">
-								${consulta.bebidaAlcoolicaComentario } <strong>Vezes por semana: </strong> ${consulta.bebidaAlcoolicaFrequenciaSemanal.tipo }
-							</c:when>
-							<c:otherwise>
-								<em>Não consome bebidas alcoolicas.</em>
-							</c:otherwise>
-						</c:choose>
+						<label><strong> Objetivo da consulta: </strong></label>
+						${consulta.objetivoConsulta }<br>
+						<table class="table table-striped">
+							<tbody>
+								<tr>
+									<td><strong>Altura:</strong></td>
+									<td>${consulta.altura}</td>
+									<td></td>
+									<td></td>
+								</tr>
+								<tr>
+									<td><strong>IMC:</strong></td>
+									<td><fmt:formatNumber type="number" maxFractionDigits="3"
+											value="${consulta.IMC}" /></td>
+									<td></td>
+									<td></td>
+								</tr>
+								<tr>
+									<td><strong>Consumo de água:</strong></td>
+									<td>${consulta.agua}copos/dia</td>
+									<td></td>
+									<td></td>
+								</tr>
+								<tr>
+									<td class="col-sm-3"><strong>Peso:</strong></td>
+									<td class="col-sm-3">${consulta.peso}</td>
+									<td class="col-sm-3"><strong>Peso desejado:</strong></td>
+									<td class="col-sm-3">${consulta.pesoDesejado}</td>
+								</tr>
+								<tr>
+									<td class="col-sm-3"><strong>CC:</strong></td>
+									<td class="col-sm-3">${consulta.circunferenciaCintura}-
+										${consulta.classificacaoCC}</td>
+									<td class="col-sm-3"><strong>CC Desejada:</strong></td>
+									<td class="col-sm-3">${consulta.circunferenciaCinturaDesejada}</td>
+								</tr>
+								<tr>
+									<td class="col-sm-3"><strong>Sistema
+											Gastrointestinal:</strong></td>
+									<td class="col-sm-3"><c:choose>
+											<c:when test="${not empty consulta.sistemaGastrointestinal}"> ${consulta.sistemaGastrointestinal}</c:when>
+											<c:otherwise> Sistema gastrointestinal não informado.</c:otherwise>
+										</c:choose></td>
+									<td class="col-sm-3"><strong>Sistema Urinário:</strong></td>
+									<td class="col-sm-3"><c:choose>
+											<c:when test="${not empty consulta.sistemaUrinario}"> ${consulta.consulta.sistemaUrinario}</c:when>
+											<c:otherwise> Sistema urinário não informado.</c:otherwise>
+										</c:choose></td>
+								</tr>
+								<tr>
+									<td><strong>Atividade Física:</strong></td>
+									<c:choose>
+										<c:when test="${consulta.atividadeFisica}">
+											<td>${consulta.atividadeFisicaComentario }</td>
+											<td><strong>Vezes por semana:</strong></td>
+											<td>${consulta.atividadeFisicaFrequenciaSemanal.tipo }</td>
+										</c:when>
+										<c:otherwise>
+											<td>Não pratica atividades fisicas.</td>
+											<td></td>
+											<td></td>
+										</c:otherwise>
+									</c:choose>
+								</tr>
+								<tr>
+									<td><strong>Consumo de carne vermelha:</strong></td>
+									<c:choose>
+										<c:when test="${consulta.carneVermelha }">
+											<td>${consulta.carneVermelhaComentario }</td>
+											<td><strong>Vezes por semana:</strong></td>
+											<td>${consulta.carneVermelhaFrequenciaSemanal.tipo }</td>
+										</c:when>
+										<c:otherwise>
+											<td>Não consome carne vermelha.</td>
+											<td></td>
+											<td></td>
+										</c:otherwise>
+									</c:choose>
+								</tr>
+								<tr>
+									<td><strong>Consumo de bebida alcoolica:</strong></td>
+									<c:choose>
+										<c:when test="${consulta.bebidaAlcoolica }">
+											<td>${consulta.bebidaAlcoolicaComentario }</td>
+											<td><strong>Vezes por semana:</strong></td>
+											<td>${consulta.bebidaAlcoolicaFrequenciaSemanal.tipo }</td>
+										</c:when>
+										<c:otherwise>
+											<td>Não consome bebidas alcoolicas.</td>
+											<td></td>
+											<td></td>
+										</c:otherwise>
+									</c:choose>
+								</tr>
+							</tbody>
+						</table>
 
-						<br><label><strong> Mastigação: </strong></label> ${consulta.mastigacao ? consulta.mastigacaoComentario  : "Não apresenta problemas na mastigação"}
-
-						<br><label><strong> Diabetes: </strong></label> ${consulta.diabetes ? "Sim"  : "Não"}
-
-						<br><label><strong> Hipertensão: </strong></label> ${consulta.hipertensao ? "Sim"  : "Não"}
-
-						<br><label><strong> Patologias: </strong></label> ${consulta.outrasPatologias ? consulta.outrasPatologiasComentario  : "<em>Não possui outras patologias</em>"}
 						<table class="table table-striped">
 							<thead class="thead">
 								<tr>
@@ -150,19 +205,38 @@
 									<td>Vômito</td>
 									<td>${consulta.vomito? consulta.vomitoComentario : "Não apresenta vomito" }</td>
 								</tr>
+								<tr>
+									<td>Diabetes</td>
+									<td>${consulta.diabetes ? "Sim"  : "Não"}</td>
+								</tr>
+								<tr>
+									<td>Hipertensão</td>
+									<td>${consulta.hipertensao ? "Sim"  : "Não"}</td>
+								</tr>
+								<tr>
+									<td>Mastigação</td>
+									<td>${consulta.mastigacao ? consulta.mastigacaoComentario  : "Não apresenta problemas na mastigação"}</td>
+								</tr>
+								<tr>
+									<td>Alergia Alimentar</td>
+									<td>${consulta.alergia ? consulta.alergiaComentario  : "Não possui alergia à alimentos"}</td>
+								</tr>
 							</tbody>
 						</table>
 					</div>
 				</div>
+				<label><strong> Medicamentos:</strong></label>
+				${consulta.medicamento ? consulta.medicamentoComentario  : "Não usa medicamentos"}
+				<br> <label><strong> Patologias: </strong></label>
+				${consulta.outrasPatologias ? consulta.outrasPatologiasComentario  : "Não possui outras patologias"}
 
 				<h3 id="recordatorio" class="section">Recordatório</h3>
-				
+
 				<c:if test="${empty consulta.frequencias}">
-					<div class="alert alert-dismissible alert-info">
-						Não há informações sobre o recordatório alimentar.
-					</div>				
+					<div class="alert alert-dismissible alert-default">Não há
+						informações sobre o recordatório alimentar.</div>
 				</c:if>
-				
+
 				<c:forEach var="freq" items="${consulta.frequencias}">
 					<div class="row">
 						<fmt:formatDate var="horaFormatada" type="time" dateStyle="short"
@@ -197,11 +271,8 @@
 						</div>
 					</div>
 				</c:forEach>
-				<label><strong> Informações Complementares: </strong></label> ${consulta.informacoesComplementaresExames }
-				
 
 				<h3 id="exame" class="section">Exames Laboratoriais</h3>
-
 
 				<table class="table table-striped">
 					<thead class="thead">
@@ -214,109 +285,158 @@
 					<tbody>
 						<tr>
 							<td><strong>Glicemia: </strong></td>
-							<c:if test="${not empty consulta.glicemia and not empty consulta.classificacaoGlicemia}">
+							<c:if
+								test="${not empty consulta.glicemia and not empty consulta.classificacaoGlicemia}">
 								<td>${consulta.glicemia }</td>
 								<td>${consulta.classificacaoGlicemia }</td>
 							</c:if>
-							<c:if test="${empty consulta.glicemia and empty consulta.classificacaoGlicemia}">
+							<c:if
+								test="${empty consulta.glicemia and empty consulta.classificacaoGlicemia}">
 								<td colspan="2">Não informado</td>
 							</c:if>
 						</tr>
 
 						<tr>
 							<td><strong>LDC - C: </strong></td>
-							<c:if test="${not empty consulta.ldlc and not empty consulta.classificacaoLdlc}">
+							<c:if
+								test="${not empty consulta.ldlc and not empty consulta.classificacaoLdlc}">
 								<td>${consulta.ldlc }</td>
 								<td>${consulta.classificacaoLdlc }</td>
 							</c:if>
-							<c:if test="${empty consulta.ldlc and empty consulta.classificacaoLdlc}">
+							<c:if
+								test="${empty consulta.ldlc and empty consulta.classificacaoLdlc}">
 								<td colspan="2">Não informado</td>
 							</c:if>
 						</tr>
 
 						<tr>
 							<td><strong>CT: </strong></td>
-							<c:if test="${not empty consulta.ct and not empty consulta.classificacaoCt}">
+							<c:if
+								test="${not empty consulta.ct and not empty consulta.classificacaoCt}">
 								<td>${consulta.ct }</td>
 								<td>${consulta.classificacaoCt }</td>
 							</c:if>
-							<c:if test="${empty consulta.ct and empty consulta.classificacaoCt}">
+							<c:if
+								test="${empty consulta.ct and empty consulta.classificacaoCt}">
 								<td colspan="2">Não informado</td>
 							</c:if>
 						</tr>
 
 						<tr>
 							<td><strong>HDL - C: </strong></td>
-							<c:if test="${not empty consulta.hdlc and not empty consulta.classificacaoHdlc}">
+							<c:if
+								test="${not empty consulta.hdlc and not empty consulta.classificacaoHdlc}">
 								<td>${consulta.hdlc }</td>
 								<td>${consulta.classificacaoHdlc }</td>
 							</c:if>
-							<c:if test="${empty consulta.hdlc and empty consulta.classificacaoHdlc}">
+							<c:if
+								test="${empty consulta.hdlc and empty consulta.classificacaoHdlc}">
 								<td colspan="2">Não informado</td>
 							</c:if>
 						</tr>
 
 						<tr>
 							<td><strong>TG: </strong></td>
-							<c:if test="${not empty consulta.tg and not empty consulta.classificacaoTg}">
+							<c:if
+								test="${not empty consulta.tg and not empty consulta.classificacaoTg}">
 								<td>${consulta.tg }</td>
 								<td>${consulta.classificacaoTg }</td>
 							</c:if>
-							<c:if test="${empty consulta.tg and empty consulta.classificacaoTg}">
+							<c:if
+								test="${empty consulta.tg and empty consulta.classificacaoTg}">
 								<td colspan="2">Não informado</td>
 							</c:if>
 						</tr>
 						<tr>
 							<td><strong>HB: </strong></td>
-							<c:if test="${not empty consulta.hb and not empty consulta.classificacaoHb}">
+							<c:if
+								test="${not empty consulta.hb and not empty consulta.classificacaoHb}">
 								<td>${consulta.hb }</td>
 								<td>${consulta.classificacaoHb }</td>
 							</c:if>
-							<c:if test="${empty consulta.hb and empty consulta.classificacaoHb}">
+							<c:if
+								test="${empty consulta.hb and empty consulta.classificacaoHb}">
 								<td colspan="2">Não informado</td>
 							</c:if>
 						</tr>
 
 						<tr>
 							<td><strong>TGO(AST): </strong></td>
-							<c:if test="${not empty consulta.tgo and not empty consulta.classificacaoTgo}">
+							<c:if
+								test="${not empty consulta.tgo and not empty consulta.classificacaoTgo}">
 								<td>${consulta.tgo }</td>
 								<td>${consulta.classificacaoTgo }</td>
 							</c:if>
-							<c:if test="${empty consulta.tgo and empty consulta.classificacaoTgo}">
+							<c:if
+								test="${empty consulta.tgo and empty consulta.classificacaoTgo}">
 								<td colspan="2">Não informado</td>
 							</c:if>
 						</tr>
 						<tr>
 							<td><strong>TGP(ALT): </strong></td>
-							<c:if test="${not empty consulta.tgp and not empty consulta.classificacaoTgp}">
+							<c:if
+								test="${not empty consulta.tgp and not empty consulta.classificacaoTgp}">
 								<td>${consulta.tgp }</td>
 								<td>${consulta.classificacaoTgp }</td>
 							</c:if>
-							<c:if test="${empty consulta.tgp and empty consulta.classificacaoTgp}">
+							<c:if
+								test="${empty consulta.tgp and empty consulta.classificacaoTgp}">
 								<td colspan="2">Não informado</td>
 							</c:if>
 						</tr>
 					</tbody>
 				</table>
-				
+
+				<h3 id="informacoesComplementaresExames" class="section">Informações
+					Complementares</h3>
+
+				<c:choose>
+					<c:when
+						test="${not empty consulta.informacoesComplementaresExames}">
+						<div class="row">
+							<div class="col-sm-12">
+								<p>${consulta.informacoesComplementaresExames}</p>
+							</div>
+						</div>
+					</c:when>
+					<c:otherwise>
+						<div class="alert alert-dismissible alert-default">Esta
+							consulta não contém nenhuma informação complementar.</div>
+					</c:otherwise>
+				</c:choose>
+
 				<h3 id="orientacoes" class="section">Conduta Nutricional</h3>
-				
-				<div class="row">
-					<div class="col-sm-12">
-						<p>${consulta.condutaNutricional}</p>
-					</div>
-				</div>
+
+				<c:choose>
+					<c:when test="${not empty consulta.condutaNutricional}">
+						<div class="row">
+							<div class="col-sm-12">
+								<p>${consulta.condutaNutricional}</p>
+							</div>
+						</div>
+					</c:when>
+					<c:otherwise>
+						<div class="alert alert-dismissible alert-default">Esta
+							consulta não possui nenhuma conduta nutricional informada.</div>
+					</c:otherwise>
+				</c:choose>
 
 				<h3 id="orientacoes" class="section">Orientações</h3>
-				
-				<div class="row">
-					<div class="col-sm-12">
-						<p>${consulta.orientacoesIndividuais}</p>
-					</div>
-				</div>
-				
-				
+
+				<c:choose>
+					<c:when test="${not empty consulta.orientacoesIndividuais}">
+						<div class="row">
+							<div class="col-sm-12">
+								<p>${consulta.orientacoesIndividuais}</p>
+							</div>
+						</div>
+					</c:when>
+					<c:otherwise>
+						<div class="alert alert-dismissible alert-default">Esta
+							consulta não possui nenhuma orientação individual para o
+							paciente.</div>
+					</c:otherwise>
+				</c:choose>
 
 				<h3 id="documentos" class="section">Documentos</h3>
 				<c:choose>
@@ -344,7 +464,8 @@
 						</table>
 					</c:when>
 					<c:otherwise>
-						<h4>Essa consulta não possui nenhum documento anexado a ela.</h4>
+						<div class="alert alert-dismissible alert-default">Esta
+							consulta não possui documento(s) anexado(s) a ela.</div>
 					</c:otherwise>
 				</c:choose>
 			</div>
@@ -352,8 +473,9 @@
 	</div>
 
 	<jsp:include page="../modulos/footer.jsp" />
-	<script src="<c:url value="/resources/js/questionario-frequencia-alimentar.js" />"></script>
-	
+	<script
+		src="<c:url value="/resources/js/questionario-frequencia-alimentar.js" />"></script>
+
 	<script type="text/javascript">
 		$('#menu-paciente').addClass('active');
 	</script>
