@@ -38,6 +38,7 @@ import br.ufc.quixada.npi.sisat.model.Documento;
 import br.ufc.quixada.npi.sisat.model.FrequenciaAlimentar;
 import br.ufc.quixada.npi.sisat.model.Papel;
 import br.ufc.quixada.npi.sisat.model.Pessoa;
+import br.ufc.quixada.npi.sisat.model.enuns.Grupo;
 import br.ufc.quixada.npi.sisat.service.AlimentoSubstitutoService;
 import br.ufc.quixada.npi.sisat.service.ConsultaNutricionalService;
 import br.ufc.quixada.npi.sisat.service.DocumentoService;
@@ -240,6 +241,7 @@ public class NutricaoController {
 	public String adicionarAlimentoSubstituto(Model model) {
 
 		model.addAttribute("action", "cadastrar");
+		model.addAttribute("grupos", Grupo.values());
 		model.addAttribute("alimentoSubstituto", new AlimentoSubstituto());
 
 		return "nutricao/alimento-cadastrar";
@@ -254,6 +256,7 @@ public class NutricaoController {
 
 		if (result.hasErrors()) {
 			model.addAttribute("action", "cadastrar");
+			model.addAttribute("grupos", Grupo.values());
 			return "nutricao/alimento-cadastrar";
 		}
 
@@ -268,6 +271,7 @@ public class NutricaoController {
 		AlimentoSubstituto alimentoSubstituto = this.alimentoSubstService.find(AlimentoSubstituto.class, id);
 
 		model.addAttribute("action", "editar");
+		model.addAttribute("grupos", Grupo.values());
 		model.addAttribute("alimentoSubstituto", alimentoSubstituto);
 
 		return "nutricao/alimento-cadastrar";
@@ -282,6 +286,7 @@ public class NutricaoController {
 		
 		if (result.hasErrors()) {
 			model.addAttribute("action", "editar");
+			model.addAttribute("grupos", Grupo.values());
 			return "nutricao/alimento-cadastrar";
 		}
 		

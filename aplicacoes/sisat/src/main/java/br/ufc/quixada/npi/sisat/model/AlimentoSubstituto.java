@@ -6,6 +6,7 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
@@ -21,6 +22,7 @@ public class AlimentoSubstituto {
 	@NotEmpty(message = "O nome do alimento substituto não pode ser vazio.")
 	private String nomeAlimento;
 	
+	@NotNull(message = "Selecione o grupo alimentício.")
 	@Enumerated(EnumType.STRING)
 	private Grupo grupo;
 

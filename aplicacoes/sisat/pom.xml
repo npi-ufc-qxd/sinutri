@@ -267,7 +267,7 @@
 			<groupId>br.ufc.quixada.npi</groupId>
 			<artifactId>npi-ldap</artifactId>
 			<version>${npi.ldap.version}</version>
-		</dependency>
+		</dependency> 
 
 		<dependency>
 			<groupId>javax.mail</groupId>
