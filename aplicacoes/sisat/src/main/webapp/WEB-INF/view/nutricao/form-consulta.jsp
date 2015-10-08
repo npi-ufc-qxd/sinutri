@@ -277,6 +277,18 @@
 					</div>
 
 					<div class="row form-group">
+						<div class="form-item col-sm-6">
+							<label for="diabetes" class=" control-label"><form:checkbox
+									id="diabetes" path="diabetes" /> Diabetes</label>
+						</div>
+
+						<div class="form-item col-sm-6">
+							<label for="hipertensao" class=" control-label"><form:checkbox
+									id="hipertensao" path="hipertensao" /> Hipertensão</label>
+						</div>
+					</div>
+
+					<div class="row form-group">
 						<div class="form-item col-sm-12">
 							<label for="checkMedicamento" class=" control-label"><form:checkbox
 									id="checkMedicamento" path="medicamento" class="check" />
@@ -292,7 +304,7 @@
 					</div>
 
 					<div class="row form-group">
-						<div class="form-item col-sm-12">
+						<div class="form-item col-sm-6">
 							<label for="checkMastigacao" class=" control-label"><form:checkbox
 									id="checkMastigacao" path="mastigacao" class="check" />
 								Mastigação:</label>
@@ -303,10 +315,8 @@
 								<form:errors path="mastigacaoComentario"></form:errors>
 							</div>
 						</div>
-					</div>
 
-					<div class="row form-group">
-						<div class="form-item col-sm-12">
+						<div class="form-item col-sm-6">
 							<label for="disfagia" class=" control-label"><form:checkbox
 									id="disfagia" path="disfagia" />
 								Disfagia&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
@@ -320,7 +330,7 @@
 					</div>
 
 					<div class="row form-group">
-						<div class="form-item col-sm-12">
+						<div class="form-item col-sm-6">
 							<label for="odinofagia" class="control-label"><form:checkbox
 									id="odinofagia" path="odinofagia" /> Odinofagia</label>
 							<form:input id="odinofagiaComentario" path="odinofagiaComentario"
@@ -331,10 +341,8 @@
 								<form:errors path="odinofagiaComentario"></form:errors>
 							</div>
 						</div>
-					</div>
 
-					<div class="row form-group">
-						<div class="form-item col-sm-12">
+						<div class="form-item col-sm-6">
 							<label for="pirose" class=" control-label"><form:checkbox
 									id="pirose" path="pirose" /> Pirose</label>
 							<form:input id="piroseComentario" path="piroseComentario"
@@ -347,7 +355,7 @@
 					</div>
 
 					<div class="row form-group">
-						<div class="form-item col-sm-12">
+						<div class="form-item col-sm-6">
 							<label for="nausea" class=" control-label"><form:checkbox
 									id="nausea" path="nausea" /> Náusea</label>
 							<form:input id="nauseaComentario" path="nauseaComentario"
@@ -357,10 +365,8 @@
 								<form:errors path="nauseaComentario"></form:errors>
 							</div>
 						</div>
-					</div>
 
-					<div class="row form-group">
-						<div class="form-item col-sm-12">
+						<div class="form-item col-sm-6">
 							<label for="vomito" class=" control-label"><form:checkbox
 									id="vomito" path="vomito" /> Vômitos</label>
 							<form:input id="vomitoComentario" path="vomitoComentario"
@@ -373,7 +379,7 @@
 					</div>
 
 					<div class="row form-group">
-						<div class="form-item col-sm-12">
+						<div class="form-item col-sm-6">
 							<label for="diarreia" class=" control-label"><form:checkbox
 									id="diarreia" path="diarreia" /> Diarreia</label>
 							<form:input id="diarreiaComentario" path="diarreiaComentario"
@@ -383,10 +389,8 @@
 								<form:errors path="diarreiaComentario"></form:errors>
 							</div>
 						</div>
-					</div>
 
-					<div class="row form-group">
-						<div class="form-item col-sm-12">
+						<div class="form-item col-sm-6">
 							<label for="constipacao" class=" control-label"><form:checkbox
 									id="constipacao" path="constipacao" /> Constipação</label>
 							<form:input id="constipacaoComentario"
@@ -396,20 +400,6 @@
 							<div class="error-validation">
 								<form:errors path="constipacaoComentario"></form:errors>
 							</div>
-						</div>
-					</div>
-
-					<div class="row form-group">
-						<div class="form-item col-sm-12">
-							<label for="diabetes" class=" control-label"><form:checkbox
-									id="diabetes" path="diabetes" /> Diabetes</label>
-						</div>
-					</div>
-
-					<div class="row form-group">
-						<div class="form-item col-sm-12">
-							<label for="hipertensao" class=" control-label"><form:checkbox
-									id="hipertensao" path="hipertensao" /> Hipertensão</label>
 						</div>
 					</div>
 
@@ -444,21 +434,6 @@
 					</div>
 
 					<h4 id="recordatorio" class="section"><strong>Recordatório</strong></h4>
-
-					<input type="text" name="r[0].refeicao" value="aa">
-					<input type="text" name="r[0].horario" value="11:11:11">
-					<input type="text" name="r[0].alimentos[0].alimento" value="aaaaaali">
-					<input type="text" name="r[0].alimentos[0].porcao" value="aaaaapor">
-					<input type="text" name="r[0].alimentos[1].alimento" value="aaaaaali">
-					<input type="text" name="r[0].alimentos[1].porcao" value="aaaaapor">
-	
-					<input type="text" name="r[1].refeicao" value="bb">
-					<input type="text" name="r[1].horario" value="11:11:11">
-					<input type="text" name="r[1].alimentos[0].alimento" value="bbbbaliali">
-					<input type="text" name="r[1].alimentos[0].porcao" value="bbbbporpor">
-					<input type="text" name="r[1].alimentos[1].alimento" value="bbbbaliali">
-					<input type="text" name="r[1].alimentos[1].porcao" value="bbbbporpor">
-
 
 					<div class="row form-group">
 						<div class="form-item col-sm-12">

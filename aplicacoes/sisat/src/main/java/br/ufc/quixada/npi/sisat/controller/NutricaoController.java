@@ -24,6 +24,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import br.ufc.quixada.npi.ldap.model.Usuario;
+import br.ufc.quixada.npi.ldap.service.UsuarioService;
 import br.ufc.quixada.npi.model.Attachment;
 import br.ufc.quixada.npi.model.Email;
 import br.ufc.quixada.npi.service.EmailService;
