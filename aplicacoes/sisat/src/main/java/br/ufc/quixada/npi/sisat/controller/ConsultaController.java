@@ -125,9 +125,10 @@ public class ConsultaController {
 	}
 
 	@RequestMapping(value = { "realizar-consulta/{cpf}" }, method = RequestMethod.POST)
-	public String salvarConsulta(Model model, @PathVariable("cpf") String cpf, @Valid ConsultaNutricional consulta,
+	public String salvarConsulta(@PathVariable("cpf") String cpf, @Valid ConsultaNutricional consulta, Model model,  
 			BindingResult result, RedirectAttributes redirectAttributes,
 			@RequestParam("files") List<MultipartFile> files,
+			@RequestParam("r") List<FrequenciaAlimentar> f,
 			@RequestParam(value = "enviar", required = false) boolean enviar) {
 
 		model.addAttribute("action", "cadastrar");

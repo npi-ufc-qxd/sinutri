@@ -445,12 +445,24 @@
 
 					<h4 id="recordatorio" class="section"><strong>Recordatório</strong></h4>
 
+					<input type="text" name="r[0].refeicao" value="aa">
+					<input type="text" name="r[0].horario" value="11:11:11">
+					<input type="text" name="r[0].alimentos[0].alimento" value="aaaaaali">
+					<input type="text" name="r[0].alimentos[0].porcao" value="aaaaapor">
+					<input type="text" name="r[0].alimentos[1].alimento" value="aaaaaali">
+					<input type="text" name="r[0].alimentos[1].porcao" value="aaaaapor">
+	
+					<input type="text" name="r[1].refeicao" value="bb">
+					<input type="text" name="r[1].horario" value="11:11:11">
+					<input type="text" name="r[1].alimentos[0].alimento" value="bbbbaliali">
+					<input type="text" name="r[1].alimentos[0].porcao" value="bbbbporpor">
+					<input type="text" name="r[1].alimentos[1].alimento" value="bbbbaliali">
+					<input type="text" name="r[1].alimentos[1].porcao" value="bbbbporpor">
+
+
 					<div class="row form-group">
 						<div class="form-item col-sm-12">
-							<fieldset>
-								<h3>Adicione as refeições</h3>
-								<table id="questionarioFrequenciaAlimentar"></table>
-							</fieldset>
+							<table id="questionarioFrequenciaAlimentar" class="table"></table>
 						</div>
 					</div>
 
@@ -872,7 +884,7 @@
 				</div>
 
 	<jsp:include page="../modulos/footer.jsp" />
-<%-- 	<script src="<c:url value="/resources/js/questionario-frequencia-alimentar.js" />"></script> --%>
+	<script src="<c:url value="/resources/js/questionario-frequencia-alimentar.js" />"></script>
 	
 	<script type="text/javascript">
 		$('#menu-paciente').addClass('active');
