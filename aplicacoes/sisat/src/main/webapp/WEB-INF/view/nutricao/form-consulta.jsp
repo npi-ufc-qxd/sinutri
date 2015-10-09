@@ -863,6 +863,7 @@
 	
 	<script type="text/javascript">
 		$('#menu-paciente').addClass('active');
+		loadRecordatorio();
 	</script>
 
 </body>

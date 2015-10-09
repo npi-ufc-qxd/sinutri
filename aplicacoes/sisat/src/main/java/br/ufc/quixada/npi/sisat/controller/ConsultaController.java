@@ -1,6 +1,7 @@
 package br.ufc.quixada.npi.sisat.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
@@ -9,9 +10,6 @@ import java.util.Set;
 import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
-
-import net.sf.jasperreports.engine.JREmptyDataSource;
-import net.sf.jasperreports.engine.JRException;
 
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -42,6 +40,8 @@ import br.ufc.quixada.npi.sisat.service.DocumentoService;
 import br.ufc.quixada.npi.sisat.service.PacienteService;
 import br.ufc.quixada.npi.sisat.service.PessoaService;
 import br.ufc.quixada.npi.sisat.validation.ConsultaNutricionalValidator;
+import net.sf.jasperreports.engine.JREmptyDataSource;
+import net.sf.jasperreports.engine.JRException;
 
 @Controller
 @RequestMapping("consulta")
@@ -128,7 +128,6 @@ public class ConsultaController {
 	public String salvarConsulta(@PathVariable("cpf") String cpf, @Valid ConsultaNutricional consulta, Model model,  
 			BindingResult result, RedirectAttributes redirectAttributes,
 			@RequestParam("files") List<MultipartFile> files,
-			@RequestParam("r") List<FrequenciaAlimentar> f,
 			@RequestParam(value = "enviar", required = false) boolean enviar) {
 
 		model.addAttribute("action", "cadastrar");
@@ -205,6 +204,9 @@ public class ConsultaController {
 		if (consulta.getBebidaAlcoolicaComentario() != null && consulta.getBebidaAlcoolicaComentario().isEmpty()) {
 			consulta.setBebidaAlcoolicaComentario(null);
 		}
+
+		atualizarFrequenciaAlimentar(consulta.getFrequencias(), consulta);
+		
 		consultaNutricionalService.save(consulta);
 
 		redirectAttributes.addFlashAttribute("success",
@@ -289,6 +291,8 @@ public class ConsultaController {
 		}
 
 		consulta.setData(data);
+		
+		atualizarFrequenciaAlimentar(consulta.getFrequencias(), consulta);
 
 		consultaNutricionalService.update(atualizarConsulta(consulta));
 		redirectAttributes.addFlashAttribute("success", "Consulta do paciente <strong>"
@@ -373,4 +377,29 @@ public class ConsultaController {
 		}
 		return (Pessoa) session.getAttribute("usuario");
 	}
+
+	private List<FrequenciaAlimentar> atualizarFrequenciaAlimentar(List<FrequenciaAlimentar> frequenciaAlimentars, ConsultaNutricional consultaNutricional) {
+		List<FrequenciaAlimentar> frequencias = new ArrayList<FrequenciaAlimentar>();
+		for (FrequenciaAlimentar frequenciaAlimentar : frequenciaAlimentars) {
+			if (frequenciaAlimentar != null) {
+				frequenciaAlimentar.setConsultaNutricional(consultaNutricional);
+				frequenciaAlimentar.setAlimentos(atualizarAlimentacao(frequenciaAlimentar));
+				frequencias.add(frequenciaAlimentar);
+			}
+		}
+		return frequencias;
+	}
+
+	private List<Alimentacao> atualizarAlimentacao(FrequenciaAlimentar frequenciaAlimentar) {
+		List<Alimentacao> alimentacaos = new ArrayList<Alimentacao>();
+		for (Alimentacao alimentacao : frequenciaAlimentar.getAlimentos()) {
+			if(alimentacao != null){
+				alimentacao.setFrequenciaAlimentar(frequenciaAlimentar);
+				alimentacaos.add(alimentacao);
+			}
+		}
+		return alimentacaos;
+	}
+	
+	
 }

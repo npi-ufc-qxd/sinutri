@@ -1,17 +1,20 @@
 var id = $("#id").val();
 
-$.ajax({
-		type: "GET",
-		data: {"id": id},
-		url: '/sisat/nutricao/frequencia-alimentar.json',
-		success: function(result) {
-			loadQuestionarios(result);
-		},
-		error: function(error) {
-			
-		}
-		
-});
+function loadRecordatorio() {
+
+	if(id != null){
+		$.ajax({
+			type: "GET",
+			data: {"id": id},
+			url: '/sisat/nutricao/frequencia-alimentar.json',
+			success: function(result) {
+				loadQuestionarios(result);
+			},
+			error: function(error) {
+			}
+		});
+	}
+}
 
 function loadQuestionarios(result) {
 	var i = 0;
@@ -56,7 +59,7 @@ $(function() {
 							name : 'refeicao',
 							display : 'Tipo de refição',
 							type : 'select',
-							ctrlOptions : 'DESJEJUM:Desjejum;LANCHE_DA_MANHA:Lanche da Manhã;ALMOCO:Almoço;LANCHE_DA_TARDE:Lanche da Tarde;JANTAR:Jantar;CEIA:Ceia',
+							ctrlOptions : 'DESJEJUM:Desjejum;COLACAO:Colação;ALMOCO:Almoço;LANCHE:Lanche;JANTAR:Jantar;CEIA:Ceia',
 							ctrlClass: 'form-control',
 							ctrlAttr: {
 								required : 'required',
@@ -82,14 +85,18 @@ $(function() {
 				            	return $('<a href="#" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span> Refeição</a>');
 							},
 				            remove: function() {
-				            	return $('<a href="#" class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span></a>');
-							}
+				            	return $('<a href="#" class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span></a>')
+				            	.on('click', function (evt) {
+				            		idFrequencia = this.id.split("_")[2]; 
+				            		alert(idFrequencia)
+				            	})
+				            }
 						},
 						i18n : {
 							rowEmpty : "Nenhum alimentação foi adicionada!"
 						},
 						nameFormatter : function(idPrefix, name, uniqueIndex) {
-							return "r[" + (uniqueIndex - 1)+ "]." + name;
+							return "frequencias[" + (uniqueIndex - 1)+ "]." + name;
 						},
 						useSubPanel : true,
 						subPanelBuilder : function(cell, uniqueIndex) {
@@ -134,14 +141,21 @@ $(function() {
 											rowEmpty : "Nenhum alimento foi adicionado!"
 										},
 										nameFormatter : function(idPrefix, name, uniqueIndex) {
-											return "r["+ (idPanel)+ "].alimentos["+ (uniqueIndex - 1)+ "]." + name;
+											return "frequencias["+ (idPanel)+ "].alimentos["+ (uniqueIndex - 1)+ "]." + name;
 										},
 								        customGridButtons: {
 								            append: function() {
 								            	return $('<a href="#" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span> Alimento</a>');
 											},
 								            remove: function() {
-								            	return $('<a href="#" class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span></a>');
+								            	return $('<a href="#" class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span></a>')
+								            	.on('click', function (evt) {
+								            		idFrequencia = this.id.split("_")[1]; 
+								            		idAlimento = this.id.split("_")[3]; 
+								            		alert(idFrequencia);
+								            		alert(idAlimento)
+								            	})
+								            	;
 											},
 								        },
 										

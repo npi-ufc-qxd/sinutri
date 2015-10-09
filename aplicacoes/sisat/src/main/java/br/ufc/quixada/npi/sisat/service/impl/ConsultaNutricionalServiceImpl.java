@@ -13,6 +13,7 @@ import br.ufc.quixada.npi.enumeration.QueryType;
 import br.ufc.quixada.npi.repository.GenericRepository;
 import br.ufc.quixada.npi.service.impl.GenericServiceImpl;
 import br.ufc.quixada.npi.sisat.model.ConsultaNutricional;
+import br.ufc.quixada.npi.sisat.model.FrequenciaAlimentar;
 import br.ufc.quixada.npi.sisat.service.ConsultaNutricionalService;
 import br.ufc.quixada.npi.util.SimpleMap;
 
@@ -73,5 +74,11 @@ public class ConsultaNutricionalServiceImpl extends GenericServiceImpl<ConsultaN
 		maps.put("outrasPatologias", findFirst(QueryType.NAMED, "ConsultaNutricional.countFrequenciaOutrasPatologias", null));
 
 		return maps;
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<FrequenciaAlimentar> getFrequenciasByIdConsulta(Long id) {
+ 		return find("ConsultaNutricional.findFrequenciasByIdConsulta", new SimpleMap<String, Object>("id", id));
 	}
 }
