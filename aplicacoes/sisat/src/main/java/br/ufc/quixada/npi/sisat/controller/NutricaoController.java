@@ -229,18 +229,11 @@ public class NutricaoController {
 		return pessoa;
 	}
 
-	@RequestMapping(value = { "alimento-substituto/listar" }, method = RequestMethod.GET)
-	public String listarAlimentosSubstitutos(Model model) {
-
-		model.addAttribute("alimentosSubstitutos", alimentoSubstService.find(AlimentoSubstituto.class));
-
-		return "nutricao/alimento-listar";
-	}
-
 	@RequestMapping(value = { "alimento-substituto/cadastrar" }, method = RequestMethod.GET)
 	public String adicionarAlimentoSubstituto(Model model) {
 
 		model.addAttribute("action", "cadastrar");
+		model.addAttribute("alimentosSubstitutos", alimentoSubstService.find(AlimentoSubstituto.class));
 		model.addAttribute("grupos", Grupo.values());
 		model.addAttribute("alimentoSubstituto", new AlimentoSubstituto());
 
@@ -256,13 +249,14 @@ public class NutricaoController {
 
 		if (result.hasErrors()) {
 			model.addAttribute("action", "cadastrar");
+			model.addAttribute("alimentosSubstitutos", alimentoSubstService.find(AlimentoSubstituto.class));
 			model.addAttribute("grupos", Grupo.values());
 			return "nutricao/alimento-cadastrar";
 		}
 
 		this.alimentoSubstService.save(alimentoSubstituto);
 		redirect.addFlashAttribute("info", "Alimento cadastrado com sucesso.");
-		return "redirect:/nutricao/alimento-listar";
+		return "redirect:/nutricao/alimento-substituto/cadastrar";
 	}
 
 	@RequestMapping(value = { "alimento-substituto/editar/{id}" }, method = RequestMethod.GET)
@@ -271,6 +265,7 @@ public class NutricaoController {
 		AlimentoSubstituto alimentoSubstituto = this.alimentoSubstService.find(AlimentoSubstituto.class, id);
 
 		model.addAttribute("action", "editar");
+		model.addAttribute("alimentosSubstitutos", alimentoSubstService.find(AlimentoSubstituto.class));
 		model.addAttribute("grupos", Grupo.values());
 		model.addAttribute("alimentoSubstituto", alimentoSubstituto);
 
@@ -286,13 +281,14 @@ public class NutricaoController {
 		
 		if (result.hasErrors()) {
 			model.addAttribute("action", "editar");
+			model.addAttribute("alimentosSubstitutos", alimentoSubstService.find(AlimentoSubstituto.class));
 			model.addAttribute("grupos", Grupo.values());
 			return "nutricao/alimento-cadastrar";
 		}
 		
 		this.alimentoSubstService.update(alimentoSubstituto);
 		redirect.addFlashAttribute("info", "Alimento atualizado com sucesso.");
-		return "redirect:/nutricao/alimento-listar";
+		return "redirect:/nutricao/alimento-substituto/cadastrar";
 	}
 
 	@RequestMapping(value = { "alimento-substituto/excluir/{id}" }, method = RequestMethod.GET)
@@ -307,6 +303,6 @@ public class NutricaoController {
 			redirect.addFlashAttribute("erro", "Alimento inexistente.");
 		}
 		
-		return "redirect:/nutricao/alimento-listar";
+		return "redirect:/nutricao/alimento-substituto/cadastrar";
 	}
 }
