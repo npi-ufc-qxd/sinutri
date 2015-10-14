@@ -84,7 +84,6 @@ $(function() {
             append: function() {
             	return $('<a id="add-refeicao" href="#" class="btn btn-primary add-refeicao"><span class="glyphicon glyphicon-plus"></span> Refeição</a>')
             	.on('click', function (evt) {
-            		alert($('body').find('table').find('table').find('.last:first').html())
             	});
 			},
             remove: function() {
