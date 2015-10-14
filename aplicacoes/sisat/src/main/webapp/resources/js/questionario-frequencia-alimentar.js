@@ -87,8 +87,7 @@ $(function() {
 				            remove: function() {
 				            	return $('<a href="#" class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span></a>')
 				            	.on('click', function (evt) {
-				            		idFrequencia = this.id.split("_")[2]; 
-				            		alert(idFrequencia)
+				            		deleteFrequencia($(this).parent().find('input').val());
 				            	})
 				            }
 						},
@@ -150,10 +149,7 @@ $(function() {
 								            remove: function() {
 								            	return $('<a href="#" class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span></a>')
 								            	.on('click', function (evt) {
-								            		idFrequencia = this.id.split("_")[1]; 
-								            		idAlimento = this.id.split("_")[3]; 
-								            		alert(idFrequencia);
-								            		alert(idAlimento)
+								            		deleteAlimento($(this).parent().find('input').val());
 								            	})
 								            	;
 											},
@@ -178,4 +174,31 @@ $(function() {
 	
 });
 
+function deleteFrequencia(idFrequencia) {
+	if(idFrequencia > 0 ){
+		$.ajax({
+			type: "GET",
+			url: '/sisat/consulta/25/excluir/refeicao/' + idFrequencia + '.json',
+			success: function(result) {
+			},
+			error: function(error) {
+			}
+		});
+	}
+}
+
+function deleteAlimento(idAlimento) {
+	if(idAlimento > 0 ){
+		alert(idAlimento);
+		$.ajax({
+			type: "GET",
+			url: '/sisat/consulta/25/excluir/alimento/' + idAlimento + '.json',
+			success: function(result) {
+			},
+			error: function(error) {
+			}
+		});
+	}
+	
+}
 

@@ -130,8 +130,7 @@ public class NutricaoController {
 	}
 
 	@RequestMapping(value = { "{idConsulta}/paciente/{cpf}/deletarDocumento/{id}" }, method = RequestMethod.GET)
-	public String deletarDocumento(@PathVariable("idConsulta") Long idConsulta, @PathVariable("cpf") String cpf,
-			@PathVariable("id") Long id, RedirectAttributes redirectAttributes) {
+	public String deletarDocumento(@PathVariable("idConsulta") Long idConsulta, @PathVariable("cpf") String cpf, @PathVariable("id") Long id, RedirectAttributes redirectAttributes) {
 		Documento documento = documentoService.find(Documento.class, id);
 		documento.setConsultaNutricional(null);
 		documentoService.delete(documento);

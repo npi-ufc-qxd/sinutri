@@ -21,6 +21,6 @@ public interface ConsultaNutricionalService extends GenericService<ConsultaNutri
 
 	public abstract List<FrequenciaAlimentar> getFrequenciasByIdConsulta(Long id);
 
-	public abstract Map<String, Object> getFrequenciaPatologia() ;
+	public abstract Map<String, Object> getFrequenciaPatologia();
 
 }
