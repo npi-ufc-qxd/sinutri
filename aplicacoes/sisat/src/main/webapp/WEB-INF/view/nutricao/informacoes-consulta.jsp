@@ -38,7 +38,7 @@
 					class="glyphicon glyphicon-chevron-left"></span> Voltar</a> <a
 					href="<c:url value="#/nutricao/plano-alimentar"></c:url>"
 					class="btn btn-info btn-sm">Plano Alimentar</a> <a
-					href="<c:url value="/consulta/editar-consulta/${consulta.id}/paciente/${consulta.paciente.pessoa.cpf}"/>"
+					href="<c:url value="/paciente/${consulta.paciente.pessoa.cpf}/consulta/${consulta.id}/editar"/>"
 					class="btn btn-warning btn-sm"><span
 					class="glyphicon glyphicon-edit"></span> Editar</a>
 			</div>
