@@ -1,6 +1,7 @@
 package br.ufc.quixada.npi.sisat.model;
 
 import java.util.Date;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -33,6 +34,9 @@ import br.ufc.quixada.npi.sisat.model.enuns.SistemaUrinario;
 	@NamedQuery(name = "ConsultaNutricional.findConsultaNutricionalWithDocumentosById", query = "select c from ConsultaNutricional c left join fetch c.documentos where c.id=:id"),
 	@NamedQuery(name = "ConsultaNutricional.findConsultaNutricionalWithFrequenciasById", query = "select c from ConsultaNutricional c left join fetch c.frequencias where c.id=:id"),
 	@NamedQuery(name = "ConsultaNutricional.findConsultaNutricionalWithDocumentosAndFrequenciasById", query = "select c from ConsultaNutricional c left join fetch c.documentos left join fetch c.frequencias where c.id=:id"),
+
+	@NamedQuery(name = "ConsultaNutricional.findFrequenciasByIdConsulta", query = "select DISTINCT f from FrequenciaAlimentar f left join fetch f.alimentos where f.consultaNutricional.id = :id"),
+
 	@NamedQuery(name = "ConsultaNutricional.findOrientacoesIndividuaisById", query = "select c.orientacoesIndividuais from ConsultaNutricional c where c.id=:id"),
 	@NamedQuery(name = "ConsultaNutricional.findPacientePessoaCpfById", query = "select c.paciente.pessoa.cpf from ConsultaNutricional c where c.id=:id"), 
 	
@@ -63,7 +67,7 @@ public class ConsultaNutricional {
 
 	@OneToMany(mappedBy = "consultaNutricional", cascade = CascadeType.ALL)
 	@JsonIgnore
-	private Set<FrequenciaAlimentar> frequencias;
+	private List<FrequenciaAlimentar> frequencias;
 
 	@ManyToOne
 	@JoinColumn(name = "paciente_id")
@@ -208,6 +212,7 @@ public class ConsultaNutricional {
 	private String observacooesDaConsulta;
 
 	public ConsultaNutricional() {
+		this.IMC = 0.0;
 	}
 
 	public ConsultaNutricional(Paciente paciente) {
@@ -257,11 +262,11 @@ public class ConsultaNutricional {
 		this.id = id;
 	}
 
-	public Set<FrequenciaAlimentar> getFrequencias() {
+	public List<FrequenciaAlimentar> getFrequencias() {
 		return frequencias;
 	}
 
-	public void setFrequencias(Set<FrequenciaAlimentar> frequencias) {
+	public void setFrequencias(List<FrequenciaAlimentar> frequencias) {
 		this.frequencias = frequencias;
 	}
 

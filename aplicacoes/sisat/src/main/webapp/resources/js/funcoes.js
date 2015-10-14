@@ -101,7 +101,9 @@ $(document)
 								}
 							});
 					
-
+					$.extend(jQuery.validator.messages, {
+					    required: "Campo obrigatório",
+					});
 
 					$('#login-form').validate({
 						rules : {

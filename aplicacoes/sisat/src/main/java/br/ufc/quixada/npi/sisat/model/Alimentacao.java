@@ -1,10 +1,10 @@
 package br.ufc.quixada.npi.sisat.model;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 import org.codehaus.jackson.annotate.JsonIgnore;
@@ -20,7 +20,7 @@ public class Alimentacao {
 	
 	private String porcao;
 
-	@ManyToOne
+	@ManyToOne(cascade = {CascadeType.REFRESH})
 	@JsonIgnore
 	private FrequenciaAlimentar frequenciaAlimentar;
 

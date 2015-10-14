@@ -28,4 +28,3 @@
 <script src="<c:url value="/resources/js/highcharts.js" />"></script>
 
 <script	src="<c:url value="/resources/js/jquery.appendGrid-1.5.2.js" />"></script>
-<script src="<c:url value="/resources/js/bootstrap-select.min.js" />"></script>
