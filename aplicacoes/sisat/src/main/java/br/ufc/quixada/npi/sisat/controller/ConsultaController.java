@@ -43,7 +43,6 @@ import br.ufc.quixada.npi.sisat.service.DocumentoService;
 import br.ufc.quixada.npi.sisat.service.PacienteService;
 import br.ufc.quixada.npi.sisat.service.PessoaService;
 import br.ufc.quixada.npi.sisat.validation.ConsultaNutricionalValidator;
-import br.ufc.quixada.npi.util.SimpleMap;
 import net.sf.jasperreports.engine.JREmptyDataSource;
 import net.sf.jasperreports.engine.JRException;
 

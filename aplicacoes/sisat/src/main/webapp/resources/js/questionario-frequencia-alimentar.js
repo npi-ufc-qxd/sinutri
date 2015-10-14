@@ -1,8 +1,8 @@
-var id = $("#id").val();
 
 function loadRecordatorio() {
+	var id = $("#id").val();
 
-	if(id != null){
+	if(id > 0){
 		$.ajax({
 			type: "GET",
 			data: {"id": id},
@@ -47,130 +47,122 @@ function loadQuestionarios(result) {
 
 
 $(function() {
-	$('#questionarioFrequenciaAlimentar') .appendGrid({
-						initRows : 0,
-						maxRowsAllowed : 6,
-						columns : [{
-							name : 'id',
-							type : 'hidden',
-						}, 
+	$('#questionarioFrequenciaAlimentar').appendGrid({
+		initRows : 0,
+		maxRowsAllowed : 6,
+		columns : [{
+			name : 'id',
+			type : 'hidden',
+		}, 
 
-						{
-							name : 'refeicao',
-							display : 'Tipo de refição',
-							type : 'select',
-							ctrlOptions : 'DESJEJUM:Desjejum;COLACAO:Colação;ALMOCO:Almoço;LANCHE:Lanche;JANTAR:Jantar;CEIA:Ceia',
-							ctrlClass: 'form-control',
-							ctrlAttr: {
-								required : 'required',
-							}
-						}, {
-							name : 'horario',
-							display : 'Hora',
-							type : 'text',
-							ctrlAttr : {
-								maxlength : 15,
-								required : 'required'
-							},
-							ctrlClass : 'form-control'
-						} ],
-						hideButtons: {
-				            moveUp: true,
-				            moveDown : true,
-				            insert: true,
-				            removeLast: true,
-				        },	
-				        customGridButtons: {
-				            append: function() {
-				            	return $('<a href="#" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span> Refeição</a>');
-							},
-				            remove: function() {
-				            	return $('<a href="#" class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span></a>')
-				            	.on('click', function (evt) {
-				            		deleteFrequencia($(this).parent().find('input').val());
-				            	})
-				            }
-						},
-						i18n : {
-							rowEmpty : "Nenhum alimentação foi adicionada!"
-						},
-						nameFormatter : function(idPrefix, name, uniqueIndex) {
-							return "frequencias[" + (uniqueIndex - 1)+ "]." + name;
-						},
-						useSubPanel : true,
-						subPanelBuilder : function(cell, uniqueIndex) {
-							var idPanel = uniqueIndex-1;
+		{
+			name : 'refeicao',
+			display : 'Tipo de refição',
+			type : 'select',
+			ctrlOptions : 'DESJEJUM:Desjejum;COLACAO:Colação;ALMOCO:Almoço;LANCHE:Lanche;JANTAR:Jantar;CEIA:Ceia',
+			ctrlClass: 'form-control',
+			ctrlAttr: {
+				required : 'required',
+			}
+		}, {
+			name : 'horario',
+			display : 'Hora',
+			type : 'text',
+			ctrlAttr : {
+				maxlength : 15,
+				required : 'required'
+			},
+			ctrlClass : 'form-control'
+		} ],
+		hideButtons: {
+            moveUp: true,
+            moveDown : true,
+            insert: true,
+            removeLast: true,
+        },	
+        customGridButtons: {
+            append: function() {
+            	return $('<a id="add-refeicao" href="#" class="btn btn-primary add-refeicao"><span class="glyphicon glyphicon-plus"></span> Refeição</a>')
+            	.on('click', function (evt) {
+            		alert($('body').find('table').find('table').find('.last:first').html())
+            	});
+			},
+            remove: function() {
+            	return $('<a href="#" class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span></a>')
+            	.on('click', function (evt) {
+            		deleteFrequencia($(this).parent().find('input').val());
+            	})
+            }
+		},
+		i18n : {
+			rowEmpty : "Nenhum alimentação foi adicionada!"
+		},
+		nameFormatter : function(idPrefix, name, uniqueIndex) {
+			return "frequencias[" + (uniqueIndex - 1)+ "]." + name;
+		},
+		useSubPanel : true,
+		subPanelBuilder : function(cell, uniqueIndex) {
+			var idPanel = uniqueIndex-1;
 
-							$(".hora").mask("99:99:99");
-			
-							var subgrid = $('<table></table>').attr('id', 'tblSubGrid_' + uniqueIndex).attr('class', 'tblSubGrid table table-striped').appendTo(cell);
+			$(".hora").mask("99:99:99");
 
-							subgrid.appendGrid({
-										initRows : 1,
-										hideRowNumColumn : true,
-										columns : [{
-											name : 'id',
-											type : 'hidden',
-										},          
-										{
-											name : 'alimento',
-											display : '',
-											ctrlClass: 'form-control',
-											ctrlAttr: {
-												required : 'required',
-												placeholder : 'Alimento',
-											}
+			var subgrid = $('<table></table>').attr('id', 'tblSubGrid_' + uniqueIndex).attr('class', 'tblSubGrid table table-striped').appendTo(cell);
 
-										}, {
-											name : 'porcao',
-											display : '',
-											ctrlClass: 'form-control',
-											ctrlAttr: {
-												required : 'required',
-												placeholder : 'Porção',
-											}
-										} ],
-										hideButtons: {
-								            moveUp: true,
-								            moveDown : true,
-								            insert: true,
-								            removeLast: true
-								        },											
-										i18n : {
-											rowEmpty : "Nenhum alimento foi adicionado!"
-										},
-										nameFormatter : function(idPrefix, name, uniqueIndex) {
-											return "frequencias["+ (idPanel)+ "].alimentos["+ (uniqueIndex - 1)+ "]." + name;
-										},
-								        customGridButtons: {
-								            append: function() {
-								            	return $('<a href="#" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span> Alimento</a>');
-											},
-								            remove: function() {
-								            	return $('<a href="#" class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span></a>')
-								            	.on('click', function (evt) {
-								            		deleteAlimento($(this).parent().find('input').val());
-								            	})
-								            	;
-											},
-								        },
-										
-										
-										
-									});
-						},
-						subPanelGetter : function(uniqueIndex) {
-							// Return the sub grid value inside sub panel for `getAllValue` and `getRowValue` methods
-							return $('#tblSubGrid_' + uniqueIndex).appendGrid('getAllValue', true);
-						},
-						rowDataLoaded : function(caller, record, rowIndex, uniqueIndex) {
-							// Check SubGridData exist in the record data
-							if (record.SubGridData) {
-								// Fill the sub grid
-								$('#tblSubGrid_' + uniqueIndex, caller).appendGrid('load',record.SubGridData);
-							}
-						}
-					});
+			subgrid.appendGrid({
+				initRows : 1,
+				hideRowNumColumn : true,
+				columns : [{
+					name : 'id',
+					type : 'hidden',
+				},          
+				{
+					name : 'alimento',
+					display : '',
+					ctrlClass: 'form-control',
+					ctrlAttr: {
+						required : 'required',
+						placeholder : 'Alimento',
+					}
+
+				}, {
+					name : 'porcao',
+					display : '',
+					ctrlClass: 'form-control',
+					ctrlAttr: {
+						required : 'required',
+						placeholder : 'Porção',
+					}
+				} ],
+				hideButtons: {
+		            moveUp: true,
+		            moveDown : true,
+		            insert: true,
+		            removeLast: true
+		        },											
+				i18n : {
+					rowEmpty : "Nenhum alimento foi adicionado!"
+				},
+				nameFormatter : function(idPrefix, name, uniqueIndex) {
+					if(name == 'id'){
+						$('#questionarioFrequenciaAlimentar').find('table').find('.last:first a:first').remove();
+					}
+
+					return "frequencias["+ (idPanel)+ "].alimentos["+ (uniqueIndex - 1)+ "]." + name;
+				},
+		        customGridButtons: {
+		            append: function() {
+		            	return $('<a href="#" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span> Alimento</a>');
+					},
+		            remove: function() {
+		            	return $('<a href="#" class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span></a>')
+			            	.on('click', function (evt) {
+			            		deleteAlimento($(this).parent().find('input').val());
+			            	});
+					},
+		        },
+			});
+		}
+	});
 	
 });
 
@@ -199,6 +191,4 @@ function deleteAlimento(idAlimento) {
 			}
 		});
 	}
-	
 }
-
