@@ -17,6 +17,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import org.codehaus.jackson.annotate.JsonIgnore;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import br.ufc.quixada.npi.sisat.model.enuns.Refeicao;
@@ -36,6 +37,7 @@ public class FrequenciaAlimentar {
 	private Refeicao refeicao;
 	
 	@ManyToOne
+	@JsonIgnore
 	@JoinColumn(name = "consultaNutricional_id")
 	private ConsultaNutricional consultaNutricional;
     

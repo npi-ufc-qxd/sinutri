@@ -72,7 +72,7 @@ $(function() {
 				maxlength : 15,
 				required : 'required'
 			},
-			ctrlClass : 'form-control'
+			ctrlClass : 'form-control hora'
 		} ],
 		hideButtons: {
             moveUp: true,
@@ -160,6 +160,14 @@ $(function() {
 					},
 		        },
 			});
+		},
+		subPanelGetter : function(uniqueIndex) {
+			return $('#tblSubGrid_' + uniqueIndex).appendGrid('getAllValue', true);
+		},
+		rowDataLoaded : function(caller, record, rowIndex, uniqueIndex) {
+			if (record.SubGridData) {
+				$('#tblSubGrid_' + uniqueIndex, caller).appendGrid('load',record.SubGridData);
+			}
 		}
 	});
 	
@@ -180,7 +188,6 @@ function deleteFrequencia(idFrequencia) {
 
 function deleteAlimento(idAlimento) {
 	if(idAlimento > 0 ){
-		alert(idAlimento);
 		$.ajax({
 			type: "GET",
 			url: '/sisat/consulta/25/excluir/alimento/' + idAlimento + '.json',
