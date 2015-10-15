@@ -403,7 +403,7 @@ public class ConsultaController {
 	private List<FrequenciaAlimentar> atualizarFrequenciaAlimentar(List<FrequenciaAlimentar> frequenciaAlimentars, ConsultaNutricional consultaNutricional) {
 		List<FrequenciaAlimentar> frequencias = new ArrayList<FrequenciaAlimentar>();
 		for (FrequenciaAlimentar frequenciaAlimentar : frequenciaAlimentars) {
-			if (frequenciaAlimentar != null) {
+			if (frequenciaAlimentar != null && frequenciaAlimentar.getAlimentos() != null) {
 				frequenciaAlimentar.setConsultaNutricional(consultaNutricional);
 				frequenciaAlimentar.setAlimentos(atualizarAlimentacao(frequenciaAlimentar));
 				frequencias.add(frequenciaAlimentar);
