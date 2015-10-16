@@ -47,8 +47,8 @@ import net.sf.jasperreports.engine.JREmptyDataSource;
 import net.sf.jasperreports.engine.JRException;
 
 @Controller
-@RequestMapping("consulta")
-public class ConsultaController {
+@RequestMapping("paciente")
+public class PacienteController {
 
 	@Inject
 	private PessoaService pessoaService;
@@ -74,7 +74,7 @@ public class ConsultaController {
 	@Inject
 	private GenericService<Alimentacao> alimentacaoService; 
 
-	@RequestMapping(value = "historico-paciente/{cpf}", method = RequestMethod.GET)
+	@RequestMapping(value = "/{cpf}/historico", method = RequestMethod.GET)
 	public String getPaginaHistorico(@PathVariable("cpf") String cpf, Model model,
 			RedirectAttributes redirectAttributes) {
 
@@ -90,7 +90,7 @@ public class ConsultaController {
 		return "nutricao/historico-paciente";
 	}
 
-	@RequestMapping(value = { "informacoes-consulta/{id}" }, method = RequestMethod.GET)
+	@RequestMapping(value = { "/consulta/{id}" }, method = RequestMethod.GET)
 	public String getPaginaInformacoesConsulta(@PathVariable("id") Long id, Model model,
 			RedirectAttributes redirectAttributes) {
 		ConsultaNutricional consulta = consultaNutricionalService.getConsultaNutricionalWithDocumentosById(id);
@@ -99,14 +99,13 @@ public class ConsultaController {
 			redirectAttributes.addFlashAttribute("erro", "Consulta não encontrado.");
 			return "redirect:/nutricao/buscar";
 		}
-		
-		consulta.setFrequencias(consultaNutricionalService.getFrequenciasByIdConsulta(id));
 
+		consulta.setFrequencias(consultaNutricionalService.getFrequenciasByIdConsulta(id));
 		model.addAttribute("consulta", consulta);
 		return "nutricao/informacoes-consulta";
 	}
 
-	@RequestMapping(value = "realizar-consulta/{cpf}", method = RequestMethod.GET)
+	@RequestMapping(value = "/{cpf}/consulta", method = RequestMethod.GET)
 	public String getPaginaRealizarConsulta(@PathVariable("cpf") String cpf, Model model,
 			RedirectAttributes redirectAttributes) {
 
@@ -134,7 +133,7 @@ public class ConsultaController {
 		return "nutricao/form-consulta";
 	}
 
-	@RequestMapping(value = { "realizar-consulta/{cpf}" }, method = RequestMethod.POST)
+	@RequestMapping(value = { "/{cpf}/consulta" }, method = RequestMethod.POST)
 	public String salvarConsulta(@PathVariable("cpf") String cpf, @Valid ConsultaNutricional consulta, Model model,  
 			BindingResult result, RedirectAttributes redirectAttributes,
 			@RequestParam("files") List<MultipartFile> files,
@@ -214,20 +213,22 @@ public class ConsultaController {
 		if (consulta.getBebidaAlcoolicaComentario() != null && consulta.getBebidaAlcoolicaComentario().isEmpty()) {
 			consulta.setBebidaAlcoolicaComentario(null);
 		}
-
-		atualizarFrequenciaAlimentar(consulta.getFrequencias(), consulta);
 		
+		if(consulta.getFrequencias() != null ){
+			atualizarFrequenciaAlimentar(consulta.getFrequencias(), consulta);
+		}
+
 		consultaNutricionalService.save(consulta);
 
 		redirectAttributes.addFlashAttribute("success",
 				"Consulta de <strong>id = " + consulta.getId() + "</strong> e paciente <strong>"
 						+ consulta.getPaciente().getPessoa().getNome() + "</strong> realizada com sucesso.");
 
-		return "redirect:/consulta/informacoes-consulta/" + consulta.getId();
+		return "redirect:/paciente/consulta/" + consulta.getId();
 	}
 
-	@RequestMapping(value = { "/editar-consulta/{idConsulta}/paciente/{cpf}" }, method = RequestMethod.GET)
-	public String editarConsulta(@PathVariable("idConsulta") long idConsulta, @PathVariable("cpf") String cpf,
+	@RequestMapping(value = { "/{cpf}/consulta/{idConsulta}/editar" }, method = RequestMethod.GET)
+	public String editarConsulta(@PathVariable("cpf") String cpf, @PathVariable("idConsulta") long idConsulta,
 			Model model) {
 
 		ConsultaNutricional consultaNutricional = consultaNutricionalService
@@ -252,8 +253,8 @@ public class ConsultaController {
 
 	}
 
-	@RequestMapping(value = { "/editar-consulta/{idConsulta}/paciente/{cpf}" }, method = RequestMethod.POST)
-	public String editarConsulta(Model model, @Valid ConsultaNutricional consulta, BindingResult result,
+	@RequestMapping(value = { "/{cpf}/consulta/{idConsulta}/editar" }, method = RequestMethod.POST)
+	public String editarConsulta(Model model, @PathVariable("cpf") String cpf, @Valid ConsultaNutricional consulta, BindingResult result,
 			RedirectAttributes redirectAttributes, @RequestParam("files") List<MultipartFile> files,
 			@RequestParam(value = "enviar", required = false) boolean enviar) {
 		model.addAttribute("action", "editar");
@@ -310,10 +311,10 @@ public class ConsultaController {
 		redirectAttributes.addFlashAttribute("success", "Consulta do paciente <strong>"
 				+ consulta.getPaciente().getPessoa().getNome() + "</strong> atualizada com sucesso.");
 
-		return "redirect:/consulta/informacoes-consulta/" + consulta.getId();
+		return "redirect:/paciente/consulta/" + consulta.getId();
 	}
 
-	@RequestMapping(value = "/relatorio-orientacoes/{id}", method = RequestMethod.GET)
+	@RequestMapping(value = "/{cpf}/consulta/{id}/relatorio/orientacoes", method = RequestMethod.GET)
 	public String relatorio(@PathVariable("id") Long id, Model model, HttpSession session) throws JRException {
 
 		String orientacoesIndividuais = consultaNutricionalService.getOrientacoesIndividuaisById(id);
@@ -330,8 +331,8 @@ public class ConsultaController {
 		return "orientacoesIndividuais";
 	}
 
-	@RequestMapping(value = { "{idConsulta}/excluir/refeicao/{idRefeicao}.json" }, method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-	public @ResponseBody Model deletarFrequenciaAlimentar(@PathVariable("idConsulta") Long idConsulta, @PathVariable("idRefeicao") Long idRefeicao, Model model, RedirectAttributes redirectAttributes) {
+	@RequestMapping(value = { "/consulta/refeicao/{idRefeicao}/excluir.json" }, method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public @ResponseBody Model deletarFrequenciaAlimentar(@PathVariable("idRefeicao") Long idRefeicao, Model model, RedirectAttributes redirectAttributes) {
 		FrequenciaAlimentar frequenciaAlimentar = frequenciaAlimentarService.find(FrequenciaAlimentar.class, idRefeicao);
 		
 		if(frequenciaAlimentar != null){
@@ -342,8 +343,8 @@ public class ConsultaController {
 		return model;
 	}
 
-	@RequestMapping(value = { "{idConsulta}/excluir/alimento/{idAlimento}.json" }, method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-	public @ResponseBody Model deletarAlimento(@PathVariable("idConsulta") Long idConsulta, @PathVariable("idAlimento") Long idAlimento, Model model, RedirectAttributes redirectAttributes) {
+	@RequestMapping(value = { "/consulta/alimento/{idAlimento}/excluir.json" }, method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public @ResponseBody Model deletarAlimento(@PathVariable("idAlimento") Long idAlimento, Model model, RedirectAttributes redirectAttributes) {
 		Alimentacao alimento = alimentacaoService.find(Alimentacao.class, idAlimento);
 
 		if(alimento != null){
@@ -354,6 +355,7 @@ public class ConsultaController {
 
 		return model;
 	}
+	
 	private Pessoa registrarPaciente(String cpf) {
 		Pessoa pessoa = pessoaService.getPessoaByCpf(cpf);
 
@@ -404,7 +406,7 @@ public class ConsultaController {
 	private List<FrequenciaAlimentar> atualizarFrequenciaAlimentar(List<FrequenciaAlimentar> frequenciaAlimentars, ConsultaNutricional consultaNutricional) {
 		List<FrequenciaAlimentar> frequencias = new ArrayList<FrequenciaAlimentar>();
 		for (FrequenciaAlimentar frequenciaAlimentar : frequenciaAlimentars) {
-			if (frequenciaAlimentar != null && frequenciaAlimentar.getAlimentos() != null) {
+			if (frequenciaAlimentar != null) {
 				frequenciaAlimentar.setConsultaNutricional(consultaNutricional);
 				frequenciaAlimentar.setAlimentos(atualizarAlimentacao(frequenciaAlimentar));
 				frequencias.add(frequenciaAlimentar);
