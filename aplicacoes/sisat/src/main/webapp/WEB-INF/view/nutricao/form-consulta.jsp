@@ -708,128 +708,121 @@
 
 					<h4 id="documentos" class="section"><strong>Documentos</strong></h4>
 
-					<div id="documentos" class="tab-pane fade in ">
-						<div class="form-group">
-							<label for="arquivo" class="col-sm-2 control-label">Arquivos:</label>
-							<div class="col-sm-5 files">
-								<span class="btn btn-success fileinput-button"> <i
-									class="glyphicon glyphicon-plus"></i> <span>Adicionar
-										arquivos...</span> <input multiple type="file" id="fileupload"
-									class="file" name="files" />
-								</span> <br> <br>
-								<div id="files" class="files"></div>
-								<br> <input type="checkbox" id="enviar" name="enviar">
-								Enviar para o paciente
-
-								<div class="error-validation" id="erro-Anexo">
-									<label class="col-sm-10 control-label" id="label-erro">
-										${anexoError} </label>
-								</div>
-
-								<table id="file-upload" role="presentation"
-									class="table table-striped">
-									<thead class="files">
-										<tr>
-											<th colspan="6">Ducumentos para enviar ao paciente</th>
-										</tr>
-										<tr>
-											<th>Nome do Arquivo</th>
-											<th>Data</th>
-											<th>Tipo</th>
-											<th>Baixar</th>
-											<th>Excluir</th>
-											<th>Enviar</th>
-										</tr>
-									</thead>
-
-									<tbody class="files">
-										<c:forEach items="${documentosEnvio}" var="documento">
-											<tr class="template-upload fade in">
-												<td>${documento.nome}<strong class="error text-danger"></strong></td>
-												<td>${documento.data}<strong class="error text-danger"></strong></td>
-												<td>${documento.tipo}<strong class="error text-danger"></strong></td>
-
-												<td><a id="download[${documento.id}]"
-													href="<c:url value="/nutricao/downloadDocumento/${documento.id }" ></c:url>"
-													class="save-document">
-														<button type="button" class="btn btn-primary">
-															<span class="glyphicon glyphicon-save"></span>
-														</button>
-												</a></td>
-
-												<td><a id="delete[${documento.id}]"
-													href="#"
-													class="btn btn-danger"
-													data-href="<c:url value="/nutricao/${consultaNutricional.id }/paciente/${consultaNutricional.paciente.pessoa.cpf }/deletarDocumento/${documento.id }" ></c:url>"
-													class="delete-document"  
-													data-toggle="modal" 
-													data-target="#confirm-delete"> 
-													<span class="glyphicon glyphicon-trash"></span>
-												</a></td>
-
-
-
-												<td><a id="send[${documento.id}]"
-													href="../../nutricao/enviarDocumento/${documento.id}/"
-													class="send-document">
-														<button class="btn btn-warning">
-															<span class="glyphicon glyphicon-send"></span>
-														</button>
-												</a></td>
-											</tr>
-
-										</c:forEach>
-									</tbody>
-								</table>
-
-								<br>
-
-								<table id="file-upload" role="presentation"
-									class="table table-striped">
-									<thead class="files">
-										<tr>
-											<th colspan="5">Outros documentos</th>
-										</tr>
-
-										<tr>
-											<th>Nome do Arquivo</th>
-											<th>Data</th>
-											<th>Tipo</th>
-											<th>Baixar</th>
-											<th>Excluir</th>
-										</tr>
-									</thead>
-									<tbody class="files">
-										<c:forEach items="${documentosNutricionista}" var="documento">
-											<tr class="template-upload fade in">
-												<td>${documento.nome}<strong class="error text-danger"></strong></td>
-												<td>${documento.data}<strong class="error text-danger"></strong></td>
-												<td>${documento.tipo}<strong class="error text-danger"></strong></td>
-												<td><a id="download[${documento.id}]"
-													href="<c:url value="/nutricao/downloadDocumento/${documento.id }" ></c:url>"
-													class="save-document">
-														<button type="button" class="btn btn-primary">
-															<span class="glyphicon glyphicon-save"></span>
-														</button>
-												</a></td>
-
-												<td><a id="delete[${documento.id}]"
-													href="#"
-													class="btn btn-danger"
-													data-href="<c:url value="/nutricao/${consultaNutricional.id }/paciente/${consultaNutricional.paciente.pessoa.cpf }/deletarDocumento/${documento.id }" ></c:url>"
-													class="delete-document"  
-													data-toggle="modal" 
-													data-target="#confirm-delete"> 
-													<span class="glyphicon glyphicon-trash"></span>
-												</a></td>
-											</tr>
-										</c:forEach>
-									</tbody>
-								</table>
+					<div class="row form-group">
+						<div class="form-item col-sm-12">
+							<div id="enviarDocumento">
+								<input type="checkbox" id="enviar" name="enviar"><label for="enviar">Enviar para o paciente</label>
 							</div>
+							
+							<input id="anexos" type="file" name="files" class="anexo file-loading" multiple="multiple" ></input>
+
+							<div class="error-validation" id="erro-Anexo">
+								<label class="col-sm-10 control-label" id="label-erro"> ${anexoError} </label>
+							</div>
+							
+							<table id="file-upload" role="presentation" class="table table-striped">
+								<thead class="files">
+									<tr>
+										<th colspan="6">Ducumentos para enviar ao paciente</th>
+									</tr>
+									<tr>
+										<th>Nome do Arquivo</th>
+										<th>Data</th>
+										<th>Tipo</th>
+										<th>Baixar</th>
+										<th>Excluir</th>
+										<th>Enviar</th>
+									</tr>
+								</thead>
+
+								<tbody class="files">
+									<c:forEach items="${documentosEnvio}" var="documento">
+										<tr class="template-upload fade in">
+											<td>${documento.nome}<strong class="error text-danger"></strong></td>
+											<td>${documento.data}<strong class="error text-danger"></strong></td>
+											<td>${documento.tipo}<strong class="error text-danger"></strong></td>
+
+											<td><a id="download[${documento.id}]"
+												href="<c:url value="/nutricao/downloadDocumento/${documento.id }" ></c:url>"
+												class="save-document">
+													<button type="button" class="btn btn-primary">
+														<span class="glyphicon glyphicon-save"></span>
+													</button>
+											</a></td>
+
+											<td><a id="delete[${documento.id}]"
+												href="#"
+												class="btn btn-danger"
+												data-href="<c:url value="/nutricao/${consultaNutricional.id }/paciente/${consultaNutricional.paciente.pessoa.cpf }/deletarDocumento/${documento.id }" ></c:url>"
+												class="delete-document"  
+												data-toggle="modal" 
+												data-target="#confirm-delete"> 
+												<span class="glyphicon glyphicon-trash"></span>
+											</a></td>
+
+
+
+											<td><a id="send[${documento.id}]"
+												href="../../nutricao/enviarDocumento/${documento.id}/"
+												class="send-document">
+													<button class="btn btn-warning">
+														<span class="glyphicon glyphicon-send"></span>
+													</button>
+											</a></td>
+										</tr>
+
+									</c:forEach>
+								</tbody>
+							</table>
+
+							<br>
+
+							<table id="file-upload" role="presentation"
+								class="table table-striped">
+								<thead class="files">
+									<tr>
+										<th colspan="5">Outros documentos</th>
+									</tr>
+
+									<tr>
+										<th>Nome do Arquivo</th>
+										<th>Data</th>
+										<th>Tipo</th>
+										<th>Baixar</th>
+										<th>Excluir</th>
+									</tr>
+								</thead>
+								<tbody class="files">
+									<c:forEach items="${documentosNutricionista}" var="documento">
+										<tr class="template-upload fade in">
+											<td>${documento.nome}<strong class="error text-danger"></strong></td>
+											<td>${documento.data}<strong class="error text-danger"></strong></td>
+											<td>${documento.tipo}<strong class="error text-danger"></strong></td>
+											<td><a id="download[${documento.id}]"
+												href="<c:url value="/nutricao/downloadDocumento/${documento.id }" ></c:url>"
+												class="save-document">
+													<button type="button" class="btn btn-primary">
+														<span class="glyphicon glyphicon-save"></span>
+													</button>
+											</a></td>
+
+											<td><a id="delete[${documento.id}]"
+												href="#"
+												class="btn btn-danger"
+												data-href="<c:url value="/nutricao/${consultaNutricional.id }/paciente/${consultaNutricional.paciente.pessoa.cpf }/deletarDocumento/${documento.id }" ></c:url>"
+												class="delete-document"  
+												data-toggle="modal" 
+												data-target="#confirm-delete"> 
+												<span class="glyphicon glyphicon-trash"></span>
+											</a></td>
+										</tr>
+									</c:forEach>
+								</tbody>
+							</table>
+							
 						</div>
 					</div>
-					
+
 					<div class="col-xs-offset-0 col-xs-10" align="center">
 						<button type="submit" class="btn btn-success">${botao}</button>
 					</div><br><br><br><br>
@@ -837,7 +830,7 @@
 				</form:form>
 			</div>
 		</div>
-	</div>
+	</div><br><br>
 
  				<div id="confirm-delete" class="modal" role="dialog" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true">
 					<div class="modal-dialog">
@@ -864,6 +857,27 @@
 	<script type="text/javascript">
 		$('#menu-paciente').addClass('active');
 		loadRecordatorio();
+		
+		
+		$(".anexo").fileinput({
+	    	uploadUrl: "/file-upload-batch/2",
+	    	showUpload:false,
+	    	showRemove: false,
+	    	language: 'pt-BR',
+	    	uploadAsync: false,
+	    	fileselectnone: true,
+	    	allowedPreviewTypes: null,
+// 	    	allowedPreviewMimeTypes: ['image/jpeg'],
+	    	layoutTemplates : {
+		        actions: '<div class="file-actions">\n' +
+				        '    <div class="file-footer-buttons">\n' +
+				        '        {delete}' +
+				        '    </div>\n' +
+				        '    <div class="clearfix"></div>\n' +
+				        '</div>'
+	    	}
+	    });		
+		
 	</script>
 
 </body>
