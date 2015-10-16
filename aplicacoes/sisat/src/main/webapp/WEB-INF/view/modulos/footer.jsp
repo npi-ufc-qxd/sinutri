@@ -12,13 +12,12 @@
 <script src="<c:url value="/webjars/jquery/2.1.0/jquery.min.js" />"></script>
 <script src="<c:url value="/webjars/bootstrap/3.3.2/js/bootstrap.min.js" />"></script>
 
-<%-- <script src="<c:url value="/webjars/jquery-ui/1.11.1/jquery-ui.css"/>"></script> --%>
-
-<script src="<c:url value="/resources/js/jquery.MultiFile.js" />"></script>
 <script src="<c:url value="/resources/js/funcoes.js" />"></script>
 
 <script	src="<c:url value="/webjars/jquery-ui/1.11.1/jquery-ui.min.js" />"></script>
 
+<%-- <script src="<c:url value="/resources/js/bootstrap.file-input.js" />"></script> --%>
+<script src="<c:url value="/resources/js/bootstrap.file-input.js" />"></script>
 <script src="<c:url value="/resources/js/bootstrap.file-input.js" />"></script>
 
 <script src="<c:url value="/webjars/jquery-maskedinput/1.3.1/jquery.maskedinput.min.js" />"></script> 
@@ -28,3 +27,6 @@
 <script src="<c:url value="/resources/js/highcharts.js" />"></script>
 
 <script	src="<c:url value="/resources/js/jquery.appendGrid-1.5.2.js" />"></script>
+
+<script src="<c:url value="/resources/js/fileinput.min.js" />"></script>
+<script src="<c:url value="/resources/js/fileinput_locale_pt-BR.js" />"></script>

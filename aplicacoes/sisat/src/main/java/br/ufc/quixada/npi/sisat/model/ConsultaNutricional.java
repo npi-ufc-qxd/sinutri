@@ -32,14 +32,9 @@ import br.ufc.quixada.npi.sisat.model.enuns.SistemaUrinario;
 
 @NamedQueries({
 	@NamedQuery(name = "ConsultaNutricional.findConsultaNutricionalWithDocumentosById", query = "select c from ConsultaNutricional c left join fetch c.documentos where c.id=:id"),
-	@NamedQuery(name = "ConsultaNutricional.findConsultaNutricionalWithFrequenciasById", query = "select c from ConsultaNutricional c left join fetch c.frequencias where c.id=:id"),
-	@NamedQuery(name = "ConsultaNutricional.findConsultaNutricionalWithDocumentosAndFrequenciasById", query = "select c from ConsultaNutricional c left join fetch c.documentos left join fetch c.frequencias where c.id=:id"),
-
 	@NamedQuery(name = "ConsultaNutricional.findFrequenciasByIdConsulta", query = "select DISTINCT f from FrequenciaAlimentar f left join fetch f.alimentos where f.consultaNutricional.id = :id"),
-
 	@NamedQuery(name = "ConsultaNutricional.findOrientacoesIndividuaisById", query = "select c.orientacoesIndividuais from ConsultaNutricional c where c.id=:id"),
 	@NamedQuery(name = "ConsultaNutricional.findPacientePessoaCpfById", query = "select c.paciente.pessoa.cpf from ConsultaNutricional c where c.id=:id"), 
-	
 	@NamedQuery(name = "ConsultaNutricional.countFrequenciaMastigacao", query = "select count(c.mastigacao) from ConsultaNutricional c where c.mastigacao = TRUE"),
 	@NamedQuery(name = "ConsultaNutricional.findCountFrequenciaMastigacao", query = "select count(c.mastigacao) from ConsultaNutricional c where c.mastigacao = TRUE"),
 	@NamedQuery(name = "ConsultaNutricional.countFrequenciaDisfagia", query = "select count(c.disfagia) from ConsultaNutricional c where c.disfagia = TRUE"),

@@ -58,19 +58,19 @@ $(document)
 			            $(this).find('.btn-ok').attr('href', $(e.relatedTarget).data('href'));
 			        });
 					
-					$('#fileupload').MultiFile({
-						accept : 'pdf|docx|png|jpg|odt|doc',
-						list : '#files',
-						STRING : {
-							remove : 	'<button class="btn btn-danger delete" type="button">' + 
-										'<i class="glyphicon glyphicon-trash"></i>'+ 
-										'<span>Remover<span>'+
-										'</button>',
-							selected : 'Selecionado: $file',
-							denied : 'Arquivo de tipo inválido: .$ext',
-							duplicate : 'Arquivo já selecionado: \n$file'
-						}
-					});
+//					$('#fileupload').MultiFile({
+//						accept : 'pdf|docx|png|jpg|odt|doc',
+//						list : '#files',
+//						STRING : {
+//							remove : 	'<button class="btn btn-danger delete" type="button">' + 
+//										'<i class="glyphicon glyphicon-trash"></i>'+ 
+//										'<span>Remover<span>'+
+//										'</button>',
+//							selected : 'Selecionado: $file',
+//							denied : 'Arquivo de tipo inválido: .$ext',
+//							duplicate : 'Arquivo já selecionado: \n$file'
+//						}
+//					});
 					
 					$('.exame').change(
 							function() {
