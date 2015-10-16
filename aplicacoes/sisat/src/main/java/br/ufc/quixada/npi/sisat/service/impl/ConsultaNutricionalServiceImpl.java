@@ -7,8 +7,6 @@ import java.util.Map;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import org.springframework.transaction.annotation.Transactional;
-
 import br.ufc.quixada.npi.enumeration.QueryType;
 import br.ufc.quixada.npi.repository.GenericRepository;
 import br.ufc.quixada.npi.service.impl.GenericServiceImpl;
@@ -47,12 +45,6 @@ public class ConsultaNutricionalServiceImpl extends GenericServiceImpl<ConsultaN
 	public String getPacientePessoaCpfById(Long id) {
 		return (String) findFirst("ConsultaNutricional.findPacientePessoaCpfById",
 				new SimpleMap<String, Object>("id", id));
-	}
-
-	@Override
-	@Transactional(readOnly = true)
-	public ConsultaNutricional getConsultaNutricionalWithDocumentosAndFrequenciasById(Long id) {
-		return (ConsultaNutricional) findFirst("ConsultaNutricional.findConsultaNutricionalWithDocumentosAndFrequenciasById", new SimpleMap<String, Object>("id", id));
 	}
 
 	@Override

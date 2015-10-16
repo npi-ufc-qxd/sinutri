@@ -93,14 +93,14 @@ public class PacienteController {
 	@RequestMapping(value = { "/consulta/{id}" }, method = RequestMethod.GET)
 	public String getPaginaInformacoesConsulta(@PathVariable("id") Long id, Model model,
 			RedirectAttributes redirectAttributes) {
-		ConsultaNutricional consulta = consultaNutricionalService
-				.getConsultaNutricionalWithDocumentosAndFrequenciasById(id);
+		ConsultaNutricional consulta = consultaNutricionalService.getConsultaNutricionalWithDocumentosById(id);
 
 		if (consulta == null) {
 			redirectAttributes.addFlashAttribute("erro", "Consulta não encontrado.");
 			return "redirect:/nutricao/buscar";
 		}
 
+		consulta.setFrequencias(consultaNutricionalService.getFrequenciasByIdConsulta(id));
 		model.addAttribute("consulta", consulta);
 		return "nutricao/informacoes-consulta";
 	}

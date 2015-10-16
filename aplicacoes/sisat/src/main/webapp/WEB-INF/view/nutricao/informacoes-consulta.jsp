@@ -386,57 +386,43 @@
 						</tr>
 					</tbody>
 				</table>
-
-				<h3 id="informacoesComplementaresExames" class="section">Informações
-					Complementares</h3>
-
+				<label><strong> Informações Complementares:</strong></label>
 				<c:choose>
-					<c:when
-						test="${not empty consulta.informacoesComplementaresExames}">
-						<div class="row">
-							<div class="col-sm-12">
-								<p>${consulta.informacoesComplementaresExames}</p>
-							</div>
-						</div>
+					<c:when test="${not empty consulta.informacoesComplementaresExames}">
+						<span>${consulta.informacoesComplementaresExames}</span>
 					</c:when>
 					<c:otherwise>
-						<div class="alert alert-dismissible alert-default">Esta
-							consulta não contém nenhuma informação complementar.</div>
-					</c:otherwise>
-				</c:choose>
-
-				<h3 id="orientacoes" class="section">Conduta Nutricional</h3>
-
-				<c:choose>
-					<c:when test="${not empty consulta.condutaNutricional}">
-						<div class="row">
-							<div class="col-sm-12">
-								<p>${consulta.condutaNutricional}</p>
-							</div>
-						</div>
-					</c:when>
-					<c:otherwise>
-						<div class="alert alert-dismissible alert-default">Esta
-							consulta não possui nenhuma conduta nutricional informada.</div>
+						<span class="alert alert-dismissible alert-default">Não há informação complementar.</span>
 					</c:otherwise>
 				</c:choose>
 
 				<h3 id="orientacoes" class="section">Orientações</h3>
 
-				<c:choose>
-					<c:when test="${not empty consulta.orientacoesIndividuais}">
-						<div class="row">
-							<div class="col-sm-12">
-								<p>${consulta.orientacoesIndividuais}</p>
-							</div>
-						</div>
-					</c:when>
-					<c:otherwise>
-						<div class="alert alert-dismissible alert-default">Esta
-							consulta não possui nenhuma orientação individual para o
-							paciente.</div>
-					</c:otherwise>
-				</c:choose>
+				<div class="row">
+					<div class="col-sm-12">
+						<label><strong> Orientacões Individuais: </strong></label>
+						<c:choose>
+							<c:when test="${not empty consulta.orientacoesIndividuais}">
+								<span>${consulta.orientacoesIndividuais}</span>
+							</c:when>
+							<c:otherwise>
+								<span class="alert alert-dismissible alert-default">Não há orientações.</span>
+							</c:otherwise>
+						</c:choose>
+					</div>
+
+					<div class="col-sm-12">
+						<label><strong> Conduta Nutricional: </strong></label>
+						<c:choose>
+							<c:when test="${not empty consulta.condutaNutricional}">
+								<span>${consulta.condutaNutricional}</span>
+							</c:when>
+							<c:otherwise>
+								<span class="alert alert-dismissible alert-default">Conduta nutricional não informada.</span>
+							</c:otherwise>
+						</c:choose>
+					</div>
+				</div>
 
 				<h3 id="documentos" class="section">Documentos</h3>
 				<c:choose>

@@ -72,7 +72,7 @@ $(function() {
 				maxlength : 15,
 				required : 'required'
 			},
-			ctrlClass : 'form-control'
+			ctrlClass : 'form-control hora'
 		} ],
 		hideButtons: {
             moveUp: true,
@@ -84,7 +84,6 @@ $(function() {
             append: function() {
             	return $('<a id="add-refeicao" href="#" class="btn btn-primary add-refeicao"><span class="glyphicon glyphicon-plus"></span> Refeição</a>')
             	.on('click', function (evt) {
-            		alert($('body').find('table').find('table').find('.last:first').html())
             	});
 			},
             remove: function() {
@@ -161,6 +160,14 @@ $(function() {
 					},
 		        },
 			});
+		},
+		subPanelGetter : function(uniqueIndex) {
+			return $('#tblSubGrid_' + uniqueIndex).appendGrid('getAllValue', true);
+		},
+		rowDataLoaded : function(caller, record, rowIndex, uniqueIndex) {
+			if (record.SubGridData) {
+				$('#tblSubGrid_' + uniqueIndex, caller).appendGrid('load',record.SubGridData);
+			}
 		}
 	});
 	
@@ -181,7 +188,6 @@ function deleteFrequencia(idFrequencia) {
 
 function deleteAlimento(idAlimento) {
 	if(idAlimento > 0 ){
-		alert(idAlimento);
 		$.ajax({
 			type: "GET",
 			url: '/sisat/paciente/consulta/alimento/' + idFrequencia + '/excluir.json',
