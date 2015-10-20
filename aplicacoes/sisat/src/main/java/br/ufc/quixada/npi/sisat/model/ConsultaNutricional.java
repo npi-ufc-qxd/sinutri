@@ -17,6 +17,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Transient;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
@@ -67,6 +68,9 @@ public class ConsultaNutricional {
 	@ManyToOne
 	@JoinColumn(name = "paciente_id")
 	private Paciente paciente;
+	
+	@OneToOne(cascade = CascadeType.ALL)
+	private InqueritoAlimentar inqueritoAlimentar;
 
 	@OneToMany(mappedBy = "consultaNutricional", cascade = CascadeType.ALL)
 	@JsonIgnore
@@ -384,7 +388,16 @@ public class ConsultaNutricional {
 	public void setBebidaAlcoolica(boolean bebidaAlcoolica) {
 		this.bebidaAlcoolica = bebidaAlcoolica;
 	}
-
+	
+	public void setInqueritoAlimentar(InqueritoAlimentar inqueritoAlimentar) {
+		this.inqueritoAlimentar = inqueritoAlimentar;
+	}
+	
+	public InqueritoAlimentar getInqueritoAlimentar() {
+		return inqueritoAlimentar;
+	}
+	
+	
 	public String getBebidaAlcoolicaComentario() {
 		return bebidaAlcoolicaComentario;
 	}

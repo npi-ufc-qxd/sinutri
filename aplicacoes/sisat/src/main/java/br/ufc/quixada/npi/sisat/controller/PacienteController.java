@@ -31,6 +31,7 @@ import br.ufc.quixada.npi.sisat.model.Alimentacao;
 import br.ufc.quixada.npi.sisat.model.ConsultaNutricional;
 import br.ufc.quixada.npi.sisat.model.Documento;
 import br.ufc.quixada.npi.sisat.model.FrequenciaAlimentar;
+import br.ufc.quixada.npi.sisat.model.InqueritoAlimentar;
 import br.ufc.quixada.npi.sisat.model.Paciente;
 import br.ufc.quixada.npi.sisat.model.Pessoa;
 import br.ufc.quixada.npi.sisat.model.enuns.ClassificacaoExame;
@@ -72,7 +73,10 @@ public class PacienteController {
 	private GenericService<FrequenciaAlimentar> frequenciaAlimentarService; 
 
 	@Inject
-	private GenericService<Alimentacao> alimentacaoService; 
+	private GenericService<Alimentacao> alimentacaoService;
+	
+	@Inject
+	private GenericService<InqueritoAlimentar> inqueritoAlimentarService;
 
 	@RequestMapping(value = "/{cpf}/historico", method = RequestMethod.GET)
 	public String getPaginaHistorico(@PathVariable("cpf") String cpf, Model model,
@@ -252,6 +256,8 @@ public class PacienteController {
 		return "nutricao/form-consulta";
 
 	}
+	
+	
 
 	@RequestMapping(value = { "/{cpf}/consulta/{idConsulta}/editar" }, method = RequestMethod.POST)
 	public String editarConsulta(Model model, @PathVariable("cpf") String cpf, @Valid ConsultaNutricional consulta, BindingResult result,
@@ -312,6 +318,23 @@ public class PacienteController {
 				+ consulta.getPaciente().getPessoa().getNome() + "</strong> atualizada com sucesso.");
 
 		return "redirect:/paciente/consulta/" + consulta.getId();
+	}
+	
+	@RequestMapping(value = { "/{cpf}/consulta/{idConsulta}/inquerito" }, method = RequestMethod.POST)
+	public String salvarInqueritoAlimentar(Model model, @PathVariable("cpf") String cpf, @PathVariable("idConsulta") Long idConsulta, @Valid InqueritoAlimentar inqueritoAlimentar, BindingResult result,RedirectAttributes redirectAttributes){
+		
+		if(result.hasErrors()){
+			model.addAttribute("inqueritoAlimentar", inqueritoAlimentar);
+			return ("nutricao/form-inquerito-alimentar");
+		}
+		
+		ConsultaNutricional consultaNutricional = consultaNutricionalService.find(ConsultaNutricional.class, idConsulta);
+		inqueritoAlimentar.setConsultaNutricional(consultaNutricional);		
+		inqueritoAlimentarService.save(inqueritoAlimentar);
+		
+		redirectAttributes.addFlashAttribute("success", "Inquerito de <strong> Id = " + inqueritoAlimentar.getId() + "</strong> da consulta <strong> de Id = " + consultaNutricional.getId() + "</strong> e paciente <strong> " + consultaNutricional.getPaciente().getPessoa().getNome() + "</strong> realizado com sucesso.");
+		
+		return "redirect:/paciente/consulta/" + consultaNutricional.getId() + "/inquerito/" + inqueritoAlimentar.getId();			
 	}
 
 	@RequestMapping(value = "/{cpf}/consulta/{id}/relatorio/orientacoes", method = RequestMethod.GET)
