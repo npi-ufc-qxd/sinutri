@@ -448,7 +448,7 @@
 							<div class="col-sm-3">
 								<div class="form-item">
 									<label for="glicemia" class="control-label">Glicemia:</label>
-									<form:input id="glicemia" path="glicemia"
+									<form:input type="number" id="glicemia" path="glicemia"
 										cssClass="form-control exame valid-num" placeholder="glicemia" />
 									<div class="error-validation">
 										<form:errors path="glicemia"></form:errors>
