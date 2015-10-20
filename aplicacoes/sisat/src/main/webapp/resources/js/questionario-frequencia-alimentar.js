@@ -175,7 +175,6 @@ $(function() {
 
 function deleteFrequencia(idFrequencia) {
 	if(idFrequencia > 0 ){
-		alert('message' + idFrequencia);
 		$.ajax({
 			type: "GET",
 			url: '/sisat/paciente/consulta/refeicao/' + idFrequencia + '/excluir.json',
@@ -189,7 +188,6 @@ function deleteFrequencia(idFrequencia) {
 
 function deleteAlimento(idAlimento) {
 	if(idAlimento > 0 ){
-		alert('message' + idAlimento);
 		$.ajax({
 			type: "GET",
 			url: '/sisat/paciente/consulta/alimento/' + idAlimento + '/excluir.json',

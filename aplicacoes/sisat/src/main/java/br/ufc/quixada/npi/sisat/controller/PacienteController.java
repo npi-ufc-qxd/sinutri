@@ -91,8 +91,7 @@ public class PacienteController {
 	}
 
 	@RequestMapping(value = { "/consulta/{id}" }, method = RequestMethod.GET)
-	public String getPaginaInformacoesConsulta(@PathVariable("id") Long id, Model model,
-			RedirectAttributes redirectAttributes) {
+	public String getPaginaInformacoesConsulta(@PathVariable("id") Long id, Model model, RedirectAttributes redirectAttributes) {
 		ConsultaNutricional consulta = consultaNutricionalService.getConsultaNutricionalWithDocumentosById(id);
 
 		if (consulta == null) {
@@ -254,7 +253,7 @@ public class PacienteController {
 	}
 
 	@RequestMapping(value = { "/{cpf}/consulta/{idConsulta}/editar" }, method = RequestMethod.POST)
-	public String editarConsulta(Model model, @PathVariable("cpf") String cpf, @Valid ConsultaNutricional consulta, BindingResult result,
+	public String editarConsulta(Model model, @PathVariable("cpf") String cpf, @PathVariable("idConsulta") Long idConsulta, @Valid ConsultaNutricional consulta, BindingResult result,
 			RedirectAttributes redirectAttributes, @RequestParam("files") List<MultipartFile> files,
 			@RequestParam(value = "enviar", required = false) boolean enviar) {
 		model.addAttribute("action", "editar");
@@ -290,6 +289,7 @@ public class PacienteController {
 					}
 				} catch (IOException e) {
 					model.addAttribute("erro", "Não foi possivel salvar os documentos.");
+					model.addAttribute("consultaNutricional", consulta);
 					return ("nutricao/form-consulta");
 				}
 			}
@@ -406,7 +406,7 @@ public class PacienteController {
 	private List<FrequenciaAlimentar> atualizarFrequenciaAlimentar(List<FrequenciaAlimentar> frequenciaAlimentars, ConsultaNutricional consultaNutricional) {
 		List<FrequenciaAlimentar> frequencias = new ArrayList<FrequenciaAlimentar>();
 		for (FrequenciaAlimentar frequenciaAlimentar : frequenciaAlimentars) {
-			if (frequenciaAlimentar != null) {
+			if (frequenciaAlimentar != null && frequenciaAlimentar.getAlimentos() != null) {
 				frequenciaAlimentar.setConsultaNutricional(consultaNutricional);
 				frequenciaAlimentar.setAlimentos(atualizarAlimentacao(frequenciaAlimentar));
 				frequencias.add(frequenciaAlimentar);
@@ -417,12 +417,12 @@ public class PacienteController {
 
 	private List<Alimentacao> atualizarAlimentacao(FrequenciaAlimentar frequenciaAlimentar) {
 		List<Alimentacao> alimentacaos = new ArrayList<Alimentacao>();
-		for (Alimentacao alimentacao : frequenciaAlimentar.getAlimentos()) {
-			if(alimentacao != null){
-				alimentacao.setFrequenciaAlimentar(frequenciaAlimentar);
-				alimentacaos.add(alimentacao);
+			for (Alimentacao alimentacao : frequenciaAlimentar.getAlimentos()) {
+				if(alimentacao != null){
+					alimentacao.setFrequenciaAlimentar(frequenciaAlimentar);
+					alimentacaos.add(alimentacao);
+				}
 			}
-		}
 		return alimentacaos;
 	}
 	
