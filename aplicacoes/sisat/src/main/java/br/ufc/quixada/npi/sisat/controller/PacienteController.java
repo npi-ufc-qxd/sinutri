@@ -81,7 +81,7 @@ public class PacienteController {
 	@RequestMapping(value = "/{cpf}/historico", method = RequestMethod.GET)
 	public String getPaginaHistorico(@PathVariable("cpf") String cpf, Model model,
 			RedirectAttributes redirectAttributes) {
-
+		
 		Pessoa pessoa = registrarPaciente(cpf);
 
 		if (pessoa == null) {
@@ -320,6 +320,22 @@ public class PacienteController {
 		return "redirect:/paciente/consulta/" + consulta.getId();
 	}
 	
+	
+	@RequestMapping(value = "/{cpf}/consulta/{idConsulta}/inquerito", method = RequestMethod.GET)
+	public String getPaginaRealizarInqueritoAlimentar(@PathVariable("idConsulta") Long idConsulta, Model model,
+			RedirectAttributes redirectAttributes) {
+
+		model.addAttribute("action", "cadastrar");
+
+		ConsultaNutricional consultaNutricional = consultaNutricionalService.find(ConsultaNutricional.class, idConsulta);
+		InqueritoAlimentar inqueritoAlimentar = new InqueritoAlimentar();
+		inqueritoAlimentar.setConsultaNutricional(consultaNutricional);		
+
+
+		model.addAttribute("inqueritoAlimentar", inqueritoAlimentar);
+		return "nutricao/form-inquerito-alimentar";
+	}
+	
 	@RequestMapping(value = { "/{cpf}/consulta/{idConsulta}/inquerito" }, method = RequestMethod.POST)
 	public String salvarInqueritoAlimentar(Model model, @PathVariable("cpf") String cpf, @PathVariable("idConsulta") Long idConsulta, @Valid InqueritoAlimentar inqueritoAlimentar, BindingResult result,RedirectAttributes redirectAttributes){
 		
@@ -334,7 +350,7 @@ public class PacienteController {
 		
 		redirectAttributes.addFlashAttribute("success", "Inquerito de <strong> Id = " + inqueritoAlimentar.getId() + "</strong> da consulta <strong> de Id = " + consultaNutricional.getId() + "</strong> e paciente <strong> " + consultaNutricional.getPaciente().getPessoa().getNome() + "</strong> realizado com sucesso.");
 		
-		return "redirect:/paciente/consulta/" + consultaNutricional.getId() + "/inquerito/" + inqueritoAlimentar.getId();			
+		return "redirect:/paciente/"+ consultaNutricional.getPaciente().getPessoa().getCpf() +"/consulta/" + consultaNutricional.getId() + "/inquerito/" + inqueritoAlimentar.getId();			
 	}
 
 	@RequestMapping(value = "/{cpf}/consulta/{id}/relatorio/orientacoes", method = RequestMethod.GET)
