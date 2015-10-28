@@ -3,15 +3,13 @@ $(document).ready(function() {
 		parent.history.back();
 		return false;
 	});
-					
-	$("input[type='checkbox']").change(function() {
+	
+	$(".checkboxInput").change(function() {
 		var itemForm = $(this).parent().parent();
 
 		if ($(this).is(":checked")) {
 			$(itemForm).find("input[type='text']").attr("disabled", false);
 			$(itemForm).find("input[type='text']").attr('required', 'required');
-			$(itemForm).parent().find("select").attr("disabled", false);
-			$(itemForm).parent().find("select").attr('required', 'required');
 			$(itemForm).find("textarea").attr("disabled", false);
 			$(itemForm).find("textarea").attr('required', 'required');
 
@@ -19,15 +17,58 @@ $(document).ready(function() {
 			$(itemForm).find("input[type='text']").val("");
 			$(itemForm).find("input[type='text']").attr("disabled", true);
 			$(itemForm).find("input[type='text']").removeAttr('required');
-			$(itemForm).parent().find("select").attr("disabled",true);
-			$(itemForm).parent().find("select").prop('selectedIndex', 0);
-			$(itemForm).find("select").removeAttr('required');
 			$(itemForm).find("textarea").attr("disabled", true);
 			$(itemForm).find("textarea").removeAttr('required');
+			$(itemForm).removeClass('has-error');
+			$(itemForm).find('.help-block').remove();
+		}
+		
+	});
+
+	$(".checkboxInputSelect").change(function() {
+		var itemForm = $(this).parent().parent().parent();
+
+		if ($(this).is(":checked")) {
+			$(itemForm).find("input[type='text']").attr("disabled", false);
+			$(itemForm).find("input[type='text']").attr('required', 'required');
+			$(itemForm).find("select").attr("disabled", false);
+			$(itemForm).find("select").attr('required', 'required');
+		} else if (!$(this).is(":checked")) {
+			$(itemForm).find("input[type='text']").attr("disabled", true);
+			$(itemForm).find("select").attr("disabled",true);
+			$(itemForm).find("select").prop('selectedIndex', 0);
 			$(itemForm).find('.has-error').removeClass('has-error');
 			$(itemForm).find('.help-block').remove();
 		}
 	});
+//
+//	$("input[type='checkbox']").change(function() {
+//		var itemForm = $(this).parent().parent();
+//
+//		if ($(this).is(":checked")) {
+//			$(itemForm).find("input[type='text']").attr("disabled", false);
+//			$(itemForm).find("input[type='text']").attr('required', 'required');
+//			$(itemForm).parent().find("select").attr("disabled", false);
+//			$(itemForm).parent().find("select").attr('required', 'required');
+//			$(itemForm).find("textarea").attr("disabled", false);
+//			$(itemForm).find("textarea").attr('required', 'required');
+//
+//		} else if (!$(this).is(":checked")) {
+//			console.log($(itemForm).html());
+//			$(itemForm).find("input[type='text']").val("");
+//			$(itemForm).find("input[type='text']").attr("disabled", true);
+//			$(itemForm).find("input[type='text']").removeAttr('required');
+//			$(itemForm).parent().find("select").attr("disabled",true);
+//			$(itemForm).parent().find("select").prop('selectedIndex', 0);
+//			$(itemForm).find("select").removeAttr('required');
+//			$(itemForm).find("textarea").attr("disabled", true);
+//			$(itemForm).find("textarea").removeAttr('required');
+//			$(itemForm).find('.has-error').removeClass('has-error');
+//			$(itemForm).removeClass('has-error');
+//			$(itemForm).parent().removeClass('has-error');
+//			$(itemForm).find('.help-block').remove();
+//		}
+//	});
 					
 	$('.valid-num').keyup(function() {
 		if ($(this).val().indexOf(",") >= 0) {
@@ -118,12 +159,6 @@ $(document).ready(function() {
 							pesoDesejado : {
 								required : true
 							},
-							circunferenciaCintura : {
-								required : true
-							},
-							circunferenciaCinturaDesejada : {
-								required : true
-							},
 							agua : {
 								required : true
 							}
@@ -159,12 +194,6 @@ $(document).ready(function() {
 							},
 							pesoDesejado : {
 								required : "Informe o peso desejado pelo paciente."
-							},
-							circunferenciaCintura : {
-								required : "Informe a circunferência da cintura do paciente."
-							},
-							circunferenciaCinturaDesejada : {
-								required : "Informe a cincunferência da cintura desejada pelo paciente."
 							},
 							agua : {
 								required : "Informe a quantidade de copos de água consumidos pelo paciente."

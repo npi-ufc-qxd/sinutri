@@ -19,7 +19,7 @@
 		<div class="buscar-paciente" align="left">
 
 		<h3>Buscar Paciente</h3>
-		<form:form id="formBuscarPaciente" role="form" servletReltiveAction="/nutricao/buscar" method="POST" class="bs-component">	
+		<form:form id="formBuscarPaciente" role="form" servletRelativeAction="/nutricao/buscar" method="POST" class="bs-component">	
 			<div class="form-group">
 			  <div class="input-group">
 				<input id="busca" name="busca" type="text" class="form-control" placeholder="Nome ou CPF" size="40" required="required" value="${busca }" autofocus="autofocus"/>

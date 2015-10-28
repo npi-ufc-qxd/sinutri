@@ -69,7 +69,7 @@ $(function() {
 			display : 'Hora',
 			type : 'text',
 			ctrlAttr : {
-				maxlength : 15,
+				maxlength : 5,
 				required : 'required'
 			},
 			ctrlClass : 'form-control hora'
@@ -103,7 +103,7 @@ $(function() {
 		subPanelBuilder : function(cell, uniqueIndex) {
 			var idPanel = uniqueIndex-1;
 
-			$(".hora").mask("99:99:99");
+			$(".hora").mask("99:99");
 
 			var subgrid = $('<table></table>').attr('id', 'tblSubGrid_' + uniqueIndex).attr('class', 'tblSubGrid table table-striped').appendTo(cell);
 
