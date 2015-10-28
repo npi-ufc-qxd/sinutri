@@ -146,6 +146,9 @@ public class PacienteController {
 		model.addAttribute("action", "cadastrar");
 
 		Pessoa pessoa = pessoaService.getPessoaByCpf(cpf);
+		InqueritoAlimentar inqueritoAlimentar = consulta.getInqueritoAlimentar();
+		inqueritoAlimentar.setConsultaNutricional(consulta);
+		consulta.setInqueritoAlimentar(inqueritoAlimentar);
 
 		if (pessoa == null) {
 			redirectAttributes.addFlashAttribute("erro", "Paciente não encontrado. Faça um nova pesquisa");
@@ -320,39 +323,6 @@ public class PacienteController {
 		return "redirect:/paciente/consulta/" + consulta.getId();
 	}
 	
-	
-	@RequestMapping(value = "/{cpf}/consulta/{idConsulta}/inquerito", method = RequestMethod.GET)
-	public String getPaginaRealizarInqueritoAlimentar(@PathVariable("idConsulta") Long idConsulta, Model model,
-			RedirectAttributes redirectAttributes) {
-
-		model.addAttribute("action", "cadastrar");
-
-		ConsultaNutricional consultaNutricional = consultaNutricionalService.find(ConsultaNutricional.class, idConsulta);
-		InqueritoAlimentar inqueritoAlimentar = new InqueritoAlimentar();
-		inqueritoAlimentar.setConsultaNutricional(consultaNutricional);		
-
-
-		model.addAttribute("inqueritoAlimentar", inqueritoAlimentar);
-		return "nutricao/form-inquerito-alimentar";
-	}
-	
-	@RequestMapping(value = { "/{cpf}/consulta/{idConsulta}/inquerito" }, method = RequestMethod.POST)
-	public String salvarInqueritoAlimentar(Model model, @PathVariable("cpf") String cpf, @PathVariable("idConsulta") Long idConsulta, @Valid InqueritoAlimentar inqueritoAlimentar, BindingResult result,RedirectAttributes redirectAttributes){
-		
-		if(result.hasErrors()){
-			model.addAttribute("inqueritoAlimentar", inqueritoAlimentar);
-			return ("nutricao/form-inquerito-alimentar");
-		}
-		
-		ConsultaNutricional consultaNutricional = consultaNutricionalService.find(ConsultaNutricional.class, idConsulta);
-		inqueritoAlimentar.setConsultaNutricional(consultaNutricional);		
-		inqueritoAlimentarService.save(inqueritoAlimentar);
-		
-		redirectAttributes.addFlashAttribute("success", "Inquerito de <strong> Id = " + inqueritoAlimentar.getId() + "</strong> da consulta <strong> de Id = " + consultaNutricional.getId() + "</strong> e paciente <strong> " + consultaNutricional.getPaciente().getPessoa().getNome() + "</strong> realizado com sucesso.");
-		
-		return "redirect:/paciente/"+ consultaNutricional.getPaciente().getPessoa().getCpf() +"/consulta/" + consultaNutricional.getId() + "/inquerito/" + inqueritoAlimentar.getId();			
-	}
-
 	@RequestMapping(value = "/{cpf}/consulta/{id}/relatorio/orientacoes", method = RequestMethod.GET)
 	public String relatorio(@PathVariable("id") Long id, Model model, HttpSession session) throws JRException {
 

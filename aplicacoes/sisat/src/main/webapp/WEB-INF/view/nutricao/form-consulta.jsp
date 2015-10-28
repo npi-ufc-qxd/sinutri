@@ -79,6 +79,9 @@
 					<li><a href="#documentos"> <span class="badge">5</span>
 							Documentos
 					</a></li>
+					<li><a href="#inquerito"> <span class="badge">6</span>
+							Inquerito Alimentar
+					</a></li>
 				</ul>
 
 			</div>
@@ -91,6 +94,7 @@
 					<form:hidden path="id" />
 					<form:hidden path="paciente.id" />
 					<form:hidden path="data" />
+					
 
 					<h4 id="avaliacao" class="section"><strong>Anamnese</strong></h4>
 
@@ -822,7 +826,46 @@
 							
 						</div>
 					</div>
-
+					
+					<h4 id="inquerito" class="section"><strong>Inquerito Alimentar</strong></h4>
+					
+					<div class="row form-group">
+						<div class="form-item col-sm-4">
+							<label for="bovinaGosta" class=" control-label"><form:checkbox
+									id="bovinaGosta" path="inqueritoAlimentar.bovinaGosta"
+									class="checkInputSelec" />Gosta de Carne Bovina?</label>							
+							<div class="error-validation">
+								<form:errors path="inqueritoAlimentar.bovinaGosta"></form:errors>
+							</div>
+						</div>
+						
+						<div class="form-item col-sm-4">
+							<label for="bovinaFrequenciaSemanal" class="control-label">&nbsp;&nbsp;&nbsp;</label>
+							<form:select path="inqueritoAlimentar.bovinaFrequenciaSemanal"
+								cssClass="form-control select"
+								disabled="${not consultaNutricional.carneVermelha}">
+								<form:option value="">Quantas vezes por semana?</form:option>
+								<form:options items="${frequencia}" itemLabel="tipo" />
+							</form:select>
+							<div class="error-validation">
+								<form:errors path="inqueritoAlimentar.bovinaFrequenciaSemanal"></form:errors>
+							</div>
+						</div>
+						
+						<div class="form-item col-sm-4">
+							<label for="bovinaQuantidade" class="control-label">&nbsp;&nbsp;&nbsp;</label>
+							<form:input id="inputTextBovina"
+								path="inqueritoAlimentar.bovinaQuantidade" cssClass="form-control"
+								placeholder="Quantidade"
+								disabled="${not consultaNutricional.carneVermelha}" />
+							<div class="error-validation">
+								<form:errors path="inqueritoAlimentar.bovinaQuantidade"></form:errors>
+							</div>
+						</div>
+						
+					</div>					
+					
+					
 					<div class="col-xs-offset-0 col-xs-10" align="center">
 						<button type="submit" class="btn btn-success">${botao}</button>
 					</div><br><br><br><br>

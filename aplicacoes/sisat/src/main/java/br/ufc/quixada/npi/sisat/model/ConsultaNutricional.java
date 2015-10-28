@@ -32,25 +32,25 @@ import br.ufc.quixada.npi.sisat.model.enuns.SistemaGastrointestinal;
 import br.ufc.quixada.npi.sisat.model.enuns.SistemaUrinario;
 
 @NamedQueries({
-	@NamedQuery(name = "ConsultaNutricional.findConsultaNutricionalWithDocumentosById", query = "select c from ConsultaNutricional c left join fetch c.documentos where c.id=:id"),
-	@NamedQuery(name = "ConsultaNutricional.findFrequenciasByIdConsulta", query = "select DISTINCT f from FrequenciaAlimentar f left join fetch f.alimentos where f.consultaNutricional.id = :id"),
-	@NamedQuery(name = "ConsultaNutricional.findOrientacoesIndividuaisById", query = "select c.orientacoesIndividuais from ConsultaNutricional c where c.id=:id"),
-	@NamedQuery(name = "ConsultaNutricional.findPacientePessoaCpfById", query = "select c.paciente.pessoa.cpf from ConsultaNutricional c where c.id=:id"), 
-	@NamedQuery(name = "ConsultaNutricional.countFrequenciaMastigacao", query = "select count(c.mastigacao) from ConsultaNutricional c where c.mastigacao = TRUE"),
-	@NamedQuery(name = "ConsultaNutricional.findCountFrequenciaMastigacao", query = "select count(c.mastigacao) from ConsultaNutricional c where c.mastigacao = TRUE"),
-	@NamedQuery(name = "ConsultaNutricional.countFrequenciaDisfagia", query = "select count(c.disfagia) from ConsultaNutricional c where c.disfagia = TRUE"),
-	@NamedQuery(name = "ConsultaNutricional.countFrequenciaOdinofagia", query = "select count(c.odinofagia) from ConsultaNutricional c WHERE c.odinofagia = TRUE"),
-	@NamedQuery(name = "ConsultaNutricional.countFrequenciaPirose", query = "select count(c.pirose) from ConsultaNutricional c where c.pirose = TRUE"),
-	@NamedQuery(name = "ConsultaNutricional.countFrequenciaNausea", query = "select count(c.nausea) from ConsultaNutricional c where c.nausea = TRUE"),
-	@NamedQuery(name = "ConsultaNutricional.countFrequenciaVomito", query = "select count(c.vomito) from ConsultaNutricional c where c.vomito = TRUE"),
-	@NamedQuery(name = "ConsultaNutricional.countFrequenciaDiarreia", query = "select count(c.diarreia) from ConsultaNutricional c where c.diarreia = TRUE"),
-	@NamedQuery(name = "ConsultaNutricional.countFrequenciaConstipacao", query = "select count(c.constipacao) from ConsultaNutricional c where c.constipacao = TRUE"),
-	@NamedQuery(name = "ConsultaNutricional.countFrequenciaDiabetes", query = "select count(c.diabetes) from ConsultaNutricional c where c.diabetes = TRUE"),
-	@NamedQuery(name = "ConsultaNutricional.countFrequenciaHipertensao", query = "select count(c.hipertensao) from ConsultaNutricional c where c.hipertensao = TRUE"),
-	@NamedQuery(name = "ConsultaNutricional.countFrequenciaAlergia", query = "select count(c.alergia) from ConsultaNutricional c where c.alergia = TRUE"),
-	@NamedQuery(name = "ConsultaNutricional.countFrequenciaOutrasPatologias", query = "select count(c.outrasPatologias) from ConsultaNutricional c where c.outrasPatologias = TRUE"),
+		@NamedQuery(name = "ConsultaNutricional.findConsultaNutricionalWithDocumentosById", query = "select c from ConsultaNutricional c left join fetch c.documentos where c.id=:id"),
+		@NamedQuery(name = "ConsultaNutricional.findFrequenciasByIdConsulta", query = "select DISTINCT f from FrequenciaAlimentar f left join fetch f.alimentos where f.consultaNutricional.id = :id"),
+		@NamedQuery(name = "ConsultaNutricional.findOrientacoesIndividuaisById", query = "select c.orientacoesIndividuais from ConsultaNutricional c where c.id=:id"),
+		@NamedQuery(name = "ConsultaNutricional.findPacientePessoaCpfById", query = "select c.paciente.pessoa.cpf from ConsultaNutricional c where c.id=:id"),
+		@NamedQuery(name = "ConsultaNutricional.countFrequenciaMastigacao", query = "select count(c.mastigacao) from ConsultaNutricional c where c.mastigacao = TRUE"),
+		@NamedQuery(name = "ConsultaNutricional.findCountFrequenciaMastigacao", query = "select count(c.mastigacao) from ConsultaNutricional c where c.mastigacao = TRUE"),
+		@NamedQuery(name = "ConsultaNutricional.countFrequenciaDisfagia", query = "select count(c.disfagia) from ConsultaNutricional c where c.disfagia = TRUE"),
+		@NamedQuery(name = "ConsultaNutricional.countFrequenciaOdinofagia", query = "select count(c.odinofagia) from ConsultaNutricional c WHERE c.odinofagia = TRUE"),
+		@NamedQuery(name = "ConsultaNutricional.countFrequenciaPirose", query = "select count(c.pirose) from ConsultaNutricional c where c.pirose = TRUE"),
+		@NamedQuery(name = "ConsultaNutricional.countFrequenciaNausea", query = "select count(c.nausea) from ConsultaNutricional c where c.nausea = TRUE"),
+		@NamedQuery(name = "ConsultaNutricional.countFrequenciaVomito", query = "select count(c.vomito) from ConsultaNutricional c where c.vomito = TRUE"),
+		@NamedQuery(name = "ConsultaNutricional.countFrequenciaDiarreia", query = "select count(c.diarreia) from ConsultaNutricional c where c.diarreia = TRUE"),
+		@NamedQuery(name = "ConsultaNutricional.countFrequenciaConstipacao", query = "select count(c.constipacao) from ConsultaNutricional c where c.constipacao = TRUE"),
+		@NamedQuery(name = "ConsultaNutricional.countFrequenciaDiabetes", query = "select count(c.diabetes) from ConsultaNutricional c where c.diabetes = TRUE"),
+		@NamedQuery(name = "ConsultaNutricional.countFrequenciaHipertensao", query = "select count(c.hipertensao) from ConsultaNutricional c where c.hipertensao = TRUE"),
+		@NamedQuery(name = "ConsultaNutricional.countFrequenciaAlergia", query = "select count(c.alergia) from ConsultaNutricional c where c.alergia = TRUE"),
+		@NamedQuery(name = "ConsultaNutricional.countFrequenciaOutrasPatologias", query = "select count(c.outrasPatologias) from ConsultaNutricional c where c.outrasPatologias = TRUE"),
 
-	@NamedQuery(name = "ConsultaNutricional.historicoPeso", query = "select new br.ufc.quixada.npi.sisat.model.ConsultaNutricional(c.paciente, c.data, c.peso, c.altura, c.circunferenciaCintura) from ConsultaNutricional c where c.paciente.pessoa.cpf = :cpf "),
+		@NamedQuery(name = "ConsultaNutricional.historicoPeso", query = "select new br.ufc.quixada.npi.sisat.model.ConsultaNutricional(c.paciente, c.data, c.peso, c.altura, c.circunferenciaCintura) from ConsultaNutricional c where c.paciente.pessoa.cpf = :cpf "),
 
 })
 
@@ -68,8 +68,8 @@ public class ConsultaNutricional {
 	@ManyToOne
 	@JoinColumn(name = "paciente_id")
 	private Paciente paciente;
-	
-	@OneToOne(cascade = CascadeType.ALL)
+
+	@OneToOne
 	private InqueritoAlimentar inqueritoAlimentar;
 
 	@OneToMany(mappedBy = "consultaNutricional", cascade = CascadeType.ALL)
@@ -189,16 +189,15 @@ public class ConsultaNutricional {
 
 	private Double tgp;
 	private ClassificacaoExame classificacaoTgp;
-	
+
 	@Transient
 	private Double IMC;
-	
+
 	@Transient
 	private String classificacaoIMC;
-	
+
 	@Transient
 	private String classificacaoCC;
-	
 
 	@Column(columnDefinition = "TEXT")
 	@NotNull(message = "Informe as orientações para o paciente.")
@@ -388,16 +387,15 @@ public class ConsultaNutricional {
 	public void setBebidaAlcoolica(boolean bebidaAlcoolica) {
 		this.bebidaAlcoolica = bebidaAlcoolica;
 	}
-	
+
 	public void setInqueritoAlimentar(InqueritoAlimentar inqueritoAlimentar) {
 		this.inqueritoAlimentar = inqueritoAlimentar;
 	}
-	
+
 	public InqueritoAlimentar getInqueritoAlimentar() {
 		return inqueritoAlimentar;
 	}
-	
-	
+
 	public String getBebidaAlcoolicaComentario() {
 		return bebidaAlcoolicaComentario;
 	}
@@ -856,7 +854,7 @@ public class ConsultaNutricional {
 		classificacaoCC = this.classificaCircunferenciaCintura();
 		return classificacaoCC;
 	}
-	
+
 	public void setClassificacaoCC(String classificacaoCC) {
 		this.classificacaoCC = classificacaoCC;
 	}
@@ -867,7 +865,7 @@ public class ConsultaNutricional {
 			return "";
 		}
 
-		Double circunferencia = this.getCircunferenciaCintura()/100;
+		Double circunferencia = this.getCircunferenciaCintura() / 100;
 
 		if (this.getPaciente().getPessoa().getSexo() != null) {
 			String sexo = this.getPaciente().getPessoa().getSexo();

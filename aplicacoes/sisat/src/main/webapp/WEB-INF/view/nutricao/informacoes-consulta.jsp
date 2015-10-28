@@ -63,6 +63,9 @@
 					<li><a href="#documentos"> <span class="badge">5</span>
 							Documentos
 					</a></li>
+					<li><a href="#inquerito"> <span class="badge">6</span>
+							Inquerito Alimentar
+					</a></li>
 				</ul>
 
 			</div>
@@ -454,6 +457,11 @@
 							consulta não possui documento(s) anexado(s) a ela.</div>
 					</c:otherwise>
 				</c:choose>
+				
+				<h3 id="inquerito" class="section">Inquerito Alimentar</h3>
+				
+				
+				
 			</div>
 		</div>
 	</div>
