@@ -20,9 +20,11 @@ function loadQuestionarios(result) {
 	var i = 0;
 	var frequencias = [];
 
+		
 	$.each( result, function( key, frequenciaAlimentar ) {
 		var alimentos = [];
 		var y = 0;
+		frequenciaAlimentar.horario = frequenciaAlimentar.horario.slice(0,5);
 
 		$.each( frequenciaAlimentar.alimentos, function( key, alimento ) {
 			alimentos[y] = { 
