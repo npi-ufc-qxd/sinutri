@@ -93,6 +93,7 @@
 					cssClass="form-horizontal" enctype="multipart/form-data">
 					<form:hidden path="id" />
 					<form:hidden path="paciente.id" />
+					<form:hidden path="inqueritoAlimentar.id" />
 					<form:hidden path="data" />
 					
 

@@ -69,7 +69,7 @@ public class ConsultaNutricional {
 	@JoinColumn(name = "paciente_id")
 	private Paciente paciente;
 
-	@OneToOne
+	@OneToOne(mappedBy = "consultaNutricional", cascade = CascadeType.ALL)
 	private InqueritoAlimentar inqueritoAlimentar;
 
 	@OneToMany(mappedBy = "consultaNutricional", cascade = CascadeType.ALL)

@@ -74,9 +74,6 @@ public class PacienteController {
 
 	@Inject
 	private GenericService<Alimentacao> alimentacaoService;
-	
-	@Inject
-	private GenericService<InqueritoAlimentar> inqueritoAlimentarService;
 
 	@RequestMapping(value = "/{cpf}/historico", method = RequestMethod.GET)
 	public String getPaginaHistorico(@PathVariable("cpf") String cpf, Model model,
@@ -122,11 +119,10 @@ public class PacienteController {
 			return "redirect:/nutricao/buscar";
 		}
 
-		ConsultaNutricional consulta = new ConsultaNutricional();
-		Paciente paciente = pessoa.getPaciente();
-		consulta.setPaciente(paciente);
+		ConsultaNutricional consulta = new ConsultaNutricional(pessoa.getPaciente());
+		consulta.setInqueritoAlimentar(new InqueritoAlimentar());
 
-		model.addAttribute("consultaNutricional", new ConsultaNutricional(pessoa.getPaciente()));
+		model.addAttribute("consultaNutricional", consulta);
 		model.addAttribute("sistemaGastrointestinal", SistemaGastrointestinal.values());
 		model.addAttribute("classificacaoExames", ClassificacaoExame.values());
 		model.addAttribute("sistemaUrinario", SistemaUrinario.values());
@@ -270,6 +266,13 @@ public class PacienteController {
 
 		Paciente paciente = pacienteService.find(Paciente.class, consulta.getPaciente().getId());
 		consulta.setPaciente(paciente);
+		
+		InqueritoAlimentar inqueritoAlimentar = consulta.getInqueritoAlimentar();
+		inqueritoAlimentar.setConsultaNutricional(consulta);
+		
+		System.out.println(consulta.getInqueritoAlimentar());
+		System.out.println(inqueritoAlimentar);
+		
 
 		consultaNutricionalValidator.validate(consulta, result);
 
@@ -315,6 +318,8 @@ public class PacienteController {
 		if (consulta.getFrequencias() != null) {
 			atualizarFrequenciaAlimentar(consulta.getFrequencias(), consulta);
 		}
+		
+		consulta.getInqueritoAlimentar().setConsultaNutricional(consulta);
 
 		consultaNutricionalService.update(atualizarConsulta(consulta));
 		redirectAttributes.addFlashAttribute("success", "Consulta do paciente <strong>"

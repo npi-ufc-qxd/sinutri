@@ -21,7 +21,7 @@ public class InqueritoAlimentar {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@OneToOne(mappedBy = "inqueritoAlimentar", cascade = CascadeType.ALL)
+	@OneToOne
 	@JoinColumn(name = "consultaNutricional_id")
 	@JsonIgnore
 	private ConsultaNutricional consultaNutricional;
