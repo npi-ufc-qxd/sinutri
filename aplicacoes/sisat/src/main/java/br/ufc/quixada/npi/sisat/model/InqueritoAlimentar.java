@@ -1,6 +1,5 @@
 package br.ufc.quixada.npi.sisat.model;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;

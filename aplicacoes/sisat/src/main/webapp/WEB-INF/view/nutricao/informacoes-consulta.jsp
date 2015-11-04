@@ -460,6 +460,215 @@
 				
 				<h3 id="inquerito" class="section">Inquerito Alimentar</h3>
 				
+				<table class="table table-striped">
+							<thead class="thead">
+								<tr>
+									<th>Alimentos</th>									
+									<th>Frequencia</th>
+									<th>Quantidade</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td>Bovina</td>
+									<c:if
+									test="${not empty consulta.inqueritoAlimentar.bovinaFrequenciaSemanal and not empty consulta.inqueritoAlimentar.bovinaQuantidade}">
+									<td>${consulta.inqueritoAlimentar.bovinaFrequenciaSemanal}</td>
+									<td>${consulta.inqueritoAlimentar.bovinaQuantidade}</td>	
+									</c:if>
+								</tr>
+								
+								<tr>
+									<td>Aves</td>
+									<c:if
+									test="${not empty consulta.inqueritoAlimentar.avesFrequenciaSemanal and not empty consulta.inqueritoAlimentar.avesQuantidade}">
+									<td>${consulta.inqueritoAlimentar.avesFrequenciaSemanal}</td>
+									<td>${consulta.inqueritoAlimentar.avesQuantidade}</td>	
+									</c:if>
+								</tr>
+								
+								<tr>
+									<td>Peixe</td>
+									<c:if
+									test="${not empty consulta.inqueritoAlimentar.peixeFrequenciaSemanal and not empty consulta.inqueritoAlimentar.peixeQuantidade}">
+									<td>${consulta.inqueritoAlimentar.peixeFrequenciaSemanal}</td>
+									<td>${consulta.inqueritoAlimentar.peixeQuantidade}</td>	
+									</c:if>
+								</tr>
+								
+								<tr>
+									<td>Visceras</td>
+									<c:if
+									test="${not empty consulta.inqueritoAlimentar.viscerasFrequenciaSemanal and not empty consulta.inqueritoAlimentar.viscerasQuantidade}">
+									<td>${consulta.inqueritoAlimentar.viscerasFrequenciaSemanal}</td>
+									<td>${consulta.inqueritoAlimentar.viscerasQuantidade}</td>	
+									</c:if>
+								</tr>
+								
+								<tr>
+									<td>Leite e Derivados</td>
+									<c:if
+									test="${not empty consulta.inqueritoAlimentar.leiteDerivadosFrequenciaSemanal and not empty consulta.inqueritoAlimentar.leiteDerivadosQuantidade}">
+									<td>${consulta.inqueritoAlimentar.leiteDerivadosFrequenciaSemanal}</td>
+									<td>${consulta.inqueritoAlimentar.leiteDerivadosQuantidade}</td>	
+									</c:if>
+								</tr>
+								
+								<tr>
+									<td>Ovos</td>
+									<c:if
+									test="${not empty consulta.inqueritoAlimentar.ovosFrequenciaSemanal and not empty consulta.inqueritoAlimentar.ovosQuantidade}">
+									<td>${consulta.inqueritoAlimentar.ovosFrequenciaSemanal}</td>
+									<td>${consulta.inqueritoAlimentar.ovosQuantidade}</td>	
+									</c:if>
+								</tr>
+								
+								<tr>
+									<td>Leguminosas</td>
+									<c:if
+									test="${not empty consulta.inqueritoAlimentar.leguminosasFrequenciaSemanal and not empty consulta.inqueritoAlimentar.leguminosasQuantidade}">
+									<td>${consulta.inqueritoAlimentar.leguminosasFrequenciaSemanal}</td>
+									<td>${consulta.inqueritoAlimentar.leguminosasQuantidade}</td>	
+									</c:if>
+								</tr>
+								
+								<tr>
+									<td>Cereais</td>
+									<c:if
+									test="${not empty consulta.inqueritoAlimentar.cereaisFrequenciaSemanal and not empty consulta.inqueritoAlimentar.cereaisQuantidade}">
+									<td>${consulta.inqueritoAlimentar.cereaisFrequenciaSemanal}</td>
+									<td>${consulta.inqueritoAlimentar.cereaisQuantidade}</td>	
+									</c:if>
+								</tr>
+								
+								<tr>
+									<td>Massas</td>
+									<c:if
+									test="${not empty consulta.inqueritoAlimentar.massasFrequenciaSemanal and not empty consulta.inqueritoAlimentar.massasQuantidade}">
+									<td>${consulta.inqueritoAlimentar.massasFrequenciaSemanal}</td>
+									<td>${consulta.inqueritoAlimentar.massasQuantidade}</td>	
+									</c:if>
+								</tr>
+								
+								<tr>
+									<td>Vegetais Crus</td>
+									<c:if
+									test="${not empty consulta.inqueritoAlimentar.vegetaisCrusFrequenciaSemanal and not empty consulta.inqueritoAlimentar.vegetaisCrusQuantidade}">
+									<td>${consulta.inqueritoAlimentar.vegetaisCrusFrequenciaSemanal}</td>
+									<td>${consulta.inqueritoAlimentar.vegetaisCrusQuantidade}</td>	
+									</c:if>
+								</tr>
+								
+								<tr>
+									<td>Vegetais Cozidos</td>
+									<c:if
+									test="${not empty consulta.inqueritoAlimentar.vegetaisCozidosFrequenciaSemanal and not empty consulta.inqueritoAlimentar.vegetaisCozidosQuantidade}">
+									<td>${consulta.inqueritoAlimentar.vegetaisCozidosFrequenciaSemanal}</td>
+									<td>${consulta.inqueritoAlimentar.vegetaisCozidosQuantidade}</td>	
+									</c:if>
+								</tr>
+								
+								<tr>
+									<td>Frutas</td>
+									<c:if
+									test="${not empty consulta.inqueritoAlimentar.frutasFrequenciaSemanal and not empty consulta.inqueritoAlimentar.frutasQuantidade}">
+									<td>${consulta.inqueritoAlimentar.frutasFrequenciaSemanal}</td>
+									<td>${consulta.inqueritoAlimentar.frutasQuantidade}</td>	
+									</c:if>
+								</tr>
+								
+								<tr>
+									<td>Doces</td>
+									<c:if
+									test="${not empty consulta.inqueritoAlimentar.docesFrequenciaSemanal and not empty consulta.inqueritoAlimentar.docesQuantidade}">
+									<td>${consulta.inqueritoAlimentar.docesFrequenciaSemanal}</td>
+									<td>${consulta.inqueritoAlimentar.docesQuantidade}</td>	
+									</c:if>
+								</tr>
+								
+								<tr>
+									<td>Óleo</td>
+									<c:if
+									test="${not empty consulta.inqueritoAlimentar.oleoFrequenciaSemanal and not empty consulta.inqueritoAlimentar.oleoQuantidade}">
+									<td>${consulta.inqueritoAlimentar.oleoFrequenciaSemanal}</td>
+									<td>${consulta.inqueritoAlimentar.oleoQuantidade}</td>	
+									</c:if>
+								</tr>
+								
+								<tr>
+									<td>Margarina</td>
+									<c:if
+									test="${not empty consulta.inqueritoAlimentar.margarinaFrequenciaSemanal and not empty consulta.inqueritoAlimentar.margarinaQuantidade}">
+									<td>${consulta.inqueritoAlimentar.margarinaFrequenciaSemanal}</td>
+									<td>${consulta.inqueritoAlimentar.margarinaQuantidade}</td>	
+									</c:if>
+								</tr>
+								
+								<tr>
+									<td>Manteiga</td>
+									<c:if
+									test="${not empty consulta.inqueritoAlimentar.manteigaFrequenciaSemanal and not empty consulta.inqueritoAlimentar.manteigaQuantidade}">
+									<td>${consulta.inqueritoAlimentar.manteigaFrequenciaSemanal}</td>
+									<td>${consulta.inqueritoAlimentar.manteigaQuantidade}</td>	
+									</c:if>
+								</tr>
+								
+								<tr>
+									<td>Toucinho/Bacon</td>
+									<c:if
+									test="${not empty consulta.inqueritoAlimentar.toucinhoBaconFrequenciaSemanal and not empty consulta.inqueritoAlimentar.toucinhoQuantidade}">
+									<td>${consulta.inqueritoAlimentar.toucinhoBaconFrequenciaSemanal}</td>
+									<td>${consulta.inqueritoAlimentar.toucinhoQuantidade}</td>	
+									</c:if>
+								</tr>
+								
+								<tr>
+									<td>Água</td>
+									<c:if
+									test="${not empty consulta.inqueritoAlimentar.aguaFrequenciaSemanal and not empty consulta.inqueritoAlimentar.aguaQuantidade}">
+									<td>${consulta.inqueritoAlimentar.aguaFrequenciaSemanal}</td>
+									<td>${consulta.inqueritoAlimentar.aguaQuantidade}</td>	
+									</c:if>
+								</tr>
+								
+								<tr>
+									<td>Suco</td>
+									<c:if
+									test="${not empty consulta.inqueritoAlimentar.sucoFrequenciaSemanal and not empty consulta.inqueritoAlimentar.sucoQuantidade}">
+									<td>${consulta.inqueritoAlimentar.sucoFrequenciaSemanal}</td>
+									<td>${consulta.inqueritoAlimentar.sucoQuantidade}</td>	
+									</c:if>
+								</tr>
+								
+								<tr>
+									<td>Bebidas Acoólicas</td>
+									<c:if
+									test="${not empty consulta.inqueritoAlimentar.bebidasAlcoolicasFrequenciaSemanal and not empty consulta.inqueritoAlimentar.bebidasAlcoolicasQuantidade}">
+									<td>${consulta.inqueritoAlimentar.bebidasAlcoolicasFrequenciaSemanal}</td>
+									<td>${consulta.inqueritoAlimentar.bebidasAcoolicasQuantidade}</td>	
+									</c:if>
+								</tr>
+								
+								<tr>
+									<td>Bebidas Gaseificadas</td>
+									<c:if
+									test="${not empty consulta.inqueritoAlimentar.gaseificadasFrequenciaSemanal and not empty consulta.inqueritoAlimentar.gaseificadasQuantidade}">
+									<td>${consulta.inqueritoAlimentar.gaseificadasFrequenciaSemanal}</td>
+									<td>${consulta.inqueritoAlimentar.gaseificadasQuantidade}</td>	
+									</c:if>
+								</tr>
+								
+								<tr>
+									<td>Infusões</td>
+									<c:if
+									test="${not empty consulta.inqueritoAlimentar.infusoesFrequenciaSemanal and not empty consulta.inqueritoAlimentar.infusoesQuantidade}">
+									<td>${consulta.inqueritoAlimentar.infusoesFrequenciaSemanal}</td>
+									<td>${consulta.inqueritoAlimentar.infusoesQuantidade}</td>	
+									</c:if>
+								</tr>								
+							</tbody>
+						</table>
+				
 				
 				
 			</div>
