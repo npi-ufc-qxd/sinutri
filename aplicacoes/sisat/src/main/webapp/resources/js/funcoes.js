@@ -299,6 +299,45 @@ $(document).ready(function() {
 							}
 						}
 					});
+					
+					$('#form-alimento-subst').validate(
+						{
+							rules : {
+								nomeAlimento : {
+									required : true
+								},
+								grupo : {
+									required : true
+								}
+							},
+							highlight : function(element) {
+								$(element).closest('.form-item')
+										.addClass('has-error');
+							},
+							unhighlight : function(element) {
+								$(element).closest('.form-group')
+										.removeClass('has-error');
+							},
+							errorElement : 'span',
+							errorClass : 'help-block',
+							errorPlacement : function(error,
+									element) {
+								error.insertAfter(element.parent()
+										.children().last());
+								var itemForm = element.parent();
+								var id = element.attr("name");
+								$(itemForm).find("span").attr("id",
+										id);
+							}, 
+							messages : {
+								nomeAlimento : {
+									required : "O nome do alimento não pode ser vazio."
+								},
+								grupo : {
+									required : "Selecione o grupo alimetício ao qual o alimento pertence."
+								}
+							}
+						});
 
 	$('div.error-validation:has(span)').find('span').css(
 			'color', '#a94442');
