@@ -26,8 +26,8 @@
 	
 	      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-2">
 			<ul class="nav navbar-nav">  
-           		<li id="menu-paciente"><a href="<c:url value="/nutricao/buscar"></c:url>">Paciente<span class="sr-only">(current)</span></a></li>
-           		<li id="menu-graficos"><a href="<c:url value="/nutricao/informacoes-graficas"></c:url>">Gráfico<span class="sr-only">(current)</span></a></li>
+           		<li id="menu-paciente"><a href="<c:url value="/nutricao/buscar"></c:url>"><span class="glyphicon glyphicon-search"></span> Paciente<span class="sr-only">(current)</span></a></li>
+           		<li id="menu-graficos"><a href="<c:url value="/nutricao/informacoes-graficas"></c:url>"><span class="glyphicon glyphicon-stats"></span> Gráfico<span class="sr-only">(current)</span></a></li>
 			</ul>
 
 			<ul class="nav navbar-right navbar-nav">

@@ -1,6 +1,7 @@
 package br.ufc.quixada.npi.sisat.service.impl;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.inject.Inject;

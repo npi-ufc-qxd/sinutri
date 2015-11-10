@@ -145,7 +145,7 @@ public class NutricaoController {
 		documentoService.delete(documento);
 		redirectAttributes.addFlashAttribute("info", "Documento deletado com sucesso.");
 
-		return "redirect:/consulta/editar-consulta/" + idConsulta + "/paciente/" + cpf;
+		return "redirect:/paciente/" + cpf + "/consulta/" + idConsulta + "/editar";
 	}
 
 	@RequestMapping(value = { "enviarDocumento/{id}/{mensagem}" }, method = RequestMethod.GET)
@@ -184,7 +184,7 @@ public class NutricaoController {
 		threadEnviarEmail.start();
 
 		redirectAttributes.addFlashAttribute("success", "Documento enviado com sucesso");
-		return "redirect:../../editarConsulta/" + documento.getConsultaNutricional().getId();
+		return "redirect:/paciente/" + documento.getConsultaNutricional().getPaciente().getPessoa().getCpf() + "/consulta/" + documento.getConsultaNutricional().getId() + "/editar";
 	}
 
 	@RequestMapping(value = { "downloadDocumento/{id}" }, method = RequestMethod.GET)

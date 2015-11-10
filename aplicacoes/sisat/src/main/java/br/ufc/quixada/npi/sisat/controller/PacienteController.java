@@ -24,7 +24,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import br.ufc.quixada.npi.ldap.model.Usuario;
 import br.ufc.quixada.npi.ldap.service.UsuarioService;
 import br.ufc.quixada.npi.service.GenericService;
 import br.ufc.quixada.npi.sisat.model.Alimentacao;
@@ -75,24 +74,22 @@ public class PacienteController {
 	private GenericService<Alimentacao> alimentacaoService; 
 
 	@RequestMapping(value = "/{cpf}/historico", method = RequestMethod.GET)
-	public String getPaginaHistorico(@PathVariable("cpf") String cpf, Model model,
-			RedirectAttributes redirectAttributes) {
+	public String getPaginaHistorico(@PathVariable("cpf") String cpf, Model model, RedirectAttributes redirectAttributes) {
 
-		Pessoa pessoa = registrarPaciente(cpf);
-
-		if (pessoa == null) {
+		if(usuarioService.getByCpf(cpf) == null){
 			redirectAttributes.addFlashAttribute("erro", "Paciente não encontrado. Faça um nova pesquisa");
 			return "redirect:/nutricao/buscar";
 		}
+		
+		registrarPaciente(cpf);
 
-		model.addAttribute("pessoa", pessoa);
+		model.addAttribute("pessoa", pessoaService.getPessoaByCpf(cpf));
 
 		return "nutricao/historico-paciente";
 	}
 
 	@RequestMapping(value = { "/consulta/{id}" }, method = RequestMethod.GET)
-	public String getPaginaInformacoesConsulta(@PathVariable("id") Long id, Model model,
-			RedirectAttributes redirectAttributes) {
+	public String getPaginaInformacoesConsulta(@PathVariable("id") Long id, Model model, RedirectAttributes redirectAttributes) {
 		ConsultaNutricional consulta = consultaNutricionalService.getConsultaNutricionalWithDocumentosById(id);
 
 		if (consulta == null) {
@@ -106,23 +103,18 @@ public class PacienteController {
 	}
 
 	@RequestMapping(value = "/{cpf}/consulta", method = RequestMethod.GET)
-	public String getPaginaRealizarConsulta(@PathVariable("cpf") String cpf, Model model,
-			RedirectAttributes redirectAttributes) {
+	public String getPaginaRealizarConsulta(@PathVariable("cpf") String cpf, Model model, RedirectAttributes redirectAttributes) {
 
-		model.addAttribute("action", "cadastrar");
-
-		Pessoa pessoa = registrarPaciente(cpf);
-
-		if (pessoa == null) {
+		if(usuarioService.getByCpf(cpf) == null){
 			redirectAttributes.addFlashAttribute("erro", "Paciente não encontrado. Faça um nova pesquisa");
 			return "redirect:/nutricao/buscar";
 		}
+		
+		model.addAttribute("action", "cadastrar");
 
-		ConsultaNutricional consulta = new ConsultaNutricional();
-		Paciente paciente = pessoa.getPaciente();
-		consulta.setPaciente(paciente);
+		registrarPaciente(cpf);
 
-		model.addAttribute("consultaNutricional", new ConsultaNutricional(pessoa.getPaciente()));
+		model.addAttribute("consultaNutricional", new ConsultaNutricional(pessoaService.getPessoaByCpf(cpf).getPaciente()));
 		model.addAttribute("sistemaGastrointestinal", SistemaGastrointestinal.values());
 		model.addAttribute("classificacaoExames", ClassificacaoExame.values());
 		model.addAttribute("sistemaUrinario", SistemaUrinario.values());
@@ -254,7 +246,7 @@ public class PacienteController {
 	}
 
 	@RequestMapping(value = { "/{cpf}/consulta/{idConsulta}/editar" }, method = RequestMethod.POST)
-	public String editarConsulta(Model model, @PathVariable("cpf") String cpf, @Valid ConsultaNutricional consulta, BindingResult result,
+	public String editarConsulta(Model model, @PathVariable("cpf") String cpf, @PathVariable("idConsulta") Long idConsulta, @Valid ConsultaNutricional consulta, BindingResult result,
 			RedirectAttributes redirectAttributes, @RequestParam("files") List<MultipartFile> files,
 			@RequestParam(value = "enviar", required = false) boolean enviar) {
 		model.addAttribute("action", "editar");
@@ -265,7 +257,10 @@ public class PacienteController {
 		consultaNutricionalValidator.validate(consulta, result);
 
 		if (result.hasErrors()) {
+			model.addAttribute("documentosEnvio", documentoService.getDocumentosEnviar(idConsulta));
+			model.addAttribute("documentosNutricionista", documentoService.getDocumentosNutricionista(idConsulta));
 			model.addAttribute("consultaNutricional", consulta);
+
 			return ("nutricao/form-consulta");
 		}
 
@@ -290,6 +285,7 @@ public class PacienteController {
 					}
 				} catch (IOException e) {
 					model.addAttribute("erro", "Não foi possivel salvar os documentos.");
+					model.addAttribute("consultaNutricional", consulta);
 					return ("nutricao/form-consulta");
 				}
 			}
@@ -356,34 +352,22 @@ public class PacienteController {
 		return model;
 	}
 	
-	private Pessoa registrarPaciente(String cpf) {
+	private void registrarPaciente(String cpf) {
 		Pessoa pessoa = pessoaService.getPessoaByCpf(cpf);
 
 		if (pessoa == null) {
-			Usuario usuario = usuarioService.getByCpf(cpf);
+			pessoa = new Pessoa(cpf);
 
-			if (usuario != null) {
-				pessoa = new Pessoa(usuario.getCpf());
+			pessoaService.save(pessoa);
 
-				pessoaService.save(pessoa);
+			pessoa.setPaciente(new Paciente());
+			pessoa.getPaciente().setPessoa(pessoa);
+			pessoa.getPaciente().setAlturaAtual(1.0);
+			pessoa.getPaciente().setCircunferenciaCinturaAtual(1.0);
+			pessoa.getPaciente().setPesoAtual(1.0);
 
-				pessoa.setPaciente(new Paciente());
-				pessoa.getPaciente().setPessoa(pessoa);
-				pessoa.getPaciente().setAlturaAtual(1.0);
-				pessoa.getPaciente().setCircunferenciaCinturaAtual(1.0);
-				pessoa.getPaciente().setPesoAtual(1.0);
-
-				pessoaService.update(pessoa);
-
-				return pessoa;
-
-			} else {
-
-				return null;
-			}
+			pessoaService.update(pessoa);
 		}
-
-		return pessoa;
 	}
 
 	private ConsultaNutricional atualizarConsulta(ConsultaNutricional consulta) {
@@ -406,7 +390,7 @@ public class PacienteController {
 	private List<FrequenciaAlimentar> atualizarFrequenciaAlimentar(List<FrequenciaAlimentar> frequenciaAlimentars, ConsultaNutricional consultaNutricional) {
 		List<FrequenciaAlimentar> frequencias = new ArrayList<FrequenciaAlimentar>();
 		for (FrequenciaAlimentar frequenciaAlimentar : frequenciaAlimentars) {
-			if (frequenciaAlimentar != null) {
+			if (frequenciaAlimentar != null && frequenciaAlimentar.getAlimentos() != null) {
 				frequenciaAlimentar.setConsultaNutricional(consultaNutricional);
 				frequenciaAlimentar.setAlimentos(atualizarAlimentacao(frequenciaAlimentar));
 				frequencias.add(frequenciaAlimentar);
@@ -417,14 +401,21 @@ public class PacienteController {
 
 	private List<Alimentacao> atualizarAlimentacao(FrequenciaAlimentar frequenciaAlimentar) {
 		List<Alimentacao> alimentacaos = new ArrayList<Alimentacao>();
-		for (Alimentacao alimentacao : frequenciaAlimentar.getAlimentos()) {
-			if(alimentacao != null){
-				alimentacao.setFrequenciaAlimentar(frequenciaAlimentar);
-				alimentacaos.add(alimentacao);
+			for (Alimentacao alimentacao : frequenciaAlimentar.getAlimentos()) {
+				if(alimentacao != null){
+					alimentacao.setFrequenciaAlimentar(frequenciaAlimentar);
+					alimentacaos.add(alimentacao);
+				}
 			}
-		}
 		return alimentacaos;
 	}
 	
+	private boolean pessoaExiste(){
+		
+		
+		
+		
+		return true;
+	}
 	
 }

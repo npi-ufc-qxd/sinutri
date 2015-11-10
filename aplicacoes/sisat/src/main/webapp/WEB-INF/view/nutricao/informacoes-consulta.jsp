@@ -117,7 +117,7 @@
 										</c:choose></td>
 									<td class="col-sm-3"><strong>Sistema Urinário:</strong></td>
 									<td class="col-sm-3"><c:choose>
-											<c:when test="${not empty consulta.sistemaUrinario}"> ${consulta.consulta.sistemaUrinario}</c:when>
+											<c:when test="${not empty consulta.sistemaUrinario}"> ${consulta.sistemaUrinario}</c:when>
 											<c:otherwise> Sistema urinário não informado.</c:otherwise>
 										</c:choose></td>
 								</tr>
