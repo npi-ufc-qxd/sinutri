@@ -94,11 +94,9 @@ public class ConsultaNutricional {
 	@Min(value = 1)
 	private Double pesoDesejado;
 
-	@NotNull(message = "Informe a cincunferencia da cintura")
 	@Min(value = 1)
 	private Double circunferenciaCintura;
 
-	@NotNull(message = "Informe a cincunferencia desejada da cintura")
 	@Min(value = 1)
 	private Double circunferenciaCinturaDesejada;
 

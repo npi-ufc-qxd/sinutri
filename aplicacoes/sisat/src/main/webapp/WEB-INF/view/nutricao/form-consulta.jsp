@@ -102,7 +102,7 @@
 					<div class="row form-group">
 						<div class="form-item col-sm-12">
 							<label for="objetivoConsulta" class="control-label">
-								Objetivo da Consulta:</label>
+								<i style="color: #F56954;" class="glyphicon glyphicon-asterisk"></i> Objetivo da Consulta:</label>
 							<form:textarea id="objetivoConsulta" path="objetivoConsulta"
 								class="form-control" rows="5"
 								placeholder="Descreva aqui o objetivo da consulta..." />
@@ -114,8 +114,8 @@
 
 					<div class="row form-group">
 						<div class="form-item col-sm-12">
-							<label for="altura" class="control-label">Altura (m):</label>
-							<form:input id="altura" name="altura" path="altura"
+							<label for="altura" class="control-label"><i style="color: #F56954;" class="glyphicon glyphicon-asterisk"></i> Altura (m):</label>
+							<form:input type="number" id="altura" name="altura" path="altura"
 								cssClass="form-control valid-num" placeholder="0.00" />
 							<div class="error-validation">
 								<form:errors path="altura"></form:errors>
@@ -125,18 +125,18 @@
 
 					<div class="row form-group">
 						<div class="form-item col-sm-3">
-							<label for="peso" class="control-label">Peso (Kg):</label>
-							<form:input id="peso" name="peso" path="peso"
+							<label for="peso" class="control-label"><i style="color: #F56954;" class="glyphicon glyphicon-asterisk"></i> Peso (Kg):</label>
+							<form:input type="number" id="peso" name="peso" path="peso"
 								cssClass="form-control valid-num" placeholder="00.00" />
 							<div class="error-validation">
 								<form:errors path="peso"></form:errors>
 							</div>
 						</div>
 						<div class="form-item col-sm-3">
-							<label for="pesoDesejado" class="control-label">Peso
+							<label for="pesoDesejado" class="control-label"><i style="color: #F56954;" class="glyphicon glyphicon-asterisk"></i> Peso
 								desejado (Kg):</label>
 							<form:input id="pesoDesejado" name="pesoDesejado"
-								path="pesoDesejado" cssClass="form-control valid-num" placeholder="00.00" />
+								path="pesoDesejado" type="number"  cssClass="form-control valid-num" placeholder="00.00" />
 							<div class="error-validation">
 								<form:errors path="pesoDesejado"></form:errors>
 							</div>
@@ -146,7 +146,7 @@
 							<label for="circunferenciaCintura" class="control-label">CC
 								(cm):</label>
 							<form:input id="circunferenciaCintura" name="cc"
-								placeholder="00.00" path="circunferenciaCintura"
+								placeholder="00.00" path="circunferenciaCintura" type="number" 
 								cssClass="form-control valid-num" min="0" />
 							<div class="error-validation">
 								<form:errors path="circunferenciaCintura"></form:errors>
@@ -155,7 +155,7 @@
 						<div class="form-item col-sm-3">
 							<label for="circunferenciaCinturaDesejada" class="control-label">CC
 								desejada (cm):</label>
-							<form:input id="circunferenciaCinturaDesejada" name="cc"
+							<form:input id="circunferenciaCinturaDesejada" name="cc" type="number" 
 								placeholder="00.00" path="circunferenciaCinturaDesejada"
 								cssClass="form-control valid-num" min="0" />
 							<div class="error-validation">
@@ -166,10 +166,9 @@
 
 					<div class="row form-group">
 						<div class="form-item col-sm-12">
-							<label for="agua" class="control-label">Consumo de água
+							<label for="agua" class="control-label"><i style="color: #F56954;" class="glyphicon glyphicon-asterisk"></i> Consumo de água
 								(copos):</label>
-							<form:input id="agua" name="agua" path="agua"
-								cssClass="form-control" placeholder="Consumo de água" />
+							<form:input type="number" id="agua" name="agua" path="agua" cssClass="form-control" placeholder="Consumo de água" />
 							<div class="error-validation">
 								<form:errors path="agua"></form:errors>
 							</div>
@@ -178,9 +177,9 @@
 
 					<div class="row form-group">
 						<div class="form-item col-sm-6">
-							<label for="checkAtividadeFisica" class="control-label"><form:checkbox
+							<label for="checkAtividadeFisica" class="control-label"><form:checkbox 
 									id="checkAtividadeFisica" path="atividadeFisica"
-									class="checkInputSelec" /> Atividade Física:</label>
+									class="checkboxInputSelect" /> Atividade Física:</label>
 							<form:input id="inputTextAtividadeFisica"
 								path="atividadeFisicaComentario" cssClass="form-control"
 								placeholder="Qual atividade?"
@@ -207,7 +206,7 @@
 						<div class="form-item col-sm-6">
 							<label for="checkCarneVermelha" class=" control-label"><form:checkbox
 									id="checkCarneVermelha" path="carneVermelha"
-									class="checkInputSelec" /> Carne Vermelha:</label>
+									class="checkboxInputSelect" /> Carne Vermelha:</label>
 							<form:input id="inputTextCarneVermelha"
 								path="carneVermelhaComentario" cssClass="form-control"
 								placeholder="Que tipo de carne?"
@@ -234,7 +233,7 @@
 						<div class="form-item col-sm-6">
 							<label for="checkBebidaAlcoolica" class=" control-label"><form:checkbox
 									id="checkBebidaAlcoolica" path="bebidaAlcoolica"
-									class="checkInputSelec" /> Bebida alcoólica:</label>
+									class="checkboxInputSelect" /> Bebida alcoólica:</label>
 							<form:input id="inputTextBebidaAlcoolica"
 								path="bebidaAlcoolicaComentario" cssClass="form-control"
 								placeholder="Qual bebida alcoólica?"
@@ -296,7 +295,7 @@
 					<div class="row form-group">
 						<div class="form-item col-sm-12">
 							<label for="checkMedicamento" class=" control-label"><form:checkbox
-									id="checkMedicamento" path="medicamento" class="check" />
+									id="checkMedicamento" path="medicamento" class="checkboxInput" />
 								Medicamentos:</label>
 							<form:input id="inputTextMedicamento"
 								path="medicamentoComentario" cssClass="form-control"
@@ -311,7 +310,7 @@
 					<div class="row form-group">
 						<div class="form-item col-sm-6">
 							<label for="checkMastigacao" class=" control-label"><form:checkbox
-									id="checkMastigacao" path="mastigacao" class="check" />
+									id="checkMastigacao" path="mastigacao" class="checkboxInput" />
 								Mastigação:</label>
 							<form:input id="inputTextMastigacao" path="mastigacaoComentario"
 								cssClass="form-control" placeholder="Como é sua mastigação?"
@@ -322,7 +321,7 @@
 						</div>
 
 						<div class="form-item col-sm-6">
-							<label for="disfagia" class=" control-label"><form:checkbox
+							<label for="disfagia" class="control-label"><form:checkbox cssClass="checkboxInput"
 									id="disfagia" path="disfagia" />
 								Disfagia&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
 							<form:input id="disfagiaComentario" path="disfagiaComentario"
@@ -336,7 +335,7 @@
 
 					<div class="row form-group">
 						<div class="form-item col-sm-6">
-							<label for="odinofagia" class="control-label"><form:checkbox
+							<label for="odinofagia" class="control-label"><form:checkbox cssClass="checkboxInput"
 									id="odinofagia" path="odinofagia" /> Odinofagia</label>
 							<form:input id="odinofagiaComentario" path="odinofagiaComentario"
 								cssClass="form-control"
@@ -348,7 +347,7 @@
 						</div>
 
 						<div class="form-item col-sm-6">
-							<label for="pirose" class=" control-label"><form:checkbox
+							<label for="pirose" class=" control-label"><form:checkbox cssClass="checkboxInput"
 									id="pirose" path="pirose" /> Pirose</label>
 							<form:input id="piroseComentario" path="piroseComentario"
 								cssClass="form-control" placeholder="Comentário sobre pirose"
@@ -361,7 +360,7 @@
 
 					<div class="row form-group">
 						<div class="form-item col-sm-6">
-							<label for="nausea" class=" control-label"><form:checkbox
+							<label for="nausea" class=" control-label"><form:checkbox cssClass="checkboxInput"
 									id="nausea" path="nausea" /> Náusea</label>
 							<form:input id="nauseaComentario" path="nauseaComentario"
 								cssClass="form-control" placeholder="Comentário sobre náusea"
@@ -372,7 +371,7 @@
 						</div>
 
 						<div class="form-item col-sm-6">
-							<label for="vomito" class=" control-label"><form:checkbox
+							<label for="vomito" class=" control-label"><form:checkbox cssClass="checkboxInput"
 									id="vomito" path="vomito" /> Vômitos</label>
 							<form:input id="vomitoComentario" path="vomitoComentario"
 								cssClass="form-control" placeholder="Comentário sobre vômito"
@@ -385,7 +384,7 @@
 
 					<div class="row form-group">
 						<div class="form-item col-sm-6">
-							<label for="diarreia" class=" control-label"><form:checkbox
+							<label for="diarreia" class=" control-label"><form:checkbox cssClass="checkboxInput"
 									id="diarreia" path="diarreia" /> Diarreia</label>
 							<form:input id="diarreiaComentario" path="diarreiaComentario"
 								cssClass="form-control" placeholder="Comentário sobre diarreia"
@@ -396,7 +395,7 @@
 						</div>
 
 						<div class="form-item col-sm-6">
-							<label for="constipacao" class=" control-label"><form:checkbox
+							<label for="constipacao" class=" control-label"><form:checkbox cssClass="checkboxInput"
 									id="constipacao" path="constipacao" /> Constipação</label>
 							<form:input id="constipacaoComentario"
 								path="constipacaoComentario" cssClass="form-control"
@@ -410,7 +409,7 @@
 
 					<div class="row form-group">
 						<div class="form-item col-sm-12">
-							<label for="checkAlergia" class=" control-label"><form:checkbox
+							<label for="checkAlergia" class=" control-label"><form:checkbox cssClass="checkboxInput"
 									id="checkAlergia" path="alergia" class="check" /> Alergia
 								Alimentar:</label>
 							<form:textarea id="inputTextAlergia" path="alergiaComentario"
@@ -425,7 +424,7 @@
 
 					<div class="row form-group">
 						<div class="form-item col-sm-12">
-							<label for="checkPatologia" class=" control-label"><form:checkbox
+							<label for="checkPatologia" class=" control-label"><form:checkbox cssClass="checkboxInput"
 									id="checkPatologia" path="outrasPatologias" class="check" />
 								Patologias:</label>
 							<form:textarea id="inputTextPatologia"
@@ -453,7 +452,7 @@
 							<div class="col-sm-3">
 								<div class="form-item">
 									<label for="glicemia" class="control-label">Glicemia:</label>
-									<form:input id="glicemia" path="glicemia"
+									<form:input type="number" id="glicemia" path="glicemia"
 										cssClass="form-control exame valid-num" placeholder="glicemia" />
 									<div class="error-validation">
 										<form:errors path="glicemia"></form:errors>
@@ -480,7 +479,7 @@
 							<div class="col-sm-3">
 								<div class="form-item">
 									<label for="ct" class="control-label">CT:</label>
-									<form:input id="ct" path="ct" cssClass="form-control exame valid-num"
+									<form:input type="number" id="ct" path="ct" cssClass="form-control exame valid-num"
 										placeholder="ct" />
 									<div class="error-validation">
 										<form:errors path="ct"></form:errors>
@@ -509,7 +508,7 @@
 							<div class="col-sm-3">
 								<div class="form-item">
 									<label for="ldlc" class="control-label">LDL-C:</label>
-									<form:input id="ldlc" path="ldlc" cssClass="form-control exame valid-num"
+									<form:input type="number" id="ldlc" path="ldlc" cssClass="form-control exame valid-num"
 										placeholder="LDL-C" />
 									<div class="error-validation">
 										<form:errors path="ldlc"></form:errors>
@@ -536,7 +535,7 @@
 							<div class="col-sm-3">
 								<div class="form-item">
 									<label for="hdlc" class="control-label">HDL-C:</label>
-									<form:input id="hdlc" path="hdlc" cssClass="form-control exame valid-num"
+									<form:input type="number" id="hdlc" path="hdlc" cssClass="form-control exame valid-num"
 										placeholder="HDL-C" />
 									<div class="error-validation">
 										<form:errors path="hdlc"></form:errors>
@@ -565,7 +564,7 @@
 							<div class="col-sm-3">
 								<div class="form-item">
 									<label for="tg" class="control-label">TG:</label>
-									<form:input id="tg" path="tg" cssClass="form-control exame valid-num"
+									<form:input type="number" id="tg" path="tg" cssClass="form-control exame valid-num"
 										placeholder="TG" />
 									<div class="error-validation">
 										<form:errors path="tg"></form:errors>
@@ -592,7 +591,7 @@
 							<div class="col-sm-3">
 								<div class="form-item">
 									<label for="hb" class="control-label">HB:</label>
-									<form:input id="hb" path="hb" cssClass="form-control exame valid-num"
+									<form:input type="number" id="hb" path="hb" cssClass="form-control exame valid-num"
 										placeholder="HB" />
 									<div class="error-validation">
 										<form:errors path="hb"></form:errors>
@@ -621,7 +620,7 @@
 							<div class="col-sm-3">
 								<div class="form-item">
 									<label for="tgo" class="control-label">TGO (AST):</label>
-									<form:input id="tgo" path="tgo" cssClass="form-control exame valid-num"
+									<form:input type="number" id="tgo" path="tgo" cssClass="form-control exame valid-num"
 										placeholder="tgo" />
 									<div class="error-validation">
 										<form:errors path="tgo"></form:errors>
@@ -647,7 +646,7 @@
 							<div class="col-sm-3">
 								<div class="form-item">
 									<label for="tgp" class="control-label">TGP (ALT):</label>
-									<form:input id="tgp" path="tgp" cssClass="form-control exame valid-num"
+									<form:input type="number" id="tgp" path="tgp" cssClass="form-control exame valid-num"
 										placeholder="TGP (ALT)" />
 									<div class="error-validation">
 										<form:errors path="tgp"></form:errors>
