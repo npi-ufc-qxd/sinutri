@@ -37,6 +37,7 @@ function loadQuestionarios(result) {
 				'id' : frequenciaAlimentar.id,
             	'refeicao': frequenciaAlimentar.refeicao, 
              	'horario': frequenciaAlimentar.horario,
+             	'tipo': frequenciaAlimentar.tipo,
              	'SubGridData' : alimentos,
    	   };
 	   i++;
@@ -50,11 +51,16 @@ $(function() {
 	$('#questionarioFrequenciaAlimentar').appendGrid({
 		initRows : 0,
 		maxRowsAllowed : 6,
-		columns : [{
+		columns : [
+		           
+		{
 			name : 'id',
 			type : 'hidden',
 		}, 
-
+		{
+			name : 'tipo',
+			type : 'hidden',
+		},
 		{
 			name : 'refeicao',
 			display : 'Tipo de refição',
@@ -192,6 +198,24 @@ function deleteAlimento(idAlimento) {
 			type: "GET",
 			url: '/sisat/paciente/consulta/alimento/' + idFrequencia + '/excluir.json',
 			success: function(result) {
+			},
+			error: function(error) {
+			}
+		});
+	}
+}
+
+
+function loadRecordatorio() {
+	var id = $("#id").val();
+
+	if(id > 0){
+		$.ajax({
+			type: "GET",
+			data: {"id": id},
+			url: '/sisat/nutricao/frequencia-alimentar.json',
+			success: function(result) {
+				loadQuestionarios(result);
 			},
 			error: function(error) {
 			}

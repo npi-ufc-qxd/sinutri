@@ -31,7 +31,7 @@ public class ConsultaNutricionalServiceImpl extends GenericServiceImpl<ConsultaN
 
 	@Override
 	public ConsultaNutricional getConsultaNutricionalWithFrequenciasById(Long id) {
-		return (ConsultaNutricional) findFirst("ConsultaNutricional.findConsultaNutricionalWithFrequenciasById",
+		return (ConsultaNutricional) findFirst("ConsultaNutricional.findConsultaNutricionalWithFrequenciassById",
 				new SimpleMap<String, Object>("id", id));
 	}
 

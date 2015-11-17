@@ -16,6 +16,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -38,6 +39,7 @@ import br.ufc.quixada.npi.sisat.model.enuns.Frequencia;
 import br.ufc.quixada.npi.sisat.model.enuns.Refeicao;
 import br.ufc.quixada.npi.sisat.model.enuns.SistemaGastrointestinal;
 import br.ufc.quixada.npi.sisat.model.enuns.SistemaUrinario;
+import br.ufc.quixada.npi.sisat.model.enuns.TipoFrequencia;
 import br.ufc.quixada.npi.sisat.service.ConsultaNutricionalService;
 import br.ufc.quixada.npi.sisat.service.DocumentoService;
 import br.ufc.quixada.npi.sisat.service.PacienteService;
@@ -215,7 +217,7 @@ public class PacienteController {
 		}
 		
 		if(consulta.getFrequencias() != null ){
-			atualizarFrequenciaAlimentar(consulta.getFrequencias(), consulta);
+			atualizarFrequenciaAlimentar(consulta.getFrequencias(), consulta, TipoFrequencia.RECORDATORIO);
 		}
 
 		consultaNutricionalService.save(consulta);
@@ -303,7 +305,7 @@ public class PacienteController {
 
 		consulta.setData(data);
 		
-		if (consulta.getFrequencias() != null) {
+		if (consulta.getFrequencias() != null) {			
 			atualizarFrequenciaAlimentar(consulta.getFrequencias(), consulta);
 		}
 
@@ -355,6 +357,31 @@ public class PacienteController {
 
 		return model;
 	}
+
+	@RequestMapping (value = { "consulta/{id}/plano-alimentar"}, method = RequestMethod.GET)
+	public String getPlanoAlimentar(@PathVariable("id") Long id, Model model){
+		ConsultaNutricional consulta = consultaNutricionalService.getConsultaNutricionalWithFrequenciasById(id);
+		model.addAttribute("consultaNutricional", consulta);		
+		return "nutricao/plano-alimentar";
+	}
+
+	@RequestMapping (value = { "consulta/{id}/plano-alimentar"}, method = RequestMethod.POST)
+	public String salvarPlanoAlimentar(@PathVariable("id") Long id, Model model, @ModelAttribute("consulta") ConsultaNutricional consultaAtual, RedirectAttributes redirectAttributes){
+		
+		ConsultaNutricional consultaBD = consultaNutricionalService.getConsultaNutricionalWithFrequenciasById(id);
+		model.addAttribute("consultaNutricional", consultaBD);
+		if(consultaAtual.getFrequencias() != null ){
+			atualizarFrequenciaAlimentar(consultaAtual.getFrequencias(), consultaAtual, TipoFrequencia.PLANOALIMENTAR);			
+			consultaBD.getFrequencias().addAll(consultaAtual.getFrequencias());
+		}
+		
+		
+		consultaNutricionalService.update(consultaBD);
+
+		redirectAttributes.addFlashAttribute("success", "Consulta do paciente <strong>" + consultaBD.getPaciente().getPessoa().getNome() + "</strong> atualizada com sucesso.");
+		
+		return "redirect:/paciente/consulta/" + consultaBD.getId();				
+	}
 	
 	private Pessoa registrarPaciente(String cpf) {
 		Pessoa pessoa = pessoaService.getPessoaByCpf(cpf);
@@ -403,11 +430,24 @@ public class PacienteController {
 		return (Pessoa) session.getAttribute("usuario");
 	}
 
+	private List<FrequenciaAlimentar> atualizarFrequenciaAlimentar(List<FrequenciaAlimentar> frequenciaAlimentars, ConsultaNutricional consultaNutricional, TipoFrequencia tipo) {
+		List<FrequenciaAlimentar> frequencias = new ArrayList<FrequenciaAlimentar>();
+		for (FrequenciaAlimentar frequenciaAlimentar : frequenciaAlimentars) {
+			if (frequenciaAlimentar != null) {
+				frequenciaAlimentar.setConsultaNutricional(consultaNutricional);				
+				frequenciaAlimentar.setAlimentos(atualizarAlimentacao(frequenciaAlimentar));
+				frequenciaAlimentar.setTipo(tipo);
+				frequencias.add(frequenciaAlimentar);
+			}
+		}
+		return frequencias;
+	}
+
 	private List<FrequenciaAlimentar> atualizarFrequenciaAlimentar(List<FrequenciaAlimentar> frequenciaAlimentars, ConsultaNutricional consultaNutricional) {
 		List<FrequenciaAlimentar> frequencias = new ArrayList<FrequenciaAlimentar>();
 		for (FrequenciaAlimentar frequenciaAlimentar : frequenciaAlimentars) {
 			if (frequenciaAlimentar != null) {
-				frequenciaAlimentar.setConsultaNutricional(consultaNutricional);
+				frequenciaAlimentar.setConsultaNutricional(consultaNutricional);				
 				frequenciaAlimentar.setAlimentos(atualizarAlimentacao(frequenciaAlimentar));
 				frequencias.add(frequenciaAlimentar);
 			}
@@ -426,5 +466,6 @@ public class PacienteController {
 		return alimentacaos;
 	}
 	
+
 	
 }
