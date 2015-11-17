@@ -16,7 +16,7 @@
 <c:if test="${action eq 'editar' }">
 	<c:url var="url"
 		value="/paciente/${consultaNutricional.paciente.pessoa.cpf}/consulta/${consultaNutricional.id}/editar"></c:url>
-	<c:set var="titulo" value="Editar Consulta  "></c:set>
+	<c:set var="titulo" value="Editar Consulta "></c:set>
 	<c:set var="botao" value="Atualizar Consulta"></c:set>
 </c:if>
 
@@ -439,6 +439,7 @@
 							<table id="questionarioFrequenciaAlimentar" class="table"></table>
 						</div>
 					</div>
+					
 
 					<h4 id="exame" class="section"><strong>Exames Laboratoriais</strong></h4>
 

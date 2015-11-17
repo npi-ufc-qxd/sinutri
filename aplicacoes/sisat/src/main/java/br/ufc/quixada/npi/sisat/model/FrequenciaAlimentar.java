@@ -21,6 +21,7 @@ import org.codehaus.jackson.annotate.JsonIgnore;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import br.ufc.quixada.npi.sisat.model.enuns.Refeicao;
+import br.ufc.quixada.npi.sisat.model.enuns.TipoFrequencia;
 
 @Entity
 public class FrequenciaAlimentar {
@@ -35,6 +36,9 @@ public class FrequenciaAlimentar {
 	
 	@Enumerated(EnumType.STRING)
 	private Refeicao refeicao;
+	
+	@Enumerated(EnumType.STRING)
+	private TipoFrequencia tipofrequencia;
 	
 	@ManyToOne
 	@JsonIgnore
@@ -83,6 +87,13 @@ public class FrequenciaAlimentar {
 
 	public Refeicao getRefeicao() {
 		return refeicao;
+	}
+	
+	public void setTipo(TipoFrequencia tipofrequencia){
+		this.tipofrequencia = tipofrequencia;
+	}
+	public TipoFrequencia getTipo(){
+		return tipofrequencia;
 	}
 
 	public Date getHorario() {
