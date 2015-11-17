@@ -20,9 +20,11 @@ function loadQuestionarios(result) {
 	var i = 0;
 	var frequencias = [];
 
+		
 	$.each( result, function( key, frequenciaAlimentar ) {
 		var alimentos = [];
 		var y = 0;
+		frequenciaAlimentar.horario = frequenciaAlimentar.horario.slice(0,5);
 
 		$.each( frequenciaAlimentar.alimentos, function( key, alimento ) {
 			alimentos[y] = { 
@@ -75,7 +77,7 @@ $(function() {
 			display : 'Hora',
 			type : 'text',
 			ctrlAttr : {
-				maxlength : 15,
+				maxlength : 5,
 				required : 'required'
 			},
 			ctrlClass : 'form-control hora'
@@ -109,7 +111,7 @@ $(function() {
 		subPanelBuilder : function(cell, uniqueIndex) {
 			var idPanel = uniqueIndex-1;
 
-			$(".hora").mask("99:99:99");
+			$(".hora").mask("99:99");
 
 			var subgrid = $('<table></table>').attr('id', 'tblSubGrid_' + uniqueIndex).attr('class', 'tblSubGrid table table-striped').appendTo(cell);
 
@@ -196,7 +198,7 @@ function deleteAlimento(idAlimento) {
 	if(idAlimento > 0 ){
 		$.ajax({
 			type: "GET",
-			url: '/sisat/paciente/consulta/alimento/' + idFrequencia + '/excluir.json',
+			url: '/sisat/paciente/consulta/alimento/' + idAlimento + '/excluir.json',
 			success: function(result) {
 			},
 			error: function(error) {

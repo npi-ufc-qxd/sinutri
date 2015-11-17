@@ -31,7 +31,7 @@ public class FrequenciaAlimentar {
 	private Long id;
 	
 	@Temporal(TemporalType.TIME)
-	@DateTimeFormat(pattern="HH:mm:ss")
+	@DateTimeFormat(pattern="HH:mm")
 	private Date horario;
 	
 	@Enumerated(EnumType.STRING)

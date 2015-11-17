@@ -6,6 +6,7 @@ import java.util.List;
 import javax.inject.Inject;
 import javax.mail.MessagingException;
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -15,6 +16,8 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -27,11 +30,14 @@ import br.ufc.quixada.npi.ldap.service.UsuarioService;
 import br.ufc.quixada.npi.model.Attachment;
 import br.ufc.quixada.npi.model.Email;
 import br.ufc.quixada.npi.service.EmailService;
+import br.ufc.quixada.npi.sisat.model.AlimentoSubstituto;
 import br.ufc.quixada.npi.sisat.model.ConsultaNutricional;
 import br.ufc.quixada.npi.sisat.model.Documento;
 import br.ufc.quixada.npi.sisat.model.FrequenciaAlimentar;
 import br.ufc.quixada.npi.sisat.model.Papel;
 import br.ufc.quixada.npi.sisat.model.Pessoa;
+import br.ufc.quixada.npi.sisat.model.enuns.Grupo;
+import br.ufc.quixada.npi.sisat.service.AlimentoSubstitutoService;
 import br.ufc.quixada.npi.sisat.service.ConsultaNutricionalService;
 import br.ufc.quixada.npi.sisat.service.DocumentoService;
 import br.ufc.quixada.npi.sisat.service.PacienteService;
@@ -63,6 +69,9 @@ public class NutricaoController {
 	@Inject
 	private PapelService papelService;
 
+	@Inject
+	private AlimentoSubstitutoService alimentoSubstService;
+
 	@RequestMapping(value = "/buscar", method = RequestMethod.GET)
 	public String paginaBuscarPaciente(Model model, HttpSession session, RedirectAttributes redirectAttributes) {
 		String cpf = SecurityContextHolder.getContext().getAuthentication().getName();
@@ -80,9 +89,9 @@ public class NutricaoController {
 	@RequestMapping(value = "/buscar", method = RequestMethod.POST)
 	public String buscarPaciente(@RequestParam("busca") String busca, ModelMap map,
 			RedirectAttributes redirectAttributes, Authentication authentication) {
-		
+
 		map.addAttribute("busca", busca);
-		
+
 		List<Usuario> usuarios = usuarioService.getByCpfOrNome(busca);
 		Usuario usuario = usuarioService.getByCpf(authentication.getName());
 		usuarios.remove(usuario);
@@ -105,7 +114,7 @@ public class NutricaoController {
 
 	@RequestMapping(value = "/informacoes-graficas/paciente/{cpf}/historico-consultas.json", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public @ResponseBody Model getPesoByConsulta(Model model, @PathVariable("cpf") String cpf) {
-		
+
 		List<ConsultaNutricional> consultas = pacienteService.getHistoricoPeso(cpf);
 
 		model.addAttribute("consultas", consultas);
@@ -136,7 +145,7 @@ public class NutricaoController {
 		documentoService.delete(documento);
 		redirectAttributes.addFlashAttribute("info", "Documento deletado com sucesso.");
 
-		return "redirect:/consulta/editar-consulta/" + idConsulta + "/paciente/" + cpf;
+		return "redirect:/paciente/" + cpf + "/consulta/" + idConsulta + "/editar";
 	}
 
 	@RequestMapping(value = { "enviarDocumento/{id}/{mensagem}" }, method = RequestMethod.GET)
@@ -175,7 +184,7 @@ public class NutricaoController {
 		threadEnviarEmail.start();
 
 		redirectAttributes.addFlashAttribute("success", "Documento enviado com sucesso");
-		return "redirect:../../editarConsulta/" + documento.getConsultaNutricional().getId();
+		return "redirect:/paciente/" + documento.getConsultaNutricional().getPaciente().getPessoa().getCpf() + "/consulta/" + documento.getConsultaNutricional().getId() + "/editar";
 	}
 
 	@RequestMapping(value = { "downloadDocumento/{id}" }, method = RequestMethod.GET)
@@ -219,4 +228,80 @@ public class NutricaoController {
 
 	
 
+	@RequestMapping(value = { "alimento-substituto/cadastrar" }, method = RequestMethod.GET)
+	public String adicionarAlimentoSubstituto(Model model) {
+
+		model.addAttribute("action", "cadastrar");
+		model.addAttribute("alimentosSubstitutos", alimentoSubstService.find(AlimentoSubstituto.class));
+		model.addAttribute("grupos", Grupo.values());
+		model.addAttribute("alimentoSubstituto", new AlimentoSubstituto());
+
+		return "nutricao/alimento-cadastrar";
+	}
+
+	@RequestMapping(value = { "alimento-substituto/cadastrar" }, method = RequestMethod.POST)
+	public String adicionarAlimentoSubstituto(Model model,
+			@Valid @ModelAttribute("alimentoSubstituto") AlimentoSubstituto alimentoSubstituto, BindingResult result,
+			RedirectAttributes redirect) {
+
+		model.addAttribute("action", "cadastrar");
+
+		if (result.hasErrors()) {
+			model.addAttribute("action", "cadastrar");
+			model.addAttribute("alimentosSubstitutos", alimentoSubstService.find(AlimentoSubstituto.class));
+			model.addAttribute("grupos", Grupo.values());
+			return "nutricao/alimento-cadastrar";
+		}
+
+		this.alimentoSubstService.save(alimentoSubstituto);
+		redirect.addFlashAttribute("info", "Alimento cadastrado com sucesso.");
+		return "redirect:/nutricao/alimento-substituto/cadastrar";
+	}
+
+	@RequestMapping(value = { "alimento-substituto/editar/{id}" }, method = RequestMethod.GET)
+	public String editarAlimentosubstituto(@PathVariable("id") Long id, Model model) {
+
+		AlimentoSubstituto alimentoSubstituto = this.alimentoSubstService.find(AlimentoSubstituto.class, id);
+
+		model.addAttribute("action", "editar");
+		model.addAttribute("alimentosSubstitutos", alimentoSubstService.find(AlimentoSubstituto.class));
+		model.addAttribute("grupos", Grupo.values());
+		model.addAttribute("alimentoSubstituto", alimentoSubstituto);
+
+		return "nutricao/alimento-cadastrar";
+	}
+
+	@RequestMapping(value = { "alimento-substituto/editar/{id}" }, method = RequestMethod.POST)
+	public String editarAlimentosubstituto(@PathVariable("id") Long id,
+			@Valid @ModelAttribute("alimentoSubstituto") AlimentoSubstituto alimentoSubstituto, Model model,
+			BindingResult result, RedirectAttributes redirect) {
+		
+		model.addAttribute("action", "editar");
+		
+		if (result.hasErrors()) {
+			model.addAttribute("action", "editar");
+			model.addAttribute("alimentosSubstitutos", alimentoSubstService.find(AlimentoSubstituto.class));
+			model.addAttribute("grupos", Grupo.values());
+			return "nutricao/alimento-cadastrar";
+		}
+		
+		this.alimentoSubstService.update(alimentoSubstituto);
+		redirect.addFlashAttribute("info", "Alimento atualizado com sucesso.");
+		return "redirect:/nutricao/alimento-substituto/cadastrar";
+	}
+
+	@RequestMapping(value = { "alimento-substituto/excluir/{id}" }, method = RequestMethod.GET)
+	public String excluirAlimentoSubstituto(@PathVariable("id") Long id, RedirectAttributes redirect) {
+		
+		AlimentoSubstituto alimentoSubstituto = this.alimentoSubstService.find(AlimentoSubstituto.class, id);
+		
+		if (alimentoSubstituto != null) {
+			this.alimentoSubstService.delete(alimentoSubstituto);
+			redirect.addFlashAttribute("info", "Alimento removido com sucesso.");
+		} else {
+			redirect.addFlashAttribute("erro", "Alimento inexistente.");
+		}
+		
+		return "redirect:/nutricao/alimento-substituto/cadastrar";
+	}
 }
