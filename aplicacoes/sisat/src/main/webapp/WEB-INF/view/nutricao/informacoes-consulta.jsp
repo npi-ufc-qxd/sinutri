@@ -471,6 +471,9 @@
 							<tbody>
 								<tr>
 									<td>Bovina</td>
+									<c:if test="${empty consulta.inqueritoAlimentar.bovinaFrequenciaSemanal and consulta.inqueritoAlimentar.bovinaQuantidade == 0}">
+										<td colspan="2"></td>
+									</c:if> 
 									<c:if
 									test="${not empty consulta.inqueritoAlimentar.bovinaFrequenciaSemanal and not empty consulta.inqueritoAlimentar.bovinaQuantidade}">
 									<td>${consulta.inqueritoAlimentar.bovinaFrequenciaSemanal}</td>
@@ -481,6 +484,10 @@
 								<tr>
 									<td>Aves</td>
 									<c:if
+									test="${empty consulta.inqueritoAlimentar.avesFrequenciaSemanal and consulta.inqueritoAlimentar.avesQuantidade == 0}">
+										<td colspan="2"></td>
+									</c:if>
+									<c:if
 									test="${not empty consulta.inqueritoAlimentar.avesFrequenciaSemanal and not empty consulta.inqueritoAlimentar.avesQuantidade}">
 									<td>${consulta.inqueritoAlimentar.avesFrequenciaSemanal}</td>
 									<td>${consulta.inqueritoAlimentar.avesQuantidade}</td>	
@@ -489,6 +496,10 @@
 								
 								<tr>
 									<td>Peixe</td>
+									<c:if
+									test="${empty consulta.inqueritoAlimentar.peixeFrequenciaSemanal and consulta.inqueritoAlimentar.peixeQuantidade == 0}">
+										<td colspan="2"></td>
+									</c:if> 
 									<c:if
 									test="${not empty consulta.inqueritoAlimentar.peixeFrequenciaSemanal and not empty consulta.inqueritoAlimentar.peixeQuantidade}">
 									<td>${consulta.inqueritoAlimentar.peixeFrequenciaSemanal}</td>
@@ -499,6 +510,10 @@
 								<tr>
 									<td>Visceras</td>
 									<c:if
+									test="${empty consulta.inqueritoAlimentar.viscerasFrequenciaSemanal and consulta.inqueritoAlimentar.viscerasQuantidade == 0}">
+										<td colspan="2"></td>
+									</c:if> 
+									<c:if
 									test="${not empty consulta.inqueritoAlimentar.viscerasFrequenciaSemanal and not empty consulta.inqueritoAlimentar.viscerasQuantidade}">
 									<td>${consulta.inqueritoAlimentar.viscerasFrequenciaSemanal}</td>
 									<td>${consulta.inqueritoAlimentar.viscerasQuantidade}</td>	
@@ -507,6 +522,10 @@
 								
 								<tr>
 									<td>Leite e Derivados</td>
+									<c:if
+									test="${empty consulta.inqueritoAlimentar.leiteDerivadosFrequenciaSemanal and consulta.inqueritoAlimentar.leiteDerivadosQuantidade == 0}">
+										<td colspan="2"></td>
+									</c:if>
 									<c:if
 									test="${not empty consulta.inqueritoAlimentar.leiteDerivadosFrequenciaSemanal and not empty consulta.inqueritoAlimentar.leiteDerivadosQuantidade}">
 									<td>${consulta.inqueritoAlimentar.leiteDerivadosFrequenciaSemanal}</td>
@@ -517,6 +536,10 @@
 								<tr>
 									<td>Ovos</td>
 									<c:if
+									test="${empty consulta.inqueritoAlimentar.ovosFrequenciaSemanal and consulta.inqueritoAlimentar.ovosQuantidade == 0}">
+										<td colspan="2"></td>
+									</c:if>
+									<c:if
 									test="${not empty consulta.inqueritoAlimentar.ovosFrequenciaSemanal and not empty consulta.inqueritoAlimentar.ovosQuantidade}">
 									<td>${consulta.inqueritoAlimentar.ovosFrequenciaSemanal}</td>
 									<td>${consulta.inqueritoAlimentar.ovosQuantidade}</td>	
@@ -525,6 +548,10 @@
 								
 								<tr>
 									<td>Leguminosas</td>
+									<c:if
+									test="${empty consulta.inqueritoAlimentar.leguminosasFrequenciaSemanal and consulta.inqueritoAlimentar.leguminosasQuantidade == 0}">
+										<td colspan="2"></td>
+									</c:if>
 									<c:if
 									test="${not empty consulta.inqueritoAlimentar.leguminosasFrequenciaSemanal and not empty consulta.inqueritoAlimentar.leguminosasQuantidade}">
 									<td>${consulta.inqueritoAlimentar.leguminosasFrequenciaSemanal}</td>
@@ -535,6 +562,10 @@
 								<tr>
 									<td>Cereais</td>
 									<c:if
+									test="${empty consulta.inqueritoAlimentar.cereaisFrequenciaSemanal and consulta.inqueritoAlimentar.cereaisQuantidade == 0}">
+										<td colspan="2"></td>
+									</c:if>
+									<c:if
 									test="${not empty consulta.inqueritoAlimentar.cereaisFrequenciaSemanal and not empty consulta.inqueritoAlimentar.cereaisQuantidade}">
 									<td>${consulta.inqueritoAlimentar.cereaisFrequenciaSemanal}</td>
 									<td>${consulta.inqueritoAlimentar.cereaisQuantidade}</td>	
@@ -543,6 +574,10 @@
 								
 								<tr>
 									<td>Massas</td>
+									<c:if
+									test="${empty consulta.inqueritoAlimentar.massasFrequenciaSemanal and consulta.inqueritoAlimentar.massasQuantidade == 0}">
+										<td colspan="2"></td>
+									</c:if>
 									<c:if
 									test="${not empty consulta.inqueritoAlimentar.massasFrequenciaSemanal and not empty consulta.inqueritoAlimentar.massasQuantidade}">
 									<td>${consulta.inqueritoAlimentar.massasFrequenciaSemanal}</td>
@@ -553,6 +588,10 @@
 								<tr>
 									<td>Vegetais Crus</td>
 									<c:if
+									test="${empty consulta.inqueritoAlimentar.vegetaisCrusFrequenciaSemanal and consulta.inqueritoAlimentar.vegetaisCrusQuantidade == 0}">
+										<td colspan="2"></td>
+									</c:if>
+									<c:if
 									test="${not empty consulta.inqueritoAlimentar.vegetaisCrusFrequenciaSemanal and not empty consulta.inqueritoAlimentar.vegetaisCrusQuantidade}">
 									<td>${consulta.inqueritoAlimentar.vegetaisCrusFrequenciaSemanal}</td>
 									<td>${consulta.inqueritoAlimentar.vegetaisCrusQuantidade}</td>	
@@ -561,6 +600,10 @@
 								
 								<tr>
 									<td>Vegetais Cozidos</td>
+									<c:if
+									test="${empty consulta.inqueritoAlimentar.vegetaisCozidosFrequenciaSemanal and consulta.inqueritoAlimentar.vegetaisCozidosQuantidade == 0}">
+										<td colspan="2"></td>
+									</c:if>
 									<c:if
 									test="${not empty consulta.inqueritoAlimentar.vegetaisCozidosFrequenciaSemanal and not empty consulta.inqueritoAlimentar.vegetaisCozidosQuantidade}">
 									<td>${consulta.inqueritoAlimentar.vegetaisCozidosFrequenciaSemanal}</td>
@@ -571,6 +614,10 @@
 								<tr>
 									<td>Frutas</td>
 									<c:if
+									test="${empty consulta.inqueritoAlimentar.frutasFrequenciaSemanal and consulta.inqueritoAlimentar.frutasQuantidade == 0}">
+										<td colspan="2"></td>
+									</c:if>
+									<c:if
 									test="${not empty consulta.inqueritoAlimentar.frutasFrequenciaSemanal and not empty consulta.inqueritoAlimentar.frutasQuantidade}">
 									<td>${consulta.inqueritoAlimentar.frutasFrequenciaSemanal}</td>
 									<td>${consulta.inqueritoAlimentar.frutasQuantidade}</td>	
@@ -579,6 +626,10 @@
 								
 								<tr>
 									<td>Doces</td>
+									<c:if
+									test="${empty consulta.inqueritoAlimentar.docesFrequenciaSemanal and consulta.inqueritoAlimentar.docesQuantidade == 0}">
+										<td colspan="2"></td>
+									</c:if>
 									<c:if
 									test="${not empty consulta.inqueritoAlimentar.docesFrequenciaSemanal and not empty consulta.inqueritoAlimentar.docesQuantidade}">
 									<td>${consulta.inqueritoAlimentar.docesFrequenciaSemanal}</td>
@@ -589,6 +640,10 @@
 								<tr>
 									<td>Óleo</td>
 									<c:if
+									test="${empty consulta.inqueritoAlimentar.oleoFrequenciaSemanal and consulta.inqueritoAlimentar.oleoQuantidade == 0}">
+										<td colspan="2"></td>
+									</c:if>
+									<c:if
 									test="${not empty consulta.inqueritoAlimentar.oleoFrequenciaSemanal and not empty consulta.inqueritoAlimentar.oleoQuantidade}">
 									<td>${consulta.inqueritoAlimentar.oleoFrequenciaSemanal}</td>
 									<td>${consulta.inqueritoAlimentar.oleoQuantidade}</td>	
@@ -597,6 +652,10 @@
 								
 								<tr>
 									<td>Margarina</td>
+									<c:if
+									test="${empty consulta.inqueritoAlimentar.margarinaFrequenciaSemanal and consulta.inqueritoAlimentar.margarinaQuantidade == 0}">
+										<td colspan="2"></td>
+									</c:if>
 									<c:if
 									test="${not empty consulta.inqueritoAlimentar.margarinaFrequenciaSemanal and not empty consulta.inqueritoAlimentar.margarinaQuantidade}">
 									<td>${consulta.inqueritoAlimentar.margarinaFrequenciaSemanal}</td>
@@ -607,6 +666,10 @@
 								<tr>
 									<td>Manteiga</td>
 									<c:if
+									test="${empty consulta.inqueritoAlimentar.manteigaFrequenciaSemanal and consulta.inqueritoAlimentar.manteigaQuantidade == 0}">
+										<td colspan="2"></td>
+									</c:if>
+									<c:if
 									test="${not empty consulta.inqueritoAlimentar.manteigaFrequenciaSemanal and not empty consulta.inqueritoAlimentar.manteigaQuantidade}">
 									<td>${consulta.inqueritoAlimentar.manteigaFrequenciaSemanal}</td>
 									<td>${consulta.inqueritoAlimentar.manteigaQuantidade}</td>	
@@ -615,6 +678,10 @@
 								
 								<tr>
 									<td>Toucinho/Bacon</td>
+									<c:if
+									test="${empty consulta.inqueritoAlimentar.toucinhoBaconFrequenciaSemanal and consulta.inqueritoAlimentar.toucinhoBaconQuantidade == 0}">
+										<td colspan="2"></td>
+									</c:if>
 									<c:if
 									test="${not empty consulta.inqueritoAlimentar.toucinhoBaconFrequenciaSemanal and not empty consulta.inqueritoAlimentar.toucinhoBaconQuantidade}">
 									<td>${consulta.inqueritoAlimentar.toucinhoBaconFrequenciaSemanal}</td>
@@ -625,6 +692,10 @@
 								<tr>
 									<td>Água</td>
 									<c:if
+									test="${empty consulta.inqueritoAlimentar.aguaFrequenciaSemanal and consulta.inqueritoAlimentar.aguaQuantidade == 0}">
+										<td colspan="2"></td>
+									</c:if>
+									<c:if
 									test="${not empty consulta.inqueritoAlimentar.aguaFrequenciaSemanal and not empty consulta.inqueritoAlimentar.aguaQuantidade}">
 									<td>${consulta.inqueritoAlimentar.aguaFrequenciaSemanal}</td>
 									<td>${consulta.inqueritoAlimentar.aguaQuantidade}</td>	
@@ -633,6 +704,10 @@
 								
 								<tr>
 									<td>Suco</td>
+									<c:if
+									test="${empty consulta.inqueritoAlimentar.sucoFrequenciaSemanal and consulta.inqueritoAlimentar.sucoQuantidade == 0}">
+										<td colspan="2"></td>
+									</c:if>
 									<c:if
 									test="${not empty consulta.inqueritoAlimentar.sucoFrequenciaSemanal and not empty consulta.inqueritoAlimentar.sucoQuantidade}">
 									<td>${consulta.inqueritoAlimentar.sucoFrequenciaSemanal}</td>
@@ -643,6 +718,10 @@
 								<tr>
 									<td>Bebidas Acoólicas</td>
 									<c:if
+									test="${empty consulta.inqueritoAlimentar.bebidasAlcoolicasFrequenciaSemanal and consulta.inqueritoAlimentar.bebidasAlcoolicasQuantidade == 0}">
+										<td colspan="2"></td>
+									</c:if>
+									<c:if
 									test="${not empty consulta.inqueritoAlimentar.bebidasAlcoolicasFrequenciaSemanal and not empty consulta.inqueritoAlimentar.bebidasAlcoolicasQuantidade}">
 									<td>${consulta.inqueritoAlimentar.bebidasAlcoolicasFrequenciaSemanal}</td>
 									<td>${consulta.inqueritoAlimentar.bebidasAlcoolicasQuantidade}</td>	
@@ -652,6 +731,10 @@
 								<tr>
 									<td>Bebidas Gaseificadas</td>
 									<c:if
+									test="${empty consulta.inqueritoAlimentar.gaseificadasFrequenciaSemanal and consulta.inqueritoAlimentar.gaseificadasQuantidade == 0}">
+										<td colspan="2"></td>
+									</c:if>
+									<c:if
 									test="${not empty consulta.inqueritoAlimentar.gaseificadasFrequenciaSemanal and not empty consulta.inqueritoAlimentar.gaseificadasQuantidade}">
 									<td>${consulta.inqueritoAlimentar.gaseificadasFrequenciaSemanal}</td>
 									<td>${consulta.inqueritoAlimentar.gaseificadasQuantidade}</td>	
@@ -660,6 +743,10 @@
 								
 								<tr>
 									<td>Infusões</td>
+									<c:if
+									test="${empty consulta.inqueritoAlimentar.infusoesFrequenciaSemanal and consulta.inqueritoAlimentar.infusoesQuantidade == 0}">
+										<td colspan="2"></td>
+									</c:if>
 									<c:if
 									test="${not empty consulta.inqueritoAlimentar.infusoesFrequenciaSemanal and not empty consulta.inqueritoAlimentar.infusoesQuantidade}">
 									<td>${consulta.inqueritoAlimentar.infusoesFrequenciaSemanal}</td>
