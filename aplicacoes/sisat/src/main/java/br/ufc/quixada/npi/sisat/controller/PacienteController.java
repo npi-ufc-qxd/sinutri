@@ -264,10 +264,6 @@ public class PacienteController {
 		
 		InqueritoAlimentar inqueritoAlimentar = consulta.getInqueritoAlimentar();
 		inqueritoAlimentar.setConsultaNutricional(consulta);
-		
-		System.out.println(consulta.getInqueritoAlimentar());
-		System.out.println(inqueritoAlimentar);
-		
 
 		consultaNutricionalValidator.validate(consulta, result);
 
