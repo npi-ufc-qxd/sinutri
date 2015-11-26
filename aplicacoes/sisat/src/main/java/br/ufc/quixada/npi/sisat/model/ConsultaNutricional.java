@@ -17,6 +17,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Transient;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
@@ -49,9 +50,7 @@ import br.ufc.quixada.npi.sisat.model.enuns.SistemaUrinario;
 	@NamedQuery(name = "ConsultaNutricional.countFrequenciaHipertensao", query = "select count(c.hipertensao) from ConsultaNutricional c where c.hipertensao = TRUE"),
 	@NamedQuery(name = "ConsultaNutricional.countFrequenciaAlergia", query = "select count(c.alergia) from ConsultaNutricional c where c.alergia = TRUE"),
 	@NamedQuery(name = "ConsultaNutricional.countFrequenciaOutrasPatologias", query = "select count(c.outrasPatologias) from ConsultaNutricional c where c.outrasPatologias = TRUE"),
-
 	@NamedQuery(name = "ConsultaNutricional.historicoPeso", query = "select new br.ufc.quixada.npi.sisat.model.ConsultaNutricional(c.paciente, c.data, c.peso, c.altura, c.circunferenciaCintura) from ConsultaNutricional c where c.paciente.pessoa.cpf = :cpf "),
-
 })
 
 @Entity
@@ -68,6 +67,9 @@ public class ConsultaNutricional {
 	@ManyToOne
 	@JoinColumn(name = "paciente_id")
 	private Paciente paciente;
+
+	@OneToOne(mappedBy = "consultaNutricional", cascade = CascadeType.ALL)
+	private InqueritoAlimentar inqueritoAlimentar;
 
 	@OneToMany(mappedBy = "consultaNutricional", cascade = CascadeType.ALL)
 	@JsonIgnore
@@ -184,16 +186,15 @@ public class ConsultaNutricional {
 
 	private Double tgp;
 	private ClassificacaoExame classificacaoTgp;
-	
+
 	@Transient
 	private Double IMC;
-	
+
 	@Transient
 	private String classificacaoIMC;
-	
+
 	@Transient
 	private String classificacaoCC;
-	
 
 	@Column(columnDefinition = "TEXT")
 	@NotNull(message = "Informe as orientações para o paciente.")
@@ -382,6 +383,14 @@ public class ConsultaNutricional {
 
 	public void setBebidaAlcoolica(boolean bebidaAlcoolica) {
 		this.bebidaAlcoolica = bebidaAlcoolica;
+	}
+
+	public void setInqueritoAlimentar(InqueritoAlimentar inqueritoAlimentar) {
+		this.inqueritoAlimentar = inqueritoAlimentar;
+	}
+
+	public InqueritoAlimentar getInqueritoAlimentar() {
+		return inqueritoAlimentar;
 	}
 
 	public String getBebidaAlcoolicaComentario() {
@@ -842,7 +851,7 @@ public class ConsultaNutricional {
 		classificacaoCC = this.classificaCircunferenciaCintura();
 		return classificacaoCC;
 	}
-	
+
 	public void setClassificacaoCC(String classificacaoCC) {
 		this.classificacaoCC = classificacaoCC;
 	}
@@ -853,7 +862,7 @@ public class ConsultaNutricional {
 			return "";
 		}
 
-		Double circunferencia = this.getCircunferenciaCintura()/100;
+		Double circunferencia = this.getCircunferenciaCintura() / 100;
 
 		if (this.getPaciente().getPessoa().getSexo() != null) {
 			String sexo = this.getPaciente().getPessoa().getSexo();
