@@ -176,6 +176,7 @@
 					</div>
 
 					<div class="row form-group">
+						<h1>value ${atividadeFisica }</h1>
 						<div class="form-item col-sm-6">
 							<label for="checkAtividadeFisica" class="control-label"><form:checkbox 
 									id="checkAtividadeFisica" path="atividadeFisica"
@@ -828,15 +829,11 @@
 					</div>
 					
 					<h4 id="inquerito" class="section"><strong>Inquerito Alimentar</strong></h4>
-					
+
 					<div class="row form-group">
 						<div class="form-item col-sm-6">
-							<label for="checkBovinoGosta" class="control-label"><form:checkbox
-									id="checkBovinoGosta" path="inqueritoAlimentar.bovinaGosta"
-									class="checkInquerito" /> Gosta de Carne Bovina?</label>
-							<form:select path="inqueritoAlimentar.bovinaFrequenciaSemanal"
-								cssClass="form-control select"
-								disabled="${not inqueritoAlimentar.bovinaGosta}">
+							<label for="checkBovinoGosta" class="control-label"><form:checkbox id="checkBovinoGosta" path="inqueritoAlimentar.bovinaGosta" class="checkInquerito" /> Gosta de Carne Bovina?</label>
+							<form:select path="inqueritoAlimentar.bovinaFrequenciaSemanal" cssClass="form-control select" disabled="${not consultaNutricional.inqueritoAlimentar.bovinaGosta}">
 								<form:option value="">Quantas vezes por semana?</form:option>
 								<form:options items="${frequencia}" itemLabel="tipo" />
 							</form:select>
@@ -850,7 +847,7 @@
 							<form:input id="inputTextBovina"
 								path="inqueritoAlimentar.bovinaQuantidade" cssClass="form-control"
 								placeholder="Quantidade"
-								disabled="${not inqueritoAlimentar.bovinaGosta}" />
+								disabled="${not consultaNutricional.inqueritoAlimentar.bovinaGosta}" />
 							<div class="error-validation">
 								<form:errors path="inqueritoAlimentar.bovinaQuantidade"></form:errors>
 							</div>
@@ -862,7 +859,7 @@
 						<div class="form-item col-sm-6">
 							<label for="checkAvesGosta" class="control-label"><form:checkbox id="checkAvesGosta" path="inqueritoAlimentar.avesGosta" class="checkInquerito" /> Gosta de Carne de Ave?</label>
 
-							<form:select path="inqueritoAlimentar.avesFrequenciaSemanal" cssClass="form-control select" disabled="${not inqueritoAlimentar.avesGosta}">
+							<form:select path="inqueritoAlimentar.avesFrequenciaSemanal" cssClass="form-control select" disabled="${not consultaNutricional.inqueritoAlimentar.avesGosta}">
 								<form:option value="">Quantas vezes por semana?</form:option>
 								<form:options items="${frequencia}" itemLabel="tipo" />
 							</form:select>
@@ -871,7 +868,7 @@
 						
 						<div class="form-item col-sm-6">
 							<label for="avesQuantidade" class="control-label">Quantidade</label>
-							<form:input id="inputTextAves" path="inqueritoAlimentar.avesQuantidade" cssClass="form-control" placeholder="Quantidade" disabled="${not inqueritoAlimentar.avesGosta}" />
+							<form:input id="inputTextAves" path="inqueritoAlimentar.avesQuantidade" cssClass="form-control" placeholder="Quantidade" disabled="${not consultaNutricional.inqueritoAlimentar.avesGosta}" />
 							<div class="error-validation">
 								<form:errors path="inqueritoAlimentar.avesQuantidade"></form:errors>
 							</div>
@@ -883,7 +880,7 @@
 						<div class="form-item col-sm-6">
 							<label for="checkPeixeGosta" class="control-label"><form:checkbox id="checkPeixeGosta" path="inqueritoAlimentar.peixeGosta" class="checkInquerito" /> Gosta de Carne de Peixe?</label>
 							
-							<form:select path="inqueritoAlimentar.peixeFrequenciaSemanal" cssClass="form-control select" disabled="${not inqueritoAlimentar.peixeGosta}">
+							<form:select path="inqueritoAlimentar.peixeFrequenciaSemanal" cssClass="form-control select" disabled="${not consultaNutricional.inqueritoAlimentar.peixeGosta}">
 								<form:option value="">Quantas vezes por semana?</form:option>
 								<form:options items="${frequencia}" itemLabel="tipo" />
 							</form:select>
@@ -894,7 +891,7 @@
 						<div class="form-item col-sm-6">
 							<label for="peixeQuantidade" class="control-label">Quantidade</label>
 							
-							<form:input id="inputTextPeixe" path="inqueritoAlimentar.peixeQuantidade" cssClass="form-control" placeholder="Quantidade" disabled="${not inqueritoAlimentar.peixeGosta}" />
+							<form:input id="inputTextPeixe" path="inqueritoAlimentar.peixeQuantidade" cssClass="form-control" placeholder="Quantidade" disabled="${not consultaNutricional.inqueritoAlimentar.peixeGosta}" />
 							
 							<div class="error-validation"> <form:errors path="inqueritoAlimentar.peixeQuantidade"></form:errors> </div>
 						</div>						
@@ -905,7 +902,7 @@
 						<div class="form-item col-sm-6">
 							<label for="checkVicerasGosta" class="control-label"><form:checkbox id="checkVicerasGosta" path="inqueritoAlimentar.viscerasGosta" class="checkInquerito" /> Gosta de Visceras?</label>
 
-							<form:select path="inqueritoAlimentar.viscerasFrequenciaSemanal" cssClass="form-control select" disabled="${not inqueritoAlimentar.viscerasGosta}">
+							<form:select path="inqueritoAlimentar.viscerasFrequenciaSemanal" cssClass="form-control select" disabled="${not consultaNutricional.inqueritoAlimentar.viscerasGosta}">
 								<form:option value="">Quantas vezes por semana?</form:option>
 								<form:options items="${frequencia}" itemLabel="tipo" />
 							</form:select>
@@ -918,7 +915,7 @@
 						<div class="form-item col-sm-6">
 							<label for="viscerasQuantidade" class="control-label">Quantidade</label>
 
-							<form:input id="inputTextVisceras" path="inqueritoAlimentar.viscerasQuantidade" cssClass="form-control" placeholder="Quantidade" disabled="${not inqueritoAlimentar.viscerasGosta}" />
+							<form:input id="inputTextVisceras" path="inqueritoAlimentar.viscerasQuantidade" cssClass="form-control" placeholder="Quantidade" disabled="${not consultaNutricional.inqueritoAlimentar.viscerasGosta}" />
 
 							<div class="error-validation">
 								<form:errors path="inqueritoAlimentar.viscerasQuantidade"></form:errors>
@@ -930,7 +927,7 @@
 						<div class="form-item col-sm-6">
 							<label for="checkLeiteDerivadosGosta" class="control-label"><form:checkbox id="checkLeiteDerivadosGosta" path="inqueritoAlimentar.leiteDerivadosGosta" class="checkInquerito" /> Gosta de Derivados do Leite?</label>
 
-							<form:select path="inqueritoAlimentar.leiteDerivadosFrequenciaSemanal" cssClass="form-control select" disabled="${not inqueritoAlimentar.leiteDerivadosGosta}">
+							<form:select path="inqueritoAlimentar.leiteDerivadosFrequenciaSemanal" cssClass="form-control select" disabled="${not consultaNutricional.inqueritoAlimentar.leiteDerivadosGosta}">
 								<form:option value="">Quantas vezes por semana?</form:option>
 								<form:options items="${frequencia}" itemLabel="tipo" />
 							</form:select>
@@ -941,7 +938,7 @@
 						<div class="form-item col-sm-6">
 							<label for="leiteDerivadosQuantidade" class="control-label">Quantidade</label>
 							
-							<form:input id="inputTextLeiteDerivados" path="inqueritoAlimentar.leiteDerivadosQuantidade" cssClass="form-control" placeholder="Quantidade" disabled="${not inqueritoAlimentar.leiteDerivadosGosta}" />
+							<form:input id="inputTextLeiteDerivados" path="inqueritoAlimentar.leiteDerivadosQuantidade" cssClass="form-control" placeholder="Quantidade" disabled="${not consultaNutricional.inqueritoAlimentar.leiteDerivadosGosta}" />
 							
 							<div class="error-validation"><form:errors path="inqueritoAlimentar.leiteDerivadosQuantidade"></form:errors></div>
 						</div>						
@@ -952,7 +949,7 @@
 						<div class="form-item col-sm-6">
 							<label for="checkOvosGosta" class="control-label"><form:checkbox id="checkOvosGosta" path="inqueritoAlimentar.ovosGosta" class="checkInquerito" /> Gosta de Ovos?</label>
 							
-							<form:select path="inqueritoAlimentar.ovosFrequenciaSemanal" cssClass="form-control select" disabled="${not inqueritoAlimentar.ovosGosta}">
+							<form:select path="inqueritoAlimentar.ovosFrequenciaSemanal" cssClass="form-control select" disabled="${not consultaNutricional.inqueritoAlimentar.ovosGosta}">
 								<form:option value="">Quantas vezes por semana?</form:option>
 								<form:options items="${frequencia}" itemLabel="tipo" />
 							</form:select>
@@ -963,7 +960,7 @@
 						<div class="form-item col-sm-6">
 							<label for="ovosQuantidade" class="control-label">Quantidade</label>
 							
-							<form:input id="inputTextOvos" path="inqueritoAlimentar.ovosQuantidade" cssClass="form-control" placeholder="Quantidade" disabled="${not inqueritoAlimentar.ovosGosta}" />
+							<form:input id="inputTextOvos" path="inqueritoAlimentar.ovosQuantidade" cssClass="form-control" placeholder="Quantidade" disabled="${not consultaNutricional.inqueritoAlimentar.ovosGosta}" />
 							
 							<div class="error-validation"><form:errors path="inqueritoAlimentar.ovosQuantidade"></form:errors></div>
 						</div>						
@@ -974,7 +971,7 @@
 						<div class="form-item col-sm-6">
 							<label for="checkLeguminosasGosta" class="control-label"><form:checkbox id="checkLeguminosasGosta" path="inqueritoAlimentar.leguminosasGosta" class="checkInquerito" /> Gosta de Leguminosas?</label>
 
-							<form:select path="inqueritoAlimentar.leguminosasFrequenciaSemanal" cssClass="form-control select" disabled="${not inqueritoAlimentar.leguminosasGosta}">
+							<form:select path="inqueritoAlimentar.leguminosasFrequenciaSemanal" cssClass="form-control select" disabled="${not consultaNutricional.inqueritoAlimentar.leguminosasGosta}">
 								<form:option value="">Quantas vezes por semana?</form:option>
 								<form:options items="${frequencia}" itemLabel="tipo" />
 							</form:select>
@@ -985,7 +982,7 @@
 						<div class="form-item col-sm-6">
 							<label for="leguminosasQuantidade" class="control-label">Quantidade</label>
 
-							<form:input id="inputTextLeguminosas" path="inqueritoAlimentar.leguminosasQuantidade" cssClass="form-control" placeholder="Quantidade" disabled="${not inqueritoAlimentar.leguminosasGosta}" />
+							<form:input id="inputTextLeguminosas" path="inqueritoAlimentar.leguminosasQuantidade" cssClass="form-control" placeholder="Quantidade" disabled="${not consultaNutricional.inqueritoAlimentar.leguminosasGosta}" />
 							
 							<div class="error-validation"><form:errors path="inqueritoAlimentar.leguminosasQuantidade"></form:errors></div>
 						</div>						
@@ -995,7 +992,7 @@
 						<div class="form-item col-sm-6">
 							<label for="checkCereaisGosta" class="control-label"><form:checkbox id="checkCereaisGosta" path="inqueritoAlimentar.cereaisGosta" class="checkInquerito" /> Gosta de Cereais?</label>
 							
-							<form:select path="inqueritoAlimentar.cereaisFrequenciaSemanal" cssClass="form-control select" disabled="${not inqueritoAlimentar.cereaisGosta}">
+							<form:select path="inqueritoAlimentar.cereaisFrequenciaSemanal" cssClass="form-control select" disabled="${not consultaNutricional.inqueritoAlimentar.cereaisGosta}">
 								<form:option value="">Quantas vezes por semana?</form:option>
 								<form:options items="${frequencia}" itemLabel="tipo" />
 							</form:select>
@@ -1006,7 +1003,7 @@
 						<div class="form-item col-sm-6">
 							<label for="cereaisQuantidade" class="control-label">Quantidade</label>
 							
-							<form:input id="inputTextCereais" path="inqueritoAlimentar.cereaisQuantidade" cssClass="form-control" placeholder="Quantidade" disabled="${not inqueritoAlimentar.cereaisGosta}" />
+							<form:input id="inputTextCereais" path="inqueritoAlimentar.cereaisQuantidade" cssClass="form-control" placeholder="Quantidade" disabled="${not consultaNutricional.inqueritoAlimentar.cereaisGosta}" />
 							
 							<div class="error-validation"><form:errors path="inqueritoAlimentar.cereaisQuantidade"></form:errors></div>
 						</div>						
@@ -1016,7 +1013,7 @@
 						<div class="form-item col-sm-6">
 							<label for="checkMassasGosta" class="control-label"><form:checkbox id="checkMassasGosta" path="inqueritoAlimentar.massasGosta" class="checkInquerito" /> Gosta de Massas?</label>
 							
-							<form:select path="inqueritoAlimentar.massasFrequenciaSemanal" cssClass="form-control select" disabled="${not inqueritoAlimentar.massasGosta}">
+							<form:select path="inqueritoAlimentar.massasFrequenciaSemanal" cssClass="form-control select" disabled="${not consultaNutricional.inqueritoAlimentar.massasGosta}">
 								<form:option value="">Quantas vezes por semana?</form:option>
 								<form:options items="${frequencia}" itemLabel="tipo" />
 							</form:select>
@@ -1028,7 +1025,7 @@
 						<div class="form-item col-sm-6">
 							<label for="massasQuantidade" class="control-label">Quantidade</label>
 							
-							<form:input id="inputTextMassas" path="inqueritoAlimentar.massasQuantidade" cssClass="form-control" placeholder="Quantidade" disabled="${not inqueritoAlimentar.massasGosta}" />
+							<form:input id="inputTextMassas" path="inqueritoAlimentar.massasQuantidade" cssClass="form-control" placeholder="Quantidade" disabled="${not consultaNutricional.inqueritoAlimentar.massasGosta}" />
 							
 							<div class="error-validation"><form:errors path="inqueritoAlimentar.massasQuantidade"></form:errors></div>
 						</div>						
@@ -1042,7 +1039,7 @@
 									class="checkInquerito" /> Gosta de Vegetais Crus?</label>
 							<form:select path="inqueritoAlimentar.vegetaisCrusFrequenciaSemanal"
 								cssClass="form-control select"
-								disabled="${not inqueritoAlimentar.vegetaisCrusGosta}">
+								disabled="${not consultaNutricional.inqueritoAlimentar.vegetaisCrusGosta}">
 								<form:option value="">Quantas vezes por semana?</form:option>
 								<form:options items="${frequencia}" itemLabel="tipo" />
 							</form:select>
@@ -1056,7 +1053,7 @@
 							<form:input id="inputTextVegetaisCrus"
 								path="inqueritoAlimentar.vegetaisCrusQuantidade" cssClass="form-control"
 								placeholder="Quantidade"
-								disabled="${not inqueritoAlimentar.vegetaisCrusGosta}" />
+								disabled="${not consultaNutricional.inqueritoAlimentar.vegetaisCrusGosta}" />
 							<div class="error-validation">
 								<form:errors path="inqueritoAlimentar.vegetaisCrusQuantidade"></form:errors>
 							</div>
@@ -1071,7 +1068,7 @@
 									class="checkInquerito" /> Gosta de Vegetais Cozidos?</label>
 							<form:select path="inqueritoAlimentar.vegetaisCozidosFrequenciaSemanal"
 								cssClass="form-control select"
-								disabled="${not inqueritoAlimentar.vegetaisCozidosGosta}">
+								disabled="${not consultaNutricional.inqueritoAlimentar.vegetaisCozidosGosta}">
 								<form:option value="">Quantas vezes por semana?</form:option>
 								<form:options items="${frequencia}" itemLabel="tipo" />
 							</form:select>
@@ -1085,7 +1082,7 @@
 							<form:input id="inputTextVegetaisCozidos"
 								path="inqueritoAlimentar.vegetaisCozidosQuantidade" cssClass="form-control"
 								placeholder="Quantidade"
-								disabled="${not inqueritoAlimentar.vegetaisCozidosGosta}" />
+								disabled="${not consultaNutricional.inqueritoAlimentar.vegetaisCozidosGosta}" />
 							<div class="error-validation">
 								<form:errors path="inqueritoAlimentar.vegetaisCozidosQuantidade"></form:errors>
 							</div>
@@ -1100,7 +1097,7 @@
 									class="checkInquerito" /> Gosta de Frutas?</label>
 							<form:select path="inqueritoAlimentar.frutasFrequenciaSemanal"
 								cssClass="form-control select"
-								disabled="${not inqueritoAlimentar.frutasGosta}">
+								disabled="${not consultaNutricional.inqueritoAlimentar.frutasGosta}">
 								<form:option value="">Quantas vezes por semana?</form:option>
 								<form:options items="${frequencia}" itemLabel="tipo" />
 							</form:select>
@@ -1114,7 +1111,7 @@
 							<form:input id="inputTextFrutas"
 								path="inqueritoAlimentar.frutasQuantidade" cssClass="form-control"
 								placeholder="Quantidade"
-								disabled="${not inqueritoAlimentar.frutasGosta}" />
+								disabled="${not consultaNutricional.inqueritoAlimentar.frutasGosta}" />
 							<div class="error-validation">
 								<form:errors path="inqueritoAlimentar.frutasQuantidade"></form:errors>
 							</div>
@@ -1129,7 +1126,7 @@
 									class="checkInquerito" /> Gosta de Doces?</label>
 							<form:select path="inqueritoAlimentar.docesFrequenciaSemanal"
 								cssClass="form-control select"
-								disabled="${not inqueritoAlimentar.docesGosta}">
+								disabled="${not consultaNutricional.inqueritoAlimentar.docesGosta}">
 								<form:option value="">Quantas vezes por semana?</form:option>
 								<form:options items="${frequencia}" itemLabel="tipo" />
 							</form:select>
@@ -1143,7 +1140,7 @@
 							<form:input id="inputTextDoces"
 								path="inqueritoAlimentar.docesQuantidade" cssClass="form-control"
 								placeholder="Quantidade"
-								disabled="${not inqueritoAlimentar.docesGosta}" />
+								disabled="${not consultaNutricional.inqueritoAlimentar.docesGosta}" />
 							<div class="error-validation">
 								<form:errors path="inqueritoAlimentar.docesQuantidade"></form:errors>
 							</div>
@@ -1158,7 +1155,7 @@
 									class="checkInquerito" /> Gosta de Óleo?</label>
 							<form:select path="inqueritoAlimentar.oleoFrequenciaSemanal"
 								cssClass="form-control select"
-								disabled="${not inqueritoAlimentar.oleoGosta}">
+								disabled="${not consultaNutricional.inqueritoAlimentar.oleoGosta}">
 								<form:option value="">Quantas vezes por semana?</form:option>
 								<form:options items="${frequencia}" itemLabel="tipo" />
 							</form:select>
@@ -1172,7 +1169,7 @@
 							<form:input id="inputTextOleo"
 								path="inqueritoAlimentar.oleoQuantidade" cssClass="form-control"
 								placeholder="Quantidade"
-								disabled="${not inqueritoAlimentar.oleoGosta}" />
+								disabled="${not consultaNutricional.inqueritoAlimentar.oleoGosta}" />
 							<div class="error-validation">
 								<form:errors path="inqueritoAlimentar.oleoQuantidade"></form:errors>
 							</div>
@@ -1187,7 +1184,7 @@
 									class="checkInquerito" /> Gosta de Margarina?</label>
 							<form:select path="inqueritoAlimentar.margarinaFrequenciaSemanal"
 								cssClass="form-control select"
-								disabled="${not inqueritoAlimentar.margarinaGosta}">
+								disabled="${not consultaNutricional.inqueritoAlimentar.margarinaGosta}">
 								<form:option value="">Quantas vezes por semana?</form:option>
 								<form:options items="${frequencia}" itemLabel="tipo" />
 							</form:select>
@@ -1201,7 +1198,7 @@
 							<form:input id="inputTextMargarina"
 								path="inqueritoAlimentar.margarinaQuantidade" cssClass="form-control"
 								placeholder="Quantidade"
-								disabled="${not inqueritoAlimentar.margarinaGosta}" />
+								disabled="${not consultaNutricional.inqueritoAlimentar.margarinaGosta}" />
 							<div class="error-validation">
 								<form:errors path="inqueritoAlimentar.margarinaQuantidade"></form:errors>
 							</div>
@@ -1216,7 +1213,7 @@
 									class="checkInquerito" /> Gosta de Manteiga?</label>
 							<form:select path="inqueritoAlimentar.manteigaFrequenciaSemanal"
 								cssClass="form-control select"
-								disabled="${not inqueritoAlimentar.manteigaGosta}">
+								disabled="${not consultaNutricional.inqueritoAlimentar.manteigaGosta}">
 								<form:option value="">Quantas vezes por semana?</form:option>
 								<form:options items="${frequencia}" itemLabel="tipo" />
 							</form:select>
@@ -1230,7 +1227,7 @@
 							<form:input id="inputTextManteiga"
 								path="inqueritoAlimentar.manteigaQuantidade" cssClass="form-control"
 								placeholder="Quantidade"
-								disabled="${not inqueritoAlimentar.manteigaGosta}" />
+								disabled="${not consultaNutricional.inqueritoAlimentar.manteigaGosta}" />
 							<div class="error-validation">
 								<form:errors path="inqueritoAlimentar.manteigaQuantidade"></form:errors>
 							</div>
@@ -1245,7 +1242,7 @@
 									class="checkInquerito" /> Gosta de Toucinho/Bacon?</label>
 							<form:select path="inqueritoAlimentar.toucinhoBaconFrequenciaSemanal"
 								cssClass="form-control select"
-								disabled="${not inqueritoAlimentar.toucinhoBaconGosta}">
+								disabled="${not consultaNutricional.inqueritoAlimentar.toucinhoBaconGosta}">
 								<form:option value="">Quantas vezes por semana?</form:option>
 								<form:options items="${frequencia}" itemLabel="tipo" />
 							</form:select>
@@ -1259,7 +1256,7 @@
 							<form:input id="inputTextToucinhoBacon"
 								path="inqueritoAlimentar.toucinhoBaconQuantidade" cssClass="form-control"
 								placeholder="Quantidade"
-								disabled="${not inqueritoAlimentar.toucinhoBaconGosta}" />
+								disabled="${not consultaNutricional.inqueritoAlimentar.toucinhoBaconGosta}" />
 							<div class="error-validation">
 								<form:errors path="inqueritoAlimentar.toucinhoBaconQuantidade"></form:errors>
 							</div>
@@ -1274,7 +1271,7 @@
 									class="checkInquerito" /> Gosta de Água?</label>
 							<form:select path="inqueritoAlimentar.aguaFrequenciaSemanal"
 								cssClass="form-control select"
-								disabled="${not inqueritoAlimentar.aguaGosta}">
+								disabled="${not consultaNutricional.inqueritoAlimentar.aguaGosta}">
 								<form:option value="">Quantas vezes por semana?</form:option>
 								<form:options items="${frequencia}" itemLabel="tipo" />
 							</form:select>
@@ -1288,7 +1285,7 @@
 							<form:input id="inputTextAgua"
 								path="inqueritoAlimentar.aguaQuantidade" cssClass="form-control"
 								placeholder="Quantidade"
-								disabled="${not inqueritoAlimentar.aguaGosta}" />
+								disabled="${not consultaNutricional.inqueritoAlimentar.aguaGosta}" />
 							<div class="error-validation">
 								<form:errors path="inqueritoAlimentar.aguaQuantidade"></form:errors>
 							</div>
@@ -1303,7 +1300,7 @@
 									class="checkInquerito" /> Gosta de Suco?</label>
 							<form:select path="inqueritoAlimentar.sucoFrequenciaSemanal"
 								cssClass="form-control select"
-								disabled="${not inqueritoAlimentar.sucoGosta}">
+								disabled="${not consultaNutricional.inqueritoAlimentar.sucoGosta}">
 								<form:option value="">Quantas vezes por semana?</form:option>
 								<form:options items="${frequencia}" itemLabel="tipo" />
 							</form:select>
@@ -1317,7 +1314,7 @@
 							<form:input id="inputTextSuco"
 								path="inqueritoAlimentar.sucoQuantidade" cssClass="form-control"
 								placeholder="Quantidade"
-								disabled="${not inqueritoAlimentar.sucoGosta}" />
+								disabled="${not consultaNutricional.inqueritoAlimentar.sucoGosta}" />
 							<div class="error-validation">
 								<form:errors path="inqueritoAlimentar.sucoQuantidade"></form:errors>
 							</div>
@@ -1332,7 +1329,7 @@
 									class="checkInquerito" /> Gosta de Bebidas Alcoólicas?</label>
 							<form:select path="inqueritoAlimentar.bebidasAlcoolicasFrequenciaSemanal"
 								cssClass="form-control select"
-								disabled="${not inqueritoAlimentar.bebidasAlcoolicasGosta}">
+								disabled="${not consultaNutricional.inqueritoAlimentar.bebidasAlcoolicasGosta}">
 								<form:option value="">Quantas vezes por semana?</form:option>
 								<form:options items="${frequencia}" itemLabel="tipo" />
 							</form:select>
@@ -1346,7 +1343,7 @@
 							<form:input id="inputTextBebidasAlcoolicas"
 								path="inqueritoAlimentar.bebidasAlcoolicasQuantidade" cssClass="form-control"
 								placeholder="Quantidade"
-								disabled="${not inqueritoAlimentar.bebidasAlcoolicasGosta}" />
+								disabled="${not consultaNutricional.inqueritoAlimentar.bebidasAlcoolicasGosta}" />
 							<div class="error-validation">
 								<form:errors path="inqueritoAlimentar.bebidasAlcoolicasQuantidade"></form:errors>
 							</div>
@@ -1361,7 +1358,7 @@
 									class="checkInquerito" /> Gosta de Bebidas Geseificadas?</label>
 							<form:select path="inqueritoAlimentar.gaseificadasFrequenciaSemanal"
 								cssClass="form-control select"
-								disabled="${not inqueritoAlimentar.gaseificadasGosta}">
+								disabled="${not consultaNutricional.inqueritoAlimentar.gaseificadasGosta}">
 								<form:option value="">Quantas vezes por semana?</form:option>
 								<form:options items="${frequencia}" itemLabel="tipo" />
 							</form:select>
@@ -1375,7 +1372,7 @@
 							<form:input id="inputTextGaseificadas"
 								path="inqueritoAlimentar.gaseificadasQuantidade" cssClass="form-control"
 								placeholder="Quantidade"
-								disabled="${not inqueritoAlimentar.gaseificadasGosta}" />
+								disabled="${not consultaNutricional.inqueritoAlimentar.gaseificadasGosta}" />
 							<div class="error-validation">
 								<form:errors path="inqueritoAlimentar.bovinaQuantidade"></form:errors>
 							</div>
@@ -1389,7 +1386,7 @@
 									class="checkInquerito" /> Gosta de Infusões?</label>
 							<form:select path="inqueritoAlimentar.infusoesFrequenciaSemanal"
 								cssClass="form-control select"
-								disabled="${not inqueritoAlimentar.infusoesGosta}">
+								disabled="${not consultaNutricional.inqueritoAlimentar.infusoesGosta}">
 								<form:option value="">Quantas vezes por semana?</form:option>
 								<form:options items="${frequencia}" itemLabel="tipo" />
 							</form:select>
@@ -1403,7 +1400,7 @@
 							<form:input id="inputTextInfusoes"
 								path="inqueritoAlimentar.infusoesQuantidade" cssClass="form-control"
 								placeholder="Quantidade"
-								disabled="${not inqueritoAlimentar.infusoesGosta}" />
+								disabled="${not consultaNutricional.inqueritoAlimentar.infusoesGosta}" />
 							<div class="error-validation">
 								<form:errors path="inqueritoAlimentar.infusoesQuantidade"></form:errors>
 							</div>

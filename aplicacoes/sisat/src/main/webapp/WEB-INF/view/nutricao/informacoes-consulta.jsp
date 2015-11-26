@@ -616,9 +616,9 @@
 								<tr>
 									<td>Toucinho/Bacon</td>
 									<c:if
-									test="${not empty consulta.inqueritoAlimentar.toucinhoBaconFrequenciaSemanal and not empty consulta.inqueritoAlimentar.toucinhoQuantidade}">
+									test="${not empty consulta.inqueritoAlimentar.toucinhoBaconFrequenciaSemanal and not empty consulta.inqueritoAlimentar.toucinhoBaconQuantidade}">
 									<td>${consulta.inqueritoAlimentar.toucinhoBaconFrequenciaSemanal}</td>
-									<td>${consulta.inqueritoAlimentar.toucinhoQuantidade}</td>	
+									<td>${consulta.inqueritoAlimentar.toucinhoBaconQuantidade}</td>	
 									</c:if>
 								</tr>
 								
@@ -645,7 +645,7 @@
 									<c:if
 									test="${not empty consulta.inqueritoAlimentar.bebidasAlcoolicasFrequenciaSemanal and not empty consulta.inqueritoAlimentar.bebidasAlcoolicasQuantidade}">
 									<td>${consulta.inqueritoAlimentar.bebidasAlcoolicasFrequenciaSemanal}</td>
-									<td>${consulta.inqueritoAlimentar.bebidasAcoolicasQuantidade}</td>	
+									<td>${consulta.inqueritoAlimentar.bebidasAlcoolicasQuantidade}</td>	
 									</c:if>
 								</tr>
 								

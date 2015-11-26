@@ -54,6 +54,7 @@ $(document).ready(function() {
 			
 		} else if (!$(this).is(":checked")) {
 			$(itemForm).find("input[type='text']").attr("disabled", true);
+			$(itemForm).find("input[type='text']").val("");
 			$(itemForm).find("select").attr("disabled",true);
 			$(itemForm).find("select").prop('selectedIndex', 0);
 			$(itemForm).find('.has-error').removeClass('has-error');
@@ -111,7 +112,9 @@ $(document).ready(function() {
 		},
 		unhighlight : function(element) {
 			$(element).closest('.form-control')
-					.removeClass('has-error');
+			.removeClass('has-error');
+			$(element).closest('.form-control')
+			.removeClass('has-success');
 		},
 		errorElement : 'span',
 		errorClass : 'help-block',
