@@ -4,32 +4,37 @@
 <head profile="http://selenium-ide.openqa.org/profiles/test-case">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <link rel="selenium.base" href="http://localhost:8080/" />
-<title>VisualizarDetalhes</title>
+<title>Visualizar-Detalhes-Paciente</title>
 </head>
 <body>
 <table cellpadding="1" cellspacing="1" border="1">
 <thead>
-<tr><td rowspan="1" colspan="3">VisualizarDetalhes</td></tr>
+<tr><td rowspan="1" colspan="3">Visualizar-Detalhes-Paciente</td></tr>
 </thead><tbody>
 <tr>
-	<td>type</td>
-	<td>name=j_username</td>
-	<td>00092349005</td>
+	<td>open</td>
+	<td>/sisat/login;jsessionid=C464F8DC7F3016C23068F3A0A9A3363F</td>
+	<td></td>
 </tr>
 <tr>
 	<td>type</td>
-	<td>name=j_password</td>
+	<td>id=password</td>
 	<td>1234</td>
 </tr>
 <tr>
+	<td>type</td>
+	<td>id=username</td>
+	<td>00092349005</td>
+</tr>
+<tr>
 	<td>clickAndWait</td>
-	<td>name=submit</td>
+	<td>id=login</td>
 	<td></td>
 </tr>
 <tr>
 	<td>type</td>
 	<td>id=busca</td>
-	<td>Ingrid da Silva</td>
+	<td>00884821382</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -38,14 +43,20 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>xpath=(//a[contains(text(),'Historico')])[5]</td>
+	<td>link=Lucas Pinto Cardoso</td>
 	<td></td>
 </tr>
 <tr>
 	<td>click</td>
+	<td>css=i.glyphicon.glyphicon-chevron-down</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
 	<td>link=Sair</td>
 	<td></td>
 </tr>
+
 </tbody></table>
 </body>
 </html>

@@ -4,12 +4,12 @@
 <head profile="http://selenium-ide.openqa.org/profiles/test-case">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <link rel="selenium.base" href="http://localhost:8080/" />
-<title>Visualizar-Baixar-Arquivos-Anexados</title>
+<title>Visualizar-Informações-Consulta</title>
 </head>
 <body>
 <table cellpadding="1" cellspacing="1" border="1">
 <thead>
-<tr><td rowspan="1" colspan="3">Visualizar-Baixar-Arquivos-Anexados</td></tr>
+<tr><td rowspan="1" colspan="3">Visualizar-Informações-Consulta</td></tr>
 </thead><tbody>
 <tr>
 	<td>type</td>
@@ -44,16 +44,6 @@
 <tr>
 	<td>clickAndWait</td>
 	<td>link=28/10/2015 14:12</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>//div[@id='myScrollspy']/ul/li[5]/a</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>link=Download</td>
 	<td></td>
 </tr>
 <tr>

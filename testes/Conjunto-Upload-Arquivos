@@ -8,10 +8,11 @@
 <body>
 <table id="suiteTable" cellpadding="1" cellspacing="1" border="1" class="selenium"><tbody>
 <tr><td><b>Test Suite</b></td></tr>
-<tr><td><a href="Fazer-Upload-Arquivos/Upload-Arquivo">Upload-Arquivos</a></td></tr>
-<tr><td><a href="Fazer-Upload-Arquivos/Upload-Varios-Arquivos">Upload-Varios-Arquivos</a></td></tr>
-<tr><td><a href="Fazer-Upload-Arquivos/Remover-Arquivos">Remover-Arquivos</a></td></tr>
 <tr><td><a href="Fazer-Upload-Arquivos/Baixar-Arquivos">Baixar-Arquivos</a></td></tr>
+<tr><td><a href="Fazer-Upload-Arquivos/Remover-Arquivos">Remover-Arquivos</a></td></tr>
+<tr><td><a href="Fazer-Upload-Arquivos/Upload-Arquivo">Upload-Arquivo</a></td></tr>
+<tr><td><a href="Fazer-Upload-Arquivos/Baixar-Arquivos-Informações-Consulta">Baixar-Arquivos-Informações-Consulta</a></td></tr>
+<tr><td><a href="Fazer-Upload-Arquivos/Upload-Varios-Arquivos">Upload-Varios-Arquivos</a></td></tr>
 </tbody></table>
 </body>
 </html>

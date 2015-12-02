@@ -4,37 +4,37 @@
 <head profile="http://selenium-ide.openqa.org/profiles/test-case">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <link rel="selenium.base" href="http://localhost:8080/" />
-<title>VisualizarInformaçõesConsulta</title>
+<title>Adicionar-refeição-com-campo-alimento-em-branco</title>
 </head>
 <body>
 <table cellpadding="1" cellspacing="1" border="1">
 <thead>
-<tr><td rowspan="1" colspan="3">VisualizarInformaçõesConsulta</td></tr>
+<tr><td rowspan="1" colspan="3">Adicionar-refeição-com-campo-alimento-em-branco</td></tr>
 </thead><tbody>
 <tr>
-	<td>selectWindow</td>
-	<td>null</td>
+	<td>open</td>
+	<td>/sisat/paciente/consulta/1</td>
 	<td></td>
 </tr>
 <tr>
 	<td>type</td>
-	<td>name=j_username</td>
+	<td>id=username</td>
 	<td>00092349005</td>
 </tr>
 <tr>
 	<td>type</td>
-	<td>name=j_password</td>
+	<td>id=password</td>
 	<td>1234</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>name=submit</td>
+	<td>id=login</td>
 	<td></td>
 </tr>
 <tr>
 	<td>type</td>
 	<td>id=busca</td>
-	<td>Luiz</td>
+	<td>luiz</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -43,12 +43,47 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>xpath=(//a[contains(text(),'Historico')])[2]</td>
+	<td>link=Luiz Ferreira Almeida</td>
 	<td></td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>link=11/08/2015 15:37</td>
+	<td>link=Editar</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=add-refeicao</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=questionarioFrequenciaAlimentar_refeicao_1</td>
+	<td>label=Colação</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=tblSubGrid_1_alimento_1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=tblSubGrid_1_porcao_1</td>
+	<td>3</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=button.btn.btn-success</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=frequencias[0].alimentos[0].alimento</td>
+	<td>*Campo obrigatório*</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=i.glyphicon.glyphicon-chevron-down</td>
 	<td></td>
 </tr>
 <tr>
@@ -56,6 +91,7 @@
 	<td>link=Sair</td>
 	<td></td>
 </tr>
+
 </tbody></table>
 </body>
 </html>

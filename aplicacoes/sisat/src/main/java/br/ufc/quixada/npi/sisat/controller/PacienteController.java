@@ -31,6 +31,7 @@ import br.ufc.quixada.npi.sisat.model.Alimentacao;
 import br.ufc.quixada.npi.sisat.model.ConsultaNutricional;
 import br.ufc.quixada.npi.sisat.model.Documento;
 import br.ufc.quixada.npi.sisat.model.FrequenciaAlimentar;
+import br.ufc.quixada.npi.sisat.model.InqueritoAlimentar;
 import br.ufc.quixada.npi.sisat.model.Paciente;
 import br.ufc.quixada.npi.sisat.model.Pessoa;
 import br.ufc.quixada.npi.sisat.model.enuns.ClassificacaoExame;
@@ -73,7 +74,7 @@ public class PacienteController {
 	private GenericService<FrequenciaAlimentar> frequenciaAlimentarService; 
 
 	@Inject
-	private GenericService<Alimentacao> alimentacaoService; 
+	private GenericService<Alimentacao> alimentacaoService;
 
 	@RequestMapping(value = "/{cpf}/historico", method = RequestMethod.GET)
 	public String getPaginaHistorico(@PathVariable("cpf") String cpf, Model model, RedirectAttributes redirectAttributes) {
@@ -136,6 +137,9 @@ public class PacienteController {
 		model.addAttribute("action", "cadastrar");
 
 		Pessoa pessoa = pessoaService.getPessoaByCpf(cpf);
+		InqueritoAlimentar inqueritoAlimentar = consulta.getInqueritoAlimentar();
+		inqueritoAlimentar.setConsultaNutricional(consulta);
+		consulta.setInqueritoAlimentar(inqueritoAlimentar);
 
 		if (pessoa == null) {
 			redirectAttributes.addFlashAttribute("erro", "Paciente não encontrado. Faça um nova pesquisa");
@@ -246,6 +250,8 @@ public class PacienteController {
 		return "nutricao/form-consulta";
 
 	}
+	
+	
 
 	@RequestMapping(value = { "/{cpf}/consulta/{idConsulta}/editar" }, method = RequestMethod.POST)
 	public String editarConsulta(Model model, @PathVariable("cpf") String cpf, @PathVariable("idConsulta") Long idConsulta, @Valid ConsultaNutricional consulta,
@@ -255,6 +261,9 @@ public class PacienteController {
 
 		Paciente paciente = pacienteService.find(Paciente.class, consulta.getPaciente().getId());
 		consulta.setPaciente(paciente);
+		
+		InqueritoAlimentar inqueritoAlimentar = consulta.getInqueritoAlimentar();
+		inqueritoAlimentar.setConsultaNutricional(consulta);
 
 		consultaNutricionalValidator.validate(consulta, result);
 
@@ -304,6 +313,8 @@ public class PacienteController {
 		if (consulta.getFrequencias() != null) {			
 			atualizarFrequenciaAlimentar(consulta.getFrequencias(), consulta);
 		}
+		
+		consulta.getInqueritoAlimentar().setConsultaNutricional(consulta);
 
 		consultaNutricionalService.update(atualizarConsulta(consulta));
 		redirectAttributes.addFlashAttribute("success", "Consulta do paciente <strong>"
@@ -311,7 +322,7 @@ public class PacienteController {
 
 		return "redirect:/paciente/consulta/" + consulta.getId();
 	}
-
+	
 	@RequestMapping(value = "/{cpf}/consulta/{id}/relatorio/orientacoes", method = RequestMethod.GET)
 	public String relatorio(@PathVariable("id") Long id, Model model, HttpSession session) throws JRException {
 
