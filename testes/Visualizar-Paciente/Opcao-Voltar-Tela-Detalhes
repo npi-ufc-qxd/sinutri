@@ -4,22 +4,27 @@
 <head profile="http://selenium-ide.openqa.org/profiles/test-case">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <link rel="selenium.base" href="http://localhost:8080/" />
-<title>Visualizar-Baixar-Arquivos-Anexados</title>
+<title>Opcao-Voltar-Tela-Detalhes</title>
 </head>
 <body>
 <table cellpadding="1" cellspacing="1" border="1">
 <thead>
-<tr><td rowspan="1" colspan="3">Visualizar-Baixar-Arquivos-Anexados</td></tr>
+<tr><td rowspan="1" colspan="3">Opcao-Voltar-Tela-Detalhes</td></tr>
 </thead><tbody>
 <tr>
-	<td>type</td>
-	<td>id=username</td>
-	<td>00092349005</td>
+	<td>open</td>
+	<td>/sisat/login;jsessionid=C464F8DC7F3016C23068F3A0A9A3363F</td>
+	<td></td>
 </tr>
 <tr>
 	<td>type</td>
 	<td>id=password</td>
 	<td>1234</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=username</td>
+	<td>00092349005</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -29,7 +34,7 @@
 <tr>
 	<td>type</td>
 	<td>id=busca</td>
-	<td>luiz</td>
+	<td>00884821382</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -38,22 +43,12 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>link=Historico</td>
+	<td>link=Lucas Pinto Cardoso</td>
 	<td></td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>link=28/10/2015 14:12</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>//div[@id='myScrollspy']/ul/li[5]/a</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>link=Download</td>
+	<td>link=Voltar</td>
 	<td></td>
 </tr>
 <tr>
