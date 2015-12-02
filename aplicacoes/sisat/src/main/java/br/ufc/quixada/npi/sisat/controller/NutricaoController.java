@@ -37,6 +37,7 @@ import br.ufc.quixada.npi.sisat.model.FrequenciaAlimentar;
 import br.ufc.quixada.npi.sisat.model.Papel;
 import br.ufc.quixada.npi.sisat.model.Pessoa;
 import br.ufc.quixada.npi.sisat.model.enuns.Grupo;
+import br.ufc.quixada.npi.sisat.model.enuns.TipoFrequencia;
 import br.ufc.quixada.npi.sisat.service.AlimentoSubstitutoService;
 import br.ufc.quixada.npi.sisat.service.ConsultaNutricionalService;
 import br.ufc.quixada.npi.sisat.service.DocumentoService;
@@ -127,13 +128,20 @@ public class NutricaoController {
 		model.addAttribute("patologias", consultaNutricionalService.getFrequenciaPatologia());
 		return model;
 	}
-
+//carrega o append
 	@RequestMapping(value = "/frequencia-alimentar.json", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-	public @ResponseBody List<FrequenciaAlimentar> getFrequencias(@RequestParam("id") Long id) {
-		if (id != null) {
-			List<FrequenciaAlimentar> frequenciaAlimentars = new ArrayList<FrequenciaAlimentar>();
-			frequenciaAlimentars = consultaNutricionalService.getFrequenciasByIdConsulta(id);
-			return frequenciaAlimentars;
+	public @ResponseBody List<FrequenciaAlimentar> getFrequencias(@RequestParam("idConsulta") Long idConsulta, @RequestParam("tipo") TipoFrequencia tipo) {
+		if (idConsulta != null) {
+			if(tipo==TipoFrequencia.RECORDATORIO){
+				List<FrequenciaAlimentar> frequenciaAlimentars = new ArrayList<FrequenciaAlimentar>();
+				frequenciaAlimentars = consultaNutricionalService.getFrequenciasByIdConsultaByTipo(idConsulta, TipoFrequencia.RECORDATORIO);
+				return frequenciaAlimentars;	
+			}else{
+				List<FrequenciaAlimentar> frequenciaAlimentars = new ArrayList<FrequenciaAlimentar>();
+				frequenciaAlimentars = consultaNutricionalService.getFrequenciasByIdConsultaByTipo(idConsulta, TipoFrequencia.PLANOALIMENTAR);
+				return frequenciaAlimentars;
+			}
+			
 		}
 		return null;
 	}

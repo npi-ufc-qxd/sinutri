@@ -856,7 +856,7 @@
 	
 	<script type="text/javascript">
 		$('#menu-paciente').addClass('active');
-		loadRecordatorio();
+		loadFrequenciaAlimentar("RECORDATORIO");
 		
 		
 		$(".anexo").fileinput({
