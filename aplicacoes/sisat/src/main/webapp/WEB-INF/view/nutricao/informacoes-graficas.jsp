@@ -31,34 +31,103 @@
 			url: '/sisat/nutricao/informacoes-graficas/patologias-frequentes.json',
 			type: "GET",
 			success: function(result) {
-				var obj = result;
-				var cat = [];
-				var data = [];
-				for (var key in obj.patologias) {
-					cat.push(key);
-					data.push(obj.patologias[key])
-		        }
+				  var dataJson = result;
+				  var objJson;
+				  var data;
 
-				$('#patologiasFrequentes').highcharts({
-			        chart: {
-			            type: 'bar'
-			        },
-			        title: {
-			            text: 'Patologias mais frequentes'
-			        },
-			        xAxis: {
-			            categories: cat
-			        },
-			        yAxis: {
-			            title: {
-			                text: 'Número de Pacientes'
-			            }
-			        },
-			        series: [{
-			        	name: 'Total de pacientes',
-			            data: data
-			        }]
-			    });				
+				  objJson = '['
+				  for (var key in dataJson.patologias) {
+				      objJson = objJson + '{ "patologia":"'+ key +'", "pacientes":'+dataJson.patologias[key]+'}';
+				  }
+				  data = JSON.parse(objJson.replace(/}{/g,'}, {') + ']');
+
+				//Definição da dimensão do gráfico
+				var margin = {top: 20, right: 20, bottom: 70, left: 40},
+				    width = 1100 - margin.left - margin.right,
+				    height = 400 - margin.top - margin.bottom;
+
+				//Definição dos vetores x e y do gráfico
+				var x = d3.scale.ordinal().rangeRoundBands([0, width], .8);
+				var y = d3.scale.linear().range([height, 0]);
+
+				//Posicionamento do vetores
+				var xAxis = d3.svg.axis()
+				    .scale(x)
+				    .orient("bottom");
+
+				var yAxis = d3.svg.axis()
+				    .scale(y)
+				    .tickSize(width)
+				    .orient("right");
+
+				//Tooltip exibir número de pacientes por barra
+				var tip = d3.tip()
+				  .attr('class', 'd3-tip')
+				  .offset([-10, 0])
+				  .html(function(d) {
+				    return "<strong>Pacientes:</strong> <span style='color:steelblue'>" + d.pacientes + "</span>";
+				  })
+
+				//Selecionar estrutura onde será localizado o gráfico
+				var marginLeftAdjust = margin.left - 10;
+				var svg = d3.select("#patologiasFrequentes").append("svg")
+				    .attr("width", width + margin.left + margin.right)
+				    .attr("height", height + margin.top + margin.bottom)
+				    .append("g")
+				    .attr("transform", 
+				          "translate(" + marginLeftAdjust + "," + margin.top + ")");
+
+				  //chamar Tooltip com informação individual da patologia.
+				  svg.call(tip);
+
+				  //Definindo dominio do gráfico
+				  x.domain(data.map(function(d) { return d.patologia; }));
+				  y.domain([0, 2*d3.max(data, function(d) { return d.pacientes; })]);
+
+				  //Definição do eixo Y
+				  var gy = svg.append("g")
+				    .attr("class", "y axis")
+				    .call(yAxis)
+				    .append("text")
+				      .attr("transform", "rotate(-90)")
+				      .attr("y", 6)
+				      .attr("dy", "-2em")
+				      .style("text-anchor", "end")
+				      .text("Quantidade de pacientes (nº)");
+				  
+				  //Titulo
+				  svg.append("g")
+				  	 .attr("class", "title")
+				  	 .append("text")
+				  	 	.attr("y",-9)
+				  	 	.attr("dx", "35em")
+				  	 	.style("text-anchor", "end")
+				  	 	.text("Patologias mais frequentes");
+
+				  //Definição do eixo X
+				  svg.append("g")
+				      .attr("class", "x axis")
+				      .attr("transform", "translate(0," + height + ")")
+				      .call(xAxis)
+				    .selectAll("text");
+
+				  //Definição do plot das barras
+				  svg.selectAll(".bar")
+				      .data(data)
+				      .enter().append("rect")
+				      .attr("class", "bar")
+				    .transition()
+				      .delay(function(d, i) { return i * 100; })
+				      .duration(200)
+				      .attr("x", function(d) { return x(d.patologia); })
+				      .attr("width", x.rangeBand())
+				      .attr("y", function(d) { return y(d.pacientes); })
+				      .attr("height", function(d) { return height - y(d.pacientes); });
+
+				  //Ação do Tooltipe em cada barra
+				  svg.selectAll(".bar")
+				      .on('mouseover', tip.show)
+				      .on('mouseout', tip.hide);				
 			}
 		});
     });
