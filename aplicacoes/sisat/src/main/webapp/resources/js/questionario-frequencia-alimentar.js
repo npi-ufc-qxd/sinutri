@@ -1,11 +1,11 @@
 
-function loadRecordatorio() {
+function loadFrequenciaAlimentar(tipo) {
 	var id = $("#id").val();
 
 	if(id > 0){
 		$.ajax({
 			type: "GET",
-			data: {"id": id},
+			data: {"idConsulta": id, "tipo": tipo},
 			url: '/sisat/nutricao/frequencia-alimentar.json',
 			success: function(result) {
 				loadQuestionarios(result);

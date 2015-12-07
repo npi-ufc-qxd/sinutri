@@ -94,13 +94,13 @@ public class PacienteController {
 	@RequestMapping(value = { "/consulta/{id}" }, method = RequestMethod.GET)
 	public String getPaginaInformacoesConsulta(@PathVariable("id") Long id, Model model, RedirectAttributes redirectAttributes) {
 		ConsultaNutricional consulta = consultaNutricionalService.getConsultaNutricionalWithDocumentosById(id);
-
+						
 		if (consulta == null) {
 			redirectAttributes.addFlashAttribute("erro", "Consulta não encontrado.");
 			return "redirect:/nutricao/buscar";
 		}
 
-		consulta.setFrequencias(consultaNutricionalService.getFrequenciasByIdConsulta(id));
+		consulta.setFrequencias(consultaNutricionalService.getFrequenciasByIdConsultaByTipo(id, TipoFrequencia.RECORDATORIO));
 		model.addAttribute("consulta", consulta);
 		return "nutricao/informacoes-consulta";
 	}
@@ -254,8 +254,8 @@ public class PacienteController {
 	
 
 	@RequestMapping(value = { "/{cpf}/consulta/{idConsulta}/editar" }, method = RequestMethod.POST)
-	public String editarConsulta(Model model, @PathVariable("cpf") String cpf, @PathVariable("idConsulta") Long idConsulta, @Valid ConsultaNutricional consulta, BindingResult result,
-			RedirectAttributes redirectAttributes, @RequestParam("files") List<MultipartFile> files,
+	public String editarConsulta(Model model, @PathVariable("cpf") String cpf, @PathVariable("idConsulta") Long idConsulta, @Valid ConsultaNutricional consulta,
+			BindingResult result, RedirectAttributes redirectAttributes, @RequestParam("files") List<MultipartFile> files,
 			@RequestParam(value = "enviar", required = false) boolean enviar) {
 		model.addAttribute("action", "editar");
 
@@ -365,31 +365,69 @@ public class PacienteController {
 		return model;
 	}
 
-	@RequestMapping (value = { "consulta/{id}/plano-alimentar"}, method = RequestMethod.GET)
-	public String getPlanoAlimentar(@PathVariable("id") Long id, Model model){
-		ConsultaNutricional consulta = consultaNutricionalService.getConsultaNutricionalWithFrequenciasById(id);
-		model.addAttribute("consultaNutricional", consulta);		
-		return "nutricao/plano-alimentar";
-	}
-
-	@RequestMapping (value = { "consulta/{id}/plano-alimentar"}, method = RequestMethod.POST)
-	public String salvarPlanoAlimentar(@PathVariable("id") Long id, Model model, @ModelAttribute("consulta") ConsultaNutricional consultaAtual, RedirectAttributes redirectAttributes){
+	@RequestMapping (value = { "consulta/{idConsulta}/plano-alimentar"}, method = RequestMethod.GET)
+	public String getRecordatorio(@PathVariable("idConsulta") Long id, Model model){
+		ConsultaNutricional consultaRecordatorio = consultaNutricionalService.getConsultaNutricionalWithDocumentosById(id);
+		consultaRecordatorio.setFrequencias(consultaNutricionalService.getFrequenciasByIdConsultaByTipo(id, TipoFrequencia.RECORDATORIO));
 		
-		ConsultaNutricional consultaBD = consultaNutricionalService.getConsultaNutricionalWithFrequenciasById(id);
-		model.addAttribute("consultaNutricional", consultaBD);
-		if(consultaAtual.getFrequencias() != null ){
-			atualizarFrequenciaAlimentar(consultaAtual.getFrequencias(), consultaAtual, TipoFrequencia.PLANOALIMENTAR);			
-			consultaBD.getFrequencias().addAll(consultaAtual.getFrequencias());
+		ConsultaNutricional consultaPlanoAlimentar = consultaNutricionalService.getConsultaNutricionalWithDocumentosById(id);
+		consultaPlanoAlimentar.setFrequencias(consultaNutricionalService.getFrequenciasByIdConsultaByTipo(id, TipoFrequencia.PLANOALIMENTAR));		
+		
+		model.addAttribute("consultaRecordatorio", consultaRecordatorio);
+		model.addAttribute("consultaPlanoAlimentar", consultaPlanoAlimentar);
+		
+		List <FrequenciaAlimentar> frequencia = consultaNutricionalService.getFrequenciasByIdConsultaByTipo(id, TipoFrequencia.PLANOALIMENTAR);
+		
+		if(frequencia.isEmpty()){
+			model.addAttribute("action", "cadastrar");
+		}else{
+			model.addAttribute("action", "editar");
 		}
 		
-		
-		consultaNutricionalService.update(consultaBD);
-
-		redirectAttributes.addFlashAttribute("success", "Consulta do paciente <strong>" + consultaBD.getPaciente().getPessoa().getNome() + "</strong> atualizada com sucesso.");
-		
-		return "redirect:/paciente/consulta/" + consultaBD.getId();				
+		return "nutricao/plano-alimentar";
 	}
 	
+	@RequestMapping (value = { "consulta/{idConsulta}/form-plano-alimentar"}, method = RequestMethod.GET)
+	public String getPlanoAlimentar(@PathVariable("idConsulta") Long id, Model model){
+		ConsultaNutricional consultaRecordatorio = consultaNutricionalService.getConsultaNutricionalWithDocumentosById(id);
+		consultaRecordatorio.setFrequencias(consultaNutricionalService.getFrequenciasByIdConsultaByTipo(id, TipoFrequencia.RECORDATORIO));
+		
+		ConsultaNutricional consultaPlanoAlimentar = consultaNutricionalService.getConsultaNutricionalWithDocumentosById(id);
+		consultaPlanoAlimentar.setFrequencias(consultaNutricionalService.getFrequenciasByIdConsultaByTipo(id, TipoFrequencia.PLANOALIMENTAR));		
+		
+		model.addAttribute("consultaRecordatorio", consultaRecordatorio);
+		model.addAttribute("consultaPlanoAlimentar", consultaPlanoAlimentar);
+		
+		List <FrequenciaAlimentar> frequencia = consultaNutricionalService.getFrequenciasByIdConsultaByTipo(id, TipoFrequencia.PLANOALIMENTAR);
+		if(frequencia.isEmpty()){
+			model.addAttribute("action", "cadastrar");
+		}else{
+			model.addAttribute("action", "editar");
+		}
+	
+		return "nutricao/form-planoalimentar";
+	}
+	@RequestMapping (value = { "consulta/{idConsulta}/plano-alimentar/atualizar"}, method = RequestMethod.POST)
+	public String salvarPlanoAlimentar(@PathVariable("idConsulta") Long id, Model model, @ModelAttribute("consulta") ConsultaNutricional consultaAtual, RedirectAttributes redirectAttributes){
+		
+		ConsultaNutricional consulta = consultaNutricionalService.getConsultaNutricionalWithDocumentosById(id);
+		consulta.setFrequencias(consultaNutricionalService.getFrequenciasByIdConsultaByTipo(id, TipoFrequencia.RECORDATORIO));
+				
+		model.addAttribute("action", "cadastrar");
+		model.addAttribute("consulta", consulta);
+		
+		if (consultaAtual.getFrequencias() != null){
+			atualizarFrequenciaAlimentar(consultaAtual.getFrequencias(),consultaAtual, TipoFrequencia.PLANOALIMENTAR);
+			consulta.getFrequencias().addAll(consultaAtual.getFrequencias());
+		}
+
+		atualizarFrequenciaAlimentar(consulta.getFrequencias(), consulta);
+
+		consultaNutricionalService.update(consulta);
+		
+		return "redirect:/paciente/consulta/"+ consulta.getId();
+	}
+
 	private void registrarPaciente(String cpf) {
 		Pessoa pessoa = pessoaService.getPessoaByCpf(cpf);
 
