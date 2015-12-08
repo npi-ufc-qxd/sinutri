@@ -45,8 +45,8 @@ public class PacienteServiceImpl extends GenericServiceImpl<Paciente> implements
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<ConsultaNutricional> getHistoricoPeso(String cpf) {
-		List<ConsultaNutricional> consultas = find(QueryType.NAMED, "ConsultaNutricional.historicoPeso", new SimpleMap<String, Object>("cpf", cpf));
+	public List<ConsultaNutricional> historicoPaciente(String cpf) {
+		List<ConsultaNutricional> consultas = find(QueryType.NAMED, "ConsultaNutricional.historicoPaciente", new SimpleMap<String, Object>("cpf", cpf));
 
 		return consultas;
 	}

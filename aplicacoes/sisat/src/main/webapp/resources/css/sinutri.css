@@ -130,7 +130,7 @@ small{
   fill: steelblue;
 }
 
-.d3-tip {
+#patologiasFrequentes .d3-tip {
   line-height: 1;
   font-weight: bold;
   padding: 1px;
@@ -140,7 +140,7 @@ small{
 }
 
 /* Creates a small triangle extender for the tooltip */
-.d3-tip:after {
+#patologiasFrequentes .d3-tip:after {
   box-sizing: border-box;
   display: inline;
   font-size: 10px;
@@ -153,7 +153,7 @@ small{
 }
 
 /* Style northward tooltips differently */
-.d3-tip.n:after {
+#patologiasFrequentes .d3-tip.n:after {
   margin: -1px 0 0 0;
   top: 100%;
   left: 0;

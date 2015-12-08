@@ -115,7 +115,7 @@ public class NutricaoController {
 	@RequestMapping(value = "/informacoes-graficas/paciente/{cpf}/historico-consultas.json", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public @ResponseBody Model getPesoByConsulta(Model model, @PathVariable("cpf") String cpf) {
 
-		List<ConsultaNutricional> consultas = pacienteService.getHistoricoPeso(cpf);
+		List<ConsultaNutricional> consultas = pacienteService.historicoPaciente(cpf);
 
 		model.addAttribute("consultas", consultas);
 

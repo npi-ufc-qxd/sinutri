@@ -100,7 +100,7 @@
 				  	 .attr("class", "title")
 				  	 .append("text")
 				  	 	.attr("y",-9)
-				  	 	.attr("dx", "35em")
+				  	 	.attr("dx", "47em")
 				  	 	.style("text-anchor", "end")
 				  	 	.text("Patologias mais frequentes");
 
