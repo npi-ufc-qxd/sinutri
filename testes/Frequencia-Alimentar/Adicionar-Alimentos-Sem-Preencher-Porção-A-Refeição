@@ -12,29 +12,24 @@
 <tr><td rowspan="1" colspan="3">Adicionar-Alimentos-Sem-Porção-A-Refeição</td></tr>
 </thead><tbody>
 <tr>
-	<td>open</td>
-	<td>/sisat/login</td>
-	<td></td>
-</tr>
-<tr>
 	<td>type</td>
 	<td>name=j_username</td>
-	<td>nutri</td>
+	<td>00092349005</td>
 </tr>
 <tr>
 	<td>type</td>
 	<td>name=j_password</td>
-	<td>teste1234</td>
+	<td>1234</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>name=submit</td>
+	<td>id=login</td>
 	<td></td>
 </tr>
 <tr>
 	<td>type</td>
 	<td>id=busca</td>
-	<td>ingrid carneiro</td>
+	<td>luiz</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -43,22 +38,32 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>css=button.btn.btn-default</td>
+	<td>link=Historico</td>
 	<td></td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>xpath=(//a[@id='editar']/button)[10]</td>
+	<td>link=Editar</td>
 	<td></td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>link=Questionario de Frequencia Alimentar</td>
+	<td>id=add-refeicao</td>
 	<td></td>
 </tr>
 <tr>
+	<td>type</td>
+	<td>id=tblSubGrid_1_alimento_1</td>
+	<td>pão</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=tblSubGrid_1_porcao_1</td>
+	<td>1</td>
+</tr>
+<tr>
 	<td>click</td>
-	<td>xpath=(//button[@type='button'])[3]</td>
+	<td>link=Alimento</td>
 	<td></td>
 </tr>
 <tr>
@@ -70,6 +75,16 @@
 	<td>clickAndWait</td>
 	<td>css=button.btn.btn-success</td>
 	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>id=frequencias[0].alimentos[1].porcao</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=frequencias[0].alimentos[1].porcao</td>
+	<td>*Campo obrigatório*</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>

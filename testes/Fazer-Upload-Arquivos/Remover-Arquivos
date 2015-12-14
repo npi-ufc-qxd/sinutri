@@ -57,8 +57,13 @@
 	<td></td>
 </tr>
 <tr>
+	<td>selectWindow</td>
+	<td>null</td>
+	<td></td>
+</tr>
+<tr>
 	<td>click</td>
-	<td>//a[@id='delete[7]']/span</td>
+	<td>//a[@id='delete[8]']/span</td>
 	<td></td>
 </tr>
 <tr>
@@ -81,7 +86,6 @@
 	<td>link=Sair</td>
 	<td></td>
 </tr>
-
 </tbody></table>
 </body>
 </html>

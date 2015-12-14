@@ -23,13 +23,13 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>name=submit</td>
+	<td>id=login</td>
 	<td></td>
 </tr>
 <tr>
 	<td>type</td>
 	<td>id=busca</td>
-	<td>ingrid carneiro</td>
+	<td>luiz</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -48,7 +48,7 @@
 </tr>
 <tr>
 	<td>click</td>
-	<td>xpath=(//button[@type='button'])[3]</td>
+	<td>id=add-refeicao</td>
 	<td></td>
 </tr>
 <tr>
@@ -63,17 +63,17 @@
 </tr>
 <tr>
 	<td>click</td>
-	<td>xpath=(//button[@type='button'])[7]</td>
+	<td>link=Alimento</td>
 	<td></td>
 </tr>
 <tr>
 	<td>type</td>
-	<td>id=tblSubGrid_2_alimento_1</td>
-	<td>leite</td>
+	<td>id=tblSubGrid_1_alimento_2</td>
+	<td>pão</td>
 </tr>
 <tr>
 	<td>type</td>
-	<td>id=tblSubGrid_2_porcao_1</td>
+	<td>id=tblSubGrid_1_porcao_2</td>
 	<td>1</td>
 </tr>
 <tr>
