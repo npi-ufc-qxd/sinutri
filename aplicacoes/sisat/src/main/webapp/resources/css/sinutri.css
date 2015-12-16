@@ -130,17 +130,18 @@ small{
   fill: steelblue;
 }
 
-#patologiasFrequentes .d3-tip {
+.d3-tip {
   line-height: 1;
   font-weight: bold;
   padding: 1px;
-  background: rgba(107, 179, 242, 0.55);
+  background: #6BB3F2 none repeat scroll 0% 0%;
   color: #fff;
   border-radius: 2px;
+  text-shadow :#000 1px 1px;
 }
 
 /* Creates a small triangle extender for the tooltip */
-#patologiasFrequentes .d3-tip:after {
+.d3-tip:after {
   box-sizing: border-box;
   display: inline;
   font-size: 10px;
@@ -153,8 +154,66 @@ small{
 }
 
 /* Style northward tooltips differently */
-#patologiasFrequentes .d3-tip.n:after {
+.d3-tip.n:after {
   margin: -1px 0 0 0;
   top: 100%;
   left: 0;
+}
+
+/* Historicos PESO IMC CC */
+.container {
+  font: 12px sans-serif;
+}
+
+.container .axis path,
+.container .axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+
+.container .y.axis path {
+  display: none;
+}
+
+.container .x.axis path {
+  display: none;
+}
+
+.container .y.axis line {
+  stroke: #777;
+  stroke-dasharray: 2,2;
+}
+
+.container .x.axis line {
+  stroke: #777;
+  stroke-dasharray: 2,2;
+}
+
+.container .y.axis .titleText {
+  font: 20px sans-serif;
+}
+
+.container .bar {
+  fill: #6BB3F2;
+}
+
+.container .bar:hover {
+  fill: steelblue;
+}
+
+.container .line {
+  fill: none;
+  stroke: steelblue;
+  stroke-width: 2.0px;
+}
+
+.container circle{
+  fill: white;
+  stroke: steelblue;
+  stroke-width: 3.0px;
+}
+
+.container circle:hover{
+  stroke-width: 6.0px;
 }
