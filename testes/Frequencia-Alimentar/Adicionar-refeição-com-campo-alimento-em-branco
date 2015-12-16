@@ -3,22 +3,27 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head profile="http://selenium-ide.openqa.org/profiles/test-case">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<link rel="selenium.base" href="http://localhost:9090/" />
-<title>Adicionar-Alimentos-Sem-Porção-A-Refeição</title>
+<link rel="selenium.base" href="http://localhost:8080/" />
+<title>Adicionar-refeição-com-campo-alimento-em-branco</title>
 </head>
 <body>
 <table cellpadding="1" cellspacing="1" border="1">
 <thead>
-<tr><td rowspan="1" colspan="3">Adicionar-Alimentos-Sem-Porção-A-Refeição</td></tr>
+<tr><td rowspan="1" colspan="3">Adicionar-refeição-com-campo-alimento-em-branco</td></tr>
 </thead><tbody>
 <tr>
+	<td>open</td>
+	<td>/sisat/paciente/consulta/1</td>
+	<td></td>
+</tr>
+<tr>
 	<td>type</td>
-	<td>name=j_username</td>
+	<td>id=username</td>
 	<td>00092349005</td>
 </tr>
 <tr>
 	<td>type</td>
-	<td>name=j_password</td>
+	<td>id=password</td>
 	<td>1234</td>
 </tr>
 <tr>
@@ -38,7 +43,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>link=Historico</td>
+	<td>link=Luiz Ferreira Almeida</td>
 	<td></td>
 </tr>
 <tr>
@@ -52,39 +57,34 @@
 	<td></td>
 </tr>
 <tr>
+	<td>select</td>
+	<td>id=questionarioFrequenciaAlimentar_refeicao_1</td>
+	<td>label=Colação</td>
+</tr>
+<tr>
 	<td>type</td>
 	<td>id=tblSubGrid_1_alimento_1</td>
-	<td>pão</td>
+	<td></td>
 </tr>
 <tr>
 	<td>type</td>
 	<td>id=tblSubGrid_1_porcao_1</td>
-	<td>1</td>
+	<td>3</td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>link=Alimento</td>
-	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>id=tblSubGrid_1_alimento_2</td>
-	<td>pão</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
 	<td>css=button.btn.btn-success</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyElementPresent</td>
-	<td>id=frequencias[0].alimentos[1].porcao</td>
-	<td></td>
+	<td>verifyText</td>
+	<td>id=frequencias[0].alimentos[0].alimento</td>
+	<td>*Campo obrigatório*</td>
 </tr>
 <tr>
-	<td>verifyText</td>
-	<td>id=frequencias[0].alimentos[1].porcao</td>
-	<td>*Campo obrigatório*</td>
+	<td>click</td>
+	<td>css=i.glyphicon.glyphicon-chevron-down</td>
+	<td></td>
 </tr>
 <tr>
 	<td>clickAndWait</td>

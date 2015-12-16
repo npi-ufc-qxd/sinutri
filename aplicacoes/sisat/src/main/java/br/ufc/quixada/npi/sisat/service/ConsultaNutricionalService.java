@@ -6,12 +6,13 @@ import java.util.Map;
 import br.ufc.quixada.npi.service.GenericService;
 import br.ufc.quixada.npi.sisat.model.ConsultaNutricional;
 import br.ufc.quixada.npi.sisat.model.FrequenciaAlimentar;
+import br.ufc.quixada.npi.sisat.model.enuns.TipoFrequencia;
 
 public interface ConsultaNutricionalService extends GenericService<ConsultaNutricional> {
 
 	public abstract ConsultaNutricional getConsultaNutricionalWithDocumentosById(Long id);
 
-	public abstract ConsultaNutricional getConsultaNutricionalWithFrequenciasById(Long id);
+	public abstract List<FrequenciaAlimentar> getFrequenciasByIdConsultaByTipo(Long id, TipoFrequencia tipoFrequencia);
 
 	public abstract String getOrientacoesIndividuaisById(Long id);
 

@@ -4,32 +4,42 @@
 <head profile="http://selenium-ide.openqa.org/profiles/test-case">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <link rel="selenium.base" href="http://localhost:8080/" />
-<title>NovaConsulta</title>
+<title>Upload-Arquivo</title>
 </head>
 <body>
 <table cellpadding="1" cellspacing="1" border="1">
 <thead>
-<tr><td rowspan="1" colspan="3">NovaConsulta</td></tr>
+<tr><td rowspan="1" colspan="3">Upload-Arquivo</td></tr>
 </thead><tbody>
 <tr>
-	<td>type</td>
-	<td>name=j_username</td>
-	<td>nutri</td>
+	<td>open</td>
+	<td>/sisat/nutricao/buscar</td>
+	<td></td>
 </tr>
 <tr>
 	<td>type</td>
-	<td>name=j_password</td>
-	<td>teste1234</td>
+	<td>id=password</td>
+	<td>1234</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=username</td>
+	<td>00092349005</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>name=submit</td>
+	<td>id=login</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=busca</td>
 	<td></td>
 </tr>
 <tr>
 	<td>type</td>
 	<td>id=busca</td>
-	<td>ingrid carneiro</td>
+	<td>luiz</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -38,62 +48,27 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>css=#consulta &gt; button.btn.btn-default</td>
+	<td>link=Luiz Ferreira Almeida</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Editar</td>
 	<td></td>
 </tr>
 <tr>
 	<td>type</td>
-	<td>id=altura</td>
-	<td>1.7</td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>id=peso</td>
-	<td>60</td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>id=pesoDesejado</td>
-	<td>62</td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>id=cc</td>
-	<td>60</td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>id=ccd</td>
-	<td>55</td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>id=agua</td>
-	<td>4</td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>id=objetivoConsulta</td>
-	<td>Perder peso, reeducar a alimentação, melhorar condicionamento físico, corrigir horários alimentares. diminuir porções,aumentar frequencia alimentar.</td>
-</tr>
-<tr>
-	<td>selectWindow</td>
-	<td>null</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>link=Documentos</td>
-	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>id=files</td>
-	<td>/home/ingrid.carneiro/Área de Trabalho/Caso_de_Uso.doc</td>
+	<td>id=anexos</td>
+	<td>/home/ingrid.carneiro/git/sisat-sistema-de-atendimento/requisitos/SiNutri-REQ-UC12-Plano-Alimentar.doc</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
 	<td>css=button.btn.btn-success</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=a.dropdown-toggle</td>
 	<td></td>
 </tr>
 <tr>

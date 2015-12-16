@@ -12,6 +12,7 @@ import br.ufc.quixada.npi.repository.GenericRepository;
 import br.ufc.quixada.npi.service.impl.GenericServiceImpl;
 import br.ufc.quixada.npi.sisat.model.ConsultaNutricional;
 import br.ufc.quixada.npi.sisat.model.FrequenciaAlimentar;
+import br.ufc.quixada.npi.sisat.model.enuns.TipoFrequencia;
 import br.ufc.quixada.npi.sisat.service.ConsultaNutricionalService;
 import br.ufc.quixada.npi.util.SimpleMap;
 
@@ -30,9 +31,15 @@ public class ConsultaNutricionalServiceImpl extends GenericServiceImpl<ConsultaN
 	}
 
 	@Override
-	public ConsultaNutricional getConsultaNutricionalWithFrequenciasById(Long id) {
-		return (ConsultaNutricional) findFirst("ConsultaNutricional.findConsultaNutricionalWithFrequenciassById",
-				new SimpleMap<String, Object>("id", id));
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	public List<FrequenciaAlimentar> getFrequenciasByIdConsultaByTipo(Long id, TipoFrequencia tipoFrequencia) {
+		
+		Map params = new SimpleMap<String, Object>();
+		
+		params.put("id", id);
+		params.put("tipo", tipoFrequencia);
+
+		return find("ConsultaNutricional.findFrequenciasByIdconsultaByTipo", params);
 	}
 
 	@Override
@@ -71,6 +78,6 @@ public class ConsultaNutricionalServiceImpl extends GenericServiceImpl<ConsultaN
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<FrequenciaAlimentar> getFrequenciasByIdConsulta(Long id) {
- 		return find("ConsultaNutricional.findFrequenciasByIdConsulta", new SimpleMap<String, Object>("id", id));
+ 		return find("ConsultaNutricional.findFrequenciaAlimentarByIdConsulta", new SimpleMap<String, Object>("id", id));
 	}
 }

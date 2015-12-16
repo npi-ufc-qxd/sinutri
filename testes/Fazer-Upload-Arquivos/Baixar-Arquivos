@@ -12,24 +12,34 @@
 <tr><td rowspan="1" colspan="3">Baixar-Arquivos</td></tr>
 </thead><tbody>
 <tr>
-	<td>type</td>
-	<td>name=j_username</td>
-	<td>nutri</td>
+	<td>open</td>
+	<td>/sisat/nutricao/buscar</td>
+	<td></td>
 </tr>
 <tr>
 	<td>type</td>
-	<td>name=j_password</td>
-	<td>teste1234</td>
+	<td>id=password</td>
+	<td>1234</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=username</td>
+	<td>00092349005</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>name=submit</td>
+	<td>id=login</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=busca</td>
 	<td></td>
 </tr>
 <tr>
 	<td>type</td>
 	<td>id=busca</td>
-	<td>ingrid carneiro</td>
+	<td>luiz</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -38,17 +48,12 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>css=button.btn.btn-default</td>
+	<td>link=Luiz Ferreira Almeida</td>
 	<td></td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>xpath=(//a[@id='editar']/button)[21]</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>link=Documentos</td>
+	<td>link=Editar</td>
 	<td></td>
 </tr>
 <tr>
@@ -57,11 +62,15 @@
 	<td></td>
 </tr>
 <tr>
+	<td>click</td>
+	<td>css=a.dropdown-toggle</td>
+	<td></td>
+</tr>
+<tr>
 	<td>clickAndWait</td>
 	<td>link=Sair</td>
 	<td></td>
 </tr>
-
 </tbody></table>
 </body>
 </html>

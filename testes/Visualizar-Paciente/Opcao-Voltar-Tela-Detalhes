@@ -3,23 +3,28 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head profile="http://selenium-ide.openqa.org/profiles/test-case">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<link rel="selenium.base" href="http://localhost:9090/" />
-<title>Adicionar-Alimentos-A-Refeição</title>
+<link rel="selenium.base" href="http://localhost:8080/" />
+<title>Opcao-Voltar-Tela-Detalhes</title>
 </head>
 <body>
 <table cellpadding="1" cellspacing="1" border="1">
 <thead>
-<tr><td rowspan="1" colspan="3">Adicionar-Alimentos-A-Refeição</td></tr>
+<tr><td rowspan="1" colspan="3">Opcao-Voltar-Tela-Detalhes</td></tr>
 </thead><tbody>
 <tr>
-	<td>type</td>
-	<td>name=j_username</td>
-	<td>00092349005</td>
+	<td>open</td>
+	<td>/sisat/login;jsessionid=C464F8DC7F3016C23068F3A0A9A3363F</td>
+	<td></td>
 </tr>
 <tr>
 	<td>type</td>
-	<td>name=j_password</td>
+	<td>id=password</td>
 	<td>1234</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=username</td>
+	<td>00092349005</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -29,7 +34,7 @@
 <tr>
 	<td>type</td>
 	<td>id=busca</td>
-	<td>luiz</td>
+	<td>00884821382</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -38,47 +43,17 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>link=Historico</td>
+	<td>link=Lucas Pinto Cardoso</td>
 	<td></td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>link=Editar</td>
+	<td>link=Voltar</td>
 	<td></td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>id=add-refeicao</td>
-	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>id=tblSubGrid_1_alimento_1</td>
-	<td>pão</td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>id=tblSubGrid_1_porcao_1</td>
-	<td>1</td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>link=Alimento</td>
-	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>id=tblSubGrid_1_alimento_2</td>
-	<td>pão</td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>id=tblSubGrid_1_porcao_2</td>
-	<td>1</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>css=button.btn.btn-success</td>
+	<td>css=i.glyphicon.glyphicon-chevron-down</td>
 	<td></td>
 </tr>
 <tr>

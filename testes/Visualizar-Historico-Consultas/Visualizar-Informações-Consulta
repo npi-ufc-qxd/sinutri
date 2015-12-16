@@ -3,22 +3,22 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head profile="http://selenium-ide.openqa.org/profiles/test-case">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<link rel="selenium.base" href="http://localhost:9090/" />
-<title>Adicionar-Alimentos-Sem-Porção-A-Refeição</title>
+<link rel="selenium.base" href="http://localhost:8080/" />
+<title>Visualizar-Informações-Consulta</title>
 </head>
 <body>
 <table cellpadding="1" cellspacing="1" border="1">
 <thead>
-<tr><td rowspan="1" colspan="3">Adicionar-Alimentos-Sem-Porção-A-Refeição</td></tr>
+<tr><td rowspan="1" colspan="3">Visualizar-Informações-Consulta</td></tr>
 </thead><tbody>
 <tr>
 	<td>type</td>
-	<td>name=j_username</td>
+	<td>id=username</td>
 	<td>00092349005</td>
 </tr>
 <tr>
 	<td>type</td>
-	<td>name=j_password</td>
+	<td>id=password</td>
 	<td>1234</td>
 </tr>
 <tr>
@@ -43,48 +43,13 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>link=Editar</td>
+	<td>link=28/10/2015 14:12</td>
 	<td></td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>id=add-refeicao</td>
+	<td>css=i.glyphicon.glyphicon-chevron-down</td>
 	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>id=tblSubGrid_1_alimento_1</td>
-	<td>pão</td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>id=tblSubGrid_1_porcao_1</td>
-	<td>1</td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>link=Alimento</td>
-	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>id=tblSubGrid_1_alimento_2</td>
-	<td>pão</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>css=button.btn.btn-success</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyElementPresent</td>
-	<td>id=frequencias[0].alimentos[1].porcao</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyText</td>
-	<td>id=frequencias[0].alimentos[1].porcao</td>
-	<td>*Campo obrigatório*</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
