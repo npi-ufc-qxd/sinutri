@@ -251,7 +251,6 @@ public class PacienteController {
 
 	}
 	
-	
 
 	@RequestMapping(value = { "/{cpf}/consulta/{idConsulta}/editar" }, method = RequestMethod.POST)
 	public String editarConsulta(Model model, @PathVariable("cpf") String cpf, @PathVariable("idConsulta") Long idConsulta, @Valid ConsultaNutricional consulta,
@@ -403,6 +402,7 @@ public class PacienteController {
 			model.addAttribute("action", "cadastrar");
 		}else{
 			model.addAttribute("action", "editar");
+			
 		}
 	
 		return "nutricao/form-planoalimentar";
@@ -428,6 +428,20 @@ public class PacienteController {
 		return "redirect:/paciente/consulta/"+ consulta.getId();
 	}
 
+	
+	@RequestMapping(value="/consulta/{idConsulta}/plano-alimentar/deletar", method = RequestMethod.GET)
+	public String excluirPlanoAlimentar(@PathVariable("idConsulta") Long idConsulta, RedirectAttributes redirectAttributes){
+		List<FrequenciaAlimentar> frequenciasAlimentares = consultaNutricionalService.getFrequenciasByIdConsultaByTipo(idConsulta, TipoFrequencia.PLANOALIMENTAR);
+
+		for (FrequenciaAlimentar frequencia : frequenciasAlimentares) {
+			frequenciaAlimentarService.delete(frequencia);
+		}
+		
+		redirectAttributes.addFlashAttribute("info", "Frequências excluidas com sucesso.");
+
+		return "redirect:/paciente/consulta/" + idConsulta+"/plano-alimentar";
+	}
+	
 	private void registrarPaciente(String cpf) {
 		Pessoa pessoa = pessoaService.getPessoaByCpf(cpf);
 
