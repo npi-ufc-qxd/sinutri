@@ -51,7 +51,7 @@ import br.ufc.quixada.npi.sisat.model.enuns.SistemaUrinario;
 	@NamedQuery(name = "ConsultaNutricional.countFrequenciaHipertensao", query = "select count(c.hipertensao) from ConsultaNutricional c where c.hipertensao = TRUE"),
 	@NamedQuery(name = "ConsultaNutricional.countFrequenciaAlergia", query = "select count(c.alergia) from ConsultaNutricional c where c.alergia = TRUE"),
 	@NamedQuery(name = "ConsultaNutricional.countFrequenciaOutrasPatologias", query = "select count(c.outrasPatologias) from ConsultaNutricional c where c.outrasPatologias = TRUE"),
-	@NamedQuery(name = "ConsultaNutricional.historicoPeso", query = "select new br.ufc.quixada.npi.sisat.model.ConsultaNutricional(c.paciente, c.data, c.peso, c.altura, c.circunferenciaCintura) from ConsultaNutricional c where c.paciente.pessoa.cpf = :cpf "),
+	@NamedQuery(name = "ConsultaNutricional.historicoPaciente", query = "select new br.ufc.quixada.npi.sisat.model.InformacaoGraficaConsultaNutricional(c.paciente.pessoa.sexo, c.data, c.peso, c.altura, c.circunferenciaCintura) from ConsultaNutricional c where c.paciente.pessoa.cpf = :cpf ")
 })
 
 @Entity
