@@ -97,115 +97,157 @@
 				url: '/sisat/nutricao/informacoes-graficas/paciente/'+ cpf +'/historico-consultas.json',
 				type: "GET",
 				success: function(result) {
-					var obj = result;
-					var cat = [];
-					var catCC = [];
-					var catIMC = [];
+				
+					//Ajuste do json
+					  var dataJson = result;
+					  var objJson;
+					  var data;
+
+					  var histPeso = '[',
+					      histIMC = '[',
+					      histCC = '[';
+					  var histPesoObj,
+					      histIMCObj,
+					      histCCObj;
+					  var i = 0;
+					  for (i; i < dataJson.consultas.length; i++) {
+					      histPeso = histPeso + '{"value":'+ dataJson.consultas[i].peso.toFixed(2) 
+					                          + ', "date":"' + formatDate(dataJson.consultas[i].data)
+					                          + '"}';
+					      histIMC = histIMC + '{"value":'+ dataJson.consultas[i].imc.toFixed(2)
+					                          + ', "date":"' + formatDate(dataJson.consultas[i].data)
+					                          + '"}';
+					      histCC = histCC + '{"value":'+ dataJson.consultas[i].circunferenciaCintura.toFixed(2)  
+					                          + ', "date":"' + formatDate(dataJson.consultas[i].data)
+					                          + '"}';
+					  }
+					  histPeso = histPeso.replace(/}{/g,'}, {') + ']';
+					  histIMC = histIMC.replace(/}{/g,'}, {') + ']';
+					  histCC = histCC.replace(/}{/g,'}, {') + ']';
+					  histPesoObj = JSON.parse(histPeso);
+					  histIMCObj = JSON.parse(histIMC);
+					  histCCObj = JSON.parse(histCC);
+					//
+					//Função para desenhar gráficos.
+					function drawChart(data,idContainer){
+
+					  //Definição da dimensão do gráfico
+					  var margin = {top: 20, right: 20, bottom: 70, left: 40},
+					      width = 1140 - margin.left - margin.right,
+					      height = 400 - margin.top - margin.bottom;
+
+					  //Definindo titulo do gráfico
+					  var titleTpo;
+					  if(idContainer=="#historicoPeso"){
+					    titleTpo = "Histórico do peso";
+					  }else if (idContainer=="#historicoIMC"){
+					    titleTpo = "Histórico do IMC"
+					  }else{
+					    titleTpo = "Histórico da circunferência da cintura";
+					  };
+
+					  //Definição dos vetores x e y do gráfico
+					  var x = d3.scale.ordinal().rangeRoundBands([0, width], .8);
+					  var y = d3.scale.linear().range([height, 0]);
+
+					  //Posicionamento do vetores
+					  var xAxis = d3.svg.axis()
+					    .scale(x)
+					    .tickSize(-height)
+					    .orient("bottom");
+
+					  var yAxis = d3.svg.axis()
+					    .scale(y)
+					    .tickSize(width)
+					    .orient("right");
+
+					  //Tooltip exibir número de pacientes por barra
+					var tip = d3.tip()
+					  .attr('class', 'd3-tip')
+					  .offset([-10, 0])
+					  .html(function(d) {
+					    return "<span style='color:white'>" + d.value + "</span>";
+					  })
+
+					  //Selecionar estrutura onde será localizado o gráfico
+					  var svg = d3.select(idContainer).append("svg")
+					    .attr("width", width + margin.left + margin.right)
+					    .attr("height", height + margin.top + margin.bottom)
+					    .append("g")
+					    .attr("transform", 
+					          "translate(" + (margin.left-6) + "," + margin.top + ")");
+
+					  //chamar Tooltip com informação individual da patologia.
+					  svg.call(tip);
+
+					  //Definindo dominio do gráfico
+					  x.domain(data.map(function(d) { return d.date; }));
+					  y.domain([0, (1.5)*d3.max(data, function(d) { return d.value; })]);
+
+					  //Definição do eixo Y
+					  var gy = svg.append("g")
+					    .attr("class", "y axis")
+					    .call(yAxis)
+					    .append("text")
+					      .attr("class","titleText")
+					      .text(titleTpo)
+					      .attr("x",(width/3));
+
+					  //Definição do eixo X
+					  svg.append("g")
+					      .attr("class", "x axis")
+					      .attr("transform", "translate(0," + height + ")")
+					      .call(xAxis)
+					    .selectAll("text");
+
+					  var line = d3.svg.line()
+					    .interpolate("cardinal")
+					    .x(function(d) { return x(d.date)+38; })
+					    .y(function(d) { return y(d.value); });
+
+					  svg.append("path")
+					      .datum(data)
+					      .attr("class", "line")
+					      .attr("d", line);
+
+					  //punti lungo il tracciato
+					    var point = svg.append("g")
+					        .attr("class", "line-point");
+
+					    point.selectAll('circle')
+					        .data(data)
+					        .enter().append('circle')
+					        .attr("cx", function(d, i) { return x(d.date)+38; })
+					        .attr("cy", function(d, i) { return y(d.value) })
+					        .attr("r", 5);
+
+					    //Ação do Tooltipe em cada barra
+					    svg.selectAll("circle")
+					      .on('mouseover', tip.show)
+					      .on('mouseout', tip.hide);
+
+					}
+
+					function formatDate(dateObject) {
+					        var d = new Date(dateObject);
+					        var day = d.getDate();
+					        var month = d.getMonth() + 1;
+					        var year = d.getFullYear();
+					        if (day < 10) {
+					            day = "0" + day;
+					        }
+					        if (month < 10) {
+					            month = "0" + month;
+					        }
+					        var date = day + "/" + month + "/" + year;
+					  
+					        return date;
+					};
+
+					drawChart(histPesoObj,"#historicoPeso");
+					drawChart(histIMCObj,"#historicoIMC");
+					drawChart(histCCObj,"#historicoCC");
 					
-					var dataPesos = [];
-					var dataIMC = [];
-					var dataCC = [];
-					var i = 1;
-	
-					$.each( obj.consultas, function( index, value ) {
-						cat.push(index+1 + "ª Consulta<br>" + formatDate(value.data));
-						catCC.push(value.classificacaoCC + "<br>" + (index + 1) + "ª Consulta<br>" + formatDate(value.data));
-						catIMC.push(value.classificacaoIMC + "<br>" + (index + 1) + "ª Consulta<br>" + formatDate(value.data));
-	
-						dataPesos.push(value.peso);
-						dataCC.push(value.circunferenciaCintura);
-						dataIMC.push(value.imc);
-					});				
-					
-				    $('#historicoPeso').highcharts({
-				        title: {
-				            text: 'Histórico do Peso',
-				        },
-				        xAxis: {
-				            categories: cat
-				        },
-				        yAxis: {
-				            title: {
-				                text: ''
-				            },
-				            plotLines: [{
-				                value: 0,
-				                width: 1,
-				                color: '#808080'
-				            }],		            
-				        },
-				        tooltip: {
-				            valueSuffix: 'kg'
-				        },
-				        legend: {
-				            layout: 'vertical',
-				            align: 'right',
-				            verticalAlign: 'middle',
-				            borderWidth: 0
-				        },
-				        series: [{
-				        	name: 'Peso',
-				            data: dataPesos
-				        }]
-				    });
-				    
-				    $('#historicoIMC').highcharts({
-				        title: {
-				            text: 'Histórico IMC',
-				        },
-				        xAxis: {
-				            categories: catIMC
-				        },
-				        yAxis: {
-				            title: {
-				                text: ''
-				            },
-				            plotLines: [{
-				                value: 0,
-				                width: 1,
-				                color: '#808080'
-				            }]
-				        },
-				        legend: {
-				            layout: 'vertical',
-				            align: 'right',
-				            verticalAlign: 'middle',
-				            borderWidth: 0
-				        },
-				        series: [{
-				        	name: 'IMC',
-				            data: dataIMC
-				        }]
-				    });
-				    
-				    $('#historicoCC').highcharts({
-				        title: {
-				            text: 'Histórico CC',
-				        },
-				        xAxis: {
-				            categories: catCC
-				        },
-				        yAxis: {
-				            title: {
-				                text: ''
-				            },
-				            plotLines: [{
-				                value: 0,
-				                width: 1,
-				                color: '#808080'
-				            }]
-				        },
-				        legend: {
-				            layout: 'vertical',
-				            align: 'right',
-				            verticalAlign: 'middle',
-				            borderWidth: 0
-				        },
-				        series: [{
-				        	name: 'CC',
-				            data: dataCC
-				        }]
-				    });
 				}
 			});
 		});
