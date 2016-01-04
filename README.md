@@ -34,3 +34,6 @@ No arquivo context.xml...
 ```
 
 Importante: Copiar o driver do PostgreSQL (postgresql-xxx.jar - http://mvnrepository.com/artifact/org.postgresql/postgresql) e javax.mail-xxx.jar (http://mvnrepository.com/artifact/com.sun.mail/javax.mail) para o diretório de libs do Tomcat.
+
+
+Usuários e senhas usadas para teste: 00000000000 1234 / 25885626391 1234
