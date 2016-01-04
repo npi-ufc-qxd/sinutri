@@ -1,12 +1,13 @@
 package br.ufc.quixada.npi.sisat.service.impl;
 
-import java.util.Date;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import javax.inject.Inject;
 import javax.inject.Named;
+
 
 import br.ufc.quixada.npi.enumeration.QueryType;
 import br.ufc.quixada.npi.repository.GenericRepository;
@@ -50,4 +51,9 @@ public class PacienteServiceImpl extends GenericServiceImpl<Paciente> implements
 
 		return consultas;
 	}
+	@Override
+	public void excluir(ConsultaNutricional consulta){
+		this.excluir(consulta);
+	}
+		
 }
