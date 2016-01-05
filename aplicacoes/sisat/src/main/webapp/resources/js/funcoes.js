@@ -73,6 +73,10 @@ $(document).ready(function() {
         $(this).find('.btn-ok').attr('href', $(e.relatedTarget).data('href'));
     });
 	
+	$('#confirm-delete-plano-alimentar').on('show.bs.modal', function(e) {
+        $(this).find('.btn-ok').attr('href', $(e.relatedTarget).data('href'));
+    });
+	
 	$('.exame').change( function() {
 		var itemForm = $(this).parent().parent().parent();
 	
