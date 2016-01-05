@@ -24,12 +24,17 @@
 			<div class="col-sm-4" align="right" style="margin-top: 15px;">
 					<a href="#" class="btn btn-primary btn-sm back"><span
 					class="glyphicon glyphicon-chevron-left"></span> Voltar</a>
-				
-					<a href="<c:url value="/paciente/consulta/${idConsulta}/plano-alimentar/deletar"></c:url>"
-					class="btn btn-warning btn-sm"> <span
-					class="glyphicon glyphicon-remove"></span>Excluir</a>
-							
 					
+				<c:if test="${not empty consultaPlanoAlimentar.frequencias}">
+					<a 
+						data-href="<c:url value="/paciente/consulta/${idConsulta}/plano-alimentar/deletar"></c:url>"
+						data-toggle="modal" 
+						data-target="#confirm-delete-plano-alimentar" 
+						class="btn btn-danger btn-sm"> 
+						<span class="glyphicon glyphicon-remove"></span>Excluir
+					</a>
+				</c:if>
+				
 				<c:if test="${action eq 'editar' }">
 					<a href="<c:url value="/paciente/consulta/${consultaRecordatorio.id}/form-plano-alimentar"></c:url>"
 					class="btn btn-warning btn-sm"> <span
@@ -84,7 +89,7 @@
 				<c:if test="${empty consultaPlanoAlimentar.frequencias}">
 					<div class="alert alert-dismissible alert-default">Não há informações sobre o plano alimentar.</div>
 				</c:if>		
-				<div class="alert alert-success" role="alert"><c:out value="${info}"/></div>		
+						
 				<c:forEach var="freq" items="${consultaPlanoAlimentar.frequencias}">
 					<fmt:formatDate var="horaFormatada" type="time" dateStyle="short" timeStyle="short" value="${freq.horario}" />
 		
@@ -116,8 +121,25 @@
 			</div>
 			
 			</div>					
-		
-	
+			<!-- MODAL EXCLUSAO PLANO ALIMENTAR -->
+			<div id="confirm-delete-plano-alimentar" class="modal" role="dialog" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true">
+					<div class="modal-dialog">
+						<div class="modal-content">
+							<div class="modal-header">
+								<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+								<h4 class="modal-title" id="myModalLabel">Confirmar Deleção</h4>
+							</div>
+							<div class="modal-body">
+								<p>Você está a ponto de excluir o plano alimentar, esse procedimento é irreversível.</p>
+								<p>Você deseja continuar?</p>
+							</div>
+							<div class="modal-footer">
+								<button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+								<a class="btn btn-danger btn-ok">Deletar</a>
+							</div>
+						</div>
+					</div>
+				</div>
 	<jsp:include page="../modulos/footer.jsp" />
 	<script src="<c:url value="/resources/js/questionario-frequencia-alimentar.js" />"></script>
 </body>

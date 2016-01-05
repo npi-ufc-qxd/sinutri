@@ -397,12 +397,12 @@ public class PacienteController {
 		model.addAttribute("consultaRecordatorio", consultaRecordatorio);
 		model.addAttribute("consultaPlanoAlimentar", consultaPlanoAlimentar);
 		
+		
 		List <FrequenciaAlimentar> frequencia = consultaNutricionalService.getFrequenciasByIdConsultaByTipo(id, TipoFrequencia.PLANOALIMENTAR);
 		if(frequencia.isEmpty()){
 			model.addAttribute("action", "cadastrar");
 		}else{
 			model.addAttribute("action", "editar");
-			
 		}
 	
 		return "nutricao/form-planoalimentar";
@@ -426,18 +426,18 @@ public class PacienteController {
 		consultaNutricionalService.update(consulta);
 		
 		return "redirect:/paciente/consulta/" + consulta.getId() +"/plano-alimentar";
+
 	}
 
 	
 	@RequestMapping(value="/consulta/{idConsulta}/plano-alimentar/deletar", method = RequestMethod.GET)
-	public String excluirPlanoAlimentar(@PathVariable("idConsulta") Long idConsulta, RedirectAttributes redirectAttributes){
+	public String excluirPlanoAlimentar(@PathVariable("idConsulta") Long idConsulta, Model model){
 		List<FrequenciaAlimentar> frequenciasAlimentares = consultaNutricionalService.getFrequenciasByIdConsultaByTipo(idConsulta, TipoFrequencia.PLANOALIMENTAR);
-
 		for (FrequenciaAlimentar frequencia : frequenciasAlimentares) {
 			frequenciaAlimentarService.delete(frequencia);
 		}
 		
-		redirectAttributes.addFlashAttribute("info", "Frequências excluidas com sucesso.");
+		//redirectAttributes.addFlashAttribute("info", "Frequências excluidas com sucesso.");
 
 		return "redirect:/paciente/consulta/" + idConsulta+"/plano-alimentar";
 	}
