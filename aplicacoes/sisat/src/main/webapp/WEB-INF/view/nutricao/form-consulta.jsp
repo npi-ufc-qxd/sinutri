@@ -176,7 +176,6 @@
 					</div>
 
 					<div class="row form-group">
-						<h1>value ${atividadeFisica }</h1>
 						<div class="form-item col-sm-6">
 							<label for="checkAtividadeFisica" class="control-label"><form:checkbox 
 									id="checkAtividadeFisica" path="atividadeFisica"
