@@ -880,7 +880,7 @@
 							<div class="error-validation">
 								<form:errors path="inqueritoAlimentar.bovinaFrequenciaSemanal"></form:errors>
 							</div>
-						</div>
+						</div> 
 
 						<div class="form-item col-sm-6">
 							<label for="bovinaQuantidade" class="control-label">Quantidade</label>
