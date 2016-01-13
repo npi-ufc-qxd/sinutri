@@ -179,7 +179,7 @@
 							<thead class="thead">
 								<tr>
 									<th>Patologias</th>
-									<th>Cometário</th>
+									<th>Comentário</th>
 								</tr>
 							</thead>
 							<tbody>
