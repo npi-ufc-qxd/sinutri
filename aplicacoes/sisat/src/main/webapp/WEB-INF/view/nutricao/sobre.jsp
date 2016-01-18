@@ -18,13 +18,13 @@
 	<div class="container">
 		<div class="sobre" align="left">
 
-		<h3>Sobre</h3>
 		<div class="logo-sobre">
 			<a><img src="<c:url value="/resources/images/logo-sinutri.png" />" alt="SiNutri" class="logo-sinutri-sobre"></a>
 		</div>
 		<div class="descript-sobre">
-			<p>O Sinutri é uma ferramenta que permite a realização de consultas nutricionais realizadas pela nutricionista do campus,</p> 
-			<p>poderá analisar, visualizar consultas, prescrever dietas e demais atividades realizadas durante a educação aliementar realizada no campus.</p>
+			<p>SISAT - Sistema de atendimento a serviços de psicologia, nutrição para a comunidade acadêmica da UFC.</p>
+			<p>Sinutri está destinado ao uso no atendimento de nutrição para a comunidade acadêmica.</p><br/><br/>
+			<p class="text-muted"> &copy; 2016 Universidade Federal do Ceará - Campus Quixadá. Todos os direitos reservados </p>
 		</div>
 			
 		</div>
