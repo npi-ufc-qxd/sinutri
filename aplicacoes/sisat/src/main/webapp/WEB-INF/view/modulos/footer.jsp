@@ -16,10 +16,6 @@
 
 <script	src="<c:url value="/webjars/jquery-ui/1.11.1/jquery-ui.min.js" />"></script>
 
-<%-- <script src="<c:url value="/resources/js/bootstrap.file-input.js" />"></script> --%>
-<script src="<c:url value="/resources/js/bootstrap.file-input.js" />"></script>
-<script src="<c:url value="/resources/js/bootstrap.file-input.js" />"></script>
-
 <script src="<c:url value="/webjars/jquery-maskedinput/1.3.1/jquery.maskedinput.min.js" />"></script> 
 <script src="<c:url value="/webjars/jquery-validation/1.12.0/jquery.validate.min.js" />"></script>
 <script src="<c:url value="/resources/js/bootstrapValidator.min.js" />"></script>

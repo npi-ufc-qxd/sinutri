@@ -720,7 +720,6 @@
 							</div>
 							
 							<input id="anexos" type="file" name="files" class="anexo file-loading" multiple="multiple" ></input>
-
 							<div class="error-validation" id="erro-Anexo">
 								<label class="col-sm-10 control-label" id="label-erro"> ${anexoError} </label>
 							</div>
@@ -728,7 +727,7 @@
 							<table id="file-upload" role="presentation" class="table table-striped">
 								<thead class="files">
 									<tr>
-										<th colspan="6">Ducumentos para enviar ao paciente</th>
+										<th colspan="6">Documentos para enviar ao paciente</th>
 									</tr>
 									<tr>
 										<th>Nome do Arquivo</th>

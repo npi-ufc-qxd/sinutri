@@ -431,14 +431,11 @@ public class PacienteController {
 
 	
 	@RequestMapping(value="/consulta/{idConsulta}/plano-alimentar/deletar", method = RequestMethod.GET)
-	public String excluirPlanoAlimentar(@PathVariable("idConsulta") Long idConsulta, Model model){
+	public String excluirPlanoAlimentar(@PathVariable("idConsulta") Long idConsulta){
 		List<FrequenciaAlimentar> frequenciasAlimentares = consultaNutricionalService.getFrequenciasByIdConsultaByTipo(idConsulta, TipoFrequencia.PLANOALIMENTAR);
 		for (FrequenciaAlimentar frequencia : frequenciasAlimentares) {
 			frequenciaAlimentarService.delete(frequencia);
 		}
-		
-		//redirectAttributes.addFlashAttribute("info", "Frequências excluidas com sucesso.");
-
 		return "redirect:/paciente/consulta/" + idConsulta+"/plano-alimentar";
 	}
 	
