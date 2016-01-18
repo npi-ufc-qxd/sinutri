@@ -106,6 +106,12 @@ public class NutricaoController {
 
 		return "/nutricao/buscar";
 	}
+	
+	@RequestMapping(value = "/sobre", method = RequestMethod.GET)
+	public String sobreSistema(ModelMap map, RedirectAttributes redirectAttributes, Authentication authentication) {
+
+		return "/nutricao/sobre";
+	}
 
 	@RequestMapping(value = "/informacoes-graficas", method = RequestMethod.GET)
 	public String paginaInformacoesGraficas() {

@@ -36,7 +36,7 @@
 					<ul class="dropdown-menu">
 						<li><a href="<c:url value="/j_spring_security_logout" />"><i class="glyphicon glyphicon-off"></i> Sair</a></li>
 		      			<li class="divider"></li>
-						<li><a href="<c:url value="#sobre" />"><i class="glyphicon glyphicon-info-sign"></i> Sobre</a></li>
+						<li><a href="<c:url value="/nutricao/sobre" />"><i class="glyphicon glyphicon-info-sign"></i> Sobre</a></li>
 					</ul>
 				</li>  
 			</ul>

@@ -61,8 +61,8 @@ $(document).ready(function() {
 			$(itemForm).find('.help-block').remove();
 		}
 	});
-					
-	$('.valid-num').keyup(function() {
+	
+	$('.valid-num').focusout(function() {
 		if ($(this).val().indexOf(",") >= 0) {
 			$(this).val($(this).val().replace(/\,/g, "."));
 		}
@@ -157,6 +157,12 @@ $(document).ready(function() {
 							pesoDesejado : {
 								required : true
 							},
+							circunferenciaCintura : {
+								required : true
+							},
+							circunferenciaCinturaDesejada : {
+								required : true
+							},
 							agua : {
 								required : true
 							}
@@ -192,6 +198,12 @@ $(document).ready(function() {
 							},
 							pesoDesejado : {
 								required : "Informe o peso desejado pelo paciente."
+							},
+							circunferenciaCintura : {
+								required : "Informe a circunferência da cintura do paciente."
+							},
+							circunferenciaCinturaDesejada : {
+								required : "Informe a circunferência da cintura desejada pelo paciente."
 							},
 							agua : {
 								required : "Informe a quantidade de copos de água consumidos pelo paciente."
