@@ -242,4 +242,8 @@ small {
 
 .descript-sobre {
 	margin: 6% -10px -2px 23%;
+	text-align: justify;
+}
+.descript-sobre .text-muted {
+	margin-left: 6%;
 }
