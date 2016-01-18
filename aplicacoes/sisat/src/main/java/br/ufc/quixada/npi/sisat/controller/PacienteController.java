@@ -309,7 +309,7 @@ public class PacienteController {
 
 		consulta.setData(data);
 		
-		if (consulta.getFrequencias() != null) {			
+		if(consulta.getFrequencias() != null ){
 			atualizarFrequenciaAlimentar(consulta.getFrequencias(), consulta, TipoFrequencia.RECORDATORIO);
 		}
 		
