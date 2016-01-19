@@ -46,15 +46,15 @@ $(document).ready(function() {
 		var itemForm = $(this).parent().parent().parent();
 
 		if ($(this).is(":checked")) {
-			$(itemForm).find("input[type='number']").attr("disabled", false);
-			$(itemForm).find("input[type='number']").attr('required', 'required');
+			$(itemForm).find("input[type='text']").attr("disabled", false);
+			$(itemForm).find("input[type='text']").attr('required', 'required');
 			
 			$(itemForm).find("select").attr("disabled", false);
 			$(itemForm).find("select").attr('required', 'required');
 			
 		} else if (!$(this).is(":checked")) {
-			$(itemForm).find("input[type='number']").attr("disabled", true);
-			$(itemForm).find("input[type='number']").val("");
+			$(itemForm).find("input[type='text']").attr("disabled", true);
+			$(itemForm).find("input[type='text']").val("");
 			$(itemForm).find("select").attr("disabled",true);
 			$(itemForm).find("select").prop('selectedIndex', 0);
 			$(itemForm).find('.has-error').removeClass('has-error');
