@@ -9,7 +9,7 @@
 
 	<properties>
 		<!-- Jackson JSON Mapper -->
-		<jackson.version>1.9.10</jackson.version>
+		<jackson.version>2.6.3</jackson.version>
 
 		<!-- Generic properties -->
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -42,6 +42,7 @@
 		<jquery-ui.version>1.11.1</jquery-ui.version>
 		<dandelion.datatables.version>0.9.3</dandelion.datatables.version>
 		<jquery.maskedinput.version>1.3.1</jquery.maskedinput.version>
+		<bootstrap-fileinput.version>4.2.6</bootstrap-fileinput.version>
 
 		<!-- NPI -->
 		<npi.core.version>0.1.1</npi.core.version>
@@ -62,7 +63,7 @@
 			<artifactId>jquery-file-upload</artifactId>
 			<version>9.11.1</version>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>joda-time</groupId>
 			<artifactId>joda-time</artifactId>
@@ -71,15 +72,14 @@
 
 		<!-- Jackson JSON Mapper -->
 		<dependency>
-			<groupId>org.codehaus.jackson</groupId>
-			<artifactId>jackson-mapper-asl</artifactId>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-core</artifactId>
 			<version>${jackson.version}</version>
 		</dependency>
-
 		<dependency>
-			<groupId>org.codehaus.jackson</groupId>
-			<artifactId>jackson-core-asl</artifactId>
-			<version>1.9.13</version>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+			<version>${jackson.version}</version>
 		</dependency>
 
 		<!-- Dependência Jasper Reports -->
@@ -211,6 +211,12 @@
 			<version>${jquery-ui.version}</version>
 		</dependency>
 
+		<dependency>
+			<groupId>org.webjars.bower</groupId>
+			<artifactId>bootstrap-fileinput</artifactId>
+			<version>${bootstrap-fileinput.version}</version>
+		</dependency>
+
 		<!-- Dandelion -->
 		<dependency>
 			<groupId>com.github.dandelion</groupId>
@@ -233,7 +239,7 @@
 			<artifactId>jquery-validation</artifactId>
 			<version>1.12.0</version>
 		</dependency>
-		
+
 		<!-- Dependência do Apache Common File -->
 		<dependency>
 			<groupId>commons-fileupload</groupId>
@@ -266,7 +272,7 @@
 			<groupId>br.ufc.quixada.npi</groupId>
 			<artifactId>npi-ldap</artifactId>
 			<version>${npi.ldap.version}</version>
-		</dependency> 
+		</dependency>
 
 		<dependency>
 			<groupId>javax.mail</groupId>
@@ -274,15 +280,15 @@
 			<version>1.4.7</version>
 			<scope>provided</scope>
 		</dependency>
-		
+
 		<!-- D3JS -->
 		<dependency>
 			<groupId>org.webjars</groupId>
 			<artifactId>d3js</artifactId>
 			<version>3.5.6</version>
 		</dependency>
-		
-		<!-- D3JS ToolTip -->	
+
+		<!-- D3JS ToolTip -->
 		<dependency>
 			<groupId>org.webjars</groupId>
 			<artifactId>d3-tip</artifactId>

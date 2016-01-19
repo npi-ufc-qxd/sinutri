@@ -1597,7 +1597,6 @@
 	<script type="text/javascript">
 		$('#menu-paciente').addClass('active');
 		loadFrequenciaAlimentar("RECORDATORIO");
-
 		$(".anexo").fileinput(
 				{
 					uploadUrl : "/file-upload-batch/2",
