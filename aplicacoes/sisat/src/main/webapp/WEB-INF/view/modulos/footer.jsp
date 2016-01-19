@@ -25,6 +25,6 @@
 <script src="<c:url value="/webjars/d3-tip/0.6.6/index.js" />"></script>
 
 <script	src="<c:url value="/resources/js/jquery.appendGrid-1.5.2.js" />"></script>
-
-<script src="<c:url value="/resources/js/fileinput.min.js" />"></script>
+<script src="<c:url value="/webjars/bootstrap-fileinput/4.2.6/js/fileinput.min.js" />"></script>
+<script	src="<c:url value="/webjars/bootstrap-fileinput/4.2.6/js/fileinput_locale_pt-BR.js" />"></script>
 <script src="<c:url value="/resources/js/fileinput_locale_pt-BR.js" />"></script>
