@@ -881,7 +881,7 @@
 								<form:errors path="inqueritoAlimentar.bovinaFrequenciaSemanal"></form:errors>
 							</div>
 						</div> 
-
+	
 						<div class="form-item col-sm-6">
 							<label for="bovinaQuantidade" class="control-label">Quantidade</label>
 							<form:input id="inputTextBovina"
@@ -1597,7 +1597,6 @@
 	<script type="text/javascript">
 		$('#menu-paciente').addClass('active');
 		loadFrequenciaAlimentar("RECORDATORIO");
-
 		$(".anexo").fileinput(
 				{
 					uploadUrl : "/file-upload-batch/2",

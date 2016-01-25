@@ -46,15 +46,15 @@ $(document).ready(function() {
 		var itemForm = $(this).parent().parent().parent();
 
 		if ($(this).is(":checked")) {
-			$(itemForm).find("input[type='number']").attr("disabled", false);
-			$(itemForm).find("input[type='number']").attr('required', 'required');
+			$(itemForm).find("input[type='text']").attr("disabled", false);
+			$(itemForm).find("input[type='text']").attr('required', 'required');
 			
 			$(itemForm).find("select").attr("disabled", false);
 			$(itemForm).find("select").attr('required', 'required');
 			
 		} else if (!$(this).is(":checked")) {
-			$(itemForm).find("input[type='number']").attr("disabled", true);
-			$(itemForm).find("input[type='number']").val("");
+			$(itemForm).find("input[type='text']").attr("disabled", true);
+			$(itemForm).find("input[type='text']").val("");
 			$(itemForm).find("select").attr("disabled",true);
 			$(itemForm).find("select").prop('selectedIndex', 0);
 			$(itemForm).find('.has-error').removeClass('has-error');
@@ -359,53 +359,58 @@ $(document).ready(function() {
 					'has-error has-feedback');
 
 	// Enviar
-	$('.send-document')
-			.on(
-					'click',
-					function(e) {
-						var line = this;
-						var href = $(line).attr('href');
+	$('.send-document').on('click',
+function(e) {
+	var line = this;
+	var href = $(line).attr('href');
 
-						e.preventDefault();
-						bootbox
-								.dialog({
-									message : "<textarea id = 'mensagem' name='mensagem' rows='6' cols='72'></textarea>",
-									title : "Mensagem para o paciente",
-									buttons : {
-										danger : {
-											label : "Enviar",
-											className : "btn btn-warning",
-											callback : function() {
-												var mensagem = $(
-														'#mensagem')
-														.val();
-												href += mensagem;
-												$
-														.ajax(
-																{
-																	type : "GET",
-																	url : href
-																})
-														.success(
-																function(
-																		result) {
+	e.preventDefault();
+	bootbox.dialog({
+			message : "<textarea id = 'mensagem' name='mensagem' rows='6' cols='72'></textarea>",
+			title : "Mensagem para o paciente",
+			buttons : {
+				danger : {
+					label : "Enviar",
+					className : "btn btn-warning",
+					callback : function() {
+						var mensagem = $(
+								'#mensagem').val();
+						href += mensagem;
+						$.ajax({
+							type : "GET",
+							url : href
+						}).success(function(result) {
 
-																});
-											}
-										},
-										main : {
-											label : "Cancelar",
-											className : "btn-default",
-											callback : function() {
-											}
-										}
-									}
-								});
-					});
-
-	$('input[type=file]').bootstrapFileInput();
+						});
+					}
+				},
+				main : {
+					label : "Cancelar",
+					className : "btn-default",
+					callback : function() {
+					}
+				}
+			}
+		});
+	});
 
 	$('.delete-file').click(function() {
 		alert($(this).attr('id'));
 	});
+
+	$(".anexo").fileinput({
+    	uploadUrl: "/file-upload-batch/2",
+    	showUpload:false,
+    	showRemove: false,
+    	language: 'pt-BR',
+    	uploadAsync: false,
+    	layoutTemplates: {
+	        actions: '<div class="file-actions">\n' +
+	        '    <div class="file-footer-buttons">\n' +
+	        '        {delete}' +
+	        '    </div>\n' +
+	        '    <div class="clearfix"></div>\n' +
+	        '</div>'
+    	}
+    });
 });
