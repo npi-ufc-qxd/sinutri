@@ -44,6 +44,7 @@ public class Pessoa {
 	private Long id;
 	
 	@ManyToMany
+	@JsonIgnore
 	@JoinTable(name = "papel_pessoa", joinColumns = @JoinColumn(name = "pessoa_id"), inverseJoinColumns = @JoinColumn(name = "papel_id"))
 	private List<Papel> papeis;
 
@@ -56,6 +57,7 @@ public class Pessoa {
 	@Transient
 	private String email;
 
+	@JsonIgnore
 	@OneToOne(cascade = CascadeType.ALL)
 	@PrimaryKeyJoinColumn
 	private Paciente paciente;

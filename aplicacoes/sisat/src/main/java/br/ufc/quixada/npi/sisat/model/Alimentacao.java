@@ -20,7 +20,6 @@ public class Alimentacao {
 	private String porcao;
 
 	@ManyToOne
-	@JsonIgnore
 	private FrequenciaAlimentar frequenciaAlimentar;
 
 	public Long getId() {

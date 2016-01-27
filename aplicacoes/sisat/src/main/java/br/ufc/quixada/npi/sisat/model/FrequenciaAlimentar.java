@@ -41,7 +41,6 @@ public class FrequenciaAlimentar {
 	private TipoFrequencia tipofrequencia;
 	
 	@ManyToOne
-	@JsonIgnore
 	@JoinColumn(name = "consultaNutricional_id")
 	private ConsultaNutricional consultaNutricional;
     
@@ -63,19 +62,23 @@ public class FrequenciaAlimentar {
 		this.id = id;
 	}
 	
+	@JsonIgnore
 	public List<Alimentacao> getAlimentos() {
 		return alimentos;
 	}
 
+	@JsonIgnore
 	public void setAlimentos(List<Alimentacao> alimentos) {
 		this.alimentos = alimentos;
 	}
 
 	
+	@JsonIgnore
 	public ConsultaNutricional getConsultaNutricional() {
 		return consultaNutricional;
 	}
 
+	@JsonIgnore
 	public void setConsultaNutricional(ConsultaNutricional consultaNutricional) {
 		this.consultaNutricional = consultaNutricional;
 	}
