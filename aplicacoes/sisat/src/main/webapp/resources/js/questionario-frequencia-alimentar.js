@@ -1,13 +1,14 @@
 
 function loadFrequenciaAlimentar(tipo) {
 	var id = $("#id").val();
-
+	
 	if(id > 0){
 		$.ajax({
 			type: "GET",
 			data: {"idConsulta": id, "tipo": tipo},
 			url: '/sisat/nutricao/frequencia-alimentar.json',
 			success: function(result) {
+				//$('#questionarioFrequenciaAlimentar').appendGrid('load', frequencias);
 				loadQuestionarios(result);
 			},
 			error: function(error) {
@@ -19,11 +20,12 @@ function loadFrequenciaAlimentar(tipo) {
 function loadQuestionarios(result) {
 	var i = 0;
 	var frequencias = [];
-
+	var frequenciaAlimentar = null;
 		
 	$.each( result, function( key, frequenciaAlimentar ) {
 		var alimentos = [];
 		var y = 0;
+		var alimento = null;
 		frequenciaAlimentar.horario = frequenciaAlimentar.horario.slice(0,5);
 
 		$.each( frequenciaAlimentar.alimentos, function( key, alimento ) {
