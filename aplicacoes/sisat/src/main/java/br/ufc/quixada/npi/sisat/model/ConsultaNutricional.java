@@ -62,9 +62,9 @@ public class ConsultaNutricional {
 	private Long id;
 
 	@OneToMany(mappedBy = "consultaNutricional", cascade = CascadeType.ALL)
-	@JsonIgnore
 	private List<FrequenciaAlimentar> frequencias;
 
+	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name = "paciente_id")
 	private Paciente paciente;
@@ -73,7 +73,6 @@ public class ConsultaNutricional {
 	private InqueritoAlimentar inqueritoAlimentar;
 
 	@OneToMany(mappedBy = "consultaNutricional", cascade = CascadeType.ALL)
-	@JsonIgnore
 	private Set<Documento> documentos;
 
 	@DateTimeFormat
@@ -256,12 +255,10 @@ public class ConsultaNutricional {
 
 	public void setId(Long id) {
 		this.id = id;
-	}
-
+	}	
 	public List<FrequenciaAlimentar> getFrequencias() {
 		return frequencias;
 	}
-
 	public void setFrequencias(List<FrequenciaAlimentar> frequencias) {
 		this.frequencias = frequencias;
 	}

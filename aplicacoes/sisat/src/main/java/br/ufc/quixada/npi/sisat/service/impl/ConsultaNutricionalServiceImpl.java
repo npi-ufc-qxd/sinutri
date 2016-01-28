@@ -38,7 +38,7 @@ public class ConsultaNutricionalServiceImpl extends GenericServiceImpl<ConsultaN
 		
 		params.put("id", id);
 		params.put("tipo", tipoFrequencia);
-
+		
 		return find("ConsultaNutricional.findFrequenciasByIdconsultaByTipo", params);
 	}
 
