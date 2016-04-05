@@ -1,7 +1,7 @@
 package br.ufc.quixada.npi.sisat.model;	
 
-import java.sql.Date;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
 
