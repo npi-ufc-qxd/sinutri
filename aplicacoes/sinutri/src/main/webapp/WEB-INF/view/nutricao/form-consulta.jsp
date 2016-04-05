@@ -81,10 +81,10 @@
 					<li><a href="#orientacoes"> <span class="badge">4</span>
 							Orientações Individuais
 					</a></li>
-					<li><a href="#documentos"> <span class="badge">5</span>
+					<li style="display: none"><a href="#documentos"> <span class="badge"></span>
 							Documentos
 					</a></li>
-					<li><a href="#inquerito"> <span class="badge">6</span>
+					<li><a href="#inquerito"> <span class="badge">5</span>
 							Inquerito Alimentar
 					</a></li>
 				</ul>
