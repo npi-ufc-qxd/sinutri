@@ -212,14 +212,6 @@
 									<td>${consulta.vomito? consulta.vomitoComentario : "Não apresenta vomito" }</td>
 								</tr>
 								<tr>
-									<td>Diabetes</td>
-									<td>${consulta.diabetes ? "Sim"  : "Não"}</td>
-								</tr>
-								<tr>
-									<td>Hipertensão</td>
-									<td>${consulta.hipertensao ? "Sim"  : "Não"}</td>
-								</tr>
-								<tr>
 									<td>Mastigação</td>
 									<td>${consulta.mastigacao ? consulta.mastigacaoComentario  : "Não apresenta problemas na mastigação"}</td>
 								</tr>
