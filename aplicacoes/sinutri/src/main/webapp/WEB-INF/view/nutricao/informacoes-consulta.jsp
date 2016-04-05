@@ -97,7 +97,7 @@
 								</tr>
 								<tr>
 									<td><strong>Consumo de água:</strong></td>
-									<td>${consulta.agua}copos/dia</td>
+									<td>${consulta.agua}</td>
 									<td></td>
 									<td></td>
 								</tr>
@@ -468,7 +468,7 @@
 								<tr>
 									<th>Alimentos</th>									
 									<th>Frequencia</th>
-									<th>Quantidade</th>
+									<th>Anotação</th>
 								</tr>
 							</thead>
 							<tbody>

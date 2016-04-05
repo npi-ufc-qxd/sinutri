@@ -101,8 +101,7 @@ public class ConsultaNutricional {
 	private Double circunferenciaCinturaDesejada;
 
 	@NotNull(message = "Informe a quantidade de copos de água consumida")
-	@Min(value = 1)
-	private Double agua;
+	private String agua;
 
 	private boolean atividadeFisica;
 	private String atividadeFisicaComentario;
@@ -322,11 +321,11 @@ public class ConsultaNutricional {
 		this.circunferenciaCinturaDesejada = circunferenciaCinturaDesejada;
 	}
 
-	public Double getAgua() {
+	public String getAgua() {
 		return agua;
 	}
 
-	public void setAgua(Double agua) {
+	public void setAgua(String agua) {
 		this.agua = agua;
 	}
 

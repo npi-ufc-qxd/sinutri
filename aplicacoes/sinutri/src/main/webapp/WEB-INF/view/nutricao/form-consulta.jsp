@@ -189,7 +189,7 @@
 							<label for="agua" class="control-label"><i
 								style="color: #F56954;" class="glyphicon glyphicon-asterisk"></i>
 								Consumo de água (copos):</label>
-							<form:input type="number" id="agua" name="agua" path="agua"
+							<form:input type="text" id="agua" name="agua" path="agua"
 								cssClass="form-control" placeholder="Consumo de água" />
 							<div class="error-validation">
 								<form:errors path="agua"></form:errors>
@@ -883,7 +883,7 @@
 						</div> 
 	
 						<div class="form-item col-sm-6">
-							<label for="bovinaQuantidade" class="control-label">Quantidade</label>
+							<label for="bovinaQuantidade" class="control-label">Anotação</label>
 							<form:input id="inputTextBovina"
 								path="inqueritoAlimentar.bovinaQuantidade"
 								cssClass="form-control" placeholder="Quantidade"
@@ -913,7 +913,7 @@
 						</div>
 
 						<div class="form-item col-sm-6">
-							<label for="avesQuantidade" class="control-label">Quantidade</label>
+							<label for="avesQuantidade" class="control-label">Anotação</label>
 							<form:input id="inputTextAves"
 								path="inqueritoAlimentar.avesQuantidade" cssClass="form-control"
 								placeholder="Quantidade"
@@ -944,7 +944,7 @@
 						</div>
 
 						<div class="form-item col-sm-6">
-							<label for="peixeQuantidade" class="control-label">Quantidade</label>
+							<label for="peixeQuantidade" class="control-label">Anotação</label>
 
 							<form:input id="inputTextPeixe"
 								path="inqueritoAlimentar.peixeQuantidade"
@@ -977,7 +977,7 @@
 						</div>
 
 						<div class="form-item col-sm-6">
-							<label for="viscerasQuantidade" class="control-label">Quantidade</label>
+							<label for="viscerasQuantidade" class="control-label">Anotação</label>
 
 							<form:input id="inputTextVisceras"
 								path="inqueritoAlimentar.viscerasQuantidade"
@@ -1012,7 +1012,7 @@
 						</div>
 
 						<div class="form-item col-sm-6">
-							<label for="leiteDerivadosQuantidade" class="control-label">Quantidade</label>
+							<label for="leiteDerivadosQuantidade" class="control-label">Anotação</label>
 
 							<form:input id="inputTextLeiteDerivados"
 								path="inqueritoAlimentar.leiteDerivadosQuantidade"
@@ -1045,7 +1045,7 @@
 						</div>
 
 						<div class="form-item col-sm-6">
-							<label for="ovosQuantidade" class="control-label">Quantidade</label>
+							<label for="ovosQuantidade" class="control-label">Anotação</label>
 
 							<form:input id="inputTextOvos"
 								path="inqueritoAlimentar.ovosQuantidade" cssClass="form-control"
@@ -1081,7 +1081,7 @@
 						</div>
 
 						<div class="form-item col-sm-6">
-							<label for="leguminosasQuantidade" class="control-label">Quantidade</label>
+							<label for="leguminosasQuantidade" class="control-label">Anotação</label>
 
 							<form:input id="inputTextLeguminosas"
 								path="inqueritoAlimentar.leguminosasQuantidade"
@@ -1113,7 +1113,7 @@
 						</div>
 
 						<div class="form-item col-sm-6">
-							<label for="cereaisQuantidade" class="control-label">Quantidade</label>
+							<label for="cereaisQuantidade" class="control-label">Anotação</label>
 
 							<form:input id="inputTextCereais"
 								path="inqueritoAlimentar.cereaisQuantidade"
@@ -1144,7 +1144,7 @@
 						</div>
 
 						<div class="form-item col-sm-6">
-							<label for="massasQuantidade" class="control-label">Quantidade</label>
+							<label for="massasQuantidade" class="control-label">Anotação</label>
 
 							<form:input id="inputTextMassas"
 								path="inqueritoAlimentar.massasQuantidade"
@@ -1178,7 +1178,7 @@
 						</div>
 
 						<div class="form-item col-sm-6">
-							<label for="vegetaisCrusQuantidade" class="control-label">Quantidade</label>
+							<label for="vegetaisCrusQuantidade" class="control-label">Anotação</label>
 							<form:input id="inputTextVegetaisCrus"
 								path="inqueritoAlimentar.vegetaisCrusQuantidade"
 								cssClass="form-control" placeholder="Quantidade"
@@ -1210,7 +1210,7 @@
 						</div>
 
 						<div class="form-item col-sm-6">
-							<label for="vegetaisCozidosQuantidade" class="control-label">Quantidade</label>
+							<label for="vegetaisCozidosQuantidade" class="control-label">Anotação</label>
 							<form:input id="inputTextVegetaisCozidos"
 								path="inqueritoAlimentar.vegetaisCozidosQuantidade"
 								cssClass="form-control" placeholder="Quantidade"
@@ -1239,7 +1239,7 @@
 						</div>
 
 						<div class="form-item col-sm-6">
-							<label for="frutasQuantidade" class="control-label">Quantidade</label>
+							<label for="frutasQuantidade" class="control-label">Anotação</label>
 							<form:input id="inputTextFrutas"
 								path="inqueritoAlimentar.frutasQuantidade"
 								cssClass="form-control" placeholder="Quantidade"
@@ -1268,7 +1268,7 @@
 						</div>
 
 						<div class="form-item col-sm-6">
-							<label for="docesQuantidade" class="control-label">Quantidade</label>
+							<label for="docesQuantidade" class="control-label">Anotação</label>
 							<form:input id="inputTextDoces"
 								path="inqueritoAlimentar.docesQuantidade"
 								cssClass="form-control" placeholder="Quantidade"
@@ -1297,7 +1297,7 @@
 						</div>
 
 						<div class="form-item col-sm-6">
-							<label for="oleoQuantidade" class="control-label">Quantidade</label>
+							<label for="oleoQuantidade" class="control-label">Anotação</label>
 							<form:input id="inputTextOleo"
 								path="inqueritoAlimentar.oleoQuantidade" cssClass="form-control"
 								placeholder="Quantidade"
@@ -1328,7 +1328,7 @@
 						</div>
 
 						<div class="form-item col-sm-6">
-							<label for="margarinaQuantidade" class="control-label">Quantidade</label>
+							<label for="margarinaQuantidade" class="control-label">Anotação</label>
 							<form:input id="inputTextMargarina"
 								path="inqueritoAlimentar.margarinaQuantidade"
 								cssClass="form-control" placeholder="Quantidade"
@@ -1357,7 +1357,7 @@
 						</div>
 
 						<div class="form-item col-sm-6">
-							<label for="manteigaQuantidade" class="control-label">Quantidade</label>
+							<label for="manteigaQuantidade" class="control-label">Anotação</label>
 							<form:input id="inputTextManteiga"
 								path="inqueritoAlimentar.manteigaQuantidade"
 								cssClass="form-control" placeholder="Quantidade"
@@ -1389,7 +1389,7 @@
 						</div>
 
 						<div class="form-item col-sm-6">
-							<label for="toucinhoBaconQuantidade" class="control-label">Quantidade</label>
+							<label for="toucinhoBaconQuantidade" class="control-label">Anotação</label>
 							<form:input id="inputTextToucinhoBacon"
 								path="inqueritoAlimentar.toucinhoBaconQuantidade"
 								cssClass="form-control" placeholder="Quantidade"
@@ -1418,7 +1418,7 @@
 						</div>
 
 						<div class="form-item col-sm-6">
-							<label for="aguaQuantidade" class="control-label">Quantidade</label>
+							<label for="aguaQuantidade" class="control-label">Anotação</label>
 							<form:input id="inputTextAgua"
 								path="inqueritoAlimentar.aguaQuantidade" cssClass="form-control"
 								placeholder="Quantidade"
@@ -1447,7 +1447,7 @@
 						</div>
 
 						<div class="form-item col-sm-6">
-							<label for="sucoQuantidade" class="control-label">Quantidade</label>
+							<label for="sucoQuantidade" class="control-label">Anotação</label>
 							<form:input id="inputTextSuco"
 								path="inqueritoAlimentar.sucoQuantidade" cssClass="form-control"
 								placeholder="Quantidade"
@@ -1479,7 +1479,7 @@
 						</div>
 
 						<div class="form-item col-sm-6">
-							<label for="bebidasAlcoolicasQuantidade" class="control-label">Quantidade</label>
+							<label for="bebidasAlcoolicasQuantidade" class="control-label">Anotação</label>
 							<form:input id="inputTextBebidasAlcoolicas"
 								path="inqueritoAlimentar.bebidasAlcoolicasQuantidade"
 								cssClass="form-control" placeholder="Quantidade"
@@ -1512,7 +1512,7 @@
 						</div>
 
 						<div class="form-item col-sm-6">
-							<label for="gaseificadasQuantidade" class="control-label">Quantidade</label>
+							<label for="gaseificadasQuantidade" class="control-label">Anotação</label>
 							<form:input id="inputTextGaseificadas"
 								path="inqueritoAlimentar.gaseificadasQuantidade"
 								cssClass="form-control" placeholder="Quantidade"
@@ -1540,7 +1540,7 @@
 						</div>
 
 						<div class="form-item col-sm-6">
-							<label for="infusoesQuantidade" class="control-label">&nbsp;&nbsp;&nbsp;</label>
+							<label for="infusoesQuantidade" class="control-label">Anotação</label>
 							<form:input id="inputTextInfusoes"
 								path="inqueritoAlimentar.infusoesQuantidade"
 								cssClass="form-control" placeholder="Quantidade"
