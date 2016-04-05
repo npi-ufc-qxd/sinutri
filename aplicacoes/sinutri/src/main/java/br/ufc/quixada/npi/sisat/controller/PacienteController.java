@@ -190,9 +190,6 @@ public class PacienteController {
 			model.addAttribute("anexoError", "Adicione anexo a seleção");
 		}
 
-		if (consulta.getAgua().equals(0)) {
-			consulta.setAgua(null);
-		}
 		if (consulta.getMedicamentoComentario() != null && consulta.getMedicamentoComentario().isEmpty()) {
 			consulta.setMedicamentoComentario(null);
 		}
