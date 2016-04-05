@@ -743,11 +743,11 @@
 						</div>
 					</div>
 
-					<h4 id="documentos" class="section">
+					<h4 id="documentos" class="section" style="display: none">
 						<strong>Documentos</strong>
 					</h4>
 
-					<div class="row form-group">
+					<div class="row form-group" style="display: none">
 						<div class="form-item col-sm-12">
 							<div id="enviarDocumento">
 								<input type="checkbox" id="enviar" name="enviar"><label
