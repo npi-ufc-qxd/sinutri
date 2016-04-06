@@ -127,7 +127,7 @@
 								style="color: #F56954;" class="glyphicon glyphicon-asterisk"></i>
 								Altura (m):</label>
 							<form:input type="number" id="altura" name="altura" path="altura"
-								cssClass="form-control valid-num" placeholder="0.00" />
+								cssClass="form-control valid-num imc-altura" placeholder="0.00" />
 							<div class="error-validation">
 								<form:errors path="altura"></form:errors>
 							</div>
@@ -140,7 +140,7 @@
 								style="color: #F56954;" class="glyphicon glyphicon-asterisk"></i>
 								Peso (Kg):</label>
 							<form:input type="number" id="peso" name="peso" path="peso"
-								cssClass="form-control valid-num" placeholder="00.00" />
+								cssClass="form-control valid-num imc-peso" placeholder="00.00" />
 							<div class="error-validation">
 								<form:errors path="peso"></form:errors>
 							</div>
@@ -181,6 +181,15 @@
 							<div class="error-validation">
 								<form:errors path="circunferenciaCinturaDesejada"></form:errors>
 							</div>
+						</div>
+					</div>
+
+					<div class="row form-group">
+						<div class="form-item col-sm-12">
+							<label for="agua" class="control-label"><i
+								style="color: #F56954;" class="glyphicon glyphicon-asterisk"></i>
+								Índice de Massa Corporal (IMC)</label>
+							<input type="text" class="form-control imc-result" value="0.0" readonly/>
 						</div>
 					</div>
 

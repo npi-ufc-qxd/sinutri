@@ -413,4 +413,27 @@ function(e) {
 	        '</div>'
     	}
     });
+	
+	/* Atualização automática do IMC */
+
+	var atualizarIMC = function() {
+		
+		var altura = $(".imc-altura").val();
+		var peso = $(".imc-peso").val();
+		var imc = parseFloat(parseInt(calculadora.calcIMC(altura, peso) * 100))/100; 
+		
+		if(!isNaN(imc)) {
+			$(".imc-result").val(imc);
+			console.log(imc);
+		}
+		
+	}
+	
+	/* Atualização automática do IMC */
+	
+	$(".imc-altura , .imc-peso").on("change paste keyup", function() {
+		atualizarIMC();
+	});
+	
+	
 });
