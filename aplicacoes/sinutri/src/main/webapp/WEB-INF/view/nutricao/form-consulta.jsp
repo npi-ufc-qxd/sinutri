@@ -748,35 +748,6 @@
 						</div>
 					</div>
 
-					<h4 id="orientacoes" class="section">
-						<strong>Orientações</strong>
-					</h4>
-
-					<div class="row form-group">
-						<div class="form-item col-sm-12">
-							<label for="condutaNutricional" class="control-label">
-								Conduta Nutricional:</label>
-							<form:textarea id="condutaNutricional" path="condutaNutricional"
-								class="form-control" rows="5" placeholder="Conduta Nutricional" />
-							<div class="error-validation">
-								<form:errors path="condutaNutricional"></form:errors>
-							</div>
-						</div>
-					</div>
-
-					<div class="row form-group">
-						<div class="form-item col-sm-12">
-							<label for="orientacoesIndividuais" class="control-label">
-								Orientações Individuais</label>
-							<form:textarea id="orientacoesIndividuais"
-								path="orientacoesIndividuais" class="form-control" rows="5"
-								placeholder="Orientações Individuais" />
-							<div class="error-validation">
-								<form:errors path="orientacoesIndividuais"></form:errors>
-							</div>
-						</div>
-					</div>
-
 					<h4 id="documentos" class="section">
 						<strong>Documentos</strong>
 					</h4>
