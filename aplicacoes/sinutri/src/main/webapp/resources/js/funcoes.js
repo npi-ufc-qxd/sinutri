@@ -424,7 +424,8 @@ function(e) {
 		
 		if(!isNaN(imc)) {
 			$(".imc-result").val(imc);
-			console.log(imc);
+		} else {
+			$(".imc-result").val(0);
 		}
 		
 	}
