@@ -199,6 +199,27 @@
 
 					<div class="row form-group">
 						<div class="form-item col-sm-6">
+							<label for="agua" class="control-label">
+								Horário de Dormir:</label>
+							<form:input type="text" id="horarioDormir" name="horarioDormir" path="horarioDormir"
+								cssClass="form-control" placeholder="Horário de Dormir" />
+							<div class="error-validation">
+								<form:errors path="horarioDormir"></form:errors>
+							</div>
+						</div>
+						<div class="form-item col-sm-6">
+							<label for="agua" class="control-label">
+								Horário de Acordar:</label>
+							<form:input type="text" id="horarioAcordar" name="horarioAcordar" path="horarioAcordar"
+								cssClass="form-control" placeholder="Horário de Acordar" />
+							<div class="error-validation">
+								<form:errors path="horarioAcordar"></form:errors>
+							</div>
+						</div>
+					</div>
+					
+					<div class="row form-group">
+						<div class="form-item col-sm-6">
 							<label for="checkAtividadeFisica" class="control-label"><form:checkbox
 									id="checkAtividadeFisica" path="atividadeFisica"
 									class="checkboxInputSelect" /> Atividade Física:</label>
