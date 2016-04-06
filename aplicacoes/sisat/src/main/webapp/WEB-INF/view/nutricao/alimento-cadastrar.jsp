@@ -71,7 +71,7 @@
 						placeholder="Nome do alimento substituto..." path="nomeAlimento"
 						cssClass="form-control" size="44"/>
 					<div class="error-validation">
-						<form:errors path="nomeAlimento"></form:errors>
+						<form:errors path="nomeAlimento" />
 					</div>
 				</div>
 			</div>

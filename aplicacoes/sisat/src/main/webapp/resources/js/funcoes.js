@@ -351,6 +351,7 @@ $(document).ready(function() {
 								}
 							}
 						});
+					
 
 	$('div.error-validation:has(span)').find('span').css(
 			'color', '#a94442');
@@ -413,4 +414,39 @@ function(e) {
 	        '</div>'
     	}
     });
-});
+	$('#form-medida-antropometrica-cadastrar').validate(
+		{
+			rules : {
+				nome : {
+					required : true
+				},
+				unidade : {
+					required : true
+				}
+			},
+			highlight : function(element) {
+				$(element).closest('.form-item')
+						.addClass('has-error');
+			},
+			unhighlight : function(element) {
+				$(element).closest('.form-group')
+						.removeClass('has-error');
+			},
+			errorElement : 'span',
+			errorClass : 'help-block',
+			errorPlacement : function(error, element) {
+				error.insertAfter(element.parent().children().last());
+				var itemForm = element.parent();
+				var id = element.attr("name");
+				$(itemForm).find("span").attr("id",	id);
+			}, 
+			messages : {
+				nome : {
+					required : "Informe o nome da medida!"
+				},
+				unidade : {
+					required : "Informe a unidade!"
+				}
+			}
+		});
+	});
