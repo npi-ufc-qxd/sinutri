@@ -1,8 +1,11 @@
 package br.ufc.quixada.npi.sisat.model;	
 
-import java.util.Calendar;
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.Period;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.util.Date;
-import java.util.GregorianCalendar;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -159,28 +162,25 @@ public class Pessoa {
 		this.telefone = telefone;
 	}
 
-	public String getIdade() {
-		String idade;
-		if (this.dataNascimento != null) {
-			Calendar dateOfBirth = new GregorianCalendar();
-			dateOfBirth.setTime(this.dataNascimento);
-
-			// Cria um objeto calendar com a data atual
-			Calendar today = Calendar.getInstance();
-
-			// Obtém a idade baseado no ano
-			int age = today.get(Calendar.YEAR) - dateOfBirth.get(Calendar.YEAR);
-			dateOfBirth.add(Calendar.YEAR, age);
-
-			// se a data de hoje é antes da data de Nascimento, então diminui
-			// 1(um)
-			if (today.before(dateOfBirth)) {
-				age--;
-			}
-			idade = "" + age;
-		} else {
-			idade = " ";
+	public Integer getIdade() {
+		Integer idade = obterIdade();
+		return idade;
+	}
+	
+	private Integer obterIdade(){
+		Integer idade = null;
+		
+		if(this.dataNascimento != null){
+			Instant instanteDataNascimento = this.dataNascimento.toInstant();
+			ZonedDateTime zonaDataNascimento = instanteDataNascimento.atZone(ZoneId.systemDefault());
+		
+			LocalDate dataDeNascimento = zonaDataNascimento.toLocalDate();
+			LocalDate dataDeHoje = LocalDate.now();
+		
+			Period periodoEntreDatas = Period.between(dataDeNascimento, dataDeHoje);
+			idade = periodoEntreDatas.getYears();
 		}
+		
 		return idade;
 	}
 
@@ -195,5 +195,5 @@ public class Pessoa {
 
 }
 
-
+	
 
