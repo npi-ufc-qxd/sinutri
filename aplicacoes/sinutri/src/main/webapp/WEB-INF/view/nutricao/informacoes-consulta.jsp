@@ -172,6 +172,22 @@
 										</c:otherwise>
 									</c:choose>
 								</tr>
+								<tr>
+									<td><strong>Consumo de Cigarro:</strong></td>
+									<c:choose>
+										<c:when test="${consulta.cigarro }">
+											<td>${consulta.cigarroComentario }</td>
+											<td><strong>Vezes por semana:</strong></td>
+											<td>${consulta.cigarroFrequenciaSemanal.tipo }</td>
+										</c:when>
+										<c:otherwise>
+											<td>Não consome cigarros.</td>
+											<td></td>
+											<td></td>
+										</c:otherwise>
+									</c:choose>
+								</tr>
+								
 							</tbody>
 						</table>
 
