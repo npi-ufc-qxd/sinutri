@@ -100,7 +100,7 @@ public class ConsultaNutricional {
 	@Min(value = 1)
 	private Double circunferenciaCinturaDesejada;
 
-	@NotNull(message = "Informe a quantidade de copos de água consumida")
+	@NotNull(message = "Informe a quantidade de água consumida")
 	private String agua;
 
 	private boolean atividadeFisica;

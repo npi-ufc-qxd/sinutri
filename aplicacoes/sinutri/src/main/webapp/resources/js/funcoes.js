@@ -206,7 +206,7 @@ $(document).ready(function() {
 								required : "Informe a circunferência da cintura desejada pelo paciente."
 							},
 							agua : {
-								required : "Informe a quantidade de copos de água consumidos pelo paciente."
+								required : "Informe a quantidade de água consumida pelo paciente."
 							},
 							atividadeFisicaComentario : {
 								required : "Informe qual a(s) ativadade(s) física(s) praticada(s) pelo paciente."

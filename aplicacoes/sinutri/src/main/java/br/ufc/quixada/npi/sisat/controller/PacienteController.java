@@ -135,7 +135,6 @@ public class PacienteController {
 			@RequestParam(value = "enviar", required = false) boolean enviar) {
 
 		model.addAttribute("action", "cadastrar");
-
 		Pessoa pessoa = pessoaService.getPessoaByCpf(cpf);
 		InqueritoAlimentar inqueritoAlimentar = consulta.getInqueritoAlimentar();
 		inqueritoAlimentar.setConsultaNutricional(consulta);
@@ -320,23 +319,6 @@ public class PacienteController {
 				+ consulta.getPaciente().getPessoa().getNome() + "</strong> atualizada com sucesso.");
 
 		return "redirect:/paciente/consulta/" + consulta.getId();
-	}
-	
-	@RequestMapping(value = "/{cpf}/consulta/{id}/relatorio/orientacoes", method = RequestMethod.GET)
-	public String relatorio(@PathVariable("id") Long id, Model model, HttpSession session) throws JRException {
-
-		String orientacoesIndividuais = consultaNutricionalService.getOrientacoesIndividuaisById(id);
-		String cpf = consultaNutricionalService.getPacientePessoaCpfById(id);
-		String nome = usuarioService.getByCpf(cpf).getNome();
-		String nutricionista = getUsuarioLogado(session).getNome();
-
-		model.addAttribute("format", "pdf");
-		model.addAttribute("orientacoesIndividuais", orientacoesIndividuais);
-		model.addAttribute("paciente", nome);
-		model.addAttribute("nutricionista", nutricionista);
-		model.addAttribute("datasource", new JREmptyDataSource());
-
-		return "orientacoesIndividuais";
 	}
 
 	@RequestMapping(value = { "/consulta/refeicao/{idRefeicao}/excluir.json" }, method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
