@@ -256,6 +256,9 @@ $(document).ready(function() {
 							alergiaComentario : {
 								required : "Informe se o paciente possui alguma alergia alimentar."
 							},
+							intoleranciaComentario : {
+								required : "Informe se o paciente possui alguma intolerância alimentar."
+							},
 							outrasPatologiasComentario : {
 								required : "Informe outras patologias do paciente."
 							},
