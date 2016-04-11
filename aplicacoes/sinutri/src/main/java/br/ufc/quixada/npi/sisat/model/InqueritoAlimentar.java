@@ -95,27 +95,27 @@ public class InqueritoAlimentar {
 	@Enumerated(EnumType.STRING)
 	private Frequencia infusoesFrequenciaSemanal;
 
-	private double avesQuantidade;
-	private double peixeQuantidade;
-	private double viscerasQuantidade;
-	private double leiteDerivadosQuantidade;
-	private double ovosQuantidade;
-	private double leguminosasQuantidade;
-	private double cereaisQuantidade;
-	private double massasQuantidade;
-	private double vegetaisCrusQuantidade;
-	private double vegetaisCozidosQuantidade;
-	private double frutasQuantidade;
-	private double docesQuantidade;
-	private double oleoQuantidade;
-	private double margarinaQuantidade;
-	private double manteigaQuantidade;
-	private double toucinhoBaconQuantidade;
-	private double aguaQuantidade;
-	private double sucoQuantidade;
-	private double bebidasAlcoolicasQuantidade;
-	private double gaseificadasQuantidade;
-	private double infusoesQuantidade;
+	private String avesQuantidade;
+	private String peixeQuantidade;
+	private String viscerasQuantidade;
+	private String leiteDerivadosQuantidade;
+	private String ovosQuantidade;
+	private String leguminosasQuantidade;
+	private String cereaisQuantidade;
+	private String massasQuantidade;
+	private String vegetaisCrusQuantidade;
+	private String vegetaisCozidosQuantidade;
+	private String frutasQuantidade;
+	private String docesQuantidade;
+	private String oleoQuantidade;
+	private String margarinaQuantidade;
+	private String manteigaQuantidade;
+	private String toucinhoBaconQuantidade;
+	private String aguaQuantidade;
+	private String sucoQuantidade;
+	private String bebidasAlcoolicasQuantidade;
+	private String gaseificadasQuantidade;
+	private String infusoesQuantidade;
 
 	private String observacoes;
 
@@ -495,171 +495,173 @@ public class InqueritoAlimentar {
 		this.viscerasFrequenciaSemanal = viscerasFrequenciaSemanal;
 	}
 
-	public double getAvesQuantidade() {
+	
+
+	public String getAvesQuantidade() {
 		return avesQuantidade;
 	}
 
-	public void setAvesQuantidade(double avesQuantidade) {
+	public void setAvesQuantidade(String avesQuantidade) {
 		this.avesQuantidade = avesQuantidade;
 	}
 
-	public double getPeixeQuantidade() {
+	public String getPeixeQuantidade() {
 		return peixeQuantidade;
 	}
 
-	public void setPeixeQuantidade(double peixeQuantidade) {
+	public void setPeixeQuantidade(String peixeQuantidade) {
 		this.peixeQuantidade = peixeQuantidade;
 	}
 
-	public double getViscerasQuantidade() {
+	public String getViscerasQuantidade() {
 		return viscerasQuantidade;
 	}
 
-	public void setViscerasQuantidade(double viscerasQuantidade) {
+	public void setViscerasQuantidade(String viscerasQuantidade) {
 		this.viscerasQuantidade = viscerasQuantidade;
 	}
 
-	public double getLeiteDerivadosQuantidade() {
+	public String getLeiteDerivadosQuantidade() {
 		return leiteDerivadosQuantidade;
 	}
 
-	public void setLeiteDerivadosQuantidade(double leiteDerivadosQuantidade) {
+	public void setLeiteDerivadosQuantidade(String leiteDerivadosQuantidade) {
 		this.leiteDerivadosQuantidade = leiteDerivadosQuantidade;
 	}
 
-	public double getOvosQuantidade() {
+	public String getOvosQuantidade() {
 		return ovosQuantidade;
 	}
 
-	public void setOvosQuantidade(double ovosQuantidade) {
+	public void setOvosQuantidade(String ovosQuantidade) {
 		this.ovosQuantidade = ovosQuantidade;
 	}
 
-	public double getLeguminosasQuantidade() {
+	public String getLeguminosasQuantidade() {
 		return leguminosasQuantidade;
 	}
 
-	public void setLeguminosasQuantidade(double leguminosasQuantidade) {
+	public void setLeguminosasQuantidade(String leguminosasQuantidade) {
 		this.leguminosasQuantidade = leguminosasQuantidade;
 	}
 
-	public double getCereaisQuantidade() {
+	public String getCereaisQuantidade() {
 		return cereaisQuantidade;
 	}
 
-	public void setCereaisQuantidade(double cereaisQuantidade) {
+	public void setCereaisQuantidade(String cereaisQuantidade) {
 		this.cereaisQuantidade = cereaisQuantidade;
 	}
 
-	public double getMassasQuantidade() {
+	public String getMassasQuantidade() {
 		return massasQuantidade;
 	}
 
-	public void setMassasQuantidade(double massasQuantidade) {
+	public void setMassasQuantidade(String massasQuantidade) {
 		this.massasQuantidade = massasQuantidade;
 	}
 
-	public double getVegetaisCrusQuantidade() {
+	public String getVegetaisCrusQuantidade() {
 		return vegetaisCrusQuantidade;
 	}
 
-	public void setVegetaisCrusQuantidade(double vegetaisCrusQuantidade) {
+	public void setVegetaisCrusQuantidade(String vegetaisCrusQuantidade) {
 		this.vegetaisCrusQuantidade = vegetaisCrusQuantidade;
 	}
 
-	public double getVegetaisCozidosQuantidade() {
+	public String getVegetaisCozidosQuantidade() {
 		return vegetaisCozidosQuantidade;
 	}
 
-	public void setVegetaisCozidosQuantidade(double vegetaisCozidosQuantidade) {
+	public void setVegetaisCozidosQuantidade(String vegetaisCozidosQuantidade) {
 		this.vegetaisCozidosQuantidade = vegetaisCozidosQuantidade;
 	}
 
-	public double getFrutasQuantidade() {
+	public String getFrutasQuantidade() {
 		return frutasQuantidade;
 	}
 
-	public void setFrutasQuantidade(double frutasQuantidade) {
+	public void setFrutasQuantidade(String frutasQuantidade) {
 		this.frutasQuantidade = frutasQuantidade;
 	}
 
-	public double getDocesQuantidade() {
+	public String getDocesQuantidade() {
 		return docesQuantidade;
 	}
 
-	public void setDocesQuantidade(double docesQuantidade) {
+	public void setDocesQuantidade(String docesQuantidade) {
 		this.docesQuantidade = docesQuantidade;
 	}
 
-	public double getOleoQuantidade() {
+	public String getOleoQuantidade() {
 		return oleoQuantidade;
 	}
 
-	public void setOleoQuantidade(double oleoQuantidade) {
+	public void setOleoQuantidade(String oleoQuantidade) {
 		this.oleoQuantidade = oleoQuantidade;
 	}
 
-	public double getMargarinaQuantidade() {
+	public String getMargarinaQuantidade() {
 		return margarinaQuantidade;
 	}
 
-	public void setMargarinaQuantidade(double margarinaQuantidade) {
+	public void setMargarinaQuantidade(String margarinaQuantidade) {
 		this.margarinaQuantidade = margarinaQuantidade;
 	}
 
-	public double getManteigaQuantidade() {
+	public String getManteigaQuantidade() {
 		return manteigaQuantidade;
 	}
 
-	public void setManteigaQuantidade(double manteigaQuantidade) {
+	public void setManteigaQuantidade(String manteigaQuantidade) {
 		this.manteigaQuantidade = manteigaQuantidade;
 	}
 
-	public double getToucinhoBaconQuantidade() {
+	public String getToucinhoBaconQuantidade() {
 		return toucinhoBaconQuantidade;
 	}
 
-	public void setToucinhoBaconQuantidade(double toucinhoBaconQuantidade) {
+	public void setToucinhoBaconQuantidade(String toucinhoBaconQuantidade) {
 		this.toucinhoBaconQuantidade = toucinhoBaconQuantidade;
 	}
 
-	public double getAguaQuantidade() {
+	public String getAguaQuantidade() {
 		return aguaQuantidade;
 	}
 
-	public void setAguaQuantidade(double aguaQuantidade) {
+	public void setAguaQuantidade(String aguaQuantidade) {
 		this.aguaQuantidade = aguaQuantidade;
 	}
 
-	public double getSucoQuantidade() {
+	public String getSucoQuantidade() {
 		return sucoQuantidade;
 	}
 
-	public void setSucoQuantidade(double sucoQuantidade) {
+	public void setSucoQuantidade(String sucoQuantidade) {
 		this.sucoQuantidade = sucoQuantidade;
 	}
 
-	public double getBebidasAlcoolicasQuantidade() {
+	public String getBebidasAlcoolicasQuantidade() {
 		return bebidasAlcoolicasQuantidade;
 	}
 
-	public void setBebidasAlcoolicasQuantidade(double bebidasAlcoolicasQuantidade) {
+	public void setBebidasAlcoolicasQuantidade(String bebidasAlcoolicasQuantidade) {
 		this.bebidasAlcoolicasQuantidade = bebidasAlcoolicasQuantidade;
 	}
 
-	public double getGaseificadasQuantidade() {
+	public String getGaseificadasQuantidade() {
 		return gaseificadasQuantidade;
 	}
 
-	public void setGaseificadasQuantidade(double gaseificadasQuantidade) {
+	public void setGaseificadasQuantidade(String gaseificadasQuantidade) {
 		this.gaseificadasQuantidade = gaseificadasQuantidade;
 	}
 
-	public double getInfusoesQuantidade() {
+	public String getInfusoesQuantidade() {
 		return infusoesQuantidade;
 	}
 
-	public void setInfusoesQuantidade(double infusoesQuantidade) {
+	public void setInfusoesQuantidade(String infusoesQuantidade) {
 		this.infusoesQuantidade = infusoesQuantidade;
 	}
 
