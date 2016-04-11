@@ -196,6 +196,39 @@
 							</div>
 						</div>
 					</div>
+					
+					<div class="row form-group">
+						<div class="form-item col-sm-6">
+							<label for="checkHorarioDormir" class="control-label"><form:checkbox 
+								id="checkHorarioDormir" path="horarioDormir" class="checkboxInput" />
+								Horário de Dormir:</label>
+							<form:input id="horarioDormirComentario" 
+								name="horarioDormirComentario" 
+								path="horarioDormirComentario"
+								cssClass="form-control" 
+								placeholder="Que horário você regulamente dorme?"
+								disabled="${not consultaNutricional.horarioDormir}" />
+							<div class="error-validation">
+								<form:errors path="horarioDormirComentario"></form:errors>
+							</div>
+						</div>
+						<div class="form-item col-sm-6">
+							<label for="checkHorarioAcordar" class="control-label"><form:checkbox 
+								id="checkHorarioAcordar" path="horarioAcordar" class="checkboxInput" />
+								Horário de Acordar:</label>
+							<form:input id="horarioAcordarComentario" 
+								name="horarioAcordarComentario" 
+								path="horarioAcordarComentario"
+								cssClass="form-control" 
+								placeholder="Que horário você regulamente acorda?"
+								disabled="${not consultaNutricional.horarioAcordar}" />
+							<div class="error-validation">
+								<form:errors path="horarioAcordarComentario"></form:errors>
+							</div>
+						</div>
+					</div>
+					
+
 
 					<div class="row form-group">
 						<div class="form-item col-sm-6">

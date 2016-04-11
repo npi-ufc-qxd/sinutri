@@ -103,6 +103,12 @@ public class ConsultaNutricional {
 	@NotNull(message = "Informe a quantidade de copos de água consumida")
 	@Min(value = 1)
 	private Double agua;
+	
+	private boolean horarioDormir;
+	private String horarioDormirComentario;
+	
+	private boolean horarioAcordar;
+	private String horarioAcordarComentario;
 
 	private boolean atividadeFisica;
 	private String atividadeFisicaComentario;
@@ -329,6 +335,40 @@ public class ConsultaNutricional {
 	public void setAgua(Double agua) {
 		this.agua = agua;
 	}
+		
+	public boolean isHorarioDormir() {
+		return horarioDormir;
+	}
+	
+	public void setHorarioDormir(boolean horarioDormir) {
+		this.horarioDormir = horarioDormir;
+	}
+
+	public void setHorarioAcordar(boolean horarioAcordar) {
+		this.horarioAcordar = horarioAcordar;
+	}
+
+	public String getHorarioDormirComentario() {
+		return horarioDormirComentario;
+	}
+
+	public void setHorarioDormirComentario(String horarioDormirComentario) {
+		this.horarioDormirComentario = horarioDormirComentario;
+	}
+	
+	public boolean isHorarioAcordar() {
+		return horarioAcordar;
+	}
+
+	public String getHorarioAcordarComentario() {
+		return horarioAcordarComentario;
+	}
+
+	public void setHorarioAcordarComentario(String horarioAcordarComentario) {
+		this.horarioAcordarComentario = horarioAcordarComentario;
+	}
+	
+	
 
 	public boolean isAtividadeFisica() {
 		return atividadeFisica;

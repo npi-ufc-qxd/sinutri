@@ -102,6 +102,13 @@
 									<td></td>
 								</tr>
 								<tr>
+									<td class="col-sm-3"><strong>Horário de Dormir:</strong></td>
+									<td class="col-sm-3">${consulta.horarioDormirComentario}</td>
+									<td class="col-sm-3"><strong>Horário de Acordar:</strong></td>
+									<td class="col-sm-3">${consulta.horarioAcordarComentario}</td>
+								</tr>
+								
+								<tr>
 									<td class="col-sm-3"><strong>Peso:</strong></td>
 									<td class="col-sm-3">${consulta.peso}</td>
 									<td class="col-sm-3"><strong>Peso desejado:</strong></td>
