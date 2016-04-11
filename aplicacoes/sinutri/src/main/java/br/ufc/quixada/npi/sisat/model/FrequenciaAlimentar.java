@@ -71,7 +71,6 @@ public class FrequenciaAlimentar {
 		this.alimentos = alimentos;
 	}
 
-	
 	public ConsultaNutricional getConsultaNutricional() {
 		return consultaNutricional;
 	}
