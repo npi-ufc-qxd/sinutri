@@ -449,7 +449,7 @@
 					
 					<div class="row form-group">
 						<div class="form-item col-sm-12">
-							<label for="checkAlergia" class=" control-label"><form:checkbox
+							<label for="checkIntolerancia" class=" control-label"><form:checkbox
 									cssClass="checkboxInput" id="checkIntolerancia" path="intolerancia"
 									class="check" /> Intolerância Alimentar:</label>
 							<form:textarea id="inputTextAlergia" path="intoleranciaComentario"
