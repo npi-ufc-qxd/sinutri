@@ -51,7 +51,7 @@ public class ConsultaNutricionalValidator implements Validator {
 		}
 		
 		if (consultaNutricional.isCigarro()) {
-			//validarComentario(errors, consultaNutricional.getCigarroComentario(), "cigarroComentario", "");
+			validarComentario(errors, consultaNutricional.getCigarroComentario(), "cigarroComentario", "Adicione algum comentário");
 			validarFrequenciaSemanal(errors, consultaNutricional.getCigarroFrequenciaSemanal(), "cigarroFrequenciaSemanal", "Informe a frequência de consumo de cigarro");
 		}
 		
