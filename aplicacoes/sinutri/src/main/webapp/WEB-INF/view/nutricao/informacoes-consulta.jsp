@@ -34,7 +34,7 @@
 			</div>
 
 			<div class="col-sm-4" align="right" style="margin-top: 15px;">
-				<a href="#" class="btn btn-primary btn-sm back"><span
+				<a href="<c:url value="/paciente/${consulta.paciente.pessoa.cpf}/historico"></c:url>" class="btn btn-primary btn-sm"><span
 					class="glyphicon glyphicon-chevron-left"></span> Voltar</a> 
 					
 					<a href="<c:url value="/paciente/consulta/${consulta.id}/plano-alimentar"></c:url>"

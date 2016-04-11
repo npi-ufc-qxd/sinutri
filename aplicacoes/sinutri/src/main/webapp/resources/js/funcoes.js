@@ -4,6 +4,7 @@ $(document).ready(function() {
 		return false;
 	});
 	
+	
 	$(".checkboxInput").change(function() {
 		var itemForm = $(this).parent().parent();
 
