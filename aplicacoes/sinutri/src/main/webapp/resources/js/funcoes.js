@@ -141,7 +141,196 @@ $(document).ready(function() {
 		}
 	});
 
-	
+	$('#form-consulta')
+			.validate(
+					{
+						rules : {
+						},
+						highlight : function(element) {
+							$(element).closest('.form-item')
+									.addClass('has-error');
+						},
+						unhighlight : function(element) {
+							$(element).closest('.form-group')
+									.removeClass('has-error');
+						},
+						errorElement : 'span',
+						errorClass : 'help-block',
+						errorPlacement : function(error,
+								element) {
+							error.insertAfter(element.parent()
+									.children().last());
+							var itemForm = element.parent();
+							var id = element.attr("name");
+							$(itemForm).find("span").attr("id",
+									id);
+						},
+						messages : {
+							objetivoConsulta : {
+								required : "Descreva o objetivo da consulta do paciente."
+							},
+							altura : {
+								required : "Informe a altura do paciente."
+							},
+							peso : {
+								required : "Informe o peso do paciente."
+							},
+							pesoDesejado : {
+								required : "Informe o peso desejado pelo paciente."
+							},
+							circunferenciaCintura : {
+								required : "Informe a circunferência da cintura do paciente."
+							},
+							circunferenciaCinturaDesejada : {
+								required : "Informe a circunferência da cintura desejada pelo paciente."
+							},
+							agua : {
+								required : "Informe a quantidade de copos de água consumidos pelo paciente."
+							},
+							atividadeFisicaComentario : {
+								required : "Informe qual a(s) ativadade(s) física(s) praticada(s) pelo paciente."
+							},
+							atividadeFisicaFrequenciaSemanal : {
+								required : "Informe qual a frequência da(s) atividade(s) física(s) praticada(s) pelo paciente."
+							},
+							carneVermelhaComentario : {
+								required : "Informe o tipo de carne vermelha consumida pelo paciente."
+							},
+							carneVermelhaFrequenciaSemanal : {
+								required : "Informe a frequência do consumo de carne vermelha pelo paciente."
+							},
+							bebidaAlcoolicaComentario : {
+								required : "Informe a bebida alcoólica comsumida pelo paciente."
+							},
+							bebidaAlcoolicaFrequenciaSemanal : {
+								required : "Informe a frequência do consumo de bebiba alcoólica pelo paciente."
+							},
+							medicamentoComentario : {
+								required : "Informe o(s) medicamento(s) utilizado(s) pelo paciente."
+							},
+							mastigacaoComentario : {
+								required : "Informe características da mastigação do paciente."
+							},
+							disfagiaComentario : {
+								required : "Informe comentários sobre a disfagia do paciente."
+							},
+							odinofagiaComentario : {
+								required : "Informe comentários sobre a odinofagia do paciente."
+							},
+							piroseComentario : {
+								required : "Informe comentários sobre a pirose do paciente."
+							},
+							nauseaComentario : {
+								required : "Informe comentários sobre náuseas do paciente."
+							},
+							vomitoComentario : {
+								required : "Informe comentários sobre vômitos do paciente."
+							},
+							diarreiaComentario : {
+								required : "Informe comentários sobre a diarreia do paciente."
+							},
+							constipacaoComentario : {
+								required : "Informe comentários sobre a constipação do paciente."
+							},
+							alergiaComentario : {
+								required : "Informe se o paciente possui alguma alergia alimentar."
+							},
+							outrasPatologiasComentario : {
+								required : "Informe outras patologias do paciente."
+							},
+							glicemia : {
+								required : "Informe o nível de glicemia do paciente."
+							},
+							classificacaoGlicemia : {
+								required : "Informe a classificação da glicemia do paciente."
+							},
+							ct : {
+								required : "Informe o nível de CT do paciente."
+							},
+							classificacaoCt : {
+								required : "Informe a classificação do CT do paciente."
+							},
+							ldlc : {
+								required : "Informe o nível de LDL-C do paciente."
+							},
+							classificacaoLdlc : {
+								required : "Informe a classificação do LDL-C do paciente."
+							},
+							hdlc : {
+								required : "Informe o nível de HDL-C do paciente."
+							},
+							classificacaoHdlc : {
+								required : "Informe a classificação de HDL-C do paciente."
+							},
+							tg : {
+								required : "Informe o nível de TG do paciente."
+							},
+							classificacaoTg : {
+								required : "Informe a classificação do TG do paciente."
+							},
+							hb : {
+								required : "Informe o nível de HB do paciente."
+							},
+							classificacaoHb : {
+								required : "Informe a classificação do HB do paciente."
+							},
+							tgo : {
+								required : "Informe o nível de TGO do paciente."
+							},
+							classificacaoTgo : {
+								required : "Informe a classificação de TGO do paciente."
+							},
+							tgp : {
+								required : "Informe o nível de TGP do paciente."
+							},
+							classificacaoTgp : {
+								required : "Informe a classificação do TGP do paciente."
+							},
+							bovinaQuantidade : {
+								required: "Informe a quantidade de carne Bovina."
+							}
+						}
+					});
+					
+					$('#form-alimento-subst').validate(
+						{
+							rules : {
+								nomeAlimento : {
+									required : true
+								},
+								grupo : {
+									required : true
+								}
+							},
+							highlight : function(element) {
+								$(element).closest('.form-item')
+										.addClass('has-error');
+							},
+							unhighlight : function(element) {
+								$(element).closest('.form-group')
+										.removeClass('has-error');
+							},
+							errorElement : 'span',
+							errorClass : 'help-block',
+							errorPlacement : function(error,
+									element) {
+								error.insertAfter(element.parent()
+										.children().last());
+								var itemForm = element.parent();
+								var id = element.attr("name");
+								$(itemForm).find("span").attr("id",
+										id);
+							}, 
+							messages : {
+								nomeAlimento : {
+									required : "O nome do alimento não pode ser vazio."
+								},
+								grupo : {
+									required : "Selecione o grupo alimetício ao qual o alimento pertence."
+								}
+							}
+						});
+
 	$('div.error-validation:has(span)').find('span').css(
 			'color', '#a94442');
 	$('div.error-validation:has(span)').find('span').parent()
