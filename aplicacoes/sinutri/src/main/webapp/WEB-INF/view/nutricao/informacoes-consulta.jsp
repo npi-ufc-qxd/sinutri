@@ -60,9 +60,6 @@
 					<li><a href="#exame"> <span class="badge">3</span> Exames
 							Laboratoriais
 					</a></li>
-					<li><a href="#orientacoes"> <span class="badge">4</span>
-							Orientações Individuais
-					</a></li>
 					<li><a href="#documentos"> <span class="badge">5</span>
 							Documentos
 					</a></li>
@@ -402,20 +399,8 @@
 					</c:otherwise>
 				</c:choose>
 
-				<h3 id="orientacoes" class="section">Orientações</h3>
 
 				<div class="row">
-					<div class="col-sm-12">
-						<label><strong> Orientacões Individuais: </strong></label>
-						<c:choose>
-							<c:when test="${not empty consulta.orientacoesIndividuais}">
-								<span>${consulta.orientacoesIndividuais}</span>
-							</c:when>
-							<c:otherwise>
-								<span class="alert alert-dismissible alert-default">Não há orientações.</span>
-							</c:otherwise>
-						</c:choose>
-					</div>
 
 					<div class="col-sm-12">
 						<label><strong> Conduta Nutricional: </strong></label>

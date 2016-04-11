@@ -78,9 +78,6 @@
 					<li><a href="#exame"> <span class="badge">3</span> Exames
 							Laboratoriais
 					</a></li>
-					<li><a href="#orientacoes"> <span class="badge">4</span>
-							Orientações Individuais
-					</a></li>
 					<li><a href="#documentos"> <span class="badge">5</span>
 							Documentos
 					</a></li>
@@ -714,10 +711,6 @@
 						</div>
 					</div>
 
-					<h4 id="orientacoes" class="section">
-						<strong>Orientações</strong>
-					</h4>
-
 					<div class="row form-group">
 						<div class="form-item col-sm-12">
 							<label for="condutaNutricional" class="control-label">
@@ -730,18 +723,6 @@
 						</div>
 					</div>
 
-					<div class="row form-group">
-						<div class="form-item col-sm-12">
-							<label for="orientacoesIndividuais" class="control-label">
-								Orientações Individuais</label>
-							<form:textarea id="orientacoesIndividuais"
-								path="orientacoesIndividuais" class="form-control" rows="5"
-								placeholder="Orientações Individuais" />
-							<div class="error-validation">
-								<form:errors path="orientacoesIndividuais"></form:errors>
-							</div>
-						</div>
-					</div>
 
 					<h4 id="documentos" class="section">
 						<strong>Documentos</strong>

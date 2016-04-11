@@ -36,7 +36,6 @@ import br.ufc.quixada.npi.sisat.model.enuns.SistemaUrinario;
 	@NamedQuery(name = "ConsultaNutricional.findFrequenciaAlimentarByIdConsulta", query = "select f from FrequenciaAlimentar f where f.consultaNutricional.id=:id"),
 	@NamedQuery(name = "ConsultaNutricional.findConsultaNutricionalWithDocumentosById", query = "select c from ConsultaNutricional c left join fetch c.documentos where c.id=:id"),
 	@NamedQuery(name = "ConsultaNutricional.findFrequenciasByIdConsulta", query = "select DISTINCT f from FrequenciaAlimentar f left join fetch f.alimentos where f.consultaNutricional.id = :id"),
-	@NamedQuery(name = "ConsultaNutricional.findOrientacoesIndividuaisById", query = "select c.orientacoesIndividuais from ConsultaNutricional c where c.id=:id"),
 	@NamedQuery(name = "ConsultaNutricional.findPacientePessoaCpfById", query = "select c.paciente.pessoa.cpf from ConsultaNutricional c where c.id=:id"), 
 	@NamedQuery(name = "ConsultaNutricional.countFrequenciaMastigacao", query = "select count(c.mastigacao) from ConsultaNutricional c where c.mastigacao = TRUE"),
 	@NamedQuery(name = "ConsultaNutricional.findCountFrequenciaMastigacao", query = "select count(c.mastigacao) from ConsultaNutricional c where c.mastigacao = TRUE"),
@@ -197,10 +196,6 @@ public class ConsultaNutricional {
 	@Transient
 	private String classificacaoCC;
 
-	@Column(columnDefinition = "TEXT")
-	@NotNull(message = "Informe as orientações para o paciente.")
-	private String orientacoesIndividuais;
-
 	private String informacoesComplementaresExames;
 
 	private String condutaNutricional;
@@ -239,15 +234,6 @@ public class ConsultaNutricional {
 
 	public void setDocumentos(Set<Documento> documentos) {
 		this.documentos = documentos;
-	}
-
-	public String getOrientacoesIndividuais() {
-		return orientacoesIndividuais;
-	}
-
-	public void setOrientacoesIndividuais(String orientacoesIndividuais) {
-		this.orientacoesIndividuais = orientacoesIndividuais;
-
 	}
 
 	public Long getId() {
