@@ -103,7 +103,10 @@ public class ConsultaNutricional {
 	@NotNull(message = "Informe a quantidade de copos de água consumida")
 	@Min(value = 1)
 	private Double agua;
-
+	
+	private String horarioDormir;
+	private String horarioAcordar;
+	
 	private boolean atividadeFisica;
 	private String atividadeFisicaComentario;
 	@Enumerated(EnumType.STRING)
@@ -330,6 +333,25 @@ public class ConsultaNutricional {
 		this.agua = agua;
 	}
 
+	
+	public String getHorarioDormir() {
+		return horarioDormir;
+	}
+
+	public void setHorarioDormir(String horarioDormir) {
+		this.horarioDormir = horarioDormir;
+	}
+
+	public String getHorarioAcordar() {
+		return horarioAcordar;
+	}
+
+	public void setHorarioAcordar(String horarioAcordar) {
+		this.horarioAcordar = horarioAcordar;
+	}
+
+	
+	
 	public boolean isAtividadeFisica() {
 		return atividadeFisica;
 	}
