@@ -76,17 +76,39 @@ public class PacienteController {
 	@Inject
 	private GenericService<Alimentacao> alimentacaoService;
 
-	@RequestMapping(value = "/{cpf}/historico", method = RequestMethod.GET)
-	public String getPaginaHistorico(@PathVariable("cpf") String cpf, Model model, RedirectAttributes redirectAttributes) {
+	@RequestMapping(value = "/{cpf}/verificar-paciente", method = RequestMethod.GET)
+	public String getPaginaHistorico(@PathVariable("cpf") String cpf,@RequestParam("acao") String acao, Model model, RedirectAttributes redirectAttributes) {
 
 		if(usuarioService.getByCpf(cpf) == null){
 			redirectAttributes.addFlashAttribute("erro", "Paciente não encontrado. Faça um nova pesquisa");
 			return "redirect:/nutricao/buscar";
 		}
 		
-		registrarPaciente(cpf);
+		Paciente paciente = registrarPaciente(cpf);
+		
+		if(acao.equals("historico")){
+			return "redirect:/paciente/"+paciente.getId()+"/historico";
+		}else if(acao.equals("consulta")){
+			return "redirect:/paciente/"+paciente.getId()+"/consulta";
+		}else{
+			redirectAttributes.addFlashAttribute("erro", "Paciente não encontrado. Faça um nova pesquisa");
+			return "redirect:/nutricao/buscar";
+		}
+	}
+	
+	@RequestMapping(value = "/{id}/historico", method = RequestMethod.GET)
+	public String getPaginaHistoricoPaciente(@PathVariable("id") Long id, Model model, RedirectAttributes redirectAttributes) {
 
-		model.addAttribute("pessoa", pessoaService.getPessoaByCpf(cpf));
+		Paciente paciente = pacienteService.find(Paciente.class, id);
+		
+//		if(usuarioService.getByCpf(cpf) == null){
+//			redirectAttributes.addFlashAttribute("erro", "Paciente não encontrado. Faça um nova pesquisa");
+//			return "redirect:/nutricao/buscar";
+//		}
+		
+//		registrarPaciente(cpf);
+
+		model.addAttribute("pessoa", pessoaService.getPessoaByCpf(paciente.getPessoa().getCpf()));
 
 		return "nutricao/historico-paciente";
 	}
@@ -105,19 +127,21 @@ public class PacienteController {
 		return "nutricao/informacoes-consulta";
 	}
 
-	@RequestMapping(value = "/{cpf}/consulta", method = RequestMethod.GET)
-	public String getPaginaRealizarConsulta(@PathVariable("cpf") String cpf, Model model, RedirectAttributes redirectAttributes) {
-
-		if(usuarioService.getByCpf(cpf) == null){
-			redirectAttributes.addFlashAttribute("erro", "Paciente não encontrado. Faça um nova pesquisa");
-			return "redirect:/nutricao/buscar";
-		}
+	@RequestMapping(value = "/{id}/consulta", method = RequestMethod.GET)
+	public String getPaginaRealizarConsulta(@PathVariable("id") Long id, Model model, RedirectAttributes redirectAttributes) {
+		
+		Paciente paciente = pacienteService.find(Paciente.class, id);
+		
+//		if(usuarioService.getByCpf(cpf) == null){
+//			redirectAttributes.addFlashAttribute("erro", "Paciente não encontrado. Faça um nova pesquisa");
+//			return "redirect:/nutricao/buscar";
+//		}
 		
 		model.addAttribute("action", "cadastrar");
 
-		registrarPaciente(cpf);
+//		registrarPaciente(cpf);
 
-		model.addAttribute("consultaNutricional", new ConsultaNutricional(pessoaService.getPessoaByCpf(cpf).getPaciente()));
+		model.addAttribute("consultaNutricional", new ConsultaNutricional(paciente));
 		model.addAttribute("sistemaGastrointestinal", SistemaGastrointestinal.values());
 		model.addAttribute("classificacaoExames", ClassificacaoExame.values());
 		model.addAttribute("sistemaUrinario", SistemaUrinario.values());
@@ -225,8 +249,8 @@ public class PacienteController {
 		return "redirect:/paciente/consulta/" + consulta.getId();
 	}
 
-	@RequestMapping(value = { "/{cpf}/consulta/{idConsulta}/editar" }, method = RequestMethod.GET)
-	public String editarConsulta(@PathVariable("cpf") String cpf, @PathVariable("idConsulta") long idConsulta,
+	@RequestMapping(value = { "/{id}/consulta/{idConsulta}/editar" }, method = RequestMethod.GET)
+	public String editarConsulta(@PathVariable("id") String id, @PathVariable("idConsulta") long idConsulta,
 			Model model) {
 
 		ConsultaNutricional consultaNutricional = consultaNutricionalService
@@ -439,7 +463,7 @@ public class PacienteController {
 		return "redirect:/paciente/consulta/" + idConsulta+"/plano-alimentar";
 	}
 	
-	private void registrarPaciente(String cpf) {
+	private Paciente registrarPaciente(String cpf) {
 		Pessoa pessoa = pessoaService.getPessoaByCpf(cpf);
 
 		if (pessoa == null) {
@@ -455,6 +479,8 @@ public class PacienteController {
 
 			pessoaService.update(pessoa);
 		}
+		
+		return pessoa.getPaciente();
 	}
 
 	private ConsultaNutricional atualizarConsulta(ConsultaNutricional consulta) {

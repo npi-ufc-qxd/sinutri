@@ -22,7 +22,7 @@
 
 			<div class="col-sm-6" align="right" style="margin-top: 15px;">
 				<a href="#" class="btn btn-primary btn-sm back"><span class="glyphicon glyphicon-chevron-left"></span> Voltar</a>
-				<a href="<c:url value="/paciente/${pessoa.cpf}/consulta"/>" class="btn btn-success btn-sm"><span class="glyphicon glyphicon-plus"></span> Realizar Consulta</a>
+				<a href="<c:url value="/paciente/${pessoa.cpf}/verificar-paciente?acao=consulta"/>" class="btn btn-success btn-sm"><span class="glyphicon glyphicon-plus"></span> Realizar Consulta</a>
 			</div>
     	</div>
 	
@@ -59,7 +59,7 @@
 										<td><a href="<c:url value="/paciente/consulta/${consulta.id}"/>">${dataFormatada}</a></td>
 						                <td align="right">
 							              <a href="<c:url value="/paciente/${pessoa.cpf}/consulta/${consulta.id}/relatorio/orientacoes"/>" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-file"></span> Relatorio</a>
-							              <a href="<c:url value="/paciente/${pessoa.cpf}/consulta/${consulta.id}/editar"/>" class="btn btn-warning btn-sm"><span class="glyphicon glyphicon-edit"></span> Editar</a>							             
+							              <a href="<c:url value="/paciente/${pessoa.getPaciente().getId()}/consulta/${consulta.id}/editar"/>" class="btn btn-warning btn-sm"><span class="glyphicon glyphicon-edit"></span> Editar</a>							             
 						                </td>
 						            </tr>
 								</c:forEach>

@@ -41,7 +41,7 @@
 					class="btn btn-info btn-sm">Plano Alimentar</a> 
 					
 					<a
-					href="<c:url value="/paciente/${consulta.paciente.pessoa.cpf}/consulta/${consulta.id}/editar"/>"
+					href="<c:url value="/paciente/${consulta.paciente.id}/consulta/${consulta.id}/editar"/>"
 					class="btn btn-warning btn-sm"><span
 					class="glyphicon glyphicon-edit"></span> Editar</a>
 			</div>
