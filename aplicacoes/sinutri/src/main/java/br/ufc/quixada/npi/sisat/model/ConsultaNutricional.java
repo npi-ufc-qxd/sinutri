@@ -32,10 +32,10 @@ import br.ufc.quixada.npi.sisat.model.enuns.SistemaGastrointestinal;
 import br.ufc.quixada.npi.sisat.model.enuns.SistemaUrinario;
 
 @NamedQueries({
-	@NamedQuery(name = "ConsultaNutricional.findFrequenciasByIdconsultaByTipo", query = "select f from FrequenciaAlimentar f where f.consultaNutricional.id=:id and f.tipofrequencia=:tipo"),
-	@NamedQuery(name = "ConsultaNutricional.findFrequenciaAlimentarByIdConsulta", query = "select f from FrequenciaAlimentar f where f.consultaNutricional.id=:id"),
+//	@NamedQuery(name = "ConsultaNutricional.findFrequenciasByIdconsultaByTipo", query = "select f from FrequenciaAlimentar f where f.consultaNutricional.id=:id and f.tipofrequencia=:tipo"),
+//	@NamedQuery(name = "ConsultaNutricional.findFrequenciaAlimentarByIdConsulta", query = "select f from FrequenciaAlimentar f where f.consultaNutricional.id=:id"),
 	@NamedQuery(name = "ConsultaNutricional.findConsultaNutricionalWithDocumentosById", query = "select c from ConsultaNutricional c left join fetch c.documentos where c.id=:id"),
-	@NamedQuery(name = "ConsultaNutricional.findFrequenciasByIdConsulta", query = "select DISTINCT f from FrequenciaAlimentar f left join fetch f.alimentos where f.consultaNutricional.id = :id"),
+//	@NamedQuery(name = "ConsultaNutricional.findFrequenciasByIdConsulta", query = "select DISTINCT f from FrequenciaAlimentar f left join fetch f.alimentos where f.consultaNutricional.id = :id"),
 	@NamedQuery(name = "ConsultaNutricional.findOrientacoesIndividuaisById", query = "select c.orientacoesIndividuais from ConsultaNutricional c where c.id=:id"),
 	@NamedQuery(name = "ConsultaNutricional.findPacientePessoaCpfById", query = "select c.paciente.pessoa.cpf from ConsultaNutricional c where c.id=:id"), 
 	@NamedQuery(name = "ConsultaNutricional.countFrequenciaMastigacao", query = "select count(c.mastigacao) from ConsultaNutricional c where c.mastigacao = TRUE"),
@@ -61,9 +61,9 @@ public class ConsultaNutricional {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@OneToMany(mappedBy = "consultaNutricional", cascade = CascadeType.ALL)
-	@JsonIgnore
-	private List<FrequenciaAlimentar> frequencias;
+//	@OneToMany(mappedBy = "consultaNutricional", cascade = CascadeType.ALL)
+//	@JsonIgnore
+//	private List<FrequenciaAlimentar> frequencias;
 
 	@ManyToOne
 	@JoinColumn(name = "paciente_id")
@@ -75,6 +75,12 @@ public class ConsultaNutricional {
 	@OneToMany(mappedBy = "consultaNutricional", cascade = CascadeType.ALL)
 	@JsonIgnore
 	private Set<Documento> documentos;
+	
+	
+	@OneToMany(mappedBy = "consultaNutricional", cascade = CascadeType.ALL)
+	@JsonIgnore
+	private List<Recordatorio> recordatorios;
+	
 
 	@DateTimeFormat
 	private Date data;
@@ -258,12 +264,20 @@ public class ConsultaNutricional {
 		this.id = id;
 	}
 
-	public List<FrequenciaAlimentar> getFrequencias() {
-		return frequencias;
+//	public List<FrequenciaAlimentar> getFrequencias() {
+//		return frequencias;
+//	}
+//
+//	public void setFrequencias(List<FrequenciaAlimentar> frequencias) {
+//		this.frequencias = frequencias;
+//	}
+	
+	public List<Recordatorio> getRecordatorio() {
+		return recordatorios;
 	}
 
-	public void setFrequencias(List<FrequenciaAlimentar> frequencias) {
-		this.frequencias = frequencias;
+	public void setRecordatorio(List<Recordatorio> recordatorio) {
+		this.recordatorios = recordatorios;
 	}
 
 	public Date getData() {

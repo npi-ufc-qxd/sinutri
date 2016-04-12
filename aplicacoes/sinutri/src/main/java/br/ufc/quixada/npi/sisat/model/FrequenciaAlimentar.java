@@ -14,6 +14,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
@@ -37,17 +38,24 @@ public class FrequenciaAlimentar {
 	@Enumerated(EnumType.STRING)
 	private Refeicao refeicao;
 	
-	@Enumerated(EnumType.STRING)
-	private TipoFrequencia tipofrequencia;
+//	@Enumerated(EnumType.STRING)
+//	private TipoFrequencia tipofrequencia;
 	
-	@ManyToOne
-	@JsonIgnore
-	@JoinColumn(name = "consultaNutricional_id")
-	private ConsultaNutricional consultaNutricional;
-    
+//	@ManyToOne
+//	@JsonIgnore
+//	@JoinColumn(name = "consultaNutricional_id")
+//	private ConsultaNutricional consultaNutricional;
+//    
 	@OneToMany(cascade = CascadeType.ALL, fetch=FetchType.EAGER)
 	@JoinColumn(name= "frequenciaalimentar_id")
 	private List<Alimentacao> alimentos;
+	
+	
+	@ManyToOne
+	@JoinColumn(name = "recordatorio_id")
+	@JsonIgnore
+	private Recordatorio recordatorio;
+
 	
 	
 	@Override
@@ -72,15 +80,21 @@ public class FrequenciaAlimentar {
 	}
 
 	
-	public ConsultaNutricional getConsultaNutricional() {
-		return consultaNutricional;
+//	public ConsultaNutricional getConsultaNutricional() {
+//		return consultaNutricional;
+//	}
+//
+//	public void setConsultaNutricional(ConsultaNutricional consultaNutricional) {
+//		this.consultaNutricional = consultaNutricional;
+//	}
+
+
+	public Recordatorio getRecordatorio() {
+		return recordatorio;
 	}
-
-	public void setConsultaNutricional(ConsultaNutricional consultaNutricional) {
-		this.consultaNutricional = consultaNutricional;
+	public void setRecordatorio(Recordatorio recordatorio) {
+		this.recordatorio = recordatorio;
 	}
-
-
 	public void setRefeicao(Refeicao refeicao) {
 		this.refeicao = refeicao;
 	}
@@ -89,12 +103,12 @@ public class FrequenciaAlimentar {
 		return refeicao;
 	}
 	
-	public void setTipo(TipoFrequencia tipofrequencia){
-		this.tipofrequencia = tipofrequencia;
-	}
-	public TipoFrequencia getTipo(){
-		return tipofrequencia;
-	}
+//	public void setTipo(TipoFrequencia tipofrequencia){
+//		this.tipofrequencia = tipofrequencia;
+//	}
+//	public TipoFrequencia getTipo(){
+//		return tipofrequencia;
+//	}
 
 	public Date getHorario() {
 		return horario;
