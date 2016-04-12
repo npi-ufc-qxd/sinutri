@@ -1,7 +1,10 @@
 package br.ufc.quixada.npi.sisat.model;
 
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.GenerationType;
 import javax.persistence.GeneratedValue;
 
@@ -23,6 +26,9 @@ public class CalculoDieta {
 	private Double lipidio;
 	
 	private Double proteinas;
+	
+	@OneToMany(mappedBy = "calculoDieta")
+	private List<Porcao> grupos; 
 
 	
 	public Integer getIdCalculaDieta() {
