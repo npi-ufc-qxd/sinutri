@@ -208,10 +208,10 @@ $(document).ready(function() {
 							agua : {
 								required : "Informe a quantidade de copos de água consumidos pelo paciente."
 							},
-							horarioDormirComentario : {
+							horarioDormir : {
 								required : "Informe o horário em que o paciente regulamente dorme."
 							},
-							horarioAcordarComentario : {
+							horarioAcordar : {
 								required : "Informe o horário em que o paciente regulamente acorda."
 							},
 							atividadeFisicaComentario : {

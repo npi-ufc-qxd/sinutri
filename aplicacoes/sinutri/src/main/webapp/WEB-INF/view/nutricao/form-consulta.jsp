@@ -199,31 +199,27 @@
 					
 					<div class="row form-group">
 						<div class="form-item col-sm-6">
-							<label for="checkHorarioDormir" class="control-label"><form:checkbox 
-								id="checkHorarioDormir" path="horarioDormir" class="checkboxInput" />
+							<label for="horarioDormir" class="control-label">
 								Horário de Dormir:</label>
-							<form:input id="horarioDormirComentario" 
-								name="horarioDormirComentario" 
-								path="horarioDormirComentario"
+							<form:input id="horarioDormir" 
+								name="horarioDormir" 
+								path="horarioDormir"
 								cssClass="form-control" 
-								placeholder="Que horário você regulamente dorme?"
-								disabled="${not consultaNutricional.horarioDormir}" />
+								placeholder="Que horário você regulamente dorme?" />
 							<div class="error-validation">
-								<form:errors path="horarioDormirComentario"></form:errors>
+								<form:errors path="horarioDormir"></form:errors>
 							</div>
 						</div>
 						<div class="form-item col-sm-6">
-							<label for="checkHorarioAcordar" class="control-label"><form:checkbox 
-								id="checkHorarioAcordar" path="horarioAcordar" class="checkboxInput" />
+							<label for="checkHorarioAcordar" class="control-label">
 								Horário de Acordar:</label>
-							<form:input id="horarioAcordarComentario" 
-								name="horarioAcordarComentario" 
-								path="horarioAcordarComentario"
+							<form:input id="horarioAcordar" 
+								name="horarioAcordar" 
+								path="horarioAcordar"
 								cssClass="form-control" 
-								placeholder="Que horário você regulamente acorda?"
-								disabled="${not consultaNutricional.horarioAcordar}" />
+								placeholder="Que horário você regulamente acorda?"/>
 							<div class="error-validation">
-								<form:errors path="horarioAcordarComentario"></form:errors>
+								<form:errors path="horarioAcordar"></form:errors>
 							</div>
 						</div>
 					</div>

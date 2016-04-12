@@ -40,14 +40,6 @@ public class ConsultaNutricionalValidator implements Validator {
 
 		validarPatologias(consultaNutricional, errors);
 		
-		if (consultaNutricional.isHorarioDormir()) {
-			ValidationUtils.rejectIfEmptyOrWhitespace(errors, "horarioDormirComentario", "horarioDormirComentario", "Informe o horário em que o paciente regulamente dorme.");
-		}
-		
-		if (consultaNutricional.isHorarioAcordar()) {
-			ValidationUtils.rejectIfEmptyOrWhitespace(errors, "horarioAcordarComentario", "horarioAcordarComentario", "Informe o horário em que o paciente regulamente acorda.");
-		}
-		
 		if (consultaNutricional.isAtividadeFisica()) {
 			ValidationUtils.rejectIfEmptyOrWhitespace(errors, "atividadeFisicaComentario", "atividadeFisicaComentario", "Informe a atividade fisica");
 			ValidationUtils.rejectIfEmptyOrWhitespace(errors, "atividadeFisicaFrequenciaSemanal", "atividadeFisicaFrequenciaSemanal", "Informe a frequência semanal da atividade fisica");

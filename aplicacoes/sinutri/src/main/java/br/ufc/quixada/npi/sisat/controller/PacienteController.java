@@ -194,12 +194,12 @@ public class PacienteController {
 			consulta.setAgua(null);
 		}
 		
-		if (consulta.getHorarioDormirComentario() != null && consulta.getHorarioDormirComentario().isEmpty()) {
-			consulta.setHorarioDormirComentario(null);
+		if (consulta.getHorarioDormir().equals(0)) {
+			consulta.setHorarioDormir(null);
 		}
 		
-		if (consulta.getHorarioAcordarComentario() != null && consulta.getHorarioAcordarComentario().isEmpty()) {
-			consulta.setHorarioAcordarComentario(null);
+		if (consulta.getHorarioAcordar().equals(0)) {
+			consulta.setHorarioAcordar(null);
 		}
 		
 		if (consulta.getMedicamentoComentario() != null && consulta.getMedicamentoComentario().isEmpty()) {

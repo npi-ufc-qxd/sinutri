@@ -103,9 +103,9 @@
 								</tr>
 								<tr>
 									<td class="col-sm-3"><strong>Horário de Dormir:</strong></td>
-									<td class="col-sm-3">${consulta.horarioDormirComentario}</td>
+									<td class="col-sm-3">${consulta.horarioDormir}</td>
 									<td class="col-sm-3"><strong>Horário de Acordar:</strong></td>
-									<td class="col-sm-3">${consulta.horarioAcordarComentario}</td>
+									<td class="col-sm-3">${consulta.horarioAcordar}</td>
 								</tr>
 								
 								<tr>
