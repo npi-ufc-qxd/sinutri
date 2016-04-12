@@ -34,6 +34,7 @@ import br.ufc.quixada.npi.sisat.model.AlimentoSubstituto;
 import br.ufc.quixada.npi.sisat.model.ConsultaNutricional;
 import br.ufc.quixada.npi.sisat.model.Documento;
 import br.ufc.quixada.npi.sisat.model.FrequenciaAlimentar;
+import br.ufc.quixada.npi.sisat.model.MedidaAntropometrica;
 import br.ufc.quixada.npi.sisat.model.Papel;
 import br.ufc.quixada.npi.sisat.model.Pessoa;
 import br.ufc.quixada.npi.sisat.model.enuns.Grupo;
@@ -41,6 +42,7 @@ import br.ufc.quixada.npi.sisat.model.enuns.TipoFrequencia;
 import br.ufc.quixada.npi.sisat.service.AlimentoSubstitutoService;
 import br.ufc.quixada.npi.sisat.service.ConsultaNutricionalService;
 import br.ufc.quixada.npi.sisat.service.DocumentoService;
+import br.ufc.quixada.npi.sisat.service.MedidaAntropometricaService;
 import br.ufc.quixada.npi.sisat.service.PacienteService;
 import br.ufc.quixada.npi.sisat.service.PapelService;
 import br.ufc.quixada.npi.sisat.service.PessoaService;
@@ -48,6 +50,9 @@ import br.ufc.quixada.npi.sisat.service.PessoaService;
 @Controller
 @RequestMapping("nutricao")
 public class NutricaoController {
+	
+	@Inject
+	private MedidaAntropometricaService medidaAntService;
 
 	@Inject
 	private PessoaService pessoaService;
@@ -318,4 +323,36 @@ public class NutricaoController {
 		
 		return "redirect:/nutricao/alimento-substituto/cadastrar";
 	}
+	
+	//lucashenriquejbe
+		@RequestMapping(value = { "medida-antropometrica/cadastrar" }, method = RequestMethod.GET)
+		public String formCadastrarMedidaAntropometrica(Model model)
+		{
+			model.addAttribute("medidaAntropometrica", new MedidaAntropometrica());		
+			return "nutricao/form-medida-antropometrica";
+		}
+		//lucashenriquejbe
+		@RequestMapping(value = {"medida-antropometrica/cadastrar"}, method = RequestMethod.POST)
+		public String cadastrarMedidaAntropometrica(@Valid @ModelAttribute("medidaAntropometrica") MedidaAntropometrica medidaAntropometrica,
+				RedirectAttributes redirect, BindingResult result, Model model)
+		{
+			if(result.hasErrors())
+				return "redirect:/nutricao/medida-antropometrica/cadastrar";
+			if(medidaAntropometrica != null)
+			{
+				MedidaAntropometrica m = medidaAntService.findMedidaAntropometricaByNome(medidaAntropometrica.getNome());
+				System.out.println(m);
+				if(m == null)
+				{
+					medidaAntService.save(medidaAntropometrica);
+					redirect.addFlashAttribute("info", "Medida antropométrica cadastrada com sucesso.");
+				}
+				else
+					redirect.addFlashAttribute("erro", "Medida já existe!");
+			}
+			else
+				redirect.addFlashAttribute("erro", "Dados não preenchidos");
+			
+			return "redirect:/nutricao/medida-antropometrica/cadastrar";
+		}
 }
