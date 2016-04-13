@@ -191,19 +191,24 @@ $(document).ready(function() {
 								required : "Descreva o objetivo da consulta do paciente."
 							},
 							altura : {
-								required : "Informe a altura do paciente."
+								required : "Informe a altura do paciente.",
+								min: "O valor não pode ser negativo"
 							},
 							peso : {
-								required : "Informe o peso do paciente."
+								required : "Informe o peso do paciente.",
+								min: "O valor não pode ser negativo"								
 							},
 							pesoDesejado : {
-								required : "Informe o peso desejado pelo paciente."
+								required : "Informe o peso desejado pelo paciente.",
+								min: "O valor não pode ser negativo"
 							},
 							circunferenciaCintura : {
-								required : "Informe a circunferência da cintura do paciente."
+								required : "Informe a circunferência da cintura do paciente.",
+								min: "O valor não pode ser negativo"
 							},
 							circunferenciaCinturaDesejada : {
-								required : "Informe a circunferência da cintura desejada pelo paciente."
+								required : "Informe a circunferência da cintura desejada pelo paciente.",
+								min: "O valor não pode ser negativo"
 							},
 							agua : {
 								required : "Informe a quantidade de copos de água consumidos pelo paciente."

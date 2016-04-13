@@ -83,21 +83,21 @@ public class ConsultaNutricional {
 	private String objetivoConsulta;
 
 	@NotNull(message = "Informe a altura")
-	@Min(value = 1)
+	@Min(value = 1,message = "Deve ser um numero positivo")
 	private Double altura;
 
 	@NotNull(message = "Informe o peso")
-	@Min(value = 1)
+	@Min(value = 1,message = "Deve ser um numero positivo")
 	private Double peso;
 
 	@NotNull(message = "Informe o peso desejado")
-	@Min(value = 1)
+	@Min(value = 1,message = "Deve ser um numero positivo")
 	private Double pesoDesejado;
 
-	@Min(value = 1)
+	@Min(value = 1,message = "Deve ser um numero positivo")
 	private Double circunferenciaCintura;
 
-	@Min(value = 1)
+	@Min(value = 1,message = "Deve ser um numero positivo")
 	private Double circunferenciaCinturaDesejada;
 
 	@NotNull(message = "Informe a quantidade de copos de água consumida")
