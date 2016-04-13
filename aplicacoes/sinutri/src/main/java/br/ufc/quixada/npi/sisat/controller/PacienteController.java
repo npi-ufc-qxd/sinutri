@@ -129,8 +129,8 @@ public class PacienteController {
 	}
 
 	@RequestMapping(value = { "/{cpf}/consulta" }, method = RequestMethod.POST)
-	public String salvarConsulta(@PathVariable("cpf") String cpf, @Valid ConsultaNutricional consulta, Model model,  
-			BindingResult result, RedirectAttributes redirectAttributes,
+	public String salvarConsulta(@PathVariable("cpf") String cpf, @Valid ConsultaNutricional consulta, BindingResult result, Model model,  
+			RedirectAttributes redirectAttributes,
 			@RequestParam("files") List<MultipartFile> files,
 			@RequestParam(value = "enviar", required = false) boolean enviar) {
 

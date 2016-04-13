@@ -21,6 +21,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.Transient;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 import org.codehaus.jackson.annotate.JsonIgnore;
 import org.hibernate.validator.constraints.NotEmpty;
@@ -80,6 +81,7 @@ public class ConsultaNutricional {
 	private Date data;
 
 	@NotEmpty(message = "Informe o objetivo da consulta")
+	@Size(max=256, message="O objetivo da consulta deve ter menos que 256 carácteres")
 	private String objetivoConsulta;
 
 	@NotNull(message = "Informe a altura")
@@ -94,9 +96,11 @@ public class ConsultaNutricional {
 	@Min(value = 1)
 	private Double pesoDesejado;
 
+	@NotNull(message = "Informe a cc")
 	@Min(value = 1)
 	private Double circunferenciaCintura;
 
+	@NotNull(message = "Informe a cc desejada")
 	@Min(value = 1)
 	private Double circunferenciaCinturaDesejada;
 
@@ -105,6 +109,7 @@ public class ConsultaNutricional {
 	private Double agua;
 
 	private boolean atividadeFisica;
+	@Size(max=256, message="Os comentários sobre atividade física precisam ocupar menos que 256 carácteres")
 	private String atividadeFisicaComentario;
 	@Enumerated(EnumType.STRING)
 	private Frequencia atividadeFisicaFrequenciaSemanal;
@@ -115,6 +120,7 @@ public class ConsultaNutricional {
 	private Frequencia carneVermelhaFrequenciaSemanal;
 
 	private boolean bebidaAlcoolica;
+	@Size(max=256, message="Os comentários sobre bebida alcóolica precisam ocupar menos que 256 carácteres")
 	private String bebidaAlcoolicaComentario;
 	@Enumerated(EnumType.STRING)
 	private Frequencia bebidaAlcoolicaFrequenciaSemanal;
@@ -126,30 +132,39 @@ public class ConsultaNutricional {
 	private SistemaUrinario sistemaUrinario;
 
 	private boolean medicamento;
+	@Size(max=256, message="A descrição dos medicamentos precisam ter menos de 256 carácteres")
 	private String medicamentoComentario;
 
 	private boolean mastigacao;
+	@Size(max=256, message="As características da mastigação precisam ocupar menos de 256 carácteres")
 	private String mastigacaoComentario;
 
 	private boolean disfagia;
+	@Size(max=256, message="Os comentários sobre disfagia precisam ocupar menos que 256 carácteres")
 	private String disfagiaComentario;
 
 	private boolean pirose;
+	@Size(max=256, message="Os comentários sobre pirose precisam ocupar menos que 256 carácteres")
 	private String piroseComentario;
 
 	private boolean nausea;
+	@Size(max=256, message="Os comentários sobre náuseas precisam ocupar menos que 256 carácteres")
 	private String nauseaComentario;
 
 	private boolean vomito;
+	@Size(max=256, message="Os comentários sobre vomito precisam ocupar menos que 256 carácteres")
 	private String vomitoComentario;
 
 	private boolean diarreia;
+	@Size(max=256, message="Os comentários sobre diarreia precisam ocupar menos que 256 carácteres")
 	private String diarreiaComentario;
 
 	private boolean constipacao;
+	@Size(max=256, message="Os comentários sobre constipação precisam ocupar menos que 256 carácteres")
 	private String constipacaoComentario;
 
 	private boolean odinofagia;
+	@Size(max=256, message="Os comentários sobre odinofagia precisam ocupar menos que 256 carácteres")
 	private String odinofagiaComentario;
 
 	private boolean regurgitacao;
@@ -159,9 +174,11 @@ public class ConsultaNutricional {
 	private boolean hipertensao;
 
 	private boolean alergia;
+	@Size(max=256, message="Os comentários sobre alergia alimentar precisam ocupar menos que 256 carácteres")
 	private String alergiaComentario;
 
 	private boolean outrasPatologias;
+	@Size(max=256, message="Os comentários sobre outras patologias precisam ocupar menos que 256 carácteres")
 	private String outrasPatologiasComentario;
 
 	private Double glicemia;
