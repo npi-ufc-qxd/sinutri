@@ -50,10 +50,6 @@ public class ConsultaNutricionalValidator implements Validator {
 			validarFrequenciaSemanal(errors, consultaNutricional.getBebidaAlcoolicaFrequenciaSemanal(), "bebidaAlcoolicaFrequenciaSemanal", "Informe a frequência de consumo de bebida alcoolica");
 		}
 		
-		if (consultaNutricional.isCarneVermelha()) {
-			validarComentario(errors, consultaNutricional.getCarneVermelhaComentario(), "carneVermelhaComentario", "Informe a carne vermelha");
-			validarFrequenciaSemanal(errors, consultaNutricional.getCarneVermelhaFrequenciaSemanal(), "carneVermelhaFrequenciaSemanal", "Informe a frequência de consumo da carne vermelha");
-		}
 	}
 
 	private void validarFrequenciaSemanal(Errors errors, Frequencia frequenciaSemanal, String campo, String message) {

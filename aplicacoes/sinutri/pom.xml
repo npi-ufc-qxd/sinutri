@@ -297,7 +297,7 @@
 
 	</dependencies>
 	<build>
-		<finalName>sisat</finalName>
+		<finalName>sinutri</finalName>
 
 		<plugins>
 			<plugin>
