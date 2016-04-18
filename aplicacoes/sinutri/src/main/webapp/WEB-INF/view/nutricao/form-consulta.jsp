@@ -187,7 +187,7 @@
 								style="color: #F56954;" class="glyphicon glyphicon-asterisk"></i>
 								Consumo de água (copos):</label>
 							<form:input type="number" id="agua" name="agua" path="agua"
-								cssClass="form-control" placeholder="Consumo de água" />
+								cssClass="form-control" placeholder="00.00" />
 							<div class="error-validation">
 								<form:errors path="agua"></form:errors>
 							</div>
@@ -854,7 +854,7 @@
 							<label for="bovinaQuantidade" class="control-label">Quantidade</label>
 							<form:input id="inputTextBovina"
 								path="inqueritoAlimentar.bovinaQuantidade"
-								cssClass="form-control" placeholder="Quantidade"
+								cssClass="form-control" placeholder="0.0"
 								disabled="${not consultaNutricional.inqueritoAlimentar.bovinaGosta}" />
 							<div class="error-validation">
 								<form:errors path="inqueritoAlimentar.bovinaQuantidade"></form:errors>
@@ -884,7 +884,7 @@
 							<label for="avesQuantidade" class="control-label">Quantidade</label>
 							<form:input id="inputTextAves"
 								path="inqueritoAlimentar.avesQuantidade" cssClass="form-control"
-								placeholder="Quantidade"
+								placeholder="0.0"
 								disabled="${not consultaNutricional.inqueritoAlimentar.avesGosta}" />
 							<div class="error-validation">
 								<form:errors path="inqueritoAlimentar.avesQuantidade"></form:errors>
@@ -916,7 +916,7 @@
 
 							<form:input id="inputTextPeixe"
 								path="inqueritoAlimentar.peixeQuantidade"
-								cssClass="form-control" placeholder="Quantidade"
+								cssClass="form-control" placeholder="0.0"
 								disabled="${not consultaNutricional.inqueritoAlimentar.peixeGosta}" />
 
 							<div class="error-validation">
@@ -949,7 +949,7 @@
 
 							<form:input id="inputTextVisceras"
 								path="inqueritoAlimentar.viscerasQuantidade"
-								cssClass="form-control" placeholder="Quantidade"
+								cssClass="form-control" placeholder="0.0"
 								disabled="${not consultaNutricional.inqueritoAlimentar.viscerasGosta}" />
 
 							<div class="error-validation">
@@ -984,7 +984,7 @@
 
 							<form:input id="inputTextLeiteDerivados"
 								path="inqueritoAlimentar.leiteDerivadosQuantidade"
-								cssClass="form-control" placeholder="Quantidade"
+								cssClass="form-control" placeholder="0.0"
 								disabled="${not consultaNutricional.inqueritoAlimentar.leiteDerivadosGosta}" />
 
 							<div class="error-validation">
@@ -1017,7 +1017,7 @@
 
 							<form:input id="inputTextOvos"
 								path="inqueritoAlimentar.ovosQuantidade" cssClass="form-control"
-								placeholder="Quantidade"
+								placeholder="0.0"
 								disabled="${not consultaNutricional.inqueritoAlimentar.ovosGosta}" />
 
 							<div class="error-validation">
@@ -1053,7 +1053,7 @@
 
 							<form:input id="inputTextLeguminosas"
 								path="inqueritoAlimentar.leguminosasQuantidade"
-								cssClass="form-control" placeholder="Quantidade"
+								cssClass="form-control" placeholder="0.0"
 								disabled="${not consultaNutricional.inqueritoAlimentar.leguminosasGosta}" />
 
 							<div class="error-validation">
@@ -1085,7 +1085,7 @@
 
 							<form:input id="inputTextCereais"
 								path="inqueritoAlimentar.cereaisQuantidade"
-								cssClass="form-control" placeholder="Quantidade"
+								cssClass="form-control" placeholder="0.0"
 								disabled="${not consultaNutricional.inqueritoAlimentar.cereaisGosta}" />
 
 							<div class="error-validation">
@@ -1116,7 +1116,7 @@
 
 							<form:input id="inputTextMassas"
 								path="inqueritoAlimentar.massasQuantidade"
-								cssClass="form-control" placeholder="Quantidade"
+								cssClass="form-control" placeholder="0.0"
 								disabled="${not consultaNutricional.inqueritoAlimentar.massasGosta}" />
 
 							<div class="error-validation">
@@ -1149,7 +1149,7 @@
 							<label for="vegetaisCrusQuantidade" class="control-label">Quantidade</label>
 							<form:input id="inputTextVegetaisCrus"
 								path="inqueritoAlimentar.vegetaisCrusQuantidade"
-								cssClass="form-control" placeholder="Quantidade"
+								cssClass="form-control" placeholder="0.0"
 								disabled="${not consultaNutricional.inqueritoAlimentar.vegetaisCrusGosta}" />
 							<div class="error-validation">
 								<form:errors path="inqueritoAlimentar.vegetaisCrusQuantidade"></form:errors>
@@ -1181,7 +1181,7 @@
 							<label for="vegetaisCozidosQuantidade" class="control-label">Quantidade</label>
 							<form:input id="inputTextVegetaisCozidos"
 								path="inqueritoAlimentar.vegetaisCozidosQuantidade"
-								cssClass="form-control" placeholder="Quantidade"
+								cssClass="form-control" placeholder="0.0"
 								disabled="${not consultaNutricional.inqueritoAlimentar.vegetaisCozidosGosta}" />
 							<div class="error-validation">
 								<form:errors path="inqueritoAlimentar.vegetaisCozidosQuantidade"></form:errors>
@@ -1210,7 +1210,7 @@
 							<label for="frutasQuantidade" class="control-label">Quantidade</label>
 							<form:input id="inputTextFrutas"
 								path="inqueritoAlimentar.frutasQuantidade"
-								cssClass="form-control" placeholder="Quantidade"
+								cssClass="form-control" placeholder="0.0"
 								disabled="${not consultaNutricional.inqueritoAlimentar.frutasGosta}" />
 							<div class="error-validation">
 								<form:errors path="inqueritoAlimentar.frutasQuantidade"></form:errors>
@@ -1239,7 +1239,7 @@
 							<label for="docesQuantidade" class="control-label">Quantidade</label>
 							<form:input id="inputTextDoces"
 								path="inqueritoAlimentar.docesQuantidade"
-								cssClass="form-control" placeholder="Quantidade"
+								cssClass="form-control" placeholder="0.0"
 								disabled="${not consultaNutricional.inqueritoAlimentar.docesGosta}" />
 							<div class="error-validation">
 								<form:errors path="inqueritoAlimentar.docesQuantidade"></form:errors>
@@ -1268,7 +1268,7 @@
 							<label for="oleoQuantidade" class="control-label">Quantidade</label>
 							<form:input id="inputTextOleo"
 								path="inqueritoAlimentar.oleoQuantidade" cssClass="form-control"
-								placeholder="Quantidade"
+								placeholder="0.0"
 								disabled="${not consultaNutricional.inqueritoAlimentar.oleoGosta}" />
 							<div class="error-validation">
 								<form:errors path="inqueritoAlimentar.oleoQuantidade"></form:errors>
@@ -1299,7 +1299,7 @@
 							<label for="margarinaQuantidade" class="control-label">Quantidade</label>
 							<form:input id="inputTextMargarina"
 								path="inqueritoAlimentar.margarinaQuantidade"
-								cssClass="form-control" placeholder="Quantidade"
+								cssClass="form-control" placeholder="0.0"
 								disabled="${not consultaNutricional.inqueritoAlimentar.margarinaGosta}" />
 							<div class="error-validation">
 								<form:errors path="inqueritoAlimentar.margarinaQuantidade"></form:errors>
@@ -1328,7 +1328,7 @@
 							<label for="manteigaQuantidade" class="control-label">Quantidade</label>
 							<form:input id="inputTextManteiga"
 								path="inqueritoAlimentar.manteigaQuantidade"
-								cssClass="form-control" placeholder="Quantidade"
+								cssClass="form-control" placeholder="0.0"
 								disabled="${not consultaNutricional.inqueritoAlimentar.manteigaGosta}" />
 							<div class="error-validation">
 								<form:errors path="inqueritoAlimentar.manteigaQuantidade"></form:errors>
@@ -1360,7 +1360,7 @@
 							<label for="toucinhoBaconQuantidade" class="control-label">Quantidade</label>
 							<form:input id="inputTextToucinhoBacon"
 								path="inqueritoAlimentar.toucinhoBaconQuantidade"
-								cssClass="form-control" placeholder="Quantidade"
+								cssClass="form-control" placeholder="0.0"
 								disabled="${not consultaNutricional.inqueritoAlimentar.toucinhoBaconGosta}" />
 							<div class="error-validation">
 								<form:errors path="inqueritoAlimentar.toucinhoBaconQuantidade"></form:errors>
@@ -1389,7 +1389,7 @@
 							<label for="aguaQuantidade" class="control-label">Quantidade</label>
 							<form:input id="inputTextAgua"
 								path="inqueritoAlimentar.aguaQuantidade" cssClass="form-control"
-								placeholder="Quantidade"
+								placeholder="0.0"
 								disabled="${not consultaNutricional.inqueritoAlimentar.aguaGosta}" />
 							<div class="error-validation">
 								<form:errors path="inqueritoAlimentar.aguaQuantidade"></form:errors>
@@ -1418,7 +1418,7 @@
 							<label for="sucoQuantidade" class="control-label">Quantidade</label>
 							<form:input id="inputTextSuco"
 								path="inqueritoAlimentar.sucoQuantidade" cssClass="form-control"
-								placeholder="Quantidade"
+								placeholder="0.0"
 								disabled="${not consultaNutricional.inqueritoAlimentar.sucoGosta}" />
 							<div class="error-validation">
 								<form:errors path="inqueritoAlimentar.sucoQuantidade"></form:errors>
@@ -1450,7 +1450,7 @@
 							<label for="bebidasAlcoolicasQuantidade" class="control-label">Quantidade</label>
 							<form:input id="inputTextBebidasAlcoolicas"
 								path="inqueritoAlimentar.bebidasAlcoolicasQuantidade"
-								cssClass="form-control" placeholder="Quantidade"
+								cssClass="form-control" placeholder="0.0"
 								disabled="${not consultaNutricional.inqueritoAlimentar.bebidasAlcoolicasGosta}" />
 							<div class="error-validation">
 								<form:errors
@@ -1483,7 +1483,7 @@
 							<label for="gaseificadasQuantidade" class="control-label">Quantidade</label>
 							<form:input id="inputTextGaseificadas"
 								path="inqueritoAlimentar.gaseificadasQuantidade"
-								cssClass="form-control" placeholder="Quantidade"
+								cssClass="form-control" placeholder="0.0"
 								disabled="${not consultaNutricional.inqueritoAlimentar.gaseificadasGosta}" />
 							<div class="error-validation">
 								<form:errors path="inqueritoAlimentar.bovinaQuantidade"></form:errors>
@@ -1511,7 +1511,7 @@
 							<label for="infusoesQuantidade" class="control-label">&nbsp;&nbsp;&nbsp;</label>
 							<form:input id="inputTextInfusoes"
 								path="inqueritoAlimentar.infusoesQuantidade"
-								cssClass="form-control" placeholder="Quantidade"
+								cssClass="form-control" placeholder="0.0"
 								disabled="${not consultaNutricional.inqueritoAlimentar.infusoesGosta}" />
 							<div class="error-validation">
 								<form:errors path="inqueritoAlimentar.infusoesQuantidade"></form:errors>
