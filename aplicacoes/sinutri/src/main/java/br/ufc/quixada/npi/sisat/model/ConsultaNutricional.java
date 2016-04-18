@@ -47,8 +47,6 @@ import br.ufc.quixada.npi.sisat.model.enuns.SistemaUrinario;
 	@NamedQuery(name = "ConsultaNutricional.countFrequenciaVomito", query = "select count(c.vomito) from ConsultaNutricional c where c.vomito = TRUE"),
 	@NamedQuery(name = "ConsultaNutricional.countFrequenciaDiarreia", query = "select count(c.diarreia) from ConsultaNutricional c where c.diarreia = TRUE"),
 	@NamedQuery(name = "ConsultaNutricional.countFrequenciaConstipacao", query = "select count(c.constipacao) from ConsultaNutricional c where c.constipacao = TRUE"),
-	@NamedQuery(name = "ConsultaNutricional.countFrequenciaDiabetes", query = "select count(c.diabetes) from ConsultaNutricional c where c.diabetes = TRUE"),
-	@NamedQuery(name = "ConsultaNutricional.countFrequenciaHipertensao", query = "select count(c.hipertensao) from ConsultaNutricional c where c.hipertensao = TRUE"),
 	@NamedQuery(name = "ConsultaNutricional.countFrequenciaAlergia", query = "select count(c.alergia) from ConsultaNutricional c where c.alergia = TRUE"),
 	@NamedQuery(name = "ConsultaNutricional.countFrequenciaOutrasPatologias", query = "select count(c.outrasPatologias) from ConsultaNutricional c where c.outrasPatologias = TRUE"),
 	@NamedQuery(name = "ConsultaNutricional.historicoPaciente", query = "select new br.ufc.quixada.npi.sisat.model.InformacaoGraficaConsultaNutricional(c.paciente.pessoa.sexo, c.data, c.peso, c.altura, c.circunferenciaCintura) from ConsultaNutricional c where c.paciente.pessoa.cpf = :cpf ")
@@ -79,18 +77,14 @@ public class ConsultaNutricional {
 	@DateTimeFormat
 	private Date data;
 
-	@NotEmpty(message = "Informe o objetivo da consulta")
 	private String objetivoConsulta;
 
-	@NotNull(message = "Informe a altura")
 	@Min(value = 1)
 	private Double altura;
 
-	@NotNull(message = "Informe o peso")
 	@Min(value = 1)
 	private Double peso;
 
-	@NotNull(message = "Informe o peso desejado")
 	@Min(value = 1)
 	private Double pesoDesejado;
 
@@ -100,7 +94,6 @@ public class ConsultaNutricional {
 	@Min(value = 1)
 	private Double circunferenciaCinturaDesejada;
 
-	@NotNull(message = "Informe a quantidade de copos de água consumida")
 	@Min(value = 1)
 	private Double agua;
 
@@ -108,11 +101,6 @@ public class ConsultaNutricional {
 	private String atividadeFisicaComentario;
 	@Enumerated(EnumType.STRING)
 	private Frequencia atividadeFisicaFrequenciaSemanal;
-
-	private boolean carneVermelha;
-	private String carneVermelhaComentario;
-	@Enumerated(EnumType.STRING)
-	private Frequencia carneVermelhaFrequenciaSemanal;
 
 	private boolean bebidaAlcoolica;
 	private String bebidaAlcoolicaComentario;
@@ -154,9 +142,6 @@ public class ConsultaNutricional {
 
 	private boolean regurgitacao;
 	private String regurgitacaoComentario;
-
-	private boolean diabetes;
-	private boolean hipertensao;
 
 	private boolean alergia;
 	private String alergiaComentario;
@@ -354,30 +339,7 @@ public class ConsultaNutricional {
 		this.atividadeFisicaFrequenciaSemanal = atividadeFisicaFrequenciaSemanal;
 	}
 
-	public boolean isCarneVermelha() {
-		return carneVermelha;
-	}
-
-	public void setCarneVermelha(boolean carneVermelha) {
-		this.carneVermelha = carneVermelha;
-	}
-
-	public String getCarneVermelhaComentario() {
-		return carneVermelhaComentario;
-	}
-
-	public void setCarneVermelhaComentario(String carneVermelhaComentario) {
-		this.carneVermelhaComentario = carneVermelhaComentario;
-	}
-
-	public Frequencia getCarneVermelhaFrequenciaSemanal() {
-		return carneVermelhaFrequenciaSemanal;
-	}
-
-	public void setCarneVermelhaFrequenciaSemanal(Frequencia carneVermelhaFrequenciaSemanal) {
-		this.carneVermelhaFrequenciaSemanal = carneVermelhaFrequenciaSemanal;
-	}
-
+	
 	public boolean isBebidaAlcoolica() {
 		return bebidaAlcoolica;
 	}
@@ -584,22 +546,6 @@ public class ConsultaNutricional {
 
 	public void setRegurgitacaoComentario(String regurgitacaoComentario) {
 		this.regurgitacaoComentario = regurgitacaoComentario;
-	}
-
-	public boolean isDiabetes() {
-		return diabetes;
-	}
-
-	public void setDiabetes(boolean diabetes) {
-		this.diabetes = diabetes;
-	}
-
-	public boolean isHipertensao() {
-		return hipertensao;
-	}
-
-	public void setHipertensao(boolean hipertensao) {
-		this.hipertensao = hipertensao;
 	}
 
 	public boolean isAlergia() {
