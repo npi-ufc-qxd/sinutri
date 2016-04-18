@@ -60,10 +60,10 @@
 					<li><a href="#exame"> <span class="badge">3</span> Exames
 							Laboratoriais
 					</a></li>
-					<li><a href="#documentos"> <span class="badge">5</span>
+					<li><a href="#documentos"> <span class="badge">4</span>
 							Documentos
 					</a></li>
-					<li><a href="#inquerito"> <span class="badge">6</span>
+					<li><a href="#inquerito"> <span class="badge">5</span>
 							Inquerito Alimentar
 					</a></li>
 				</ul>
