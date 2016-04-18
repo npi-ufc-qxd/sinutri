@@ -77,11 +77,16 @@
 				<h3 id="avaliacao" class="section">Anamnese</h3>
 
 				<div class="row">
-					<div class="col-sm-12">
 						<label><strong> Objetivo da consulta: </strong></label>
 						${consulta.objetivoConsulta }<br>
 						<table class="table table-striped">
 							<tbody>
+								<tr>
+									<td><strong>Data de Nascimento:</strong></td>
+									<td><fmt:formatDate type="date" value="${consulta.paciente.pessoa.dataNascimento}" /></td>
+									<td><strong>Idade:</strong></td>
+									<td>${consulta.paciente.pessoa.idade}</td>
+								</tr>
 								<tr>
 									<td><strong>Altura:</strong></td>
 									<td>${consulta.altura}</td>
@@ -143,21 +148,6 @@
 									</c:choose>
 								</tr>
 								<tr>
-									<td><strong>Consumo de carne vermelha:</strong></td>
-									<c:choose>
-										<c:when test="${consulta.carneVermelha }">
-											<td>${consulta.carneVermelhaComentario }</td>
-											<td><strong>Vezes por semana:</strong></td>
-											<td>${consulta.carneVermelhaFrequenciaSemanal.tipo }</td>
-										</c:when>
-										<c:otherwise>
-											<td>Não consome carne vermelha.</td>
-											<td></td>
-											<td></td>
-										</c:otherwise>
-									</c:choose>
-								</tr>
-								<tr>
 									<td><strong>Consumo de bebida alcoolica:</strong></td>
 									<c:choose>
 										<c:when test="${consulta.bebidaAlcoolica }">
@@ -210,14 +200,6 @@
 								<tr>
 									<td>Vômito</td>
 									<td>${consulta.vomito? consulta.vomitoComentario : "Não apresenta vomito" }</td>
-								</tr>
-								<tr>
-									<td>Diabetes</td>
-									<td>${consulta.diabetes ? "Sim"  : "Não"}</td>
-								</tr>
-								<tr>
-									<td>Hipertensão</td>
-									<td>${consulta.hipertensao ? "Sim"  : "Não"}</td>
 								</tr>
 								<tr>
 									<td>Mastigação</td>
