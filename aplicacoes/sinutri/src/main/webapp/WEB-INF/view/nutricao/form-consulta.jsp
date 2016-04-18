@@ -111,7 +111,9 @@
 							<label class="control-label">
 								Data de Nascimento:
 							</label>
-							<label class="data-formatada">${consultaNutricional.paciente.pessoa.dataNascimento}</label>
+							<label>
+							 <fmt:formatDate type="date" value="${consultaNutricional.paciente.pessoa.dataNascimento}" />
+							</label>
 						</div>
 						<div class="form-item col-sm-6">
 							<label class="control-label">
@@ -1630,8 +1632,6 @@
 								+ '</div>'
 					}
 				});
-		
-		formatarDatas();
 	</script>
 
 </body>

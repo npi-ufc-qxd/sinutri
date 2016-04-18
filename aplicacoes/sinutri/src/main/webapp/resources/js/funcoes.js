@@ -415,16 +415,3 @@ function(e) {
     });
 	
 });
-
-function formatarDatas(){
-	var input = $(".data-formatada");
-	var input_text = input.text();
-	
-	var year = input_text.slice(-4),
-    month = ['Jan','Feb','Mar','Apr','May','Jun',
-             'Jul','Aug','Sep','Oct','Nov','Dec'].indexOf(input_text.substr(4,3))+1,
-    day = input_text.substr(8,2);
-	
-	var output = day + '-' + (month<10?'0':'') + month + '-' + year ;
-	input.text(output);
-}

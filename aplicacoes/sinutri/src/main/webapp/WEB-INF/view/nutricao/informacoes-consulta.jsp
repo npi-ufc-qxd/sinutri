@@ -83,7 +83,7 @@
 							<tbody>
 								<tr>
 									<td><strong>Data de Nascimento:</strong></td>
-									<td class="data-formatada">${consulta.paciente.pessoa.dataNascimento}</td>
+									<td><fmt:formatDate type="date" value="${consulta.paciente.pessoa.dataNascimento}" /></td>
 									<td><strong>Idade:</strong></td>
 									<td>${consulta.paciente.pessoa.idade}</td>
 								</tr>
@@ -776,7 +776,6 @@
 
 	<script type="text/javascript">
 		$('#menu-paciente').addClass('active');
-		formatarDatas();
 	</script>
 
 </body>
