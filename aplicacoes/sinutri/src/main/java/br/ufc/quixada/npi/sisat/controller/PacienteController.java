@@ -190,18 +190,6 @@ public class PacienteController {
 			model.addAttribute("anexoError", "Adicione anexo a seleção");
 		}
 
-		if (consulta.getAgua().equals(0)) {
-			consulta.setAgua(null);
-		}
-		
-		if (consulta.getHorarioDormir().equals(0)) {
-			consulta.setHorarioDormir(null);
-		}
-		
-		if (consulta.getHorarioAcordar().equals(0)) {
-			consulta.setHorarioAcordar(null);
-		}
-		
 		if (consulta.getMedicamentoComentario() != null && consulta.getMedicamentoComentario().isEmpty()) {
 			consulta.setMedicamentoComentario(null);
 		}
@@ -210,9 +198,6 @@ public class PacienteController {
 		}
 		if (consulta.getAlergiaComentario() != null && consulta.getAlergiaComentario().isEmpty()) {
 			consulta.setAlergiaComentario(null);
-		}
-		if (consulta.getCarneVermelhaComentario() != null && consulta.getCarneVermelhaComentario().isEmpty()) {
-			consulta.setCarneVermelhaComentario(null);
 		}
 		if (consulta.getAtividadeFisicaComentario() != null && consulta.getAtividadeFisicaComentario().isEmpty()) {
 			consulta.setAtividadeFisicaComentario(null);

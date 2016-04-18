@@ -204,7 +204,7 @@
 							<form:input id="horarioDormir" 
 								name="horarioDormir" 
 								path="horarioDormir"
-								cssClass="form-control" 
+								cssClass="form-control hora" 
 								placeholder="Que horário você regulamente dorme?" />
 							<div class="error-validation">
 								<form:errors path="horarioDormir"></form:errors>
@@ -216,7 +216,7 @@
 							<form:input id="horarioAcordar" 
 								name="horarioAcordar" 
 								path="horarioAcordar"
-								cssClass="form-control" 
+								cssClass="form-control hora" 
 								placeholder="Que horário você regulamente acorda?"/>
 							<div class="error-validation">
 								<form:errors path="horarioAcordar"></form:errors>
@@ -1619,9 +1619,11 @@
 	</div>
 
 	<jsp:include page="../modulos/footer.jsp" />
-	<script
-		src="<c:url value="/resources/js/questionario-frequencia-alimentar.js" />"></script>
+	
+	<script src="<c:url value="/resources/js/questionario-frequencia-alimentar.js" />"></script>
 	<script src="<c:url value="/resources/js/inquerito-alimentar.js" />"></script>
+	<script src="<c:url value="/resources/js/mascaras.js" />"></script>
+	
 
 	<script type="text/javascript">
 		$('#menu-paciente').addClass('active');

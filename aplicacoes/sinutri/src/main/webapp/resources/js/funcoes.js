@@ -165,7 +165,7 @@ $(document).ready(function() {
 							},
 							agua : {
 								required : true
-							}
+							},
 						},
 						highlight : function(element) {
 							$(element).closest('.form-item')
@@ -207,12 +207,6 @@ $(document).ready(function() {
 							},
 							agua : {
 								required : "Informe a quantidade de copos de água consumidos pelo paciente."
-							},
-							horarioDormir : {
-								required : "Informe o horário em que o paciente regulamente dorme."
-							},
-							horarioAcordar : {
-								required : "Informe o horário em que o paciente regulamente acorda."
 							},
 							atividadeFisicaComentario : {
 								required : "Informe qual a(s) ativadade(s) física(s) praticada(s) pelo paciente."
