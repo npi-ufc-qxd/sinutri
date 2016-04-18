@@ -166,27 +166,6 @@ $(document).ready(function() {
 									id);
 						},
 						messages : {
-							objetivoConsulta : {
-								required : "Descreva o objetivo da consulta do paciente."
-							},
-							altura : {
-								required : "Informe a altura do paciente."
-							},
-							peso : {
-								required : "Informe o peso do paciente."
-							},
-							pesoDesejado : {
-								required : "Informe o peso desejado pelo paciente."
-							},
-							circunferenciaCintura : {
-								required : "Informe a circunferência da cintura do paciente."
-							},
-							circunferenciaCinturaDesejada : {
-								required : "Informe a circunferência da cintura desejada pelo paciente."
-							},
-							agua : {
-								required : "Informe a quantidade de copos de água consumidos pelo paciente."
-							},
 							atividadeFisicaComentario : {
 								required : "Informe qual a(s) ativadade(s) física(s) praticada(s) pelo paciente."
 							},
