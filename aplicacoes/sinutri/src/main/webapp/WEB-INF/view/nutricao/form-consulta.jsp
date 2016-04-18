@@ -108,8 +108,7 @@
 
 					<div class="row form-group">
 						<div class="form-item col-sm-12">
-							<label for="objetivoConsulta" class="control-label"> <i
-								style="color: #F56954;" class="glyphicon glyphicon-asterisk"></i>
+							<label for="objetivoConsulta" class="control-label">
 								Objetivo da Consulta:
 							</label>
 							<form:textarea id="objetivoConsulta" path="objetivoConsulta"
@@ -123,8 +122,7 @@
 
 					<div class="row form-group">
 						<div class="form-item col-sm-12">
-							<label for="altura" class="control-label"><i
-								style="color: #F56954;" class="glyphicon glyphicon-asterisk"></i>
+							<label for="altura" class="control-label">
 								Altura (m):</label>
 							<form:input type="number" id="altura" name="altura" path="altura"
 								cssClass="form-control valid-num" placeholder="0.00" />
@@ -136,8 +134,7 @@
 
 					<div class="row form-group">
 						<div class="form-item col-sm-3">
-							<label for="peso" class="control-label"><i
-								style="color: #F56954;" class="glyphicon glyphicon-asterisk"></i>
+							<label for="peso" class="control-label">
 								Peso (Kg):</label>
 							<form:input type="number" id="peso" name="peso" path="peso"
 								cssClass="form-control valid-num" placeholder="00.00" />
@@ -146,8 +143,7 @@
 							</div>
 						</div>
 						<div class="form-item col-sm-3">
-							<label for="pesoDesejado" class="control-label"><i
-								style="color: #F56954;" class="glyphicon glyphicon-asterisk"></i>
+							<label for="pesoDesejado" class="control-label">
 								Peso desejado (Kg):</label>
 							<form:input id="pesoDesejado" name="pesoDesejado"
 								path="pesoDesejado" type="number"
@@ -159,7 +155,6 @@
 
 						<div class="form-item col-sm-3">
 							<label for="circunferenciaCintura" class="control-label">
-								<i style="color: #F56954;" class="glyphicon glyphicon-asterisk"></i>
 								CC (cm):
 							</label>
 							<form:input id="circunferenciaCintura" name="cc"
@@ -171,7 +166,6 @@
 						</div>
 						<div class="form-item col-sm-3">
 							<label for="circunferenciaCinturaDesejada" class="control-label">
-								<i style="color: #F56954;" class="glyphicon glyphicon-asterisk"></i>
 								CC desejada (cm):
 							</label>
 							<form:input id="circunferenciaCinturaDesejada" name="cc"
@@ -186,8 +180,7 @@
 
 					<div class="row form-group">
 						<div class="form-item col-sm-12">
-							<label for="agua" class="control-label"><i
-								style="color: #F56954;" class="glyphicon glyphicon-asterisk"></i>
+							<label for="agua" class="control-label">
 								Consumo de água (copos):</label>
 							<form:input type="number" id="agua" name="agua" path="agua"
 								cssClass="form-control" placeholder="Consumo de água" />

@@ -77,18 +77,14 @@ public class ConsultaNutricional {
 	@DateTimeFormat
 	private Date data;
 
-	@NotEmpty(message = "Informe o objetivo da consulta")
 	private String objetivoConsulta;
 
-	@NotNull(message = "Informe a altura")
 	@Min(value = 1)
 	private Double altura;
 
-	@NotNull(message = "Informe o peso")
 	@Min(value = 1)
 	private Double peso;
 
-	@NotNull(message = "Informe o peso desejado")
 	@Min(value = 1)
 	private Double pesoDesejado;
 
@@ -98,7 +94,6 @@ public class ConsultaNutricional {
 	@Min(value = 1)
 	private Double circunferenciaCinturaDesejada;
 
-	@NotNull(message = "Informe a quantidade de copos de água consumida")
 	@Min(value = 1)
 	private Double agua;
 
