@@ -10,6 +10,7 @@ public class GraficoPeso {
 
 	public GraficoPeso(Date data, Double peso) {
 		this.data = data;
+		this.peso = peso;
 	}
 
 	public Date getData() {
