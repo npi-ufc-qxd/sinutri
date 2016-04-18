@@ -50,7 +50,6 @@ public class ConsultaNutricionalValidator implements Validator {
 			validarFrequenciaSemanal(errors, consultaNutricional.getBebidaAlcoolicaFrequenciaSemanal(), "bebidaAlcoolicaFrequenciaSemanal", "Informe a frequência de consumo de bebida alcoolica");
 		}
 		
-
 		if (consultaNutricional.isCigarro()) {
 			validarComentario(errors, consultaNutricional.getCigarroComentario(), "cigarroComentario", "Adicione algum comentário");
 			validarFrequenciaSemanal(errors, consultaNutricional.getCigarroFrequenciaSemanal(), "cigarroFrequenciaSemanal", "Informe a frequência de consumo de cigarro");
