@@ -198,8 +198,6 @@ public class ConsultaNutricional {
 
 	private String informacoesComplementaresExames;
 
-	private String condutaNutricional;
-
 	private String observacooesDaConsulta;
 
 	public ConsultaNutricional() {
@@ -754,14 +752,6 @@ public class ConsultaNutricional {
 
 	public void setInformacoesComplementaresExames(String informacoesComplementaresExames) {
 		this.informacoesComplementaresExames = informacoesComplementaresExames;
-	}
-
-	public String getCondutaNutricional() {
-		return condutaNutricional;
-	}
-
-	public void setCondutaNutricional(String condutaNutricional) {
-		this.condutaNutricional = condutaNutricional;
 	}
 
 	public String getObservacooesDaConsulta() {

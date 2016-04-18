@@ -399,22 +399,6 @@
 					</c:otherwise>
 				</c:choose>
 
-
-				<div class="row">
-
-					<div class="col-sm-12">
-						<label><strong> Conduta Nutricional: </strong></label>
-						<c:choose>
-							<c:when test="${not empty consulta.condutaNutricional}">
-								<span>${consulta.condutaNutricional}</span>
-							</c:when>
-							<c:otherwise>
-								<span class="alert alert-dismissible alert-default">Conduta nutricional não informada.</span>
-							</c:otherwise>
-						</c:choose>
-					</div>
-				</div>
-
 				<h3 id="documentos" class="section">Documentos</h3>
 				<c:choose>
 					<c:when test="${not empty consulta.documentos }">

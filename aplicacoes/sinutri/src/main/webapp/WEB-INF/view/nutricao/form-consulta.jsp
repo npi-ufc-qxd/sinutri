@@ -78,10 +78,10 @@
 					<li><a href="#exame"> <span class="badge">3</span> Exames
 							Laboratoriais
 					</a></li>
-					<li><a href="#documentos"> <span class="badge">5</span>
+					<li><a href="#documentos"> <span class="badge">4</span>
 							Documentos
 					</a></li>
-					<li><a href="#inquerito"> <span class="badge">6</span>
+					<li><a href="#inquerito"> <span class="badge">5</span>
 							Inquerito Alimentar
 					</a></li>
 				</ul>
@@ -710,19 +710,6 @@
 							</div>
 						</div>
 					</div>
-
-					<div class="row form-group">
-						<div class="form-item col-sm-12">
-							<label for="condutaNutricional" class="control-label">
-								Conduta Nutricional:</label>
-							<form:textarea id="condutaNutricional" path="condutaNutricional"
-								class="form-control" rows="5" placeholder="Conduta Nutricional" />
-							<div class="error-validation">
-								<form:errors path="condutaNutricional"></form:errors>
-							</div>
-						</div>
-					</div>
-
 
 					<h4 id="documentos" class="section">
 						<strong>Documentos</strong>
