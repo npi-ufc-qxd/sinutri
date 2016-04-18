@@ -57,7 +57,7 @@ $(function() {
 
 		{
 			name : 'refeicao',
-			display : 'Tipo de refição',
+			display : 'Tipo de refeição',
 			type : 'select',
 			ctrlOptions : 'DESJEJUM:Desjejum;COLACAO:Colação;ALMOCO:Almoço;LANCHE:Lanche;JANTAR:Jantar;CEIA:Ceia',
 			ctrlClass: 'form-control',
@@ -102,8 +102,14 @@ $(function() {
 		useSubPanel : true,
 		subPanelBuilder : function(cell, uniqueIndex) {
 			var idPanel = uniqueIndex-1;
-
-			$(".hora").mask("99:99");
+			$.mask.definitions['H'] = "[0-2]";
+			$.mask.definitions['h'] = "[0-9]";
+			$.mask.definitions['M'] = "[0-5]";
+			$.mask.definitions['m'] = "[0-9]";
+			$(".hora").mask("Hh:Mm",{completed:function(){if(this.val()>="24:00"){
+															this.val("00:00");
+															}
+			}});
 
 			var subgrid = $('<table></table>').attr('id', 'tblSubGrid_' + uniqueIndex).attr('class', 'tblSubGrid table table-striped').appendTo(cell);
 
