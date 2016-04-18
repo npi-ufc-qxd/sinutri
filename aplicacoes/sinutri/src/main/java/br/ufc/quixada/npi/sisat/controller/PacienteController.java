@@ -202,9 +202,6 @@ public class PacienteController {
 		if (consulta.getAlergiaComentario() != null && consulta.getAlergiaComentario().isEmpty()) {
 			consulta.setAlergiaComentario(null);
 		}
-		if (consulta.getCarneVermelhaComentario() != null && consulta.getCarneVermelhaComentario().isEmpty()) {
-			consulta.setCarneVermelhaComentario(null);
-		}
 		if (consulta.getAtividadeFisicaComentario() != null && consulta.getAtividadeFisicaComentario().isEmpty()) {
 			consulta.setAtividadeFisicaComentario(null);
 		}
