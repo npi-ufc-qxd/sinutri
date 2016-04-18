@@ -26,10 +26,6 @@ public class InqueritoAlimentar {
 	private ConsultaNutricional consultaNutricional;
 
 	private boolean bovinaGosta;
-	@Enumerated(EnumType.STRING)
-	private Frequencia bovinaFrequenciaSemanal;
-	private String bovinaQuantidade;
-
 	private boolean avesGosta;
 	private boolean peixeGosta;
 	private boolean viscerasGosta;
@@ -51,7 +47,9 @@ public class InqueritoAlimentar {
 	private boolean bebidasAlcoolicasGosta;
 	private boolean gaseificadasGosta;
 	private boolean infusoesGosta;
-
+	
+	@Enumerated(EnumType.STRING)
+	private Frequencia bovinaFrequenciaSemanal;
 	@Enumerated(EnumType.STRING)
 	private Frequencia avesFrequenciaSemanal;
 	@Enumerated(EnumType.STRING)
@@ -94,28 +92,29 @@ public class InqueritoAlimentar {
 	private Frequencia gaseificadasFrequenciaSemanal;
 	@Enumerated(EnumType.STRING)
 	private Frequencia infusoesFrequenciaSemanal;
-
-	private String avesQuantidade;
-	private String peixeQuantidade;
-	private String viscerasQuantidade;
-	private String leiteDerivadosQuantidade;
-	private String ovosQuantidade;
-	private String leguminosasQuantidade;
-	private String cereaisQuantidade;
-	private String massasQuantidade;
-	private String vegetaisCrusQuantidade;
-	private String vegetaisCozidosQuantidade;
-	private String frutasQuantidade;
-	private String docesQuantidade;
-	private String oleoQuantidade;
-	private String margarinaQuantidade;
-	private String manteigaQuantidade;
-	private String toucinhoBaconQuantidade;
-	private String aguaQuantidade;
-	private String sucoQuantidade;
-	private String bebidasAlcoolicasQuantidade;
-	private String gaseificadasQuantidade;
-	private String infusoesQuantidade;
+	
+	private String bovinaAnotacao;
+	private String avesAnotacao;
+	private String peixeAnotacao;
+	private String viscerasAnotacao;
+	private String leiteDerivadosAnotacao;
+	private String ovosAnotacao;
+	private String leguminosasAnotacao;
+	private String cereaisAnotacao;
+	private String massasAnotacao;
+	private String vegetaisCrusAnotacao;
+	private String vegetaisCozidosAnotacao;
+	private String frutasAnotacao;
+	private String docesAnotacao;
+	private String oleoAnotacao;
+	private String margarinaAnotacao;
+	private String manteigaAnotacao;
+	private String toucinhoBaconAnotacao;
+	private String aguaAnotacao;
+	private String sucoAnotacao;
+	private String bebidasAlcoolicasAnotacao;
+	private String gaseificadasAnotacao;
+	private String infusoesAnotacao;
 
 	private String observacoes;
 
@@ -143,12 +142,12 @@ public class InqueritoAlimentar {
 		this.bovinaGosta = bovinaGosta;
 	}
 
-	public String getBovinaQuantidade() {
-		return bovinaQuantidade;
+	public String getBovinaAnotacao() {
+		return bovinaAnotacao;
 	}
 
-	public void setBovinaQuantidade(String bovinaQuantidade) {
-		this.bovinaQuantidade = bovinaQuantidade;
+	public void setBovinaAnotacao(String bovinaQuantidade) {
+		this.bovinaAnotacao = bovinaQuantidade;
 	}
 
 	public boolean isAvesGosta() {
@@ -496,172 +495,172 @@ public class InqueritoAlimentar {
 	}
 
 
-	public String getAvesQuantidade() {
-		return avesQuantidade;
+	public String getAvesAnotacao() {
+		return avesAnotacao;
 	}
 
-	public void setAvesQuantidade(String avesQuantidade) {
-		this.avesQuantidade = avesQuantidade;
+	public void setAvesAnotacao(String avesAnotacao) {
+		this.avesAnotacao = avesAnotacao;
 	}
 
-	public String getPeixeQuantidade() {
-		return peixeQuantidade;
+	public String getPeixeAnotacao() {
+		return peixeAnotacao;
 	}
 
-	public void setPeixeQuantidade(String peixeQuantidade) {
-		this.peixeQuantidade = peixeQuantidade;
+	public void setPeixeAnotacao(String peixeAnotacao) {
+		this.peixeAnotacao = peixeAnotacao;
 	}
 
-	public String getViscerasQuantidade() {
-		return viscerasQuantidade;
+	public String getViscerasAnotacao() {
+		return viscerasAnotacao;
 	}
 
-	public void setViscerasQuantidade(String viscerasQuantidade) {
-		this.viscerasQuantidade = viscerasQuantidade;
+	public void setViscerasAnotacao(String viscerasAnotacao) {
+		this.viscerasAnotacao = viscerasAnotacao;
 	}
 
-	public String getLeiteDerivadosQuantidade() {
-		return leiteDerivadosQuantidade;
+	public String getLeiteDerivadosAnotacao() {
+		return leiteDerivadosAnotacao;
 	}
 
-	public void setLeiteDerivadosQuantidade(String leiteDerivadosQuantidade) {
-		this.leiteDerivadosQuantidade = leiteDerivadosQuantidade;
+	public void setLeiteDerivadosAnotacao(String leiteDerivadosAnotacao) {
+		this.leiteDerivadosAnotacao = leiteDerivadosAnotacao;
 	}
 
-	public String getOvosQuantidade() {
-		return ovosQuantidade;
+	public String getOvosAnotacao() {
+		return ovosAnotacao;
 	}
 
-	public void setOvosQuantidade(String ovosQuantidade) {
-		this.ovosQuantidade = ovosQuantidade;
+	public void setOvosAnotacao(String ovosAnotacao) {
+		this.ovosAnotacao = ovosAnotacao;
 	}
 
-	public String getLeguminosasQuantidade() {
-		return leguminosasQuantidade;
+	public String getLeguminosasAnotacao() {
+		return leguminosasAnotacao;
 	}
 
-	public void setLeguminosasQuantidade(String leguminosasQuantidade) {
-		this.leguminosasQuantidade = leguminosasQuantidade;
+	public void setLeguminosasAnotacao(String leguminosasAnotacao) {
+		this.leguminosasAnotacao = leguminosasAnotacao;
 	}
 
-	public String getCereaisQuantidade() {
-		return cereaisQuantidade;
+	public String getCereaisAnotacao() {
+		return cereaisAnotacao;
 	}
 
-	public void setCereaisQuantidade(String cereaisQuantidade) {
-		this.cereaisQuantidade = cereaisQuantidade;
+	public void setCereaisAnotacao(String cereaisAnotacao) {
+		this.cereaisAnotacao = cereaisAnotacao;
 	}
 
-	public String getMassasQuantidade() {
-		return massasQuantidade;
+	public String getMassasAnotacao() {
+		return massasAnotacao;
 	}
 
-	public void setMassasQuantidade(String massasQuantidade) {
-		this.massasQuantidade = massasQuantidade;
+	public void setMassasAnotacao(String massasAnotacao) {
+		this.massasAnotacao = massasAnotacao;
 	}
 
-	public String getVegetaisCrusQuantidade() {
-		return vegetaisCrusQuantidade;
+	public String getVegetaisCrusAnotacao() {
+		return vegetaisCrusAnotacao;
 	}
 
-	public void setVegetaisCrusQuantidade(String vegetaisCrusQuantidade) {
-		this.vegetaisCrusQuantidade = vegetaisCrusQuantidade;
+	public void setVegetaisCrusAnotacao(String vegetaisCrusAnotacao) {
+		this.vegetaisCrusAnotacao = vegetaisCrusAnotacao;
 	}
 
-	public String getVegetaisCozidosQuantidade() {
-		return vegetaisCozidosQuantidade;
+	public String getVegetaisCozidosAnotacao() {
+		return vegetaisCozidosAnotacao;
 	}
 
-	public void setVegetaisCozidosQuantidade(String vegetaisCozidosQuantidade) {
-		this.vegetaisCozidosQuantidade = vegetaisCozidosQuantidade;
+	public void setVegetaisCozidosAnotacao(String vegetaisCozidosAnotacao) {
+		this.vegetaisCozidosAnotacao = vegetaisCozidosAnotacao;
 	}
 
-	public String getFrutasQuantidade() {
-		return frutasQuantidade;
+	public String getFrutasAnotacao() {
+		return frutasAnotacao;
 	}
 
-	public void setFrutasQuantidade(String frutasQuantidade) {
-		this.frutasQuantidade = frutasQuantidade;
+	public void setFrutasAnotacao(String frutasAnotacao) {
+		this.frutasAnotacao = frutasAnotacao;
 	}
 
-	public String getDocesQuantidade() {
-		return docesQuantidade;
+	public String getDocesAnotacao() {
+		return docesAnotacao;
 	}
 
-	public void setDocesQuantidade(String docesQuantidade) {
-		this.docesQuantidade = docesQuantidade;
+	public void setDocesAnotacao(String docesAnotacao) {
+		this.docesAnotacao = docesAnotacao;
 	}
 
-	public String getOleoQuantidade() {
-		return oleoQuantidade;
+	public String getOleoAnotacao() {
+		return oleoAnotacao;
 	}
 
-	public void setOleoQuantidade(String oleoQuantidade) {
-		this.oleoQuantidade = oleoQuantidade;
+	public void setOleoAnotacao(String oleoAnotacao) {
+		this.oleoAnotacao = oleoAnotacao;
 	}
 
-	public String getMargarinaQuantidade() {
-		return margarinaQuantidade;
+	public String getMargarinaAnotacao() {
+		return margarinaAnotacao;
 	}
 
-	public void setMargarinaQuantidade(String margarinaQuantidade) {
-		this.margarinaQuantidade = margarinaQuantidade;
+	public void setMargarinaAnotacao(String margarinaAnotacao) {
+		this.margarinaAnotacao = margarinaAnotacao;
 	}
 
-	public String getManteigaQuantidade() {
-		return manteigaQuantidade;
+	public String getManteigaAnotacao() {
+		return manteigaAnotacao;
 	}
 
-	public void setManteigaQuantidade(String manteigaQuantidade) {
-		this.manteigaQuantidade = manteigaQuantidade;
+	public void setManteigaAnotacao(String manteigaAnotacao) {
+		this.manteigaAnotacao = manteigaAnotacao;
 	}
 
-	public String getToucinhoBaconQuantidade() {
-		return toucinhoBaconQuantidade;
+	public String getToucinhoBaconAnotacao() {
+		return toucinhoBaconAnotacao;
 	}
 
-	public void setToucinhoBaconQuantidade(String toucinhoBaconQuantidade) {
-		this.toucinhoBaconQuantidade = toucinhoBaconQuantidade;
+	public void setToucinhoBaconAnotacao(String toucinhoBaconAnotacao) {
+		this.toucinhoBaconAnotacao = toucinhoBaconAnotacao;
 	}
 
-	public String getAguaQuantidade() {
-		return aguaQuantidade;
+	public String getAguaAnotacao() {
+		return aguaAnotacao;
 	}
 
-	public void setAguaQuantidade(String aguaQuantidade) {
-		this.aguaQuantidade = aguaQuantidade;
+	public void setAguaAnotacao(String aguaAnotacao) {
+		this.aguaAnotacao = aguaAnotacao;
 	}
 
-	public String getSucoQuantidade() {
-		return sucoQuantidade;
+	public String getSucoAnotacao() {
+		return sucoAnotacao;
 	}
 
-	public void setSucoQuantidade(String sucoQuantidade) {
-		this.sucoQuantidade = sucoQuantidade;
+	public void setSucoAnotacao(String sucoAnotacao) {
+		this.sucoAnotacao = sucoAnotacao;
 	}
 
-	public String getBebidasAlcoolicasQuantidade() {
-		return bebidasAlcoolicasQuantidade;
+	public String getBebidasAlcoolicasAnotacao() {
+		return bebidasAlcoolicasAnotacao;
 	}
 
-	public void setBebidasAlcoolicasQuantidade(String bebidasAlcoolicasQuantidade) {
-		this.bebidasAlcoolicasQuantidade = bebidasAlcoolicasQuantidade;
+	public void setBebidasAlcoolicasAnotacao(String bebidasAlcoolicasAnotacao) {
+		this.bebidasAlcoolicasAnotacao = bebidasAlcoolicasAnotacao;
 	}
 
-	public String getGaseificadasQuantidade() {
-		return gaseificadasQuantidade;
+	public String getGaseificadasAnotacao() {
+		return gaseificadasAnotacao;
 	}
 
-	public void setGaseificadasQuantidade(String gaseificadasQuantidade) {
-		this.gaseificadasQuantidade = gaseificadasQuantidade;
+	public void setGaseificadasAnotacao(String gaseificadasAnotacao) {
+		this.gaseificadasAnotacao = gaseificadasAnotacao;
 	}
 
-	public String getInfusoesQuantidade() {
-		return infusoesQuantidade;
+	public String getInfusoesAnotacao() {
+		return infusoesAnotacao;
 	}
 
-	public void setInfusoesQuantidade(String infusoesQuantidade) {
-		this.infusoesQuantidade = infusoesQuantidade;
+	public void setInfusoesAnotacao(String infusoesAnotacao) {
+		this.infusoesAnotacao = infusoesAnotacao;
 	}
 
 	public void setObservacoes(String observacoes) {
