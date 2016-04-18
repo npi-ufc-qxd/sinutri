@@ -77,11 +77,16 @@
 				<h3 id="avaliacao" class="section">Anamnese</h3>
 
 				<div class="row">
-					<div class="col-sm-12">
 						<label><strong> Objetivo da consulta: </strong></label>
 						${consulta.objetivoConsulta }<br>
 						<table class="table table-striped">
 							<tbody>
+								<tr>
+									<td><strong>Data de Nascimento:</strong></td>
+									<td><fmt:formatDate type="date" value="${consulta.paciente.pessoa.dataNascimento}" /></td>
+									<td><strong>Idade:</strong></td>
+									<td>${consulta.paciente.pessoa.idade}</td>
+								</tr>
 								<tr>
 									<td><strong>Altura:</strong></td>
 									<td>${consulta.altura}</td>

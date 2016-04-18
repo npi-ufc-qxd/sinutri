@@ -105,6 +105,23 @@
 					<h4 id="avaliacao" class="section">
 						<strong>Anamnese</strong>
 					</h4>
+					
+					<div class="row form-group">
+						<div class="form-item col-sm-6">
+							<label class="control-label">
+								Data de Nascimento:
+							</label>
+							<label>
+							 <fmt:formatDate type="date" value="${consultaNutricional.paciente.pessoa.dataNascimento}" />
+							</label>
+						</div>
+						<div class="form-item col-sm-6">
+							<label class="control-label">
+								Idade:
+							</label>
+							<label>${consultaNutricional.paciente.pessoa.idade}</label>
+						</div>
+					</div>
 
 					<div class="row form-group">
 						<div class="form-item col-sm-12">
