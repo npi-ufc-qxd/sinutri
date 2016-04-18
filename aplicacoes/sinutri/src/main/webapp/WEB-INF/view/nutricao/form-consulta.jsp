@@ -217,32 +217,6 @@
 							</div>
 						</div>
 					</div>
-					<div class="row form-group">
-						<div class="form-item col-sm-6">
-							<label for="checkCarneVermelha" class=" control-label"><form:checkbox
-									id="checkCarneVermelha" path="carneVermelha"
-									class="checkboxInputSelect" /> Carne Vermelha:</label>
-							<form:input id="inputTextCarneVermelha"
-								path="carneVermelhaComentario" cssClass="form-control"
-								placeholder="Que tipo de carne?"
-								disabled="${not consultaNutricional.carneVermelha}" />
-							<div class="error-validation">
-								<form:errors path="carneVermelhaComentario"></form:errors>
-							</div>
-						</div>
-						<div class="form-item col-sm-6">
-							<label for="agua" class="control-label">&nbsp;&nbsp;&nbsp;</label>
-							<form:select path="carneVermelhaFrequenciaSemanal"
-								cssClass="form-control select"
-								disabled="${not consultaNutricional.carneVermelha}">
-								<form:option value="">Quantas vezes por semana?</form:option>
-								<form:options items="${frequencia}" itemLabel="tipo" />
-							</form:select>
-							<div class="error-validation">
-								<form:errors path="carneVermelhaFrequenciaSemanal"></form:errors>
-							</div>
-						</div>
-					</div>
 
 					<div class="row form-group">
 						<div class="form-item col-sm-6">
@@ -292,18 +266,6 @@
 								<form:option value="">Selecione</form:option>
 								<form:options items="${sistemaUrinario}" itemLabel="tipo" />
 							</form:select>
-						</div>
-					</div>
-
-					<div class="row form-group">
-						<div class="form-item col-sm-6">
-							<label for="diabetes" class=" control-label"><form:checkbox
-									id="diabetes" path="diabetes" /> Diabetes</label>
-						</div>
-
-						<div class="form-item col-sm-6">
-							<label for="hipertensao" class=" control-label"><form:checkbox
-									id="hipertensao" path="hipertensao" /> Hipertensão</label>
 						</div>
 					</div>
 
