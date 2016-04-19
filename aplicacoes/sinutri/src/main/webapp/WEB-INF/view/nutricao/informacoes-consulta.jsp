@@ -57,13 +57,10 @@
 					<li><a href="#exame"> <span class="badge">3</span> Exames
 							Laboratoriais
 					</a></li>
-					<li><a href="#orientacoes"> <span class="badge">4</span>
-							Orientações Individuais
-					</a></li>
-					<li><a href="#documentos"> <span class="badge">5</span>
+					<li><a href="#documentos"> <span class="badge">4</span>
 							Documentos
 					</a></li>
-					<li><a href="#inquerito"> <span class="badge">6</span>
+					<li><a href="#inquerito"> <span class="badge">5</span>
 							Inquerito Alimentar
 					</a></li>
 				</ul>
@@ -403,36 +400,6 @@
 					</c:otherwise>
 				</c:choose>
 
-				<h3 id="orientacoes" class="section">Orientações</h3>
-
-				<div class="row">
-					<div class="col-sm-12">
-						<label><strong> Orientacões Individuais: </strong></label>
-						<c:choose>
-							<c:when test="${not empty consulta.orientacoesIndividuais}">
-								<span>${consulta.orientacoesIndividuais}</span>
-							</c:when>
-							<c:otherwise>
-								<span class="alert alert-dismissible alert-default">Não
-									há orientações.</span>
-							</c:otherwise>
-						</c:choose>
-					</div>
-
-					<div class="col-sm-12">
-						<label><strong> Conduta Nutricional: </strong></label>
-						<c:choose>
-							<c:when test="${not empty consulta.condutaNutricional}">
-								<span>${consulta.condutaNutricional}</span>
-							</c:when>
-							<c:otherwise>
-								<span class="alert alert-dismissible alert-default">Conduta
-									nutricional não informada.</span>
-							</c:otherwise>
-						</c:choose>
-					</div>
-				</div>
-
 				<h3 id="documentos" class="section">Documentos</h3>
 				<c:choose>
 					<c:when test="${not empty consulta.documentos }">
@@ -767,7 +734,7 @@
 
 			</div>
 		</div>
-	</div>
+	
 
 	<jsp:include page="../modulos/footer.jsp" />
 	<script
