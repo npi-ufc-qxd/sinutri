@@ -1622,7 +1622,6 @@
 	
 	<script src="<c:url value="/resources/js/questionario-frequencia-alimentar.js" />"></script>
 	<script src="<c:url value="/resources/js/inquerito-alimentar.js" />"></script>
-	<script src="<c:url value="/resources/js/mascaras.js" />"></script>
 	
 
 	<script type="text/javascript">
