@@ -235,9 +235,11 @@
 
 					<div class="row form-group">
 						<div class="form-item col-sm-6">
-							<label for="checkBebidaAlcoolica" class=" control-label"><form:checkbox
-									id="checkBebidaAlcoolica" path="bebidaAlcoolica"
-									class="checkboxInputSelect" /> Bebida alcoólica:</label>
+							<label for="checkBebidaAlcoolica" class=" control-label">
+								<form:checkbox id="checkBebidaAlcoolica" path="bebidaAlcoolica" class="checkboxInputSelect" /> Bebida alcoólica:
+							</label>
+									
+									
 							<form:input id="inputTextBebidaAlcoolica"
 								path="bebidaAlcoolicaComentario" cssClass="form-control"
 								placeholder="Qual bebida alcoólica?"
@@ -260,6 +262,38 @@
 							</div>
 						</div>
 					</div>
+					
+					
+					<div class="row form-group">
+						<div class="form-item col-sm-6">
+							<label for="checkCigarro" class=" control-label">
+								<form:checkbox id="checkCigarro" path="cigarro" class="checkboxInputSelect" /> Cigarro:
+							</label>									
+									
+							<form:input id="inputTextCigarro"
+								path="cigarroComentario" cssClass="form-control"
+								placeholder="Cigarro."
+								disabled="${not consultaNutricional.cigarro}" />
+							<div class="error-validation">
+								<form:errors path="cigarroComentario"></form:errors>
+							</div>
+						</div>
+
+						<div class="form-item col-sm-6">
+							<label class="control-label">&nbsp;&nbsp;&nbsp;</label>
+							<form:select path="cigarroFrequenciaSemanal"
+								cssClass="form-control"
+								disabled="${not consultaNutricional.cigarro}">
+								<form:option value="">Quantas vezes por semana?</form:option>
+								<form:options items="${frequencia}" itemLabel="tipo" />
+							</form:select>
+							<div class="error-validation">
+								<form:errors path="cigarroFrequenciaSemanal"></form:errors>
+							</div>
+						</div>
+					</div>
+					
+
 
 					<div class="row form-group">
 						<div class="form-item col-sm-6">
@@ -413,6 +447,21 @@
 								disabled="${not consultaNutricional.alergia}" />
 							<div class="error-validation">
 								<form:errors path="alergiaComentario"></form:errors>
+							</div>
+						</div>
+					</div>
+					
+					<div class="row form-group">
+						<div class="form-item col-sm-12">
+							<label for="checkIntolerancia" class=" control-label"><form:checkbox
+									cssClass="checkboxInput" id="checkIntolerancia" path="intolerancia"
+									class="check" /> Intolerância Alimentar:</label>
+							<form:textarea id="inputTextAlergia" path="intoleranciaComentario"
+								class="form-control" rows="5"
+								placeholder="Qual sua intolerância Alimentar?"
+								disabled="${not consultaNutricional.intolerancia}" />
+							<div class="error-validation">
+								<form:errors path="intoleranciaComentario"></form:errors>
 							</div>
 						</div>
 					</div>

@@ -105,7 +105,12 @@ public class ConsultaNutricional {
 	private String bebidaAlcoolicaComentario;
 	@Enumerated(EnumType.STRING)
 	private Frequencia bebidaAlcoolicaFrequenciaSemanal;
-
+	
+	private boolean cigarro;
+	private String cigarroComentario;
+	@Enumerated(EnumType.STRING)
+	private Frequencia cigarroFrequenciaSemanal;
+	
 	@Enumerated(EnumType.STRING)
 	private SistemaGastrointestinal sistemaGastrointestinal;
 
@@ -144,6 +149,9 @@ public class ConsultaNutricional {
 
 	private boolean alergia;
 	private String alergiaComentario;
+	
+	private boolean intolerancia;
+	private String intoleranciaComentario;
 
 	private boolean outrasPatologias;
 	private String outrasPatologiasComentario;
@@ -330,6 +338,30 @@ public class ConsultaNutricional {
 
 	public void setBebidaAlcoolica(boolean bebidaAlcoolica) {
 		this.bebidaAlcoolica = bebidaAlcoolica;
+	}
+		
+	public boolean isCigarro() {
+		return cigarro;
+	}
+
+	public void setCigarro(boolean cigarro) {
+		this.cigarro = cigarro;
+	}
+
+	public String getCigarroComentario() {
+		return cigarroComentario;
+	}
+
+	public void setCigarroComentario(String cigarroComentario) {
+		this.cigarroComentario = cigarroComentario;
+	}
+
+	public Frequencia getCigarroFrequenciaSemanal() {
+		return cigarroFrequenciaSemanal;
+	}
+
+	public void setCigarroFrequenciaSemanal(Frequencia cigarroFrequenciaSemanal) {
+		this.cigarroFrequenciaSemanal = cigarroFrequenciaSemanal;
 	}
 
 	public void setInqueritoAlimentar(InqueritoAlimentar inqueritoAlimentar) {
@@ -548,6 +580,22 @@ public class ConsultaNutricional {
 		this.alergiaComentario = alergiaComentario;
 	}
 
+	public boolean isIntolerancia() {
+		return intolerancia;
+	}
+
+	public void setIntolerancia(boolean intolerancia) {
+		this.intolerancia = intolerancia;
+	}
+
+	public String getIntoleranciaComentario() {
+		return intoleranciaComentario;
+	}
+
+	public void setIntoleranciaComentario(String intoleranciaComentario) {
+		this.intoleranciaComentario = intoleranciaComentario;
+	}
+	
 	public boolean isOutrasPatologias() {
 		return outrasPatologias;
 	}

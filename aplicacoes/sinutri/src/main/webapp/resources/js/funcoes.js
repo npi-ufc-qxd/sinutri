@@ -180,9 +180,15 @@ $(document).ready(function() {
 							},
 							bebidaAlcoolicaComentario : {
 								required : "Informe a bebida alcoólica comsumida pelo paciente."
-							},
+							},							
 							bebidaAlcoolicaFrequenciaSemanal : {
 								required : "Informe a frequência do consumo de bebiba alcoólica pelo paciente."
+							},
+							cigarroComentario : {
+								required : ""
+							},
+							cigarroFrequenciaSemanal : {
+								required : "Informe a frequência do consumo de cigarro pelo paciente."
 							},
 							medicamentoComentario : {
 								required : "Informe o(s) medicamento(s) utilizado(s) pelo paciente."
@@ -213,6 +219,9 @@ $(document).ready(function() {
 							},
 							alergiaComentario : {
 								required : "Informe se o paciente possui alguma alergia alimentar."
+							},
+							intoleranciaComentario : {
+								required : "Informe se o paciente possui alguma intolerância alimentar."
 							},
 							outrasPatologiasComentario : {
 								required : "Informe outras patologias do paciente."
