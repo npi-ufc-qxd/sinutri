@@ -1,3 +1,4 @@
+
 //Definições
 $.mask.definitions['H'] = "[0-2]";
 $.mask.definitions['h'] = "[0-9]";
