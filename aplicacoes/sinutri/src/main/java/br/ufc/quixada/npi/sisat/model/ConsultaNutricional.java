@@ -106,7 +106,12 @@ public class ConsultaNutricional {
 	private String bebidaAlcoolicaComentario;
 	@Enumerated(EnumType.STRING)
 	private Frequencia bebidaAlcoolicaFrequenciaSemanal;
-
+	
+	private boolean cigarro;
+	private String cigarroComentario;
+	@Enumerated(EnumType.STRING)
+	private Frequencia cigarroFrequenciaSemanal;
+	
 	@Enumerated(EnumType.STRING)
 	private SistemaGastrointestinal sistemaGastrointestinal;
 
@@ -349,6 +354,30 @@ public class ConsultaNutricional {
 
 	public void setBebidaAlcoolica(boolean bebidaAlcoolica) {
 		this.bebidaAlcoolica = bebidaAlcoolica;
+	}
+		
+	public boolean isCigarro() {
+		return cigarro;
+	}
+
+	public void setCigarro(boolean cigarro) {
+		this.cigarro = cigarro;
+	}
+
+	public String getCigarroComentario() {
+		return cigarroComentario;
+	}
+
+	public void setCigarroComentario(String cigarroComentario) {
+		this.cigarroComentario = cigarroComentario;
+	}
+
+	public Frequencia getCigarroFrequenciaSemanal() {
+		return cigarroFrequenciaSemanal;
+	}
+
+	public void setCigarroFrequenciaSemanal(Frequencia cigarroFrequenciaSemanal) {
+		this.cigarroFrequenciaSemanal = cigarroFrequenciaSemanal;
 	}
 
 	public void setInqueritoAlimentar(InqueritoAlimentar inqueritoAlimentar) {
