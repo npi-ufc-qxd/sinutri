@@ -206,6 +206,10 @@
 									<td>Alergia Alimentar</td>
 									<td>${consulta.alergia ? consulta.alergiaComentario  : "Não possui alergia à alimentos"}</td>
 								</tr>
+								<tr>
+									<td>Intolerância Alimentar</td>
+									<td>${consulta.intolerancia ? consulta.intoleranciaComentario  : "Não possui intolerância à alimentos"}</td>
+								</tr>
 							</tbody>
 						</table>
 					</div>

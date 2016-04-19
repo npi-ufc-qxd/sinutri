@@ -419,6 +419,21 @@
 							</div>
 						</div>
 					</div>
+					
+					<div class="row form-group">
+						<div class="form-item col-sm-12">
+							<label for="checkIntolerancia" class=" control-label"><form:checkbox
+									cssClass="checkboxInput" id="checkIntolerancia" path="intolerancia"
+									class="check" /> Intolerância Alimentar:</label>
+							<form:textarea id="inputTextAlergia" path="intoleranciaComentario"
+								class="form-control" rows="5"
+								placeholder="Qual sua intolerância Alimentar?"
+								disabled="${not consultaNutricional.intolerancia}" />
+							<div class="error-validation">
+								<form:errors path="intoleranciaComentario"></form:errors>
+							</div>
+						</div>
+					</div>
 
 					<div class="row form-group">
 						<div class="form-item col-sm-12">
