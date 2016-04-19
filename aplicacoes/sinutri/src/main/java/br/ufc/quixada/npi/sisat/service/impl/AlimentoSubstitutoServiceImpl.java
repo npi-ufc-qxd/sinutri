@@ -8,5 +8,4 @@ import br.ufc.quixada.npi.sisat.service.AlimentoSubstitutoService;
 
 @Named
 public class AlimentoSubstitutoServiceImpl extends GenericServiceImpl<AlimentoSubstituto> implements AlimentoSubstitutoService{
-
 }
