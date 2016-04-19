@@ -78,10 +78,13 @@
 					<li><a href="#exame"> <span class="badge">3</span> Exames
 							Laboratoriais
 					</a></li>
-					<li><a href="#documentos"> <span class="badge">4</span>
+					<li><a href="#orientacoes"> <span class="badge">4</span>
+							Orientações Individuais
+					</a></li>
+					<li><a href="#documentos"> <span class="badge">5</span>
 							Documentos
 					</a></li>
-					<li><a href="#inquerito"> <span class="badge">5</span>
+					<li><a href="#inquerito"> <span class="badge">6</span>
 							Inquerito Alimentar
 					</a></li>
 				</ul>
@@ -102,27 +105,11 @@
 					<h4 id="avaliacao" class="section">
 						<strong>Anamnese</strong>
 					</h4>
-					
-					<div class="row form-group">
-						<div class="form-item col-sm-6">
-							<label class="control-label">
-								Data de Nascimento:
-							</label>
-							<label>
-							 <fmt:formatDate type="date" value="${consultaNutricional.paciente.pessoa.dataNascimento}" />
-							</label>
-						</div>
-						<div class="form-item col-sm-6">
-							<label class="control-label">
-								Idade:
-							</label>
-							<label>${consultaNutricional.paciente.pessoa.idade}</label>
-						</div>
-					</div>
 
 					<div class="row form-group">
 						<div class="form-item col-sm-12">
-							<label for="objetivoConsulta" class="control-label">
+							<label for="objetivoConsulta" class="control-label"> <i
+								style="color: #F56954;" class="glyphicon glyphicon-asterisk"></i>
 								Objetivo da Consulta:
 							</label>
 							<form:textarea id="objetivoConsulta" path="objetivoConsulta"
@@ -136,7 +123,8 @@
 
 					<div class="row form-group">
 						<div class="form-item col-sm-12">
-							<label for="altura" class="control-label">
+							<label for="altura" class="control-label"><i
+								style="color: #F56954;" class="glyphicon glyphicon-asterisk"></i>
 								Altura (m):</label>
 							<form:input type="number" id="altura" name="altura" path="altura"
 								cssClass="form-control valid-num" placeholder="0.00" />
@@ -148,7 +136,8 @@
 
 					<div class="row form-group">
 						<div class="form-item col-sm-3">
-							<label for="peso" class="control-label">
+							<label for="peso" class="control-label"><i
+								style="color: #F56954;" class="glyphicon glyphicon-asterisk"></i>
 								Peso (Kg):</label>
 							<form:input type="number" id="peso" name="peso" path="peso"
 								cssClass="form-control valid-num" placeholder="00.00" />
@@ -157,7 +146,8 @@
 							</div>
 						</div>
 						<div class="form-item col-sm-3">
-							<label for="pesoDesejado" class="control-label">
+							<label for="pesoDesejado" class="control-label"><i
+								style="color: #F56954;" class="glyphicon glyphicon-asterisk"></i>
 								Peso desejado (Kg):</label>
 							<form:input id="pesoDesejado" name="pesoDesejado"
 								path="pesoDesejado" type="number"
@@ -169,6 +159,7 @@
 
 						<div class="form-item col-sm-3">
 							<label for="circunferenciaCintura" class="control-label">
+								<i style="color: #F56954;" class="glyphicon glyphicon-asterisk"></i>
 								CC (cm):
 							</label>
 							<form:input id="circunferenciaCintura" name="cc"
@@ -180,6 +171,7 @@
 						</div>
 						<div class="form-item col-sm-3">
 							<label for="circunferenciaCinturaDesejada" class="control-label">
+								<i style="color: #F56954;" class="glyphicon glyphicon-asterisk"></i>
 								CC desejada (cm):
 							</label>
 							<form:input id="circunferenciaCinturaDesejada" name="cc"
@@ -194,8 +186,8 @@
 
 					<div class="row form-group">
 						<div class="form-item col-sm-12">
-
-							<label for="agua" class="control-label">
+							<label for="agua" class="control-label"><i
+								style="color: #F56954;" class="glyphicon glyphicon-asterisk"></i>
 								Consumo de água (copos):</label>
 							<form:input type="number" id="agua" name="agua" path="agua"
 								cssClass="form-control" placeholder="00.00" />
@@ -235,11 +227,9 @@
 
 					<div class="row form-group">
 						<div class="form-item col-sm-6">
-							<label for="checkBebidaAlcoolica" class=" control-label">
-								<form:checkbox id="checkBebidaAlcoolica" path="bebidaAlcoolica" class="checkboxInputSelect" /> Bebida alcoólica:
-							</label>
-									
-									
+							<label for="checkBebidaAlcoolica" class=" control-label"><form:checkbox
+									id="checkBebidaAlcoolica" path="bebidaAlcoolica"
+									class="checkboxInputSelect" /> Bebida alcoólica:</label>
 							<form:input id="inputTextBebidaAlcoolica"
 								path="bebidaAlcoolicaComentario" cssClass="form-control"
 								placeholder="Qual bebida alcoólica?"
@@ -262,38 +252,6 @@
 							</div>
 						</div>
 					</div>
-					
-					
-					<div class="row form-group">
-						<div class="form-item col-sm-6">
-							<label for="checkCigarro" class=" control-label">
-								<form:checkbox id="checkCigarro" path="cigarro" class="checkboxInputSelect" /> Cigarro:
-							</label>									
-									
-							<form:input id="inputTextCigarro"
-								path="cigarroComentario" cssClass="form-control"
-								placeholder="Cigarro."
-								disabled="${not consultaNutricional.cigarro}" />
-							<div class="error-validation">
-								<form:errors path="cigarroComentario"></form:errors>
-							</div>
-						</div>
-
-						<div class="form-item col-sm-6">
-							<label class="control-label">&nbsp;&nbsp;&nbsp;</label>
-							<form:select path="cigarroFrequenciaSemanal"
-								cssClass="form-control"
-								disabled="${not consultaNutricional.cigarro}">
-								<form:option value="">Quantas vezes por semana?</form:option>
-								<form:options items="${frequencia}" itemLabel="tipo" />
-							</form:select>
-							<div class="error-validation">
-								<form:errors path="cigarroFrequenciaSemanal"></form:errors>
-							</div>
-						</div>
-					</div>
-					
-
 
 					<div class="row form-group">
 						<div class="form-item col-sm-6">
@@ -450,7 +408,7 @@
 							</div>
 						</div>
 					</div>
-					
+
 					<div class="row form-group">
 						<div class="form-item col-sm-12">
 							<label for="checkIntolerancia" class=" control-label"><form:checkbox
@@ -465,7 +423,7 @@
 							</div>
 						</div>
 					</div>
-
+					
 					<div class="row form-group">
 						<div class="form-item col-sm-12">
 							<label for="checkPatologia" class=" control-label"><form:checkbox
@@ -729,6 +687,35 @@
 								rows="5" placeholder="Conduta Nutricional" />
 							<div class="error-validation">
 								<form:errors path="informacoesComplementaresExames"></form:errors>
+							</div>
+						</div>
+					</div>
+
+					<h4 id="orientacoes" class="section">
+						<strong>Orientações</strong>
+					</h4>
+
+					<div class="row form-group">
+						<div class="form-item col-sm-12">
+							<label for="condutaNutricional" class="control-label">
+								Conduta Nutricional:</label>
+							<form:textarea id="condutaNutricional" path="condutaNutricional"
+								class="form-control" rows="5" placeholder="Conduta Nutricional" />
+							<div class="error-validation">
+								<form:errors path="condutaNutricional"></form:errors>
+							</div>
+						</div>
+					</div>
+
+					<div class="row form-group">
+						<div class="form-item col-sm-12">
+							<label for="orientacoesIndividuais" class="control-label">
+								Orientações Individuais</label>
+							<form:textarea id="orientacoesIndividuais"
+								path="orientacoesIndividuais" class="form-control" rows="5"
+								placeholder="Orientações Individuais" />
+							<div class="error-validation">
+								<form:errors path="orientacoesIndividuais"></form:errors>
 							</div>
 						</div>
 					</div>
@@ -1408,7 +1395,7 @@
 						</div>
 
 						<div class="form-item col-sm-6">
-							<label for="aguaAnotacao" class="control-label">Anotação</label>
+							<label for="aguaAnotacao" class="control-label">Quantidade</label>
 							<form:input id="inputTextAgua"
 								path="inqueritoAlimentar.aguaAnotacao" cssClass="form-control"
 								placeholder="Anotação"
