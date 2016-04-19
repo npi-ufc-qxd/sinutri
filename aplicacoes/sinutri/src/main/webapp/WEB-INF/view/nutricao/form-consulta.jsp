@@ -78,13 +78,10 @@
 					<li><a href="#exame"> <span class="badge">3</span> Exames
 							Laboratoriais
 					</a></li>
-					<li><a href="#orientacoes"> <span class="badge">4</span>
-							Orientações Individuais
-					</a></li>
-					<li><a href="#documentos"> <span class="badge">5</span>
+					<li><a href="#documentos"> <span class="badge">4</span>
 							Documentos
 					</a></li>
-					<li><a href="#inquerito"> <span class="badge">6</span>
+					<li><a href="#inquerito"> <span class="badge">5</span>
 							Inquerito Alimentar
 					</a></li>
 				</ul>
@@ -201,7 +198,7 @@
 							<label for="agua" class="control-label">
 								Consumo de água (copos):</label>
 							<form:input type="number" id="agua" name="agua" path="agua"
-								cssClass="form-control" placeholder="Consumo de água" />
+								cssClass="form-control" placeholder="00.00" />
 							<div class="error-validation">
 								<form:errors path="agua"></form:errors>
 							</div>
@@ -732,35 +729,6 @@
 								rows="5" placeholder="Conduta Nutricional" />
 							<div class="error-validation">
 								<form:errors path="informacoesComplementaresExames"></form:errors>
-							</div>
-						</div>
-					</div>
-
-					<h4 id="orientacoes" class="section">
-						<strong>Orientações</strong>
-					</h4>
-
-					<div class="row form-group">
-						<div class="form-item col-sm-12">
-							<label for="condutaNutricional" class="control-label">
-								Conduta Nutricional:</label>
-							<form:textarea id="condutaNutricional" path="condutaNutricional"
-								class="form-control" rows="5" placeholder="Conduta Nutricional" />
-							<div class="error-validation">
-								<form:errors path="condutaNutricional"></form:errors>
-							</div>
-						</div>
-					</div>
-
-					<div class="row form-group">
-						<div class="form-item col-sm-12">
-							<label for="orientacoesIndividuais" class="control-label">
-								Orientações Individuais</label>
-							<form:textarea id="orientacoesIndividuais"
-								path="orientacoesIndividuais" class="form-control" rows="5"
-								placeholder="Orientações Individuais" />
-							<div class="error-validation">
-								<form:errors path="orientacoesIndividuais"></form:errors>
 							</div>
 						</div>
 					</div>
