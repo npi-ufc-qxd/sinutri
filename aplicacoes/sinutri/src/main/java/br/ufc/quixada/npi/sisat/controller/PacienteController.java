@@ -85,7 +85,7 @@ public class PacienteController {
 		}
 		
 		registrarPaciente(cpf);
-
+		
 		model.addAttribute("pessoa", pessoaService.getPessoaByCpf(cpf));
 
 		return "nutricao/historico-paciente";
