@@ -103,7 +103,7 @@ $(function() {
 		subPanelBuilder : function(cell, uniqueIndex) {
 			var idPanel = uniqueIndex-1;
 
-			$(".hora").mask("99:99");
+			aplicarMascaras();
 
 			var subgrid = $('<table></table>').attr('id', 'tblSubGrid_' + uniqueIndex).attr('class', 'tblSubGrid table table-striped').appendTo(cell);
 
