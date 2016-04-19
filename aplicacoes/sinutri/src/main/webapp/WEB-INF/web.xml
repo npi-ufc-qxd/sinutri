@@ -54,6 +54,10 @@
 		<param-value>/WEB-INF/spring-security.xml, /WEB-INF/applicationContext.xml</param-value>
  	</context-param>    
 	
+	<session-config>
+		<session-timeout>-1</session-timeout>
+	</session-config> 
+	
 	<!-- Spring Security -->
  	<filter>
  		<filter-name>springSecurityFilterChain</filter-name>
