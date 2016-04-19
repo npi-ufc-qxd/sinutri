@@ -150,6 +150,9 @@ public class ConsultaNutricional {
 
 	private boolean alergia;
 	private String alergiaComentario;
+	
+	private boolean intolerancia;
+	private String intoleranciaComentario;
 
 	private boolean outrasPatologias;
 	private String outrasPatologiasComentario;
@@ -593,6 +596,22 @@ public class ConsultaNutricional {
 		this.alergiaComentario = alergiaComentario;
 	}
 
+	public boolean isIntolerancia() {
+		return intolerancia;
+	}
+
+	public void setIntolerancia(boolean intolerancia) {
+		this.intolerancia = intolerancia;
+	}
+
+	public String getIntoleranciaComentario() {
+		return intoleranciaComentario;
+	}
+
+	public void setIntoleranciaComentario(String intoleranciaComentario) {
+		this.intoleranciaComentario = intoleranciaComentario;
+	}
+	
 	public boolean isOutrasPatologias() {
 		return outrasPatologias;
 	}
