@@ -135,7 +135,6 @@ public class PacienteController {
 			@RequestParam(value = "enviar", required = false) boolean enviar) {
 
 		model.addAttribute("action", "cadastrar");
-
 		Pessoa pessoa = pessoaService.getPessoaByCpf(cpf);
 		InqueritoAlimentar inqueritoAlimentar = consulta.getInqueritoAlimentar();
 		inqueritoAlimentar.setConsultaNutricional(consulta);
