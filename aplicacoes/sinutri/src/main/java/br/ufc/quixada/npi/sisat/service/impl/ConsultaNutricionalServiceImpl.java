@@ -43,12 +43,6 @@ public class ConsultaNutricionalServiceImpl extends GenericServiceImpl<ConsultaN
 	}
 
 	@Override
-	public String getOrientacoesIndividuaisById(Long id) {
-		return (String) findFirst("ConsultaNutricional.findOrientacoesIndividuaisById",
-				new SimpleMap<String, Object>("id", id));
-	}
-
-	@Override
 	public String getPacientePessoaCpfById(Long id) {
 		return (String) findFirst("ConsultaNutricional.findPacientePessoaCpfById",
 				new SimpleMap<String, Object>("id", id));
@@ -67,8 +61,6 @@ public class ConsultaNutricionalServiceImpl extends GenericServiceImpl<ConsultaN
 		maps.put("vômitos",findFirst(QueryType.NAMED, "ConsultaNutricional.countFrequenciaVomito", null));
 		maps.put("diarreia", findFirst(QueryType.NAMED, "ConsultaNutricional.countFrequenciaDiarreia", null));
 		maps.put("constipação", findFirst(QueryType.NAMED, "ConsultaNutricional.countFrequenciaConstipacao", null));
-		maps.put("diabetes", findFirst(QueryType.NAMED, "ConsultaNutricional.countFrequenciaDiabetes", null));
-		maps.put("hipertensao", findFirst(QueryType.NAMED, "ConsultaNutricional.countFrequenciaHipertensao", null));
 		maps.put("alergia", findFirst(QueryType.NAMED, "ConsultaNutricional.countFrequenciaAlergia", null));
 		maps.put("outrasPatologias", findFirst(QueryType.NAMED, "ConsultaNutricional.countFrequenciaOutrasPatologias", null));
 
