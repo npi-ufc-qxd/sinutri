@@ -1,7 +1,6 @@
 package br.ufc.quixada.npi.sisat.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
@@ -122,7 +121,6 @@ public class PacienteController {
 			return "redirect:/nutricao/buscar";
 		}
 
-		consulta.setFrequencias(consultaNutricionalService.getFrequenciasByIdConsultaByTipo(id, TipoFrequencia.RECORDATORIO));
 		model.addAttribute("consulta", consulta);
 		return "nutricao/informacoes-consulta";
 	}
@@ -226,18 +224,12 @@ public class PacienteController {
 		if (consulta.getAlergiaComentario() != null && consulta.getAlergiaComentario().isEmpty()) {
 			consulta.setAlergiaComentario(null);
 		}
-		if (consulta.getCarneVermelhaComentario() != null && consulta.getCarneVermelhaComentario().isEmpty()) {
-			consulta.setCarneVermelhaComentario(null);
-		}
+	
 		if (consulta.getAtividadeFisicaComentario() != null && consulta.getAtividadeFisicaComentario().isEmpty()) {
 			consulta.setAtividadeFisicaComentario(null);
 		}
 		if (consulta.getBebidaAlcoolicaComentario() != null && consulta.getBebidaAlcoolicaComentario().isEmpty()) {
 			consulta.setBebidaAlcoolicaComentario(null);
-		}
-		
-		if(consulta.getFrequencias() != null ){
-			atualizarFrequenciaAlimentar(consulta.getFrequencias(), consulta, TipoFrequencia.RECORDATORIO);
 		}
 
 		consultaNutricionalService.save(consulta);
@@ -333,10 +325,6 @@ public class PacienteController {
 
 		consulta.setData(data);
 		
-		if(consulta.getFrequencias() != null ){
-			atualizarFrequenciaAlimentar(consulta.getFrequencias(), consulta, TipoFrequencia.RECORDATORIO);
-		}
-		
 		consulta.getInqueritoAlimentar().setConsultaNutricional(consulta);
 
 		consultaNutricionalService.update(atualizarConsulta(consulta));
@@ -349,13 +337,11 @@ public class PacienteController {
 	@RequestMapping(value = "/{cpf}/consulta/{id}/relatorio/orientacoes", method = RequestMethod.GET)
 	public String relatorio(@PathVariable("id") Long id, Model model, HttpSession session) throws JRException {
 
-		String orientacoesIndividuais = consultaNutricionalService.getOrientacoesIndividuaisById(id);
 		String cpf = consultaNutricionalService.getPacientePessoaCpfById(id);
 		String nome = usuarioService.getByCpf(cpf).getNome();
 		String nutricionista = getUsuarioLogado(session).getNome();
 
 		model.addAttribute("format", "pdf");
-		model.addAttribute("orientacoesIndividuais", orientacoesIndividuais);
 		model.addAttribute("paciente", nome);
 		model.addAttribute("nutricionista", nutricionista);
 		model.addAttribute("datasource", new JREmptyDataSource());
@@ -391,11 +377,7 @@ public class PacienteController {
 	@RequestMapping (value = { "consulta/{idConsulta}/plano-alimentar"}, method = RequestMethod.GET)
 	public String getRecordatorio(@PathVariable("idConsulta") Long id, Model model){
 		ConsultaNutricional consultaRecordatorio = consultaNutricionalService.getConsultaNutricionalWithDocumentosById(id);
-		consultaRecordatorio.setFrequencias(consultaNutricionalService.getFrequenciasByIdConsultaByTipo(id, TipoFrequencia.RECORDATORIO));
-		
 		ConsultaNutricional consultaPlanoAlimentar = consultaNutricionalService.getConsultaNutricionalWithDocumentosById(id);
-		consultaPlanoAlimentar.setFrequencias(consultaNutricionalService.getFrequenciasByIdConsultaByTipo(id, TipoFrequencia.PLANOALIMENTAR));		
-		
 		model.addAttribute("consultaRecordatorio", consultaRecordatorio);
 		model.addAttribute("consultaPlanoAlimentar", consultaPlanoAlimentar);
 		
@@ -413,10 +395,8 @@ public class PacienteController {
 	@RequestMapping (value = { "consulta/{idConsulta}/form-plano-alimentar"}, method = RequestMethod.GET)
 	public String getPlanoAlimentar(@PathVariable("idConsulta") Long id, Model model){
 		ConsultaNutricional consultaRecordatorio = consultaNutricionalService.getConsultaNutricionalWithDocumentosById(id);
-		consultaRecordatorio.setFrequencias(consultaNutricionalService.getFrequenciasByIdConsultaByTipo(id, TipoFrequencia.RECORDATORIO));
 		
 		ConsultaNutricional consultaPlanoAlimentar = consultaNutricionalService.getConsultaNutricionalWithDocumentosById(id);
-		consultaPlanoAlimentar.setFrequencias(consultaNutricionalService.getFrequenciasByIdConsultaByTipo(id, TipoFrequencia.PLANOALIMENTAR));		
 		
 		model.addAttribute("consultaRecordatorio", consultaRecordatorio);
 		model.addAttribute("consultaPlanoAlimentar", consultaPlanoAlimentar);
@@ -435,18 +415,10 @@ public class PacienteController {
 	public String salvarPlanoAlimentar(@PathVariable("idConsulta") Long id, Model model, @ModelAttribute("consulta") ConsultaNutricional consultaAtual, RedirectAttributes redirectAttributes){
 		
 		ConsultaNutricional consulta = consultaNutricionalService.getConsultaNutricionalWithDocumentosById(id);
-		consulta.setFrequencias(consultaNutricionalService.getFrequenciasByIdConsultaByTipo(id, TipoFrequencia.RECORDATORIO));
 				
 		model.addAttribute("action", "cadastrar");
 		model.addAttribute("consulta", consulta);
 		
-		if (consultaAtual.getFrequencias() != null){
-			atualizarFrequenciaAlimentar(consultaAtual.getFrequencias(),consultaAtual, TipoFrequencia.PLANOALIMENTAR);
-			consulta.getFrequencias().addAll(consultaAtual.getFrequencias());
-		}
-
-		atualizarFrequenciaAlimentar(consulta.getFrequencias(), consulta);
-
 		consultaNutricionalService.update(consulta);
 		
 		return "redirect:/paciente/consulta/" + consulta.getId() +"/plano-alimentar";
@@ -499,41 +471,4 @@ public class PacienteController {
 		}
 		return (Pessoa) session.getAttribute("usuario");
 	}
-
-	private List<FrequenciaAlimentar> atualizarFrequenciaAlimentar(List<FrequenciaAlimentar> frequenciaAlimentars, ConsultaNutricional consultaNutricional, TipoFrequencia tipo) {
-		List<FrequenciaAlimentar> frequencias = new ArrayList<FrequenciaAlimentar>();
-		for (FrequenciaAlimentar frequenciaAlimentar : frequenciaAlimentars) {
-			if (frequenciaAlimentar != null) {
-				frequenciaAlimentar.setConsultaNutricional(consultaNutricional);				
-				frequenciaAlimentar.setAlimentos(atualizarAlimentacao(frequenciaAlimentar));
-				frequenciaAlimentar.setTipo(tipo);
-				frequencias.add(frequenciaAlimentar);
-			}
-		}
-		return frequencias;
-	}
-
-	private List<FrequenciaAlimentar> atualizarFrequenciaAlimentar(List<FrequenciaAlimentar> frequenciaAlimentars, ConsultaNutricional consultaNutricional) {
-		List<FrequenciaAlimentar> frequencias = new ArrayList<FrequenciaAlimentar>();
-		for (FrequenciaAlimentar frequenciaAlimentar : frequenciaAlimentars) {
-
-			if (frequenciaAlimentar != null) {
-				frequenciaAlimentar.setConsultaNutricional(consultaNutricional);				
-				frequenciaAlimentar.setAlimentos(atualizarAlimentacao(frequenciaAlimentar));
-				frequencias.add(frequenciaAlimentar);
-			}
-		}
-		return frequencias;
-	}
-
-	private List<Alimentacao> atualizarAlimentacao(FrequenciaAlimentar frequenciaAlimentar) {
-		List<Alimentacao> alimentacaos = new ArrayList<Alimentacao>();
-			for (Alimentacao alimentacao : frequenciaAlimentar.getAlimentos()) {
-				if(alimentacao != null){
-					alimentacao.setFrequenciaAlimentar(frequenciaAlimentar);
-					alimentacaos.add(alimentacao);
-				}
-			}
-		return alimentacaos;
-	}	
 }
