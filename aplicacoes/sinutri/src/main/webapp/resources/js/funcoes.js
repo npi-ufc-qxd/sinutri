@@ -356,6 +356,56 @@ $(document).ready(function() {
 						}
 
 					});
+	$('#form-cadastro-paciente-externo').validate(
+			{
+				rules : {
+					nome : {
+						required : true
+					},
+					dataNascimento : {
+						required : true
+					},
+					vinculo : {
+						required : true
+					},
+					telefone : {
+						required : true
+					},
+				},
+				highlight : function(element) {
+					$(element).closest('.form-item')
+							.addClass('has-error');
+				},
+				unhighlight : function(element) {
+					$(element).closest('.form-group')
+							.removeClass('has-error');
+				},
+				errorElement : 'span',
+				errorClass : 'help-block',
+				errorPlacement : function(error,
+						element) {
+					error.insertAfter(element.parent()
+							.children().last());
+					var itemForm = element.parent();
+					var id = element.attr("name");
+					$(itemForm).find("span").attr("id",
+							id);
+				},
+				messages : {
+					nome : {
+						required : "Informe o nome do paciente."
+					},
+					dataNascimento : {
+						required : "Informe a data de nascimento do paciente."
+					},
+					vinculo : {
+						required : "Informe o vinculo do paciente com a universidade."
+					},
+					telefone : {
+						required : "Informe o telefone do paciente."
+					}
+				}
+			});
 					
 					$('#form-alimento-subst').validate(
 						{
