@@ -80,22 +80,22 @@ public class ConsultaNutricional {
 	@Size(max=256, message="O objetivo da consulta deve ter menos que 256 carácteres")
 	private String objetivoConsulta;
 
-	@Min(value = 1)
+	@Min(value = 1,message = "Deve ser um numero positivo")
 	private Double altura;
 
-	@Min(value = 1)
+	@Min(value = 1,message = "Deve ser um numero positivo")
 	private Double peso;
 
-	@Min(value = 1)
+	@Min(value = 1,message = "Deve ser um numero positivo")
 	private Double pesoDesejado;
 
-	@Min(value = 1)
+	@Min(value = 1,message = "Deve ser um numero positivo")
 	private Double circunferenciaCintura;
 
-	@Min(value = 1)
+	@Min(value = 1,message = "Deve ser um numero positivo")
 	private Double circunferenciaCinturaDesejada;
 
-	@Min(value = 1)
+	@Min(value = 1,message = "Deve ser um numero positivo")
 	private Double agua;
 	
 	@DateTimeFormat(pattern="HH:mm")

@@ -215,8 +215,23 @@ $(document).ready(function() {
 									id);
 						},
 						messages : {
-							objetivoConsulta : {
+							objetivoConsulta : {								
 								maxlength: "O objetivo da consulta deve ter menos que 256 carácteres"
+							},
+							altura : {
+								min: "O valor não pode ser negativo"
+							},
+							peso : {
+								min: "O valor não pode ser negativo"								
+							},
+							pesoDesejado : {
+								min: "O valor não pode ser negativo"
+							},
+							circunferenciaCintura : {
+								min: "O valor não pode ser negativo"
+							},
+							circunferenciaCinturaDesejada : {
+								min: "O valor não pode ser negativo"
 							},
 							atividadeFisicaComentario : {
 								required : "Informe qual a(s) ativadade(s) física(s) praticada(s) pelo paciente.",

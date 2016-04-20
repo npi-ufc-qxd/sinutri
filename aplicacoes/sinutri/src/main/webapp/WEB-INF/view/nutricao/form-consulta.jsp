@@ -139,7 +139,7 @@
 							<label for="altura" class="control-label">
 								Altura (m):</label>
 							<form:input type="number" id="altura" name="altura" path="altura"
-								cssClass="form-control valid-num" placeholder="0.00" />
+								cssClass="form-control valid-num" min="0" placeholder="0.00" />
 							<div class="error-validation">
 								<form:errors path="altura"></form:errors>
 							</div>
@@ -151,7 +151,7 @@
 							<label for="peso" class="control-label">
 								Peso (Kg):</label>
 							<form:input type="number" id="peso" name="peso" path="peso"
-								cssClass="form-control valid-num" placeholder="00.00" />
+								cssClass="form-control valid-num" min="0" placeholder="00.00" />
 							<div class="error-validation">
 								<form:errors path="peso"></form:errors>
 							</div>
@@ -161,7 +161,7 @@
 								Peso desejado (Kg):</label>
 							<form:input id="pesoDesejado" name="pesoDesejado"
 								path="pesoDesejado" type="number"
-								cssClass="form-control valid-num" placeholder="00.00" />
+								cssClass="form-control valid-num" min="0" placeholder="00.00" />
 							<div class="error-validation">
 								<form:errors path="pesoDesejado"></form:errors>
 							</div>
