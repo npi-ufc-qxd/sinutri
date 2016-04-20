@@ -21,8 +21,8 @@
 			<div class="col-sm-6"><h3>Paciente <strong>${pessoa.nome }</strong></h3></div>
 
 			<div class="col-sm-6" align="right" style="margin-top: 15px;">
-				<a href="#" class="btn btn-primary btn-sm back"><span class="glyphicon glyphicon-chevron-left"></span> Voltar</a>
 				<a href="<c:url value="/paciente/${pessoa.cpf}/verificar-paciente?acao=consulta"/>" class="btn btn-success btn-sm"><span class="glyphicon glyphicon-plus"></span> Realizar Consulta</a>
+				<a href='<c:url value="/nutricao/buscar"></c:url>' class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-chevron-left"></span> Voltar</a>
 			</div>
     	</div>
 	
@@ -56,10 +56,12 @@
 									<fmt:formatDate var="dataFormatada" type="both" pattern="dd/MM/yyyy HH:mm" value="${consulta.data}" />
 						            <tr>
 						                <td>${cont.count }ª Consulta</td>
-										<td><a href="<c:url value="/paciente/consulta/${consulta.id}"/>">${dataFormatada}</a></td>
+										<td>${dataFormatada}</a></td>
+										
 						                <td align="right">
-							              <a href="<c:url value="/paciente/${pessoa.cpf}/consulta/${consulta.id}/relatorio/orientacoes"/>" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-file"></span> Relatorio</a>
-							              <a href="<c:url value="/paciente/${pessoa.getPaciente().getId()}/consulta/${consulta.id}/editar"/>" class="btn btn-warning btn-sm"><span class="glyphicon glyphicon-edit"></span> Editar</a>							             
+ 										  <a href="<c:url value="/paciente/consulta/${consulta.id}/plano-alimentar"></c:url>" class="btn btn-info btn-sm">Plano Alimentar</a> 
+ 							              <a href="<c:url value="/paciente/consulta/${consulta.id}"/>" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-eye-open"> </> Detalhes </a>
+							              <a href="<c:url value="/paciente/${pessoa.getPaciente().getId()}/consulta/${consulta.id}/editar"/>" class="btn btn-warning btn-sm"><span class="glyphicon glyphicon-edit"></span> Editar</a>
 						                </td>
 						            </tr>
 								</c:forEach>
