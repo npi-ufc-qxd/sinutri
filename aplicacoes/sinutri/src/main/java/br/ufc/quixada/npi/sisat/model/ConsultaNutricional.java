@@ -18,6 +18,8 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.persistence.Transient;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
@@ -95,6 +97,12 @@ public class ConsultaNutricional {
 
 	@Min(value = 1)
 	private Double agua;
+	
+	@DateTimeFormat(pattern="HH:mm")
+	private Date horarioDormir;
+
+	@DateTimeFormat(pattern="HH:mm")
+	private Date horarioAcordar;
 
 	private boolean atividadeFisica;
 	private String atividadeFisicaComentario;
@@ -305,6 +313,22 @@ public class ConsultaNutricional {
 
 	public void setAgua(Double agua) {
 		this.agua = agua;
+	}
+
+	public Date getHorarioDormir() {
+		return horarioDormir;
+	}
+
+	public void setHorarioDormir(Date horarioDormir) {
+		this.horarioDormir = horarioDormir;
+	}
+
+	public Date getHorarioAcordar() {
+		return horarioAcordar;
+	}
+
+	public void setHorarioAcordar(Date horarioAcordar) {
+		this.horarioAcordar = horarioAcordar;
 	}
 
 	public boolean isAtividadeFisica() {

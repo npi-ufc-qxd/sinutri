@@ -101,6 +101,17 @@
 									<td></td>
 								</tr>
 								<tr>
+									<td class="col-sm-3"><strong>Horário de Dormir:</strong></td>
+									<td class="col-sm-3">
+										<fmt:formatDate type="time" pattern="HH:mm" value="${consulta.horarioDormir}" />
+									</td>
+									<td class="col-sm-3"><strong>Horário de Acordar:</strong></td>
+									<td class="col-sm-3">
+										<fmt:formatDate type="time" pattern="HH:mm" value="${consulta.horarioAcordar}" />
+									</td>
+								</tr>
+								
+								<tr>
 									<td class="col-sm-3"><strong>Peso:</strong></td>
 									<td class="col-sm-3">${consulta.peso}</td>
 									<td class="col-sm-3"><strong>Peso desejado:</strong></td>
