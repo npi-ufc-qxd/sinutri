@@ -14,6 +14,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
@@ -36,24 +37,17 @@ public class FrequenciaAlimentar {
 	
 	@Enumerated(EnumType.STRING)
 	private Refeicao refeicao;
-	
-	@Enumerated(EnumType.STRING)
-	private TipoFrequencia tipofrequencia;
-	
-	/**
-	 * A classe ConsultaNutricional não está mais diretamente com FrequenciaAlimentar 
-	*/
-	/*@ManyToOne
-	@JsonIgnore
-	@JoinColumn(name = "consultaNutricional_id")
-	private ConsultaNutricional consultaNutricional;
-    */
-	
+
 	@OneToMany(cascade = CascadeType.ALL, fetch=FetchType.EAGER)
 	@JoinColumn(name= "frequenciaalimentar_id")
 	private List<Alimentacao> alimentos;
 	
 	
+	@ManyToOne
+	@JoinColumn(name = "recordatorio_id")
+	@JsonIgnore
+	private Recordatorio recordatorio;
+
 	@Override
 	public String toString() {
 		return "FrequenciaAlimentar [id=" + id + ", horario=" + horario
@@ -74,17 +68,10 @@ public class FrequenciaAlimentar {
 	public void setAlimentos(List<Alimentacao> alimentos) {
 		this.alimentos = alimentos;
 	}
-	/**
-	 * A classe ConsultaNutricional não está mais diretamente com FrequenciaAlimentar 
-	*/
-/*	public ConsultaNutricional getConsultaNutricional() {
-		return consultaNutricional;
-	}
 
-	public void setConsultaNutricional(ConsultaNutricional consultaNutricional) {
-		this.consultaNutricional = consultaNutricional;
+	public Recordatorio getRecordatorio() {
+		return recordatorio;
 	}
-*/
 
 	public void setRefeicao(Refeicao refeicao) {
 		this.refeicao = refeicao;
@@ -92,13 +79,6 @@ public class FrequenciaAlimentar {
 
 	public Refeicao getRefeicao() {
 		return refeicao;
-	}
-	
-	public void setTipo(TipoFrequencia tipofrequencia){
-		this.tipofrequencia = tipofrequencia;
-	}
-	public TipoFrequencia getTipo(){
-		return tipofrequencia;
 	}
 
 	public Date getHorario() {
@@ -110,5 +90,3 @@ public class FrequenciaAlimentar {
 	}
 	   
 }
-
-

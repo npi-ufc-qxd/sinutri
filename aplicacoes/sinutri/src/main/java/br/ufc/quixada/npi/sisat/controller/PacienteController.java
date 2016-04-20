@@ -99,11 +99,9 @@ public class PacienteController {
 			redirectAttributes.addFlashAttribute("erro", "Consulta não encontrado.");
 			return "redirect:/nutricao/buscar";
 		}
-		/**
-		 * A classe ConsultaNutricional não está mais diretamente com FrequenciaAlimentar 
-		*/
-		//consulta.setFrequencias(consultaNutricionalService.getFrequenciasByIdConsultaByTipo(id, TipoFrequencia.RECORDATORIO));
+
 		model.addAttribute("consulta", consulta);
+
 		return "nutricao/informacoes-consulta";
 	}
 
@@ -206,13 +204,6 @@ public class PacienteController {
 		if (consulta.getBebidaAlcoolicaComentario() != null && consulta.getBebidaAlcoolicaComentario().isEmpty()) {
 			consulta.setBebidaAlcoolicaComentario(null);
 		}
-		
-		/**
-		 * A classe ConsultaNutricional não está mais diretamente com FrequenciaAlimentar 
-		*/
-		/*if(consulta.getFrequencias() != null ){
-			atualizarFrequenciaAlimentar(consulta.getFrequencias(), consulta, TipoFrequencia.RECORDATORIO);
-		}*/
 
 		consultaNutricionalService.save(consulta);
 
@@ -307,13 +298,6 @@ public class PacienteController {
 
 		consulta.setData(data);
 		
-		/**
-		 * A classe ConsultaNutricional não está mais diretamente com FrequenciaAlimentar 
-		*/
-		/*if(consulta.getFrequencias() != null ){
-			atualizarFrequenciaAlimentar(consulta.getFrequencias(), consulta, TipoFrequencia.RECORDATORIO);
-		}
-		*/
 		consulta.getInqueritoAlimentar().setConsultaNutricional(consulta);
 
 		consultaNutricionalService.update(atualizarConsulta(consulta));
@@ -351,17 +335,8 @@ public class PacienteController {
 	@RequestMapping (value = { "consulta/{idConsulta}/plano-alimentar"}, method = RequestMethod.GET)
 	public String getRecordatorio(@PathVariable("idConsulta") Long id, Model model){
 		ConsultaNutricional consultaRecordatorio = consultaNutricionalService.getConsultaNutricionalWithDocumentosById(id);
-		/**
-		 * A classe ConsultaNutricional não está mais diretamente com FrequenciaAlimentar 
-		*/
-		//consultaRecordatorio.setFrequencias(consultaNutricionalService.getFrequenciasByIdConsultaByTipo(id, TipoFrequencia.RECORDATORIO));
-		
 		ConsultaNutricional consultaPlanoAlimentar = consultaNutricionalService.getConsultaNutricionalWithDocumentosById(id);
-		/**
-		 * A classe ConsultaNutricional não está mais diretamente com FrequenciaAlimentar 
-		*/
-		//consultaPlanoAlimentar.setFrequencias(consultaNutricionalService.getFrequenciasByIdConsultaByTipo(id, TipoFrequencia.PLANOALIMENTAR));		
-		
+
 		model.addAttribute("consultaRecordatorio", consultaRecordatorio);
 		model.addAttribute("consultaPlanoAlimentar", consultaPlanoAlimentar);
 		
@@ -379,17 +354,8 @@ public class PacienteController {
 	@RequestMapping (value = { "consulta/{idConsulta}/form-plano-alimentar"}, method = RequestMethod.GET)
 	public String getPlanoAlimentar(@PathVariable("idConsulta") Long id, Model model){
 		ConsultaNutricional consultaRecordatorio = consultaNutricionalService.getConsultaNutricionalWithDocumentosById(id);
-		/**
-		 * A classe ConsultaNutricional não está mais diretamente com FrequenciaAlimentar 
-		*/
-		//consultaRecordatorio.setFrequencias(consultaNutricionalService.getFrequenciasByIdConsultaByTipo(id, TipoFrequencia.RECORDATORIO));
-		
 		ConsultaNutricional consultaPlanoAlimentar = consultaNutricionalService.getConsultaNutricionalWithDocumentosById(id);
-		/**
-		 * A classe ConsultaNutricional não está mais diretamente com FrequenciaAlimentar 
-		*/
-		//consultaPlanoAlimentar.setFrequencias(consultaNutricionalService.getFrequenciasByIdConsultaByTipo(id, TipoFrequencia.PLANOALIMENTAR));		
-		
+
 		model.addAttribute("consultaRecordatorio", consultaRecordatorio);
 		model.addAttribute("consultaPlanoAlimentar", consultaPlanoAlimentar);
 		
@@ -407,25 +373,10 @@ public class PacienteController {
 	public String salvarPlanoAlimentar(@PathVariable("idConsulta") Long id, Model model, @ModelAttribute("consulta") ConsultaNutricional consultaAtual, RedirectAttributes redirectAttributes){
 		
 		ConsultaNutricional consulta = consultaNutricionalService.getConsultaNutricionalWithDocumentosById(id);
-		
-		/**
-		 * A classe ConsultaNutricional não está mais diretamente com FrequenciaAlimentar 
-		*/
-		//consulta.setFrequencias(consultaNutricionalService.getFrequenciasByIdConsultaByTipo(id, TipoFrequencia.RECORDATORIO));
 				
 		model.addAttribute("action", "cadastrar");
 		model.addAttribute("consulta", consulta);
 		
-		/**
-		 * A classe ConsultaNutricional não está mais diretamente com FrequenciaAlimentar 
-		*/
-		/*if (consultaAtual.getFrequencias() != null){
-			atualizarFrequenciaAlimentar(consultaAtual.getFrequencias(),consultaAtual, TipoFrequencia.PLANOALIMENTAR);
-			consulta.getFrequencias().addAll(consultaAtual.getFrequencias());
-		}
-
-		atualizarFrequenciaAlimentar(consulta.getFrequencias(), consulta);
-		*/
 		consultaNutricionalService.update(consulta);
 		
 		return "redirect:/paciente/consulta/" + consulta.getId() +"/plano-alimentar";
@@ -481,12 +432,9 @@ public class PacienteController {
 		List<FrequenciaAlimentar> frequencias = new ArrayList<FrequenciaAlimentar>();
 		for (FrequenciaAlimentar frequenciaAlimentar : frequenciaAlimentars) {
 			if (frequenciaAlimentar != null) {
-			/**
-			 * A classe ConsultaNutricional não está mais diretamente com FrequenciaAlimentar 
-			*/
-				//frequenciaAlimentar.setConsultaNutricional(consultaNutricional);				
+
 				frequenciaAlimentar.setAlimentos(atualizarAlimentacao(frequenciaAlimentar));
-				frequenciaAlimentar.setTipo(tipo);
+//				frequenciaAlimentar.setTipo(tipo);
 				frequencias.add(frequenciaAlimentar);
 			}
 		}
@@ -498,10 +446,6 @@ public class PacienteController {
 		for (FrequenciaAlimentar frequenciaAlimentar : frequenciaAlimentars) {
 
 			if (frequenciaAlimentar != null) {
-			/**
-			 * A classe ConsultaNutricional não está mais diretamente com FrequenciaAlimentar 
-			*/
-				//frequenciaAlimentar.setConsultaNutricional(consultaNutricional);				
 				frequenciaAlimentar.setAlimentos(atualizarAlimentacao(frequenciaAlimentar));
 				frequencias.add(frequenciaAlimentar);
 			}

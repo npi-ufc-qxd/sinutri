@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -19,14 +18,10 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 import javax.persistence.Transient;
 import javax.validation.constraints.Min;
-import javax.validation.constraints.NotNull;
 
 import org.codehaus.jackson.annotate.JsonIgnore;
-import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import br.ufc.quixada.npi.sisat.model.enuns.ClassificacaoExame;
@@ -35,11 +30,7 @@ import br.ufc.quixada.npi.sisat.model.enuns.SistemaGastrointestinal;
 import br.ufc.quixada.npi.sisat.model.enuns.SistemaUrinario;
 
 @NamedQueries({
-	//@NamedQuery(name = "ConsultaNutricional.findFrequenciasByIdconsultaByTipo", query = "select f from FrequenciaAlimentar f where f.consultaNutricional.id=:id and f.tipofrequencia=:tipo"),
-	//@NamedQuery(name = "ConsultaNutricional.findFrequenciaAlimentarByIdConsulta", query = "select f from FrequenciaAlimentar f where f.consultaNutricional.id=:id"),
 	@NamedQuery(name = "ConsultaNutricional.findConsultaNutricionalWithDocumentosById", query = "select c from ConsultaNutricional c left join fetch c.documentos where c.id=:id"),
-	//@NamedQuery(name = "ConsultaNutricional.findFrequenciasByIdConsulta", query = "select DISTINCT f from FrequenciaAlimentar f left join fetch f.alimentos where f.consultaNutricional.id = :id"),
-	//@NamedQuery(name = "ConsultaNutricional.findFrequenciasByIdConsulta", query = "select DISTINCT f from FrequenciaAlimentar f left join fetch f.alimentos where f.consultaNutricional.id = :id"),
 	@NamedQuery(name = "ConsultaNutricional.findPacientePessoaCpfById", query = "select c.paciente.pessoa.cpf from ConsultaNutricional c where c.id=:id"), 
 	@NamedQuery(name = "ConsultaNutricional.countFrequenciaMastigacao", query = "select count(c.mastigacao) from ConsultaNutricional c where c.mastigacao = TRUE"),
 	@NamedQuery(name = "ConsultaNutricional.findCountFrequenciaMastigacao", query = "select count(c.mastigacao) from ConsultaNutricional c where c.mastigacao = TRUE"),
@@ -61,14 +52,6 @@ public class ConsultaNutricional {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-
-	/**
-	 * A classe ConsultaNutricional não está mais diretamente com FrequenciaAlimentar 
-	*/
-	/*@OneToMany(mappedBy = "consultaNutricional", cascade = CascadeType.ALL)
-	@JsonIgnore
-	private List<FrequenciaAlimentar> frequencias;
-	*/
 	
 	@OneToMany(cascade = CascadeType.ALL, fetch=FetchType.LAZY)
 	@JsonIgnore
@@ -85,6 +68,12 @@ public class ConsultaNutricional {
 	@OneToMany(mappedBy = "consultaNutricional", cascade = CascadeType.ALL)
 	@JsonIgnore
 	private Set<Documento> documentos;
+	
+	
+	@OneToMany(mappedBy = "consultaNutricional", cascade = CascadeType.ALL)
+	@JsonIgnore
+	private List<Recordatorio> recordatorios;
+	
 
 	@DateTimeFormat
 	private Date data;
@@ -253,18 +242,12 @@ public class ConsultaNutricional {
 	public void setId(Long id) {
 		this.id = id;
 	}
+
 	
-	/**
-	 * A classe ConsultaNutricional não está mais diretamente com FrequenciaAlimentar 
-	*/
-	/*public List<FrequenciaAlimentar> getFrequencias() {
-		return frequencias;
+	public List<Recordatorio> getRecordatorio() {
+		return recordatorios;
 	}
 
-	public void setFrequencias(List<FrequenciaAlimentar> frequencias) {
-		this.frequencias = frequencias;
-	}
-	 */
 	public Date getData() {
 		return data;
 	}
