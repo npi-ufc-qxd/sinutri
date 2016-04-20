@@ -14,8 +14,6 @@ public interface ConsultaNutricionalService extends GenericService<ConsultaNutri
 
 	public abstract List<FrequenciaAlimentar> getFrequenciasByIdConsultaByTipo(Long id, TipoFrequencia tipoFrequencia);
 
-	public abstract String getOrientacoesIndividuaisById(Long id);
-
 	public abstract String getPacientePessoaCpfById(Long id);
 
 	public abstract List<FrequenciaAlimentar> getFrequenciasByIdConsulta(Long id);
