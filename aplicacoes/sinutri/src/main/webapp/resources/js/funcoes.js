@@ -4,6 +4,7 @@ $(document).ready(function() {
 		return false;
 	});
 	
+	
 	$(".checkboxInput").change(function() {
 		var itemForm = $(this).parent().parent();
 
@@ -146,25 +147,52 @@ $(document).ready(function() {
 					{
 						rules : {
 							objetivoConsulta : {
-								required : true
+								maxlength: 256
 							},
-							altura : {
-								required : true
+							medicamentoComentario:{
+								maxlength: 256
 							},
-							peso : {
-								required : true
+							mastigacaoComentario:{
+								maxlength: 256
 							},
-							pesoDesejado : {
-								required : true
+							alergiaComentario:{
+								maxlength: 256
 							},
-							circunferenciaCintura : {
-								required : true
+							outrasPatologiasComentario:{
+								maxlength: 256
 							},
-							circunferenciaCinturaDesejada : {
-								required : true
+							disfagiaComentario:{
+								maxlength: 256
 							},
-							agua : {
-								required : true
+							odinofagiaComentario:{
+								maxlength: 256
+							},
+							piroseComentario:{
+								maxlength: 256
+							},
+							nauseaComentario:{
+								maxlength: 256
+							},
+							vomitoComentario:{
+								maxlength: 256
+							},
+							diarreiaComentario:{
+								maxlength: 256
+							},
+							constipacaoComentario:{
+								maxlength: 256
+							},
+							carneVermelhaComentario:{
+								maxlength: 256
+							},
+							bebidaAlcoolicaComentario:{
+								maxlength: 256
+							},
+							atividadeFisicaComentario:{
+								maxlength: 256
+							},
+							intoleranciaComentario:{
+								maxlength: 256
 							}
 						},
 						highlight : function(element) {
@@ -187,82 +215,107 @@ $(document).ready(function() {
 									id);
 						},
 						messages : {
-							objetivoConsulta : {
-								required : "Descreva o objetivo da consulta do paciente."
+							objetivoConsulta : {								
+								maxlength: "O objetivo da consulta deve ter menos que 256 carácteres"
 							},
 							altura : {
-								required : "Informe a altura do paciente.",
 								min: "O valor não pode ser negativo"
 							},
 							peso : {
-								required : "Informe o peso do paciente.",
 								min: "O valor não pode ser negativo"								
 							},
 							pesoDesejado : {
-								required : "Informe o peso desejado pelo paciente.",
 								min: "O valor não pode ser negativo"
 							},
 							circunferenciaCintura : {
-								required : "Informe a circunferência da cintura do paciente.",
 								min: "O valor não pode ser negativo"
 							},
 							circunferenciaCinturaDesejada : {
-								required : "Informe a circunferência da cintura desejada pelo paciente.",
 								min: "O valor não pode ser negativo"
 							},
-							agua : {
-								required : "Informe a quantidade de copos de água consumidos pelo paciente."
-							},
 							atividadeFisicaComentario : {
-								required : "Informe qual a(s) ativadade(s) física(s) praticada(s) pelo paciente."
+								required : "Informe qual a(s) ativadade(s) física(s) praticada(s) pelo paciente.",
+								maxlength: "A(s) atividade(s) física(s) precisa(m) ocupar menos que 256 carácteres"
+
 							},
 							atividadeFisicaFrequenciaSemanal : {
 								required : "Informe qual a frequência da(s) atividade(s) física(s) praticada(s) pelo paciente."
 							},
 							carneVermelhaComentario : {
-								required : "Informe o tipo de carne vermelha consumida pelo paciente."
+								required : "Informe o tipo de carne vermelha consumida pelo paciente.",
+								maxlength: "O comentários sobre carne vermelha precisam ocupar menos que 256 carácteres"
+
 							},
 							carneVermelhaFrequenciaSemanal : {
 								required : "Informe a frequência do consumo de carne vermelha pelo paciente."
 							},
 							bebidaAlcoolicaComentario : {
-								required : "Informe a bebida alcoólica comsumida pelo paciente."
+								required : "Informe a bebida alcoólica comsumida pelo paciente.",
+								maxlength: "Os comentários sobre disfagia precisam ocupar menos que 256 carácteres"
+
 							},
 							bebidaAlcoolicaFrequenciaSemanal : {
 								required : "Informe a frequência do consumo de bebiba alcoólica pelo paciente."
 							},
+							cigarroComentario : {
+								required : "Informe o comentário."
+							},
+							cigarroFrequenciaSemanal : {
+								required : "Informe a frequência do consumo de cigarro pelo paciente."
+							},
 							medicamentoComentario : {
-								required : "Informe o(s) medicamento(s) utilizado(s) pelo paciente."
+								required : "Informe o(s) medicamento(s) utilizado(s) pelo paciente.",
+								maxlength: "A descrição dos medicamentos precisam ter menos de 256 carácteres"
 							},
 							mastigacaoComentario : {
-								required : "Informe características da mastigação do paciente."
+								required : "Informe características da mastigação do paciente.",
+								maxlength: "As características da mastigação precisam ocupar menos de 256 carácteres"
 							},
 							disfagiaComentario : {
-								required : "Informe comentários sobre a disfagia do paciente."
+								required : "Informe comentários sobre a disfagia do paciente.",
+								maxlength: "Os comentários sobre disfagia precisam ocupar menos que 256 carácteres"
 							},
 							odinofagiaComentario : {
-								required : "Informe comentários sobre a odinofagia do paciente."
+								required : "Informe comentários sobre a odinofagia do paciente.",
+								maxlength: "Os comentários sobre odinofagia precisam ocupar menos que 256 carácteres"
+
 							},
 							piroseComentario : {
-								required : "Informe comentários sobre a pirose do paciente."
+								required : "Informe comentários sobre a pirose do paciente.",
+								maxlength: "Os comentários sobre pirose precisam ocupar menos que 256 carácteres"
+
 							},
 							nauseaComentario : {
-								required : "Informe comentários sobre náuseas do paciente."
+								required : "Informe comentários sobre náuseas do paciente.",
+								maxlength: "Os comentários sobre náuseas precisam ocupar menos que 256 carácteres"
+
 							},
 							vomitoComentario : {
-								required : "Informe comentários sobre vômitos do paciente."
+								required : "Informe comentários sobre vômitos do paciente.",
+								maxlength: "Os comentários sobre vômitos precisam ocupar menos que 256 carácteres"
+
 							},
 							diarreiaComentario : {
-								required : "Informe comentários sobre a diarreia do paciente."
+								required : "Informe comentários sobre a diarreia do paciente.",
+								maxlength: "Os comentários sobre diarreia precisam ocupar menos que 256 carácteres"
+
 							},
 							constipacaoComentario : {
-								required : "Informe comentários sobre a constipação do paciente."
+								required : "Informe comentários sobre a constipação do paciente.",
+								maxlength: "Os comentários sobre constipação precisam ocupar menos que 256 carácteres"
+
 							},
 							alergiaComentario : {
-								required : "Informe se o paciente possui alguma alergia alimentar."
+								required : "Informe se o paciente possui alguma alergia alimentar.",
+								maxlength: "Os comentário sobre alergia alimentar precisam ocupar menos que 256 carácteres"
+							},
+							intoleranciaComentario : {
+								required : "Informe se o paciente possui alguma intolerância alimentar.",
+								maxlength: "Os comentário sobre intolerância alimentar precisam ocupar menos que 256 carácteres"
 							},
 							outrasPatologiasComentario : {
-								required : "Informe outras patologias do paciente."
+								required : "Informe outras patologias do paciente.",
+								maxlength: "A descrição de outras patologias precisam ocupar menos que 256 carácteres"
 							},
 							glicemia : {
 								required : "Informe o nível de glicemia do paciente."
@@ -316,7 +369,58 @@ $(document).ready(function() {
 								required: "Informe a quantidade de carne Bovina."
 							}
 						}
+
 					});
+	$('#form-cadastro-paciente-externo').validate(
+			{
+				rules : {
+					nome : {
+						required : true
+					},
+					dataNascimento : {
+						required : true
+					},
+					vinculo : {
+						required : true
+					},
+					telefone : {
+						required : true
+					},
+				},
+				highlight : function(element) {
+					$(element).closest('.form-item')
+							.addClass('has-error');
+				},
+				unhighlight : function(element) {
+					$(element).closest('.form-group')
+							.removeClass('has-error');
+				},
+				errorElement : 'span',
+				errorClass : 'help-block',
+				errorPlacement : function(error,
+						element) {
+					error.insertAfter(element.parent()
+							.children().last());
+					var itemForm = element.parent();
+					var id = element.attr("name");
+					$(itemForm).find("span").attr("id",
+							id);
+				},
+				messages : {
+					nome : {
+						required : "Informe o nome do paciente."
+					},
+					dataNascimento : {
+						required : "Informe a data de nascimento do paciente."
+					},
+					vinculo : {
+						required : "Informe o vinculo do paciente com a universidade."
+					},
+					telefone : {
+						required : "Informe o telefone do paciente."
+					}
+				}
+			});
 					
 					$('#form-alimento-subst').validate(
 						{
@@ -418,4 +522,22 @@ function(e) {
 	        '</div>'
     	}
     });
+	
+	aplicarMascaras();
 });
+
+//Definição das Mascaras
+$.mask.definitions['H'] = "[0-2]";
+$.mask.definitions['h'] = "[0-9]";
+$.mask.definitions['M'] = "[0-5]";
+$.mask.definitions['m'] = "[0-9]";
+
+function aplicarMascaras(){
+	$(".hora").mask("Hh:Mm",
+			{ completed:function(){
+				if(this.val()>="24:00"){
+					this.val("00:00");
+				}
+			}
+	});
+}
