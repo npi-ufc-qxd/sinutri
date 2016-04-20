@@ -57,7 +57,7 @@ $(function() {
 
 		{
 			name : 'refeicao',
-			display : 'Tipo de refição',
+			display : 'Tipo de refeição',
 			type : 'select',
 			ctrlOptions : 'DESJEJUM:Desjejum;COLACAO:Colação;ALMOCO:Almoço;LANCHE:Lanche;JANTAR:Jantar;CEIA:Ceia',
 			ctrlClass: 'form-control',
@@ -102,8 +102,8 @@ $(function() {
 		useSubPanel : true,
 		subPanelBuilder : function(cell, uniqueIndex) {
 			var idPanel = uniqueIndex-1;
-
-			$(".hora").mask("99:99");
+			
+			aplicarMascaras();
 
 			var subgrid = $('<table></table>').attr('id', 'tblSubGrid_' + uniqueIndex).attr('class', 'tblSubGrid table table-striped').appendTo(cell);
 

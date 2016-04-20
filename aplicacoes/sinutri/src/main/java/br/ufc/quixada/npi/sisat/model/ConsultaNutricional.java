@@ -5,10 +5,10 @@ import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -20,24 +20,16 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Transient;
 import javax.validation.constraints.Min;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-
 import org.codehaus.jackson.annotate.JsonIgnore;
-import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.format.annotation.DateTimeFormat;
-
 import br.ufc.quixada.npi.sisat.model.enuns.ClassificacaoExame;
 import br.ufc.quixada.npi.sisat.model.enuns.Frequencia;
 import br.ufc.quixada.npi.sisat.model.enuns.SistemaGastrointestinal;
 import br.ufc.quixada.npi.sisat.model.enuns.SistemaUrinario;
 
 @NamedQueries({
-	@NamedQuery(name = "ConsultaNutricional.findFrequenciasByIdconsultaByTipo", query = "select f from FrequenciaAlimentar f where f.consultaNutricional.id=:id and f.tipofrequencia=:tipo"),
-	@NamedQuery(name = "ConsultaNutricional.findFrequenciaAlimentarByIdConsulta", query = "select f from FrequenciaAlimentar f where f.consultaNutricional.id=:id"),
 	@NamedQuery(name = "ConsultaNutricional.findConsultaNutricionalWithDocumentosById", query = "select c from ConsultaNutricional c left join fetch c.documentos where c.id=:id"),
-	@NamedQuery(name = "ConsultaNutricional.findFrequenciasByIdConsulta", query = "select DISTINCT f from FrequenciaAlimentar f left join fetch f.alimentos where f.consultaNutricional.id = :id"),
-	@NamedQuery(name = "ConsultaNutricional.findOrientacoesIndividuaisById", query = "select c.orientacoesIndividuais from ConsultaNutricional c where c.id=:id"),
 	@NamedQuery(name = "ConsultaNutricional.findPacientePessoaCpfById", query = "select c.paciente.pessoa.cpf from ConsultaNutricional c where c.id=:id"), 
 	@NamedQuery(name = "ConsultaNutricional.countFrequenciaMastigacao", query = "select count(c.mastigacao) from ConsultaNutricional c where c.mastigacao = TRUE"),
 	@NamedQuery(name = "ConsultaNutricional.findCountFrequenciaMastigacao", query = "select count(c.mastigacao) from ConsultaNutricional c where c.mastigacao = TRUE"),
@@ -48,8 +40,6 @@ import br.ufc.quixada.npi.sisat.model.enuns.SistemaUrinario;
 	@NamedQuery(name = "ConsultaNutricional.countFrequenciaVomito", query = "select count(c.vomito) from ConsultaNutricional c where c.vomito = TRUE"),
 	@NamedQuery(name = "ConsultaNutricional.countFrequenciaDiarreia", query = "select count(c.diarreia) from ConsultaNutricional c where c.diarreia = TRUE"),
 	@NamedQuery(name = "ConsultaNutricional.countFrequenciaConstipacao", query = "select count(c.constipacao) from ConsultaNutricional c where c.constipacao = TRUE"),
-	@NamedQuery(name = "ConsultaNutricional.countFrequenciaDiabetes", query = "select count(c.diabetes) from ConsultaNutricional c where c.diabetes = TRUE"),
-	@NamedQuery(name = "ConsultaNutricional.countFrequenciaHipertensao", query = "select count(c.hipertensao) from ConsultaNutricional c where c.hipertensao = TRUE"),
 	@NamedQuery(name = "ConsultaNutricional.countFrequenciaAlergia", query = "select count(c.alergia) from ConsultaNutricional c where c.alergia = TRUE"),
 	@NamedQuery(name = "ConsultaNutricional.countFrequenciaOutrasPatologias", query = "select count(c.outrasPatologias) from ConsultaNutricional c where c.outrasPatologias = TRUE"),
 	@NamedQuery(name = "ConsultaNutricional.historicoPaciente", query = "select new br.ufc.quixada.npi.sisat.model.InformacaoGraficaConsultaNutricional(c.paciente.pessoa.sexo, c.data, c.peso, c.altura, c.circunferenciaCintura) from ConsultaNutricional c where c.paciente.pessoa.cpf = :cpf ")
@@ -61,10 +51,11 @@ public class ConsultaNutricional {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-
-	@OneToMany(mappedBy = "consultaNutricional", cascade = CascadeType.ALL)
+	
+	@OneToMany(cascade = CascadeType.ALL, fetch=FetchType.LAZY)
 	@JsonIgnore
-	private List<FrequenciaAlimentar> frequencias;
+	@JoinColumn(name= "consultanutricional_id")
+	private List<PlanoAlimentar> planosAlimentares;
 
 	@ManyToOne
 	@JoinColumn(name = "paciente_id")
@@ -76,37 +67,42 @@ public class ConsultaNutricional {
 	@OneToMany(mappedBy = "consultaNutricional", cascade = CascadeType.ALL)
 	@JsonIgnore
 	private Set<Documento> documentos;
+	
+	
+	@OneToMany(mappedBy = "consultaNutricional", cascade = CascadeType.ALL)
+	@JsonIgnore
+	private List<Recordatorio> recordatorios;
+	
 
 	@DateTimeFormat
 	private Date data;
-
-	@NotEmpty(message = "Informe o objetivo da consulta")
+	
 	@Size(max=256, message="O objetivo da consulta deve ter menos que 256 carácteres")
 	private String objetivoConsulta;
 
-	@NotNull(message = "Informe a altura")
 	@Min(value = 1)
 	private Double altura;
 
-	@NotNull(message = "Informe o peso")
 	@Min(value = 1)
 	private Double peso;
 
-	@NotNull(message = "Informe o peso desejado")
 	@Min(value = 1)
 	private Double pesoDesejado;
 
-	@NotNull(message = "Informe a cc")
 	@Min(value = 1)
 	private Double circunferenciaCintura;
 
-	@NotNull(message = "Informe a cc desejada")
 	@Min(value = 1)
 	private Double circunferenciaCinturaDesejada;
 
-	@NotNull(message = "Informe a quantidade de copos de água consumida")
 	@Min(value = 1)
 	private Double agua;
+	
+	@DateTimeFormat(pattern="HH:mm")
+	private Date horarioDormir;
+
+	@DateTimeFormat(pattern="HH:mm")
+	private Date horarioAcordar;
 
 	private boolean atividadeFisica;
 	@Size(max=256, message="Os comentários sobre atividade física precisam ocupar menos que 256 carácteres")
@@ -114,17 +110,17 @@ public class ConsultaNutricional {
 	@Enumerated(EnumType.STRING)
 	private Frequencia atividadeFisicaFrequenciaSemanal;
 
-	private boolean carneVermelha;
-	private String carneVermelhaComentario;
-	@Enumerated(EnumType.STRING)
-	private Frequencia carneVermelhaFrequenciaSemanal;
-
 	private boolean bebidaAlcoolica;
 	@Size(max=256, message="Os comentários sobre bebida alcóolica precisam ocupar menos que 256 carácteres")
 	private String bebidaAlcoolicaComentario;
 	@Enumerated(EnumType.STRING)
 	private Frequencia bebidaAlcoolicaFrequenciaSemanal;
-
+	
+	private boolean cigarro;
+	private String cigarroComentario;
+	@Enumerated(EnumType.STRING)
+	private Frequencia cigarroFrequenciaSemanal;
+	
 	@Enumerated(EnumType.STRING)
 	private SistemaGastrointestinal sistemaGastrointestinal;
 
@@ -132,6 +128,7 @@ public class ConsultaNutricional {
 	private SistemaUrinario sistemaUrinario;
 
 	private boolean medicamento;
+
 	@Size(max=256, message="A descrição dos medicamentos precisam ter menos de 256 carácteres")
 	private String medicamentoComentario;
 
@@ -170,12 +167,12 @@ public class ConsultaNutricional {
 	private boolean regurgitacao;
 	private String regurgitacaoComentario;
 
-	private boolean diabetes;
-	private boolean hipertensao;
-
 	private boolean alergia;
 	@Size(max=256, message="Os comentários sobre alergia alimentar precisam ocupar menos que 256 carácteres")
 	private String alergiaComentario;
+	
+	private boolean intolerancia;
+	private String intoleranciaComentario;
 
 	private boolean outrasPatologias;
 	@Size(max=256, message="Os comentários sobre outras patologias precisam ocupar menos que 256 carácteres")
@@ -214,13 +211,7 @@ public class ConsultaNutricional {
 	@Transient
 	private String classificacaoCC;
 
-	@Column(columnDefinition = "TEXT")
-	@NotNull(message = "Informe as orientações para o paciente.")
-	private String orientacoesIndividuais;
-
 	private String informacoesComplementaresExames;
-
-	private String condutaNutricional;
 
 	private String observacooesDaConsulta;
 
@@ -258,15 +249,6 @@ public class ConsultaNutricional {
 		this.documentos = documentos;
 	}
 
-	public String getOrientacoesIndividuais() {
-		return orientacoesIndividuais;
-	}
-
-	public void setOrientacoesIndividuais(String orientacoesIndividuais) {
-		this.orientacoesIndividuais = orientacoesIndividuais;
-
-	}
-
 	public Long getId() {
 		return id;
 	}
@@ -275,12 +257,9 @@ public class ConsultaNutricional {
 		this.id = id;
 	}
 
-	public List<FrequenciaAlimentar> getFrequencias() {
-		return frequencias;
-	}
-
-	public void setFrequencias(List<FrequenciaAlimentar> frequencias) {
-		this.frequencias = frequencias;
+	
+	public List<Recordatorio> getRecordatorio() {
+		return recordatorios;
 	}
 
 	public Date getData() {
@@ -347,6 +326,22 @@ public class ConsultaNutricional {
 		this.agua = agua;
 	}
 
+	public Date getHorarioDormir() {
+		return horarioDormir;
+	}
+
+	public void setHorarioDormir(Date horarioDormir) {
+		this.horarioDormir = horarioDormir;
+	}
+
+	public Date getHorarioAcordar() {
+		return horarioAcordar;
+	}
+
+	public void setHorarioAcordar(Date horarioAcordar) {
+		this.horarioAcordar = horarioAcordar;
+	}
+
 	public boolean isAtividadeFisica() {
 		return atividadeFisica;
 	}
@@ -371,36 +366,37 @@ public class ConsultaNutricional {
 		this.atividadeFisicaFrequenciaSemanal = atividadeFisicaFrequenciaSemanal;
 	}
 
-	public boolean isCarneVermelha() {
-		return carneVermelha;
-	}
-
-	public void setCarneVermelha(boolean carneVermelha) {
-		this.carneVermelha = carneVermelha;
-	}
-
-	public String getCarneVermelhaComentario() {
-		return carneVermelhaComentario;
-	}
-
-	public void setCarneVermelhaComentario(String carneVermelhaComentario) {
-		this.carneVermelhaComentario = carneVermelhaComentario;
-	}
-
-	public Frequencia getCarneVermelhaFrequenciaSemanal() {
-		return carneVermelhaFrequenciaSemanal;
-	}
-
-	public void setCarneVermelhaFrequenciaSemanal(Frequencia carneVermelhaFrequenciaSemanal) {
-		this.carneVermelhaFrequenciaSemanal = carneVermelhaFrequenciaSemanal;
-	}
-
+	
 	public boolean isBebidaAlcoolica() {
 		return bebidaAlcoolica;
 	}
 
 	public void setBebidaAlcoolica(boolean bebidaAlcoolica) {
 		this.bebidaAlcoolica = bebidaAlcoolica;
+	}
+		
+	public boolean isCigarro() {
+		return cigarro;
+	}
+
+	public void setCigarro(boolean cigarro) {
+		this.cigarro = cigarro;
+	}
+
+	public String getCigarroComentario() {
+		return cigarroComentario;
+	}
+
+	public void setCigarroComentario(String cigarroComentario) {
+		this.cigarroComentario = cigarroComentario;
+	}
+
+	public Frequencia getCigarroFrequenciaSemanal() {
+		return cigarroFrequenciaSemanal;
+	}
+
+	public void setCigarroFrequenciaSemanal(Frequencia cigarroFrequenciaSemanal) {
+		this.cigarroFrequenciaSemanal = cigarroFrequenciaSemanal;
 	}
 
 	public void setInqueritoAlimentar(InqueritoAlimentar inqueritoAlimentar) {
@@ -603,22 +599,6 @@ public class ConsultaNutricional {
 		this.regurgitacaoComentario = regurgitacaoComentario;
 	}
 
-	public boolean isDiabetes() {
-		return diabetes;
-	}
-
-	public void setDiabetes(boolean diabetes) {
-		this.diabetes = diabetes;
-	}
-
-	public boolean isHipertensao() {
-		return hipertensao;
-	}
-
-	public void setHipertensao(boolean hipertensao) {
-		this.hipertensao = hipertensao;
-	}
-
 	public boolean isAlergia() {
 		return alergia;
 	}
@@ -635,6 +615,22 @@ public class ConsultaNutricional {
 		this.alergiaComentario = alergiaComentario;
 	}
 
+	public boolean isIntolerancia() {
+		return intolerancia;
+	}
+
+	public void setIntolerancia(boolean intolerancia) {
+		this.intolerancia = intolerancia;
+	}
+
+	public String getIntoleranciaComentario() {
+		return intoleranciaComentario;
+	}
+
+	public void setIntoleranciaComentario(String intoleranciaComentario) {
+		this.intoleranciaComentario = intoleranciaComentario;
+	}
+	
 	public boolean isOutrasPatologias() {
 		return outrasPatologias;
 	}
@@ -785,14 +781,6 @@ public class ConsultaNutricional {
 
 	public void setInformacoesComplementaresExames(String informacoesComplementaresExames) {
 		this.informacoesComplementaresExames = informacoesComplementaresExames;
-	}
-
-	public String getCondutaNutricional() {
-		return condutaNutricional;
-	}
-
-	public void setCondutaNutricional(String condutaNutricional) {
-		this.condutaNutricional = condutaNutricional;
 	}
 
 	public String getObservacooesDaConsulta() {

@@ -4,6 +4,7 @@ $(document).ready(function() {
 		return false;
 	});
 	
+	
 	$(".checkboxInput").change(function() {
 		var itemForm = $(this).parent().parent();
 
@@ -146,26 +147,7 @@ $(document).ready(function() {
 					{
 						rules : {
 							objetivoConsulta : {
-								required : true,
 								maxlength: 256
-							},
-							altura : {
-								required : true
-							},
-							peso : {
-								required : true
-							},
-							pesoDesejado : {
-								required : true
-							},
-							circunferenciaCintura : {
-								required : true
-							},
-							circunferenciaCinturaDesejada : {
-								required : true
-							},
-							agua : {
-								required : true
 							},
 							medicamentoComentario:{
 								maxlength: 256
@@ -209,8 +191,9 @@ $(document).ready(function() {
 							atividadeFisicaComentario:{
 								maxlength: 256
 							},
-							
-							
+							intoleranciaComentario:{
+								maxlength: 256
+							}
 						},
 						highlight : function(element) {
 							$(element).closest('.form-item')
@@ -233,26 +216,7 @@ $(document).ready(function() {
 						},
 						messages : {
 							objetivoConsulta : {
-								required : "Descreva o objetivo da consulta do paciente.",
 								maxlength: "O objetivo da consulta deve ter menos que 256 carácteres"
-							},
-							altura : {
-								required : "Informe a altura do paciente."
-							},
-							peso : {
-								required : "Informe o peso do paciente."
-							},
-							pesoDesejado : {
-								required : "Informe o peso desejado pelo paciente."
-							},
-							circunferenciaCintura : {
-								required : "Informe a circunferência da cintura do paciente."
-							},
-							circunferenciaCinturaDesejada : {
-								required : "Informe a circunferência da cintura desejada pelo paciente."
-							},
-							agua : {
-								required : "Informe a quantidade de copos de água consumidos pelo paciente."
 							},
 							atividadeFisicaComentario : {
 								required : "Informe qual a(s) ativadade(s) física(s) praticada(s) pelo paciente.",
@@ -276,7 +240,13 @@ $(document).ready(function() {
 
 							},
 							bebidaAlcoolicaFrequenciaSemanal : {
-								required : "Informe a frequência do consumo de bebiba alcoólica pelo paciente."								
+								required : "Informe a frequência do consumo de bebiba alcoólica pelo paciente."
+							},
+							cigarroComentario : {
+								required : "Informe o comentário."
+							},
+							cigarroFrequenciaSemanal : {
+								required : "Informe a frequência do consumo de cigarro pelo paciente."
 							},
 							medicamentoComentario : {
 								required : "Informe o(s) medicamento(s) utilizado(s) pelo paciente.",
@@ -323,6 +293,10 @@ $(document).ready(function() {
 							alergiaComentario : {
 								required : "Informe se o paciente possui alguma alergia alimentar.",
 								maxlength: "Os comentário sobre alergia alimentar precisam ocupar menos que 256 carácteres"
+							},
+							intoleranciaComentario : {
+								required : "Informe se o paciente possui alguma intolerância alimentar.",
+								maxlength: "Os comentário sobre intolerância alimentar precisam ocupar menos que 256 carácteres"
 							},
 							outrasPatologiasComentario : {
 								required : "Informe outras patologias do paciente.",
@@ -483,4 +457,22 @@ function(e) {
 	        '</div>'
     	}
     });
+	
+	aplicarMascaras();
 });
+
+//Definição das Mascaras
+$.mask.definitions['H'] = "[0-2]";
+$.mask.definitions['h'] = "[0-9]";
+$.mask.definitions['M'] = "[0-5]";
+$.mask.definitions['m'] = "[0-9]";
+
+function aplicarMascaras(){
+	$(".hora").mask("Hh:Mm",
+			{ completed:function(){
+				if(this.val()>="24:00"){
+					this.val("00:00");
+				}
+			}
+	});
+}
