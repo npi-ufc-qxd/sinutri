@@ -56,10 +56,11 @@
 									<fmt:formatDate var="dataFormatada" type="both" pattern="dd/MM/yyyy HH:mm" value="${consulta.data}" />
 						            <tr>
 						                <td>${cont.count }ª Consulta</td>
-										<td><a href="<c:url value="/paciente/consulta/${consulta.id}"/>">${dataFormatada}</a></td>
+										<td>${dataFormatada}</a></td>
+										
 						                <td align="right">
-							              <a href="<c:url value="/paciente/${pessoa.cpf}/consulta/${consulta.id}/relatorio/orientacoes"/>" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-file"></span> Relatorio</a>
-							              <a href="<c:url value="/paciente/${pessoa.cpf}/consulta/${consulta.id}/editar"/>" class="btn btn-warning btn-sm"><span class="glyphicon glyphicon-edit"></span> Editar</a>							             
+							              <a href="<c:url value="/paciente/consulta/${consulta.id}"/>" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-eye-open"> </> Detalhes </a>
+							              <a href="<c:url value="/paciente/${pessoa.cpf}/consulta/${consulta.id}/editar"/>" class="btn btn-warning btn-sm"><span class="glyphicon glyphicon-edit"></span> Editar</a>
 						                </td>
 						            </tr>
 								</c:forEach>
