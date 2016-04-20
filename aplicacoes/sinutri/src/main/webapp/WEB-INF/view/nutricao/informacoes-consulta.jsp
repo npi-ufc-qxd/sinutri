@@ -37,9 +37,6 @@
 				<a href="<c:url value="/paciente/${consulta.paciente.pessoa.cpf}/historico"></c:url>" class="btn btn-primary btn-sm"><span
 					class="glyphicon glyphicon-chevron-left"></span> Voltar</a> 
 					
-					<a href="<c:url value="/paciente/consulta/${consulta.id}/plano-alimentar"></c:url>"
-					class="btn btn-info btn-sm">Plano Alimentar</a> 
-					
 					<a
 					href="<c:url value="/paciente/${consulta.paciente.pessoa.cpf}/consulta/${consulta.id}/editar"/>"
 					class="btn btn-warning btn-sm"><span
@@ -245,48 +242,6 @@
 				${consulta.medicamento ? consulta.medicamentoComentario  : "Não usa medicamentos"}
 				<br> <label><strong> Patologias: </strong></label>
 				${consulta.outrasPatologias ? consulta.outrasPatologiasComentario  : "Não possui outras patologias"}
-
-				<h3 id="recordatorio" class="section">Recordatório</h3>
-
-				<c:if test="${empty consulta.frequencias}">
-					<div class="alert alert-dismissible alert-default">Não há
-						informações sobre o recordatório alimentar.</div>
-				</c:if>
-
-				<c:forEach var="freq" items="${consulta.frequencias}">
-					<div class="row">
-						<fmt:formatDate var="horaFormatada" type="time" dateStyle="short"
-							timeStyle="short" value="${freq.horario}" />
-
-						<div class="col-sm-2 label-horario" align="center">
-							<h4>
-								<strong class="label label-info">${freq.refeicao.nome }</strong>
-							</h4>
-							<h1>
-								<span class="label label-primary">${horaFormatada}</span>
-							</h1>
-						</div>
-
-						<div class="col-sm-10">
-							<table class="table table-striped">
-								<thead class="thead">
-									<tr>
-										<th>Alimento/Preparo</th>
-										<th>Porção</th>
-									</tr>
-								</thead>
-								<tbody>
-									<c:forEach var="alimento" items="${freq.alimentos }">
-										<tr>
-											<td>${alimento.alimento }</td>
-											<td>${alimento.porcao }</td>
-										</tr>
-									</c:forEach>
-								</tbody>
-							</table>
-						</div>
-					</div>
-				</c:forEach>
 
 				<h3 id="exame" class="section">Exames Laboratoriais</h3>
 

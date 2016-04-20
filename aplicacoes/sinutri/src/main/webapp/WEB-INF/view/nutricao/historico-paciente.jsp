@@ -59,7 +59,8 @@
 										<td>${dataFormatada}</a></td>
 										
 						                <td align="right">
-							              <a href="<c:url value="/paciente/consulta/${consulta.id}"/>" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-eye-open"> </> Detalhes </a>
+ 										  <a href="<c:url value="/paciente/consulta/${consulta.id}/plano-alimentar"></c:url>" class="btn btn-info btn-sm">Plano Alimentar</a> 
+ 							              <a href="<c:url value="/paciente/consulta/${consulta.id}"/>" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-eye-open"> </> Detalhes </a>
 							              <a href="<c:url value="/paciente/${pessoa.cpf}/consulta/${consulta.id}/editar"/>" class="btn btn-warning btn-sm"><span class="glyphicon glyphicon-edit"></span> Editar</a>
 						                </td>
 						            </tr>

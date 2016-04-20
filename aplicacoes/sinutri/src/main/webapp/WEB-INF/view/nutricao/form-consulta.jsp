@@ -72,9 +72,9 @@
 					<li class="active"><a href="#avaliacao"> <span
 							class="badge">1</span> Anamnese
 					</a></li>
-					<li><a href="#recordatorio"> <span class="badge">2</span>
-							Recordatório Alimentar
-					</a></li>
+<!-- 					<li><a href="#recordatorio"> <span class="badge">2</span> -->
+<!-- 							Recordatório Alimentar -->
+<!-- 					</a></li> -->
 					<li><a href="#exame"> <span class="badge">3</span> Exames
 							Laboratoriais
 					</a></li>
@@ -508,15 +508,15 @@
 						</div>
 					</div>
 
-					<h4 id="recordatorio" class="section">
-						<strong>Recordatório</strong>
-					</h4>
+<!-- 					<h4 id="recordatorio" class="section"> -->
+<!-- 						<strong>Recordatório</strong> -->
+<!-- 					</h4> -->
 
-					<div class="row form-group">
-						<div class="form-item col-sm-12">
-							<table id="questionarioFrequenciaAlimentar" class="table"></table>
-						</div>
-					</div>
+<!-- 					<div class="row form-group"> -->
+<!-- 						<div class="form-item col-sm-12"> -->
+<!-- 							<table id="questionarioFrequenciaAlimentar" class="table"></table> -->
+<!-- 						</div> -->
+<!-- 					</div> -->
 
 
 					<h4 id="exame" class="section">
@@ -1611,28 +1611,6 @@
 		src="<c:url value="/resources/js/questionario-frequencia-alimentar.js" />"></script>
 	<script src="<c:url value="/resources/js/inquerito-alimentar.js" />"></script>
 
-	<script type="text/javascript">
-		$('#menu-paciente').addClass('active');
-		loadFrequenciaAlimentar("RECORDATORIO");
-		$(".anexo").fileinput(
-				{
-					uploadUrl : "/file-upload-batch/2",
-					showUpload : false,
-					showRemove : false,
-					language : 'pt-BR',
-					uploadAsync : false,
-					fileselectnone : true,
-					allowedPreviewTypes : null,
-					// 	    	allowedPreviewMimeTypes: ['image/jpeg'],
-					layoutTemplates : {
-						actions : '<div class="file-actions">\n'
-								+ '    <div class="file-footer-buttons">\n'
-								+ '        {delete}' + '    </div>\n'
-								+ '    <div class="clearfix"></div>\n'
-								+ '</div>'
-					}
-				});
-	</script>
-
+	
 </body>
 </html>

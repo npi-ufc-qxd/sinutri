@@ -40,11 +40,15 @@ public class FrequenciaAlimentar {
 	@Enumerated(EnumType.STRING)
 	private TipoFrequencia tipofrequencia;
 	
-	@ManyToOne
+	/**
+	 * A classe ConsultaNutricional não está mais diretamente com FrequenciaAlimentar 
+	*/
+	/*@ManyToOne
 	@JsonIgnore
 	@JoinColumn(name = "consultaNutricional_id")
 	private ConsultaNutricional consultaNutricional;
-    
+    */
+	
 	@OneToMany(cascade = CascadeType.ALL, fetch=FetchType.EAGER)
 	@JoinColumn(name= "frequenciaalimentar_id")
 	private List<Alimentacao> alimentos;
@@ -70,16 +74,17 @@ public class FrequenciaAlimentar {
 	public void setAlimentos(List<Alimentacao> alimentos) {
 		this.alimentos = alimentos;
 	}
-
-	
-	public ConsultaNutricional getConsultaNutricional() {
+	/**
+	 * A classe ConsultaNutricional não está mais diretamente com FrequenciaAlimentar 
+	*/
+/*	public ConsultaNutricional getConsultaNutricional() {
 		return consultaNutricional;
 	}
 
 	public void setConsultaNutricional(ConsultaNutricional consultaNutricional) {
 		this.consultaNutricional = consultaNutricional;
 	}
-
+*/
 
 	public void setRefeicao(Refeicao refeicao) {
 		this.refeicao = refeicao;
