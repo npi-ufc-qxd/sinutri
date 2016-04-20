@@ -476,11 +476,11 @@ public class PacienteController {
 			pessoa.getPaciente().setAlturaAtual(1.0);
 			pessoa.getPaciente().setCircunferenciaCinturaAtual(1.0);
 			pessoa.getPaciente().setPesoAtual(1.0);
-
+			
 			pessoaService.update(pessoa);
 		}
 		
-		return pessoa.getPaciente();
+		return pessoaService.getPessoaByCpf(cpf).getPaciente();
 	}
 
 	private ConsultaNutricional atualizarConsulta(ConsultaNutricional consulta) {
