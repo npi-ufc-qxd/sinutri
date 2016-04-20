@@ -146,6 +146,54 @@ $(document).ready(function() {
 			.validate(
 					{
 						rules : {
+							objetivoConsulta : {
+								maxlength: 256
+							},
+							medicamentoComentario:{
+								maxlength: 256
+							},
+							mastigacaoComentario:{
+								maxlength: 256
+							},
+							alergiaComentario:{
+								maxlength: 256
+							},
+							outrasPatologiasComentario:{
+								maxlength: 256
+							},
+							disfagiaComentario:{
+								maxlength: 256
+							},
+							odinofagiaComentario:{
+								maxlength: 256
+							},
+							piroseComentario:{
+								maxlength: 256
+							},
+							nauseaComentario:{
+								maxlength: 256
+							},
+							vomitoComentario:{
+								maxlength: 256
+							},
+							diarreiaComentario:{
+								maxlength: 256
+							},
+							constipacaoComentario:{
+								maxlength: 256
+							},
+							carneVermelhaComentario:{
+								maxlength: 256
+							},
+							bebidaAlcoolicaComentario:{
+								maxlength: 256
+							},
+							atividadeFisicaComentario:{
+								maxlength: 256
+							},
+							intoleranciaComentario:{
+								maxlength: 256
+							}
 						},
 						highlight : function(element) {
 							$(element).closest('.form-item')
@@ -167,65 +215,92 @@ $(document).ready(function() {
 									id);
 						},
 						messages : {
+							objetivoConsulta : {
+								maxlength: "O objetivo da consulta deve ter menos que 256 carácteres"
+							},
 							atividadeFisicaComentario : {
-								required : "Informe qual a(s) ativadade(s) física(s) praticada(s) pelo paciente."
+								required : "Informe qual a(s) ativadade(s) física(s) praticada(s) pelo paciente.",
+								maxlength: "A(s) atividade(s) física(s) precisa(m) ocupar menos que 256 carácteres"
+
 							},
 							atividadeFisicaFrequenciaSemanal : {
 								required : "Informe qual a frequência da(s) atividade(s) física(s) praticada(s) pelo paciente."
 							},
 							carneVermelhaComentario : {
-								required : "Informe o tipo de carne vermelha consumida pelo paciente."
+								required : "Informe o tipo de carne vermelha consumida pelo paciente.",
+								maxlength: "O comentários sobre carne vermelha precisam ocupar menos que 256 carácteres"
+
 							},
 							carneVermelhaFrequenciaSemanal : {
 								required : "Informe a frequência do consumo de carne vermelha pelo paciente."
 							},
 							bebidaAlcoolicaComentario : {
-								required : "Informe a bebida alcoólica comsumida pelo paciente."
-							},							
+								required : "Informe a bebida alcoólica comsumida pelo paciente.",
+								maxlength: "Os comentários sobre disfagia precisam ocupar menos que 256 carácteres"
+
+							},
 							bebidaAlcoolicaFrequenciaSemanal : {
 								required : "Informe a frequência do consumo de bebiba alcoólica pelo paciente."
 							},
 							cigarroComentario : {
-								required : ""
+								required : "Informe o comentário."
 							},
 							cigarroFrequenciaSemanal : {
 								required : "Informe a frequência do consumo de cigarro pelo paciente."
 							},
 							medicamentoComentario : {
-								required : "Informe o(s) medicamento(s) utilizado(s) pelo paciente."
+								required : "Informe o(s) medicamento(s) utilizado(s) pelo paciente.",
+								maxlength: "A descrição dos medicamentos precisam ter menos de 256 carácteres"
 							},
 							mastigacaoComentario : {
-								required : "Informe características da mastigação do paciente."
+								required : "Informe características da mastigação do paciente.",
+								maxlength: "As características da mastigação precisam ocupar menos de 256 carácteres"
 							},
 							disfagiaComentario : {
-								required : "Informe comentários sobre a disfagia do paciente."
+								required : "Informe comentários sobre a disfagia do paciente.",
+								maxlength: "Os comentários sobre disfagia precisam ocupar menos que 256 carácteres"
 							},
 							odinofagiaComentario : {
-								required : "Informe comentários sobre a odinofagia do paciente."
+								required : "Informe comentários sobre a odinofagia do paciente.",
+								maxlength: "Os comentários sobre odinofagia precisam ocupar menos que 256 carácteres"
+
 							},
 							piroseComentario : {
-								required : "Informe comentários sobre a pirose do paciente."
+								required : "Informe comentários sobre a pirose do paciente.",
+								maxlength: "Os comentários sobre pirose precisam ocupar menos que 256 carácteres"
+
 							},
 							nauseaComentario : {
-								required : "Informe comentários sobre náuseas do paciente."
+								required : "Informe comentários sobre náuseas do paciente.",
+								maxlength: "Os comentários sobre náuseas precisam ocupar menos que 256 carácteres"
+
 							},
 							vomitoComentario : {
-								required : "Informe comentários sobre vômitos do paciente."
+								required : "Informe comentários sobre vômitos do paciente.",
+								maxlength: "Os comentários sobre vômitos precisam ocupar menos que 256 carácteres"
+
 							},
 							diarreiaComentario : {
-								required : "Informe comentários sobre a diarreia do paciente."
+								required : "Informe comentários sobre a diarreia do paciente.",
+								maxlength: "Os comentários sobre diarreia precisam ocupar menos que 256 carácteres"
+
 							},
 							constipacaoComentario : {
-								required : "Informe comentários sobre a constipação do paciente."
+								required : "Informe comentários sobre a constipação do paciente.",
+								maxlength: "Os comentários sobre constipação precisam ocupar menos que 256 carácteres"
+
 							},
 							alergiaComentario : {
-								required : "Informe se o paciente possui alguma alergia alimentar."
+								required : "Informe se o paciente possui alguma alergia alimentar.",
+								maxlength: "Os comentário sobre alergia alimentar precisam ocupar menos que 256 carácteres"
 							},
 							intoleranciaComentario : {
-								required : "Informe se o paciente possui alguma intolerância alimentar."
+								required : "Informe se o paciente possui alguma intolerância alimentar.",
+								maxlength: "Os comentário sobre intolerância alimentar precisam ocupar menos que 256 carácteres"
 							},
 							outrasPatologiasComentario : {
-								required : "Informe outras patologias do paciente."
+								required : "Informe outras patologias do paciente.",
+								maxlength: "A descrição de outras patologias precisam ocupar menos que 256 carácteres"
 							},
 							glicemia : {
 								required : "Informe o nível de glicemia do paciente."
@@ -279,6 +354,7 @@ $(document).ready(function() {
 								required: "Informe a quantidade de carne Bovina."
 							}
 						}
+
 					});
 					
 					$('#form-alimento-subst').validate(
