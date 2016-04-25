@@ -2,8 +2,8 @@ package br.ufc.quixada.npi.sisat.model.enuns;
 
 public enum SistemaUrinario {
 		
-	RUN("RUN"),
-	RUA("RUA");
+	NORMAL("NORMAL"),
+	ALTERADO("ALTERADO");
 
 	private String tipo;
 		
