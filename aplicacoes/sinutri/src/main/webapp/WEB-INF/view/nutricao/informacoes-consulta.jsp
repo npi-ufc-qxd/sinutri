@@ -34,11 +34,11 @@
 			</div>
 
 			<div class="col-sm-4" align="right" style="margin-top: 15px;">
-				<a href="<c:url value="/paciente/${consulta.paciente.pessoa.cpf}/historico"></c:url>" class="btn btn-primary btn-sm"><span
+				<a href="<c:url value="/paciente/${consulta.paciente.pessoa.id}/historico"></c:url>" class="btn btn-primary btn-sm"><span
 					class="glyphicon glyphicon-chevron-left"></span> Voltar</a> 
 					
 					<a
-					href="<c:url value="/paciente/${consulta.paciente.pessoa.cpf}/consulta/${consulta.id}/editar"/>"
+					href="<c:url value="/paciente/${consulta.paciente.id}/consulta/${consulta.id}/editar"/>"
 					class="btn btn-warning btn-sm"><span
 					class="glyphicon glyphicon-edit"></span> Editar</a>
 			</div>

@@ -50,11 +50,11 @@
 			        <tbody>
 						<c:forEach var="pessoa" items="${pessoas}">
 				            <tr>
-				                <td><a href="<c:url value="/paciente/${pessoa.cpf}/historico"></c:url>">${pessoa.nome}</a></td>
+				                <td><a href="<c:url value="/paciente/${pessoa.cpf}/verificar-paciente?acao=historico"></c:url>">${pessoa.nome}</a></td>
 				                <td>${pessoa.email}</td>
 				                <td align="right">
-				                	<a href="<c:url value="/paciente/${pessoa.cpf}/historico"/>" class="btn btn-info btn-sm"><span class="glyphicon glyphicon-eye-open"></span> Historico</a>
-				                	<a href="<c:url value="/paciente/${pessoa.cpf}/consulta"/>" class="btn btn-success btn-sm"><span class="glyphicon glyphicon-plus"></span> Consulta</a>
+				                	<a href="<c:url value="/paciente/${pessoa.cpf}/verificar-paciente?acao=historico"/>" class="btn btn-info btn-sm"><span class="glyphicon glyphicon-eye-open"></span> Historico</a>
+				                	<a href="<c:url value="/paciente/${pessoa.cpf}/verificar-paciente?acao=consulta"/>" class="btn btn-success btn-sm"><span class="glyphicon glyphicon-plus"></span> Consulta</a>
 				                </td>
 				            </tr>
 						</c:forEach>
