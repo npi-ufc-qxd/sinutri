@@ -41,14 +41,6 @@ public class CalculoGastosEnergeticos {
 	@OneToMany(mappedBy = "calculoGastosEnergeticos")
     private List<DistribuicaoAlimentar> grupos;
 	
-	@ManyToOne
-	@JoinColumn
-	private Paciente paciente;
-	
-	@ManyToOne
-	@JoinColumn
-	private PacienteExterno pacienteExterno;
-	
 	public Long getId() {
 		return id;
 	}
