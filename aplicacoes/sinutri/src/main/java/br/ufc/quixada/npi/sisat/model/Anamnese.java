@@ -85,18 +85,12 @@ public class Anamnese {
 	@Size(max=256, message="Os comentários sobre odinofagia precisam ocupar menos que 256 carácteres")
 	private String odinofagiaComentario;
 	
-	private boolean regurgitacao;
-	@Size(max=256, message="Os comentários sobre regurgitação precisam ocupar menos que 256 carácteres")
-	private String regurgitacaoComentario;
-	
 	private boolean bebidaAlcoolica;
 	@Size(max=256, message="Os comentários sobre bebida alcóolica precisam ocupar menos que 256 carácteres")
 	private String bebidaAlcoolicaComentario;
-	@Enumerated(EnumType.STRING)
-	private Frequencia bebidaAlcoolicaFrequenciaSemanal;
-	
+		
 	@Size(max=256, message="Os comentários sobre outras patologias precisam ocupar menos que 256 carácteres")
-	private String outrasPatologiasComentario;
+	private String patologiasComentario;
 	
 	private boolean alergia;
 	@Size(max=256, message="Os comentários sobre alergia alimentar precisam ocupar menos que 256 carácteres")
@@ -106,12 +100,15 @@ public class Anamnese {
 	@Size(max=256, message="Os comentários sobre intolerância alimentar precisam ocupar menos que 256 carácteres")
 	private String intoleranciaComentario;
 	
+	@Enumerated(EnumType.STRING)
 	private SistemaUrinario sistemaUrinario;
 	@Size(max=256, message="Os comentários sobre o sistema urinário precisam ocupar menos que 256 carácteres")
 	private String sistemaUrinarioComentario;
 	
+	@Enumerated(EnumType.STRING)
 	private SistemaGastrointestinal sistemaGastroIntestinal;
 	
+	@Enumerated(EnumType.STRING)
 	private Apetite apetite;
 	@Size(max=256, message="Os comentários sobre o apetite precisam ocupar menos que 256 carácteres")
 	private String apetiteComentario;
@@ -342,22 +339,6 @@ public class Anamnese {
 		this.odinofagiaComentario = odinofagiaComentario;
 	}
 
-	public boolean isRegurgitacao() {
-		return regurgitacao;
-	}
-
-	public void setRegurgitacao(boolean regurgitacao) {
-		this.regurgitacao = regurgitacao;
-	}
-
-	public String getRegurgitacaoComentario() {
-		return regurgitacaoComentario;
-	}
-
-	public void setRegurgitacaoComentario(String regurgitacaoComentario) {
-		this.regurgitacaoComentario = regurgitacaoComentario;
-	}
-
 	public boolean isBebidaAlcoolica() {
 		return bebidaAlcoolica;
 	}
@@ -374,20 +355,12 @@ public class Anamnese {
 		this.bebidaAlcoolicaComentario = bebidaAlcoolicaComentario;
 	}
 
-	public Frequencia getBebidaAlcoolicaFrequenciaSemanal() {
-		return bebidaAlcoolicaFrequenciaSemanal;
-	}
-
-	public void setBebidaAlcoolicaFrequenciaSemanal(Frequencia bebidaAlcoolicaFrequenciaSemanal) {
-		this.bebidaAlcoolicaFrequenciaSemanal = bebidaAlcoolicaFrequenciaSemanal;
-	}
-
 	public String getOutrasPatologiasComentario() {
-		return outrasPatologiasComentario;
+		return patologiasComentario;
 	}
 
 	public void setOutrasPatologiasComentario(String outrasPatologiasComentario) {
-		this.outrasPatologiasComentario = outrasPatologiasComentario;
+		this.patologiasComentario = outrasPatologiasComentario;
 	}
 
 	public boolean isAlergia() {
