@@ -1,15 +1,18 @@
 package br.ufc.quixada.npi.sisat.model;
 
+import java.util.Date;
 import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 public class PlanoAlimentar {
@@ -17,10 +20,20 @@ public class PlanoAlimentar {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-	@JoinColumn(name = "planoalimentar_id")
-	private List<FrequenciaAlimentar> frequenciasAlimentares;
+	
+	@NotNull
+	@DateTimeFormat(pattern="dd/MM/yyyy")
+	private Date criadoEm;
+	
+	@NotNull
+	@DateTimeFormat(pattern="dd/MM/yyyy")
+	private Date atualizadoEm;
+	
+	private Servidor nutricionista;
+	
+	@OneToMany
+	@JoinColumn(name = "plano_alimentar_id")
+	private List<RefeicaoPlanoAlimentar> refeicoesPlanoAlimentar;
 
 	public Long getId() {
 		return id;
@@ -30,12 +43,28 @@ public class PlanoAlimentar {
 		this.id = id;
 	}
 
-	public List<FrequenciaAlimentar> getFrequenciasAlimentares() {
-		return frequenciasAlimentares;
+	public Date getCriadoEm() {
+		return criadoEm;
 	}
 
-	public void setFrequenciasAlimentares(
-			List<FrequenciaAlimentar> frequenciasAlimentares) {
-		this.frequenciasAlimentares = frequenciasAlimentares;
+	public void setCriadoEm(Date criadoEm) {
+		this.criadoEm = criadoEm;
 	}
+
+	public Date getAtualizadoEm() {
+		return atualizadoEm;
+	}
+
+	public void setAtualizadoEm(Date atualizadoEm) {
+		this.atualizadoEm = atualizadoEm;
+	}
+
+	public Servidor getNutricionista() {
+		return nutricionista;
+	}
+
+	public void setNutricionista(Servidor nutricionista) {
+		this.nutricionista = nutricionista;
+	}
+
 }
