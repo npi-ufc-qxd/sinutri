@@ -20,11 +20,11 @@ public class AvaliacaoAntropometrica {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@DateTimeFormat(pattern="dd/MM/yy")
+	@DateTimeFormat(pattern="dd/MM/yyyy")
 	@NotNull
 	private Date criadoEm;
 	
-	@DateTimeFormat(pattern="dd/MM/yy")
+	@DateTimeFormat(pattern="dd/MM/yyyy")
 	private Date atualizadoEm;
 	
 	@OneToOne
