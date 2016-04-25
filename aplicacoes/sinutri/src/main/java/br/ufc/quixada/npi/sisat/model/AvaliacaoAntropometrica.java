@@ -28,8 +28,6 @@ public class AvaliacaoAntropometrica {
 	private Date atualizadoEm;
 	
 	@OneToOne
-	@JsonIgnore
-	@JoinColumn
 	private Servidor nutricionista;
 	
 	private Double peso; 
