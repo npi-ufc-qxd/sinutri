@@ -32,6 +32,7 @@ import br.ufc.quixada.npi.sisat.model.Documento;
 import br.ufc.quixada.npi.sisat.model.FrequenciaAlimentar;
 import br.ufc.quixada.npi.sisat.model.InqueritoAlimentar;
 import br.ufc.quixada.npi.sisat.model.Paciente;
+import br.ufc.quixada.npi.sisat.model.PacienteExterno;
 import br.ufc.quixada.npi.sisat.model.Pessoa;
 import br.ufc.quixada.npi.sisat.model.enuns.ClassificacaoExame;
 import br.ufc.quixada.npi.sisat.model.enuns.Frequencia;
@@ -41,6 +42,7 @@ import br.ufc.quixada.npi.sisat.model.enuns.SistemaUrinario;
 import br.ufc.quixada.npi.sisat.model.enuns.TipoFrequencia;
 import br.ufc.quixada.npi.sisat.service.ConsultaNutricionalService;
 import br.ufc.quixada.npi.sisat.service.DocumentoService;
+import br.ufc.quixada.npi.sisat.service.PacienteExternoService;
 import br.ufc.quixada.npi.sisat.service.PacienteService;
 import br.ufc.quixada.npi.sisat.service.PessoaService;
 import br.ufc.quixada.npi.sisat.validation.ConsultaNutricionalValidator;
@@ -74,6 +76,9 @@ public class PacienteController {
 
 	@Inject
 	private GenericService<Alimentacao> alimentacaoService;
+	
+	@Inject
+	private PacienteExternoService pacienteExternoService;
 
 	@RequestMapping(value = "/{cpf}/verificar-paciente", method = RequestMethod.GET)
 	public String getPaginaHistorico(@PathVariable("cpf") String cpf,@RequestParam("acao") String acao, Model model, RedirectAttributes redirectAttributes) {
@@ -470,5 +475,22 @@ public class PacienteController {
 			session.setAttribute("usuario", pessoa);
 		}
 		return (Pessoa) session.getAttribute("usuario");
+	}
+	
+	@RequestMapping(value = "cadastrar/paciente", method = RequestMethod.GET)
+	public String formCadastrarPaciente(Model model)
+	{
+		model.addAttribute("pacienteExterno", new PacienteExterno());
+		return "nutricao/cadastro-paciente";
+	}
+	
+	@RequestMapping(value = "cadastrar/paciente", method = RequestMethod.POST)
+	public String cadastrarPaciente(@Valid PacienteExterno paciente, Model model,  
+			BindingResult result, RedirectAttributes redirectAttributes) {
+
+		model.addAttribute("action", "cadastrar");
+		pacienteExternoService.save(paciente);
+
+		return "redirect:/paciente/cadastrar/paciente";
 	}
 }
