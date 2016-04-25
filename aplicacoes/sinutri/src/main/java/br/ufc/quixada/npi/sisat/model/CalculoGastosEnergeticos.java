@@ -34,8 +34,7 @@ public class CalculoGastosEnergeticos {
 	private Double totalCalorias;
 	
 	@OneToOne
-	@JoinColumn(name = "servidor")
-	@JsonIgnore
+	@JoinColumn(name = "nutricionista_id")
 	private Servidor nutricionista;
 
 	@OneToMany(mappedBy = "calculoGastosEnergeticos")

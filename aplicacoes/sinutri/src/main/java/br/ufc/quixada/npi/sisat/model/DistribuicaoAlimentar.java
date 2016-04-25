@@ -12,12 +12,12 @@ public class DistribuicaoAlimentar {
 
 	@Id
     @ManyToOne
-    @JoinColumn(name="grupo_id")
+    @JoinColumn(name = "grupo_id")
     private Grupo grupo;
  
     @Id
     @ManyToOne
-    @JoinColumn(name="calculoGastosEnergeticos_id")
+    @JoinColumn(name = "calculo_gastos_energeticos_id")
     private CalculoGastosEnergeticos calculoGastosEnergeticos;
     
     private Integer porcao;

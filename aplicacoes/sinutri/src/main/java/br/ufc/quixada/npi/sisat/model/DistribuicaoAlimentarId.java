@@ -2,11 +2,15 @@ package br.ufc.quixada.npi.sisat.model;
 
 import java.io.Serializable;
 
+import javax.persistence.Column;
+
 public class DistribuicaoAlimentarId implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
+	@Column(name = "grupo_id")
 	private Long grupo;
     
+	@Column(name = "calculo_gastos_energeticos_id")
 	private Long calculoGastosEnergeticos;
 
 	public Long getGrupo() {
