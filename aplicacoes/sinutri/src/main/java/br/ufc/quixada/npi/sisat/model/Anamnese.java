@@ -2,12 +2,14 @@ package br.ufc.quixada.npi.sisat.model;
 
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.Size;
 
@@ -29,7 +31,7 @@ public class Anamnese {
 	
 	@DateTimeFormat
 	private Date atualizadoEm;
-	
+	@OneToOne(cascade = CascadeType.ALL)
 	private Servidor nutricionista;
 	
 	@Size(max=256, message="O objetivo da consulta deve ter menos que 256 carácteres")
