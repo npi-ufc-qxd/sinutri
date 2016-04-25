@@ -3,6 +3,8 @@ package br.ufc.quixada.npi.sisat.model;
 import java.util.Date;
 
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
@@ -21,6 +23,7 @@ public class RefeicaoRecordatorio {
 	@DateTimeFormat(pattern="HH:mm")
 	private Date hora;
 	
+	@Enumerated(EnumType.STRING)
 	private Refeicao descricao;
 	
 	private String itens;

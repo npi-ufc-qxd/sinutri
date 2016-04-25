@@ -1,7 +1,5 @@
 package br.ufc.quixada.npi.sisat.model;
 
-import java.util.Arrays;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -17,8 +15,6 @@ public class Prescricao {
 	private String descricao;
 	
 	private String texto;
-	
-	private Byte[] arquivo;
 	
 	@OneToOne
 	private Servidor nutricionista;
@@ -47,14 +43,6 @@ public class Prescricao {
 		this.texto = texto;
 	}
 
-	public Byte[] getArquivo() {
-		return arquivo;
-	}
-
-	public void setArquivo(Byte[] arquivo) {
-		this.arquivo = arquivo;
-	}
-
 	public Servidor getNutricionista() {
 		return nutricionista;
 	}
@@ -65,8 +53,10 @@ public class Prescricao {
 
 	@Override
 	public String toString() {
-		return "Prescricao [id=" + id + ", descricao=" + descricao + ", texto=" + texto + ", arquivo="
-				+ Arrays.toString(arquivo) + ", nutricionista=" + nutricionista + "]";
+		return "Prescricao [id=" + id + ", descricao=" + descricao + ", texto=" + texto + ", nutricionista="
+				+ nutricionista + "]";
 	}
+
+	
 
 }
