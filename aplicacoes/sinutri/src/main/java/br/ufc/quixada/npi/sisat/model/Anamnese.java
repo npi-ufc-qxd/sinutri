@@ -26,11 +26,12 @@ public class Anamnese {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@DateTimeFormat
+	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	private Date criadoEm;
 	
-	@DateTimeFormat
+	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	private Date atualizadoEm;
+	
 	@OneToOne(cascade = CascadeType.ALL)
 	private Servidor nutricionista;
 	
