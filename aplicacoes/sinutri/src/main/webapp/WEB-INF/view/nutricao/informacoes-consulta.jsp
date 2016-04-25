@@ -401,7 +401,7 @@
 				</c:choose>
 
 				<h3 id="inquerito" class="section">Inquerito Alimentar</h3>
-
+			<!-- 
 				<table class="table table-striped">
 					<thead class="thead">
 						<tr>
@@ -697,7 +697,7 @@
 							</c:if>
 						</tr>
 					</tbody>
-				</table>
+				</table>  -->
 
 
 

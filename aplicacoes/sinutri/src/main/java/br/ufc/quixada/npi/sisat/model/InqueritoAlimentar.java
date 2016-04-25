@@ -1,5 +1,7 @@
 package br.ufc.quixada.npi.sisat.model;
 
+import java.util.Date;
+
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -10,6 +12,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 
 import org.codehaus.jackson.annotate.JsonIgnore;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import br.ufc.quixada.npi.sisat.model.enuns.Frequencia;
 
@@ -19,11 +22,6 @@ public class InqueritoAlimentar {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-
-	@OneToOne
-	@JoinColumn(name = "consultaNutricional_id")
-	@JsonIgnore
-	private ConsultaNutricional consultaNutricional;
 
 	private boolean bovinaGosta;
 	private boolean avesGosta;
@@ -115,8 +113,12 @@ public class InqueritoAlimentar {
 	private String bebidasAlcoolicasAnotacao;
 	private String gaseificadasAnotacao;
 	private String infusoesAnotacao;
-
 	private String observacoes;
+	
+	@DateTimeFormat
+	private Date criadoEm;
+	@DateTimeFormat
+	private Date atualizadoEm;
 
 	public Long getId() {
 		return id;
@@ -124,14 +126,6 @@ public class InqueritoAlimentar {
 
 	public void setId(Long id) {
 		this.id = id;
-	}
-
-	public ConsultaNutricional getConsultaNutricional() {
-		return consultaNutricional;
-	}
-
-	public void setConsultaNutricional(ConsultaNutricional consultaNutricional) {
-		this.consultaNutricional = consultaNutricional;
 	}
 
 	public boolean isBovinaGosta() {
@@ -669,6 +663,22 @@ public class InqueritoAlimentar {
 
 	public String getObservacoes() {
 		return observacoes;
+	}
+
+	public Date getCriadoEm() {
+		return criadoEm;
+	}
+
+	public void setCriadoEm(Date criadoEm) {
+		this.criadoEm = criadoEm;
+	}
+
+	public Date getAtualizadoEm() {
+		return atualizadoEm;
+	}
+
+	public void setAtualizadoEm(Date atualizadoEm) {
+		this.atualizadoEm = atualizadoEm;
 	}
 
 }

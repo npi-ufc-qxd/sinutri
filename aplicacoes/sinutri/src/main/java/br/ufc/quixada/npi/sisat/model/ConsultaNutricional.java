@@ -61,9 +61,6 @@ public class ConsultaNutricional {
 	@JoinColumn(name = "paciente_id")
 	private Paciente paciente;
 
-	@OneToOne(mappedBy = "consultaNutricional", cascade = CascadeType.ALL)
-	private InqueritoAlimentar inqueritoAlimentar;
-
 	@OneToMany(mappedBy = "consultaNutricional", cascade = CascadeType.ALL)
 	@JsonIgnore
 	private Set<Documento> documentos;
@@ -397,14 +394,6 @@ public class ConsultaNutricional {
 
 	public void setCigarroFrequenciaSemanal(Frequencia cigarroFrequenciaSemanal) {
 		this.cigarroFrequenciaSemanal = cigarroFrequenciaSemanal;
-	}
-
-	public void setInqueritoAlimentar(InqueritoAlimentar inqueritoAlimentar) {
-		this.inqueritoAlimentar = inqueritoAlimentar;
-	}
-
-	public InqueritoAlimentar getInqueritoAlimentar() {
-		return inqueritoAlimentar;
 	}
 
 	public String getBebidaAlcoolicaComentario() {
