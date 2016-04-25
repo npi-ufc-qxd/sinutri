@@ -32,7 +32,7 @@ public class Anamnese {
 	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	private Date atualizadoEm;
 	
-	@OneToOne(cascade = CascadeType.ALL)
+	@OneToOne
 	private Servidor nutricionista;
 	
 	@Size(max=256, message="O objetivo da consulta deve ter menos que 256 carácteres")
