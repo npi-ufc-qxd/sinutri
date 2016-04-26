@@ -7,6 +7,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.validation.constraints.NotNull;
 
@@ -20,16 +21,17 @@ public class AvaliacaoAntropometrica {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@DateTimeFormat(pattern="dd/MM/yyyy")
 	@NotNull
+	@DateTimeFormat(pattern="dd/MM/yyyy")
 	private Date criadoEm;
 	
+	@NotNull
 	@DateTimeFormat(pattern="dd/MM/yyyy")
 	private Date atualizadoEm;
 	
-	@OneToOne
+	@ManyToOne
 	private Servidor nutricionista;
-	
+		
 	private Double peso; 
 	private Double pesoDesejado;
 	private Double altura;
