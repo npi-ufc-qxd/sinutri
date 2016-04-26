@@ -29,7 +29,6 @@ public class AvaliacaoLaboratorial {
 	@DateTimeFormat(pattern="dd/MM/yyyy")
 	private Date atualizado;
 	
-	@NotNull
 	private String observacao;
 	
 	@OneToOne
@@ -77,6 +76,14 @@ public class AvaliacaoLaboratorial {
 
 	public void setNutricionista(Servidor nutricionista) {
 		this.nutricionista = nutricionista;
+	}
+
+	public List<Exame> getExames() {
+		return exames;
+	}
+
+	public void setExames(List<Exame> exames) {
+		this.exames = exames;
 	}
 	
 }
