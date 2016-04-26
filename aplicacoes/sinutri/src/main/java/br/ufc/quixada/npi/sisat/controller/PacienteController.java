@@ -164,9 +164,9 @@ public class PacienteController {
 		model.addAttribute("action", "cadastrar");
 
 		Pessoa pessoa = pessoaService.getPessoaByCpf(cpf);
-		InqueritoAlimentar inqueritoAlimentar = consulta.getInqueritoAlimentar();
-		inqueritoAlimentar.setConsultaNutricional(consulta);
-		consulta.setInqueritoAlimentar(inqueritoAlimentar);
+		//InqueritoAlimentar inqueritoAlimentar = consulta.getInqueritoAlimentar();
+		//inqueritoAlimentar.setConsultaNutricional(consulta);
+		//consulta.setInqueritoAlimentar(inqueritoAlimentar);
 
 		if (pessoa == null) {
 			redirectAttributes.addFlashAttribute("erro", "Paciente não encontrado. Faça um nova pesquisa");
@@ -282,8 +282,8 @@ public class PacienteController {
 		Paciente paciente = pacienteService.find(Paciente.class, consulta.getPaciente().getId());
 		consulta.setPaciente(paciente);
 		
-		InqueritoAlimentar inqueritoAlimentar = consulta.getInqueritoAlimentar();
-		inqueritoAlimentar.setConsultaNutricional(consulta);
+		//InqueritoAlimentar inqueritoAlimentar = consulta.getInqueritoAlimentar();
+		//inqueritoAlimentar.setConsultaNutricional(consulta);
 
 		consultaNutricionalValidator.validate(consulta, result);
 
@@ -330,7 +330,7 @@ public class PacienteController {
 
 		consulta.setData(data);
 		
-		consulta.getInqueritoAlimentar().setConsultaNutricional(consulta);
+		//consulta.getInqueritoAlimentar().setConsultaNutricional(consulta);
 
 		consultaNutricionalService.update(atualizarConsulta(consulta));
 		redirectAttributes.addFlashAttribute("success", "Consulta do paciente <strong>"
