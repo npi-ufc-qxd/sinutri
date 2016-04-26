@@ -19,7 +19,6 @@ public class Alimento {
 	private Long id;
 	private Double porcao;
 	private Double valorCalorico;
-	private Grupo grupo;
 	private Double proteinas;
 	private Double carboidratos;
 	private Double gordurasTotais;
@@ -79,14 +78,6 @@ public class Alimento {
 
 	public void setValorCalorico(Double valorCalorico) {
 		this.valorCalorico = valorCalorico;
-	}
-
-	public Grupo getGrupo() {
-		return grupo;
-	}
-
-	public void setGrupo(Grupo grupo) {
-		this.grupo = grupo;
 	}
 
 	public Double getProteinas() {
