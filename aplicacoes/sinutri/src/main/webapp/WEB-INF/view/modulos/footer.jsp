@@ -17,6 +17,7 @@
 <script src="<c:url value="/webjars/jquery-maskedinput/1.3.1/jquery.maskedinput.min.js" />"></script> 
 <script src="<c:url value="/webjars/jquery-validation/1.12.0/jquery.validate.min.js" />"></script>
 <script src="<c:url value="/resources/js/bootstrapValidator.min.js" />"></script>
+<script src="<c:url value="/resources/js/bootstrap-datepicker.js" />"></script>
 
 <script src="<c:url value="/resources/js/highcharts.js" />"></script>
 <script src="<c:url value="/webjars/d3js/3.5.6/d3.min.js" />"></script>
