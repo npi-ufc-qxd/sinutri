@@ -8,10 +8,8 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
+import javax.validation.constraints.NotNull;
 
-import org.codehaus.jackson.annotate.JsonIgnore;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import br.ufc.quixada.npi.sisat.model.enuns.Frequencia;
@@ -22,6 +20,13 @@ public class InqueritoAlimentar {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	
+	@NotNull
+	@DateTimeFormat(pattern = "dd/MM/yyyy")
+	private Date criadoEm;
+	
+	@DateTimeFormat(pattern = "dd/MM/yyyy")
+	private Date atualizadoEm;
 
 	private boolean bovinaGosta;
 	private boolean avesGosta;
@@ -115,12 +120,6 @@ public class InqueritoAlimentar {
 	private String infusoesAnotacao;
 	private String observacoes;
 	
-	
-	@DateTimeFormat(pattern = "dd/MM/yyyy")
-	private Date criadoEm;
-	@DateTimeFormat(pattern = "dd/MM/yyyy")
-	private Date atualizadoEm;
-
 	public Long getId() {
 		return id;
 	}

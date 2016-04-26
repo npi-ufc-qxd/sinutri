@@ -46,6 +46,7 @@ import br.ufc.quixada.npi.sisat.service.PacienteExternoService;
 import br.ufc.quixada.npi.sisat.service.PacienteService;
 import br.ufc.quixada.npi.sisat.service.PessoaService;
 import br.ufc.quixada.npi.sisat.validation.ConsultaNutricionalValidator;
+import br.ufc.quixada.npi.sisat.validation.InqueritoAlimentarValidation;
 import net.sf.jasperreports.engine.JREmptyDataSource;
 import net.sf.jasperreports.engine.JRException;
 
@@ -71,6 +72,9 @@ public class PacienteController {
 	@Inject
 	private ConsultaNutricionalValidator consultaNutricionalValidator;
 
+	@Inject
+	private InqueritoAlimentarValidation inqueritoAlimentarValidator;
+	
 	@Inject
 	private GenericService<FrequenciaAlimentar> frequenciaAlimentarService; 
 
@@ -492,5 +496,17 @@ public class PacienteController {
 		pacienteExternoService.save(paciente);
 
 		return "redirect:/paciente/cadastrar/paciente";
+	}
+	
+	@RequestMapping(value = "Paciente/{id}/Inquerito/Cadastrar", method = RequestMethod.POST)
+	public String cadastrarInqueritoAlimentar(Model model, @Valid InqueritoAlimentar inqueritoAlimentar, BindingResult result){
+		inqueritoAlimentarValidator.validate(inqueritoAlimentar, result);
+		if (result.hasErrors()) {
+			model.addAttribute("inqueritoAlimentar", inqueritoAlimentar);
+			return "Paciente/{id}/Inquerito";
+		}
+		
+		
+		return null;
 	}
 }
