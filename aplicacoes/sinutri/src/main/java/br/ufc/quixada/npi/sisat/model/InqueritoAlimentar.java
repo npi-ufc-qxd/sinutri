@@ -115,9 +115,10 @@ public class InqueritoAlimentar {
 	private String infusoesAnotacao;
 	private String observacoes;
 	
-	@DateTimeFormat
+	
+	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	private Date criadoEm;
-	@DateTimeFormat
+	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	private Date atualizadoEm;
 
 	public Long getId() {
