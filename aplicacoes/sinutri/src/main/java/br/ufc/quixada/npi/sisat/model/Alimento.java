@@ -26,6 +26,7 @@ public class Alimento {
 	private Double calcio;
 	private Double colesterol;
 	private Double ferro;
+	//private Grupo grupo;
 	private Double fibraAlimentar;
 	private Double gMonoinsaturada;
 	private Double gPoliinsaturada;
