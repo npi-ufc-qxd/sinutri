@@ -21,6 +21,14 @@ public class PorcaoAlimento {
 	
 	private Integer quantidade;
 	
+	public Integer getQuantidade() {
+		return quantidade;
+	}
+
+	public void setQuantidade(Integer quantidade) {
+		this.quantidade = quantidade;
+	}
+
 	public Alimento getAlimento() {
 		return alimento;
 	}
