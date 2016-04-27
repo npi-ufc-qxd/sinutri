@@ -498,15 +498,23 @@ public class PacienteController {
 		return "redirect:/paciente/cadastrar/paciente";
 	}
 	
-	@RequestMapping(value = "Paciente/{id}/Inquerito/Cadastrar", method = RequestMethod.POST)
+	@RequestMapping(value = "/{id}/Inquerito/", method = RequestMethod.GET)
+	public String formAdicionarInqueritoAlimentar(Model model) {
+		model.addAttribute("inquerito", new InqueritoAlimentar());
+		
+		return "nutricao/inquerito/form-inquerito";		
+	}
+	
+	
+	@RequestMapping(value = "/{id}/Inquerito/", method = RequestMethod.POST)
 	public String cadastrarInqueritoAlimentar(Model model, @Valid InqueritoAlimentar inqueritoAlimentar, BindingResult result){
-		inqueritoAlimentarValidator.validate(inqueritoAlimentar, result);
+
+		inqueritoAlimentarValidator.validate(inqueritoAlimentar, result);	
 		if (result.hasErrors()) {
 			model.addAttribute("inqueritoAlimentar", inqueritoAlimentar);
 			return "Paciente/{id}/Inquerito";
 		}
 		
-		
-		return null;
+		return "redirect:/";
 	}
 }

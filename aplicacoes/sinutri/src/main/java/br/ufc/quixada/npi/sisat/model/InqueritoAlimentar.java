@@ -8,6 +8,7 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
 
 import org.springframework.format.annotation.DateTimeFormat;
@@ -28,6 +29,9 @@ public class InqueritoAlimentar {
 	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	private Date atualizadoEm;
 
+	@ManyToOne
+	private Paciente paciente;
+	
 	private boolean bovinaGosta;
 	private boolean avesGosta;
 	private boolean peixeGosta;
@@ -126,6 +130,14 @@ public class InqueritoAlimentar {
 
 	public void setId(Long id) {
 		this.id = id;
+	}
+
+	public Paciente getPaciente() {
+		return paciente;
+	}
+
+	public void setPaciente(Paciente paciente) {
+		this.paciente = paciente;
 	}
 
 	public boolean isBovinaGosta() {

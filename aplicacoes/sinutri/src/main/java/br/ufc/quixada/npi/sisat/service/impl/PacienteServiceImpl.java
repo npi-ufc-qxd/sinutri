@@ -13,6 +13,7 @@ import br.ufc.quixada.npi.enumeration.QueryType;
 import br.ufc.quixada.npi.repository.GenericRepository;
 import br.ufc.quixada.npi.service.impl.GenericServiceImpl;
 import br.ufc.quixada.npi.sisat.model.ConsultaNutricional;
+import br.ufc.quixada.npi.sisat.model.InqueritoAlimentar;
 import br.ufc.quixada.npi.sisat.model.Paciente;
 import br.ufc.quixada.npi.sisat.service.PacienteService;
 import br.ufc.quixada.npi.util.SimpleMap;
@@ -23,6 +24,9 @@ public class PacienteServiceImpl extends GenericServiceImpl<Paciente> implements
 	@Inject
 	GenericRepository<ConsultaNutricional> consultaRepository;
 
+	@Inject
+	GenericRepository<InqueritoAlimentar> inqueritoAlimentarRepository;
+	
 	@Override
 	public Map<Long, Object> getConsultasByPaciente(Long id) {
 		Map<String, Object> params = new HashMap<String, Object>();
@@ -54,6 +58,10 @@ public class PacienteServiceImpl extends GenericServiceImpl<Paciente> implements
 	@Override
 	public void excluir(ConsultaNutricional consulta){
 		this.excluir(consulta);
+	}
+	
+	public void adicionarInqueritoAlimentar(InqueritoAlimentar inqueritoAlimentar){
+		inqueritoAlimentarRepository.save(inqueritoAlimentar);
 	}
 		
 }
