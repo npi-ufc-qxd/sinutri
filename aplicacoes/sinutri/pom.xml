@@ -47,6 +47,10 @@
 		<!-- NPI -->
 		<npi.core.version>0.1.1</npi.core.version>
 		<npi.ldap.version>0.1.2</npi.ldap.version>
+
+		<!-- Thymeleaf -->
+		<thymeleaf.version>2.1.4.RELEASE</thymeleaf.version>
+
 	</properties>
 
 	<repositories>
@@ -57,6 +61,14 @@
 	</repositories>
 
 	<dependencies>
+
+	<!-- Thymeleaf -->
+  	<dependency>
+        <groupId>org.thymeleaf</groupId>
+        <artifactId>thymeleaf-spring4</artifactId>
+        <version>${thymeleaf.version}</version>
+    </dependency>
+
 		<!-- JQuery File Upload -->
 		<dependency>
 			<groupId>org.webjars.bower</groupId>
