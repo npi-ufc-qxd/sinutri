@@ -6,11 +6,10 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.validation.constraints.NotNull;
 
-import org.codehaus.jackson.annotate.JsonIgnore;
 import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
@@ -20,16 +19,26 @@ public class AvaliacaoAntropometrica {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@DateTimeFormat(pattern="dd/MM/yyyy")
 	@NotNull
+	@DateTimeFormat(pattern="dd/MM/yyyy")
 	private Date criadoEm;
 	
+	@NotNull
 	@DateTimeFormat(pattern="dd/MM/yyyy")
 	private Date atualizadoEm;
 	
 	@OneToOne
 	private Servidor nutricionista;
 	
+	@ManyToOne
+	private Paciente paciente;
+	
+	public Paciente getPaciente() {
+		return paciente;
+	}
+	public void setPaciente(Paciente paciente) {
+		this.paciente = paciente;
+	}
 	private Double peso; 
 	private Double pesoDesejado;
 	private Double altura;
@@ -62,6 +71,62 @@ public class AvaliacaoAntropometrica {
 	private Double torax;
 	private Double coxa;
 	private Double panturrilhaMedial;
+	
+	public AvaliacaoAntropometrica() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+	public AvaliacaoAntropometrica(Paciente paciente) {
+		super();
+		setPaciente(paciente);
+	}
+	public AvaliacaoAntropometrica(Long id, Date criadoEm, Date atualizadoEm, Servidor nutricionista, Paciente paciente,
+			Double peso, Double pesoDesejado, Double altura, Double ombro, Double peitoral, Double cintura,
+			Double abdomen, Double quadril, Double panturrilhaDireita, Double panturrilhaEsquerda, Double pescoco,
+			Double punho, Double coxaDireita, Double coxaEsquerda, Double coxaProximalDireita,
+			Double coxaProximalEsquerda, Double bracoRelaxadoDireita, Double bracoRelaxadoEsquerda,
+			Double bracoContraidoDireito, Double bracoContraidoEsquerdo, Double antebraco, Double diametroPunho,
+			Double diametroFemur, Double biceps, Double abdominal, Double triceps, Double suprailiaca,
+			Double axilarMedia, Double subescapular, Double torax, Double coxa, Double panturrilhaMedial) {
+		super();
+		this.id = id;
+		this.criadoEm = criadoEm;
+		this.atualizadoEm = atualizadoEm;
+		this.nutricionista = nutricionista;
+		this.paciente = paciente;
+		this.peso = peso;
+		this.pesoDesejado = pesoDesejado;
+		this.altura = altura;
+		this.ombro = ombro;
+		this.peitoral = peitoral;
+		this.cintura = cintura;
+		this.abdomen = abdomen;
+		this.quadril = quadril;
+		this.panturrilhaDireita = panturrilhaDireita;
+		this.panturrilhaEsquerda = panturrilhaEsquerda;
+		this.pescoco = pescoco;
+		this.punho = punho;
+		this.coxaDireita = coxaDireita;
+		this.coxaEsquerda = coxaEsquerda;
+		this.coxaProximalDireita = coxaProximalDireita;
+		this.coxaProximalEsquerda = coxaProximalEsquerda;
+		this.bracoRelaxadoDireita = bracoRelaxadoDireita;
+		this.bracoRelaxadoEsquerda = bracoRelaxadoEsquerda;
+		this.bracoContraidoDireito = bracoContraidoDireito;
+		this.bracoContraidoEsquerdo = bracoContraidoEsquerdo;
+		this.antebraco = antebraco;
+		this.diametroPunho = diametroPunho;
+		this.diametroFemur = diametroFemur;
+		this.biceps = biceps;
+		this.abdominal = abdominal;
+		this.triceps = triceps;
+		this.suprailiaca = suprailiaca;
+		this.axilarMedia = axilarMedia;
+		this.subescapular = subescapular;
+		this.torax = torax;
+		this.coxa = coxa;
+		this.panturrilhaMedial = panturrilhaMedial;
+	}
 	
 	public Long getId() {
 		return id;

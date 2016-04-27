@@ -1,6 +1,7 @@
 package br.ufc.quixada.npi.sisat.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
@@ -27,6 +28,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import br.ufc.quixada.npi.ldap.service.UsuarioService;
 import br.ufc.quixada.npi.service.GenericService;
 import br.ufc.quixada.npi.sisat.model.Alimentacao;
+import br.ufc.quixada.npi.sisat.model.AvaliacaoAntropometrica;
 import br.ufc.quixada.npi.sisat.model.ConsultaNutricional;
 import br.ufc.quixada.npi.sisat.model.Documento;
 import br.ufc.quixada.npi.sisat.model.FrequenciaAlimentar;
@@ -129,6 +131,27 @@ public class PacienteController {
 		model.addAttribute("consulta", consulta);
 		return "nutricao/informacoes-consulta";
 	}
+	
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////	
+	@RequestMapping(value = "/{id}/Antropometria/Listar", method = RequestMethod.GET)
+	public String getPaginaListarAvaliacaoAntropometrica(@PathVariable("id") Long id, Model model, RedirectAttributes redirectAttributes) {
+		return "nutricao/antropometria/informacoes-antropometricas";
+	}
+	
+	
+	@RequestMapping(value = "/{id}/Antropometria", method = RequestMethod.GET)
+	public String getPaginaRealizarAvaliacaoAntropometrica(@PathVariable("id") Long id, Model model, RedirectAttributes redirectAttributes) {
+	
+		Paciente paciente = pacienteService.find(Paciente.class, id);
+
+		model.addAttribute("action", "cadastrar");
+		
+		model.addAttribute("paciente", paciente);
+		model.addAttribute("avaliacaoAntropometrica", new AvaliacaoAntropometrica(paciente));
+		
+		return "nutricao/antropometria/form-antropometria";
+	}
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////	
 
 	@RequestMapping(value = "/{id}/consulta", method = RequestMethod.GET)
 	public String getPaginaRealizarConsulta(@PathVariable("id") Long id, Model model, RedirectAttributes redirectAttributes) {
