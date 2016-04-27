@@ -27,6 +27,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import br.ufc.quixada.npi.ldap.service.UsuarioService;
 import br.ufc.quixada.npi.service.GenericService;
 import br.ufc.quixada.npi.sisat.model.Alimentacao;
+import br.ufc.quixada.npi.sisat.model.AvaliacaoAntropometrica;
 import br.ufc.quixada.npi.sisat.model.ConsultaNutricional;
 import br.ufc.quixada.npi.sisat.model.Documento;
 import br.ufc.quixada.npi.sisat.model.FrequenciaAlimentar;
@@ -40,6 +41,7 @@ import br.ufc.quixada.npi.sisat.model.enuns.Refeicao;
 import br.ufc.quixada.npi.sisat.model.enuns.SistemaGastrointestinal;
 import br.ufc.quixada.npi.sisat.model.enuns.SistemaUrinario;
 import br.ufc.quixada.npi.sisat.model.enuns.TipoFrequencia;
+import br.ufc.quixada.npi.sisat.service.AvaliacaoAntropometricaService;
 import br.ufc.quixada.npi.sisat.service.ConsultaNutricionalService;
 import br.ufc.quixada.npi.sisat.service.DocumentoService;
 import br.ufc.quixada.npi.sisat.service.PacienteExternoService;
@@ -79,6 +81,9 @@ public class PacienteController {
 	
 	@Inject
 	private PacienteExternoService pacienteExternoService;
+	
+	@Inject
+	private AvaliacaoAntropometricaService avaliacaoAntropometricaService;
 
 	@RequestMapping(value = "/{cpf}/verificar-paciente", method = RequestMethod.GET)
 	public String getPaginaHistorico(@PathVariable("cpf") String cpf,@RequestParam("acao") String acao, Model model, RedirectAttributes redirectAttributes) {
@@ -177,6 +182,7 @@ public class PacienteController {
 		consulta.setPaciente(paciente);
 
 		consultaNutricionalValidator.validate(consulta, result);
+		
 		if (result.hasErrors()) {
 			model.addAttribute("consultaNutricional", consulta);
 			return ("nutricao/form-consulta");
@@ -214,7 +220,7 @@ public class PacienteController {
 				consulta.setDocumentos(documentos);
 			}
 		} else {
-			model.addAttribute("anexoError", "Adicione anexo a seleção");
+			model.addAttribute("anexoError", "Adicione anexo a seleção");	consultaNutricionalValidator.validate(consulta, result);
 		}
 
 		if (consulta.getAgua().equals(0)) {
@@ -478,8 +484,7 @@ public class PacienteController {
 	}
 	
 	@RequestMapping(value = "cadastrar/paciente", method = RequestMethod.GET)
-	public String formCadastrarPaciente(Model model)
-	{
+	public String formCadastrarPaciente(Model model) {
 		model.addAttribute("pacienteExterno", new PacienteExterno());
 		return "nutricao/cadastro-paciente";
 	}
@@ -492,5 +497,26 @@ public class PacienteController {
 		pacienteExternoService.save(paciente);
 
 		return "redirect:/paciente/cadastrar/paciente";
+	}
+	
+	@RequestMapping(value= {"/{id}/Antropometria/"}, method = RequestMethod.GET)
+	public String getAvaliacaoAntropometrica(Model model){
+		model.addAttribute("antropometria", new AvaliacaoAntropometrica());
+		return "nutricao/antropometria/form-antropometria";
+	}
+	
+	@RequestMapping(value={"/{id}/Antropometria/"}, method = RequestMethod.POST)
+	public String adicionarAvaliacaoAntropometrica(@PathVariable("id") String id, Model model, @Valid AvaliacaoAntropometrica antropometria, BindingResult result){
+		
+		if(result.hasErrors()){
+			model.addAttribute("antropometria", new AvaliacaoAntropometrica());
+			return "nutricao/antropometria/form-antropometria";
+		}
+		
+		Paciente paciente = pacienteService.find(Paciente.class, id);
+		antropometria.setPaciente(paciente);
+		model.addAttribute("action","cadastrar");
+		avaliacaoAntropometricaService.save(antropometria);
+		return "nutricao/antropometria/form-antropometria";
 	}
 }
