@@ -60,8 +60,15 @@ public class PacienteServiceImpl extends GenericServiceImpl<Paciente> implements
 		this.excluir(consulta);
 	}
 	
-	public void adicionarInqueritoAlimentar(InqueritoAlimentar inqueritoAlimentar){
-		inqueritoAlimentarRepository.save(inqueritoAlimentar);
+	public boolean adicionarInqueritoAlimentar(InqueritoAlimentar inqueritoAlimentar, Long id){
+		Paciente paciente = this.find(Paciente.class, id);
+		if(paciente != null){
+			inqueritoAlimentar.setAtualizadoEm(inqueritoAlimentar.getCriadoEm());
+			inqueritoAlimentar.setPaciente(paciente);
+			inqueritoAlimentarRepository.save(inqueritoAlimentar);
+			return true;
+		}else
+			return false;
 	}
 		
 }

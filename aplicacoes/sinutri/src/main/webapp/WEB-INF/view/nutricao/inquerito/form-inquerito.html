@@ -20,8 +20,8 @@
 			</div>			
 			<div class="row form-group">
 				<div class="form-item col-sm-6">
-					<label for="checkBovinoGosta" class="control-label">
-					<input type="checkbox" id="checkBovinoGosta" th:field="*{aguaGosta}" class="checkInquerito" /> Gosta água?</label>
+					<label for="checkAguaGosta" class="control-label">
+					<input type="checkbox" id="checkAguaGosta" th:field="*{aguaGosta}" class="checkInquerito" /> Gosta água?</label>
 					<select th:field="*{aguaFrequenciaSemanal}" class="form-control select">
 						<option value="">Quantas vezes por semana?</option>
 						<option th:each="f : ${frequenciasSemanais}" th:text="${f.descricao}" th:value="${f}"></option>
@@ -30,7 +30,7 @@
 	
 				<div class="form-item col-sm-6">
 					<label for="aguaAnotacao" class="control-label">Anotação</label>
-					<input id="inputTextagua" th:field="*{aguaAnotacao}" class="form-control" placeholder="Anotação" />
+					<input id="inputTextAgua" th:field="*{aguaAnotacao}" class="form-control" placeholder="Anotação" />
 				</div>
 			</div>
 			<div class="row form-group">

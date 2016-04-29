@@ -510,18 +510,18 @@ public class PacienteController {
 	
 	
 	@RequestMapping(value = "/{id}/Inquerito/", method = RequestMethod.POST)
-	public String cadastrarInqueritoAlimentar(Model model, @PathVariable("id") Long id, @Valid InqueritoAlimentar inqueritoAlimentar, BindingResult result){
-		Paciente paciente = pacienteService.find(Paciente.class, 2l);
-		inqueritoAlimentar.setPaciente(paciente);
-		inqueritoAlimentar.setAtualizadoEm(inqueritoAlimentar.getCriadoEm());
+	public String adicionarInqueritoAlimentar(Model model, @PathVariable("id") Long id, @Valid InqueritoAlimentar inqueritoAlimentar, BindingResult result, RedirectAttributes redirectAttributes){
 		inqueritoAlimentarValidator.validate(inqueritoAlimentar, result);	
 		if (result.hasErrors()) {
 			model.addAttribute("frequenciasSemanais", FrequenciaSemanal.values());
 			model.addAttribute("inquerito", inqueritoAlimentar);
 			return "nutricao/inquerito/form-inquerito";
 		}
-		pacienteService.adicionarInqueritoAlimentar(inqueritoAlimentar);
-		
+		if(!pacienteService.adicionarInqueritoAlimentar(inqueritoAlimentar, id)){
+			redirectAttributes.addFlashAttribute("erro", "Paciente não encontrado. Faça um nova pesquisa");
+			return "redirect:/nutricao/buscar";
+		}
+
 		return "redirect:/";
 	}
 }
