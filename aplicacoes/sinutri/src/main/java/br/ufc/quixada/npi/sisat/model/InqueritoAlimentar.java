@@ -13,7 +13,7 @@ import javax.validation.constraints.NotNull;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
-import br.ufc.quixada.npi.sisat.model.enuns.Frequencia;
+import br.ufc.quixada.npi.sisat.model.enuns.FrequenciaSemanal;
 
 @Entity
 public class InqueritoAlimentar {
@@ -56,49 +56,49 @@ public class InqueritoAlimentar {
 	private boolean infusoesGosta;
 	
 	@Enumerated(EnumType.STRING)
-	private Frequencia bovinaFrequenciaSemanal;
+	private FrequenciaSemanal bovinaFrequenciaSemanal;
 	@Enumerated(EnumType.STRING)
-	private Frequencia avesFrequenciaSemanal;
+	private FrequenciaSemanal avesFrequenciaSemanal;
 	@Enumerated(EnumType.STRING)
-	private Frequencia peixeFrequenciaSemanal;
+	private FrequenciaSemanal peixeFrequenciaSemanal;
 	@Enumerated(EnumType.STRING)
-	private Frequencia viscerasFrequenciaSemanal;
+	private FrequenciaSemanal viscerasFrequenciaSemanal;
 	@Enumerated(EnumType.STRING)
-	private Frequencia leiteDerivadosFrequenciaSemanal;
+	private FrequenciaSemanal leiteDerivadosFrequenciaSemanal;
 	@Enumerated(EnumType.STRING)
-	private Frequencia ovosFrequenciaSemanal;
+	private FrequenciaSemanal ovosFrequenciaSemanal;
 	@Enumerated(EnumType.STRING)
-	private Frequencia leguminosasFrequenciaSemanal;
+	private FrequenciaSemanal leguminosasFrequenciaSemanal;
 	@Enumerated(EnumType.STRING)
-	private Frequencia cereaisFrequenciaSemanal;
+	private FrequenciaSemanal cereaisFrequenciaSemanal;
 	@Enumerated(EnumType.STRING)
-	private Frequencia massasFrequenciaSemanal;
+	private FrequenciaSemanal massasFrequenciaSemanal;
 	@Enumerated(EnumType.STRING)
-	private Frequencia vegetaisCrusFrequenciaSemanal;
+	private FrequenciaSemanal vegetaisCrusFrequenciaSemanal;
 	@Enumerated(EnumType.STRING)
-	private Frequencia vegetaisCozidosFrequenciaSemanal;
+	private FrequenciaSemanal vegetaisCozidosFrequenciaSemanal;
 	@Enumerated(EnumType.STRING)
-	private Frequencia frutasFrequenciaSemanal;
+	private FrequenciaSemanal frutasFrequenciaSemanal;
 	@Enumerated(EnumType.STRING)
-	private Frequencia docesFrequenciaSemanal;
+	private FrequenciaSemanal docesFrequenciaSemanal;
 	@Enumerated(EnumType.STRING)
-	private Frequencia oleoFrequenciaSemanal;
+	private FrequenciaSemanal oleoFrequenciaSemanal;
 	@Enumerated(EnumType.STRING)
-	private Frequencia margarinaFrequenciaSemanal;
+	private FrequenciaSemanal margarinaFrequenciaSemanal;
 	@Enumerated(EnumType.STRING)
-	private Frequencia manteigaFrequenciaSemanal;
+	private FrequenciaSemanal manteigaFrequenciaSemanal;
 	@Enumerated(EnumType.STRING)
-	private Frequencia toucinhoBaconFrequenciaSemanal;
+	private FrequenciaSemanal toucinhoBaconFrequenciaSemanal;
 	@Enumerated(EnumType.STRING)
-	private Frequencia aguaFrequenciaSemanal;
+	private FrequenciaSemanal aguaFrequenciaSemanal;
 	@Enumerated(EnumType.STRING)
-	private Frequencia sucoFrequenciaSemanal;
+	private FrequenciaSemanal sucoFrequenciaSemanal;
 	@Enumerated(EnumType.STRING)
-	private Frequencia bebidasAlcoolicasFrequenciaSemanal;
+	private FrequenciaSemanal bebidasAlcoolicasFrequenciaSemanal;
 	@Enumerated(EnumType.STRING)
-	private Frequencia gaseificadasFrequenciaSemanal;
+	private FrequenciaSemanal gaseificadasFrequenciaSemanal;
 	@Enumerated(EnumType.STRING)
-	private Frequencia infusoesFrequenciaSemanal;
+	private FrequenciaSemanal infusoesFrequenciaSemanal;
 	
 	private String bovinaAnotacao;
 	private String avesAnotacao;
@@ -324,179 +324,179 @@ public class InqueritoAlimentar {
 		this.infusoesGosta = infusoesGosta;
 	}
 
-	public Frequencia getAguaFrequenciaSemanal() {
+	public FrequenciaSemanal getAguaFrequenciaSemanal() {
 		return aguaFrequenciaSemanal;
 	}
 
-	public void setAguaFrequenciaSemanal(Frequencia aguaFrequenciaSemanal) {
+	public void setAguaFrequenciaSemanal(FrequenciaSemanal aguaFrequenciaSemanal) {
 		this.aguaFrequenciaSemanal = aguaFrequenciaSemanal;
 	}
 
-	public Frequencia getAvesFrequenciaSemanal() {
+	public FrequenciaSemanal getAvesFrequenciaSemanal() {
 		return avesFrequenciaSemanal;
 	}
 
-	public void setAvesFrequenciaSemanal(Frequencia avesFrequenciaSemanal) {
+	public void setAvesFrequenciaSemanal(FrequenciaSemanal avesFrequenciaSemanal) {
 		this.avesFrequenciaSemanal = avesFrequenciaSemanal;
 	}
 
-	public Frequencia getBebidasAlcoolicasFrequenciaSemanal() {
+	public FrequenciaSemanal getBebidasAlcoolicasFrequenciaSemanal() {
 		return bebidasAlcoolicasFrequenciaSemanal;
 	}
 
-	public void setBebidasAlcoolicasFrequenciaSemanal(Frequencia bebidasAlcoolicasFrequenciaSemanal) {
+	public void setBebidasAlcoolicasFrequenciaSemanal(FrequenciaSemanal bebidasAlcoolicasFrequenciaSemanal) {
 		this.bebidasAlcoolicasFrequenciaSemanal = bebidasAlcoolicasFrequenciaSemanal;
 	}
 
-	public Frequencia getBovinaFrequenciaSemanal() {
+	public FrequenciaSemanal getBovinaFrequenciaSemanal() {
 		return bovinaFrequenciaSemanal;
 	}
 
-	public void setBovinaFrequenciaSemanal(Frequencia bovinaFrequenciaSemanal) {
+	public void setBovinaFrequenciaSemanal(FrequenciaSemanal bovinaFrequenciaSemanal) {
 		this.bovinaFrequenciaSemanal = bovinaFrequenciaSemanal;
 	}
 
-	public Frequencia getCereaisFrequenciaSemanal() {
+	public FrequenciaSemanal getCereaisFrequenciaSemanal() {
 		return cereaisFrequenciaSemanal;
 	}
 
-	public void setCereaisFrequenciaSemanal(Frequencia cereaisFrequenciaSemanal) {
+	public void setCereaisFrequenciaSemanal(FrequenciaSemanal cereaisFrequenciaSemanal) {
 		this.cereaisFrequenciaSemanal = cereaisFrequenciaSemanal;
 	}
 
-	public Frequencia getDocesFrequenciaSemanal() {
+	public FrequenciaSemanal getDocesFrequenciaSemanal() {
 		return docesFrequenciaSemanal;
 	}
 
-	public void setDocesFrequenciaSemanal(Frequencia docesFrequenciaSemanal) {
+	public void setDocesFrequenciaSemanal(FrequenciaSemanal docesFrequenciaSemanal) {
 		this.docesFrequenciaSemanal = docesFrequenciaSemanal;
 	}
 
-	public Frequencia getFrutasFrequenciaSemanal() {
+	public FrequenciaSemanal getFrutasFrequenciaSemanal() {
 		return frutasFrequenciaSemanal;
 	}
 
-	public void setFrutasFrequenciaSemanal(Frequencia frutasFrequenciaSemanal) {
+	public void setFrutasFrequenciaSemanal(FrequenciaSemanal frutasFrequenciaSemanal) {
 		this.frutasFrequenciaSemanal = frutasFrequenciaSemanal;
 	}
 
-	public Frequencia getGaseificadasFrequenciaSemanal() {
+	public FrequenciaSemanal getGaseificadasFrequenciaSemanal() {
 		return gaseificadasFrequenciaSemanal;
 	}
 
-	public void setGaseificadasFrequenciaSemanal(Frequencia gaseificadasFrequenciaSemanal) {
+	public void setGaseificadasFrequenciaSemanal(FrequenciaSemanal gaseificadasFrequenciaSemanal) {
 		this.gaseificadasFrequenciaSemanal = gaseificadasFrequenciaSemanal;
 	}
 
-	public Frequencia getInfusoesFrequenciaSemanal() {
+	public FrequenciaSemanal getInfusoesFrequenciaSemanal() {
 		return infusoesFrequenciaSemanal;
 	}
 
-	public void setInfusoesFrequenciaSemanal(Frequencia infusoesFrequenciaSemanal) {
+	public void setInfusoesFrequenciaSemanal(FrequenciaSemanal infusoesFrequenciaSemanal) {
 		this.infusoesFrequenciaSemanal = infusoesFrequenciaSemanal;
 	}
 
-	public Frequencia getLeguminosasFrequenciaSemanal() {
+	public FrequenciaSemanal getLeguminosasFrequenciaSemanal() {
 		return leguminosasFrequenciaSemanal;
 	}
 
-	public void setLeguminosasFrequenciaSemanal(Frequencia leguminosasFrequenciaSemanal) {
+	public void setLeguminosasFrequenciaSemanal(FrequenciaSemanal leguminosasFrequenciaSemanal) {
 		this.leguminosasFrequenciaSemanal = leguminosasFrequenciaSemanal;
 	}
 
-	public Frequencia getLeiteDerivadosFrequenciaSemanal() {
+	public FrequenciaSemanal getLeiteDerivadosFrequenciaSemanal() {
 		return leiteDerivadosFrequenciaSemanal;
 	}
 
-	public void setLeiteDerivadosFrequenciaSemanal(Frequencia leiteDerivadosFrequenciaSemanal) {
+	public void setLeiteDerivadosFrequenciaSemanal(FrequenciaSemanal leiteDerivadosFrequenciaSemanal) {
 		this.leiteDerivadosFrequenciaSemanal = leiteDerivadosFrequenciaSemanal;
 	}
 
-	public Frequencia getManteigaFrequenciaSemanal() {
+	public FrequenciaSemanal getManteigaFrequenciaSemanal() {
 		return manteigaFrequenciaSemanal;
 	}
 
-	public void setManteigaFrequenciaSemanal(Frequencia manteigaFrequenciaSemanal) {
+	public void setManteigaFrequenciaSemanal(FrequenciaSemanal manteigaFrequenciaSemanal) {
 		this.manteigaFrequenciaSemanal = manteigaFrequenciaSemanal;
 	}
 
-	public Frequencia getMargarinaFrequenciaSemanal() {
+	public FrequenciaSemanal getMargarinaFrequenciaSemanal() {
 		return margarinaFrequenciaSemanal;
 	}
 
-	public void setMargarinaFrequenciaSemanal(Frequencia margarinaFrequenciaSemanal) {
+	public void setMargarinaFrequenciaSemanal(FrequenciaSemanal margarinaFrequenciaSemanal) {
 		this.margarinaFrequenciaSemanal = margarinaFrequenciaSemanal;
 	}
 
-	public Frequencia getMassasFrequenciaSemanal() {
+	public FrequenciaSemanal getMassasFrequenciaSemanal() {
 		return massasFrequenciaSemanal;
 	}
 
-	public void setMassasFrequenciaSemanal(Frequencia massasFrequenciaSemanal) {
+	public void setMassasFrequenciaSemanal(FrequenciaSemanal massasFrequenciaSemanal) {
 		this.massasFrequenciaSemanal = massasFrequenciaSemanal;
 	}
 
-	public Frequencia getOleoFrequenciaSemanal() {
+	public FrequenciaSemanal getOleoFrequenciaSemanal() {
 		return oleoFrequenciaSemanal;
 	}
 
-	public void setOleoFrequenciaSemanal(Frequencia oleoFrequenciaSemanal) {
+	public void setOleoFrequenciaSemanal(FrequenciaSemanal oleoFrequenciaSemanal) {
 		this.oleoFrequenciaSemanal = oleoFrequenciaSemanal;
 	}
 
-	public Frequencia getOvosFrequenciaSemanal() {
+	public FrequenciaSemanal getOvosFrequenciaSemanal() {
 		return ovosFrequenciaSemanal;
 	}
 
-	public void setOvosFrequenciaSemanal(Frequencia ovosFrequenciaSemanal) {
+	public void setOvosFrequenciaSemanal(FrequenciaSemanal ovosFrequenciaSemanal) {
 		this.ovosFrequenciaSemanal = ovosFrequenciaSemanal;
 	}
 
-	public Frequencia getPeixeFrequenciaSemanal() {
+	public FrequenciaSemanal getPeixeFrequenciaSemanal() {
 		return peixeFrequenciaSemanal;
 	}
 
-	public void setPeixeFrequenciaSemanal(Frequencia peixeFrequenciaSemanal) {
+	public void setPeixeFrequenciaSemanal(FrequenciaSemanal peixeFrequenciaSemanal) {
 		this.peixeFrequenciaSemanal = peixeFrequenciaSemanal;
 	}
 
-	public Frequencia getSucoFrequenciaSemanal() {
+	public FrequenciaSemanal getSucoFrequenciaSemanal() {
 		return sucoFrequenciaSemanal;
 	}
 
-	public void setSucoFrequenciaSemanal(Frequencia sucoFrequenciaSemanal) {
+	public void setSucoFrequenciaSemanal(FrequenciaSemanal sucoFrequenciaSemanal) {
 		this.sucoFrequenciaSemanal = sucoFrequenciaSemanal;
 	}
 
-	public Frequencia getToucinhoBaconFrequenciaSemanal() {
+	public FrequenciaSemanal getToucinhoBaconFrequenciaSemanal() {
 		return toucinhoBaconFrequenciaSemanal;
 	}
 
-	public void setToucinhoBaconFrequenciaSemanal(Frequencia toucinhoBaconFrequenciaSemanal) {
+	public void setToucinhoBaconFrequenciaSemanal(FrequenciaSemanal toucinhoBaconFrequenciaSemanal) {
 		this.toucinhoBaconFrequenciaSemanal = toucinhoBaconFrequenciaSemanal;
 	}
 
-	public Frequencia getVegetaisCozidosFrequenciaSemanal() {
+	public FrequenciaSemanal getVegetaisCozidosFrequenciaSemanal() {
 		return vegetaisCozidosFrequenciaSemanal;
 	}
 
-	public void setVegetaisCozidosFrequenciaSemanal(Frequencia vegetaisCozidosFrequenciaSemanal) {
+	public void setVegetaisCozidosFrequenciaSemanal(FrequenciaSemanal vegetaisCozidosFrequenciaSemanal) {
 		this.vegetaisCozidosFrequenciaSemanal = vegetaisCozidosFrequenciaSemanal;
 	}
 
-	public Frequencia getVegetaisCrusFrequenciaSemanal() {
+	public FrequenciaSemanal getVegetaisCrusFrequenciaSemanal() {
 		return vegetaisCrusFrequenciaSemanal;
 	}
 
-	public void setVegetaisCrusFrequenciaSemanal(Frequencia vegetaisCrusFrequenciaSemanal) {
+	public void setVegetaisCrusFrequenciaSemanal(FrequenciaSemanal vegetaisCrusFrequenciaSemanal) {
 		this.vegetaisCrusFrequenciaSemanal = vegetaisCrusFrequenciaSemanal;
 	}
 
-	public Frequencia getViscerasFrequenciaSemanal() {
+	public FrequenciaSemanal getViscerasFrequenciaSemanal() {
 		return viscerasFrequenciaSemanal;
 	}
 
-	public void setViscerasFrequenciaSemanal(Frequencia viscerasFrequenciaSemanal) {
+	public void setViscerasFrequenciaSemanal(FrequenciaSemanal viscerasFrequenciaSemanal) {
 		this.viscerasFrequenciaSemanal = viscerasFrequenciaSemanal;
 	}
 

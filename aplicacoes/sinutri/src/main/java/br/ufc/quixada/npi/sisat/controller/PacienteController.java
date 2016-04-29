@@ -35,7 +35,7 @@ import br.ufc.quixada.npi.sisat.model.Paciente;
 import br.ufc.quixada.npi.sisat.model.PacienteExterno;
 import br.ufc.quixada.npi.sisat.model.Pessoa;
 import br.ufc.quixada.npi.sisat.model.enuns.ClassificacaoExame;
-import br.ufc.quixada.npi.sisat.model.enuns.Frequencia;
+import br.ufc.quixada.npi.sisat.model.enuns.FrequenciaSemanal;
 import br.ufc.quixada.npi.sisat.model.enuns.Refeicao;
 import br.ufc.quixada.npi.sisat.model.enuns.SistemaGastrointestinal;
 import br.ufc.quixada.npi.sisat.model.enuns.SistemaUrinario;
@@ -153,7 +153,7 @@ public class PacienteController {
 		model.addAttribute("classificacaoExames", ClassificacaoExame.values());
 		model.addAttribute("sistemaUrinario", SistemaUrinario.values());
 		model.addAttribute("classificacao", ClassificacaoExame.values());
-		model.addAttribute("frequencia", Frequencia.values());
+		model.addAttribute("frequencia", FrequenciaSemanal.values());
 		model.addAttribute("refeicoes", Refeicao.values());
 
 		return "nutricao/form-consulta";
@@ -269,7 +269,7 @@ public class PacienteController {
 		model.addAttribute("classificacaoExames", ClassificacaoExame.values());
 		model.addAttribute("sistemaUrinario", SistemaUrinario.values());
 		model.addAttribute("classificacao", ClassificacaoExame.values());
-		model.addAttribute("frequencia", Frequencia.values());
+		model.addAttribute("frequencia", FrequenciaSemanal.values());
 		model.addAttribute("refeicoes", Refeicao.values());
 
 		return "nutricao/form-consulta";
@@ -500,20 +500,27 @@ public class PacienteController {
 	
 	@RequestMapping(value = "/{id}/Inquerito/", method = RequestMethod.GET)
 	public String formAdicionarInqueritoAlimentar(Model model) {
-		model.addAttribute("inquerito", new InqueritoAlimentar());
+		InqueritoAlimentar inquerito = new InqueritoAlimentar();
+		inquerito.setCriadoEm(new Date());
 		
+		model.addAttribute("inquerito", inquerito);
+		model.addAttribute("frequenciasSemanais", FrequenciaSemanal.values());
 		return "nutricao/inquerito/form-inquerito";		
 	}
 	
 	
 	@RequestMapping(value = "/{id}/Inquerito/", method = RequestMethod.POST)
-	public String cadastrarInqueritoAlimentar(Model model, @Valid InqueritoAlimentar inqueritoAlimentar, BindingResult result){
-
+	public String cadastrarInqueritoAlimentar(Model model, @PathVariable("id") Long id, @Valid InqueritoAlimentar inqueritoAlimentar, BindingResult result){
+		Paciente paciente = pacienteService.find(Paciente.class, 2l);
+		inqueritoAlimentar.setPaciente(paciente);
+		inqueritoAlimentar.setAtualizadoEm(inqueritoAlimentar.getCriadoEm());
 		inqueritoAlimentarValidator.validate(inqueritoAlimentar, result);	
 		if (result.hasErrors()) {
-			model.addAttribute("inqueritoAlimentar", inqueritoAlimentar);
-			return "Paciente/{id}/Inquerito";
+			model.addAttribute("frequenciasSemanais", FrequenciaSemanal.values());
+			model.addAttribute("inquerito", inqueritoAlimentar);
+			return "nutricao/inquerito/form-inquerito";
 		}
+		pacienteService.adicionarInqueritoAlimentar(inqueritoAlimentar);
 		
 		return "redirect:/";
 	}
