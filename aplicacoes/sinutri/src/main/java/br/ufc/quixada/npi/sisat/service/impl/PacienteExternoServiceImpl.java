@@ -10,6 +10,4 @@ import br.ufc.quixada.npi.sisat.service.PacienteExternoService;
 public class PacienteExternoServiceImpl extends GenericServiceImpl<PacienteExterno>
 implements PacienteExternoService{
 
-	
-
 }

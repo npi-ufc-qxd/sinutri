@@ -27,6 +27,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import br.ufc.quixada.npi.ldap.service.UsuarioService;
 import br.ufc.quixada.npi.service.GenericService;
 import br.ufc.quixada.npi.sisat.model.Alimentacao;
+import br.ufc.quixada.npi.sisat.model.Anamnese;
 import br.ufc.quixada.npi.sisat.model.ConsultaNutricional;
 import br.ufc.quixada.npi.sisat.model.Documento;
 import br.ufc.quixada.npi.sisat.model.FrequenciaAlimentar;
@@ -40,6 +41,7 @@ import br.ufc.quixada.npi.sisat.model.enuns.Refeicao;
 import br.ufc.quixada.npi.sisat.model.enuns.SistemaGastrointestinal;
 import br.ufc.quixada.npi.sisat.model.enuns.SistemaUrinario;
 import br.ufc.quixada.npi.sisat.model.enuns.TipoFrequencia;
+import br.ufc.quixada.npi.sisat.service.AnamneseService;
 import br.ufc.quixada.npi.sisat.service.ConsultaNutricionalService;
 import br.ufc.quixada.npi.sisat.service.DocumentoService;
 import br.ufc.quixada.npi.sisat.service.PacienteExternoService;
@@ -79,6 +81,9 @@ public class PacienteController {
 	
 	@Inject
 	private PacienteExternoService pacienteExternoService;
+	
+	@Inject
+	private AnamneseService anamneseService;
 
 	@RequestMapping(value = "/{cpf}/verificar-paciente", method = RequestMethod.GET)
 	public String getPaginaHistorico(@PathVariable("cpf") String cpf,@RequestParam("acao") String acao, Model model, RedirectAttributes redirectAttributes) {
@@ -492,5 +497,27 @@ public class PacienteController {
 		pacienteExternoService.save(paciente);
 
 		return "redirect:/paciente/cadastrar/paciente";
+	}
+	
+	@RequestMapping(value = "/{id}/Anamnese")
+	public String AdicionarAnamnese(@PathVariable("id") Long id, @Valid Anamnese anamnese, BindingResult result, Model model){
+		//Paciente paciente = pacienteService.find(Paciente.class, id);
+		if(result.hasErrors()){
+			model.addAttribute("anamnese", anamnese);
+			return "redirect:nutricao/form-consulta";
+		}
+		anamnese.setId(null);
+		anamneseService.save(anamnese);		
+		return "redirect:/nutricao/form-consulta";
+	}
+	
+	@RequestMapping(value  = {"AnamneseTeste"}, method = RequestMethod.GET)
+	public String teste( Model model, HttpSession session){
+		Anamnese anamnese = new Anamnese();
+		anamnese.setAgua(2.0);
+		//anamnese.setNutricionista(getUsuarioLogado(session));
+		model.addAttribute("anamnese",anamnese);
+		
+		return "redirect:/paciente/"+2+"/Anamnese";
 	}
 }
