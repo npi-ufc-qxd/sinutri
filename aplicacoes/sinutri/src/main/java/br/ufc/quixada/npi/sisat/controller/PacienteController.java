@@ -525,13 +525,25 @@ public class PacienteController {
 		return "redirect:/";
 	}
 	
-		@RequestMapping(value = "/{id}/Inquerito/{id}/Excluir/")
-	 	public String excluirInqueritoAlimentar(@PathVariable("id") Long id){
-	 		InqueritoAlimentar inquerito = new InqueritoAlimentar();
-	 		Paciente paciente = pacienteService.find(Paciente.class, id);
-	 		inquerito.setId(id);
-	 		inquerito.setPaciente(paciente);
-	 		pacienteService.excluirInquerito(inquerito);
-	 		return null;
-	 	}
+	@RequestMapping(value = "/{id}/Inquerito/{id}/Excluir/")
+ 	public String excluirInqueritoAlimentar(@PathVariable("id") Long id){
+ 		InqueritoAlimentar inquerito = new InqueritoAlimentar();
+ 		Paciente paciente = pacienteService.find(Paciente.class, id);
+ 		inquerito.setId(id);
+ 		inquerito.setPaciente(paciente);
+ 		pacienteService.excluirInquerito(inquerito);
+ 		return null;
+ 	}
+	
+	@RequestMapping(value = "/{id}/Inquerito/{id}/Editar/", method = RequestMethod.GET)
+	public String formEditarInqueritoAlimentar(@PathVariable("id") Long id, Model model, RedirectAttributes redirectAttributes ) {
+		InqueritoAlimentar inquerito = pacienteService.getInqueritoAlimentarById(id);
+		if(inquerito == null){
+			redirectAttributes.addFlashAttribute("erro", "Paciente não encontrado. Faça um nova pesquisa");
+			return "redirect:/nutricao/buscar";
+		}
+		model.addAttribute("inquerito", inquerito);
+		model.addAttribute("frequenciasSemanais", FrequenciaSemanal.values());
+		return "/{id}/Inquerito/"+id+"/";
+	}
 }

@@ -9,11 +9,17 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.validation.constraints.NotNull;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
 import br.ufc.quixada.npi.sisat.model.enuns.FrequenciaSemanal;
+
+@NamedQueries({
+	@NamedQuery(name = "InqueritoAlimentar.findInqueritoAlimentarById", query = "SELECT ia FROM InqueritoAlimentar ia WHERE ia.id=:id")
+})
 
 @Entity
 public class InqueritoAlimentar {

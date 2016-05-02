@@ -19,5 +19,7 @@ public interface PacienteService extends GenericService<Paciente> {
 	void excluir(ConsultaNutricional consulta);
 	
 	void excluirInquerito(InqueritoAlimentar inquerito);
+	
+	InqueritoAlimentar getInqueritoAlimentarById(Long id);
 
 }

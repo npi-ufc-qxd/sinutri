@@ -75,5 +75,9 @@ public class PacienteServiceImpl extends GenericServiceImpl<Paciente> implements
  	public void excluirInquerito(InqueritoAlimentar inquerito) {
  		inqueritoAlimentarRepository.delete(inquerito);
 	}
-		
+	
+	@Override
+	public InqueritoAlimentar getInqueritoAlimentarById(Long id) {
+		return (InqueritoAlimentar) findFirst("InqueritoAlimentar.findInqueritoAlimentarById", new SimpleMap<String, Object>("id", id));
+	}
 }
