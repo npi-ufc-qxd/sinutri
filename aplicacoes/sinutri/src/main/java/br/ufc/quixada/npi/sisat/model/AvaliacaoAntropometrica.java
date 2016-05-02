@@ -6,9 +6,12 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.validation.constraints.NotNull;
-
+import org.codehaus.jackson.annotate.JsonIgnore;
+import org.hibernate.annotations.ManyToAny;
 import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
@@ -32,13 +35,6 @@ public class AvaliacaoAntropometrica {
 	@ManyToOne
 	private Paciente paciente;
 	
-	public Paciente getPaciente() {
-		return paciente;
-	}
-	public void setPaciente(Paciente paciente) {
-		this.paciente = paciente;
-	}
-
 	private Double peso; 
 	private Double pesoDesejado;
 	private Double altura;
@@ -74,7 +70,6 @@ public class AvaliacaoAntropometrica {
 	
 	public AvaliacaoAntropometrica() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 	public AvaliacaoAntropometrica(Paciente paciente) {
 		super();
@@ -151,6 +146,13 @@ public class AvaliacaoAntropometrica {
 	}
 	public void setNutricionista(Servidor nutricionista) {
 		this.nutricionista = nutricionista;
+	}
+	
+	public Paciente getPaciente() {
+		return paciente;
+	}
+	public void setPaciente(Paciente paciente) {
+		this.paciente = paciente;
 	}
 	public Double getPeso() {
 		return peso;
