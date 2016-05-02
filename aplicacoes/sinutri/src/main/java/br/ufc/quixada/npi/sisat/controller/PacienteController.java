@@ -511,6 +511,18 @@ public class PacienteController {
 		return "redirect:/nutricao/form-consulta";
 	}
 	
+	@RequestMapping(value = "/{idPaciente}/Anamnese/{idAnamnese}/Excluir")
+	public String excluirAnamnese(@PathVariable("idPaciente") Long pacienteId,@PathVariable("idAnamnese") Long idAnamnese){
+		Anamnese anamnese = anamneseService.find(Anamnese.class, idAnamnese);
+		if(anamnese != null){
+			anamneseService.delete(anamnese);
+			return "/";
+		}else{
+			return "/";
+		}
+		
+	}
+	
 	@RequestMapping(value  = {"AnamneseTeste"}, method = RequestMethod.GET)
 	public String teste( Model model, HttpSession session){
 		Anamnese anamnese = new Anamnese();
