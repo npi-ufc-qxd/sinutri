@@ -133,12 +133,6 @@ public class PacienteController {
 	}
 	
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////	
-	@RequestMapping(value = "/{id}/Antropometria/Listar", method = RequestMethod.GET)
-	public String getPaginaListarAvaliacaoAntropometrica(@PathVariable("id") Long id, Model model, RedirectAttributes redirectAttributes) {
-		return "nutricao/antropometria/informacoes-antropometricas";
-	}
-	
-	
 	@RequestMapping(value = "/{id}/Antropometria", method = RequestMethod.GET)
 	public String getPaginaRealizarAvaliacaoAntropometrica(@PathVariable("id") Long id, Model model, RedirectAttributes redirectAttributes) {
 	

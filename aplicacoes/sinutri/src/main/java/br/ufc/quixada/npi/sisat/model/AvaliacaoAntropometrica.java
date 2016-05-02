@@ -55,8 +55,8 @@ public class AvaliacaoAntropometrica {
 	private Double coxaEsquerda;
 	private Double coxaProximalDireita;
 	private Double coxaProximalEsquerda;
-	private Double bracoRelaxadoDireita;
-	private Double bracoRelaxadoEsquerda;
+	private Double bracoRelaxadoDireito;
+	private Double bracoRelaxadoEsquerdo;
 	private Double bracoContraidoDireito;
 	private Double bracoContraidoEsquerdo;
 	private Double antebraco;
@@ -84,7 +84,7 @@ public class AvaliacaoAntropometrica {
 			Double peso, Double pesoDesejado, Double altura, Double ombro, Double peitoral, Double cintura,
 			Double abdomen, Double quadril, Double panturrilhaDireita, Double panturrilhaEsquerda, Double pescoco,
 			Double punho, Double coxaDireita, Double coxaEsquerda, Double coxaProximalDireita,
-			Double coxaProximalEsquerda, Double bracoRelaxadoDireita, Double bracoRelaxadoEsquerda,
+			Double coxaProximalEsquerda, Double bracoRelaxadoDireito, Double bracoRelaxadoEsquerdo,
 			Double bracoContraidoDireito, Double bracoContraidoEsquerdo, Double antebraco, Double diametroPunho,
 			Double diametroFemur, Double biceps, Double abdominal, Double triceps, Double suprailiaca,
 			Double axilarMedia, Double subescapular, Double torax, Double coxa, Double panturrilhaMedial) {
@@ -110,8 +110,8 @@ public class AvaliacaoAntropometrica {
 		this.coxaEsquerda = coxaEsquerda;
 		this.coxaProximalDireita = coxaProximalDireita;
 		this.coxaProximalEsquerda = coxaProximalEsquerda;
-		this.bracoRelaxadoDireita = bracoRelaxadoDireita;
-		this.bracoRelaxadoEsquerda = bracoRelaxadoEsquerda;
+		this.bracoRelaxadoDireito = bracoRelaxadoDireito;
+		this.bracoRelaxadoEsquerdo = bracoRelaxadoEsquerdo;
 		this.bracoContraidoDireito = bracoContraidoDireito;
 		this.bracoContraidoEsquerdo = bracoContraidoEsquerdo;
 		this.antebraco = antebraco;
@@ -248,17 +248,17 @@ public class AvaliacaoAntropometrica {
 	public void setCoxaProximalEsquerda(Double coxaProximalEsquerda) {
 		this.coxaProximalEsquerda = coxaProximalEsquerda;
 	}
-	public Double getBracoRelaxadoDireita() {
-		return bracoRelaxadoDireita;
+	public Double getbracoRelaxadoDireito() {
+		return bracoRelaxadoDireito;
 	}
-	public void setBracoRelaxadoDireita(Double bracoRelaxadoDireita) {
-		this.bracoRelaxadoDireita = bracoRelaxadoDireita;
+	public void setbracoRelaxadoDireito(Double bracoRelaxadoDireito) {
+		this.bracoRelaxadoDireito = bracoRelaxadoDireito;
 	}
-	public Double getBracoRelaxadoEsquerda() {
-		return bracoRelaxadoEsquerda;
+	public Double getbracoRelaxadoEsquerdo() {
+		return bracoRelaxadoEsquerdo;
 	}
-	public void setBracoRelaxadoEsquerda(Double bracoRelaxadoEsquerda) {
-		this.bracoRelaxadoEsquerda = bracoRelaxadoEsquerda;
+	public void setbracoRelaxadoEsquerdo(Double bracoRelaxadoEsquerdo) {
+		this.bracoRelaxadoEsquerdo = bracoRelaxadoEsquerdo;
 	}
 	public Double getBracoContraidoDireito() {
 		return bracoContraidoDireito;
