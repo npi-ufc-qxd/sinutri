@@ -524,4 +524,14 @@ public class PacienteController {
 
 		return "redirect:/";
 	}
+	
+		@RequestMapping(value = "/{id}/Inquerito/{id}/Excluir/")
+	 	public String excluirInqueritoAlimentar(@PathVariable("id") Long id){
+	 		InqueritoAlimentar inquerito = new InqueritoAlimentar();
+	 		Paciente paciente = pacienteService.find(Paciente.class, id);
+	 		inquerito.setId(id);
+	 		inquerito.setPaciente(paciente);
+	 		pacienteService.excluirInquerito(inquerito);
+	 		return null;
+	 	}
 }

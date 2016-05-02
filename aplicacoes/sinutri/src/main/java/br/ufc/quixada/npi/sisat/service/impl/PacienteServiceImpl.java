@@ -70,5 +70,10 @@ public class PacienteServiceImpl extends GenericServiceImpl<Paciente> implements
 		}else
 			return false;
 	}
+	
+	@Override
+ 	public void excluirInquerito(InqueritoAlimentar inquerito) {
+ 		inqueritoAlimentarRepository.delete(inquerito);
+	}
 		
 }

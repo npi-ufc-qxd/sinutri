@@ -17,5 +17,7 @@ public interface PacienteService extends GenericService<Paciente> {
 	List<ConsultaNutricional> getHistoricoPeso(String cpf);
 	
 	void excluir(ConsultaNutricional consulta);
+	
+	void excluirInquerito(InqueritoAlimentar inquerito);
 
 }
