@@ -7,7 +7,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
 import javax.validation.constraints.NotNull;
 
 import org.springframework.format.annotation.DateTimeFormat;
@@ -27,9 +26,9 @@ public class AvaliacaoAntropometrica {
 	@DateTimeFormat(pattern="dd/MM/yyyy")
 	private Date atualizadoEm;
 	
-	@OneToOne
+	@ManyToOne
 	private Servidor nutricionista;
-	
+
 	@ManyToOne
 	private Paciente paciente;
 	
@@ -39,6 +38,7 @@ public class AvaliacaoAntropometrica {
 	public void setPaciente(Paciente paciente) {
 		this.paciente = paciente;
 	}
+
 	private Double peso; 
 	private Double pesoDesejado;
 	private Double altura;
