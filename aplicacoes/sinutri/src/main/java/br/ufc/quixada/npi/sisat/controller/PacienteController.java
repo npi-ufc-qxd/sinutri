@@ -526,14 +526,14 @@ public class PacienteController {
 	}
 	
 	@RequestMapping(value={"/{id}/Antropometria"}, method = RequestMethod.POST)
-	public String adicionarAvaliacaoAntropometrica(@PathVariable("id") String id, Model model, @Valid AvaliacaoAntropometrica antropometria, BindingResult result){
+	public String adicionarAvaliacaoAntropometrica(@PathVariable("id") String id, Model model, @Valid AvaliacaoAntropometrica avaliacaoAntropometrica, BindingResult result){
 		
 		if(result.hasErrors()){
-			model.addAttribute("avaliacaoAntropometrica", antropometria);
+			model.addAttribute("avaliacaoAntropometrica", avaliacaoAntropometrica);
 			return "nutricao/antropometria/form-antropometria";
 		}
 		
-		avaliacaoAntropometricaService.save(antropometria);
+		avaliacaoAntropometricaService.save(avaliacaoAntropometrica);
 		return "nutricao/antropometria/mensagem";
 	}
 }

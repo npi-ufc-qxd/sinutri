@@ -9,13 +9,13 @@
 
 <c:if test="${action eq 'cadastrar' }">
 	<c:url var="url"
-		value="/paciente/${consultaNutricional.paciente.pessoa.cpf}/consulta"></c:url>
+		value="/paciente/${consultaNutricional.paciente.id}/consulta"></c:url>
 	<c:set var="titulo" value="Nova Consulta "></c:set>
 	<c:set var="botao" value="Finalizar Consulta "></c:set>
 </c:if>
 <c:if test="${action eq 'editar' }">
 	<c:url var="url"
-		value="/paciente/${consultaNutricional.paciente.pessoa.cpf}/consulta/${consultaNutricional.id}/editar"></c:url>
+		value="/paciente/${consultaNutricional.paciente.id}/consulta/${consultaNutricional.id}/editar"></c:url>
 	<c:set var="titulo" value="Editar Consulta "></c:set>
 	<c:set var="botao" value="Atualizar Consulta"></c:set>
 </c:if>

@@ -9,6 +9,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
+import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 import org.codehaus.jackson.annotate.JsonIgnore;
 import org.hibernate.annotations.ManyToAny;
@@ -29,6 +30,7 @@ public class AvaliacaoAntropometrica {
 	@DateTimeFormat(pattern="dd/MM/yyyy")
 	private Date atualizadoEm;
 	
+	@Transient
 	@ManyToOne
 	private Servidor nutricionista;
 
