@@ -1,6 +1,7 @@
 package br.ufc.quixada.npi.sisat.service.impl;
 
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -70,14 +71,27 @@ public class PacienteServiceImpl extends GenericServiceImpl<Paciente> implements
 		}else
 			return false;
 	}
-	
-	@Override
- 	public void excluirInquerito(InqueritoAlimentar inquerito) {
- 		inqueritoAlimentarRepository.delete(inquerito);
-	}
-	
+
 	@Override
 	public InqueritoAlimentar getInqueritoAlimentarById(Long id) {
 		return (InqueritoAlimentar) findFirst("InqueritoAlimentar.findInqueritoAlimentarById", new SimpleMap<String, Object>("id", id));
+	}
+
+	@Override
+	public boolean editarInqueritoAlimentar(InqueritoAlimentar inqueritoAlimentar) {
+		if(inqueritoAlimentar != null){
+			inqueritoAlimentar.setAtualizadoEm(new Date());
+			inqueritoAlimentarRepository.update(inqueritoAlimentar);
+			return true;
+		}else
+			return false;
+	}
+
+	@Override
+	public void excluirInqueritoAlimentar(Long id) {
+		InqueritoAlimentar inquerito = getInqueritoAlimentarById(id);
+ 		if(inquerito != null){
+ 			inqueritoAlimentarRepository.delete(inquerito);
+ 		}
 	}
 }
