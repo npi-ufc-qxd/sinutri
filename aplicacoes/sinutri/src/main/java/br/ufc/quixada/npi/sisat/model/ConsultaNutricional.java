@@ -61,19 +61,10 @@ public class ConsultaNutricional {
 	@JoinColumn(name = "paciente_id")
 	private Paciente paciente;
 
-	@OneToOne(mappedBy = "consultaNutricional", cascade = CascadeType.ALL)
-	private InqueritoAlimentar inqueritoAlimentar;
-
 	@OneToMany(mappedBy = "consultaNutricional", cascade = CascadeType.ALL)
 	@JsonIgnore
 	private Set<Documento> documentos;
 	
-	
-	@OneToMany(mappedBy = "consultaNutricional", cascade = CascadeType.ALL)
-	@JsonIgnore
-	private List<Recordatorio> recordatorios;
-	
-
 	@DateTimeFormat
 	private Date data;
 	
@@ -237,7 +228,7 @@ public class ConsultaNutricional {
 		return paciente;
 	}
 
-	public void setPaciente(Paciente paciente) {
+	public void setPaciente(Paciente paciente) {	
 		this.paciente = paciente;
 	}
 
@@ -255,11 +246,6 @@ public class ConsultaNutricional {
 
 	public void setId(Long id) {
 		this.id = id;
-	}
-
-	
-	public List<Recordatorio> getRecordatorio() {
-		return recordatorios;
 	}
 
 	public Date getData() {
@@ -397,14 +383,6 @@ public class ConsultaNutricional {
 
 	public void setCigarroFrequenciaSemanal(Frequencia cigarroFrequenciaSemanal) {
 		this.cigarroFrequenciaSemanal = cigarroFrequenciaSemanal;
-	}
-
-	public void setInqueritoAlimentar(InqueritoAlimentar inqueritoAlimentar) {
-		this.inqueritoAlimentar = inqueritoAlimentar;
-	}
-
-	public InqueritoAlimentar getInqueritoAlimentar() {
-		return inqueritoAlimentar;
 	}
 
 	public String getBebidaAlcoolicaComentario() {

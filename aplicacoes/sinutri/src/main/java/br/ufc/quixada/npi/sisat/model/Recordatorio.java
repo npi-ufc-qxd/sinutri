@@ -1,9 +1,12 @@
 package br.ufc.quixada.npi.sisat.model;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 import org.codehaus.jackson.annotate.JsonIgnore;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import br.ufc.quixada.npi.sisat.model.*;
 
@@ -14,35 +17,57 @@ public class Recordatorio {
 	@GeneratedValue
 	private long id;
 	
-	@OneToMany(mappedBy="recordatorio", cascade = CascadeType.ALL)
-	@JsonIgnore
-	private List<FrequenciaAlimentar> refeicoes;
+	@NotNull
+	@DateTimeFormat(pattern="dd/MM/yyyy")
+	private Date criadoEm;
 	
-	@ManyToOne
-	@JoinColumn(name = "consultaNutricional_id")
-	private ConsultaNutricional consultaNutricional;
-
+	@NotNull
+	@DateTimeFormat(pattern="dd/MM/yyyy")
+	private Date atualizadoEm;
+	
+	@OneToOne
+	private Servidor nutricionista;
+	
+	@OneToMany
+	@JoinColumn(name="recordatorio_id")
+	private List<RefeicaoRecordatorio> refeicoes;
+	
 	public long getId() {
 		return id;
 	}
-
+	
 	public void setId(long id) {
 		this.id = id;
 	}
-
-	public List<FrequenciaAlimentar> getRefeicoes() {
-		return refeicoes;
+	
+	public Date getCriadoEm() {
+		return criadoEm;
+	}
+	
+	public void setCriadoEm(Date criadoEm) {
+		this.criadoEm = criadoEm;
+	}
+	
+	public Date getAtualizadoEm() {
+		return atualizadoEm;
+	}
+	
+	public void setAtualizadoEm(Date atualizadoEm) {
+		this.atualizadoEm = atualizadoEm;
+	}
+	
+	public Servidor getNutricionista() {
+		return nutricionista;
+	}
+	
+	public void setNutricionista(Servidor nutricionista) {
+		this.nutricionista = nutricionista;
 	}
 
-	public void setRefeicoes(List<FrequenciaAlimentar> refeicoes) {
-		this.refeicoes = refeicoes;
+	@Override
+	public String toString() {
+		return "Recordatorio [id=" + id + ", criadoEm=" + criadoEm + ", atualizadoEm=" + atualizadoEm
+				+ ", nutricionista=" + nutricionista + ", refeicoes=" + refeicoes + "]";
 	}
-
-	public ConsultaNutricional getConsultaNutricional() {
-		return consultaNutricional;
-	}
-
-	public void setConsultaNutricional(ConsultaNutricional consultaNutricional) {
-		this.consultaNutricional = consultaNutricional;
-	}
+	
 }

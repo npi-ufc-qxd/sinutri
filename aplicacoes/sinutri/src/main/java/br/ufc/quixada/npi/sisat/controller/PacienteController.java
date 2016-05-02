@@ -86,7 +86,8 @@ public class PacienteController {
 	private AvaliacaoAntropometricaService avaliacaoAntropometricaService;
 
 	@RequestMapping(value = "/{cpf}/verificar-paciente", method = RequestMethod.GET)
-	public String getPaginaHistorico(@PathVariable("cpf") String cpf,@RequestParam("acao") String acao, Model model, RedirectAttributes redirectAttributes) {
+	public String getPaginaHistorico(@PathVariable("cpf") String cpf,@RequestParam("acao") 
+	String acao, Model model, RedirectAttributes redirectAttributes) {
 
 		if(usuarioService.getByCpf(cpf) == null){
 			redirectAttributes.addFlashAttribute("erro", "Paciente não encontrado. Faça um nova pesquisa");
@@ -159,6 +160,19 @@ public class PacienteController {
 
 		return "nutricao/form-consulta";
 	}
+	
+	@RequestMapping(value = { "/Antropometria/{id}" }, method = RequestMethod.GET)
+	public String getPaginaAntropometria(@PathVariable("id") Long id, Model model, RedirectAttributes redirectAttributes) {
+		AvaliacaoAntropometrica antropometria = avaliacaoAntropometricaService.find(AvaliacaoAntropometrica.class, id);
+						
+		if (antropometria == null) {
+			redirectAttributes.addFlashAttribute("erro", " Avaliacao Antropometrica não encontrado.");
+			return "redirect:/nutricao/buscar";
+		}
+
+		model.addAttribute("antropometria", antropometria);
+		return "Paciente/{id}/Antropometria/{id}/";
+	}
 
 	@RequestMapping(value = { "/{cpf}/consulta" }, method = RequestMethod.POST)
 	public String salvarConsulta(@PathVariable("cpf") String cpf, @Valid ConsultaNutricional consulta, Model model,  
@@ -169,9 +183,9 @@ public class PacienteController {
 		model.addAttribute("action", "cadastrar");
 
 		Pessoa pessoa = pessoaService.getPessoaByCpf(cpf);
-		InqueritoAlimentar inqueritoAlimentar = consulta.getInqueritoAlimentar();
-		inqueritoAlimentar.setConsultaNutricional(consulta);
-		consulta.setInqueritoAlimentar(inqueritoAlimentar);
+		//InqueritoAlimentar inqueritoAlimentar = consulta.getInqueritoAlimentar();
+		//inqueritoAlimentar.setConsultaNutricional(consulta);
+		//consulta.setInqueritoAlimentar(inqueritoAlimentar);
 
 		if (pessoa == null) {
 			redirectAttributes.addFlashAttribute("erro", "Paciente não encontrado. Faça um nova pesquisa");
@@ -288,8 +302,8 @@ public class PacienteController {
 		Paciente paciente = pacienteService.find(Paciente.class, consulta.getPaciente().getId());
 		consulta.setPaciente(paciente);
 		
-		InqueritoAlimentar inqueritoAlimentar = consulta.getInqueritoAlimentar();
-		inqueritoAlimentar.setConsultaNutricional(consulta);
+		//InqueritoAlimentar inqueritoAlimentar = consulta.getInqueritoAlimentar();
+		//inqueritoAlimentar.setConsultaNutricional(consulta);
 
 		consultaNutricionalValidator.validate(consulta, result);
 
@@ -336,7 +350,7 @@ public class PacienteController {
 
 		consulta.setData(data);
 		
-		consulta.getInqueritoAlimentar().setConsultaNutricional(consulta);
+		//consulta.getInqueritoAlimentar().setConsultaNutricional(consulta);
 
 		consultaNutricionalService.update(atualizarConsulta(consulta));
 		redirectAttributes.addFlashAttribute("success", "Consulta do paciente <strong>"
@@ -501,7 +515,11 @@ public class PacienteController {
 	
 	@RequestMapping(value= {"/{id}/Antropometria/"}, method = RequestMethod.GET)
 	public String getAvaliacaoAntropometrica(Model model){
-		model.addAttribute("antropometria", new AvaliacaoAntropometrica());
+		AvaliacaoAntropometrica avaliacaoAntropometrica = new AvaliacaoAntropometrica();
+		avaliacaoAntropometrica.setCriadoEm(new Date());
+		avaliacaoAntropometrica.setAtualizadoEm(new Date());
+		
+		model.addAttribute("antropometria", avaliacaoAntropometrica);
 		return "nutricao/antropometria/form-antropometria";
 	}
 	
@@ -509,12 +527,13 @@ public class PacienteController {
 	public String adicionarAvaliacaoAntropometrica(@PathVariable("id") String id, Model model, @Valid AvaliacaoAntropometrica antropometria, BindingResult result){
 		
 		if(result.hasErrors()){
-			model.addAttribute("antropometria", new AvaliacaoAntropometrica());
+			model.addAttribute("antropometria", antropometria);
 			return "nutricao/antropometria/form-antropometria";
 		}
 		
 		Paciente paciente = pacienteService.find(Paciente.class, id);
 		antropometria.setPaciente(paciente);
+		
 		model.addAttribute("action","cadastrar");
 		avaliacaoAntropometricaService.save(antropometria);
 		return "nutricao/antropometria/form-antropometria";

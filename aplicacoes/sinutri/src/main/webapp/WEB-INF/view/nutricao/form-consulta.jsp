@@ -95,7 +95,7 @@
 					cssClass="form-horizontal" enctype="multipart/form-data">
 					<form:hidden path="id" />
 					<form:hidden path="paciente.id" />
-					<form:hidden path="inqueritoAlimentar.id" />
+<%-- 					<form:hidden path="inqueritoAlimentar.id" /> --%>
 					<form:hidden path="data" />
 
 
@@ -882,7 +882,7 @@
 					<h4 id="inquerito" class="section">
 						<strong>Inquerito Alimentar</strong>
 					</h4>
-
+<!--
 					<div class="row form-group">
 						<div class="form-item col-sm-6">
 							<label for="checkBovinoGosta" class="control-label"><form:checkbox
@@ -896,7 +896,7 @@
 							</form:select>
 							<div class="error-validation">
 								<form:errors path="inqueritoAlimentar.bovinaFrequenciaSemanal"></form:errors>
-							</div>
+							</div>"src/"src/main/webapp/WEB-INF/view/nutricao/informacoes-consulta.jsp"main/webapp/WEB-INF/view/nutricao/informacoes-consulta.jsp"
 						</div> 
 	
 						<div class="form-item col-sm-6">
@@ -1583,7 +1583,7 @@
 	</div>
 	<br>
 	<br>
-
+-->
 	<div id="confirm-delete" class="modal" role="dialog" tabindex="-1"
 		aria-labelledby="myModalLabel" aria-hidden="true">
 		<div class="modal-dialog">
