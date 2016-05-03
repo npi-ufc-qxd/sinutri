@@ -1,26 +1,23 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<head th:replace="templates/layoutPadrao :: head">
 	<title>Cadastrar Avaliação Antropometrica</title>
-	<jsp:include page="../../modulos/header-estrutura.jsp" />
 </head>
 <body>
-	<jsp:include page="../../modulos/header.jsp" />
-	
-	<div th:if=${action == 'cadastrar' }>
-		<div th:with="url=@{/paciente/${avaliacaoAntropometrica.paciente.pessoa.cpf}/Antropometria"></div>
+	<nav th:replace="templates/layoutPadrao :: menu"></nav>
+	<div th:if="${action} == 'cadastrar' ">
+		<div th:with="url='/paciente/${avaliacaoAntropometrica.paciente.id}/Antropometria'"></div>
 		<div th:with="titulo='Nova Avaliação Antropometrica'"></div>
 		<div th:with="botao='Finalizar Avaliação Antropometrica'"></div>
 	</div>
-	<div th:if=${action == 'editar' }>
-		<div th:with="url=@{/paciente/${avaliacaoAntropometrica.paciente.pessoa.cpf}/Antropometria/${avaliacaoAntropometrica.id}/editar"></div>
+	<div th:if="${action} == 'editar'">
+		<div th:with="url='/paciente/${avaliacaoAntropometrica.paciente.id}/Antropometria/${avaliacaoAntropometrica.id}/editar'"></div>
 		<div th:with="titulo='Editar Avaliação Antropometrica'"></div>
 		<div th:with="botao='Atualizar Avaliação Antropometrica'"></div>
 	</div>
 	
 	<div class="container">
-		<div th:if=${not empty erro}>
+		<div th:if="${erro != null}">
 			<div class="alert alert-danger alert-dismissible fade in"
 				role="alert" id="alert-erro">
 				<button type="button" class="close" data-dismiss="alert">
@@ -29,7 +26,7 @@
 				<div th:text="${erro}"></div>
 			</div>
 		</div>
-		<div th:if=${not empty info}>
+		<div th:if="${info != null}">
 			<div class="alert alert-success alert-dismissible fade in"
 				role="alert" id="alert-info">
 				<button type="button" class="close" data-dismiss="alert">
@@ -73,7 +70,7 @@
 										style="color: #F56954;" class="glyphicon glyphicon-asterisk"></i>
 										Data:
 									</label>
-									<input type=date" th:field="*{criadoEm}" class="form-control datepicker" placeholder="dd/mm/aaaa"/>
+									<input type="date" th:field="*{criadoEm}" class="form-control datepicker" placeholder="dd/mm/aaaa"/>
 									<div class="error-validation">
 										<p th:if="${#fields.hasErrors('criadoEm')}" th:errors="*{criadoEm}">Data inválida</p>
 									</div>
@@ -82,7 +79,7 @@
 								<div class="form-item col-sm-3">
 									<label th:for="${#ids.next('altura')}" class="control-label">
 										Altura (m):</label>
-									<input type=number" th:field="*{altura}" class="form-control valid-num" min="0" placeholder="0.00"/>
+									<input type="number" th:field="*{altura}" class="form-control valid-num" min="0" placeholder="0.00"/>
 									<div class="error-validation">
 										<p th:if="${#fields.hasErrors('altura')}" th:errors="*{altura}">Altura inválida</p>
 									</div>
@@ -91,7 +88,7 @@
 								<div class="form-item col-sm-3">
 									<label th:for="${#ids.next('peso')}" class="control-label">
 										Peso (Kg):</label>
-									<input type=number" th:field="*{peso}" class="form-control valid-num" min="0" placeholder="0.00"/>
+									<input type="number" th:field="*{peso}" class="form-control valid-num" min="0" placeholder="0.00"/>
 									<div class="error-validation">
 										<p th:if="${#fields.hasErrors('peso')}" th:errors="*{peso}">Peso inválido</p>
 									</div>
@@ -99,7 +96,7 @@
 								<div class="form-item col-sm-3">
 									<label th:for="${#ids.next('pesoDesejado')}" class="control-label">
 										Peso desejado (Kg):</label>
-									<input type=number" th:field="*{pesoDesejado}" class="form-control valid-num" min="0" placeholder="0.00"/>
+									<input type="number" th:field="*{pesoDesejado}" class="form-control valid-num" min="0" placeholder="0.00"/>
 									<div class="error-validation">
 										<p th:if="${#fields.hasErrors('pesoDesejado')}" th:errors="*{pesoDesejado}">Peso Desejado inválido</p>
 									</div>
@@ -111,7 +108,7 @@
 									<label th:for="${#ids.next('cintura')}" class="control-label">
 										Cintura (cm):
 									</label>
-									<input type=number" th:field="*{cintura}" class="form-control valid-num" min="0" placeholder="0.00"/>
+									<input type="number" th:field="*{cintura}" class="form-control valid-num" min="0" placeholder="0.00"/>
 									<div class="error-validation">
 										<p th:if="${#fields.hasErrors('cintura')}" th:errors="*{cintura}">Cintura inválida</p>
 									</div>
@@ -121,7 +118,7 @@
 									<label th:for="${#ids.next('abdomen')}" class="control-label">
 										Abdomen (cm):
 									</label>
-									<input type=number" th:field="*{abdomen}" class="form-control valid-num" min="0" placeholder="0.00"/>
+									<input type="number" th:field="*{abdomen}" class="form-control valid-num" min="0" placeholder="0.00"/>
 									<div class="error-validation">
 										<p th:if="${#fields.hasErrors('abdomen')}" th:errors="*{abdomen}">Abdomen inválido</p>
 									</div>
@@ -131,7 +128,7 @@
 									<label th:for="${#ids.next('quadril')}" class="control-label">
 										Quadril (cm):
 									</label>
-									<input type=number" th:field="*{quadril}" class="form-control valid-num" min="0" placeholder="0.00"/>
+									<input type="number" th:field="*{quadril}" class="form-control valid-num" min="0" placeholder="0.00"/>
 									<div class="error-validation">
 										<p th:if="${#fields.hasErrors('quadril')}" th:errors="*{quadril}">Quadril inválido</p>
 									</div>
@@ -141,7 +138,7 @@
 									<label th:for="${#ids.next('punho')}" class="control-label">
 										Punho (cm):
 									</label>
-									<input type=number" th:field="*{punho}" class="form-control valid-num" min="0" placeholder="0.00"/>
+									<input type="number" th:field="*{punho}" class="form-control valid-num" min="0" placeholder="0.00"/>
 									<div class="error-validation">
 										<p th:if="${#fields.hasErrors('punho')}" th:errors="*{punho}">Punho inválido</p>
 									</div>
@@ -153,7 +150,7 @@
 									<label th:for="${#ids.next('antebraco')}" class="control-label">
 										Antebraco (cm):
 									</label>
-									<input type=number" th:field="*{antebraco}" class="form-control valid-num" min="0" placeholder="0.00"/>
+									<input type="number" th:field="*{antebraco}" class="form-control valid-num" min="0" placeholder="0.00"/>
 									<div class="error-validation">
 										<p th:if="${#fields.hasErrors('antebraco')}" th:errors="*{antebraco}">Antebraco inválido</p>
 									</div>
@@ -162,7 +159,7 @@
 						</div>
 					</div>
 				</div>
-				
+				<!--
 				<div class="panel panel-primary">
 					<div class="panel-heading">
 				        <h4 class="panel-title">
@@ -499,14 +496,15 @@
 					</div>
 				</div>
 				 --> 
+				 -->
 				<div class="col-xs-offset-0 col-xs-10" align="center">
-					</br>
-					<button type="submit" class="btn btn-success">${botao}</button>
+					<br></br>
+					<button type="submit" class="btn btn-success" th:text="${botao}">Enviar</button>
 				</div>
 			</form>
 		</div>
 		</div>
 	</div>
+	<footer th:replace="templates/layoutPadrao :: footer"></footer>
 </body>
-<jsp:include page="../../modulos/footer.jsp" />
 </html>
