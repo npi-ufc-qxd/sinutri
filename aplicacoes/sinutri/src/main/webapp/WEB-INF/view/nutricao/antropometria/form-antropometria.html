@@ -1,23 +1,4 @@
 <!DOCTYPE html>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
-
-<c:if test="${action eq 'cadastrar' }">
-	<c:url var="url" value="/paciente/${avaliacaoAntropometrica.paciente.pessoa.cpf}/Antropometria"></c:url>
-	<c:set var="titulo" value="Nova Avaliação Antropometrica "></c:set>
-	<c:set var="botao" value="Finalizar Avaliação Antropometrica "></c:set>
-</c:if>
-<c:if test="${action eq 'editar' }">
-	<c:url var="url" value="/paciente/${avaliacaoAntropometrica.paciente.pessoa.cpf}/Antropometria/${avaliacaoAntropometrica.id}/editar"></c:url>
-	<c:set var="titulo" value="Editar Avaliação Antropometrica "></c:set>
-	<c:set var="botao" value="Atualizar Avaliação Antropometrica"></c:set>
-</c:if>
-
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -26,30 +7,42 @@
 </head>
 <body>
 	<jsp:include page="../../modulos/header.jsp" />
+	
+	<div th:if=${action == 'cadastrar' }>
+		<div th:with="url=@{/paciente/${avaliacaoAntropometrica.paciente.pessoa.cpf}/Antropometria"></div>
+		<div th:with="titulo='Nova Avaliação Antropometrica'"></div>
+		<div th:with="botao='Finalizar Avaliação Antropometrica'"></div>
+	</div>
+	<div th:if=${action == 'editar' }>
+		<div th:with="url=@{/paciente/${avaliacaoAntropometrica.paciente.pessoa.cpf}/Antropometria/${avaliacaoAntropometrica.id}/editar"></div>
+		<div th:with="titulo='Editar Avaliação Antropometrica'"></div>
+		<div th:with="botao='Atualizar Avaliação Antropometrica'"></div>
+	</div>
+	
 	<div class="container">
-		<c:if test="${not empty erro}">
+		<div th:if=${not empty erro}>
 			<div class="alert alert-danger alert-dismissible fade in"
 				role="alert" id="alert-erro">
 				<button type="button" class="close" data-dismiss="alert">
 					<span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
 				</button>
-				<c:out value="${erro}"></c:out>
+				<div th:text="${erro}"></div>
 			</div>
-		</c:if>
-		<c:if test="${not empty info}">
+		</div>
+		<div th:if=${not empty info}>
 			<div class="alert alert-success alert-dismissible fade in"
 				role="alert" id="alert-info">
 				<button type="button" class="close" data-dismiss="alert">
 					<span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
 				</button>
-				<c:out value="${info}"></c:out>
+				<div th:text="${info}"></div>
 			</div>
-		</c:if>
+		</div>
 		
 		<div class="row">
 			<div class="col-sm-9">
-				<h3>${titulo}
-					<strong>${avaliacaoAntropometrica.paciente.pessoa.nome}</strong>
+				<h3 th:text="${titulo}">Avaliação Antropometrica de
+					<strong th:text="${avaliacaoAntropometrica.paciente.pessoa.nome}">José Silva</strong>
 				</h3>
 			</div>
 
@@ -61,14 +54,11 @@
 		
 		<div class="row">
 		<div class="panel-group" id="accordionAntropometria">
-			<form:form servletRelativeAction="${url}" method="POST"
-					id="form-antropometria" modelAttribute="avaliacaoAntropometrica"
-					commandName="avaliacaoAntropometrica" acceptCharset="UTF-8"
-					cssClass="form-horizontal" enctype="multipart/form-data">
-				<form:hidden path="id" />
-				<form:hidden path="atualizadoEm" />
-				<form:hidden path="nutricionista.id" />
-				<form:hidden path="paciente.id" />
+			<form action="#" class="form-horizontal" th:action="${url}" th:object="${avaliacaoAntropometrica}" method="post" enctype="multipart/form-data">
+				<input type="hidden" th:field="*{id}" />
+				<input type="hidden" th:field="*{atualizadoEm}" />
+				<input type="hidden" th:field="*{paciente.id}" />
+				<input type="hidden" th:field="*{nutricionista.id}" />
 				<div class="panel panel-primary">
 					<div class="panel-heading">
 				        <h4 class="panel-title">
@@ -79,108 +69,93 @@
 						<div class="panel-body">	
 							<div class="row form-group">
 								<div class="form-item col-sm-3">
-									<label for="criadoEm" class="control-label"> <i
+									<label th:for="${#ids.next('criadoEm')}" class="control-label"> <i
 										style="color: #F56954;" class="glyphicon glyphicon-asterisk"></i>
 										Data:
 									</label>
-									<form:input id="criadoEm" path="criadoEm" class="form-control datepicker"
-										placeholder="dd/mm/aaaa" type="date"/>
+									<input type=date" th:field="*{criadoEm}" class="form-control datepicker" placeholder="dd/mm/aaaa"/>
 									<div class="error-validation">
-										<form:errors path="criadoEm"></form:errors>
+										<p th:if="${#fields.hasErrors('criadoEm')}" th:errors="*{criadoEm}">Data inválida</p>
 									</div>
 								</div>
 								
 								<div class="form-item col-sm-3">
-									<label for="altura" class="control-label">
+									<label th:for="${#ids.next('altura')}" class="control-label">
 										Altura (m):</label>
-									<form:input type="number" id="altura" name="altura" path="altura"
-										cssClass="form-control valid-num" min="0" placeholder="0.00" />
+									<input type=number" th:field="*{altura}" class="form-control valid-num" min="0" placeholder="0.00"/>
 									<div class="error-validation">
-										<form:errors path="altura"></form:errors>
+										<p th:if="${#fields.hasErrors('altura')}" th:errors="*{altura}">Altura inválida</p>
 									</div>
 								</div>
 								
 								<div class="form-item col-sm-3">
-									<label for="peso" class="control-label">
+									<label th:for="${#ids.next('peso')}" class="control-label">
 										Peso (Kg):</label>
-									<form:input type="number" id="peso" name="peso" path="peso"
-										cssClass="form-control valid-num" min="0" placeholder="00.00" />
+									<input type=number" th:field="*{peso}" class="form-control valid-num" min="0" placeholder="0.00"/>
 									<div class="error-validation">
-										<form:errors path="peso"></form:errors>
+										<p th:if="${#fields.hasErrors('peso')}" th:errors="*{peso}">Peso inválido</p>
 									</div>
 								</div>
 								<div class="form-item col-sm-3">
-									<label for="pesoDesejado" class="control-label">
+									<label th:for="${#ids.next('pesoDesejado')}" class="control-label">
 										Peso desejado (Kg):</label>
-									<form:input id="pesoDesejado" name="pesoDesejado"
-										path="pesoDesejado" type="number"
-										cssClass="form-control valid-num" min="0" placeholder="00.00" />
+									<input type=number" th:field="*{pesoDesejado}" class="form-control valid-num" min="0" placeholder="0.00"/>
 									<div class="error-validation">
-										<form:errors path="pesoDesejado"></form:errors>
+										<p th:if="${#fields.hasErrors('pesoDesejado')}" th:errors="*{pesoDesejado}">Peso Desejado inválido</p>
 									</div>
 								</div>
 							</div>
 							
 							<div class="row form-group">
 								<div class="form-item col-sm-3">
-									<label for="cintura" class="control-label">
+									<label th:for="${#ids.next('cintura')}" class="control-label">
 										Cintura (cm):
 									</label>
-									<form:input id="cintura" name="cintura"
-										placeholder="00.00" path="cintura" type="number"
-										cssClass="form-control valid-num" min="0" />
+									<input type=number" th:field="*{cintura}" class="form-control valid-num" min="0" placeholder="0.00"/>
 									<div class="error-validation">
-										<form:errors path="cintura"></form:errors>
+										<p th:if="${#fields.hasErrors('cintura')}" th:errors="*{cintura}">Cintura inválida</p>
 									</div>
 								</div>
 								
 								<div class="form-item col-sm-3">
-									<label for="abdomen" class="control-label">
+									<label th:for="${#ids.next('abdomen')}" class="control-label">
 										Abdomen (cm):
 									</label>
-									<form:input id="abdomen" name="abdomen"
-										placeholder="00.00" path="abdomen" type="number"
-										cssClass="form-control valid-num" min="0" />
+									<input type=number" th:field="*{abdomen}" class="form-control valid-num" min="0" placeholder="0.00"/>
 									<div class="error-validation">
-										<form:errors path="abdomen"></form:errors>
+										<p th:if="${#fields.hasErrors('abdomen')}" th:errors="*{abdomen}">Abdomen inválido</p>
 									</div>
 								</div>
 								
 								<div class="form-item col-sm-3">
-									<label for="quadril" class="control-label">
+									<label th:for="${#ids.next('quadril')}" class="control-label">
 										Quadril (cm):
 									</label>
-									<form:input id="quadril" name="quadril"
-										placeholder="00.00" path="quadril" type="number"
-										cssClass="form-control valid-num" min="0" />
+									<input type=number" th:field="*{quadril}" class="form-control valid-num" min="0" placeholder="0.00"/>
 									<div class="error-validation">
-										<form:errors path="quadril"></form:errors>
+										<p th:if="${#fields.hasErrors('quadril')}" th:errors="*{quadril}">Quadril inválido</p>
 									</div>
 								</div>
 								
 								<div class="form-item col-sm-3">
-									<label for="punho" class="control-label">
+									<label th:for="${#ids.next('punho')}" class="control-label">
 										Punho (cm):
 									</label>
-									<form:input id="punho" name="punho"
-										placeholder="00.00" path="punho" type="number"
-										cssClass="form-control valid-num" min="0" />
+									<input type=number" th:field="*{punho}" class="form-control valid-num" min="0" placeholder="0.00"/>
 									<div class="error-validation">
-										<form:errors path="punho"></form:errors>
+										<p th:if="${#fields.hasErrors('punho')}" th:errors="*{punho}">Punho inválido</p>
 									</div>
 								</div>
 							</div>
 							
 							<div class="row form-group">
 								<div class="form-item col-sm-3">
-									<label for="antebraco" class="control-label">
+									<label th:for="${#ids.next('antebraco')}" class="control-label">
 										Antebraco (cm):
 									</label>
-									<form:input id="antebraco" name="antebraco"
-										placeholder="00.00" path="antebraco" type="number"
-										cssClass="form-control valid-num" min="0" />
+									<input type=number" th:field="*{antebraco}" class="form-control valid-num" min="0" placeholder="0.00"/>
 									<div class="error-validation">
-										<form:errors path="antebraco"></form:errors>
+										<p th:if="${#fields.hasErrors('antebraco')}" th:errors="*{antebraco}">Antebraco inválido</p>
 									</div>
 								</div>
 							</div>
@@ -191,7 +166,7 @@
 				<div class="panel panel-primary">
 					<div class="panel-heading">
 				        <h4 class="panel-title">
-				        	<a data-toggle="collapse" data-parent="#accordionAntropometria" href="#collapse2">CIRCUNFERÊNCIAS</a>
+				        	<a data-toggle="collapse" data-parent="#accordionAntropometria" href="#collapse2">CIRCUNFER�NCIAS</a>
 				        </h4>
 				    </div>
 				    <div id="collapse2" class="panel-collapse collapse">
@@ -250,7 +225,7 @@
 							<div class="row form-group">
 								<div class="form-item col-sm-3">
 									<label for="pescoco" class="control-label">
-										Pescoço (cm):
+										Pesco�o (cm):
 									</label>
 									<form:input id="pescoco" name="pescoco"
 										placeholder="00.00" path="pescoco" type="number"
@@ -338,7 +313,7 @@
 								
 								<div class="form-item col-sm-3">
 									<label for="bracoContraidoDireito" class="control-label">
-										Braco Contraído Direito (cm):
+										Braco Contra�do Direito (cm):
 									</label>
 									<form:input id="bracoContraidoDireito" name="bracoContraidoDireito"
 										placeholder="00.00" path="bracoContraidoDireito" type="number"
@@ -367,7 +342,7 @@
 				<div class="panel panel-primary">
 					<div class="panel-heading">
 				        <h4 class="panel-title">
-				        	<a data-toggle="collapse" data-parent="#accordionAntropometria" href="#collapse3">DiÂMETROS ÓSSEOS</a>
+				        	<a data-toggle="collapse" data-parent="#accordionAntropometria" href="#collapse3">Di�METROS �SSEOS</a>
 				        </h4>
 				    </div>
 				    <div id="collapse3" class="panel-collapse collapse">
@@ -387,7 +362,7 @@
 								
 								<div class="form-item col-sm-3">
 									<label for="diametroFemur" class="control-label">
-										Diametro Fêmur (cm):
+										Diametro F�mur (cm):
 									</label>
 									<form:input id="diametroFemur" name="diametroFemur"
 										placeholder="00.00" path="diametroFemur" type="number"
@@ -404,7 +379,7 @@
 				<div class="panel panel-primary">
 					<div class="panel-heading">
 				        <h4 class="panel-title">
-				        	<a data-toggle="collapse" data-parent="#accordionAntropometria" href="#collapse4">COMPOSIÇÃO CORPORAL</a>
+				        	<a data-toggle="collapse" data-parent="#accordionAntropometria" href="#collapse4">COMPOSI��O CORPORAL</a>
 				        </h4>
 				    </div>
 				    <div id="collapse4" class="panel-collapse collapse">
@@ -436,7 +411,7 @@
 								
 								<div class="form-item col-sm-3">
 									<label for="axilarMedia" class="control-label">
-										Axilar Média (cm):
+										Axilar M�dia (cm):
 									</label>
 									<form:input id="axilarMedia" name="axilarMedia"
 										placeholder="00.00" path="axilarMedia" type="number"
@@ -448,7 +423,7 @@
 								
 								<div class="form-item col-sm-3">
 									<label for="torax" class="control-label">
-										Tórax (cm):
+										T�rax (cm):
 									</label>
 									<form:input id="torax" name="torax"
 										placeholder="00.00" path="torax" type="number"
@@ -486,7 +461,7 @@
 								
 								<div class="form-item col-sm-3">
 									<label for="suprailiaca" class="control-label">
-										Suprailíaca (cm):
+										Suprail�aca (cm):
 									</label>
 									<form:input id="suprailiaca" name="suprailiaca"
 										placeholder="00.00" path="suprailiaca" type="number"
@@ -523,12 +498,12 @@
 						</div>
 					</div>
 				</div>
-				
+				 --> 
 				<div class="col-xs-offset-0 col-xs-10" align="center">
 					</br>
 					<button type="submit" class="btn btn-success">${botao}</button>
 				</div>
-			</form:form>
+			</form>
 		</div>
 		</div>
 	</div>
