@@ -429,7 +429,6 @@ public class PacienteController {
 		consultaNutricionalService.update(consulta);
 		
 		return "redirect:/paciente/consulta/" + consulta.getId() +"/plano-alimentar";
-
 	}
 
 	

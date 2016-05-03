@@ -77,8 +77,7 @@ public class PacienteServiceImpl extends GenericServiceImpl<Paciente> implements
 
 	@Override
 	public Prescricao buscarPrescricao(Long id) {
-		prescricaoRepository.find(Prescricao.class, id);
-		return null;
+		return prescricaoRepository.find(Prescricao.class, id);
 	}
 		
 }
