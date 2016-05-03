@@ -520,8 +520,8 @@ public class PacienteController {
 		
 	}
 	
-	@RequestMapping(value = "/{idPaciente}/Anamnese/{idAnamnese}/Editar")
-	public String editarAnamnese(@PathVariable("idPaciente") Long idPaciente,@PathVariable("idAnanmese") Long idAnanmese, @Valid Anamnese anamnese,
+	@RequestMapping(value = "/{id}/Anamnese/{idAnamnese}/Editar")
+	public String editarAnamnese(@PathVariable("id") Long id,@PathVariable("idAnanmese") Long idAnanmese, @Valid Anamnese anamnese,
 			BindingResult result, Model model){
 		System.out.println(anamnese.getAgua() + " NULOOO\n\n\n");
 		if(result.hasErrors()){
@@ -530,7 +530,7 @@ public class PacienteController {
 		}
 		anamnese.setId(4l);
 		anamnese.setAgua(30.0);
-		pacienteService.excluirAnamnese(anamnese);
+		pacienteService.editarAnamnese(anamnese);
 		return "/";
 	}
 	
