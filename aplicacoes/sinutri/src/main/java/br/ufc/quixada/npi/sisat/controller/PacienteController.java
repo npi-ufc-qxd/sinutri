@@ -41,7 +41,6 @@ import br.ufc.quixada.npi.sisat.model.enuns.Refeicao;
 import br.ufc.quixada.npi.sisat.model.enuns.SistemaGastrointestinal;
 import br.ufc.quixada.npi.sisat.model.enuns.SistemaUrinario;
 import br.ufc.quixada.npi.sisat.model.enuns.TipoFrequencia;
-import br.ufc.quixada.npi.sisat.service.AnamneseService;
 import br.ufc.quixada.npi.sisat.service.ConsultaNutricionalService;
 import br.ufc.quixada.npi.sisat.service.DocumentoService;
 import br.ufc.quixada.npi.sisat.service.PacienteExternoService;
@@ -81,9 +80,7 @@ public class PacienteController {
 	
 	@Inject
 	private PacienteExternoService pacienteExternoService;
-	
-	@Inject
-	private AnamneseService anamneseService;
+		
 
 	@RequestMapping(value = "/{cpf}/verificar-paciente", method = RequestMethod.GET)
 	public String getPaginaHistorico(@PathVariable("cpf") String cpf,@RequestParam("acao") String acao, Model model, RedirectAttributes redirectAttributes) {
@@ -507,15 +504,15 @@ public class PacienteController {
 			return "redirect:nutricao/form-consulta";
 		}
 		anamnese.setId(null);
-		anamneseService.save(anamnese);		
+		pacienteService.adicionarAnamnese(anamnese);
 		return "redirect:/nutricao/form-consulta";
 	}
 	
 	@RequestMapping(value = "/{idPaciente}/Anamnese/{idAnamnese}/Excluir")
 	public String excluirAnamnese(@PathVariable("idPaciente") Long pacienteId,@PathVariable("idAnamnese") Long idAnamnese){
-		Anamnese anamnese = anamneseService.find(Anamnese.class, idAnamnese);
+		Anamnese anamnese = pacienteService.buscarAnamnese(idAnamnese);
 		if(anamnese != null){
-			anamneseService.delete(anamnese);
+			pacienteService.excluirAnamnese(anamnese);
 			return "/";
 		}else{
 			return "/";
@@ -523,9 +520,24 @@ public class PacienteController {
 		
 	}
 	
+	@RequestMapping(value = "/{idPaciente}/Anamnese/{idAnamnese}/Editar")
+	public String editarAnamnese(@PathVariable("idPaciente") Long idPaciente,@PathVariable("idAnanmese") Long idAnanmese, @Valid Anamnese anamnese,
+			BindingResult result, Model model){
+		System.out.println(anamnese.getAgua() + " NULOOO\n\n\n");
+		if(result.hasErrors()){
+			model.addAttribute("anamnese", anamnese);
+			return "redirect:nutricao/form-consulta";
+		}
+		anamnese.setId(4l);
+		anamnese.setAgua(30.0);
+		pacienteService.excluirAnamnese(anamnese);
+		return "/";
+	}
+	
 	@RequestMapping(value  = {"AnamneseTeste"}, method = RequestMethod.GET)
 	public String teste( Model model, HttpSession session){
 		Anamnese anamnese = new Anamnese();
+		anamnese.setId(4l);
 		anamnese.setAgua(2.0);
 		//anamnese.setNutricionista(getUsuarioLogado(session));
 		model.addAttribute("anamnese",anamnese);
