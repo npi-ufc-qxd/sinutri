@@ -14,6 +14,7 @@ import br.ufc.quixada.npi.repository.GenericRepository;
 import br.ufc.quixada.npi.service.impl.GenericServiceImpl;
 import br.ufc.quixada.npi.sisat.model.ConsultaNutricional;
 import br.ufc.quixada.npi.sisat.model.Paciente;
+import br.ufc.quixada.npi.sisat.model.Prescricao;
 import br.ufc.quixada.npi.sisat.service.PacienteService;
 import br.ufc.quixada.npi.util.SimpleMap;
 
@@ -22,6 +23,9 @@ public class PacienteServiceImpl extends GenericServiceImpl<Paciente> implements
 
 	@Inject
 	GenericRepository<ConsultaNutricional> consultaRepository;
+	
+	@Inject
+	GenericRepository<Prescricao> prescricaoRepository;
 
 	@Override
 	public Map<Long, Object> getConsultasByPaciente(Long id) {
@@ -54,6 +58,27 @@ public class PacienteServiceImpl extends GenericServiceImpl<Paciente> implements
 	@Override
 	public void excluir(ConsultaNutricional consulta){
 		this.excluir(consulta);
+	}
+
+	@Override
+	public void adicionarPrescricao(Prescricao prescricao) {
+		prescricaoRepository.save(prescricao);
+	}
+
+	@Override
+	public void excluirPrescricao(Prescricao prescricao) {
+		prescricaoRepository.delete(prescricao);
+	}
+
+	@Override
+	public void editarPrescricao(Prescricao prescricao) {
+		prescricaoRepository.update(prescricao);
+	}
+
+	@Override
+	public Prescricao buscarPrescricao(Long id) {
+		prescricaoRepository.find(Prescricao.class, id);
+		return null;
 	}
 		
 }

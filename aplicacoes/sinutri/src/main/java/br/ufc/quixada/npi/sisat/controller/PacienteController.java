@@ -46,7 +46,6 @@ import br.ufc.quixada.npi.sisat.service.DocumentoService;
 import br.ufc.quixada.npi.sisat.service.PacienteExternoService;
 import br.ufc.quixada.npi.sisat.service.PacienteService;
 import br.ufc.quixada.npi.sisat.service.PessoaService;
-import br.ufc.quixada.npi.sisat.service.PrescricaoService;
 import br.ufc.quixada.npi.sisat.validation.ConsultaNutricionalValidator;
 import net.sf.jasperreports.engine.JREmptyDataSource;
 import net.sf.jasperreports.engine.JRException;
@@ -81,9 +80,7 @@ public class PacienteController {
 	
 	@Inject
 	private PacienteExternoService pacienteExternoService;
-	
-	@Inject
-	private PrescricaoService prescricaoService;
+
 
 	@RequestMapping(value = "/{cpf}/verificar-paciente", method = RequestMethod.GET)
 	public String getPaginaHistorico(@PathVariable("cpf") String cpf,@RequestParam("acao") String acao, Model model, RedirectAttributes redirectAttributes) {
@@ -505,11 +502,32 @@ public class PacienteController {
 		model.addAttribute("prescricao", prescricao);
 		model.addAttribute("action", "cadastrar");
 		
-		if(!result.hasErrors()){
-			prescricaoService.save(prescricao);
-			return "";
-		}
-		return "";
+		if(!result.hasErrors())
+			pacienteService.adicionarPrescricao(prescricao);
+		
+		return "redirect:/Paciente/Prescricao";
+	}
+	
+	@RequestMapping(value="Paciente/{id}/Prescricao/{idPrescricao}/Excluir/", method = RequestMethod.POST)
+	public String excluirPrescricao(@PathVariable("id") Long idPaciente, @PathVariable("idPrescricao") Long idPrescricao){
+		Prescricao prescricao = pacienteService.buscarPrescricao(idPrescricao);
+		if(prescricao != null)
+			pacienteService.excluirPrescricao(prescricao);
+		
+		return "redirect:/Paciente/"+idPaciente+"Prescricao";
+	}
+	
+	@RequestMapping(value="Paciente/{id}/Prescricao/{idPrescricao}/Editar/", method = RequestMethod.POST)
+	public String editarPrescricao(@PathVariable("id") Long idPaciente, @PathVariable("idPrescricao") Long idPrescricao, 
+			@Valid Prescricao prescricao, Model model,
+			BindingResult result, RedirectAttributes redirectAttributes){
+		
+		if(!result.hasErrors())
+			pacienteService.editarPrescricao(prescricao);
+		
+		return "Paciente/"+idPaciente+"/Prescricao/";
 	}
 	
 }
+
+	
