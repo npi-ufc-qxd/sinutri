@@ -34,7 +34,7 @@
 		<spring.security.version>3.2.1.RELEASE</spring.security.version>
 
 		<!-- Logging -->
-		<slf4j-log4j12.version>1.7.6</slf4j-log4j12.version>
+		<slf4j-log4j12.version>1.7.5</slf4j-log4j12.version>
 
 		<!-- Web dependencies -->
 		<bootstrap.version>3.3.2</bootstrap.version>
@@ -47,6 +47,10 @@
 		<!-- NPI -->
 		<npi.core.version>0.1.1</npi.core.version>
 		<npi.ldap.version>0.1.2</npi.ldap.version>
+
+		<!-- Thymeleaf -->
+		<thymeleaf.version>2.1.4.RELEASE</thymeleaf.version>
+
 	</properties>
 
 	<repositories>
@@ -57,11 +61,21 @@
 	</repositories>
 
 	<dependencies>
-		<!-- JQuery File Upload -->
+		<!-- Thymeleaf -->
+	  	<dependency>
+	        <groupId>org.thymeleaf</groupId>
+	        <artifactId>thymeleaf-spring4</artifactId>
+	        <version>${thymeleaf.version}</version>
+	    </dependency>
 		<dependency>
-			<groupId>org.webjars.bower</groupId>
-			<artifactId>jquery-file-upload</artifactId>
-			<version>9.11.1</version>
+		  <groupId>org.thymeleaf.extras</groupId>
+		  <artifactId>thymeleaf-extras-tiles2-spring4</artifactId>
+		  <version>2.1.1.RELEASE</version>
+		</dependency>
+		<dependency>
+			<groupId>nz.net.ultraq.thymeleaf</groupId>
+			<artifactId>thymeleaf-layout-dialect</artifactId>
+			<version>1.2.1</version>
 		</dependency>
 
 		<dependency>
@@ -166,7 +180,14 @@
 			<artifactId>slf4j-log4j12</artifactId>
 			<version>${slf4j-log4j12.version}</version>
 		</dependency>
+		<dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>jcl-over-slf4j</artifactId>
 
+			<version>${slf4j-log4j12.version}</version>
+<!--             <version>${org.slf4j-version}</version> -->
+            <scope>runtime</scope>
+        </dependency>
 		<!-- Spring Security -->
 		<dependency>
 			<groupId>org.springframework.security</groupId>

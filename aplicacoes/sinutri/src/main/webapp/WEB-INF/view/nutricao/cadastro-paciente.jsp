@@ -9,12 +9,9 @@
 
 <html>
 	<head>
-		<jsp:include page="../modulos/header-estrutura.jsp" />
 		<title>Cadastrar Paciente</title>
 	</head>
 <body>
-
-	<jsp:include page="../modulos/header.jsp" />
 
 	<div class="container">
 		
@@ -96,9 +93,6 @@
 			</form:form>
 	
 	</div>
-			
-	
-	<jsp:include page="../modulos/footer.jsp" />
 	
 </body>
 </html>

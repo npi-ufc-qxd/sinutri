@@ -8,15 +8,15 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.validation.constraints.NotNull;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
-public class PlanoAlimentar {
-
+public class AvaliacaoLaboratorial {
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
@@ -27,15 +27,16 @@ public class PlanoAlimentar {
 	
 	@NotNull
 	@DateTimeFormat(pattern="dd/MM/yyyy")
-	private Date atualizadoEm;
+	private Date atualizado;
 	
-	@ManyToOne
-	@JoinColumn(name = "nutricionista_id")
+	private String observacao;
+	
+	@OneToOne
 	private Servidor nutricionista;
 	
 	@OneToMany
-	@JoinColumn(name = "plano_alimentar_id")
-	private List<RefeicaoPlanoAlimentar> refeicoesPlanoAlimentar;
+	@JoinColumn(name = "exame_id")
+	private List<Exame> exames;
 
 	public Long getId() {
 		return id;
@@ -53,12 +54,20 @@ public class PlanoAlimentar {
 		this.criadoEm = criadoEm;
 	}
 
-	public Date getAtualizadoEm() {
-		return atualizadoEm;
+	public Date getAtualizado() {
+		return atualizado;
 	}
 
-	public void setAtualizadoEm(Date atualizadoEm) {
-		this.atualizadoEm = atualizadoEm;
+	public void setAtualizado(Date atualizado) {
+		this.atualizado = atualizado;
+	}
+
+	public String getObservacao() {
+		return observacao;
+	}
+
+	public void setObservacao(String observacao) {
+		this.observacao = observacao;
 	}
 
 	public Servidor getNutricionista() {
@@ -69,4 +78,12 @@ public class PlanoAlimentar {
 		this.nutricionista = nutricionista;
 	}
 
+	public List<Exame> getExames() {
+		return exames;
+	}
+
+	public void setExames(List<Exame> exames) {
+		this.exames = exames;
+	}
+	
 }
