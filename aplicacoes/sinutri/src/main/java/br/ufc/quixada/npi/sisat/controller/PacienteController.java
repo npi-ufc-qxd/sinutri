@@ -34,6 +34,7 @@ import br.ufc.quixada.npi.sisat.model.InqueritoAlimentar;
 import br.ufc.quixada.npi.sisat.model.Paciente;
 import br.ufc.quixada.npi.sisat.model.PacienteExterno;
 import br.ufc.quixada.npi.sisat.model.Pessoa;
+import br.ufc.quixada.npi.sisat.model.Prescricao;
 import br.ufc.quixada.npi.sisat.model.enuns.ClassificacaoExame;
 import br.ufc.quixada.npi.sisat.model.enuns.Frequencia;
 import br.ufc.quixada.npi.sisat.model.enuns.Refeicao;
@@ -45,6 +46,7 @@ import br.ufc.quixada.npi.sisat.service.DocumentoService;
 import br.ufc.quixada.npi.sisat.service.PacienteExternoService;
 import br.ufc.quixada.npi.sisat.service.PacienteService;
 import br.ufc.quixada.npi.sisat.service.PessoaService;
+import br.ufc.quixada.npi.sisat.service.PrescricaoService;
 import br.ufc.quixada.npi.sisat.validation.ConsultaNutricionalValidator;
 import net.sf.jasperreports.engine.JREmptyDataSource;
 import net.sf.jasperreports.engine.JRException;
@@ -79,6 +81,9 @@ public class PacienteController {
 	
 	@Inject
 	private PacienteExternoService pacienteExternoService;
+	
+	@Inject
+	private PrescricaoService prescricaoService;
 
 	@RequestMapping(value = "/{cpf}/verificar-paciente", method = RequestMethod.GET)
 	public String getPaginaHistorico(@PathVariable("cpf") String cpf,@RequestParam("acao") String acao, Model model, RedirectAttributes redirectAttributes) {
@@ -493,4 +498,18 @@ public class PacienteController {
 
 		return "redirect:/paciente/cadastrar/paciente";
 	}
+	
+	@RequestMapping(value="Paciente/{id}/Prescricao", method = RequestMethod.POST)
+	public String adcionarPrescricao(@PathVariable("id") Long id, @Valid Prescricao prescricao, Model model, 
+			BindingResult result, RedirectAttributes redirectAttributes){
+		model.addAttribute("prescricao", prescricao);
+		model.addAttribute("action", "cadastrar");
+		
+		if(!result.hasErrors()){
+			prescricaoService.save(prescricao);
+			return "";
+		}
+		return "";
+	}
+	
 }
