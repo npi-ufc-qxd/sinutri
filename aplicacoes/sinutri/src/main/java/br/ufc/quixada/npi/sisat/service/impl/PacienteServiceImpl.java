@@ -15,6 +15,7 @@ import br.ufc.quixada.npi.service.impl.GenericServiceImpl;
 import br.ufc.quixada.npi.sisat.model.AvaliacaoAntropometrica;
 import br.ufc.quixada.npi.sisat.model.ConsultaNutricional;
 import br.ufc.quixada.npi.sisat.model.Paciente;
+import br.ufc.quixada.npi.sisat.model.Papel;
 import br.ufc.quixada.npi.sisat.service.PacienteService;
 import br.ufc.quixada.npi.util.SimpleMap;
 
@@ -64,6 +65,18 @@ public class PacienteServiceImpl extends GenericServiceImpl<Paciente> implements
 	public void adicionarAvaliacaoAntropometrica(AvaliacaoAntropometrica antropometria){
 		antropometriaRepository.save(antropometria);
 	}
-
+	
+	public void editarAvaliacaoAntropometrica(AvaliacaoAntropometrica antropometria) {
+		antropometriaRepository.update(antropometria);
 		
+	}
+	
+	public AvaliacaoAntropometrica buscarAvaliacaoAntropometricaById(Long id) {
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("id", id);
+
+		AvaliacaoAntropometrica avaliacaoAntropometrica = (AvaliacaoAntropometrica) 
+				findFirst(QueryType.JPQL, "from AvaliacaoAntropometrica where id = :id", params);
+		return avaliacaoAntropometrica;
+	}
 }

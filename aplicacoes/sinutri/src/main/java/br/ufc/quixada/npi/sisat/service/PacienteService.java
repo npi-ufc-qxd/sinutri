@@ -20,5 +20,9 @@ public interface PacienteService extends GenericService<Paciente> {
 	
 	//Métodos Avaliação Antropométrica
 	public void adicionarAvaliacaoAntropometrica(AvaliacaoAntropometrica antropometria);
+	
+	public void editarAvaliacaoAntropometrica(AvaliacaoAntropometrica antropometria);
+	
+	public AvaliacaoAntropometrica buscarAvaliacaoAntropometricaById(Long id);
 
 }

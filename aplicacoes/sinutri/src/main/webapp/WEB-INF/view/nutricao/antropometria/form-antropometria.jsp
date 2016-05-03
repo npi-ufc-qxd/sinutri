@@ -8,12 +8,12 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 
 <c:if test="${action eq 'cadastrar' }">
-	<c:url var="url" value="/paciente/${avaliacaoAntropometrica.paciente.pessoa.cpf}/Antropometria"></c:url>
+	<c:url var="url" value="/paciente/${avaliacaoAntropometrica.paciente.id}/Antropometria"></c:url>
 	<c:set var="titulo" value="Nova Avaliação Antropometrica "></c:set>
 	<c:set var="botao" value="Finalizar Avaliação Antropometrica "></c:set>
 </c:if>
 <c:if test="${action eq 'editar' }">
-	<c:url var="url" value="/paciente/${avaliacaoAntropometrica.paciente.pessoa.cpf}/Antropometria/${avaliacaoAntropometrica.id}/editar"></c:url>
+	<c:url var="url" value="/paciente/${avaliacaoAntropometrica.paciente.id}/Antropometria/${avaliacaoAntropometrica.id}/editar"></c:url>
 	<c:set var="titulo" value="Editar Avaliação Antropometrica "></c:set>
 	<c:set var="botao" value="Atualizar Avaliação Antropometrica"></c:set>
 </c:if>
