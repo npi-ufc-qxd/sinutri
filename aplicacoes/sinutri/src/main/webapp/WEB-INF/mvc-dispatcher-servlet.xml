@@ -43,7 +43,7 @@
 	<bean id="tilesConfigurer" class="org.thymeleaf.extras.tiles2.spring4.web.configurer.ThymeleafTilesConfigurer">
     	<property name="definitions">
       		<list>
-        		<value>/WEB-INF/view/message/tiles-defs.xml</value>
+        		<value>/WEB-INF/tiles-defs.xml</value>
 	      	</list>
     	</property>
   </bean>
