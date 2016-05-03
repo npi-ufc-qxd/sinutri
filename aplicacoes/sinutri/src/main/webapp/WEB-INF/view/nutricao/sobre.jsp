@@ -8,12 +8,10 @@
 
 <html>
 	<head>
-		<jsp:include page="../modulos/header-estrutura.jsp" />
 		<title>Sobre</title>
 	</head>
 <body>
 
-	<jsp:include page="../modulos/header.jsp" />
 
 	<div class="container">
 		<div class="sobre" align="left">
@@ -30,7 +28,6 @@
 		</div>
 	</div>
 	
-	<jsp:include page="../modulos/footer.jsp" />
 	
 	<script type="text/javascript">
 		$('#menu-paciente').addClass('active');
