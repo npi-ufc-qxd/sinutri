@@ -73,13 +73,18 @@ public class PacienteServiceImpl extends GenericServiceImpl<Paciente> implements
 	}
 
 	@Override
-	public InqueritoAlimentar getInqueritoAlimentarById(Long id) {
-		return (InqueritoAlimentar) findFirst("InqueritoAlimentar.findInqueritoAlimentarById", new SimpleMap<String, Object>("id", id));
+	public InqueritoAlimentar getInqueritoAlimentarById(Long idInquerito, Long idPaciente) {
+		InqueritoAlimentar inquerito = (InqueritoAlimentar) findFirst("InqueritoAlimentar.findInqueritoAlimentarById", new SimpleMap<String, Object>("id", idInquerito));
+		Paciente paciente = this.find(Paciente.class, idPaciente);
+		inquerito.setPaciente(paciente);
+		return inquerito;
 	}
 
 	@Override
-	public boolean editarInqueritoAlimentar(InqueritoAlimentar inqueritoAlimentar) {
-		if(inqueritoAlimentar != null){
+	public boolean editarInqueritoAlimentar(InqueritoAlimentar inqueritoAlimentar, Long idPaciente) {
+		Paciente paciente = this.find(Paciente.class, idPaciente);
+		if(inqueritoAlimentar != null || paciente != null){
+			inqueritoAlimentar.setPaciente(paciente);
 			inqueritoAlimentar.setAtualizadoEm(new Date());
 			inqueritoAlimentarRepository.update(inqueritoAlimentar);
 			return true;
@@ -88,8 +93,8 @@ public class PacienteServiceImpl extends GenericServiceImpl<Paciente> implements
 	}
 
 	@Override
-	public void excluirInqueritoAlimentar(Long id) {
-		InqueritoAlimentar inquerito = getInqueritoAlimentarById(id);
+	public void excluirInqueritoAlimentar(Long idInquerito, Long idPaciente) {
+		InqueritoAlimentar inquerito = getInqueritoAlimentarById(idInquerito, idPaciente);
  		if(inquerito != null){
  			inqueritoAlimentarRepository.delete(inquerito);
  		}

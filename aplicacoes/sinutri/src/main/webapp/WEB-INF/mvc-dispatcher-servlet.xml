@@ -2,6 +2,7 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
 	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:p="http://www.springframework.org/schema/p"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans          
            http://www.springframework.org/schema/beans/spring-beans.xsd
            http://www.springframework.org/schema/context 
@@ -39,14 +40,33 @@
         <property name="cacheable" value="false"/>
     </bean>
 
-    <bean id="templateEngine"
-          class="org.thymeleaf.spring4.SpringTemplateEngine">
-        <property name="templateResolver" ref="templateResolver" />
-    </bean>
+	<bean id="tilesConfigurer" class="org.thymeleaf.extras.tiles2.spring4.web.configurer.ThymeleafTilesConfigurer">
+    	<property name="definitions">
+      		<list>
+        		<value>/WEB-INF/tiles-defs.xml</value>
+	      	</list>
+    	</property>
+  </bean>
+
+<!--     <bean id="templateEngine" -->
+<!--           class="org.thymeleaf.spring4.SpringTemplateEngine"> -->
+<!--         <property name="templateResolver" ref="templateResolver" /> -->
+<!--     </bean> -->
+
+	<bean id="templateEngine" class="org.thymeleaf.spring4.SpringTemplateEngine" p:templateResolver-ref="templateResolver">
+		<property name="additionalDialects">
+			<set>
+				<bean class="org.thymeleaf.extras.tiles2.dialect.TilesDialect" />
+			</set>
+		</property>
+	</bean>
 
     <bean class="org.thymeleaf.spring4.view.ThymeleafViewResolver">
         <property name="templateEngine" ref="templateEngine" />
     </bean>
+
+<!-- <bean class="org.thymeleaf.spring4.view.ThymeleafViewResolver" p:viewClass="org.thymeleaf.extras.tiles2.spring.web.view.ThymeleafTilesView" p:templateEngine-ref="templateEngine"/>     -->
+    
 	
 	<mvc:resources mapping="/webjars/**" location="/webjars/" />
 	<mvc:resources mapping="/resources/**" location="/resources/"/>

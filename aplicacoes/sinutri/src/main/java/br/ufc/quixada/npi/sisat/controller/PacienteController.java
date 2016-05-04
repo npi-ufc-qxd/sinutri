@@ -499,9 +499,16 @@ public class PacienteController {
 	}
 	
 	@RequestMapping(value = "/{id}/Inquerito/", method = RequestMethod.GET)
-	public String formAdicionarInqueritoAlimentar(Model model) {
+	public String formAdicionarInqueritoAlimentar(Model model, @PathVariable("id") Long id, RedirectAttributes redirectAttributes) {
+		Paciente paciente = pacienteService.find(Paciente.class, id);
+		
+		if(paciente == null){
+			redirectAttributes.addFlashAttribute("erro", "Paciente não encontrado. Faça um nova pesquisa");
+			return "redirect:/nutricao/buscar";
+		}
 		InqueritoAlimentar inquerito = new InqueritoAlimentar();
 		inquerito.setCriadoEm(new Date());
+		inquerito.setPaciente(paciente);
 		model.addAttribute("acao", "cadastrar");
 		model.addAttribute("inquerito", inquerito);
 		model.addAttribute("frequenciasSemanais", FrequenciaSemanal.values());
@@ -527,7 +534,7 @@ public class PacienteController {
 
 	@RequestMapping(value = "/{idPaciente}/Inquerito/{idInquerito}/Editar/", method = RequestMethod.GET)
 	public String formEditarInqueritoAlimentar(@PathVariable("idInquerito") Long idInquerito, @PathVariable("idPaciente") Long idPaciente, Model model, RedirectAttributes redirectAttributes ) {
-		InqueritoAlimentar inquerito = pacienteService.getInqueritoAlimentarById(idInquerito);
+		InqueritoAlimentar inquerito = pacienteService.getInqueritoAlimentarById(idInquerito, idPaciente);
 		if(inquerito == null){
 			redirectAttributes.addFlashAttribute("erro", "Paciente não encontrado. Faça um nova pesquisa");
 			return "redirect:/nutricao/buscar";
@@ -538,33 +545,33 @@ public class PacienteController {
 		return "nutricao/inquerito/form-inquerito";
 	}
 	
-	@RequestMapping(value = "/{id}/Inquerito/{id}/Editar/", method = RequestMethod.POST)
-	public String editarInqueritoAlimentar(@Valid InqueritoAlimentar inquerito, @PathVariable("id") Long id, Model model,  BindingResult result, RedirectAttributes redirectAttributes){
+	@RequestMapping(value = "/{idPaciente}/Inquerito/{idInquerito}/Editar/", method = RequestMethod.POST)
+	public String editarInqueritoAlimentar(@Valid InqueritoAlimentar inquerito, @PathVariable("idInquerito") Long idInquerito,@PathVariable("idPaciente") Long idPaciente, Model model,  BindingResult result, RedirectAttributes redirectAttributes){
 		inqueritoAlimentarValidator.validate(inquerito, result);
 		if(result.hasErrors()){
 			model.addAttribute("inquerito", inquerito);
 			model.addAttribute("frequenciasSemanais", FrequenciaSemanal.values());
 			return "nutricao/inquerito/form-inquerito";
 		}
-		if(!pacienteService.editarInqueritoAlimentar(inquerito)){
+		if(!pacienteService.editarInqueritoAlimentar(inquerito, idPaciente)){
 			redirectAttributes.addFlashAttribute("erro", "Paciente não encontrado. Faça um nova pesquisa");
 			return "redirect:/nutricao/buscar";
 		}
-		return null;
+		return "redirect:/";
 	}
 	
-	@RequestMapping(value = "/{id}/Inquerito/{id}/Excluir/")
- 	public String excluirInqueritoAlimentar(@PathVariable("id") Long id){
-		pacienteService.excluirInqueritoAlimentar(id);
+	@RequestMapping(value = "/{idPaciente}/Inquerito/{idInquerito}/Excluir/")
+ 	public String excluirInqueritoAlimentar(@PathVariable("idInquerito") Long idInquerito, @PathVariable("idPaciente") Long idPaciente){
+		pacienteService.excluirInqueritoAlimentar(idInquerito, idPaciente);
  		return null;
  	}
 	
-	@RequestMapping(value = "/{id}/Inquerito/{id}/")
-	public String visualizarInqueritoAlimentar(Model model, @PathVariable("id") Long id){
-		InqueritoAlimentar inquerito = pacienteService.getInqueritoAlimentarById(id);
+	@RequestMapping(value = "/{idPaciente}/Inquerito/{idInquerito}/")
+	public String visualizarInqueritoAlimentar(Model model, @PathVariable("idInquerito") Long idInquerito, @PathVariable("idPaciente") Long idPaciente){
+		InqueritoAlimentar inquerito = pacienteService.getInqueritoAlimentarById(idInquerito, idPaciente);
 		if(inquerito != null){
 			model.addAttribute("inquerito", inquerito);
-			return "nutricao/inquerito/form-visualizar-inquerito";
+			return "nutricao/inquerito/visualizar-inquerito";
 		}else{
 			return null;
 		} 
