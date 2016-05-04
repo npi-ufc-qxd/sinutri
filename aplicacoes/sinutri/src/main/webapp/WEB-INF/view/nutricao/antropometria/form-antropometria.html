@@ -3,19 +3,11 @@
 <head th:replace="templates/layoutPadrao :: head">
 	<title>Cadastrar Avaliação Antropometrica</title>
 </head>
-<body>
+<body th:with="url=((${action == 'cadastrar'}) ? @{/paciente/${avaliacaoAntropometrica.paciente.id}/Antropometria} : @{/paciente/${avaliacaoAntropometrica.paciente.id}/Antropometria/${avaliacaoAntropometrica.id}/editar} ), 
+			  titulo=((${action == 'cadastrar'}) ? 'Nova Avaliação Antropometrica' : 'Editar Avaliação Antropometrica'),
+			  botao=((${action == 'cadastrar'}) ? 'Finalizar Avaliação Antropometrica' : 'Atualizar Avaliação Antropometrica')">
 	<nav th:replace="templates/layoutPadrao :: menu"></nav>
-	<div th:if="${action} == 'cadastrar' ">
-		<div th:with="url='/paciente/${avaliacaoAntropometrica.paciente.id}/Antropometria'"></div>
-		<div th:with="titulo='Nova Avaliação Antropometrica'"></div>
-		<div th:with="botao='Finalizar Avaliação Antropometrica'"></div>
-	</div>
-	<div th:if="${action} == 'editar'">
-		<div th:with="url='/paciente/${avaliacaoAntropometrica.paciente.id}/Antropometria/${avaliacaoAntropometrica.id}/editar'"></div>
-		<div th:with="titulo='Editar Avaliação Antropometrica'"></div>
-		<div th:with="botao='Atualizar Avaliação Antropometrica'"></div>
-	</div>
-	
+	<h1 th:text="${acao}"></h1>
 	<div class="container">
 		<div th:if="${erro != null}">
 			<div class="alert alert-danger alert-dismissible fade in"
@@ -38,8 +30,9 @@
 		
 		<div class="row">
 			<div class="col-sm-9">
-				<h3 th:text="${titulo}">Avaliação Antropometrica de
-					<strong th:text="${avaliacaoAntropometrica.paciente.pessoa.nome}">José Silva</strong>
+				<h3>
+					<label th:text="${titulo}">Nova Avaliação Antropometrica </label> para 
+					<strong th:text="${avaliacaoAntropometrica.paciente.pessoa.nome}">José da Silva</strong>
 				</h3>
 			</div>
 
@@ -159,61 +152,53 @@
 						</div>
 					</div>
 				</div>
-				<!--
+				
 				<div class="panel panel-primary">
 					<div class="panel-heading">
 				        <h4 class="panel-title">
-				        	<a data-toggle="collapse" data-parent="#accordionAntropometria" href="#collapse2">CIRCUNFER�NCIAS</a>
+				        	<a data-toggle="collapse" data-parent="#accordionAntropometria" href="#collapse2">CIRCUNFERÊNCIAS</a>
 				        </h4>
 				    </div>
 				    <div id="collapse2" class="panel-collapse collapse">
 						<div class="panel-body">
 							<div class="row form-group">
 								<div class="form-item col-sm-3">
-									<label for="ombro" class="control-label">
+									<label th:for="${#ids.next('ombro')}" class="control-label">
 										Ombro (cm):
 									</label>
-									<form:input id="ombro" name="ombro"
-										placeholder="00.00" path="ombro" type="number"
-										cssClass="form-control valid-num" min="0" />
+									<input type="number" th:field="*{ombro}" class="form-control valid-num" min="0" placeholder="0.00"/>
 									<div class="error-validation">
-										<form:errors path="ombro"></form:errors>
+										<p th:if="${#fields.hasErrors('ombro')}" th:errors="*{ombro}">Ombro inválido</p>
 									</div>
 								</div>
 								
 								<div class="form-item col-sm-3">
-									<label for="peitoral" class="control-label">
+									<label th:for="${#ids.next('peitoral')}" class="control-label">
 										Peitoral (cm):
 									</label>
-									<form:input id="peitoral" name="peitoral"
-										placeholder="00.00" path="peitoral" type="number"
-										cssClass="form-control valid-num" min="0" />
+									<input type="number" th:field="*{peitoral}" class="form-control valid-num" min="0" placeholder="0.00"/>
 									<div class="error-validation">
-										<form:errors path="peitoral"></form:errors>
+										<p th:if="${#fields.hasErrors('peitoral')}" th:errors="*{peitoral}">Peitoral inválido</p>
 									</div>
 								</div>
 								
 								<div class="form-item col-sm-3">
-									<label for="panturrilhaDireita" class="control-label">
+									<label th:for="${#ids.next('panturrilhaDireita')}" class="control-label">
 										Panturrilha Direita (cm):
 									</label>
-									<form:input id="panturrilhaDireita" name="panturrilhaDireita"
-										placeholder="00.00" path="panturrilhaDireita" type="number"
-										cssClass="form-control valid-num" min="0" />
+									<input type="number" th:field="*{panturrilhaDireita}" class="form-control valid-num" min="0" placeholder="0.00"/>
 									<div class="error-validation">
-										<form:errors path="panturrilhaDireita"></form:errors>
+										<p th:if="${#fields.hasErrors('peitoral')}" th:errors="*{panturrilhaDireita}">Panturrilha Direita inválida</p>
 									</div>
 								</div>
 								
 								<div class="form-item col-sm-3">
-									<label for="panturrilhaEsquerda" class="control-label">
+									<label th:for="${#ids.next('panturrilhaEsquerda')}" class="control-label">
 										Panturrilha Esquerda (cm):
 									</label>
-									<form:input id="panturrilhaEsquerda" name="panturrilhaEsquerda"
-										placeholder="00.00" path="panturrilhaEsquerda" type="number"
-										cssClass="form-control valid-num" min="0" />
+									<input type="number" th:field="*{panturrilhaEsquerda}" class="form-control valid-num" min="0" placeholder="0.00"/>
 									<div class="error-validation">
-										<form:errors path="panturrilhaEsquerda"></form:errors>
+										<p th:if="${#fields.hasErrors('panturrilhaEsquerda')}" th:errors="*{panturrilhaEsquerda}">Panturrilha Esquerda inválida</p>
 									</div>
 								</div>
 								
@@ -221,114 +206,96 @@
 						
 							<div class="row form-group">
 								<div class="form-item col-sm-3">
-									<label for="pescoco" class="control-label">
-										Pesco�o (cm):
+									<label th:for="${#ids.next('pescoco')}" class="control-label">
+										Pescoço (cm):
 									</label>
-									<form:input id="pescoco" name="pescoco"
-										placeholder="00.00" path="pescoco" type="number"
-										cssClass="form-control valid-num" min="0" />
+									<input type="number" th:field="*{pescoco}" class="form-control valid-num" min="0" placeholder="0.00"/>
 									<div class="error-validation">
-										<form:errors path="pescoco"></form:errors>
+										<p th:if="${#fields.hasErrors('pescoco')}" th:errors="*{pescoco}">Pescoço inválido</p>
 									</div>
 								</div>
 							</div>
 							
 							<div class="row form-group">
 								<div class="form-item col-sm-3">
-									<label for="coxaDireita" class="control-label">
+									<label th:for="${#ids.next('coxaDireita')}" class="control-label">
 										Coxa Direita (cm):
 									</label>
-									<form:input id="coxaDireita" name="coxaDireita"
-										placeholder="00.00" path="coxaDireita" type="number"
-										cssClass="form-control valid-num" min="0" />
+									<input type="number" th:field="*{coxaDireita}" class="form-control valid-num" min="0" placeholder="0.00"/>
 									<div class="error-validation">
-										<form:errors path="coxaDireita"></form:errors>
+										<p th:if="${#fields.hasErrors('coxaDireita')}" th:errors="*{coxaDireita}">Coxa direita inválido</p>
 									</div>
 								</div>
 								
 								<div class="form-item col-sm-3">
-									<label for="coxaEsquerda" class="control-label">
+									<label th:for="${#ids.next('coxaEsquerda')}" class="control-label">
 										Coxa Esquerda (cm):
 									</label>
-									<form:input id="coxaEsquerda" name="coxaDireita"
-										placeholder="00.00" path="coxaEsquerda" type="number"
-										cssClass="form-control valid-num" min="0" />
+									<input type="number" th:field="*{coxaEsquerda}" class="form-control valid-num" min="0" placeholder="0.00"/>
 									<div class="error-validation">
-										<form:errors path="coxaEsquerda"></form:errors>
+										<p th:if="${#fields.hasErrors('coxaEsquerda')}" th:errors="*{coxaEsquerda}">Coxa esquerda inválida</p>
 									</div>
 								</div>
 								
 								<div class="form-item col-sm-3">
-									<label for="coxaProximalDireita" class="control-label">
+									<label th:for="${#ids.next('coxaProximalDireita')}" class="control-label">
 										Coxa Proximal Direita (cm):
 									</label>
-									<form:input id="coxaProximalDireita" name="coxaProximalDireita"
-										placeholder="00.00" path="coxaProximalDireita" type="number"
-										cssClass="form-control valid-num" min="0" />
+									<input type="number" th:field="*{coxaProximalDireita}" class="form-control valid-num" min="0" placeholder="0.00"/>
 									<div class="error-validation">
-										<form:errors path="coxaProximalDireita"></form:errors>
+										<p th:if="${#fields.hasErrors('coxaProximalDireita')}" th:errors="*{coxaProximalDireita}">Coxa proximal direita inválida</p>
 									</div>
 								</div>
 								
 								<div class="form-item col-sm-3">
-									<label for="coxaProximalEsquerda" class="control-label">
+									<label th:for="${#ids.next('coxaProximalEsquerda')}" class="control-label">
 										Coxa Proximal Esquerda (cm):
 									</label>
-									<form:input id="coxaProximalEsquerda" name="coxaProximalDireita"
-										placeholder="00.00" path="coxaProximalEsquerda" type="number"
-										cssClass="form-control valid-num" min="0" />
+									<input type="number" th:field="*{coxaProximalEsquerda}" class="form-control valid-num" min="0" placeholder="0.00"/>
 									<div class="error-validation">
-										<form:errors path="coxaProximalEsquerda"></form:errors>
+										<p th:if="${#fields.hasErrors('coxaProximalEsquerda')}" th:errors="*{coxaProximalEsquerda}">Coxa proximal esquerda inválida</p>
 									</div>
 								</div>
 							</div>
 							
 							<div class="row form-group">
 								<div class="form-item col-sm-3">
-									<label for="bracoRelaxadoDireito" class="control-label">
+									<label th:for="${#ids.next('bracoRelaxadoDireito')}" class="control-label">
 										Braco Relaxado Direito (cm):
 									</label>
-									<form:input id="bracoRelaxadoDireito" name="bracoRelaxadoDireito"
-										placeholder="00.00" path="bracoRelaxadoDireito" type="number"
-										cssClass="form-control valid-num" min="0" />
+									<input type="number" th:field="*{bracoRelaxadoDireito}" class="form-control valid-num" min="0" placeholder="0.00"/>
 									<div class="error-validation">
-										<form:errors path="bracoRelaxadoDireito"></form:errors>
+										<p th:if="${#fields.hasErrors('bracoRelaxadoDireito')}" th:errors="*{bracoRelaxadoDireito}">Braço relaxado direito inválido</p>
 									</div>
 								</div>
 								
 								<div class="form-item col-sm-3">
-									<label for="bracoRelaxadoEsquerdo" class="control-label">
+									<label th:for="${#ids.next('bracoRelaxadoEsquerdo')}" class="control-label">
 										Braco Relaxado Esquerdo (cm):
 									</label>
-									<form:input id="bracoRelaxadoEsquerdo" name="bracoRelaxadoEsquerdo"
-										placeholder="00.00" path="bracoRelaxadoEsquerdo" type="number"
-										cssClass="form-control valid-num" min="0" />
+									<input type="number" th:field="*{bracoRelaxadoEsquerdo}" class="form-control valid-num" min="0" placeholder="0.00"/>
 									<div class="error-validation">
-										<form:errors path="bracoRelaxadoEsquerdo"></form:errors>
+										<p th:if="${#fields.hasErrors('bracoRelaxadoEsquerdo')}" th:errors="*{bracoRelaxadoDireito}">Braço relaxado esquerdo inválido</p>
 									</div>
 								</div>
 								
 								<div class="form-item col-sm-3">
-									<label for="bracoContraidoDireito" class="control-label">
-										Braco Contra�do Direito (cm):
+									<label th:for="${#ids.next('bracoContraidoDireito')}" class="control-label">
+										Braco Contraído Direito (cm):
 									</label>
-									<form:input id="bracoContraidoDireito" name="bracoContraidoDireito"
-										placeholder="00.00" path="bracoContraidoDireito" type="number"
-										cssClass="form-control valid-num" min="0" />
+									<input type="number" th:field="*{bracoContraidoDireito}" class="form-control valid-num" min="0" placeholder="0.00"/>
 									<div class="error-validation">
-										<form:errors path="bracoContraidoDireito"></form:errors>
+										<p th:if="${#fields.hasErrors('bracoContraidoDireito')}" th:errors="*{bracoContraidoDireito}">Braço contraído direito inválido</p>
 									</div>
 								</div>
 								
 								<div class="form-item col-sm-3">
-									<label for="bracoContraidoEsquerdo" class="control-label">
+									<label th:for="${#ids.next('bracoContraidoEsquerdo')}" class="control-label">
 										Braco Contraido Esquerdo (cm):
 									</label>
-									<form:input id="bracoContraidoEsquerdo" name="bracoContraidoEsquerdo"
-										placeholder="00.00" path="bracoContraidoEsquerdo" type="number"
-										cssClass="form-control valid-num" min="0" />
+									<input type="number" th:field="*{bracoContraidoEsquerdo}" class="form-control valid-num" min="0" placeholder="0.00"/>
 									<div class="error-validation">
-										<form:errors path="bracoContraidoEsquerdo"></form:errors>
+										<p th:if="${#fields.hasErrors('bracoContraidoEsquerdo')}" th:errors="*{bracoContraidoEsquerdo}">Braço contraído esuqerdo inválido</p>
 									</div>
 								</div>
 							</div>
@@ -339,33 +306,29 @@
 				<div class="panel panel-primary">
 					<div class="panel-heading">
 				        <h4 class="panel-title">
-				        	<a data-toggle="collapse" data-parent="#accordionAntropometria" href="#collapse3">Di�METROS �SSEOS</a>
+				        	<a data-toggle="collapse" data-parent="#accordionAntropometria" href="#collapse3">DiÂMETROS ÓSSEOS</a>
 				        </h4>
 				    </div>
 				    <div id="collapse3" class="panel-collapse collapse">
 						<div class="panel-body">
 							<div class="row form-group">
 								<div class="form-item col-sm-3">
-									<label for="diametroPunho" class="control-label">
+									<label th:for="${#ids.next('diametroPunho')}" class="control-label">
 										Diametro Punho (cm):
 									</label>
-									<form:input id="diametroPunho" name="diametroPunho"
-										placeholder="00.00" path="diametroPunho" type="number"
-										cssClass="form-control valid-num" min="0" />
+									<input type="number" th:field="*{diametroPunho}" class="form-control valid-num" min="0" placeholder="0.00"/>
 									<div class="error-validation">
-										<form:errors path="diametroPunho"></form:errors>
+										<p th:if="${#fields.hasErrors('diametroPunho')}" th:errors="*{diametroPunho}">Diametro do punho inválido</p>
 									</div>
 								</div>
 								
 								<div class="form-item col-sm-3">
-									<label for="diametroFemur" class="control-label">
-										Diametro F�mur (cm):
+									<label th:for="${#ids.next('diametroFemur')}" class="control-label">
+										Diametro Fêmur (cm):
 									</label>
-									<form:input id="diametroFemur" name="diametroFemur"
-										placeholder="00.00" path="diametroFemur" type="number"
-										cssClass="form-control valid-num" min="0" />
+									<input type="number" th:field="*{diametroFemur}" class="form-control valid-num" min="0" placeholder="0.00"/>
 									<div class="error-validation">
-										<form:errors path="diametroFemur"></form:errors>
+										<p th:if="${#fields.hasErrors('diametroFemur')}" th:errors="*{diametroFemur}">Diametro do fêmur inválido</p>
 									</div>
 								</div>
 							</div>
@@ -376,127 +339,108 @@
 				<div class="panel panel-primary">
 					<div class="panel-heading">
 				        <h4 class="panel-title">
-				        	<a data-toggle="collapse" data-parent="#accordionAntropometria" href="#collapse4">COMPOSI��O CORPORAL</a>
+				        	<a data-toggle="collapse" data-parent="#accordionAntropometria" href="#collapse4">COMPOSIÇÂO CORPORAL</a>
 				        </h4>
 				    </div>
 				    <div id="collapse4" class="panel-collapse collapse">
 						<div class="panel-body">
 							<div class="row form-group">
 								<div class="form-item col-sm-3">
-									<label for="biceps" class="control-label">
+									<label th:for="${#ids.next('biceps')}" class="control-label">
 										Biceps (cm):
 									</label>
-									<form:input id="biceps" name="biceps"
-										placeholder="00.00" path="biceps" type="number"
-										cssClass="form-control valid-num" min="0" />
+									<input type="number" th:field="*{biceps}" class="form-control valid-num" min="0" placeholder="0.00"/>
 									<div class="error-validation">
-										<form:errors path="biceps"></form:errors>
+										<p th:if="${#fields.hasErrors('biceps')}" th:errors="*{biceps}">Biceps inválido</p>
 									</div>
 								</div>
 								
 								<div class="form-item col-sm-3">
-									<label for="triceps" class="control-label">
+									<label th:for="${#ids.next('triceps')}" class="control-label">
 										Triceps (cm):
 									</label>
-									<form:input id="triceps" name="triceps"
-										placeholder="00.00" path="triceps" type="number"
-										cssClass="form-control valid-num" min="0" />
+									<input type="number" th:field="*{triceps}" class="form-control valid-num" min="0" placeholder="0.00"/>
 									<div class="error-validation">
-										<form:errors path="triceps"></form:errors>
+										<p th:if="${#fields.hasErrors('triceps')}" th:errors="*{triceps}">Triceps inválido</p>
 									</div>
 								</div>
 								
 								<div class="form-item col-sm-3">
-									<label for="axilarMedia" class="control-label">
-										Axilar M�dia (cm):
+									<label th:for="${#ids.next('axilarMedia')}" class="control-label">
+										Axilar Média (cm):
 									</label>
-									<form:input id="axilarMedia" name="axilarMedia"
-										placeholder="00.00" path="axilarMedia" type="number"
-										cssClass="form-control valid-num" min="0" />
+									<input type="number" th:field="*{axilarMedia}" class="form-control valid-num" min="0" placeholder="0.00"/>
 									<div class="error-validation">
-										<form:errors path="axilarMedia"></form:errors>
+										<p th:if="${#fields.hasErrors('axilarMedia')}" th:errors="*{axilarMedia}">Axilar média inválida</p>
 									</div>
 								</div>
 								
 								<div class="form-item col-sm-3">
-									<label for="torax" class="control-label">
-										T�rax (cm):
+									<label th:for="${#ids.next('torax')}" class="control-label">
+										Tórax (cm):
 									</label>
-									<form:input id="torax" name="torax"
-										placeholder="00.00" path="torax" type="number"
-										cssClass="form-control valid-num" min="0" />
+									<input type="number" th:field="*{torax}" class="form-control valid-num" min="0" placeholder="0.00"/>
 									<div class="error-validation">
-										<form:errors path="torax"></form:errors>
+										<p th:if="${#fields.hasErrors('torax')}" th:errors="*{torax}">Tórax inválido</p>
 									</div>
 								</div>
 							</div>
 							
 							<div class="row form-group">
 								<div class="form-item col-sm-3">
-									<label for="panturrilhaMedial" class="control-label">
+									<label th:for="${#ids.next('panturrilhaMedial')}" class="control-label">
 										Panturrilha Medial (cm):
 									</label>
-									<form:input id="panturrilhaMedial" name="panturrilhaMedial"
-										placeholder="00.00" path="panturrilhaMedial" type="number"
-										cssClass="form-control valid-num" min="0" />
+									<input type="number" th:field="*{panturrilhaMedial}" class="form-control valid-num" min="0" placeholder="0.00"/>
 									<div class="error-validation">
-										<form:errors path="panturrilhaMedial"></form:errors>
+										<p th:if="${#fields.hasErrors('panturrilhaMedial')}" th:errors="*{panturrilhaMedial}">P anturrilha Medial inválida</p>
 									</div>
 								</div>
 								
 								<div class="form-item col-sm-3">
-									<label for="abdominal" class="control-label">
+									<label th:for="${#ids.next('abdominal')}" class="control-label">
 										Abdominal (cm):
 									</label>
-									<form:input id="abdominal" name="abdominal"
-										placeholder="00.00" path="abdominal" type="number"
-										cssClass="form-control valid-num" min="0" />
+									<input type="number" th:field="*{abdominal}" class="form-control valid-num" min="0" placeholder="0.00"/>
 									<div class="error-validation">
-										<form:errors path="abdominal"></form:errors>
+										<p th:if="${#fields.hasErrors('abdominal')}" th:errors="*{abdominal}">Abdominal inválido</p>
 									</div>
 								</div>
 								
 								<div class="form-item col-sm-3">
-									<label for="suprailiaca" class="control-label">
-										Suprail�aca (cm):
+									<label th:for="${#ids.next('suprailiaca')}" class="control-label">
+										Suprailíaca (cm):
 									</label>
-									<form:input id="suprailiaca" name="suprailiaca"
-										placeholder="00.00" path="suprailiaca" type="number"
-										cssClass="form-control valid-num" min="0" />
+									<input type="number" th:field="*{suprailiaca}" class="form-control valid-num" min="0" placeholder="0.00"/>
 									<div class="error-validation">
-										<form:errors path="suprailiaca"></form:errors>
+										<p th:if="${#fields.hasErrors('suprailiaca')}" th:errors="*{suprailiaca}">Suprailiaca inválida</p>
 									</div>
 								</div>
 								
 								<div class="form-item col-sm-3">
-									<label for="subescapular" class="control-label">
+									<label th:for="${#ids.next('subescapular')}" class="control-label">
 										Subescapular (cm):
 									</label>
-									<form:input id="subescapular" name="subescapular"
-										placeholder="00.00" path="subescapular" type="number"
-										cssClass="form-control valid-num" min="0" />
+									<input type="number" th:field="*{subescapular}" class="form-control valid-num" min="0" placeholder="0.00"/>
 									<div class="error-validation">
-										<form:errors path="subescapular"></form:errors>
+										<p th:if="${#fields.hasErrors('subescapular')}" th:errors="*{subescapular}">Subescapular inválida</p>
 									</div>
 								</div>
 								
 								<div class="form-item col-sm-3">
-									<label for="coxa" class="control-label">
+									<label th:for="${#ids.next('coxa')}" class="control-label">
 										Coxa (cm):
 									</label>
-									<form:input id="coxa" name="coxa"
-										placeholder="00.00" path="coxa" type="number"
-										cssClass="form-control valid-num" min="0" />
+									<input type="number" th:field="*{coxa}" class="form-control valid-num" min="0" placeholder="0.00"/>
 									<div class="error-validation">
-										<form:errors path="coxa"></form:errors>
+										<p th:if="${#fields.hasErrors('coxa')}" th:errors="*{coxa}">Coxa inválida</p>
 									</div>
 								</div>
 							</div>
 						</div>
 					</div>
 				</div>
-				 --> 
-				 -->
+				
 				<div class="col-xs-offset-0 col-xs-10" align="center">
 					<br></br>
 					<button type="submit" class="btn btn-success" th:text="${botao}">Enviar</button>
