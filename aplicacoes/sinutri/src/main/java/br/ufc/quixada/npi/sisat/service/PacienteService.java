@@ -18,6 +18,7 @@ public interface PacienteService extends GenericService<Paciente> {
 
 	void excluir(ConsultaNutricional consulta);
 	
+	//PRESCRICAO
 	void adicionarPrescricao(Prescricao prescricao);
 	
 	void excluirPrescricao(Prescricao prescricao);

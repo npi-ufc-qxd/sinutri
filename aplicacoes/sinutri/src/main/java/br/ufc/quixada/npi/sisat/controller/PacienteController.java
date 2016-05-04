@@ -35,6 +35,7 @@ import br.ufc.quixada.npi.sisat.model.Paciente;
 import br.ufc.quixada.npi.sisat.model.PacienteExterno;
 import br.ufc.quixada.npi.sisat.model.Pessoa;
 import br.ufc.quixada.npi.sisat.model.Prescricao;
+import br.ufc.quixada.npi.sisat.model.Servidor;
 import br.ufc.quixada.npi.sisat.model.enuns.ClassificacaoExame;
 import br.ufc.quixada.npi.sisat.model.enuns.Frequencia;
 import br.ufc.quixada.npi.sisat.model.enuns.Refeicao;
@@ -495,19 +496,29 @@ public class PacienteController {
 		return "redirect:/paciente/cadastrar/paciente";
 	}
 	
-	@RequestMapping(value="Paciente/{id}/Prescricao", method = RequestMethod.POST)
-	public String adcionarPrescricao(@PathVariable("id") Long id, @Valid Prescricao prescricao, Model model, 
-			BindingResult result, RedirectAttributes redirectAttributes){
+	@RequestMapping(value="/Prescricao", method = RequestMethod.GET)
+	public String formAdicionarPrescricao(@PathVariable("id") Long id, Prescricao prescricao, Model model){
 		model.addAttribute("prescricao", prescricao);
-		model.addAttribute("action", "cadastrar");
+		return "nutricao/prescricao/form-prescricao";
+	}
+	
+	@RequestMapping(value="/{id}/Prescricao", method = RequestMethod.POST)
+	public String adicionarPrescricao(@PathVariable("id") Long id, Prescricao prescricao, Model model, 
+			BindingResult result, RedirectAttributes redirectAttributes){
 		
-		if(!result.hasErrors())
+		System.out.println("\n\n\n\n\n\n\n\n\n\nAQUIIIII\n\n\n\n\n\n\n\n\n");
+		
+		prescricao.setDescricao("descricao");
+		prescricao.setTexto("tiuaehoasoaaouuhifujaofja");
+		model.addAttribute("prescricao", prescricao);
+		
+		//if(!result.hasErrors())
 			pacienteService.adicionarPrescricao(prescricao);
 		
 		return "redirect:/Paciente/Prescricao";
 	}
 	
-	@RequestMapping(value="Paciente/{id}/Prescricao/{idPrescricao}/Excluir/", method = RequestMethod.POST)
+	@RequestMapping(value="/{id}/Prescricao/{idPrescricao}/Excluir/", method = RequestMethod.POST)
 	public String excluirPrescricao(@PathVariable("id") Long idPaciente, @PathVariable("idPrescricao") Long idPrescricao){
 		Prescricao prescricao = pacienteService.buscarPrescricao(idPrescricao);
 		if(prescricao != null)
@@ -516,7 +527,7 @@ public class PacienteController {
 		return "redirect:/Paciente/"+idPaciente+"Prescricao";
 	}
 	
-	@RequestMapping(value="Paciente/{id}/Prescricao/{idPrescricao}/Editar/", method = RequestMethod.POST)
+	@RequestMapping(value="/{id}/Prescricao/{idPrescricao}/Editar/", method = RequestMethod.POST)
 	public String editarPrescricao(@PathVariable("id") Long idPaciente, @PathVariable("idPrescricao") Long idPrescricao, 
 			@Valid Prescricao prescricao, Model model,
 			BindingResult result, RedirectAttributes redirectAttributes){
@@ -526,7 +537,6 @@ public class PacienteController {
 		
 		return "Paciente/"+idPaciente+"/Prescricao/";
 	}
-	
 }
 
 	

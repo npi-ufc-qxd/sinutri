@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="templates/layoutPadrao :: head"></head>
+<body>
+    <nav th:replace="templates/layoutPadrao :: menu"></nav>
+    <footer th:replace="templates/layoutPadrao :: footer"></footer>
+    
+    <form th:object="${prescricao}"> 
+    	<button type="submit" name="adicionarPrescricao" > adicionar </button> 
+    </form>
+    
+</body>
+</html>
