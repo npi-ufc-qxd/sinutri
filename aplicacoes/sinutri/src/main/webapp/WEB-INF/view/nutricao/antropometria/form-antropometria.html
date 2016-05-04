@@ -44,7 +44,7 @@
 		
 		<div class="row">
 		<div class="panel-group" id="accordionAntropometria">
-			<form action="#" class="form-horizontal" th:action="${url}" th:object="${avaliacaoAntropometrica}" method="post" enctype="multipart/form-data">
+			<form id="form-antropometria" action="#" class="form-horizontal" th:action="${url}" th:object="${avaliacaoAntropometrica}" method="post" enctype="multipart/form-data">
 				<input type="hidden" th:field="*{id}" />
 				<input type="hidden" th:field="*{atualizadoEm}" />
 				<input type="hidden" th:field="*{paciente.id}" />
