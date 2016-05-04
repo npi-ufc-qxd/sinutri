@@ -1,71 +1,93 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" >
     <head>
     	
     	<title>Cadastro de inquérito alimentar</title>
-        <link rel="stylesheet" href="../../../css/main-static.css" th:href="@{/css/main.css}" />
+    	<script th:src="@{/webjars/jquery/2.1.0/jquery.min.js}"></script>
+		<script th:src="@{/webjars/bootstrap/3.3.2/js/bootstrap.min.js}"></script>
+		<script	th:src="@{/webjars/jquery-ui/1.11.1/jquery-ui.min.js}"></script>
+		<script th:src="@{/webjars/jquery-maskedinput/1.3.1/jquery.maskedinput.min.js}"></script> 
+		<script th:src="@{/webjars/jquery-validation/1.12.0/jquery.validate.min.js}"></script>
+		<script th:src="@{/resources/js/bootstrapValidator.min.js}"></script>
+		<script th:src="@{/resources/js/bootstrap-datepicker.js}"></script>
+		<script th:src="@{/resources/js/highcharts.js}"></script>
+		<script th:src="@{/webjars/d3js/3.5.6/d3.min.js}"></script>
+		<script th:src="@{/webjars/d3-tip/0.6.6/index.js}"></script>
+		<script	th:src="@{/resources/js/jquery.appendGrid-1.5.2.js}"></script>
+		<script th:src="@{/webjars/bootstrap-fileinput/4.2.6/js/fileinput.min.js}"></script>
+		<script	th:src="@{/webjars/bootstrap-fileinput/4.2.6/js/fileinput_locale_pt-BR.js}"></script>
+		<script th:src="@{/resources/js/fileinput_locale_pt-BR.js}"></script>
+		<script th:src="@{/resources/js/funcoes.js}"></script>
+    	<link href="/webjars/bootstrap/3.3.2/css/bootstrap.min.css" rel="stylesheet" th:href="@{/webjars/bootstrap/3.3.2/css/bootstrap.min.css}"/>
+		<link href="/webjars/bootstrap-fileinput/4.2.6/css/fileinput.min.css" rel="stylesheet" th:href="@{/webjars/bootstrap-fileinput/4.2.6/css/fileinput.min.css}"/>
+		<link href="/resources/css/bootstrap-flatly.min.css" rel="stylesheet" th:href="@{/resources/css/bootstrap-flatly.min.css}"/>
+		<link href="/resources/css/bootstrap-datepicker.min.css" rel="stylesheet" th:href="@{/resources/css/bootstrap-datepicker.min.css}"/>
+    	<link rel="stylesheet" href="/resources/css/sinutri.css" th:href="@{/resources/css/sinutri.css}" />
         <meta charset="utf-8" />
     </head>
-    <body>
-        <h1>Adicionar Inquérito Alimentar</h1>
+    <body th:with="url=((${acao eq 'cadastrar'})? @{/paciente/2/Inquerito/} : @{/paciente/2/Inquerito/9/Editar/}),titulo=((${acao eq 'cadastrar'})? 'Adicionar Inquerito Alimentar' : 'Editar Inquerito Alimentar'), botao=((${acao eq 'cadastrar'})? 'Adicionar' : 'Editar')">
+        <h1 th:text="${titulo}"></h1>
 
-        <form th:object="${inquerito}" th:method="post" th:action="@{/paciente/2/Inquerito/}">
-			<input type="hidden" id="id" th:field="*{id}" value="100"/>
+        <form th:object="${inquerito}" th:method="post" th:action="${url}">
+			<input type="hidden" id="id" th:field="*{id}"/>
 			
 			<div class="row form-group">
 				<div class="form-item col-sm-6">
-					<label for="criadoEm" class="control-label">Data</label>
-					<input id="inputTextCriadoEm" th:field="*{criadoEm}" class="form-control" placeholder="Anotação" />
+					<label for="criadoEm" class="control-label">Data de criação</label>
+					<input type="text" id="inputTextCriadoEm" th:field="*{criadoEm}" class="form-control" placeholder="Data" />
+				</div>
+				<div th:if="${acao eq 'editar'}"  class="form-item col-sm-6">
+					<label for="criadoEm" class="control-label">Data de atualização</label>
+					<input type="text" id="inputTextCriadoEm" th:field="*{atualizadoEm}" class="form-control" placeholder="Data" disabled="true"/>
 				</div>
 			</div>			
 			<div class="row form-group">
 				<div class="form-item col-sm-6">
 					<label for="checkAguaGosta" class="control-label">
-					<input type="checkbox" id="checkAguaGosta" th:field="*{aguaGosta}" class="checkInquerito" /> Gosta água?</label>
-					<select th:field="*{aguaFrequenciaSemanal}" class="form-control select">
+					<input type="checkbox" id="checkAguaGosta" th:field="*{aguaGosta}" class="checkInquerito"/> Gosta água?</label>
+					<select th:field="*{aguaFrequenciaSemanal}" class="form-control select" th:disabled="*{!aguaGosta}" >
 						<option value="">Quantas vezes por semana?</option>
 						<option th:each="f : ${frequenciasSemanais}" th:text="${f.descricao}" th:value="${f}"></option>
 					</select>
 				</div> 
-	
 				<div class="form-item col-sm-6">
 					<label for="aguaAnotacao" class="control-label">Anotação</label>
-					<input id="inputTextAgua" th:field="*{aguaAnotacao}" class="form-control" placeholder="Anotação" />
+					<input type="text" id="inputTextAgua" th:field="*{aguaAnotacao}" class="form-control" placeholder="Anotação" th:disabled="*{!aguaGosta}" />
 				</div>
 			</div>
 			<div class="row form-group">
 				<div class="form-item col-sm-6">
 					<label for="checkAvesGosta" class="control-label">
 					<input type="checkbox" id="checkAvesGosta" th:field="*{avesGosta}" class="checkInquerito" /> Gosta de aves?</label>
-					<select th:field="*{avesFrequenciaSemanal}" class="form-control select">
+					<select th:field="*{avesFrequenciaSemanal}" class="form-control select" th:disabled="*{!avesGosta}">
 						<option value="">Quantas vezes por semana?</option>
 						<option th:each="f : ${frequenciasSemanais}" th:text="${f.descricao}" th:value="${f}"></option>
 					</select>
 				</div> 
 				<div class="form-item col-sm-6">
 					<label for="avesAnotacao" class="control-label">Anotação</label>
-					<input id="inputTextAves" th:field="*{avesAnotacao}" class="form-control" placeholder="Anotação" />
+					<input type="text" id="inputTextAves" th:field="*{avesAnotacao}" class="form-control" placeholder="Anotação" th:disabled="*{!avesGosta}" />
 				</div>
 			</div>
 			<div class="row form-group">
 				<div class="form-item col-sm-6">
 					<label for="checkBebidasAlcoolicasGosta" class="control-label">
 					<input type="checkbox" id="checkBebidasAlcoolicasGosta" th:field="*{bebidasAlcoolicasGosta}" class="checkInquerito" /> Gosta de bebidas alcoólicas?</label>
-					<select th:field="*{bebidasAlcoolicasFrequenciaSemanal}" class="form-control select">
+					<select th:field="*{bebidasAlcoolicasFrequenciaSemanal}" class="form-control select" th:disabled="*{!bebidasAlcoolicasGosta}">
 						<option value="">Quantas vezes por semana?</option>
 						<option th:each="f : ${frequenciasSemanais}" th:text="${f.descricao}" th:value="${f}"></option>
 					</select>
 				</div> 
 				<div class="form-item col-sm-6">
 					<label for="bebidasAlcoolicasAnotacao" class="control-label">Anotação</label>
-					<input id="inputTextBebidasAlcoolicas" th:field="*{bebidasAlcoolicasAnotacao}" class="form-control" placeholder="Anotação" />
+					<input type="text" id="inputTextBebidasAlcoolicas" th:field="*{bebidasAlcoolicasAnotacao}" class="form-control" placeholder="Anotação" th:disabled="*{!bebidasAlcoolicasGosta}" />
 				</div>
 			</div>
 			<div class="row form-group">
 				<div class="form-item col-sm-6">
 					<label for="checkBovinaGosta" class="control-label">
 					<input type="checkbox" id="checkBovinaGosta" th:field="*{bovinaGosta}" class="checkInquerito" /> Gosta de carne bovina?</label>
-					<select th:field="*{bovinaFrequenciaSemanal}" class="form-control select">
+					<select th:field="*{bovinaFrequenciaSemanal}" class="form-control select" th:disabled="*{!bovinaGosta}">
 						<option value="">Quantas vezes por semana?</option>
 						<option th:each="f : ${frequenciasSemanais}" th:text="${f.descricao}" th:value="${f}"></option>
 					</select>
@@ -73,98 +95,98 @@
 	
 				<div class="form-item col-sm-6">
 					<label for="bovinaAnotacao" class="control-label">Anotação</label>
-					<input id="inputTextBovina" th:field="*{bovinaAnotacao}" class="form-control" placeholder="Anotação" />
+					<input type="text" id="inputTextBovina" th:field="*{bovinaAnotacao}" class="form-control" placeholder="Anotação" th:disabled="*{!bovinaGosta}" />
 				</div>
 			</div>
 			<div class="row form-group">
 				<div class="form-item col-sm-6">
 					<label for="checkCereaisGosta" class="control-label">
 					<input type="checkbox" id="checkCereaisGosta" th:field="*{cereaisGosta}" class="checkInquerito" /> Gosta de cereais?</label>
-					<select th:field="*{cereaisFrequenciaSemanal}" class="form-control select">
+					<select th:field="*{cereaisFrequenciaSemanal}" class="form-control select" th:disabled="*{!cereaisGosta}">
 						<option value="">Quantas vezes por semana?</option>
 						<option th:each="f : ${frequenciasSemanais}" th:text="${f.descricao}" th:value="${f}"></option>
 					</select>
 				</div> 
 				<div class="form-item col-sm-6">
 					<label for="cereaisAnotacao" class="control-label">Anotação</label>
-					<input id="inputTextCereais" th:field="*{cereaisAnotacao}" class="form-control" placeholder="Anotação" />
+					<input type="text" id="inputTextCereais" th:field="*{cereaisAnotacao}" class="form-control" placeholder="Anotação" th:disabled="*{!cereaisGosta}" />
 				</div>
 			</div>
 			<div class="row form-group">
 				<div class="form-item col-sm-6">
 					<label for="checkDocesGosta" class="control-label">
 					<input type="checkbox" id="checkDocesGosta" th:field="*{docesGosta}" class="checkInquerito" /> Gosta de doces?</label>
-					<select th:field="*{docesFrequenciaSemanal}" class="form-control select">
+					<select th:field="*{docesFrequenciaSemanal}" class="form-control select" th:disabled="*{!docesGosta}">
 						<option value="">Quantas vezes por semana?</option>
 						<option th:each="f : ${frequenciasSemanais}" th:text="${f.descricao}" th:value="${f}"></option>
 					</select>
 				</div> 
 				<div class="form-item col-sm-6">
 					<label for="docesAnotacao" class="control-label">Anotação</label>
-					<input id="inputTextDoces" th:field="*{docesAnotacao}" class="form-control" placeholder="Anotação" />
+					<input type="text" id="inputTextDoces" th:field="*{docesAnotacao}" class="form-control" placeholder="Anotação" th:disabled="*{!docesGosta}" />
 				</div>
 			</div>
 			<div class="row form-group">
 				<div class="form-item col-sm-6">
 					<label for="checkFrutasGosta" class="control-label">
 					<input type="checkbox" id="checkFrutasGosta" th:field="*{frutasGosta}" class="checkInquerito" /> Gosta de frutas?</label>
-					<select th:field="*{frutasFrequenciaSemanal}" class="form-control select">
+					<select th:field="*{frutasFrequenciaSemanal}" class="form-control select" th:disabled="*{!frutasGosta}">
 						<option value="">Quantas vezes por semana?</option>
 						<option th:each="f : ${frequenciasSemanais}" th:text="${f.descricao}" th:value="${f}"></option>
 					</select>
 				</div> 
 				<div class="form-item col-sm-6">
 					<label for="frutasAnotacao" class="control-label">Anotação</label>
-					<input id="inputTextFrutas" th:field="*{FrutasAnotacao}" class="form-control" placeholder="Anotação" />
+					<input type="text" id="inputTextFrutas" th:field="*{FrutasAnotacao}" class="form-control" placeholder="Anotação" th:disabled="*{!frutasGosta}" />
 				</div>
 			</div>
 			<div class="row form-group">
 				<div class="form-item col-sm-6">
 					<label for="checkGaseificadasGosta" class="control-label">
 					<input type="checkbox" id="checkGaseificadasGosta" th:field="*{gaseificadasGosta}" class="checkInquerito" /> Gosta de bebidas gaseificadas?</label>
-					<select th:field="*{gaseificadasFrequenciaSemanal}" class="form-control select">
+					<select th:field="*{gaseificadasFrequenciaSemanal}" class="form-control select" th:disabled="*{!gaseificadasGosta}">
 						<option value="">Quantas vezes por semana?</option>
 						<option th:each="f : ${frequenciasSemanais}" th:text="${f.descricao}" th:value="${f}"></option>
 					</select>
 				</div> 
 				<div class="form-item col-sm-6">
 					<label for="gaseificadasAnotacao" class="control-label">Anotação</label>
-					<input id="inputTextGaseificadas" th:field="*{gaseificadasAnotacao}" class="form-control" placeholder="Anotação" />
+					<input type="text" id="inputTextGaseificadas" th:field="*{gaseificadasAnotacao}" class="form-control" placeholder="Anotação" th:disabled="*{!gaseificadasGosta}" />
 				</div>
 			</div>
 			<div class="row form-group">
 				<div class="form-item col-sm-6">
 					<label for="checkInfusoesGosta" class="control-label">
 					<input type="checkbox" id="checkInfusoesGosta" th:field="*{infusoesGosta}" class="checkInquerito" /> Gosta de infusão?</label>
-					<select th:field="*{infusoesFrequenciaSemanal}" class="form-control select">
+					<select th:field="*{infusoesFrequenciaSemanal}" class="form-control select" th:disabled="*{!infusoesGosta}">
 						<option value="">Quantas vezes por semana?</option>
 						<option th:each="f : ${frequenciasSemanais}" th:text="${f.descricao}" th:value="${f}"></option>
 					</select>
 				</div> 
 				<div class="form-item col-sm-6">
 					<label for="infusoesAnotacao" class="control-label">Anotação</label>
-					<input id="inputTextInfusoes" th:field="*{infusoesAnotacao}" class="form-control" placeholder="Anotação" />
+					<input type="text" id="inputTextInfusoes" th:field="*{infusoesAnotacao}" class="form-control" placeholder="Anotação" th:disabled="*{!infusoesGosta}" />
 				</div>
 			</div>
 			<div class="row form-group">
 				<div class="form-item col-sm-6">
 					<label for="checkLeguminosasGosta" class="control-label">
 					<input type="checkbox" id="checkLeguminosasGosta" th:field="*{leguminosasGosta}" class="checkInquerito" /> Gosta de leguminosas?</label>
-					<select th:field="*{leguminosasFrequenciaSemanal}" class="form-control select">
+					<select th:field="*{leguminosasFrequenciaSemanal}" class="form-control select" th:disabled="*{!leguminosasGosta}">
 						<option value="">Quantas vezes por semana?</option>
 						<option th:each="f : ${frequenciasSemanais}" th:text="${f.descricao}" th:value="${f}"></option>
 					</select>
 				</div> 
 				<div class="form-item col-sm-6">
 					<label for="leguminosasAnotacao" class="control-label">Anotação</label>
-					<input id="inputTextLeguminosas" th:field="*{leguminosasAnotacao}" class="form-control" placeholder="Anotação" />
+					<input type="text" id="inputTextLeguminosas" th:field="*{leguminosasAnotacao}" class="form-control" placeholder="Anotação" th:disabled="*{!leguminosasGosta}" />
 				</div>
 			</div>
 			<div class="row form-group">
 				<div class="form-item col-sm-6">
 					<label for="checkLeiteDerivadosGosta" class="control-label">
 					<input type="checkbox" id="checkLeiteDerivadosGosta" th:field="*{leiteDerivadosGosta}" class="checkInquerito" /> Gosta de leite ou derivados?</label>
-					<select th:field="*{leiteDerivadosFrequenciaSemanal}" class="form-control select">
+					<select th:field="*{leiteDerivadosFrequenciaSemanal}" class="form-control select" th:disabled="*{!leiteDerivadosGosta}">
 						<option value="">Quantas vezes por semana?</option>
 						<option th:each="f : ${frequenciasSemanais}" th:text="${f.descricao}" th:value="${f}"></option>
 					</select>
@@ -172,14 +194,14 @@
 	
 				<div class="form-item col-sm-6">
 					<label for="leiteDerivadosAnotacao" class="control-label">Anotação</label>
-					<input id="inputTextLeiteDerivados" th:field="*{leiteDerivadosAnotacao}" class="form-control" placeholder="Anotação" />
+					<input type="text" id="inputTextLeiteDerivados" th:field="*{leiteDerivadosAnotacao}" class="form-control" placeholder="Anotação" th:disabled="*{!leiteDerivadosGosta}" />
 				</div>
 			</div>
 			<div class="row form-group">
 				<div class="form-item col-sm-6">
 					<label for="checkManteigaGosta" class="control-label">
 					<input type="checkbox" id="checkManteigaGosta" th:field="*{manteigaGosta}" class="checkInquerito" /> Gosta de manteiga?</label>
-					<select th:field="*{manteigaFrequenciaSemanal}" class="form-control select">
+					<select th:field="*{manteigaFrequenciaSemanal}" class="form-control select" th:disabled="*{!manteigaGosta}">
 						<option value="">Quantas vezes por semana?</option>
 						<option th:each="f : ${frequenciasSemanais}" th:text="${f.descricao}" th:value="${f}"></option>
 					</select>
@@ -187,14 +209,14 @@
 	
 				<div class="form-item col-sm-6">
 					<label for="manteigaAnotacao" class="control-label">Anotação</label>
-					<input id="inputTextManteiga" th:field="*{manteigaAnotacao}" class="form-control" placeholder="Anotação" />
+					<input type="text" id="inputTextManteiga" th:field="*{manteigaAnotacao}" class="form-control" placeholder="Anotação" th:disabled="*{!manteigaGosta}" />
 				</div>
 			</div>
 			<div class="row form-group">
 				<div class="form-item col-sm-6">
 					<label for="checkMargarinaGosta" class="control-label">
 					<input type="checkbox" id="checkMargarinaGosta" th:field="*{margarinaGosta}" class="checkInquerito" /> Gosta de margarina?</label>
-					<select th:field="*{margarinaFrequenciaSemanal}" class="form-control select">
+					<select th:field="*{margarinaFrequenciaSemanal}" class="form-control select" th:disabled="*{!margarinaGosta}">
 						<option value="">Quantas vezes por semana?</option>
 						<option th:each="f : ${frequenciasSemanais}" th:text="${f.descricao}" th:value="${f}"></option>
 					</select>
@@ -202,14 +224,14 @@
 	
 				<div class="form-item col-sm-6">
 					<label for="margarinaAnotacao" class="control-label">Anotação</label>
-					<input id="inputTextMargarina" th:field="*{margarinaAnotacao}" class="form-control" placeholder="Anotação" />
+					<input type="text" id="inputTextMargarina" th:field="*{margarinaAnotacao}" class="form-control" placeholder="Anotação" th:disabled="*{!margarinaGosta}" />
 				</div>
 			</div>
 			<div class="row form-group">
 				<div class="form-item col-sm-6">
 					<label for="checkMassasGosta" class="control-label">
 					<input type="checkbox" id="checkMassasGosta" th:field="*{massasGosta}" class="checkInquerito" /> Gosta de massas?</label>
-					<select th:field="*{massasFrequenciaSemanal}" class="form-control select">
+					<select th:field="*{massasFrequenciaSemanal}" class="form-control select" th:disabled="*{!massasGosta}">
 						<option value="">Quantas vezes por semana?</option>
 						<option th:each="f : ${frequenciasSemanais}" th:text="${f.descricao}" th:value="${f}"></option>
 					</select>
@@ -217,14 +239,14 @@
 	
 				<div class="form-item col-sm-6">
 					<label for="massasAnotacao" class="control-label">Anotação</label>
-					<input id="inputTextMassas" th:field="*{massasAnotacao}" class="form-control" placeholder="Anotação" />
+					<input type="text" id="inputTextMassas" th:field="*{massasAnotacao}" class="form-control" placeholder="Anotação" th:disabled="*{!massasGosta}" />
 				</div>
 			</div>
 			<div class="row form-group">
 				<div class="form-item col-sm-6">
 					<label for="checkOleoGosta" class="control-label">
 					<input type="checkbox" id="checkOleoGosta" th:field="*{oleoGosta}" class="checkInquerito" /> Gosta de óleos?</label>
-					<select th:field="*{oleoFrequenciaSemanal}" class="form-control select">
+					<select th:field="*{oleoFrequenciaSemanal}" class="form-control select" th:disabled="*{!oleoGosta}">
 						<option value="">Quantas vezes por semana?</option>
 						<option th:each="f : ${frequenciasSemanais}" th:text="${f.descricao}" th:value="${f}"></option>
 					</select>
@@ -232,14 +254,14 @@
 	
 				<div class="form-item col-sm-6">
 					<label for="oleoAnotacao" class="control-label">Anotação</label>
-					<input id="inputTextOleo" th:field="*{oleoAnotacao}" class="form-control" placeholder="Anotação" />
+					<input type="text" id="inputTextOleo" th:field="*{oleoAnotacao}" class="form-control" placeholder="Anotação" th:disabled="*{!oleoGosta}" />
 				</div>
 			</div>
 			<div class="row form-group">
 				<div class="form-item col-sm-6">
 					<label for="checkOvosGosta" class="control-label">
 					<input type="checkbox" id="checkOvosGosta" th:field="*{ovosGosta}" class="checkInquerito" /> Gosta de ovos?</label>
-					<select th:field="*{ovosFrequenciaSemanal}" class="form-control select">
+					<select th:field="*{ovosFrequenciaSemanal}" class="form-control select" th:disabled="*{!ovosGosta}">
 						<option value="">Quantas vezes por semana?</option>
 						<option th:each="f : ${frequenciasSemanais}" th:text="${f.descricao}" th:value="${f}"></option>
 					</select>
@@ -247,14 +269,14 @@
 	
 				<div class="form-item col-sm-6">
 					<label for="ovosAnotacao" class="control-label">Anotação</label>
-					<input id="inputTextOvos" th:field="*{ovosAnotacao}" class="form-control" placeholder="Anotação" />
+					<input type="text" id="inputTextOvos" th:field="*{ovosAnotacao}" class="form-control" placeholder="Anotação" th:disabled="*{!ovosGosta}" />
 				</div>
 			</div>
 			<div class="row form-group">
 				<div class="form-item col-sm-6">
 					<label for="checkPeixeGosta" class="control-label">
 					<input type="checkbox" id="checkPeixeGosta" th:field="*{peixeGosta}" class="checkInquerito" /> Gosta de peixes?</label>
-					<select th:field="*{peixeFrequenciaSemanal}" class="form-control select">
+					<select th:field="*{peixeFrequenciaSemanal}" class="form-control select" th:disabled="*{!peixeGosta}">
 						<option value="">Quantas vezes por semana?</option>
 						<option th:each="f : ${frequenciasSemanais}" th:text="${f.descricao}" th:value="${f}"></option>
 					</select>
@@ -262,14 +284,14 @@
 	
 				<div class="form-item col-sm-6">
 					<label for="peixeAnotacao" class="control-label">Anotação</label>
-					<input id="inputTextPeixe" th:field="*{peixeAnotacao}" class="form-control" placeholder="Anotação" />
+					<input type="text" id="inputTextPeixe" th:field="*{peixeAnotacao}" class="form-control" placeholder="Anotação" th:disabled="*{!peixeGosta}" />
 				</div>
 			</div>
 			<div class="row form-group">
 				<div class="form-item col-sm-6">
 					<label for="checkSucoGosta" class="control-label">
 					<input type="checkbox" id="checkSucoGosta" th:field="*{sucoGosta}" class="checkInquerito" /> Gosta de sucos?</label>
-					<select th:field="*{sucoFrequenciaSemanal}" class="form-control select">
+					<select th:field="*{sucoFrequenciaSemanal}" class="form-control select" th:disabled="*{!sucoGosta}">
 						<option value="">Quantas vezes por semana?</option>
 						<option th:each="f : ${frequenciasSemanais}" th:text="${f.descricao}" th:value="${f}"></option>
 					</select>
@@ -277,14 +299,14 @@
 	
 				<div class="form-item col-sm-6">
 					<label for="sucoAnotacao" class="control-label">Anotação</label>
-					<input id="inputTextSuco" th:field="*{sucoAnotacao}" class="form-control" placeholder="Anotação" />
+					<input type="text" id="inputTextSuco" th:field="*{sucoAnotacao}" class="form-control" placeholder="Anotação" th:disabled="*{!sucoGosta}" />
 				</div>
 			</div>
 			<div class="row form-group">
 				<div class="form-item col-sm-6">
 					<label for="checkToucinhoBaconGosta" class="control-label">
 					<input type="checkbox" id="checkToucinhoBaconGosta" th:field="*{toucinhoBaconGosta}" class="checkInquerito" /> Gosta de toucinho ou bacon?</label>
-					<select th:field="*{toucinhoBaconFrequenciaSemanal}" class="form-control select">
+					<select th:field="*{toucinhoBaconFrequenciaSemanal}" class="form-control select" th:disabled="*{!toucinhoBaconGosta}">
 						<option value="">Quantas vezes por semana?</option>
 						<option th:each="f : ${frequenciasSemanais}" th:text="${f.descricao}" th:value="${f}"></option>
 					</select>
@@ -292,14 +314,14 @@
 	
 				<div class="form-item col-sm-6">
 					<label for="toucinhoBaconAnotacao" class="control-label">Anotação</label>
-					<input id="inputTextToucinhoBacon" th:field="*{toucinhoBaconAnotacao}" class="form-control" placeholder="Anotação" />
+					<input type="text" id="inputTextToucinhoBacon" th:field="*{toucinhoBaconAnotacao}" class="form-control" placeholder="Anotação" th:disabled="*{!toucinhoBaconGosta}" />
 				</div>
 			</div>
 			<div class="row form-group">
 				<div class="form-item col-sm-6">
 					<label for="checkVegetaisCozidosGosta" class="control-label">
 					<input type="checkbox" id="checkVegetaisCozidosGosta" th:field="*{vegetaisCozidosGosta}" class="checkInquerito" /> Gosta de vegetais cozidos?</label>
-					<select th:field="*{vegetaisCozidosFrequenciaSemanal}" class="form-control select">
+					<select th:field="*{vegetaisCozidosFrequenciaSemanal}" class="form-control select" th:disabled="*{!vegetaisCozidosGosta}">
 						<option value="">Quantas vezes por semana?</option>
 						<option th:each="f : ${frequenciasSemanais}" th:text="${f.descricao}" th:value="${f}"></option>
 					</select>
@@ -307,14 +329,14 @@
 	
 				<div class="form-item col-sm-6">
 					<label for="vegetaisCozidosAnotacao" class="control-label">Anotação</label>
-					<input id="inputTextVegetaisCozidos" th:field="*{vegetaisCozidosAnotacao}" class="form-control" placeholder="Anotação" />
+					<input type="text" id="inputTextVegetaisCozidos" th:field="*{vegetaisCozidosAnotacao}" class="form-control" placeholder="Anotação" th:disabled="*{!vegetaisCozidosGosta}" />
 				</div>
 			</div>
 			<div class="row form-group">
 				<div class="form-item col-sm-6">
 					<label for="checkVegetaisCrusGosta" class="control-label">
 					<input type="checkbox" id="checkVegetaisCrusGosta" th:field="*{vegetaisCrusGosta}" class="checkInquerito" /> Gosta de vegetais crus?</label>
-					<select th:field="*{vegetaisCrusFrequenciaSemanal}" class="form-control select">
+					<select th:field="*{vegetaisCrusFrequenciaSemanal}" class="form-control select" th:disabled="*{!vegetaisCrusGosta}">
 						<option value="">Quantas vezes por semana?</option>
 						<option th:each="f : ${frequenciasSemanais}" th:text="${f.descricao}" th:value="${f}"></option>
 					</select>
@@ -322,14 +344,14 @@
 	
 				<div class="form-item col-sm-6">
 					<label for="vegetaisCrusAnotacao" class="control-label">Anotação</label>
-					<input id="inputTextVegetaisCrus" th:field="*{vegetaisCrusAnotacao}" class="form-control" placeholder="Anotação" />
+					<input type="text" id="inputTextVegetaisCrus" th:field="*{vegetaisCrusAnotacao}" class="form-control" placeholder="Anotação" th:disabled="*{!vegetaisCrusGosta}" />
 				</div>
 			</div>
 			<div class="row form-group">
 				<div class="form-item col-sm-6">
 					<label for="checkViscerasGosta" class="control-label">
 					<input type="checkbox" id="checkViscerasGosta" th:field="*{viscerasGosta}" class="checkInquerito" /> Gosta de vísceras?</label>
-					<select th:field="*{viscerasFrequenciaSemanal}" class="form-control select">
+					<select th:field="*{viscerasFrequenciaSemanal}" class="form-control select" th:disabled="*{!viscerasGosta}">
 						<option value="">Quantas vezes por semana?</option>
 						<option th:each="f : ${frequenciasSemanais}" th:text="${f.descricao}" th:value="${f}"></option>
 					</select>
@@ -337,7 +359,7 @@
 	
 				<div class="form-item col-sm-6">
 					<label for="viscerasAnotacao" class="control-label">Anotação</label>
-					<input id="inputTextVisceras" th:field="*{viscerasAnotacao}" class="form-control" placeholder="Anotação" />
+					<input type="text" id="inputTextVisceras" th:field="*{viscerasAnotacao}" class="form-control" placeholder="Anotação" th:disabled="*{!viscerasGosta}" />
 				</div>
 			</div>
 			<div class="row form-group">
@@ -346,8 +368,9 @@
 					<textarea rows="3" cols="50" placeholder="Observações" th:field="*{observacoes}"></textarea>
 				</div>
 			</div>
-	
-			<input type="submit" />
-        </form>
+			<div class="col-xs-offset-0 col-xs-10" align="center">
+				<button type="submit" class="btn btn-success" th:text="${botao}"></button>
+			</div>
+		</form>
     </body>
 </html>

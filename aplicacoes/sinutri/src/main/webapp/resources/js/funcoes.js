@@ -42,7 +42,7 @@ $(document).ready(function() {
 			$(itemForm).find('.help-block').remove();
 		}
 	});
-
+	
 	$(".checkInquerito").change(function() {
 		var itemForm = $(this).parent().parent().parent();
 

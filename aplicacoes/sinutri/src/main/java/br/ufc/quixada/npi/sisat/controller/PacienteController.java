@@ -502,7 +502,7 @@ public class PacienteController {
 	public String formAdicionarInqueritoAlimentar(Model model) {
 		InqueritoAlimentar inquerito = new InqueritoAlimentar();
 		inquerito.setCriadoEm(new Date());
-		
+		model.addAttribute("acao", "cadastrar");
 		model.addAttribute("inquerito", inquerito);
 		model.addAttribute("frequenciasSemanais", FrequenciaSemanal.values());
 		return "nutricao/inquerito/form-inquerito";		
@@ -512,6 +512,7 @@ public class PacienteController {
 	public String adicionarInqueritoAlimentar(Model model, @PathVariable("id") Long id, @Valid InqueritoAlimentar inqueritoAlimentar, BindingResult result, RedirectAttributes redirectAttributes){
 		inqueritoAlimentarValidator.validate(inqueritoAlimentar, result);	
 		if (result.hasErrors()) {
+			model.addAttribute("acao", "cadastrar");
 			model.addAttribute("frequenciasSemanais", FrequenciaSemanal.values());
 			model.addAttribute("inquerito", inqueritoAlimentar);
 			return "nutricao/inquerito/form-inquerito";
@@ -524,16 +525,17 @@ public class PacienteController {
 		return "redirect:/";
 	}
 
-	@RequestMapping(value = "/{id}/Inquerito/{id}/Editar/", method = RequestMethod.GET)
-	public String formEditarInqueritoAlimentar(@PathVariable("id") Long id, Model model, RedirectAttributes redirectAttributes ) {
-		InqueritoAlimentar inquerito = pacienteService.getInqueritoAlimentarById(id);
+	@RequestMapping(value = "/{idPaciente}/Inquerito/{idInquerito}/Editar/", method = RequestMethod.GET)
+	public String formEditarInqueritoAlimentar(@PathVariable("idInquerito") Long idInquerito, @PathVariable("idPaciente") Long idPaciente, Model model, RedirectAttributes redirectAttributes ) {
+		InqueritoAlimentar inquerito = pacienteService.getInqueritoAlimentarById(idInquerito);
 		if(inquerito == null){
 			redirectAttributes.addFlashAttribute("erro", "Paciente não encontrado. Faça um nova pesquisa");
 			return "redirect:/nutricao/buscar";
 		}
+		model.addAttribute("acao", "editar");
 		model.addAttribute("inquerito", inquerito);
 		model.addAttribute("frequenciasSemanais", FrequenciaSemanal.values());
-		return "/{id}/Inquerito/"+id+"/";
+		return "nutricao/inquerito/form-inquerito";
 	}
 	
 	@RequestMapping(value = "/{id}/Inquerito/{id}/Editar/", method = RequestMethod.POST)
