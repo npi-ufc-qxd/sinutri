@@ -12,6 +12,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -28,7 +29,7 @@ public class InqueritoAlimentar {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@NotNull
+	@NotNull(message = "Campo Obrigatório")
 	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	private Date criadoEm;
 	
@@ -106,28 +107,73 @@ public class InqueritoAlimentar {
 	@Enumerated(EnumType.STRING)
 	private FrequenciaSemanal infusoesFrequenciaSemanal;
 	
+	@Size(max=256, message="Máximo de caracteres excedido")
 	private String bovinaAnotacao;
+	
+	@Size(max=256, message="Máximo de caracteres excedido")
 	private String avesAnotacao;
+	
+	@Size(max=256, message="Máximo de caracteres excedido")
 	private String peixeAnotacao;
+	
+	@Size(max=256, message="Máximo de caracteres excedido")
 	private String viscerasAnotacao;
+	
+	@Size(max=256, message="Máximo de caracteres excedido")
 	private String leiteDerivadosAnotacao;
+	
+	@Size(max=256, message="Máximo de caracteres excedido")
 	private String ovosAnotacao;
+	
+	@Size(max=256, message="Máximo de caracteres excedido")
 	private String leguminosasAnotacao;
+	
+	@Size(max=256, message="Máximo de caracteres excedido")
 	private String cereaisAnotacao;
+	
+	@Size(max=256, message="Máximo de caracteres excedido")
 	private String massasAnotacao;
+	
+	@Size(max=256, message="Máximo de caracteres excedido")
 	private String vegetaisCrusAnotacao;
+	
+	@Size(max=256, message="Máximo de caracteres excedido")
 	private String vegetaisCozidosAnotacao;
+	
+	@Size(max=256, message="Máximo de caracteres excedido")
 	private String frutasAnotacao;
+	
+	@Size(max=256, message="Máximo de caracteres excedido")
 	private String docesAnotacao;
+	
+	@Size(max=256, message="Máximo de caracteres excedido")
 	private String oleoAnotacao;
+	
+	@Size(max=256, message="Máximo de caracteres excedido")
 	private String margarinaAnotacao;
+	
+	@Size(max=256, message="Máximo de caracteres excedido")
 	private String manteigaAnotacao;
+	
+	@Size(max=256, message="Máximo de caracteres excedido")
 	private String toucinhoBaconAnotacao;
+	
+	@Size(max=256, message="Máximo de caracteres excedido")
 	private String aguaAnotacao;
+	
+	@Size(max=256, message="Máximo de caracteres excedido")
 	private String sucoAnotacao;
+	
+	@Size(max=256, message="Máximo de caracteres excedido")
 	private String bebidasAlcoolicasAnotacao;
+	
+	@Size(max=256, message="Máximo de caracteres excedido")
 	private String gaseificadasAnotacao;
+	
+	@Size(max=256, message="Máximo de caracteres excedido")
 	private String infusoesAnotacao;
+	
+	@Size(max=256, message="Máximo de caracteres excedido")
 	private String observacoes;
 	
 	public Long getId() {

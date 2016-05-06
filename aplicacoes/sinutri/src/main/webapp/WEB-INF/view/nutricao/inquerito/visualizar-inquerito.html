@@ -25,12 +25,12 @@
 					class="glyphicon glyphicon-edit"></span> Editar</a>
 				</div>
 			</div>
-			<div class="row">
+			<div class="row col-sm-12">
 				<h3 class="section">Observações:</h3>
 				<font size="3" style="margin-left: 30px" th:text="${inquerito.observacoes}"></font>
 			</div>
 			<div class="row">
-				<div class="col-sm-20">
+				<div class="col-sm-12">
 					<h3 id="inquerito" class="section" th:text="'Inquérito Alimentar de '+${inquerito.criadoEm}">criado</h3>
 					<table class="table table-striped">
 						<thead class="thead">
@@ -156,6 +156,5 @@
 				</div>
 			</div>
 		</div>
-		
 	</body>
 </html>

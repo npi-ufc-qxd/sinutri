@@ -73,10 +73,8 @@ public class PacienteServiceImpl extends GenericServiceImpl<Paciente> implements
 	}
 
 	@Override
-	public InqueritoAlimentar getInqueritoAlimentarById(Long idInquerito, Long idPaciente) {
+	public InqueritoAlimentar getInqueritoAlimentarById(Long idInquerito) {
 		InqueritoAlimentar inquerito = (InqueritoAlimentar) findFirst("InqueritoAlimentar.findInqueritoAlimentarById", new SimpleMap<String, Object>("id", idInquerito));
-		Paciente paciente = this.find(Paciente.class, idPaciente);
-		inquerito.setPaciente(paciente);
 		return inquerito;
 	}
 
@@ -93,8 +91,8 @@ public class PacienteServiceImpl extends GenericServiceImpl<Paciente> implements
 	}
 
 	@Override
-	public void excluirInqueritoAlimentar(Long idInquerito, Long idPaciente) {
-		InqueritoAlimentar inquerito = getInqueritoAlimentarById(idInquerito, idPaciente);
+	public void excluirInqueritoAlimentar(Long idInquerito) {
+		InqueritoAlimentar inquerito = getInqueritoAlimentarById(idInquerito);
  		if(inquerito != null){
  			inqueritoAlimentarRepository.delete(inquerito);
  		}
