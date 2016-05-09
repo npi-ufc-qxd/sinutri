@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="templates/layoutPadrao :: head">
+	<title>Visualizar Avaliação Antropometrica</title>
+</head>
+<body>
+	<nav th:replace="templates/layoutPadrao :: menu"></nav>
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-sm-8">
+				<h3>
+					Informações da Avaliação Antropometria de <strong th:text="${avaliacaoAntropometrica.paciente.pessoa.nome}">Renata Campos</strong>
+				</h3>
+			</div>
+	
+			<div class="col-sm-4" align="right" style="margin-top: 15px;">
+				<a href="#" class="btn btn-primary btn-sm">
+					<span class="glyphicon glyphicon-chevron-left"></span> Voltar
+				</a> 
+				<a th:href="@{${'/paciente/' + avaliacaoAntropometrica.paciente.id + '/Antropometria/' + avaliacaoAntropometrica.id + '/editar'}}" class="btn btn-warning btn-sm">
+					<span class="glyphicon glyphicon-edit"></span> Editar
+				</a>
+			</div>
+		</div>
+		<div class="panel panel-primary group">
+			<div class="panel-heading">
+			<h3 class="panel-title">GERAL</h3>
+			</div>
+			<div class="panel-body">
+				
+				<div class="container-fluid group-item">
+				<div class="row">
+						<div class="col-md-3">
+							<label>Nutricionista:</label>
+							<label th:text="${avaliacaoAntropometrica.nutricionista != null} ? ${avaliacaoAntropometrica.nutricionista} : 'Sem nutricionista' ">Maria da Silva</label>
+						</div>
+						<div class="col-md-3">
+							<label>Criação:</label>
+							<label th:text="${#dates.format(avaliacaoAntropometrica.criadoEm,'dd/MM/yyyy')}">01/01/1995</label>
+						</div>
+						<div class="col-md-3">
+							<label>Última atualização:</label>
+							<label th:text="${#dates.format(avaliacaoAntropometrica.atualizadoEm,'dd/MM/yyyy')}">01/01/1995</label>
+						</div>
+						<div class="col-md-3">
+						</div>
+					</div>
+				</div>
+				
+				<div class="container-fluid group-item">
+					<div class="row">
+						<div class="col-md-3">
+							<label>Altura (m):</label>
+							<label th:text="${avaliacaoAntropometrica.altura}">10</label>
+						</div>
+						<div class="col-md-3">
+							<label>Peso (Kg):</label>
+							<label th:text="${avaliacaoAntropometrica.peso}">10</label>
+						</div>
+						<div class="col-md-3">
+							<label>Peso Desejado (Kg):</label>
+							<label th:text="${avaliacaoAntropometrica.pesoDesejado}">10</label>
+						</div>
+						<div class="col-md-3">
+							<label>Cintura (cm):</label>
+							<label th:text="${avaliacaoAntropometrica.cintura}">10</label>
+						</div>
+					</div>
+				</div>
+				
+				<div class="container-fluid group-item">
+					<div class="row">
+						<div class="col-md-3 group-item-colum">
+							<label>Abdomen (cm):</label>
+							<label th:text="${avaliacaoAntropometrica.abdomen}">10</label>
+						</div>
+						<div class="col-md-3">
+							<label>Quadril (cm):</label>
+							<label th:text="${avaliacaoAntropometrica.quadril}">10</label>
+						</div>
+						<div class="col-md-3">
+							<label>Punho (cm):</label>
+							<label th:text="${avaliacaoAntropometrica.punho}">10</label>
+						</div>
+						<div class="col-md-3">
+							<label>Antebraço (cm):</label>
+							<label th:text="${avaliacaoAntropometrica.antebraco}">10</label>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="panel panel-primary group">
+			<div class="panel-heading">
+			<h3 class="panel-title">CIRCUNFERÊNCIAS</h3>
+			</div>
+			<div class="panel-body">
+			
+				<div class="container-fluid group-item">
+				<div class="row">
+						<div class="col-md-3">
+							<label>Ombro (cm):</label>
+							<label th:text="${avaliacaoAntropometrica.ombro}">10</label>
+						</div>
+						<div class="col-md-3">
+							<label>Peitoral (cm):</label>
+							<label th:text="${avaliacaoAntropometrica.peitoral}">10</label>
+						</div>
+						<div class="col-md-3">
+							<label>Panturrilha Direita (cm):</label>
+							<label th:text="${avaliacaoAntropometrica.panturrilhaDireita}">10</label>
+						</div>
+						<div class="col-md-3">
+							<label>Panturrilha Esquerda (cm):</label>
+							<label th:text="${avaliacaoAntropometrica.panturrilhaEsquerda}">10</label>
+						</div>
+					</div>
+				</div>
+				
+				<div class="container-fluid group-item">
+					<div class="row">
+						<div class="col-md-3">
+							<label>Pescoço (cm):</label>
+							<label th:text="${avaliacaoAntropometrica.pescoco}">10</label>
+						</div>
+					</div>
+				</div>
+				
+				<div class="container-fluid group-item">
+					<div class="row">
+						<div class="col-md-3 group-item-colum">
+							<label>Coxa Direita (cm):</label>
+							<label th:text="${avaliacaoAntropometrica.coxaDireita}">10</label>
+						</div>
+						<div class="col-md-3">
+							<label>Coxa Esquerda (cm):</label>
+							<label th:text="${avaliacaoAntropometrica.coxaEsquerda}">10</label>
+						</div>
+						<div class="col-md-3">
+							<label>Coxa Proximal Direita (cm):</label>
+							<label th:text="${avaliacaoAntropometrica.coxaProximalDireita}">10</label>
+						</div>
+						<div class="col-md-3">
+							<label>Coxa Proximal Esquerda (cm):</label>
+							<label th:text="${avaliacaoAntropometrica.coxaProximalEsquerda}">10</label>
+						</div>
+					</div>
+				</div>
+				
+				<div class="container-fluid group-item">
+					<div class="row">
+						<div class="col-md-3 group-item-colum">
+							<label>Braco Relaxado Direito (cm):</label>
+							<label th:text="${avaliacaoAntropometrica.bracoRelaxadoDireito}">10</label>
+						</div>
+						<div class="col-md-3">
+							<label>Braco Relaxado Esquerdo (cm):</label>
+							<label th:text="${avaliacaoAntropometrica.bracoRelaxadoEsquerdo}">10</label>
+						</div>
+						<div class="col-md-3 group-item-colum">
+							<label>Braco Contraído Direito (cm):</label>
+							<label th:text="${avaliacaoAntropometrica.bracoContraidoDireito}">10</label>
+						</div>
+						<div class="col-md-3">
+							<label>Braco Contraído Esquerdo (cm):</label>
+							<label th:text="${avaliacaoAntropometrica.bracoContraidoEsquerdo}">10</label>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="panel panel-primary group">
+			<div class="panel-heading">
+			<h3 class="panel-title">DiÂMETROS ÓSSEOS</h3>
+			</div>
+			<div class="panel-body">
+				
+				<div class="container-fluid group-item">
+				<div class="row">
+					<div class="col-md-3">
+						<label>Diâmetro Punho (cm):</label>
+						<label th:text="${avaliacaoAntropometrica.diametroPunho}">10</label>
+					</div>
+					<div class="col-md-3">
+						<label>Diâmetro Fêmur (cm):</label>
+						<label th:text="${avaliacaoAntropometrica.diametroFemur}">10</label>
+					</div>
+				</div>
+				</div>
+			</div>
+		</div>
+		
+		<div class="panel panel-primary group">
+			<div class="panel-heading">
+			<h3 class="panel-title">COMPOSIÇÂO CORPORAL</h3>
+			</div>
+			<div class="panel-body">
+				
+				<div class="container-fluid group-item">
+				<div class="row">
+					<div class="col-md-3">
+						<label>Biceps (cm):</label>
+						<label th:text="${avaliacaoAntropometrica.biceps}">10</label>
+					</div>
+					<div class="col-md-3">
+						<label>Triceps (cm):</label>
+						<label th:text="${avaliacaoAntropometrica.triceps}">10</label>
+					</div>
+					<div class="col-md-3">
+						<label>Axilar Média (cm):</label>
+						<label th:text="${avaliacaoAntropometrica.axilarMedia}">10</label>
+					</div>
+					<div class="col-md-3">
+						<label> Tórax (cm):</label>
+						<label th:text="${avaliacaoAntropometrica.torax}">10</label>
+					</div>
+				</div>
+				</div>
+				
+				<div class="container-fluid group-item">
+				<div class="row">
+					<div class="col-md-3">
+						<label>Panturrilha Medial (cm):</label>
+						<label th:text="${avaliacaoAntropometrica.panturrilhaMedial}">10</label>
+					</div>
+					<div class="col-md-3">
+						<label>Abdominal (cm):</label>
+						<label th:text="${avaliacaoAntropometrica.abdominal}">10</label>
+					</div>
+					<div class="col-md-3">
+						<label>Suprailíaca (cm):</label>
+						<label th:text="${avaliacaoAntropometrica.suprailiaca}">10</label>
+					</div>
+					<div class="col-md-3">
+						<label>Subescapular (cm): </label>
+						<label th:text="${avaliacaoAntropometrica.subescapular}">10</label>
+					</div>
+				</div>
+				</div>
+				
+				<div class="container-fluid group-item">
+				<div class="row">
+					<div class="col-md-3">
+						<label>Coxa (cm):</label>
+						<label th:text="${avaliacaoAntropometrica.coxa}">10</label>
+					</div>
+				</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<footer th:replace="templates/layoutPadrao :: footer"></footer>
+</body>
+</html>

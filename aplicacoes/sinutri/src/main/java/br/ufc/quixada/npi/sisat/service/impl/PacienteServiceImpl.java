@@ -12,6 +12,7 @@ import javax.inject.Named;
 import br.ufc.quixada.npi.enumeration.QueryType;
 import br.ufc.quixada.npi.repository.GenericRepository;
 import br.ufc.quixada.npi.service.impl.GenericServiceImpl;
+import br.ufc.quixada.npi.sisat.model.AvaliacaoAntropometrica;
 import br.ufc.quixada.npi.sisat.model.ConsultaNutricional;
 import br.ufc.quixada.npi.sisat.model.Paciente;
 import br.ufc.quixada.npi.sisat.service.PacienteService;
@@ -54,6 +55,15 @@ public class PacienteServiceImpl extends GenericServiceImpl<Paciente> implements
 	@Override
 	public void excluir(ConsultaNutricional consulta){
 		this.excluir(consulta);
+	}
+	
+	public AvaliacaoAntropometrica buscarAvaliacaoAntropometricaById(Long id) {
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("id", id);
+
+		AvaliacaoAntropometrica avaliacaoAntropometrica = (AvaliacaoAntropometrica) 
+				findFirst(QueryType.JPQL, "from AvaliacaoAntropometrica where id = :id", params);
+		return avaliacaoAntropometrica;
 	}
 		
 }

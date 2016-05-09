@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="templates/layoutPadrao :: head">
+	<title>Cadastrar Avaliação Antropometrica</title>
+</head>
+<body>
+	<nav th:replace="templates/layoutPadrao :: menu"></nav>
+	
+	<div class="container-fluid">	
+		<div th:replace="nutricao/antropometria/form :: form-erros"></div>
+		
+		<div class="row">
+			<div class="col-sm-9">
+				<h3>
+					<label>Nova Avaliação Antropometrica para</label> 
+					<strong th:text="${avaliacaoAntropometrica.paciente.pessoa.nome}">José da Silva</strong>
+				</h3>
+			</div>
+	
+			<div class="col-sm-3" align="right" style="margin-top: 15px;">
+				<a href="#" class="btn btn-primary btn-sm back"><span
+					class="glyphicon glyphicon-chevron-left"></span> Voltar</a>
+			</div>
+		</div>
+		<div class="panel-group" id="accordionAntropometria">
+		<form id="form-antropometria" action="#" th:action="@{${'/paciente/'+avaliacaoAntropometrica.paciente.id+'/Antropometria'}}" class="form-horizontal" th:object="${avaliacaoAntropometrica}" method="post" enctype="multipart/form-data">
+			<div th:replace="nutricao/antropometria/form :: form-fields">
+			</div>
+			<div class="col-xs-offset-0 col-xs-10" align="center">
+				<br></br>
+				<button type="submit" class="btn btn-success">Cadastrar</button>
+			</div>
+		</form>
+		</div>
+	</div>
+	<footer th:replace="templates/layoutPadrao :: footer"></footer>
+</body>
+</html>

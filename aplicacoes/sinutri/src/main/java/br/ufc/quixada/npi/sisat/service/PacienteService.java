@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import br.ufc.quixada.npi.service.GenericService;
+import br.ufc.quixada.npi.sisat.model.AvaliacaoAntropometrica;
 import br.ufc.quixada.npi.sisat.model.ConsultaNutricional;
 import br.ufc.quixada.npi.sisat.model.Paciente;
 
@@ -16,5 +17,7 @@ public interface PacienteService extends GenericService<Paciente> {
 	
 
 	void excluir(ConsultaNutricional consulta);
+	
+	public AvaliacaoAntropometrica buscarAvaliacaoAntropometricaById(Long id);
 
 }

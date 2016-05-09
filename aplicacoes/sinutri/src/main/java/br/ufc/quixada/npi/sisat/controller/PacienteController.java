@@ -522,7 +522,7 @@ public class PacienteController {
 		
 		model.addAttribute("action","cadastrar");
 		model.addAttribute("avaliacaoAntropometrica", avaliacaoAntropometrica);
-		return "nutricao/antropometria/form-antropometria";
+		return "nutricao/antropometria/form-cadastrar";
 	}
 	
 	@RequestMapping(value={"/{id}/Antropometria"}, method = RequestMethod.POST)
@@ -536,4 +536,21 @@ public class PacienteController {
 		avaliacaoAntropometricaService.save(avaliacaoAntropometrica);
 		return "nutricao/antropometria/mensagem";
 	}
+	
+
+	@RequestMapping(value= {"/{id}/Antropometria/{idAntropometria}"}, method = RequestMethod.GET)
+	public String getVisualizarAntropometrica(@PathVariable("id") Long id, @PathVariable("idAntropometria") Long idAntropometria
+			, RedirectAttributes redirectAttributes, Model model){
+		
+		AvaliacaoAntropometrica avaliacaoAntropometrica = pacienteService.buscarAvaliacaoAntropometricaById(idAntropometria);
+		Paciente paciente = pacienteService.find(Paciente.class, id);
+		if(paciente == null){
+			redirectAttributes.addFlashAttribute("erro", "Paciente inválido. Tente novamente!");
+			return "nutricao/antropometria/form-antropometria";
+		}
+		model.addAttribute("avaliacaoAntropometrica", avaliacaoAntropometrica);
+		return "nutricao/antropometria/visualizar-antropometria";
+	}
+	
+
 }

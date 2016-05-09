@@ -252,16 +252,16 @@ public class AvaliacaoAntropometrica {
 	public void setCoxaProximalEsquerda(Double coxaProximalEsquerda) {
 		this.coxaProximalEsquerda = coxaProximalEsquerda;
 	}
-	public Double getbracoRelaxadoDireito() {
+	public Double getBracoRelaxadoDireito() {
 		return bracoRelaxadoDireito;
 	}
-	public void setbracoRelaxadoDireito(Double bracoRelaxadoDireito) {
+	public void setBracoRelaxadoDireito(Double bracoRelaxadoDireito) {
 		this.bracoRelaxadoDireito = bracoRelaxadoDireito;
 	}
-	public Double getbracoRelaxadoEsquerdo() {
+	public Double getBracoRelaxadoEsquerdo() {
 		return bracoRelaxadoEsquerdo;
 	}
-	public void setbracoRelaxadoEsquerdo(Double bracoRelaxadoEsquerdo) {
+	public void setBracoRelaxadoEsquerdo(Double bracoRelaxadoEsquerdo) {
 		this.bracoRelaxadoEsquerdo = bracoRelaxadoEsquerdo;
 	}
 	public Double getBracoContraidoDireito() {

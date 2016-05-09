@@ -3,7 +3,7 @@
 <head th:replace="templates/layoutPadrao :: head">
 	<title>Cadastrar Avaliação Antropometrica</title>
 </head>
-<body th:with="url=((${action == 'cadastrar'}) ? @{/paciente/${avaliacaoAntropometrica.paciente.id}/Antropometria} : @{/paciente/${avaliacaoAntropometrica.paciente.id}/Antropometria/${avaliacaoAntropometrica.id}/editar} ), 
+<body th:with="url=((${action == 'cadastrar'}) ? @{${'/paciente/'+avaliacaoAntropometrica.paciente.id+'/Antropometria'}} : @{${'/paciente/' + avaliacaoAntropometrica.paciente.id + '/Antropometria/' + avaliacaoAntropometrica.id + '/editar'}} ), 
 			  titulo=((${action == 'cadastrar'}) ? 'Nova Avaliação Antropometrica' : 'Editar Avaliação Antropometrica'),
 			  botao=((${action == 'cadastrar'}) ? 'Finalizar Avaliação Antropometrica' : 'Atualizar Avaliação Antropometrica')">
 	<nav th:replace="templates/layoutPadrao :: menu"></nav>
@@ -314,7 +314,7 @@
 							<div class="row form-group">
 								<div class="form-item col-sm-3">
 									<label th:for="${#ids.next('diametroPunho')}" class="control-label">
-										Diametro Punho (cm):
+										Diâmetro Punho (cm):
 									</label>
 									<input type="number" th:field="*{diametroPunho}" class="form-control valid-num" min="0" placeholder="0.00"/>
 									<div class="error-validation">
@@ -324,7 +324,7 @@
 								
 								<div class="form-item col-sm-3">
 									<label th:for="${#ids.next('diametroFemur')}" class="control-label">
-										Diametro Fêmur (cm):
+										Diâmetro Fêmur (cm):
 									</label>
 									<input type="number" th:field="*{diametroFemur}" class="form-control valid-num" min="0" placeholder="0.00"/>
 									<div class="error-validation">
@@ -439,11 +439,6 @@
 							</div>
 						</div>
 					</div>
-				</div>
-				
-				<div class="col-xs-offset-0 col-xs-10" align="center">
-					<br></br>
-					<button type="submit" class="btn btn-success" th:text="${botao}">Enviar</button>
 				</div>
 			</form>
 		</div>
