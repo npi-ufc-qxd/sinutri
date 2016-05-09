@@ -13,7 +13,7 @@
 	<c:set var="botao" value="Finalizar Avaliação Antropometrica "></c:set>
 </c:if>
 <c:if test="${action eq 'editar' }">
-	<c:url var="url" value="/paciente/${avaliacaoAntropometrica.paciente.id}/Antropometria/${avaliacaoAntropometrica.id}/editar"></c:url>
+	<c:url var="url" value="/paciente/${avaliacaoAntropometrica.paciente.id}/Antropometria/${avaliacaoAntropometrica.id}/"></c:url>
 	<c:set var="titulo" value="Editar Avaliação Antropometrica "></c:set>
 	<c:set var="botao" value="Atualizar Avaliação Antropometrica"></c:set>
 </c:if>

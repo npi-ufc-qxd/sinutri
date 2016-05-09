@@ -529,20 +529,19 @@ public class PacienteController {
 	}
 	
 	//Controler Avaliação Antropométrica Editar
-	@RequestMapping(value= {"/{id}/Antropometria/{idAntropometria}"}, method = RequestMethod.GET)
+	@RequestMapping(value= {"/{id}/Antropometria/{idAntropometria}/Editar"}, method = RequestMethod.GET)
 	public String getEditarAvaliacaoAntropometrica(@PathVariable("id") Long id, @PathVariable("idAntropometria") Long idAntropometria
 			, Model model){
 		//Paciente paciente = pacienteService.find(Paciente.class, idPaciente);
 		AvaliacaoAntropometrica avaliacaoAntropometrica = pacienteService.buscarAvaliacaoAntropometricaById(idAntropometria);
-		System.out.println("-------------------------------busca avaliacao"+avaliacaoAntropometrica);
 		avaliacaoAntropometrica.setAtualizadoEm(new Date());
 		
 		model.addAttribute("action","editar");
 		model.addAttribute("avaliacaoAntropometrica", avaliacaoAntropometrica);
 		return "nutricao/antropometria/form-antropometria";
 	}
-	@RequestMapping(value={"/{id}/Antropometria/{idAntropometria}"}, method = RequestMethod.POST)
-	public String editarAvaliacaoAntropometrica(@PathVariable("id") String id, Model model, @Valid AvaliacaoAntropometrica avaliacaoAntropometrica, BindingResult result, RedirectAttributes redirectAttributes){
+	@RequestMapping(value={"/{id}/Antropometria/{idAntropometria}/Editar"}, method = RequestMethod.POST)
+	public String editarAvaliacaoAntropometrica(@PathVariable("id") Long id, Model model, @Valid AvaliacaoAntropometrica avaliacaoAntropometrica, BindingResult result, RedirectAttributes redirectAttributes){
 		Paciente paciente = pacienteService.find(Paciente.class, id);
 		if(paciente == null){
 			redirectAttributes.addFlashAttribute("erro", "Paciente inválido. Tente novamente!");
@@ -554,5 +553,21 @@ public class PacienteController {
 		
 		pacienteService.editarAvaliacaoAntropometrica(avaliacaoAntropometrica);
 		return "nutricao/antropometria/mensagem";
+	}
+	//Controller Avaliação Antropométrica Visualizar
+	@RequestMapping(value= {"/{id}/Antropometria/{idAntropometria}"}, method = RequestMethod.GET)
+	public String getVisualizarAntropometrica(@PathVariable("id") Long id, @PathVariable("idAntropometria") Long idAntropometria
+			, RedirectAttributes redirectAttributes, Model model){
+		
+		AvaliacaoAntropometrica avaliacaoAntropometrica = pacienteService.buscarAvaliacaoAntropometricaById(idAntropometria);
+		Paciente paciente = pacienteService.find(Paciente.class, id);
+		if(paciente == null){
+			redirectAttributes.addFlashAttribute("erro", "Paciente inválido. Tente novamente!");
+			return "nutricao/antropometria/form-antropometria";
+		}
+		
+		model.addAttribute("action","visualizar");
+		model.addAttribute("avaliacaoAntropometrica", avaliacaoAntropometrica);
+		return "nutricao/antropometria/visualizar";
 	}
 }
