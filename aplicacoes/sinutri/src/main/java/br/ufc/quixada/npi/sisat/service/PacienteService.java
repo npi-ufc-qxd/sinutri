@@ -24,5 +24,7 @@ public interface PacienteService extends GenericService<Paciente> {
 	public void editarAvaliacaoAntropometrica(AvaliacaoAntropometrica antropometria);
 	
 	public AvaliacaoAntropometrica buscarAvaliacaoAntropometricaById(Long id);
+	
+	public void excluirAvaliacaoAntropometrica(AvaliacaoAntropometrica antropometria);
 
 }

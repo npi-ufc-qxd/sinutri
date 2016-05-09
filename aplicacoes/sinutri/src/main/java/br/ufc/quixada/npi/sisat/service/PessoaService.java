@@ -4,6 +4,7 @@ import java.util.List;
 
 import br.ufc.quixada.npi.service.GenericService;
 import br.ufc.quixada.npi.sisat.model.Pessoa;
+import br.ufc.quixada.npi.sisat.model.Servidor;
 
 public interface PessoaService extends GenericService<Pessoa> {
 
@@ -16,4 +17,6 @@ public interface PessoaService extends GenericService<Pessoa> {
 	public abstract List<Pessoa> getPessoasByNomeOuCpf(String busca);
 	
 	public abstract List<Pessoa> getPareceristas(Long id);
+	
+	public Servidor buscarServidorByPessoa (Pessoa pessoa);
 }

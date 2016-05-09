@@ -79,4 +79,10 @@ public class PacienteServiceImpl extends GenericServiceImpl<Paciente> implements
 				findFirst(QueryType.JPQL, "from AvaliacaoAntropometrica where id = :id", params);
 		return avaliacaoAntropometrica;
 	}
+
+	@Override
+	public void excluirAvaliacaoAntropometrica(AvaliacaoAntropometrica antropometria) {
+		antropometriaRepository.delete(antropometria);
+		
+	}
 }

@@ -34,6 +34,7 @@ import br.ufc.quixada.npi.sisat.model.InqueritoAlimentar;
 import br.ufc.quixada.npi.sisat.model.Paciente;
 import br.ufc.quixada.npi.sisat.model.PacienteExterno;
 import br.ufc.quixada.npi.sisat.model.Pessoa;
+import br.ufc.quixada.npi.sisat.model.Servidor;
 import br.ufc.quixada.npi.sisat.model.enuns.ClassificacaoExame;
 import br.ufc.quixada.npi.sisat.model.enuns.Frequencia;
 import br.ufc.quixada.npi.sisat.model.enuns.Refeicao;
@@ -502,9 +503,13 @@ public class PacienteController {
 	
 	//Controler Avaliação Antropométrica Cadastrar
 	@RequestMapping(value= {"/{id}/Antropometria"}, method = RequestMethod.GET)
-	public String getAvaliacaoAntropometrica(@PathVariable("id") Long id, Model model){
+	public String getAvaliacaoAntropometrica(@PathVariable("id") Long id, Model model, HttpSession session){
+		Pessoa pessoa = getUsuarioLogado(session);
+		Servidor nutricionista = pessoaService.buscarServidorByPessoa(pessoa);
 		Paciente paciente = pacienteService.find(Paciente.class, id);
 		AvaliacaoAntropometrica avaliacaoAntropometrica = new AvaliacaoAntropometrica(paciente);
+		
+		avaliacaoAntropometrica.setNutricionista(nutricionista);
 		avaliacaoAntropometrica.setCriadoEm(new Date());
 		avaliacaoAntropometrica.setAtualizadoEm(new Date());
 		
@@ -566,8 +571,23 @@ public class PacienteController {
 			return "nutricao/antropometria/form-antropometria";
 		}
 		
-		model.addAttribute("action","visualizar");
 		model.addAttribute("avaliacaoAntropometrica", avaliacaoAntropometrica);
 		return "nutricao/antropometria/visualizar";
+	}
+	//Controller Avaliação Antropométrica Excluir
+	@RequestMapping(value= {"/{id}/Antropometria/{idAntropometria}/Excluir"}, method = RequestMethod.GET)
+	public String getExcluirAntropometria(@PathVariable("id") Long id, @PathVariable("idAntropometria") Long idAntropometria
+			, RedirectAttributes redirectAttributes, Model model){
+		
+		AvaliacaoAntropometrica avaliacaoAntropometrica = pacienteService.buscarAvaliacaoAntropometricaById(idAntropometria);
+		Paciente paciente = pacienteService.find(Paciente.class, id);
+		if(paciente == null){
+			redirectAttributes.addFlashAttribute("erro", "Paciente inválido. Tente novamente!");
+			return "nutricao/antropometria/form-antropometria";
+		}
+		
+		pacienteService.excluirAvaliacaoAntropometrica(avaliacaoAntropometrica);
+		model.addAttribute("avaliacaoAntropometrica", avaliacaoAntropometrica);
+		return "nutricao/antropometria/excluir";
 	}
 }

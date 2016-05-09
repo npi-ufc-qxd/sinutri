@@ -5,10 +5,17 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+
+
+@NamedQueries({
+	@NamedQuery(name = "Servidor.findServidorByPessoa", query = "select s from Servidor s where s.pessoa.id = :idPessoa")
+})
 
 @Entity
-public class Servidor {
-
+public class Servidor {	
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;

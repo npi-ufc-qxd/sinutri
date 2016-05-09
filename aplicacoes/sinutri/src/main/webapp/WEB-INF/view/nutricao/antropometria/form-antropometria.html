@@ -3,7 +3,7 @@
 <head th:replace="templates/layoutPadrao :: head">
 	<title>Cadastrar Avaliação Antropometrica</title>
 </head>
-<body th:with="url=((${action == 'cadastrar'}) ? @{/paciente/${avaliacaoAntropometrica.paciente.id}/Antropometria} : @{/paciente/${avaliacaoAntropometrica.paciente.id}/Antropometria/${avaliacaoAntropometrica.id}/editar} ), 
+<body th:with="url=((${action == 'cadastrar'}) ? @{${'/paciente/'+avaliacaoAntropometrica.paciente.id+'/Antropometria'}} : @{${'/paciente/' + avaliacaoAntropometrica.paciente.id + '/Antropometria/' + avaliacaoAntropometrica.id + '/editar'}} ), 
 			  titulo=((${action == 'cadastrar'}) ? 'Nova Avaliação Antropometrica' : 'Editar Avaliação Antropometrica'),
 			  botao=((${action == 'cadastrar'}) ? 'Finalizar Avaliação Antropometrica' : 'Atualizar Avaliação Antropometrica')">
 	<nav th:replace="templates/layoutPadrao :: menu"></nav>
