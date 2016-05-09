@@ -3,26 +3,21 @@
     <head th:replace="templates/layoutPadrao :: head">
     	<title>Inquérito alimentar</title>
     </head>
-    <body th:with="url=((${acao eq 'cadastrar'})? @{${'/paciente/'+inquerito.paciente.id+'/Inquerito/'}} : @{${'/paciente/'+inquerito.paciente.id+'/Inquerito/'+inquerito.id+'/Editar/'}}),titulo=((${acao eq 'cadastrar'})? 'Adicionar Inquerito Alimentar' : 'Editar Inquerito Alimentar'), botao=((${acao eq 'cadastrar'})? 'Adicionar' : 'Editar')">
-        <div th:id="${inquerito.paciente.id}"> </div>
+    <body>
         <nav th:replace="templates/layoutPadrao :: menu"></nav>
     	<footer th:replace="templates/layoutPadrao :: footer"></footer>
-        
-        
-        
-        
         
         <div class="container">
 	        <div class="row">
 	        	<div class="col-sm-8">
-	        		<h1 th:text="${titulo}"></h1>
+	        		<h1>Adicionar Inquerito Alimentar</h1>
 					<h3>
 						<strong th:text="${inquerito.paciente.pessoa.nome}"></strong>
 					</h3>
 				</div>
 			</div>
 			<div class="row col-sm-12">
-				<form th:object="${inquerito}" th:method="post" th:action="${url}">
+				<form th:object="${inquerito}" th:method="post" th:action="@{${'/paciente/'+inquerito.paciente.id+'/Inquerito/'}}">
 					<input type="hidden" id="id" th:field="*{id}"/>
 					
 					<div class="row form-group">
@@ -382,12 +377,12 @@
 					<div class="row form-group">
 						<div class="form-item col-sm-6">
 							<label for="observacoes" class="control-label">Observações</label>
-							<textarea rows="3" cols="50" placeholder="Observações" th:field="*{observacoes}"></textarea>
+							<textarea rows="3" cols="80" placeholder="Observações" th:field="*{observacoes}"></textarea>
 							<label class=" label label-danger" th:if="${#fields.hasErrors('observacoes')}" th:errors="*{observacoes}">Title error message</label>
 						</div>
 					</div>
 					<div class="col-xs-offset-0 col-xs-10" align="center">
-						<button type="submit" class="btn btn-success" th:text="${botao}"></button>
+						<button type="submit" class="btn btn-success">Adicionar</button>
 					</div>
 				</form>
 			</div>

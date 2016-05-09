@@ -509,10 +509,9 @@ public class PacienteController {
 		InqueritoAlimentar inquerito = new InqueritoAlimentar();
 		inquerito.setCriadoEm(new Date());
 		inquerito.setPaciente(paciente);
-		model.addAttribute("acao", "cadastrar");
 		model.addAttribute("inquerito", inquerito);
 		model.addAttribute("frequenciasSemanais", FrequenciaSemanal.values());
-		return "nutricao/inquerito/form-inquerito";		
+		return "nutricao/inquerito/form-adicionar-inquerito";		
 	}
 	
 	@RequestMapping(value = "/{id}/Inquerito/", method = RequestMethod.POST)
@@ -525,10 +524,9 @@ public class PacienteController {
 				return "redirect:/nutricao/buscar";
 			}
 			inqueritoAlimentar.setPaciente(paciente);
-			model.addAttribute("acao", "cadastrar");
 			model.addAttribute("frequenciasSemanais", FrequenciaSemanal.values());
 			model.addAttribute("inquerito", inqueritoAlimentar);
-			return "nutricao/inquerito/form-inquerito";
+			return "nutricao/inquerito/form-adicionar-inquerito";
 		}
 		if(!pacienteService.adicionarInqueritoAlimentar(inqueritoAlimentar, id)){
 			redirectAttributes.addFlashAttribute("erro", "Paciente não encontrado. Faça um nova pesquisa");
@@ -550,10 +548,9 @@ public class PacienteController {
 			redirectAttributes.addFlashAttribute("erro", "Inquérito Alimentar não encontrado. Faça um nova pesquisa");
 			return "redirect:/nutricao/buscar";
 		}
-		model.addAttribute("acao", "editar");
 		model.addAttribute("inquerito", inquerito);
 		model.addAttribute("frequenciasSemanais", FrequenciaSemanal.values());
-		return "nutricao/inquerito/form-inquerito";
+		return "nutricao/inquerito/form-editar-inquerito";
 	}
 	
 	@RequestMapping(value = "/{idPaciente}/Inquerito/{idInquerito}/Editar/", method = RequestMethod.POST)
@@ -566,10 +563,9 @@ public class PacienteController {
 				return "redirect:/nutricao/buscar";
 			}
 			inquerito.setPaciente(paciente);
-			model.addAttribute("acao", "editar");
 			model.addAttribute("inquerito", inquerito);
 			model.addAttribute("frequenciasSemanais", FrequenciaSemanal.values());
-			return "nutricao/inquerito/form-inquerito";
+			return "nutricao/inquerito/form-editar-inquerito";
 		}
 		if(!pacienteService.editarInqueritoAlimentar(inquerito, idPaciente)){
 			redirectAttributes.addFlashAttribute("erro", "Paciente não encontrado. Faça um nova pesquisa");
