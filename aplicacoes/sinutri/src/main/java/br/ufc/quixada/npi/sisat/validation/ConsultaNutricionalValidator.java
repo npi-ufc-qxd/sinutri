@@ -8,7 +8,7 @@ import org.springframework.validation.Validator;
 
 import br.ufc.quixada.npi.sisat.model.ConsultaNutricional;
 import br.ufc.quixada.npi.sisat.model.enuns.ClassificacaoExame;
-import br.ufc.quixada.npi.sisat.model.enuns.Frequencia;
+import br.ufc.quixada.npi.sisat.model.enuns.FrequenciaSemanal;
 
 @Named
 public class ConsultaNutricionalValidator implements Validator {
@@ -57,7 +57,7 @@ public class ConsultaNutricionalValidator implements Validator {
 		
 	}
 
-	private void validarFrequenciaSemanal(Errors errors, Frequencia frequenciaSemanal, String campo, String message) {
+	private void validarFrequenciaSemanal(Errors errors, FrequenciaSemanal frequenciaSemanal, String campo, String message) {
 		if(frequenciaSemanal == null){
 			errors.rejectValue(campo, campo, message);
 		}

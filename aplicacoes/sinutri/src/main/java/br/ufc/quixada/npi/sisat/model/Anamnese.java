@@ -16,7 +16,7 @@ import javax.validation.constraints.Size;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import br.ufc.quixada.npi.sisat.model.enuns.Apetite;
-import br.ufc.quixada.npi.sisat.model.enuns.Frequencia;
+import br.ufc.quixada.npi.sisat.model.enuns.FrequenciaSemanal;
 import br.ufc.quixada.npi.sisat.model.enuns.SistemaGastrointestinal;
 import br.ufc.quixada.npi.sisat.model.enuns.SistemaUrinario;
 

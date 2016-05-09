@@ -24,7 +24,7 @@ import javax.validation.constraints.Size;
 import org.codehaus.jackson.annotate.JsonIgnore;
 import org.springframework.format.annotation.DateTimeFormat;
 import br.ufc.quixada.npi.sisat.model.enuns.ClassificacaoExame;
-import br.ufc.quixada.npi.sisat.model.enuns.Frequencia;
+import br.ufc.quixada.npi.sisat.model.enuns.FrequenciaSemanal;
 import br.ufc.quixada.npi.sisat.model.enuns.SistemaGastrointestinal;
 import br.ufc.quixada.npi.sisat.model.enuns.SistemaUrinario;
 
@@ -99,18 +99,18 @@ public class ConsultaNutricional {
 	@Size(max=256, message="Os comentários sobre atividade física precisam ocupar menos que 256 carácteres")
 	private String atividadeFisicaComentario;
 	@Enumerated(EnumType.STRING)
-	private Frequencia atividadeFisicaFrequenciaSemanal;
+	private FrequenciaSemanal atividadeFisicaFrequenciaSemanal;
 
 	private boolean bebidaAlcoolica;
 	@Size(max=256, message="Os comentários sobre bebida alcóolica precisam ocupar menos que 256 carácteres")
 	private String bebidaAlcoolicaComentario;
 	@Enumerated(EnumType.STRING)
-	private Frequencia bebidaAlcoolicaFrequenciaSemanal;
+	private FrequenciaSemanal bebidaAlcoolicaFrequenciaSemanal;
 	
 	private boolean cigarro;
 	private String cigarroComentario;
 	@Enumerated(EnumType.STRING)
-	private Frequencia cigarroFrequenciaSemanal;
+	private FrequenciaSemanal cigarroFrequenciaSemanal;
 	
 	@Enumerated(EnumType.STRING)
 	private SistemaGastrointestinal sistemaGastrointestinal;
@@ -344,11 +344,11 @@ public class ConsultaNutricional {
 		this.atividadeFisicaComentario = atividadeFisicaComentario;
 	}
 
-	public Frequencia getAtividadeFisicaFrequenciaSemanal() {
+	public FrequenciaSemanal getAtividadeFisicaFrequenciaSemanal() {
 		return atividadeFisicaFrequenciaSemanal;
 	}
 
-	public void setAtividadeFisicaFrequenciaSemanal(Frequencia atividadeFisicaFrequenciaSemanal) {
+	public void setAtividadeFisicaFrequenciaSemanal(FrequenciaSemanal atividadeFisicaFrequenciaSemanal) {
 		this.atividadeFisicaFrequenciaSemanal = atividadeFisicaFrequenciaSemanal;
 	}
 
@@ -377,11 +377,11 @@ public class ConsultaNutricional {
 		this.cigarroComentario = cigarroComentario;
 	}
 
-	public Frequencia getCigarroFrequenciaSemanal() {
+	public FrequenciaSemanal getCigarroFrequenciaSemanal() {
 		return cigarroFrequenciaSemanal;
 	}
 
-	public void setCigarroFrequenciaSemanal(Frequencia cigarroFrequenciaSemanal) {
+	public void setCigarroFrequenciaSemanal(FrequenciaSemanal cigarroFrequenciaSemanal) {
 		this.cigarroFrequenciaSemanal = cigarroFrequenciaSemanal;
 	}
 
@@ -393,11 +393,11 @@ public class ConsultaNutricional {
 		this.bebidaAlcoolicaComentario = bebidaAlcoolicaComentario;
 	}
 
-	public Frequencia getBebidaAlcoolicaFrequenciaSemanal() {
+	public FrequenciaSemanal getBebidaAlcoolicaFrequenciaSemanal() {
 		return bebidaAlcoolicaFrequenciaSemanal;
 	}
 
-	public void setBebidaAlcoolicaFrequenciaSemanal(Frequencia bebidaAlcoolicaFrequenciaSemanal) {
+	public void setBebidaAlcoolicaFrequenciaSemanal(FrequenciaSemanal bebidaAlcoolicaFrequenciaSemanal) {
 		this.bebidaAlcoolicaFrequenciaSemanal = bebidaAlcoolicaFrequenciaSemanal;
 	}
 
