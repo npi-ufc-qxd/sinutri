@@ -247,3 +247,15 @@ small {
 .descript-sobre .text-muted {
 	margin-left: 6%;
 }
+
+
+.panel.group > .panel-body > .group-item{
+	margin: 10px;
+	border-width:1px;
+	border-style: none none solid none;
+}
+
+.panel.group > .panel-body > .group-item:last-child{
+	border-style: none none none none;
+}
+

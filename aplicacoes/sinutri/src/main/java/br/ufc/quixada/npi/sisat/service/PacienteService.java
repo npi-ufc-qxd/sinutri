@@ -18,7 +18,7 @@ public interface PacienteService extends GenericService<Paciente> {
 
 	void excluir(ConsultaNutricional consulta);
 	
-	//Métodos Avaliação Antropométrica
+
 	public void adicionarAvaliacaoAntropometrica(AvaliacaoAntropometrica antropometria);
 	
 	public void editarAvaliacaoAntropometrica(AvaliacaoAntropometrica antropometria);
@@ -26,5 +26,4 @@ public interface PacienteService extends GenericService<Paciente> {
 	public AvaliacaoAntropometrica buscarAvaliacaoAntropometricaById(Long id);
 	
 	public void excluirAvaliacaoAntropometrica(AvaliacaoAntropometrica antropometria);
-
 }

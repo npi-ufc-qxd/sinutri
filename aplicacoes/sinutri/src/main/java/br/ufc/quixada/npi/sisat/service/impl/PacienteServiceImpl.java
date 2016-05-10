@@ -67,8 +67,7 @@ public class PacienteServiceImpl extends GenericServiceImpl<Paciente> implements
 	}
 	
 	public void editarAvaliacaoAntropometrica(AvaliacaoAntropometrica antropometria) {
-		antropometriaRepository.update(antropometria);
-		
+		antropometriaRepository.update(antropometria);		
 	}
 	
 	public AvaliacaoAntropometrica buscarAvaliacaoAntropometricaById(Long id) {
@@ -82,7 +81,6 @@ public class PacienteServiceImpl extends GenericServiceImpl<Paciente> implements
 
 	@Override
 	public void excluirAvaliacaoAntropometrica(AvaliacaoAntropometrica antropometria) {
-		antropometriaRepository.delete(antropometria);
-		
+		antropometriaRepository.delete(antropometria);		
 	}
 }

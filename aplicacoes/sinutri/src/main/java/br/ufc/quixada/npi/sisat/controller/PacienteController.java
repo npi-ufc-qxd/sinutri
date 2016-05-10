@@ -500,8 +500,7 @@ public class PacienteController {
 	}
 	
 	
-	//Controler Avaliação Antropométrica Cadastrar
-	@RequestMapping(value= {"/{id}/Antropometria"}, method = RequestMethod.GET)
+	@RequestMapping(value= {"/{id}/Antropometria/"}, method = RequestMethod.GET)
 	public String getAvaliacaoAntropometrica(@PathVariable("id") Long id, Model model, HttpSession session){
 		Pessoa pessoa = getUsuarioLogado(session);
 		Servidor nutricionista = pessoaService.buscarServidorByPessoa(pessoa);
@@ -511,55 +510,50 @@ public class PacienteController {
 		avaliacaoAntropometrica.setNutricionista(nutricionista);
 		avaliacaoAntropometrica.setCriadoEm(new Date());
 		avaliacaoAntropometrica.setAtualizadoEm(new Date());
-		
 		model.addAttribute("action","cadastrar");
 		model.addAttribute("avaliacaoAntropometrica", avaliacaoAntropometrica);
-		return "nutricao/antropometria/form-antropometria";
+		return "nutricao/antropometria/form-cadastrar";
 	}
 	
-	@RequestMapping(value={"/{id}/Antropometria"}, method = RequestMethod.POST)
+	@RequestMapping(value={"/{id}/Antropometria/"}, method = RequestMethod.POST)
 	public String adicionarAvaliacaoAntropometrica(@PathVariable("id") Long id, Model model, @Valid AvaliacaoAntropometrica avaliacaoAntropometrica, BindingResult result, RedirectAttributes redirectAttributes){
 		Paciente paciente = pacienteService.find(Paciente.class, id);
 		if(paciente == null){
 			redirectAttributes.addFlashAttribute("erro", "Paciente inválido. Tente novamente!");
-			return "nutricao/antropometria/form-antropometria";
+			return "nutricao/antropometria/form-cadastrar";
 		}else if(result.hasErrors()){
 			model.addAttribute("avaliacaoAntropometrica", avaliacaoAntropometrica);
-			return "nutricao/antropometria/form-antropometria";
+			return "nutricao/antropometria/form-cadastrar";
 		}
 		
 		pacienteService.adicionarAvaliacaoAntropometrica(avaliacaoAntropometrica);
-		return "nutricao/antropometria/mensagem";
+		return "redirect:/paciente/"+paciente.getId()+"/Antropometria/"+avaliacaoAntropometrica.getId()+"/";
 	}
 	
-	//Controler Avaliação Antropométrica Editar
-	@RequestMapping(value= {"/{id}/Antropometria/{idAntropometria}/Editar"}, method = RequestMethod.GET)
+	@RequestMapping(value= {"/{id}/Antropometria/{idAntropometria}/Editar/"}, method = RequestMethod.GET)
 	public String getEditarAvaliacaoAntropometrica(@PathVariable("id") Long id, @PathVariable("idAntropometria") Long idAntropometria
 			, Model model){
-		//Paciente paciente = pacienteService.find(Paciente.class, idPaciente);
 		AvaliacaoAntropometrica avaliacaoAntropometrica = pacienteService.buscarAvaliacaoAntropometricaById(idAntropometria);
 		avaliacaoAntropometrica.setAtualizadoEm(new Date());
 		
-		model.addAttribute("action","editar");
 		model.addAttribute("avaliacaoAntropometrica", avaliacaoAntropometrica);
-		return "nutricao/antropometria/form-antropometria";
+		return "nutricao/antropometria/form-editar";
 	}
-	@RequestMapping(value={"/{id}/Antropometria/{idAntropometria}/Editar"}, method = RequestMethod.POST)
+	@RequestMapping(value={"/{id}/Antropometria/{idAntropometria}/Editar/"}, method = RequestMethod.POST)
 	public String editarAvaliacaoAntropometrica(@PathVariable("id") Long id, Model model, @Valid AvaliacaoAntropometrica avaliacaoAntropometrica, BindingResult result, RedirectAttributes redirectAttributes){
 		Paciente paciente = pacienteService.find(Paciente.class, id);
 		if(paciente == null){
 			redirectAttributes.addFlashAttribute("erro", "Paciente inválido. Tente novamente!");
-			return "nutricao/antropometria/form-antropometria";
+			return "nutricao/antropometria/form-cadastrar";
 		}else if(result.hasErrors()){
 			model.addAttribute("avaliacaoAntropometrica", avaliacaoAntropometrica);
-			return "nutricao/antropometria/form-antropometria";
+			return "nutricao/antropometria/form-cadastrar";
 		}
 		
 		pacienteService.editarAvaliacaoAntropometrica(avaliacaoAntropometrica);
-		return "nutricao/antropometria/mensagem";
+		return "redirect:/paciente/"+paciente.getId()+"/Antropometria/"+avaliacaoAntropometrica.getId()+"/";
 	}
-	//Controller Avaliação Antropométrica Visualizar
-	@RequestMapping(value= {"/{id}/Antropometria/{idAntropometria}"}, method = RequestMethod.GET)
+	@RequestMapping(value= {"/{id}/Antropometria/{idAntropometria}/"}, method = RequestMethod.GET)
 	public String getVisualizarAntropometrica(@PathVariable("id") Long id, @PathVariable("idAntropometria") Long idAntropometria
 			, RedirectAttributes redirectAttributes, Model model){
 		
@@ -567,14 +561,13 @@ public class PacienteController {
 		Paciente paciente = pacienteService.find(Paciente.class, id);
 		if(paciente == null){
 			redirectAttributes.addFlashAttribute("erro", "Paciente inválido. Tente novamente!");
-			return "nutricao/antropometria/form-antropometria";
+			return "nutricao/antropometria/form-cadastrar";
 		}
 		
 		model.addAttribute("avaliacaoAntropometrica", avaliacaoAntropometrica);
-		return "nutricao/antropometria/visualizar";
+		return "nutricao/antropometria/visualizar-antropometria";
 	}
-	//Controller Avaliação Antropométrica Excluir
-	@RequestMapping(value= {"/{id}/Antropometria/{idAntropometria}/Excluir"}, method = RequestMethod.GET)
+	@RequestMapping(value= {"/{id}/Antropometria/{idAntropometria}/Excluir/"}, method = RequestMethod.GET)
 	public String getExcluirAntropometria(@PathVariable("id") Long id, @PathVariable("idAntropometria") Long idAntropometria
 			, RedirectAttributes redirectAttributes, Model model){
 		
@@ -582,11 +575,10 @@ public class PacienteController {
 		Paciente paciente = pacienteService.find(Paciente.class, id);
 		if(paciente == null){
 			redirectAttributes.addFlashAttribute("erro", "Paciente inválido. Tente novamente!");
-			return "nutricao/antropometria/form-antropometria";
+			return "nutricao/antropometria/form-cadastrar";
 		}
 		
 		pacienteService.excluirAvaliacaoAntropometrica(avaliacaoAntropometrica);
-		model.addAttribute("avaliacaoAntropometrica", avaliacaoAntropometrica);
-		return "nutricao/antropometria/excluir";
+		return "redirect:/paciente/"+paciente.getId()+"/Antropometria/";
 	}
 }
