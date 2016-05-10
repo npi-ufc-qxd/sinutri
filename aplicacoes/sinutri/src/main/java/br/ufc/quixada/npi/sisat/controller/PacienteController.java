@@ -30,7 +30,6 @@ import br.ufc.quixada.npi.sisat.model.AvaliacaoAntropometrica;
 import br.ufc.quixada.npi.sisat.model.ConsultaNutricional;
 import br.ufc.quixada.npi.sisat.model.Documento;
 import br.ufc.quixada.npi.sisat.model.FrequenciaAlimentar;
-import br.ufc.quixada.npi.sisat.model.InqueritoAlimentar;
 import br.ufc.quixada.npi.sisat.model.Paciente;
 import br.ufc.quixada.npi.sisat.model.PacienteExterno;
 import br.ufc.quixada.npi.sisat.model.Pessoa;
