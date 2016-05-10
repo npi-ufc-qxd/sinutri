@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="templates/layoutPadrao :: head"></head>
+<body>
+    <nav th:replace="templates/layoutPadrao :: menu"></nav>
+    <footer th:replace="templates/layoutPadrao :: footer"></footer>
+    
+    <form action="#" th:object="${prescricao}" th:action="@{/1/Prescricao/2/}" method="get">
+		Descrição: <p th:text="*{descricao}"> </p>
+ 		Texto: <p th:text="*{texto}"></p> 
+ 		
+ 		<a href="formEditar/" > Editar </a>
+ 		
+    </form>
+</body>
+</html>

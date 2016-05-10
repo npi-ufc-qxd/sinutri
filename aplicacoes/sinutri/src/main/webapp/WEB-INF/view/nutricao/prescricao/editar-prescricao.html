@@ -5,10 +5,10 @@
     <nav th:replace="templates/layoutPadrao :: menu"></nav>
     <footer th:replace="templates/layoutPadrao :: footer"></footer>
     
-    <form action="#" th:object="${prescricao}" th:action="@{/paciente/1/Prescricao/}" method="post"> 
+    <form action="#" th:object="${prescricao}" th:action="@{/paciente/1/Prescricao/2/Editar/}" method="post"> 
     	<input type="hidden" id="idPrescricao" th:field="*{idPrescricao}"/>
-    	Descricao: <input type="text" th:field="*{descricao}" />
-    	Texto: <input type="text" th:field="*{texto}" />
+    	Descricao: <input type="text" th:field="*{descricao}" value="*{descricao}" />
+    	Texto: <input type="text" th:field="*{texto}" value="*{texto}" />
     	<input type="submit" value="Adicionar"/>   
     </form>
 </body>
