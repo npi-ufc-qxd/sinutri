@@ -6,11 +6,33 @@
     <footer th:replace="templates/layoutPadrao :: footer"></footer>
     
     <form action="#" th:object="${prescricao}" th:action="@{/1/Prescricao/2/}" method="get">
-		Descrição: <p th:text="*{descricao}"> </p>
- 		Texto: <p th:text="*{texto}"></p> 
- 		
- 		<a href="formEditar/" > Editar </a>
- 		
+    
+    <div class="container">
+    	<div class="row">
+    		<div class="col-sm-8">
+    			<h3> Informações da prescrição </h3> <br></br>
+    		</div>
+    	</div>
+		<div class="row">
+			<table class="table table-striped table-hover">
+				<thead>
+				<tr>
+					<th class="form-group">  Descrição:  </th>
+					<th class="form-group">  Texto:  </th> 
+				</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td > <p th:text="*{descricao}"> </p> </td>
+						<td> <p th:text="*{texto}"> </p> </td>
+					</tr>			
+				</tbody>
+			</table>	
+			
+ 			<a href="formEditar/" class="btn btn-warning btn-sm" > <span
+					class="glyphicon glyphicon-edit"></span> Editar </a>
+ 		</div> 
+ 	</div>	
     </form>
 </body>
 </html>

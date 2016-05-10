@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="templates/layoutPadrao :: head"></head>
+<body>
+    <nav th:replace="templates/layoutPadrao :: menu"></nav>
+    <footer th:replace="templates/layoutPadrao :: footer"></footer>
+    
+	 <form action="#" th:object="${prescricao}" th:action="@{/paciente/1/Prescricao/}" method="post" > 
+		
+	 	<input type="hidden" id="idPrescricao" th:field="*{idPrescricao}" />
+			  
+    	<div class="row form-group">
+   			<div class="form-item col-sm-6">  	
+		    	<label class="control-label"> Descricao </label>
+		    	<input id="inputTextDescricao" type="text" th:field="*{descricao}" 
+		    	placeholder="Digite a descrição da prescrição." class="form-control" />
+		    </div>
+    	</div> 
+    	
+    	<div class="row form-group">
+   			<div class="form-item col-sm-6">
+		    	<label class="control-label"> Texto </label>
+		    	<textarea id="inputTextTexto" rows="6" th:field="*{texto}" 
+		    	placeholder="Digite aqui o texto da prescricao." class="form-control"> </textarea>
+	    	</div>
+    	</div> 
+    	
+		<input type="submit" value="Cadastrar" class="btn btn-success"/>   
+	</form>
+</body>
+</html>

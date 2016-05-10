@@ -499,8 +499,7 @@ public class PacienteController {
 	@RequestMapping(value="/{id}/Prescricao/", method = RequestMethod.GET)
 	public String formAdicionarPrescricao(@PathVariable("id") Long id, Model model){
 		model.addAttribute("prescricao", new Prescricao());
-		System.out.println("\n\n METODO DO FORMULARIO \n\n\n\n");
-		return "nutricao/prescricao/form-prescricao";
+		return "nutricao/prescricao/cadastrar-prescricao";
 	}
 	
 	@RequestMapping(value="/{id}/Prescricao/", method = RequestMethod.POST)
@@ -533,7 +532,6 @@ public class PacienteController {
 			model.addAttribute("id", idPrescricao);
 			return "nutricao/prescricao/editar-prescricao";
 		}
-		System.out.println("\n\n\n\n PRESCRICAO NULA \n\n\n\n");
 		return "redirect:/nutricao/buscar";
 	}
 	
@@ -556,8 +554,6 @@ public class PacienteController {
 		return "nutricao/prescricao/visualizar-prescricao";
 	}
 	
-	
-
 }
 
 	

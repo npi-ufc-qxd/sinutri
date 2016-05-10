@@ -6,10 +6,25 @@
     <footer th:replace="templates/layoutPadrao :: footer"></footer>
     
     <form action="#" th:object="${prescricao}" th:action="@{/paciente/1/Prescricao/2/Editar/}" method="post"> 
+    	
     	<input type="hidden" id="idPrescricao" th:field="*{idPrescricao}"/>
-    	Descricao: <input type="text" th:field="*{descricao}" value="*{descricao}" />
-    	Texto: <input type="text" th:field="*{texto}" value="*{texto}" />
-    	<input type="submit" value="Adicionar"/>   
+    	
+    	<div class="row form-group">
+    		<div class="form-item col-sm-6">
+    			<label class="control-label"> Descricao </label>
+    			<input id="inputTextDescricao" type="text" th:field="*{descricao}" value="*{descricao}" class="form-control"/> 
+    		</div>
+    	</div>
+    	
+    	<div class="row form-group">
+    		<div class="form-item col-sm-6">
+    			<label class="control-label"> Texto </label> 
+    			<textarea id="inputTextTexto" th:field="*{texto}"  rows="6" name="*{texto}" 
+    				class="form-control"></textarea> 
+    		</div> 
+    	</div>
+    	
+    	<input type="submit" value="Editar" class="btn btn-success"/>   
     </form>
 </body>
 </html>
