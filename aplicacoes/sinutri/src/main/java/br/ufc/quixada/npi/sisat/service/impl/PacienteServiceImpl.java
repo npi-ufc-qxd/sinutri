@@ -1,21 +1,16 @@
 package br.ufc.quixada.npi.sisat.service.impl;
 
-
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 import javax.inject.Inject;
 import javax.inject.Named;
-
-
 import br.ufc.quixada.npi.enumeration.QueryType;
 import br.ufc.quixada.npi.repository.GenericRepository;
 import br.ufc.quixada.npi.service.impl.GenericServiceImpl;
 import br.ufc.quixada.npi.sisat.model.AvaliacaoAntropometrica;
 import br.ufc.quixada.npi.sisat.model.ConsultaNutricional;
 import br.ufc.quixada.npi.sisat.model.Paciente;
-import br.ufc.quixada.npi.sisat.model.Papel;
 import br.ufc.quixada.npi.sisat.service.PacienteService;
 import br.ufc.quixada.npi.util.SimpleMap;
 
@@ -45,7 +40,6 @@ public class PacienteServiceImpl extends GenericServiceImpl<Paciente> implements
 			p.put("data", consulta.getData());
 			map.put(consulta.getId(), p);
 		}
-
 		return map;
 	}
 
@@ -61,7 +55,6 @@ public class PacienteServiceImpl extends GenericServiceImpl<Paciente> implements
 		this.excluir(consulta);
 	}
 	
-	//Implementação dos Métodos da Avaliação Antropométrica
 	public void adicionarAvaliacaoAntropometrica(AvaliacaoAntropometrica antropometria){
 		antropometriaRepository.save(antropometria);
 	}

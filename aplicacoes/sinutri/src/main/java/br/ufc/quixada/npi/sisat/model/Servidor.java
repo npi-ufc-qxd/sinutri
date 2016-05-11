@@ -8,7 +8,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 
-
 @NamedQueries({
 	@NamedQuery(name = "Servidor.findServidorByPessoa", query = "select s from Servidor s where s.pessoa.id = :idPessoa")
 })
@@ -47,6 +46,5 @@ public class Servidor {
 
 	public void setPessoa(Pessoa pessoa) {
 		this.pessoa = pessoa;
-	}
-	
+	}	
 }

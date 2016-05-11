@@ -1,9 +1,7 @@
 package br.ufc.quixada.npi.sisat.service.impl;
 
 import java.util.List;
-
 import javax.inject.Named;
-
 import br.ufc.quixada.npi.service.impl.GenericServiceImpl;
 import br.ufc.quixada.npi.sisat.model.Pessoa;
 import br.ufc.quixada.npi.sisat.model.Servidor;
@@ -14,7 +12,6 @@ import br.ufc.quixada.npi.util.SimpleMap;
 @Named
 public class PessoaServiceImpl extends GenericServiceImpl<Pessoa> implements PessoaService {
 
-	
 	public Pessoa getPessoaByCpf(String cpf) {
 		return (Pessoa) findFirst("Pessoa.findPessoaByCpf", new SimpleMap<String, Object>("cpf", cpf));
 	}
@@ -38,7 +35,6 @@ public class PessoaServiceImpl extends GenericServiceImpl<Pessoa> implements Pes
 
 	@Override
 	public Servidor buscarServidorByPessoa(Pessoa pessoa) {
-		
 		return (Servidor) find("Servidor.findServidorByPessoa", new SimpleMap<String, Object>("idPessoa", pessoa.getId())).get(0);
 	}
 }
