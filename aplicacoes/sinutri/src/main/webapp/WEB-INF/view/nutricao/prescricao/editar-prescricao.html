@@ -5,9 +5,10 @@
     <nav th:replace="templates/layoutPadrao :: menu"></nav>
     <footer th:replace="templates/layoutPadrao :: footer"></footer>
     
-    <form action="#" th:object="${prescricao}" th:action="@{/paciente/1/Prescricao/2/Editar/}" method="post"> 
+    <form id="form-prescricao" action="#" th:object="${prescricao}" th:action="@{/paciente/1/Prescricao/2/Editar/}" method="post"> 
     	
-    	<input type="hidden" id="idPrescricao" th:field="*{idPrescricao}"/>
+    	<input type="hidden" th:field="*{idPrescricao}"/>
+    	<input type="hidden"  th:field="*{atualizadoEm}"/>
     	
     	<div class="row form-group">
     		<div class="form-item col-sm-6">
@@ -20,9 +21,16 @@
     		<div class="form-item col-sm-6">
     			<label class="control-label"> Texto </label> 
     			<textarea id="inputTextTexto" th:field="*{texto}"  rows="6" name="*{texto}" 
-    				class="form-control"></textarea> 
+    				class="form-control"> </textarea> 
     		</div> 
     	</div>
+    	
+    	<div class="form-item col-sm-3">
+			<label th:for="${#ids.next('criadoEm')}" class="control-label">
+				Data: 
+			</label>
+			<input type="date" th:field="*{criadoEm}" class="form-control datepicker" placeholder="dd/mm/aaaa"/>
+		</div>
     	
     	<input type="submit" value="Editar" class="btn btn-success"/>   
     </form>
