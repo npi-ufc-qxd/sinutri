@@ -31,6 +31,9 @@ public class Paciente implements Serializable {
 	@OneToMany(mappedBy = "paciente", fetch = FetchType.EAGER)
 	@JsonIgnore
 	private List<ConsultaNutricional> consultas;
+	
+	@OneToMany(mappedBy = "paciente")
+	private List<Anamnese> anamneses;
 
 	@NotNull(message = "Informe a altura do paciente!")
 	private Double alturaAtual;

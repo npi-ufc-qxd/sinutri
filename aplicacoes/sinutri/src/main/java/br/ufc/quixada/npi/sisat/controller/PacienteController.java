@@ -35,6 +35,7 @@ import br.ufc.quixada.npi.sisat.model.InqueritoAlimentar;
 import br.ufc.quixada.npi.sisat.model.Paciente;
 import br.ufc.quixada.npi.sisat.model.PacienteExterno;
 import br.ufc.quixada.npi.sisat.model.Pessoa;
+import br.ufc.quixada.npi.sisat.model.enuns.Apetite;
 import br.ufc.quixada.npi.sisat.model.enuns.ClassificacaoExame;
 import br.ufc.quixada.npi.sisat.model.enuns.Frequencia;
 import br.ufc.quixada.npi.sisat.model.enuns.Refeicao;
@@ -496,16 +497,44 @@ public class PacienteController {
 		return "redirect:/paciente/cadastrar/paciente";
 	}
 	
-	@RequestMapping(value = "/{id}/Anamnese")
+	@RequestMapping(value = "/{idPaciente}/Anamnese/{idAnamnese}/",method = RequestMethod.GET)
+	public String visualizarAnamnese(@PathVariable("idPaciente") Long idPaciente,@PathVariable("idAnamnese") Long idAnamnese,Model model){
+		Anamnese anamnese = pacienteService.buscarAnamnese(idAnamnese);
+		if(anamnese != null){
+			model.addAttribute("anamnese",anamnese);
+			return "/nutricao/anamnese/visualizar-anamnese";
+		}
+		return "/";
+	}
+	
+	@RequestMapping(value = "/{id}/Anamnese",method = RequestMethod.GET)
+	public String formAdicionarAnamnese(@PathVariable("id") Long id, Model model){
+		Paciente paciente = pacienteService.find(Paciente.class, id);
+		if(paciente != null){
+			Anamnese anamnese =  new Anamnese();
+			anamnese.setCriadoEm(new Date());
+			anamnese.setPaciente(paciente);
+			model.addAttribute("anamnese",anamnese);
+			model.addAttribute("tiposApetite",Apetite.values());
+			model.addAttribute("tiposSistemaUrinario",SistemaUrinario.values());
+			model.addAttribute("tiposSistemaGastrointestinal", SistemaGastrointestinal.values());
+			return "/nutricao/anamnese/cadastrar-anamnese";
+		}
+		return "/";
+	}
+	
+	@RequestMapping(value = "/{id}/Anamnese",method = RequestMethod.POST)
 	public String AdicionarAnamnese(@PathVariable("id") Long id, @Valid Anamnese anamnese, BindingResult result, Model model){
-		//Paciente paciente = pacienteService.find(Paciente.class, id);
 		if(result.hasErrors()){
-			model.addAttribute("anamnese", anamnese);
-			return "redirect:nutricao/form-consulta";
+			model.addAttribute("anamnese",anamnese);
+			model.addAttribute("tiposApetite",Apetite.values());
+			model.addAttribute("tiposSistemaUrinario",SistemaUrinario.values());
+			model.addAttribute("tiposSistemaGastrointestinal", SistemaGastrointestinal.values());
+			return "nutricao/anamnese/cadastrar-anamnese";
 		}
 		anamnese.setId(null);
 		pacienteService.adicionarAnamnese(anamnese);
-		return "redirect:/nutricao/form-consulta";
+		return "redirect:/paciente/"+id+"/Anamnese/"+anamnese.getId()+"/";
 	}
 	
 	@RequestMapping(value = "/{idPaciente}/Anamnese/{idAnamnese}/Excluir")
@@ -520,28 +549,30 @@ public class PacienteController {
 		
 	}
 	
-	@RequestMapping(value = "/{id}/Anamnese/{idAnamnese}/Editar")
-	public String editarAnamnese(@PathVariable("id") Long id,@PathVariable("idAnanmese") Long idAnanmese, @Valid Anamnese anamnese,
-			BindingResult result, Model model){
-		System.out.println(anamnese.getAgua() + " NULOOO\n\n\n");
-		if(result.hasErrors()){
+	@RequestMapping(value = "/{idPaciente}/Anamnese/{idAnamnese}/Editar",method = RequestMethod.GET)
+	public String formEditarAnamnese( Model model, @PathVariable("idPaciente") Long idPaciente,@PathVariable("idAnamnese") Long idAnamnese){
+		Anamnese anamnese = pacienteService.buscarAnamnese(idAnamnese);
+		if(anamnese != null){
+			anamnese.setAtualizadoEm(new Date());
 			model.addAttribute("anamnese", anamnese);
-			return "redirect:nutricao/form-consulta";
-		}
-		anamnese.setId(4l);
-		anamnese.setAgua(30.0);
-		pacienteService.editarAnamnese(anamnese);
-		return "/";
+			model.addAttribute("tiposApetite",Apetite.values());
+			model.addAttribute("tiposSistemaUrinario",SistemaUrinario.values());
+			model.addAttribute("tiposSistemaGastrointestinal", SistemaGastrointestinal.values());
+			return "/nutricao/anamnese/editar-anamnese";
+		}else
+			return "/";
 	}
 	
-	@RequestMapping(value  = {"AnamneseTeste"}, method = RequestMethod.GET)
-	public String teste( Model model, HttpSession session){
-		Anamnese anamnese = new Anamnese();
-		anamnese.setId(4l);
-		anamnese.setAgua(2.0);
-		//anamnese.setNutricionista(getUsuarioLogado(session));
-		model.addAttribute("anamnese",anamnese);
-		
-		return "redirect:/paciente/"+2+"/Anamnese";
+	@RequestMapping(value = "/{id}/Anamnese/{idAnamnese}/Editar",method=RequestMethod.POST)
+	public String editarAnamnese(@PathVariable("id") Long id,@PathVariable("idAnamnese") Long idAnanmese,
+			@ModelAttribute("Ananmnese") @Valid Anamnese anamnese,
+			BindingResult result, Model model){
+		if(result.hasErrors()){
+			model.addAttribute("anamnese", anamnese);
+			return "/nutricao/anamnese/editar-anamnese";
+		}		
+		pacienteService.editarAnamnese(anamnese);
+		return "redirect:/paciente/"+id+"/Anamnese/"+anamnese.getId()+"/";
 	}
+		
 }

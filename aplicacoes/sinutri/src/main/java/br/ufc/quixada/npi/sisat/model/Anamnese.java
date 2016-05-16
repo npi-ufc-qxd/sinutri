@@ -9,6 +9,7 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.Size;
@@ -31,6 +32,9 @@ public class Anamnese {
 	
 	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	private Date atualizadoEm;
+		
+	@ManyToOne
+	private Paciente paciente;
 	
 	//@OneToOne
 	//private Servidor nutricionista;
@@ -38,7 +42,7 @@ public class Anamnese {
 	@Size(max=256, message="O objetivo da consulta deve ter menos que 256 carácteres")
 	private String objetivoConsulta;
 	
-	@Min(value = 1,message = "Deve ser um numero positivo")
+	@Min(value = 0,message = "Deve ser um numero positivo")
 	private Double agua;
 	
 	private boolean atividadeFisica;
@@ -89,7 +93,7 @@ public class Anamnese {
 	@Size(max=256, message="Os comentários sobre bebida alcóolica precisam ocupar menos que 256 carácteres")
 	private String bebidaAlcoolicaComentario;
 		
-	@Size(max=256, message="Os comentários sobre outras patologias precisam ocupar menos que 256 carácteres")
+	@Size(max=256, message="Os comentários patologias precisam ocupar menos que 256 carácteres")
 	private String patologiasComentario;
 	
 	private boolean alergia;
@@ -143,7 +147,7 @@ public class Anamnese {
 		//return nutricionista;
 	//}
 
-//	public void setNutricionista(Servidor nutricionista) {
+	//public void setNutricionista(Servidor nutricionista) {
 		//this.nutricionista = nutricionista;
 	//}
 
@@ -355,11 +359,11 @@ public class Anamnese {
 		this.bebidaAlcoolicaComentario = bebidaAlcoolicaComentario;
 	}
 
-	public String getOutrasPatologiasComentario() {
+	public String getPatologiasComentario() {
 		return patologiasComentario;
 	}
 
-	public void setOutrasPatologiasComentario(String outrasPatologiasComentario) {
+	public void setPatologiasComentario(String outrasPatologiasComentario) {
 		this.patologiasComentario = outrasPatologiasComentario;
 	}
 
@@ -442,5 +446,14 @@ public class Anamnese {
 	public void setSuplementosAlimentares(String suplementosAlimentares) {
 		this.suplementosAlimentares = suplementosAlimentares;
 	}
+
+	public Paciente getPaciente() {
+		return paciente;
+	}
+
+	public void setPaciente(Paciente paciente) {
+		this.paciente = paciente;
+	}
+	
 	
 }
