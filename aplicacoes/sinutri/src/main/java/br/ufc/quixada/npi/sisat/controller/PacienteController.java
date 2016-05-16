@@ -542,9 +542,9 @@ public class PacienteController {
 		Anamnese anamnese = pacienteService.buscarAnamnese(idAnamnese);
 		if(anamnese != null){
 			pacienteService.excluirAnamnese(anamnese);
-			return "/";
+			return "redirect:/";
 		}else{
-			return "/";
+			return "redirect:/";
 		}
 		
 	}
@@ -560,7 +560,7 @@ public class PacienteController {
 			model.addAttribute("tiposSistemaGastrointestinal", SistemaGastrointestinal.values());
 			return "/nutricao/anamnese/editar-anamnese";
 		}else
-			return "/";
+			return "redirect:/";
 	}
 	
 	@RequestMapping(value = "/{id}/Anamnese/{idAnamnese}/Editar",method=RequestMethod.POST)
