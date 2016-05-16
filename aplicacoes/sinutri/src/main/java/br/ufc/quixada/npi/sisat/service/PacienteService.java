@@ -6,6 +6,7 @@ import java.util.Map;
 import br.ufc.quixada.npi.service.GenericService;
 import br.ufc.quixada.npi.sisat.model.ConsultaNutricional;
 import br.ufc.quixada.npi.sisat.model.Paciente;
+import br.ufc.quixada.npi.sisat.model.Prescricao;
 
 public interface PacienteService extends GenericService<Paciente> {
 	
@@ -16,5 +17,14 @@ public interface PacienteService extends GenericService<Paciente> {
 	
 
 	void excluir(ConsultaNutricional consulta);
+	
+	//PRESCRICAO
+	void adicionarPrescricao(Prescricao prescricao);
+	
+	void excluirPrescricao(Prescricao prescricao);
+	
+	void editarPrescricao(Prescricao prescricao);
+	
+	Prescricao buscarPrescricao(Long id);
 
 }

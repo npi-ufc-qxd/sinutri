@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="templates/layoutPadrao :: head"></head>
+<body>
+    <nav th:replace="templates/layoutPadrao :: menu"></nav>
+    <footer th:replace="templates/layoutPadrao :: footer"></footer>
+    
+	 <form id="form-prescricao" action="#" th:object="${prescricao}" th:action="@{/paciente/1/Prescricao/}" method="post" > 
+		
+	 	<input type="hidden" id="idPrescricao" th:field="*{idPrescricao}" />
+		
+		<input type="hidden" id="atualizadoEm" th:field="*{atualizadoEm}" />
+	
+    	<div class="row form-group">
+   			<div class="form-item col-sm-6">  	
+		    	<label class="control-label"> Descricao </label>
+		    	<input id="inputTextDescricao" type="text" th:field="*{descricao}" 
+		    	placeholder="Digite aqui a descrição da prescrição." class="form-control" />
+		    </div>
+    	</div> 
+    	
+    	<div class="row form-group">
+   			<div class="form-item col-sm-6">
+		    	<label class="control-label"> Texto </label>
+		    	<textarea id="inputTextTexto" rows="6" th:field="*{texto}" 
+		    	placeholder="Digite aqui o texto da prescricao." class="form-control"> </textarea>
+	    	</div>
+    	</div> 
+    	
+    	<div class="form-item col-sm-3">
+			<label th:for="${#ids.next('criadoEm')}" class="control-label">
+				Data: 
+			</label>
+			<input type="date" th:field="*{criadoEm}" class="form-control datepicker" placeholder="dd/mm/aaaa"/>
+		</div>
+    	
+    	<!-- <a href="#" class="btn btn-primary btn-sm back"><span
+				class="glyphicon glyphicon-chevron-left"></span> Voltar</a>
+	 	-->
+		<div class="form-item col-sm-3">
+			<input type="submit" value="Salvar" class="btn btn-success"/>
+		</div>   
+	</form>
+</body>
+</html>
