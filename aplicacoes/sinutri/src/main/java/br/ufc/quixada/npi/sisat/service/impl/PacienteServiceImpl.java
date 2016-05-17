@@ -12,6 +12,7 @@ import javax.inject.Named;
 import br.ufc.quixada.npi.enumeration.QueryType;
 import br.ufc.quixada.npi.repository.GenericRepository;
 import br.ufc.quixada.npi.service.impl.GenericServiceImpl;
+import br.ufc.quixada.npi.sisat.model.Anamnese;
 import br.ufc.quixada.npi.sisat.model.ConsultaNutricional;
 import br.ufc.quixada.npi.sisat.model.Paciente;
 import br.ufc.quixada.npi.sisat.service.PacienteService;
@@ -22,7 +23,10 @@ public class PacienteServiceImpl extends GenericServiceImpl<Paciente> implements
 
 	@Inject
 	GenericRepository<ConsultaNutricional> consultaRepository;
-
+	
+	@Inject
+	GenericRepository<Anamnese> anamneseRepository;
+	
 	@Override
 	public Map<Long, Object> getConsultasByPaciente(Long id) {
 		Map<String, Object> params = new HashMap<String, Object>();
@@ -55,5 +59,29 @@ public class PacienteServiceImpl extends GenericServiceImpl<Paciente> implements
 	public void excluir(ConsultaNutricional consulta){
 		this.excluir(consulta);
 	}
+
+	@Override
+	public void adicionarAnamnese(Anamnese anamnese) {
+		anamneseRepository.save(anamnese);		
+	}
+
+	@Override
+	public void editarAnamnese(Anamnese anamnese) {
+		anamneseRepository.update(anamnese);
+		
+	}
+
+	@Override
+	public void excluirAnamnese(Anamnese anamnese) {
+		anamneseRepository.delete(anamnese);
+		
+	}
+
+	@Override
+	public Anamnese buscarAnamnese(Long id) {		
+		return anamneseRepository.find(Anamnese.class, id);
+	}
+	
+	
 		
 }

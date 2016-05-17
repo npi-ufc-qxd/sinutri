@@ -26,6 +26,7 @@ $(document).ready(function() {
 		
 	});
 
+	
 	$(".checkboxInputSelect").change(function() {
 		var itemForm = $(this).parent().parent().parent();
 
@@ -371,6 +372,155 @@ $(document).ready(function() {
 						}
 
 					});
+	$('#form-anamnese')
+	.validate(
+			{
+				rules : {
+					objetivoConsulta : {
+						maxlength: 256
+					},
+					dormeBemComentario:{
+						maxlength: 256
+					},
+					medicamentoComentario:{
+						maxlength: 256
+					},
+					mastigacaoComentario:{
+						maxlength: 256
+					},
+					alergiaComentario:{
+						maxlength: 256
+					},
+					patologiasComentario:{
+						maxlength: 256
+					},
+					disfagiaComentario:{
+						maxlength: 256
+					},
+					odinofagiaComentario:{
+						maxlength: 256
+					},
+					piroseComentario:{
+						maxlength: 256
+					},
+					nauseaComentario:{
+						maxlength: 256
+					},
+					vomitoComentario:{
+						maxlength: 256
+					},
+					diarreiaComentario:{
+						maxlength: 256
+					},
+					constipacaoComentario:{
+						maxlength: 256
+					},					
+					bebidaAlcoolicaComentario:{
+						maxlength: 256
+					},
+					atividadeFisicaComentario:{
+						maxlength: 256
+					},
+					intoleranciaComentario:{
+						maxlength: 256
+					},
+					apetiteComentario:{
+						maxlength: 256
+					},
+					sistemaUrinarioComentario:{
+						maxlength: 256
+					},
+					agua :{
+						min : 0
+					}					
+				},
+				highlight : function(element) {
+					$(element).closest('.form-item')
+							.addClass('has-error');
+				},
+				unhighlight : function(element) {
+					$(element).closest('.form-group')
+							.removeClass('has-error');
+				},
+				errorElement : 'span',
+				errorClass : 'help-block',
+				errorPlacement : function(error,
+						element) {
+					error.insertAfter(element.parent()
+							.children().last());
+					var itemForm = element.parent();
+					var id = element.attr("name");
+					$(itemForm).find("span").attr("id",
+							id);
+				},
+				messages : {
+					objetivoConsulta : {								
+						maxlength: "O objetivo da consulta deve ter menos que 256 carácteres"
+					},
+					atividadeFisicaComentario : {						
+						maxlength: "A(s) atividade(s) física(s) precisa(m) ocupar menos que 256 carácteres"
+
+					},
+					atividadeFisicaFrequenciaSemanal : {
+						required : "Informe qual a frequência da(s) atividade(s) física(s) praticada(s) pelo paciente."
+					},
+					bebidaAlcoolicaComentario : {						
+						maxlength: "Os comentários sobre disfagia precisam ocupar menos que 256 carácteres"
+					},										
+					medicamentoComentario : {
+						maxlength: "A descrição dos medicamentos precisam ter menos de 256 carácteres"
+					},
+					mastigacaoComentario : {
+						maxlength: "As características da mastigação precisam ocupar menos de 256 carácteres"
+					},
+					disfagiaComentario : {
+						maxlength: "Os comentários sobre disfagia precisam ocupar menos que 256 carácteres"
+					},
+					odinofagiaComentario : {
+						maxlength: "Os comentários sobre odinofagia precisam ocupar menos que 256 carácteres"
+					},
+					piroseComentario : {
+						maxlength: "Os comentários sobre pirose precisam ocupar menos que 256 carácteres"
+					},
+					nauseaComentario : {
+						maxlength: "Os comentários sobre náuseas precisam ocupar menos que 256 carácteres"
+
+					},
+					vomitoComentario : {
+						maxlength: "Os comentários sobre vômitos precisam ocupar menos que 256 carácteres"
+					},
+					diarreiaComentario : {
+						maxlength: "Os comentários sobre diarreia precisam ocupar menos que 256 carácteres"
+
+					},
+					constipacaoComentario : {
+						maxlength: "Os comentários sobre constipação precisam ocupar menos que 256 carácteres"
+
+					},
+					alergiaComentario : {
+						maxlength: "Os comentário sobre alergia alimentar precisam ocupar menos que 256 carácteres"
+					},
+					intoleranciaComentario : {
+						maxlength: "Os comentário sobre intolerância alimentar precisam ocupar menos que 256 carácteres"
+					},
+					outrasPatologiasComentario : {
+						maxlength: "A descrição de outras patologias precisam ocupar menos que 256 carácteres"
+					},
+					dormeBemComentario : {
+						maxlength: "Os comentários sobre o sono precisam ocupar menos que 256 carácteres"
+					},
+					apetiteComentario:{
+						maxlength: "Os comentários sobre o apetite precisam ocupar menos que 256 carácteres"
+					},
+					sistemaUrinarioComentario:{
+						maxlength: "Os comentários sobre o sistema urinário precisam ocupar menos que 256 carácteres"
+					},
+					agua : {
+						min : "Deve ser um numero positivo"
+					}					
+				}
+
+			});
 	$('#form-cadastro-paciente-externo').validate(
 			{
 				rules : {
