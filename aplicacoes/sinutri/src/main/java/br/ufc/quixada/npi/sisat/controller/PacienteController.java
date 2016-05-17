@@ -487,11 +487,11 @@ public class PacienteController {
 		return "redirect:/paciente/cadastrar/paciente";
 	}
 	
-	@RequestMapping(value= {"/{id}/Antropometria/"}, method = RequestMethod.GET)
-	public String getAvaliacaoAntropometrica(@PathVariable("id") Long id, Model model, HttpSession session){
+	@RequestMapping(value= {"/{idPaciente}/Antropometria/"}, method = RequestMethod.GET)
+	public String getAvaliacaoAntropometrica(@PathVariable("idPaciente") Long idPaciente, Model model, HttpSession session){
 		Pessoa pessoa = getUsuarioLogado(session);
 		Servidor nutricionista = pessoaService.buscarServidorByPessoa(pessoa);
-		Paciente paciente = pacienteService.find(Paciente.class, id);
+		Paciente paciente = pacienteService.find(Paciente.class, idPaciente);
 		AvaliacaoAntropometrica avaliacaoAntropometrica = new AvaliacaoAntropometrica(paciente);
 		
 		avaliacaoAntropometrica.setNutricionista(nutricionista);
@@ -502,9 +502,9 @@ public class PacienteController {
 		return "nutricao/antropometria/form-cadastrar";
 	}
 	
-	@RequestMapping(value={"/{id}/Antropometria/"}, method = RequestMethod.POST)
-	public String adicionarAvaliacaoAntropometrica(@PathVariable("id") Long id, Model model, @Valid AvaliacaoAntropometrica avaliacaoAntropometrica, BindingResult result, RedirectAttributes redirectAttributes){
-		Paciente paciente = pacienteService.find(Paciente.class, id);
+	@RequestMapping(value={"/{idPaciente}/Antropometria/"}, method = RequestMethod.POST)
+	public String adicionarAvaliacaoAntropometrica(@PathVariable("idPaciente") Long idPaciente, Model model, @Valid AvaliacaoAntropometrica avaliacaoAntropometrica, BindingResult result, RedirectAttributes redirectAttributes){
+		Paciente paciente = pacienteService.find(Paciente.class, idPaciente);
 		if(paciente == null){
 			redirectAttributes.addFlashAttribute("erro", "Paciente inválido. Tente novamente!");
 			return "nutricao/antropometria/form-cadastrar";
@@ -516,8 +516,8 @@ public class PacienteController {
 		return "redirect:/paciente/"+paciente.getId()+"/Antropometria/"+avaliacaoAntropometrica.getId()+"/";
 	}
 	
-	@RequestMapping(value= {"/{id}/Antropometria/{idAntropometria}/Editar/"}, method = RequestMethod.GET)
-	public String getEditarAvaliacaoAntropometrica(@PathVariable("id") Long id, @PathVariable("idAntropometria") Long idAntropometria
+	@RequestMapping(value= {"/{idPaciente}/Antropometria/{idAntropometria}/Editar/"}, method = RequestMethod.GET)
+	public String getEditarAvaliacaoAntropometrica(@PathVariable("idPaciente") Long idPaciente, @PathVariable("idAntropometria") Long idAntropometria
 			, Model model){
 		AvaliacaoAntropometrica avaliacaoAntropometrica = pacienteService.buscarAvaliacaoAntropometricaById(idAntropometria);
 		avaliacaoAntropometrica.setAtualizadoEm(new Date());
@@ -525,9 +525,9 @@ public class PacienteController {
 		model.addAttribute("avaliacaoAntropometrica", avaliacaoAntropometrica);
 		return "nutricao/antropometria/form-editar";
 	}
-	@RequestMapping(value={"/{id}/Antropometria/{idAntropometria}/Editar/"}, method = RequestMethod.POST)
-	public String editarAvaliacaoAntropometrica(@PathVariable("id") Long id, Model model, @Valid AvaliacaoAntropometrica avaliacaoAntropometrica, BindingResult result, RedirectAttributes redirectAttributes){
-		Paciente paciente = pacienteService.find(Paciente.class, id);
+	@RequestMapping(value={"/{idPaciente}/Antropometria/{idAntropometria}/Editar/"}, method = RequestMethod.POST)
+	public String editarAvaliacaoAntropometrica(@PathVariable("idPaciente") Long idPaciente, Model model, @Valid AvaliacaoAntropometrica avaliacaoAntropometrica, BindingResult result, RedirectAttributes redirectAttributes){
+		Paciente paciente = pacienteService.find(Paciente.class, idPaciente);
 		if(paciente == null){
 			redirectAttributes.addFlashAttribute("erro", "Paciente inválido. Tente novamente!");
 			return "nutricao/antropometria/form-cadastrar";
@@ -538,12 +538,12 @@ public class PacienteController {
 		pacienteService.editarAvaliacaoAntropometrica(avaliacaoAntropometrica);
 		return "redirect:/paciente/"+paciente.getId()+"/Antropometria/"+avaliacaoAntropometrica.getId()+"/";
 	}
-	@RequestMapping(value= {"/{id}/Antropometria/{idAntropometria}/"}, method = RequestMethod.GET)
-	public String getVisualizarAntropometrica(@PathVariable("id") Long id, @PathVariable("idAntropometria") Long idAntropometria
+	@RequestMapping(value= {"/{idPaciente}/Antropometria/{idAntropometria}/"}, method = RequestMethod.GET)
+	public String getVisualizarAntropometrica(@PathVariable("idPaciente") Long idPaciente, @PathVariable("idAntropometria") Long idAntropometria
 			, RedirectAttributes redirectAttributes, Model model){
 		
 		AvaliacaoAntropometrica avaliacaoAntropometrica = pacienteService.buscarAvaliacaoAntropometricaById(idAntropometria);
-		Paciente paciente = pacienteService.find(Paciente.class, id);
+		Paciente paciente = pacienteService.find(Paciente.class, idPaciente);
 		if(paciente == null){
 			redirectAttributes.addFlashAttribute("erro", "Paciente inválido. Tente novamente!");
 			return "nutricao/antropometria/form-cadastrar";
@@ -551,12 +551,12 @@ public class PacienteController {
 		model.addAttribute("avaliacaoAntropometrica", avaliacaoAntropometrica);
 		return "nutricao/antropometria/visualizar-antropometria";
 	}
-	@RequestMapping(value= {"/{id}/Antropometria/{idAntropometria}/Excluir/"}, method = RequestMethod.GET)
-	public String getExcluirAntropometria(@PathVariable("id") Long id, @PathVariable("idAntropometria") Long idAntropometria
+	@RequestMapping(value= {"/{idPaciente}/Antropometria/{idAntropometria}/Excluir/"}, method = RequestMethod.GET)
+	public String getExcluirAntropometria(@PathVariable("idPaciente") Long idPaciente, @PathVariable("idAntropometria") Long idAntropometria
 			, RedirectAttributes redirectAttributes, Model model){
 		
 		AvaliacaoAntropometrica avaliacaoAntropometrica = pacienteService.buscarAvaliacaoAntropometricaById(idAntropometria);
-		Paciente paciente = pacienteService.find(Paciente.class, id);
+		Paciente paciente = pacienteService.find(Paciente.class, idPaciente);
 		if(paciente == null){
 			redirectAttributes.addFlashAttribute("erro", "Paciente inválido. Tente novamente!");
 			return "nutricao/antropometria/form-cadastrar";
