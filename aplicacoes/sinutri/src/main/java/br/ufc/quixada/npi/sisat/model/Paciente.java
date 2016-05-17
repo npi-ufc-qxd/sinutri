@@ -32,6 +32,9 @@ public class Paciente implements Serializable {
 	@JsonIgnore
 	private List<ConsultaNutricional> consultas;
 
+	@OneToMany(mappedBy = "paciente")
+	private List<AvaliacaoAntropometrica> antropometrias;
+	
 	@NotNull(message = "Informe a altura do paciente!")
 	private Double alturaAtual;
 

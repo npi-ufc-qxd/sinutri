@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="templates/layoutPadrao :: head">
+	<title>Cadastrar Avaliação Antropométrica</title>
+</head>
+<body>
+	<nav th:replace="templates/layoutPadrao :: menu"></nav>
+	
+	<div class="container-fluid">	
+		<div th:if="${erro != null}">
+			<div class="alert alert-danger alert-dismissible fade in"
+				role="alert" id="alert-erro">
+				<button type="button" class="close" data-dismiss="alert">
+					<span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+				</button>
+				<div th:text="${erro}"></div>
+			</div>
+		</div>
+		<div th:if="${info != null}">
+			<div class="alert alert-success alert-dismissible fade in"
+				role="alert" id="alert-info">
+				<button type="button" class="close" data-dismiss="alert">
+					<span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+				</button>
+				<div th:text="${info}"></div>
+			</div>
+		</div>
+		
+		<div class="row">
+			<div class="col-sm-9">
+				<h3>
+					<label>Nova Avaliação Antropométrica para</label> 
+					<strong th:text="${avaliacaoAntropometrica.paciente.pessoa.nome}">José da Silva</strong>
+				</h3>
+			</div>
+	
+			<div class="col-sm-3" align="right" style="margin-top: 15px;">
+				<a href="#" class="btn btn-primary btn-sm back"><span
+					class="glyphicon glyphicon-chevron-left"></span> Voltar</a>
+			</div>
+		</div>
+		<div class="panel-group" id="accordionAntropometria">
+		<form id="form-antropometria" action="#" th:action="@{${'/paciente/'+avaliacaoAntropometrica.paciente.id+'/Antropometria/'}}" class="form-horizontal" th:object="${avaliacaoAntropometrica}" method="post" enctype="multipart/form-data">
+			<input type="hidden" th:field="*{id}" />
+			<input type="hidden" th:field="*{atualizadoEm}" />
+			<input type="hidden" th:field="*{paciente.id}" />
+			<input type="hidden" th:field="*{nutricionista.id}" />
+			<div class="panel panel-primary">
+				<div class="panel-heading">
+			        <h4 class="panel-title">
+			        	<a data-toggle="collapse" data-parent="#accordionAntropometria" href="#collapse1">GERAL</a>
+			        </h4>
+			    </div>
+			    <div id="collapse1" class="panel-collapse collapse in">
+					<div class="panel-body">	
+						<div class="row form-group">
+							<div class="form-item col-sm-3">
+								<label th:for="${#ids.next('criadoEm')}" class="control-label"> <i
+									style="color: #F56954;" class="glyphicon glyphicon-asterisk"></i>
+									Data:
+								</label>
+								<input type="date" th:field="*{criadoEm}" class="form-control datepicker" placeholder="dd/mm/aaaa"/>
+								<div class="error-validation">
+									<p th:if="${#fields.hasErrors('criadoEm')}" th:errors="*{criadoEm}">Data inválida</p>
+								</div>
+							</div>
+							
+							<div class="form-item col-sm-3">
+								<label th:for="${#ids.next('altura')}" class="control-label">
+									Altura (m):</label>
+								<input type="number" th:field="*{altura}" class="form-control valid-num" min="0" placeholder="0.00"/>
+								<div class="error-validation">
+									<p th:if="${#fields.hasErrors('altura')}" th:errors="*{altura}">Altura inválida</p>
+								</div>
+							</div>
+							
+							<div class="form-item col-sm-3">
+								<label th:for="${#ids.next('peso')}" class="control-label">
+									Peso (Kg):</label>
+								<input type="number" th:field="*{peso}" class="form-control valid-num" min="0" placeholder="0.00"/>
+								<div class="error-validation">
+									<p th:if="${#fields.hasErrors('peso')}" th:errors="*{peso}">Peso inválido</p>
+								</div>
+							</div>
+							<div class="form-item col-sm-3">
+								<label th:for="${#ids.next('pesoDesejado')}" class="control-label">
+									Peso desejado (Kg):</label>
+								<input type="number" th:field="*{pesoDesejado}" class="form-control valid-num" min="0" placeholder="0.00"/>
+								<div class="error-validation">
+									<p th:if="${#fields.hasErrors('pesoDesejado')}" th:errors="*{pesoDesejado}">Peso Desejado inválido</p>
+								</div>
+							</div>
+						</div>
+						
+						<div class="row form-group">
+							<div class="form-item col-sm-3">
+								<label th:for="${#ids.next('cintura')}" class="control-label">
+									Cintura (cm):
+								</label>
+								<input type="number" th:field="*{cintura}" class="form-control valid-num" min="0" placeholder="0.00"/>
+								<div class="error-validation">
+									<p th:if="${#fields.hasErrors('cintura')}" th:errors="*{cintura}">Cintura inválida</p>
+								</div>
+							</div>
+							
+							<div class="form-item col-sm-3">
+								<label th:for="${#ids.next('abdomen')}" class="control-label">
+									Abdomen (cm):
+								</label>
+								<input type="number" th:field="*{abdomen}" class="form-control valid-num" min="0" placeholder="0.00"/>
+								<div class="error-validation">
+									<p th:if="${#fields.hasErrors('abdomen')}" th:errors="*{abdomen}">Abdomen inválido</p>
+								</div>
+							</div>
+							
+							<div class="form-item col-sm-3">
+								<label th:for="${#ids.next('quadril')}" class="control-label">
+									Quadril (cm):
+								</label>
+								<input type="number" th:field="*{quadril}" class="form-control valid-num" min="0" placeholder="0.00"/>
+								<div class="error-validation">
+									<p th:if="${#fields.hasErrors('quadril')}" th:errors="*{quadril}">Quadril inválido</p>
+								</div>
+							</div>
+							
+							<div class="form-item col-sm-3">
+								<label th:for="${#ids.next('punho')}" class="control-label">
+									Punho (cm):
+								</label>
+								<input type="number" th:field="*{punho}" class="form-control valid-num" min="0" placeholder="0.00"/>
+								<div class="error-validation">
+									<p th:if="${#fields.hasErrors('punho')}" th:errors="*{punho}">Punho inválido</p>
+								</div>
+							</div>
+						</div>
+						
+						<div class="row form-group">
+							<div class="form-item col-sm-3">
+								<label th:for="${#ids.next('antebraco')}" class="control-label">
+									Antebraco (cm):
+								</label>
+								<input type="number" th:field="*{antebraco}" class="form-control valid-num" min="0" placeholder="0.00"/>
+								<div class="error-validation">
+									<p th:if="${#fields.hasErrors('antebraco')}" th:errors="*{antebraco}">Antebraco inválido</p>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			
+			<div class="panel panel-primary">
+				<div class="panel-heading">
+			        <h4 class="panel-title">
+			        	<a data-toggle="collapse" data-parent="#accordionAntropometria" href="#collapse2">CIRCUNFERÊNCIAS</a>
+			        </h4>
+			    </div>
+			    <div id="collapse2" class="panel-collapse collapse">
+					<div class="panel-body">
+						<div class="row form-group">
+							<div class="form-item col-sm-3">
+								<label th:for="${#ids.next('ombro')}" class="control-label">
+									Ombro (cm):
+								</label>
+								<input type="number" th:field="*{ombro}" class="form-control valid-num" min="0" placeholder="0.00"/>
+								<div class="error-validation">
+									<p th:if="${#fields.hasErrors('ombro')}" th:errors="*{ombro}">Ombro inválido</p>
+								</div>
+							</div>
+							
+							<div class="form-item col-sm-3">
+								<label th:for="${#ids.next('peitoral')}" class="control-label">
+									Peitoral (cm):
+								</label>
+								<input type="number" th:field="*{peitoral}" class="form-control valid-num" min="0" placeholder="0.00"/>
+								<div class="error-validation">
+									<p th:if="${#fields.hasErrors('peitoral')}" th:errors="*{peitoral}">Peitoral inválido</p>
+								</div>
+							</div>
+							
+							<div class="form-item col-sm-3">
+								<label th:for="${#ids.next('panturrilhaDireita')}" class="control-label">
+									Panturrilha Direita (cm):
+								</label>
+								<input type="number" th:field="*{panturrilhaDireita}" class="form-control valid-num" min="0" placeholder="0.00"/>
+								<div class="error-validation">
+									<p th:if="${#fields.hasErrors('peitoral')}" th:errors="*{panturrilhaDireita}">Panturrilha Direita inválida</p>
+								</div>
+							</div>
+							
+							<div class="form-item col-sm-3">
+								<label th:for="${#ids.next('panturrilhaEsquerda')}" class="control-label">
+									Panturrilha Esquerda (cm):
+								</label>
+								<input type="number" th:field="*{panturrilhaEsquerda}" class="form-control valid-num" min="0" placeholder="0.00"/>
+								<div class="error-validation">
+									<p th:if="${#fields.hasErrors('panturrilhaEsquerda')}" th:errors="*{panturrilhaEsquerda}">Panturrilha Esquerda inválida</p>
+								</div>
+							</div>
+							
+						</div>
+					
+						<div class="row form-group">
+							<div class="form-item col-sm-3">
+								<label th:for="${#ids.next('pescoco')}" class="control-label">
+									Pescoço (cm):
+								</label>
+								<input type="number" th:field="*{pescoco}" class="form-control valid-num" min="0" placeholder="0.00"/>
+								<div class="error-validation">
+									<p th:if="${#fields.hasErrors('pescoco')}" th:errors="*{pescoco}">Pescoço inválido</p>
+								</div>
+							</div>
+						</div>
+						
+						<div class="row form-group">
+							<div class="form-item col-sm-3">
+								<label th:for="${#ids.next('coxaDireita')}" class="control-label">
+									Coxa Direita (cm):
+								</label>
+								<input type="number" th:field="*{coxaDireita}" class="form-control valid-num" min="0" placeholder="0.00"/>
+								<div class="error-validation">
+									<p th:if="${#fields.hasErrors('coxaDireita')}" th:errors="*{coxaDireita}">Coxa direita inválido</p>
+								</div>
+							</div>
+							
+							<div class="form-item col-sm-3">
+								<label th:for="${#ids.next('coxaEsquerda')}" class="control-label">
+									Coxa Esquerda (cm):
+								</label>
+								<input type="number" th:field="*{coxaEsquerda}" class="form-control valid-num" min="0" placeholder="0.00"/>
+								<div class="error-validation">
+									<p th:if="${#fields.hasErrors('coxaEsquerda')}" th:errors="*{coxaEsquerda}">Coxa esquerda inválida</p>
+								</div>
+							</div>
+							
+							<div class="form-item col-sm-3">
+								<label th:for="${#ids.next('coxaProximalDireita')}" class="control-label">
+									Coxa Proximal Direita (cm):
+								</label>
+								<input type="number" th:field="*{coxaProximalDireita}" class="form-control valid-num" min="0" placeholder="0.00"/>
+								<div class="error-validation">
+									<p th:if="${#fields.hasErrors('coxaProximalDireita')}" th:errors="*{coxaProximalDireita}">Coxa proximal direita inválida</p>
+								</div>
+							</div>
+							
+							<div class="form-item col-sm-3">
+								<label th:for="${#ids.next('coxaProximalEsquerda')}" class="control-label">
+									Coxa Proximal Esquerda (cm):
+								</label>
+								<input type="number" th:field="*{coxaProximalEsquerda}" class="form-control valid-num" min="0" placeholder="0.00"/>
+								<div class="error-validation">
+									<p th:if="${#fields.hasErrors('coxaProximalEsquerda')}" th:errors="*{coxaProximalEsquerda}">Coxa proximal esquerda inválida</p>
+								</div>
+							</div>
+						</div>
+						
+						<div class="row form-group">
+							<div class="form-item col-sm-3">
+								<label th:for="${#ids.next('bracoRelaxadoDireito')}" class="control-label">
+									Braco Relaxado Direito (cm):
+								</label>
+								<input type="number" th:field="*{bracoRelaxadoDireito}" class="form-control valid-num" min="0" placeholder="0.00"/>
+								<div class="error-validation">
+									<p th:if="${#fields.hasErrors('bracoRelaxadoDireito')}" th:errors="*{bracoRelaxadoDireito}">Braço relaxado direito inválido</p>
+								</div>
+							</div>
+							
+							<div class="form-item col-sm-3">
+								<label th:for="${#ids.next('bracoRelaxadoEsquerdo')}" class="control-label">
+									Braco Relaxado Esquerdo (cm):
+								</label>
+								<input type="number" th:field="*{bracoRelaxadoEsquerdo}" class="form-control valid-num" min="0" placeholder="0.00"/>
+								<div class="error-validation">
+									<p th:if="${#fields.hasErrors('bracoRelaxadoEsquerdo')}" th:errors="*{bracoRelaxadoDireito}">Braço relaxado esquerdo inválido</p>
+								</div>
+							</div>
+							
+							<div class="form-item col-sm-3">
+								<label th:for="${#ids.next('bracoContraidoDireito')}" class="control-label">
+									Braco Contraído Direito (cm):
+								</label>
+								<input type="number" th:field="*{bracoContraidoDireito}" class="form-control valid-num" min="0" placeholder="0.00"/>
+								<div class="error-validation">
+									<p th:if="${#fields.hasErrors('bracoContraidoDireito')}" th:errors="*{bracoContraidoDireito}">Braço contraído direito inválido</p>
+								</div>
+							</div>
+							
+							<div class="form-item col-sm-3">
+								<label th:for="${#ids.next('bracoContraidoEsquerdo')}" class="control-label">
+									Braco Contraido Esquerdo (cm):
+								</label>
+								<input type="number" th:field="*{bracoContraidoEsquerdo}" class="form-control valid-num" min="0" placeholder="0.00"/>
+								<div class="error-validation">
+									<p th:if="${#fields.hasErrors('bracoContraidoEsquerdo')}" th:errors="*{bracoContraidoEsquerdo}">Braço contraído esuqerdo inválido</p>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			
+			<div class="panel panel-primary">
+				<div class="panel-heading">
+			        <h4 class="panel-title">
+			        	<a data-toggle="collapse" data-parent="#accordionAntropometria" href="#collapse3">DiÂMETROS ÓSSEOS</a>
+			        </h4>
+			    </div>
+			    <div id="collapse3" class="panel-collapse collapse">
+					<div class="panel-body">
+						<div class="row form-group">
+							<div class="form-item col-sm-3">
+								<label th:for="${#ids.next('diametroPunho')}" class="control-label">
+									Diâmetro Punho (cm):
+								</label>
+								<input type="number" th:field="*{diametroPunho}" class="form-control valid-num" min="0" placeholder="0.00"/>
+								<div class="error-validation">
+									<p th:if="${#fields.hasErrors('diametroPunho')}" th:errors="*{diametroPunho}">Diametro do punho inválido</p>
+								</div>
+							</div>
+							
+							<div class="form-item col-sm-3">
+								<label th:for="${#ids.next('diametroFemur')}" class="control-label">
+									Diâmetro Fêmur (cm):
+								</label>
+								<input type="number" th:field="*{diametroFemur}" class="form-control valid-num" min="0" placeholder="0.00"/>
+								<div class="error-validation">
+									<p th:if="${#fields.hasErrors('diametroFemur')}" th:errors="*{diametroFemur}">Diametro do fêmur inválido</p>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			
+			<div class="panel panel-primary">
+				<div class="panel-heading">
+			        <h4 class="panel-title">
+			        	<a data-toggle="collapse" data-parent="#accordionAntropometria" href="#collapse4">COMPOSIÇÂO CORPORAL</a>
+			        </h4>
+			    </div>
+			    <div id="collapse4" class="panel-collapse collapse">
+					<div class="panel-body">
+						<div class="row form-group">
+							<div class="form-item col-sm-3">
+								<label th:for="${#ids.next('biceps')}" class="control-label">
+									Biceps (cm):
+								</label>
+								<input type="number" th:field="*{biceps}" class="form-control valid-num" min="0" placeholder="0.00"/>
+								<div class="error-validation">
+									<p th:if="${#fields.hasErrors('biceps')}" th:errors="*{biceps}">Biceps inválido</p>
+								</div>
+							</div>
+							
+							<div class="form-item col-sm-3">
+								<label th:for="${#ids.next('triceps')}" class="control-label">
+									Triceps (cm):
+								</label>
+								<input type="number" th:field="*{triceps}" class="form-control valid-num" min="0" placeholder="0.00"/>
+								<div class="error-validation">
+									<p th:if="${#fields.hasErrors('triceps')}" th:errors="*{triceps}">Triceps inválido</p>
+								</div>
+							</div>
+							
+							<div class="form-item col-sm-3">
+								<label th:for="${#ids.next('axilarMedia')}" class="control-label">
+									Axilar Média (cm):
+								</label>
+								<input type="number" th:field="*{axilarMedia}" class="form-control valid-num" min="0" placeholder="0.00"/>
+								<div class="error-validation">
+									<p th:if="${#fields.hasErrors('axilarMedia')}" th:errors="*{axilarMedia}">Axilar média inválida</p>
+								</div>
+							</div>
+							
+							<div class="form-item col-sm-3">
+								<label th:for="${#ids.next('torax')}" class="control-label">
+									Tórax (cm):
+								</label>
+								<input type="number" th:field="*{torax}" class="form-control valid-num" min="0" placeholder="0.00"/>
+								<div class="error-validation">
+									<p th:if="${#fields.hasErrors('torax')}" th:errors="*{torax}">Tórax inválido</p>
+								</div>
+							</div>
+						</div>
+						
+						<div class="row form-group">
+							<div class="form-item col-sm-3">
+								<label th:for="${#ids.next('panturrilhaMedial')}" class="control-label">
+									Panturrilha Medial (cm):
+								</label>
+								<input type="number" th:field="*{panturrilhaMedial}" class="form-control valid-num" min="0" placeholder="0.00"/>
+								<div class="error-validation">
+									<p th:if="${#fields.hasErrors('panturrilhaMedial')}" th:errors="*{panturrilhaMedial}">P anturrilha Medial inválida</p>
+								</div>
+							</div>
+							
+							<div class="form-item col-sm-3">
+								<label th:for="${#ids.next('abdominal')}" class="control-label">
+									Abdominal (cm):
+								</label>
+								<input type="number" th:field="*{abdominal}" class="form-control valid-num" min="0" placeholder="0.00"/>
+								<div class="error-validation">
+									<p th:if="${#fields.hasErrors('abdominal')}" th:errors="*{abdominal}">Abdominal inválido</p>
+								</div>
+							</div>
+							
+							<div class="form-item col-sm-3">
+								<label th:for="${#ids.next('suprailiaca')}" class="control-label">
+									Suprailíaca (cm):
+								</label>
+								<input type="number" th:field="*{suprailiaca}" class="form-control valid-num" min="0" placeholder="0.00"/>
+								<div class="error-validation">
+									<p th:if="${#fields.hasErrors('suprailiaca')}" th:errors="*{suprailiaca}">Suprailiaca inválida</p>
+								</div>
+							</div>
+							
+							<div class="form-item col-sm-3">
+								<label th:for="${#ids.next('subescapular')}" class="control-label">
+									Subescapular (cm):
+								</label>
+								<input type="number" th:field="*{subescapular}" class="form-control valid-num" min="0" placeholder="0.00"/>
+								<div class="error-validation">
+									<p th:if="${#fields.hasErrors('subescapular')}" th:errors="*{subescapular}">Subescapular inválida</p>
+								</div>
+							</div>
+							
+							<div class="form-item col-sm-3">
+								<label th:for="${#ids.next('coxa')}" class="control-label">
+									Coxa (cm):
+								</label>
+								<input type="number" th:field="*{coxa}" class="form-control valid-num" min="0" placeholder="0.00"/>
+								<div class="error-validation">
+									<p th:if="${#fields.hasErrors('coxa')}" th:errors="*{coxa}">Coxa inválida</p>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-xs-offset-0 col-xs-10" align="center">
+				<br></br>
+				<button type="submit" class="btn btn-success">Cadastrar Avaliação Antropométrica</button>
+			</div>
+		</form>
+		</div>
+	</div>
+	<footer th:replace="templates/layoutPadrao :: footer"></footer>
+</body>
+</html>

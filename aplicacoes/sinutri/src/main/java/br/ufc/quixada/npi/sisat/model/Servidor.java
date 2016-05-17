@@ -5,44 +5,24 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+
+@NamedQueries({
+	@NamedQuery(name = "Servidor.findServidorByPessoa", query = "select s from Servidor s where s.pessoa.id = :idPessoa")
+})
 
 @Entity
-public class Servidor {
-
+public class Servidor {	
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	private String siap;
+	private String siape;
 
 	@ManyToOne
 	private Pessoa pessoa;
-
-	public Servidor() {
-		super();
-	}
-
-	public Servidor(String siap, Pessoa pessoa) {
-		super();
-		this.siap = siap;
-		this.pessoa = pessoa;
-	}
-
-	public String getSiap() {
-		return siap;
-	}
-
-	public void setSiap(String siap) {
-		this.siap = siap;
-	}
-
-	public Pessoa getUsuario() {
-		return pessoa;
-	}
-
-	public void setUsuario(Pessoa pessoa) {
-		this.pessoa = pessoa;
-	}
 
 	public Long getId() {
 		return id;
@@ -52,4 +32,19 @@ public class Servidor {
 		this.id = id;
 	}
 
+	public String getSiape() {
+		return siape;
+	}
+
+	public void setSiape(String siape) {
+		this.siape = siape;
+	}
+
+	public Pessoa getPessoa() {
+		return pessoa;
+	}
+
+	public void setPessoa(Pessoa pessoa) {
+		this.pessoa = pessoa;
+	}	
 }

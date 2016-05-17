@@ -1,15 +1,12 @@
 package br.ufc.quixada.npi.sisat.controller;
-
 import java.io.IOException;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-
 import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
-
 import org.springframework.http.MediaType;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -23,17 +20,17 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
 import br.ufc.quixada.npi.ldap.service.UsuarioService;
 import br.ufc.quixada.npi.service.GenericService;
 import br.ufc.quixada.npi.sisat.model.Alimentacao;
+import br.ufc.quixada.npi.sisat.model.AvaliacaoAntropometrica;
 import br.ufc.quixada.npi.sisat.model.ConsultaNutricional;
 import br.ufc.quixada.npi.sisat.model.Documento;
 import br.ufc.quixada.npi.sisat.model.FrequenciaAlimentar;
-import br.ufc.quixada.npi.sisat.model.InqueritoAlimentar;
 import br.ufc.quixada.npi.sisat.model.Paciente;
 import br.ufc.quixada.npi.sisat.model.PacienteExterno;
 import br.ufc.quixada.npi.sisat.model.Pessoa;
+import br.ufc.quixada.npi.sisat.model.Servidor;
 import br.ufc.quixada.npi.sisat.model.enuns.ClassificacaoExame;
 import br.ufc.quixada.npi.sisat.model.enuns.Frequencia;
 import br.ufc.quixada.npi.sisat.model.enuns.Refeicao;
@@ -79,9 +76,10 @@ public class PacienteController {
 	
 	@Inject
 	private PacienteExternoService pacienteExternoService;
-
+	
 	@RequestMapping(value = "/{cpf}/verificar-paciente", method = RequestMethod.GET)
-	public String getPaginaHistorico(@PathVariable("cpf") String cpf,@RequestParam("acao") String acao, Model model, RedirectAttributes redirectAttributes) {
+	public String getPaginaHistorico(@PathVariable("cpf") String cpf,@RequestParam("acao") 
+	String acao, Model model, RedirectAttributes redirectAttributes) {
 
 		if(usuarioService.getByCpf(cpf) == null){
 			redirectAttributes.addFlashAttribute("erro", "Paciente não encontrado. Faça um nova pesquisa");
@@ -154,6 +152,8 @@ public class PacienteController {
 
 		return "nutricao/form-consulta";
 	}
+	//Visualizar Avaliação Antropometrica 
+	
 
 	@RequestMapping(value = { "/{cpf}/consulta" }, method = RequestMethod.POST)
 	public String salvarConsulta(@PathVariable("cpf") String cpf, @Valid ConsultaNutricional consulta, Model model,  
@@ -177,6 +177,7 @@ public class PacienteController {
 		consulta.setPaciente(paciente);
 
 		consultaNutricionalValidator.validate(consulta, result);
+		
 		if (result.hasErrors()) {
 			model.addAttribute("consultaNutricional", consulta);
 			return ("nutricao/form-consulta");
@@ -214,7 +215,7 @@ public class PacienteController {
 				consulta.setDocumentos(documentos);
 			}
 		} else {
-			model.addAttribute("anexoError", "Adicione anexo a seleção");
+			model.addAttribute("anexoError", "Adicione anexo a seleção");	consultaNutricionalValidator.validate(consulta, result);
 		}
 
 		if (consulta.getAgua().equals(0)) {
@@ -272,7 +273,6 @@ public class PacienteController {
 
 	}
 	
-
 	@RequestMapping(value = { "/{cpf}/consulta/{idConsulta}/editar" }, method = RequestMethod.POST)
 	public String editarConsulta(Model model, @PathVariable("cpf") String cpf, @PathVariable("idConsulta") Long idConsulta, @Valid ConsultaNutricional consulta,
 			BindingResult result, RedirectAttributes redirectAttributes, @RequestParam("files") List<MultipartFile> files,
@@ -362,7 +362,6 @@ public class PacienteController {
 			frequenciaAlimentarService.delete(frequenciaAlimentar);
 			model.addAttribute("sucesso", "sucesso");
 		}
-
 		return model;
 	}
 
@@ -375,7 +374,6 @@ public class PacienteController {
 			frequenciaAlimentarService.update(alimento.getFrequenciaAlimentar());
 			model.addAttribute("sucesso", "sucesso");
 		}
-
 		return model;
 	}
 
@@ -393,7 +391,6 @@ public class PacienteController {
 		}else{
 			model.addAttribute("action", "editar");
 		}
-		
 		return "nutricao/plano-alimentar";
 	}
 	
@@ -413,7 +410,6 @@ public class PacienteController {
 		}else{
 			model.addAttribute("action", "editar");
 		}
-	
 		return "nutricao/form-planoalimentar";
 	}
 	@RequestMapping (value = { "consulta/{idConsulta}/plano-alimentar/atualizar"}, method = RequestMethod.POST)
@@ -429,7 +425,6 @@ public class PacienteController {
 		return "redirect:/paciente/consulta/" + consulta.getId() +"/plano-alimentar";
 
 	}
-
 	
 	@RequestMapping(value="/consulta/{idConsulta}/plano-alimentar/deletar", method = RequestMethod.GET)
 	public String excluirPlanoAlimentar(@PathVariable("idConsulta") Long idConsulta){
@@ -455,8 +450,7 @@ public class PacienteController {
 			pessoa.getPaciente().setPesoAtual(1.0);
 			
 			pessoaService.update(pessoa);
-		}
-		
+		}	
 		return pessoaService.getPessoaByCpf(cpf).getPaciente();
 	}
 
@@ -478,8 +472,7 @@ public class PacienteController {
 	}
 	
 	@RequestMapping(value = "cadastrar/paciente", method = RequestMethod.GET)
-	public String formCadastrarPaciente(Model model)
-	{
+	public String formCadastrarPaciente(Model model) {
 		model.addAttribute("pacienteExterno", new PacienteExterno());
 		return "nutricao/cadastro-paciente";
 	}
@@ -492,5 +485,83 @@ public class PacienteController {
 		pacienteExternoService.save(paciente);
 
 		return "redirect:/paciente/cadastrar/paciente";
+	}
+	
+	@RequestMapping(value= {"/{idPaciente}/Antropometria/"}, method = RequestMethod.GET)
+	public String getAvaliacaoAntropometrica(@PathVariable("idPaciente") Long idPaciente, Model model, HttpSession session){
+		Pessoa pessoa = getUsuarioLogado(session);
+		Servidor nutricionista = pessoaService.buscarServidorByPessoa(pessoa);
+		Paciente paciente = pacienteService.find(Paciente.class, idPaciente);
+		AvaliacaoAntropometrica avaliacaoAntropometrica = new AvaliacaoAntropometrica(paciente);
+		
+		avaliacaoAntropometrica.setNutricionista(nutricionista);
+		avaliacaoAntropometrica.setCriadoEm(new Date());
+		avaliacaoAntropometrica.setAtualizadoEm(new Date());
+		model.addAttribute("action","cadastrar");
+		model.addAttribute("avaliacaoAntropometrica", avaliacaoAntropometrica);
+		return "nutricao/antropometria/form-cadastrar";
+	}
+	
+	@RequestMapping(value={"/{idPaciente}/Antropometria/"}, method = RequestMethod.POST)
+	public String adicionarAvaliacaoAntropometrica(@PathVariable("idPaciente") Long idPaciente, Model model, @Valid AvaliacaoAntropometrica avaliacaoAntropometrica, BindingResult result, RedirectAttributes redirectAttributes){
+		Paciente paciente = pacienteService.find(Paciente.class, idPaciente);
+		if(paciente == null){
+			redirectAttributes.addFlashAttribute("erro", "Paciente inválido. Tente novamente!");
+			return "nutricao/antropometria/form-cadastrar";
+		}else if(result.hasErrors()){
+			model.addAttribute("avaliacaoAntropometrica", avaliacaoAntropometrica);
+			return "nutricao/antropometria/form-cadastrar";
+		}
+		pacienteService.adicionarAvaliacaoAntropometrica(avaliacaoAntropometrica);
+		return "redirect:/paciente/"+paciente.getId()+"/Antropometria/"+avaliacaoAntropometrica.getId()+"/";
+	}
+	
+	@RequestMapping(value= {"/{idPaciente}/Antropometria/{idAntropometria}/Editar/"}, method = RequestMethod.GET)
+	public String getEditarAvaliacaoAntropometrica(@PathVariable("idPaciente") Long idPaciente, @PathVariable("idAntropometria") Long idAntropometria
+			, Model model){
+		AvaliacaoAntropometrica avaliacaoAntropometrica = pacienteService.buscarAvaliacaoAntropometricaById(idAntropometria);
+		avaliacaoAntropometrica.setAtualizadoEm(new Date());
+		
+		model.addAttribute("avaliacaoAntropometrica", avaliacaoAntropometrica);
+		return "nutricao/antropometria/form-editar";
+	}
+	@RequestMapping(value={"/{idPaciente}/Antropometria/{idAntropometria}/Editar/"}, method = RequestMethod.POST)
+	public String editarAvaliacaoAntropometrica(@PathVariable("idPaciente") Long idPaciente, Model model, @Valid AvaliacaoAntropometrica avaliacaoAntropometrica, BindingResult result, RedirectAttributes redirectAttributes){
+		Paciente paciente = pacienteService.find(Paciente.class, idPaciente);
+		if(paciente == null){
+			redirectAttributes.addFlashAttribute("erro", "Paciente inválido. Tente novamente!");
+			return "nutricao/antropometria/form-cadastrar";
+		}else if(result.hasErrors()){
+			model.addAttribute("avaliacaoAntropometrica", avaliacaoAntropometrica);
+			return "nutricao/antropometria/form-cadastrar";
+		}
+		pacienteService.editarAvaliacaoAntropometrica(avaliacaoAntropometrica);
+		return "redirect:/paciente/"+paciente.getId()+"/Antropometria/"+avaliacaoAntropometrica.getId()+"/";
+	}
+	@RequestMapping(value= {"/{idPaciente}/Antropometria/{idAntropometria}/"}, method = RequestMethod.GET)
+	public String getVisualizarAntropometrica(@PathVariable("idPaciente") Long idPaciente, @PathVariable("idAntropometria") Long idAntropometria
+			, RedirectAttributes redirectAttributes, Model model){
+		
+		AvaliacaoAntropometrica avaliacaoAntropometrica = pacienteService.buscarAvaliacaoAntropometricaById(idAntropometria);
+		Paciente paciente = pacienteService.find(Paciente.class, idPaciente);
+		if(paciente == null){
+			redirectAttributes.addFlashAttribute("erro", "Paciente inválido. Tente novamente!");
+			return "nutricao/antropometria/form-cadastrar";
+		}	
+		model.addAttribute("avaliacaoAntropometrica", avaliacaoAntropometrica);
+		return "nutricao/antropometria/visualizar-antropometria";
+	}
+	@RequestMapping(value= {"/{idPaciente}/Antropometria/{idAntropometria}/Excluir/"}, method = RequestMethod.GET)
+	public String getExcluirAntropometria(@PathVariable("idPaciente") Long idPaciente, @PathVariable("idAntropometria") Long idAntropometria
+			, RedirectAttributes redirectAttributes, Model model){
+		
+		AvaliacaoAntropometrica avaliacaoAntropometrica = pacienteService.buscarAvaliacaoAntropometricaById(idAntropometria);
+		Paciente paciente = pacienteService.find(Paciente.class, idPaciente);
+		if(paciente == null){
+			redirectAttributes.addFlashAttribute("erro", "Paciente inválido. Tente novamente!");
+			return "nutricao/antropometria/form-cadastrar";
+		}
+		pacienteService.excluirAvaliacaoAntropometrica(avaliacaoAntropometrica);
+		return "redirect:/paciente/"+paciente.getId()+"/Antropometria/";
 	}
 }
