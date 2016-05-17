@@ -460,6 +460,37 @@ $(document).ready(function() {
 								}
 							}
 						});
+		$('#form-prescricao').validate({
+			 rules : {
+				 criadoEm : {
+					 required : true
+				 },
+			 },
+			 highlight : function(element) {
+			 		$(element).closest('.form-item')
+			 		.addClass('has-error');
+			 },
+			 unhighlight : function(element) {
+			 		$(element).closest('.form-group')
+			 			.removeClass('has-error');
+			 },
+			 errorElement : 'span',
+			 errorClass : 'help-block',
+			 errorPlacement : function(error,
+					 element) {
+			 			error.insertAfter(element.parent()
+			 				.children().last());
+			 			var itemForm = element.parent();
+			 			var id = element.attr("name");
+			 			$(itemForm).find("span").attr("id",
+			 				id);
+			 	},
+				 	messages : {
+			 		criadoEm : {
+			 			required : "Informe a data de criação da prescrição."
+			 		},
+			 	}
+		 });	
 
 	$('div.error-validation:has(span)').find('span').css(
 			'color', '#a94442');
@@ -548,4 +579,3 @@ $(function(){
 	    format: 'dd/mm/yyyy',
 	});
 });
-

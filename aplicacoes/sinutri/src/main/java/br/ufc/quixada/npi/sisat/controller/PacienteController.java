@@ -34,6 +34,8 @@ import br.ufc.quixada.npi.sisat.model.InqueritoAlimentar;
 import br.ufc.quixada.npi.sisat.model.Paciente;
 import br.ufc.quixada.npi.sisat.model.PacienteExterno;
 import br.ufc.quixada.npi.sisat.model.Pessoa;
+import br.ufc.quixada.npi.sisat.model.Prescricao;
+import br.ufc.quixada.npi.sisat.model.Servidor;
 import br.ufc.quixada.npi.sisat.model.enuns.ClassificacaoExame;
 import br.ufc.quixada.npi.sisat.model.enuns.Frequencia;
 import br.ufc.quixada.npi.sisat.model.enuns.Refeicao;
@@ -79,6 +81,7 @@ public class PacienteController {
 	
 	@Inject
 	private PacienteExternoService pacienteExternoService;
+
 
 	@RequestMapping(value = "/{cpf}/verificar-paciente", method = RequestMethod.GET)
 	public String getPaginaHistorico(@PathVariable("cpf") String cpf,@RequestParam("acao") String acao, Model model, RedirectAttributes redirectAttributes) {
@@ -416,6 +419,7 @@ public class PacienteController {
 	
 		return "nutricao/form-planoalimentar";
 	}
+	
 	@RequestMapping (value = { "consulta/{idConsulta}/plano-alimentar/atualizar"}, method = RequestMethod.POST)
 	public String salvarPlanoAlimentar(@PathVariable("idConsulta") Long id, Model model, @ModelAttribute("consulta") ConsultaNutricional consultaAtual, RedirectAttributes redirectAttributes){
 		
@@ -427,10 +431,8 @@ public class PacienteController {
 		consultaNutricionalService.update(consulta);
 		
 		return "redirect:/paciente/consulta/" + consulta.getId() +"/plano-alimentar";
-
 	}
 
-	
 	@RequestMapping(value="/consulta/{idConsulta}/plano-alimentar/deletar", method = RequestMethod.GET)
 	public String excluirPlanoAlimentar(@PathVariable("idConsulta") Long idConsulta){
 		List<FrequenciaAlimentar> frequenciasAlimentares = consultaNutricionalService.getFrequenciasByIdConsultaByTipo(idConsulta, TipoFrequencia.PLANOALIMENTAR);
@@ -493,4 +495,67 @@ public class PacienteController {
 
 		return "redirect:/paciente/cadastrar/paciente";
 	}
+	
+	@RequestMapping(value="/{id}/Prescricao/", method = RequestMethod.GET)
+	public String formAdicionarPrescricao(@PathVariable("id") Long id, Model model){
+		Prescricao prescricao = new Prescricao();
+		
+		prescricao.setCriadoEm(new Date());
+		model.addAttribute("prescricao", prescricao);
+		
+		return "nutricao/prescricao/cadastrar-prescricao";
+	}
+	
+	@RequestMapping(value="/{id}/Prescricao/", method = RequestMethod.POST)
+	public String adicionarPrescricao(Prescricao prescricao, @PathVariable("id") Long id, Model model, 
+			BindingResult result, RedirectAttributes redirectAttributes){
+		
+		
+		prescricao.setAtualizadoEm(prescricao.getCriadoEm());
+		
+		if(!result.hasErrors())
+			pacienteService.adicionarPrescricao(prescricao);
+		
+		return "redirect:/paciente/"+id+"/Prescricao/"+prescricao.getId()+"/";
+	}
+	
+	@RequestMapping(value="/{id}/Prescricao/{idPrescricao}/Excluir/", method = RequestMethod.GET)
+	public String excluirPrescricao(@PathVariable("id") Long idPaciente, @PathVariable("idPrescricao") Long idPrescricao){
+		Prescricao prescricao = pacienteService.buscarPrescricao(idPrescricao);
+		if(prescricao != null)
+			pacienteService.excluirPrescricao(prescricao);
+		
+		return "redirect:/nutricao/buscar";
+	}
+	
+	@RequestMapping(value="/{id}/Prescricao/{idPrescricao}/Editar/", method = RequestMethod.GET)
+	public String formEditarPrescricao(@PathVariable("id") Long idPaciente, @PathVariable("idPrescricao") Long idPrescricao, 
+			Model model, RedirectAttributes redirectAttributes){
+		
+		Prescricao prescricao = pacienteService.buscarPrescricao(idPrescricao);
+		prescricao.setAtualizadoEm(new Date());
+		model.addAttribute("prescricao", prescricao);
+		return "nutricao/prescricao/editar-prescricao";
+	}
+	
+	@RequestMapping(value="/{id}/Prescricao/{idPrescricao}/Editar/", method = RequestMethod.POST)
+	public String editarPrescricao(@PathVariable("id") Long idPaciente, @PathVariable("idPrescricao") Long idPrescricao, 
+			@Valid Prescricao prescricao, BindingResult result, Model model, RedirectAttributes redirectAttributes){
+		
+		if(!result.hasErrors())
+			pacienteService.editarPrescricao(prescricao);
+		
+		return "redirect:/paciente/"+idPaciente+"/Prescricao/"+prescricao.getId()+"/";
+	}
+	
+	@RequestMapping(value="/{id}/Prescricao/{idPrescricao}/", method = RequestMethod.GET)
+	public String visualizarPrescricao(@PathVariable("id") Long idPaciente, @PathVariable("idPrescricao") Long idPrescricao, Prescricao prescricao,
+			Model model){
+		prescricao = pacienteService.buscarPrescricao(idPrescricao);
+		model.addAttribute("prescricao", prescricao);
+		return "nutricao/prescricao/visualizar-prescricao";
+	}
+	
 }
+
+	
