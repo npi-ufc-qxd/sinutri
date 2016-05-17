@@ -516,7 +516,7 @@ public class PacienteController {
 		if(!result.hasErrors())
 			pacienteService.adicionarPrescricao(prescricao);
 		
-		return "redirect:/paciente/"+id+"/Prescricao/"+prescricao.getIdPrescricao()+"/";
+		return "redirect:/paciente/"+id+"/Prescricao/"+prescricao.getId()+"/";
 	}
 	
 	@RequestMapping(value="/{id}/Prescricao/{idPrescricao}/Excluir/", method = RequestMethod.GET)
@@ -545,7 +545,7 @@ public class PacienteController {
 		if(!result.hasErrors())
 			pacienteService.editarPrescricao(prescricao);
 		
-		return "redirect:/paciente/"+idPaciente+"/Prescricao/"+prescricao.getIdPrescricao()+"/";
+		return "redirect:/paciente/"+idPaciente+"/Prescricao/"+prescricao.getId()+"/";
 	}
 	
 	@RequestMapping(value="/{id}/Prescricao/{idPrescricao}/", method = RequestMethod.GET)

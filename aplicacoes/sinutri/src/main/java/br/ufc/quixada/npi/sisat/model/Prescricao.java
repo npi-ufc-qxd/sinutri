@@ -16,7 +16,7 @@ public class Prescricao {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long idPrescricao;
+	private Long id;
 	
 	private String descricao;
 	
@@ -34,30 +34,14 @@ public class Prescricao {
 	@OneToOne
 	private Servidor nutricionista;
 	
-
-	public Long getIdPrescricao() {
-		return idPrescricao;
+	public Long getId() {
+		return id;
 	}
 
-	public Prescricao(Long idPrescricao, String descricao, String texto, Date criadoEm, Date atualizadoEm) {
-		super();
-		this.idPrescricao = idPrescricao;
-		this.descricao = descricao;
-		this.texto = texto;
-		this.criadoEm = criadoEm;
-		this.atualizadoEm = atualizadoEm;
-	}
-	
-
-	public Prescricao() {
-		super();
-		// TODO Auto-generated constructor stub
+	public void setId(Long id) {
+		this.id = id;
 	}
 
-	public void setIdPrescricao(Long idPrescricao) {
-		this.idPrescricao = idPrescricao;
-	}
-	
 	public String getDescricao() {
 		return descricao;
 	}
@@ -100,7 +84,7 @@ public class Prescricao {
 
 	@Override
 	public String toString() {
-		return "Prescricao [id=" + idPrescricao + ", descricao=" + descricao + ", texto=" + texto+"]";
+		return "Prescricao [id=" + id + ", descricao=" + descricao + ", texto=" + texto+"]";
 	}
 
 }
