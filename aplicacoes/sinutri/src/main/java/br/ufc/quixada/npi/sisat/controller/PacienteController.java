@@ -507,9 +507,9 @@ public class PacienteController {
 		return "/";
 	}
 	
-	@RequestMapping(value = "/{id}/Anamnese",method = RequestMethod.GET)
-	public String formAdicionarAnamnese(@PathVariable("id") Long id, Model model){
-		Paciente paciente = pacienteService.find(Paciente.class, id);
+	@RequestMapping(value = "/{idPaciente}/Anamnese",method = RequestMethod.GET)
+	public String formAdicionarAnamnese(@PathVariable("idPaciente") Long idPaciente, Model model){
+		Paciente paciente = pacienteService.find(Paciente.class, idPaciente);
 		if(paciente != null){
 			Anamnese anamnese =  new Anamnese();
 			anamnese.setCriadoEm(new Date());
@@ -523,8 +523,8 @@ public class PacienteController {
 		return "/";
 	}
 	
-	@RequestMapping(value = "/{id}/Anamnese",method = RequestMethod.POST)
-	public String AdicionarAnamnese(@PathVariable("id") Long id, @Valid Anamnese anamnese, BindingResult result, Model model){
+	@RequestMapping(value = "/{idPaciente}/Anamnese",method = RequestMethod.POST)
+	public String AdicionarAnamnese(@PathVariable("idPaciente") Long idPaciente, @Valid Anamnese anamnese, BindingResult result, Model model){
 		if(result.hasErrors()){
 			model.addAttribute("anamnese",anamnese);
 			model.addAttribute("tiposApetite",Apetite.values());
@@ -534,7 +534,7 @@ public class PacienteController {
 		}
 		anamnese.setId(null);
 		pacienteService.adicionarAnamnese(anamnese);
-		return "redirect:/paciente/"+id+"/Anamnese/"+anamnese.getId()+"/";
+		return "redirect:/paciente/"+idPaciente+"/Anamnese/"+anamnese.getId()+"/";
 	}
 	
 	@RequestMapping(value = "/{idPaciente}/Anamnese/{idAnamnese}/Excluir")
@@ -563,8 +563,8 @@ public class PacienteController {
 			return "redirect:/";
 	}
 	
-	@RequestMapping(value = "/{id}/Anamnese/{idAnamnese}/Editar",method=RequestMethod.POST)
-	public String editarAnamnese(@PathVariable("id") Long id,@PathVariable("idAnamnese") Long idAnanmese,
+	@RequestMapping(value = "/{idPaciente}/Anamnese/{idAnamnese}/Editar",method=RequestMethod.POST)
+	public String editarAnamnese(@PathVariable("idPaciente") Long idPaciente,@PathVariable("idAnamnese") Long idAnanmese,
 			@ModelAttribute("Ananmnese") @Valid Anamnese anamnese,
 			BindingResult result, Model model){
 		if(result.hasErrors()){
@@ -572,7 +572,7 @@ public class PacienteController {
 			return "/nutricao/anamnese/editar-anamnese";
 		}		
 		pacienteService.editarAnamnese(anamnese);
-		return "redirect:/paciente/"+id+"/Anamnese/"+anamnese.getId()+"/";
+		return "redirect:/paciente/"+idPaciente+"/Anamnese/"+anamnese.getId()+"/";
 	}
 		
 }
