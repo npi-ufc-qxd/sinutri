@@ -61,40 +61,28 @@ public class PacienteServiceImpl extends GenericServiceImpl<Paciente> implements
 		this.excluir(consulta);
 	}
 	
-	public boolean adicionarInqueritoAlimentar(InqueritoAlimentar inqueritoAlimentar, Long id){
-		Paciente paciente = this.find(Paciente.class, id);
-		if(paciente != null){
-			inqueritoAlimentar.setAtualizadoEm(inqueritoAlimentar.getCriadoEm());
-			inqueritoAlimentar.setPaciente(paciente);
-			inqueritoAlimentarRepository.save(inqueritoAlimentar);
-			return true;
-		}else
-			return false;
+	@Override
+	public void adicionarInqueritoAlimentar(InqueritoAlimentar inqueritoAlimentar, Paciente paciente){
+		inqueritoAlimentar.setAtualizadoEm(new Date());
+		inqueritoAlimentar.setPaciente(paciente);
+		inqueritoAlimentarRepository.save(inqueritoAlimentar);
 	}
 
 	@Override
 	public InqueritoAlimentar getInqueritoAlimentarById(Long idInquerito) {
-		InqueritoAlimentar inquerito = (InqueritoAlimentar) findFirst("InqueritoAlimentar.findInqueritoAlimentarById", new SimpleMap<String, Object>("id", idInquerito));
+		InqueritoAlimentar inquerito = inqueritoAlimentarRepository.find(InqueritoAlimentar.class, idInquerito);
 		return inquerito;
 	}
 
 	@Override
-	public boolean editarInqueritoAlimentar(InqueritoAlimentar inqueritoAlimentar, Long idPaciente) {
-		Paciente paciente = this.find(Paciente.class, idPaciente);
-		if(inqueritoAlimentar != null || paciente != null){
+	public void editarInqueritoAlimentar(InqueritoAlimentar inqueritoAlimentar, Paciente paciente) {
 			inqueritoAlimentar.setPaciente(paciente);
 			inqueritoAlimentar.setAtualizadoEm(new Date());
 			inqueritoAlimentarRepository.update(inqueritoAlimentar);
-			return true;
-		}else
-			return false;
 	}
 
 	@Override
-	public void excluirInqueritoAlimentar(Long idInquerito) {
-		InqueritoAlimentar inquerito = getInqueritoAlimentarById(idInquerito);
- 		if(inquerito != null){
- 			inqueritoAlimentarRepository.delete(inquerito);
- 		}
-	}
+	public void excluirInqueritoAlimentar(InqueritoAlimentar inquerito) {
+		inqueritoAlimentarRepository.delete(inquerito);
+ 	}
 }

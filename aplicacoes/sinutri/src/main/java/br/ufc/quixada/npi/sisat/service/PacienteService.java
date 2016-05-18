@@ -10,11 +10,11 @@ import br.ufc.quixada.npi.sisat.model.Paciente;
 
 public interface PacienteService extends GenericService<Paciente> {
 	
-	void excluirInqueritoAlimentar(Long idInquerito);
+	void excluirInqueritoAlimentar(InqueritoAlimentar inquerito);
 	
-	boolean adicionarInqueritoAlimentar(InqueritoAlimentar inqueritoAlimentar, Long id);
+	void adicionarInqueritoAlimentar(InqueritoAlimentar inqueritoAlimentar, Paciente paciente);
 	
-	boolean editarInqueritoAlimentar(InqueritoAlimentar inqueritoAlimentar, Long idPaciente);
+	void editarInqueritoAlimentar(InqueritoAlimentar inqueritoAlimentar, Paciente paciente);
 	
 	Map<Long, Object> getConsultasByPaciente(Long id);
 	
