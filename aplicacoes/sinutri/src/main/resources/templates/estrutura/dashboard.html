@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:th="http://www.thymeleaf.org"
+    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+	<title>SiNutri</title>
+	<meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0"/>
+	<link rel="stylesheet" type="text/css" th:href="@{/css/material.min.css}"/>
+	<link rel="stylesheet" type="text/css" th:href="@{/css/font/material-icons.css}"/>
+	<link rel="stylesheet" type="text/css" th:href="@{/css/font/roboto.css}"/>
+	<link rel="stylesheet" type="text/css" th:href="@{/css/dialog-polyfill.css}"/>
+	<link rel="stylesheet" type="text/css" th:href="@{/css/sinutri.css}"/>
+</head>
+<body >
+	<div class="sn-container">
+		<div class="sn-drawer-left">
+			<div class="mdl-layout__header-row">
+				<span class="mdl-layout-title mdl-color-text--primary-dark">SiNutri</span>
+			</div>
+
+			<nav class="mdl-list">
+				<a class="mdl-navigation__link mdl-list__item mdl-js-ripple-effect" th:href="@{/Nutricao/Buscar}">
+					<span class="mdl-list__item-primary-content"> <i class="material-icons mdl-list__item-icon">person</i> Pacientes</span>
+					<span class="mdl-ripple"></span>
+				</a>
+			</nav>
+		</div>
+
+		<div class="sn-main">
+			<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header mdl-color--grey-200">
+				<header class="mdl-layout__header">
+					<div class="mdl-layout__header-row">
+						<span class="mdl-layout-title">SiNutri</span>
+						<div class="mdl-layout-spacer"></div>
+
+						<button id="sn-menu-account" class="mdl-button mdl-js-button mdl-button--icon"><i class="material-icons">person</i></button>
+
+						<ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="sn-menu-account">
+							<li><a class="mdl-menu__item">Perfil</a></li>
+							<li><a th:href="@{/logout}" class="mdl-menu__item">Sair</a></li>
+						</ul>
+					</div>
+				</header>
+				
+				<section class="mdl-layout__content" layout:fragment="conteudo"></section>
+			</div>
+			
+			<div class="sn-main__foreground"></div>
+		</div>
+	</div>
+
+	<script type="text/javascript" th:src="@{/js/jquery.js}"></script>
+	<script type="text/javascript" th:src="@{/js/material.min.js}"></script>
+	<script type="text/javascript" th:src="@{/js/dialog-polyfill.js}"></script>
+	<script type="text/javascript" th:src="@{/js/sinutri.js}"></script>
+	
+</body>
+</html>

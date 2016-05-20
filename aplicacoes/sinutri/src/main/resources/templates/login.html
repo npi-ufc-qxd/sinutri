@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0"/>
+	<link rel="stylesheet" type="text/css" th:href="@{css/material.min.css}"/>
+	<link rel="stylesheet" type="text/css" th:href="@{css/font/material-icons.css}"/>
+	<link rel="stylesheet" type="text/css" th:href="@{css/font/roboto.css}"/>
+	<link rel="stylesheet" type="text/css" th:href="@{css/dialog-polyfill.css}"/>
+	<link rel="stylesheet" type="text/css" th:href="@{/css/sinutri.css}"/>
+
+    <title>SiNutri | Entrar</title>
+
+	<style>
+		.mdl-card {
+			width: 360px;
+			height: 400px;
+			margin: 96px auto;
+		}
+		
+		.mdl-card>.mdl-card__title {
+ 			background: url("/sinutri/images/logo-sinutri-2.png") center/cover;
+			background-size: 80% auto;
+			background-repeat: no-repeat;
+		}
+		
+		.mdl-card form {
+			padding-left: 16px;
+			padding-right: 16px;
+			padding-bottom: 16px;
+		}
+		
+		.mdl-card button {
+			width: 100%;
+		}
+		
+		#btn-recover-pass {
+			float: right;
+		}
+	</style>
+</head>
+
+<body>
+	
+	<div class="sn-container">
+		<div class="sn-main sn-main-expanded">
+			<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header mdl-color--grey-200">				
+				<div class="mdl-grid">
+					<div class=" mdl-card mdl-shadow--2dp">
+						<div class="mdl-card__title mdl-card--expand mdl-color--teal">
+							<h2 class="mdl-card__title-text"></h2>
+						</div>
+				
+						<div class="mdl-card__supporting-text">
+							<div th:if="${not #lists.isEmpty(error)}" th:text="${error}"></div>
+							<div th:if="${not #lists.isEmpty(msg)}" th:text="${msg}"></div>
+							<form name='f' th:action="@{/login}" method='POST' accept-charset="UTF-8" role="form" class="form-signin" id="login-form">
+								<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+									<input class="mdl-textfield__input" placeholder="CPF" id="username" type="text" name='username' />
+									<label class="mdl-textfield__label" for="username">CPF</label>
+								</div>
+				
+								<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+									<input class="mdl-textfield__input" placeholder="Senha" id="password" type="password" name='password' />
+									<label class="mdl-textfield__label" for="password">Senha</label>
+								</div>
+				
+								<button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored">Entrar</button>
+							</form>
+						</div>
+				
+						<div class="mdl-card__actions mdl-card--border">
+							<a class="mdl-button mdl-button--accent mdl-js-button mdl-js-ripple-effect"> Cadastrar </a> 
+							<a id="btn-recover-pass" class="mdl-button mdl-button--accent mdl-js-button mdl-js-ripple-effect"> Recuperar senha </a>
+						</div>
+					</div>
+				</div>
+			</div>
+			
+			<div class="sn-main__foreground"></div>
+		</div>
+	</div>
+	
+	<script type="text/javascript" th:src="@{/js/jquery.js}"></script>
+	<script type="text/javascript" th:src="@{/js/material.min.js}"></script>
+
+</body>
+</html>
+
