@@ -40,7 +40,7 @@ public class PacienteController {
 		model.addAttribute("inqueritoAlimentar", inqueritoAlimentar);
 		model.addAttribute("FrequenciasSemanais", FrequenciaSemanal.values());
 
-		return "inquerito-alimentar/cadastrar";
+		return "/inquerito-alimentar/cadastrar";
 	}
 	
 	@RequestMapping(value = "/{idPaciente}/InqueritoAlimentar/", method = RequestMethod.POST)
