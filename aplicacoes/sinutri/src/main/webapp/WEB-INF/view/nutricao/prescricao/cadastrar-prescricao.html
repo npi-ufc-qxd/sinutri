@@ -7,7 +7,7 @@
     
 	 <form id="form-prescricao" action="#" th:object="${prescricao}" th:action="@{/paciente/1/Prescricao/}" method="post" > 
 		
-	 	<input type="hidden" id="idPrescricao" th:field="*{idPrescricao}" />
+	 	<input type="hidden" id="idPrescricao" th:field="*{id}" />
 		
 		<input type="hidden" id="atualizadoEm" th:field="*{atualizadoEm}" />
 	

@@ -10,6 +10,7 @@ import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
+import org.bouncycastle.jce.provider.JDKAlgorithmParameters.IDEAAlgorithmParameters;
 import org.springframework.http.MediaType;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -496,18 +497,27 @@ public class PacienteController {
 		return "redirect:/paciente/cadastrar/paciente";
 	}
 	
-	@RequestMapping(value="/{id}/Prescricao/", method = RequestMethod.GET)
-	public String formAdicionarPrescricao(@PathVariable("id") Long id, Model model){
+	@RequestMapping(value="/{idPaciente}/Prescricao/", method = RequestMethod.GET)
+	public String formAdicionarPrescricao(@PathVariable("idPaciente") Long idPaciente, Model model){
 		Prescricao prescricao = new Prescricao();
+		
+		Paciente paciente = pacienteService.find(Paciente.class, idPaciente);
+		
+		System.out.println("\n\n\n\n\n\n\n\n\n "+idPaciente+"\n\\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
 		
 		prescricao.setCriadoEm(new Date());
 		model.addAttribute("prescricao", prescricao);
+		model.addAttribute("paciente", paciente);
+		if(paciente == null)
+			System.out.println("\n\n\\n\n\n\n\n\n AQUI \n\n\\n\n\n\n\n\n");
+		else
+			System.out.println("\n\n\\n\n\n\n\n\n AQUI"+paciente.getId()+"\n\n\\n\n\n\n\n\n");
 		
 		return "nutricao/prescricao/cadastrar-prescricao";
 	}
 	
-	@RequestMapping(value="/{id}/Prescricao/", method = RequestMethod.POST)
-	public String adicionarPrescricao(Prescricao prescricao, @PathVariable("id") Long id, Model model, 
+	@RequestMapping(value="/{idPaciente}/Prescricao/", method = RequestMethod.POST)
+	public String adicionarPrescricao(Prescricao prescricao, @PathVariable("idPaciente") Long id, Model model, 
 			BindingResult result, RedirectAttributes redirectAttributes){
 		
 		
@@ -519,8 +529,8 @@ public class PacienteController {
 		return "redirect:/paciente/"+id+"/Prescricao/"+prescricao.getId()+"/";
 	}
 	
-	@RequestMapping(value="/{id}/Prescricao/{idPrescricao}/Excluir/", method = RequestMethod.GET)
-	public String excluirPrescricao(@PathVariable("id") Long idPaciente, @PathVariable("idPrescricao") Long idPrescricao){
+	@RequestMapping(value="/{idPaciente}/Prescricao/{idPrescricao}/Excluir/", method = RequestMethod.GET)
+	public String excluirPrescricao(@PathVariable("idPaciente") Long idPaciente, @PathVariable("idPrescricao") Long idPrescricao){
 		Prescricao prescricao = pacienteService.buscarPrescricao(idPrescricao);
 		if(prescricao != null)
 			pacienteService.excluirPrescricao(prescricao);
@@ -528,18 +538,21 @@ public class PacienteController {
 		return "redirect:/nutricao/buscar";
 	}
 	
-	@RequestMapping(value="/{id}/Prescricao/{idPrescricao}/Editar/", method = RequestMethod.GET)
-	public String formEditarPrescricao(@PathVariable("id") Long idPaciente, @PathVariable("idPrescricao") Long idPrescricao, 
+	@RequestMapping(value="/{idPaciente}/Prescricao/{idPrescricao}/Editar/", method = RequestMethod.GET)
+	public String formEditarPrescricao(@PathVariable("idPaciente") Long idPaciente, @PathVariable("idPrescricao") Long idPrescricao, 
 			Model model, RedirectAttributes redirectAttributes){
 		
+		Paciente paciente = pacienteService.find(Paciente.class, idPaciente);
 		Prescricao prescricao = pacienteService.buscarPrescricao(idPrescricao);
+		
 		prescricao.setAtualizadoEm(new Date());
 		model.addAttribute("prescricao", prescricao);
+		model.addAttribute("paciente", paciente);
 		return "nutricao/prescricao/editar-prescricao";
 	}
 	
-	@RequestMapping(value="/{id}/Prescricao/{idPrescricao}/Editar/", method = RequestMethod.POST)
-	public String editarPrescricao(@PathVariable("id") Long idPaciente, @PathVariable("idPrescricao") Long idPrescricao, 
+	@RequestMapping(value="/{idPaciente}/Prescricao/{idPrescricao}/Editar/", method = RequestMethod.POST)
+	public String editarPrescricao(@PathVariable("idPaciente") Long idPaciente, @PathVariable("idPrescricao") Long idPrescricao, 
 			@Valid Prescricao prescricao, BindingResult result, Model model, RedirectAttributes redirectAttributes){
 		
 		if(!result.hasErrors())
@@ -548,8 +561,8 @@ public class PacienteController {
 		return "redirect:/paciente/"+idPaciente+"/Prescricao/"+prescricao.getId()+"/";
 	}
 	
-	@RequestMapping(value="/{id}/Prescricao/{idPrescricao}/", method = RequestMethod.GET)
-	public String visualizarPrescricao(@PathVariable("id") Long idPaciente, @PathVariable("idPrescricao") Long idPrescricao, Prescricao prescricao,
+	@RequestMapping(value="/{idPaciente}/Prescricao/{idPrescricao}/", method = RequestMethod.GET)
+	public String visualizarPrescricao(@PathVariable("idPaciente") Long idPaciente, @PathVariable("idPrescricao") Long idPrescricao, Prescricao prescricao,
 			Model model){
 		prescricao = pacienteService.buscarPrescricao(idPrescricao);
 		model.addAttribute("prescricao", prescricao);

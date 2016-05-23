@@ -7,7 +7,7 @@
     
     <form id="form-prescricao" action="#" th:object="${prescricao}" th:action="@{/paciente/1/Prescricao/2/Editar/}" method="post"> 
     	
-    	<input type="hidden" th:field="*{idPrescricao}"/>
+    	<input type="hidden" th:field="*{id}"/>
     	<input type="hidden"  th:field="*{atualizadoEm}"/>
     	
     	<div class="row form-group">
@@ -24,7 +24,6 @@
     				class="form-control"> </textarea> 
     		</div> 
     	</div>
-    	
     	<div class="form-item col-sm-3">
 			<label th:for="${#ids.next('criadoEm')}" class="control-label">
 				Data: 
