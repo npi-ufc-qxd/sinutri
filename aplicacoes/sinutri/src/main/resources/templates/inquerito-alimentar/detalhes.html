@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head th:replace="templates/layoutPadrao :: head">
+	<title>Inquérito Alimentar</title>
+	</head>
+	<body>
+		<nav th:replace="templates/layoutPadrao :: menu"></nav>
+    	<footer th:replace="templates/layoutPadrao :: footer"></footer>
+		
+		<div class="container">
+			<div class="row">
+				<div class="col-sm-8">
+					<h3>
+						Informações do Inquérito Alimentar de <strong th:text="${inqueritoAlimentar.paciente.pessoa.nome}"></strong>
+					</h3>
+				</div>
+				<div class="col-sm-4" align="right" style="margin-top: 15px;">
+					<a
+					th:href="@{'/paciente/'+${inqueritoAlimentar.paciente.id}+'/Inquerito/'+${inqueritoAlimentar.id}+'/Excluir/'}"
+					class="btn btn-danger btn-sm"><span
+					class="glyphicon glyphicon-remove"></span> Excluir</a>
+					<a
+					th:href="@{'/paciente/'+${inqueritoAlimentar.paciente.id}+'/Inquerito/'+${inqueritoAlimentar.id}+'/Editar/'}"
+					class="btn btn-warning btn-sm"><span
+					class="glyphicon glyphicon-edit"></span> Editar</a>
+				</div>
+			</div>
+			<div class="row col-sm-12">
+				<h3 class="section">Observações:</h3>
+				<font size="3" style="margin-left: 30px" th:text="${inqueritoAlimentar.observacoes}"></font>
+			</div>
+			<div class="row">
+				<div class="col-sm-12">
+					<h3 id="inquerito" class="section" th:text="'Inquérito Alimentar criado em '+${inqueritoAlimentar.criadoEm}">Criado</h3>
+					<h3 id="inquerito" class="section" th:text="'Inquérito Alimentar atualizado em '+${inqueritoAlimentar.criadoEm}">Atualizado</h3>
+					<table class="table table-striped">
+						<thead class="thead">
+							<tr>
+								<th>Alimentos</th>
+								<th>Frequencia</th>
+								<th>Anotação</th>
+							</tr>
+						</thead>
+						<tbody th:object="${inqueritoAlimentar}">
+							<tr th:if="*{aguaGosta}">
+								<td>Agua</td>
+								<td th:text="*{aguaFrequenciaSemanal.descricao}"></td>
+								<td th:text="*{aguaAnotacao}"></td>
+							</tr>
+							<tr th:if="*{avesGosta}">
+								<td>Aves</td>
+								<td th:text="*{avesFrequenciaSemanal.descricao}"></td>
+								<td th:text="*{avesAnotacao}"></td>
+							</tr>
+							<tr th:if="*{bebidasAlcoolicasGosta}">
+								<td>Bebidas Alcoólicas</td>
+								<td th:text="*{bebidasAlcoolicasFrequenciaSemanal.descricao}"></td>
+								<td th:text="*{bebidasAlcoolicasAnotacao}"></td>
+							</tr>
+							<tr th:if="*{bovinaGosta}">
+								<td>Carne Bovina</td>
+								<td th:text="*{bovinaFrequenciaSemanal.descricao}"></td>
+								<td th:text="*{bovinaAnotacao}"></td>
+							</tr>
+							<tr th:if="*{cereaisGosta}">
+								<td>Cereais</td>
+								<td th:text="*{cereaisFrequenciaSemanal.descricao}"></td>
+								<td th:text="*{cereaisAnotacao}"></td>
+							</tr>
+							<tr th:if="*{docesGosta}">
+								<td>Doces</td>
+								<td th:text="*{docesFrequenciaSemanal.descricao}"></td>
+								<td th:text="*{docesAnotacao}"></td>
+							</tr>
+							<tr th:if="*{frutasGosta}">
+								<td>Frutas</td>
+								<td th:text="*{frutasFrequenciaSemanal.descricao}"></td>
+								<td th:text="*{frutasAnotacao}"></td>
+							</tr>
+							<tr th:if="*{gaseificadasGosta}">
+								<td>Gaseificadas</td>
+								<td th:text="*{gaseificadasFrequenciaSemanal.descricao}"></td>
+								<td th:text="*{gaseificadasAnotacao}"></td>
+							</tr>
+							<tr th:if="*{infusoesGosta}">
+								<td>Infusões</td>
+								<td th:text="*{infusoesFrequenciaSemanal.descricao}"></td>
+								<td th:text="*{infusoesAnotacao}"></td>
+							</tr>
+							<tr th:if="*{leguminosasGosta}">
+								<td>Leguminosas</td>
+								<td th:text="*{leguminosasFrequenciaSemanal.descricao}"></td>
+								<td th:text="*{leguminosasAnotacao}"></td>
+							</tr>
+							<tr th:if="*{leiteDerivadosGosta}">
+								<td>Leite ou derivados</td>
+								<td th:text="*{leiteDerivadosFrequenciaSemanal.descricao}"></td>
+								<td th:text="*{leiteDerivadosAnotacao}"></td>
+							</tr>
+							<tr th:if="*{manteigaGosta}">
+								<td>Manteiga</td>
+								<td th:text="*{manteigaFrequenciaSemanal.descricao}"></td>
+								<td th:text="*{manteigaAnotacao}"></td>
+							</tr>
+							<tr th:if="*{margarinaGosta}">
+								<td>Margarina</td>
+								<td th:text="*{margarinaFrequenciaSemanal.descricao}"></td>
+								<td th:text="*{margarinaAnotacao}"></td>
+							</tr>
+							<tr th:if="*{massasGosta}">
+								<td>Massas</td>
+								<td th:text="*{massasFrequenciaSemanal.descricao}"></td>
+								<td th:text="*{massasAnotacao}"></td>
+							</tr>
+							<tr th:if="*{oleoGosta}">
+								<td>Óleos</td>
+								<td th:text="*{oleoFrequenciaSemanal.descricao}"></td>
+								<td th:text="*{oleoAnotacao}"></td>
+							</tr>
+							<tr th:if="*{ovosGosta}">
+								<td>Ovos</td>
+								<td th:text="*{ovosFrequenciaSemanal.descricao}"></td>
+								<td th:text="*{ovosAnotacao}"></td>
+							</tr>
+							<tr th:if="*{peixeGosta}">
+								<td>Peixes</td>
+								<td th:text="*{peixeFrequenciaSemanal.descricao}"></td>
+								<td th:text="*{peixeAnotacao}"></td>
+							</tr>
+							<tr th:if="*{sucoGosta}">
+								<td>Sucos</td>
+								<td th:text="*{sucoFrequenciaSemanal.descricao}"></td>
+								<td th:text="*{sucoAnotacao}"></td>
+							</tr>
+							<tr th:if="*{toucinhoBaconGosta}">
+								<td>Toucinho ou Bacon</td>
+								<td th:text="*{toucinhoBaconFrequenciaSemanal.descricao}"></td>
+								<td th:text="*{toucinhoBaconAnotacao}"></td>
+							</tr>
+							<tr th:if="*{vegetaisCozidosGosta}">
+								<td>Vegetais Cozidos</td>
+								<td th:text="*{vegetaisCozidosFrequenciaSemanal.descricao}"></td>
+								<td th:text="*{vegetaisCozidosAnotacao}"></td>
+							</tr>
+							<tr th:if="*{vegetaisCrusGosta}">
+								<td>Vegetais crus</td>
+								<td th:text="*{vegetaisCrusFrequenciaSemanal.descricao}"></td>
+								<td th:text="*{vegetaisCrusAnotacao}"></td>
+							</tr>
+							<tr th:if="*{viscerasGosta}">
+								<td>Vísceras</td>
+								<td th:text="*{viscerasFrequenciaSemanal.descricao}"></td>
+								<td th:text="*{viscerasAnotacao}"></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>
