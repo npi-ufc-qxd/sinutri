@@ -15,5 +15,5 @@ public class PessoaServiceImpl implements PessoaService {
 	public Papel getPapel(String nome) {
 		return papelRepository.findByNome(nome);
 	}
-
+	
 }
