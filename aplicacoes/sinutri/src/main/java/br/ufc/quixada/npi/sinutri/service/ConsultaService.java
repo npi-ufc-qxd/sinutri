@@ -12,4 +12,5 @@ public interface ConsultaService {
 	void editarInqueritoAlimentar(InqueritoAlimentar inqueritoAlimentar);
 	
 	void excluirInqueritoAlimentar(InqueritoAlimentar inqueritoAlimentar);
+
 }
