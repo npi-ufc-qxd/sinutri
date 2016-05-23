@@ -46,7 +46,7 @@ public class Anamnese {
 	private Double agua;
 	
 	private boolean atividadeFisica;
-	@Size(max=256, message="Os comentários sobre atividade física precisam ocupar menos que 256 carácteres")
+	@Size(max=256, message="Os comentários sobre atividade física precisam ocupar menos que 256 caracteres")
 	private String atividadeFisicaComentario;
 	
 	private boolean dormeBem;

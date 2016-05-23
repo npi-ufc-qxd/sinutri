@@ -11,9 +11,17 @@
 	    <form id="form-anamnese" action="#" method="post" th:action="@{${'/paciente/'+anamnese.paciente.id+'/Anamnese/'+anamnese.id+'/Editar'}}" th:object="${anamnese}">
 	    	<input type="hidden" th:field="*{id}" name="id"/>
 	    	<input type="hidden" th:field="*{paciente.id}" />
-	    	<div>
-	    		<label class="control-label">Data de Criação:</label>
-	    		<input type="date" th:field="*{criadoEm}"/>
+	    	
+	    	<div class="row form-group">
+	    		<div class="form-item col-sm-2">
+	    			<label class="control-label">Data de Edição:</label>
+	    			<input class="form-control" type="date" th:field="*{atualizadoEm}"/>	    			
+	    			<div class="error-validation">
+							<label class="label label-danger" th:if="${#fields.hasErrors('atualizadoEm')}" 
+								th:errors="*{atualizadoEm}"
+							>Error message</label>
+					</div>
+	    		</div>
 	    	</div>
 	    	
 	    	<div class="row form-group">
