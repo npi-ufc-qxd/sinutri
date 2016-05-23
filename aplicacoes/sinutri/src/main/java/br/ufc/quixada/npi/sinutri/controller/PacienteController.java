@@ -16,6 +16,7 @@ import br.ufc.quixada.npi.sinutri.model.InqueritoAlimentar;
 import br.ufc.quixada.npi.sinutri.model.Paciente;
 import br.ufc.quixada.npi.sinutri.model.enuns.FrequenciaSemanal;
 import br.ufc.quixada.npi.sinutri.service.ConsultaService;
+import br.ufc.quixada.npi.sinutri.service.PacienteService;
 
 @Controller
 @RequestMapping(value = "/Paciente")
@@ -24,16 +25,17 @@ public class PacienteController {
 	@Inject
 	private ConsultaService consultaService;
 	
+	@Inject
+	private PacienteService pacienteService;
 	
 	@RequestMapping(value= "/{idPaciente}/InqueritoAlimentar/", method = RequestMethod.GET)
 	public String formAdicionarInqueritoAlimentar(Model model, @PathVariable("idPaciente") Long idPaciente, RedirectAttributes redirectAttributes){
-
-		if(!consultaService.pacienteExiste(idPaciente)) {
+		Paciente paciente =  pacienteService.buscarPacientePorId(idPaciente);
+		
+		if(isInvalido(paciente)) {
 			redirectAttributes.addFlashAttribute("erro", "Paciente não encontrado. Faça uma nova pesquisa");
 			return "redirect:/Nutricao/Buscar";
 		}
-
-		Paciente paciente = consultaService.buscarPacientePorId(idPaciente);
 		
 		InqueritoAlimentar inqueritoAlimentar = new InqueritoAlimentar();
 		inqueritoAlimentar.setPaciente(paciente);
@@ -45,8 +47,8 @@ public class PacienteController {
 	
 	@RequestMapping(value = "/{idPaciente}/InqueritoAlimentar/", method = RequestMethod.POST)
 	public String adicionarInqueritoAlimentar(Model model, @PathVariable("idPaciente") Long idPaciente, @Valid @ModelAttribute("inqueritoAlimentar") InqueritoAlimentar inqueritoAlimentar, BindingResult result, RedirectAttributes redirectAttributes){
-		Paciente paciente = consultaService.buscarPacientePorId(idPaciente);
-		if(paciente == null){
+		Paciente paciente = pacienteService.buscarPacientePorId(idPaciente);
+		if(isInvalido(paciente)){
 			redirectAttributes.addFlashAttribute("erro", "Paciente não encontrado. Faça uma nova pesquisa");
 			return "redirect:/nutricao/buscar";
 		}
@@ -64,8 +66,8 @@ public class PacienteController {
 	
 	@RequestMapping(value = "/{idPaciente}/InqueritoAlimentar/{idInqueritoAlimentar}/Editar/", method = RequestMethod.GET)
 	public String formEditarInqueritoAlimentar(@PathVariable("idInqueritoAlimentar") Long idInqueritoAlimentar, @PathVariable("idPaciente") Long idPaciente, Model model, RedirectAttributes redirectAttributes ){
-		Paciente paciente = consultaService.buscarPacientePorId(idPaciente);
-		if(paciente == null){
+		Paciente paciente = pacienteService.buscarPacientePorId(idPaciente);
+		if(isInvalido(paciente)){
 			redirectAttributes.addFlashAttribute("erro", "Paciente não encontrado. Faça uma nova pesquisa");
 			return "redirect:/nutricao/buscar";
 		}
@@ -81,8 +83,8 @@ public class PacienteController {
 	
 	@RequestMapping(value = "/{idPaciente}/InqueritoAlimentar/{idInqueritoAlimentar}/Editar/", method = RequestMethod.POST)
 	public String editarInqueritoAlimentar(Model model, @PathVariable("idInqueritoAlimentar") Long idInqueritoAlimentar, @PathVariable("idPaciente") Long idPaciente, @Valid InqueritoAlimentar inqueritoAlimentar, BindingResult result, RedirectAttributes redirectAttributes){
-		Paciente paciente = consultaService.buscarPacientePorId(idPaciente);
-		if(paciente == null){
+		Paciente paciente = pacienteService.buscarPacientePorId(idPaciente);
+		if(isInvalido(paciente)){
 			redirectAttributes.addFlashAttribute("erro", "Paciente não encontrado. Faça uma nova pesquisa");
 			return "redirect:/nutricao/buscar";
 		}
@@ -107,6 +109,10 @@ public class PacienteController {
 		return "redirect:/Paciente/"+idPaciente+"/";
 	}
 	
+	
+	private boolean isInvalido(Paciente paciente){
+		return paciente == null;
+	}
 	
 	
 }

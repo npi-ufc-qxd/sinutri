@@ -8,26 +8,14 @@ import javax.inject.Named;
 import br.ufc.quixada.npi.sinutri.model.InqueritoAlimentar;
 import br.ufc.quixada.npi.sinutri.model.Paciente;
 import br.ufc.quixada.npi.sinutri.repository.InqueritoAlimentarRepository;
-import br.ufc.quixada.npi.sinutri.repository.PacienteRepository;
 import br.ufc.quixada.npi.sinutri.service.ConsultaService;
 
 @Named
 public class ConsultaServiceImpl implements ConsultaService {
 
 	@Inject
-	private PacienteRepository pacienteRepository;
-	
-	@Inject
 	private InqueritoAlimentarRepository inqueritoAlimentarRepository;
 	
-	@Override
-	public Paciente buscarPacientePorId(Long idPaciente) {
-		return pacienteRepository.findOne(idPaciente);
-	}
-	
-	public boolean pacienteExiste(Long idPaciente) {
-		return pacienteRepository.exists(idPaciente);
-	}
 	
 	@Override
 	public void adicionarInqueritoAlimentar(InqueritoAlimentar inqueritoAlimentar, Paciente paciente) {
