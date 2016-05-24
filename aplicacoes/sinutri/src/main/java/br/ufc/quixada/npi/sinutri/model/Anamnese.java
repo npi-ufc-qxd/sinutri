@@ -9,6 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.Size;
 
@@ -34,8 +35,8 @@ public class Anamnese {
 	@ManyToOne
 	private Paciente paciente;
 	
-	//@OneToOne
-	//private Servidor nutricionista;
+	@OneToOne
+	private Servidor nutricionista;
 	
 	@Size(max=256, message="O objetivo da consulta deve ter menos que 256 caracteres")
 	private String objetivoConsulta;
@@ -141,13 +142,13 @@ public class Anamnese {
 		this.atualizadoEm = atualizadoEm;
 	}
 
-	//public Servidor getNutricionista() {
-		//return nutricionista;
-	//}
+	public Servidor getNutricionista() {
+		return nutricionista;
+	}
 
-	//public void setNutricionista(Servidor nutricionista) {
-		//this.nutricionista = nutricionista;
-	//}
+	public void setNutricionista(Servidor nutricionista) {
+		this.nutricionista = nutricionista;
+	}
 
 	public String getObjetivoConsulta() {
 		return objetivoConsulta;

@@ -3,6 +3,7 @@ package br.ufc.quixada.npi.sinutri.controller;
 import java.util.Date;
 import javax.inject.Inject;
 import javax.validation.Valid;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import br.ufc.quixada.npi.sinutri.model.Anamnese;
 import br.ufc.quixada.npi.sinutri.model.Paciente;
+import br.ufc.quixada.npi.sinutri.model.Servidor;
 import br.ufc.quixada.npi.sinutri.model.enuns.Apetite;
 import br.ufc.quixada.npi.sinutri.model.enuns.SistemaGastrointestinal;
 import br.ufc.quixada.npi.sinutri.model.enuns.SistemaUrinario;
@@ -20,6 +22,7 @@ import br.ufc.quixada.npi.sinutri.model.InqueritoAlimentar;
 import br.ufc.quixada.npi.sinutri.model.enuns.FrequenciaSemanal;
 import br.ufc.quixada.npi.sinutri.service.ConsultaService;
 import br.ufc.quixada.npi.sinutri.service.PacienteService;
+import br.ufc.quixada.npi.sinutri.service.PessoaService;
 
 @Controller
 @RequestMapping(value = "/Paciente")
@@ -30,6 +33,9 @@ public class PacienteController {
 	
 	@Inject
 	private PacienteService pacienteService;
+	
+	@Inject
+	private PessoaService pessoaService;
 	
 	@RequestMapping(value= "/{idPaciente}/InqueritoAlimentar/", method = RequestMethod.GET)
 	public String formAdicionarInqueritoAlimentar(Model model, @PathVariable("idPaciente") Long idPaciente, RedirectAttributes redirectAttributes){
@@ -145,14 +151,15 @@ public class PacienteController {
 	
 	@RequestMapping(value = "/{idPaciente}/Anamnese",method = RequestMethod.POST)
 	public String AdicionarAnamnese(@PathVariable("idPaciente") Long idPaciente, @Valid Anamnese anamnese, BindingResult result, Model model){
-		if(result.hasErrors()){
+		if(result.hasErrors()){			
 			model.addAttribute("anamnese",anamnese);
 			model.addAttribute("tiposApetite",Apetite.values());
 			model.addAttribute("tiposSistemaUrinario",SistemaUrinario.values());
 			model.addAttribute("tiposSistemaGastrointestinal", SistemaGastrointestinal.values());
 			return "nutricao/anamnese/cadastrar";
 		}
-		anamnese.setId(null);
+		Servidor nutricionista = pessoaService.buscarServidorPorCpf(getCpfPessoaLogada());
+		anamnese.setNutricionista(nutricionista);
 		consultaService.adicionarAnamnese(anamnese);
 		return "redirect:/paciente/"+idPaciente+"/Anamnese/"+anamnese.getId()+"/";
 	}
@@ -194,5 +201,9 @@ public class PacienteController {
 		consultaService.editarAnamnese(anamnese);
 		return "redirect:/paciente/"+idPaciente+"/Anamnese/"+anamnese.getId()+"/";
 	}	
+
+	private String getCpfPessoaLogada() {
+		return SecurityContextHolder.getContext().getAuthentication().getName();
+	}
 
 }
