@@ -5,6 +5,7 @@ import java.util.Date;
 import javax.inject.Inject;
 import javax.validation.Valid;
 
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -17,9 +18,11 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import br.ufc.quixada.npi.sinutri.model.InqueritoAlimentar;
 import br.ufc.quixada.npi.sinutri.model.Paciente;
 import br.ufc.quixada.npi.sinutri.model.Prescricao;
+import br.ufc.quixada.npi.sinutri.model.Servidor;
 import br.ufc.quixada.npi.sinutri.model.enuns.FrequenciaSemanal;
 import br.ufc.quixada.npi.sinutri.service.ConsultaService;
 import br.ufc.quixada.npi.sinutri.service.PacienteService;
+import br.ufc.quixada.npi.sinutri.service.PessoaService;
 
 @Controller
 @RequestMapping(value = "/Paciente")
@@ -30,6 +33,9 @@ public class PacienteController {
 	
 	@Inject
 	private PacienteService pacienteService;
+	
+	@Inject
+	private PessoaService pessoaService;
 	
 	@RequestMapping(value= "/{idPaciente}/InqueritoAlimentar/", method = RequestMethod.GET)
 	public String formAdicionarInqueritoAlimentar(Model model, @PathVariable("idPaciente") Long idPaciente, RedirectAttributes redirectAttributes){
@@ -141,8 +147,10 @@ public class PacienteController {
 	 public String adicionarPrescricao(Prescricao prescricao, @PathVariable("idPaciente") Long id, Model model,
 			 		BindingResult result, RedirectAttributes redirectAttributes){
 	
+		 Servidor nutricionista = pessoaService.buscarServidorPorCpf(getCpfPessoaLogada());
+		 prescricao.setNutricionista(nutricionista);
 		 prescricao.setAtualizadoEm(prescricao.getCriadoEm());
-		
+		 
 		 if(!result.hasErrors())
 			 consultaService.adicionarPrescricao(prescricao);
 		
@@ -186,6 +194,8 @@ public class PacienteController {
 			 @Valid Prescricao prescricao, BindingResult result, Model model, RedirectAttributes redirectAttributes){
 	
 		 Paciente paciente = pacienteService.buscarPacientePorId(idPaciente);
+		 Servidor nutricionista = pessoaService.buscarServidorPorCpf(getCpfPessoaLogada());
+		 prescricao.setNutricionista(nutricionista);
 		 
 		 if(paciente==null){
 				redirectAttributes.addFlashAttribute("erro", "Paciente não encontrado. Faça uma nova pesquisa.");
@@ -210,4 +220,8 @@ public class PacienteController {
 		 return "prescricao/visualizar-prescricao";
 	 }
 	
+	private String getCpfPessoaLogada() {
+		return SecurityContextHolder.getContext().getAuthentication().getName();
+	}
+
 }
