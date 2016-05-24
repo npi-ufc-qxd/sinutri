@@ -3,10 +3,14 @@ package br.ufc.quixada.npi.sinutri.controller;
 import javax.inject.Inject;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import br.ufc.quixada.npi.sinutri.model.AvaliacaoLaboratorial;
 import br.ufc.quixada.npi.sinutri.model.Paciente;
+import br.ufc.quixada.npi.sinutri.service.ConsultaNutricionalService;
 import br.ufc.quixada.npi.sinutri.service.PacienteService;
 
 @Controller
@@ -16,11 +20,13 @@ public class PacienteController {
 	@Inject
 	private PacienteService pacienteService;
 	
-//	private 
+	@Inject
+	private ConsultaNutricionalService consultaNutricionalService;
+	
 //	@RequestMapping(value = "{id}/avalicao-laboratorial", method = RequestMethod.GET)
 //	public String formAdicionarAvaliacaoLaboratorial(@PathVariable("id") Long id, Model model, RedirectAttributes redirectAttributes){
 //
-//		Paciente paciente = pacienteService.find(Paciente.class, id);
+//		Paciente paciente = pacienteService.
 //		
 //		if(paciente != null){
 //						
