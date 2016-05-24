@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" 
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorator="estrutura/dashboard">
+
+<head>
+	<title>Sinutri | Cadastrar Avaliação Laboratorial</title>
+</head>
+<section layout:fragment="conteudo">
+	<div class="mdl-grid">
+
+		<div class="mdl-cell
+			mdl-cell--7-col-desktop mdl-cell--1-offset-desktop
+			sn-card sn-padding--48">
+  				
+			<div class="mdl-layout-title">Cadastrar Avaliação Laboratorial</div>
+
+			<form class="sn-form" action="#" th:action="@{/Paciente/__*{paciente.id}__/AvalicaoLaboratorial/}" th:object="${avaliacaoLaboratorial}" method="post">
+				
+				<input class="mdl-textfield__input sn-input__date-datepicker" type="hidden" th:field="*{id}"/>
+
+				<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label sn-display--flex sn-fill--width">
+					<input class="mdl-textfield__input sn-input__date-datepicker" type="text" th:field="*{criadoEm}" th:value="*{criadoEm}"/>
+					<label class="mdl-textfield__label" for="criadoEm">Criado Em</label>
+				</div>
+
+				<div class="mdl-textfield mdl-js-textfield sn-display--flex sn-fill--width">
+					<textarea class="mdl-textfield__input" rows= "3" id="" th:field="*{observacao}"></textarea>
+					<label class="mdl-textfield__label" for="*{observacao}">Observação</label>
+				</div>
+				
+				<input type="submit" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--raised mdl-button--primary" value="Salvar"/>
+
+			</form>
+
+		</div>
+
+		<div class="mdl-cell
+			mdl-cell--3-col-desktop 
+			sn-card sn-padding--48">
+
+			<div class="mdl-layout-title">Informações</div>
+		</div>
+	</div>
+</section>
+
+
+</html>
+

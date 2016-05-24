@@ -5,6 +5,7 @@ import java.util.Date;
 import javax.inject.Inject;
 import javax.validation.Valid;
 
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -31,7 +32,7 @@ public class PacienteController {
 	@Inject
 	private PacienteService pacienteService;
 	
-	@RequestMapping(value = "{idPaciente}/AvalicaoLaboratorial/", method = RequestMethod.GET)
+	@RequestMapping(value = "{idPaciente}/AvaliacaoLaboratorial/", method = RequestMethod.GET)
 	public String formAdicionarAvaliacaoLaboratorial(@PathVariable("idPaciente") Long idPaciente, Model model, RedirectAttributes redirectAttributes){
 
 		Paciente paciente = pacienteService.buscarPacientePorId(idPaciente);
@@ -49,7 +50,7 @@ public class PacienteController {
 		return "avaliacao-laboratorial/cadastrar";
 	}
 	
-	@RequestMapping(value = "{idPaciente}/AvalicaoLaboratorial/", method = RequestMethod.POST)
+	@RequestMapping(value = "{idPaciente}/AvaliacaoLaboratorial/", method = RequestMethod.POST)
 	public String adicionarAvaliacaoLaboratorial(@PathVariable("idPaciente") Long idPaciente, @Valid AvaliacaoLaboratorial avaliacaoLaboratorial, BindingResult bindingResult, Model model, RedirectAttributes redirectAttributes){
 		
 		Paciente paciente = pacienteService.buscarPacientePorId(idPaciente);
@@ -84,7 +85,7 @@ public class PacienteController {
 		return "avaliacao-laboratorial/detalhes";
 	}
 	
-	@RequestMapping(value = "/{idPaciente}/AvalicaoLaboratorial/{idAvaliacaoLaboratorial}/Editar/", method = RequestMethod.GET)
+	@RequestMapping(value = "/{idPaciente}/AvaliacaoLaboratorial/{idAvaliacaoLaboratorial}/Editar/", method = RequestMethod.GET)
 	public String formEditarAvaliacaoLaboratorial(@PathVariable("idPaciente") Long idPaciente, @PathVariable("idAvaliacaoLaboratorial") Long idAvaliacaoLaboratorial, Model model, RedirectAttributes redirectAttributes){
 		
 		Paciente paciente = pacienteService.buscarPacientePorId(idPaciente);
@@ -126,7 +127,7 @@ public class PacienteController {
 		return "redirect:/paciente/"+idPaciente+"/AvaliacaoLaboratorial/"+avaliacaoLaboratorial.getId()+"/Detalhes";
 	}
 	
-	@RequestMapping(value = "/{idPaciente}/AvalicaoLaboratorial/{idAvaliacaoLaboratorial}/Excluir/", method = RequestMethod.GET)
+	@RequestMapping(value = "/{idPaciente}/AvaliacaoLaboratorial/{idAvaliacaoLaboratorial}/Excluir/", method = RequestMethod.GET)
 	public String excluirAvaliacaoLaboratorial(@PathVariable("idPaciente") Long idPaciente, @PathVariable("idAvaliacaoLaboratorial") Long idAvaliacaoLaboratorial, RedirectAttributes redirectAttributes){
 		
 		AvaliacaoLaboratorial avaliacaoLaboratorial = consultaService.buscarAvaliacaoLaboratorialPorId(idAvaliacaoLaboratorial);
@@ -225,6 +226,9 @@ public class PacienteController {
 	private boolean isInvalido(Paciente paciente){
 		return paciente == null;
 	}
-	
-	
+
+	private String getCpfPessoaLogada() {
+		return SecurityContextHolder.getContext().getAuthentication().getName();
+	}
+
 }
