@@ -2,14 +2,17 @@ package br.ufc.quixada.npi.sinutri.model;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.MapsId;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 import org.springframework.format.annotation.DateTimeFormat;
+
 
 @Entity
 public class Paciente implements Serializable {
@@ -36,6 +39,9 @@ public class Paciente implements Serializable {
 	private String email;
 
 	private Boolean externo;
+	
+	@OneToMany(mappedBy="paciente")
+	private List<Prescricao> listPrescricao;
 
 	public Long getId() {
 		return id;
