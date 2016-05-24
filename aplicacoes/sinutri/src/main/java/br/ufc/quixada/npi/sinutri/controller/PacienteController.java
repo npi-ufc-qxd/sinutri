@@ -135,8 +135,10 @@ public class PacienteController {
 	
 	@RequestMapping(value = "/{idPaciente}/Anamnese",method = RequestMethod.GET)
 	public String formAdicionarAnamnese(@PathVariable("idPaciente") Long idPaciente, Model model){
-		Paciente paciente = pacienteService.buscarPacientePorId(idPaciente);
-		if(isInvalido(paciente)){
+		Paciente paciente =null;
+		paciente =  pacienteService.buscarPacientePorId(2L);
+		
+		if(!isInvalido(paciente)){
 			Anamnese anamnese =  new Anamnese();
 			anamnese.setCriadoEm(new Date());
 			anamnese.setPaciente(paciente);
@@ -144,7 +146,7 @@ public class PacienteController {
 			model.addAttribute("tiposApetite",Apetite.values());
 			model.addAttribute("tiposSistemaUrinario",SistemaUrinario.values());
 			model.addAttribute("tiposSistemaGastrointestinal", SistemaGastrointestinal.values());
-			return "/nutricao/anamnese/cadastrar";
+			return "/anamnese/cadastrar";
 		}
 		return "/";
 	}
@@ -156,7 +158,7 @@ public class PacienteController {
 			model.addAttribute("tiposApetite",Apetite.values());
 			model.addAttribute("tiposSistemaUrinario",SistemaUrinario.values());
 			model.addAttribute("tiposSistemaGastrointestinal", SistemaGastrointestinal.values());
-			return "nutricao/anamnese/cadastrar";
+			return "/anamnese/cadastrar";
 		}
 		Servidor nutricionista = pessoaService.buscarServidorPorCpf(getCpfPessoaLogada());
 		anamnese.setNutricionista(nutricionista);
@@ -185,7 +187,7 @@ public class PacienteController {
 			model.addAttribute("tiposApetite",Apetite.values());
 			model.addAttribute("tiposSistemaUrinario",SistemaUrinario.values());
 			model.addAttribute("tiposSistemaGastrointestinal", SistemaGastrointestinal.values());
-			return "/nutricao/anamnese/editar";
+			return "/anamnese/editar";
 		}else
 			return "redirect:/";
 	}
