@@ -50,20 +50,6 @@ var sn_base = function() {
 
 	var setupForm = function() {
 		
-		if($(".sn-input__date-datepicker").exists()) {
-			
-			// Date picker
-			$(".sn-input__date-datepicker").datepicker({
-				nextText: "►", 
-				prevText: "◄"
-			});
-			var widget = $(".sn-input__date-datepicker" ).datepicker( "widget" );
-			
-			widget.addClass("sn-padding--24 mdl-color--white mdl-shadow--2dp");
-			widget.find(".ui-datepicker").css("display", "none");
-
-		}
-		
 		if($(".sn-form").exists()) {
 			
 			// Form Validate
@@ -71,16 +57,15 @@ var sn_base = function() {
 
 		}
 
-		//Mask		
-		if($(".sn-input__date-mask").exists()) {
+		if($(".sn-input__date").exists()) {
 
-			$(".sn-input__date-mask").mask("99/99/9999",{placeholder:""});
+			$(".sn-input__date").mask("99/99/9999",{placeholder:"dd mm aaaa"});
 
 		}
 
-		if($(".sn-input__phone-mask").exists()) {
+		if($(".sn-input__phone").exists()) {
 
-			$(".sn-input__phone-mask").mask("(99) 99999-9999");
+			$(".sn-input__phone").mask("(99) 99999-9999");
 
 		}
 		
@@ -192,9 +177,36 @@ var sn_base = function() {
 
 		}, 
 
-		doRegistryDialog(dialogSelector) {
+		doRegistryDialog : function(dialogSelector) {
 
 			return setupDialog(dialogSelector);
+
+		}, 
+
+		doRegistryDatePicker : function(el) {
+			if($(el).exists()) {
+			
+				// Date picker
+				$(el).datepicker({
+					nextText: "►", 
+					prevText: "◄", 
+					dateFormat: "dd/mm/yy", 
+					onSelect: function() {
+						$(el).parent().addClass("is-dirty");
+					}
+				});
+
+				var widget = $(el).datepicker( "widget" );
+				
+				widget.addClass("sn-padding--24 mdl-color--white mdl-shadow--2dp");
+				widget.find(".ui-datepicker").css("display", "none");
+
+				if($(".sn-input__date-now").exists()) {
+					$(".sn-input__date-now").parent().addClass("is-dirty");
+					$(".sn-input__date-now").datepicker('setDate', new Date());
+				}
+
+			}
 
 		}
 

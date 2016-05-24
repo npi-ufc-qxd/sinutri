@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+
+<html>
+	
+	<head>
+
+		<title></title>
+
+		<meta charset="utf-8">
+	    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+
+		<link rel="stylesheet" type="text/css" href="css/material.min.css">
+		<link rel="stylesheet" type="text/css" href="css/font/material-icons.css">
+		<link rel="stylesheet" type="text/css" href="css/font/roboto.css">
+		<link rel="stylesheet" type="text/css" href="css/dialog-polyfill.css">
+		<link rel="stylesheet" type="text/css" href="css/sinutri.css">
+
+	</head>
+
+	<body>
+
+		<div class="sn-container">
+			
+			<div class="sn-drawer-left">
+				
+				<div class="mdl-layout__header-row">
+
+					<span class="mdl-layout-title">Title</span>
+
+				</div>
+
+			</div>
+
+			<div class="sn-main">
+				
+				<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header mdl-color--grey-200">
+
+					<header class="mdl-layout__header">
+    					
+    					<div class="mdl-layout__header-row">
+
+    						<span class="mdl-layout-title">Title</span>
+
+    					</div>
+
+    				</header>
+
+					<div class="mdl-layout__content">
+
+						<div class="mdl-grid">
+
+							<div class="mdl-cell
+								mdl-cell--7-col-desktop mdl-cell--1-offset-desktop
+								sn-card sn-padding--48">
+			    				
+								<div class="mdl-layout-title">Form</div>
+
+								<form action="#">
+
+									<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label sn-display--flex sn-fill--width">
+										<input class="mdl-textfield__input" type="text" id="sample21"/>
+										<label class="mdl-textfield__label" for="sample21">Text</label>
+										
+									</div>
+
+									<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label sn-display--flex sn-fill--width">
+										<input class="mdl-textfield__input sn-input__number" type="number" id="sample22" pattern="-?[0-9]*(\.[0-9]+)?"/>
+										<label class="mdl-textfield__label" for="sample22">Number</label>
+									</div>
+
+									<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label sn-display--flex sn-fill--width">
+										<input class="mdl-textfield__input sn-input__date-datepicker sn-input__date-now" type="text" id="sample24" />
+										<label class="mdl-textfield__label" for="sample24">Date</label>
+									</div>
+
+									<div class="mdl-textfield mdl-js-textfield sn-display--flex sn-fill--width">
+										<textarea class="mdl-textfield__input" type="text" rows= "3" id="sample25" ></textarea>
+										<label class="mdl-textfield__label" for="sample25">Text Lines</label>
+									</div>
+
+									<label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="checkbox-1">
+										<input type="checkbox" id="checkbox-1" class="mdl-checkbox__input" checked>
+										<span class="mdl-checkbox__label">Checkbox</span>
+									</label>
+
+									<div class="mdl-grid mdl-grid--no-spacing">
+
+										<select class="mdl-cell mdl-cell--6-col mdl-button mdl-js-button mdl-js-ripple-effect">
+											<option value="volvo">Volvo</option>
+											<option value="saab">Saab</option>
+											<option value="mercedes">Mercedes</option>
+											<option value="audi">Audi</option>
+										</select>
+										<select class="mdl-cell mdl-cell--6-col mdl-button mdl-js-button mdl-js-ripple-effect">
+											<option value="volvo">Volvo</option>
+											<option value="saab">Saab</option>
+											<option value="mercedes">Mercedes</option>
+											<option value="audi">Audi</option>
+										</select>
+
+									</div>
+
+									<div class="mdl-grid mdl-grid--no-spacing sn-display--flex sn-align-items--center">
+
+										<select class="mdl-cell mdl-cell--6-col mdl-button mdl-js-button mdl-js-ripple-effect">
+											<option value="volvo">Volvo</option>
+											<option value="saab">Saab</option>
+											<option value="mercedes">Mercedes</option>
+											<option value="audi">Audi</option>
+										</select>
+
+										<div class="mdl-cell mdl-cell--6-col mdl-textfield mdl-js-textfield sn-display--flex sn-fill--width sn-align-items--center">
+											<input class="mdl-textfield__input" type="text" id="sample31"/>
+											<label class="mdl-textfield__label" for="sample31">Text</label>
+										</div>
+
+									</div>
+
+								</form>
+
+							</div>
+
+							<div class="mdl-cell
+								mdl-cell--3-col-desktop 
+								sn-card sn-padding--48">
+
+								<div class="mdl-layout-title">Informações</div>
+							</div>
+
+	    				</div>
+
+	    			</div>
+
+				</div>
+
+			<div class="sn-main__foreground"></div>
+
+		</div>
+
+		<div class="sn-foreground"></div>
+
+		<script type="text/javascript" src="js/jquery.js"></script>
+		<script type="text/javascript" src="js/jquery-ui.min.js"></script>
+		<script type="text/javascript" src="js/jquery.maskedinput.min.js"></script>
+		<script defer type="text/javascript" src="js/material.min.js"></script>
+		<script type="text/javascript" src="js/dialog-polyfill.js"></script>
+		<script type="text/javascript" src="js/sinutri.js"></script>
+
+		<script type="text/javascript">
+			
+		$(document).ready(function() {
+
+			componentHandler.registerUpgradedCallback("MaterialLayout", function(elem) {
+				
+				sn_base.doRegistryDatePicker("#sample4");
+				sn_base.doRegistryDatePicker("#sample24");
+					
+			});
+		});
+
+		</script>
+
+	</body>
+
+</html>
