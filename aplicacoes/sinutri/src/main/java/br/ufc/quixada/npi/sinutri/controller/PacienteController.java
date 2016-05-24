@@ -3,6 +3,7 @@ package br.ufc.quixada.npi.sinutri.controller;
 import javax.inject.Inject;
 import javax.validation.Valid;
 
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -113,6 +114,9 @@ public class PacienteController {
 	private boolean isInvalido(Paciente paciente){
 		return paciente == null;
 	}
-	
-	
+
+	private String getCpfPessoaLogada() {
+		return SecurityContextHolder.getContext().getAuthentication().getName();
+	}
+
 }
