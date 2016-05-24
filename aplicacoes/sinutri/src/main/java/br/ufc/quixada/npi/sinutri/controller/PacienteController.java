@@ -17,9 +17,11 @@ import br.ufc.quixada.npi.sinutri.model.InqueritoAlimentar;
 import br.ufc.quixada.npi.sinutri.model.Paciente;
 import br.ufc.quixada.npi.sinutri.model.Recordatorio;
 import br.ufc.quixada.npi.sinutri.model.RefeicaoRecordatorio;
+import br.ufc.quixada.npi.sinutri.model.Servidor;
 import br.ufc.quixada.npi.sinutri.model.enuns.FrequenciaSemanal;
 import br.ufc.quixada.npi.sinutri.service.ConsultaService;
 import br.ufc.quixada.npi.sinutri.service.PacienteService;
+import br.ufc.quixada.npi.sinutri.service.PessoaService;
 
 @Controller
 @RequestMapping(value = "/Paciente")
@@ -30,6 +32,9 @@ public class PacienteController {
 	
 	@Inject
 	private PacienteService pacienteService;
+	
+	@Inject
+	private PessoaService pessoaService;
 	
 	@RequestMapping(value= "/{idPaciente}/InqueritoAlimentar/", method = RequestMethod.GET)
 	public String formAdicionarInqueritoAlimentar(Model model, @PathVariable("idPaciente") Long idPaciente, RedirectAttributes redirectAttributes){
@@ -121,10 +126,10 @@ public class PacienteController {
 	//Recordatorio	
 		@RequestMapping(value = "/{idPaciente}/Recordatorio", method = RequestMethod.GET)
 	    public String formAdicionarRecordatorio( @PathVariable("idPaciente") Long idPaciente, Model model ) {		
-	        Paciente paciente = pacienteService.buscarPacientePorId(idPaciente);
+	        Paciente paciente = pacienteService.buscarPacientePorId(idPaciente);	        	        
 	        if(paciente==null){
 	        	return "redirect:/Nutricao/buscar";
-	        }
+	        }	        
 	        model.addAttribute("paciente", paciente);
 	        model.addAttribute("recordatorio", new Recordatorio());
 	        
@@ -134,12 +139,12 @@ public class PacienteController {
 	    @RequestMapping(value = "/{idPaciente}/Recordatorio", method = RequestMethod.POST)
 	    public String adicionarRecordatorio( @Valid @ModelAttribute("recordatorio") Recordatorio recordatorio,
 	            BindingResult result, @PathVariable("idPaciente") Long idPaciente, Model model ) {
-	    	
+	    	Servidor nutricionista = pessoaService.buscarServidorPorCpf(getCpfPessoaLogada());
 	    	if( result.hasErrors() ){
 	    		model.addAttribute("recordatorio", recordatorio);
 	            return "nutricao/recordatorio/adicionar-recordatorio";
 	    	}
-	    	
+	    	recordatorio.setNutricionista(nutricionista);
 	        consultaService.adicionarRecordatorio(recordatorio);
 	        return "redirect:/Paciente/" + idPaciente + "/Recordatorio/" + recordatorio.getId();
 	    }	
