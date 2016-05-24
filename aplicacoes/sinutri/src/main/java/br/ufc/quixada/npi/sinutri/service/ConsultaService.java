@@ -18,14 +18,7 @@ public interface ConsultaService {
 	
 	void editarAvaliacaoAntropometrica(AvaliacaoAntropometrica antropometria, Paciente paciente);
 	
-//	public AvaliacaoAntropometrica buscarAvaliacaoAntropometricaById(Long id) {
-//		Map<String, Object> params = new HashMap<String, Object>();
-//		params.put("id", id);
-//
-//		AvaliacaoAntropometrica avaliacaoAntropometrica = (AvaliacaoAntropometrica) 
-//				findFirst(QueryType.JPQL, "from AvaliacaoAntropometrica where id = :id", params);
-//		return avaliacaoAntropometrica;
-//	}
+	public AvaliacaoAntropometrica buscarAvaliacaoAntropometricaById(Long id);
 	
 	void excluirAvaliacaoAntropometrica(AvaliacaoAntropometrica antropometria, Paciente paciente);
 }

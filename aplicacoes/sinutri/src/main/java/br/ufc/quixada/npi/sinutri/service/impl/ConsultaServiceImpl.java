@@ -11,6 +11,8 @@ import br.ufc.quixada.npi.sinutri.model.Paciente;
 import br.ufc.quixada.npi.sinutri.repository.AvaliacaoAntropometricaRepository;
 import br.ufc.quixada.npi.sinutri.repository.InqueritoAlimentarRepository;
 import br.ufc.quixada.npi.sinutri.service.ConsultaService;
+import br.ufc.quixada.npi.sinutri.service.HashMap;
+import br.ufc.quixada.npi.sinutri.service.Map;
 
 @Named
 public class ConsultaServiceImpl implements ConsultaService {
@@ -63,5 +65,17 @@ public class ConsultaServiceImpl implements ConsultaService {
 	@Override
 	public void excluirAvaliacaoAntropometrica(AvaliacaoAntropometrica antropometria, Paciente paciente) {
 		avaliacaoAntropometricaRepository.delete(antropometria);
+	}
+
+	@Override
+	public AvaliacaoAntropometrica buscarAvaliacaoAntropometricaById(Long id) {
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("id", id);
+
+		AvaliacaoAntropometrica avaliacaoAntropometrica = (AvaliacaoAntropometrica) 
+				findFirst(QueryType.JPQL, "from AvaliacaoAntropometrica where id = :id", params);
+		return avaliacaoAntropometrica;
+
+		return null;
 	}
 }
