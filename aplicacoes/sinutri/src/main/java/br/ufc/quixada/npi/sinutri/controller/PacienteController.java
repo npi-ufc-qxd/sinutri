@@ -122,7 +122,7 @@ public class PacienteController {
 		Anamnese anamnese = consultaService.buscarAnamnese(idAnamnese);
 		if(anamnese != null){
 			model.addAttribute("anamnese",anamnese);
-			return "/nutricao/anamnese/visualizar-anamnese";
+			return "/nutricao/anamnese/detalhes";
 		}
 		return "/";
 	}
@@ -138,7 +138,7 @@ public class PacienteController {
 			model.addAttribute("tiposApetite",Apetite.values());
 			model.addAttribute("tiposSistemaUrinario",SistemaUrinario.values());
 			model.addAttribute("tiposSistemaGastrointestinal", SistemaGastrointestinal.values());
-			return "/nutricao/anamnese/cadastrar-anamnese";
+			return "/nutricao/anamnese/cadastrar";
 		}
 		return "/";
 	}
@@ -150,7 +150,7 @@ public class PacienteController {
 			model.addAttribute("tiposApetite",Apetite.values());
 			model.addAttribute("tiposSistemaUrinario",SistemaUrinario.values());
 			model.addAttribute("tiposSistemaGastrointestinal", SistemaGastrointestinal.values());
-			return "nutricao/anamnese/cadastrar-anamnese";
+			return "nutricao/anamnese/cadastrar";
 		}
 		anamnese.setId(null);
 		consultaService.adicionarAnamnese(anamnese);
@@ -178,7 +178,7 @@ public class PacienteController {
 			model.addAttribute("tiposApetite",Apetite.values());
 			model.addAttribute("tiposSistemaUrinario",SistemaUrinario.values());
 			model.addAttribute("tiposSistemaGastrointestinal", SistemaGastrointestinal.values());
-			return "/nutricao/anamnese/editar-anamnese";
+			return "/nutricao/anamnese/editar";
 		}else
 			return "redirect:/";
 	}
@@ -189,7 +189,7 @@ public class PacienteController {
 			BindingResult result, Model model){
 		if(result.hasErrors()){
 			model.addAttribute("anamnese", anamnese);
-			return "/nutricao/anamnese/editar-anamnese";
+			return "/nutricao/anamnese/editar";
 		}		
 		consultaService.editarAnamnese(anamnese);
 		return "redirect:/paciente/"+idPaciente+"/Anamnese/"+anamnese.getId()+"/";
