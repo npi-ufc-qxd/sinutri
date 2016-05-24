@@ -6,6 +6,7 @@ import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -21,8 +22,10 @@ import br.ufc.quixada.npi.sinutri.model.Paciente;
 import br.ufc.quixada.npi.sinutri.model.Pessoa;
 import br.ufc.quixada.npi.sinutri.model.Servidor;
 import br.ufc.quixada.npi.sinutri.model.enuns.FrequenciaSemanal;
+import br.ufc.quixada.npi.sinutri.repository.ServidorRepository;
 import br.ufc.quixada.npi.sinutri.service.ConsultaService;
 import br.ufc.quixada.npi.sinutri.service.PacienteService;
+import br.ufc.quixada.npi.sinutri.service.PessoaService;
 
 @Controller
 @RequestMapping(value = "/Paciente")
@@ -33,6 +36,9 @@ public class PacienteController {
 	
 	@Inject
 	private PacienteService pacienteService;
+	
+	@Inject
+	private PessoaService pessoaService;
 	
 	@RequestMapping(value= "/{idPaciente}/InqueritoAlimentar/", method = RequestMethod.GET)
 	public String formAdicionarInqueritoAlimentar(Model model, @PathVariable("idPaciente") Long idPaciente, RedirectAttributes redirectAttributes){
@@ -117,7 +123,7 @@ public class PacienteController {
 	
 	@RequestMapping(value= {"/{idPaciente}/Antropometria/"}, method = RequestMethod.GET)
 	public String getAvaliacaoAntropometrica(@PathVariable("idPaciente") Long idPaciente, Model model, HttpSession session){
-		Paciente paciente = pacienteService.find(Paciente.class, idPaciente);
+		Paciente paciente = pacienteService.buscarPacientePorId(idPaciente);
 		AvaliacaoAntropometrica avaliacaoAntropometrica = new AvaliacaoAntropometrica(paciente);
 		avaliacaoAntropometrica.setCriadoEm(new Date());
 		avaliacaoAntropometrica.setAtualizadoEm(new Date());
@@ -128,9 +134,9 @@ public class PacienteController {
 	
 	@RequestMapping(value={"/{idPaciente}/Antropometria/"}, method = RequestMethod.POST)
 	public String adicionarAvaliacaoAntropometrica(@PathVariable("idPaciente") Long idPaciente, Model model, @Valid AvaliacaoAntropometrica avaliacaoAntropometrica, BindingResult result, RedirectAttributes redirectAttributes){
-		Pessoa pessoa = getUsuarioLogado(session);
-		Servidor nutricionista = pessoaService.buscarServidorByPessoa(pessoa);
-		Paciente paciente = pacienteService.find(Paciente.class, idPaciente);
+		String cpfPessoaLogada = getCpfPessoaLogada();
+		Servidor nutricionista = pessoaService.buscarServidorPorCpf(cpfPessoaLogada);
+		Paciente paciente = pacienteService.buscarPacientePorId(idPaciente);
 		avaliacaoAntropometrica.setNutricionista(nutricionista);
 		if(paciente == null){
 			redirectAttributes.addFlashAttribute("erro", "Paciente inválido. Tente novamente!");
@@ -146,15 +152,14 @@ public class PacienteController {
 	@RequestMapping(value= {"/{idPaciente}/Antropometria/{idAntropometria}/Editar/"}, method = RequestMethod.GET)
 	public String getEditarAvaliacaoAntropometrica(@PathVariable("idPaciente") Long idPaciente, @PathVariable("idAntropometria") Long idAntropometria
 			, Model model){
-		AvaliacaoAntropometrica avaliacaoAntropometrica = pacienteService.buscarAvaliacaoAntropometricaById(idAntropometria);
+		AvaliacaoAntropometrica avaliacaoAntropometrica = consultaService.buscarAvaliacaoAntropometricaById(idAntropometria);
 		avaliacaoAntropometrica.setAtualizadoEm(new Date());
-		
 		model.addAttribute("avaliacaoAntropometrica", avaliacaoAntropometrica);
 		return "nutricao/antropometria/form-editar";
 	}
 	@RequestMapping(value={"/{idPaciente}/Antropometria/{idAntropometria}/Editar/"}, method = RequestMethod.POST)
 	public String editarAvaliacaoAntropometrica(@PathVariable("idPaciente") Long idPaciente, Model model, @Valid AvaliacaoAntropometrica avaliacaoAntropometrica, BindingResult result, RedirectAttributes redirectAttributes){
-		Paciente paciente = pacienteService.find(Paciente.class, idPaciente);
+		Paciente paciente = pacienteService.buscarPacientePorId(idPaciente);
 		if(paciente == null){
 			redirectAttributes.addFlashAttribute("erro", "Paciente inválido. Tente novamente!");
 			return "nutricao/antropometria/form-cadastrar";
@@ -169,8 +174,8 @@ public class PacienteController {
 	public String getVisualizarAntropometrica(@PathVariable("idPaciente") Long idPaciente, @PathVariable("idAntropometria") Long idAntropometria
 			, RedirectAttributes redirectAttributes, Model model){
 		
-		AvaliacaoAntropometrica avaliacaoAntropometrica = pacienteService.buscarAvaliacaoAntropometricaById(idAntropometria);
-		Paciente paciente = pacienteService.find(Paciente.class, idPaciente);
+		AvaliacaoAntropometrica avaliacaoAntropometrica = consultaService.buscarAvaliacaoAntropometricaById(idAntropometria);
+		Paciente paciente = pacienteService.buscarPacientePorId(idPaciente);
 		if(paciente == null){
 			redirectAttributes.addFlashAttribute("erro", "Paciente inválido. Tente novamente!");
 			return "nutricao/antropometria/form-cadastrar";
@@ -182,8 +187,8 @@ public class PacienteController {
 	public String getExcluirAntropometria(@PathVariable("idPaciente") Long idPaciente, @PathVariable("idAntropometria") Long idAntropometria
 			, RedirectAttributes redirectAttributes, Model model){
 		
-		AvaliacaoAntropometrica avaliacaoAntropometrica = pacienteService.buscarAvaliacaoAntropometricaById(idAntropometria);
-		Paciente paciente = pacienteService.find(Paciente.class, idPaciente);
+		AvaliacaoAntropometrica avaliacaoAntropometrica = consultaService.buscarAvaliacaoAntropometricaById(idAntropometria);
+		Paciente paciente = pacienteService.buscarPacientePorId(idPaciente);
 		if(paciente == null){
 			redirectAttributes.addFlashAttribute("erro", "Paciente inválido. Tente novamente!");
 			return "nutricao/antropometria/form-cadastrar";
@@ -192,9 +197,12 @@ public class PacienteController {
 		return "redirect:/paciente/"+paciente.getId()+"/Antropometria/";
 	}
 	
-	
 	private boolean isInvalido(Paciente paciente){
 		return paciente == null;
+	}
+
+	private String getCpfPessoaLogada() {
+		return SecurityContextHolder.getContext().getAuthentication().getName();
 	}
 }
 

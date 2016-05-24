@@ -1,18 +1,17 @@
 package br.ufc.quixada.npi.sinutri.service.impl;
 
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.inject.Inject;
 import javax.inject.Named;
-
 import br.ufc.quixada.npi.sinutri.model.AvaliacaoAntropometrica;
 import br.ufc.quixada.npi.sinutri.model.InqueritoAlimentar;
 import br.ufc.quixada.npi.sinutri.model.Paciente;
 import br.ufc.quixada.npi.sinutri.repository.AvaliacaoAntropometricaRepository;
 import br.ufc.quixada.npi.sinutri.repository.InqueritoAlimentarRepository;
 import br.ufc.quixada.npi.sinutri.service.ConsultaService;
-import br.ufc.quixada.npi.sinutri.service.HashMap;
-import br.ufc.quixada.npi.sinutri.service.Map;
 
 @Named
 public class ConsultaServiceImpl implements ConsultaService {
@@ -69,13 +68,7 @@ public class ConsultaServiceImpl implements ConsultaService {
 
 	@Override
 	public AvaliacaoAntropometrica buscarAvaliacaoAntropometricaById(Long id) {
-		Map<String, Object> params = new HashMap<String, Object>();
-		params.put("id", id);
-
-		AvaliacaoAntropometrica avaliacaoAntropometrica = (AvaliacaoAntropometrica) 
-				findFirst(QueryType.JPQL, "from AvaliacaoAntropometrica where id = :id", params);
-		return avaliacaoAntropometrica;
-
-		return null;
+		return avaliacaoAntropometricaRepository.findOne(id);
+		
 	}
 }
