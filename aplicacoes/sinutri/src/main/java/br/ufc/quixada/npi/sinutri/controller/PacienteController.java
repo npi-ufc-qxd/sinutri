@@ -118,7 +118,7 @@ public class PacienteController {
 			return "redirect:/nutricao/buscar";
 		}
 		consultaService.excluirInqueritoAlimentar(inqueritoAlimentar);
-		return "redirect:/Paciente/"+idPaciente+"/";
+		return "redirect:/paciente/"+idPaciente+"/";
 	}
 	
 	@RequestMapping(value= {"/{idPaciente}/Antropometria/"}, method = RequestMethod.GET)
@@ -146,7 +146,7 @@ public class PacienteController {
 			return "nutricao/antropometria/form-cadastrar";
 		}
 		consultaService.adicionarAvaliacaoAntropometrica(avaliacaoAntropometrica, paciente);
-		return "redirect:/paciente/"+paciente.getId()+"/Antropometria/"+avaliacaoAntropometrica.getId()+"/";
+		return "redirect:/Paciente/"+paciente.getId()+"/Antropometria/"+avaliacaoAntropometrica.getId()+"/";
 	}
 	
 	@RequestMapping(value= {"/{idPaciente}/Antropometria/{idAntropometria}/Editar/"}, method = RequestMethod.GET)
@@ -168,7 +168,7 @@ public class PacienteController {
 			return "nutricao/antropometria/form-cadastrar";
 		}
 		consultaService.editarAvaliacaoAntropometrica(avaliacaoAntropometrica, paciente);
-		return "redirect:/paciente/"+paciente.getId()+"/Antropometria/"+avaliacaoAntropometrica.getId()+"/";
+		return "redirect:/Paciente/"+paciente.getId()+"/Antropometria/"+avaliacaoAntropometrica.getId()+"/";
 	}
 	@RequestMapping(value= {"/{idPaciente}/Antropometria/{idAntropometria}/"}, method = RequestMethod.GET)
 	public String getVisualizarAntropometrica(@PathVariable("idPaciente") Long idPaciente, @PathVariable("idAntropometria") Long idAntropometria
@@ -194,7 +194,7 @@ public class PacienteController {
 			return "nutricao/antropometria/form-cadastrar";
 		}
 		consultaService.excluirAvaliacaoAntropometrica(avaliacaoAntropometrica, paciente);
-		return "redirect:/paciente/"+paciente.getId()+"/Antropometria/";
+		return "redirect:/Paciente/"+paciente.getId()+"/Antropometria/";
 	}
 	
 	private boolean isInvalido(Paciente paciente){

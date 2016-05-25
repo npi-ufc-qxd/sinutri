@@ -1,11 +1,13 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-<head th:replace="templates/layoutPadrao :: head">
-	<title>Visualizar Avaliação Antropométrica</title>
+<html xmlns="http://www.w3.org/1999/xhtml" 
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorator="estrutura/dashboard">
+<head>
+	<title>Sinutri | Visualizar Avaliação Antropometrica</title>
 </head>
 <body>
-	<nav th:replace="templates/layoutPadrao :: menu"></nav>
-	<div class="container-fluid">
+	<section layout:fragment="conteudo">
 		<div class="row">
 			<div class="col-sm-8">
 				<h3>
@@ -14,13 +16,10 @@
 			</div>
 	
 			<div class="col-sm-4" align="right" style="margin-top: 15px;">
-				<a href="#" class="btn btn-primary btn-sm">
-					<span class="glyphicon glyphicon-chevron-left"></span> Voltar
-				</a> 
-				<a th:href="@{${'/paciente/' + avaliacaoAntropometrica.paciente.id + '/Antropometria/' + avaliacaoAntropometrica.id + '/Editar/'}}" class="btn btn-warning btn-sm">
+				<a th:href="@{${'/Paciente/' + avaliacaoAntropometrica.paciente.id + '/Antropometria/' + avaliacaoAntropometrica.id + '/Editar/'}}" class="btn btn-warning btn-sm">
 					<span class="glyphicon glyphicon-edit"></span> Editar
 				</a>
-				<a th:href="@{${'/paciente/' + avaliacaoAntropometrica.paciente.id + '/Antropometria/' + avaliacaoAntropometrica.id + '/Excluir/'}}" class="btn btn-danger btn-sm">
+				<a th:href="@{${'/Paciente/' + avaliacaoAntropometrica.paciente.id + '/Antropometria/' + avaliacaoAntropometrica.id + '/Excluir/'}}" class="btn btn-danger btn-sm">
 					<span class="glyphicon glyphicon-remove"></span> Excluir
 				</a>
 			</div>
@@ -251,7 +250,6 @@
 				</div>
 			</div>
 		</div>
-	</div>
-	<footer th:replace="templates/layoutPadrao :: footer"></footer>
+	</section>
 </body>
 </html>

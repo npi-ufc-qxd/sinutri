@@ -33,7 +33,7 @@
 			
 			<div class="mdl-cell mdl-cell--7-col-desktop mdl-cell--1-offset-desktop sn-card sn-padding--48">
 				<div class="mdl-layout-title" th:text="${avaliacaoAntropometrica.paciente.pessoa.nome}">Form</div>
-				<form id="form-antropometria" action="#" th:action="@{${'/paciente/'+avaliacaoAntropometrica.paciente.id+'/Antropometria/'}}" class="form-horizontal" th:object="${avaliacaoAntropometrica}" method="post" enctype="multipart/form-data">
+				<form id="form-antropometria" action="#" th:action="@{${'/Paciente/'+avaliacaoAntropometrica.paciente.id+'/Antropometria/'}}" class="form-horizontal" th:object="${avaliacaoAntropometrica}" method="post" enctype="multipart/form-data">
 					<h5>
 						<label>Nova Avaliação Antropométrica para</label> 
 						<strong th:text="${avaliacaoAntropometrica.paciente.pessoa.nome}">José da Silva</strong>
@@ -189,13 +189,13 @@
 					</div>
 					
 					<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label sn-display--flex sn-fill--width">
-						<input type="number" th:field="*{diametroFemur}" class="mdl-textfield__inputsn-input__number" pattern="-?[0-9]*(\.[0-9]+)?"/>
+						<input type="number" th:field="*{diametroFemur}" class="mdl-textfield__input sn-input__number" pattern="-?[0-9]*(\.[0-9]+)?"/>
 						<label th:for="${#ids.next('diametroFemur')}" class="mdl-textfield__label">Diâmetro Fêmur (cm):</label>
 						<p th:if="${#fields.hasErrors('diametroFemur')}" th:errors="*{diametroFemur}">Diametro do fêmur inválido</p>
 					</div>
 					
 					<h4>COMPOSIÇÂO CORPORAL</h4>
-					
+					 th:text="${avaliacaoAntropometrica.nutricionista != null} ? ${avaliacaoAntropometrica.nutricionista.pessoa.nome}
 					<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label sn-display--flex sn-fill--width">
 						<input type="number" th:field="*{biceps}" class="mdl-textfield__input sn-input__number" pattern="-?[0-9]*(\.[0-9]+)?"/>
 						<label th:for="${#ids.next('biceps')}" class="mdl-textfield__label">Biceps (cm):</label>
@@ -261,5 +261,18 @@
 		</div>
 		
 	</section>
+	
+	<script type="text/javascript">
+			
+		$(document).ready(function() {
+
+			componentHandler.registerUpgradedCallback("MaterialLayout", function(elem) {
+				
+				sn_base.doRegistryDatePicker(".sn-input__date-datepicker");
+				sn_base.doRegistryDatePicker("sn-input__date-datepicker");	
+			});
+		});
+
+	</script>
 </body>
 </html>
