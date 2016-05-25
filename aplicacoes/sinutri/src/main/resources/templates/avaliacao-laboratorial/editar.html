@@ -5,7 +5,7 @@
     layout:decorator="estrutura/dashboard">
 
 <head>
-	<title>Sinutri | Cadastrar Avaliação Laboratorial</title>
+	<title>Sinutri | Editar Avaliação Laboratorial</title>
 </head>
 <section layout:fragment="conteudo">
 	<div class="mdl-grid">
@@ -14,15 +14,20 @@
 			mdl-cell--7-col-desktop mdl-cell--1-offset-desktop
 			sn-card sn-padding--48">
   				
-			<div class="mdl-layout-title">Cadastrar Avaliação Laboratorial</div>
+			<div class="mdl-layout-title">Editar Avaliação Laboratorial</div>
 
-			<form class="sn-form" action="#" th:action="@{/Paciente/__*{paciente.id}__/AvaliacaoLaboratorial/}" th:object="${avaliacaoLaboratorial}" method="post">
+			<form class="sn-form" action="#" th:action="@{/Paciente/__*{paciente.id}__/AvaliacaoLaboratorial/__*{id}__/Editar/}" th:object="${avaliacaoLaboratorial}" method="post">
 				
 				<input class="mdl-textfield__input sn-input__date-datepicker" type="hidden" th:field="*{id}"/>
 
 				<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label sn-display--flex sn-fill--width">
 					<input class="mdl-textfield__input sn-input__date-datepicker" type="text" th:field="*{criadoEm}" th:value="*{criadoEm}"/>
 					<label class="mdl-textfield__label" for="criadoEm">Criado Em</label>
+				</div>
+				
+				<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label sn-display--flex sn-fill--width">
+					<input class="mdl-textfield__input sn-input__date-datepicker" type="text" th:field="*{atualizado}" th:value="*{atualizado}"/>
+					<label class="mdl-textfield__label" for="atualizado">Atualizado</label>
 				</div>
 
 				<div class="mdl-textfield mdl-js-textfield sn-display--flex sn-fill--width">
@@ -47,4 +52,3 @@
 
 
 </html>
-

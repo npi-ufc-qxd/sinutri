@@ -68,10 +68,10 @@ public class PacienteController {
 		}
 		
 		consultaService.adicionarAvaliacaoLaboratorial(avaliacaoLaboratorial, paciente);
-		return "redirect:/paciente/"+idPaciente+"/AvaliacaoLaboratorial/"+avaliacaoLaboratorial.getId()+"/Detalhes";
+		return "redirect:/Paciente/"+idPaciente+"/AvaliacaoLaboratorial/"+avaliacaoLaboratorial.getId()+"/Detalhes/";
 	}
 	
-	@RequestMapping(value = "/{idPaciente}/AvaliacaoLaboratorial/{idAvaliacaoLaboratorial}/Detalhes", method = RequestMethod.GET)
+	@RequestMapping(value = "/{idPaciente}/AvaliacaoLaboratorial/{idAvaliacaoLaboratorial}/Detalhes/", method = RequestMethod.GET)
 	public String visualizarDetalhesAvaliacaoLaboratorial(@PathVariable("idPaciente") Long idPaciente, @PathVariable("idAvaliacaoLaboratorial") Long idAvaliacaoLaboratorial, RedirectAttributes redirectAttributes){
 		
 		AvaliacaoLaboratorial avaliacaoLaboratorial = consultaService.buscarAvaliacaoLaboratorialPorId(idAvaliacaoLaboratorial);
@@ -81,7 +81,6 @@ public class PacienteController {
 			return "redirect:/Nutricao/Buscar";
 		}
 		
-		consultaService.excluirAvaliacaoLaboratorial(avaliacaoLaboratorial);
 		return "avaliacao-laboratorial/detalhes";
 	}
 	
@@ -124,7 +123,7 @@ public class PacienteController {
 		}
 				
 		consultaService.editarAvaliacaoLaboratorial(avaliacaoLaboratorial);
-		return "redirect:/paciente/"+idPaciente+"/AvaliacaoLaboratorial/"+avaliacaoLaboratorial.getId()+"/Detalhes";
+		return "redirect:/Paciente/"+idPaciente+"/AvaliacaoLaboratorial/"+avaliacaoLaboratorial.getId()+"/Detalhes/";
 	}
 	
 	@RequestMapping(value = "/{idPaciente}/AvaliacaoLaboratorial/{idAvaliacaoLaboratorial}/Excluir/", method = RequestMethod.GET)
