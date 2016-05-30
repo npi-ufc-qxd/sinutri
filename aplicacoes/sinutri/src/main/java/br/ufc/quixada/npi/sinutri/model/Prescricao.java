@@ -12,6 +12,10 @@ import javax.validation.constraints.NotNull;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+/**
+ * @author 05201719341
+ *
+ */
 @Entity
 public class Prescricao {
 	
