@@ -12,30 +12,30 @@
 
 		<div class="mdl-cell mdl-cell--7-col-desktop mdl-cell--1-offset-desktop sn-card sn-padding--48">
 
-			<form class="sn-form">
+			<form class="sn-form" action="#" th:action="@{/Paciente/__*{paciente.id}__/AvaliacaoLaboratorial/}" th:object="${avaliacaoLaboratorial}" method="post">
 
 				<div class="mdl-grid">
 
 					<!-- First section -->
 
 					<div class="sn-textfield mdl-cell mdl-cell--8-col">
-						<div class="mdl-layout-title">Form</div>
+						<div class="mdl-layout-title">Cadastrar Avaliação Laboratorial</div>
 					</div>
 					
 					<div class="sn-textfield mdl-cell mdl-cell--6-col">
-						<label class="sn-textfield__label" for="sn-date">Date</label> 
+						<label class="sn-textfield__label" for="sn-date">Data de criação:</label> 
 						<input class="sn-textfield__input sn-date-picker sn-mask-date" id="sn-date" />
 					</div>
 
 					<div class="sn-textfield mdl-cell mdl-cell--12-col">
-						<label class="sn-textfield__label" for="sn-text">Text</label>
+						<label class="sn-textfield__label" for="sn-text">Observação:</label>
 						<textarea class="sn-textfield__input" type="text" id="sn-text"></textarea>
 					</div>
 
 					<div class="sn-form-actions">
 
-						<input type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect" value="Save" /> 
-						<input type="button" class="mdl-button mdl-js-button mdl-button--colored mdl-js-ripple-effect" value="Cancel" />
+						<input type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect" value="Salvar" /> 
+						<input type="button" class="mdl-button mdl-js-button mdl-button--colored mdl-js-ripple-effect" value="Cancelar" />
 
 					</div>
 
