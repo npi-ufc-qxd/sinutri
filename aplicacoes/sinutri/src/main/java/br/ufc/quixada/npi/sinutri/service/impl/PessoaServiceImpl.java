@@ -19,9 +19,6 @@ public class PessoaServiceImpl implements PessoaService {
 	
 	@Inject
 	private ServidorRepository servidorRepository;
-	
-	@Inject
-	private UsuarioService usuarioService;
 
 	@Override
 	public Papel buscaPapelPorNome(String papel) {
@@ -30,14 +27,6 @@ public class PessoaServiceImpl implements PessoaService {
 
 	@Override
 	public Servidor buscarServidorPorCpf(String cpf) {
-
-		Servidor servidor = servidorRepository.findByCpf(cpf);
-		Usuario usuario = usuarioService.getByCpf(servidor.getPessoa().getCpf());
-		servidor.getPessoa().setNome(usuario.getNome());
-		servidor.getPessoa().setEmail(usuario.getEmail());
-		servidor.getPessoa().setTelefone(usuario.getTelefone());
-		servidor.getPessoa().setDataNascimento(usuario.getNascimento());
-
 		return servidorRepository.findByCpf(cpf);
 	}
 	

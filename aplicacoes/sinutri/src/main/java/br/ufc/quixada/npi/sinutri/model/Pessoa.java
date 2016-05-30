@@ -27,7 +27,7 @@ import javax.persistence.Transient;
 import javax.persistence.UniqueConstraint;
 
 @Entity
-@EntityListeners(PessoaEntityListener.class)
+//@EntityListeners(PessoaEntityListener.class)
 @Table(uniqueConstraints = @UniqueConstraint(columnNames = { "id", "cpf" }))
 public class Pessoa {
 
