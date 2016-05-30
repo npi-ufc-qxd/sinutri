@@ -1,5 +1,7 @@
 package br.ufc.quixada.npi.sinutri.controller;
 
+import java.util.Date;
+
 import javax.inject.Inject;
 import javax.validation.Valid;
 
@@ -36,13 +38,15 @@ public class PacienteController {
 			redirectAttributes.addFlashAttribute("erro", "Paciente não encontrado. Faça uma nova pesquisa");
 			return "redirect:/Nutricao/Buscar";
 		}
-		
+			
 		InqueritoAlimentar inqueritoAlimentar = new InqueritoAlimentar();
+		inqueritoAlimentar.setCriadoEm(new Date());
+		
 		inqueritoAlimentar.setPaciente(paciente);
 		model.addAttribute("inqueritoAlimentar", inqueritoAlimentar);
-		model.addAttribute("FrequenciasSemanais", FrequenciaSemanal.values());
+		model.addAttribute("frequenciasSemanais", FrequenciaSemanal.values());
 
-		return "/inquerito-alimentar/cadastrar";
+		return "inquerito-alimentar/cadastrar";
 	}
 	
 	@RequestMapping(value = "/{idPaciente}/InqueritoAlimentar/", method = RequestMethod.POST)
@@ -50,18 +54,18 @@ public class PacienteController {
 		Paciente paciente = pacienteService.buscarPacientePorId(idPaciente);
 		if(isInvalido(paciente)){
 			redirectAttributes.addFlashAttribute("erro", "Paciente não encontrado. Faça uma nova pesquisa");
-			return "redirect:/nutricao/buscar";
+			return "redirect:/Nutricao/Buscar";
 		}
-
+		
 		if (result.hasErrors()) {
 			inqueritoAlimentar.setPaciente(paciente);
 			model.addAttribute("frequenciasSemanais", FrequenciaSemanal.values());
 			model.addAttribute("inqueritoAlimentar", inqueritoAlimentar);
-			return "nutricao/inquerito/cadastrar";
+			return "inquerito-alimentar/cadastrar";
 		}
 		
 		consultaService.adicionarInqueritoAlimentar(inqueritoAlimentar, paciente);
-		return "redirect:/paciente/"+idPaciente+"/InqueritoAlimentar"+inqueritoAlimentar.getId()+"/";
+		return "redirect:/Paciente/"+idPaciente+"/InqueritoAlimentar/"+inqueritoAlimentar.getId()+"/";
 	}
 	
 	@RequestMapping(value = "/{idPaciente}/InqueritoAlimentar/{idInqueritoAlimentar}/Editar/", method = RequestMethod.GET)
@@ -69,16 +73,21 @@ public class PacienteController {
 		Paciente paciente = pacienteService.buscarPacientePorId(idPaciente);
 		if(isInvalido(paciente)){
 			redirectAttributes.addFlashAttribute("erro", "Paciente não encontrado. Faça uma nova pesquisa");
-			return "redirect:/nutricao/buscar";
+			return "redirect:/Nutricao/Buscar";
 		}
+		
 		InqueritoAlimentar inqueritoAlimentar = consultaService.buscarInqueritoAlimentarPorId(idInqueritoAlimentar);
+		
 		if(inqueritoAlimentar == null){
 			redirectAttributes.addFlashAttribute("erro", "Inquérito Alimentar não encontrado. Faça uma nova pesquisa");
-			return "redirect:/nutricao/buscar";
+			return "redirect:/Nutricao/Buscar";
 		}
-		model.addAttribute("inqueritoAlimenar", inqueritoAlimentar);
-		model.addAttribute("FrequenciasSemanais", FrequenciaSemanal.values());
-		return "nutricao/inqueritoAlimentar/editar";
+		
+		inqueritoAlimentar.setPaciente(paciente);
+		
+		model.addAttribute("inqueritoAlimentar", inqueritoAlimentar);
+		model.addAttribute("frequenciasSemanais", FrequenciaSemanal.values());
+		return "inquerito-alimentar/editar";
 	}
 	
 	@RequestMapping(value = "/{idPaciente}/InqueritoAlimentar/{idInqueritoAlimentar}/Editar/", method = RequestMethod.POST)
@@ -86,16 +95,15 @@ public class PacienteController {
 		Paciente paciente = pacienteService.buscarPacientePorId(idPaciente);
 		if(isInvalido(paciente)){
 			redirectAttributes.addFlashAttribute("erro", "Paciente não encontrado. Faça uma nova pesquisa");
-			return "redirect:/nutricao/buscar";
+			return "redirect:/Nutricao/Buscar";
 		}
 		if (result.hasErrors()) {
-			inqueritoAlimentar.setPaciente(paciente);
 			model.addAttribute("frequenciasSemanais", FrequenciaSemanal.values());
 			model.addAttribute("inqueritoAlimentar", inqueritoAlimentar);
-			return "nutricao/inquerito/editar";
+			return "inquerito-alimentar/editar";
 		}
 		consultaService.editarInqueritoAlimentar(inqueritoAlimentar);
-		return "redirect:/paciente/"+idPaciente+"/Inquerito/"+idInqueritoAlimentar+"/";
+		return "redirect:/Paciente/"+idPaciente+"/InqueritoAlimentar/"+idInqueritoAlimentar+"/";
 	}
 	
 	@RequestMapping(value = "/{idPaciente}/InqueritoAlimentar/{idInqueritoAlimentar}/Excluir/", method = RequestMethod.GET)
@@ -103,10 +111,26 @@ public class PacienteController {
 		InqueritoAlimentar inqueritoAlimentar = consultaService.buscarInqueritoAlimentarPorId(idInqueritoAlimentar);
 		if(inqueritoAlimentar == null){
 			redirectAttributes.addFlashAttribute("erro", "Inquérito Alimentar não encontrado. Faça uma nova pesquisa");
-			return "redirect:/nutricao/buscar";
+			return "redirect:/Nutricao/Buscar";
 		}
 		consultaService.excluirInqueritoAlimentar(inqueritoAlimentar);
 		return "redirect:/Paciente/"+idPaciente+"/";
+	}
+	
+	@RequestMapping(value = "/idPaciente/InqueritoAlimentar/{idInqueritoAlimentar}/", method = RequestMethod.POST)
+	public String visualizarDetalhesInqueritoAlimentar(@PathVariable("idInqueritoAlimentar") Long idInqueritoAlimentar, @PathVariable("idPaciente") Long idPaciente, Model model, RedirectAttributes redirectAttributes ){
+		Paciente paciente = pacienteService.buscarPacientePorId(idPaciente);
+		if(isInvalido(paciente)){
+			redirectAttributes.addFlashAttribute("erro", "Paciente não encontrado. Faça uma nova pesquisa");
+			return "redirect:/Nutricao/Buscar";
+		}
+		InqueritoAlimentar inqueritoAlimentar = consultaService.buscarInqueritoAlimentarPorId(idInqueritoAlimentar);
+		if(inqueritoAlimentar == null){
+			redirectAttributes.addFlashAttribute("erro", "Inquérito Alimentar não encontrado. Faça uma nova pesquisa");
+			return "redirect:/Nutricao/Buscar";
+		}
+		model.addAttribute("inqueritoAlimenar", inqueritoAlimentar);
+		return "inquerito-alimentar/detalhes";
 	}
 	
 	

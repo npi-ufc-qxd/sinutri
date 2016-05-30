@@ -1,391 +1,382 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" >
-    <head th:replace="templates/layoutPadrao :: head">
-    	<title>Inquérito alimentar</title>
-    </head>
-    <body>
-        <nav th:replace="templates/layoutPadrao :: menu"></nav>
-    	<footer th:replace="templates/layoutPadrao :: footer"></footer>
-        
-        <div class="container">
-	        <div class="row">
-	        	<div class="col-sm-8">
-	        		<h1>Adicionar Inquerito Alimentar</h1>
-					<h3>
-						<strong th:text="${inqueritoAlimentar.paciente.pessoa.nome}"></strong>
-					</h3>
+<html xmlns="http://www.w3.org/1999/xhtml" 
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorator="estrutura/dashboard">
+
+<head>
+	<title>Sinutri | Cadastro Inquérito Alimentar</title>
+</head>
+<section layout:fragment="conteudo">
+	<div class="mdl-grid">
+	
+		<div class="mdl-cell
+			mdl-cell--7-col-desktop mdl-cell--1-offset-desktop
+			sn-card sn-padding--48">
+	 				
+			<div class="mdl-layout-title">Cadastrar Inquérito Alimentar</div>
+	
+			<form action="#" th:object="${inqueritoAlimentar}" th:method="post" th:action="@{${'/Paciente/'+ inqueritoAlimentar.paciente.id +'/InqueritoAlimentar/'}}">
+				<input type="hidden" id="id" th:field="*{id}"/>
+				
+				<div class="sn-textfield mdl-cell mdl-cell--6-col">
+					<input class="sn-textfield__input sn-date-picker sn-mask-date" th:field="*{criadoEm}" type="text" id="criadoEm" />
+					<label class="sn-textfield__label" for="criadoEm">Data de criação</label>
 				</div>
-			</div>
-			<div class="row col-sm-12">
-				<form th:object="${inqueritoAlimentar}" th:method="post" th:action="@{${'/paciente/'+inqueritoAlimentar.paciente.id+'/Inquerito/'}}">
-					<input type="hidden" id="id" th:field="*{id}"/>
-					
-					<div class="row form-group">
-						<div class="form-item col-sm-6">
-							<label for="criadoEm" class="control-label">*Data de criação</label>
-							<input type="text" id="inputTextCriadoEm" th:field="*{criadoEm}" class="form-control" placeholder="Data" />
-							<label class=" label label-danger" th:if="${#fields.hasErrors('criadoEm')}" th:errors="*{criadoEm}">Title error message</label>
-						</div>
-						<div th:if="${acao eq 'editar'}"  class="form-item col-sm-6">
-							<label for="criadoEm" class="control-label">Data da última atualização</label>
-							<input type="text" id="inputTextCriadoEm" th:field="*{atualizadoEm}" class="form-control" placeholder="Data" disabled="true"/>
-						</div>
-					</div>			
-					<div class="row form-group">
-						<div class="form-item col-sm-6">
-							<label for="checkAguaGosta" class="control-label">
-							<input type="checkbox" id="checkAguaGosta" th:field="*{aguaGosta}" class="checkInquerito"/> Gosta água?</label>
-							<select th:field="*{aguaFrequenciaSemanal}" class="form-control select" th:disabled="*{!aguaGosta}" >
-								<option value="">Quantas vezes por semana?</option>
-								<option th:each="f : ${frequenciasSemanais}" th:text="${f.descricao}" th:value="${f}"></option>
-							</select>
-						</div> 
-						<div class="form-item col-sm-6">
-							<label for="aguaAnotacao" class="control-label">Anotação</label>
-							<input type="text" id="inputTextAgua" th:field="*{aguaAnotacao}" class="form-control" placeholder="Anotação" th:disabled="*{!aguaGosta}"/>
-							<label class=" label label-danger" th:if="${#fields.hasErrors('aguaAnotacao')}" th:errors="*{aguaAnotacao}">Title error message</label>
-						</div>
+	
+				<label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="checkAguaGosta">
+					<input type="checkbox" id="checkAguaGosta"  class="mdl-checkbox__input" th:field="*{aguaGosta}"/>
+					<span class="mdl-checkbox__label">Gosta de água</span>
+				</label>
+				<div class="mdl-grid mdl-grid--no-spacing sn-display--flex sn-align-items--center">
+					<select class="mdl-cell mdl-cell--6-col mdl-button mdl-js-button mdl-js-ripple-effect" th:field="*{aguaFrequenciaSemanal}">
+						<option value="">Quantas vezes por semana?</option>
+						<option th:each="f : ${frequenciasSemanais}" th:text="${f.descricao}" th:value="${f}">Volvo</option>
+					</select>
+				<div class="mdl-cell mdl-cell--6-col mdl-textfield mdl-js-textfield sn-display--flex sn-fill--width sn-align-items--center">
+						<input class="mdl-textfield__input" type="text" id="anotacaoAgua" th:field="*{aguaAnotacao}" />
+						<label class="mdl-textfield__label" for="anotacaoAgua">Anotação</label>
 					</div>
-					<div class="row form-group">
-						<div class="form-item col-sm-6">
-							<label for="checkAvesGosta" class="control-label">
-							<input type="checkbox" id="checkAvesGosta" th:field="*{avesGosta}" class="checkInquerito" /> Gosta de aves?</label>
-							<select th:field="*{avesFrequenciaSemanal}" class="form-control select" th:disabled="*{!avesGosta}">
-								<option value="">Quantas vezes por semana?</option>
-								<option th:each="f : ${frequenciasSemanais}" th:text="${f.descricao}" th:value="${f}"></option>
-							</select>
-						</div> 
-						<div class="form-item col-sm-6">
-							<label for="avesAnotacao" class="control-label">Anotação</label>
-							<input type="text" id="inputTextAves" th:field="*{avesAnotacao}" class="form-control" placeholder="Anotação" th:disabled="*{!avesGosta}" />
-							<label class=" label label-danger" th:if="${#fields.hasErrors('avesAnotacao')}" th:errors="*{avesAnotacao}">Title error message</label>
-						</div>
+				</div>
+				
+				<label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="checkAvesGosta">
+					<input type="checkbox" id="checkAvesGosta"  class="mdl-checkbox__input" th:field="*{avesGosta}"/>
+					<span class="mdl-checkbox__label">Gosta de aves</span>
+				</label>
+				<div class="mdl-grid mdl-grid--no-spacing sn-display--flex sn-align-items--center">
+					<select class="mdl-cell mdl-cell--6-col mdl-button mdl-js-button mdl-js-ripple-effect" th:field="*{avesFrequenciaSemanal}">
+						<option value="">Quantas vezes por semana?</option>
+						<option th:each="f : ${frequenciasSemanais}" th:text="${f.descricao}" th:value="${f}">Volvo</option>
+					</select>
+				<div class="mdl-cell mdl-cell--6-col mdl-textfield mdl-js-textfield sn-display--flex sn-fill--width sn-align-items--center">
+						<input class="mdl-textfield__input" type="text" id="anotacaoAves" th:field="*{avesAnotacao}" />
+						<label class="mdl-textfield__label" for="anotacaoAves">Anotação</label>
 					</div>
-					<div class="row form-group">
-						<div class="form-item col-sm-6">
-							<label for="checkBebidasAlcoolicasGosta" class="control-label">
-							<input type="checkbox" id="checkBebidasAlcoolicasGosta" th:field="*{bebidasAlcoolicasGosta}" class="checkInquerito" /> Gosta de bebidas alcoólicas?</label>
-							<select th:field="*{bebidasAlcoolicasFrequenciaSemanal}" class="form-control select" th:disabled="*{!bebidasAlcoolicasGosta}">
-								<option value="">Quantas vezes por semana?</option>
-								<option th:each="f : ${frequenciasSemanais}" th:text="${f.descricao}" th:value="${f}"></option>
-							</select>
-						</div> 
-						<div class="form-item col-sm-6">
-							<label for="bebidasAlcoolicasAnotacao" class="control-label">Anotação</label>
-							<input type="text" id="inputTextBebidasAlcoolicas" th:field="*{bebidasAlcoolicasAnotacao}" class="form-control" placeholder="Anotação" th:disabled="*{!bebidasAlcoolicasGosta}" />
-							<label class=" label label-danger" th:if="${#fields.hasErrors('bebidasAlcoolicasAnotacao')}" th:errors="*{bebidasAlcoolicasAnotacao}">Title error message</label>
-						</div>
+				</div>
+				
+				<label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="checkBebidasAlcoolicasGosta">
+					<input type="checkbox" id="checkBebidasAlcoolicasGosta"  class="mdl-checkbox__input" th:field="*{bebidasAlcoolicasGosta}"/>
+					<span class="mdl-checkbox__label">Gosta de bebidas alcoólicas</span>
+				</label>
+				<div class="mdl-grid mdl-grid--no-spacing sn-display--flex sn-align-items--center">
+					<select class="mdl-cell mdl-cell--6-col mdl-button mdl-js-button mdl-js-ripple-effect" th:field="*{bebidasAlcoolicasFrequenciaSemanal}">
+						<option value="">Quantas vezes por semana?</option>
+						<option th:each="f : ${frequenciasSemanais}" th:text="${f.descricao}" th:value="${f}">Volvo</option>
+					</select>
+				<div class="mdl-cell mdl-cell--6-col mdl-textfield mdl-js-textfield sn-display--flex sn-fill--width sn-align-items--center">
+						<input class="mdl-textfield__input" type="text" id="anotacaoBebidasAlcoolicas" th:field="*{bebidasAlcoolicasAnotacao}" />
+						<label class="mdl-textfield__label" for="anotacaoBebidasAlcoolicas">Anotação</label>
 					</div>
-					<div class="row form-group">
-						<div class="form-item col-sm-6">
-							<label for="checkBovinaGosta" class="control-label">
-							<input type="checkbox" id="checkBovinaGosta" th:field="*{bovinaGosta}" class="checkInquerito" /> Gosta de carne bovina?</label>
-							<select th:field="*{bovinaFrequenciaSemanal}" class="form-control select" th:disabled="*{!bovinaGosta}">
-								<option value="">Quantas vezes por semana?</option>
-								<option th:each="f : ${frequenciasSemanais}" th:text="${f.descricao}" th:value="${f}"></option>
-							</select>
-						</div> 
-			
-						<div class="form-item col-sm-6">
-							<label for="bovinaAnotacao" class="control-label">Anotação</label>
-							<input type="text" id="inputTextBovina" th:field="*{bovinaAnotacao}" class="form-control" placeholder="Anotação" th:disabled="*{!bovinaGosta}" />
-							<label class=" label label-danger" th:if="${#fields.hasErrors('bovinaAnotacao')}" th:errors="*{bovinaAnotacao}">Title error message</label>
-						</div>
+				</div>
+				
+				<label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="checkBovinaGosta">
+					<input type="checkbox" id="checkBovinaGosta"  class="mdl-checkbox__input" th:field="*{bovinaGosta}"/>
+					<span class="mdl-checkbox__label">Gosta de bovina</span>
+				</label>
+				<div class="mdl-grid mdl-grid--no-spacing sn-display--flex sn-align-items--center">
+					<select class="mdl-cell mdl-cell--6-col mdl-button mdl-js-button mdl-js-ripple-effect" th:field="*{bovinaFrequenciaSemanal}">
+						<option value="">Quantas vezes por semana?</option>
+						<option th:each="f : ${frequenciasSemanais}" th:text="${f.descricao}" th:value="${f}">Volvo</option>
+					</select>
+				<div class="mdl-cell mdl-cell--6-col mdl-textfield mdl-js-textfield sn-display--flex sn-fill--width sn-align-items--center">
+						<input class="mdl-textfield__input" type="text" id="anotacaoBovina" th:field="*{bovinaAnotacao}" />
+						<label class="mdl-textfield__label" for="anotacaoBovina">Anotação</label>
 					</div>
-					<div class="row form-group">
-						<div class="form-item col-sm-6">
-							<label for="checkCereaisGosta" class="control-label">
-							<input type="checkbox" id="checkCereaisGosta" th:field="*{cereaisGosta}" class="checkInquerito" /> Gosta de cereais?</label>
-							<select th:field="*{cereaisFrequenciaSemanal}" class="form-control select" th:disabled="*{!cereaisGosta}">
-								<option value="">Quantas vezes por semana?</option>
-								<option th:each="f : ${frequenciasSemanais}" th:text="${f.descricao}" th:value="${f}"></option>
-							</select>
-						</div> 
-						<div class="form-item col-sm-6">
-							<label for="cereaisAnotacao" class="control-label">Anotação</label>
-							<input type="text" id="inputTextCereais" th:field="*{cereaisAnotacao}" class="form-control" placeholder="Anotação" th:disabled="*{!cereaisGosta}" />
-							<label class=" label label-danger" th:if="${#fields.hasErrors('cereaisAnotacao')}" th:errors="*{cereaisAnotacao}">Title error message</label>
-						</div>
+				</div>
+				
+				<label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="checkCereaisGosta">
+					<input type="checkbox" id="checkCereaisGosta"  class="mdl-checkbox__input" th:field="*{cereaisGosta}"/>
+					<span class="mdl-checkbox__label">Gosta de cereais</span>
+				</label>
+				<div class="mdl-grid mdl-grid--no-spacing sn-display--flex sn-align-items--center">
+					<select class="mdl-cell mdl-cell--6-col mdl-button mdl-js-button mdl-js-ripple-effect" th:field="*{cereaisFrequenciaSemanal}">
+						<option value="">Quantas vezes por semana?</option>
+						<option th:each="f : ${frequenciasSemanais}" th:text="${f.descricao}" th:value="${f}">Volvo</option>
+					</select>
+				<div class="mdl-cell mdl-cell--6-col mdl-textfield mdl-js-textfield sn-display--flex sn-fill--width sn-align-items--center">
+						<input class="mdl-textfield__input" type="text" id="anotacaoCereais" th:field="*{cereaisAnotacao}" />
+						<label class="mdl-textfield__label" for="anotacaoCereais">Anotação</label>
 					</div>
-					<div class="row form-group">
-						<div class="form-item col-sm-6">
-							<label for="checkDocesGosta" class="control-label">
-							<input type="checkbox" id="checkDocesGosta" th:field="*{docesGosta}" class="checkInquerito" /> Gosta de doces?</label>
-							<select th:field="*{docesFrequenciaSemanal}" class="form-control select" th:disabled="*{!docesGosta}">
-								<option value="">Quantas vezes por semana?</option>
-								<option th:each="f : ${frequenciasSemanais}" th:text="${f.descricao}" th:value="${f}"></option>
-							</select>
-						</div> 
-						<div class="form-item col-sm-6">
-							<label for="docesAnotacao" class="control-label">Anotação</label>
-							<input type="text" id="inputTextDoces" th:field="*{docesAnotacao}" class="form-control" placeholder="Anotação" th:disabled="*{!docesGosta}" />
-							<label class=" label label-danger" th:if="${#fields.hasErrors('docesAnotacao')}" th:errors="*{docesAnotacao}">Title error message</label>
-						</div>
+				</div>
+				
+				<label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="checkDocesGosta">
+					<input type="checkbox" id="checkDocesGosta"  class="mdl-checkbox__input" th:field="*{docesGosta}"/>
+					<span class="mdl-checkbox__label">Gosta de doces</span>
+				</label>
+				<div class="mdl-grid mdl-grid--no-spacing sn-display--flex sn-align-items--center">
+					<select class="mdl-cell mdl-cell--6-col mdl-button mdl-js-button mdl-js-ripple-effect" th:field="*{docesFrequenciaSemanal}">
+						<option value="">Quantas vezes por semana?</option>
+						<option th:each="f : ${frequenciasSemanais}" th:text="${f.descricao}" th:value="${f}">Volvo</option>
+					</select>
+				<div class="mdl-cell mdl-cell--6-col mdl-textfield mdl-js-textfield sn-display--flex sn-fill--width sn-align-items--center">
+						<input class="mdl-textfield__input" type="text" id="anotacaoDoces" th:field="*{docesAnotacao}" />
+						<label class="mdl-textfield__label" for="anotacaoDoces">Anotação</label>
 					</div>
-					<div class="row form-group">
-						<div class="form-item col-sm-6">
-							<label for="checkFrutasGosta" class="control-label">
-							<input type="checkbox" id="checkFrutasGosta" th:field="*{frutasGosta}" class="checkInquerito" /> Gosta de frutas?</label>
-							<select th:field="*{frutasFrequenciaSemanal}" class="form-control select" th:disabled="*{!frutasGosta}">
-								<option value="">Quantas vezes por semana?</option>
-								<option th:each="f : ${frequenciasSemanais}" th:text="${f.descricao}" th:value="${f}"></option>
-							</select>
-						</div> 
-						<div class="form-item col-sm-6">
-							<label for="frutasAnotacao" class="control-label">Anotação</label>
-							<input type="text" id="inputTextFrutas" th:field="*{FrutasAnotacao}" class="form-control" placeholder="Anotação" th:disabled="*{!frutasGosta}" />
-							<label class=" label label-danger" th:if="${#fields.hasErrors('frutasAnotacao')}" th:errors="*{frutasAnotacao}">Title error message</label>
-						</div>
+				</div>
+				
+				<label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="checkFrutasGosta">
+					<input type="checkbox" id="checkFrutasGosta"  class="mdl-checkbox__input" th:field="*{frutasGosta}"/>
+					<span class="mdl-checkbox__label">Gosta de frutas</span>
+				</label>
+				<div class="mdl-grid mdl-grid--no-spacing sn-display--flex sn-align-items--center">
+					<select class="mdl-cell mdl-cell--6-col mdl-button mdl-js-button mdl-js-ripple-effect" th:field="*{frutasFrequenciaSemanal}">
+						<option value="">Quantas vezes por semana?</option>
+						<option th:each="f : ${frequenciasSemanais}" th:text="${f.descricao}" th:value="${f}">Volvo</option>
+					</select>
+				<div class="mdl-cell mdl-cell--6-col mdl-textfield mdl-js-textfield sn-display--flex sn-fill--width sn-align-items--center">
+						<input class="mdl-textfield__input" type="text" id="anotacaoFrutas" th:field="*{frutasAnotacao}" />
+						<label class="mdl-textfield__label" for="anotacaoFrutas">Anotação</label>
 					</div>
-					<div class="row form-group">
-						<div class="form-item col-sm-6">
-							<label for="checkGaseificadasGosta" class="control-label">
-							<input type="checkbox" id="checkGaseificadasGosta" th:field="*{gaseificadasGosta}" class="checkInquerito" /> Gosta de bebidas gaseificadas?</label>
-							<select th:field="*{gaseificadasFrequenciaSemanal}" class="form-control select" th:disabled="*{!gaseificadasGosta}">
-								<option value="">Quantas vezes por semana?</option>
-								<option th:each="f : ${frequenciasSemanais}" th:text="${f.descricao}" th:value="${f}"></option>
-							</select>
-						</div> 
-						<div class="form-item col-sm-6">
-							<label for="gaseificadasAnotacao" class="control-label">Anotação</label>
-							<input type="text" id="inputTextGaseificadas" th:field="*{gaseificadasAnotacao}" class="form-control" placeholder="Anotação" th:disabled="*{!gaseificadasGosta}" />
-							<label class=" label label-danger" th:if="${#fields.hasErrors('gaseificadasAnotacao')}" th:errors="*{gaseificadasAnotacao}">Title error message</label>
-						</div>
+				</div>
+				
+				<label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="checkGaseificadasGosta">
+					<input type="checkbox" id="checkGaseificadasGosta"  class="mdl-checkbox__input" th:field="*{gaseificadasGosta}"/>
+					<span class="mdl-checkbox__label">Gosta de gaseificadas</span>
+				</label>
+				<div class="mdl-grid mdl-grid--no-spacing sn-display--flex sn-align-items--center">
+					<select class="mdl-cell mdl-cell--6-col mdl-button mdl-js-button mdl-js-ripple-effect" th:field="*{gaseificadasFrequenciaSemanal}">
+						<option value="">Quantas vezes por semana?</option>
+						<option th:each="f : ${frequenciasSemanais}" th:text="${f.descricao}" th:value="${f}">Volvo</option>
+					</select>
+				<div class="mdl-cell mdl-cell--6-col mdl-textfield mdl-js-textfield sn-display--flex sn-fill--width sn-align-items--center">
+						<input class="mdl-textfield__input" type="text" id="anotacaoGaseificadas" th:field="*{gaseificadasAnotacao}" />
+						<label class="mdl-textfield__label" for="anotacaoGaseificadas">Anotação</label>
 					</div>
-					<div class="row form-group">
-						<div class="form-item col-sm-6">
-							<label for="checkInfusoesGosta" class="control-label">
-							<input type="checkbox" id="checkInfusoesGosta" th:field="*{infusoesGosta}" class="checkInquerito" /> Gosta de infusão?</label>
-							<select th:field="*{infusoesFrequenciaSemanal}" class="form-control select" th:disabled="*{!infusoesGosta}">
-								<option value="">Quantas vezes por semana?</option>
-								<option th:each="f : ${frequenciasSemanais}" th:text="${f.descricao}" th:value="${f}"></option>
-							</select>
-						</div> 
-						<div class="form-item col-sm-6">
-							<label for="infusoesAnotacao" class="control-label">Anotação</label>
-							<input type="text" id="inputTextInfusoes" th:field="*{infusoesAnotacao}" class="form-control" placeholder="Anotação" th:disabled="*{!infusoesGosta}" />
-							<label class=" label label-danger" th:if="${#fields.hasErrors('infusoesAnotacao')}" th:errors="*{infusoesAnotacao}">Title error message</label>
-						</div>
+				</div>
+				
+				<label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="checkInfusoesGosta">
+					<input type="checkbox" id="checkInfusoesGosta"  class="mdl-checkbox__input" th:field="*{infusoesGosta}"/>
+					<span class="mdl-checkbox__label">Gosta de infusoes</span>
+				</label>
+				<div class="mdl-grid mdl-grid--no-spacing sn-display--flex sn-align-items--center">
+					<select class="mdl-cell mdl-cell--6-col mdl-button mdl-js-button mdl-js-ripple-effect" th:field="*{infusoesFrequenciaSemanal}">
+						<option value="">Quantas vezes por semana?</option>
+						<option th:each="f : ${frequenciasSemanais}" th:text="${f.descricao}" th:value="${f}">Volvo</option>
+					</select>
+				<div class="mdl-cell mdl-cell--6-col mdl-textfield mdl-js-textfield sn-display--flex sn-fill--width sn-align-items--center">
+						<input class="mdl-textfield__input" type="text" id="anotacaoInfusoes" th:field="*{infusoesAnotacao}" />
+						<label class="mdl-textfield__label" for="anotacaoInfusoes">Anotação</label>
 					</div>
-					<div class="row form-group">
-						<div class="form-item col-sm-6">
-							<label for="checkLeguminosasGosta" class="control-label">
-							<input type="checkbox" id="checkLeguminosasGosta" th:field="*{leguminosasGosta}" class="checkInquerito" /> Gosta de leguminosas?</label>
-							<select th:field="*{leguminosasFrequenciaSemanal}" class="form-control select" th:disabled="*{!leguminosasGosta}">
-								<option value="">Quantas vezes por semana?</option>
-								<option th:each="f : ${frequenciasSemanais}" th:text="${f.descricao}" th:value="${f}"></option>
-							</select>
-						</div> 
-						<div class="form-item col-sm-6">
-							<label for="leguminosasAnotacao" class="control-label">Anotação</label>
-							<input type="text" id="inputTextLeguminosas" th:field="*{leguminosasAnotacao}" class="form-control" placeholder="Anotação" th:disabled="*{!leguminosasGosta}" />
-							<label class=" label label-danger" th:if="${#fields.hasErrors('leguminosasAnotacao')}" th:errors="*{leguminosasAnotacao}">Title error message</label>
-						</div>
+				</div>
+				
+				<label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="checkLeguminosasGosta">
+					<input type="checkbox" id="checkLeguminosasGosta"  class="mdl-checkbox__input" th:field="*{leguminosasGosta}"/>
+					<span class="mdl-checkbox__label">Gosta de leguminosas</span>
+				</label>
+				<div class="mdl-grid mdl-grid--no-spacing sn-display--flex sn-align-items--center">
+					<select class="mdl-cell mdl-cell--6-col mdl-button mdl-js-button mdl-js-ripple-effect" th:field="*{leguminosasFrequenciaSemanal}">
+						<option value="">Quantas vezes por semana?</option>
+						<option th:each="f : ${frequenciasSemanais}" th:text="${f.descricao}" th:value="${f}">Volvo</option>
+					</select>
+				<div class="mdl-cell mdl-cell--6-col mdl-textfield mdl-js-textfield sn-display--flex sn-fill--width sn-align-items--center">
+						<input class="mdl-textfield__input" type="text" id="anotacaoLeguminosas" th:field="*{leguminosasAnotacao}" />
+						<label class="mdl-textfield__label" for="anotacaoLeguminosas">Anotação</label>
 					</div>
-					<div class="row form-group">
-						<div class="form-item col-sm-6">
-							<label for="checkLeiteDerivadosGosta" class="control-label">
-							<input type="checkbox" id="checkLeiteDerivadosGosta" th:field="*{leiteDerivadosGosta}" class="checkInquerito" /> Gosta de leite ou derivados?</label>
-							<select th:field="*{leiteDerivadosFrequenciaSemanal}" class="form-control select" th:disabled="*{!leiteDerivadosGosta}">
-								<option value="">Quantas vezes por semana?</option>
-								<option th:each="f : ${frequenciasSemanais}" th:text="${f.descricao}" th:value="${f}"></option>
-							</select>
-						</div> 
-			
-						<div class="form-item col-sm-6">
-							<label for="leiteDerivadosAnotacao" class="control-label">Anotação</label>
-							<input type="text" id="inputTextLeiteDerivados" th:field="*{leiteDerivadosAnotacao}" class="form-control" placeholder="Anotação" th:disabled="*{!leiteDerivadosGosta}" />
-							<label class=" label label-danger" th:if="${#fields.hasErrors('leiteDerivadosAnotacao')}" th:errors="*{leiteDerivadosAnotacao}">Title error message</label>
-						</div>
+				</div>
+				
+				<label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="checkLeiteDerivadosGosta">
+					<input type="checkbox" id="checkLeiteDerivadosGosta"  class="mdl-checkbox__input" th:field="*{leiteDerivadosGosta}"/>
+					<span class="mdl-checkbox__label">Gosta de leite ou derivados</span>
+				</label>
+				<div class="mdl-grid mdl-grid--no-spacing sn-display--flex sn-align-items--center">
+					<select class="mdl-cell mdl-cell--6-col mdl-button mdl-js-button mdl-js-ripple-effect" th:field="*{leiteDerivadosFrequenciaSemanal}">
+						<option value="">Quantas vezes por semana?</option>
+						<option th:each="f : ${frequenciasSemanais}" th:text="${f.descricao}" th:value="${f}">Volvo</option>
+					</select>
+				<div class="mdl-cell mdl-cell--6-col mdl-textfield mdl-js-textfield sn-display--flex sn-fill--width sn-align-items--center">
+						<input class="mdl-textfield__input" type="text" id="anotacaoLeiteDerivados" th:field="*{leiteDerivadosAnotacao}" />
+						<label class="mdl-textfield__label" for="anotacaoLeiteDerivados">Anotação</label>
 					</div>
-					<div class="row form-group">
-						<div class="form-item col-sm-6">
-							<label for="checkManteigaGosta" class="control-label">
-							<input type="checkbox" id="checkManteigaGosta" th:field="*{manteigaGosta}" class="checkInquerito" /> Gosta de manteiga?</label>
-							<select th:field="*{manteigaFrequenciaSemanal}" class="form-control select" th:disabled="*{!manteigaGosta}">
-								<option value="">Quantas vezes por semana?</option>
-								<option th:each="f : ${frequenciasSemanais}" th:text="${f.descricao}" th:value="${f}"></option>
-							</select>
-						</div> 
-			
-						<div class="form-item col-sm-6">
-							<label for="manteigaAnotacao" class="control-label">Anotação</label>
-							<input type="text" id="inputTextManteiga" th:field="*{manteigaAnotacao}" class="form-control" placeholder="Anotação" th:disabled="*{!manteigaGosta}" />
-							<label class=" label label-danger" th:if="${#fields.hasErrors('manteigaAnotacao')}" th:errors="*{manteigaAnotacao}">Title error message</label>
-						</div>
+				</div>
+				
+				<label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="checkManteigaGosta">
+					<input type="checkbox" id="checkManteigaGosta"  class="mdl-checkbox__input" th:field="*{manteigaGosta}"/>
+					<span class="mdl-checkbox__label">Gosta de manteiga</span>
+				</label>
+				<div class="mdl-grid mdl-grid--no-spacing sn-display--flex sn-align-items--center">
+					<select class="mdl-cell mdl-cell--6-col mdl-button mdl-js-button mdl-js-ripple-effect" th:field="*{manteigaFrequenciaSemanal}">
+						<option value="">Quantas vezes por semana?</option>
+						<option th:each="f : ${frequenciasSemanais}" th:text="${f.descricao}" th:value="${f}">Volvo</option>
+					</select>
+				<div class="mdl-cell mdl-cell--6-col mdl-textfield mdl-js-textfield sn-display--flex sn-fill--width sn-align-items--center">
+						<input class="mdl-textfield__input" type="text" id="anotacaoManteiga" th:field="*{manteigaAnotacao}" />
+						<label class="mdl-textfield__label" for="anotacaoManteiga">Anotação</label>
 					</div>
-					<div class="row form-group">
-						<div class="form-item col-sm-6">
-							<label for="checkMargarinaGosta" class="control-label">
-							<input type="checkbox" id="checkMargarinaGosta" th:field="*{margarinaGosta}" class="checkInquerito" /> Gosta de margarina?</label>
-							<select th:field="*{margarinaFrequenciaSemanal}" class="form-control select" th:disabled="*{!margarinaGosta}">
-								<option value="">Quantas vezes por semana?</option>
-								<option th:each="f : ${frequenciasSemanais}" th:text="${f.descricao}" th:value="${f}"></option>
-							</select>
-						</div> 
-			
-						<div class="form-item col-sm-6">
-							<label for="margarinaAnotacao" class="control-label">Anotação</label>
-							<input type="text" id="inputTextMargarina" th:field="*{margarinaAnotacao}" class="form-control" placeholder="Anotação" th:disabled="*{!margarinaGosta}" />
-							<label class=" label label-danger" th:if="${#fields.hasErrors('margarinaAnotacao')}" th:errors="*{margarinaAnotacao}">Title error message</label>
-						</div>
+				</div>
+				
+				<label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="checkMargarinaGosta">
+					<input type="checkbox" id="checkMargarinaGosta"  class="mdl-checkbox__input" th:field="*{margarinaGosta}"/>
+					<span class="mdl-checkbox__label">Gosta de margarina</span>
+				</label>
+				<div class="mdl-grid mdl-grid--no-spacing sn-display--flex sn-align-items--center">
+					<select class="mdl-cell mdl-cell--6-col mdl-button mdl-js-button mdl-js-ripple-effect"  th:field="*{margarinaFrequenciaSemanal}">
+						<option value="">Quantas vezes por semana?</option>
+						<option th:each="f : ${frequenciasSemanais}" th:text="${f.descricao}" th:value="${f}">Volvo</option>
+					</select>
+				<div class="mdl-cell mdl-cell--6-col mdl-textfield mdl-js-textfield sn-display--flex sn-fill--width sn-align-items--center">
+						<input class="mdl-textfield__input" type="text" id="anotacaoMargarina" th:field="*{margarinaAnotacao}" />
+						<label class="mdl-textfield__label" for="anotacaoMargarina">Anotação</label>
 					</div>
-					<div class="row form-group">
-						<div class="form-item col-sm-6">
-							<label for="checkMassasGosta" class="control-label">
-							<input type="checkbox" id="checkMassasGosta" th:field="*{massasGosta}" class="checkInquerito" /> Gosta de massas?</label>
-							<select th:field="*{massasFrequenciaSemanal}" class="form-control select" th:disabled="*{!massasGosta}">
-								<option value="">Quantas vezes por semana?</option>
-								<option th:each="f : ${frequenciasSemanais}" th:text="${f.descricao}" th:value="${f}"></option>
-							</select>
-						</div> 
-			
-						<div class="form-item col-sm-6">
-							<label for="massasAnotacao" class="control-label">Anotação</label>
-							<input type="text" id="inputTextMassas" th:field="*{massasAnotacao}" class="form-control" placeholder="Anotação" th:disabled="*{!massasGosta}" />
-							<label class=" label label-danger" th:if="${#fields.hasErrors('massasAnotacao')}" th:errors="*{massasAnotacao}">Title error message</label>
-						</div>
+				</div>
+				
+				<label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="checkMassasGosta">
+					<input type="checkbox" id="checkMassasGosta"  class="mdl-checkbox__input" th:field="*{massasGosta}"/>
+					<span class="mdl-checkbox__label">Gosta de massas</span>
+				</label>
+				<div class="mdl-grid mdl-grid--no-spacing sn-display--flex sn-align-items--center">
+					<select class="mdl-cell mdl-cell--6-col mdl-button mdl-js-button mdl-js-ripple-effect" th:field="*{massasFrequenciaSemanal}">
+						<option value="">Quantas vezes por semana?</option>
+						<option th:each="f : ${frequenciasSemanais}" th:text="${f.descricao}" th:value="${f}">Volvo</option>
+					</select>
+				<div class="mdl-cell mdl-cell--6-col mdl-textfield mdl-js-textfield sn-display--flex sn-fill--width sn-align-items--center">
+						<input class="mdl-textfield__input" type="text" id="anotacaoMassas" th:field="*{massasAnotacao}" />
+						<label class="mdl-textfield__label" for="anotacaoMassas">Anotação</label>
 					</div>
-					<div class="row form-group">
-						<div class="form-item col-sm-6">
-							<label for="checkOleoGosta" class="control-label">
-							<input type="checkbox" id="checkOleoGosta" th:field="*{oleoGosta}" class="checkInquerito" /> Gosta de óleos?</label>
-							<select th:field="*{oleoFrequenciaSemanal}" class="form-control select" th:disabled="*{!oleoGosta}">
-								<option value="">Quantas vezes por semana?</option>
-								<option th:each="f : ${frequenciasSemanais}" th:text="${f.descricao}" th:value="${f}"></option>
-							</select>
-						</div> 
-			
-						<div class="form-item col-sm-6">
-							<label for="oleoAnotacao" class="control-label">Anotação</label>
-							<input type="text" id="inputTextOleo" th:field="*{oleoAnotacao}" class="form-control" placeholder="Anotação" th:disabled="*{!oleoGosta}" />
-							<label class=" label label-danger" th:if="${#fields.hasErrors('oleoAnotacao')}" th:errors="*{oleoAnotacao}">Title error message</label>
-						</div>
+				</div>
+				
+				<label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="checkOleoGosta">
+					<input type="checkbox" id="checkOleoGosta"  class="mdl-checkbox__input" th:field="*{oleoGosta}"/>
+					<span class="mdl-checkbox__label">Gosta de oleo</span>
+				</label>
+				<div class="mdl-grid mdl-grid--no-spacing sn-display--flex sn-align-items--center">
+					<select class="mdl-cell mdl-cell--6-col mdl-button mdl-js-button mdl-js-ripple-effect" th:field="*{oleoFrequenciaSemanal}">
+						<option value="">Quantas vezes por semana?</option>
+						<option th:each="f : ${frequenciasSemanais}" th:text="${f.descricao}" th:value="${f}">Volvo</option>
+					</select>
+				<div class="mdl-cell mdl-cell--6-col mdl-textfield mdl-js-textfield sn-display--flex sn-fill--width sn-align-items--center">
+						<input class="mdl-textfield__input" type="text" id="anotacaoOleo" th:field="*{oleoAnotacao}" />
+						<label class="mdl-textfield__label" for="anotacaoOleo">Anotação</label>
 					</div>
-					<div class="row form-group">
-						<div class="form-item col-sm-6">
-							<label for="checkOvosGosta" class="control-label">
-							<input type="checkbox" id="checkOvosGosta" th:field="*{ovosGosta}" class="checkInquerito" /> Gosta de ovos?</label>
-							<select th:field="*{ovosFrequenciaSemanal}" class="form-control select" th:disabled="*{!ovosGosta}">
-								<option value="">Quantas vezes por semana?</option>
-								<option th:each="f : ${frequenciasSemanais}" th:text="${f.descricao}" th:value="${f}"></option>
-							</select>
-						</div> 
-			
-						<div class="form-item col-sm-6">
-							<label for="ovosAnotacao" class="control-label">Anotação</label>
-							<input type="text" id="inputTextOvos" th:field="*{ovosAnotacao}" class="form-control" placeholder="Anotação" th:disabled="*{!ovosGosta}" />
-							<label class=" label label-danger" th:if="${#fields.hasErrors('ovosAnotacao')}" th:errors="*{ovosAnotacao}">Title error message</label>
-						</div>
+				</div>
+				
+				<label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="checkOvosGosta">
+					<input type="checkbox" id="checkOvosGosta"  class="mdl-checkbox__input" th:field="*{ovosGosta}"/>
+					<span class="mdl-checkbox__label">Gosta de ovos</span>
+				</label>
+				<div class="mdl-grid mdl-grid--no-spacing sn-display--flex sn-align-items--center">
+					<select class="mdl-cell mdl-cell--6-col mdl-button mdl-js-button mdl-js-ripple-effect" th:field="*{ovosFrequenciaSemanal}">
+						<option value="">Quantas vezes por semana?</option>
+						<option th:each="f : ${frequenciasSemanais}" th:text="${f.descricao}" th:value="${f}">Volvo</option>
+					</select>
+				<div class="mdl-cell mdl-cell--6-col mdl-textfield mdl-js-textfield sn-display--flex sn-fill--width sn-align-items--center">
+						<input class="mdl-textfield__input" type="text" id="anotacaoOvos" th:field="*{ovosAnotacao}" />
+						<label class="mdl-textfield__label" for="anotacaoOvos">Anotação</label>
 					</div>
-					<div class="row form-group">
-						<div class="form-item col-sm-6">
-							<label for="checkPeixeGosta" class="control-label">
-							<input type="checkbox" id="checkPeixeGosta" th:field="*{peixeGosta}" class="checkInquerito" /> Gosta de peixes?</label>
-							<select th:field="*{peixeFrequenciaSemanal}" class="form-control select" th:disabled="*{!peixeGosta}">
-								<option value="">Quantas vezes por semana?</option>
-								<option th:each="f : ${frequenciasSemanais}" th:text="${f.descricao}" th:value="${f}"></option>
-							</select>
-						</div> 
-			
-						<div class="form-item col-sm-6">
-							<label for="peixeAnotacao" class="control-label">Anotação</label>
-							<input type="text" id="inputTextPeixe" th:field="*{peixeAnotacao}" class="form-control" placeholder="Anotação" th:disabled="*{!peixeGosta}" />
-							<label class=" label label-danger" th:if="${#fields.hasErrors('peixeAnotacao')}" th:errors="*{peixeAnotacao}">Title error message</label>
-						</div>
+				</div>
+				
+				<label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="checkPeixeGosta">
+					<input type="checkbox" id="checkPeixeGosta"  class="mdl-checkbox__input" th:field="*{peixeGosta}"/>
+					<span class="mdl-checkbox__label">Gosta de peixe</span>
+				</label>
+				<div class="mdl-grid mdl-grid--no-spacing sn-display--flex sn-align-items--center">
+					<select class="mdl-cell mdl-cell--6-col mdl-button mdl-js-button mdl-js-ripple-effect" th:field="*{peixeFrequenciaSemanal}">
+						<option value="">Quantas vezes por semana?</option>
+						<option th:each="f : ${frequenciasSemanais}" th:text="${f.descricao}" th:value="${f}">Volvo</option>
+					</select>
+				<div class="mdl-cell mdl-cell--6-col mdl-textfield mdl-js-textfield sn-display--flex sn-fill--width sn-align-items--center">
+						<input class="mdl-textfield__input" type="text" id="anotacaoPeixe" th:field="*{peixeAnotacao}" />
+						<label class="mdl-textfield__label" for="anotacaoPeixe">Anotação</label>
 					</div>
-					<div class="row form-group">
-						<div class="form-item col-sm-6">
-							<label for="checkSucoGosta" class="control-label">
-							<input type="checkbox" id="checkSucoGosta" th:field="*{sucoGosta}" class="checkInquerito" /> Gosta de sucos?</label>
-							<select th:field="*{sucoFrequenciaSemanal}" class="form-control select" th:disabled="*{!sucoGosta}">
-								<option value="">Quantas vezes por semana?</option>
-								<option th:each="f : ${frequenciasSemanais}" th:text="${f.descricao}" th:value="${f}"></option>
-							</select>
-						</div> 
-			
-						<div class="form-item col-sm-6">
-							<label for="sucoAnotacao" class="control-label">Anotação</label>
-							<input type="text" id="inputTextSuco" th:field="*{sucoAnotacao}" class="form-control" placeholder="Anotação" th:disabled="*{!sucoGosta}" />
-							<label class=" label label-danger" th:if="${#fields.hasErrors('sucoAnotacao')}" th:errors="*{sucoAnotacao}">Title error message</label>
-						</div>
+				</div>
+				
+				<label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="checkSucoGosta">
+					<input type="checkbox" id="checkSucoGosta"  class="mdl-checkbox__input" th:field="*{sucoGosta}"/>
+					<span class="mdl-checkbox__label">Gosta de suco</span>
+				</label>
+				<div class="mdl-grid mdl-grid--no-spacing sn-display--flex sn-align-items--center">
+					<select class="mdl-cell mdl-cell--6-col mdl-button mdl-js-button mdl-js-ripple-effect" th:field="*{sucoFrequenciaSemanal}">
+						<option value="">Quantas vezes por semana?</option>
+						<option th:each="f : ${frequenciasSemanais}" th:text="${f.descricao}" th:value="${f}">Volvo</option>
+					</select>
+				<div class="mdl-cell mdl-cell--6-col mdl-textfield mdl-js-textfield sn-display--flex sn-fill--width sn-align-items--center">
+						<input class="mdl-textfield__input" type="text" id="anotacaoSuco" th:field="*{sucoAnotacao}" />
+						<label class="mdl-textfield__label" for="anotacaoSuco">Anotação</label>
 					</div>
-					<div class="row form-group">
-						<div class="form-item col-sm-6">
-							<label for="checkToucinhoBaconGosta" class="control-label">
-							<input type="checkbox" id="checkToucinhoBaconGosta" th:field="*{toucinhoBaconGosta}" class="checkInquerito" /> Gosta de toucinho ou bacon?</label>
-							<select th:field="*{toucinhoBaconFrequenciaSemanal}" class="form-control select" th:disabled="*{!toucinhoBaconGosta}">
-								<option value="">Quantas vezes por semana?</option>
-								<option th:each="f : ${frequenciasSemanais}" th:text="${f.descricao}" th:value="${f}"></option>
-							</select>
-						</div> 
-			
-						<div class="form-item col-sm-6">
-							<label for="toucinhoBaconAnotacao" class="control-label">Anotação</label>
-							<input type="text" id="inputTextToucinhoBacon" th:field="*{toucinhoBaconAnotacao}" class="form-control" placeholder="Anotação" th:disabled="*{!toucinhoBaconGosta}" />
-							<label class=" label label-danger" th:if="${#fields.hasErrors('toucinhoBaconAnotacao')}" th:errors="*{toucinhoBaconAnotacao}">Title error message</label>
-						</div>
+				</div>
+				
+				<label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="checkToucinhoBaconGosta">
+					<input type="checkbox" id="checkToucinhoBaconGosta"  class="mdl-checkbox__input" th:field="*{toucinhoBaconGosta}"/>
+					<span class="mdl-checkbox__label">Gosta de toucinho ou bacon</span>
+				</label>
+				<div class="mdl-grid mdl-grid--no-spacing sn-display--flex sn-align-items--center">
+					<select class="mdl-cell mdl-cell--6-col mdl-button mdl-js-button mdl-js-ripple-effect" th:field="*{toucinhoBaconFrequenciaSemanal}">
+						<option value="">Quantas vezes por semana?</option>
+						<option th:each="f : ${frequenciasSemanais}" th:text="${f.descricao}" th:value="${f}">Volvo</option>
+					</select>
+				<div class="mdl-cell mdl-cell--6-col mdl-textfield mdl-js-textfield sn-display--flex sn-fill--width sn-align-items--center">
+						<input class="mdl-textfield__input" type="text" id="anotacaoToucinhoBacon" th:field="*{toucinhoBaconAnotacao}" />
+						<label class="mdl-textfield__label" for="anotacaoToucinhoBacon">Anotação</label>
 					</div>
-					<div class="row form-group">
-						<div class="form-item col-sm-6">
-							<label for="checkVegetaisCozidosGosta" class="control-label">
-							<input type="checkbox" id="checkVegetaisCozidosGosta" th:field="*{vegetaisCozidosGosta}" class="checkInquerito" /> Gosta de vegetais cozidos?</label>
-							<select th:field="*{vegetaisCozidosFrequenciaSemanal}" class="form-control select" th:disabled="*{!vegetaisCozidosGosta}">
-								<option value="">Quantas vezes por semana?</option>
-								<option th:each="f : ${frequenciasSemanais}" th:text="${f.descricao}" th:value="${f}"></option>
-							</select>
-						</div> 
-			
-						<div class="form-item col-sm-6">
-							<label for="vegetaisCozidosAnotacao" class="control-label">Anotação</label>
-							<input type="text" id="inputTextVegetaisCozidos" th:field="*{vegetaisCozidosAnotacao}" class="form-control" placeholder="Anotação" th:disabled="*{!vegetaisCozidosGosta}" />
-							<label class=" label label-danger" th:if="${#fields.hasErrors('vegetaisCozidosAnotacao')}" th:errors="*{vegetaisCozidosAnotacao}">Title error message</label>
-						</div>
+				</div>
+				
+				<label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="checkVegetaisCozidosGosta">
+					<input type="checkbox" id="checkVegetaisCozidosGosta"  class="mdl-checkbox__input" th:field="*{vegetaisCozidosGosta}"/>
+					<span class="mdl-checkbox__label">Gosta de vegetais cozidos</span>
+				</label>
+				<div class="mdl-grid mdl-grid--no-spacing sn-display--flex sn-align-items--center">
+					<select class="mdl-cell mdl-cell--6-col mdl-button mdl-js-button mdl-js-ripple-effect" th:field="*{vegetaisCozidosFrequenciaSemanal}">
+						<option value="">Quantas vezes por semana?</option>
+						<option th:each="f : ${frequenciasSemanais}" th:text="${f.descricao}" th:value="${f}">Volvo</option>
+					</select>
+				<div class="mdl-cell mdl-cell--6-col mdl-textfield mdl-js-textfield sn-display--flex sn-fill--width sn-align-items--center">
+						<input class="mdl-textfield__input" type="text" id="anotacaoVegetaisCozidos" th:field="*{vegetaisCozidosAnotacao}" />
+						<label class="mdl-textfield__label" for="anotacaoVegetaisCozidos">Anotação</label>
 					</div>
-					<div class="row form-group">
-						<div class="form-item col-sm-6">
-							<label for="checkVegetaisCrusGosta" class="control-label">
-							<input type="checkbox" id="checkVegetaisCrusGosta" th:field="*{vegetaisCrusGosta}" class="checkInquerito" /> Gosta de vegetais crus?</label>
-							<select th:field="*{vegetaisCrusFrequenciaSemanal}" class="form-control select" th:disabled="*{!vegetaisCrusGosta}">
-								<option value="">Quantas vezes por semana?</option>
-								<option th:each="f : ${frequenciasSemanais}" th:text="${f.descricao}" th:value="${f}"></option>
-							</select>
-						</div> 
-			
-						<div class="form-item col-sm-6">
-							<label for="vegetaisCrusAnotacao" class="control-label">Anotação</label>
-							<input type="text" id="inputTextVegetaisCrus" th:field="*{vegetaisCrusAnotacao}" class="form-control" placeholder="Anotação" th:disabled="*{!vegetaisCrusGosta}" />
-							<label class=" label label-danger" th:if="${#fields.hasErrors('vegetaisCrusAnotacao')}" th:errors="*{vegetaisCrusAnotacao}">Title error message</label>
-						</div>
+				</div>
+				
+				<label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="checkVegetaisCrusGosta">
+					<input type="checkbox" id="checkVegetaisCrusGosta"  class="mdl-checkbox__input" th:field="*{vegetaisCrusGosta}"/>
+					<span class="mdl-checkbox__label">Gosta de vegetais crus</span>
+				</label>
+				<div class="mdl-grid mdl-grid--no-spacing sn-display--flex sn-align-items--center">
+					<select class="mdl-cell mdl-cell--6-col mdl-button mdl-js-button mdl-js-ripple-effect"  th:field="*{vegetaisCrusFrequenciaSemanal}">
+						<option value="">Quantas vezes por semana?</option>
+						<option th:each="f : ${frequenciasSemanais}" th:text="${f.descricao}" th:value="${f}">Volvo</option>
+					</select>
+				<div class="mdl-cell mdl-cell--6-col mdl-textfield mdl-js-textfield sn-display--flex sn-fill--width sn-align-items--center">
+						<input class="mdl-textfield__input" type="text" id="anotacaoVegetaisCrus" th:field="*{vegetaisCrusAnotacao}" />
+						<label class="mdl-textfield__label" for="anotacaoVegetaisCrus">Anotação</label>
 					</div>
-					<div class="row form-group">
-						<div class="form-item col-sm-6">
-							<label for="checkViscerasGosta" class="control-label">
-							<input type="checkbox" id="checkViscerasGosta" th:field="*{viscerasGosta}" class="checkInquerito" /> Gosta de vísceras?</label>
-							<select th:field="*{viscerasFrequenciaSemanal}" class="form-control select" th:disabled="*{!viscerasGosta}">
-								<option value="">Quantas vezes por semana?</option>
-								<option th:each="f : ${frequenciasSemanais}" th:text="${f.descricao}" th:value="${f}"></option>
-							</select>
-						</div> 
-			
-						<div class="form-item col-sm-6">
-							<label for="viscerasAnotacao" class="control-label">Anotação</label>
-							<input type="text" id="inputTextVisceras" th:field="*{viscerasAnotacao}" class="form-control" placeholder="Anotação" th:disabled="*{!viscerasGosta}" />
-							<label class=" label label-danger" th:if="${#fields.hasErrors('viscerasAnotacao')}" th:errors="*{viscerasAnotacao}">Title error message</label>
-						</div>
+				</div>
+				
+				<label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="checkViscerasGosta">
+					<input type="checkbox" id="checkViscerasGosta"  class="mdl-checkbox__input" th:field="*{viscerasGosta}"/>
+					<span class="mdl-checkbox__label">Gosta de visceras</span>
+				</label>
+				<div class="mdl-grid mdl-grid--no-spacing sn-display--flex sn-align-items--center">
+					<select class="mdl-cell mdl-cell--6-col mdl-button mdl-js-button mdl-js-ripple-effect" th:field="*{viscerasFrequenciaSemanal}">
+						<option value="">Quantas vezes por semana?</option>
+						<option th:each="f : ${frequenciasSemanais}" th:text="${f.descricao}" th:value="${f}">Volvo</option>
+					</select>
+				<div class="mdl-cell mdl-cell--6-col mdl-textfield mdl-js-textfield sn-display--flex sn-fill--width sn-align-items--center">
+						<input class="mdl-textfield__input" type="text" id="anotacaoVisceras" th:field="*{viscerasAnotacao}" />
+						<label class="mdl-textfield__label" for="anotacaoVisceras">Anotação</label>
 					</div>
-					<div class="row form-group">
-						<div class="form-item col-sm-6">
-							<label for="observacoes" class="control-label">Observações</label>
-							<textarea rows="3" cols="80" placeholder="Observações" th:field="*{observacoes}"></textarea>
-							<label class=" label label-danger" th:if="${#fields.hasErrors('observacoes')}" th:errors="*{observacoes}">Title error message</label>
-						</div>
-					</div>
-					<div class="col-xs-offset-0 col-xs-10" align="center">
-						<button type="submit" class="btn btn-success">Adicionar</button>
-					</div>
-				</form>
-			</div>
+				</div>
+				
+				
+
+				<div class="mdl-textfield mdl-js-textfield sn-display--flex sn-fill--width">
+					<textarea class="mdl-textfield__input" type="text" rows= "3" id="observacoes" th:field="*{observacoes}"></textarea>
+					<label class="mdl-textfield__label" for="observacoes">Observações</label>
+				</div>
+				<div align="right">
+					<button type="submit" class="mdl-button">Cadastrar</button>
+				</div>
+				
+				
+	
+			</form>
+	
 		</div>
-    </body>
+	
+		<div class="mdl-cell
+			mdl-cell--3-col-desktop 
+			sn-card sn-padding--48">
+	
+			<div class="mdl-layout-title">Informações</div>
+		</div>
+	
+				</div>
+</section>
 </html>
