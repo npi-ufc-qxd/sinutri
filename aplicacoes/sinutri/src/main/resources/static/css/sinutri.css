@@ -443,28 +443,23 @@
 	text-align: center;
 	font-size: 24px;
 	color: #888;
-	margin-left: auto;
-	margin-right: auto;
-
 }
 
-.sn-rounded-card__message {
-	padding: 26px;
-	text-align: center;
-	font-size: 24px;
-	color: #888;
+.sn-attribute__title {
+	font-family: "roboto";
+	font-size: 18px;
+	font-weight: 300;
+	color: #000 !important;
+	margin-bottom: 6px;
 }
 
-.sn-input__label {
-	width: 96px;
-	margin-right: 16px;
-	text-align: right;
+.sn-attribute__value {
+	font-family: "roboto";
+	font-size: 18px;
+	font-weight: bold;
+	margin-bottom: 16px;
 }
 
-.sn-textfield__label {
-	width: calc(100% - 96px);
-	margin-left: 96px;
-}
 
 .sn-padding--16 { padding: 16px; }
 
@@ -491,7 +486,7 @@
 .sn-display--inline-block { display: inline-block !important; }
 
 .sn-display--inline { display: inline-block !important; }
-	
+
 .sn-display--flex { display: flex !important; }
 
 .sn-align-items--center { align-items: center; }
