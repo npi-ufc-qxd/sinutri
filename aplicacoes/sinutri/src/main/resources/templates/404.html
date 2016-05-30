@@ -4,6 +4,67 @@
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 
 <head>
+
 	<title>Sinutri | 404</title>
+	<meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0"/>
+	<link rel="stylesheet" type="text/css" th:href="@{css/material.min.css}"/>
+	<link rel="stylesheet" type="text/css" th:href="@{css/font/material-icons.css}"/>
+	<link rel="stylesheet" type="text/css" th:href="@{css/font/roboto.css}"/>
+	<link rel="stylesheet" type="text/css" th:href="@{css/dialog-polyfill.css}"/>
+	<link rel="stylesheet" type="text/css" th:href="@{/css/sinutri.css}"/>
+	
 </head>
+
+	<body>
+		<div class="sn-container">
+			
+			<div class="sn-drawer-left">
+				
+				<div class="mdl-layout__header-row">
+
+					<span class="mdl-layout-title">Title</span>
+
+				</div>
+
+			</div>
+
+			<div class="sn-main">
+				
+				<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header mdl-color--grey-200">
+
+					<header class="mdl-layout__header">
+    					
+    					<div class="mdl-layout__header-row">
+
+    						<span class="mdl-layout-title">Title</span>
+
+    					</div>
+
+    				</header>
+
+					<div class="mdl-layout__content">
+	    				
+	    				<div class="sn-rounded-card">
+	    					<div class="sn-rounded-card__circle">
+	    						<b class="sn-rounded-card__icon">404</b>
+	    					</div>
+	    					<div class="sn-rounded-card__message">
+	    						Página não encontrada!
+	    					</div>
+	    				</div>
+
+	    			</div>
+
+				</div>
+
+			<div class="sn-main__foreground"></div>
+
+		</div>
+		
+		<script type="text/javascript" th:src="@{/js/jquery.js}"></script>
+		<script type="text/javascript" th:src="@{/js/material.min.js}"></script>
+		
+	</body>
+
 </html>
