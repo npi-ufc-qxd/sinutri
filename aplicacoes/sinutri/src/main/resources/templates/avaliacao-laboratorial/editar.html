@@ -9,43 +9,49 @@
 </head>
 <section layout:fragment="conteudo">
 	<div class="mdl-grid">
-
-		<div class="mdl-cell
-			mdl-cell--7-col-desktop mdl-cell--1-offset-desktop
-			sn-card sn-padding--48">
-  				
-			<div class="mdl-layout-title">Editar Avaliação Laboratorial</div>
-
+		
+		<div class="mdl-cell mdl-cell--7-col-desktop mdl-cell--1-offset-desktop sn-card sn-padding--48">
+		
 			<form class="sn-form" action="#" th:action="@{/Paciente/__*{paciente.id}__/AvaliacaoLaboratorial/__*{id}__/Editar/}" th:object="${avaliacaoLaboratorial}" method="post">
 				
-				<input class="mdl-textfield__input sn-input__date-datepicker" type="hidden" th:field="*{id}"/>
+				<div class="mdl-grid">
 
-				<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label sn-display--flex sn-fill--width">
-					<input class="mdl-textfield__input sn-input__date-datepicker" type="text" th:field="*{criadoEm}" th:value="*{criadoEm}"/>
-					<label class="mdl-textfield__label" for="criadoEm">Criado Em</label>
-				</div>
-				
-				<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label sn-display--flex sn-fill--width">
-					<input class="mdl-textfield__input sn-input__date-datepicker" type="text" th:field="*{atualizado}" th:value="*{atualizado}"/>
-					<label class="mdl-textfield__label" for="atualizado">Atualizado</label>
-				</div>
+					<div class="sn-textfield mdl-cell mdl-cell--8-col">
+						<div class="mdl-layout-title">Editar Avaliação Laboratorial</div>
+					</div>
+					
+					<div class="sn-textfield mdl-cell mdl-cell--6-col">
+						<label class="sn-textfield__label" for="sn-date">Data de criação:</label> 
+						<input class="sn-textfield__input sn-date-picker" type="text" id="sn-date" th:field="*{criadoEm}" th:value="*{criadoEm}"/>
+					</div>
+					
+					<div class="sn-textfield mdl-cell mdl-cell--6-col">
+						<label class="sn-textfield__label" for="sn-date">Última atualização:</label> 
+						<input class="sn-textfield__input sn-date-picker" type="text" id="sn-date" th:field="*{atualizado}" th:value="*{atualizado}"/>
+					</div>
+					
+					<div class="sn-textfield mdl-cell mdl-cell--12-col">
+						<label class="sn-textfield__label" for="sn-text">Observação:</label>
+						<textarea class="sn-textfield__input" type="text" id="sn-text" th:field="*{observacao}" th:value="*{observacao}"></textarea>
+					</div>
 
-				<div class="mdl-textfield mdl-js-textfield sn-display--flex sn-fill--width">
-					<textarea class="mdl-textfield__input" rows= "3" id="" th:field="*{observacao}"></textarea>
-					<label class="mdl-textfield__label" for="*{observacao}">Observação</label>
-				</div>
-				
-				<input type="submit" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--raised mdl-button--primary" value="Salvar"/>
+					<div class="sn-form-actions">
 
+						<input type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect" value="Salvar" /> 
+						<input type="button" class="mdl-button mdl-js-button mdl-button--colored mdl-js-ripple-effect" value="Cancelar" />
+
+					</div>
+
+				</div>
 			</form>
 
 		</div>
 
-		<div class="mdl-cell
-			mdl-cell--3-col-desktop 
-			sn-card sn-padding--48">
+		<div class="mdl-cell mdl-cell--3-col-desktop">
+			<div class="sn-card sn-padding--48">
+				<div class="mdl-layout-title">Informações</div>
 
-			<div class="mdl-layout-title">Informações</div>
+			</div>
 		</div>
 	</div>
 </section>

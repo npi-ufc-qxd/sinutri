@@ -18,20 +18,18 @@
 
 				<div class="mdl-grid">
 
-					<!-- First section -->
-
 					<div class="sn-textfield mdl-cell mdl-cell--8-col">
 						<div class="mdl-layout-title">Cadastrar Avaliação Laboratorial</div>
 					</div>
 					
 					<div class="sn-textfield mdl-cell mdl-cell--6-col">
 						<label class="sn-textfield__label" for="sn-date">Data de criação:</label> 
-						<input class="sn-textfield__input sn-date-picker sn-mask-date" id="sn-date" />
+						<input class="sn-textfield__input sn-date-picker" type="text" id="sn-date" th:field="*{criadoEm}" th:value="*{criadoEm}"/>
 					</div>
 
 					<div class="sn-textfield mdl-cell mdl-cell--12-col">
 						<label class="sn-textfield__label" for="sn-text">Observação:</label>
-						<textarea class="sn-textfield__input" type="text" id="sn-text"></textarea>
+						<textarea class="sn-textfield__input" type="text" id="sn-text" th:field="*{observacao}" th:value="*{observacao}"></textarea>
 					</div>
 
 					<div class="sn-form-actions">
@@ -59,6 +57,7 @@
 
 <section layout:fragment="js">
 
+	<script type="text/javascript" th:src="@{/js/moment.js}"></script>
 	<script type="text/javascript" th:src="@{/js/material-date-picker.js}"></script>
 
 </section>
