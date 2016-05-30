@@ -48,6 +48,8 @@ var tryExecute = function(func, prefix, successMessage, errorMessage) {
 
 var sn_base = function() {
 
+	var dialogCounter = 0;
+
 	var setupForm = function() {
 		
 		if($(".sn-mask-date").exists()) {
@@ -73,10 +75,10 @@ var sn_base = function() {
 				var selector = "#" + id;
 				sn_base.doRegistryDatePicker(selector);
 			});
-			
+
 		}
 
-		if($(".sn-time-picker").exists()) {
+		if($(".sn-time-picker").exists()) { 
 
 			$(".sn-time-picker").each(function(index, el) {
 				el = $(el);
@@ -91,6 +93,7 @@ var sn_base = function() {
 		}
 
 		if($(".sn-date-time-picker").exists()) { 
+
 			$(".sn-date-time-picker").each(function(index, el) {
 				el = $(el);
 				var id = el.attr("id");
@@ -100,6 +103,7 @@ var sn_base = function() {
 				var selector = "#" + id;
 				sn_base.doRegistryDateTimePicker(selector);
 			});
+
 		}
 		
 	}
@@ -115,7 +119,6 @@ var sn_base = function() {
 				$(".mdl-layout__header").css("box-shadow", "none");				
 
 		});
-		
 		$(".mdl-layout__header").css("box-shadow", "none");
 
 		$(".mdl-layout__content").scroll(function() {
@@ -128,16 +131,7 @@ var sn_base = function() {
 
 	var setupDialog = function(dialogSelector) {
 
-		var dialog = document.querySelector(dialogSelector);
-
-		if (!dialog.showModal) {
-
-			dialogPolyfill.registerDialog(dialog);
-
-		}
-
-		return dialog;
-
+		
 	}
 
 	var setupDrawer = function() {
@@ -211,13 +205,59 @@ var sn_base = function() {
 
 		}, 
 
-		doRegistryDialog : function(dialogSelector) {
+		doRegistryDialog : function(setts) {
 
-			return setupDialog(dialogSelector);
+			var dialogText="" + 
+				"<dialog class=\"mdl-dialog\" id=\"modal-1\">" + 
+
+					"<div class=\"mdl-card__menu\">" + 
+						"<button class=\"mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect mdl-card__menu-close\">" + 
+							"<i class=\"material-icons\">close</i>" + 
+						"</button>" + 
+					"</div>" + 
+
+					"<h4 class=\"mdl-dialog__title\"></h4>" + 
+					"<div class=\"mdl-dialog__content\">" + 
+						// ...
+					"</div>" + 
+					"<div class=\"mdl-dialog__actions\">" + 
+						// ...
+					"</div>" +
+
+				"</dialog>";
+
+			var dialog = $($.parseHTML(dialogText));
+			var dialogContent = $(setts.dialog);
+			dialogContent.remove();
+
+			dialog.attr("id", "sn-dialog-" + (dialogCounter++));
+			$("body").append(dialog);
+			dialog.find(".mdl-dialog__content").append(dialogContent);
+			dialog.find(".mdl-card__menu-close").click(function() { dialog.get(0).close(); });
+			dialog.find(".mdl-dialog__title").text(setts.title);
+
+			for(var i = 0; i < setts.buttons.length; i++) {
+				var bs = setts.buttons[i];
+				button = $.parseHTML("<button class=\"mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--primary\">" + bs.label + "</button>");
+				$(button).click(bs.action);
+				dialog.find(".mdl-dialog__actions").append(button);
+			}
+
+			if (!dialog.get(0).showModal) {
+				dialogPolyfill.registerDialog(dialog.get(0));
+			}
+
+			$(setts.showButton).click(function() {
+				dialog.get(0).showModal();
+			});
+
+			return dialog.get(0);
+
 
 		}, 
 
 		doRegistryDatePicker : function(el) {
+
 			if($(el).exists()) {
 
 				$(el).bootstrapMaterialDatePicker({
@@ -271,29 +311,6 @@ var sn_base = function() {
 					okText: "OK", 
 					nowText: "Agora"
 				});
-			}
-
-			if($(el).exists()) {
-			
-				// Date picker
-				$(el).datepicker({
-					nextText: "►", 
-					prevText: "◄", 
-					dateFormat: "dd/mm/yy", 
-					onSelect: function() {
-						$(el).parent().addClass("is-dirty");
-					}
-				});
-
-				var widget = $(el).datepicker( "widget" );
-				
-				widget.addClass("sn-padding--24 mdl-color--white mdl-shadow--2dp");
-				widget.find(".ui-datepicker").css("display", "none");
-
-				if($(".sn-input__date-now").exists()) {
-					$(".sn-input__date-now").parent().addClass("is-dirty");
-					$(".sn-input__date-now").datepicker('setDate', new Date());
-				}
 
 			}
 
