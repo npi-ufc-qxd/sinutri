@@ -8,249 +8,206 @@
 </head>
 <body>
 	<section layout:fragment="conteudo">
-	<div class="mdl-grid">
-		<div class="row">
-			<div class="col-sm-8">
-				<h3>
-					Informações da Avaliação Antropométria de <strong th:text="${avaliacaoAntropometrica.paciente.pessoa.nome}">Renata Campos</strong>
-				</h3>
-			</div>
 	
-			<div class="col-sm-4" align="right" style="margin-top: 15px;">
-				<a th:href="@{${'/Paciente/' + avaliacaoAntropometrica.paciente.id + '/Antropometria/' + avaliacaoAntropometrica.id + '/Editar/'}}" class="btn btn-warning btn-sm">
-					<span class="glyphicon glyphicon-edit"></span> Editar
-				</a>
-				<a th:href="@{${'/Paciente/' + avaliacaoAntropometrica.paciente.id + '/Antropometria/' + avaliacaoAntropometrica.id + '/Excluir/'}}" class="btn btn-danger btn-sm">
-					<span class="glyphicon glyphicon-remove"></span> Excluir
-				</a>
+	<style type="text/css">
+
+		.sn-fab {
+			position: absolute;
+			right: 26px;
+			bottom: -26px;
+		}
+
+	</style>
+	
+	<div class="mdl-grid">
+		<div class="mdl-cell mdl-cell--7-col-desktop mdl-cell--1-offset-desktop sn-card">	
+			<div class="mdl-grid mdl-grid--no-spacing">
+				<div class="mdl-layout-title mdl-cell mdl-cell--12-col sn-padding--48 mdl-color--teal-500 mdl-color-text--white">
+					Informações da Avaliação Antropométria
+					<a th:href="@{${'/Paciente/' + avaliacaoAntropometrica.paciente.id + '/Antropometria/' + avaliacaoAntropometrica.id + '/Editar/'}}" class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored sn-fab">
+						<i class="material-icons mdl-color-text--white">edit</i>
+					</a>
+				</div>
+				
+				<div class="mdl-grid mdl-cell mdl-cell--12-col sn-padding--48 mdl-color--white">
+				
+					<a th:href="@{${'/Paciente/' + avaliacaoAntropometrica.paciente.id + '/Antropometria/' + avaliacaoAntropometrica.id + '/Excluir/'}}" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--raised mdl-button--accent mdl-color-text--white">
+						Remover
+					</a>
+					
+					<div class="sn-textfield mdl-cell mdl-cell--12-col">
+						<h5>GERAL</h5>
+					</div>
+					
+					<div class="sn-attribute mdl-cell mdl-cell--6-col">
+						<div class="sn-attribute__title">Nutricionista:</div>
+						<div class="sn-attribute__value" th:text="${avaliacaoAntropometrica.nutricionista != null} ? ${avaliacaoAntropometrica.nutricionista.pessoa.nome} : 'Sem nutricionista' ">Maria da Silva</div>
+					</div>
+					<div class="sn-attribute mdl-cell mdl-cell--6-col">
+						<div class="sn-attribute__title">Criação:</div>
+						<div class="sn-attribute__value" th:text="${#dates.format(avaliacaoAntropometrica.criadoEm,'dd/MM/yyyy')}">01/01/1995</div>
+					</div>
+					<div class="sn-attribute mdl-cell mdl-cell--6-col">
+						<div class="sn-attribute__title">Última atualização:</div>
+						<div class="sn-attribute__value" th:text="${#dates.format(avaliacaoAntropometrica.atualizadoEm,'dd/MM/yyyy')}">01/01/1995</div>
+					</div>
+					<div class="sn-attribute mdl-cell mdl-cell--6-col">
+						<div class="sn-attribute__title">Altura (m):</div>
+						<div class="sn-attribute__value" th:text="${avaliacaoAntropometrica.altura}">10</div>
+					</div>
+					<div class="sn-attribute mdl-cell mdl-cell--6-col">
+						<div class="sn-attribute__title">Peso (Kg):</div>
+						<div class="sn-attribute__value" th:text="${avaliacaoAntropometrica.peso}">10</div>
+					</div>
+					<div class="sn-attribute mdl-cell mdl-cell--6-col">
+						<div class="sn-attribute__title">Peso Desejado (Kg):</div>
+						<div class="sn-attribute__value" th:text="${avaliacaoAntropometrica.pesoDesejado}">10</div>
+					</div>
+					<div class="sn-attribute mdl-cell mdl-cell--6-col">
+						<div class="sn-attribute__title">Cintura (cm):</div>
+						<div class="sn-attribute__value" th:text="${avaliacaoAntropometrica.cintura}">10</div>
+					</div>
+					<div class="sn-attribute mdl-cell mdl-cell--6-col">
+						<div class="sn-attribute__title">Abdomen (cm):</div>
+						<div class="sn-attribute__value" th:text="${avaliacaoAntropometrica.abdomen}">10</div>
+					</div>
+					<div class="sn-attribute mdl-cell mdl-cell--6-col">
+						<div class="sn-attribute__title">Quadril (cm):</div>
+						<div class="sn-attribute__value" th:text="${avaliacaoAntropometrica.quadril}">10</div>
+					</div>
+					<div class="sn-attribute mdl-cell mdl-cell--6-col">
+						<div class="sn-attribute__title">Punho (cm):</div>
+						<div class="sn-attribute__value" th:text="${avaliacaoAntropometrica.punho}">10</div>
+					</div>
+					<div class="sn-attribute mdl-cell mdl-cell--6-col">
+						<div class="sn-attribute__title">Antebraço (cm):</div>
+						<div class="sn-attribute__value" th:text="${avaliacaoAntropometrica.antebraco}">10</div>
+					</div>
+					
+					<div class="sn-textfield mdl-cell mdl-cell--12-col">
+						<h5>CIRCUNFERÊNCIAS</h5>
+					</div>
+					
+					<div class="sn-attribute mdl-cell mdl-cell--6-col">
+						<div class="sn-attribute__title">Ombro (cm):</div>
+						<div class="sn-attribute__value" th:text="${avaliacaoAntropometrica.ombro}">10</div>
+					</div>
+					<div class="sn-attribute mdl-cell mdl-cell--6-col">
+						<div class="sn-attribute__title">Peitoral (cm):</div>
+						<div class="sn-attribute__value" th:text="${avaliacaoAntropometrica.peitoral}">10</div>
+					</div>
+					<div class="sn-attribute mdl-cell mdl-cell--6-col">
+						<div class="sn-attribute__title">Panturrilha Direita (cm):</div>
+						<div class="sn-attribute__value" th:text="${avaliacaoAntropometrica.panturrilhaDireita}">10</div>
+					</div>
+					<div class="sn-attribute mdl-cell mdl-cell--6-col">
+						<div class="sn-attribute__title">Panturrilha Direita (cm):</div>
+						<div class="sn-attribute__value" th:text="${avaliacaoAntropometrica.panturrilhaDireita}">10</div>
+					</div>
+					<div class="sn-attribute mdl-cell mdl-cell--6-col">
+						<div class="sn-attribute__title">Panturrilha Esquerda (cm):</div>
+						<div class="sn-attribute__value" th:text="${avaliacaoAntropometrica.panturrilhaEsquerda}">10</div>
+					</div>
+					<div class="sn-attribute mdl-cell mdl-cell--6-col">
+						<div class="sn-attribute__title">Pescoço (cm):</div>
+						<div class="sn-attribute__value" th:text="${avaliacaoAntropometrica.pescoco}">10</div>
+					</div>
+					<div class="sn-attribute mdl-cell mdl-cell--6-col">
+						<div class="sn-attribute__title">Coxa Direita (cm):</div>
+						<div class="sn-attribute__value" th:text="${avaliacaoAntropometrica.coxaDireita}">10</div>
+					</div>
+					<div class="sn-attribute mdl-cell mdl-cell--6-col">
+						<div class="sn-attribute__title">Coxa Esquerda (cm):</div>
+						<div class="sn-attribute__value" th:text="${avaliacaoAntropometrica.coxaEsquerda}">10</div>
+					</div>
+					<div class="sn-attribute mdl-cell mdl-cell--6-col">
+						<div class="sn-attribute__title">Coxa Proximal Direita (cm):</div>
+						<div class="sn-attribute__value" th:text="${avaliacaoAntropometrica.coxaProximalDireita}">10</div>
+					</div>
+					<div class="sn-attribute mdl-cell mdl-cell--6-col">
+						<div class="sn-attribute__title">Coxa Proximal Esquerda (cm):</div>
+						<div class="sn-attribute__value" th:text="${avaliacaoAntropometrica.coxaProximalEsquerda}">10</div>
+					</div>
+					<div class="sn-attribute mdl-cell mdl-cell--6-col">
+						<div class="sn-attribute__title">Braco Relaxado Direito (cm):</div>
+						<div class="sn-attribute__value" th:text="${avaliacaoAntropometrica.bracoRelaxadoDireito}">10</div>
+					</div>
+					<div class="sn-attribute mdl-cell mdl-cell--6-col">
+						<div class="sn-attribute__title">Braco Relaxado Esquerdo (cm):</div>
+						<div class="sn-attribute__value" th:text="${avaliacaoAntropometrica.bracoRelaxadoEsquerdo}">10</div>
+					</div>
+					<div class="sn-attribute mdl-cell mdl-cell--6-col">
+						<div class="sn-attribute__title">Braco Contraído Direito (cm):</div>
+						<div class="sn-attribute__value" th:text="${avaliacaoAntropometrica.bracoContraidoDireito}">10</div>
+					</div>
+					<div class="sn-attribute mdl-cell mdl-cell--6-col">
+						<div class="sn-attribute__title">Braco Contraído Esquerdo (cm):</div>
+						<div class="sn-attribute__value" th:text="${avaliacaoAntropometrica.bracoContraidoEsquerdo}">10</div>
+					</div>
+				
+					<div class="sn-textfield mdl-cell mdl-cell--12-col">
+						<h5>DiÂMETROS ÓSSEOS</h5>
+					</div>
+				
+					<div class="sn-attribute mdl-cell mdl-cell--6-col">
+						<div class="sn-attribute__title">Diâmetro Punho (cm):</div>
+						<div class="sn-attribute__value" th:text="${avaliacaoAntropometrica.diametroPunho}">10</div>
+					</div>
+					<div class="sn-attribute mdl-cell mdl-cell--6-col">
+						<div class="sn-attribute__title">Diâmetro Fêmur (cm):</div>
+						<div class="sn-attribute__value" th:text="${avaliacaoAntropometrica.diametroFemur}">10</div>
+					</div>
+					
+					<div class="sn-textfield mdl-cell mdl-cell--12-col">
+						<h5>COMPOSIÇÂO CORPORAL</h5>
+					</div>
+					
+					<div class="sn-attribute mdl-cell mdl-cell--6-col">
+						<div class="sn-attribute__title">Biceps (cm):</div>
+						<div class="sn-attribute__value" th:text="${avaliacaoAntropometrica.biceps}">10</div>
+					</div>
+					<div class="sn-attribute mdl-cell mdl-cell--6-col">
+						<div class="sn-attribute__title">Triceps (cm):</div>
+						<div class="sn-attribute__value" th:text="${avaliacaoAntropometrica.triceps}">10</div>
+					</div>
+					<div class="sn-attribute mdl-cell mdl-cell--6-col">
+						<div class="sn-attribute__title">Axilar Média (cm):</div>
+						<div class="sn-attribute__value" th:text="${avaliacaoAntropometrica.axilarMedia}">10</div>
+					</div>
+					<div class="sn-attribute mdl-cell mdl-cell--6-col">
+						<div class="sn-attribute__title">Tórax (cm):</div>
+						<div class="sn-attribute__value" th:text="${avaliacaoAntropometrica.torax}">10</div>
+					</div>
+					<div class="sn-attribute mdl-cell mdl-cell--6-col">
+						<div class="sn-attribute__title">Panturrilha Medial (cm):</div>
+						<div class="sn-attribute__value" th:text="${avaliacaoAntropometrica.panturrilhaMedial}">10</div>
+					</div>
+					<div class="sn-attribute mdl-cell mdl-cell--6-col">
+						<div class="sn-attribute__title">Abdominal (cm):</div>
+						<div class="sn-attribute__value" th:text="${avaliacaoAntropometrica.abdominal}">10</div>
+					</div>
+					<div class="sn-attribute mdl-cell mdl-cell--6-col">
+						<div class="sn-attribute__title">Suprailíaca (cm):</div>
+						<div class="sn-attribute__value" th:text="${avaliacaoAntropometrica.suprailiaca}">10</div>
+					</div>
+					<div class="sn-attribute mdl-cell mdl-cell--6-col">
+						<div class="sn-attribute__title">Subescapular (cm):</div>
+						<div class="sn-attribute__value" th:text="${avaliacaoAntropometrica.subescapular}">10</div>
+					</div>
+					<div class="sn-attribute mdl-cell mdl-cell--6-col">
+						<div class="sn-attribute__title">Coxa (cm):</div>
+						<div class="sn-attribute__value" th:text="${avaliacaoAntropometrica.coxa}">10</div>
+					</div>
+				</div>
 			</div>
 		</div>
-		<div class="panel panel-primary group">
-			<div class="panel-heading">
-			<h3 class="panel-title">GERAL</h3>
-			</div>
-			<div class="panel-body">
 				
-				<div class="container-fluid group-item">
-				<div class="row">
-						<div class="col-md-3">
-							<label>Nutricionista:</label>
-							<label th:text="${avaliacaoAntropometrica.nutricionista != null} ? ${avaliacaoAntropometrica.nutricionista.pessoa.nome} : 'Sem nutricionista' ">Maria da Silva</label>
-						</div>
-						<div class="col-md-3">
-							<label>Criação:</label>
-							<label th:text="${#dates.format(avaliacaoAntropometrica.criadoEm,'dd/MM/yyyy')}">01/01/1995</label>
-						</div>
-						<div class="col-md-3">
-							<label>Última atualização:</label>
-							<label th:text="${#dates.format(avaliacaoAntropometrica.atualizadoEm,'dd/MM/yyyy')}">01/01/1995</label>
-						</div>
-						<div class="col-md-3">
-						</div>
-					</div>
-				</div>
-				
-				<div class="container-fluid group-item">
-					<div class="row">
-						<div class="col-md-3">
-							<label>Altura (m):</label>
-							<label th:text="${avaliacaoAntropometrica.altura}">10</label>
-						</div>
-						<div class="col-md-3">
-							<label>Peso (Kg):</label>
-							<label th:text="${avaliacaoAntropometrica.peso}">10</label>
-						</div>
-						<div class="col-md-3">
-							<label>Peso Desejado (Kg):</label>
-							<label th:text="${avaliacaoAntropometrica.pesoDesejado}">10</label>
-						</div>
-						<div class="col-md-3">
-							<label>Cintura (cm):</label>
-							<label th:text="${avaliacaoAntropometrica.cintura}">10</label>
-						</div>
-					</div>
-				</div>
-				
-				<div class="container-fluid group-item">
-					<div class="row">
-						<div class="col-md-3 group-item-colum">
-							<label>Abdomen (cm):</label>
-							<label th:text="${avaliacaoAntropometrica.abdomen}">10</label>
-						</div>
-						<div class="col-md-3">
-							<label>Quadril (cm):</label>
-							<label th:text="${avaliacaoAntropometrica.quadril}">10</label>
-						</div>
-						<div class="col-md-3">
-							<label>Punho (cm):</label>
-							<label th:text="${avaliacaoAntropometrica.punho}">10</label>
-						</div>
-						<div class="col-md-3">
-							<label>Antebraço (cm):</label>
-							<label th:text="${avaliacaoAntropometrica.antebraco}">10</label>
-						</div>
-					</div>
-				</div>
+		<div class="mdl-cell mdl-cell--3-col-desktop">					
+			<div class="sn-card sn-padding--48">
+				<div class="mdl-layout-title">Informações</div>
 			</div>
 		</div>
-		<div class="panel panel-primary group">
-			<div class="panel-heading">
-			<h3 class="panel-title">CIRCUNFERÊNCIAS</h3>
-			</div>
-			<div class="panel-body">
 			
-				<div class="container-fluid group-item">
-				<div class="row">
-						<div class="col-md-3">
-							<label>Ombro (cm):</label>
-							<label th:text="${avaliacaoAntropometrica.ombro}">10</label>
-						</div>
-						<div class="col-md-3">
-							<label>Peitoral (cm):</label>
-							<label th:text="${avaliacaoAntropometrica.peitoral}">10</label>
-						</div>
-						<div class="col-md-3">
-							<label>Panturrilha Direita (cm):</label>
-							<label th:text="${avaliacaoAntropometrica.panturrilhaDireita}">10</label>
-						</div>
-						<div class="col-md-3">
-							<label>Panturrilha Esquerda (cm):</label>
-							<label th:text="${avaliacaoAntropometrica.panturrilhaEsquerda}">10</label>
-						</div>
-					</div>
-				</div>
-				
-				<div class="container-fluid group-item">
-					<div class="row">
-						<div class="col-md-3">
-							<label>Pescoço (cm):</label>
-							<label th:text="${avaliacaoAntropometrica.pescoco}">10</label>
-						</div>
-					</div>
-				</div>
-				
-				<div class="container-fluid group-item">
-					<div class="row">
-						<div class="col-md-3 group-item-colum">
-							<label>Coxa Direita (cm):</label>
-							<label th:text="${avaliacaoAntropometrica.coxaDireita}">10</label>
-						</div>
-						<div class="col-md-3">
-							<label>Coxa Esquerda (cm):</label>
-							<label th:text="${avaliacaoAntropometrica.coxaEsquerda}">10</label>
-						</div>
-						<div class="col-md-3">
-							<label>Coxa Proximal Direita (cm):</label>
-							<label th:text="${avaliacaoAntropometrica.coxaProximalDireita}">10</label>
-						</div>
-						<div class="col-md-3">
-							<label>Coxa Proximal Esquerda (cm):</label>
-							<label th:text="${avaliacaoAntropometrica.coxaProximalEsquerda}">10</label>
-						</div>
-					</div>
-				</div>
-				
-				<div class="container-fluid group-item">
-					<div class="row">
-						<div class="col-md-3 group-item-colum">
-							<label>Braco Relaxado Direito (cm):</label>
-							<label th:text="${avaliacaoAntropometrica.bracoRelaxadoDireito}">10</label>
-						</div>
-						<div class="col-md-3">
-							<label>Braco Relaxado Esquerdo (cm):</label>
-							<label th:text="${avaliacaoAntropometrica.bracoRelaxadoEsquerdo}">10</label>
-						</div>
-						<div class="col-md-3 group-item-colum">
-							<label>Braco Contraído Direito (cm):</label>
-							<label th:text="${avaliacaoAntropometrica.bracoContraidoDireito}">10</label>
-						</div>
-						<div class="col-md-3">
-							<label>Braco Contraído Esquerdo (cm):</label>
-							<label th:text="${avaliacaoAntropometrica.bracoContraidoEsquerdo}">10</label>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-		<div class="panel panel-primary group">
-			<div class="panel-heading">
-			<h3 class="panel-title">DiÂMETROS ÓSSEOS</h3>
-			</div>
-			<div class="panel-body">
-				
-				<div class="container-fluid group-item">
-				<div class="row">
-					<div class="col-md-3">
-						<label>Diâmetro Punho (cm):</label>
-						<label th:text="${avaliacaoAntropometrica.diametroPunho}">10</label>
-					</div>
-					<div class="col-md-3">
-						<label>Diâmetro Fêmur (cm):</label>
-						<label th:text="${avaliacaoAntropometrica.diametroFemur}">10</label>
-					</div>
-				</div>
-				</div>
-			</div>
-		</div>
-		
-		<div class="panel panel-primary group">
-			<div class="panel-heading">
-			<h3 class="panel-title">COMPOSIÇÂO CORPORAL</h3>
-			</div>
-			<div class="panel-body">
-				
-				<div class="container-fluid group-item">
-				<div class="row">
-					<div class="col-md-3">
-						<label>Biceps (cm):</label>
-						<label th:text="${avaliacaoAntropometrica.biceps}">10</label>
-					</div>
-					<div class="col-md-3">
-						<label>Triceps (cm):</label>
-						<label th:text="${avaliacaoAntropometrica.triceps}">10</label>
-					</div>
-					<div class="col-md-3">
-						<label>Axilar Média (cm):</label>
-						<label th:text="${avaliacaoAntropometrica.axilarMedia}">10</label>
-					</div>
-					<div class="col-md-3">
-						<label> Tórax (cm):</label>
-						<label th:text="${avaliacaoAntropometrica.torax}">10</label>
-					</div>
-				</div>
-				</div>
-				
-				<div class="container-fluid group-item">
-				<div class="row">
-					<div class="col-md-3">
-						<label>Panturrilha Medial (cm):</label>
-						<label th:text="${avaliacaoAntropometrica.panturrilhaMedial}">10</label>
-					</div>
-					<div class="col-md-3">
-						<label>Abdominal (cm):</label>
-						<label th:text="${avaliacaoAntropometrica.abdominal}">10</label>
-					</div>
-					<div class="col-md-3">
-						<label>Suprailíaca (cm):</label>
-						<label th:text="${avaliacaoAntropometrica.suprailiaca}">10</label>
-					</div>
-					<div class="col-md-3">
-						<label>Subescapular (cm): </label>
-						<label th:text="${avaliacaoAntropometrica.subescapular}">10</label>
-					</div>
-				</div>
-				</div>
-				
-				<div class="container-fluid group-item">
-				<div class="row">
-					<div class="col-md-3">
-						<label>Coxa (cm):</label>
-						<label th:text="${avaliacaoAntropometrica.coxa}">10</label>
-					</div>
-				</div>
-				</div>
-			</div>
-		</div>
 	</div>
 	</section>
 </body>
