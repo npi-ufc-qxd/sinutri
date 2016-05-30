@@ -39,7 +39,7 @@ var tryExecute = function(func, prefix, successMessage, errorMessage) {
 
 	} catch(err) {
 
-		sn_error(prefix + " - " + errorMessage);
+		sn_error(prefix + " - " + errorMessage + " [" + err + "]");
 		return null;
 
 	}
@@ -50,38 +50,56 @@ var sn_base = function() {
 
 	var setupForm = function() {
 		
-		if($(".sn-input__date-datepicker").exists()) {
-			
-			// Date picker
-			$(".sn-input__date-datepicker").datepicker({
-				nextText: "►", 
-				prevText: "◄"
+		if($(".sn-mask-date").exists()) {
+
+			$(".sn-mask-date").mask("99/99/9999",{placeholder:"dd mm aaaa"});
+
+		}
+
+		if($(".sn-mask-phone").exists()) {
+
+			$(".sn-mask-phone").mask("(99) 99999-9999");
+
+		}
+
+		if($(".sn-date-picker").exists()) { 
+
+			$(".sn-date-picker").each(function(index, el) {
+				el = $(el);
+				var id = el.attr("id");
+				if (id == undefined) {
+					el.attr("id", "sn-date-picker-" + index);
+				}
+				var selector = "#" + id;
+				sn_base.doRegistryDatePicker(selector);
 			});
-			var widget = $(".sn-input__date-datepicker" ).datepicker( "widget" );
 			
-			widget.addClass("sn-padding--24 mdl-color--white mdl-shadow--2dp");
-			widget.find(".ui-datepicker").css("display", "none");
-
-		}
-		
-		if($(".sn-form").exists()) {
-			
-			// Form Validate
-			$(".sn-form").validate();
-
 		}
 
-		//Mask		
-		if($(".sn-input__date-mask").exists()) {
+		if($(".sn-time-picker").exists()) {
 
-			$(".sn-input__date-mask").mask("99/99/9999",{placeholder:""});
+			$(".sn-time-picker").each(function(index, el) {
+				el = $(el);
+				var id = el.attr("id");
+				if (id == undefined) {
+					el.attr("id", "sn-time-picker-" + index);
+				}
+				var selector = "#" + id;
+				sn_base.doRegistryTimePicker(selector);
+			});
 
 		}
 
-		if($(".sn-input__phone-mask").exists()) {
-
-			$(".sn-input__phone-mask").mask("(99) 99999-9999");
-
+		if($(".sn-date-time-picker").exists()) { 
+			$(".sn-date-time-picker").each(function(index, el) {
+				el = $(el);
+				var id = el.attr("id");
+				if (id == undefined) {
+					el.attr("id", "sn-date-time-picker-" + index);
+				}
+				var selector = "#" + id;
+				sn_base.doRegistryDateTimePicker(selector);
+			});
 		}
 		
 	}
@@ -97,6 +115,7 @@ var sn_base = function() {
 				$(".mdl-layout__header").css("box-shadow", "none");				
 
 		});
+		
 		$(".mdl-layout__header").css("box-shadow", "none");
 
 		$(".mdl-layout__content").scroll(function() {
@@ -195,6 +214,88 @@ var sn_base = function() {
 		doRegistryDialog : function(dialogSelector) {
 
 			return setupDialog(dialogSelector);
+
+		}, 
+
+		doRegistryDatePicker : function(el) {
+			if($(el).exists()) {
+
+				$(el).bootstrapMaterialDatePicker({
+					format: "DD/MM/YYYY", 
+					shortTime: false, 
+					date: true, 
+					time: false, 
+					currentDate: new Date(), 
+					nowButton: true, 
+					cancelText: "Cancelar", 
+					okText: "OK", 
+					nowText: "Agora"
+				});
+
+			}
+
+		}, 
+
+		doRegistryTimePicker : function(el) {
+
+			if($(el).exists()) {
+
+				$(el).bootstrapMaterialDatePicker({
+					format: "HH:mm", 
+					shortTime: false, 
+					date: false, 
+					time: true, 
+					currentDate: new Date(), 
+					nowButton: true, 
+					cancelText: "Cancelar", 
+					okText: "OK", 
+					nowText: "Agora"
+				});
+
+			}
+
+		}, 
+
+		doRegistryDateTimePicker : function(el) {
+
+			if($(el).exists()) {
+
+				$(el).bootstrapMaterialDatePicker({
+					format: "DD/MM/YYYY HH:mm", 
+					shortTime: false, 
+					date: true, 
+					time: true, 
+					currentDate: new Date(), 
+					nowButton: true, 
+					cancelText: "Cancelar", 
+					okText: "OK", 
+					nowText: "Agora"
+				});
+			}
+
+			if($(el).exists()) {
+			
+				// Date picker
+				$(el).datepicker({
+					nextText: "►", 
+					prevText: "◄", 
+					dateFormat: "dd/mm/yy", 
+					onSelect: function() {
+						$(el).parent().addClass("is-dirty");
+					}
+				});
+
+				var widget = $(el).datepicker( "widget" );
+				
+				widget.addClass("sn-padding--24 mdl-color--white mdl-shadow--2dp");
+				widget.find(".ui-datepicker").css("display", "none");
+
+				if($(".sn-input__date-now").exists()) {
+					$(".sn-input__date-now").parent().addClass("is-dirty");
+					$(".sn-input__date-now").datepicker('setDate', new Date());
+				}
+
+			}
 
 		}
 

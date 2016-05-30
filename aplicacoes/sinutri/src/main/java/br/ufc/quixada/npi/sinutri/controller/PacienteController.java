@@ -145,8 +145,8 @@ public class PacienteController {
 	}
 	    
     @RequestMapping(value = "/{idPaciente}/Recordatorio", method = RequestMethod.POST)
-    public String adicionarRecordatorio( @Valid @ModelAttribute("recordatorio") Recordatorio recordatorio,
-            BindingResult result, @PathVariable("idPaciente") Long idPaciente, Model model ) {
+    public String adicionarRecordatorio( @ModelAttribute("recordatorio") Recordatorio recordatorio,
+            @PathVariable("idPaciente") Long idPaciente, Model model ) {
     	
     	Paciente paciente = pacienteService.buscarPacientePorId(idPaciente);
     	Servidor nutricionista = pessoaService.buscarServidorPorCpf(getCpfPessoaLogada());

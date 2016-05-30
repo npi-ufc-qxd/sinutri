@@ -6,14 +6,74 @@
 
 <head>
 	<title>Sinutri | Buscar</title>
+	<link rel="stylesheet" type="text/css" th:href="@{/css/buscar.css}"/>
 </head>
+
 <section layout:fragment="conteudo">
-	<div class="mdl-grid">
-		<div class="sn-list mdl-cell mdl-cell--8-col-desktop mdl-cell--2-offset-desktop mdl-cell--6-col-tablet mdl-cell--1-offset-tablet mdl-cell--4-col-phone">
-			<div class="sn-display--block sn-fill--width sn-search sn-padding--48 mdl-shadow--2dp mdl-color--white">
-				<span class="mdl-layout-title">Buscar</span>
+	<div class="page-content mdl-grid">
+
+		<div class="sn-main-page mdl-cell
+			mdl-cell--10-col-desktop mdl-cell--1-offset-desktop
+			mdl-cell--6-col-tablet mdl-cell--1-offset-tablet
+			mdl-cell--4-col-phone
+			mdl-shadow--2dp mdl-color--white">
+
+			<div class="sn-search">
+
+				<div class="mdl-textfield mdl-js-textfield sn-search__box">
+					<input id="sn-search__input" class="mdl-textfield__input sn-search__input"></input>
+					<label class="mdl-textfield__label" for="sn-search__input">Busca pacientes...</label>
+					<i class="sn-search__icon material-icons">search</i>
+				</div>
+
 			</div>
+
+			<div class="sn-search-actions">
+
+				<div class="mdl-layout-spacer"></div>
+
+				<button id="sn-search-actions__entries" class="sn-search-actions__entries mdl-button mdl-button--accent mdl-js-button mdl-js-ripple-effect">
+					<i class="material-icons mdl-list__item-icon mdl-color-text--accent">arrow_drop_down</i>Mostrando <span class="sn-search-actions__entries-value"></span> resultados
+				</button>
+
+				<ul class="sn-show-entries__list mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect" for="sn-search-actions__entries">
+					<li class="mdl-menu__item">10</li>
+					<li class="mdl-menu__item">25</li>
+					<li class="mdl-menu__item">50</li>
+					<li class="mdl-menu__item">100</li>
+				</ul>
+
+			</div>
+
+			<ul class="demo-list-two mdl-list mdl-color--grey-100">
+				<li class="mdl-list__item mdl-list__item--two-line">
+					<span class="mdl-list__item-primary-content">
+						<i class="material-icons mdl-list__item-avatar">person</i>
+						<span>Felipe Pinho</span>
+						<span class="mdl-list__item-sub-title">felipe76857685@gmail.com</span>
+					</span>
+					<span class="mdl-list__item-secondary-content">
+						<a class="mdl-list__item-secondary-action mdl-button mdl-button--accent mdl-js-button mdl-js-ripple-effect" href="#">Informações</a>
+					</span>
+				</li>
+				
+				<li class="mdl-list__item mdl-list__item--two-line">
+					<span class="mdl-list__item-primary-content">
+						<i class="material-icons mdl-list__item-avatar">person</i>
+						<span>Felipe Pinho</span>
+						<span class="mdl-list__item-sub-title">felipe76857685@gmail.com</span>
+					</span>
+					<span class="mdl-list__item-secondary-content">
+						<a class="mdl-list__item-secondary-action mdl-button mdl-button--accent mdl-js-button mdl-js-ripple-effect" href="#">Informações</a>
+					</span>
+				</li>
+			</ul>
+			
 		</div>
 	</div>
 </section>
+
+<script type="text/javascript" th:src="@{/js/buscar.js}"></script>
+<script type="text/javascript" th:src="@{http://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js}"></script>
+
 </html>

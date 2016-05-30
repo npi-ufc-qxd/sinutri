@@ -9,6 +9,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 @Entity
 @Table(uniqueConstraints = @UniqueConstraint(columnNames = { "id"}))
 public class Recordatorio {
+	
 	@Id
 	@GeneratedValue
 	private long id;
