@@ -73,10 +73,10 @@ var sn_base = function() {
 				var selector = "#" + id;
 				sn_base.doRegistryDatePicker(selector);
 			});
-
+			
 		}
 
-		if($(".sn-time-picker").exists()) { 
+		if($(".sn-time-picker").exists()) {
 
 			$(".sn-time-picker").each(function(index, el) {
 				el = $(el);
@@ -91,7 +91,6 @@ var sn_base = function() {
 		}
 
 		if($(".sn-date-time-picker").exists()) { 
-
 			$(".sn-date-time-picker").each(function(index, el) {
 				el = $(el);
 				var id = el.attr("id");
@@ -101,7 +100,6 @@ var sn_base = function() {
 				var selector = "#" + id;
 				sn_base.doRegistryDateTimePicker(selector);
 			});
-
 		}
 		
 	}
@@ -117,6 +115,7 @@ var sn_base = function() {
 				$(".mdl-layout__header").css("box-shadow", "none");				
 
 		});
+		
 		$(".mdl-layout__header").css("box-shadow", "none");
 
 		$(".mdl-layout__content").scroll(function() {
@@ -219,7 +218,6 @@ var sn_base = function() {
 		}, 
 
 		doRegistryDatePicker : function(el) {
-
 			if($(el).exists()) {
 
 				$(el).bootstrapMaterialDatePicker({
@@ -273,6 +271,29 @@ var sn_base = function() {
 					okText: "OK", 
 					nowText: "Agora"
 				});
+			}
+
+			if($(el).exists()) {
+			
+				// Date picker
+				$(el).datepicker({
+					nextText: "►", 
+					prevText: "◄", 
+					dateFormat: "dd/mm/yy", 
+					onSelect: function() {
+						$(el).parent().addClass("is-dirty");
+					}
+				});
+
+				var widget = $(el).datepicker( "widget" );
+				
+				widget.addClass("sn-padding--24 mdl-color--white mdl-shadow--2dp");
+				widget.find(".ui-datepicker").css("display", "none");
+
+				if($(".sn-input__date-now").exists()) {
+					$(".sn-input__date-now").parent().addClass("is-dirty");
+					$(".sn-input__date-now").datepicker('setDate', new Date());
+				}
 
 			}
 
