@@ -445,6 +445,21 @@
 	color: #888;
 }
 
+.sn-attribute__title {
+	font-family: "roboto";
+	font-size: 18px;
+	font-weight: 300;
+	color: #000 !important;
+	margin-bottom: 6px;
+}
+
+.sn-attribute__value {
+	font-family: "roboto";
+	font-size: 18px;
+	font-weight: bold;
+	margin-bottom: 16px;
+}
+
 
 .sn-padding--16 { padding: 16px; }
 

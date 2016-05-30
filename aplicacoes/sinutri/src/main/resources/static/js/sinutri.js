@@ -241,6 +241,8 @@ var sn_base = function() {
 				button = $.parseHTML("<button class=\"mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--primary\">" + bs.label + "</button>");
 				$(button).click(bs.action);
 				dialog.find(".mdl-dialog__actions").append(button);
+				for(k in bs.attrs)
+					$(button).attr(k, bs.attrs[k]);				
 			}
 
 			if (!dialog.get(0).showModal) {
