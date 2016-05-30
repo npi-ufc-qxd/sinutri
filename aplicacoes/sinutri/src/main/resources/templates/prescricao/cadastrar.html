@@ -7,46 +7,39 @@
 <head>
 	<title>Sinutri | Buscar</title>
 </head>
-<section layout:fragment="conteudo">
-	<div class="mdl-grid">
-		<div class="mdl-layout__content">
+	<section layout:fragment="conteudo">
+		<div class="mdl-grid">
+			<div class="mdl-cell
+					mdl-cell--7-col-desktop mdl-cell--1-offset-desktop
+					sn-card sn-padding--48">
+	   				
+				<div class="mdl-layout-title">Prescrição</div>
+				<form id="form-prescricao" action="#" th:object="${prescricao}" th:action="@{/Paciente/1/Prescricao/}" method="post">
 
-			<div class="mdl-grid">
-
-				<div class="mdl-cell
-						mdl-cell--7-col-desktop mdl-cell--1-offset-desktop
-						sn-card sn-padding--48">
-			    				
-					<div class="mdl-layout-title">Prescrição</div>
-
-					<form id="form-prescricao" action="#" th:object="${prescricao}" th:action="@{/Paciente/1/Prescricao/}" method="post">
-
-						<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label sn-display--flex sn-fill--width">
-							<input class="mdl-textfield__input" type="text" id="inputTextDescricao" th:field="*{descricao}"/>
-							<label class="mdl-textfield__label" for="inputTextDescricao">Descrição</label>
-						</div>
+					<div class="sn-textfield mdl-cell mdl-cell--12-col">	
+						<label class="sn-textfield__label" for="inputTextDescricao">Descrição</label>
+						<input class="sn-textfield__input" type="text" id="inputTextDescricao" th:field="*{descricao}"/>
+					</div>
 									
-						<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label sn-display--flex sn-fill--width">
-							<textarea class="mdl-textfield__input" rows= "5" id="inputTextTexto" th:field="*{texto}"></textarea>
-							<label class="mdl-textfield__label" for="inputTextTexto">Texto</label>
-						</div>
-		
-						<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label sn-display--flex sn-fill--width">
-							<input class="mdl-textfield__input sn-input__date-datepicker sn-input__date-now" type="text" 
-									id="inputDataCriacao" th:field="*{criadoEm}" />
-							<label class="mdl-textfield__label" for="inputDataCriacao">Data de Criação</label>
-						</div>
-						
-						<div align="right">
-                    		<button type="submit" class="mdl-button mdl-button-js mdl-button--raised mdl-button--primary">Cadastrar</button>
-                		</div>
-
-					</form>
-
-				</div>
-
- 			</div>
-	    </div>
-	</div>
-</section>
+					<div class="sn-textfield mdl-cell mdl-cell--12-col">
+						<label class="mdl-textfield__label" for="inputTextTexto">Texto</label>
+						<textarea class="sn-textfield__input" rows= "5" id="inputTextTexto" th:field="*{texto}"></textarea>
+					</div>
+			
+					<div class="sn-textfield mdl-cell mdl-cell--6-col">
+						<label class="sn-textfield__label" for="inputDataCriacao">Data de Criação</label>
+						<input class="sn-textfield__input sn-date-time-picker" type="text" 
+								id="inputDataCriacao" th:field="*{criadoEm}" />
+					</div>
+							
+					<div class="sn-form-actions">
+						<input type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect" 
+							value="Cadastrar" data-upgraded=",MaterialButton,MaterialRipple"></input>
+						<input type="button" class="mdl-button mdl-js-button mdl-button--colored mdl-js-ripple-effect" 
+							value="Cancelar" data-upgraded=",MaterialButton,MaterialRipple"></input>
+					</div>
+				</form>
+			</div>
+		</div>   
+	</section>
 </html>
