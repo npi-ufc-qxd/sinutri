@@ -109,7 +109,7 @@ public class Anamnese {
 	private String sistemaUrinarioComentario;
 	
 	@Enumerated(EnumType.STRING)
-	private SistemaGastrointestinal sistemaGastroIntestinal;
+	private SistemaGastrointestinal sistemaGastrointestinal;
 	
 	@Enumerated(EnumType.STRING)
 	private Apetite apetite;
@@ -412,14 +412,14 @@ public class Anamnese {
 
 	public void setSistemaUrinarioComentario(String sistemaUrinarioComentario) {
 		this.sistemaUrinarioComentario = sistemaUrinarioComentario;
+	}	
+
+	public SistemaGastrointestinal getSistemaGastrointestinal() {
+		return sistemaGastrointestinal;
 	}
 
-	public SistemaGastrointestinal getSistemaGastroIntestinal() {
-		return sistemaGastroIntestinal;
-	}
-
-	public void setSistemaGastroIntestinal(SistemaGastrointestinal sistemaGastroIntestinal) {
-		this.sistemaGastroIntestinal = sistemaGastroIntestinal;
+	public void setSistemaGastrointestinal(SistemaGastrointestinal sistemaGastrointestinal) {
+		this.sistemaGastrointestinal = sistemaGastrointestinal;
 	}
 
 	public Apetite getApetite() {

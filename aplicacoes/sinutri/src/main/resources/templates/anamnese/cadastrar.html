@@ -14,21 +14,144 @@
 			mdl-cell--7-col-desktop mdl-cell--1-offset-desktop
 			sn-card sn-padding--48">
   				
-			<div class="mdl-layout-title">Form</div>
+			<div class="mdl-layout-title">Anamnese</div>
 
 				<form id="form-anamnese" action="#" method="post" th:action="@{${'/paciente/'+anamnese.paciente.id+'/Anamnese'}}" th:object="${anamnese}">
 					<input type="hidden" th:field="*{id}" name="id"/>
 	   				<input type="hidden" th:field="*{paciente.id}" />
 	   				
 	   				<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label sn-display--flex sn-fill--width">
-						<input class="mdl-textfield__input sn-input__date-datepicker sn-input__date-now" type="text" id="sample24" />
-						<label class="mdl-textfield__label" for="sample24">Date</label>
+						<input class="mdl-textfield__input sn-input__date-datepicker sn-input__date-now" type="text" id="sample24" th:field="*{criadoEm}" />
+						<label class="mdl-textfield__label" for="sample24">Data de Criação:</label>
+					</div>
+					
+					<div class="mdl-textfield mdl-js-textfield sn-display--flex sn-fill--width">
+						<textarea class="mdl-textfield__input" rows= "5" id="sample25"
+							th:field="*{objetivoConsulta}" placeholder="Descreva aqui o objetivo da consulta..."
+						 ></textarea>
+						<label class="mdl-textfield__label" for="sample25">Objetivo da consulta:</label>
+					</div>
+					
+					<h5>Hábitos de Vida</h5>
+					<label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="checkAtividadeFisica">
+						<input type="checkbox" id="checkAtividadeFisica" th:field="*{atividadeFisica}" class="mdl-checkbox__input"/>
+						<span class="mdl-checkbox__label">Atividade Física</span>
+					</label>
+					<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label sn-display--flex sn-fill--width">
+						<input id="inputTextAtividadeFisica" type="text"
+									th:field="*{atividadeFisicaComentario}" class="mdl-textfield__input"								
+								 	/>
+						<label class="mdl-textfield__label" for="sample21">Quais atividades?</label>
+					</div>
+					
+					<label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="checkDormeBem">
+						<input type="checkbox" id="checkDormeBem" th:field="*{dormeBem}" class="mdl-checkbox__input"/>
+						<span class="mdl-checkbox__label">Dorme bem?</span>
+					</label>
+					<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label sn-display--flex sn-fill--width">
+						<input id="inputTextdormeBem" type="text"
+									th:field="*{dormeBemComentario}" class="mdl-textfield__input"								
+								 	/>
+						<label class="mdl-textfield__label" for="sample21">Comentários</label>
+					</div>
+					
+					<label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="checkBebidaAlcoolica">
+						<input type="checkbox" id="checkBebidaAlcoolica" th:field="*{bebidaAlcoolica}" class="mdl-checkbox__input"/>
+						<span class="mdl-checkbox__label">Bebida alcóolica:</span>
+					</label>
+					<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label sn-display--flex sn-fill--width">
+						<input id="inputTextBebidaAlcoolica" type="text"
+									th:field="*{bebidaAlcoolicaComentario}" class="mdl-textfield__input"								
+								 	/>
+						<label class="mdl-textfield__label" for="inputTextBebidaAlcoolica">Comentários</label>
+					</div>
+					
+					<h5>Patologias</h5>
+					<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label sn-display--flex sn-fill--width">
+						<input class="mdl-textfield__input" type="text" id="inputTextPatologias"/>
+						<label class="mdl-textfield__label" for="inputTextPatologias">Patologias</label>
+					</div>
+					
+					<label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="checkMedicamento">
+						<input type="checkbox" id="checkMedicamento" th:field="*{medicamento}" class="mdl-checkbox__input"/>
+						<span class="mdl-checkbox__label">Medicação:</span>
+					</label>
+					<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label sn-display--flex sn-fill--width">
+						<input id="inputTextMedicamento" type="text"
+									th:field="*{medicamentoComentario}" class="mdl-textfield__input"								
+								 	/>
+						<label class="mdl-textfield__label" for="inputTextMedicamento">Comentários</label>
+					</div>
+					
+					<h5>Avaliação Clínica</h5>
+					<div class="mdl-grid mdl-grid--no-spacing sn-display--flex sn-align-items--center">
+						<label class="mdl-textfield__label" for="selectApetite">Apetite</label>						
+						<select id="selectApetite" th:field="*{apetite}" class="mdl-cell mdl-cell--6-col mdl-button">
+							<option value="">Selecione:</option>
+							<option th:each="t: ${tiposApetite}" th:value="${t.tipo}" th:text="${t.tipo}"></option>
+						</select>					
+						<div class="mdl-cell mdl-cell--6-col mdl-textfield mdl-js-textfield sn-display--flex sn-fill--width sn-align-items--center">
+							<input id="inputTextApetite" th:field="*{apetiteComentario}" class="mdl-textfield__input" type="text"/>
+							<label class="mdl-textfield__label" for="inputTextApetite">Comentário</label>
+						</div>
+					</div>		
+					
+					<div class="mdl-grid mdl-grid--no-spacing sn-display--flex sn-align-items--center">					
+						<select id="selectSistemaUrinario" th:field="*{sistemaUrinario}" class="mdl-cell mdl-cell--6-col mdl-button">
+							<option value="">Selecione:</option>
+							<option th:each="t: ${tiposSistemaUrinario}" th:value="${t.tipo}" th:text="${t.tipo}"></option>
+						</select>					
+						<div class="mdl-cell mdl-cell--6-col mdl-textfield mdl-js-textfield sn-display--flex sn-fill--width sn-align-items--center">
+							<input id="inputTextSistemaUrinario" th:field="*{sistemaUrinarioComentario}" class="mdl-textfield__input" type="text"/>
+							<label class="mdl-textfield__label" for="inputTextSistemaUrinario">Comentário</label>
+						</div>
+					</div>
+					
+					<div class="mdl-grid mdl-grid--no-spacing sn-display--flex sn-align-items--center">					
+						<select id="selectSistemaGastrointestinal" th:field="*{sistemaGastrointestinal}" class="mdl-cell mdl-cell--6-col mdl-button">
+							<option value="">Selecione:</option>
+							<option th:each="t: ${tiposSistemaGastrointestinal}" th:value="${t.tipo}" th:text="${t.tipo}"></option>
+						</select>											
 					</div>
 					
 					<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label sn-display--flex sn-fill--width">
-						<input class="mdl-textfield__input" type="text" id="sample21"/>
-						<label class="mdl-textfield__label" for="sample21">Text</label>
+						<input id="inputTextAgua" th:field="*{agua}" class="mdl-textfield__input sn-input__number" type="number" pattern="-?[0-9]*(\.[0-9]+)?"/>
+						<label class="mdl-textfield__label" for="inputTextAgua">Consumo de água (litros):</label>
 					</div>
+					
+					<label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="checkMastigacao">
+						<input type="checkbox" id="checkMastigacao" th:field="*{mastigacao}" class="mdl-checkbox__input"/>
+						<span class="mdl-checkbox__label">Mastigação:</span>
+					</label>
+					<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label sn-display--flex sn-fill--width">
+						<input id="inputTextMastigacao" type="text"
+									th:field="*{mastigacaoComentario}" class="mdl-textfield__input"								
+								 	/>
+						<label class="mdl-textfield__label" for="inputTextMastigacao">Comentários</label>
+					</div>
+					
+					<h5>Hábitos Alimentares</h5>                    
+					<label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="checkAlergia">
+                    <input type="checkbox" id="checkAlergia" th:field="*{alergia}" class="mdl-checkbox__input"/>
+                        <span class="mdl-checkbox__label">Alergia:</span>
+                    </label>
+                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label sn-display--flex sn-fill--width">
+                        <input id="inputTextAlergia" type="text"
+                                    th:field="*{alergiaComentario}" class="mdl-textfield__input"                                
+                                     />
+                        <label class="mdl-textfield__label" for="inputTextAlergia">Comentários</label>
+                    </div>                        
+                    
+                    <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="checkIntolerancia">
+                    <input type="checkbox" id="checkIntolerancia" th:field="*{intolerancia}" class="mdl-checkbox__input"/>
+                        <span class="mdl-checkbox__label">Intolerancia:</span>
+                    </label>
+                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label sn-display--flex sn-fill--width">
+                        <input id="inputTextIntolerancia" type="text"
+                                    th:field="*{intoleranciaComentario}" class="mdl-textfield__input"
+                                     />
+                        <label class="mdl-textfield__label" for="inputTextIntolerancia">Comentários</label>
+                    </div>										
 	
 					<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label sn-display--flex sn-fill--width">
 						<input class="mdl-textfield__input sn-input__number" type="number" id="sample22" pattern="-?[0-9]*(\.[0-9]+)?"/>

@@ -180,7 +180,7 @@
 				        
 				        <div class="row form-group">
 			      	  		<div class="form-item col-sm-6">
-								<label class="control-label"> Sistema urinário:</label>
+							<!-- 	<label class="control-label"> Sistema urinário:</label> -->
 								<select th:field="*{sistemaUrinario}" class="form-control">
 									<option value="">Selecione:</option>
 									<option th:each="t: ${tiposSistemaUrinario}" th:value="${t.tipo}" th:text="${t.tipo}"></option>
@@ -223,6 +223,8 @@
 								</div>
 				        	</div>				        	
 			        	</div>
+			        	
+			        	
 			        	
 			        	<div class="row form-group">
 							<div class="form-item col-sm-6">
