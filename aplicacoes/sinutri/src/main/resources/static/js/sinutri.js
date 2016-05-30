@@ -192,7 +192,7 @@ var sn_base = function() {
 
 		}, 
 
-		doRegistryDialog(dialogSelector) {
+		doRegistryDialog : function(dialogSelector) {
 
 			return setupDialog(dialogSelector);
 

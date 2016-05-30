@@ -141,48 +141,62 @@ public class PacienteController {
         model.addAttribute("paciente", paciente);
         model.addAttribute("recordatorio", new Recordatorio());
         
-        return "nutricao/recordatorio/adicionar-recordatorio";
+        return "recordatorio/adicionar-recordatorio";
 	}
 	    
     @RequestMapping(value = "/{idPaciente}/Recordatorio", method = RequestMethod.POST)
     public String adicionarRecordatorio( @Valid @ModelAttribute("recordatorio") Recordatorio recordatorio,
             BindingResult result, @PathVariable("idPaciente") Long idPaciente, Model model ) {
     	
+    	Paciente paciente = pacienteService.buscarPacientePorId(idPaciente);
     	Servidor nutricionista = pessoaService.buscarServidorPorCpf(getCpfPessoaLogada());
-    	if( result.hasErrors() ){
-    		model.addAttribute("recordatorio", recordatorio);
-            return "nutricao/recordatorio/adicionar-recordatorio";
-    	}
+    	
+//    	if( result.hasErrors() ){
+//    		model.addAttribute("recordatorio", recordatorio);
+//            return "recordatorio/adicionar-recordatorio";
+//    	}
+    	
     	recordatorio.setNutricionista(nutricionista);
+    	recordatorio.setPaciente(paciente);
+    	
         consultaService.adicionarRecordatorio(recordatorio);
         return "redirect:/Paciente/" + idPaciente + "/Recordatorio/" + recordatorio.getId();
     }	
 	
 	@RequestMapping(value = "/{idPaciente}/Recordatorio/{idRecordatorio}/Refeicao/{idRefeicao}/Editar/", method = RequestMethod.GET)
-	public String formEditarRecordatorio(@PathVariable("idPaciente") Long idPaciente, @PathVariable("idRecordatorio") Long idRecordatorio, Model model){
-				Paciente paciente = this.pacienteService.buscarPacientePorId(idPaciente);
-				if(paciente==null){
-		        	return "redirect:/Nutricao/buscar";
-		        }					
-				Recordatorio recordatorio = this.consultaService.buscarRecordatorio(idRecordatorio);
-				model.addAttribute("paciente", paciente);
-				model.addAttribute("recordatorio", recordatorio);
-		return "nutricao/recordatorio/editar-recordatorio";
+	public String formEditarRecordatorio(@PathVariable("idPaciente") Long idPaciente, 
+			@PathVariable("idRecordatorio") Long idRecordatorio, 
+			Model model){
+		
+		Paciente paciente = this.pacienteService.buscarPacientePorId(idPaciente);
+		if(paciente==null){
+        	return "redirect:/Nutricao/buscar";
+        }					
+		Recordatorio recordatorio = this.consultaService.buscarRecordatorio(idRecordatorio);
+		model.addAttribute("paciente", paciente);
+		model.addAttribute("recordatorio", recordatorio);
+		
+		return "recordatorio/editar-recordatorio";
 	}
 	
 	@RequestMapping(value = "/{idPaciente}/Recordatorio/{idRecordatorio}/Refeicao/{idRefeicao}/Editar/", method = RequestMethod.POST)
 	public String editarRecordatorio(@Valid @ModelAttribute("recordatorio") Recordatorio recordatorio,
 			@PathVariable("idPaciente") Long idPaciente,BindingResult result, Model model){
+		
 		if( result.hasErrors() ){
 			model.addAttribute("recordatorio", recordatorio);
-			return "nutricao/recordatorio/editar-recordatorio";
+			return "recordatorio/editar-recordatorio";
 		}
-		this.consultaService.editarRecordatorio(recordatorio);			
+		
+		this.consultaService.editarRecordatorio(recordatorio);
+		
 		return "redirect:/Paciente/" + idPaciente + "/Recordatorio/" + recordatorio.getId();
 	}
 	
 	@RequestMapping(value = "/{idPaciente}/Recordatorio/{idRecordatorio}/Excluir", method = RequestMethod.POST)
-	public String excluirRecordatorio(@PathVariable("idPaciente") Long idPaciente, @PathVariable("idRecordatorio") Long idRecordatorio){
+	public String excluirRecordatorio(@PathVariable("idPaciente") Long idPaciente, 
+			@PathVariable("idRecordatorio") Long idRecordatorio){
+		
 		Recordatorio recordatorio = this.consultaService.buscarRecordatorio(idRecordatorio);
 		if (recordatorio!=null){
 			this.consultaService.excluirRecordatorio(recordatorio);
@@ -192,7 +206,10 @@ public class PacienteController {
 	}	
 	
 	@RequestMapping(value = "/{idPaciente}/Recordatorio/{idRecordatorio}/", method = RequestMethod.GET)
-	public String visulizarRecordatorio(@PathVariable("idPaciente") Long idPaciente, @PathVariable("idRecordatorio") Long idRecordatorio, Model model){
+	public String visulizarRecordatorio(@PathVariable("idPaciente") Long idPaciente, 
+			@PathVariable("idRecordatorio") Long idRecordatorio, 
+			Model model){
+		
 		Recordatorio recordatorio = this.consultaService.buscarRecordatorio(idRecordatorio);
 		
 		Paciente paciente = pacienteService.buscarPacientePorId(idPaciente);
@@ -202,7 +219,8 @@ public class PacienteController {
 		
         model.addAttribute("paciente", paciente);
 		model.addAttribute("recordatorio", recordatorio);
-		return "nutricao/recordatorio/visualizar-recordatorio";
+		
+		return "recordatorio/visualizar-recordatorio";
 	}			
 
 	@ModelAttribute("tiposRefeicao")
@@ -210,8 +228,8 @@ public class PacienteController {
 		return Refeicao.values();
 	}
 	
-	@RequestMapping(value = "Paciente/{id}/Recordatorio", params={"adicionarRefeicao"})
-	public String adicionarRefeicao(@PathVariable("id") Long id, 
+	@RequestMapping(value = "/{idPaciente}/Recordatorio", params={"adicionarRefeicao"})
+	public String adicionarRefeicao(@PathVariable("idPaciente") Long idPaciente, 
 		@ModelAttribute("recordatorio") Recordatorio recordatorio, Model model,
 		HttpServletRequest request) {
 		RefeicaoRecordatorio refeicao = new RefeicaoRecordatorio();
@@ -236,38 +254,41 @@ public class PacienteController {
 	    	}
 		});	    
 
-	    model.addAttribute("idPaciente", id);
+	    model.addAttribute("idPacientePaciente", idPaciente);
 		model.addAttribute("recordatorio", recordatorio);		
 
-		return "nutricao/adicionar-recordatorio";
+		return "recordatorio/adicionar-recordatorio";
 	}
 	
-	@RequestMapping( value = "Paciente/{id}/Recordatorio", params={"removerRefeicao"} )
-	public String removerRefeicao(@PathVariable("id") Long id, @ModelAttribute("recordatorio") Recordatorio recordatorio,
+	@RequestMapping( value = "/{idPaciente}/Recordatorio", params={"removerRefeicao"} )
+	public String removerRefeicao(@PathVariable("idPaciente") Long idPaciente, @ModelAttribute("recordatorio") Recordatorio recordatorio,
 			@RequestParam("removerRefeicao") Integer index, Model model) {
 		
 		recordatorio.getRefeicoes().remove(index.intValue());
-		model.addAttribute("idPaciente", id);
+		model.addAttribute("idPacientePaciente", idPaciente);
 		model.addAttribute("recordatorio", recordatorio);	
 
-		return "nutricao/adicionar-recordatorio";
+		return "recordatorio/adicionar-recordatorio";
 
 	}
 	
 	@RequestMapping(value = "/{idPaciente}/Recordatorio/{idRecordatorio}/Refeicao/{idRefeicao}/Excluir", method = RequestMethod.POST)
-	public String excluirRefeicaoRecordatorio(@PathVariable("idPaciente") Long idPaciente, @PathVariable("idRecordatorio") Long idRecordatorio,
+	public String excluirRefeicaoRecordatorio(@PathVariable("idPaciente") Long idPaciente, 
+			@PathVariable("idRecordatorio") Long idRecordatorio,
 			@PathVariable("idRefeicao") Long idRefeicao){
 		
 		RefeicaoRecordatorio refeicao = consultaService.buscarRefeicaoRecordatorio(idRefeicao);
 		
 		this.consultaService.excluirRefeicaoRecordatorio(refeicao);
-		return "redirect:/Paciente/" + idPaciente + "/Recordatorio/" + idRecordatorio;
 		
+		return "redirect:/Paciente/" + idPaciente + "/Recordatorio/" + idRecordatorio;
 	}	
 	
-	@RequestMapping( value = "Paciente/{id}/Recordatorio", params={"editarRefeicao"} )
-	public String editarRefeicao(@PathVariable("id") Long id, @ModelAttribute("recordatorio") Recordatorio recordatorio,
-			@RequestParam("editarRefeicao") Integer index, HttpServletRequest request, Model model) {		
+	@RequestMapping( value = "/{idPaciente}/Recordatorio", params={"editarRefeicao"} )
+	public String editarRefeicao(@PathVariable("idPaciente") Long idPaciente, 
+			@ModelAttribute("recordatorio") Recordatorio recordatorio,
+			@RequestParam("editarRefeicao") Integer index, 
+			HttpServletRequest request, Model model) {		
 
 		SimpleDateFormat dataFormatada = new SimpleDateFormat("HH:mm");
 		Date hora = null;
@@ -293,10 +314,10 @@ public class PacienteController {
 		refeicao.setItens(request.getParameter("itensRefeicaoAtualizada"));
 		refeicao.setObservacao(request.getParameter("observacaoRefeicaoAtualizada"));		
 
-		model.addAttribute("idPaciente", id);
+		model.addAttribute("idPaciente", idPaciente);
 		model.addAttribute("recordatorio", recordatorio);
 
-		return "nutricao/adicionar-recordatorio";
+		return "recordatorio/adicionar-recordatorio";
 
 	}
 		

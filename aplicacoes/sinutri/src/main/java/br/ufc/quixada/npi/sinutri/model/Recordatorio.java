@@ -1,4 +1,5 @@
 package br.ufc.quixada.npi.sinutri.model;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.*;
@@ -12,20 +13,21 @@ public class Recordatorio {
 	@GeneratedValue
 	private long id;
 	
-	@NotNull
 	@DateTimeFormat(pattern="dd/MM/yyyy")
 	private Date criadoEm;
 	
-	@NotNull
 	@DateTimeFormat(pattern="dd/MM/yyyy")
 	private Date atualizadoEm;
 	
 	@OneToOne
 	private Servidor nutricionista;
 	
+	@ManyToOne
+	private Paciente paciente;
+	
 	@OneToMany(cascade=CascadeType.ALL)
 	@JoinColumn(name="recordatorio_id")
-	private List<RefeicaoRecordatorio> refeicoes;
+	private List<RefeicaoRecordatorio> refeicoes = new ArrayList<RefeicaoRecordatorio>();
 	
 	public long getId() {
 		return id;
@@ -67,6 +69,13 @@ public class Recordatorio {
 		this.refeicoes = refeicoes;
 	}
 
+	public Paciente getPaciente() {
+		return paciente;
+	}
+
+	public void setPaciente(Paciente paciente) {
+		this.paciente = paciente;
+	}
 
 	@Override
 	public String toString() {
