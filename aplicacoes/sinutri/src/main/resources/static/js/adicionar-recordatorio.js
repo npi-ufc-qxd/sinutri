@@ -1,5 +1,11 @@
 $(function() 
 {	
+	$(".sn-editar-refeicao").click(function() {
+		var idDialog = $(this).attr("name");
+		var dialog = sn_base.doRegistryDialog(idDialog);
+		dialog.showModal();
+	});
+	
 	$("#btnAdicionarRefeicaoDialog").click(function() {
 		var dialog = sn_base.doRegistryDialog("#adicionarRefeicao");
 		dialog.showModal();

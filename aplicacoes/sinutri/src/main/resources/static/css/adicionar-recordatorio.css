@@ -24,3 +24,8 @@ table
 	width: 100%;
 	box-shadow: none !important;
 }
+
+._dialog_overlay
+{
+	z-index: -10000 !important;
+}
