@@ -35,7 +35,7 @@ public class ConsultaServiceImpl implements ConsultaService {
 	
 	@Override
 	public void editarPrescricao(Prescricao prescricao){
-		prescricaoRepository.save(prescricao);
+		prescricaoRepository.saveAndFlush(prescricao);
 	}
 	
 	@Override

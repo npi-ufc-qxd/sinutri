@@ -214,8 +214,8 @@ public class PacienteController {
 //			 prescricao.setPaciente(paciente);
 			 model.addAttribute("prescricao", prescricao);
 		 }
-		 
-		 prescricao.setId(idPrescricao);
+		 prescricao.setAtualizadoEm(new Date());
+		 System.out.println("\n\n\n"+prescricao.toString());
 		 consultaService.editarPrescricao(prescricao);
 		
 		 return "redirect:/Paciente/"+idPaciente+"/Prescricao/"+prescricao.getId()+"/";

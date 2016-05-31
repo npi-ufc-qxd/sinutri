@@ -6,10 +6,61 @@
 
 <head>
 	<title>Sinutri | Detalhes</title>
+	<style type="text/css">
+
+		.sn-fab {
+			position: absolute;
+			right: 26px;
+			bottom: -26px;
+		}
+
+	</style>
 </head>
 <section layout:fragment="conteudo">
 	<div class="mdl-grid">
-		
+		<div class="mdl-cell mdl-cell--7-col-desktop mdl-cell--1-offset-desktop sn-card"> 
+			<div class="mdl-grid mdl-grid--no-spacing">
+				<div class="mdl-layout-title mdl-cell mdl-cell--12-col sn-padding--48 mdl-color--teal-500 mdl-color-text--white">
+					Prescrição 
+					<a th:href="@{${'/Paciente/1/Prescricao/'+ prescricao.id +'/Editar/'}}" class="sn-fab mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored sn-fab" data-upgraded=",MaterialButton,MaterialRipple">
+						<i class="material-icons mdl-color-text--white">edit</i>
+						<span class="mdl-button__ripple-container">
+							<span class="mdl-ripple is-animating" style="width: 160.391918985787px; height: 160.391918985787px; transform: translate(-50%, -50%) translate(28px, 21px);"></span>
+						</span>
+					</a>
+				</div>
+				
+				<div class="mdl-grid mdl-cell mdl-cell--12-col sn-padding--48 mdl-color--white">
+				
+					<a th:href="@{${'/Paciente/1/Prescricao/'+ prescricao.id +'/Excluir/'}}"  class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--raised mdl-button--accent mdl-color-text--white">
+                        Remover
+                 	</a>
+                 	 
+                 	<div class="mdl-layout-title mdl-cell mdl-cell--12-col"> Informações gerais:</div>
+                 	 
+					<div class="sn-attribute mdl-cell mdl-cell--6-col">
+						<div class="sn-attribute__title"> Data de criação:</div>
+						<div class="sn-attribute__value" th:text="${#dates.format(prescricao.criadoEm,'dd/MM/yyyy')}"> </div>
+					</div>
+					
+					<div class="sn-attribute mdl-cell mdl-cell--6-col">
+						<div class="sn-attribute__title"> Data de última atualização:</div>
+						<div class="sn-attribute__value" th:text="${#dates.format(prescricao.atualizadoEm,'dd/MM/yyyy')}"> </div>
+					</div>
+					
+					<div class="sn-attribute mdl-cell mdl-cell--6-col">
+						<div class="sn-attribute__title"> Descrição: </div>
+						<div class="sn-attribute__value" th:text="${prescricao.descricao}"> </div> 
+					</div>					
+
+					<div class="sn-attribute mdl-cell mdl-cell--12-col"> 
+						<div class="sn-attribute__title"> Texto: </div>
+						<div class="sn-attribute__value" th:text="${prescricao.texto}"> </div>					
+					</div>					
+					
+				</div>
+			</div>
+		</div>
 	</div>
 </section>
 </html>

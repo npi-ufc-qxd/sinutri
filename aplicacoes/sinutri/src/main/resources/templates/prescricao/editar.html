@@ -14,15 +14,17 @@
 				sn-card sn-padding--48">
 	  				
 			<div class="mdl-layout-title">Prescrição</div>
-				<form id="form-prescricao" action="#" th:object="${prescricao}" th:action="@{/Paciente/1/Prescricao/}" method="post">
+				<form id="form-prescricao" action="#" th:object="${prescricao}" th:method="post" th:action="@{${'/Paciente/1/Prescricao/'+prescricao.id+'/Editar/'}}">
 	
+					<input type="hidden" id="id" th:field="*{id}"/>
+					<input type="hidden" id="atualizadoEm" th:field="*{atualizadoEm}" />
 					<div class="sn-textfield mdl-cell mdl-cell--12-col">	
 						<label class="sn-textfield__label" for="inputTextDescricao">Descrição</label>
 						<input class="sn-textfield__input" type="text" id="inputTextDescricao" th:field="*{descricao}"/>
 					</div>
 									
 					<div class="sn-textfield mdl-cell mdl-cell--12-col">
-						<label class="mdl-textfield__label" for="inputTextTexto">Texto</label>
+						<label class="sn-textfield__label" for="inputTextTexto">Texto</label>
 						<textarea class="sn-textfield__input" rows= "5" id="inputTextTexto" th:field="*{texto}"></textarea>
 					</div>
 			
@@ -34,7 +36,7 @@
 							
 					<div class="sn-form-actions">
 						<input type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect" 
-							value="Cadastrar" data-upgraded=",MaterialButton,MaterialRipple"></input>
+							value="Salvar" data-upgraded=",MaterialButton,MaterialRipple"></input>
 						<input type="button" class="mdl-button mdl-js-button mdl-button--colored mdl-js-ripple-effect" 
 							value="Cancelar" data-upgraded=",MaterialButton,MaterialRipple"></input>
 					</div>

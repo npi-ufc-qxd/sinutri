@@ -99,7 +99,11 @@ public class Prescricao {
 
 	@Override
 	public String toString() {
-		return "Prescricao [id=" + id + ", descricao=" + descricao + ", texto=" + texto+"]";
+		return "Prescricao [id=" + id + ", descricao=" + descricao + ", texto=" + texto + ", criadoEm=" + criadoEm
+				+ ", atualizadoEm=" + atualizadoEm + ", nutricionista=" + nutricionista + ", paciente=" + paciente
+				+ "]";
 	}
+	
+	
 
 }
