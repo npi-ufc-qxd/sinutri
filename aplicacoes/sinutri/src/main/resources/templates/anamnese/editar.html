@@ -1,418 +1,322 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-<head th:replace="templates/layoutPadrao :: head">
-	<title>Editar Anamnese</title>
-</head>
+<html xmlns="http://www.w3.org/1999/xhtml" 
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorator="estrutura/dashboard">
 
-<body >
-    <nav th:replace="templates/layoutPadrao :: menu"></nav>
-    <div class="container">
-    
-	    <form id="form-anamnese" action="#" method="post" th:action="@{${'/paciente/'+anamnese.paciente.id+'/Anamnese/'+anamnese.id+'/Editar'}}" th:object="${anamnese}">
-	    	<input type="hidden" th:field="*{id}" name="id"/>
-	    	<input type="hidden" th:field="*{paciente.id}" />
-	    	
-	    	<div class="row form-group">
-	    		<div class="form-item col-sm-2">
-	    			<label class="control-label">Data de Edição:</label>
-	    			<input class="form-control" type="date" th:field="*{atualizadoEm}"/>	    			
-	    			<div class="error-validation">
-							<label class="label label-danger" th:if="${#fields.hasErrors('atualizadoEm')}" 
+<head>
+	<title>Sinutri | Editar Anamnese</title>
+</head>
+<section layout:fragment="conteudo">
+	<div class="mdl-grid">
+
+		<div class="mdl-cell
+		mdl-cell--7-col-desktop mdl-cell--1-offset-desktop
+		sn-card sn-padding--48">
+  				
+			<div class="mdl-layout-title">Anamnese</div>
+
+				<form id="form-anamnese" class="sn-form" method="post" th:action="@{${'/Paciente/'+anamnese.paciente.id+'/Anamnese/'+anamnese.id+'/Editar'}}" th:object="${anamnese}">
+					<div class="mdl-grid">
+
+						<input type="hidden" th:field="*{id}" name="id"/>
+		   				<input type="hidden" th:field="*{paciente.id}" />
+		   				
+		   				<div class="sn-textfield mdl-cell mdl-cell--6-col">
+		   					<label class="sn-textfield__label" for="dataCriacao">Data de Edição:</label>
+							<input class="sn-textfield__input sn-time-picker" type="text" id="dataCriacao" th:field="*{atualizadoEm}" />
+							<label class="sn-textfield__messages sn-error-text" th:if="${#fields.hasErrors('atualizadoEm')}" 
 								th:errors="*{atualizadoEm}"
-							>Error message</label>
-					</div>
-	    		</div>
-	    	</div>
-	    	
-	    	<div class="row form-group">
-	   			<div class="form-item col-sm-12">
-	   				<label>Objetivo da consulta:</label>
-	   				<textarea id="objetivoConsulta" th:field="*{objetivoConsulta}"
-	   					class="form-control" rows="5" placeholder="Descreva aqui o objetivo da consulta..."
-	   				></textarea>
-	   				<div class="error-validation">
-							<label class="label label-danger" th:if="${#fields.hasErrors('objetivoConsulta')}" 
+							>Error message</label>							
+						</div>
+						
+						<div class="sn-textfield mdl-cell mdl-cell--12-col">
+							<label class="sn-textfield__label" for="textObjetivoConsulta">Objetivo da consulta:</label>
+							<textarea class="sn-textfield__input" rows= "5" id="textObjetivoConsulta"
+								th:field="*{objetivoConsulta}" placeholder="Descreva aqui o objetivo da consulta..."
+							 ></textarea>
+							 <label class="sn-textfield__messages sn-error-text" th:if="${#fields.hasErrors('objetivoConsulta')}" 
 								th:errors="*{objetivoConsulta}"
-							>Error message</label>
-					</div>
-	   			</div>
-	    	</div>
-	    	
-		     <div class="panel-group" id="accordion">
-			  <div class="panel panel-default">
-			    <div class="panel-heading">
-			      <h4 class="panel-title">
-			        <a data-toggle="collapse" data-parent="#accordion" href="#collapse1">
-			        Hábitos de Vida</a>
-			      </h4>
-			    </div>
-			    <div id="collapse1" class="panel-collapse collapse in">
-			      <div class="panel-body">
-			  			<div class="row form-group">
-							<div class="form-item col-sm-6">
-								<label for="checkAtividadeFisica" class="control-label"><input type="checkbox"
-										id="checkAtividadeFisica" th:field="*{atividadeFisica}"
-										/> Atividade Física:</label>
-								<input id="inputTextAtividadeFisica" type="text"
-									th:field="*{atividadeFisicaComentario}" class="form-control"
-									placeholder="Qual atividade?"									
-									 />
-								<div class="error-validation">
-									<label class="label label-danger" th:if="${#fields.hasErrors('atividadeFisicaComentario')}" 
+							>Error message</label>					
+						</div>
+						
+						<h5 class="mdl-cell mdl-cell--12-col">Hábitos de Vida</h5>
+						
+						<label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect mdl-cell mdl-cell--12-col" for="checkAtividadeFisica">
+							<input type="checkbox" id="checkAtividadeFisica" th:field="*{atividadeFisica}" class="mdl-checkbox__input"/>
+							<span class="mdl-checkbox__label">Atividade Física</span>
+						</label>
+						<div class="sn-textfield mdl-cell mdl-cell--12-col">
+							<label class="sn-textfield__label" for="inputTextAtividadeFisica">Quais atividades?</label>
+							<input id="inputTextAtividadeFisica" type="text"
+										th:field="*{atividadeFisicaComentario}" class="sn-textfield__input"								
+									 	/>
+							<label class="sn-textfield__messages sn-error-text" th:if="${#fields.hasErrors('atividadeFisicaComentario')}" 
 										th:errors="*{atividadeFisicaComentario}"
 									>Error message</label>
-								</div>
-							</div>
-						</div>    	
-			      </div>
-			      
-			      <div class="panel-body">
-			  			<div class="row form-group">
-							<div class="form-item col-sm-6">
-								<label for="checkDormeBem" class="control-label"><input type="checkbox"
-										id="checkDormeBem" th:field="*{dormeBem}"
-										/> Dorme Bem?:</label>
-								<input id="inputTextDormeBem" type="text"
-									th:field="*{dormeBemComentario}" class="form-control"
-									placeholder="Comentários"
-									/>
-								<div class="error-validation">
-									<label class="label label-danger" th:if="${#fields.hasErrors('dormeBemComentario')}" 
-										th:errors="*{dormeBemComentario}"
-									>Error message</label>
-								</div>
-							</div>
-						</div>    	
-			      </div>
-			    
-			    <div class="panel-body">
-			  			<div class="row form-group">
-							<div class="form-item col-sm-6">
-								<label for="checkBebidaAlcoolica" class="control-label"><input type="checkbox"
-										id="checkBebidaAlcoolica" th:field="*{bebidaAlcoolica}"
-										/> Bebida alcóolica:</label>
-								<input id="inputTextbeBidaAlcoolica" type="text"
-									th:field="*{bebidaAlcoolicaComentario}" class="form-control"
-									placeholder="Comentários"
-									/>
-								<div class="error-validation">
-									<label class="label label-danger" th:if="${#fields.hasErrors('bebidaAlcoolicaComentario')}" 
-										th:errors="*{bebidaAlcoolicaComentario}"
-									>Error message</label>
-								</div>
-							</div>
-						</div>    	
-			      </div>
-			    </div>
-			    
-			  </div>
-			  <div class="panel panel-default">
-			    <div class="panel-heading">
-			      <h4 class="panel-title">
-			        <a data-toggle="collapse" data-parent="#accordion" href="#collapse2">
-			        Patologias</a>
-			      </h4>
-			    </div>
-			    <div id="collapse2" class="panel-collapse collapse">
-			      <div class="panel-body">
-			      	<div class="row form-group">
-						<div class="form-item col-sm-6">
-							<label for="inputTextPatologias" class="control-label">Patologias:</label>
-							<input id="inputTextPatologias" type="text"
-								th:field="*{patologiasComentario}" class="form-control"
-								placeholder="Comentários" />
-							<div class="error-validation">
-								<label class="label label-danger" th:if="${#fields.hasErrors('patologiasComentario')}" 
-									th:errors="*{patologiasComentario}"
-								>Error message</label>
-							</div>
 						</div>
-					</div>  
 						
-					<div class="row form-group">
-						<div class="form-item col-sm-6">
-							<label for="checkMedicamento" class="control-label"><input type="checkbox"
-									id="checkMedicamento" th:field="*{medicamento}"
-									/> Medicamento:</label>
-							<input id="inputTextMedicamento" type="text"
-								th:field="*{medicamentoComentario}" class="form-control"
-								placeholder="Comentários"
-								/>
-							<div class="error-validation">
-								<label class="label label-danger" th:if="${#fields.hasErrors('medicamentoComentario')}" 
-									th:errors="*{medicamentoComentario}"
-								>Error message</label>
-							</div>
+						<label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect mdl-cell mdl-cell--12-col" for="checkDormeBem">
+							<input type="checkbox" id="checkDormeBem" th:field="*{dormeBem}" class="mdl-checkbox__input"/>
+							<span class="mdl-checkbox__label">Dorme bem?</span>
+						</label>
+						<div class="sn-textfield mdl-cell mdl-cell--12-col">
+							<label class="sn-textfield__label"  for="inputTextdormeBem">Comentários</label>
+							<input id="inputTextdormeBem" type="text"
+										th:field="*{dormeBemComentario}" class="sn-textfield__input"								
+									 	/>	
+							<label class="sn-textfield__messages sn-error-text" th:if="${#fields.hasErrors('dormeBemComentario')}" 
+										th:errors="*{dormeBemComentario}"
+									>Error message</label>						
 						</div>
-					</div>
-							
-			      </div>
-			    </div>
-			  </div>
-			  <div class="panel panel-default">
-			    <div class="panel-heading">
-			      <h4 class="panel-title">
-			        <a data-toggle="collapse" data-parent="#accordion" href="#collapse3">
-			        Avaliação Clínica</a>
-			      </h4>
-			    </div>
-			    <div id="collapse3" class="panel-collapse collapse">
-			      <div class="panel-body">
-				      <div class="row form-group">
-			      	  		<div class="form-item col-sm-6">
-								<label class="control-label"> Apetite:</label>
-								<select th:field="*{apetite}" class="form-control">
+						
+						<label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect mdl-cell mdl-cell--12-col" for="checkBebidaAlcoolica">
+							<input type="checkbox" id="checkBebidaAlcoolica" th:field="*{bebidaAlcoolica}" class="mdl-checkbox__input"/>
+							<span class="mdl-checkbox__label">Bebida alcóolica:</span>
+						</label>
+						<div class="sn-textfield mdl-cell mdl-cell--12-col">
+							<label class="sn-textfield__label"  for="inputTextBebidaAlcoolica">Comentários</label>
+							<input id="inputTextBebidaAlcoolica" type="text"
+										th:field="*{bebidaAlcoolicaComentario}" class="sn-textfield__input"								
+									 	/>	
+							<label class="sn-textfield__messages sn-error-text" th:if="${#fields.hasErrors('bebidaAlcoolicaComentario')}" 
+										th:errors="*{bebidaAlcoolicaComentario}"
+									>Error message</label>						
+						</div>
+						
+						<h5 class="mdl-cell mdl-cell--12-col">Patologias</h5>
+						<div class="sn-textfield mdl-cell mdl-cell--12-col">
+							<label class="sn-textfield__label"  for="inputTextPatologias">Comentários</label>
+							<input class="sn-textfield__input" type="text" id="inputTextPatologias"
+								th:field="*{patologiasComentario}"
+							/>
+							<label class="sn-textfield__messages sn-error-text" th:if="${#fields.hasErrors('patologiasComentario')}" 
+									th:errors="*{patologiasComentario}"
+								>Error message</label>							
+						</div>
+						
+						<label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect mdl-cell mdl-cell--12-col" for="checkMedicamento">
+							<input type="checkbox" id="checkMedicamento" th:field="*{medicamento}" class="mdl-checkbox__input"/>
+							<span class="mdl-checkbox__label">Medicação:</span>
+						</label>
+						<div class="sn-textfield mdl-cell mdl-cell--12-col">
+							<label class="sn-textfield__label"  for="inputTextMedicamento">Comentários</label>
+							<input id="inputTextMedicamento" type="text"
+										th:field="*{medicamentoComentario}" class="sn-textfield__input"								
+									 	/>
+							<label class="sn-textfield__messages sn-error-text" th:if="${#fields.hasErrors('medicamentoComentario')}" 
+									th:errors="*{medicamentoComentario}"
+								>Error message</label>							
+						</div>
+						
+						<h5 class="mdl-cell mdl-cell--12-col">Avaliação Clínica</h5>	
+																							
+							<div class="sn-selectfield mdl-cell mdl-cell--6-col">					
+								<label class="sn-textfield__label"  for="selectApetite">Apetite</label>
+								<select id="selectApetite" th:field="*{apetite}" class="sn-selectfield__select">								
 									<option value="">Selecione:</option>
 									<option th:each="t: ${tiposApetite}" th:value="${t.tipo}" th:text="${t.tipo}"></option>
-								</select>			      				      	  																		
-							</div>
-							<div class="form-item col-sm-6">
-								<label class="control-label">&nbsp;&nbsp;&nbsp;</label>			      				      	  										
-								<input id="inputTextApetite" type="text"
-									th:field="*{apetiteComentario}" class="form-control"
-									placeholder="Comentários"/>
-								<div class="error-validation">
-									<label class="label label-danger" th:if="${#fields.hasErrors('apetiteComentario')}" 
+								</select>
+							</div>					
+							<div class="sn-textfield mdl-cell mdl-cell--6-col">
+								<label class="sn-textfield__label"  for="inputTextApetite">Comentário</label>
+								<input id="inputTextApetite" th:field="*{apetiteComentario}" class="sn-textfield__input" type="text"/>
+								<label class="sn-textfield__messages sn-error-text" th:if="${#fields.hasErrors('apetiteComentario')}" 
 										th:errors="*{apetiteComentario}"
-									>Error message</label>
-								</div>
-							</div>							
-				        </div>
-				        
-				        <div class="row form-group">
-			      	  		<div class="form-item col-sm-6">
-								<label class="control-label"> Sistema urinário:</label>
-								<select th:field="*{sistemaUrinario}" class="form-control">
-									<option value="">Selecione:</option>
-									<option th:each="t: ${tiposSistemaUrinario}" th:value="${t.tipo}" th:text="${t.tipo}"></option>
-								</select>			      				      	  																	
-							</div>
-							<div class="form-item col-sm-6">
-								<label class="control-label">&nbsp;&nbsp;&nbsp;</label>			      				      	  										
-								<input id="inputTextSitemaUrinario" type="text"
-									th:field="*{sistemaUrinarioComentario}" class="form-control"
-									placeholder="Comentários"/>
-								<div class="error-validation">
-									<label class="label label-danger" th:if="${#fields.hasErrors('sistemaUrinarioComentario')}" 
+									>Error message</label>								
+							</div>															
+						
+						<div class="sn-selectfield mdl-cell mdl-cell--6-col">					
+							<label class="sn-textfield__label"  for="selectApetite">Sistema Urinário</label>												
+							<select id="selectSistemaUrinario" th:field="*{sistemaUrinario}" class="sn-selectfield__select">						
+								<option value="">Selecione:</option>
+								<option th:each="t: ${tiposSistemaUrinario}" th:value="${t.tipo}" th:text="${t.tipo}"></option>
+							</select>					
+						</div>
+						<div class="sn-textfield mdl-cell mdl-cell--6-col">
+							<label class="sn-textfield__label"  for="inputTextSistemaUrinario">Comentário</label>							
+							<input id="inputTextSistemaUrinario" th:field="*{sistemaUrinarioComentario}" class="sn-textfield__input" type="text"/>
+							<label class="sn-textfield__messages sn-error-text" th:if="${#fields.hasErrors('sistemaUrinarioComentario')}" 
 										th:errors="*{sistemaUrinarioComentario}"
 									>Error message</label>
-								</div>
-							</div>							
-				        </div>
-	
-				        <div class="row form-group">
-				        	<div class="form-item col-sm-6">
-				        		<label class="control-label">Sistema Gastrointestinal</label>			      				      	  										
-								<select th:field="*{sistemaGastroIntestinal}" class="form-control">
-									<option value="">Selecione:</option>
-									<option th:each="t: ${tiposSistemaGastrointestinal}" th:value="${t.tipo}" th:text="${t.tipo}"></option>
-								</select>
-				        		<div class="error-validation">									
-								</div>
-				        	</div>				        	
+						</div>
+
+						
+						<div class="sn-selectfield mdl-cell mdl-cell--6-col">
+							<label class="sn-textfield__label"  for="selectApetite">Sistema Gastrointestinal</label>						
+							<select id="selectSistemaGastrointestinal" th:field="*{sistemaGastrointestinal}" class="sn-selectfield__select">
+								<option value="">Selecione:</option>
+								<option th:each="t: ${tiposSistemaGastrointestinal}" th:value="${t.tipo}" th:text="${t.tipo}"></option>
+							</select>											
 						</div>
 						
-						<div class="row form-group">
-				        	<div class="form-item col-sm-6">
-				        		<label class="control-label">Consumo de água</label>
-				        		<input id="inputTextAgua" type="number" th:field="*{agua}" 
-				        			class="form-control valid-num" min="0" placeholder="0.00"
-				        		 />	
-				        		<div class="error-validation">
+						<div class="sn-textfield mdl-cell mdl-cell--12-col">
+							<label class="sn-textfield__label"  for="inputTextAgua">Consumo de água (litros):</label>
+							<input id="inputTextAgua" th:field="*{agua}" class="mdl-textfield__input sn-input__number" type="number" pattern="-?[0-9]*(\.[0-9]+)?"/>
+							<div class="error-validation">
 									<label class=" label label-danger" th:if="${#fields.hasErrors('agua')}" th:errors="*{agua}"
 									>Error message</label>
-								</div>
-				        	</div>				        	
-			        	</div>
-			        	
-			        	<div class="row form-group">
-							<div class="form-item col-sm-6">
-								<label for="checkMastigacao" class="control-label"><input type="checkbox"
-										id="checkMastigacao" th:field="*{mastigacao}"
-										/> Mastigação:</label>
-								<input id="inputTextMastigacao" type="text"
-									th:field="*{mastigacaoComentario}" class="form-control"
-									placeholder="Comentário"									
-									 />							
-								<div class="error-validation">
-									<label class="label label-danger" th:if="${#fields.hasErrors('mastigacaoComentario')}" 
+								</div>							
+						</div>
+						
+						<label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect mdl-cell mdl-cell--12-col" for="checkMastigacao">
+							<input type="checkbox" id="checkMastigacao" th:field="*{mastigacao}" class="mdl-checkbox__input"/>
+							<span class="mdl-checkbox__label">Mastigação:</span>
+						</label>
+						<div class="sn-textfield mdl-cell mdl-cell--12-col">
+							<label class="sn-textfield__label"  for="inputTextMastigacao">Comentários</label>
+							<input id="inputTextMastigacao" type="text"
+										th:field="*{mastigacaoComentario}" class="sn-textfield__input"								
+									 	/>	
+							<label class="sn-textfield__messages sn-error-text" th:if="${#fields.hasErrors('mastigacaoComentario')}" 
 										th:errors="*{mastigacaoComentario}"
-									>Error message</label>
-								</div>
-							</div>							
+									>Error message</label>						
 						</div>
 						
-						<div class="row form-group">
-							<div class="form-item col-sm-6">
-								<label for="checkDisfagia" class="control-label"><input type="checkbox"
-										id="checkDisfagia" th:field="*{disfagia}"
-										/> Disfagia:</label>
-								<input id="inputTextDisfagia" type="text"
-									th:field="*{disfagiaComentario}" class="form-control"
-									placeholder="Comentário"									
-									 />							
-								<div class="error-validation">
-									<label class="label label-danger" th:if="${#fields.hasErrors('disfagiaComentario')}" 
+						<label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect mdl-cell mdl-cell--12-col" for="checkDisfagia">
+							<input type="checkbox" id="checkDisfagia" th:field="*{disfagia}" class="mdl-checkbox__input"/>
+							<span class="mdl-checkbox__label">Disfagia:</span>
+						</label>
+						<div class="sn-textfield mdl-cell mdl-cell--12-col">
+							<label class="sn-textfield__label"  for="inputTextDisfagia">Comentários</label>
+							<input id="inputTextDisfagia" type="text"
+										th:field="*{disfagiaComentario}" class="sn-textfield__input"								
+									 	/>				
+							<label class="sn-textfield__messages sn-error-text" th:if="${#fields.hasErrors('disfagiaComentario')}" 
 										th:errors="*{disfagiaComentario}"
-									>Error message</label>
-								</div>
-							</div>							
+									>Error message</label>		
 						</div>
 						
-						<div class="row form-group">
-							<div class="form-item col-sm-6">
-								<label for="checkOdinofagia" class="control-label"><input type="checkbox"
-										id="checkOdinofagia" th:field="*{odinofagia}"
-										/> Odinosfagia:</label>
-								<input id="inputTextOdinofagia" type="text"
-									th:field="*{odinofagiaComentario}" class="form-control"
-									placeholder="Comentário"									
-									 />							
-								<div class="error-validation">
-									<label class="label label-danger" th:if="${#fields.hasErrors('odinofagiaComentario')}" 
+						<label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect mdl-cell mdl-cell--12-col" for="checkOdinofagia">
+							<input type="checkbox" id="checkOdinofagia" th:field="*{odinofagia}" class="mdl-checkbox__input"/>
+							<span class="mdl-checkbox__label">Odinofagia:</span>
+						</label>
+						<div class="sn-textfield mdl-cell mdl-cell--12-col">
+							<label class="sn-textfield__label"  for="inputTextOdinofagia">Comentários</label>
+							<input id="inputTextOdinofagia" type="text"
+										th:field="*{odinofagiaComentario}" class="sn-textfield__input"								
+									 	/>		
+							<label class="sn-textfield__messages sn-error-text" th:if="${#fields.hasErrors('odinofagiaComentario')}" 
 										th:errors="*{odinofagiaComentario}"
-									>Error message</label>
-								</div>
-							</div>							
+									>Error message</label>					
 						</div>
 						
-						<div class="row form-group">
-							<div class="form-item col-sm-6">
-								<label for="checkPirose" class="control-label"><input type="checkbox"
-										id="checkPirose" th:field="*{pirose}"
-										/> Pirose:</label>
-								<input id="inputTextPirose" type="text"
-									th:field="*{piroseComentario}" class="form-control"
-									placeholder="Comentário"									
-									 />							
-								<div class="error-validation">
-									<label class="label label-danger" th:if="${#fields.hasErrors('piroseComentario')}" 
+						<label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect mdl-cell mdl-cell--12-col" for="checkPirose">
+							<input type="checkbox" id="checkPirose" th:field="*{pirose}" class="mdl-checkbox__input"/>
+							<span class="mdl-checkbox__label">Pirose:</span>
+						</label>
+						<div class="sn-textfield mdl-cell mdl-cell--12-col">
+							<label class="sn-textfield__label"  for="inputTextPirose">Comentários</label>
+							<input id="inputTextPirose" type="text"
+										th:field="*{piroseComentario}" class="sn-textfield__input"								
+									 	/>
+							<label class="sn-textfield__messages sn-error-text" th:if="${#fields.hasErrors('piroseComentario')}" 
 										th:errors="*{piroseComentario}"
-									>Error message</label>
-								</div>
-							</div>							
+									>Error message</label>						
 						</div>
 						
-						<div class="row form-group">
-							<div class="form-item col-sm-6">
-								<label for="checkNausea" class="control-label"><input type="checkbox"
-										id="checkNausea" th:field="*{nausea}"
-										/> Nausea:</label>
-								<input id="inputTextNausea" type="text"
-									th:field="*{nauseaComentario}" class="form-control"
-									placeholder="Comentário"									
-									 />							
-								<div class="error-validation">
-									<label class="label label-danger" th:if="${#fields.hasErrors('nauseaComentario')}" 
+						<label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect mdl-cell mdl-cell--12-col" for="checkNausea">
+							<input type="checkbox" id="checkNausea" th:field="*{nausea}" class="mdl-checkbox__input"/>
+							<span class="mdl-checkbox__label">Nausea:</span>
+						</label>
+						<div class="sn-textfield mdl-cell mdl-cell--12-col">
+							<label class="sn-textfield__label"  for="inputTextNausea">Comentários</label>
+							<input id="inputTextNausea" type="text"
+										th:field="*{nauseaComentario}" class="sn-textfield__input"								
+									 	/>	
+							<label class="sn-textfield__messages sn-error-text" th:if="${#fields.hasErrors('nauseaComentario')}" 
 											th:errors="*{nauseaComentario}"
-										>Error message</label>
-								</div>
-							</div>							
+										>Error message</label>						
 						</div>
 						
-						<div class="row form-group">
-							<div class="form-item col-sm-6">
-								<label for="checkVomito" class="control-label"><input type="checkbox"
-										id="checkVomito" th:field="*{vomito}"
-										/> Vomito:</label>
-								<input id="inputTextVomito" type="text"
-									th:field="*{vomitoComentario}" class="form-control"
-									placeholder="Comentário"									
-									 />							
-								<div class="error-validation">
-									<label class="label label-danger" th:if="${#fields.hasErrors('vomitoComentario')}" 
+						<label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect mdl-cell mdl-cell--12-col" for="checkVomito">
+							<input type="checkbox" id="checkVomito" th:field="*{vomito}" class="mdl-checkbox__input"/>
+							<span class="mdl-checkbox__label">Vomito:</span>
+						</label>
+						<div class="sn-textfield mdl-cell mdl-cell--12-col">
+							<label class="sn-textfield__label"  for="inputTextVomito">Comentários</label>
+							<input id="inputTextVomito" type="text"
+										th:field="*{vomitoComentario}" class="sn-textfield__input"								
+									 	/>		
+							<label class="sn-textfield__messages sn-error-text" th:if="${#fields.hasErrors('vomitoComentario')}" 
 										th:errors="*{vomitoComentario}"
-									>Error message</label>
-								</div>
-							</div>							
+									>Error message</label>					
 						</div>
 						
-						<div class="row form-group">
-							<div class="form-item col-sm-6">
-								<label for="checkDiarreia" class="control-label"><input type="checkbox"
-										id="checkDiarreia" th:field="*{diarreia}"
-										/> Diarreia:</label>
-								<input id="inputTextDiarreia" type="text"
-									th:field="*{diarreiaComentario}" class="form-control"
-									placeholder="Comentário"									
-									 />							
-								<div class="error-validation">
-									<label class="label label-danger" th:if="${#fields.hasErrors('diarreiaComentario')}" 
+						<label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect mdl-cell mdl-cell--12-col" for="checkDiarreia">
+							<input type="checkbox" id="checkDiarreia" th:field="*{diarreia}" class="mdl-checkbox__input"/>
+							<span class="mdl-checkbox__label">Diarréia:</span>
+						</label>
+						<div class="sn-textfield mdl-cell mdl-cell--12-col">
+							<label class="sn-textfield__label"  for="inputTextDiarreia">Comentários</label>
+							<input id="inputTextDiarreia" type="text"
+										th:field="*{diarreiaComentario}" class="sn-textfield__input"								
+									 	/>			
+							<label class="sn-textfield__messages sn-error-text" th:if="${#fields.hasErrors('diarreiaComentario')}" 
 										th:errors="*{diarreiaComentario}"
-									>Error message</label>
-								</div>
-							</div>							
+									>Error message</label>				
 						</div>
 						
-						<div class="row form-group">
-							<div class="form-item col-sm-6">
-								<label for="checkConstipacao" class="control-label"><input type="checkbox"
-										id="checkConstipacao" th:field="*{constipacao}"
-										/> Constipação:</label>
-								<input id="inputTextConstipacao" type="text"
-									th:field="*{constipacaoComentario}" class="form-control"
-									placeholder="Comentário"									
-									 />							
-								<div class="error-validation">
-									<label class="label label-danger" th:if="${#fields.hasErrors('constipacaoComentario')}" 
+						<label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect mdl-cell mdl-cell--12-col" for="checkConstipacao">
+							<input type="checkbox" id="checkConstipacao" th:field="*{constipacao}" class="mdl-checkbox__input"/>
+							<span class="mdl-checkbox__label">Constipacao:</span>
+						</label>
+						<div class="sn-textfield mdl-cell mdl-cell--12-col">
+							<label class="sn-textfield__label"  for="inputTextConstipacao">Comentários</label>
+							<input id="inputTextConstipacao" type="text"
+										th:field="*{constipacaoComentario}" class="sn-textfield__input"								
+									 	/>	
+							<label class="sn-textfield__messages sn-error-text" th:if="${#fields.hasErrors('constipacaoComentario')}" 
 										th:errors="*{constipacaoComentario}"
-									>Error message</label>
-								</div>
-							</div>							
-						</div>							        			    
-			      </div>
-			    </div>
-			  </div>
-			  <div class="panel panel-default">
-			  	<div class="panel-heading">
-			      <h4 class="panel-title">
-			        <a data-toggle="collapse" data-parent="#accordion" href="#collapse4">
-			        Hábitos Alimentares</a>
-			      </h4>
-			    </div>
-			    <div id="collapse4" class="panel-collapse collapse out">
-			      <div class="panel-body">
-			      		<div class="row form-group">
-							<div class="form-item col-sm-6">
-								<label for="checkAlergia" class="control-label"><input type="checkbox"
-										id="checkAlergia" th:field="*{alergia}"
-										/> Constipação:</label>
-								<input id="inputTextConstipacao" type="text"
-									th:field="*{alergiaComentario}" class="form-control"
-									placeholder="Comentário"																
-									 />							
-								<div class="error-validation">
-									<label class="label label-danger" th:if="${#fields.hasErrors('alergiaComentario')}" 
+									>Error message</label>						
+						</div>
+						
+						<h5 class="mdl-cell mdl-cell--12-col">Hábitos Alimentares</h5>                    
+						<label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect mdl-cell mdl-cell--12-col" for="checkAlergia">
+	                    <input type="checkbox" id="checkAlergia" th:field="*{alergia}" class="mdl-checkbox__input"/>
+	                        <span class="mdl-checkbox__label">Alergia:</span>
+	                    </label>
+	                    <div class="sn-textfield mdl-cell mdl-cell--12-col">
+	                        <label class="sn-textfield__label"  for="inputTextAlergia">Comentários</label>
+	                        <input id="inputTextAlergia" type="text"
+	                                    th:field="*{alergiaComentario}" class="sn-textfield__input"                                
+	                                     />
+	                        <label class="sn-textfield__messages sn-error-text" th:if="${#fields.hasErrors('alergiaComentario')}" 
 										th:errors="*{alergiaComentario}"
-									>Error message</label>
-								</div>
-							</div>							
-						</div>	
-						
-						<div class="row form-group">
-							<div class="form-item col-sm-6">
-								<label for="checkIntolerancia" class="control-label"><input type="checkbox"
-										id="checkIntolerancia" th:field="*{intolerancia}"
-										/> Constipação:</label>
-								<input id="inputTextIntolerancia" type="text"
-									th:field="*{intoleranciaComentario}" class="form-control"
-									placeholder="Comentário"									
-									/>							
-								<div class="error-validation">
-								<label class="label label-danger" th:if="${#fields.hasErrors('intoleranciaComentario')}" 
+									>Error message</label>                 
+	                    </div>                        
+	                    
+	                    <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect mdl-cell mdl-cell--12-col" for="checkIntolerancia">
+	                    <input type="checkbox" id="checkIntolerancia" th:field="*{intolerancia}" class="mdl-checkbox__input"/>
+	                        <span class="mdl-checkbox__label">Intolerância:</span>
+	                    </label>
+	                    <div class="sn-textfield mdl-cell mdl-cell--12-col">
+	                        <label class="sn-textfield__label"  for="inputTextIntolerancia">Comentários</label>
+	                        <input id="inputTextIntolerancia" type="text"
+	                                    th:field="*{intoleranciaComentario}" class="sn-textfield__input"
+	                                     />	
+	                        <label class="sn-textfield__messages sn-error-text" th:if="${#fields.hasErrors('intoleranciaComentario')}" 
 										th:errors="*{intoleranciaComentario}"
-									>Error message</label>
-								</div>
-							</div>							
-						</div>	
+									>Error message</label>                      
+	                    </div>															
 						
-			      </div>
-			    </div>
-			  </div>
-			</div>		
-			<button type="submit" class="btn btn-success">Salvar</button>        
-	    </form> 
-	</div>   
-    <footer th:replace="templates/layoutPadrao :: footer"></footer>
-</body>
+						<div class="sn-form-actions">
+	
+							<input type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect" value="Salvar" />
+							<input type="button" class="mdl-button mdl-js-button mdl-button--colored mdl-js-ripple-effect" value="Cancelar"/>
+							
+						</div>
+					</div>						
+				</form>
+		</div>
+
+		<div class="mdl-cell
+			mdl-cell--3-col-desktop 
+			sn-card sn-padding--48">
+
+			<div class="mdl-layout-title">Informações</div>
+		</div>
+
+	</div>
+</section>
 </html>

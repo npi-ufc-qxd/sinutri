@@ -35,7 +35,7 @@ public class Anamnese {
 	@ManyToOne
 	private Paciente paciente;
 	
-	@OneToOne
+	@ManyToOne
 	private Servidor nutricionista;
 	
 	@Size(max=256, message="O objetivo da consulta deve ter menos que 256 caracteres")
