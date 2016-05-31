@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" 
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorator="estrutura/dashboard">
+
+<head>
+	<title>Sinutri | Novo Plano Alimentar</title>
+	<link rel="stylesheet" type="text/css" th:href="@{/css/material-date-picker.css}"/>
+</head>
+
+<section layout:fragment="conteudo">
+	<div class="mdl-grid">
+
+		<div class="mdl-cell mdl-cell--7-col-desktop mdl-cell--1-offset-desktop sn-card sn-padding--48">
+	
+			<form class="sn-form" th:object="${planoAlimentar}" th:method="post" th:action="@{${'/Paciente/'+planoAlimentar.paciente.id+'/PlanoAlimentar/'}}">
+	
+				<div class="mdl-grid">
+	
+					<div class="sn-textfield mdl-cell mdl-cell--8-col">
+						
+						<div class="mdl-layout-title">Plano Alimentar</div>
+						
+					</div>
+					
+	
+					<div class="sn-textfield mdl-cell mdl-cell--6-col">
+					
+						<label class="sn-textfield__label" for="criadoEm">Date</label>
+						<input class="sn-textfield__input sn-date-picker" th:field="*{criadoEm}" id="criadoEm"/>
+					
+					</div>
+	
+					<div class="sn-form-actions">
+	
+						<input type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect" value="Salvar" />
+						<input type="button" class="mdl-button mdl-js-button mdl-button--colored mdl-js-ripple-effect" value="Cancelar"/>
+						
+					</div>
+	
+				</div>
+	
+			</form>
+	
+		</div>
+	
+		<div class="mdl-cell
+			mdl-cell--3-col-desktop">
+			<div class="sn-card sn-padding--48">
+				<div class="mdl-layout-title">Informações</div>
+			</div>
+		</div>
+	
+	</div>
+</section>
+
+<section layout:fragment="js">
+        <script type="text/javascript" th:src="@{/js/moment.js}"></script>
+        <script type="text/javascript" th:src="@{/js/material-date-picker.js}"></script>
+</section>
+
+</html>
