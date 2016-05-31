@@ -64,10 +64,6 @@ public class AvaliacaoAntropometrica {
 	private Double coxa;
 	private Double panturrilhaMedial;
 	
-	public AvaliacaoAntropometrica() {
-		super();
-	}
-	
 	public Long getId() {
 		return id;
 	}
