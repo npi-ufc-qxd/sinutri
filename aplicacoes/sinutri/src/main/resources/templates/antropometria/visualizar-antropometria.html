@@ -31,9 +31,7 @@
 				
 				<div class="mdl-grid mdl-cell mdl-cell--12-col sn-padding--48 mdl-color--white">
 				
-					<a th:href="@{${'/Paciente/' + avaliacaoAntropometrica.paciente.id + '/Antropometria/' + avaliacaoAntropometrica.id + '/Excluir/'}}" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--raised mdl-button--accent mdl-color-text--white">
-						Remover
-					</a>
+					<button id="showButton-1" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--raised mdl-button--accent mdl-color-text--white">Remover</button>
 					
 					<div class="sn-textfield mdl-cell mdl-cell--12-col">
 						<h5>GERAL</h5>
@@ -207,8 +205,37 @@
 				<div class="mdl-layout-title">Informações</div>
 			</div>
 		</div>
+		
+		<!-- Modal Content -->
+		<div id="modal-content-1">Modal content</div>
 			
 	</div>
 	</section>
+	
+	<script type="text/javascript">
+			
+			$(document).ready(function() {
+				
+				dialog = sn_base.doRegistryDialog({
+					title: "SiNutri", 
+					dialog: "#modal-content-1", 
+					showButton: "#showButton-1", 
+					buttons: [
+						{
+							label: "OK",
+							attrs: {id: "btn-ok", type: "submit"}, 
+							action: function() {
+								dialog.close();
+								alert("Dialog closed");
+							}
+						}
+					]
+				});
+				
+
+			});
+
+	</script>
+	
 </body>
 </html>
