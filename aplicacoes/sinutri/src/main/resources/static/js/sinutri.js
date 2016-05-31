@@ -532,6 +532,22 @@ var DynamicList = function(rootEl, settings) {
 
 	}
 
+	this.sortItems = function() {
+		var items = $(this.settings.cloneableElement);
+		items.sort(function (a, b) {
+			var contentA = parseInt( $(a).data('sort'));
+			var contentB = parseInt( $(b).data('sort'));
+			console.log("Comparando: " + contentA + " : " + contentB);
+			return (contentA < contentB) ? -1 : (contentA > contentB) ? 1 : 0;
+	   	});
+
+	   	var self = this;
+	   	items.each(function(i, el) {
+	   		$(el).data("index", i);
+	   		$(el).parent().append(el);
+	   	});
+	}
+
 	/* PUBLIC */
 
 	this.doInit = function() {
@@ -635,7 +651,6 @@ var DynamicList = function(rootEl, settings) {
 		var self = this;
 
 		var items = this.parent.children(this.settings.cloneableElement);
-		var currentIndex = items.length;
 		
 		if(items.length > 0) {
 
@@ -713,7 +728,7 @@ var DynamicList = function(rootEl, settings) {
 					
 					$(el).click(function() {
 
-						if(self.settings.onItemEdit(newItem, currentIndex))
+						if(self.settings.onItemEdit(newItem, newItem.data("index")))
 							self.doEditItem(newItem);
 						
 					})
@@ -752,6 +767,9 @@ var DynamicList = function(rootEl, settings) {
 
 			}
 
+			newItem.data("sort", data.sortValue);
+			
+
 		} else {
 
 			self.error("Nenhum elemento com o seletor " + self.settings.cloneableElement + " foi encontrado!");
@@ -771,6 +789,8 @@ var DynamicList = function(rootEl, settings) {
 
 		self.showStatus("Adding");
 
+		self.sortItems();
+
 		return newItem;
 		
 	} 
@@ -787,6 +807,8 @@ var DynamicList = function(rootEl, settings) {
 		}
 
 		self.showStatus("Removing");
+
+		this.sortItems();
 
 	}
 
@@ -811,6 +833,10 @@ var DynamicList = function(rootEl, settings) {
 			}
 
 		}
+
+		item.data("sort", data.sortValue);
+
+		this.sortItems();
 
 		return item;
 
