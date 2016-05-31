@@ -3,7 +3,13 @@
    var pluginName = "bootstrapMaterialDatePicker";
    var pluginDataName = "plugin_" + pluginName;
 
-   moment.locale('en');
+   moment.locale('pt-BR', {
+    months : "janeiro fevereiro março abril maio junho julho agosto setembro outubro novembro dezembro".split(" "),
+    monthsShort : "jan fev mar abr mai jun jul ago set out nov dez".split(" "),
+    weekdays : "domingo segunda terça quarta quinta sexta sábado".split(" "),
+    weekdaysShort : "dom seg ter qua qui sex sab".split(" "),
+    weekdaysMin : "Do Se Te Qu Qu Se Sa".split(" ")
+   });
 
    function Plugin(element, options)
    {
@@ -17,7 +23,7 @@
       this.element = element;
       this.$element = $(element);
 
-      this.params = {date: true, time: true, format: 'YYYY-MM-DD', minDate: null, maxDate: null, currentDate: null, lang: 'en', weekStart: 0, shortTime: false, clearButton: false, nowButton: false, cancelText: 'Cancel', okText: 'OK', clearText: 'Clear', nowText: 'Now', switchOnClick: false};
+      this.params = {date: true, time: true, format: 'YYYY-MM-DD', minDate: null, maxDate: null, currentDate: null, lang: 'pt-BR', weekStart: 0, shortTime: false, clearButton: false, nowButton: false, cancelText: 'Cancel', okText: 'OK', clearText: 'Clear', nowText: 'Now', switchOnClick: false};
       this.params = $.fn.extend(this.params, options);
 
       this.name = "dtp_" + this.setName();
@@ -66,6 +72,7 @@
                  this._attachEvent(this.$dtpElement, 'click', this._onBackgroundClick.bind(this));
                  this._attachEvent(this.$dtpElement.find('.dtp-close > a'), 'click', this._onCloseClick.bind(this));
                  this._attachEvent(this.$element, 'focus', this._onFocus.bind(this));
+
               },
               initDays: function ()
               {
@@ -199,51 +206,51 @@
               },
               initTemplate: function ()
               {
-                 this.template = '<div class="dtp hidden" id="' + this.name + '">' +
+                 this.template = '<div class="dtp dtp-hidden" id="' + this.name + '">' +
                          '<div class="dtp-content">' +
                          '<div class="dtp-date-view">' +
                          '<header class="dtp-header">' +
                          '<div class="dtp-actual-day">Lundi</div>' +
                          '<div class="dtp-close"><a href="javascript:void(0);"><i class="material-icons">clear</i></</div>' +
                          '</header>' +
-                         '<div class="dtp-date hidden">' +
+                         '<div class="dtp-date dtp-hidden">' +
                          '<div>' +
-                         '<div class="left center p10">' +
+                         '<div class="dtp-left dtp-center p10">' +
                          '<a href="javascript:void(0);" class="dtp-select-month-before mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon"><i class="material-icons mdl-color-text--white">chevron_left</i></a>' +
                          '</div>' +
                          '<div class="dtp-actual-month p80">MAR</div>' +
-                         '<div class="right center p10">' +
+                         '<div class="dtp-right dtp-center p10">' +
                          '<a href="javascript:void(0);" class="dtp-select-month-after mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon"><i class="material-icons mdl-color-text--white">chevron_right</i></a>' +
                          '</div>' +
-                         '<div class="clearfix"></div>' +
+                         '<div class="dtp-clearfix"></div>' +
                          '</div>' +
                          '<div class="dtp-actual-num">13</div>' +
                          '<div>' +
-                         '<div class="left center p10">' +
+                         '<div class="dtp-left dtp-center p10">' +
                          '<a href="javascript:void(0);" class="dtp-select-year-before mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon"><i class="material-icons mdl-color-text--white">chevron_left</i></a>' +
                          '</div>' +
                          '<div class="dtp-actual-year p80">2014</div>' +
-                         '<div class="right center p10">' +
+                         '<div class="dtp-right dtp-center p10">' +
                          '<a href="javascript:void(0);" class="dtp-select-year-after mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon"><i class="material-icons mdl-color-text--white">chevron_right</i></a>' +
                          '</div>' +
-                         '<div class="clearfix"></div>' +
+                         '<div class="dtp-clearfix"></div>' +
                          '</div>' +
                          '</div>' +
-                         '<div class="dtp-time hidden">' +
+                         '<div class="dtp-time dtp-hidden">' +
                          '<div class="dtp-actual-maxtime">23:55</div>' +
                          '</div>' +
                          '<div class="dtp-picker">' +
                          '<div class="dtp-picker-calendar"></div>' +
-                         '<div class="dtp-picker-datetime hidden">' +
+                         '<div class="dtp-picker-datetime dtp-hidden">' +
                          '<div class="dtp-actual-meridien">' +
-                         '<div class="left p20">' +
+                         '<div class="dtp-left p20">' +
                          '<a class="dtp-meridien-am" href="javascript:void(0);">AM</a>' +
                          '</div>' +
                          '<div class="dtp-actual-time p60"></div>' +
-                         '<div class="right p20">' +
+                         '<div class="dtp-right p20">' +
                          '<a class="dtp-meridien-pm" href="javascript:void(0);">PM</a>' +
                          '</div>' +
-                         '<div class="clearfix"></div>' +
+                         '<div class="dtp-clearfix"></div>' +
                          '</div>' +
                          '<div id="dtp-svg-clock">' +
                          '</div>' +
@@ -251,11 +258,11 @@
                          '</div>' +
                          '</div>' +
                          '<div class="dtp-buttons">' +
-                         '<button class="dtp-btn-now mdl-button mdl-js-button mdl-button--primary mdl-js-ripple-effect hidden">' + this.params.nowText + '</button>' +
-                         '<button class="dtp-btn-clear mdl-button mdl-js-button mdl-button--primary mdl-js-ripple-effect hidden">' + this.params.clearText + '</button>' +
+                         '<button class="dtp-btn-now mdl-button mdl-js-button mdl-button--primary mdl-js-ripple-effect dtp-hidden">' + this.params.nowText + '</button>' +
+                         '<button class="dtp-btn-clear mdl-button mdl-js-button mdl-button--primary mdl-js-ripple-effect dtp-hidden">' + this.params.clearText + '</button>' +
                          '<button class="dtp-btn-cancel mdl-button mdl-js-button mdl-button--primary mdl-js-ripple-effect">' + this.params.cancelText + '</button>' +
                          '<button class="dtp-btn-ok mdl-button mdl-js-button mdl-button--raised mdl-button--primary mdl-js-ripple-effect">' + this.params.okText + '</button>' +
-                         '<div class="clearfix"></div>' +
+                         '<div class="dtp-clearfix"></div>' +
                          '</div>' +
                          '</div>' +
                          '</div>';
@@ -283,13 +290,13 @@
                  if (this.params.clearButton === true)
                  {
                     this._attachEvent(this.$dtpElement.find('.dtp-btn-clear'), 'click', this._onClearClick.bind(this));
-                    this.$dtpElement.find('.dtp-btn-clear').removeClass('hidden');
+                    this.$dtpElement.find('.dtp-btn-clear').removeClass('dtp-hidden');
                  }
 
                  if (this.params.nowButton === true)
                  {
                     this._attachEvent(this.$dtpElement.find('.dtp-btn-now'), 'click', this._onNowClick.bind(this));
-                    this.$dtpElement.find('.dtp-btn-now').removeClass('hidden');
+                    this.$dtpElement.find('.dtp-btn-now').removeClass('dtp-hidden');
                  }
 
                  if ((this.params.nowButton === true) && (this.params.clearButton === true))
@@ -309,8 +316,8 @@
               {
                  this.currentView = 0;
 
-                 this.$dtpElement.find('.dtp-picker-calendar').removeClass('hidden');
-                 this.$dtpElement.find('.dtp-picker-datetime').addClass('hidden');
+                 this.$dtpElement.find('.dtp-picker-calendar').removeClass('dtp-hidden');
+                 this.$dtpElement.find('.dtp-picker-datetime').addClass('dtp-hidden');
 
                  var _date = ((typeof (this.currentDate) !== 'undefined' && this.currentDate !== null) ? this.currentDate : null);
                  var _calendar = this.generateCalendar(this.currentDate);
@@ -349,8 +356,8 @@
 
                  var hFormat = ((this.params.shortTime) ? 'h' : 'H');
 
-                 this.$dtpElement.find('.dtp-picker-datetime').removeClass('hidden');
-                 this.$dtpElement.find('.dtp-picker-calendar').addClass('hidden');
+                 this.$dtpElement.find('.dtp-picker-datetime').removeClass('dtp-hidden');
+                 this.$dtpElement.find('.dtp-picker-calendar').addClass('dtp-hidden');
 
                  var svgClockElement = this.createSVGClock(true);
 
@@ -412,8 +419,8 @@
                        svgClockElement.appendChild(svgHourText)
                     }
 
-                    this.$dtpElement.find('a.dtp-meridien-am').addClass('hidden');
-                    this.$dtpElement.find('a.dtp-meridien-pm').addClass('hidden');
+                    this.$dtpElement.find('a.dtp-meridien-am').addClass('dtp-hidden');
+                    this.$dtpElement.find('a.dtp-meridien-pm').addClass('dtp-hidden');
                  }
 
                  this._centerBox();
@@ -434,8 +441,8 @@
                     this.$dtpElement.find('a.dtp-meridien-pm').click();
                  }
 
-                 this.$dtpElement.find('.dtp-picker-calendar').addClass('hidden');
-                 this.$dtpElement.find('.dtp-picker-datetime').removeClass('hidden');
+                 this.$dtpElement.find('.dtp-picker-calendar').addClass('dtp-hidden');
+                 this.$dtpElement.find('.dtp-picker-datetime').removeClass('dtp-hidden');
 
                  var svgClockElement = this.createSVGClock(false);
 
@@ -779,18 +786,18 @@
 
                     if (!this.isAfterMinDate(startOfMonth, false, false))
                     {
-                       this.$dtpElement.find('a.dtp-select-month-before').addClass('invisible');
+                       this.$dtpElement.find('a.dtp-select-month-before').addClass('dtp-invisible');
                     } else
                     {
-                       this.$dtpElement.find('a.dtp-select-month-before').removeClass('invisible');
+                       this.$dtpElement.find('a.dtp-select-month-before').removeClass('dtp-invisible');
                     }
 
                     if (!this.isBeforeMaxDate(endOfMonth, false, false))
                     {
-                       this.$dtpElement.find('a.dtp-select-month-after').addClass('invisible');
+                       this.$dtpElement.find('a.dtp-select-month-after').addClass('dtp-invisible');
                     } else
                     {
-                       this.$dtpElement.find('a.dtp-select-month-after').removeClass('invisible');
+                       this.$dtpElement.find('a.dtp-select-month-after').removeClass('dtp-invisible');
                     }
 
                     var startOfYear = moment(date).locale(this.params.lang).startOf('year');
@@ -798,18 +805,18 @@
 
                     if (!this.isAfterMinDate(startOfYear, false, false))
                     {
-                       this.$dtpElement.find('a.dtp-select-year-before').addClass('invisible');
+                       this.$dtpElement.find('a.dtp-select-year-before').addClass('dtp-invisible');
                     } else
                     {
-                       this.$dtpElement.find('a.dtp-select-year-before').removeClass('invisible');
+                       this.$dtpElement.find('a.dtp-select-year-before').removeClass('dtp-invisible');
                     }
 
                     if (!this.isBeforeMaxDate(endOfYear, false, false))
                     {
-                       this.$dtpElement.find('a.dtp-select-year-after').addClass('invisible');
+                       this.$dtpElement.find('a.dtp-select-year-after').addClass('dtp-invisible');
                     } else
                     {
-                       this.$dtpElement.find('a.dtp-select-year-after').removeClass('invisible');
+                       this.$dtpElement.find('a.dtp-select-year-after').removeClass('dtp-invisible');
                     }
                  }
               },
@@ -857,13 +864,13 @@
 
                  if (this.params.date)
                  {
-                    this.$dtpElement.find('.dtp-date').removeClass('hidden');
+                    this.$dtpElement.find('.dtp-date').removeClass('dtp-hidden');
                     this.initDate();
                  } else
                  {
                     if (this.params.time)
                     {
-                       this.$dtpElement.find('.dtp-time').removeClass('hidden');
+                       this.$dtpElement.find('.dtp-time').removeClass('dtp-hidden');
                        this.initHours();
                     }
                  }
@@ -1141,21 +1148,34 @@
               },
               show: function ()
               {
-                 this.$dtpElement.removeClass('hidden');
+                 this.$dtpElement.removeClass('dtp-hidden');
                  this._attachEvent($(window), 'keydown', this._onKeydown.bind(this));
                  this._centerBox();
+                 this.$dtpElement.find('.dtp-content').addClass('dtp-hide-bottom');
+                 this.$dtpElement[0].offsetHeight;
+                 
+                 this._setAnim(true);
+                 this.$dtpElement.find('.dtp-content').removeClass('dtp-hide-bottom');
+                 
               },
               hide: function ()
               {
                  $(window).off('keydown', null, null, this._onKeydown.bind(this));
-                 this.$dtpElement.addClass('hidden');
+                 this.$dtpElement.addClass('dtp-hidden');
+                 this._setAnim(false);
               },
               _centerBox: function ()
               {
+                 this.$dtpElement[0].offsetHeight;
                  var h = (this.$dtpElement.height() - this.$dtpElement.find('.dtp-content').height()) / 2;
                  this.$dtpElement.find('.dtp-content').css('marginLeft', -(this.$dtpElement.find('.dtp-content').width() / 2) + 'px');
                  this.$dtpElement.find('.dtp-content').css('top', h + 'px');
               },
+              _setAnim: function (anim)
+              {
+                 if(anim) this.$dtpElement.find("*").addClass("dtp-anim");
+                 else this.$dtpElement.find("*").removeClass("dtp-anim");
+              }, 
               enableDays: function ()
               {
                  var enableDays = this.params.enableDays;
