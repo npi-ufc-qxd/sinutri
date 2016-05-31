@@ -39,7 +39,7 @@ var tryExecute = function(func, prefix, successMessage, errorMessage) {
 
 	} catch(err) {
 
-		sn_error(prefix + " - " + errorMessage);
+		sn_error(prefix + " - " + errorMessage + " [" + err + "]");
 		return null;
 
 	}
@@ -48,24 +48,61 @@ var tryExecute = function(func, prefix, successMessage, errorMessage) {
 
 var sn_base = function() {
 
+	var dialogCounter = 0;
+
 	var setupForm = function() {
 		
-		if($(".sn-form").exists()) {
-			
-			// Form Validate
-			$(".sn-form").validate();
+		if($(".sn-mask-date").exists()) {
+
+			$(".sn-mask-date").mask("99/99/9999",{placeholder:"dd mm aaaa"});
 
 		}
 
-		if($(".sn-input__date").exists()) {
+		if($(".sn-mask-phone").exists()) {
 
-			$(".sn-input__date").mask("99/99/9999",{placeholder:"dd mm aaaa"});
+			$(".sn-mask-phone").mask("(99) 99999-9999");
 
 		}
 
-		if($(".sn-input__phone").exists()) {
+		if($(".sn-date-picker").exists()) { 
 
-			$(".sn-input__phone").mask("(99) 99999-9999");
+			$(".sn-date-picker").each(function(index, el) {
+				el = $(el);
+				var id = el.attr("id");
+				if (id == undefined) {
+					el.attr("id", "sn-date-picker-" + index);
+				}
+				var selector = "#" + id;
+				sn_base.doRegistryDatePicker(selector);
+			});
+
+		}
+
+		if($(".sn-time-picker").exists()) { 
+
+			$(".sn-time-picker").each(function(index, el) {
+				el = $(el);
+				var id = el.attr("id");
+				if (id == undefined) {
+					el.attr("id", "sn-time-picker-" + index);
+				}
+				var selector = "#" + id;
+				sn_base.doRegistryTimePicker(selector);
+			});
+
+		}
+
+		if($(".sn-date-time-picker").exists()) { 
+
+			$(".sn-date-time-picker").each(function(index, el) {
+				el = $(el);
+				var id = el.attr("id");
+				if (id == undefined) {
+					el.attr("id", "sn-date-time-picker-" + index);
+				}
+				var selector = "#" + id;
+				sn_base.doRegistryDateTimePicker(selector);
+			});
 
 		}
 		
@@ -94,16 +131,7 @@ var sn_base = function() {
 
 	var setupDialog = function(dialogSelector) {
 
-		var dialog = document.querySelector(dialogSelector);
-
-		if (!dialog.showModal) {
-
-			dialogPolyfill.registerDialog(dialog);
-
-		}
-
-		return dialog;
-
+		
 	}
 
 	var setupDrawer = function() {
@@ -177,34 +205,114 @@ var sn_base = function() {
 
 		}, 
 
-		doRegistryDialog : function(dialogSelector) {
+		doRegistryDialog : function(setts) {
 
-			return setupDialog(dialogSelector);
+			var dialogText="" + 
+				"<dialog class=\"mdl-dialog\" id=\"modal-1\">" + 
+
+					"<div class=\"mdl-card__menu\">" + 
+						"<button class=\"mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect mdl-card__menu-close\">" + 
+							"<i class=\"material-icons\">close</i>" + 
+						"</button>" + 
+					"</div>" + 
+
+					"<h4 class=\"mdl-dialog__title\"></h4>" + 
+					"<div class=\"mdl-dialog__content\">" + 
+						// ...
+					"</div>" + 
+					"<div class=\"mdl-dialog__actions\">" + 
+						// ...
+					"</div>" +
+
+				"</dialog>";
+
+			var dialog = $($.parseHTML(dialogText));
+			var dialogContent = $(setts.dialog);
+			dialogContent.remove();
+
+			dialog.attr("id", "sn-dialog-" + (dialogCounter++));
+			$("body").append(dialog);
+			dialog.find(".mdl-dialog__content").append(dialogContent);
+			dialog.find(".mdl-card__menu-close").click(function() { dialog.get(0).close(); });
+			dialog.find(".mdl-dialog__title").text(setts.title);
+
+			for(var i = 0; i < setts.buttons.length; i++) {
+				var bs = setts.buttons[i];
+				button = $.parseHTML("<button class=\"mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--primary\">" + bs.label + "</button>");
+				$(button).click(bs.action);
+				dialog.find(".mdl-dialog__actions").append(button);
+				for(k in bs.attrs)
+					$(button).attr(k, bs.attrs[k]);				
+			}
+
+			if (!dialog.get(0).showModal) {
+				dialogPolyfill.registerDialog(dialog.get(0));
+			}
+
+			$(setts.showButton).click(function() {
+				dialog.get(0).showModal();
+			});
+
+			return dialog.get(0);
+
 
 		}, 
 
 		doRegistryDatePicker : function(el) {
+
 			if($(el).exists()) {
-			
-				// Date picker
-				$(el).datepicker({
-					nextText: "►", 
-					prevText: "◄", 
-					dateFormat: "dd/mm/yy", 
-					onSelect: function() {
-						$(el).parent().addClass("is-dirty");
-					}
+
+				$(el).bootstrapMaterialDatePicker({
+					format: "DD/MM/YYYY", 
+					shortTime: false, 
+					date: true, 
+					time: false, 
+					currentDate: new Date(), 
+					nowButton: true, 
+					cancelText: "Cancelar", 
+					okText: "OK", 
+					nowText: "Agora"
 				});
 
-				var widget = $(el).datepicker( "widget" );
-				
-				widget.addClass("sn-padding--24 mdl-color--white mdl-shadow--2dp");
-				widget.find(".ui-datepicker").css("display", "none");
+			}
 
-				if($(".sn-input__date-now").exists()) {
-					$(".sn-input__date-now").parent().addClass("is-dirty");
-					$(".sn-input__date-now").datepicker('setDate', new Date());
-				}
+		}, 
+
+		doRegistryTimePicker : function(el) {
+
+			if($(el).exists()) {
+
+				$(el).bootstrapMaterialDatePicker({
+					format: "HH:mm", 
+					shortTime: false, 
+					date: false, 
+					time: true, 
+					currentDate: new Date(), 
+					nowButton: true, 
+					cancelText: "Cancelar", 
+					okText: "OK", 
+					nowText: "Agora"
+				});
+
+			}
+
+		}, 
+
+		doRegistryDateTimePicker : function(el) {
+
+			if($(el).exists()) {
+
+				$(el).bootstrapMaterialDatePicker({
+					format: "DD/MM/YYYY HH:mm", 
+					shortTime: false, 
+					date: true, 
+					time: true, 
+					currentDate: new Date(), 
+					nowButton: true, 
+					cancelText: "Cancelar", 
+					okText: "OK", 
+					nowText: "Agora"
+				});
 
 			}
 

@@ -19,9 +19,7 @@ import br.ufc.quixada.npi.sinutri.model.InqueritoAlimentar;
 import br.ufc.quixada.npi.sinutri.model.Paciente;
 import br.ufc.quixada.npi.sinutri.model.PlanoAlimentar;
 import br.ufc.quixada.npi.sinutri.model.Servidor;
-import br.ufc.quixada.npi.sinutri.model.enuns.FonteAlimento;
 import br.ufc.quixada.npi.sinutri.model.enuns.FrequenciaSemanal;
-import br.ufc.quixada.npi.sinutri.model.enuns.Refeicao;
 import br.ufc.quixada.npi.sinutri.service.ConsultaService;
 import br.ufc.quixada.npi.sinutri.service.PacienteService;
 import br.ufc.quixada.npi.sinutri.service.PessoaService;
@@ -133,8 +131,7 @@ public class PacienteController {
 	
 	@RequestMapping(value = "/{idPaciente}/PlanoAlimentar/", method = RequestMethod.POST)
 	public String adicionarPlanoAlimentar(Model model, @ModelAttribute("planoAlimentar") PlanoAlimentar planoAlimentar, @PathVariable("idPaciente") Long idPaciente, BindingResult result, RedirectAttributes redirectAttributes){
-		String cpfPessoaLogada = getCpfPessoaLogada();
-		Servidor nutricionista = pessoaService.buscarServidorPorCpf(cpfPessoaLogada);
+		Servidor nutricionista = pessoaService.buscarServidorPorCpf(getCpfPessoaLogada());
 		Paciente paciente = pacienteService.buscarPacientePorId(idPaciente);
 		planoAlimentar.setNutricionista(nutricionista);
 		
@@ -145,12 +142,52 @@ public class PacienteController {
 			model.addAttribute("planoAlimentar", planoAlimentar);
 			return "/plano-alimentar/cadastrar";
 		}
-				
-		consultaService.adicionarPlanoAlimentar(planoAlimentar, paciente);
+		
+		planoAlimentar.setPaciente(paciente);
+		consultaService.adicionarPlanoAlimentar(planoAlimentar);
 		
 		return "nutricao/buscar"; //modificar
 	}
 	
+	@RequestMapping(value = "/{idPaciente}/PlanoAlimentar/{idPlanoAlimentar}/Editar/", method = RequestMethod.GET)
+	public String formEditarIPlanoAlimentar(@PathVariable("idPlanoAlimentar") Long idPlanoAlimentar, @PathVariable("idPaciente") Long idPaciente, Model model){
+		//Paciente paciente = pacienteService.buscarPacientePorId(idPaciente);
+				
+		PlanoAlimentar planoAlimentar = consultaService.buscarPlanoAlimentarPorId(idPlanoAlimentar);
+		model.addAttribute("planoAlimentar", planoAlimentar);
+		
+		return "/plano-alimentar/editar";
+	}
+	
+	@RequestMapping(value = "/{idPaciente}/PlanoAlimentar/{idPlanoAlimentar}/Editar/", method = RequestMethod.POST)
+	public String editarPlanoAlimentar(Model model, @PathVariable("idPlanoAlimentar") Long idPlanoAlimentar, @PathVariable("idPaciente") Long idPaciente, PlanoAlimentar planoAlimentar, BindingResult result, RedirectAttributes redirectAttributes){
+		
+		Paciente paciente = pacienteService.buscarPacientePorId(idPaciente);
+		
+		if(paciente == null){
+			redirectAttributes.addFlashAttribute("erro", "Paciente inválido. Tente novamente!");
+			return "/plano-alimentar/cadastrar";
+		}else if(result.hasErrors()){
+			model.addAttribute("planoAlimentar", planoAlimentar);
+			return "/plano-alimentar/cadastrar";
+		}
+		
+		consultaService.editarPlanoAlimentar(planoAlimentar);
+		
+		return "nutricao/buscar"; //modificar
+	}
+	
+	@RequestMapping(value= {"/{idPaciente}/PlanoAlimentar/{idPlanoAlimentar}/Excluir/"}, method = RequestMethod.GET)
+	public String excluirPlanoAlimentar(@PathVariable("idPaciente") Long idPaciente, @PathVariable("idPlanoAlimentar") Long idPlanoAlimentar, RedirectAttributes redirectAttributes, Model model){
+		PlanoAlimentar planoAlimentar = consultaService.buscarPlanoAlimentarPorId(idPlanoAlimentar);
+		Paciente paciente = pacienteService.buscarPacientePorId(idPaciente);
+		if(paciente == null){
+			redirectAttributes.addFlashAttribute("erro", "Paciente inválido. Tente novamente!");
+			return "/plano-alimentar/cadastrar";
+		}
+		consultaService.excluirPlanoAlimentar(planoAlimentar);
+		return "nutricao/buscar"; //modificar
+	}
 	
 	private boolean isInvalido(Paciente paciente){
 		return paciente == null;

@@ -14,6 +14,12 @@ public interface ConsultaService {
 	
 	void excluirInqueritoAlimentar(InqueritoAlimentar inqueritoAlimentar);
 	
-	void adicionarPlanoAlimentar(PlanoAlimentar planoAlimentar, Paciente paciente);
+	void adicionarPlanoAlimentar(PlanoAlimentar planoAlimentar);
+	
+	PlanoAlimentar buscarPlanoAlimentarPorId(Long idPlanoAlimentar);
+
+	void editarPlanoAlimentar(PlanoAlimentar planoAlimentar);
+
+	void excluirPlanoAlimentar(PlanoAlimentar planoAlimentar); 
 
 }

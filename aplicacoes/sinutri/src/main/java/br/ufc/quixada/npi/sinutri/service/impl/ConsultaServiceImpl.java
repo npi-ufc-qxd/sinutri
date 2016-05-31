@@ -46,9 +46,27 @@ public class ConsultaServiceImpl implements ConsultaService {
 	}
 
 	@Override
-	public void adicionarPlanoAlimentar(PlanoAlimentar planoAlimentar, Paciente paciente) {
-		planoAlimentar.setPaciente(paciente);
+	public void adicionarPlanoAlimentar(PlanoAlimentar planoAlimentar) {
 		planoAlimentar.setAtualizadoEm(new Date());
 		planoAlimentarRepository.save(planoAlimentar);
 	}
+
+	@Override
+	public PlanoAlimentar buscarPlanoAlimentarPorId(Long idPlanoAlimentar) {
+		return planoAlimentarRepository.findOne(idPlanoAlimentar);
+	}
+
+	@Override
+	public void editarPlanoAlimentar(PlanoAlimentar planoAlimentar) {
+		planoAlimentar.setAtualizadoEm(new Date());
+		planoAlimentarRepository.save(planoAlimentar);
+		
+	}
+
+	@Override
+	public void excluirPlanoAlimentar(PlanoAlimentar planoAlimentar) {
+		planoAlimentarRepository.delete(planoAlimentar);
+		
+	}
+	
 }
