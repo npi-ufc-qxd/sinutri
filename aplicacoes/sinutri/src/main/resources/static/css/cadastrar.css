@@ -1,0 +1,25 @@
+.sn-list-exames-container {
+
+}
+
+.sn-list-exames {
+	margin: 0;
+	padding: 0;
+	padding-top: 16px;
+	padding-left: 16px;
+	padding-right: 16px;
+}
+
+.sn-list-exames li:last-child {
+	margin-bottom: 16px;
+}
+
+.sn-list-exames__actions {
+	padding: 16px;
+	padding-top: 0;
+	height: calc(36px);
+}
+
+.sn-list-exames__actions button {
+	float: right;
+}
