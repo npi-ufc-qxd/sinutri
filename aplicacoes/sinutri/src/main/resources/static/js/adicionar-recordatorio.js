@@ -5,10 +5,10 @@ $(function()
 		
 		var dynamicList = $(".sn-list-refeicoes").dynamicList({
 			cloneableElement: ".sn-cloneable",
-			removeButton:     ".sn-refeicao-remove",
+			removeButton:     ".sn-refeicao-remover",
 			editButton:       ".sn-refeicao-editar",
+			orderBy: 	   	  ".sn-refeicao-hora",
 			onItemEdit:		  function(el, index) {
-				alert("aqui");
 				if( dialog != null ) {
 					var hora = el.find(".sn-refeicao-hora").text();
 					var descricao = el.find(".sn-refeicao-descricao").text();
@@ -19,11 +19,23 @@ $(function()
 					$(dialog).find("#sn-refeicao-descricao").val(descricao);
 					$(dialog).find("#sn-refeicao-itens").val(itens);
 					$(dialog).find("#sn-refeicao-observacao").val(observacao);
+					$(dialog).find("#sn-refeicao-item-index").val(index);
 					
 					dialog.showModal();
 				}
 				
+			},
+			compare: function(hora1, hora2) {
+				hora1 = hora1.split(":");
+			    hora2 = hora2.split(":");
+
+			    var d = new Date();
+			    var data1 = new Date(d.getFullYear(), d.getMonth(), d.getDate(), hora1[0], hora1[1]);
+			    var data2 = new Date(d.getFullYear(), d.getMonth(), d.getDate(), hora2[0], hora2[1]);
+
+			    return data1 > data2;
 			}
+		
 		});
 		
 		dialog = sn_base.doRegistryDialog({
@@ -52,11 +64,11 @@ $(function()
 						  
 						  var el;
 						  
-						  if(index != "")
+						  if(index.length != 0)
 							  el = dynamicList.doEditItem(index, data);
 						  else 
 							  el = dynamicList.doAddItem(data);
-						  
+						 
 						  componentHandler.upgradeElement(el[0]);
 						  el.find("*").each( function(index, el) {
 							  componentHandler.upgradeElement(el);
