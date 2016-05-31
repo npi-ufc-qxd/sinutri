@@ -20,6 +20,14 @@
 						<div class="mdl-layout-title">Editar Avaliação Laboratorial</div>
 					</div>
 					
+					<div class="sn-textfield mdl-cell mdl-cell--6-col" hidden="true">
+						<input type="text" hidden="true" th:field="*{id}"/>
+					</div>
+					
+					<div class="sn-textfield mdl-cell mdl-cell--6-col" hidden="true">
+						<input type="text" hidden="true" th:field="*{paciente.id}"/>
+					</div>
+									
 					<div class="sn-textfield mdl-cell mdl-cell--6-col">
 						<label class="sn-textfield__label" for="sn-date">Data de criação:</label> 
 						<input class="sn-textfield__input sn-date-picker" type="text" id="sn-date" th:field="*{criadoEm}" th:value="*{criadoEm}"/>
