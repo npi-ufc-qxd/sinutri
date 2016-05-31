@@ -1,5 +1,7 @@
 package br.ufc.quixada.npi.sinutri.controller;
 
+import java.util.Date;
+
 import javax.inject.Inject;
 import javax.validation.Valid;
 
@@ -15,9 +17,14 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import br.ufc.quixada.npi.sinutri.model.InqueritoAlimentar;
 import br.ufc.quixada.npi.sinutri.model.Paciente;
+import br.ufc.quixada.npi.sinutri.model.PlanoAlimentar;
+import br.ufc.quixada.npi.sinutri.model.Servidor;
+import br.ufc.quixada.npi.sinutri.model.enuns.FonteAlimento;
 import br.ufc.quixada.npi.sinutri.model.enuns.FrequenciaSemanal;
+import br.ufc.quixada.npi.sinutri.model.enuns.Refeicao;
 import br.ufc.quixada.npi.sinutri.service.ConsultaService;
 import br.ufc.quixada.npi.sinutri.service.PacienteService;
+import br.ufc.quixada.npi.sinutri.service.PessoaService;
 
 @Controller
 @RequestMapping(value = "/Paciente")
@@ -29,9 +36,13 @@ public class PacienteController {
 	@Inject
 	private PacienteService pacienteService;
 	
+	@Inject
+	private PessoaService pessoaService;
+	
 	@RequestMapping(value= "/{idPaciente}/InqueritoAlimentar/", method = RequestMethod.GET)
 	public String formAdicionarInqueritoAlimentar(Model model, @PathVariable("idPaciente") Long idPaciente, RedirectAttributes redirectAttributes){
 		Paciente paciente =  pacienteService.buscarPacientePorId(idPaciente);
+		System.out.println("---------------------------"+paciente.toString());
 		
 		if(isInvalido(paciente)) {
 			redirectAttributes.addFlashAttribute("erro", "Paciente não encontrado. Faça uma nova pesquisa");
@@ -108,6 +119,36 @@ public class PacienteController {
 		}
 		consultaService.excluirInqueritoAlimentar(inqueritoAlimentar);
 		return "redirect:/Paciente/"+idPaciente+"/";
+	}
+	
+	@RequestMapping(value= "/{idPaciente}/PlanoAlimentar/", method = RequestMethod.GET)
+	public String formAdicionarPlanoAlimentar(@PathVariable("idPaciente") Long idPaciente, Model model, RedirectAttributes redirectAttributes){
+		Paciente paciente = pacienteService.buscarPacientePorId(idPaciente);
+		PlanoAlimentar planoAlimentar = new PlanoAlimentar(paciente);
+		planoAlimentar.setCriadoEm(new Date());
+		model.addAttribute("planoAlimentar", planoAlimentar);
+
+		return "/plano-alimentar/cadastrar";
+	}
+	
+	@RequestMapping(value = "/{idPaciente}/PlanoAlimentar/", method = RequestMethod.POST)
+	public String adicionarPlanoAlimentar(Model model, @ModelAttribute("planoAlimentar") PlanoAlimentar planoAlimentar, @PathVariable("idPaciente") Long idPaciente, BindingResult result, RedirectAttributes redirectAttributes){
+		String cpfPessoaLogada = getCpfPessoaLogada();
+		Servidor nutricionista = pessoaService.buscarServidorPorCpf(cpfPessoaLogada);
+		Paciente paciente = pacienteService.buscarPacientePorId(idPaciente);
+		planoAlimentar.setNutricionista(nutricionista);
+		
+		if(paciente == null){
+			redirectAttributes.addFlashAttribute("erro", "Paciente inválido. Tente novamente!");
+			return "/plano-alimentar/cadastrar";
+		}else if(result.hasErrors()){
+			model.addAttribute("planoAlimentar", planoAlimentar);
+			return "/plano-alimentar/cadastrar";
+		}
+				
+		consultaService.adicionarPlanoAlimentar(planoAlimentar, paciente);
+		
+		return "nutricao/buscar"; //modificar
 	}
 	
 	

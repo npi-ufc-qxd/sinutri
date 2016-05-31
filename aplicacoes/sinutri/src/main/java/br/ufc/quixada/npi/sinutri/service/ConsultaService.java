@@ -2,6 +2,7 @@ package br.ufc.quixada.npi.sinutri.service;
 
 import br.ufc.quixada.npi.sinutri.model.InqueritoAlimentar;
 import br.ufc.quixada.npi.sinutri.model.Paciente;
+import br.ufc.quixada.npi.sinutri.model.PlanoAlimentar;
 
 public interface ConsultaService {
 	
@@ -12,5 +13,7 @@ public interface ConsultaService {
 	void editarInqueritoAlimentar(InqueritoAlimentar inqueritoAlimentar);
 	
 	void excluirInqueritoAlimentar(InqueritoAlimentar inqueritoAlimentar);
+	
+	void adicionarPlanoAlimentar(PlanoAlimentar planoAlimentar, Paciente paciente);
 
 }
