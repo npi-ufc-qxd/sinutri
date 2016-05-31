@@ -14,11 +14,11 @@ public interface ConsultaService {
 	
 	void excluirInqueritoAlimentar(InqueritoAlimentar inqueritoAlimentar);
 
-	void adicionarAvaliacaoAntropometrica(AvaliacaoAntropometrica antropometria, Paciente paciente);
+	void adicionarAvaliacaoAntropometrica(AvaliacaoAntropometrica antropometria);
 	
-	void editarAvaliacaoAntropometrica(AvaliacaoAntropometrica antropometria, Paciente paciente);
+	void editarAvaliacaoAntropometrica(AvaliacaoAntropometrica antropometria);
 	
 	AvaliacaoAntropometrica buscarAvaliacaoAntropometricaById(Long id);
 	
-	void excluirAvaliacaoAntropometrica(AvaliacaoAntropometrica antropometria, Paciente paciente);
+	void excluirAvaliacaoAntropometrica(AvaliacaoAntropometrica antropometria);
 }

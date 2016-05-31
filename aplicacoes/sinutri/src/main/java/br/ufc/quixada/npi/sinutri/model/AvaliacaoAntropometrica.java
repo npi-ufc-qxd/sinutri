@@ -1,12 +1,14 @@
 package br.ufc.quixada.npi.sinutri.model;
 
 import java.util.Date;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
+
 import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
@@ -20,7 +22,6 @@ public class AvaliacaoAntropometrica {
 	@DateTimeFormat(pattern="dd/MM/yyyy")
 	private Date criadoEm;
 	
-	@NotNull
 	@DateTimeFormat(pattern="dd/MM/yyyy")
 	private Date atualizadoEm;
 
@@ -65,57 +66,6 @@ public class AvaliacaoAntropometrica {
 	
 	public AvaliacaoAntropometrica() {
 		super();
-	}
-	public AvaliacaoAntropometrica(Paciente paciente) {
-		super();
-		setPaciente(paciente);
-	}
-	public AvaliacaoAntropometrica(Long id, Date criadoEm, Date atualizadoEm, Servidor nutricionista, Paciente paciente,
-			Double peso, Double pesoDesejado, Double altura, Double ombro, Double peitoral, Double cintura,
-			Double abdomen, Double quadril, Double panturrilhaDireita, Double panturrilhaEsquerda, Double pescoco,
-			Double punho, Double coxaDireita, Double coxaEsquerda, Double coxaProximalDireita,
-			Double coxaProximalEsquerda, Double bracoRelaxadoDireito, Double bracoRelaxadoEsquerdo,
-			Double bracoContraidoDireito, Double bracoContraidoEsquerdo, Double antebraco, Double diametroPunho,
-			Double diametroFemur, Double biceps, Double abdominal, Double triceps, Double suprailiaca,
-			Double axilarMedia, Double subescapular, Double torax, Double coxa, Double panturrilhaMedial) {
-		super();
-		this.id = id;
-		this.criadoEm = criadoEm;
-		this.atualizadoEm = atualizadoEm;
-		this.nutricionista = nutricionista;
-		this.paciente = paciente;
-		this.peso = peso;
-		this.pesoDesejado = pesoDesejado;
-		this.altura = altura;
-		this.ombro = ombro;
-		this.peitoral = peitoral;
-		this.cintura = cintura;
-		this.abdomen = abdomen;
-		this.quadril = quadril;
-		this.panturrilhaDireita = panturrilhaDireita;
-		this.panturrilhaEsquerda = panturrilhaEsquerda;
-		this.pescoco = pescoco;
-		this.punho = punho;
-		this.coxaDireita = coxaDireita;
-		this.coxaEsquerda = coxaEsquerda;
-		this.coxaProximalDireita = coxaProximalDireita;
-		this.coxaProximalEsquerda = coxaProximalEsquerda;
-		this.bracoRelaxadoDireito = bracoRelaxadoDireito;
-		this.bracoRelaxadoEsquerdo = bracoRelaxadoEsquerdo;
-		this.bracoContraidoDireito = bracoContraidoDireito;
-		this.bracoContraidoEsquerdo = bracoContraidoEsquerdo;
-		this.antebraco = antebraco;
-		this.diametroPunho = diametroPunho;
-		this.diametroFemur = diametroFemur;
-		this.biceps = biceps;
-		this.abdominal = abdominal;
-		this.triceps = triceps;
-		this.suprailiaca = suprailiaca;
-		this.axilarMedia = axilarMedia;
-		this.subescapular = subescapular;
-		this.torax = torax;
-		this.coxa = coxa;
-		this.panturrilhaMedial = panturrilhaMedial;
 	}
 	
 	public Long getId() {

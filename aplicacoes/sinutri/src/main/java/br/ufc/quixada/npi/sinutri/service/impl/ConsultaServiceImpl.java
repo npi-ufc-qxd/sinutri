@@ -1,11 +1,10 @@
 package br.ufc.quixada.npi.sinutri.service.impl;
 
 import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
 
 import javax.inject.Inject;
 import javax.inject.Named;
+
 import br.ufc.quixada.npi.sinutri.model.AvaliacaoAntropometrica;
 import br.ufc.quixada.npi.sinutri.model.InqueritoAlimentar;
 import br.ufc.quixada.npi.sinutri.model.Paciente;
@@ -47,22 +46,19 @@ public class ConsultaServiceImpl implements ConsultaService {
 	}
 
 	@Override
-	public void adicionarAvaliacaoAntropometrica(AvaliacaoAntropometrica antropometria, Paciente paciente) {
-		antropometria.setPaciente(paciente);
-		antropometria.setAtualizadoEm(new Date());
+	public void adicionarAvaliacaoAntropometrica(AvaliacaoAntropometrica antropometria) {
 		avaliacaoAntropometricaRepository.save(antropometria);
 		
 	}
 
 	@Override
-	public void editarAvaliacaoAntropometrica(AvaliacaoAntropometrica antropometria, Paciente paciente) {
-		antropometria.setAtualizadoEm(new Date());
+	public void editarAvaliacaoAntropometrica(AvaliacaoAntropometrica antropometria) {
 		avaliacaoAntropometricaRepository.save(antropometria);
 		
 	}
 
 	@Override
-	public void excluirAvaliacaoAntropometrica(AvaliacaoAntropometrica antropometria, Paciente paciente) {
+	public void excluirAvaliacaoAntropometrica(AvaliacaoAntropometrica antropometria) {
 		avaliacaoAntropometricaRepository.delete(antropometria);
 	}
 
