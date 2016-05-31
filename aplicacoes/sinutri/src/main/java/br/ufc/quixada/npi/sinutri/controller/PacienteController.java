@@ -120,8 +120,12 @@ public class PacienteController {
 	}
 	
 	@RequestMapping(value= {"/{idPaciente}/Antropometria/"}, method = RequestMethod.GET)
-	public String getAvaliacaoAntropometrica(@PathVariable("idPaciente") Long idPaciente, Model model, HttpSession session){
+	public String getAvaliacaoAntropometrica(@PathVariable("idPaciente") Long idPaciente, Model model, HttpSession session, RedirectAttributes redirectAttributes){
 		Paciente paciente = pacienteService.buscarPacientePorId(idPaciente);
+		if(paciente == null){
+			redirectAttributes.addFlashAttribute("erro", "Paciente inválido. Tente novamente!");
+			return "antropometria/form-cadastrar";
+		}
 		AvaliacaoAntropometrica avaliacaoAntropometrica = new AvaliacaoAntropometrica();
 		avaliacaoAntropometrica.setPaciente(paciente);
 		avaliacaoAntropometrica.setCriadoEm(new Date());
@@ -131,11 +135,7 @@ public class PacienteController {
 	
 	@RequestMapping(value={"/{idPaciente}/Antropometria/"}, method = RequestMethod.POST)
 	public String adicionarAvaliacaoAntropometrica(@PathVariable("idPaciente") Long idPaciente, Model model, @Valid AvaliacaoAntropometrica avaliacaoAntropometrica, BindingResult result, RedirectAttributes redirectAttributes){
-		Servidor nutricionista = pessoaService.buscarServidorPorCpf(getCpfPessoaLogada());
 		Paciente paciente = pacienteService.buscarPacientePorId(idPaciente);
-		avaliacaoAntropometrica.setNutricionista(nutricionista);
-		avaliacaoAntropometrica.setPaciente(paciente);
-		avaliacaoAntropometrica.setAtualizadoEm(new Date());
 		if(paciente == null){
 			redirectAttributes.addFlashAttribute("erro", "Paciente inválido. Tente novamente!");
 			return "antropometria/form-cadastrar";
@@ -143,6 +143,11 @@ public class PacienteController {
 			model.addAttribute("avaliacaoAntropometrica", avaliacaoAntropometrica);
 			return "antropometria/form-cadastrar";
 		}
+		Servidor nutricionista = pessoaService.buscarServidorPorCpf(getCpfPessoaLogada());
+		avaliacaoAntropometrica.setNutricionista(nutricionista);
+		avaliacaoAntropometrica.setPaciente(paciente);
+		avaliacaoAntropometrica.setAtualizadoEm(new Date());
+		
 		consultaService.adicionarAvaliacaoAntropometrica(avaliacaoAntropometrica);
 		return "redirect:/Paciente/"+paciente.getId()+"/Antropometria/"+avaliacaoAntropometrica.getId()+"/";
 	}
@@ -170,14 +175,14 @@ public class PacienteController {
 	}
 	@RequestMapping(value= {"/{idPaciente}/Antropometria/{idAntropometria}/"}, method = RequestMethod.GET)
 	public String getVisualizarAntropometrica(@PathVariable("idPaciente") Long idPaciente, @PathVariable("idAntropometria") Long idAntropometria, RedirectAttributes redirectAttributes, Model model){
-		
-		AvaliacaoAntropometrica avaliacaoAntropometrica = consultaService.buscarAvaliacaoAntropometricaById(idAntropometria);
 		Paciente paciente = pacienteService.buscarPacientePorId(idPaciente);
 
 		if(paciente == null){
 			redirectAttributes.addFlashAttribute("erro", "Paciente inválido. Tente novamente!");
 			return "antropometria/form-cadastrar";
 		}
+		AvaliacaoAntropometrica avaliacaoAntropometrica = consultaService.buscarAvaliacaoAntropometricaById(idAntropometria);
+		
 		
 		model.addAttribute("avaliacaoAntropometrica", avaliacaoAntropometrica);
 		return "antropometria/visualizar-antropometria";
@@ -185,13 +190,12 @@ public class PacienteController {
 	@RequestMapping(value= {"/{idPaciente}/Antropometria/{idAntropometria}/Excluir/"}, method = RequestMethod.GET)
 	public String getExcluirAntropometria(@PathVariable("idPaciente") Long idPaciente, @PathVariable("idAntropometria") Long idAntropometria
 			, RedirectAttributes redirectAttributes, Model model){
-		
-		AvaliacaoAntropometrica avaliacaoAntropometrica = consultaService.buscarAvaliacaoAntropometricaById(idAntropometria);
 		Paciente paciente = pacienteService.buscarPacientePorId(idPaciente);
 		if(paciente == null){
 			redirectAttributes.addFlashAttribute("erro", "Paciente inválido. Tente novamente!");
 			return "antropometria/form-cadastrar";
 		}
+		AvaliacaoAntropometrica avaliacaoAntropometrica = consultaService.buscarAvaliacaoAntropometricaById(idAntropometria);
 		consultaService.excluirAvaliacaoAntropometrica(avaliacaoAntropometrica);
 		return "redirect:/Paciente/"+paciente.getId()+"/Antropometria/";
 	}
