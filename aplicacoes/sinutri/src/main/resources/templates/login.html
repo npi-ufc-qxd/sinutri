@@ -3,15 +3,14 @@
 <head>
 	<meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0"/>
-	<link rel="stylesheet" type="text/css" th:href="@{/css/material.min.css}"/>
-	<link rel="stylesheet" type="text/css" th:href="@{/css/font/material-icons.css}"/>
-	<link rel="stylesheet" type="text/css" th:href="@{/css/font/roboto.css}"/>
-	<link rel="stylesheet" type="text/css" th:href="@{/css/dialog-polyfill.css}"/>
+	<link rel="stylesheet" type="text/css" th:href="@{css/material.min.css}"/>
+	<link rel="stylesheet" type="text/css" th:href="@{css/font/material-icons.css}"/>
+	<link rel="stylesheet" type="text/css" th:href="@{css/font/roboto.css}"/>
+	<link rel="stylesheet" type="text/css" th:href="@{css/dialog-polyfill.css}"/>
 	<link rel="stylesheet" type="text/css" th:href="@{/css/sinutri.css}"/>
 	<link rel="stylesheet" type="text/css" th:href="@{/css/index.css}"/>
 
     <title>SiNutri | Entrar</title>
-
 </head>
 
 <body>
@@ -32,27 +31,24 @@
 
 			<div class="sn-index__left">
 
-				<img class="sn-index__left-logo" th:src="@{/images/logo.png}"></img>
+				<img class="sn-index__left-logo" th:src="@{/img/logo.png}"></img>
 			
 			</div>
 
 			<div class="sn-index__right">
 
-				<form name='f' th:action="@{/login}" method='POST' accept-charset="UTF-8" role="form" class="form-signin" id="login-form">
+				<form name='f' th:action="@{/login}" method='POST' accept-charset="UTF-8" role="form" class="sn-hide-fade" id="login-form">
 					<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label sn-fill--width">
-						<input class="mdl-textfield__input" type="text" id="sample1"/>
-						<label class="mdl-textfield__label" for="sample1">Usuário</label>
+						<input class="mdl-textfield__input" placeholder="CPF" id="username" type="text" name='username' />
+						<label class="mdl-textfield__label" for="username">CPF</label>
+					</div>
+				
+					<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label sn-fill--width">
+						<input class="mdl-textfield__input" placeholder="Senha" id="password" type="password" name='password' />
+						<label class="mdl-textfield__label" for="password">Senha</label>
 					</div>
 
-					<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label sn-fill--width">
-						<input class="mdl-textfield__input" type="password" id="sample1"/>
-						<label class="mdl-textfield__label" for="sample1">Senha</label>
-					</div>
-					
-					<div class="sn-error-text" th:if="${not #lists.isEmpty(error)}" th:text="${error}"></div>
-					<div class="sn-error-info" th:if="${not #lists.isEmpty(msg)}" th:text="${msg}"></div>
-
-					<button type="button" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent mdl-color-text--white sn-fill--width">
+					<button type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent mdl-color-text--white sn-fill--width">
 						Entrar
 					</button>
 
@@ -72,7 +68,7 @@
 	</div>
 
 	<div class="sn-foreground"></div>
-	
+
 	<script type="text/javascript" th:src="@{/js/jquery.js}"></script>
 	<script type="text/javascript" th:src="@{/js/material.min.js}"></script>
 	<script type="text/javascript" th:src="@{/js/sinutri.js}"></script>
