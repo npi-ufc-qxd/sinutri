@@ -6,6 +6,10 @@ $(document).ready(function() {
 			$(this).removeClass("sn-hide-right");
 			$(this).removeClass("sn-hide-left");
 		});
+		
+		setTimeout(function() {
+			$("form").removeClass("sn-hide-fade");
+		}, 0.2);
 
 	});
 
