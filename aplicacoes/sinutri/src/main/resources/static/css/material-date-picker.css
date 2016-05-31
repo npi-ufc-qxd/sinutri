@@ -39,13 +39,28 @@
 .dtp .dtp-picker-time > .dtp-select-minute { cursor: pointer; }
 
 .dtp .dtp-buttons { padding: 0 1em 1em 1em; text-align: right; }
-.dtp .dtp-buttons button { margin-left: 8px; };
+.dtp .dtp-buttons button { margin-left: 8px; font-size: 12px; height: 36px; }
 
-.dtp.hidden, .dtp .hidden { display: none; }
-.dtp .invisible { visibility: hidden; }
+.dtp.dtp-hidden, .dtp .dtp-hidden { display: none; }
+.dtp .dtp-invisible { visibility: hidden; }
 
-.dtp .left { float: left; }
-.dtp .right { float: right; }
-.dtp .clearfix { clear: both; }
+.dtp .dtp-left { float: left; }
+.dtp .dtp-right { float: right; }
+.dtp .dtp-clearfix { clear: both; }
 
-.dtp .center { text-align: center; }
+.dtp .dtp-center { text-align: center; }
+
+.dtp-anim {
+	-webkit-transition: all .3s ease;;
+    -moz-transition: all .3s ease;;
+    -o-transition: all .3s ease;;
+    transition: all .3s ease;;
+}
+
+.dtp-hide-bottom {
+	-ms-transform: translate(0px, 52px); /* IE 9 */
+   	-webkit-transform: translate(0px, 52px); /* Safari */
+    transform: translate(0px, 52px);
+
+    opacity: 0.0;
+}
