@@ -635,6 +635,7 @@ var DynamicList = function(rootEl, settings) {
 		var self = this;
 
 		var items = this.parent.children(this.settings.cloneableElement);
+		var currentIndex = items.length;
 		
 		if(items.length > 0) {
 
@@ -706,6 +707,31 @@ var DynamicList = function(rootEl, settings) {
 
 			setRemoveFunc(newItem);
 
+			var setEditFunc = function(rootEl) {
+
+				rootEl.children(self.settings.editButton).each(function(index, el) {
+					
+					$(el).click(function() {
+
+						if(self.settings.onItemEdit(newItem, currentIndex))
+							self.doEditItem(newItem);
+						
+					})
+
+				});
+
+				rootEl.children().each(function(index, el) {
+					
+					if(!$(el).isDynamicList()) {
+						setEditFunc($(el));
+					}
+
+				});
+
+			}
+
+			setEditFunc(newItem);
+
 			if(data === undefined)
 				data = self.settings.defaultData;
 			
@@ -744,6 +770,8 @@ var DynamicList = function(rootEl, settings) {
 		self.settings.onItemAdded(newItem);
 
 		self.showStatus("Adding");
+
+		return newItem;
 		
 	} 
 
@@ -762,9 +790,29 @@ var DynamicList = function(rootEl, settings) {
 
 	}
 
-	this.doEditItem = function(data) {
+	this.doEditItem = function(index, data) {
 
-		
+		var self = this;
+		var item = $(self.parent.children(self.settings.cloneableElement)[index]);
+
+		for(k in data) {
+
+			var el = item.find(k);
+			var elData = data[k];
+			for(attr in elData) {
+
+				if(attr === "value")
+					el.val(elData[attr]);
+				else if(attr === "text")
+					el.text(elData[attr]);
+				else
+					el.attr(attr, elData[attr]);
+
+			}
+
+		}
+
+		return item;
 
 	}
 
