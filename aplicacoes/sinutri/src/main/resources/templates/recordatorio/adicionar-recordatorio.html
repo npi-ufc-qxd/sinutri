@@ -14,6 +14,7 @@
 	<link rel="stylesheet" type="text/css" th:href="@{/css/dialog-polyfill.css}"/>
 	<link rel="stylesheet" type="text/css" th:href="@{/css/sinutri.css}"/>
 	<link rel="stylesheet" type="text/css" th:href="@{/css/adicionar-recordatorio.css}"/>
+	<link rel="stylesheet" type="text/css" th:href="@{/css/material-date-picker.css}"/>
 </head>
 <body>
 	<section layout:fragment="conteudo">
@@ -41,170 +42,47 @@
 				    		
 				    	</thead>
 				    		
-				    	<tbody>
+				    	<tbody class="sn-list-refeicoes">
 				    	
-				    		<tr th:each="refeicao, state : *{refeicoes}">
+				    		<tr class="sn-cloneable">
 				    			
-				    			<td hidden="true"
-				    			th:class="mdl-data-table__cell--non-numeric">
-				    			
-					    			<input type="hidden" 
-					    			th:field="*{refeicoes[__${state.index}__].hora}"/>
-					    			<input type="hidden" 
-					    			th:field="*{refeicoes[__${state.index}__].descricao}"/>
-					    			<input type="hidden" 
-					    			th:field="*{refeicoes[__${state.index}__].itens}"/>
-					    			<input type="hidden" 
-					    			th:field="*{refeicoes[__${state.index}__].observacao}"/>
-					    			
-				    			</td>
-				    			
-				    			<td th:id="${#strings.append('hora_', state.index)}" style="width:20%" 
-				    			th:field="*{refeicoes[__${state.index}__].hora}" 
-				    			th:text="${#dates.format(refeicao.hora, 'HH:mm')}"
-				    			th:class="mdl-data-table__cell--non-numeric">
+				    			<td style="width:20%" 
+				    			class="mdl-data-table__cell--non-numeric sn-refeicao-hora">
 				    				Hora
 				    			</td>
 				    			
-				    			<td th:id="${#strings.append('descricao_', state.index)}" style="width:20%" 
-				    			th:field="*{refeicoes[__${state.index}__].descricao}" 
-				    			th:text="${refeicao.descricao.nome}"
-				    			th:class="mdl-data-table__cell--non-numeric">
+				    			<td style="width:20%" 
+				    			class="mdl-data-table__cell--non-numeric sn-refeicao-descricao">
 				    				Descrição
 				    			</td>
 				    			
-				    			<td th:id="${#strings.append('itens_', state.index)}" style="width:20%" 
-				    			th:field="*{refeicoes[__${state.index}__].itens}" 
-				    			th:text="${refeicao.itens}"
-				    			th:class="mdl-data-table__cell--non-numeric">
+				    			<td style="width:20%" 
+				    			class="mdl-data-table__cell--non-numeric sn-refeicao-itens">
 				    				Itens
 				    			</td>
 				    			
-				    			<td th:id="${#strings.append('observacao_', state.index)}" style="width:20%" 
-				    			th:field="*{refeicoes[__${state.index}__].observacao}" 
-				    			th:text="${refeicao.observacao}"
-				    			th:class="mdl-data-table__cell--non-numeric">
+				    			<td style="width:20%" 
+				    			class="mdl-data-table__cell--non-numeric sn-refeicao-observacao">
 				    				Observação
 				    			</td>
 				    			
 				    			<td style="width:20%">
 				    			
 				    				<button type="button" 
-				    				class="mdl-button mdl-js-button mdl-button--icon sn-editar-refeicao" 
-				    				th:value="${state.index}"
-				    				th:name="${#strings.append('#editarRefeicao', state.index)}">
+				    				class="mdl-button mdl-js-button mdl-button--icon sn-refeicao-editar">
 				    				
 				    					<i class="material-icons mdl-color-text--teal">mode_edit</i>
 				    					
 				    				</button>
 				    				
-				    				<button name="removerRefeicao"
-				    				class="mdl-button mdl-js-button mdl-button--icon" 
-				    				th:value="${state.index}" 
-				    				type="submit">
+				    				<button type="button"	
+				    				class="mdl-button mdl-js-button mdl-button--icon sn-refeicao-remover">
 				    				
-				    					<i class="material-icons mdl-color-text--teal">delete</i>
+				    					<i class="material-icons mdl-color-text--teal">close</i>
 				    					
 				    				</button>
 				    				
 				    			</td>
-				    			
-				    			<dialog class="mdl-dialog" 
-				    			th:id="${ #strings.append('editarRefeicao', state.index) }">
-				    				
-				    				
-		    						<h4 class="dl-dialog__title">
-		    							Editar refeição
-		    						</h4>
-				    		    				
-							    	<div class="mdl-dialog__content">    
-							    		
-									    <div class="mdl-grid">
-									    
-									    	<div class="sn-textfield mdl-cell mdl-cell--6-col">
-										    	
-										    	<label for="horaRefeicaoAtualizada"
-										    	class="sn-textfield__label">
-										    		Hora: 
-										    	</label>
-										    		
-									    		<input type="text" 
-									    		class="sn-textfield__input sn-time-picker" 
-									    		id="horaRefeicaoAtualizada"
-									    		name="horaRefeicaoAtualizada" 
-									    		pattern="^(0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$"
-									    		th:value="*{#dates.format(refeicoes[__${state.index}__].hora, 'HH:mm')}"/>
-									    		
-									    	</div>
-									    	
-									    	<div class="sn-selectfield mdl-cell mdl-cell--6-col">
-									    		<label for="descricaoRefeicaoAtualizada"
-									    		class="sn-selectfield__label">
-									    			Tipo: 
-									    		</label>
-									    		<select class="sn-selectfield__select" 
-									    		id="descricaoRefeicaoAtualizada"
-									    		name="descricaoRefeicaoAtualizada">
-									    		
-									    			<option value="">Selecione uma opção</option>
-									    			<option th:each="tipo : ${tiposRefeicao}" 
-									    			th:selected=" (*{refeicoes[__${state.index}__].descricao} == ${tipo} ? 'selected') " 
-									    			th:value="${tipo}" th:text="${tipo.nome}">
-									    			</option>
-									    			
-									    		</select>
-									    	</div>
-									    		
-									    	<div class="sn-textfield mdl-cell mdl-cell--12-col">
-									    		<label for="itensRefeicaoAtualizada"
-									    		class="sn-textfield__label">
-									    			Itens: 
-									    		</label>
-									    		<textarea class="sn-textfield__input" 
-									    		id="itensRefeicaoAtualizada"
-									    		name="itensRefeicaoAtualizada" 
-									    		th:value="*{refeicoes[__${state.index}__].itens}"
-									    		th:text="*{refeicoes[__${state.index}__].itens}">
-									    		</textarea>
-									    	</div>
-									    	
-									    	<div class="sn-textfield mdl-cell mdl-cell--12-col">
-									    		
-									    		<label for="observacaoRefeicaoAtualizada"
-									    		class="sn-textfield__label">
-									    			Observação: 
-									    		</label>
-									    		<textarea class="sn-textfield__input"
-									    		id="observacaoRefeicaoAtualizada" 
-									    		name="observacaoRefeicaoAtualizada" 
-									    		th:value="*{refeicoes[__${state.index}__].observacao}"
-									    		th:text="*{refeicoes[__${state.index}__].observacao}">
-									    		</textarea>
-									    		
-									    	</div>
-									    		
-										</div>
-										    
-										<div class="mdl-dialog__actions">
-										    	
-									    	<button class="mdl-button"
-								    		id="btnEditarRefeicao"
-								    		name="editarRefeicao" 
-								    		th:value="${state.index}" 
-								    		type="submit">
-								    			Editar
-								    		</button>
-								    		
-								    		<button type="button" 
-								    		class="mdl-button close">
-								    			Cancelar
-								    		</button>
-										    	
-										</div>
-									    
-									</div>
-										
-							    </dialog>
 				    			
 				    		</tr>
 				    		
@@ -213,103 +91,73 @@
 				</table>
 		
 		
-			    <dialog class="mdl-dialog" 
-			    id="adicionarRefeicao" 
-			    tabindex="-1" 
-			    role="dialog" 
-			    aria-labelledby="modalLabel">
-		    
-					<h4 class="dl-dialog__title">
-						Adicionar refeição
-					</h4>
-	 									    	
-			    	<div class="mdl-dialog__content">
+			    <div id="sn-add-refeicao-modal">
 			    		
-			    		<div class="mdl-grid">
-								
-							<div class="sn-textfield mdl-cell mdl-cell--6-col">
+		    		<div class="mdl-grid">
+		    			<input type="hidden" id="sn-refeicao-item-index"/>
 							
-					    		<label for="horaRefeicao"
-					    		class="sn-textfield__label">
-					    			Hora: 
-					    		</label>
-					    		<input type="text" 
-					    		pattern="^(0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$" 
-					    		class="sn-textfield__input sn-time-picker" 
-					    		name="horaRefeicao"
-					    		id="horaRefeicao"/>
-					    		
-					    	</div>
-							    	
-							<div class="sn-selectfield mdl-cell mdl-cell--6-col">
-							
-					    		<label for="descricaoRefeicao"
-					    		class="sn-textfield__label">
-					    			Tipo: 
-					    		</label>
-					    		<select class="sn-selectfield__select" 
-					    		name="descricaoRefeicao"
-					    		id="descricaoRefeicao">
-					    		
-					    			<option value="">Selecione uma opção</option>
-					    			<option th:each="tipo : ${tiposRefeicao}" 
-					    			th:value="${tipo}" 
-					    			th:text="${tipo.nome}">
-					    			</option>
-								    			
-					    		</select>
+						<div class="sn-textfield mdl-cell mdl-cell--6-col">
+						
+				    		<label for="sn-refeicao-hora"
+				    		class="sn-textfield__label">
+				    			Hora
+				    		</label>
+				    		<input type="text" 
+				    		pattern="^(0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$" 
+				    		class="sn-textfield__input sn-time-picker" 
+				    		id="sn-refeicao-hora"/>
 				    		
-				    		</div>
+				    	</div>
+						    	
+						<div class="sn-selectfield mdl-cell mdl-cell--6-col">
+						
+				    		<label for="sn-refeicao-descricao"
+				    		class="sn-textfield__label">
+				    			Tipo
+				    		</label>
+				    		<select class="sn-selectfield__select"
+				    		id="sn-refeicao-descricao">
 				    		
-				    		<div class="sn-textfield mdl-cell mdl-cell--12-col">
+				    			<option value="">Selecione uma opção</option>
+				    			<option th:each="tipo : ${tiposRefeicao}" 
+				    			th:value="${tipo}" 
+				    			th:text="${tipo.nome}">
+				    			</option>
+							    			
+				    		</select>
+			    		
+			    		</div>
+			    		
+			    		<div class="sn-textfield mdl-cell mdl-cell--12-col">
+			    		
+				    		<label for="sn-refeicao-itens"
+				    		class="sn-textfield__label">
+				    			Itens
+				    		</label>
+				    		<textarea class="sn-textfield__input"
+				    		id="sn-refeicao-itens"></textarea>
 				    		
-					    		<label for="itensRefeicao"
-					    		class="sn-textfield__label">
-					    			Itens: 
-					    		</label>
-					    		<textarea class="sn-textfield__input" 
-					    		name="itensRefeicao"
-					    		id="itensRefeicao"></textarea>
-					    		
-					    	</div>
-							
-							<div class="sn-textfield mdl-cell mdl-cell--12-col">
-					    		
-					    		<label for="itensRefeicao"
-					    		class="sn-textfield__label">
-					    			Observação: 
-					    		</label>
-					    		<textarea class="sn-textfield__input" 
-					    		name="observacaoRefeicao"
-					    		id="itensRefeicao"></textarea>
-					    		
-					    	</div>
+				    	</div>
+						
+						<div class="sn-textfield mdl-cell mdl-cell--12-col">
+				    		
+				    		<label for="sn-refeicao-observacao"
+				    		class="sn-textfield__label">
+				    			Observação
+				    		</label>
+				    		<textarea class="sn-textfield__input"
+				    		id="sn-refeicao-observacao"></textarea>
 				    		
 				    	</div>
 				    		
+				    		
 	   				</div>
 			    	
-			    	<div class="mdl-dialog__actions">
-			    		
-			    		<button id="bntAdicionarRefeicao" 
-			    		class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect"
-			    		name="adicionarRefeicao" 
-			    		type="submit">
-			    			Adicionar
-			    		</button>
-			    		
-			    		<button type="button" 
-			    		class="mdl-button mdl-js-button mdl-button--colored mdl-js-ripple-effect close">
-			    			Cancelar
-			    		</button>
-					    				      
-				    </div>
-			    	
-			    </dialog>
+			    </div>
 			    
 			    <button type="button" 
    				class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--mini-fab mdl-button--colored" 
-   				id="btnAdicionarRefeicaoDialog">
+   				id="sn-add-refeicao-button">
    					<i class="material-icons">add</i>
    				</button>
    				
@@ -325,11 +173,11 @@
 		</div>
 	</section>
 	
-	<script type="text/javascript" th:src="@{/js/jquery.js}"></script>
-	<script type="text/javascript" th:src="@{/js/material.min.js}"></script>
-	<script type="text/javascript" th:src="@{/js/dialog-polyfill.js}"></script>
-	<script type="text/javascript" th:src="@{/js/sinutri.js}"></script>
-	<script type="text/javascript" th:src="@{/js/adicionar-recordatorio.js}"></script>
+	<section layout:fragment="js">		
+		<script type="text/javascript" th:src="@{/js/moment.js}"></script>
+		<script type="text/javascript" th:src="@{/js/material-date-picker.js}"></script>
+		<script type="text/javascript" th:src="@{/js/adicionar-recordatorio.js}"></script>
+	</section>
 
 </body>
 </html>

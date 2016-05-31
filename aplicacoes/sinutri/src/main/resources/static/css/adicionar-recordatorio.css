@@ -1,4 +1,4 @@
-#btnAdicionarRefeicaoDialog 
+#sn-add-refeicao-button
 {
 	position: absolute;
 	right: -20px;
@@ -25,7 +25,3 @@ table
 	box-shadow: none !important;
 }
 
-._dialog_overlay
-{
-	z-index: -10000 !important;
-}
