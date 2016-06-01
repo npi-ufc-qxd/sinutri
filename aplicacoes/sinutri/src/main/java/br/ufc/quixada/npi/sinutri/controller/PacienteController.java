@@ -17,9 +17,11 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import br.ufc.quixada.npi.sinutri.model.InqueritoAlimentar;
 import br.ufc.quixada.npi.sinutri.model.Paciente;
+import br.ufc.quixada.npi.sinutri.model.Servidor;
 import br.ufc.quixada.npi.sinutri.model.enuns.FrequenciaSemanal;
 import br.ufc.quixada.npi.sinutri.service.ConsultaService;
 import br.ufc.quixada.npi.sinutri.service.PacienteService;
+import br.ufc.quixada.npi.sinutri.service.PessoaService;
 
 @Controller
 @RequestMapping(value = "/Paciente")
@@ -27,6 +29,9 @@ public class PacienteController {
 
 	@Inject
 	private ConsultaService consultaService;
+	
+	@Inject
+	private PessoaService pessoaService;
 	
 	@Inject
 	private PacienteService pacienteService;
@@ -57,14 +62,15 @@ public class PacienteController {
 			redirectAttributes.addFlashAttribute("erro", "Paciente não encontrado. Faça uma nova pesquisa");
 			return "redirect:/Nutricao/Buscar";
 		}
-		
 		if (result.hasErrors()) {
 			inqueritoAlimentar.setPaciente(paciente);
 			model.addAttribute("frequenciasSemanais", FrequenciaSemanal.values());
 			model.addAttribute("inqueritoAlimentar", inqueritoAlimentar);
 			return "inquerito-alimentar/cadastrar";
 		}
-		
+		String cpfPessoaLogada = getCpfPessoaLogada();
+		Servidor nutricionista = pessoaService.buscarServidorPorCpf(cpfPessoaLogada);
+		inqueritoAlimentar.setNutricionista(nutricionista);
 		consultaService.adicionarInqueritoAlimentar(inqueritoAlimentar, paciente);
 		return "redirect:/Paciente/"+idPaciente+"/InqueritoAlimentar/"+inqueritoAlimentar.getId()+"/";
 	}
@@ -83,8 +89,6 @@ public class PacienteController {
 			redirectAttributes.addFlashAttribute("erro", "Inquérito Alimentar não encontrado. Faça uma nova pesquisa");
 			return "redirect:/Nutricao/Buscar";
 		}
-		
-		inqueritoAlimentar.setPaciente(paciente);
 		
 		model.addAttribute("inqueritoAlimentar", inqueritoAlimentar);
 		model.addAttribute("frequenciasSemanais", FrequenciaSemanal.values());
@@ -109,16 +113,21 @@ public class PacienteController {
 	
 	@RequestMapping(value = "/{idPaciente}/InqueritoAlimentar/{idInqueritoAlimentar}/Excluir/", method = RequestMethod.GET)
 	public String excluirInqueritoAlimentar(@PathVariable("idPaciente") Long idPaciente, @PathVariable("idInqueritoAlimentar") Long idInqueritoAlimentar, RedirectAttributes redirectAttributes){
+		Paciente paciente = pacienteService.buscarPacientePorId(idPaciente);
+		if(isInvalido(paciente)){
+			redirectAttributes.addFlashAttribute("erro", "Paciente não encontrado. Faça uma nova pesquisa");
+			return "redirect:/Nutricao/Buscar";
+		}
 		InqueritoAlimentar inqueritoAlimentar = consultaService.buscarInqueritoAlimentarPorId(idInqueritoAlimentar);
 		if(inqueritoAlimentar == null){
 			redirectAttributes.addFlashAttribute("erro", "Inquérito Alimentar não encontrado. Faça uma nova pesquisa");
 			return "redirect:/Nutricao/Buscar";
 		}
 		consultaService.excluirInqueritoAlimentar(inqueritoAlimentar);
-		return "redirect:/Paciente/"+idPaciente+"/";
+		return "redirect:/Paciente/"+paciente.getId()+"/";
 	}
 	
-	@RequestMapping(value = "/idPaciente/InqueritoAlimentar/{idInqueritoAlimentar}/", method = RequestMethod.POST)
+	@RequestMapping(value = "/{idPaciente}/InqueritoAlimentar/{idInqueritoAlimentar}/", method = RequestMethod.GET)
 	public String visualizarDetalhesInqueritoAlimentar(@PathVariable("idInqueritoAlimentar") Long idInqueritoAlimentar, @PathVariable("idPaciente") Long idPaciente, Model model, RedirectAttributes redirectAttributes ){
 		Paciente paciente = pacienteService.buscarPacientePorId(idPaciente);
 		if(isInvalido(paciente)){
@@ -130,10 +139,9 @@ public class PacienteController {
 			redirectAttributes.addFlashAttribute("erro", "Inquérito Alimentar não encontrado. Faça uma nova pesquisa");
 			return "redirect:/Nutricao/Buscar";
 		}
-		model.addAttribute("inqueritoAlimenar", inqueritoAlimentar);
+		model.addAttribute("inqueritoAlimentar", inqueritoAlimentar);
 		return "inquerito-alimentar/detalhes";
 	}
-	
 	
 	private boolean isInvalido(Paciente paciente){
 		return paciente == null;

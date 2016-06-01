@@ -1,161 +1,255 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-	<head th:replace="templates/layoutPadrao :: head">
-	<title>Inquérito Alimentar</title>
-	</head>
-	<body>
-		<nav th:replace="templates/layoutPadrao :: menu"></nav>
-    	<footer th:replace="templates/layoutPadrao :: footer"></footer>
-		
-		<div class="container">
-			<div class="row">
-				<div class="col-sm-8">
-					<h3>
-						Informações do Inquérito Alimentar de <strong th:text="${inqueritoAlimentar.paciente.pessoa.nome}"></strong>
-					</h3>
-				</div>
-				<div class="col-sm-4" align="right" style="margin-top: 15px;">
-					<a
-					th:href="@{'/paciente/'+${inqueritoAlimentar.paciente.id}+'/Inquerito/'+${inqueritoAlimentar.id}+'/Excluir/'}"
-					class="btn btn-danger btn-sm"><span
-					class="glyphicon glyphicon-remove"></span> Excluir</a>
-					<a
-					th:href="@{'/paciente/'+${inqueritoAlimentar.paciente.id}+'/Inquerito/'+${inqueritoAlimentar.id}+'/Editar/'}"
-					class="btn btn-warning btn-sm"><span
-					class="glyphicon glyphicon-edit"></span> Editar</a>
-				</div>
-			</div>
-			<div class="row col-sm-12">
-				<h3 class="section">Observações:</h3>
-				<font size="3" style="margin-left: 30px" th:text="${inqueritoAlimentar.observacoes}"></font>
-			</div>
-			<div class="row">
-				<div class="col-sm-12">
-					<h3 id="inquerito" class="section" th:text="'Inquérito Alimentar criado em '+${inqueritoAlimentar.criadoEm}">Criado</h3>
-					<h3 id="inquerito" class="section" th:text="'Inquérito Alimentar atualizado em '+${inqueritoAlimentar.criadoEm}">Atualizado</h3>
-					<table class="table table-striped">
-						<thead class="thead">
-							<tr>
-								<th>Alimentos</th>
-								<th>Frequencia</th>
-								<th>Anotação</th>
-							</tr>
-						</thead>
-						<tbody th:object="${inqueritoAlimentar}">
-							<tr th:if="*{aguaGosta}">
-								<td>Agua</td>
-								<td th:text="*{aguaFrequenciaSemanal.descricao}"></td>
-								<td th:text="*{aguaAnotacao}"></td>
-							</tr>
-							<tr th:if="*{avesGosta}">
-								<td>Aves</td>
-								<td th:text="*{avesFrequenciaSemanal.descricao}"></td>
-								<td th:text="*{avesAnotacao}"></td>
-							</tr>
-							<tr th:if="*{bebidasAlcoolicasGosta}">
-								<td>Bebidas Alcoólicas</td>
-								<td th:text="*{bebidasAlcoolicasFrequenciaSemanal.descricao}"></td>
-								<td th:text="*{bebidasAlcoolicasAnotacao}"></td>
-							</tr>
-							<tr th:if="*{bovinaGosta}">
-								<td>Carne Bovina</td>
-								<td th:text="*{bovinaFrequenciaSemanal.descricao}"></td>
-								<td th:text="*{bovinaAnotacao}"></td>
-							</tr>
-							<tr th:if="*{cereaisGosta}">
-								<td>Cereais</td>
-								<td th:text="*{cereaisFrequenciaSemanal.descricao}"></td>
-								<td th:text="*{cereaisAnotacao}"></td>
-							</tr>
-							<tr th:if="*{docesGosta}">
-								<td>Doces</td>
-								<td th:text="*{docesFrequenciaSemanal.descricao}"></td>
-								<td th:text="*{docesAnotacao}"></td>
-							</tr>
-							<tr th:if="*{frutasGosta}">
-								<td>Frutas</td>
-								<td th:text="*{frutasFrequenciaSemanal.descricao}"></td>
-								<td th:text="*{frutasAnotacao}"></td>
-							</tr>
-							<tr th:if="*{gaseificadasGosta}">
-								<td>Gaseificadas</td>
-								<td th:text="*{gaseificadasFrequenciaSemanal.descricao}"></td>
-								<td th:text="*{gaseificadasAnotacao}"></td>
-							</tr>
-							<tr th:if="*{infusoesGosta}">
-								<td>Infusões</td>
-								<td th:text="*{infusoesFrequenciaSemanal.descricao}"></td>
-								<td th:text="*{infusoesAnotacao}"></td>
-							</tr>
-							<tr th:if="*{leguminosasGosta}">
-								<td>Leguminosas</td>
-								<td th:text="*{leguminosasFrequenciaSemanal.descricao}"></td>
-								<td th:text="*{leguminosasAnotacao}"></td>
-							</tr>
-							<tr th:if="*{leiteDerivadosGosta}">
-								<td>Leite ou derivados</td>
-								<td th:text="*{leiteDerivadosFrequenciaSemanal.descricao}"></td>
-								<td th:text="*{leiteDerivadosAnotacao}"></td>
-							</tr>
-							<tr th:if="*{manteigaGosta}">
-								<td>Manteiga</td>
-								<td th:text="*{manteigaFrequenciaSemanal.descricao}"></td>
-								<td th:text="*{manteigaAnotacao}"></td>
-							</tr>
-							<tr th:if="*{margarinaGosta}">
-								<td>Margarina</td>
-								<td th:text="*{margarinaFrequenciaSemanal.descricao}"></td>
-								<td th:text="*{margarinaAnotacao}"></td>
-							</tr>
-							<tr th:if="*{massasGosta}">
-								<td>Massas</td>
-								<td th:text="*{massasFrequenciaSemanal.descricao}"></td>
-								<td th:text="*{massasAnotacao}"></td>
-							</tr>
-							<tr th:if="*{oleoGosta}">
-								<td>Óleos</td>
-								<td th:text="*{oleoFrequenciaSemanal.descricao}"></td>
-								<td th:text="*{oleoAnotacao}"></td>
-							</tr>
-							<tr th:if="*{ovosGosta}">
-								<td>Ovos</td>
-								<td th:text="*{ovosFrequenciaSemanal.descricao}"></td>
-								<td th:text="*{ovosAnotacao}"></td>
-							</tr>
-							<tr th:if="*{peixeGosta}">
-								<td>Peixes</td>
-								<td th:text="*{peixeFrequenciaSemanal.descricao}"></td>
-								<td th:text="*{peixeAnotacao}"></td>
-							</tr>
-							<tr th:if="*{sucoGosta}">
-								<td>Sucos</td>
-								<td th:text="*{sucoFrequenciaSemanal.descricao}"></td>
-								<td th:text="*{sucoAnotacao}"></td>
-							</tr>
-							<tr th:if="*{toucinhoBaconGosta}">
-								<td>Toucinho ou Bacon</td>
-								<td th:text="*{toucinhoBaconFrequenciaSemanal.descricao}"></td>
-								<td th:text="*{toucinhoBaconAnotacao}"></td>
-							</tr>
-							<tr th:if="*{vegetaisCozidosGosta}">
-								<td>Vegetais Cozidos</td>
-								<td th:text="*{vegetaisCozidosFrequenciaSemanal.descricao}"></td>
-								<td th:text="*{vegetaisCozidosAnotacao}"></td>
-							</tr>
-							<tr th:if="*{vegetaisCrusGosta}">
-								<td>Vegetais crus</td>
-								<td th:text="*{vegetaisCrusFrequenciaSemanal.descricao}"></td>
-								<td th:text="*{vegetaisCrusAnotacao}"></td>
-							</tr>
-							<tr th:if="*{viscerasGosta}">
-								<td>Vísceras</td>
-								<td th:text="*{viscerasFrequenciaSemanal.descricao}"></td>
-								<td th:text="*{viscerasAnotacao}"></td>
-							</tr>
-						</tbody>
-					</table>
-				</div>
-			</div>
-		</div>
-	</body>
+<html xmlns="http://www.w3.org/1999/xhtml" 
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorator="estrutura/dashboard">
+
+<head>
+	<title>Sinutri | Visualizar Inquérito Alimentar</title>
+	<style type="text/css">
+
+		.sn-fab {
+			position: absolute;
+			right: 26px;
+			bottom: -26px;
+		}
+
+	</style>
+</head>
+
+<section layout:fragment="conteudo">
+	<div class="mdl-grid">
+
+							<div class="mdl-cell
+								mdl-cell--7-col-desktop mdl-cell--1-offset-desktop
+								sn-card">
+								
+								<div class="mdl-grid mdl-grid--no-spacing">
+
+									<div class="mdl-layout-title mdl-cell mdl-cell--12-col sn-padding--48 mdl-color--teal-500 mdl-color-text--white">
+									Inquérito Alimentar
+										<a th:href="@{${'/Paciente/'+ inqueritoAlimentar.paciente.id +'/InqueritoAlimentar/'+inqueritoAlimentar.id+'/Editar/'}}" class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored sn-fab">
+											<i class="material-icons mdl-color-text--white">edit</i>
+										</a>
+
+									</div>
+			
+									<div class="mdl-grid mdl-cell mdl-cell--12-col sn-padding--48 mdl-color--white" >
+										<div class="sn-attribute mdl-cell mdl-cell--12-col">
+											<a th:href="@{${'/Paciente/'+ inqueritoAlimentar.paciente.id +'/InqueritoAlimentar/'+inqueritoAlimentar.id+'/Excluir/'}}" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--raised mdl-button--accent mdl-color-text--white">Remover</a>
+										</div>
+										<div class="sn-attribute mdl-cell mdl-cell--6-col">
+											<div class="sn-attribute__title">Água</div>
+											<div class="sn-attribute__value" th:text="${inqueritoAlimentar.aguaFrequenciaSemanal != null} ? ${inqueritoAlimentar.aguaFrequenciaSemanal.descricao} : 'Sem frequencia' ">Frequencia semanal</div>
+										</div>
+										<div class="sn-attribute mdl-cell mdl-cell--6-col">
+											<div class="sn-attribute__title">Anotação</div>
+											<div class="sn-attribute__value" th:text="${inqueritoAlimentar.aguaAnotacao != null} ? ${inqueritoAlimentar.aguaAnotacao} : 'Sem anotação' ">Anotação</div>
+										</div>
+										
+										<div class="sn-attribute mdl-cell mdl-cell--6-col">
+											<div class="sn-attribute__title">Aves</div>
+											<div class="sn-attribute__value" th:text="${inqueritoAlimentar.avesFrequenciaSemanal != null} ? ${inqueritoAlimentar.avesFrequenciaSemanal.descricao} : 'Sem frequencia' ">Frequencia semanal</div>
+										</div>
+										<div class="sn-attribute mdl-cell mdl-cell--6-col">
+											<div class="sn-attribute__title">Anotação</div>
+											<div class="sn-attribute__value" th:text="${inqueritoAlimentar.avesAnotacao != null} ? ${inqueritoAlimentar.avesAnotacao} : 'Sem anotação' ">Anotação</div>
+										</div>
+										
+										<div class="sn-attribute mdl-cell mdl-cell--6-col">
+											<div class="sn-attribute__title">Bebidas alcoólicas</div>
+											<div class="sn-attribute__value" th:text="${inqueritoAlimentar.bebidasAlcoolicasFrequenciaSemanal != null} ? ${inqueritoAlimentar.bebidasAlcoolicasFrequenciaSemanal.descricao} : 'Sem frequencia' ">Frequencia semanal</div>
+										</div>
+										<div class="sn-attribute mdl-cell mdl-cell--6-col">
+											<div class="sn-attribute__title">Anotação</div>
+											<div class="sn-attribute__value" th:text="${inqueritoAlimentar.bebidasAlcoolicasAnotacao != null} ? ${inqueritoAlimentar.bebidasAlcoolicasAnotacao} : 'Sem anotação' ">Anotação</div>
+										</div>
+										
+										<div class="sn-attribute mdl-cell mdl-cell--6-col">
+											<div class="sn-attribute__title">Bovina</div>
+											<div class="sn-attribute__value" th:text="${inqueritoAlimentar.bovinaFrequenciaSemanal != null} ? ${inqueritoAlimentar.bovinaFrequenciaSemanal.descricao} : 'Sem frequencia' ">Frequencia semanal</div>
+										</div>
+										<div class="sn-attribute mdl-cell mdl-cell--6-col">
+											<div class="sn-attribute__title">Anotação</div>
+											<div class="sn-attribute__value" th:text="${inqueritoAlimentar.bovinaAnotacao != null} ? ${inqueritoAlimentar.bovinaAnotacao} : 'Sem anotação' ">Anotação</div>
+										</div>
+										
+										<div class="sn-attribute mdl-cell mdl-cell--6-col">
+											<div class="sn-attribute__title">Cereais</div>
+											<div class="sn-attribute__value" th:text="${inqueritoAlimentar.cereaisFrequenciaSemanal != null} ? ${inqueritoAlimentar.cereaisFrequenciaSemanal.descricao} : 'Sem frequencia' ">Frequencia semanal</div>
+										</div>
+										<div class="sn-attribute mdl-cell mdl-cell--6-col">
+											<div class="sn-attribute__title">Anotação</div>
+											<div class="sn-attribute__value" th:text="${inqueritoAlimentar.cereaisAnotacao != null} ? ${inqueritoAlimentar.cereaisAnotacao} : 'Sem anotação' ">Anotação</div>
+										</div>
+										
+										<div class="sn-attribute mdl-cell mdl-cell--6-col">
+											<div class="sn-attribute__title">Doces</div>
+											<div class="sn-attribute__value" th:text="${inqueritoAlimentar.docesFrequenciaSemanal != null} ? ${inqueritoAlimentar.docesFrequenciaSemanal.descricao} : 'Sem frequencia' ">Frequencia semanal</div>
+										</div>
+										<div class="sn-attribute mdl-cell mdl-cell--6-col">
+											<div class="sn-attribute__title">Anotação</div>
+											<div class="sn-attribute__value" th:text="${inqueritoAlimentar.docesAnotacao != null} ? ${inqueritoAlimentar.docesAnotacao} : 'Sem anotação' ">Anotação</div>
+										</div>
+										
+										<div class="sn-attribute mdl-cell mdl-cell--6-col">
+											<div class="sn-attribute__title">Frutas</div>
+											<div class="sn-attribute__value" th:text="${inqueritoAlimentar.frutasFrequenciaSemanal != null} ? ${inqueritoAlimentar.frutasFrequenciaSemanal.descricao} : 'Sem frequencia' ">Frequencia semanal</div>
+										</div>
+										<div class="sn-attribute mdl-cell mdl-cell--6-col">
+											<div class="sn-attribute__title">Anotação</div>
+											<div class="sn-attribute__value" th:text="${inqueritoAlimentar.frutasAnotacao != null} ? ${inqueritoAlimentar.frutasAnotacao} : 'Sem anotação' ">Anotação</div>
+										</div>
+										
+										<div class="sn-attribute mdl-cell mdl-cell--6-col">
+											<div class="sn-attribute__title">Bebidas gaseificadas</div>
+											<div class="sn-attribute__value" th:text="${inqueritoAlimentar.gaseificadasFrequenciaSemanal != null} ? ${inqueritoAlimentar.gaseificadasFrequenciaSemanal.descricao} : 'Sem frequencia' ">Frequencia semanal</div>
+										</div>
+										<div class="sn-attribute mdl-cell mdl-cell--6-col">
+											<div class="sn-attribute__title">Anotação</div>
+											<div class="sn-attribute__value" th:text="${inqueritoAlimentar.gaseificadasAnotacao != null} ? ${inqueritoAlimentar.gaseificadasAnotacao} : 'Sem anotação' ">Anotação</div>
+										</div>
+										
+										<div class="sn-attribute mdl-cell mdl-cell--6-col">
+											<div class="sn-attribute__title">Infusões</div>
+											<div class="sn-attribute__value" th:text="${inqueritoAlimentar.infusoesFrequenciaSemanal != null} ? ${inqueritoAlimentar.infusoesFrequenciaSemanal.descricao} : 'Sem frequencia' ">Frequencia semanal</div>
+										</div>
+										<div class="sn-attribute mdl-cell mdl-cell--6-col">
+											<div class="sn-attribute__title">Anotação</div>
+											<div class="sn-attribute__value" th:text="${inqueritoAlimentar.infusoesAnotacao != null} ? ${inqueritoAlimentar.infusoesAnotacao} : 'Sem anotação' ">Anotação</div>
+										</div>
+										
+										<div class="sn-attribute mdl-cell mdl-cell--6-col">
+											<div class="sn-attribute__title">Leguminosas</div>
+											<div class="sn-attribute__value" th:text="${inqueritoAlimentar.leguminosasFrequenciaSemanal != null} ? ${inqueritoAlimentar.leguminosasFrequenciaSemanal.descricao} : 'Sem frequencia' ">Frequencia semanal</div>
+										</div>
+										<div class="sn-attribute mdl-cell mdl-cell--6-col">
+											<div class="sn-attribute__title">Anotação</div>
+											<div class="sn-attribute__value" th:text="${inqueritoAlimentar.leguminosasAnotacao != null} ? ${inqueritoAlimentar.leguminosasAnotacao} : 'Sem anotação' ">Anotação</div>
+										</div>
+										
+										<div class="sn-attribute mdl-cell mdl-cell--6-col">
+											<div class="sn-attribute__title">Leite ou derivados</div>
+											<div class="sn-attribute__value" th:text="${inqueritoAlimentar.leiteDerivadosFrequenciaSemanal != null} ? ${inqueritoAlimentar.leiteDerivadosFrequenciaSemanal.descricao} : 'Sem frequencia' ">Frequencia semanal</div>
+										</div>
+										<div class="sn-attribute mdl-cell mdl-cell--6-col">
+											<div class="sn-attribute__title">Anotação</div>
+											<div class="sn-attribute__value" th:text="${inqueritoAlimentar.leiteDerivadosAnotacao != null} ? ${inqueritoAlimentar.leiteDerivadosAnotacao} : 'Sem anotação' ">Anotação</div>
+										</div>
+										
+										<div class="sn-attribute mdl-cell mdl-cell--6-col">
+											<div class="sn-attribute__title">Manteiga</div>
+											<div class="sn-attribute__value" th:text="${inqueritoAlimentar.manteigaFrequenciaSemanal != null} ? ${inqueritoAlimentar.manteigaFrequenciaSemanal.descricao} : 'Sem frequencia' ">Frequencia semanal</div>
+										</div>
+										<div class="sn-attribute mdl-cell mdl-cell--6-col">
+											<div class="sn-attribute__title">Anotação</div>
+											<div class="sn-attribute__value" th:text="${inqueritoAlimentar.manteigaAnotacao != null} ? ${inqueritoAlimentar.manteigaAnotacao} : 'Sem anotação' ">Anotação</div>
+										</div>
+										
+										<div class="sn-attribute mdl-cell mdl-cell--6-col">
+											<div class="sn-attribute__title">Margarina</div>
+											<div class="sn-attribute__value" th:text="${inqueritoAlimentar.margarinaFrequenciaSemanal != null} ? ${inqueritoAlimentar.margarinaFrequenciaSemanal.descricao} : 'Sem frequencia' ">Frequencia semanal</div>
+										</div>
+										<div class="sn-attribute mdl-cell mdl-cell--6-col">
+											<div class="sn-attribute__title">Anotação</div>
+											<div class="sn-attribute__value" th:text="${inqueritoAlimentar.margarinaAnotacao != null} ? ${inqueritoAlimentar.margarinaAnotacao} : 'Sem anotação' ">Anotação</div>
+										</div>
+										
+										<div class="sn-attribute mdl-cell mdl-cell--6-col">
+											<div class="sn-attribute__title">Massas</div>
+											<div class="sn-attribute__value" th:text="${inqueritoAlimentar.massasFrequenciaSemanal != null} ? ${inqueritoAlimentar.massasFrequenciaSemanal.descricao} : 'Sem frequencia' ">Frequencia semanal</div>
+										</div>
+										<div class="sn-attribute mdl-cell mdl-cell--6-col">
+											<div class="sn-attribute__title">Anotação</div>
+											<div class="sn-attribute__value" th:text="${inqueritoAlimentar.massasAnotacao != null} ? ${inqueritoAlimentar.massasAnotacao} : 'Sem anotação' ">Anotação</div>
+										</div>
+										
+										<div class="sn-attribute mdl-cell mdl-cell--6-col">
+											<div class="sn-attribute__title">Óleo</div>
+											<div class="sn-attribute__value" th:text="${inqueritoAlimentar.oleoFrequenciaSemanal != null} ? ${inqueritoAlimentar.oleoFrequenciaSemanal.descricao} : 'Sem frequencia' ">Frequencia semanal</div>
+										</div>
+										<div class="sn-attribute mdl-cell mdl-cell--6-col">
+											<div class="sn-attribute__title">Anotação</div>
+											<div class="sn-attribute__value" th:text="${inqueritoAlimentar.oleoAnotacao != null} ? ${inqueritoAlimentar.oleoAnotacao} : 'Sem anotação' ">Anotação</div>
+										</div>
+										
+										<div class="sn-attribute mdl-cell mdl-cell--6-col">
+											<div class="sn-attribute__title">Ovos</div>
+											<div class="sn-attribute__value" th:text="${inqueritoAlimentar.ovosFrequenciaSemanal != null} ? ${inqueritoAlimentar.ovosFrequenciaSemanal.descricao} : 'Sem frequencia' ">Frequencia semanal</div>
+										</div>
+										<div class="sn-attribute mdl-cell mdl-cell--6-col">
+											<div class="sn-attribute__title">Anotação</div>
+											<div class="sn-attribute__value" th:text="${inqueritoAlimentar.ovosAnotacao != null} ? ${inqueritoAlimentar.ovosAnotacao} : 'Sem anotação' ">Anotação</div>
+										</div>
+										
+										<div class="sn-attribute mdl-cell mdl-cell--6-col">
+											<div class="sn-attribute__title">Peixe</div>
+											<div class="sn-attribute__value" th:text="${inqueritoAlimentar.peixeFrequenciaSemanal != null} ? ${inqueritoAlimentar.peixeFrequenciaSemanal.descricao} : 'Sem frequencia' ">Frequencia semanal</div>
+										</div>
+										<div class="sn-attribute mdl-cell mdl-cell--6-col">
+											<div class="sn-attribute__title">Anotação</div>
+											<div class="sn-attribute__value" th:text="${inqueritoAlimentar.peixeAnotacao != null} ? ${inqueritoAlimentar.peixeAnotacao} : 'Sem anotação' ">Anotação</div>
+										</div>
+										
+										<div class="sn-attribute mdl-cell mdl-cell--6-col">
+											<div class="sn-attribute__title">Suco</div>
+											<div class="sn-attribute__value" th:text="${inqueritoAlimentar.sucoFrequenciaSemanal != null} ? ${inqueritoAlimentar.sucoFrequenciaSemanal.descricao} : 'Sem frequencia' ">Frequencia semanal</div>
+										</div>
+										<div class="sn-attribute mdl-cell mdl-cell--6-col">
+											<div class="sn-attribute__title">Anotação</div>
+											<div class="sn-attribute__value" th:text="${inqueritoAlimentar.sucoAnotacao != null} ? ${inqueritoAlimentar.sucoAnotacao} : 'Sem anotação' ">Anotação</div>
+										</div>
+										
+										<div class="sn-attribute mdl-cell mdl-cell--6-col">
+											<div class="sn-attribute__title">Toucinho ou Bacon</div>
+											<div class="sn-attribute__value" th:text="${inqueritoAlimentar.toucinhoBaconFrequenciaSemanal != null} ? ${inqueritoAlimentar.toucinhoBaconFrequenciaSemanal.descricao} : 'Sem frequencia' ">Frequencia semanal</div>
+										</div>
+										<div class="sn-attribute mdl-cell mdl-cell--6-col">
+											<div class="sn-attribute__title">Anotação</div>
+											<div class="sn-attribute__value" th:text="${inqueritoAlimentar.toucinhoBaconAnotacao != null} ? ${inqueritoAlimentar.toucinhoBaconAnotacao} : 'Sem anotação' ">Anotação</div>
+										</div>
+										
+										<div class="sn-attribute mdl-cell mdl-cell--6-col">
+											<div class="sn-attribute__title">Vegetais Cozidos</div>
+											<div class="sn-attribute__value" th:text="${inqueritoAlimentar.vegetaisCozidosFrequenciaSemanal != null} ? ${inqueritoAlimentar.vegetaisCozidosFrequenciaSemanal.descricao} : 'Sem frequencia' ">Frequencia semanal</div>
+										</div>
+										<div class="sn-attribute mdl-cell mdl-cell--6-col">
+											<div class="sn-attribute__title">Anotação</div>
+											<div class="sn-attribute__value" th:text="${inqueritoAlimentar.vegetaisCozidosAnotacao != null} ? ${inqueritoAlimentar.vegetaisCozidosAnotacao} : 'Sem anotação' ">Anotação</div>
+										</div>
+										
+										<div class="sn-attribute mdl-cell mdl-cell--6-col">
+											<div class="sn-attribute__title">Vegetais crus</div>
+											<div class="sn-attribute__value" th:text="${inqueritoAlimentar.vegetaisCrusFrequenciaSemanal != null} ? ${inqueritoAlimentar.vegetaisCrusFrequenciaSemanal.descricao} : 'Sem frequencia' ">Frequencia semanal</div>
+										</div>
+										<div class="sn-attribute mdl-cell mdl-cell--6-col">
+											<div class="sn-attribute__title">Anotação</div>
+											<div class="sn-attribute__value" th:text="${inqueritoAlimentar.vegetaisCrusAnotacao != null} ? ${inqueritoAlimentar.vegetaisCrusAnotacao} : 'Sem anotação' ">Anotação</div>
+										</div>
+										
+										<div class="sn-attribute mdl-cell mdl-cell--6-col">
+											<div class="sn-attribute__title">Vísceras</div>
+											<div class="sn-attribute__value" th:text="${inqueritoAlimentar.viscerasFrequenciaSemanal != null} ? ${inqueritoAlimentar.viscerasFrequenciaSemanal.descricao} : 'Sem frequencia' ">Frequencia semanal</div>
+										</div>
+										<div class="sn-attribute mdl-cell mdl-cell--6-col">
+											<div class="sn-attribute__title">Anotação</div>
+											<div class="sn-attribute__value" th:text="${inqueritoAlimentar.viscerasAnotacao != null} ? ${inqueritoAlimentar.viscerasAnotacao} : 'Sem anotação' ">Anotação</div>
+										</div>
+										
+									</div>
+								</div>
+							</div>
+
+							<div class="mdl-cell
+								mdl-cell--3-col-desktop">
+								
+								<div class="sn-card sn-padding--48">
+									<div class="mdl-layout-title">Informações</div>
+								</div>
+
+							</div>
+
+	    				</div>
+</section>
+
 </html>
