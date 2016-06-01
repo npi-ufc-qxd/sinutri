@@ -126,21 +126,21 @@ public class PacienteController {
 	@RequestMapping(value="/{idPaciente}/Prescricao/", method = RequestMethod.GET)
 	public String formAdicionarPrescricao(@PathVariable("idPaciente") Long idPaciente, RedirectAttributes redirectAttributes, 
 			Model model){
-//		
-//		Paciente paciente = pacienteService.buscarPacientePorId(idPaciente);
-//		System.out.println("\n\n\n id "+idPaciente);
-//		System.out.println("\n paciente "+paciente);
-//		if(paciente==null){
-//			redirectAttributes.addFlashAttribute("erro", "Paciente não encontrado. Faça uma nova pesquisa.");
-//			return "redirect:/Nutricao/Buscar";
-//		}
+	
+		Paciente paciente = pacienteService.buscarPacientePorId(idPaciente);
+		System.out.println("\n\n\n id "+idPaciente);
+		System.out.println("\n paciente "+paciente);
+		if(paciente==null){
+			redirectAttributes.addFlashAttribute("erro", "Paciente não encontrado. Faça uma nova pesquisa.");
+			return "redirect:/Nutricao/Buscar";
+		}
 	
 		Prescricao prescricao = new Prescricao();
-		prescricao.setPaciente(new Paciente());
+		prescricao.setPaciente(paciente);
 		prescricao.setCriadoEm(new Date());
 	 
 		model.addAttribute("prescricao", prescricao);
-		//model.addAttribute("paciente", paciente);
+//		model.addAttribute("paciente", paciente);
 		return "prescricao/cadastrar";
 	 }
 	
@@ -155,7 +155,7 @@ public class PacienteController {
 		 prescricao.setAtualizadoEm(prescricao.getCriadoEm());
 		 
 		 if(!result.hasErrors()){
-			 System.out.println("\n\n\nAQUI");
+//			 System.out.println("\n\n\nAQUI");
 			 consultaService.adicionarPrescricao(prescricao);
 		 }
 		 
@@ -180,18 +180,19 @@ public class PacienteController {
 	 public String formEditarPrescricao(@PathVariable("idPaciente") Long idPaciente, @PathVariable("idPrescricao") Long idPrescricao,
 		 Model model, RedirectAttributes redirectAttributes){
 		
-//		 Paciente paciente = pacienteService.buscarPacientePorId(idPaciente);
+		 Paciente paciente = pacienteService.buscarPacientePorId(idPaciente);
 		 Prescricao prescricao = consultaService.buscarPrescricaoPorId(idPrescricao);
-//		 if(paciente == null)
-//			 redirectAttributes.addFlashAttribute("erro", "Paciente não encontrado. Faça uma nova pesquisa.");
-		/* else*/ 
-		 if(prescricao!=null)
-			 System.out.println("PRESCRIÇÃO:"+prescricao.toString());
-		 else if(prescricao == null)
+		 if(paciente == null){
+			 redirectAttributes.addFlashAttribute("erro", "Paciente não encontrado. Faça uma nova pesquisa.");
+			 return "Nutricao/Buscar/";
+		 }
+		else if(prescricao == null){
 			 redirectAttributes.addFlashAttribute("erro", "Prescrição não encontrada. Faça uma nova pesquisa.");
+			 return "Nutricao/Buscar/";
+		}
 		 
 		 prescricao.setAtualizadoEm(new Date());
-//		 prescricao.setPaciente(paciente);
+		 prescricao.setPaciente(paciente);
 		 model.addAttribute("prescricao", prescricao);
 		
 		 return "prescricao/editar";
@@ -201,17 +202,17 @@ public class PacienteController {
 	 public String editarPrescricao(@PathVariable("idPaciente") Long idPaciente, @PathVariable("idPrescricao") Long idPrescricao,
 			 @Valid Prescricao prescricao, BindingResult result, Model model, RedirectAttributes redirectAttributes){
 	
-//		 Paciente paciente = pacienteService.buscarPacientePorId(idPaciente);
+		 Paciente paciente = pacienteService.buscarPacientePorId(idPaciente);
 		 Servidor nutricionista = pessoaService.buscarServidorPorCpf(getCpfPessoaLogada());
 		 prescricao.setNutricionista(nutricionista);
 		 
-//		 if(paciente==null){
-//				redirectAttributes.addFlashAttribute("erro", "Paciente não encontrado. Faça uma nova pesquisa.");
-//				return "redirect:/Nutricao/Buscar";
-//		 }
+		 if(paciente==null){
+				redirectAttributes.addFlashAttribute("erro", "Paciente não encontrado. Faça uma nova pesquisa.");
+				return "redirect:/Nutricao/Buscar";
+		 }
 		 
 		 if(result.hasErrors()){
-//			 prescricao.setPaciente(paciente);
+			 prescricao.setPaciente(paciente);
 			 model.addAttribute("prescricao", prescricao);
 		 }
 		 prescricao.setAtualizadoEm(new Date());

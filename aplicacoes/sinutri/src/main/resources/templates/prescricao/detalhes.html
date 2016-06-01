@@ -22,7 +22,7 @@
 			<div class="mdl-grid mdl-grid--no-spacing">
 				<div class="mdl-layout-title mdl-cell mdl-cell--12-col sn-padding--48 mdl-color--teal-500 mdl-color-text--white">
 					Prescrição 
-					<a th:href="@{${'/Paciente/1/Prescricao/'+ prescricao.id +'/Editar/'}}" class="sn-fab mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored sn-fab" data-upgraded=",MaterialButton,MaterialRipple">
+					<a th:href="@{${'/Paciente/'+prescricao.paciente.id+'/Prescricao/'+ prescricao.id +'/Editar/'}}" class="sn-fab mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored sn-fab" data-upgraded=",MaterialButton,MaterialRipple">
 						<i class="material-icons mdl-color-text--white">edit</i>
 						<span class="mdl-button__ripple-container">
 							<span class="mdl-ripple is-animating" style="width: 160.391918985787px; height: 160.391918985787px; transform: translate(-50%, -50%) translate(28px, 21px);"></span>
@@ -32,7 +32,7 @@
 				
 				<div class="mdl-grid mdl-cell mdl-cell--12-col sn-padding--48 mdl-color--white">
 				
-					<a th:href="@{${'/Paciente/1/Prescricao/'+ prescricao.id +'/Excluir/'}}"  class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--raised mdl-button--accent mdl-color-text--white">
+					<a th:href="@{${'/Paciente/'+prescricao.paciente.id+'/Prescricao/'+ prescricao.id +'/Excluir/'}}"  class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--raised mdl-button--accent mdl-color-text--white">
                         Remover
                  	</a>
                  	 
