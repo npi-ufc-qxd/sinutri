@@ -15,6 +15,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import br.ufc.quixada.npi.sinutri.model.InqueritoAlimentar;
 import br.ufc.quixada.npi.sinutri.model.Paciente;
+import br.ufc.quixada.npi.sinutri.model.Pessoa;
 import br.ufc.quixada.npi.sinutri.model.enuns.FrequenciaSemanal;
 import br.ufc.quixada.npi.sinutri.service.ConsultaService;
 import br.ufc.quixada.npi.sinutri.service.PacienteService;
@@ -110,6 +111,30 @@ public class PacienteController {
 		return "redirect:/Paciente/"+idPaciente+"/";
 	}
 	
+	@RequestMapping(value= "/Cadastrar/", method = RequestMethod.GET)
+	public String formCadastrarPacienteExterno(Model model){
+		Paciente paciente = new Paciente();
+		Pessoa pessoa = new Pessoa();
+		model.addAttribute("paciente", paciente);
+		model.addAttribute("pessoa", pessoa);
+
+		return "/paciente-externo/cadastrar";
+	}
+	
+	@RequestMapping(value = "/Cadastrar/", method = RequestMethod.POST)
+	public String cadastrarPacienteExterno(Model model, @ModelAttribute("paciente") Paciente paciente, @ModelAttribute("pessoa") Pessoa pessoa, BindingResult result, RedirectAttributes redirectAttributes){
+		
+		if(result.hasErrors()){
+			model.addAttribute("paciente", paciente);
+			model.addAttribute("pessoa", pessoa);
+			return "/paciente-externo/cadastrar";
+		}
+		
+		paciente.setPessoa(pessoa);
+		pacienteService.adicionarPaciente(paciente);
+		
+		return "nutricao/buscar"; //modificar
+	}
 	
 	private boolean isInvalido(Paciente paciente){
 		return paciente == null;
@@ -118,5 +143,4 @@ public class PacienteController {
 	private String getCpfPessoaLogada() {
 		return SecurityContextHolder.getContext().getAuthentication().getName();
 	}
-
 }

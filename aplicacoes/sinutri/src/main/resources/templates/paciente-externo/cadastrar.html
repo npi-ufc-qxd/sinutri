@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" 
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorator="estrutura/dashboard">
+
+<head>
+	<title>Sinutri | Novo Plano Alimentar</title>
+	<link rel="stylesheet" type="text/css" th:href="@{/css/material-date-picker.css}"/>
+</head>
+
+<section layout:fragment="conteudo">
+	<div class="mdl-grid">
+
+		<div class="mdl-cell mdl-cell--7-col-desktop mdl-cell--1-offset-desktop sn-card sn-padding--48">
+	
+			<form class="sn-form" th:object="${paciente}" th:method="post" th:action="@{${'/Paciente/Cadastrar/'}}">
+
+				<div class="mdl-grid">
+	
+					<div class="sn-textfield mdl-cell mdl-cell--8-col">
+						<div class="mdl-layout-title">Cadastro Paciente</div>
+					</div>
+					
+					<div class="sn-textfield mdl-cell mdl-cell--12-col">
+						<label class="sn-textfield__label" for="nome">Nome</label>
+						<input class="sn-textfield__input" type="text" th:field="*{nome}" id="nome" />
+					</div>
+					
+					<div class="sn-textfield mdl-cell mdl-cell--12-col">
+						<label class="sn-textfield__label" for="nome">CPF</label>
+						<input class="sn-textfield__input" type="text" th:field="*{nome}" id="nome" />
+					</div>
+
+					<div class="sn-textfield mdl-cell mdl-cell--6-col">
+						<label class="sn-textfield__label" for="dataNascimento">Data de Nascimento</label>
+						<input class="sn-textfield__input sn-date-picker" th:field="*{dataNascimento}" id="dataNascimento"/>
+					</div>
+					
+					<div class="sn-textfield mdl-cell mdl-cell--6-col">
+						<label class="sn-textfield__label" for="telefone">Telefone</label>
+						<input class="sn-textfield__input" type="text" th:field="*{telefone}" id="telefone"/>
+					</div>
+					
+					<div class="sn-textfield mdl-cell mdl-cell--12-col">
+						<label class="sn-textfield__label" for="email">Email</label>
+						<input class="sn-textfield__input" type="text" th:field="*{email}" id="email" />
+					</div>
+					
+					<div class="sn-selectfield mdl-cell mdl-cell--6-col">
+						<label class="sn-selectfield__label" for="sexo">Sexo</label>
+						<select class="sn-selectfield__select" id="sexo">
+							<option>Feminino</option>	
+							<option>Masculino</option>	
+
+						</select>
+					</div>
+					
+					<label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect mdl-cell mdl-cell--12-col" for="externo">
+						<input type="checkbox" id="externo" class="mdl-checkbox__input" checked="false"/>
+						<span class="mdl-checkbox__label">Paciente Externo</span>
+					</label>
+					
+					<div class="sn-textfield mdl-cell mdl-cell--6-col hide-by-externo">
+						<label class="sn-textfield__label" for="vinculo">Vinculo</label>
+						<input class="sn-textfield__input" type="text" th:field="*{vinculo}" id="vinculo" />
+					</div>
+					
+					<div class="sn-textfield mdl-cell mdl-cell--6-col hide-by-externo">
+						<label class="sn-textfield__label" for="ocupacao">Ocupação</label>
+						<input class="sn-textfield__input" type="text" th:field="*{ocupacao}" id="ocupacao" />
+					</div>
+					
+	
+					<div class="sn-form-actions">
+	
+						<input type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect" value="Cadastrar" />
+						<input type="button" class="mdl-button mdl-js-button mdl-button--colored mdl-js-ripple-effect" value="Cancelar"/>
+						
+					</div>
+	
+				</div>
+	
+			</form>
+	
+		</div>
+	
+	</div>
+</section>
+
+<section layout:fragment="js">
+        <script type="text/javascript" th:src="@{/js/moment.js}"></script>
+        <script type="text/javascript" th:src="@{/js/material-date-picker.js}"></script>
+        <script type="text/javascript" th:src="@{/js/paciente-externo-cadastrar.js}"></script>
+</section>
+
+</html>
