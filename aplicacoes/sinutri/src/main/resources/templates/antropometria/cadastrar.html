@@ -5,6 +5,7 @@
     layout:decorator="estrutura/dashboard">
 <head>
 	<title>Sinutri | Nova Avaliação Antropometrica</title>
+	<link rel="stylesheet" type="text/css" th:href="@{/css/material-date-picker.css}"/>
 </head>
 <body>
 	<section layout:fragment="conteudo">
@@ -52,7 +53,7 @@
 					<div class="sn-textfield mdl-cell mdl-cell--6-col">
 						<label th:for="${#ids.next('criadoEm')}" class="sn-textfield__label">Data da Criação:</label>
 						<label class="sn-textfield__messages sn-error-text" th:for="${#ids.next('criadoEm')}" th:if="${#fields.hasErrors('criadoEm')}" th:errors="*{criadoEm}">Data inválida</label>
-						<input type="text" th:field="*{criadoEm}" class="sn-textfield__input sn-date-picker sn-mask-date" required="required" />
+						<input type="text" th:field="*{criadoEm}" class="sn-textfield__input sn-date-picker" required="required" />
 					</div>
 					
 					<div class="sn-textfield mdl-cell mdl-cell--12-col">
@@ -264,11 +265,17 @@
 				</form>
 			</div>
 			
-			<div class="mdl-cell mdl-cell--3-col-desktop sn-card sn-padding--48">
-				<div class="mdl-layout-title">Informações</div>
+			<div class="mdl-cell mdl-cell--3-col-desktop">
+				<div class="sn-card sn-padding--48">
+					<div class="mdl-layout-title">Informações</div>
+				</div>
 			</div>
 		</div>
-		
 	</section>
+	
+	<section layout:fragment="js">
+       <script type="text/javascript" th:src="@{/js/moment.js}"></script>
+       <script type="text/javascript" th:src="@{/js/material-date-picker.js}"></script>
+   </section>
 </body>
 </html>
