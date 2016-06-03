@@ -38,6 +38,11 @@
 										<div class="sn-attribute mdl-cell mdl-cell--12-col">
 											<a th:href="@{${'/Paciente/'+ inqueritoAlimentar.paciente.id +'/InqueritoAlimentar/'+inqueritoAlimentar.id+'/Excluir/'}}" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--raised mdl-button--accent mdl-color-text--white">Remover</a>
 										</div>
+										
+										<div class="sn-attribute mdl-cell mdl-cell--12-col">
+											<div class="sn-attribute__title">Data de Criação</div>
+											<div class="sn-attribute__value" th:text="${#dates.format(inqueritoAlimentar.criadoEm,'dd/MM/yyyy')}">10/10/1010</div>
+										</div>
 										<div class="sn-attribute mdl-cell mdl-cell--6-col">
 											<div class="sn-attribute__title">Água</div>
 											<div class="sn-attribute__value" th:text="${inqueritoAlimentar.aguaFrequenciaSemanal != null} ? ${inqueritoAlimentar.aguaFrequenciaSemanal.descricao} : 'Sem frequencia' ">Frequencia semanal</div>
@@ -234,6 +239,11 @@
 										<div class="sn-attribute mdl-cell mdl-cell--6-col">
 											<div class="sn-attribute__title">Anotação</div>
 											<div class="sn-attribute__value" th:text="${inqueritoAlimentar.viscerasAnotacao != null} ? ${inqueritoAlimentar.viscerasAnotacao} : 'Sem anotação' ">Anotação</div>
+										</div>
+										
+										<div class="sn-attribute mdl-cell mdl-cell--12-col">
+											<div class="sn-attribute__title">Observações</div>
+											<div class="sn-attribute__value" th:text="${inqueritoAlimentar.observacoes != null} ? ${inqueritoAlimentar.observacoes} : 'Sem observações' ">Aemon Targaryen está vivo!</div>
 										</div>
 										
 									</div>
