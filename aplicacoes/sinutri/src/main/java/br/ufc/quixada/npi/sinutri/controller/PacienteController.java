@@ -161,6 +161,10 @@ public class PacienteController {
 			return "redirect:/Nutricao/Buscar";
 		}
 		AvaliacaoAntropometrica avaliacaoAntropometrica = consultaService.buscarAvaliacaoAntropometricaById(idAntropometria);
+		if(isInvalidoAntropometria(avaliacaoAntropometrica)){
+			redirectAttributes.addFlashAttribute("erro", "Avaliação Antropométrica não encontrada. Faça uma nova pesquisa");
+			return "redirect:/Nutricao/Buscar";
+		}
 		model.addAttribute("avaliacaoAntropometrica", avaliacaoAntropometrica);
 		return "antropometria/editar";
 	}
@@ -176,6 +180,10 @@ public class PacienteController {
 		}
 		avaliacaoAntropometrica.setAtualizadoEm(new Date());
 		consultaService.editarAvaliacaoAntropometrica(avaliacaoAntropometrica);
+		if(isInvalidoAntropometria(avaliacaoAntropometrica)){
+			redirectAttributes.addFlashAttribute("erro", "Avaliação Antropométrica não encontrada. Faça uma nova pesquisa");
+			return "redirect:/Nutricao/Buscar";
+		}
 		return "redirect:/Paciente/"+paciente.getId()+"/Antropometria/"+avaliacaoAntropometrica.getId()+"/";
 	}
 	@RequestMapping(value= {"/{idPaciente}/Antropometria/{idAntropometria}/"}, method = RequestMethod.GET)
@@ -187,8 +195,10 @@ public class PacienteController {
 			return "redirect:/Nutricao/Buscar";
 		}
 		AvaliacaoAntropometrica avaliacaoAntropometrica = consultaService.buscarAvaliacaoAntropometricaById(idAntropometria);
-		
-		
+		if(isInvalidoAntropometria(avaliacaoAntropometrica)){
+			redirectAttributes.addFlashAttribute("erro", "Avaliação Antropométrica não encontrada. Faça uma nova pesquisa");
+			return "redirect:/Nutricao/Buscar";
+		}
 		model.addAttribute("avaliacaoAntropometrica", avaliacaoAntropometrica);
 		return "antropometria/detalhes";
 	}
@@ -201,12 +211,19 @@ public class PacienteController {
 			return "redirect:/Nutricao/Buscar";
 		}
 		AvaliacaoAntropometrica avaliacaoAntropometrica = consultaService.buscarAvaliacaoAntropometricaById(idAntropometria);
+		if(isInvalidoAntropometria(avaliacaoAntropometrica)){
+			redirectAttributes.addFlashAttribute("erro", "Avaliação Antropométrica não encontrada. Faça uma nova pesquisa");
+			return "redirect:/Nutricao/Buscar";
+		}
 		consultaService.excluirAvaliacaoAntropometrica(avaliacaoAntropometrica);
-		return "redirect:/Paciente/"+paciente.getId()+"/Antropometria/";
+		return "redirect:/Paciente/"+paciente.getId()+"/";
 	}
 	
 	private boolean isInvalido(Paciente paciente){
 		return paciente == null;
+	}
+	private boolean isInvalidoAntropometria(AvaliacaoAntropometrica avaliacaoAntropometrica){
+		return avaliacaoAntropometrica == null;
 	}
 
 	private String getCpfPessoaLogada() {

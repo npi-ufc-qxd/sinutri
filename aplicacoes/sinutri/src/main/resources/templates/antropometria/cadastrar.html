@@ -59,7 +59,7 @@
 					<div class="sn-textfield mdl-cell mdl-cell--12-col">
 						<label th:for="${#ids.next('altura')}" class="sn-textfield__label">Altura (m):</label>
 						<label class="sn-textfield__messages sn-error-text" th:for="${#ids.next('altura')}" th:if="${#fields.hasErrors('altura')}" th:errors="*{altura}">Altura inválida</label>
-						<input type="number" th:field="*{altura}" class="sn-textfield__input"  step="0.01"/>
+						<input type="number" max="999999" th:field="*{altura}" class="sn-textfield__input"  step="0.01"/>
 					</div>
 					
 					<div class="sn-textfield mdl-cell mdl-cell--12-col">
