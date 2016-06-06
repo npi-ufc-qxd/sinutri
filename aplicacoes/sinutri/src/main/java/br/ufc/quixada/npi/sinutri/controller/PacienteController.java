@@ -72,7 +72,7 @@ public class PacienteController {
 	}
 	
 	@RequestMapping(value = "/{idPaciente}/AvaliacaoLaboratorial/{idAvaliacaoLaboratorial}/Detalhes/", method = RequestMethod.GET)
-	public String visualizarDetalhesAvaliacaoLaboratorial(@PathVariable("idPaciente") Long idPaciente, @PathVariable("idAvaliacaoLaboratorial") Long idAvaliacaoLaboratorial, RedirectAttributes redirectAttributes){
+	public String visualizarDetalhesAvaliacaoLaboratorial(@PathVariable("idPaciente") Long idPaciente, @PathVariable("idAvaliacaoLaboratorial") Long idAvaliacaoLaboratorial, RedirectAttributes redirectAttributes, Model model){
 		
 		AvaliacaoLaboratorial avaliacaoLaboratorial = consultaService.buscarAvaliacaoLaboratorialPorId(idAvaliacaoLaboratorial);
 		
@@ -81,6 +81,7 @@ public class PacienteController {
 			return "redirect:/Nutricao/Buscar";
 		}
 		
+		model.addAttribute("avaliacaoLaboratorial", avaliacaoLaboratorial);
 		return "avaliacao-laboratorial/detalhes";
 	}
 	
