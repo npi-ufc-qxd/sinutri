@@ -116,27 +116,26 @@ public class PacienteController {
 	
 	@RequestMapping(value= "/Cadastrar/", method = RequestMethod.GET)
 	public String formCadastrarPacienteExterno(Model model){
-		Paciente paciente = new Paciente();
-		Pessoa pessoa = new Pessoa();
-		model.addAttribute("paciente", paciente);
+		Pessoa pessoa = new Pessoa(null);
 		model.addAttribute("pessoa", pessoa);
 
-		return "/paciente-externo/cadastrar";
+		return "/paciente/cadastrar";
 	}
 	
 	@RequestMapping(value = "/Cadastrar/", method = RequestMethod.POST)
-	public String cadastrarPacienteExterno(Model model, @ModelAttribute("paciente") Paciente paciente, @ModelAttribute("pessoa") Pessoa pessoa, BindingResult result, RedirectAttributes redirectAttributes){
+	public String cadastrarPacienteExterno(Model model, @ModelAttribute("pessoa") Pessoa pessoa, BindingResult result, RedirectAttributes redirectAttributes){
 		
 		if(result.hasErrors()){
-			model.addAttribute("paciente", paciente);
 			model.addAttribute("pessoa", pessoa);
-			return "/paciente-externo/cadastrar";
+			return "/paciente/cadastrar";
 		}
+		
+		Paciente paciente = new Paciente();
 		
 		paciente.setPessoa(pessoa);
 		pacienteService.adicionarPaciente(paciente);
 		
-		return "nutricao/buscar"; //modificar
+		return "nutricao/buscar"; //modificar para visualizar
 	}
 	
 	private boolean isInvalido(Paciente paciente){

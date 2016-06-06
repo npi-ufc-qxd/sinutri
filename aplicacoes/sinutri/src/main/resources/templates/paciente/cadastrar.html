@@ -14,8 +14,10 @@
 
 		<div class="mdl-cell mdl-cell--7-col-desktop mdl-cell--1-offset-desktop sn-card sn-padding--48">
 	
-			<form class="sn-form" th:object="${paciente}" th:method="post" th:action="@{${'/Paciente/Cadastrar/'}}">
+			<form class="sn-form" th:object="${pessoa}" th:method="post" th:action="@{${'/Paciente/Cadastrar/'}}">
 
+				<input type="hidden" id="id" th:field="*{id}"/>
+				
 				<div class="mdl-grid">
 	
 					<div class="sn-textfield mdl-cell mdl-cell--8-col">
@@ -29,7 +31,7 @@
 					
 					<div class="sn-textfield mdl-cell mdl-cell--12-col">
 						<label class="sn-textfield__label" for="nome">CPF</label>
-						<input class="sn-textfield__input" type="text" th:field="*{nome}" id="nome" />
+						<input class="sn-textfield__input" type="text" th:field="*{cpf}" id="cpf" />
 					</div>
 
 					<div class="sn-textfield mdl-cell mdl-cell--6-col">
@@ -67,8 +69,8 @@
 					</div>
 					
 					<div class="sn-textfield mdl-cell mdl-cell--6-col hide-by-externo">
-						<label class="sn-textfield__label" for="ocupacao">Ocupação</label>
-						<input class="sn-textfield__input" type="text" th:field="*{ocupacao}" id="ocupacao" />
+						<label class="sn-textfield__label" for="ocupacaoOuCargo">Cargo/Ocupação</label>
+						<input class="sn-textfield__input" type="text" th:field="*{ocupacaoOuCargo}" id="ocupacaoOuCargo" />
 					</div>
 					
 	
