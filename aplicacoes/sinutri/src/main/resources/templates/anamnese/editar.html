@@ -6,6 +6,8 @@
 
 <head>
 	<title>Sinutri | Editar Anamnese</title>
+	<link rel="stylesheet" type="text/css" th:href="@{/css/material-date-picker.css}"/>
+	
 </head>
 <section layout:fragment="conteudo">
 	<div class="mdl-grid">
@@ -16,15 +18,16 @@
   				
 			<div class="mdl-layout-title">Anamnese</div>
 
-				<form id="form-anamnese" class="sn-form" method="post" th:action="@{${'/Paciente/'+anamnese.paciente.id+'/Anamnese/'+anamnese.id+'/Editar'}}" th:object="${anamnese}">
+				<form id="form-anamnese" class="sn-form" method="post" th:action="@{${'/Paciente/'+anamnese.paciente.id+'/Anamnese/'+anamnese.id+'/Editar/'}}" th:object="${anamnese}">
 					<div class="mdl-grid">
 
 						<input type="hidden" th:field="*{id}" name="id"/>
 		   				<input type="hidden" th:field="*{paciente.id}" />
+		   				<input type="hidden" th:field="*{criadoEm}"/>
 		   				
 		   				<div class="sn-textfield mdl-cell mdl-cell--6-col">
-		   					<label class="sn-textfield__label" for="dataCriacao">Data de Edição:</label>
-							<input class="sn-textfield__input sn-time-picker" type="text" id="dataCriacao" th:field="*{atualizadoEm}" />
+		   					<label class="sn-textfield__label" for="dataModificacao">Data de Edição:</label>
+							<input class="sn-textfield__input sn-time-picker" type="text" id="dataModificacao" th:field="*{atualizadoEm}" />
 							<label class="sn-textfield__messages sn-error-text" th:if="${#fields.hasErrors('atualizadoEm')}" 
 								th:errors="*{atualizadoEm}"
 							>Error message</label>							
@@ -318,5 +321,9 @@
 		</div>
 
 	</div>
+</section>
+<section layout:fragment="js">
+	<script type="text/javascript" th:src="@{/js/moment.js}"></script>
+	<script type="text/javascript" th:src="@{/js/material-date-picker.js}"></script>	
 </section>
 </html>

@@ -135,7 +135,7 @@ public class PacienteController {
 		}
 	}
 	
-	@RequestMapping(value = "/{idPaciente}/Anamnese",method = RequestMethod.GET)
+	@RequestMapping(value = "/{idPaciente}/Anamnese/",method = RequestMethod.GET)
 	public String formAdicionarAnamnese(@PathVariable("idPaciente") Long idPaciente, Model model, RedirectAttributes redirectAttributes){
 		Paciente paciente =null;
 		paciente =  pacienteService.buscarPacientePorId(idPaciente);
@@ -155,7 +155,7 @@ public class PacienteController {
 		}
 	}
 	
-	@RequestMapping(value = "/{idPaciente}/Anamnese",method = RequestMethod.POST)
+	@RequestMapping(value = "/{idPaciente}/Anamnese/",method = RequestMethod.POST)
 	public String AdicionarAnamnese(@PathVariable("idPaciente") Long idPaciente, @Valid Anamnese anamnese, BindingResult result, Model model){
 		if(result.hasErrors()){			
 			model.addAttribute("anamnese",anamnese);
@@ -183,7 +183,7 @@ public class PacienteController {
 		
 	}
 	
-	@RequestMapping(value = "/{idPaciente}/Anamnese/{idAnamnese}/Editar",method = RequestMethod.GET)
+	@RequestMapping(value = "/{idPaciente}/Anamnese/{idAnamnese}/Editar/",method = RequestMethod.GET)
 	public String formEditarAnamnese( Model model, @PathVariable("idPaciente") Long idPaciente,@PathVariable("idAnamnese") Long idAnamnese, RedirectAttributes redirectAttributes){
 		Anamnese anamnese = consultaService.buscarAnamnese(idAnamnese);
 		
