@@ -19,6 +19,7 @@ import br.ufc.quixada.npi.sinutri.model.Pessoa;
 import br.ufc.quixada.npi.sinutri.model.enuns.FrequenciaSemanal;
 import br.ufc.quixada.npi.sinutri.service.ConsultaService;
 import br.ufc.quixada.npi.sinutri.service.PacienteService;
+import br.ufc.quixada.npi.sinutri.service.PessoaService;
 
 @Controller
 @RequestMapping(value = "/Paciente")
@@ -29,6 +30,8 @@ public class PacienteController {
 	
 	@Inject
 	private PacienteService pacienteService;
+	
+	@Inject PessoaService pessoaService;
 	
 	@RequestMapping(value= "/{idPaciente}/InqueritoAlimentar/", method = RequestMethod.GET)
 	public String formAdicionarInqueritoAlimentar(Model model, @PathVariable("idPaciente") Long idPaciente, RedirectAttributes redirectAttributes){

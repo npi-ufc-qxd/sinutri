@@ -51,8 +51,6 @@ public class Paciente implements Serializable {
 	
 	private String ocupacao;
 
-
-
 	public Long getId() {
 		return id;
 	}
