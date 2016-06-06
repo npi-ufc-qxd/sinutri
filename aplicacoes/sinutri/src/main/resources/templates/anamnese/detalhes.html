@@ -42,6 +42,14 @@
 							mdl-cell mdl-cell--12-col
 							sn-padding--48 mdl-color--white">
 
+					<div class="mdl-cell mdl-cell--12-col">
+						<a
+							th:href="@{${'/Paciente/' + anamnese.paciente.id +'/Anamnese/'+ anamnese.id +'/Excluir/'}}"
+							class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--raised mdl-button--accent mdl-color-text--white">Remover
+							Avaliação</a>
+					</div>
+					<div class="sn-form__hdivider"></div>
+					
 					
 					<div class="sn-attribute mdl-cell mdl-cell--6-col">
                         <div class="sn-attribute__title">Criação:</div>
@@ -65,7 +73,8 @@
 							<label th:text="${anamnese.objetivoConsulta}">Objetivo</label>
 						</div>
 					</div>
-													
+					
+					<div class="sn-form__hdivider"></div>					
 					<h3 class="mdl-cell mdl-cell--12-col">Hábitos de Vida</h3>
 					
 					<div class="sn-attribute mdl-cell mdl-cell--6-col" th:if="${anamnese.atividadeFisica}">
@@ -108,7 +117,7 @@
 					</div>		
 					
 					
-					
+					<div class="sn-form__hdivider"></div>					
 					<h3 class="mdl-cell mdl-cell--12-col">Patologias</h3>
 					
 					<div class="sn-attribute mdl-cell mdl-cell--12-col" th:if='${anamnese.patologiasComentario}'>
@@ -132,7 +141,7 @@
 					</div>
 										
 					
-					
+					<div class="sn-form__hdivider"></div>					
 					<h3 class="mdl-cell mdl-cell--12-col">Avaliação Clínica</h3>
 					
 					<div class="sn-attribute mdl-cell mdl-cell--6-col">
@@ -276,7 +285,7 @@
 					</div>
 					
 					
-					
+					<div class="sn-form__hdivider"></div>					
 					<h3 class="mdl-cell mdl-cell--12-col">Hábitos Alimentares</h3>
 
 					<div class="sn-attribute mdl-cell mdl-cell--6-col" th:if="${anamnese.alergia}">
@@ -306,13 +315,7 @@
 					</div>
 				</div>
 
-			</div>
-
-			<div class="mdl-cell mdl-cell--12-col">
-            	<a th:href="@{${'/Paciente/' + anamnese.paciente.id +'/Anamnese/'+ anamnese.id +'/Excluir/'}}" 
-            	class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--raised mdl-button--accent mdl-color-text--white">Remover
-                       Avaliação</a>
-                </div>
+			</div>			
 
 		</div>
 
