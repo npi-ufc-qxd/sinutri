@@ -175,7 +175,7 @@ public class PacienteController {
 		Anamnese anamnese = consultaService.buscarAnamnese(idAnamnese);
 		if(anamnese != null){
 			consultaService.excluirAnamnese(anamnese);
-			return "redirect:/";
+			return "redirect:/Paciente/"+idPaciente+"/";
 		}else{
 			redirectAttributes.addFlashAttribute("erro", "Anamnese não encontrada.");
 			return "redirect:/Paciente/"+idPaciente+"/";			

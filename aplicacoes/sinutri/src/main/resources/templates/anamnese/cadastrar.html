@@ -44,8 +44,8 @@
 						<h5 class="mdl-cell mdl-cell--12-col">Hábitos de Vida</h5>
 						
 						<label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect mdl-cell mdl-cell--12-col" for="checkAtividadeFisica">
-							<input type="checkbox" id="checkAtividadeFisica" th:field="*{atividadeFisica}" class="mdl-checkbox__input"/>
-							<span class="mdl-checkbox__label">Atividade Física</span>
+							<input type="checkbox" id="checkAtividadeFisica" th:field="*{atividadeFisica}" class="mdl-checkbox__input" onClick="checkChange('AtividadeFisica')"/>
+							<span class="mdl-checkbox__label">Atividade Física:</span>
 						</label>
 						<div class="sn-textfield mdl-cell mdl-cell--12-col">
 							<label class="sn-textfield__label" for="inputTextAtividadeFisica">Quais atividades?</label>
@@ -57,24 +57,22 @@
 									>Error message</label>
 						</div>
 							
-						<div>
-							<label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect mdl-cell mdl-cell--12-col" for="checkDormeBem">
-								<input type="checkbox" id="checkDormeBem" th:field="*{dormeBem}" class="mdl-checkbox__input"/>
-								<span class="mdl-checkbox__label checkboxInput">Dorme bem?</span>
-							</label>
-							<div class="sn-textfield mdl-cell mdl-cell--12-col">
-								<label class="sn-textfield__label"  for="inputTextdormeBem">Comentários</label>
-								<input id="inputTextdormeBem" type="text"
-											th:field="*{dormeBemComentario}" class="sn-textfield__input"								
-										 	/>	
-								<label class="sn-textfield__messages sn-error-text" th:if="${#fields.hasErrors('dormeBemComentario')}" 
-											th:errors="*{dormeBemComentario}"
-										>Error message</label>						
-							</div>
+						<label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect mdl-cell mdl-cell--12-col" for="checkDormeBem">
+							<input type="checkbox" id="checkDormeBem" th:field="*{dormeBem}" class="mdl-checkbox__input" onClick="checkChange('DormeBem')"/>
+							<span class="mdl-checkbox__label">Dorme bem?</span>
+						</label>
+						<div class="sn-textfield mdl-cell mdl-cell--12-col">
+							<label class="sn-textfield__label"  for="inputTextDormeBem">Comentários</label>
+							<input id="inputTextDormeBem" type="text"
+										th:field="*{dormeBemComentario}" class="sn-textfield__input"								
+									 	/>	
+							<label class="sn-textfield__messages sn-error-text" th:if="${#fields.hasErrors('dormeBemComentario')}" 
+										th:errors="*{dormeBemComentario}"
+									>Error message</label>						
 						</div>
 						
 						<label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect mdl-cell mdl-cell--12-col" for="checkBebidaAlcoolica">
-							<input type="checkbox" id="checkBebidaAlcoolica" th:field="*{bebidaAlcoolica}" class="mdl-checkbox__input"/>
+							<input type="checkbox" id="checkBebidaAlcoolica" th:field="*{bebidaAlcoolica}" class="mdl-checkbox__input" onClick="checkChange('BebidaAlcoolica')" />
 							<span class="mdl-checkbox__label">Bebida alcóolica:</span>
 						</label>
 						<div class="sn-textfield mdl-cell mdl-cell--12-col">
@@ -99,8 +97,8 @@
 						</div>
 						
 						<label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect mdl-cell mdl-cell--12-col" for="checkMedicamento">
-							<input type="checkbox" id="checkMedicamento" th:field="*{medicamento}" class="mdl-checkbox__input"/>
-							<span class="mdl-checkbox__label">Medicação:</span>
+							<input type="checkbox" id="checkMedicamento" th:field="*{medicamento}" class="mdl-checkbox__input" onclick="checkChange('Medicamento')"/>
+							<span class="mdl-checkbox__label">Medicamento:</span>
 						</label>
 						<div class="sn-textfield mdl-cell mdl-cell--12-col">
 							<label class="sn-textfield__label"  for="inputTextMedicamento">Comentários</label>
@@ -163,7 +161,7 @@
 						</div>
 						
 						<label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect mdl-cell mdl-cell--12-col" for="checkMastigacao">
-							<input type="checkbox" id="checkMastigacao" th:field="*{mastigacao}" class="mdl-checkbox__input"/>
+							<input type="checkbox" id="checkMastigacao" th:field="*{mastigacao}" class="mdl-checkbox__input" onclick="checkChange('Mastigacao')"/>
 							<span class="mdl-checkbox__label">Mastigação:</span>
 						</label>
 						<div class="sn-textfield mdl-cell mdl-cell--12-col">
@@ -177,7 +175,7 @@
 						</div>
 						
 						<label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect mdl-cell mdl-cell--12-col" for="checkDisfagia">
-							<input type="checkbox" id="checkDisfagia" th:field="*{disfagia}" class="mdl-checkbox__input"/>
+							<input type="checkbox" id="checkDisfagia" th:field="*{disfagia}" class="mdl-checkbox__input" onclick="checkChange('Disfagia')"/>
 							<span class="mdl-checkbox__label">Disfagia:</span>
 						</label>
 						<div class="sn-textfield mdl-cell mdl-cell--12-col">
@@ -191,7 +189,7 @@
 						</div>
 						
 						<label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect mdl-cell mdl-cell--12-col" for="checkOdinofagia">
-							<input type="checkbox" id="checkOdinofagia" th:field="*{odinofagia}" class="mdl-checkbox__input"/>
+							<input type="checkbox" id="checkOdinofagia" th:field="*{odinofagia}" class="mdl-checkbox__input" onclick="checkChange('Odinofagia')"/>
 							<span class="mdl-checkbox__label">Odinofagia:</span>
 						</label>
 						<div class="sn-textfield mdl-cell mdl-cell--12-col">
@@ -205,7 +203,7 @@
 						</div>
 						
 						<label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect mdl-cell mdl-cell--12-col" for="checkPirose">
-							<input type="checkbox" id="checkPirose" th:field="*{pirose}" class="mdl-checkbox__input"/>
+							<input type="checkbox" id="checkPirose" th:field="*{pirose}" class="mdl-checkbox__input" onclick="checkChange('Pirose')"/>
 							<span class="mdl-checkbox__label">Pirose:</span>
 						</label>
 						<div class="sn-textfield mdl-cell mdl-cell--12-col">
@@ -219,7 +217,7 @@
 						</div>
 						
 						<label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect mdl-cell mdl-cell--12-col" for="checkNausea">
-							<input type="checkbox" id="checkNausea" th:field="*{nausea}" class="mdl-checkbox__input"/>
+							<input type="checkbox" id="checkNausea" th:field="*{nausea}" class="mdl-checkbox__input" onclick="checkChange('Nausea')"/>
 							<span class="mdl-checkbox__label">Nausea:</span>
 						</label>
 						<div class="sn-textfield mdl-cell mdl-cell--12-col">
@@ -233,7 +231,7 @@
 						</div>
 						
 						<label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect mdl-cell mdl-cell--12-col" for="checkVomito">
-							<input type="checkbox" id="checkVomito" th:field="*{vomito}" class="mdl-checkbox__input"/>
+							<input type="checkbox" id="checkVomito" th:field="*{vomito}" class="mdl-checkbox__input" onclick="checkChange('Vomito')"/>
 							<span class="mdl-checkbox__label">Vomito:</span>
 						</label>
 						<div class="sn-textfield mdl-cell mdl-cell--12-col">
@@ -247,7 +245,7 @@
 						</div>
 						
 						<label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect mdl-cell mdl-cell--12-col" for="checkDiarreia">
-							<input type="checkbox" id="checkDiarreia" th:field="*{diarreia}" class="mdl-checkbox__input"/>
+							<input type="checkbox" id="checkDiarreia" th:field="*{diarreia}" class="mdl-checkbox__input" onclick="checkChange('Diarreia')"/>
 							<span class="mdl-checkbox__label">Diarréia:</span>
 						</label>
 						<div class="sn-textfield mdl-cell mdl-cell--12-col">
@@ -261,7 +259,7 @@
 						</div>
 						
 						<label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect mdl-cell mdl-cell--12-col" for="checkConstipacao">
-							<input type="checkbox" id="checkConstipacao" th:field="*{constipacao}" class="mdl-checkbox__input"/>
+							<input type="checkbox" id="checkConstipacao" th:field="*{constipacao}" class="mdl-checkbox__input" onclick="checkChange('Constipacao')"/>
 							<span class="mdl-checkbox__label">Constipacao:</span>
 						</label>
 						<div class="sn-textfield mdl-cell mdl-cell--12-col">
@@ -276,7 +274,7 @@
 						
 						<h5 class="mdl-cell mdl-cell--12-col">Hábitos Alimentares</h5>                    
 						<label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect mdl-cell mdl-cell--12-col" for="checkAlergia">
-	                    <input type="checkbox" id="checkAlergia" th:field="*{alergia}" class="mdl-checkbox__input"/>
+	                    <input type="checkbox" id="checkAlergia" th:field="*{alergia}" class="mdl-checkbox__input" onclick="checkChange('Alergia')"/>
 	                        <span class="mdl-checkbox__label">Alergia:</span>
 	                    </label>
 	                    <div class="sn-textfield mdl-cell mdl-cell--12-col">
@@ -290,7 +288,7 @@
 	                    </div>                        
 	                    
 	                    <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect mdl-cell mdl-cell--12-col" for="checkIntolerancia">
-	                    <input type="checkbox" id="checkIntolerancia" th:field="*{intolerancia}" class="mdl-checkbox__input"/>
+	                    <input type="checkbox" id="checkIntolerancia" th:field="*{intolerancia}" class="mdl-checkbox__input" onclick="checkChange('Intolerancia')"/>
 	                        <span class="mdl-checkbox__label">Intolerância:</span>
 	                    </label>
 	                    <div class="sn-textfield mdl-cell mdl-cell--12-col">
@@ -305,8 +303,7 @@
 						
 						<div class="sn-form-actions">
 	
-							<input type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect" value="Salvar" />
-							<input type="button" class="mdl-button mdl-js-button mdl-button--colored mdl-js-ripple-effect" value="Cancelar"/>
+							<input type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect" value="Salvar" />							
 							
 						</div>
 					</div>						
