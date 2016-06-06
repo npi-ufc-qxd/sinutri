@@ -128,9 +128,9 @@ public class PacienteController {
 			Model model){
 	
 		Paciente paciente = pacienteService.buscarPacientePorId(idPaciente);
-		System.out.println("\n\n\n id "+idPaciente);
-		System.out.println("\n paciente "+paciente);
+//		System.out.println("\nid "+idPaciente);
 		if(paciente==null){
+//			System.out.println("paciente nulo");
 			redirectAttributes.addFlashAttribute("erro", "Paciente não encontrado. Faça uma nova pesquisa.");
 			return "redirect:/Nutricao/Buscar";
 		}
@@ -140,7 +140,6 @@ public class PacienteController {
 		prescricao.setCriadoEm(new Date());
 	 
 		model.addAttribute("prescricao", prescricao);
-//		model.addAttribute("paciente", paciente);
 		return "prescricao/cadastrar";
 	 }
 	
@@ -149,14 +148,13 @@ public class PacienteController {
 			 		BindingResult result, RedirectAttributes redirectAttributes){
 		
 		 Servidor nutricionista = pessoaService.buscarServidorPorCpf(getCpfPessoaLogada());
-		 
-		// System.out.println("nutricionista"+nutricionista);
+	
 		 prescricao.setNutricionista(nutricionista);
-		 prescricao.setAtualizadoEm(prescricao.getCriadoEm());
+		 prescricao.setAtualizadoEm(new Date());
+		 consultaService.adicionarPrescricao(prescricao);
 		 
 		 if(!result.hasErrors()){
 //			 System.out.println("\n\n\nAQUI");
-			 consultaService.adicionarPrescricao(prescricao);
 		 }
 		 
 		 return "redirect:/Paciente/"+id+"/Prescricao/"+prescricao.getId()+"/";
@@ -216,7 +214,7 @@ public class PacienteController {
 			 model.addAttribute("prescricao", prescricao);
 		 }
 		 prescricao.setAtualizadoEm(new Date());
-		 System.out.println("\n\n\n"+prescricao.toString());
+//		 System.out.println("\n\n\n"+prescricao.toString());
 		 consultaService.editarPrescricao(prescricao);
 		
 		 return "redirect:/Paciente/"+idPaciente+"/Prescricao/"+prescricao.getId()+"/";

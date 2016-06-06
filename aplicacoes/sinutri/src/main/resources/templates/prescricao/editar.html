@@ -20,7 +20,10 @@
 				<form id="form-prescricao" action="#" th:object="${prescricao}" th:method="post" th:action="@{${'/Paciente/'+prescricao.paciente.id+'/Prescricao/'+prescricao.id+'/Editar/'}}">
 	
 					<input type="hidden" id="id" th:field="*{id}"/>
+					<input type="hidden" id="id" th:field="*{paciente.id}"/>
+					<input type="hidden" id="id" th:field="*{nutricionista.id}"/>
 					<input type="hidden" id="atualizadoEm" th:field="*{atualizadoEm}" />
+					
 					<div class="sn-textfield mdl-cell mdl-cell--12-col">	
 						<label class="sn-textfield__label" for="inputTextDescricao">Descrição</label>
 						<input class="sn-textfield__input" type="text" id="inputTextDescricao" th:field="*{descricao}"/>

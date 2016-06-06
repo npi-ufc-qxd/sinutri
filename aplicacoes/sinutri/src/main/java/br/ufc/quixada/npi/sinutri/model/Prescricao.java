@@ -7,7 +7,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
 import javax.validation.constraints.NotNull;
 
 import org.springframework.format.annotation.DateTimeFormat;
@@ -35,12 +34,16 @@ public class Prescricao {
 	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	private Date atualizadoEm;
 	
-	@OneToOne
+	@ManyToOne
 	private Servidor nutricionista;
 	
 	@ManyToOne
 	private Paciente paciente;
 	
+	public Prescricao() {
+		super();
+	}
+
 	public Long getId() {
 		return id;
 	}

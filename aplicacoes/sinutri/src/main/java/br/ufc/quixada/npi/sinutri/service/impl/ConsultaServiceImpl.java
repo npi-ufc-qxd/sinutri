@@ -20,7 +20,7 @@ public class ConsultaServiceImpl implements ConsultaService {
 	
 	
 	@Inject
-	PrescricaoRepository prescricaoRepository;
+	private PrescricaoRepository prescricaoRepository;
 	
 	
 	@Override
@@ -35,7 +35,7 @@ public class ConsultaServiceImpl implements ConsultaService {
 	
 	@Override
 	public void editarPrescricao(Prescricao prescricao){
-		prescricaoRepository.saveAndFlush(prescricao);
+		prescricaoRepository.save(prescricao);
 	}
 	
 	@Override
