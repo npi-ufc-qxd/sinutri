@@ -135,6 +135,7 @@ public class PacienteController {
 	
 	@RequestMapping(value={"/{idPaciente}/Antropometria/"}, method = RequestMethod.POST)
 	public String adicionarAvaliacaoAntropometrica(@PathVariable("idPaciente") Long idPaciente, Model model, @Valid AvaliacaoAntropometrica avaliacaoAntropometrica, BindingResult result, RedirectAttributes redirectAttributes){
+		avaliacaoAntropometrica.setId(null);
 		Paciente paciente = pacienteService.buscarPacientePorId(idPaciente);
 		if(isInvalido(paciente)){
 			redirectAttributes.addFlashAttribute("erro", "Paciente não encontrado. Faça uma nova pesquisa");
