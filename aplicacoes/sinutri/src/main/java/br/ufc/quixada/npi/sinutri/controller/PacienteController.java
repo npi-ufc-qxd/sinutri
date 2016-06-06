@@ -144,6 +144,10 @@ public class PacienteController {
 			return "antropometria/cadastrar";
 		}
 		Servidor nutricionista = pessoaService.buscarServidorPorCpf(getCpfPessoaLogada());
+		if(isInvalidoNutricionista(nutricionista)){
+			redirectAttributes.addFlashAttribute("erro", "Nutricionista não encontrada. Faça uma nova pesquisa");
+			return "redirect:/Nutricao/Buscar";
+		}
 		avaliacaoAntropometrica.setNutricionista(nutricionista);
 		avaliacaoAntropometrica.setPaciente(paciente);
 		avaliacaoAntropometrica.setAtualizadoEm(new Date());
@@ -225,7 +229,9 @@ public class PacienteController {
 	private boolean isInvalidoAntropometria(AvaliacaoAntropometrica avaliacaoAntropometrica){
 		return avaliacaoAntropometrica == null;
 	}
-
+	private boolean isInvalidoNutricionista(Servidor nutricionista){
+		return nutricionista == null;
+	}
 	private String getCpfPessoaLogada() {
 		return SecurityContextHolder.getContext().getAuthentication().getName();
 	}
