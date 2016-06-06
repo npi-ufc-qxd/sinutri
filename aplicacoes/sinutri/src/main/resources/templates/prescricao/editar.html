@@ -43,8 +43,8 @@
 					<div class="sn-form-actions">
 						<input type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect" 
 							value="Salvar" data-upgraded=",MaterialButton,MaterialRipple"></input>
-						<input type="button" class="mdl-button mdl-js-button mdl-button--colored mdl-js-ripple-effect" 
-							value="Cancelar" data-upgraded=",MaterialButton,MaterialRipple"></input>
+						<a th:href="@{${'/Paciente/'+prescricao.paciente.id+'/'}}" type="button" class="mdl-button mdl-js-button mdl-button--colored mdl-js-ripple-effect" 
+								 data-upgraded=",MaterialButton,MaterialRipple"> Cancelar </a> 
 					</div>
 				</form>
 			</div>
