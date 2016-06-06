@@ -33,234 +33,237 @@
 		<div class="mdl-grid">
 			<div class="mdl-cell mdl-cell--7-col-desktop mdl-cell--1-offset-desktop sn-card sn-padding--48">
 				<form id="form-antropometria" action="#" th:action="@{${'/Paciente/'+avaliacaoAntropometrica.paciente.id+'/Antropometria/+avaliacaoAntropometrica+/Editar/'}}" class="sn-form" th:object="${avaliacaoAntropometrica}" th:method="post" enctype="multipart/form-data">
-					<div class="mdl-grid">
-					
-					<div class="sn-textfield mdl-cell mdl-cell--12-col">
-						<div class="mdl-layout-title">
-							<label>Editar Avaliação Antropométrica</label> 
+					<div class="mdl-grid">	
+						<div class="sn-textfield mdl-cell mdl-cell--6-col">
+							<div class="mdl-layout-title">
+								<label>Editar Avaliação Antropométrica</label> 
+							</div>
 						</div>
-					</div>
+						
+						<input type="hidden" th:field="*{id}" />
+						<input type="hidden" th:field="*{atualizadoEm}" />
+						<input type="hidden" th:field="*{paciente.id}" />
+						<input type="hidden" th:field="*{nutricionista.id}" />
+						
+						<div class="sn-textfield mdl-cell mdl-cell--12-col">
+							<h5>GERAL</h5>
+						</div>
+						
+						<div class="sn-textfield mdl-cell mdl-cell--6-col">
+							<label th:for="${#ids.next('criadoEm')}" class="sn-textfield__label">Data de Criação:</label>
+							<label class="sn-textfield__messages sn-error-text" th:for="${#ids.next('criadoEm')}" th:if="${#fields.hasErrors('criadoEm')}" th:errors="*{criadoEm}">Data inválida</label>
+							<input type="text" th:field="*{criadoEm}" class="sn-textfield__input sn-date-picker" required="required" />
+						</div>
+						
+						<div class="sn-textfield mdl-cell mdl-cell--6-col">
+							<label th:for="${#ids.next('altura')}" class="sn-textfield__label">Altura (m):</label>
+							<label class="sn-textfield__messages sn-error-text" th:for="${#ids.next('altura')}" th:if="${#fields.hasErrors('altura')}" th:errors="*{altura}">Altura inválida</label>
+							<input type="number" min="0"  max="999999" th:field="*{altura}" class="sn-textfield__input"  step="0.01"/>
+						</div>
+						
+						<div class="sn-textfield mdl-cell mdl-cell--6-col">
+							<label th:for="${#ids.next('peso')}" class="sn-textfield__label">Peso (Kg):</label>
+							<label class="sn-textfield__messages sn-error-text" th:for="${#ids.next('peso')}"  th:if="${#fields.hasErrors('peso')}" th:errors="*{peso}">Peso inválido</label>
+							<input type="number" min="0"  max="999999" th:field="*{peso}" class="sn-textfield__input"  step="0.01"/>
+						</div>
+						
+						<div class="sn-textfield mdl-cell mdl-cell--6-col">
+							<label th:for="${#ids.next('pesoDesejado')}" class="sn-textfield__label">Peso desejado (Kg):</label>
+							<label class="sn-textfield__messages sn-error-text" th:for="${#ids.next('pesoDesejado')}" th:if="${#fields.hasErrors('pesoDesejado')}" th:errors="*{pesoDesejado}">Peso Desejado inválido</label>
+							<input type="number" min="0"  max="999999" th:field="*{pesoDesejado}" class="sn-textfield__input" step="0.01"/>
+						</div>
+						
+						<div class="sn-textfield mdl-cell mdl-cell--6-col">
+							<label th:for="${#ids.next('cintura')}" class="sn-textfield__label">Cintura (cm):</label>
+							<label class="sn-textfield__messages sn-error-text" th:for="${#ids.next('cintura')}" th:if="${#fields.hasErrors('cintura')}" th:errors="*{cintura}">Cintura inválida</label>
+							<input type="number" min="0"  max="999999" th:field="*{cintura}" class="sn-textfield__input" step="0.01"/>
+						</div>
+						
+						<div class="sn-textfield mdl-cell mdl-cell--6-col">
+							<label th:for="${#ids.next('abdomen')}" class="sn-textfield__label">Abdômen (cm):</label>
+							<label  class="sn-textfield__messages sn-error-text" th:for="${#ids.next('abdomen')}" th:if="${#fields.hasErrors('abdomen')}" th:errors="*{abdomen}">Abdomen inválido</label>
+							<input type="number" min="0"  max="999999" th:field="*{abdomen}" class="sn-textfield__input" step="0.01"/>
+						</div>
+						
+						<div class="sn-textfield mdl-cell mdl-cell--6-col">
+							<label th:for="${#ids.next('quadril')}" class="sn-textfield__label">Quadril (cm):</label>
+							<label class="sn-textfield__messages sn-error-text" th:for="${#ids.next('quadril')}" th:if="${#fields.hasErrors('quadril')}" th:errors="*{quadril}">Quadril inválido</label>
+							<input type="number" min="0"  max="999999" th:field="*{quadril}" class="sn-textfield__input" step="0.01"/>
+						</div>
+						
+						<div class="sn-textfield mdl-cell mdl-cell--6-col">
+							<label th:for="${#ids.next('punho')}" class="sn-textfield__label">Punho (cm):</label>
+							<label class="sn-textfield__messages sn-error-text" th:for="${#ids.next('punho')}" th:if="${#fields.hasErrors('punho')}" th:errors="*{punho}">Punho inválido</label>
+							<input type="number" min="0"  max="999999" th:field="*{punho}" class="sn-textfield__input" step="0.01"/>
+						</div>
+						
+						<div class="sn-textfield mdl-cell mdl-cell--6-col">
+							<label th:for="${#ids.next('antebraco')}" class="sn-textfield__label">Antebraço (cm):</label>
+							<label class="sn-textfield__messages sn-error-text" th:for="${#ids.next('antebraco')}"  th:if="${#fields.hasErrors('antebraco')}" th:errors="*{antebraco}">Antebraco inválido</label>
+							<input type="number" min="0"  max="999999" th:field="*{antebraco}" class="sn-textfield__input" step="0.01"/>
+						</div>
+						
+						<div class="sn-textfield mdl-cell mdl-cell--12-col">
+							<h5>CIRCUNFERÊNCIAS</h5>
+						</div>
 					
-					<input type="hidden" th:field="*{id}" />
-					<input type="hidden" th:field="*{atualizadoEm}" />
-					<input type="hidden" th:field="*{paciente.id}" />
-					<input type="hidden" th:field="*{nutricionista.id}" />
-					
-					<div class="sn-textfield mdl-cell mdl-cell--12-col">
-						<h5>GERAL</h5>
-					</div>
-					
-					<div class="sn-textfield mdl-cell mdl-cell--6-col">
-						<label th:for="${#ids.next('criadoEm')}" class="sn-textfield__label">Data da Criação:</label>
-						<label class="sn-textfield__messages sn-error-text" th:for="${#ids.next('criadoEm')}" th:if="${#fields.hasErrors('criadoEm')}" th:errors="*{criadoEm}">Data inválida</label>
-						<input type="text" th:field="*{criadoEm}" class="sn-textfield__input sn-date-picker" required="required" />
-					</div>
-					
-					<div class="sn-textfield mdl-cell mdl-cell--12-col">
-						<label th:for="${#ids.next('altura')}" class="sn-textfield__label">Altura (m):</label>
-						<label class="sn-textfield__messages sn-error-text" th:for="${#ids.next('altura')}" th:if="${#fields.hasErrors('altura')}" th:errors="*{altura}">Altura inválida</label>
-						<input type="number" th:field="*{altura}" class="sn-textfield__input"  step="0.01"/>
-					</div>
-					
-					<div class="sn-textfield mdl-cell mdl-cell--12-col">
-						<label th:for="${#ids.next('peso')}" class="sn-textfield__label">Peso (Kg):</label>
-						<label class="sn-textfield__messages sn-error-text" th:for="${#ids.next('peso')}"  th:if="${#fields.hasErrors('peso')}" th:errors="*{peso}">Peso inválido</label>
-						<input type="number" th:field="*{peso}" class="sn-textfield__input"  step="0.01"/>
-					</div>
-					
-					<div class="sn-textfield mdl-cell mdl-cell--12-col">
-						<label th:for="${#ids.next('pesoDesejado')}" class="sn-textfield__label">Peso desejado (Kg):</label>
-						<label class="sn-textfield__messages sn-error-text" th:for="${#ids.next('pesoDesejado')}" th:if="${#fields.hasErrors('pesoDesejado')}" th:errors="*{pesoDesejado}">Peso Desejado inválido</label>
-						<input type="number" th:field="*{pesoDesejado}" class="sn-textfield__input" step="0.01"/>
-					</div>
-					
-					<div class="sn-textfield mdl-cell mdl-cell--12-col">
-						<label th:for="${#ids.next('cintura')}" class="sn-textfield__label">Cintura (cm):</label>
-						<label class="sn-textfield__messages sn-error-text" th:for="${#ids.next('cintura')}" th:if="${#fields.hasErrors('cintura')}" th:errors="*{cintura}">Cintura inválida</label>
-						<input type="number" th:field="*{cintura}" class="sn-textfield__input" step="0.01"/>
-					</div>
-					
-					<div class="sn-textfield mdl-cell mdl-cell--12-col">
-						<label th:for="${#ids.next('abdomen')}" class="sn-textfield__label">Abdomen (cm):</label>
-						<label  class="sn-textfield__messages sn-error-text" th:for="${#ids.next('abdomen')}" th:if="${#fields.hasErrors('abdomen')}" th:errors="*{abdomen}">Abdomen inválido</label>
-						<input type="number" th:field="*{abdomen}" class="sn-textfield__input" step="0.01"/>
-					</div>
-					
-					<div class="sn-textfield mdl-cell mdl-cell--12-col">
-						<label th:for="${#ids.next('quadril')}" class="sn-textfield__label">Quadril (cm):</label>
-						<label class="sn-textfield__messages sn-error-text" th:for="${#ids.next('quadril')}" th:if="${#fields.hasErrors('quadril')}" th:errors="*{quadril}">Quadril inválido</label>
-						<input type="number" th:field="*{quadril}" class="sn-textfield__input" step="0.01"/>
-					</div>
-					
-					<div class="sn-textfield mdl-cell mdl-cell--12-col">
-						<label th:for="${#ids.next('punho')}" class="sn-textfield__label">Punho (cm):</label>
-						<label class="sn-textfield__messages sn-error-text" th:for="${#ids.next('punho')}" th:if="${#fields.hasErrors('punho')}" th:errors="*{punho}">Punho inválido</label>
-						<input type="number" th:field="*{punho}" class="sn-textfield__input" step="0.01"/>
-					</div>
-					
-					<div class="sn-textfield mdl-cell mdl-cell--12-col">
-						<label th:for="${#ids.next('antebraco')}" class="sn-textfield__label">Antebraco (cm):</label>
-						<label class="sn-textfield__messages sn-error-text" th:for="${#ids.next('antebraco')}"  th:if="${#fields.hasErrors('antebraco')}" th:errors="*{antebraco}">Antebraco inválido</label>
-						<input type="number" th:field="*{antebraco}" class="sn-textfield__input" step="0.01"/>
-					</div>
-					
-					<div class="sn-textfield mdl-cell mdl-cell--12-col">
-						<h5>CIRCUNFERÊNCIAS</h5>
-					</div>
-				
-					<div class="sn-textfield mdl-cell mdl-cell--12-col">
-						<label th:for="${#ids.next('ombro')}" class="sn-textfield__label">Ombro (cm):</label>
-						<label class="sn-textfield__messages sn-error-text" th:for="${#ids.next('ombro')}"  th:if="${#fields.hasErrors('ombro')}" th:errors="*{ombro}">Ombro inválido</label>
-						<input type="number" th:field="*{ombro}" class="sn-textfield__input" step="0.01"/>
-					</div>
-					
-					<div class="sn-textfield mdl-cell mdl-cell--12-col">
-						<label th:for="${#ids.next('peitoral')}" class="sn-textfield__label">Peitoral (cm):</label>
-						<label class="sn-textfield__messages sn-error-text"  th:if="${#fields.hasErrors('peitoral')}" th:errors="*{peitoral}">Peitoral inválido</label>
-						<input type="number" th:field="*{peitoral}" class="sn-textfield__input" step="0.01"/>
-					</div>
-					
-					<div class="sn-textfield mdl-cell mdl-cell--12-col">
-						<label th:for="${#ids.next('panturrilhaDireita')}" class="sn-textfield__label">Panturrilha Direita (cm):</label>
-						<label class="sn-textfield__messages sn-error-text" th:for="${#ids.next('panturrilhaDireita')}"   th:if="${#fields.hasErrors('panturrilhaDireita')}" th:errors="*{panturrilhaDireita}">Panturrilha Direita inválida</label>
-						<input type="number" th:field="*{panturrilhaDireita}" class="sn-textfield__input" step="0.01"/>					
-					</div>
-					
-					<div class="sn-textfield mdl-cell mdl-cell--12-col">
-						<label th:for="${#ids.next('panturrilhaEsquerda')}" class="sn-textfield__label">Panturrilha Esquerda (cm):</label>
-						<label class="sn-textfield__messages sn-error-text" th:for="${#ids.next('panturrilhaEsquerda')}" th:if="${#fields.hasErrors('panturrilhaEsquerda')}" th:errors="*{panturrilhaEsquerda}">Panturrilha Esquerda inválida</label>
-						<input type="number" th:field="*{panturrilhaEsquerda}" class="sn-textfield__input" step="0.01"/>						
-					</div>
-					
-					<div class="sn-textfield mdl-cell mdl-cell--12-col">
-						<label th:for="${#ids.next('pescoco')}" class="sn-textfield__label">Pescoço (cm):</label>
-						<label class="sn-textfield__messages sn-error-text" th:for="${#ids.next('pescoco')}"  th:if="${#fields.hasErrors('pescoco')}" th:errors="*{pescoco}">Pescoço inválido</label>
-						<input type="number" th:field="*{pescoco}" class="sn-textfield__input" step="0.01"/>
-					</div>
-					
-					<div class="sn-textfield mdl-cell mdl-cell--12-col">
-						<label th:for="${#ids.next('coxaDireita')}" class="sn-textfield__label">Coxa Direita (cm):</label>
-						<label  class="sn-textfield__messages sn-error-text" th:for="${#ids.next('coxaDireita')}"  th:if="${#fields.hasErrors('coxaDireita')}" th:errors="*{coxaDireita}">Coxa direita inválida</label>
-						<input type="number" th:field="*{coxaDireita}" class="sn-textfield__input" step="0.01"/>					
-					</div>
-					
-					<div class="sn-textfield mdl-cell mdl-cell--12-col">
-						<label th:for="${#ids.next('coxaEsquerda')}" class="sn-textfield__label">Coxa Esquerda (cm):</label>
-						<label class="sn-textfield__messages sn-error-text" th:for="${#ids.next('coxaEsquerda')}" th:if="${#fields.hasErrors('coxaEsquerda')}" th:errors="*{coxaEsquerda}">Coxa esquerda inválida</label>
-						<input type="number" th:field="*{coxaEsquerda}" class="sn-textfield__input" step="0.01"/>
-					</div>
-					
-					<div class="sn-textfield mdl-cell mdl-cell--12-col">
-						<label th:for="${#ids.next('coxaProximalDireita')}" class="sn-textfield__label">Coxa Proximal Direita (cm):</label>
-						<label class="sn-textfield__messages sn-error-text" th:for="${#ids.next('coxaProximalDireita')}"  th:if="${#fields.hasErrors('coxaProximalDireita')}" th:errors="*{coxaProximalDireita}">Coxa proximal direita inválida</label>
-						<input type="number" th:field="*{coxaProximalDireita}" class="sn-textfield__input" step="0.01"/>
-					</div>
-					
-					<div class="sn-textfield mdl-cell mdl-cell--12-col">
-						<label th:for="${#ids.next('coxaProximalEsquerda')}" class="sn-textfield__label">Coxa Proximal Esquerda (cm):</label>
-						<label class="sn-textfield__messages sn-error-text" th:for="${#ids.next('coxaProximalEsquerda')}" th:if="${#fields.hasErrors('coxaProximalEsquerda')}" th:errors="*{coxaProximalDireita}">Coxa proximal esquerda inválida</label>
-						<input type="number" th:field="*{coxaProximalEsquerda}" class="sn-textfield__input" step="0.01"/>
-					</div>
-					
-					<div class="sn-textfield mdl-cell mdl-cell--12-col">
-						<label th:for="${#ids.next('bracoRelaxadoDireito')}" class="sn-textfield__label">Braco Relaxado Direito (cm):</label>
-						<label class="sn-textfield__messages sn-error-text" th:for="${#ids.next('bracoRelaxadoDireito')}" th:if="${#fields.hasErrors('bracoRelaxadoDireito')}" th:errors="*{bracoRelaxadoDireito}">Braço relaxado direito inválido</label>
-						<input type="number" th:field="*{bracoRelaxadoDireito}" class="sn-textfield__input" step="0.01"/>
-					</div>
-					
-					<div class="sn-textfield mdl-cell mdl-cell--12-col">
-						<label th:for="${#ids.next('bracoRelaxadoEsquerdo')}" class="sn-textfield__label">Braco Relaxado Esquerdo (cm):</label>
-						<label class="sn-textfield__messages sn-error-text" th:for="${#ids.next('bracoRelaxadoEsquerdo')}" th:if="${#fields.hasErrors('bracoRelaxadoEsquerdo')}" th:errors="*{bracoRelaxadoEsquerdo}">Braço relaxado esquerdo inválido</label>
-						<input type="number" th:field="*{bracoRelaxadoEsquerdo}" class="sn-textfield__input" step="0.01"/>
-					</div>
-					
-					<div class="sn-textfield mdl-cell mdl-cell--12-col">
-						<label th:for="${#ids.next('bracoContraidoDireito')}" class="sn-textfield__label">Braco Contraído Direito (cm):</label>
-						<label class="sn-textfield__messages sn-error-text" th:for="${#ids.next('bracoContraidoDireito')}" th:if="${#fields.hasErrors('bracoContraidoDireito')}" th:errors="*{bracoContraidoDireito}">Braço contraído direito inválido</label>
-						<input type="number" th:field="*{bracoContraidoDireito}" class="sn-textfield__input" step="0.01"/>
-					</div>
-					
-					<div class="sn-textfield mdl-cell mdl-cell--12-col">
-						<label th:for="${#ids.next('bracoContraidoEsquerdo')}" class="sn-textfield__label">Braco Contraido Esquerdo (cm):</label>
-						<label class="sn-textfield__messages sn-error-text" th:for="${#ids.next('bracoContraidoEsquerdo')}" th:if="${#fields.hasErrors('bracoContraidoEsquerdo')}" th:errors="*{bracoContraidoEsquerdo}">Braço contraído esuqerdo inválido</label>
-						<input type="number" th:field="*{bracoContraidoEsquerdo}" class="sn-textfield__input" step="0.01"/>
-					</div>
-					
-					<div class="sn-textfield mdl-cell mdl-cell--12-col">
-						<h5>DiÂMETROS ÓSSEOS</h5>
-					</div>
-					
-					<div class="sn-textfield mdl-cell mdl-cell--12-col">
-						<label th:for="${#ids.next('diametroPunho')}" class="sn-textfield__label">Diâmetro Punho (cm):</label>
-						<label class="sn-textfield__messages sn-error-text" th:for="${#ids.next('diametroPunho')}" th:if="${#fields.hasErrors('diametroPunho')}" th:errors="*{diametroPunho}">Diametro do punho inválido</label>
-						<input type="number" th:field="*{diametroPunho}" class="sn-textfield__input" step="0.01"/>
-					</div>
-					
-					<div class="sn-textfield mdl-cell mdl-cell--12-col">
-						<label th:for="${#ids.next('diametroFemur')}" class="sn-textfield__label">Diâmetro Fêmur (cm):</label>
-						<label class="sn-textfield__messages sn-error-text" th:for="${#ids.next('diametroFemur')}" th:if="${#fields.hasErrors('diametroFemur')}" th:errors="*{diametroFemur}">Diametro do fêmur inválido</label>
-						<input type="number" th:field="*{diametroFemur}" class="sn-textfield__input" step="0.01"/>
-					</div>
-					
-					<div class="sn-textfield mdl-cell mdl-cell--12-col">
-						<h5>COMPOSIÇÂO CORPORAL</h5>
-					</div>
-					
-					<div class="sn-textfield mdl-cell mdl-cell--12-col">
-						<label th:for="${#ids.next('biceps')}" class="sn-textfield__label">Biceps (cm):</label>
-						<label class="sn-textfield__messages sn-error-text" th:for="${#ids.next('biceps')}" th:if="${#fields.hasErrors('biceps')}" th:errors="*{biceps}">Biceps inválido</label>
-						<input type="number" th:field="*{biceps}" class="sn-textfield__input" step="0.01"/>
-					</div>
-					
-					<div class="sn-textfield mdl-cell mdl-cell--12-col">
-						<label th:for="${#ids.next('triceps')}" class="sn-textfield__label">Triceps (cm):</label>
-						<label class="sn-textfield__messages sn-error-text" th:for="${#ids.next('triceps')}" th:if="${#fields.hasErrors('triceps')}" th:errors="*{triceps}">Triceps inválido</label>
-						<input type="number" th:field="*{triceps}" class="sn-textfield__input" step="0.01"/>
-					</div>
-					
-					<div class="sn-textfield mdl-cell mdl-cell--12-col">
-						<label th:for="${#ids.next('axilarMedia')}" class="sn-textfield__label">Axilar Média (cm):</label>
-						<label class="sn-textfield__messages sn-error-text" th:for="${#ids.next('axilarMedia')}" th:if="${#fields.hasErrors('axilarMedia')}" th:errors="*{axilarMedia}">Axilar média inválida</label>
-						<input type="number" th:field="*{axilarMedia}" class="sn-textfield__input" step="0.01"/>
-					</div>
-					
-					<div class="sn-textfield mdl-cell mdl-cell--12-col">
-						<label th:for="${#ids.next('torax')}" class="sn-textfield__label">Tórax (cm):</label>
-						<input type="number" th:field="*{torax}" class="sn-textfield__input" step="0.01"/>
-						<label class="sn-textfield__messages sn-error-text" th:for="${#ids.next('torax')}" th:if="${#fields.hasErrors('torax')}" th:errors="*{torax}">Tórax inválido</label>
-					</div>
-					
-					<div class="sn-textfield mdl-cell mdl-cell--12-col">
-						<label th:for="${#ids.next('panturrilhaMedial')}" class="sn-textfield__label">Panturrilha Medial (cm):</label>
-						<label class="sn-textfield__messages sn-error-text" th:for="${#ids.next('panturrilhaMedial')}" th:if="${#fields.hasErrors('panturrilhaMedial')}" th:errors="*{panturrilhaMedial}">Panturrilha Medial inválida</label>
-						<input type="number" th:field="*{panturrilhaMedial}" class="sn-textfield__input" step="0.01"/>
-					</div>
-					
-					<div class="sn-textfield mdl-cell mdl-cell--12-col">
-						<label th:for="${#ids.next('abdominal')}" class="sn-textfield__label">Abdominal (cm):</label>
-						<label class="sn-textfield__messages sn-error-text" th:for="${#ids.next('abdominal')}" th:if="${#fields.hasErrors('abdominal')}" th:errors="*{abdominal}">Abdominal inválido</label>
-						<input type="number" th:field="*{abdominal}" class="sn-textfield__input" step="0.01"/>
-					</div>
-					
-					<div class="sn-textfield mdl-cell mdl-cell--12-col">
-						<label th:for="${#ids.next('suprailiaca')}" class="sn-textfield__label">Suprailíaca (cm):</label>
-						<label class="sn-textfield__messages sn-error-text"  th:if="${#fields.hasErrors('suprailiaca')}" th:errors="*{suprailiaca}">Suprailiaca inválida</label>
-						<input type="number" th:field="*{suprailiaca}" class="sn-textfield__input" step="0.01"/>
-					</div>
-					
-					<div class="sn-textfield mdl-cell mdl-cell--12-col">
-						<label th:for="${#ids.next('subescapular')}" class="sn-textfield__label">Subescapular (cm):</label>
-						<label class="sn-textfield__messages sn-error-text" th:for="${#ids.next('subescapular')}" th:if="${#fields.hasErrors('subescapular')}" th:errors="*{subescapular}">Subescapular inválida</label>
-						<input type="number" th:field="*{subescapular}" class="sn-textfield__input" step="0.01"/>
-					</div>
-					
-					<div class="sn-textfield mdl-cell mdl-cell--12-col">
-						<label th:for="${#ids.next('coxa')}" class="sn-textfield__label">Coxa (cm):</label>
-						<label class="sn-textfield__messages sn-error-text" th:for="${#ids.next('coxa')}" th:if="${#fields.hasErrors('coxa')}" th:errors="*{coxa}">Coxa inválida</label>
-						<input type="number" th:field="*{coxa}" class="sn-textfield__input" step="0.01"/>
-					</div>
-					
-					<button class="mdl-button mdl-button--raised mdl-button--colored">Editar</button>
+						<div class="sn-textfield mdl-cell mdl-cell--6-col">
+							<label th:for="${#ids.next('ombro')}" class="sn-textfield__label">Ombro (cm):</label>
+							<label class="sn-textfield__messages sn-error-text" th:for="${#ids.next('ombro')}"  th:if="${#fields.hasErrors('ombro')}" th:errors="*{ombro}">Ombro inválido</label>
+							<input type="number" min="0"  max="999999" th:field="*{ombro}" class="sn-textfield__input" step="0.01"/>
+						</div>
+						
+						<div class="sn-textfield mdl-cell mdl-cell--6-col">
+							<label th:for="${#ids.next('peitoral')}" class="sn-textfield__label">Peitoral (cm):</label>
+							<label class="sn-textfield__messages sn-error-text"  th:if="${#fields.hasErrors('peitoral')}" th:errors="*{peitoral}">Peitoral inválido</label>
+							<input type="number" min="0"  max="999999" th:field="*{peitoral}" class="sn-textfield__input" step="0.01"/>
+						</div>
+						
+						<div class="sn-textfield mdl-cell mdl-cell--6-col">
+							<label th:for="${#ids.next('panturrilhaDireita')}" class="sn-textfield__label">Panturrilha Direita (cm):</label>
+							<label class="sn-textfield__messages sn-error-text" th:for="${#ids.next('panturrilhaDireita')}"   th:if="${#fields.hasErrors('panturrilhaDireita')}" th:errors="*{panturrilhaDireita}">Panturrilha Direita inválida</label>
+							<input type="number" min="0"  max="999999" th:field="*{panturrilhaDireita}" class="sn-textfield__input" step="0.01"/>					
+						</div>
+						
+						<div class="sn-textfield mdl-cell mdl-cell--6-col">
+							<label th:for="${#ids.next('panturrilhaEsquerda')}" class="sn-textfield__label">Panturrilha Esquerda (cm):</label>
+							<label class="sn-textfield__messages sn-error-text" th:for="${#ids.next('panturrilhaEsquerda')}" th:if="${#fields.hasErrors('panturrilhaEsquerda')}" th:errors="*{panturrilhaEsquerda}">Panturrilha Esquerda inválida</label>
+							<input type="number" min="0"  max="999999" th:field="*{panturrilhaEsquerda}" class="sn-textfield__input" step="0.01"/>						
+						</div>
+						
+						<div class="sn-textfield mdl-cell mdl-cell--6-col">
+							<label th:for="${#ids.next('pescoco')}" class="sn-textfield__label">Pescoço (cm):</label>
+							<label class="sn-textfield__messages sn-error-text" th:for="${#ids.next('pescoco')}"  th:if="${#fields.hasErrors('pescoco')}" th:errors="*{pescoco}">Pescoço inválido</label>
+							<input type="number" min="0"  max="999999" th:field="*{pescoco}" class="sn-textfield__input" step="0.01"/>
+						</div>
+						
+						<div class="sn-textfield mdl-cell mdl-cell--6-col">
+							<label th:for="${#ids.next('coxaDireita')}" class="sn-textfield__label">Coxa Direita (cm):</label>
+							<label  class="sn-textfield__messages sn-error-text" th:for="${#ids.next('coxaDireita')}"  th:if="${#fields.hasErrors('coxaDireita')}" th:errors="*{coxaDireita}">Coxa direita inválida</label>
+							<input type="number" min="0"  max="999999" th:field="*{coxaDireita}" class="sn-textfield__input" step="0.01"/>					
+						</div>
+						
+						<div class="sn-textfield mdl-cell mdl-cell--6-col">
+							<label th:for="${#ids.next('coxaEsquerda')}" class="sn-textfield__label">Coxa Esquerda (cm):</label>
+							<label class="sn-textfield__messages sn-error-text" th:for="${#ids.next('coxaEsquerda')}" th:if="${#fields.hasErrors('coxaEsquerda')}" th:errors="*{coxaEsquerda}">Coxa esquerda inválida</label>
+							<input type="number" min="0"  max="999999" th:field="*{coxaEsquerda}" class="sn-textfield__input" step="0.01"/>
+						</div>
+						
+						<div class="sn-textfield mdl-cell mdl-cell--6-col">
+							<label th:for="${#ids.next('coxaProximalDireita')}" class="sn-textfield__label">Coxa Proximal Direita (cm):</label>
+							<label class="sn-textfield__messages sn-error-text" th:for="${#ids.next('coxaProximalDireita')}"  th:if="${#fields.hasErrors('coxaProximalDireita')}" th:errors="*{coxaProximalDireita}">Coxa proximal direita inválida</label>
+							<input type="number" min="0"  max="999999" th:field="*{coxaProximalDireita}" class="sn-textfield__input" step="0.01"/>
+						</div>
+						
+						<div class="sn-textfield mdl-cell mdl-cell--6-col">
+							<label th:for="${#ids.next('coxaProximalEsquerda')}" class="sn-textfield__label">Coxa Proximal Esquerda (cm):</label>
+							<label class="sn-textfield__messages sn-error-text" th:for="${#ids.next('coxaProximalEsquerda')}" th:if="${#fields.hasErrors('coxaProximalEsquerda')}" th:errors="*{coxaProximalDireita}">Coxa proximal esquerda inválida</label>
+							<input type="number" min="0"  max="999999" th:field="*{coxaProximalEsquerda}" class="sn-textfield__input" step="0.01"/>
+						</div>
+						
+						<div class="sn-textfield mdl-cell mdl-cell--6-col">
+							<label th:for="${#ids.next('bracoRelaxadoDireito')}" class="sn-textfield__label">Braço Relaxado Direito (cm):</label>
+							<label class="sn-textfield__messages sn-error-text" th:for="${#ids.next('bracoRelaxadoDireito')}" th:if="${#fields.hasErrors('bracoRelaxadoDireito')}" th:errors="*{bracoRelaxadoDireito}">Braço relaxado direito inválido</label>
+							<input type="number" min="0"  max="999999" th:field="*{bracoRelaxadoDireito}" class="sn-textfield__input" step="0.01"/>
+						</div>
+						
+						<div class="sn-textfield mdl-cell mdl-cell--6-col">
+							<label th:for="${#ids.next('bracoRelaxadoEsquerdo')}" class="sn-textfield__label">Braço Relaxado Esquerdo (cm):</label>
+							<label class="sn-textfield__messages sn-error-text" th:for="${#ids.next('bracoRelaxadoEsquerdo')}" th:if="${#fields.hasErrors('bracoRelaxadoEsquerdo')}" th:errors="*{bracoRelaxadoEsquerdo}">Braço relaxado esquerdo inválido</label>
+							<input type="number" min="0"  max="999999" th:field="*{bracoRelaxadoEsquerdo}" class="sn-textfield__input" step="0.01"/>
+						</div>
+						
+						<div class="sn-textfield mdl-cell mdl-cell--6-col">
+							<label th:for="${#ids.next('bracoContraidoDireito')}" class="sn-textfield__label">Braço Contraído Direito (cm):</label>
+							<label class="sn-textfield__messages sn-error-text" th:for="${#ids.next('bracoContraidoDireito')}" th:if="${#fields.hasErrors('bracoContraidoDireito')}" th:errors="*{bracoContraidoDireito}">Braço contraído direito inválido</label>
+							<input type="number" min="0"  max="999999" th:field="*{bracoContraidoDireito}" class="sn-textfield__input" step="0.01"/>
+						</div>
+						
+						<div class="sn-textfield mdl-cell mdl-cell--6-col">
+							<label th:for="${#ids.next('bracoContraidoEsquerdo')}" class="sn-textfield__label">Braço Contraído Esquerdo (cm):</label>
+							<label class="sn-textfield__messages sn-error-text" th:for="${#ids.next('bracoContraidoEsquerdo')}" th:if="${#fields.hasErrors('bracoContraidoEsquerdo')}" th:errors="*{bracoContraidoEsquerdo}">Braço contraído esuqerdo inválido</label>
+							<input type="number" min="0"  max="999999" th:field="*{bracoContraidoEsquerdo}" class="sn-textfield__input" step="0.01"/>
+						</div>
+						
+						<div class="sn-textfield mdl-cell mdl-cell--6-col">
+							<h5>DIÂMETROS ÓSSEOS</h5>
+						</div>
+						
+						<div class="sn-textfield mdl-cell mdl-cell--6-col">
+							<label th:for="${#ids.next('diametroPunho')}" class="sn-textfield__label">Diâmetro Punho (cm):</label>
+							<label class="sn-textfield__messages sn-error-text" th:for="${#ids.next('diametroPunho')}" th:if="${#fields.hasErrors('diametroPunho')}" th:errors="*{diametroPunho}">Diametro do punho inválido</label>
+							<input type="number" min="0"  max="999999" th:field="*{diametroPunho}" class="sn-textfield__input" step="0.01"/>
+						</div>
+						
+						<div class="sn-textfield mdl-cell mdl-cell--6-col">
+							<label th:for="${#ids.next('diametroFemur')}" class="sn-textfield__label">Diâmetro Fêmur (cm):</label>
+							<label class="sn-textfield__messages sn-error-text" th:for="${#ids.next('diametroFemur')}" th:if="${#fields.hasErrors('diametroFemur')}" th:errors="*{diametroFemur}">Diametro do fêmur inválido</label>
+							<input type="number" min="0"  max="999999" th:field="*{diametroFemur}" class="sn-textfield__input" step="0.01"/>
+						</div>
+						
+						<div class="sn-textfield mdl-cell mdl-cell--12-col">
+							<h5>COMPOSIÇÃO CORPORAL</h5>
+						</div>
+						
+						<div class="sn-textfield mdl-cell mdl-cell--6-col">
+							<label th:for="${#ids.next('biceps')}" class="sn-textfield__label">Bíceps (cm):</label>
+							<label class="sn-textfield__messages sn-error-text" th:for="${#ids.next('biceps')}" th:if="${#fields.hasErrors('biceps')}" th:errors="*{biceps}">Biceps inválido</label>
+							<input type="number" min="0"  max="999999" th:field="*{biceps}" class="sn-textfield__input" step="0.01"/>
+						</div>
+						
+						<div class="sn-textfield mdl-cell mdl-cell--6-col">
+							<label th:for="${#ids.next('triceps')}" class="sn-textfield__label">Tríceps (cm):</label>
+							<label class="sn-textfield__messages sn-error-text" th:for="${#ids.next('triceps')}" th:if="${#fields.hasErrors('triceps')}" th:errors="*{triceps}">Triceps inválido</label>
+							<input type="number" min="0"  max="999999" th:field="*{triceps}" class="sn-textfield__input" step="0.01"/>
+						</div>
+						
+						<div class="sn-textfield mdl-cell mdl-cell--6-col">
+							<label th:for="${#ids.next('axilarMedia')}" class="sn-textfield__label">Axilar Média (cm):</label>
+							<label class="sn-textfield__messages sn-error-text" th:for="${#ids.next('axilarMedia')}" th:if="${#fields.hasErrors('axilarMedia')}" th:errors="*{axilarMedia}">Axilar média inválida</label>
+							<input type="number" min="0"  max="999999" th:field="*{axilarMedia}" class="sn-textfield__input" step="0.01"/>
+						</div>
+						
+						<div class="sn-textfield mdl-cell mdl-cell--6-col">
+							<label th:for="${#ids.next('torax')}" class="sn-textfield__label">Tórax (cm):</label>
+							<input type="number" min="0"  max="999999" th:field="*{torax}" class="sn-textfield__input" step="0.01"/>
+							<label class="sn-textfield__messages sn-error-text" th:for="${#ids.next('torax')}" th:if="${#fields.hasErrors('torax')}" th:errors="*{torax}">Tórax inválido</label>
+						</div>
+						
+						<div class="sn-textfield mdl-cell mdl-cell--6-col">
+							<label th:for="${#ids.next('panturrilhaMedial')}" class="sn-textfield__label">Panturrilha Medial (cm):</label>
+							<label class="sn-textfield__messages sn-error-text" th:for="${#ids.next('panturrilhaMedial')}" th:if="${#fields.hasErrors('panturrilhaMedial')}" th:errors="*{panturrilhaMedial}">Panturrilha Medial inválida</label>
+							<input type="number" min="0"  max="999999" th:field="*{panturrilhaMedial}" class="sn-textfield__input" step="0.01"/>
+						</div>
+						
+						<div class="sn-textfield mdl-cell mdl-cell--6-col">
+							<label th:for="${#ids.next('abdominal')}" class="sn-textfield__label">Abdominal (cm):</label>
+							<label class="sn-textfield__messages sn-error-text" th:for="${#ids.next('abdominal')}" th:if="${#fields.hasErrors('abdominal')}" th:errors="*{abdominal}">Abdominal inválido</label>
+							<input type="number" min="0"  max="999999" th:field="*{abdominal}" class="sn-textfield__input" step="0.01"/>
+						</div>
+						
+						<div class="sn-textfield mdl-cell mdl-cell--6-col">
+							<label th:for="${#ids.next('suprailiaca')}" class="sn-textfield__label">Suprailíaca (cm):</label>
+							<label class="sn-textfield__messages sn-error-text"  th:if="${#fields.hasErrors('suprailiaca')}" th:errors="*{suprailiaca}">Suprailiaca inválida</label>
+							<input type="number" min="0"  max="999999" th:field="*{suprailiaca}" class="sn-textfield__input" step="0.01"/>
+						</div>
+						
+						<div class="sn-textfield mdl-cell mdl-cell--6-col">
+							<label th:for="${#ids.next('subescapular')}" class="sn-textfield__label">Subescapular (cm):</label>
+							<label class="sn-textfield__messages sn-error-text" th:for="${#ids.next('subescapular')}" th:if="${#fields.hasErrors('subescapular')}" th:errors="*{subescapular}">Subescapular inválida</label>
+							<input type="number" min="0"  max="999999" th:field="*{subescapular}" class="sn-textfield__input" step="0.01"/>
+						</div>
+						
+						<div class="sn-textfield mdl-cell mdl-cell--6-col">
+							<label th:for="${#ids.next('coxa')}" class="sn-textfield__label">Coxa (cm):</label>
+							<label class="sn-textfield__messages sn-error-text" th:for="${#ids.next('coxa')}" th:if="${#fields.hasErrors('coxa')}" th:errors="*{coxa}">Coxa inválida</label>
+							<input type="number" min="0"  max="999999" th:field="*{coxa}" class="sn-textfield__input" step="0.01"/>
+						</div>
+						
+						<div class="sn-form-actions">
+							<input type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect" value="Salvar" />
+							<a th:href="@{${'/Paciente/'+avaliacaoAntropometrica.paciente.id+'/'}}" href="#" class="mdl-button mdl-js-button mdl-button--colored mdl-js-ripple-effect">Cancelar</a>					
+						</div>
+						
 					</div>	
 				</form>
 			</div>
