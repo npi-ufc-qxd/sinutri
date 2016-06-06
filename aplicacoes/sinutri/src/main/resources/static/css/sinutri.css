@@ -44,6 +44,15 @@
 	--shadow--2dp: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
 
 	--animation: all 0.2s ease;
+	--animation--2s: all 0.2s ease;
+	--animation--3s: all 0.3s ease;
+	--animation--4s: all 0.4s ease;
+	--animation--5s: all 0.5s ease;
+	--animation--6s: all 0.6s ease;
+	--animation--7s: all 0.7s ease;
+	--animation--8s: all 0.8s ease;
+	--animation--9s: all 0.9s ease;
+	--animation--10s: all 1s ease;
 
 }
 
@@ -288,7 +297,7 @@
 
 .sn-selectfield option { 
 
-	margin: 40px;
+	padding: 16px;
 
 }
 
@@ -501,6 +510,16 @@
 
 
 /* mdl override */
+
+table {
+
+	border: none !important;
+
+}
+
+.mdl-ripple {
+	background-color: #fff !important;
+}
 
 .mdl-navigation__link {
 
