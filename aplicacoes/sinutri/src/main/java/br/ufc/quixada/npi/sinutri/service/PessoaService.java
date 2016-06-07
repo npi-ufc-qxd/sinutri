@@ -12,6 +12,8 @@ public interface PessoaService {
 	
 	Pessoa buscarPessoaPorId(Long id);
 
-	void editarPessoa(Pessoa pessoa); 
+	void editarPessoa(Pessoa pessoa);
+
+	void excluirPessoa(Pessoa pessoa); 
 
 }

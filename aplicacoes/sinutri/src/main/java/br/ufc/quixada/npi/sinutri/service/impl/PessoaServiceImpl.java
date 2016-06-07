@@ -44,4 +44,10 @@ public class PessoaServiceImpl implements PessoaService {
 		
 	}
 
+	@Override
+	public void excluirPessoa(Pessoa pessoa) {
+		pessoaRepository.delete(pessoa);
+		
+	}
+
 }

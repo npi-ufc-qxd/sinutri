@@ -11,4 +11,6 @@ public interface PacienteService {
 
 	void editarPaciente(Paciente paciente);
 
+	void excluirPaciente(Paciente paciente);
+
 }

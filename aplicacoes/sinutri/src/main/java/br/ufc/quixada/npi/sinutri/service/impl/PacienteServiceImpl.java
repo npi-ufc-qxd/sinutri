@@ -29,5 +29,11 @@ public class PacienteServiceImpl implements PacienteService{
 		pacienteRepository.save(paciente);
 		
 	}
+
+	@Override
+	public void excluirPaciente(Paciente paciente) {
+		pacienteRepository.delete(paciente);
+		
+	}
 	
 }

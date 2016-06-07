@@ -144,7 +144,7 @@ public class PacienteController {
 		
 		model.addAttribute("pessoa", pessoa);
 		
-		return "nutricao/visualizar"; //modificar para visualizar
+		return "/paciente/visualizar";
 	}
 	
 	@RequestMapping(value = "/{idPaciente}/Editar/", method = RequestMethod.GET)
@@ -191,6 +191,20 @@ public class PacienteController {
 		model.addAttribute("pessoa", pessoa);
 
 		return "/paciente/visualizar"; 
+	}
+	
+	@RequestMapping(value= {"/{idPaciente}/Excluir/"}, method = RequestMethod.GET)
+	public String ExcluirAntropometria(@PathVariable("idPaciente") Long idPaciente, RedirectAttributes redirectAttributes, Model model){
+		Paciente paciente = pacienteService.buscarPacientePorId(idPaciente);
+		if(isInvalido(paciente)){
+			redirectAttributes.addFlashAttribute("erro", "Paciente não encontrado. Faça uma nova pesquisa");
+			return "nutricao/buscar";
+		}
+		
+		pessoaService.excluirPessoa(paciente.getPessoa());
+		pacienteService.excluirPaciente(paciente);
+		
+		return "nutricao/buscar"; //modificar
 	}
 	
 	private boolean isInvalido(Paciente paciente){
