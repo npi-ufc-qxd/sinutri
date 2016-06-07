@@ -7,9 +7,7 @@ $(document).ready(function() {
 			$(this).removeClass("sn-hide-left");
 		});
 		
-		setTimeout(function() {
-			$("form").removeClass("sn-hide-fade");
-		}, 0.2);
+		$("form").animate({opacity: "1.0"}, 1500);
 
 	});
 
