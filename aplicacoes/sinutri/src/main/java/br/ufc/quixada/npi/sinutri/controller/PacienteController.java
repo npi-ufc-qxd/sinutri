@@ -151,7 +151,7 @@ public class PacienteController {
 			return "/anamnese/cadastrar";
 		}else{
 			redirectAttributes.addFlashAttribute("erro", "Paciente não encontrado. Faça uma nova pesquisa");
-			return "redirect:/nutricao/buscar";			
+			return "redirect:/Nutricao/Buscar/";			
 		}
 	}
 	

@@ -43,10 +43,10 @@
 							sn-padding--48 mdl-color--white">
 
 					<div class="mdl-cell mdl-cell--12-col">
-						<a
+						<a id="bt-excluir"
 							th:href="@{${'/Paciente/' + anamnese.paciente.id +'/Anamnese/'+ anamnese.id +'/Excluir/'}}"
 							class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--raised mdl-button--accent mdl-color-text--white">Remover
-							Avaliação</a>
+							Anamnese</a>
 					</div>
 					<div class="sn-form__hdivider"></div>
 					
@@ -214,7 +214,7 @@
 							class="mdl-checkbox__label sn-attribute__title">Odinofagia</span>
 						</label>
 					</div>
-					<div class="sn-attribute__valuemdl-cell mdl-cell--6-col" th:if="${anamnese.odinofagia}">
+					<div class="sn-attribute__value mdl-cell mdl-cell--6-col" th:if="${anamnese.odinofagia}">
 						<div class="sn-attribute__title ">Comentário:</div>
 						<label th:text="${anamnese.odinofagiaComentario}">Comentário</label>
 					</div>
@@ -329,9 +329,39 @@
 		</div>
 
 	</div>
+	
+	<div id="modal-exclusao">
+		<label>Operação irreversível</label>
+	</div>
+	
 </section>
 
-<script type="text/javascript" th:src="@{/js/buscar.js}"></script>
-<script type="text/javascript" th:src="@{http://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js}"></script>
+<section layout:fragment="js">
+	<script type="text/javascript">
+		$( "#bt-excluir" ).click(function(event) {
+	        var dialog = sn_base.doRegistryDialog({
+	            title: "Remover",
+	            dialog: "#modal-exclusao",
+	            buttons: [
+	                    {
+	                       label: "Excluir",
+	                       attrs: {href: $(this).attr("href")},
+	                       action: function() {
+	                           dialog.close();
+	                       }
+	                    },
+	                    {
+	                        label: "Cancelar",
+	                        action: function() {
+	                            dialog.close();
+	                        }
+	                    }
+	            ]
+	            });                     dialog.showModal();
+	        event.preventDefault();
+	    });
+	</script>
+
+</section>
 
 </html>

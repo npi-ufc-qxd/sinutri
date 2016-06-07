@@ -155,7 +155,7 @@
 						
 						<div class="sn-textfield mdl-cell mdl-cell--12-col">
 							<label class="sn-textfield__label"  for="inputTextAgua">Consumo de água (litros):</label>
-							<input id="inputTextAgua" th:field="*{agua}" class="mdl-textfield__input sn-input__number" type="number" pattern="-?[0-9]*(\.[0-9]+)?"/>
+							<input id="inputTextAgua" th:field="*{agua}" class="sn-textfield__input" type="number" step="0.01" min="0" max="9999999" pattern="-?[0-9]*(\.[0-9]+)?"/>
 							<div class="error-validation">
 									<label class=" label label-danger" th:if="${#fields.hasErrors('agua')}" th:errors="*{agua}"
 									>Error message</label>
@@ -305,7 +305,8 @@
 						
 						<div class="sn-form-actions">
 	
-							<input type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect" value="Salvar" />							
+							<input type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect" value="Salvar" />
+							<a class="mdl-button mdl-js-button mdl-button--colored mdl-js-ripple-effect" th:href="@{${'/Paciente/'+anamnese.paciente.id+'/Anamnese/'+anamnese.id+'/'}}">CANCELAR</a>													
 							
 						</div>
 					</div>						
