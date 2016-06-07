@@ -9,5 +9,9 @@ public interface PessoaService {
 	Papel buscaPapelPorNome(String papel);
 	
 	Servidor buscarServidorPorCpf(String cpf);
+	
+	Pessoa buscarPessoaPorId(Long id);
+
+	void editarPessoa(Pessoa pessoa); 
 
 }

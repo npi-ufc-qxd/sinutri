@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" 
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorator="estrutura/dashboard">
+<head>
+	<title>Sinutri | Paciente</title>
+	
+</head>
+
+<body>
+	<section layout:fragment="conteudo">
+	
+		<div class="mdl-grid">
+	
+	      <!-- Célula de informações do formulário -->
+	
+	      <div class="
+	              mdl-cell
+	              mdl-cell--7-col-desktop mdl-cell--1-offset-desktop
+	              mdl-cell--8-col-tablet
+	              mdl-cell--4-col-phone
+	              mdl-grid mdl-grid--no-spacing
+	              sn-main-card">
+	
+	              <div class="mdl-cell mdl-cell--12-col sn-card sn-padding--48 mdl-color--teal">
+	
+	                      <div class="mdl-layout-title mdl-color-text--white">Avaliação Laboratorial</div>
+	
+	                      <fabgroup class="sn-fab--bottom-right">
+	
+	                              <button class="sn-fab sn-fab--hide mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-js-ripple-effect mdl-color--red-700">
+	                                      <i class="material-icons mdl-color-text--white">delete</i>
+	                              </button>
+	
+	                              <button class="sn-fab sn-fab--hide mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-js-ripple-effect mdl-color--purple">
+	                                      <i class="material-icons mdl-color-text--white">edit</i>
+	                              </button>
+	
+	                              <button class="sn-float--launcher mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored">
+	                                      <i class="material-icons mdl-color-text--white">more_horiz</i>
+	                              </button>
+	                      </fabgroup>
+	
+	              </div>
+	
+	              <div class="sn-card-top mdl-cell mdl-cell--12-col sn-card sn-padding--48 mdl-color--white mdl-grid">
+	
+	                      <!-- Text atribute -->
+	                      <div class="sn-attribute mdl-cell mdl-cell--6-col">
+	                              <div class="sn-attribute__title">Name</div>
+	                              <div class="sn-attribute__value">Felipe da Silva Pinho</div>
+	                      </div>
+	
+	                      <!-- Text atribute -->
+	                      <div class="sn-attribute mdl-cell mdl-cell--6-col">
+	                              <div class="sn-attribute__title">Age</div>
+	                              <div class="sn-attribute__value">21 years</div>
+	                      </div>
+	
+	                      <!-- Text atribute -->
+	                      <div class="sn-attribute mdl-cell mdl-cell--6-col">
+	                              <div class="sn-attribute__title">Status</div>
+	                              <div class="sn-attribute__value">Sad</div>
+	                      </div>
+	
+	                      <!-- Text atribute -->
+	                      <div class="sn-attribute mdl-cell mdl-cell--6-col">
+	                              <div class="sn-attribute__title">Sexo</div>
+	                              <div class="sn-attribute__value">Undefined</div>
+	                      </div>
+	
+	              </div>
+	
+	              <div class="sn-card-top mdl-cell mdl-cell--12-col sn-card sn-padding--48 mdl-color--white mdl-grid">
+	
+	                      <label
+	                      class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect mdl-cell mdl-cell--6-col"
+	                      for="checkbox-1">
+	                      <input type="checkbox" id="checkbox-1" class="mdl-checkbox__input" disabled="true"/>
+	                      <span class="mdl-checkbox__label sn-attribute__title">Boolean Value</span>
+	                      </label>
+	
+	                      <!-- Text atribute -->
+	                      <div class="sn-attribute mdl-cell mdl-cell--12-col">
+	                      <div class="sn-attribute__title">City</div>
+	                      <div class="sn-attribute__value">Madalena</div>
+	                      </div>
+	
+	              </div>
+	
+	      	</div>
+	      </div>
+	
+	
+	
+				
+		<div class="mdl-grid">
+
+			<div class="mdl-cell mdl-cell--7-col-desktop mdl-cell--1-offset-desktop sn-card">
+								
+				<div class="mdl-grid mdl-grid--no-spacing">
+
+					<div class="mdl-layout-title mdl-cell mdl-cell--12-col sn-padding--48 mdl-color--teal-500 mdl-color-text--white">
+						Paciente
+						
+						 <fabgroup class="sn-fab--bottom-right">
+
+                              <button class="sn-fab sn-fab--hide mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-js-ripple-effect mdl-color--red-700">
+                                      <i class="material-icons mdl-color-text--white">delete</i>
+                              </button>
+
+                              <button class="sn-fab sn-fab--hide mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-js-ripple-effect mdl-color--purple">
+                                      <i class="material-icons mdl-color-text--white">edit</i>
+                              </button>
+
+                              <button class="sn-float--launcher mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored">
+                                      <i class="material-icons mdl-color-text--white">more_horiz</i>
+                              </button>
+                      	</fabgroup>
+						
+
+						
+
+					</div>
+
+					<div class="mdl-grid mdl-cell mdl-cell--12-col sn-padding--48 mdl-color--white">
+
+						<div class="sn-attribute mdl-cell mdl-cell--12-col">
+							<div class="sn-attribute__title">Nome</div>
+							<div class="sn-attribute__value" th:text="${pessoa.nome}"></div>
+						</div>
+						
+						<div class="sn-attribute mdl-cell mdl-cell--6-col">
+							<div class="sn-attribute__title">Sexo</div>
+							<div class="sn-attribute__value" th:text="${pessoa.sexo}"></div>
+						</div>
+						
+						<div class="sn-attribute mdl-cell mdl-cell--6-col">
+							<div class="sn-attribute__title">Idade</div>
+							<div class="sn-attribute__value" th:text="${pessoa.getIdade()}"></div>
+						</div>
+						
+						<div class="sn-attribute mdl-cell mdl-cell--12-col">
+							<div class="sn-attribute__title">CPF</div>
+							<div class="sn-attribute__value" th:text="${pessoa.cpf}"></div>
+						</div>
+
+						<div class="sn-attribute mdl-cell mdl-cell--6-col">
+							<div class="sn-attribute__title">Telefone</div>
+							<div class="sn-attribute__value" th:text="${pessoa.telefone}"></div>
+						</div>
+						
+						<div class="sn-attribute mdl-cell mdl-cell--6-col">
+							<div class="sn-attribute__title">Cargo/Ocupação</div>
+							<div class="sn-attribute__value" th:text="${pessoa.ocupacaoOuCargo}"></div>
+						</div>
+						
+						<div class="sn-attribute mdl-cell mdl-cell--12-col">
+							<div class="sn-attribute__title">Email</div>
+							<div class="sn-attribute__value" th:text="${pessoa.email}"></div>
+						</div>
+						
+						<div class="sn-attribute mdl-cell mdl-cell--6-col" th:if="${pessoa.externo}">
+							<div class="sn-attribute__title">Vínculo</div>
+							<div class="sn-attribute__value" th:text="${pessoa.vinculo}"></div>
+						</div>
+					
+					</div>
+
+				</div>
+
+
+
+				</div>
+
+					<div class="mdl-cell mdl-cell--3-col-desktop">
+					
+						<div class="sn-card sn-padding--48">
+							<div class="mdl-layout-title">Informações</div>
+						</div>
+
+					</div>
+
+  				</div>
+	
+	</section>	
+</body>
+</html>

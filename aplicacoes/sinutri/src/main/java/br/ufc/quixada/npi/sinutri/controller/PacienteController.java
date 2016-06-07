@@ -17,6 +17,7 @@ import br.ufc.quixada.npi.sinutri.model.InqueritoAlimentar;
 import br.ufc.quixada.npi.sinutri.model.Paciente;
 import br.ufc.quixada.npi.sinutri.model.Pessoa;
 import br.ufc.quixada.npi.sinutri.model.enuns.FrequenciaSemanal;
+import br.ufc.quixada.npi.sinutri.model.enuns.Sexo;
 import br.ufc.quixada.npi.sinutri.service.ConsultaService;
 import br.ufc.quixada.npi.sinutri.service.PacienteService;
 import br.ufc.quixada.npi.sinutri.service.PessoaService;
@@ -114,16 +115,22 @@ public class PacienteController {
 		return "redirect:/Paciente/"+idPaciente+"/";
 	}
 	
+	@ModelAttribute("sexos")
+	Sexo[] getSexos()
+	{
+		return Sexo.values();
+	}
+	
 	@RequestMapping(value= "/Cadastrar/", method = RequestMethod.GET)
 	public String formCadastrarPacienteExterno(Model model){
-		Pessoa pessoa = new Pessoa(null);
+		Pessoa pessoa = new Pessoa();
 		model.addAttribute("pessoa", pessoa);
-
+		
 		return "/paciente/cadastrar";
 	}
 	
 	@RequestMapping(value = "/Cadastrar/", method = RequestMethod.POST)
-	public String cadastrarPacienteExterno(Model model, @ModelAttribute("pessoa") Pessoa pessoa, BindingResult result, RedirectAttributes redirectAttributes){
+	public String cadastrarPacienteExterno(Model model, @Valid @ModelAttribute("pessoa") Pessoa pessoa, BindingResult result, RedirectAttributes redirectAttributes){
 		
 		if(result.hasErrors()){
 			model.addAttribute("pessoa", pessoa);
@@ -135,7 +142,55 @@ public class PacienteController {
 		paciente.setPessoa(pessoa);
 		pacienteService.adicionarPaciente(paciente);
 		
-		return "nutricao/buscar"; //modificar para visualizar
+		model.addAttribute("pessoa", pessoa);
+		
+		return "nutricao/visualizar"; //modificar para visualizar
+	}
+	
+	@RequestMapping(value = "/{idPaciente}/Editar/", method = RequestMethod.GET)
+	public String formEditarPaciente(@PathVariable("idPaciente") Long idPaciente, Model model, RedirectAttributes redirectAttributes){
+		
+		Paciente paciente = pacienteService.buscarPacientePorId(idPaciente);
+		
+		if(isInvalido(paciente)){
+			redirectAttributes.addFlashAttribute("erro", "Paciente não encontrado. Faça uma nova pesquisa");
+			return "nutricao/buscar";
+		}
+		
+		Pessoa pessoa = pessoaService.buscarPessoaPorId(idPaciente);
+		
+		model.addAttribute("pessoa", pessoa);
+		return "/paciente/editar";
+	}
+	
+	@RequestMapping(value = "/{idPaciente}/Editar/", method = RequestMethod.POST)
+	public String editarPaciente(Model model, @PathVariable("idPaciente") Long idPaciente, @Valid Pessoa pessoa, BindingResult result, RedirectAttributes redirectAttributes){
+		Paciente paciente = pacienteService.buscarPacientePorId(idPaciente);
+		if(isInvalido(paciente)){
+			redirectAttributes.addFlashAttribute("erro", "Paciente não encontrado. Faça uma nova pesquisa");
+			return "nutricao/buscar";
+		}
+		pessoaService.editarPessoa(pessoa);
+		model.addAttribute("pessoa", pessoa);
+
+		return "/paciente/visualizar"; //modificar
+	}
+	
+	@RequestMapping(value = "/{idPaciente}/", method = RequestMethod.GET)
+	public String visualizarPaciente(@PathVariable("idPaciente") Long idPaciente, Model model, RedirectAttributes redirectAttributes){
+
+		Paciente paciente = pacienteService.buscarPacientePorId(idPaciente);
+		
+		if(isInvalido(paciente)){
+			redirectAttributes.addFlashAttribute("erro", "Paciente não encontrado. Faça uma nova pesquisa");
+			return "nutricao/buscar";
+		}
+		
+		Pessoa pessoa = pessoaService.buscarPessoaPorId(idPaciente);
+		
+		model.addAttribute("pessoa", pessoa);
+
+		return "/paciente/visualizar"; 
 	}
 	
 	private boolean isInvalido(Paciente paciente){

@@ -5,23 +5,24 @@
     layout:decorator="estrutura/dashboard">
 
 <head>
-	<title>Sinutri | Novo Paciente Externo</title>
+	<title>Sinutri | Editar Paciente</title>
 	<link rel="stylesheet" type="text/css" th:href="@{/css/material-date-picker.css}"/>
 </head>
 
 <section layout:fragment="conteudo">
+
 	<div class="mdl-grid">
 
 		<div class="mdl-cell mdl-cell--7-col-desktop mdl-cell--1-offset-desktop sn-card sn-padding--48">
 	
-			<form class="sn-form" th:object="${pessoa}" th:method="post" th:action="@{${'/Paciente/Cadastrar/'}}">
-
+			<form class="sn-form" th:object="${pessoa}" th:method="post" th:action="@{${'/Paciente/'+pessoa.id+'/Editar/'}}">
+			
 				<input type="hidden" id="id" th:field="*{id}"/>
 				
 				<div class="mdl-grid">
 	
 					<div class="sn-textfield mdl-cell mdl-cell--8-col">
-						<div class="mdl-layout-title">Cadastro Paciente Externo</div>
+						<div class="mdl-layout-title">Editar Paciente Externo</div>
 					</div>
 					
 					<div class="sn-textfield mdl-cell mdl-cell--12-col">
@@ -37,7 +38,7 @@
 
 						</select>
 					</div>
-						
+					
 					<div class="sn-textfield mdl-cell mdl-cell--6-col">
 						<label class="sn-textfield__label" for="dataNascimento">Data de Nascimento</label>
 						<input class="sn-textfield__input sn-date-picker" th:field="*{dataNascimento}" id="dataNascimento"/>
@@ -47,13 +48,15 @@
 						<label class="sn-textfield__label" for="nome">CPF</label>
 						<input class="sn-textfield__input" type="text" th:field="*{cpf}" id="cpf" />
 					</div>
+
+					
 					
 					<div class="sn-textfield mdl-cell mdl-cell--6-col">
 						<label class="sn-textfield__label" for="telefone">Telefone</label>
 						<input class="sn-textfield__input" type="text" th:field="*{telefone}" id="telefone"/>
 					</div>
 					
-					<div class="sn-textfield mdl-cell mdl-cell--6-col">
+					<div class="sn-textfield mdl-cell mdl-cell--6-col hide-by-externo">
 						<label class="sn-textfield__label" for="ocupacaoOuCargo">Ocupação/Cargo</label>
 						<input class="sn-textfield__input" type="text" th:field="*{ocupacaoOuCargo}" id="ocupacaoOuCargo" />
 					</div>
@@ -68,14 +71,17 @@
 						<span class="mdl-checkbox__label">Paciente Externo</span>
 					</label>
 					
-					<div class="sn-textfield mdl-cell mdl-cell--12-col hide-by-externo">
+					<div class="sn-textfield mdl-cell mdl-cell--6-col hide-by-externo">
 						<label class="sn-textfield__label" for="vinculo">Vinculo</label>
 						<input class="sn-textfield__input" type="text" th:field="*{vinculo}" id="vinculo" />
 					</div>
+					
+					
+					
 	
 					<div class="sn-form-actions">
 	
-						<input type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect" value="Cadastrar" />
+						<input type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect" value="Salvar" />
 						<input type="button" class="mdl-button mdl-js-button mdl-button--colored mdl-js-ripple-effect" value="Cancelar"/>
 						
 					</div>
@@ -87,6 +93,7 @@
 		</div>
 	
 	</div>
+	
 </section>
 
 <section layout:fragment="js">

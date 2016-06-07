@@ -9,4 +9,6 @@ public interface PacienteService {
 	
 	void adicionarPaciente(Paciente paciente);
 
+	void editarPaciente(Paciente paciente);
+
 }

@@ -23,4 +23,11 @@ public class PacienteServiceImpl implements PacienteService{
 	public void adicionarPaciente(Paciente paciente) {
 		pacienteRepository.save(paciente);	
 	}
+
+	@Override
+	public void editarPaciente(Paciente paciente) {
+		pacienteRepository.save(paciente);
+		
+	}
+	
 }
