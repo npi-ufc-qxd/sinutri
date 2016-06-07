@@ -261,7 +261,7 @@
 						
 						<div class="sn-form-actions">
 							<input type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect" value="Editar" />
-							<a th:href="@{${'/Paciente/'+avaliacaoAntropometrica.paciente.id+'/Antropometria/' + avaliacaoAntropometrica.id + '/' }}" href="#" class="mdl-button mdl-js-button mdl-button--colored mdl-js-ripple-effect">Cancelar</a>					
+							<a id="cancelar" th:href="@{${'/Paciente/'+avaliacaoAntropometrica.paciente.id+'/Antropometria/' + avaliacaoAntropometrica.id + '/' }}" href="#" class="mdl-button mdl-js-button mdl-button--colored mdl-js-ripple-effect">Cancelar</a>					
 						</div>
 						
 					</div>	
@@ -274,10 +274,48 @@
 				</div>
 			</div>
 		</div>
+		
+		<div id="modal-cancelar"></div>
 	</section>
 	
 	<section layout:fragment="js">
-       <script type="text/javascript" th:src="@{/js/moment.js}"></script>
+		<script type="text/javascript" th:src="@{/js/cookies.js}"></script> 
+		 <script type="text/javascript">
+	       	$( "#cancelar" ).click(function(event) {
+	       	   if(Cookies.get("formulario-alterado")){
+		    	   var dialog = sn_base.doRegistryDialog({
+		               title: "Descartar as alterações?", 
+		               dialog: "#modal-cancelar", 
+		               buttons: [
+		                       {
+		                          label: "Sim",
+		                          attrs: {href: $(this).attr("href")}, 
+		                          action: function() {
+		                              dialog.close();
+		                          }
+		                       }, 
+		                       {
+		                           label: "Não",
+		                           action: function() {
+		                               dialog.close();
+		                           }
+		                       }
+		               ]
+		       		});    	   
+		
+		    	   dialog.showModal();
+		    	   event.preventDefault();
+	       	   }
+	       });
+	       Cookies.remove("formulario-alterado");   
+	       $("#form-antropometria :input").each(function(index){
+	    	   $(this).change(function(){
+	    		   Cookies.set("formulario-alterado", true);   
+		       });
+	       });
+       </script>
+	
+	   <script type="text/javascript" th:src="@{/js/moment.js}"></script>
        <script type="text/javascript" th:src="@{/js/material-date-picker.js}"></script>
    </section>
 </body>
