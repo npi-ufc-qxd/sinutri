@@ -136,13 +136,15 @@ public class PacienteController {
 	@RequestMapping(value={"/{idPaciente}/Antropometria/"}, method = RequestMethod.POST)
 	public String adicionarAvaliacaoAntropometrica(@PathVariable("idPaciente") Long idPaciente, Model model, @Valid AvaliacaoAntropometrica avaliacaoAntropometrica, BindingResult result, RedirectAttributes redirectAttributes){
 		avaliacaoAntropometrica.setId(null);
+		if(result.hasErrors()){
+			model.addAttribute("avaliacaoAntropometrica", avaliacaoAntropometrica);
+			return "antropometria/cadastrar";
+		}
+		
 		Paciente paciente = pacienteService.buscarPacientePorId(idPaciente);
 		if(isInvalido(paciente)){
 			redirectAttributes.addFlashAttribute("erro", "Paciente não encontrado. Faça uma nova pesquisa");
 			return "redirect:/Nutricao/Buscar";
-		}else if(result.hasErrors()){
-			model.addAttribute("avaliacaoAntropometrica", avaliacaoAntropometrica);
-			return "antropometria/cadastrar";
 		}
 		Servidor nutricionista = pessoaService.buscarServidorPorCpf(getCpfPessoaLogada());
 		if(isInvalidoNutricionista(nutricionista)){
@@ -175,13 +177,15 @@ public class PacienteController {
 	}
 	@RequestMapping(value={"/{idPaciente}/Antropometria/{idAntropometria}/Editar/"}, method = RequestMethod.POST)
 	public String editarAvaliacaoAntropometrica(@PathVariable("idPaciente") Long idPaciente, Model model, @Valid AvaliacaoAntropometrica avaliacaoAntropometrica, BindingResult result, RedirectAttributes redirectAttributes){
+		if(result.hasErrors()){
+			model.addAttribute("avaliacaoAntropometrica", avaliacaoAntropometrica);
+			return "antropometria/cadastrar";
+		}
+		
 		Paciente paciente = pacienteService.buscarPacientePorId(idPaciente);
 		if(isInvalido(paciente)){
 			redirectAttributes.addFlashAttribute("erro", "Paciente não encontrado. Faça uma nova pesquisa");
 			return "redirect:/Nutricao/Buscar";
-		}else if(result.hasErrors()){
-			model.addAttribute("avaliacaoAntropometrica", avaliacaoAntropometrica);
-			return "antropometria/cadastrar";
 		}
 		avaliacaoAntropometrica.setAtualizadoEm(new Date());
 		consultaService.editarAvaliacaoAntropometrica(avaliacaoAntropometrica);
