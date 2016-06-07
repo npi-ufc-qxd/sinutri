@@ -26,16 +26,22 @@
 					
 					<div class="sn-textfield mdl-cell mdl-cell--12-col">	
 						<label class="sn-textfield__label" for="inputTextDescricao">Descrição</label>
+						<label class="sn-textfield__messages sn-error-text" 
+								th:if="${#fields.hasErrors('descricao')}" th:errors="*{descricao}"> Erro na descrição </label>
 						<input class="sn-textfield__input" type="text" id="inputTextDescricao" th:field="*{descricao}"/>
 					</div>
 									
 					<div class="sn-textfield mdl-cell mdl-cell--12-col">
 						<label class="sn-textfield__label" for="inputTextTexto">Texto</label>
+						<label class="sn-textfield__messages sn-error-text" 
+								th:if="${#fields.hasErrors('texto')}" th:errors="*{texto}"> Erro na descrição </label>
 						<textarea class="sn-textfield__input" rows= "5" id="inputTextTexto" th:field="*{texto}"></textarea>
 					</div>
 			
 					<div class="sn-textfield mdl-cell mdl-cell--6-col">
 						<label class="sn-textfield__label" for="inputDataCriacao">Data de Criação</label>
+						<label class="sn-textfield__messages sn-error-text" 
+								th:if="${#fields.hasErrors('criadoEm')}" th:errors="*{criadoEm}"> Erro na descrição </label>
 						<input class="sn-textfield__input sn-date-time-picker" type="text" 
 								id="inputDataCriacao" th:field="*{criadoEm}" />
 					</div>

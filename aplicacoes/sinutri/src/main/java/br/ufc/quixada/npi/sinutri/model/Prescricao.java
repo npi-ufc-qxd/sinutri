@@ -8,6 +8,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -22,15 +23,17 @@ public class Prescricao {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
+	@Size(max=256, message="A descrição deve ter no máximo 256 caracteres.")
 	private String descricao;
 	
+	@Size(max=256, message="O texto da prescrição deve ter no máximo 256 caracteres.")
 	private String texto;
 	
 	@NotNull
 	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	private Date criadoEm;
 	
-	@NotNull
+	
 	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	private Date atualizadoEm;
 	
