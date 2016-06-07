@@ -39,24 +39,33 @@ $(document).ready(function() {
 						var type = $(dialog).find("#sn-exame-type").val();
 						var val = $(dialog).find("#sn-exame-value").val();
 						var data = {
+							sortValue: val,  
 							".sn-exame-type": {text: type},
-							".sn-exame-value": {text: val} 
+							".sn-exame-value": {text: val},
+							".sn-exame-input-nome": {value: type},
+							".sn-exame-input-resultado": {value: val}
 						};
 						
 						var el;
 
-						if(index != "")
+						if(index != "") {
 							el = dynamicList.doEditItem(index, data);
-						else 
+
+						}
+						else {
 							el = dynamicList.doAddItem(data);
 
-						componentHandler.upgradeElement(el[0]);
-						el.find("*").each(function(index, el) { componentHandler.upgradeElement(el); });
+							
+						}
+
 						$(dialog).find("#sn-exame-item-index").val("");
+
+						componentHandler.upgradeDom();						
 
 					}
 				}
 			]
+
 		});
 			
 	});

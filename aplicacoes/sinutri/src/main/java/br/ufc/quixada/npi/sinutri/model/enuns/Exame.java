@@ -112,12 +112,4 @@ public enum Exame {
 	public void setUnidadeMedida(String unidadeMedida) {
 		this.unidadeMedida = unidadeMedida;
 	}
-	
-	@Override
-	public String toString() {
-		
-		return "Exame " + nome + " medido em " + unidadeMedida;
-		
-	}
-	
 }

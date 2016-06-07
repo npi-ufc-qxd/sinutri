@@ -10,6 +10,12 @@
 	padding-right: 16px;
 }
 
+.sn-list-exames li {
+	width: 100%;
+	margin-right: auto;
+	margin-left: auto;
+}
+
 .sn-list-exames li:last-child {
 	margin-bottom: 16px;
 }

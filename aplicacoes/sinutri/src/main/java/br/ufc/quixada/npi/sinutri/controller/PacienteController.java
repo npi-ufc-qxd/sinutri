@@ -18,6 +18,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import br.ufc.quixada.npi.sinutri.model.AvaliacaoLaboratorial;
 import br.ufc.quixada.npi.sinutri.model.InqueritoAlimentar;
 import br.ufc.quixada.npi.sinutri.model.Paciente;
+import br.ufc.quixada.npi.sinutri.model.enuns.Exame;
 import br.ufc.quixada.npi.sinutri.model.enuns.FrequenciaSemanal;
 import br.ufc.quixada.npi.sinutri.service.ConsultaService;
 import br.ufc.quixada.npi.sinutri.service.PacienteService;
@@ -48,6 +49,12 @@ public class PacienteController {
 		model.addAttribute("avaliacaoLaboratorial", avaliacaoLaboratorial);
 
 		return "avaliacao-laboratorial/cadastrar";
+	}
+	
+	@ModelAttribute("exames")
+	Exame[] getExames()
+	{
+		return Exame.values();
 	}
 	
 	@RequestMapping(value = "{idPaciente}/AvaliacaoLaboratorial/", method = RequestMethod.POST)

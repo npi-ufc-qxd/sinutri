@@ -1,5 +1,6 @@
 package br.ufc.quixada.npi.sinutri.model;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -42,7 +43,7 @@ public class AvaliacaoLaboratorial {
 
 	@OneToMany
 	@JoinColumn(name = "exame_id")
-	private List<Exame> exames;
+	private List<Exame> exames = new ArrayList<Exame>();
 
 	public Long getId() {
 		return id;
