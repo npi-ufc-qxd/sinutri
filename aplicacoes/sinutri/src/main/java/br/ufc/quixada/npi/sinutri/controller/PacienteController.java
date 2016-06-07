@@ -4,6 +4,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Comparator;
 import java.util.Date;
+import java.util.Iterator;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
@@ -134,7 +135,8 @@ public class PacienteController {
 	//Recordatorio	
 	@RequestMapping(value = "/{idPaciente}/Recordatorio", method = RequestMethod.GET)
     public String formAdicionarRecordatorio( @PathVariable("idPaciente") Long idPaciente, Model model ) {		
-        Paciente paciente = pacienteService.buscarPacientePorId(idPaciente);	        	        
+        System.out.println("aksjdhalskdh");
+		Paciente paciente = pacienteService.buscarPacientePorId(idPaciente);	        	        
         if(paciente==null){
         	return "redirect:/Nutricao/buscar";
 	    }	        
@@ -150,11 +152,6 @@ public class PacienteController {
     	
     	Paciente paciente = pacienteService.buscarPacientePorId(idPaciente);
     	Servidor nutricionista = pessoaService.buscarServidorPorCpf(getCpfPessoaLogada());
-    	
-//    	if( result.hasErrors() ){
-//    		model.addAttribute("recordatorio", recordatorio);
-//            return "recordatorio/adicionar-recordatorio";
-//    	}
     	
     	recordatorio.setNutricionista(nutricionista);
     	recordatorio.setPaciente(paciente);
@@ -228,50 +225,6 @@ public class PacienteController {
 		return Refeicao.values();
 	}
 	
-	@RequestMapping(value = "/{idPaciente}/Recordatorio", params={"adicionarRefeicao"})
-	public String adicionarRefeicao(@PathVariable("idPaciente") Long idPaciente, 
-		@ModelAttribute("recordatorio") Recordatorio recordatorio, Model model,
-		HttpServletRequest request) {
-		RefeicaoRecordatorio refeicao = new RefeicaoRecordatorio();
-		SimpleDateFormat dataFormatada = new SimpleDateFormat("HH:mm");
-		Date hora = null;
-		
-		try {
-			hora = dataFormatada.parse(request.getParameter("horaRefeicao"));
-		} catch (ParseException e) {
-			e.printStackTrace();
-		}
-		
-		refeicao.setHora(hora);
-		refeicao.setDescricao(Refeicao.valueOf(request.getParameter("descricaoRefeicao")));
-		refeicao.setItens(request.getParameter("itensRefeicao"));
-		refeicao.setObservacao(request.getParameter("observacaoRefeicao"));
-		recordatorio.getRefeicoes().add(refeicao);
-	    recordatorio.getRefeicoes().sort(new Comparator<RefeicaoRecordatorio>() {
-	    	@Override
-	    	public int compare(RefeicaoRecordatorio refeicao1, RefeicaoRecordatorio refeicao2) {
-	    		return refeicao1.getHora().compareTo(refeicao2.getHora());
-	    	}
-		});	    
-
-	    model.addAttribute("idPacientePaciente", idPaciente);
-		model.addAttribute("recordatorio", recordatorio);		
-
-		return "recordatorio/adicionar-recordatorio";
-	}
-	
-	@RequestMapping( value = "/{idPaciente}/Recordatorio", params={"removerRefeicao"} )
-	public String removerRefeicao(@PathVariable("idPaciente") Long idPaciente, @ModelAttribute("recordatorio") Recordatorio recordatorio,
-			@RequestParam("removerRefeicao") Integer index, Model model) {
-		
-		recordatorio.getRefeicoes().remove(index.intValue());
-		model.addAttribute("idPacientePaciente", idPaciente);
-		model.addAttribute("recordatorio", recordatorio);	
-
-		return "recordatorio/adicionar-recordatorio";
-
-	}
-	
 	@RequestMapping(value = "/{idPaciente}/Recordatorio/{idRecordatorio}/Refeicao/{idRefeicao}/Excluir", method = RequestMethod.POST)
 	public String excluirRefeicaoRecordatorio(@PathVariable("idPaciente") Long idPaciente, 
 			@PathVariable("idRecordatorio") Long idRecordatorio,
@@ -282,45 +235,7 @@ public class PacienteController {
 		this.consultaService.excluirRefeicaoRecordatorio(refeicao);
 		
 		return "redirect:/Paciente/" + idPaciente + "/Recordatorio/" + idRecordatorio;
-	}	
-	
-	@RequestMapping( value = "/{idPaciente}/Recordatorio", params={"editarRefeicao"} )
-	public String editarRefeicao(@PathVariable("idPaciente") Long idPaciente, 
-			@ModelAttribute("recordatorio") Recordatorio recordatorio,
-			@RequestParam("editarRefeicao") Integer index, 
-			HttpServletRequest request, Model model) {		
-
-		SimpleDateFormat dataFormatada = new SimpleDateFormat("HH:mm");
-		Date hora = null;
-		
-		try {
-			hora = dataFormatada.parse(request.getParameter("horaRefeicaoAtualizada"));
-		} catch (ParseException e) {
-			e.printStackTrace();
-		}		
-
-		RefeicaoRecordatorio refeicao = recordatorio.getRefeicoes().get(index.intValue());
-		if(!refeicao.getHora().equals(hora)){
-			refeicao.setHora(hora);
-			recordatorio.getRefeicoes().sort(new Comparator<RefeicaoRecordatorio>() {
-		    	@Override
-		    	public int compare(RefeicaoRecordatorio refeicao1, RefeicaoRecordatorio refeicao2) {
-		    		return refeicao1.getHora().compareTo(refeicao2.getHora());
-		    	}
-			});
-		}
-		
-		refeicao.setDescricao(Refeicao.valueOf(request.getParameter("descricaoRefeicaoAtualizada")));
-		refeicao.setItens(request.getParameter("itensRefeicaoAtualizada"));
-		refeicao.setObservacao(request.getParameter("observacaoRefeicaoAtualizada"));		
-
-		model.addAttribute("idPaciente", idPaciente);
-		model.addAttribute("recordatorio", recordatorio);
-
-		return "recordatorio/adicionar-recordatorio";
-
-	}
-		
+	}		
 
 	private String getCpfPessoaLogada() {
 		return SecurityContextHolder.getContext().getAuthentication().getName();

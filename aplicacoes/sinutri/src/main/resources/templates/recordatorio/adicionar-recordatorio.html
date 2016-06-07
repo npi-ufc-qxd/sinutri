@@ -8,17 +8,16 @@
 	<title>Sinutri | Adicionar Recordatório</title>
 	<meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0"/>
-	<link rel="stylesheet" type="text/css" th:href="@{/css/material.min.css}"/>
-	<link rel="stylesheet" type="text/css" th:href="@{/css/font/material-icons.css}"/>
-	<link rel="stylesheet" type="text/css" th:href="@{/css/font/roboto.css}"/>
-	<link rel="stylesheet" type="text/css" th:href="@{/css/dialog-polyfill.css}"/>
-	<link rel="stylesheet" type="text/css" th:href="@{/css/sinutri.css}"/>
-	<link rel="stylesheet" type="text/css" th:href="@{/css/adicionar-recordatorio.css}"/>
 	<link rel="stylesheet" type="text/css" th:href="@{/css/material-date-picker.css}"/>
+	<link rel="stylesheet" type="text/css" th:href="@{/css/adicionar-recordatorio.css}"/>
 </head>
+
 <body>
 	<section layout:fragment="conteudo">
+	
 		<div class="mdl-grid">
+		
+			
 			<form action="#" 
 		    id="formAdicionarRecordatorio"
 		    method="post" 
@@ -26,8 +25,18 @@
 		    th:action="@{/Paciente/__${idPaciente}__/Recordatorio}"
 		    th:object="${recordatorio}"
 		    accept-charset="utf-8">
-		    
-			    <table class="mdl-data-table mdl-js-data-table mdl-data-table--selectable mdl-shadow--2dp">
+
+				<div class="mdl-cell mdl-cell--8-col sn-padding--24">
+				
+					<div class="mdl-layout-title">
+						Cadastrar Recordatório
+					</div>
+					
+				</div>
+				
+				<div class="sn-form__hdivider"></div>
+				
+			    <table class="mdl-data-table mdl-js-data-table">
 				    
 				    	<thead>
 				    	
@@ -45,6 +54,13 @@
 				    	<tbody class="sn-list-refeicoes">
 				    	
 				    		<tr class="sn-cloneable">
+				    			
+				    			<td hidden="true">
+					    			<input type="hidden" th:field="*{refeicoes[0].hora}" class="sn-refeicao-input-hora" value="00:00"/>
+					    			<input type="hidden" th:field="*{refeicoes[0].descricao}" class="sn-refeicao-input-descricao" value="CAFEMANHA"/>
+					    			<input type="hidden" th:field="*{refeicoes[0].itens}" class="sn-refeicao-input-itens" value="das"/>
+					    			<input type="hidden" th:field="*{refeicoes[0].observacao}" class="sn-refeicao-input-observacao" value="akhggf"/>
+				    			</td>
 				    			
 				    			<td style="width:20%" 
 				    			class="mdl-data-table__cell--non-numeric sn-refeicao-hora">
@@ -71,14 +87,14 @@
 				    				<button type="button" 
 				    				class="mdl-button mdl-js-button mdl-button--icon sn-refeicao-editar">
 				    				
-				    					<i class="material-icons mdl-color-text--teal">mode_edit</i>
+				    					<i class="material-icons mdl-color-text--grey-700">mode_edit</i>
 				    					
 				    				</button>
 				    				
 				    				<button type="button"	
 				    				class="mdl-button mdl-js-button mdl-button--icon sn-refeicao-remover">
 				    				
-				    					<i class="material-icons mdl-color-text--teal">close</i>
+				    					<i class="material-icons mdl-color-text--grey-700">close</i>
 				    					
 				    				</button>
 				    				
@@ -96,7 +112,7 @@
 		    		<div class="mdl-grid">
 		    			<input type="hidden" id="sn-refeicao-item-index"/>
 							
-						<div class="sn-textfield mdl-cell mdl-cell--6-col">
+						<div class="sn-textfield mdl-cell mdl-cell--4-col">
 						
 				    		<label for="sn-refeicao-hora"
 				    		class="sn-textfield__label">
@@ -105,18 +121,22 @@
 				    		<input type="text" 
 				    		pattern="^(0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$" 
 				    		class="sn-textfield__input sn-time-picker" 
-				    		id="sn-refeicao-hora"/>
+				    		id="sn-refeicao-hora"
+				    		name="snrefeicaohora"
+				    		required="required"/>
 				    		
 				    	</div>
 						    	
-						<div class="sn-selectfield mdl-cell mdl-cell--6-col">
+						<div class="sn-selectfield mdl-cell mdl-cell--8-col">
 						
 				    		<label for="sn-refeicao-descricao"
 				    		class="sn-textfield__label">
 				    			Tipo
 				    		</label>
 				    		<select class="sn-selectfield__select"
-				    		id="sn-refeicao-descricao">
+				    		id="sn-refeicao-descricao"
+				    		name="snrefeicaodescricao"
+				    		required="required">
 				    		
 				    			<option value="">Selecione uma opção</option>
 				    			<option th:each="tipo : ${tiposRefeicao}" 
@@ -135,7 +155,9 @@
 				    			Itens
 				    		</label>
 				    		<textarea class="sn-textfield__input"
-				    		id="sn-refeicao-itens"></textarea>
+				    		id="sn-refeicao-itens"
+				    		name="snrefeicaoitens"
+				    		required="required"></textarea>
 				    		
 				    	</div>
 						
@@ -146,7 +168,9 @@
 				    			Observação
 				    		</label>
 				    		<textarea class="sn-textfield__input"
-				    		id="sn-refeicao-observacao"></textarea>
+				    		id="sn-refeicao-observacao"
+				    		name="snrefeicaoobservacao"
+				    		required="required"></textarea>
 				    		
 				    	</div>
 				    		
@@ -156,7 +180,7 @@
 			    </div>
 			    
 			    <button type="button" 
-   				class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--mini-fab mdl-button--colored" 
+   				class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored" 
    				id="sn-add-refeicao-button">
    					<i class="material-icons">add</i>
    				</button>
@@ -164,9 +188,9 @@
    				<div>
 	   				<input type="submit" 
 	   				id="btnAdicionarRecordatorio"
-				    class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect mdl-button--accent" 
-				    value="Adicionar" /> 
-				</div>
+				    class="mdl-button mdl-js-button mdl-button--raised mdl-button--primary mdl-js-ripple-effect" 
+				    value="Cadastrar" /> 
+				</div> 
 				
 		    </form>
 		    

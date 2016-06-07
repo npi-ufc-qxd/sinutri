@@ -50,58 +50,48 @@ var sn_base = function() {
 
 	var dialogCounter = 0;
 
-	var setupForm = function() {
-		
-		if($(".sn-mask-date").exists()) {
+	var setupForm = function(root) {
 
-			$(".sn-mask-date").mask("99/99/9999",{placeholder:"dd mm aaaa"});
+		root = root == undefined? "body": root;
 
-		}
+		if($(root + " .sn-date-picker").exists()) { 
 
-		if($(".sn-mask-phone").exists()) {
-
-			$(".sn-mask-phone").mask("(99) 99999-9999");
-
-		}
-
-		if($(".sn-date-picker").exists()) { 
-
-			$(".sn-date-picker").each(function(index, el) {
+			$(root + " .sn-date-picker").each(function(index, el) {
 				el = $(el);
 				var id = el.attr("id");
 				if (id == undefined) {
 					el.attr("id", "sn-date-picker-" + index);
 				}
 				var selector = "#" + id;
-				sn_base.doRegistryDatePicker(selector);
+				sn_base.doRegistryDatePicker(selector, $(root));
 			});
 
 		}
 
-		if($(".sn-time-picker").exists()) { 
+		if($(root + " .sn-time-picker").exists()) { 
 
-			$(".sn-time-picker").each(function(index, el) {
+			$(root + " .sn-time-picker").each(function(index, el) {
 				el = $(el);
 				var id = el.attr("id");
 				if (id == undefined) {
 					el.attr("id", "sn-time-picker-" + index);
 				}
 				var selector = "#" + id;
-				sn_base.doRegistryTimePicker(selector);
+				sn_base.doRegistryTimePicker(selector, $(root));
 			});
 
 		}
 
-		if($(".sn-date-time-picker").exists()) { 
+		if($(root + " .sn-date-time-picker").exists()) { 
 
-			$(".sn-date-time-picker").each(function(index, el) {
+			$(root + " .sn-date-time-picker").each(function(index, el) {
 				el = $(el);
 				var id = el.attr("id");
 				if (id == undefined) {
 					el.attr("id", "sn-date-time-picker-" + index);
 				}
 				var selector = "#" + id;
-				sn_base.doRegistryDateTimePicker(selector);
+				sn_base.doRegistryDateTimePicker(selector, $(root));
 			});
 
 		}
@@ -190,6 +180,21 @@ var sn_base = function() {
 		$(".sn-foreground").fadeOut(500);
 
 	}
+
+	var sortDivs = function() {
+
+		var items = $("body").children();
+
+		items.sort(function (a, b) {
+			var contentA = $(a).hasClass("dtp")? 3: $(a).hasClass("mdl-dialog")? 2: 1;
+			var contentB = $(b).hasClass("dtp")? 3: $(b).hasClass("mdl-dialog")? 2: 1;
+			return (contentA < contentB) ? -1 : (contentA > contentB) ? 1 : 0;
+	   	});
+
+	   	items.each(function(i, el) {
+	   		$(el).parent().append(el);
+	   	});
+	}
 	
 	return {
 
@@ -231,7 +236,9 @@ var sn_base = function() {
 			dialogContent.remove();
 
 			dialog.attr("id", "sn-dialog-" + (dialogCounter++));
-			$("body").append(dialog);
+			
+			$("body").append(dialog);	
+			
 			dialog.find(".mdl-dialog__content").append(dialogContent);
 			dialog.find(".mdl-card__menu-close").click(function() { dialog.get(0).close(); });
 			dialog.find(".mdl-dialog__title").text(setts.title);
@@ -242,7 +249,9 @@ var sn_base = function() {
 				$(button).click(bs.action);
 				dialog.find(".mdl-dialog__actions").append(button);
 				for(k in bs.attrs)
-					$(button).attr(k, bs.attrs[k]);				
+					$(button).attr(k, bs.attrs[k]);		
+
+
 			}
 
 			if (!dialog.get(0).showModal) {
@@ -253,13 +262,22 @@ var sn_base = function() {
 				dialog.get(0).showModal();
 			});
 
+			dialog.find("*").each(function(i, el) {
+				componentHandler.upgradeElement(el);
+			});
+
+			setupForm("#" + dialog.attr("id"));
+
+			sortDivs();
+
 			return dialog.get(0);
 
 
 		}, 
 
-		doRegistryDatePicker : function(el) {
+		doRegistryDatePicker : function(el, root) {
 
+			if(root === undefined) root = $("body");
 			if($(el).exists()) {
 
 				$(el).bootstrapMaterialDatePicker({
@@ -271,15 +289,19 @@ var sn_base = function() {
 					nowButton: true, 
 					cancelText: "Cancelar", 
 					okText: "OK", 
-					nowText: "Agora"
+					nowText: "Agora", 
+					parent: root
 				});
 
 			}
 
+			sortDivs();
+
 		}, 
 
-		doRegistryTimePicker : function(el) {
+		doRegistryTimePicker : function(el, root) {
 
+			if(root === undefined) root = $("body");
 			if($(el).exists()) {
 
 				$(el).bootstrapMaterialDatePicker({
@@ -291,15 +313,19 @@ var sn_base = function() {
 					nowButton: true, 
 					cancelText: "Cancelar", 
 					okText: "OK", 
-					nowText: "Agora"
+					nowText: "Agora", 
+					parent: root
 				});
 
 			}
 
+			sortDivs();
+
 		}, 
 
-		doRegistryDateTimePicker : function(el) {
+		doRegistryDateTimePicker : function(el, root) {
 
+			if(root === undefined) root = $("body");
 			if($(el).exists()) {
 
 				$(el).bootstrapMaterialDatePicker({
@@ -311,10 +337,13 @@ var sn_base = function() {
 					nowButton: true, 
 					cancelText: "Cancelar", 
 					okText: "OK", 
-					nowText: "Agora"
+					nowText: "Agora", 
+					parent: root
 				});
 
 			}
+
+			sortDivs();
 
 		}
 
@@ -457,7 +486,7 @@ var DynamicList = function(rootEl, settings) {
 
 		// Seletor do elemento que será clonado
 		cloneableElement: ".dl-el", 
-		
+
 		// Seletor do botão responsável por adicionar novos items
 		addButton: ".dl-add", 
 		// Seletor do botão responsável por remover items
@@ -478,7 +507,7 @@ var DynamicList = function(rootEl, settings) {
 
 		// Trás os valores padrão para os elementos da lista
 		defaultData: {}, 
-		
+
 		// Lista de callbacks
 		// Para que o item seja adicionado, removido ou editado, retorne true
 		onItemAdd: function(item) { return true; }, 
@@ -493,7 +522,8 @@ var DynamicList = function(rootEl, settings) {
 	this.rootEl = rootEl;
 	this.parent = undefined;
 	this.settings = settings;
-	
+	this.template = undefined;
+
 	this.error = function(message) {
 
 		console.error("Dynamic HTML: " + message);
@@ -532,6 +562,54 @@ var DynamicList = function(rootEl, settings) {
 
 	}
 
+	this.doIncrementItem = function(name, index) {
+		
+		if( /[\w]+\[[\d]+\]\.[\w]+/.test(name) ) {
+			return name.replace( /\[[\d]+\]+/, "[" + index + "]")
+		} 
+
+		return name;
+
+	}
+
+	this.sortItems = function() {
+		var items = $(this.settings.cloneableElement);
+		items.sort(function (a, b) {
+			var contentA = parseInt( $(a).data('sort'));
+			var contentB = parseInt( $(b).data('sort'));
+			return (contentA < contentB) ? -1 : (contentA > contentB) ? 1 : 0;
+	   	});
+
+	   	var self = this;
+	   	items.each(function(i, e) {
+	   		var index = parseInt(JSON.stringify(i));
+
+	   		$(e).data("index", index);
+	   		$(e).parent().append(e);
+
+			var setSetupFunc = function(rootEl) {
+
+				rootEl.children().each(function(_, elm) {
+					
+					var el = $(elm);
+
+					if(!el.isDynamicList()) {
+
+						el.attr("name", self.doIncrementItem(el.attr("name"), index));
+						setSetupFunc(el);
+
+					}
+
+				});
+
+			}
+
+			$(e).attr("name", self.doIncrementItem($(e).attr("name"), index));
+			setSetupFunc($(e));
+
+	   	});
+	}
+
 	/* PUBLIC */
 
 	this.doInit = function() {
@@ -565,6 +643,8 @@ var DynamicList = function(rootEl, settings) {
 		} else {
 
 			var item = $(items.get(0));	
+			item.remove();
+			self.template = item;
 			self.settings.defaultItemDisplay = item.css("display");
 
 			if(self.settings.hideFirst) {
@@ -624,6 +704,8 @@ var DynamicList = function(rootEl, settings) {
 
 		setAddFunc(self.rootEl);
 
+		self.sortItems();
+
 		self.showStatus("Initializing");
 
 		return this;
@@ -636,22 +718,18 @@ var DynamicList = function(rootEl, settings) {
 
 		var items = this.parent.children(this.settings.cloneableElement);
 		
-		var currentIndex = items.length;
-		
-		if(items.length > 0) {
-
-			var last = items.last();
-			var newItem = last.clone(true);
+		if(self.template !== undefined) {
+			
+			var last = items.length == 0? undefined: items.last();
+			var newItem = self.template.clone(true);
 			newItem.find("*").off("click");
-			newItem.insertAfter(last);
+
+			if(last === undefined)
+				self.parent.append(newItem);
+			else 
+				newItem.insertAfter(last);
 
 			newItem.css("display", self.settings.defaultItemDisplay);
-
-			if(self.settings.autoIncrementID && newItem.attr("id") != undefined)
-				newItem.attr("id", self.getNextAttrBy(newItem.attr("id")));
-
-			if(self.settings.autoIncrementName && newItem.attr("name") != undefined)
-				newItem.attr("name", self.getNextAttrBy(newItem.attr("name")));
 
 			var setSetupFunc = function(rootEl) {
 
@@ -666,12 +744,6 @@ var DynamicList = function(rootEl, settings) {
 						dl.doClearItems();
 
 					} else {
-
-						if(self.settings.autoIncrementID && el.attr("id") != undefined)
-							el.attr("id", self.getNextAttrBy(el.attr("id")));
-
-						if(self.settings.autoIncrementName && $(this).attr("name") != undefined)
-							el.attr("name", self.getNextAttrBy(el.attr("name")));
 
 						setSetupFunc(el);
 
@@ -714,7 +786,7 @@ var DynamicList = function(rootEl, settings) {
 					
 					$(el).click(function() {
 
-						if(self.settings.onItemEdit(newItem, currentIndex))
+						if(self.settings.onItemEdit(newItem, newItem.data("index")))
 							self.doEditItem(newItem);
 						
 					})
@@ -753,6 +825,9 @@ var DynamicList = function(rootEl, settings) {
 
 			}
 
+			newItem.data("sort", data.sortValue);
+			
+
 		} else {
 
 			self.error("Nenhum elemento com o seletor " + self.settings.cloneableElement + " foi encontrado!");
@@ -772,6 +847,23 @@ var DynamicList = function(rootEl, settings) {
 
 		self.showStatus("Adding");
 
+		self.sortItems();
+
+		newItem.css("min-height", "0");
+		newItem.css("min-width", "0");
+		newItem.css("border-radius", "50px");
+		newItem.css("width", "72px");
+		var anim = new Animation(newItem).doSequentially(
+			new Animation().doAnimate(
+				{"width": "100%", specialEasing: {width: "linear"}},
+				{duration: 200, queue: false}
+			), 
+			new Animation().doAnimate(
+				{"border-radius": "2px", specialEasing: {"border-radius": "linear"}},
+				{duration: 50, queue: false}
+			)
+		).doPlay();
+
 		return newItem;
 		
 	} 
@@ -781,10 +873,37 @@ var DynamicList = function(rootEl, settings) {
 		var self = this;
 		var items = self.parent.children(self.settings.cloneableElement);
 
-		if(items.length > 1) {
-			item.find("*").remove();
-			item.remove();
-			self.settings.onItemRemoved(item);
+		if(items.length > 0) {
+
+			el = item;
+				
+			el.css("min-height", "0px");
+			el.css("min-width", "0px");
+			el.css("margin-left", "auto");
+			
+			var anim = new Animation(el).doSequentially(
+				new Animation().doAnimate(
+					{"border-radius": "50px", specialEasing: {"border-radius": "linear"}},
+					{duration: 100, queue: false}
+				),
+				new Animation().doAnimate(
+					{width: "72px", height: "72px", specialEasing: {width: "linear"}},
+					{duration: 100, queue: false}
+				),
+				new Animation().doAnimate(
+					{width: "0px", height: "0px", specialEasing: {width: "linear"}},
+					{duration: 50, queue: false}
+				)
+				
+			).doPlay();
+
+			setTimeout(function() {
+				item.find("*").remove();
+				item.remove();
+				self.settings.onItemRemoved(item);
+				self.sortItems();
+			}, 250);		
+
 		}
 
 		self.showStatus("Removing");
@@ -812,6 +931,29 @@ var DynamicList = function(rootEl, settings) {
 			}
 
 		}
+
+		item.data("sort", data.sortValue);
+
+		this.sortItems();
+
+		var anim = new Animation(item).doSequentially(
+			new Animation().doAnimate(
+				{"margin-left": "-16px", specialEasing: {"margin-left": "linear"}},
+				{duration: 100, queue: false}
+			), 
+			new Animation().doAnimate(
+				{"margin-left": "16px", specialEasing: {"margin-left": "linear"}},
+				{duration: 100, queue: false}
+			), 
+			new Animation().doAnimate(
+				{"margin-left": "-16px", specialEasing: {"margin-left": "linear"}},
+				{duration: 100, queue: false}
+			), 
+			new Animation().doAnimate(
+				{"margin-left": "0px", specialEasing: {"margin-left": "linear"}},
+				{duration: 100, queue: false}
+			)
+		).doPlay();
 
 		return item;
 
@@ -847,3 +989,81 @@ var DynamicList = function(rootEl, settings) {
 };
 
 DynamicList.objectCount = 0;
+
+
+var Animation = function(el) {
+
+	this.el = el;
+	this.anim = null;
+
+	this.doAnimate = function(setts, duration) {
+		
+		var data = {
+			type: "animation", 
+			setts: setts, 
+			duration: duration
+		};
+
+		this.anim = data;
+
+		return this;
+	};
+
+	this.doSequentially = function() {
+
+		var data = {
+			type: "sequentially", 
+			anims: []
+		};
+
+		for(var i = 0; i < arguments.length; i++)
+			data.anims.push(arguments[i].anim);
+
+		this.anim = data;
+
+		return this;
+
+	};
+
+	this.doPlay = function(onComplete) {
+
+		this._play(this.anim, onComplete);
+		return this;
+
+	}
+
+	this._play = function(anim, onComplete) {
+
+		var _self = this;
+
+		if(anim.type === "animation") {
+
+			anim.duration.complete = function() {
+				if(onComplete != undefined)
+					onComplete();
+			};
+
+			_self.el.animate(
+				anim.setts, 
+				anim.duration				
+			);
+
+		} else if(anim.type === "sequentially") {
+
+			if(anim.anims.length > 0) {
+				var a = anim.anims.splice(0, 1)[0];
+				_self._play(a, function() {
+
+					if(onComplete != undefined)
+						onComplete();
+
+					_self._play(anim);
+
+				});
+			}
+			
+		} 
+
+	}
+
+};

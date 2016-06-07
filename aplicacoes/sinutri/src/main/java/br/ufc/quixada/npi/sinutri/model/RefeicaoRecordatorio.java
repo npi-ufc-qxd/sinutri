@@ -7,6 +7,8 @@ import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -19,6 +21,7 @@ public class RefeicaoRecordatorio {
 	private Long id;
 	
 	@NotNull
+	@Temporal(TemporalType.TIME)
 	@DateTimeFormat(pattern="HH:mm")
 	private Date hora;
 	
