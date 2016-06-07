@@ -22,7 +22,7 @@
 			<div class="mdl-grid mdl-grid--no-spacing">
 				<div class="mdl-layout-title mdl-cell mdl-cell--12-col sn-padding--48 mdl-color--teal-500 mdl-color-text--white">
 					Prescrição 
-					<a th:href="@{${'/Paciente/'+prescricao.paciente.id+'/Prescricao/'+ prescricao.id +'/Editar/'}}" class="sn-fab mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored sn-fab" data-upgraded=",MaterialButton,MaterialRipple">
+					<a id="botao-excluir" th:href="@{${'/Paciente/'+prescricao.paciente.id+'/Prescricao/'+ prescricao.id +'/Editar/'}}" class="sn-fab mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored sn-fab" data-upgraded=",MaterialButton,MaterialRipple">
 						<i class="material-icons mdl-color-text--white">edit</i>
 						<span class="mdl-button__ripple-container">
 							<span class="mdl-ripple is-animating" style="width: 160.391918985787px; height: 160.391918985787px; transform: translate(-50%, -50%) translate(28px, 21px);"></span>
@@ -62,5 +62,41 @@
 			</div>
 		</div>
 	</div>
+	
+	<div id="modal-exclusao">
+	<label> Deseja mesmo excluir a prescrição?</label>
+	</div>
+	
 </section>
+
+	<section layout:fragment="js"> 
+		<script type="text/javascript">
+		
+		$( "#excluir" ).clic"src/main/resources/templates/prescricao/detalhes.html"k(function(event) {
+		          var dialog = sn_base.doRegistryDialog({
+		              title: "Operação irreversível",
+		              dialog: "#modal-exclusao",
+		              buttons: [
+		                      {
+		                         label: "Sim",
+		                         attrs: {href: $(this).attr("href")},
+		                         action: function() {
+		                             dialog.close();
+		                         }
+		                      },
+		                      {
+		                          label: "Nao",
+		                          action: function() {
+		                              dialog.close();
+		                          }
+		                      }
+		              ]
+		              });                     
+		          dialog.showModal();
+		          event.preventDefault();
+		      });
+		
+		</script>
+	</section>
+
 </html>

@@ -148,6 +148,7 @@ public class PacienteController {
 			 		BindingResult result){
 		
 		 if(result.hasErrors()){
+			 model.addAttribute("prescricao", prescricao);
 			 return "/prescricao/cadastrar";
 		 }
 		 
@@ -207,6 +208,7 @@ public class PacienteController {
 		 Paciente paciente = pacienteService.buscarPacientePorId(idPaciente);
 	
 		 if(result.hasErrors()){
+			 model.addAttribute("prescricao", prescricao);
 			 return "/prescricao/editar";
 		 }
 		 
