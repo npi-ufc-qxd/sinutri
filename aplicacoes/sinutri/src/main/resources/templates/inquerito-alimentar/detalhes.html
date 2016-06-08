@@ -8,11 +8,7 @@
 	<title>Sinutri | Visualizar Inquérito Alimentar</title>
 	<style type="text/css">
 
-		.sn-fab {
-			position: absolute;
-			right: 26px;
-			bottom: -26px;
-		}
+
 
 	</style>
 </head>
@@ -20,21 +16,34 @@
 <section layout:fragment="conteudo">
 	<div class="mdl-grid">
 
-		<div class="mdl-cell mdl-cell--7-col-desktop mdl-cell--1-offset-desktop sn-card">
-						
-			<div class="mdl-grid mdl-grid--no-spacing">
+		<div class="mdl-cell mdl-cell--7-col-desktop mdl-cell--1-offset-desktop mdl-cell--8-col-tablet mdl-cell--4-col-phone mdl-grid mdl-grid--no-spacing sn-main-card">
+			
 
-				<div class="mdl-layout-title mdl-cell mdl-cell--12-col sn-padding--48 mdl-color--teal-500 mdl-color-text--white"> Inquérito Alimentar
-					<a th:href="@{${'/Paciente/'+ inqueritoAlimentar.paciente.id +'/InqueritoAlimentar/'+inqueritoAlimentar.id+'/Editar/'}}" class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored sn-fab">
-						<i class="material-icons mdl-color-text--white">edit</i>
-					</a>
-				</div>
-	
-				<div class="mdl-grid mdl-cell mdl-cell--12-col sn-padding--48 mdl-color--white" >
-					<div class="sn-attribute mdl-cell mdl-cell--12-col">
-						<a id="excluir" th:href="@{${'/Paciente/'+ inqueritoAlimentar.paciente.id +'/InqueritoAlimentar/'+inqueritoAlimentar.id+'/Excluir/'}}" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--raised mdl-button--accent mdl-color-text--white">Remover</a>
-					</div>
-					
+			 <div class="mdl-cell mdl-cell--12-col sn-card sn-padding--48 mdl-color--teal">
+
+                        <div class="mdl-layout-title mdl-color-text--white">Inquérito Alimentar</div>
+
+                      <fabgroup class="sn-fab--bottom-right">
+
+                              <a id="excluir" th:href="@{${'/Paciente/'+ inqueritoAlimentar.paciente.id +'/InqueritoAlimentar/'+inqueritoAlimentar.id+'/Excluir/'}}" class="sn-fab sn-fab--hide mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-js-ripple-effect mdl-color--red-700">
+                                      <i class="material-icons mdl-color-text--white">delete</i>
+                              </a>
+
+                              <a th:href="@{${'/Paciente/'+ inqueritoAlimentar.paciente.id +'/InqueritoAlimentar/'+inqueritoAlimentar.id+'/Editar/'}}" class="sn-fab sn-fab--hide mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-js-ripple-effect mdl-color--purple">
+                                      <i class="material-icons mdl-color-text--white">edit</i>
+                              </a>
+
+                              <button class="sn-float--launcher mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored">
+                                      <i class="material-icons mdl-color-text--white">more_horiz</i>
+                              </button>
+                      </fabgroup>
+
+              </div>
+
+
+
+			<div class="mdl-grid mdl-grid--no-spacing">
+				 <div class="sn-card-top mdl-cell mdl-cell--12-col sn-card sn-padding--48 mdl-color--white mdl-grid">
 					<div class="sn-attribute mdl-cell mdl-cell--12-col">
 						<div class="sn-attribute__title">Data de Criação</div>
 						<div class="sn-attribute__value" th:text="${#dates.format(inqueritoAlimentar.criadoEm,'dd/MM/yyyy')}">10/10/1010</div>
