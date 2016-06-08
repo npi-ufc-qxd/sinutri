@@ -7,50 +7,48 @@
 <head>
 	<title>Sinutri | Detalhes</title>
 	<link rel="stylesheet" type="text/css" th:href="@{/css/buscar.css}"/>
-	<style type="text/css">
-
-			.sn-fab {
-				position: absolute;
-				right: 26px;
-				bottom: -26px;
-			}
-
-		</style>
 </head>
 
 <section layout:fragment="conteudo">
 	<div class="mdl-grid">
-		<div
-			class="mdl-cell
-				   mdl-cell--7-col-desktop mdl-cell--1-offset-desktop
-				   sn-card">
 
-			<div class="mdl-grid mdl-grid--no-spacing">
-				<div class="mdl-layout-title
-							mdl-cell mdl-cell--12-col
-							sn-padding--48
-							mdl-color--teal-500 mdl-color-text--white">
-					Anamnese
-					<a th:href="@{${'/Paciente/' + anamnese.paciente.id +'/Anamnese/'+ anamnese.id +'/Editar/'}}"
-						class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored sn-fab">
-						<i class="material-icons mdl-color-text--white">edit</i>
-						
-					</a>
+      <!-- Célula de informações do formulário -->
 
-				</div>
-				<div class="mdl-grid
-							mdl-cell mdl-cell--12-col
-							sn-padding--48 mdl-color--white">
+      <div class="
+              mdl-cell
+              mdl-cell--7-col-desktop mdl-cell--1-offset-desktop
+              mdl-cell--8-col-tablet
+              mdl-cell--4-col-phone
+              mdl-grid mdl-grid--no-spacing
+              sn-main-card">
 
-					<div class="mdl-cell mdl-cell--12-col">
-						<a id="bt-excluir"
-							th:href="@{${'/Paciente/' + anamnese.paciente.id +'/Anamnese/'+ anamnese.id +'/Excluir/'}}"
-							class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--raised mdl-button--accent mdl-color-text--white">Remover
-							Anamnese</a>
-					</div>
-					<div class="sn-form__hdivider"></div>
-					
-					
+              <div class="mdl-cell mdl-cell--12-col sn-card sn-padding--48 mdl-color--teal">
+
+                      <div class="mdl-layout-title mdl-color-text--white">Avaliação Laboratorial</div>
+
+                      <fabgroup class="sn-fab--bottom-right">
+
+                              <a id="bt-excluir"
+									th:href="@{${'/Paciente/' + anamnese.paciente.id +'/Anamnese/'+ anamnese.id +'/Excluir/'}}" 
+                              		class="sn-fab sn-fab--hide mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-js-ripple-effect mdl-color--red-700">
+                                    <i class="material-icons mdl-color-text--white">delete</i>
+                              </a>
+
+                              <a th:href="@{${'/Paciente/' + anamnese.paciente.id +'/Anamnese/'+ anamnese.id +'/Editar/'}}" 
+                              class="sn-fab sn-fab--hide mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-js-ripple-effect mdl-color--purple">
+                                      <i class="material-icons mdl-color-text--white">edit</i>
+                              </a>
+
+
+                              <button class="sn-float--launcher mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored">
+                                      <i class="material-icons mdl-color-text--white">more_horiz</i>
+                              </button>
+                              
+                      </fabgroup>
+
+              </div>
+
+              <div class="sn-card-top mdl-cell mdl-cell--12-col sn-card sn-padding--48 mdl-color--white mdl-grid">
 					<div class="sn-attribute mdl-cell mdl-cell--6-col">
                         <div class="sn-attribute__title">Criação:</div>
                         <div class="sn-attribute__value" th:text="${#dates.format(anamnese.criadoEm,'dd/MM/yyyy')}">01/01/1995</div>
@@ -73,9 +71,17 @@
 							<label th:text="${anamnese.objetivoConsulta}">Objetivo</label>
 						</div>
 					</div>
-					
-					<div class="sn-form__hdivider"></div>					
-					<h3 class="mdl-cell mdl-cell--12-col">Hábitos de Vida</h3>
+
+              </div>
+
+              <div class="sn-card-top mdl-cell mdl-cell--12-col sn-card sn-padding--48 mdl-color--white mdl-grid">
+
+                      <h5 class="mdl-cell mdl-cell--12-col">Hábitos de Vida</h5>
+                      
+                      <div class="sn-attribute__value mdl-cell mdl-cell--12-col" 
+					 	  th:if="${!anamnese.atividadeFisica and !anamnese.dormeBem and !anamnese.bebidaAlcoolica}">					 	 
+					 		Não há informações sobre a categoria!
+					 </div>
 					
 					<div class="sn-attribute mdl-cell mdl-cell--6-col" th:if="${anamnese.atividadeFisica}">
 						<label 
@@ -87,7 +93,12 @@
 					</div>
 					<div class="sn-attribute__value mdl-cell mdl-cell--6-col" th:if="${anamnese.atividadeFisica}">
 						<div class="sn-attribute__title ">Comentário:</div>
-						<label th:text="${anamnese.atividadeFisicaComentario}">Comentário</label>
+						<label th:text=
+								"${#strings.length(anamnese.atividadeFisicaComentario)!=0 ? 
+								anamnese.atividadeFisicaComentario:
+								'Não há comentário!'}">
+								Comentário
+						</label>
 					</div>							
 					
 					<div class="sn-attribute mdl-cell mdl-cell--6-col" th:if="${anamnese.dormeBem}">
@@ -100,7 +111,12 @@
 					</div>
 					<div class="sn-attribute__value  mdl-cell mdl-cell--6-col" th:if="${anamnese.dormeBem}">
 						<div class="sn-attribute__title ">Comentário:</div>
-						<label th:text="${anamnese.dormeBemComentario}">Comentário</label>
+						<label th:text=
+								"${#strings.length(anamnese.dormeBemComentario)!=0 ? 
+								anamnese.dormeBemComentario:
+								'Não há comentário!'}">
+								Comentário
+						</label>						
 					</div>					
 					
 					<div class="sn-attribute mdl-cell mdl-cell--6-col" th:if="${anamnese.bebidaAlcoolica}">
@@ -113,14 +129,26 @@
 					</div>
 					<div class="sn-attribute__value mdl-cell mdl-cell--6-col" th:if="${anamnese.bebidaAlcoolica}">
 						<div class="sn-attribute__title ">Comentário:</div>
-						<label th:text="${anamnese.bebidaAlcoolicaComentario}">Comentário</label>
-					</div>		
+						<label th:text=
+								"${#strings.length(anamnese.bebidaAlcoolicaComentario)!=0 ? 
+								anamnese.bebidaAlcoolicaComentario:
+								'Não há comentário!'}">
+								Comentário
+						</label>						
+					</div>
+
+              </div>
+              
+              
+              <div class="sn-card-top mdl-cell mdl-cell--12-col sn-card sn-padding--48 mdl-color--white mdl-grid">
+					<h5 class="mdl-cell mdl-cell--12-col">Patologias</h5>
 					
-					
-					<div class="sn-form__hdivider"></div>					
-					<h3 class="mdl-cell mdl-cell--12-col">Patologias</h3>
-					
-					<div class="sn-attribute mdl-cell mdl-cell--12-col" th:if='${anamnese.patologiasComentario}'>
+					<div class="sn-attribute__value mdl-cell mdl-cell--12-col" 
+					 	  th:if="${!anamnese.medicamento and #strings.length(anamnese.patologiasComentario)==0}">					 	 
+					 		Não há informações sobre a categoria!
+					</div>
+					 
+					<div class="sn-attribute mdl-cell mdl-cell--12-col" th:if='${#strings.length(anamnese.patologiasComentario)!=0}'>
 						<div class="sn-attribute__title ">Patologias:</div>
 						<div class="sn-attribute__value">
 							<label th:text="${anamnese.patologiasComentario}">patologias Comentario</label>	
@@ -138,11 +166,13 @@
 					<div class="sn-attribute__value mdl-cell mdl-cell--6-col" th:if="${anamnese.medicamento}">
 						<div class="sn-attribute__title ">Comentário:</div>
 						<label th:text="${anamnese.medicamentoComentario}">Comentário</label>
-					</div>
-										
-					
-					<div class="sn-form__hdivider"></div>					
-					<h3 class="mdl-cell mdl-cell--12-col">Avaliação Clínica</h3>
+					</div>             
+              </div>
+              
+              
+              
+              <div class="sn-card-top mdl-cell mdl-cell--12-col sn-card sn-padding--48 mdl-color--white mdl-grid">
+					<h5 class="mdl-cell mdl-cell--12-col">Avaliação Clínica</h5>
 					
 					<div class="sn-attribute mdl-cell mdl-cell--6-col">
 						<div class="sn-attribute__title ">Apetite:</div>
@@ -283,10 +313,15 @@
 						<div class="sn-attribute__title ">Comentário:</div>
 						<label th:text="${anamnese.constipacaoComentario}">Comentário</label>
 					</div>
-					
-					
-					<div class="sn-form__hdivider"></div>					
-					<h3 class="mdl-cell mdl-cell--12-col">Hábitos Alimentares</h3>
+              </div>
+              
+              
+              <div class="sn-card-top mdl-cell mdl-cell--12-col sn-card sn-padding--48 mdl-color--white mdl-grid">
+					<h5 class="mdl-cell mdl-cell--12-col">Hábitos Alimentares</h5>
+					 <div class="sn-attribute__value mdl-cell mdl-cell--12-col" 
+					 	  th:if="${!anamnese.alergia and !anamnese.intolerancia}">				 	  
+					 		Não há informações sobre a categoria!
+					 </div>
 
 					<div class="sn-attribute mdl-cell mdl-cell--6-col" th:if="${anamnese.alergia}">
 						<label 
@@ -312,27 +347,33 @@
 					<div class="sn-attribute__value mdl-cell mdl-cell--6-col" th:if="${anamnese.intolerancia}">
 						<div class="sn-attribute__title ">Comentário:</div>
 						<label th:text="${anamnese.intoleranciaComentario}">Comentário</label>
-					</div>
-				</div>
+					</div>                    
 
-			</div>			
+              </div>
+              
+              
+              
+      </div>
 
-		</div>
+      <!-- Célula de informações do paciente -->
 
-		<div class="mdl-cell
-								mdl-cell--3-col-desktop">
+      <div class="mdl-cell
+              mdl-cell--3-col-desktop
+              mdl-cell--8-col-tablet
+              mdl-cell--4-col-phone">
 
-			<div class="sn-card sn-padding--48">
-				<div class="mdl-layout-title">Informações</div>
-			</div>
+              <div class="sn-card sn-padding--48">
+                      <div class="mdl-layout-title">Informações do Paciente</div>
+              </div>
 
-		</div>
-
+      </div>
+      
+      <div id="modal-exclusao">
+		
 	</div>
-	
-	<div id="modal-exclusao">
-		<label>Operação irreversível</label>
-	</div>
+
+</div>
+
 	
 </section>
 
