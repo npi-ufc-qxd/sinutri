@@ -34,7 +34,8 @@
 			<div class="mdl-cell mdl-cell--7-col-desktop mdl-cell--1-offset-desktop sn-card sn-padding--48">
 				<form id="form-antropometria" action="#" th:action="@{${'/Paciente/'+avaliacaoAntropometrica.paciente.id+'/Antropometria/+avaliacaoAntropometrica+/Editar/'}}" class="sn-form" th:object="${avaliacaoAntropometrica}" th:method="post" enctype="multipart/form-data">
 					<div class="mdl-grid">	
-						<div class="sn-textfield mdl-cell mdl-cell--6-col">
+					
+						<div class="sn-textfield mdl-cell mdl-cell--12-col">
 							<div class="mdl-layout-title">
 								<label>Editar Avaliação Antropométrica</label> 
 							</div>
@@ -185,7 +186,7 @@
 							<input type="number" min="0"  max="999999" th:field="*{bracoContraidoEsquerdo}" class="sn-textfield__input" step="0.01"/>
 						</div>
 						
-						<div class="sn-textfield mdl-cell mdl-cell--6-col">
+						<div class="sn-textfield mdl-cell mdl-cell--12-col">
 							<h5>DIÂMETROS ÓSSEOS</h5>
 						</div>
 						
