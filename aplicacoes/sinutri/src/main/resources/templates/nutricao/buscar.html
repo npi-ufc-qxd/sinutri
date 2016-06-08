@@ -45,7 +45,8 @@
 
 			</div>
 
-			<ul class="demo-list-two mdl-list mdl-color--grey-100">
+			<ul class="demo-list-two mdl-list">
+			
 				<li class="mdl-list__item mdl-list__item--two-line">
 					<span class="mdl-list__item-primary-content">
 						<i class="material-icons mdl-list__item-avatar">person</i>
@@ -57,23 +58,15 @@
 					</span>
 				</li>
 				
-				<li class="mdl-list__item mdl-list__item--two-line">
-					<span class="mdl-list__item-primary-content">
-						<i class="material-icons mdl-list__item-avatar">person</i>
-						<span>Felipe Pinho</span>
-						<span class="mdl-list__item-sub-title">felipe76857685@gmail.com</span>
-					</span>
-					<span class="mdl-list__item-secondary-content">
-						<a class="mdl-list__item-secondary-action mdl-button mdl-button--accent mdl-js-button mdl-js-ripple-effect" href="#">Informações</a>
-					</span>
-				</li>
 			</ul>
 			
 		</div>
 	</div>
 </section>
 
-<script type="text/javascript" th:src="@{/js/buscar.js}"></script>
-<script type="text/javascript" th:src="@{http://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js}"></script>
+<section layout:fragment="js">
+	<script type="text/javascript" th:src="@{/js/buscar.js}"></script>
+	<script type="text/javascript" th:src="@{http://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js}"></script>
+</section>
 
 </html>
