@@ -6,21 +6,13 @@
 
 <head>
 	<title>Sinutri | Detalhes</title>
-	<style type="text/css">
-
-		.sn-fab {
-			position: absolute;
-			right: 26px;
-			bottom: -26px;
-		}
-
-	</style>
+	
 </head>
 <section layout:fragment="conteudo">
+ 
+	<div class="mdl-grid">
 
-<div class="mdl-grid">
-
-      <div class="
+    	<div class="
               mdl-cell
               mdl-cell--7-col-desktop mdl-cell--1-offset-desktop
               mdl-cell--8-col-tablet
@@ -34,7 +26,7 @@
 
                       <fabgroup class="sn-fab--bottom-right">
 
-                              <a th:href="@{${'/Paciente/'+prescricao.paciente.id+'/Prescricao/'+ prescricao.id +'/Excluir/'}}" class="sn-fab sn-fab--hide mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-js-ripple-effect mdl-color--red-700">
+                              <a id="excluir" th:href="@{${'/Paciente/'+prescricao.paciente.id+'/Prescricao/'+ prescricao.id +'/Excluir/'}}" class="sn-fab sn-fab--hide mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-js-ripple-effect mdl-color--red-700">
                                       <i class="material-icons mdl-color-text--white">delete</i>
                               </a>
 
@@ -74,18 +66,13 @@
 					</div>		
 
               </div>
-
-      </div>
-
-      
-
+		</div>
 	</div>
 
-	
 	<div id="modal-exclusao">
-		<label> Deseja mesmo excluir a prescrição?</label>
-	</div>
-	
+		
+	</div>  
+		
 </section>
 
 
@@ -93,20 +80,20 @@
 	<section layout:fragment="js"> 
 		<script type="text/javascript">
 		
-		$( "#excluir" ).clic"src/main/resources/templates/prescricao/detalhes.html"k(function(event) {
+		$( "#excluir" ).click(function(event) {
 		          var dialog = sn_base.doRegistryDialog({
 		              title: "Operação irreversível",
 		              dialog: "#modal-exclusao",
 		              buttons: [
 		                      {
-		                         label: "Sim",
+		                         label: "Remover",
 		                         attrs: {href: $(this).attr("href")},
 		                         action: function() {
 		                             dialog.close();
 		                         }
 		                      },
 		                      {
-		                          label: "Nao",
+		                          label: "Cancelar",
 		                          action: function() {
 		                              dialog.close();
 		                          }
