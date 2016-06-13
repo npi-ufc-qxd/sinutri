@@ -1,13 +1,6 @@
 package br.ufc.quixada.npi.sinutri.controller;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Comparator;
-import java.util.Date;
-import java.util.Iterator;
-
 import javax.inject.Inject;
-import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -18,7 +11,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import br.ufc.quixada.npi.sinutri.model.InqueritoAlimentar;
@@ -135,11 +127,12 @@ public class PacienteController {
 	//Recordatorio	
 	@RequestMapping(value = "/{idPaciente}/Recordatorio", method = RequestMethod.GET)
     public String formAdicionarRecordatorio( @PathVariable("idPaciente") Long idPaciente, Model model ) {		
-        System.out.println("aksjdhalskdh");
+        
 		Paciente paciente = pacienteService.buscarPacientePorId(idPaciente);	        	        
-        if(paciente==null){
+        if( paciente == null ){
         	return "redirect:/Nutricao/buscar";
 	    }	        
+        
         model.addAttribute("paciente", paciente);
         model.addAttribute("recordatorio", new Recordatorio());
         
@@ -149,7 +142,6 @@ public class PacienteController {
     @RequestMapping(value = "/{idPaciente}/Recordatorio", method = RequestMethod.POST)
     public String adicionarRecordatorio( @ModelAttribute("recordatorio") Recordatorio recordatorio,
             @PathVariable("idPaciente") Long idPaciente, Model model ) {
-    	
     	Paciente paciente = pacienteService.buscarPacientePorId(idPaciente);
     	Servidor nutricionista = pessoaService.buscarServidorPorCpf(getCpfPessoaLogada());
     	
@@ -160,7 +152,7 @@ public class PacienteController {
         return "redirect:/Paciente/" + idPaciente + "/Recordatorio/" + recordatorio.getId();
     }	
 	
-	@RequestMapping(value = "/{idPaciente}/Recordatorio/{idRecordatorio}/Refeicao/{idRefeicao}/Editar/", method = RequestMethod.GET)
+	@RequestMapping(value = "/{idPaciente}/Recordatorio/{idRecordatorio}/Refeicao/{idRefeicao}/Editar", method = RequestMethod.GET)
 	public String formEditarRecordatorio(@PathVariable("idPaciente") Long idPaciente, 
 			@PathVariable("idRecordatorio") Long idRecordatorio, 
 			Model model){
@@ -176,7 +168,7 @@ public class PacienteController {
 		return "recordatorio/editar-recordatorio";
 	}
 	
-	@RequestMapping(value = "/{idPaciente}/Recordatorio/{idRecordatorio}/Refeicao/{idRefeicao}/Editar/", method = RequestMethod.POST)
+	@RequestMapping(value = "/{idPaciente}/Recordatorio/{idRecordatorio}/Refeicao/{idRefeicao}/Editar", method = RequestMethod.POST)
 	public String editarRecordatorio(@Valid @ModelAttribute("recordatorio") Recordatorio recordatorio,
 			@PathVariable("idPaciente") Long idPaciente,BindingResult result, Model model){
 		
@@ -190,7 +182,7 @@ public class PacienteController {
 		return "redirect:/Paciente/" + idPaciente + "/Recordatorio/" + recordatorio.getId();
 	}
 	
-	@RequestMapping(value = "/{idPaciente}/Recordatorio/{idRecordatorio}/Excluir", method = RequestMethod.POST)
+	@RequestMapping(value = "/{idPaciente}/Recordatorio/{idRecordatorio}/Excluir", method = RequestMethod.GET)
 	public String excluirRecordatorio(@PathVariable("idPaciente") Long idPaciente, 
 			@PathVariable("idRecordatorio") Long idRecordatorio){
 		
@@ -199,10 +191,10 @@ public class PacienteController {
 			this.consultaService.excluirRecordatorio(recordatorio);
 		}
 		
-		return "redirect:/Paciente/" + idPaciente;
+		return "redirect:/Paciente/" + idPaciente + "/Recordatorio";
 	}	
 	
-	@RequestMapping(value = "/{idPaciente}/Recordatorio/{idRecordatorio}/", method = RequestMethod.GET)
+	@RequestMapping(value = "/{idPaciente}/Recordatorio/{idRecordatorio}", method = RequestMethod.GET)
 	public String visulizarRecordatorio(@PathVariable("idPaciente") Long idPaciente, 
 			@PathVariable("idRecordatorio") Long idRecordatorio, 
 			Model model){
@@ -210,7 +202,7 @@ public class PacienteController {
 		Recordatorio recordatorio = this.consultaService.buscarRecordatorio(idRecordatorio);
 		
 		Paciente paciente = pacienteService.buscarPacientePorId(idPaciente);
-		if(paciente==null){
+		if(paciente == null){
 			return "redirect:/Nutricao/buscar";
         }
 		
@@ -225,7 +217,7 @@ public class PacienteController {
 		return Refeicao.values();
 	}
 	
-	@RequestMapping(value = "/{idPaciente}/Recordatorio/{idRecordatorio}/Refeicao/{idRefeicao}/Excluir", method = RequestMethod.POST)
+	@RequestMapping(value = "/{idPaciente}/Recordatorio/{idRecordatorio}/Refeicao/{idRefeicao}/Excluir", method = RequestMethod.GET)
 	public String excluirRefeicaoRecordatorio(@PathVariable("idPaciente") Long idPaciente, 
 			@PathVariable("idRecordatorio") Long idRecordatorio,
 			@PathVariable("idRefeicao") Long idRefeicao){

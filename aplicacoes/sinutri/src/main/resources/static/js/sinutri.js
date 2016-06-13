@@ -196,6 +196,12 @@ var sn_base = function() {
 	   	});
 	}
 	
+	var setupFab = function() {
+		$(".sn-float--launcher").click(function() {
+			$(".sn-float--launcher").parent().find(".sn-fab").toggleClass("sn-fab--hide");
+		});
+	}
+
 	return {
 
 		doInit : function() {
@@ -206,7 +212,9 @@ var sn_base = function() {
 
 			tryExecute(toggleDrawer, "sn_base", "Toggle drawer done!", "Toggle drawer error!");
 
-			tryExecute(showContent, "sn_base", "Show content done!", "Show content error!");			
+			tryExecute(showContent, "sn_base", "Show content done!", "Show content error!");	
+
+			tryExecute(setupFab, "sn_base", "Setup Fab done!", "Setup Fab error!");	
 
 		}, 
 
@@ -243,16 +251,21 @@ var sn_base = function() {
 			dialog.find(".mdl-card__menu-close").click(function() { dialog.get(0).close(); });
 			dialog.find(".mdl-dialog__title").text(setts.title);
 
-			for(var i = 0; i < setts.buttons.length; i++) {
-				var bs = setts.buttons[i];
-				button = $.parseHTML("<button class=\"mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--primary\">" + bs.label + "</button>");
-				$(button).click(bs.action);
-				dialog.find(".mdl-dialog__actions").append(button);
-				for(k in bs.attrs)
-					$(button).attr(k, bs.attrs[k]);		
+			if(setts.buttons !== undefined)
+				for(var i = 0; i < setts.buttons.length; i++) {
+					
+					var index = parseInt(JSON.stringify(i));
+					//var bs = setts.buttons[i];
+					var bs = setts.buttons[index];
+					var button = $.parseHTML("<a class=\"mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--primary\">" + bs.label + "</a>");
+					//$(button).click(bs.action);
+					$(button).click(bs.action);
+					dialog.find(".mdl-dialog__actions").append(button);
+					for(k in bs.attrs)
+						$(button).attr(k, bs.attrs[k]);		
 
+				}
 
-			}
 
 			if (!dialog.get(0).showModal) {
 				dialogPolyfill.registerDialog(dialog.get(0));

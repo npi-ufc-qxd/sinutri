@@ -42,6 +42,7 @@ $(function()
 		        		  var index 	 = $(dialog).find("#sn-refeicao-item-index").val();
 		        		  var hora 		 = $(dialog).find("#sn-refeicao-hora").val();
 						  var descricao  = $(dialog).find("#sn-refeicao-descricao").val();
+						  var textdescricao  = $(dialog).find("#sn-refeicao-descricao option:selected").text();
 						  var itens      = $(dialog).find("#sn-refeicao-itens").val();
 						  var observacao = $(dialog).find("#sn-refeicao-observacao").val();
 						  
@@ -61,7 +62,7 @@ $(function()
 					      var data = {
 								  sortValue: d.getTime(),
 								  ".sn-refeicao-hora": 			   {text:  hora},
-								  ".sn-refeicao-descricao":		   {text:  descricao},
+								  ".sn-refeicao-descricao":		   {text:  textdescricao},
 								  ".sn-refeicao-itens": 		   {text:  itens},
 								  ".sn-refeicao-observacao": 	   {text:  observacao},
 								  ".sn-refeicao-input-hora": 	   {value: hora},

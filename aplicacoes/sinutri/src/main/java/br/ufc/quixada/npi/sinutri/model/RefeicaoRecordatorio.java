@@ -22,7 +22,6 @@ public class RefeicaoRecordatorio {
 	
 	@NotNull
 	@Temporal(TemporalType.TIME)
-	@DateTimeFormat(pattern="HH:mm")
 	private Date hora;
 	
 	@Enumerated(EnumType.STRING)
