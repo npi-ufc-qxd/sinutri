@@ -78,10 +78,10 @@
 
                       <h5 class="mdl-cell mdl-cell--12-col">Hábitos de Vida</h5>
                       
-                      <div class="sn-attribute__value mdl-cell mdl-cell--12-col" 
-					 	  th:if="${!anamnese.atividadeFisica and !anamnese.dormeBem and !anamnese.bebidaAlcoolica}">					 	 
-					 		Não há informações sobre a categoria!
-					 </div>
+<!--                       <div class="sn-attribute__value mdl-cell mdl-cell--12-col"  -->
+<!-- 					 	  th:if="${!anamnese.atividadeFisica and !anamnese.dormeBem and !anamnese.bebidaAlcoolica}">					 	  -->
+<!-- 					 		Não há informações sobre a categoria! -->
+<!-- 					 </div> -->
 					
 					<div class="sn-attribute mdl-cell mdl-cell--6-col" th:if="${anamnese.atividadeFisica}">
 						<label 
@@ -151,7 +151,12 @@
 					<div class="sn-attribute mdl-cell mdl-cell--12-col" th:if='${#strings.length(anamnese.patologiasComentario)!=0}'>
 						<div class="sn-attribute__title ">Patologias:</div>
 						<div class="sn-attribute__value">
-							<label th:text="${anamnese.patologiasComentario}">patologias Comentario</label>	
+						<label th:text=
+								"${#strings.length(anamnese.patologiasComentario)!=0 ? 
+								 anamnese.patologiasComentario:
+								'Não há comentário!'}">
+								Comentário
+						</label>
 						</div>			
 					</div>						
 					
@@ -174,10 +179,16 @@
               <div class="sn-card-top mdl-cell mdl-cell--12-col sn-card sn-padding--48 mdl-color--white mdl-grid">
 					<h5 class="mdl-cell mdl-cell--12-col">Avaliação Clínica</h5>
 					
+					<div class="sn-attribute__value mdl-cell mdl-cell--12-col" 
+					 	  th:if="${!anamnese.medicamento and #strings.length(anamnese.patologiasComentario)==0}">					 	 
+					 		Não há informações sobre a categoria!
+					</div>
+					
 					<div class="sn-attribute mdl-cell mdl-cell--6-col">
 						<div class="sn-attribute__title ">Apetite:</div>
 						<div class="sn-attribute__value">
-							<label th:text="${anamnese.apetite}">Apetite</label>	
+							<label th:text="${anamnese.apetite}">Apetite</label>
+							<label th:text=	"${anamnese.apetite "> Comentário </label>	
 						</div>						
 					</div>
 					<div class="sn-attribute__value  mdl-cell mdl-cell--6-col">
