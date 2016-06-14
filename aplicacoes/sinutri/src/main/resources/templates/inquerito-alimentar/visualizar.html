@@ -25,11 +25,11 @@
 
                       <fabgroup class="sn-fab--bottom-right">
 
-                              <a id="excluir" th:href="@{${'/Paciente/'+ inqueritoAlimentar.paciente.id +'/InqueritoAlimentar/'+inqueritoAlimentar.id+'/Excluir/'}}" class="sn-fab sn-fab--hide mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-js-ripple-effect mdl-color--red-700">
+                              <a id="excluir" th:href="@{${'/Paciente/'+ inqueritoAlimentar.paciente.id +'/InqueritoAlimentar/'+inqueritoAlimentar.id+'/Excluir'}}" class="sn-fab sn-fab--hide mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-js-ripple-effect mdl-color--red-700">
                                       <i class="material-icons mdl-color-text--white">delete</i>
                               </a>
 
-                              <a th:href="@{${'/Paciente/'+ inqueritoAlimentar.paciente.id +'/InqueritoAlimentar/'+inqueritoAlimentar.id+'/Editar/'}}" class="sn-fab sn-fab--hide mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-js-ripple-effect mdl-color--purple">
+                              <a th:href="@{${'/Paciente/'+ inqueritoAlimentar.paciente.id +'/InqueritoAlimentar/'+inqueritoAlimentar.id+'/Editar'}}" class="sn-fab sn-fab--hide mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-js-ripple-effect mdl-color--purple">
                                       <i class="material-icons mdl-color-text--white">edit</i>
                               </a>
 
@@ -273,18 +273,18 @@
 	
 		$( "#excluir" ).click(function(event) {
 	        var dialog = sn_base.doRegistryDialog({
-	            title: "Operação irreversível", 
+	            title: "Você realmente deseja excluir este inquérito alimentar?", 
 	            dialog: "#modal-exclusao", 
 	            buttons: [
 	                    {
-	                       label: "Excluir",
+	                       label: "SIM",
 	                       attrs: {href: $(this).attr("href")}, 
 	                       action: function() {
 	                           dialog.close();
 	                       }
 	                    }, 
 	                    {
-	                        label: "Cancelar",
+	                        label: "NÃO",
 	                        action: function() {
 	                            dialog.close();
 	                        }

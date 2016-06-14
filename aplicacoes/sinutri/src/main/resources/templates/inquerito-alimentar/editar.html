@@ -10,19 +10,17 @@
 	</head>
 	<section layout:fragment="conteudo">
 		<div class="mdl-grid">
-			<div class="mdl-cell mdl-cell--7-col-desktop mdl-cell--1-offset-desktop sn-card sn-padding--48">
-				<form id="form-inquerito" class="sn-form" action="#" th:object="${inqueritoAlimentar}" th:method="post" th:action="@{${'/Paciente/'+ inqueritoAlimentar.paciente.id +'/InqueritoAlimentar/'+inqueritoAlimentar.id+'/Editar/'}}">
-					<div class="mdl-grid">
-						
-						<div class="sn-textfield mdl-cell mdl-cell--8-col">
-							<div class="mdl-layout-title">Cadastrar Inquérito Alimentar</div>
-						</div>
-						
-						<input type="hidden" id="id" th:field="*{id}"/>
-						<input type="hidden" th:field="*{atualizadoEm}" />
-                    	<input type="hidden" th:field="*{paciente.id}" />
-                    	<input type="hidden" th:field="*{nutricionista.id}" />
-							
+				<form id="form-inquerito" class="sn-form mdl-cell mdl-cell--7-col-desktop mdl-cell--1-offset-desktop mdl-cell--8-col-tablet mdl-cell--4-col-phone mdl-grid mdl-grid--no-spacing sn-main-card" action="#" th:object="${inqueritoAlimentar}" th:method="post" th:action="@{${'/Paciente/'+ inqueritoAlimentar.paciente.id +'/InqueritoAlimentar/'+inqueritoAlimentar.id+'/Editar/'}}">
+					<div class="mdl-cell mdl-cell--12-col sn-card sn-padding--48 mdl-color--teal">
+               			<div class="mdl-layout-title mdl-color-text--white">Editar Inquérito Alimentar</div>
+       				</div>
+					
+					<input type="hidden" id="id" th:field="*{id}"/>
+					<input type="hidden" th:field="*{atualizadoEm}" />
+                   	<input type="hidden" th:field="*{paciente.id}" />
+                   	<input type="hidden" th:field="*{nutricionista.id}" />
+				
+					<div class="sn-card-top mdl-cell mdl-cell--12-col sn-card sn-padding--48 mdl-color--white mdl-grid">
 						<div class="sn-textfield mdl-cell mdl-cell--6-col">
 							<label class="sn-textfield__label" for="criadoEm">Data de criação</label>
 							<label class="sn-textfield__messages sn-error-text" for="criadoEm" th:if="${#fields.hasErrors('criadoEm')}" th:errors="*{criadoEm}">Title error message</label>
@@ -436,11 +434,10 @@
 						
 						<div class="sn-form-actions">
 							<input type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect" value="Editar" />
-							<a id="cancelar" class="mdl-button mdl-js-button mdl-button--colored mdl-js-ripple-effect" th:href="@{${'/Paciente/'+ inqueritoAlimentar.paciente.id +'/InqueritoAlimentar/'+inqueritoAlimentar.id+'/'}}">Cancelar</a>
+							<a id="cancelar" class="mdl-button mdl-js-button mdl-button--colored mdl-js-ripple-effect" th:href="@{${'/Paciente/'+ inqueritoAlimentar.paciente.id +'/InqueritoAlimentar/'+inqueritoAlimentar.id}}">Cancelar</a>
 						</div>
 					</div>
 				</form>
-			</div>
 			<div class="mdl-cell mdl-cell--3-col-desktop">
 				<div class="sn-card sn-padding--48">
 					<div class="mdl-layout-title">Informações</div>
@@ -459,18 +456,18 @@
 	    		$( "#cancelar" ).click(function(event) {
 	    	   		if(Cookies.get("formulario-alterado")){
 		    	   		var dialog = sn_base.doRegistryDialog({
-		               		title: "Descartar as alterações?", 
+		               		title: "Você realmente deseja descartar as alterações?", 
 		               		dialog: "#modal-cancelar", 
 		               		buttons: [
 		                    		   {
-		                          		label: "Sim",
+		                          		label: "SIM",
 		                          		attrs: {href: $(this).attr("href")}, 
 		                          		action: function() {
 		                              	dialog.close();
 		                          		}
 		                      		 }, 
 		                      	 {
-		                           	label: "Não",
+		                           	label: "NÃO",
 		                           	action: function() {
 		                               dialog.close();
 		                           	}
