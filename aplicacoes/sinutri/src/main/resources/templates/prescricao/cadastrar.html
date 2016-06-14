@@ -11,24 +11,30 @@
 	
 </head>
 	<section layout:fragment="conteudo">
-		<div class="mdl-layout__content">
+		
 		<div class="mdl-grid">
-			<div class="mdl-cell
-					mdl-cell--7-col-desktop mdl-cell--1-offset-desktop
-					sn-card sn-padding--48">
-	   				
-				<form id="form-prescricao" action="#" th:object="${prescricao}" th:action="@{${'/Paciente/'+prescricao.paciente.id+'/Prescricao'}}" th:method="post" class="sn-form">
+			
+			<form  
+				class="sn-form mdl-cell
+	            mdl-cell--7-col-desktop mdl-cell--1-offset-desktop
+	            mdl-cell--8-col-tablet
+	            mdl-cell--4-col-phone
+	            mdl-grid mdl-grid--no-spacing
+	            sn-main-card" id="form-prescricao" action="#" th:object="${prescricao}" 
+	            th:action="@{${'/Paciente/'+prescricao.paciente.id+'/Prescricao'}}" th:method="post">
 					
 					<input type="hidden" id="id" th:field="*{idPrescricao}"/>
 					<input type="hidden" id="id" th:field="*{paciente.id}"/>
 					<input type="hidden" id="id" th:field="*{nutricionista.id}"/>
 					<input type="hidden" id="id" th:field="*{atualizadoEm}"/>
 					
-					<div class="mdl-grid"> 					
+										
 						
-						<div class="sn-textfield mdl-cell mdl-cell--8-col">
- 							<div class="mdl-layout-title">Prescrição</div>
+						<div class="mdl-cell mdl-cell--12-col sn-card sn-padding--48 mdl-color--teal">
+ 							<div class="mdl-layout-title mdl-color-text--white">Cadastrando nova prescrição</div>
 						</div>	
+						
+						<div class="sn-card-top mdl-cell mdl-cell--12-col sn-card sn-padding--48 mdl-color--white mdl-grid">
 						
 						<div class="sn-textfield mdl-cell mdl-cell--12-col">	
 							<label class="sn-textfield__label" for="inputTextDescricao">Descrição</label>
@@ -58,13 +64,10 @@
 							<a id="cancelar" th:href="@{${'/Paciente/'+prescricao.paciente.id}}" type="button" class="mdl-button mdl-js-button mdl-button--colored mdl-js-ripple-effect" 
 								 data-upgraded=",MaterialButton,MaterialRipple"> Cancelar </a> 
 						</div>
-						
-						
 					</div>
+						
 				</form>
 			</div>
-			</div>   
-		</div>
 		
 		<div id="modal-cancelar">
 		
