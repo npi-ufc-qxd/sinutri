@@ -10,78 +10,73 @@
 
 <body>
 	<section layout:fragment="conteudo">
-	
+			
 		<div class="mdl-grid">
 	
-	      <div class="mdl-cell mdl-cell--7-col-desktop mdl-cell--1-offset-desktop mdl-cell--8-col-tablet mdl-cell--4-col-phone mdl-grid mdl-grid--no-spacing sn-main-card">
+			<div class="mdl-cell mdl-cell--7-col-desktop mdl-cell--1-offset-desktop mdl-cell--8-col-tablet mdl-cell--4-col-phone mdl-grid mdl-grid--no-spacing sn-main-card">
 	
-	              <div class="mdl-cell mdl-cell--12-col sn-card sn-padding--48 mdl-color--teal">
-	
-	                      <div class="mdl-layout-title mdl-color-text--white">Paciente</div>
-	
-	                      <fabgroup class="sn-fab--bottom-right">
-	
-	                              <a th:href="@{'/Paciente/' + ${pessoa.id + '/Excluir/'}}" class="sn-fab sn-fab--hide mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-js-ripple-effect mdl-color--red-700">
-	                                      <i class="material-icons mdl-color-text--white">delete</i>
-	                              </a>
-	
-	                              <a th:href="@{'/Paciente/' + ${pessoa.id + '/Editar/'}}" class="sn-fab sn-fab--hide mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-js-ripple-effect mdl-color--purple">
-	                                      <i class="material-icons mdl-color-text--white">edit</i>
-	                              </a>
-	
-	                              <button class="sn-float--launcher mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored">
-	                                      <i class="material-icons mdl-color-text--white">more_horiz</i>
-	                              </button>
-	                      </fabgroup>
-	
-	              </div>
-	
-	              <div class="sn-card-top mdl-cell mdl-cell--12-col sn-card sn-padding--48 mdl-color--white mdl-grid">
-	
-	                     <div class="sn-attribute mdl-cell mdl-cell--12-col">
-							<div class="sn-attribute__title">Nome</div>
-							<div class="sn-attribute__value" th:text="${pessoa.nome}"></div>
-						</div>
-						
-						<div class="sn-attribute mdl-cell mdl-cell--6-col">
-							<div class="sn-attribute__title">Sexo</div>
-							<div class="sn-attribute__value" th:text="${pessoa.sexo}"></div>
-						</div>
-						
-						<div class="sn-attribute mdl-cell mdl-cell--6-col">
-							<div class="sn-attribute__title">Idade</div>
-							<div class="sn-attribute__value" th:text="${pessoa.getIdade()}"></div>
-						</div>
-						
-						<div class="sn-attribute mdl-cell mdl-cell--12-col">
-							<div class="sn-attribute__title">CPF</div>
-							<div class="sn-attribute__value" th:text="${pessoa.cpf}"></div>
-						</div>
+            	<div class="mdl-cell mdl-cell--12-col sn-card sn-padding--48 mdl-color--teal">
 
-						<div class="sn-attribute mdl-cell mdl-cell--6-col">
-							<div class="sn-attribute__title">Telefone</div>
-							<div class="sn-attribute__value" th:text="${pessoa.telefone}"></div>
-						</div>
+                     <div class="mdl-layout-title mdl-color-text--white">Paciente</div>
+
+                     <fabgroup class="sn-fab--bottom-right">
+
+						<a th:href="@{'/Paciente/' + ${pessoa.id + '/Excluir/'}}" class="sn-fab sn-fab--hide mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-js-ripple-effect mdl-color--red-700">
+						        <i class="material-icons mdl-color-text--white">delete</i>
+						</a>
 						
-						<div class="sn-attribute mdl-cell mdl-cell--6-col">
-							<div class="sn-attribute__title">Cargo/Ocupação</div>
-							<div class="sn-attribute__value" th:text="${pessoa.ocupacaoOuCargo}"></div>
-						</div>
+						<a th:href="@{'/Paciente/' + ${pessoa.id + '/Editar/'}}" class="sn-fab sn-fab--hide mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-js-ripple-effect mdl-color--purple">
+						        <i class="material-icons mdl-color-text--white">edit</i>
+						</a>
 						
-						<div class="sn-attribute mdl-cell mdl-cell--12-col">
-							<div class="sn-attribute__title">Email</div>
-							<div class="sn-attribute__value" th:text="${pessoa.email}"></div>
-						</div>
+						<button class="sn-float--launcher mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored">
+						        <i class="material-icons mdl-color-text--white">more_horiz</i>
+						</button>
 						
-						<div class="sn-attribute mdl-cell mdl-cell--6-col" th:if="${pessoa.externo}">
-							<div class="sn-attribute__title">Vínculo</div>
-							<div class="sn-attribute__value" th:text="${pessoa.vinculo}"></div>
-						</div>
+                     </fabgroup>
+
+            	</div>
+            	
+            	<div class="sn-card-top mdl-cell mdl-cell--12-col sn-card sn-padding--48 mdl-color--white">
 	
-	              </div>
-	              
+	            </div>
+            
+            </div>
+            
+            <div class="mdl-cell mdl-cell--3-col-desktop mdl-cell--8-col-tablet mdl-cell--4-col-phone">
+								
+				<div class="sn-card sn-padding--48">
+				
+					<div class="mdl-layout-title">Informações do Paciente</div>
+					
+					<div class="sn-attribute__title">Nome</div>
+					<div class="sn-attribute__value" th:text="${pessoa.nome}"></div>
+					
+					<div class="sn-attribute__title">Sexo</div>
+					<div class="sn-attribute__value" th:text="${pessoa.sexo}"></div>
+					
+					<div class="sn-attribute__title">Idade</div>
+					<div class="sn-attribute__value" th:text="${pessoa.getIdade()}"></div>
+					
+					<div class="sn-attribute__title">CPF</div>
+					<div class="sn-attribute__value" th:text="${pessoa.cpf}"></div>
+					
+					<div class="sn-attribute__title">Telefone</div>
+					<div class="sn-attribute__value" th:text="${pessoa.telefone}"></div>
+					
+					<div class="sn-attribute__title">Cargo/Ocupação</div>
+					<div class="sn-attribute__value" th:text="${pessoa.ocupacaoOuCargo}"></div>
+					
+					<div class="sn-attribute__title">Email</div>
+					<div class="sn-attribute__value" th:text="${pessoa.email}"></div>
+							
+					<div class="sn-attribute__title">Vínculo</div>
+					<div class="sn-attribute__value" th:text="${pessoa.vinculo}"></div>
+					
+				</div>
+
 			</div>
-			
+              
 		</div>
 	
 	</section>	
