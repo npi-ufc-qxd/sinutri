@@ -18,7 +18,7 @@ public interface ConsultaService {
 	
 	void editarAvaliacaoAntropometrica(AvaliacaoAntropometrica antropometria);
 	
-	AvaliacaoAntropometrica buscarAvaliacaoAntropometricaById(Long id);
+	AvaliacaoAntropometrica buscarAvaliacaoAntropometricaPorId(Long id);
 	
 	void excluirAvaliacaoAntropometrica(AvaliacaoAntropometrica antropometria);
 }

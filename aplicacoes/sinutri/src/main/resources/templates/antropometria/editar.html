@@ -32,7 +32,7 @@
 		
 		<div class="mdl-grid">
 			<div class="mdl-cell mdl-cell--7-col-desktop mdl-cell--1-offset-desktop sn-card sn-padding--48">
-				<form id="form-antropometria" action="#" th:action="@{${'/Paciente/'+avaliacaoAntropometrica.paciente.id+'/Antropometria/+avaliacaoAntropometrica+/Editar/'}}" class="sn-form" th:object="${avaliacaoAntropometrica}" th:method="post" enctype="multipart/form-data">
+				<form id="form-antropometria" action="#" th:action="@{${'/Paciente/'+avaliacaoAntropometrica.paciente.id+'/Antropometria/+avaliacaoAntropometrica+/Editar'}}" class="sn-form" th:object="${avaliacaoAntropometrica}" th:method="post" enctype="multipart/form-data">
 					<div class="mdl-grid">	
 					
 						<div class="sn-textfield mdl-cell mdl-cell--12-col">
@@ -285,7 +285,7 @@
 	       	$( "#cancelar" ).click(function(event) {
 	       	   if(Cookies.get("formulario-alterado")){
 		    	   var dialog = sn_base.doRegistryDialog({
-		               title: "Descartar as alterações?", 
+		               title: "Você realmente deseja descartar as alterações?", 
 		               dialog: "#modal-cancelar", 
 		               buttons: [
 		                       {

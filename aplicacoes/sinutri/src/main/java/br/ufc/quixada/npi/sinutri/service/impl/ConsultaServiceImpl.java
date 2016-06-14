@@ -63,7 +63,7 @@ public class ConsultaServiceImpl implements ConsultaService {
 	}
 
 	@Override
-	public AvaliacaoAntropometrica buscarAvaliacaoAntropometricaById(Long id) {
+	public AvaliacaoAntropometrica buscarAvaliacaoAntropometricaPorId(Long id) {
 		return avaliacaoAntropometricaRepository.findOne(id);
 		
 	}
