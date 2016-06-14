@@ -20,7 +20,7 @@ public interface ConsultaService {
 	
 	void editarPrescricao(Prescricao prescricao);
 	
-	Prescricao buscarPrescricaoPorId(Long id);
+	Prescricao buscarPrescricaoPorId(Long idPrescricao);
 	
 	
 }

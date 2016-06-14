@@ -17,9 +17,9 @@
 				sn-card sn-padding--48">
 	  				
 			<div class="mdl-layout-title">Prescrição</div>
-				<form id="form-prescricao" action="#" th:object="${prescricao}" th:method="post" th:action="@{${'/Paciente/'+prescricao.paciente.id+'/Prescricao/'+prescricao.id+'/Editar/'}}">
+				<form id="form-prescricao" action="#" th:object="${prescricao}" th:method="post" th:action="@{${'/Paciente/'+prescricao.paciente.id+'/Prescricao/'+prescricao.idPrescricao+'/Editar'}}">
 	
-					<input type="hidden" id="id" th:field="*{id}"/>
+					<input type="hidden" id="id" th:field="*{idPrescricao}"/>
 					<input type="hidden" id="id" th:field="*{paciente.id}"/>
 					<input type="hidden" id="id" th:field="*{nutricionista.id}"/>
 					<input type="hidden" id="atualizadoEm" th:field="*{atualizadoEm}" />
@@ -28,14 +28,14 @@
 						<label class="sn-textfield__label" for="inputTextDescricao">Descrição</label>
 						<label class="sn-textfield__messages sn-error-text" 
 								th:if="${#fields.hasErrors('descricao')}" th:errors="*{descricao}"> Erro na descrição </label>
-						<input class="sn-textfield__input" type="text" id="inputTextDescricao" th:field="*{descricao}"/>
+						<input class="sn-textfield__input" type="text" id="inputTextDescricao" th:field="*{descricao}" maxlength="255"/>
 					</div>
 									
 					<div class="sn-textfield mdl-cell mdl-cell--12-col">
 						<label class="sn-textfield__label" for="inputTextTexto">Texto</label>
 						<label class="sn-textfield__messages sn-error-text" 
 								th:if="${#fields.hasErrors('texto')}" th:errors="*{texto}"> Erro na descrição </label>
-						<textarea class="sn-textfield__input" rows= "5" id="inputTextTexto" th:field="*{texto}"></textarea>
+						<textarea class="sn-textfield__input" rows= "5" id="inputTextTexto" th:field="*{texto}" maxlength="255"></textarea>
 					</div>
 			
 					<div class="sn-textfield mdl-cell mdl-cell--6-col">
@@ -49,7 +49,7 @@
 					<div class="sn-form-actions">
 						<input type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect" 
 							value="Salvar" data-upgraded=",MaterialButton,MaterialRipple"></input>
-						<a th:href="@{${'/Paciente/'+prescricao.paciente.id+'/'}}" type="button" class="mdl-button mdl-js-button mdl-button--colored mdl-js-ripple-effect" 
+						<a id= "cancelar" th:href="@{${'/Paciente/'+prescricao.paciente.id+'/Prescricao/'+prescricao.idPrescricao}}" type="button" class="mdl-button mdl-js-button mdl-button--colored mdl-js-ripple-effect" 
 								 data-upgraded=",MaterialButton,MaterialRipple"> Cancelar </a> 
 					</div>
 				</form>
@@ -59,6 +59,33 @@
 	<section layout:fragment="js"> 
 		<script type="text/javascript" th:src="@{/js/moment.js}"></script>
 		<script type="text/javascript" th:src="@{/js/material-date-picker.js}"></script>
+		<script type="text/javascript">
+			
+			$( "#cancelar" ).click(function(event) {
+			          var dialog = sn_base.doRegistryDialog({
+			              title: "Você realmente deseja descartar as alterações?",
+			              dialog: "#modal-cancelar",
+			              buttons: [
+			                      {
+			                         label: "SIM",
+			                         attrs: {href: $(this).attr("href")},
+			                         action: function() {
+			                             dialog.close();
+			                         }
+			                      },
+			                      {
+			                          label: "NÃO",
+			                          action: function() {
+			                              dialog.close();
+			                          }
+			                      }
+			              ]
+			              });                     
+			          dialog.showModal();
+			          event.preventDefault();
+			      });
+			
+			</script>
 	</section>
 
 </html>

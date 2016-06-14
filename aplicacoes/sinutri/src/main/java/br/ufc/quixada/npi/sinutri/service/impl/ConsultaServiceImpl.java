@@ -39,8 +39,8 @@ public class ConsultaServiceImpl implements ConsultaService {
 	}
 	
 	@Override
-	public Prescricao buscarPrescricaoPorId(Long id){
-		return prescricaoRepository.findOne(id);
+	public Prescricao buscarPrescricaoPorId(Long idPrescricao){
+		return prescricaoRepository.findOne(idPrescricao);
 	}
 	
 	@Override

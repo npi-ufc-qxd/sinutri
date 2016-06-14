@@ -21,7 +21,7 @@ public class Prescricao {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+	private Long idPrescricao;
 	
 	@Size(max=256, message="A descrição deve ter no máximo 256 caracteres.")
 	private String descricao;
@@ -47,12 +47,12 @@ public class Prescricao {
 		super();
 	}
 
-	public Long getId() {
-		return id;
+	public Long getIdPrescricao() {
+		return idPrescricao;
 	}
 
-	public void setId(Long id) {
-		this.id = id;
+	public void setIdPrescricao(Long idPrescricao) {
+		this.idPrescricao = idPrescricao;
 	}
 
 	public String getDescricao() {
@@ -105,7 +105,8 @@ public class Prescricao {
 
 	@Override
 	public String toString() {
-		return "Prescricao [id=" + id + ", descricao=" + descricao + ", texto=" + texto + ", criadoEm=" + criadoEm
+		return "Prescricao [id=" + idPrescricao
+				+ ", descricao=" + descricao + ", texto=" + texto + ", criadoEm=" + criadoEm
 				+ ", atualizadoEm=" + atualizadoEm + ", nutricionista=" + nutricionista + ", paciente=" + paciente
 				+ "]";
 	}
