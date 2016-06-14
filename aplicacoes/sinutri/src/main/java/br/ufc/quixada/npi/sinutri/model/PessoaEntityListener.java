@@ -1,7 +1,5 @@
 package br.ufc.quixada.npi.sinutri.model;
 
-import javax.persistence.PostLoad;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 

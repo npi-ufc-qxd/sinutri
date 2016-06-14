@@ -30,22 +30,21 @@
 		</div>
 		 -->
 		
-		<div class="mdl-grid">
-			<div class="mdl-cell mdl-cell--7-col-desktop mdl-cell--1-offset-desktop sn-card sn-padding--48">
-				<form id="form-antropometria" action="#" th:action="@{${'/Paciente/'+avaliacaoAntropometrica.paciente.id+'/Antropometria'}}" class="sn-form" th:object="${avaliacaoAntropometrica}" th:method="post" enctype="multipart/form-data">
-					<div class="mdl-grid">
+		<div class="mdl-grid">		
+			
+			<form class="sn-form mdl-cell mdl-cell--7-col-desktop mdl-cell--1-offset-desktop mdl-cell--8-col-tablet mdl-cell--4-col-phone mdl-grid mdl-grid--no-spacing sn-main-card" id="form-antropometria" action="#" th:action="@{${'/Paciente/'+avaliacaoAntropometrica.paciente.id+'/Antropometria'}}" th:object="${avaliacaoAntropometrica}" th:method="post" enctype="multipart/form-data">
 					
-						<div class="sn-textfield mdl-cell mdl-cell--12-col">
-							<div class="mdl-layout-title">
-								<label>Nova Avaliação Antropométrica</label>
-							</div>
-						</div>
-						
-						<input type="hidden" th:field="*{id}" />
-						<input type="hidden" th:field="*{atualizadoEm}" />
-						<input type="hidden" th:field="*{paciente.id}" />
-						<input type="hidden" th:field="*{nutricionista.id}" />
-						
+					<div class="mdl-cell mdl-cell--12-col sn-card sn-padding--48 mdl-color--teal">
+              				<div class="mdl-layout-title mdl-color-text--white">Adicionar Avaliação Antropométrica</div>
+       				</div>
+					
+					<input type="hidden" th:field="*{id}" />
+					<input type="hidden" th:field="*{atualizadoEm}" />
+					<input type="hidden" th:field="*{paciente.id}" />
+					<input type="hidden" th:field="*{nutricionista.id}" />
+					
+					<div class="sn-card sn-padding--48 sn-fill--width mdl-grid">
+					
 						<div class="sn-textfield mdl-cell mdl-cell--12-col">
 							<h5>GERAL</h5>
 						</div>
@@ -103,7 +102,10 @@
 							<label class="sn-textfield__messages sn-error-text" th:for="${#ids.next('antebraco')}"  th:if="${#fields.hasErrors('antebraco')}" th:errors="*{antebraco}">Antebraco inválido</label>
 							<input type="number" min="0"  max="999999" th:field="*{antebraco}" class="sn-textfield__input" step="0.01"/>
 						</div>
-						
+					</div>
+					
+					<div class="sn-card sn-padding--48 sn-fill--width mdl-grid">
+					
 						<div class="sn-textfield mdl-cell mdl-cell--12-col">
 							<h5>CIRCUNFERÊNCIAS</h5>
 						</div>
@@ -185,7 +187,9 @@
 							<label class="sn-textfield__messages sn-error-text" th:for="${#ids.next('bracoContraidoEsquerdo')}" th:if="${#fields.hasErrors('bracoContraidoEsquerdo')}" th:errors="*{bracoContraidoEsquerdo}">Braço contraído esuqerdo inválido</label>
 							<input type="number" min="0"  max="999999" th:field="*{bracoContraidoEsquerdo}" class="sn-textfield__input" step="0.01"/>
 						</div>
-						
+					</div>
+					
+					<div class="sn-card sn-padding--48 sn-fill--width mdl-grid">
 						<div class="sn-textfield mdl-cell mdl-cell--12-col">
 							<h5>DIÂMETROS ÓSSEOS</h5>
 						</div>
@@ -201,7 +205,9 @@
 							<label class="sn-textfield__messages sn-error-text" th:for="${#ids.next('diametroFemur')}" th:if="${#fields.hasErrors('diametroFemur')}" th:errors="*{diametroFemur}">Diametro do fêmur inválido</label>
 							<input type="number" min="0"  max="999999" th:field="*{diametroFemur}" class="sn-textfield__input" step="0.01"/>
 						</div>
-						
+					</div>
+					
+					<div class="sn-card sn-padding--48 sn-fill--width mdl-grid">				
 						<div class="sn-textfield mdl-cell mdl-cell--12-col">
 							<h5>COMPOSIÇÃO CORPORAL</h5>
 						</div>
@@ -265,9 +271,8 @@
 							<a id="cancelar" th:href="@{${'/Paciente/'+avaliacaoAntropometrica.paciente.id+'/'}}" href="#" class="mdl-button mdl-js-button mdl-button--colored mdl-js-ripple-effect">Cancelar</a>					
 						</div>
 					</div>	
-				</form>
-			</div>
-			
+			</form>
+				
 			<div class="mdl-cell mdl-cell--3-col-desktop">
 				<div class="sn-card sn-padding--48">
 					<div class="mdl-layout-title">Informações</div>

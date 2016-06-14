@@ -170,7 +170,7 @@ public class PacienteController {
 		AvaliacaoAntropometrica avaliacaoAntropometrica = consultaService.buscarAvaliacaoAntropometricaPorId(idAntropometria);
 		if(isInvalidoAntropometria(avaliacaoAntropometrica)){
 			redirectAttributes.addFlashAttribute("erro", "Avaliação Antropométrica não encontrada.");
-			return "redirect:/Nutricao/Buscar";
+			return "redirect:/Paciente/"+paciente.getId();
 		}
 		model.addAttribute("avaliacaoAntropometrica", avaliacaoAntropometrica);
 		return "antropometria/editar";
@@ -191,7 +191,7 @@ public class PacienteController {
 		consultaService.editarAvaliacaoAntropometrica(avaliacaoAntropometrica);
 		if(isInvalidoAntropometria(avaliacaoAntropometrica)){
 			redirectAttributes.addFlashAttribute("erro", "Avaliação Antropométrica não encontrada.");
-			return "redirect:/Nutricao/Buscar";
+			return "redirect:/Paciente/"+paciente.getId();
 		}
 		return "redirect:/Paciente/"+paciente.getId()+"/Antropometria/"+avaliacaoAntropometrica.getId();
 	}
@@ -206,7 +206,7 @@ public class PacienteController {
 		AvaliacaoAntropometrica avaliacaoAntropometrica = consultaService.buscarAvaliacaoAntropometricaPorId(idAntropometria);
 		if(isInvalidoAntropometria(avaliacaoAntropometrica)){
 			redirectAttributes.addFlashAttribute("erro", "Avaliação Antropométrica não encontrada.");
-			return "redirect:/Nutricao/Buscar";
+			return "redirect:/Paciente/"+paciente.getId();
 		}
 		model.addAttribute("avaliacaoAntropometrica", avaliacaoAntropometrica);
 		return "antropometria/visualizar";
@@ -222,7 +222,7 @@ public class PacienteController {
 		AvaliacaoAntropometrica avaliacaoAntropometrica = consultaService.buscarAvaliacaoAntropometricaPorId(idAntropometria);
 		if(isInvalidoAntropometria(avaliacaoAntropometrica)){
 			redirectAttributes.addFlashAttribute("erro", "Avaliação Antropométrica não encontrada.");
-			return "redirect:/Nutricao/Buscar";
+			return "redirect:/Paciente/"+paciente.getId();
 		}
 		consultaService.excluirAvaliacaoAntropometrica(avaliacaoAntropometrica);
 		return "redirect:/Paciente/"+paciente.getId();
