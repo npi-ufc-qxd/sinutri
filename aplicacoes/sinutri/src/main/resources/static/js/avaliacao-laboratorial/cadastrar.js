@@ -66,6 +66,32 @@ $(document).ready(function() {
 			]
 
 		});
+		
+		
+		dialogCancel = sn_base.doRegistryDialog({
+			
+			title: "Cancelar Cadastro", 
+			dialog: "#sn-cancelar-modal", 
+			showButton: "#sn-cancel",
+			buttons: [
+			          {
+			        	  label: "OK", 
+			        	  attrs: { }, 
+			        	  action: function() {
+			        		  dialogCancel.close();
+			        	  }
+			          }, 
+			          {
+			        	  label: "Não", 
+			        	  attrs: {  }, 
+			        	  action: function() {
+			        		  dialogCancel.close();
+			        	  }
+			          }
+			]
+
+		});
+		
 			
 	});
 
