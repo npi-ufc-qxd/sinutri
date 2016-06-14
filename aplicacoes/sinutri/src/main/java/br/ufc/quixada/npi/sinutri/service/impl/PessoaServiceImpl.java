@@ -27,5 +27,5 @@ public class PessoaServiceImpl implements PessoaService {
 	public Servidor buscarServidorPorCpf(String cpf) {
 		return servidorRepository.findByCpf(cpf);
 	}
-
+	
 }

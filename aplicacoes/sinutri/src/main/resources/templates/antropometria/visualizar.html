@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" 
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorator="estrutura/dashboard">
+<head>
+	<title>Sinutri | Visualizar Avaliação Antropometrica</title>
+</head>
+<body>
+	<section layout:fragment="conteudo">
+	
+	<div class="mdl-grid">
+		<div class="
+              mdl-cell
+              mdl-cell--7-col-desktop mdl-cell--1-offset-desktop
+              mdl-cell--8-col-tablet
+              mdl-cell--4-col-phone
+              mdl-grid mdl-grid--no-spacing
+              sn-main-card">
+			
+			<div class="mdl-cell mdl-cell--12-col sn-card sn-padding--48 mdl-color--teal">
+				 <div class="mdl-layout-title mdl-color-text--white">Avaliação Antropometrica</div>
+				 <fabgroup class="sn-fab--bottom-right">
+			         <a id="excluir" th:href="@{${'/Paciente/' + avaliacaoAntropometrica.paciente.id + '/Antropometria/' + avaliacaoAntropometrica.id + '/Excluir'}}"  class="sn-fab sn-fab--hide mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-js-ripple-effect mdl-color--red-700">
+			              <i class="material-icons mdl-color-text--white">delete</i>
+			         </a>
+			         <a th:href="@{'/Paciente/' + ${avaliacaoAntropometrica.paciente.id + '/Antropometria/' + avaliacaoAntropometrica.id + '/Editar'}}" class="sn-fab sn-fab--hide mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-js-ripple-effect mdl-color--purple">
+			              <i class="material-icons mdl-color-text--white">edit</i>
+			         </a>
+			         <button  class="sn-float--launcher mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored">
+			              <i class="material-icons mdl-color-text--white">more_horiz</i>
+			         </button>
+				 </fabgroup>
+              </div>
+ 			<div class="sn-card-top mdl-cell mdl-cell--12-col sn-card sn-padding--48 mdl-color--white mdl-grid">
+				<div class="sn-textfield mdl-cell mdl-cell--12-col">
+					<h5>GERAL</h5>
+				</div>
+				
+				<div class="sn-attribute mdl-cell mdl-cell--6-col">
+					<div class="sn-attribute__title">Nutricionista</div>
+					<div class="sn-attribute__value" th:text="${avaliacaoAntropometrica.nutricionista != null} ? ${avaliacaoAntropometrica.nutricionista.pessoa.nome} : 'Sem nutricionista' ">Maria da Silva</div>
+				</div>
+				<div class="sn-attribute mdl-cell mdl-cell--6-col">
+					<div class="sn-attribute__title">Criação</div>
+					<div class="sn-attribute__value" th:text="${#dates.format(avaliacaoAntropometrica.criadoEm,'dd/MM/yyyy')}">01/01/1995</div>
+				</div>
+				
+				<div class="sn-attribute mdl-cell mdl-cell--6-col">
+					<div class="sn-attribute__title">Última atualização</div>
+					<div class="sn-attribute__value" th:text="${#dates.format(avaliacaoAntropometrica.atualizadoEm,'dd/MM/yyyy')}">01/01/1995</div>
+				</div>
+				<div class="sn-attribute mdl-cell mdl-cell--6-col">
+					<div class="sn-attribute__title">Altura (m)</div>
+					<div class="sn-attribute__value" th:text="${avaliacaoAntropometrica.altura}">10</div>
+				</div>
+				<div class="sn-attribute mdl-cell mdl-cell--6-col">
+					<div class="sn-attribute__title">Peso (Kg)</div>
+					<div class="sn-attribute__value" th:text="${avaliacaoAntropometrica.peso}">10</div>
+				</div>
+				<div class="sn-attribute mdl-cell mdl-cell--6-col">
+					<div class="sn-attribute__title">Peso Desejado (Kg)</div>
+					<div class="sn-attribute__value" th:text="${avaliacaoAntropometrica.pesoDesejado}">10</div>
+				</div>
+				<div class="sn-attribute mdl-cell mdl-cell--6-col">
+					<div class="sn-attribute__title">Cintura (cm)</div>
+					<div class="sn-attribute__value" th:text="${avaliacaoAntropometrica.cintura}">10</div>
+				</div>
+				<div class="sn-attribute mdl-cell mdl-cell--6-col">
+					<div class="sn-attribute__title">Abdômen (cm)</div>
+					<div class="sn-attribute__value" th:text="${avaliacaoAntropometrica.abdomen}">10</div>
+				</div>
+				<div class="sn-attribute mdl-cell mdl-cell--6-col">
+					<div class="sn-attribute__title">Quadril (cm)</div>
+					<div class="sn-attribute__value" th:text="${avaliacaoAntropometrica.quadril}">10</div>
+				</div>
+				<div class="sn-attribute mdl-cell mdl-cell--6-col">
+					<div class="sn-attribute__title">Punho (cm)</div>
+					<div class="sn-attribute__value" th:text="${avaliacaoAntropometrica.punho}">10</div>
+				</div>
+				<div class="sn-attribute mdl-cell mdl-cell--6-col">
+					<div class="sn-attribute__title">Antebraço (cm)</div>
+					<div class="sn-attribute__value" th:text="${avaliacaoAntropometrica.antebraco}">10</div>
+				</div>
+			</div>
+			
+			<div class="sn-card-top mdl-cell mdl-cell--12-col sn-card sn-padding--48 mdl-color--white mdl-grid">
+				<div class="sn-textfield mdl-cell mdl-cell--12-col">
+					<h5>CIRCUNFERÊNCIAS</h5>
+				</div>
+				
+				<div class="sn-attribute mdl-cell mdl-cell--6-col">
+					<div class="sn-attribute__title">Ombro (cm)</div>
+					<div class="sn-attribute__value" th:text="${avaliacaoAntropometrica.ombro}">10</div>
+				</div>
+				<div class="sn-attribute mdl-cell mdl-cell--6-col">
+					<div class="sn-attribute__title">Peitoral (cm)</div>
+					<div class="sn-attribute__value" th:text="${avaliacaoAntropometrica.peitoral}">10</div>
+				</div>
+				<div class="sn-attribute mdl-cell mdl-cell--6-col">
+					<div class="sn-attribute__title">Panturrilha Direita (cm)</div>
+					<div class="sn-attribute__value" th:text="${avaliacaoAntropometrica.panturrilhaDireita}">10</div>
+				</div>
+				<div class="sn-attribute mdl-cell mdl-cell--6-col">
+					<div class="sn-attribute__title">Panturrilha Esquerda (cm)</div>
+					<div class="sn-attribute__value" th:text="${avaliacaoAntropometrica.panturrilhaEsquerda}">10</div>
+				</div>
+				<div class="sn-attribute mdl-cell mdl-cell--6-col">
+					<div class="sn-attribute__title">Pescoço (cm)</div>
+					<div class="sn-attribute__value" th:text="${avaliacaoAntropometrica.pescoco}">10</div>
+				</div>
+				<div class="sn-attribute mdl-cell mdl-cell--6-col">
+					<div class="sn-attribute__title">Coxa Direita (cm)</div>
+					<div class="sn-attribute__value" th:text="${avaliacaoAntropometrica.coxaDireita}">10</div>
+				</div>
+				<div class="sn-attribute mdl-cell mdl-cell--6-col">
+					<div class="sn-attribute__title">Coxa Esquerda (cm)</div>
+					<div class="sn-attribute__value" th:text="${avaliacaoAntropometrica.coxaEsquerda}">10</div>
+				</div>
+				<div class="sn-attribute mdl-cell mdl-cell--6-col">
+					<div class="sn-attribute__title">Coxa Proximal Direita (cm)</div>
+					<div class="sn-attribute__value" th:text="${avaliacaoAntropometrica.coxaProximalDireita}">10</div>
+				</div>
+				<div class="sn-attribute mdl-cell mdl-cell--6-col">
+					<div class="sn-attribute__title">Coxa Proximal Esquerda (cm)</div>
+					<div class="sn-attribute__value" th:text="${avaliacaoAntropometrica.coxaProximalEsquerda}">10</div>
+				</div>
+				<div class="sn-attribute mdl-cell mdl-cell--6-col">
+					<div class="sn-attribute__title">Braco Relaxado Direito (cm)</div>
+					<div class="sn-attribute__value" th:text="${avaliacaoAntropometrica.bracoRelaxadoDireito}">10</div>
+				</div>
+				<div class="sn-attribute mdl-cell mdl-cell--6-col">
+					<div class="sn-attribute__title">Braco Relaxado Esquerdo (cm)</div>
+					<div class="sn-attribute__value" th:text="${avaliacaoAntropometrica.bracoRelaxadoEsquerdo}">10</div>
+				</div>
+				<div class="sn-attribute mdl-cell mdl-cell--6-col">
+					<div class="sn-attribute__title">Braco Contraído Direito (cm)</div>
+					<div class="sn-attribute__value" th:text="${avaliacaoAntropometrica.bracoContraidoDireito}">10</div>
+				</div>
+				<div class="sn-attribute mdl-cell mdl-cell--6-col">
+					<div class="sn-attribute__title">Braco Contraído Esquerdo (cm)</div>
+					<div class="sn-attribute__value" th:text="${avaliacaoAntropometrica.bracoContraidoEsquerdo}">10</div>
+				</div>
+			</div>
+		
+			<div class="sn-card-top mdl-cell mdl-cell--12-col sn-card sn-padding--48 mdl-color--white mdl-grid">
+				<div class="sn-textfield mdl-cell mdl-cell--12-col">
+					<h5>DIÂMETROS ÓSSEOS</h5>
+				</div>
+			
+				<div class="sn-attribute mdl-cell mdl-cell--6-col">
+					<div class="sn-attribute__title">Diâmetro Punho (cm)</div>
+					<div class="sn-attribute__value" th:text="${avaliacaoAntropometrica.diametroPunho}">10</div>
+				</div>
+				<div class="sn-attribute mdl-cell mdl-cell--6-col">
+					<div class="sn-attribute__title">Diâmetro Fêmur (cm)</div>
+					<div class="sn-attribute__value" th:text="${avaliacaoAntropometrica.diametroFemur}">10</div>
+				</div>
+			</div>
+			<div class="sn-card-top mdl-cell mdl-cell--12-col sn-card sn-padding--48 mdl-color--white mdl-grid">
+				<div class="sn-textfield mdl-cell mdl-cell--12-col">
+					<h5>COMPOSIÇÃO CORPORAL</h5>
+				</div>	
+				<div class="sn-attribute mdl-cell mdl-cell--6-col">
+					<div class="sn-attribute__title">Bíceps (cm)</div>
+					<div class="sn-attribute__value" th:text="${avaliacaoAntropometrica.biceps}">10</div>
+				</div>
+				<div class="sn-attribute mdl-cell mdl-cell--6-col">
+					<div class="sn-attribute__title">Tríceps (cm)</div>
+					<div class="sn-attribute__value" th:text="${avaliacaoAntropometrica.triceps}">10</div>
+				</div>
+				<div class="sn-attribute mdl-cell mdl-cell--6-col">
+					<div class="sn-attribute__title">Axilar Média (cm)</div>
+					<div class="sn-attribute__value" th:text="${avaliacaoAntropometrica.axilarMedia}">10</div>
+				</div>
+				<div class="sn-attribute mdl-cell mdl-cell--6-col">
+					<div class="sn-attribute__title">Tórax (cm)</div>
+					<div class="sn-attribute__value" th:text="${avaliacaoAntropometrica.torax}">10</div>
+				</div>
+				<div class="sn-attribute mdl-cell mdl-cell--6-col">
+					<div class="sn-attribute__title">Panturrilha Medial (cm)</div>
+					<div class="sn-attribute__value" th:text="${avaliacaoAntropometrica.panturrilhaMedial}">10</div>
+				</div>
+				<div class="sn-attribute mdl-cell mdl-cell--6-col">
+					<div class="sn-attribute__title">Abdominal (cm)</div>
+					<div class="sn-attribute__value" th:text="${avaliacaoAntropometrica.abdominal}">10</div>
+				</div>
+				<div class="sn-attribute mdl-cell mdl-cell--6-col">
+					<div class="sn-attribute__title">Suprailíaca (cm)</div>
+					<div class="sn-attribute__value" th:text="${avaliacaoAntropometrica.suprailiaca}">10</div>
+				</div>
+				<div class="sn-attribute mdl-cell mdl-cell--6-col">
+					<div class="sn-attribute__title">Subescapular (cm)</div>
+					<div class="sn-attribute__value" th:text="${avaliacaoAntropometrica.subescapular}">10</div>
+				</div>
+				<div class="sn-attribute mdl-cell mdl-cell--6-col">
+					<div class="sn-attribute__title">Coxa (cm)</div>
+					<div class="sn-attribute__value" th:text="${avaliacaoAntropometrica.coxa}">10</div>
+				</div>
+			</div>
+		</div>
+				
+		<div class="mdl-cell mdl-cell--3-col-desktop">					
+			<div class="sn-card sn-padding--48">
+				<div class="mdl-layout-title">Informações</div>
+			</div>
+		</div>
+	</div>
+	
+	<div id="modal-exclusao"></div>
+	
+	</section>	
+	
+	
+	<section layout:fragment="js">
+       
+       <script type="text/javascript">
+
+       
+       
+       $( "#excluir" ).click(function(event) {
+    	   var dialog = sn_base.doRegistryDialog({
+               title: "Você realmente deseja excluir esta Avaliação Antropométrica?", 
+               dialog: "#modal-exclusao", 
+               buttons: [
+                       {
+                          label: "Excluir",
+                          attrs: {href: $(this).attr("href")}, 
+                          action: function() {
+                              dialog.close();
+                          }
+                       }, 
+                       {
+                           label: "Cancelar",
+                           action: function() {
+                               dialog.close();
+                           }
+                       }
+               ]
+       		});    	   
+
+    	   dialog.showModal();
+    	   event.preventDefault();
+       });       
+
+       
+       
+       </script>
+   </section>
+	
+</body>
+</html>

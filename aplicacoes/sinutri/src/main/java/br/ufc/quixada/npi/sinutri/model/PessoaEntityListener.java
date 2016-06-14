@@ -1,18 +1,16 @@
 package br.ufc.quixada.npi.sinutri.model;
 
-import javax.persistence.PostLoad;
-
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
-import org.springframework.context.ApplicationContextAware;
 
 import br.ufc.quixada.npi.ldap.model.Usuario;
 import br.ufc.quixada.npi.ldap.service.UsuarioService;
 
-public class PessoaEntityListener implements ApplicationContextAware {
+public class PessoaEntityListener {
 	
-	private static ApplicationContext context;
+	private ApplicationContext context;
 	
-	@PostLoad
+	//@PostLoad
 	public void loadPessoa(Pessoa pessoa) {
 		UsuarioService usuarioService = (UsuarioService) context.getBean(UsuarioService.class);
 		Usuario usuario = usuarioService.getByCpf(pessoa.getCpf());
@@ -22,13 +20,9 @@ public class PessoaEntityListener implements ApplicationContextAware {
 		pessoa.setDataNascimento(usuario.getNascimento());
 	}
 	
-	public ApplicationContext getApplicationContext() {
-        return context;
-    }
- 
-    @Override
-    public void setApplicationContext(ApplicationContext ctx) {
-        context = ctx;
+	@Autowired
+    public void context(ApplicationContext ctx) {
+        this.context = ctx;
     }
 
 }
