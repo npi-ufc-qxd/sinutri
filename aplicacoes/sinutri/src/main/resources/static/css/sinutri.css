@@ -485,7 +485,7 @@ fabgroup button {
 .sn-fab--bottom-right {
 	position: absolute;
 	right: 26px;
-	bottom: -34px;
+	bottom: -26px;
 	z-index: 1000;
 }
 

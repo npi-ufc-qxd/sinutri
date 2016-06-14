@@ -33,13 +33,13 @@ public class PacienteController {
 	@Inject
 	private PacienteService pacienteService;
 	
-	@RequestMapping(value = "{idPaciente}/AvaliacaoLaboratorial/", method = RequestMethod.GET)
+	@RequestMapping(value = "{idPaciente}/AvaliacaoLaboratorial", method = RequestMethod.GET)
 	public String formAdicionarAvaliacaoLaboratorial(@PathVariable("idPaciente") Long idPaciente, Model model, RedirectAttributes redirectAttributes){
 
 		Paciente paciente = pacienteService.buscarPacientePorId(idPaciente);
 		
 		if(isInvalido(paciente)){	
-			redirectAttributes.addFlashAttribute("erro", "Paciente não encontrado. Faça uma nova pesquisa");
+			redirectAttributes.addFlashAttribute("erro", "Paciente não encontrado.");
 			return "redirect:/Nutricao/Buscar";
 		}
 		
@@ -52,18 +52,17 @@ public class PacienteController {
 	}
 	
 	@ModelAttribute("exames")
-	Exame[] getExames()
-	{
+	public Exame[] getExames(){
 		return Exame.values();
 	}
 	
-	@RequestMapping(value = "{idPaciente}/AvaliacaoLaboratorial/", method = RequestMethod.POST)
+	@RequestMapping(value = "{idPaciente}/AvaliacaoLaboratorial", method = RequestMethod.POST)
 	public String adicionarAvaliacaoLaboratorial(@PathVariable("idPaciente") Long idPaciente, @Valid AvaliacaoLaboratorial avaliacaoLaboratorial, BindingResult bindingResult, Model model, RedirectAttributes redirectAttributes){
 		
 		Paciente paciente = pacienteService.buscarPacientePorId(idPaciente);
 		
 		if(isInvalido(paciente)){
-			redirectAttributes.addFlashAttribute("erro", "Paciente não encontrado. Faça uma nova pesquisa");
+			redirectAttributes.addFlashAttribute("erro", "Paciente não encontrado.");
 			return "redirect:/Nutricao/Buscar";
 		}
 		
@@ -78,7 +77,7 @@ public class PacienteController {
 		return "redirect:/Paciente/"+idPaciente+"/AvaliacaoLaboratorial/"+avaliacaoLaboratorial.getId()+"/Detalhes/";
 	}
 	
-	@RequestMapping(value = "/{idPaciente}/AvaliacaoLaboratorial/{idAvaliacaoLaboratorial}/Detalhes/", method = RequestMethod.GET)
+	@RequestMapping(value = "/{idPaciente}/AvaliacaoLaboratorial/{idAvaliacaoLaboratorial}/Detalhes", method = RequestMethod.GET)
 	public String visualizarDetalhesAvaliacaoLaboratorial(@PathVariable("idPaciente") Long idPaciente, @PathVariable("idAvaliacaoLaboratorial") Long idAvaliacaoLaboratorial, RedirectAttributes redirectAttributes, Model model){
 		
 		AvaliacaoLaboratorial avaliacaoLaboratorial = consultaService.buscarAvaliacaoLaboratorialPorId(idAvaliacaoLaboratorial);

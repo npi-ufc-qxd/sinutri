@@ -44,7 +44,11 @@ public class AvaliacaoLaboratorial {
 
 	@OneToMany(cascade = CascadeType.PERSIST)
 	@JoinColumn(name = "exame_id")
-	private List<Exame> exames = new ArrayList<Exame>();
+	private List<Exame> exames;
+	
+	public AvaliacaoLaboratorial(){
+		this.exames = new ArrayList<Exame>();
+	}
 
 	public Long getId() {
 		return id;

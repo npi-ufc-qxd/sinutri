@@ -5,29 +5,30 @@
 	layout:decorator="estrutura/dashboard">
 
 <head>
+
 <title>Sinutri | Cadastrar Avaliação Laboratorial</title>
-<link rel="stylesheet" type="text/css"
-	th:href="@{/css/material-date-picker.css}" />
+<link rel="stylesheet" type="text/css" th:href="@{/css/material-date-picker.css}" />
+<link rel="stylesheet" type="text/css" th:href="@{/css/avaliacao-laboratorial/visualizar.css}" />
 
 </head>
 <section layout:fragment="conteudo">
 	<div class="mdl-grid">
 
-		<div class="mdl-cell mdl-cell--7-col-desktop mdl-cell--1-offset-desktop sn-card">
+		<div class="mdl-cell mdl-cell--7-col-desktop mdl-cell--1-offset-desktop">
 
 			<div class="mdl-grid mdl-grid--no-spacing">
 
-				<div class="mdl-layout-title mdl-cell mdl-cell--12-col sn-padding--48 mdl-color--teal-500 mdl-color-text--white">
+				<div class="mdl-layout-title mdl-cell mdl-cell--12-col sn-padding--48 mdl-color--teal-500 mdl-color-text--white sn-card">
 					Avaliação Laboratorial
 
 					<button
-						class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored sn-fab">
+						class="sn-fab--bottom-right mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored sn-fab">
 						<i class="material-icons mdl-color-text--white">edit</i>
 					</button>
 
 				</div>
 
-				<div class="mdl-grid mdl-cell mdl-cell--12-col sn-padding--48 mdl-color--white">
+				<div class="mdl-grid mdl-cell mdl-cell--12-col sn-padding--48 mdl-color--white sn-card">
 					<div class="sn-attribute mdl-cell mdl-cell--4-col">
 						<div class="sn-attribute__title">Observação</div>
 						<div class="sn-attribute__value" th:text="${avaliacaoLaboratorial.observacao}">está bem!</div>
@@ -43,6 +44,17 @@
 						<div class="sn-attribute__value" th:text="${#dates.format(avaliacaoLaboratorial.atualizado,'dd/MM/yyyy')}">01/01/1995</div>
 					</div>
 					
+					<div class="sn-attribute mdl-cell mdl-cell--12-col">
+						<div class="sn-attribute__title">Exames</div>
+						<ul class="sn-list-exames mdl-list">
+							<li th:each="exame : ${avaliacaoLaboratorial.exames}" class="mdl-list__item mdl-list__item--two-line mdl-color--grey-100">
+								<span class="mdl-list__item-primary-content">
+									<span class="sn-exame-type" th:text="${exame.nome}">Exame tal</span>
+									<span class="mdl-list__item-sub-title sn-exame-value" th:text="${exame.resultado}">5.56 kg</span>
+								</span>
+							</li>
+						</ul>
+					</div>
 					
 				</div>
 
@@ -50,8 +62,7 @@
 
 		</div>
 
-		<div class="mdl-cell
-								mdl-cell--3-col-desktop">
+		<div class="mdl-cell mdl-cell--3-col-desktop">
 
 			<div class="sn-card sn-padding--48">
 				<div class="mdl-layout-title">Informações</div>

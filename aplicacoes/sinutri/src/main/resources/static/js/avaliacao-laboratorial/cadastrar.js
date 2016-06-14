@@ -38,8 +38,7 @@ $(document).ready(function() {
 						var index = $(dialog).find("#sn-exame-item-index").val();
 						var type = $(dialog).find("#sn-exame-type").val();
 						var val = $(dialog).find("#sn-exame-value").val();
-						var data = {
-							sortValue: val,  
+						var data = {  
 							".sn-exame-type": {text: type},
 							".sn-exame-value": {text: val},
 							".sn-exame-input-nome": {value: type},
