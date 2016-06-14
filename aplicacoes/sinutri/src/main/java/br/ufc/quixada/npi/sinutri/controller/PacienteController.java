@@ -162,7 +162,7 @@ public class PacienteController {
 		 prescricao.setNutricionista(nutricionista);
 		 prescricao.setAtualizadoEm(new Date());
 		 consultaService.adicionarPrescricao(prescricao);
-		 return "redirect:/Paciente/"+paciente.getId()+"/Prescricao/"+prescricao.getIdPrescricao();
+		 return "redirect:/Paciente/"+paciente.getId()+"/Prescricao/"+prescricao.getId();
 	 }
 	
 	 @RequestMapping(value="/{idPaciente}/Prescricao/{idPrescricao}/Excluir", method = RequestMethod.GET)
@@ -225,7 +225,7 @@ public class PacienteController {
 //		 System.out.println("\n\n\n"+prescricao.toString());
 		 consultaService.editarPrescricao(prescricao);
 		
-		 return "redirect:/Paciente/"+idPaciente+"/Prescricao/"+prescricao.getIdPrescricao();
+		 return "redirect:/Paciente/"+idPaciente+"/Prescricao/"+prescricao.getId();
 	 }
 	
 	 @RequestMapping(value="/{idPaciente}/Prescricao/{idPrescricao}", method = RequestMethod.GET)

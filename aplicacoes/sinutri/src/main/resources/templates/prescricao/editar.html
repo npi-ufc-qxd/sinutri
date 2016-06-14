@@ -21,9 +21,9 @@
 	            mdl-grid mdl-grid--no-spacing
 	            sn-main-card"
 				id="form-prescricao" action="#" th:object="${prescricao}" th:method="post" 
-				th:action="@{${'/Paciente/'+prescricao.paciente.id+'/Prescricao/'+prescricao.idPrescricao+'/Editar'}}">
+				th:action="@{${'/Paciente/'+prescricao.paciente.id+'/Prescricao/'+prescricao.id+'/Editar'}}">
 	
-				<input type="hidden" id="id" th:field="*{idPrescricao}"/>
+				<input type="hidden" id="id" th:field="*{id}"/>
 				<input type="hidden" id="id" th:field="*{paciente.id}"/>
 				<input type="hidden" id="id" th:field="*{nutricionista.id}"/>
 				<input type="hidden" id="atualizadoEm" th:field="*{atualizadoEm}" />
@@ -59,7 +59,7 @@
 					<div class="sn-form-actions">
 						<input type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect" 
 							value="Salvar" data-upgraded=",MaterialButton,MaterialRipple"></input>
-						<a id= "cancelar" th:href="@{${'/Paciente/'+prescricao.paciente.id+'/Prescricao/'+prescricao.idPrescricao}}" type="button" class="mdl-button mdl-js-button mdl-button--colored mdl-js-ripple-effect" 
+						<a id= "cancelar" th:href="@{${'/Paciente/'+prescricao.paciente.id+'/Prescricao/'+prescricao.id}}" type="button" class="mdl-button mdl-js-button mdl-button--colored mdl-js-ripple-effect" 
 								 data-upgraded=",MaterialButton,MaterialRipple"> Cancelar </a> 
 					</div>
 				</div>
