@@ -121,16 +121,16 @@ public class PacienteController {
 		return Sexo.values();
 	}
 	
-	@RequestMapping(value= "/Cadastrar/", method = RequestMethod.GET)
-	public String formCadastrarPacienteExterno(Model model){
+	@RequestMapping(value= "/Cadastrar", method = RequestMethod.GET)
+	public String formAdicionarPacienteExterno(Model model){
 		Pessoa pessoa = new Pessoa();
 		model.addAttribute("pessoa", pessoa);
 		
 		return "/paciente/cadastrar";
 	}
 	
-	@RequestMapping(value = "/Cadastrar/", method = RequestMethod.POST)
-	public String cadastrarPacienteExterno(Model model, @Valid @ModelAttribute("pessoa") Pessoa pessoa, BindingResult result, RedirectAttributes redirectAttributes){
+	@RequestMapping(value = "/Cadastrar", method = RequestMethod.POST)
+	public String adicionarPacienteExterno(Model model, @ModelAttribute("pessoa") Pessoa pessoa, BindingResult result, RedirectAttributes redirectAttributes){
 		
 		if(result.hasErrors()){
 			model.addAttribute("pessoa", pessoa);
@@ -147,13 +147,13 @@ public class PacienteController {
 		return "/paciente/visualizar";
 	}
 	
-	@RequestMapping(value = "/{idPaciente}/Editar/", method = RequestMethod.GET)
+	@RequestMapping(value = "/{idPaciente}/Editar", method = RequestMethod.GET)
 	public String formEditarPaciente(@PathVariable("idPaciente") Long idPaciente, Model model, RedirectAttributes redirectAttributes){
 		
 		Paciente paciente = pacienteService.buscarPacientePorId(idPaciente);
 		
 		if(isInvalido(paciente)){
-			redirectAttributes.addFlashAttribute("erro", "Paciente não encontrado. Faça uma nova pesquisa");
+			redirectAttributes.addFlashAttribute("erro", "Paciente inexistente.");
 			return "nutricao/buscar";
 		}
 		
@@ -163,26 +163,29 @@ public class PacienteController {
 		return "/paciente/editar";
 	}
 	
-	@RequestMapping(value = "/{idPaciente}/Editar/", method = RequestMethod.POST)
+	@RequestMapping(value = "/{idPaciente}/Editar", method = RequestMethod.POST)
 	public String editarPaciente(Model model, @PathVariable("idPaciente") Long idPaciente, @Valid Pessoa pessoa, BindingResult result, RedirectAttributes redirectAttributes){
+	
 		Paciente paciente = pacienteService.buscarPacientePorId(idPaciente);
+		
 		if(isInvalido(paciente)){
-			redirectAttributes.addFlashAttribute("erro", "Paciente não encontrado. Faça uma nova pesquisa");
+			redirectAttributes.addFlashAttribute("erro", "Paciente inexistente.");
 			return "nutricao/buscar";
 		}
+		
 		pessoaService.editarPessoa(pessoa);
 		model.addAttribute("pessoa", pessoa);
 
-		return "/paciente/visualizar"; //modificar
+		return "/paciente/visualizar"; 
 	}
 	
-	@RequestMapping(value = "/{idPaciente}/", method = RequestMethod.GET)
+	@RequestMapping(value = "/{idPaciente}", method = RequestMethod.GET)
 	public String visualizarPaciente(@PathVariable("idPaciente") Long idPaciente, Model model, RedirectAttributes redirectAttributes){
 
 		Paciente paciente = pacienteService.buscarPacientePorId(idPaciente);
 		
 		if(isInvalido(paciente)){
-			redirectAttributes.addFlashAttribute("erro", "Paciente não encontrado. Faça uma nova pesquisa");
+			redirectAttributes.addFlashAttribute("erro", "Paciente inexistente.");
 			return "nutricao/buscar";
 		}
 		
@@ -193,18 +196,22 @@ public class PacienteController {
 		return "/paciente/visualizar"; 
 	}
 	
-	@RequestMapping(value= {"/{idPaciente}/Excluir/"}, method = RequestMethod.GET)
-	public String ExcluirAntropometria(@PathVariable("idPaciente") Long idPaciente, RedirectAttributes redirectAttributes, Model model){
+	@RequestMapping(value= {"/{idPaciente}/Excluir"}, method = RequestMethod.GET)
+	public String excluirPaciente(@PathVariable("idPaciente") Long idPaciente, RedirectAttributes redirectAttributes, Model model){
+		
 		Paciente paciente = pacienteService.buscarPacientePorId(idPaciente);
+		Pessoa pessoa = paciente.getPessoa();
+		
 		if(isInvalido(paciente)){
-			redirectAttributes.addFlashAttribute("erro", "Paciente não encontrado. Faça uma nova pesquisa");
+			redirectAttributes.addFlashAttribute("erro", "Paciente inexistente.");
 			return "nutricao/buscar";
 		}
 		
-		pessoaService.excluirPessoa(paciente.getPessoa());
 		pacienteService.excluirPaciente(paciente);
+		pessoaService.excluirPessoa(pessoa);
 		
-		return "nutricao/buscar"; //modificar
+		
+		return "nutricao/buscar";
 	}
 	
 	private boolean isInvalido(Paciente paciente){

@@ -21,7 +21,7 @@
 
                      <fabgroup class="sn-fab--bottom-right">
 
-						<a th:href="@{'/Paciente/' + ${pessoa.id + '/Excluir/'}}" class="sn-fab sn-fab--hide mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-js-ripple-effect mdl-color--red-700">
+						<a id="excluir" th:href="@{'/Paciente/' + ${pessoa.id + '/Excluir'}}" class="sn-fab sn-fab--hide mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-js-ripple-effect mdl-color--red-700">
 						        <i class="material-icons mdl-color-text--white">delete</i>
 						</a>
 						
@@ -80,5 +80,39 @@
 		</div>
 	
 	</section>	
+	
+	<section layout:fragment="js">
+       
+       <script type="text/javascript">
+       
+       
+       $( "#excluir" ).click(function(event) {
+    	   var dialog = sn_base.doRegistryDialog({
+               title: "Você realmente deseja excluir este Paciente? ", 
+               dialog: "#modal-exclusao", 
+               buttons: [
+                       {
+                          label: "Excluir",
+                          attrs: {href: $(this).attr("href")}, 
+                          action: function() {
+                              dialog.close();
+                          }
+                       }, 
+                       {
+                           label: "Cancelar",
+                           action: function() {
+                               dialog.close();
+                           }
+                       }
+               ]
+       		});    	   
+    	   dialog.showModal();
+    	   event.preventDefault();
+       });       
+       
+       
+       </script>
+   </section>
+   
 </body>
 </html>

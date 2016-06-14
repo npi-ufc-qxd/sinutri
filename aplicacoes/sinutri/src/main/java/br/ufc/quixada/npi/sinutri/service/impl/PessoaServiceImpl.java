@@ -21,7 +21,8 @@ public class PessoaServiceImpl implements PessoaService {
 	@Inject
 	private ServidorRepository servidorRepository;
 	
-	@Inject PessoaRepository pessoaRepository;
+	@Inject 
+	private PessoaRepository pessoaRepository;
 
 	@Override
 	public Papel buscaPapelPorNome(String papel) {
