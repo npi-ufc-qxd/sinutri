@@ -110,6 +110,8 @@ public class Anamnese {
 	
 	@Enumerated(EnumType.STRING)
 	private SistemaGastrointestinal sistemaGastrointestinal;
+	@Size(max=256, message="Os comentários sobre o sistema gastroitenstinal precisam ocupar menos que 256 caracteres")
+	private String sistemaGastrointestinalComentario;
 	
 	@Enumerated(EnumType.STRING)
 	private Apetite apetite;
@@ -420,6 +422,14 @@ public class Anamnese {
 
 	public void setSistemaGastrointestinal(SistemaGastrointestinal sistemaGastrointestinal) {
 		this.sistemaGastrointestinal = sistemaGastrointestinal;
+	}
+
+	public String getSistemaGastrointestinalComentario() {
+		return sistemaGastrointestinalComentario;
+	}
+
+	public void setSistemaGastrointestinalComentario(String sistemaGastrointestinalComentario) {
+		this.sistemaGastrointestinalComentario = sistemaGastrointestinalComentario;
 	}
 
 	public Apetite getApetite() {

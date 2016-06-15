@@ -91,9 +91,9 @@
 					<div class="sn-attribute__value mdl-cell mdl-cell--6-col" >
 						<div class="sn-attribute__title ">Comentário:</div>
 						<label th:text=
-								"${#strings.length(anamnese.atividadeFisicaComentario)!=0 ? 
+								"${anamnese.atividadeFisicaComentario}?(${#strings.length(anamnese.atividadeFisicaComentario)!=0 ? 
 								anamnese.atividadeFisicaComentario:
-								'Não há comentário!'}">
+								'Não há comentário!'}): 'Não há comentário!'">
 								Comentário
 						</label>
 					</div>							

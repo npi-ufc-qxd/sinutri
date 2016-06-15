@@ -112,24 +112,25 @@
 						
 						<h5 class="mdl-cell mdl-cell--12-col">Avaliação Clínica</h5>	
 																							
-							<div class="sn-selectfield mdl-cell mdl-cell--6-col">					
-								<label class="sn-textfield__label"  for="selectApetite">Apetite</label>
-								<select id="selectApetite" th:field="*{apetite}" class="sn-selectfield__select">								
-									<option value="">Selecione:</option>
-									<option th:each="t: ${tiposApetite}" th:value="${t.tipo}" th:text="${t.tipo}"></option>
-								</select>
-							</div>					
-							<div class="sn-textfield mdl-cell mdl-cell--6-col">
-								<label class="sn-textfield__label"  for="inputTextApetite">Comentário</label>
-								<input id="inputTextApetite" th:field="*{apetiteComentario}" class="sn-textfield__input" type="text"/>
-								<label class="sn-textfield__messages sn-error-text" th:if="${#fields.hasErrors('apetiteComentario')}" 
-										th:errors="*{apetiteComentario}"
-									>Error message</label>								
-							</div>															
+						<div class="sn-selectfield mdl-cell mdl-cell--6-col">					
+							<label class="sn-textfield__label"  for="selectApetite">Apetite</label>
+							<select id="selectApetite" th:field="*{apetite}" class="sn-selectfield__select" onchange="selectChange('Apetite')">								
+								<option value="">Selecione:</option>
+								<option th:each="t: ${tiposApetite}" th:value="${t.tipo}" th:text="${t.tipo}"></option>
+							</select>
+						</div>					
+						<div class="sn-textfield mdl-cell mdl-cell--6-col">
+							<label class="sn-textfield__label"  for="inputTextApetite">Comentário</label>
+							<input id="inputTextApetite" th:field="*{apetiteComentario}" class="sn-textfield__input" type="text"/>
+							<label class="sn-textfield__messages sn-error-text" th:if="${#fields.hasErrors('apetiteComentario')}" 
+									th:errors="*{apetiteComentario}"
+								>Error message</label>								
+						</div>															
 						
 						<div class="sn-selectfield mdl-cell mdl-cell--6-col">					
 							<label class="sn-textfield__label"  for="selectApetite">Sistema Urinário</label>												
-							<select id="selectSistemaUrinario" th:field="*{sistemaUrinario}" class="sn-selectfield__select">						
+							<select id="selectSistemaUrinario" th:field="*{sistemaUrinario}" class="sn-selectfield__select" 
+								onchange="selectChange('SistemaUrinario')">						
 								<option value="">Selecione:</option>
 								<option th:each="t: ${tiposSistemaUrinario}" th:value="${t.tipo}" th:text="${t.tipo}"></option>
 							</select>					
@@ -145,14 +146,22 @@
 						
 						<div class="sn-selectfield mdl-cell mdl-cell--6-col">
 							<label class="sn-textfield__label"  for="selectApetite">Sistema Gastrointestinal</label>						
-							<select id="selectSistemaGastrointestinal" th:field="*{sistemaGastrointestinal}" class="sn-selectfield__select">
+							<select id="selectSistemaGastrointestinal" th:field="*{sistemaGastrointestinal}" class="sn-selectfield__select " 
+								onchange="selectChange('SistemaGastrointestinal')">
 								<option value="">Selecione:</option>
 								<option th:each="t: ${tiposSistemaGastrointestinal}" th:value="${t.tipo}" th:text="${t.tipo}"></option>
 							</select>											
 						</div>
+						<div class="sn-textfield mdl-cell mdl-cell--6-col">
+							<label class="sn-textfield__label"  for="inputTextSistemaGastrointestinal">Comentário</label>							
+							<input id="inputTextSistemaGastrointestinal" th:field="*{sistemaGastrointestinalComentario}" class="sn-textfield__input" type="text"/>
+							<label class="sn-textfield__messages sn-error-text" th:if="${#fields.hasErrors('sistemaGastrointestinalComentario')}" 
+										th:errors="*{sistemaGastrointestinalComentario}"
+									>Error message</label>
+						</div>
 						
 						<div class="sn-textfield mdl-cell mdl-cell--12-col">
-							<label class="sn-textfield__label"  for="inputTextAgua">Consumo de água (litros):</label>
+							<label class="sn-textfield__label"  for="inputTextAgua">Consumo de água (copos):</label>
 							<input id="inputTextAgua" th:field="*{agua}" class="sn-textfield__input" type="number" step="0.01" min="0" max="9999999" pattern="-?[0-9]*(\.[0-9]+)?"/>
 							<div class="error-validation">
 									<label class=" label label-danger" th:if="${#fields.hasErrors('agua')}" th:errors="*{agua}"
