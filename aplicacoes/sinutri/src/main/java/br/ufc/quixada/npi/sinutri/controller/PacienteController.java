@@ -120,7 +120,7 @@ public class PacienteController {
 	}
 	
 	@RequestMapping(value= {"/{idPaciente}/Antropometria"}, method = RequestMethod.GET)
-	public String formAdicionarAvaliacaoAntropometrica(@PathVariable("idPaciente") Long idPaciente, Model model, HttpSession session, RedirectAttributes redirectAttributes){
+	public String formAdicionarAvaliacaoAntropometrica(@PathVariable("idPaciente") Long idPaciente, Model model, RedirectAttributes redirectAttributes){
 		Paciente paciente = pacienteService.buscarPacientePorId(idPaciente);
 		if(isInvalido(paciente)){
 			redirectAttributes.addFlashAttribute("erro", "Paciente inexistente.");
@@ -162,15 +162,10 @@ public class PacienteController {
 	@RequestMapping(value= {"/{idPaciente}/Antropometria/{idAntropometria}/Editar"}, method = RequestMethod.GET)
 	public String formEditarAvaliacaoAntropometrica(@PathVariable("idPaciente") Long idPaciente, @PathVariable("idAntropometria") Long idAntropometria
 			, Model model, RedirectAttributes redirectAttributes){
-		Paciente paciente = pacienteService.buscarPacientePorId(idPaciente);
-		if(isInvalido(paciente)){
-			redirectAttributes.addFlashAttribute("erro", "Paciente inexistente.");
-			return "redirect:/Nutricao/Buscar";
-		}
 		AvaliacaoAntropometrica avaliacaoAntropometrica = consultaService.buscarAvaliacaoAntropometricaPorId(idAntropometria);
 		if(isInvalidoAntropometria(avaliacaoAntropometrica)){
 			redirectAttributes.addFlashAttribute("erro", "Avaliação Antropométrica não encontrada.");
-			return "redirect:/Paciente/"+paciente.getId();
+			return "redirect:/Paciente/"+idPaciente;
 		}
 		model.addAttribute("avaliacaoAntropometrica", avaliacaoAntropometrica);
 		return "antropometria/editar";
@@ -181,32 +176,20 @@ public class PacienteController {
 			model.addAttribute("avaliacaoAntropometrica", avaliacaoAntropometrica);
 			return "antropometria/cadastrar";
 		}
-		
-		Paciente paciente = pacienteService.buscarPacientePorId(idPaciente);
-		if(isInvalido(paciente)){
-			redirectAttributes.addFlashAttribute("erro", "Paciente inexistente.");
-			return "redirect:/Nutricao/Buscar";
-		}
 		avaliacaoAntropometrica.setAtualizadoEm(new Date());
 		consultaService.editarAvaliacaoAntropometrica(avaliacaoAntropometrica);
 		if(isInvalidoAntropometria(avaliacaoAntropometrica)){
 			redirectAttributes.addFlashAttribute("erro", "Avaliação Antropométrica não encontrada.");
-			return "redirect:/Paciente/"+paciente.getId();
+			return "redirect:/Paciente/"+idPaciente;
 		}
-		return "redirect:/Paciente/"+paciente.getId()+"/Antropometria/"+avaliacaoAntropometrica.getId();
+		return "redirect:/Paciente/"+idPaciente+"/Antropometria/"+avaliacaoAntropometrica.getId();
 	}
 	@RequestMapping(value= {"/{idPaciente}/Antropometria/{idAntropometria}"}, method = RequestMethod.GET)
 	public String visualizarAvaliacaoAntropometrica(@PathVariable("idPaciente") Long idPaciente, @PathVariable("idAntropometria") Long idAntropometria, RedirectAttributes redirectAttributes, Model model){
-		Paciente paciente = pacienteService.buscarPacientePorId(idPaciente);
-
-		if(isInvalido(paciente)){
-			redirectAttributes.addFlashAttribute("erro", "Paciente inexistente.");
-			return "redirect:/Nutricao/Buscar";
-		}
 		AvaliacaoAntropometrica avaliacaoAntropometrica = consultaService.buscarAvaliacaoAntropometricaPorId(idAntropometria);
 		if(isInvalidoAntropometria(avaliacaoAntropometrica)){
 			redirectAttributes.addFlashAttribute("erro", "Avaliação Antropométrica não encontrada.");
-			return "redirect:/Paciente/"+paciente.getId();
+			return "redirect:/Paciente/"+idPaciente;
 		}
 		model.addAttribute("avaliacaoAntropometrica", avaliacaoAntropometrica);
 		return "antropometria/visualizar";
@@ -214,18 +197,13 @@ public class PacienteController {
 	@RequestMapping(value= {"/{idPaciente}/Antropometria/{idAntropometria}/Excluir"}, method = RequestMethod.GET)
 	public String excluirAvaliacaoAntropometrica(@PathVariable("idPaciente") Long idPaciente, @PathVariable("idAntropometria") Long idAntropometria
 			, RedirectAttributes redirectAttributes, Model model){
-		Paciente paciente = pacienteService.buscarPacientePorId(idPaciente);
-		if(isInvalido(paciente)){
-			redirectAttributes.addFlashAttribute("erro", "Paciente inexistente.");
-			return "redirect:/Nutricao/Buscar";
-		}
 		AvaliacaoAntropometrica avaliacaoAntropometrica = consultaService.buscarAvaliacaoAntropometricaPorId(idAntropometria);
 		if(isInvalidoAntropometria(avaliacaoAntropometrica)){
 			redirectAttributes.addFlashAttribute("erro", "Avaliação Antropométrica não encontrada.");
-			return "redirect:/Paciente/"+paciente.getId();
+			return "redirect:/Paciente/"+idPaciente;
 		}
 		consultaService.excluirAvaliacaoAntropometrica(avaliacaoAntropometrica);
-		return "redirect:/Paciente/"+paciente.getId();
+		return "redirect:/Paciente/"+idPaciente;
 	}
 	
 	private boolean isInvalido(Paciente paciente){
