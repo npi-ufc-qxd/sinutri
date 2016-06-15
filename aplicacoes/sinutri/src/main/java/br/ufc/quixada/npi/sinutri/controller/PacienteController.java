@@ -203,6 +203,7 @@ public class PacienteController {
 			redirectAttributes.addFlashAttribute("erro", "Paciente inexistente.");
 			return "redirect:/Nutricao/Buscar";
 		}
+		
 		AvaliacaoAntropometrica avaliacaoAntropometrica = consultaService.buscarAvaliacaoAntropometricaPorId(idAntropometria);
 		if(isInvalidoAntropometria(avaliacaoAntropometrica)){
 			redirectAttributes.addFlashAttribute("erro", "Avaliação Antropométrica não encontrada.");
