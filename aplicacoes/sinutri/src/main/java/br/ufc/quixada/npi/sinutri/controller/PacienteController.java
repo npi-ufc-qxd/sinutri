@@ -187,7 +187,7 @@ public class PacienteController {
 		 Prescricao prescricao = consultaService.buscarPrescricaoPorId(idPrescricao);
 		 if(paciente == null){
 			 redirectAttributes.addFlashAttribute("erro", "Paciente inexistente.");
-			 return "redirect:/Paciente/"+idPaciente;
+			 return "redirect:/Nutricao/Buscar";
 		 }
 		else if(prescricao == null){
 			 redirectAttributes.addFlashAttribute("erro", "Prescrição não encontrada.");
@@ -237,7 +237,7 @@ public class PacienteController {
 		 
 		 if(paciente==null){
 			redirectAttributes.addFlashAttribute("erro", "Paciente inexistente.");
-		    return "redirect:/Paciente/"+idPaciente;
+		    return "redirect:/Nutricao/Buscar";
 		 }
 		 if(prescricao==null){
 			 redirectAttributes.addFlashAttribute("erro", "Prescrição não encontrada.");
