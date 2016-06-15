@@ -104,7 +104,7 @@ public class PacienteController {
 		AvaliacaoLaboratorial avaliacaoLaboratorial = consultaService.buscarAvaliacaoLaboratorialPorId(idAvaliacaoLaboratorial);
 		
 		if(avaliacaoLaboratorial == null){
-			redirectAttributes.addFlashAttribute("erro", "Avaliação Laboratorial não encontrado.");
+			redirectAttributes.addFlashAttribute("erro", "Avaliação Laboratorial não encontrada.");
 			return "redirect:/Nutricao/Buscar";
 		}
 		
