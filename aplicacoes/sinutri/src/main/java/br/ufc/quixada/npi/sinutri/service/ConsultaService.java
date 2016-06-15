@@ -16,11 +16,11 @@ public interface ConsultaService {
 
 	void adicionarPrescricao(Prescricao prescricao);
 	
-	void excluirPrescricao(Prescricao prescricao);
-	
 	void editarPrescricao(Prescricao prescricao);
 	
 	Prescricao buscarPrescricaoPorId(Long idPrescricao);
+	
+	void excluirPrescricao(Prescricao prescricao);
 	
 	
 }

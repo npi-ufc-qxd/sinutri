@@ -128,9 +128,7 @@ public class PacienteController {
 			Model model){
 	
 		Paciente paciente = pacienteService.buscarPacientePorId(idPaciente);
-//		System.out.println("\nid "+idPaciente);
 		if(paciente==null){
-//			System.out.println("paciente nulo");
 			redirectAttributes.addFlashAttribute("erro", "Paciente inexistente.");
 			return "redirect:/Nutricao/Buscar";
 		}
@@ -145,7 +143,7 @@ public class PacienteController {
 	
 	 @RequestMapping(value="/{idPaciente}/Prescricao", method = RequestMethod.POST)
 	 public String adicionarPrescricao(@PathVariable("idPaciente") Long idPaciente, Model model, @Valid Prescricao prescricao,
-			 		BindingResult result){
+			 		BindingResult result, RedirectAttributes redirectAttributes){
 		
 		 if(result.hasErrors()){
 			 model.addAttribute("prescricao", prescricao);
@@ -153,6 +151,12 @@ public class PacienteController {
 		 }
 		 
 		 Servidor nutricionista = pessoaService.buscarServidorPorCpf(getCpfPessoaLogada());
+		 
+		 if(nutricionista == null){
+			 redirectAttributes.addFlashAttribute("erro", "Nutricinista não encontrado.");
+			 return "redirect:/Nutricar/Buscar";
+		 }
+		 
 		 Paciente paciente = pacienteService.buscarPacientePorId(idPaciente);
 		 
 		 if(paciente==null){
@@ -163,20 +167,6 @@ public class PacienteController {
 		 prescricao.setAtualizadoEm(new Date());
 		 consultaService.adicionarPrescricao(prescricao);
 		 return "redirect:/Paciente/"+paciente.getId()+"/Prescricao/"+prescricao.getId();
-	 }
-	
-	 @RequestMapping(value="/{idPaciente}/Prescricao/{idPrescricao}/Excluir", method = RequestMethod.GET)
-	 public String excluirPrescricao(@PathVariable("idPaciente") Long idPaciente, @PathVariable("idPrescricao") Long idPrescricao, RedirectAttributes redirectAttributes){
-		 
-		 Prescricao prescricao = consultaService.buscarPrescricaoPorId(idPrescricao);
-		 
-		 if(prescricao != null)
-			 consultaService.excluirPrescricao(prescricao);
-		 else{
-			redirectAttributes.addFlashAttribute("erro", "Prescrição não encontrada."); 
-		 }
-		
-		 return "redirect:/Paciente/"+idPaciente;
 	 }
 	
 	 @RequestMapping(value="/{idPaciente}/Prescricao/{idPrescricao}/Editar", method = RequestMethod.GET)
@@ -194,7 +184,6 @@ public class PacienteController {
 			 return "redirect:/Paciente/"+idPaciente;
 		}
 		 
-		 prescricao.setAtualizadoEm(new Date());
 		 prescricao.setPaciente(paciente);
 		 model.addAttribute("prescricao", prescricao);
 		
@@ -213,8 +202,15 @@ public class PacienteController {
 		 }
 		 
 		 Servidor nutricionista = pessoaService.buscarServidorPorCpf(getCpfPessoaLogada());
+		 
+		 if(nutricionista == null){
+			 redirectAttributes.addFlashAttribute("erro", "Nutricinista não encontrado.");
+			 return "redirect:/Nutricar/Buscar";
+		 }
+		 
 		 prescricao.setNutricionista(nutricionista);
 		 prescricao.setPaciente(paciente);
+		 prescricao.setAtualizadoEm(new Date());
 		 
 		 if(paciente==null){
 			redirectAttributes.addFlashAttribute("erro", "Paciente inexistente.");
@@ -222,7 +218,6 @@ public class PacienteController {
 		 }
 		 
 		 prescricao.setAtualizadoEm(new Date());
-//		 System.out.println("\n\n\n"+prescricao.toString());
 		 consultaService.editarPrescricao(prescricao);
 		
 		 return "redirect:/Paciente/"+idPaciente+"/Prescricao/"+prescricao.getId();
@@ -247,9 +242,23 @@ public class PacienteController {
 		 model.addAttribute("prescricao", prescricao);
 		 return "prescricao/visualizar";
 	 }
+
+	 @RequestMapping(value="/{idPaciente}/Prescricao/{idPrescricao}/Excluir", method = RequestMethod.GET)
+	 public String excluirPrescricao(@PathVariable("idPaciente") Long idPaciente, @PathVariable("idPrescricao") Long idPrescricao, RedirectAttributes redirectAttributes){
+
+		 Prescricao prescricao = consultaService.buscarPrescricaoPorId(idPrescricao);
+
+		 if(prescricao != null)
+			 consultaService.excluirPrescricao(prescricao);
+		 else{
+			 redirectAttributes.addFlashAttribute("erro", "Prescrição não encontrada."); 
+		 }
+
+		 return "redirect:/Paciente/"+idPaciente;
+	 }
 	
-	private String getCpfPessoaLogada() {
-		return SecurityContextHolder.getContext().getAuthentication().getName();
-	}
+	 private String getCpfPessoaLogada() {
+		 return SecurityContextHolder.getContext().getAuthentication().getName();
+	 }
 
 }
