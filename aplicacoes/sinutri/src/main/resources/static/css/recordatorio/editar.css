@@ -1,0 +1,39 @@
+.mdl-dialog
+{
+	width: 380px !important;
+}
+
+#sn-add-refeicao-button
+{
+	position: absolute;
+	right: -28px;
+	top: 26px;
+	color: #fff;
+}
+
+.sn-form-actions {
+	width: calc(100% - 30px);
+	float: right;
+	margin-top: 100px;
+	color: #fff;
+}
+
+#formAdicionarRecordatorio
+{
+	position: relative;
+	overflow: visible;
+}
+
+table
+{
+	width: 100%;
+	box-shadow: none !important;
+}
+
+table th:nth-child(2), table td:nth-child(2) {
+	padding-left: 24px !important; 
+} 
+
+table th:last-child, table td:last-child {
+	padding-right: 24px !important; 
+} 

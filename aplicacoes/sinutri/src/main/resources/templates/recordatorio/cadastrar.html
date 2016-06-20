@@ -9,7 +9,7 @@
 	<meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0"/>
 	<link rel="stylesheet" type="text/css" th:href="@{/css/material-date-picker.css}"/>
-	<link rel="stylesheet" type="text/css" th:href="@{/css/adicionar-recordatorio.css}"/>
+	<link rel="stylesheet" type="text/css" th:href="@{/css/recordatorio/cadastrar.css}"/>
 </head>
 
 <body>
@@ -185,14 +185,25 @@
    					<i class="material-icons">add</i>
    				</button>
    				
-   				<div>
+   				<div class="sn-form-actions">
 	   				<input type="submit" 
 	   				id="btnAdicionarRecordatorio"
 				    class="mdl-button mdl-js-button mdl-button--raised mdl-button--primary mdl-js-ripple-effect" 
 				    value="Cadastrar" /> 
+				    
+				    <button type="button" 
+				    id="btnCancelar"
+				    class="mdl-button mdl-js-button mdl-button--colored mdl-js-ripple-effect" 
+				    th:attr="link=@{/Nutricao/}">
+				    	Cancelar
+				    </button>
 				</div> 
 				
 		    </form>
+
+			<div id="sn-confirma-cancelar-modal">
+				Você realmente deseja descartar as alterações?
+			</div>
 		    
 		</div>
 	</section>
@@ -200,7 +211,7 @@
 	<section layout:fragment="js">		
 		<script type="text/javascript" th:src="@{/js/moment.js}"></script>
 		<script type="text/javascript" th:src="@{/js/material-date-picker.js}"></script>
-		<script type="text/javascript" th:src="@{/js/adicionar-recordatorio.js}"></script>
+		<script type="text/javascript" th:src="@{/js/recordatorio/cadastrar.js}"></script>
 	</section>
 
 </body>

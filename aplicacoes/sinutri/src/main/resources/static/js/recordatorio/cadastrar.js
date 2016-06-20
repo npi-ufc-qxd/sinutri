@@ -9,16 +9,21 @@ $(function()
 			editButton:       ".sn-refeicao-editar",
 			onItemEdit:		  function(el, index) {
 				if( dialog != null ) {
+					$(dialog).find("#sn-refeicao-item-index").val("");
+					
 					var hora = el.find(".sn-refeicao-hora").text();
-					var descricao = el.find(".sn-refeicao-descricao").text();
+					var descricao = el.find(".sn-refeicao-input-descricao").val();
 					var itens = el.find(".sn-refeicao-itens").text();
 					var observacao = el.find(".sn-refeicao-observacao").text();
 					
+					var filtro = "[value="+descricao+"]";
+					
 					$(dialog).find("#sn-refeicao-hora").val(hora);
-					$(dialog).find("#sn-refeicao-descricao").val(descricao);
 					$(dialog).find("#sn-refeicao-itens").val(itens);
-					$(dialog).find("#sn-refeicao-observacao").val(observacao);
 					$(dialog).find("#sn-refeicao-item-index").val(index);
+					$(dialog).find("#sn-refeicao-observacao").val(observacao);
+					$(dialog).find("#sn-refeicao-descricao option").removeAttr("selected");
+					$(dialog).find("#sn-refeicao-descricao option"+filtro).prop("selected", true);
 					
 					dialog.showModal();
 				}
@@ -30,14 +35,11 @@ $(function()
 		dialog = sn_base.doRegistryDialog({
 			title: "Refeição",
 			dialog: "#sn-add-refeicao-modal",
-			showButton: "#sn-add-refeicao-button",
 			buttons: [
 		          {
 		        	  label: "Adicionar",
 		        	  attrs: {id: "btn-add", type: "button"},
 		        	  action: function() {
-		        		  
-		        		  
 		        		  
 		        		  var index 	 = $(dialog).find("#sn-refeicao-item-index").val();
 		        		  var hora 		 = $(dialog).find("#sn-refeicao-hora").val();
@@ -88,33 +90,40 @@ $(function()
 			]
 		});
 		
-	});
-	
-	
-	$(".sn-editar-refeicao").click(function() {
-		var idDialog = $(this).attr("name");
-		var dialog = sn_base.doRegistryDialog(idDialog);
-		dialog.showModal();
-	});
-	
-	$("#btnAdicionarRefeicaoDialog").click(function() {
-		var dialog = sn_base.doRegistryDialog("#adicionarRefeicao");
-		dialog.showModal();
-	});
-	
-	$("#bntAdicionarRefeicao").click(function() {
-		$("#formAdicionarRecordatorio").validate({
-			rules: {
-				horaRefeicao: "required", 
-				descricaoRefeicao: "required",
-				itensRefeicao: "required",
-				observacaoRefeicao: "required",
-				pass: "required"
-			}
+		$("#sn-add-refeicao-button").click(function() {
+			
+			$(dialog).find("#sn-refeicao-hora").val("");
+			$(dialog).find("#sn-refeicao-descricao").val("");
+			$(dialog).find("#sn-refeicao-descricao").selectedIndex = 0;
+			$(dialog).find("#sn-refeicao-itens").val("");
+			$(dialog).find("#sn-refeicao-observacao").val("");
+			
+			$(dialog).find("#sn-refeicao-item-index").val("");
+			
+			dialog.showModal();
 		});
-		$("#formAdicionarRecordatorio").valid();
+		
+		var confirmacao = sn_base.doRegistryDialog({
+			title: "Cancelar",
+			dialog: "#sn-confirma-cancelar-modal",
+			buttons: [
+	          {
+		          label: "SIM",
+		          attrs: {href: $("#btnCancelar").attr("link")}
+	          },
+	          {
+	        	  label: "NÃO",
+	        	  action: function() {
+	        		  confirmacao.close();
+				  }
+	          }
+			]
+		});
+		
+		$("#btnCancelar").click(function() {
+			confirmacao.showModal();
+		});
+		
 	});
 	
-	$("#btnEditarRefeicao").click(function() {
-	});
 });

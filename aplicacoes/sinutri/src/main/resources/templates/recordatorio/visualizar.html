@@ -10,7 +10,6 @@
 	<meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0"/>
 	<link rel="stylesheet" type="text/css" th:href="@{/css/material-date-picker.css}"/>
-	<link rel="stylesheet" type="text/css" th:href="@{/css/adicionar-recordatorio.css}"/>
 	
 </head>
 
@@ -32,14 +31,16 @@
 	
 	                      <fabgroup class="sn-fab--bottom-right">
 	
-	                              <a th:href="@{/Paciente/__${paciente.id}__/Recordatorio/__${recordatorio.id}__/Excluir}" 
+	                              <button id="sn-excluir-recordatorio" 
+	                              th:attr="link=@{/Paciente/__${paciente.id}__/Recordatorio/__${recordatorio.id}__/Excluir}" 
 	                              class="sn-fab sn-fab--hide mdl-button mdl-js-button 
 	                              mdl-button--fab mdl-button--mini-fab 
 	                              mdl-js-ripple-effect mdl-color--red-700">
 	                                      <i class="material-icons mdl-color-text--white">delete</i>
-	                              </a>
+	                              </button>
 	
-	                              <a class="sn-fab sn-fab--hide mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-js-ripple-effect mdl-color--purple">
+	                              <a th:href="@{/Paciente/__${paciente.id}__/Recordatorio/__${recordatorio.id}__/Editar}" 
+	                              class="sn-fab sn-fab--hide mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-js-ripple-effect mdl-color--purple">
 	                                      <i class="material-icons mdl-color-text--white">edit</i>
 	                              </a>
 	
@@ -157,13 +158,17 @@
 	      
 		</div>
 		
+		<div id="sn-confirma-excluir-modal">
+			Você realmente deseja excluir este Recordatório?
+		</div>
+		
 	</section>
 	
 	<section layout:fragment="js">	
 		
 		<script type="text/javascript" th:src="@{/js/moment.js}"></script>
 		<script type="text/javascript" th:src="@{/js/material-date-picker.js}"></script>
-		<script type="text/javascript" th:src="@{/js/adicionar-recordatorio.js}"></script>
+		<script type="text/javascript" th:src="@{/js/recordatorio/visualizar.js}"></script>
 		
 	</section>
 

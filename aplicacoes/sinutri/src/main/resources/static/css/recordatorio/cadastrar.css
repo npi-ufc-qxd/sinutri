@@ -11,8 +11,8 @@
 	color: #fff;
 }
 
-#btnAdicionarRecordatorio {
-	margin: 16px;
+.sn-form-actions {
+	width: calc(100% - 30px);
 	float: right;
 	margin-top: 100px;
 	color: #fff;

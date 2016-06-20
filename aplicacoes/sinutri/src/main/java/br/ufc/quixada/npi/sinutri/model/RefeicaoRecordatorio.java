@@ -21,6 +21,7 @@ public class RefeicaoRecordatorio {
 	private Long id;
 	
 	@NotNull
+	@DateTimeFormat(pattern = "HH:mm")
 	@Temporal(TemporalType.TIME)
 	private Date hora;
 	
