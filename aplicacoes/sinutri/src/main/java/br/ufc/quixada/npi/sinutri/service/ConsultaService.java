@@ -7,9 +7,9 @@ public interface ConsultaService {
 	
 	void adicionarInqueritoAlimentar(InqueritoAlimentar inqueritoAlimentar, Paciente paciente);
 	
-	InqueritoAlimentar buscarInqueritoAlimentarPorId(Long idInqueritoAlimentar);
-	
 	void editarInqueritoAlimentar(InqueritoAlimentar inqueritoAlimentar);
+	
+	InqueritoAlimentar buscarInqueritoAlimentarPorId(Long idInqueritoAlimentar);
 	
 	void excluirInqueritoAlimentar(InqueritoAlimentar inqueritoAlimentar);
 

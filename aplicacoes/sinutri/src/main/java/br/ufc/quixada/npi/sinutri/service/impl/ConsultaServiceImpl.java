@@ -23,20 +23,20 @@ public class ConsultaServiceImpl implements ConsultaService {
 		inqueritoAlimentar.setAtualizadoEm(new Date());
 		inqueritoAlimentarRepository.save(inqueritoAlimentar);
 	}
-
+	
 	@Override
-	public void excluirInqueritoAlimentar(InqueritoAlimentar inqueritoAlimentar) {
-		inqueritoAlimentarRepository.delete(inqueritoAlimentar);
+	public void editarInqueritoAlimentar(InqueritoAlimentar inqueritoAlimentar) {
+		inqueritoAlimentar.setAtualizadoEm(new Date());
+		inqueritoAlimentarRepository.save(inqueritoAlimentar);
 	}
-
+	
 	@Override
 	public InqueritoAlimentar buscarInqueritoAlimentarPorId(Long idInqueritoAlimentar) {
 		return inqueritoAlimentarRepository.findOne(idInqueritoAlimentar);
 	}
 
 	@Override
-	public void editarInqueritoAlimentar(InqueritoAlimentar inqueritoAlimentar) {
-		inqueritoAlimentar.setAtualizadoEm(new Date());
-		inqueritoAlimentarRepository.save(inqueritoAlimentar);
+	public void excluirInqueritoAlimentar(InqueritoAlimentar inqueritoAlimentar) {
+		inqueritoAlimentarRepository.delete(inqueritoAlimentar);
 	}
 }

@@ -28,409 +28,406 @@
 						</div>
 				
 						<label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect mdl-cell mdl-cell--12-col" for="checkAguaGosta">
-							<input type="checkbox" id="checkAguaGosta"  class="mdl-checkbox__input" th:field="*{aguaGosta}"/>
-							<span class="mdl-checkbox__label">Gosta de água</span>
-						</label>
+								<input type="checkbox" id="checkAguaGosta"  class="mdl-checkbox__input" th:field="*{aguaGosta}" onClick="checkChange('AguaGosta')"/>
+								<span class="mdl-checkbox__label">Gosta de água</span>
+							</label>
+							
+							<div class="sn-selectfield mdl-cell mdl-cell--6-col">
+								<label class="sn-selectfield__label" for="sn-select">Quantas vezes por semana?</label>
+								<select id="selectAguaGosta" class="sn-selectfield__select" th:field="*{aguaFrequenciaSemanal}">
+									<option value="">Escolha uma opção</option>
+									<option th:each="f : ${frequenciasSemanais}" th:text="${f.descricao}" th:value="${f}">Volvo</option>
+								</select>
+							</div>
+							<div class="sn-textfield mdl-cell mdl-cell--6-col">
+								<label class="sn-textfield__label" for="anotacaoAgua">Anotação</label>
+								<label class="sn-textfield__messages sn-error-text" for="anotacaoAgua" th:if="${#fields.hasErrors('aguaAnotacao')}" th:errors="*{aguaAnotacao}">Title error message</label>
+								<input id="inputTextAguaGosta" class="sn-textfield__input" maxlength="255" type="text" th:field="*{aguaAnotacao}" />
+							</div>
+							
+							<label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect mdl-cell mdl-cell--12-col" for="checkAvesGosta">
+								<input type="checkbox" id="checkAvesGosta"  class="mdl-checkbox__input" th:field="*{avesGosta}" onClick="checkChange('AvesGosta')"/>
+								<span class="mdl-checkbox__label">Gosta de aves</span>
+							</label>
+							
+							<div class="sn-selectfield mdl-cell mdl-cell--6-col">
+								<label class="sn-selectfield__label" for="sn-select">Quantas vezes por semana?</label>
+								<select id="selectAvesGosta" class="sn-selectfield__select" th:field="*{avesFrequenciaSemanal}">
+									<option value="">Escolha uma opção</option>
+									<option th:each="f : ${frequenciasSemanais}" th:text="${f.descricao}" th:value="${f}">Volvo</option>
+								</select>
+							</div>
+							<div class="sn-textfield mdl-cell mdl-cell--6-col">
+								<label class="sn-textfield__label" for="anotacaoAves">Anotação</label>
+								<label class="sn-textfield__messages sn-error-text" for="anotacaoAves" th:if="${#fields.hasErrors('avesAnotacao')}" th:errors="*{avesAnotacao}">Title error message</label>
+								<input id="inputTextAvesGosta" class="sn-textfield__input" maxlength="255" type="text" th:field="*{avesAnotacao}" />
+							</div>
+							
+							<label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect mdl-cell mdl-cell--12-col" for="checkBebidasAlcoolicasGosta">
+								<input type="checkbox" id="checkBebidasAlcoolicasGosta"  class="mdl-checkbox__input" th:field="*{bebidasAlcoolicasGosta}" onClick="checkChange('BebidasAlcoolicasGosta')"/>
+								<span class="mdl-checkbox__label">Gosta de bebidas alcoólicas</span>
+							</label>
+							
+							<div class="sn-selectfield mdl-cell mdl-cell--6-col">
+								<label class="sn-selectfield__label" for="sn-select">Quantas vezes por semana?</label>
+								<select id="selectBebidasAlcoolicasGosta" class="sn-selectfield__select" th:field="*{bebidasAlcoolicasFrequenciaSemanal}">
+									<option value="">Escolha uma opção</option>
+									<option th:each="f : ${frequenciasSemanais}" th:text="${f.descricao}" th:value="${f}">Volvo</option>
+								</select>
+							</div>
+							<div class="sn-textfield mdl-cell mdl-cell--6-col">
+								<label class="sn-textfield__label" for="anotacaoBebidasAlcoolicas">Anotação</label>
+								<label class="sn-textfield__messages sn-error-text" for="anotacaoBebidasAlcoolicas" th:if="${#fields.hasErrors('bebidasAlcoolicasAnotacao')}" th:errors="*{bebidasAlcoolicasAnotacao}">Title error message</label>
+								<input id="inputTextBebidasAlcoolicasGosta" class="sn-textfield__input" maxlength="255" type="text" th:field="*{bebidasAlcoolicasAnotacao}" />
+							</div>
+							
+							<label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect mdl-cell mdl-cell--12-col" for="checkBovinaGosta">
+								<input type="checkbox" id="checkBovinaGosta"  class="mdl-checkbox__input" th:field="*{bovinaGosta}" onClick="checkChange('BovinaGosta')"/>
+								<span class="mdl-checkbox__label">Gosta de bovina</span>
+							</label>
+							
+							<div class="sn-selectfield mdl-cell mdl-cell--6-col">
+								<label class="sn-selectfield__label" for="sn-select">Quantas vezes por semana?</label>
+								<select id="selectBovinaGosta" class="sn-selectfield__select" th:field="*{bovinaFrequenciaSemanal}">
+									<option value="">Escolha uma opção</option>
+									<option th:each="f : ${frequenciasSemanais}" th:text="${f.descricao}" th:value="${f}">Volvo</option>
+								</select>
+							</div>
+							<div class="sn-textfield mdl-cell mdl-cell--6-col">
+								<label class="sn-textfield__label" for="anotacaoBovina">Anotação</label>
+								<label class="sn-textfield__messages sn-error-text" for="anotacaoBovina" th:if="${#fields.hasErrors('bovinaAnotacao')}" th:errors="*{bovinaAnotacao}">Title error message</label>
+								<input id="inputTextBovinaGosta" class="sn-textfield__input" maxlength="255" type="text" th:field="*{bovinaAnotacao}" />
+							</div>
+							
+							<label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect mdl-cell mdl-cell--12-col" for="checkCereaisGosta">
+								<input type="checkbox" id="checkCereaisGosta"  class="mdl-checkbox__input" th:field="*{cereaisGosta}" onClick="checkChange('CereaisGosta')"/>
+								<span class="mdl-checkbox__label">Gosta de cereais</span>
+							</label>
+							
+							<div class="sn-selectfield mdl-cell mdl-cell--6-col">
+								<label class="sn-selectfield__label" for="sn-select">Quantas vezes por semana?</label>
+								<select id="selectCereaisGosta" class="sn-selectfield__select" th:field="*{cereaisFrequenciaSemanal}">
+									<option value="">Escolha uma opção</option>
+									<option th:each="f : ${frequenciasSemanais}" th:text="${f.descricao}" th:value="${f}">Volvo</option>
+								</select>
+							</div>
+							<div class="sn-textfield mdl-cell mdl-cell--6-col">
+								<label class="sn-textfield__label" for="anotacaoCereais">Anotação</label>
+								<label class="sn-textfield__messages sn-error-text" for="anotacaoCereais" th:if="${#fields.hasErrors('cereaisAnotacao')}" th:errors="*{cereaisAnotacao}">Title error message</label>
+								<input id="inputTextCereaisGosta" class="sn-textfield__input" maxlength="255" type="text" th:field="*{cereaisAnotacao}" />
+							</div>
+							
+							<label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect mdl-cell mdl-cell--12-col" for="checkDocesGosta">
+								<input type="checkbox" id="checkDocesGosta"  class="mdl-checkbox__input" th:field="*{docesGosta}" onClick="checkChange('DocesGosta')"/>
+								<span class="mdl-checkbox__label">Gosta de doces</span>
+							</label>
+							
+							<div class="sn-selectfield mdl-cell mdl-cell--6-col">
+								<label class="sn-selectfield__label" for="sn-select">Quantas vezes por semana?</label>
+								<select id="selectDocesGosta" class="sn-selectfield__select" th:field="*{docesFrequenciaSemanal}">
+									<option value="">Escolha uma opção</option>
+									<option th:each="f : ${frequenciasSemanais}" th:text="${f.descricao}" th:value="${f}">Volvo</option>
+								</select>
+							</div>
+							<div class="sn-textfield mdl-cell mdl-cell--6-col">
+								<label class="sn-textfield__label" for="anotacaoDoces">Anotação</label>
+								<label class="sn-textfield__messages sn-error-text" for="anotacaoDoces" th:if="${#fields.hasErrors('docesAnotacao')}" th:errors="*{docesAnotacao}">Title error message</label>
+								<input id="inputTextDocesGosta" class="sn-textfield__input" maxlength="255" type="text" th:field="*{docesAnotacao}" />
+							</div>
+							
+							<label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect mdl-cell mdl-cell--12-col" for="checkFrutasGosta">
+								<input type="checkbox" id="checkFrutasGosta"  class="mdl-checkbox__input" th:field="*{frutasGosta}" onClick="checkChange('FrutasGosta')"/>
+								<span class="mdl-checkbox__label">Gosta de frutas</span>
+							</label>
+							
+							<div class="sn-selectfield mdl-cell mdl-cell--6-col">
+								<label class="sn-selectfield__label" for="sn-select">Quantas vezes por semana?</label>
+								<select id="selectFrutasGosta" class="sn-selectfield__select" th:field="*{frutasFrequenciaSemanal}">
+									<option value="">Escolha uma opção</option>
+									<option th:each="f : ${frequenciasSemanais}" th:text="${f.descricao}" th:value="${f}">Volvo</option>
+								</select>
+							</div>
+							<div class="sn-textfield mdl-cell mdl-cell--6-col">
+								<label class="sn-textfield__label" for="anotacaoFrutas">Anotação</label>
+								<label class="sn-textfield__messages sn-error-text" for="anotacaoFrutas" th:if="${#fields.hasErrors('frutasAnotacao')}" th:errors="*{frutasAnotacao}">Title error message</label>
+								<input id="inputTextFrutasGosta" class="sn-textfield__input" maxlength="255" type="text" th:field="*{frutasAnotacao}" />
+							</div>
+							
+							<label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect mdl-cell mdl-cell--12-col" for="checkGaseificadasGosta">
+								<input type="checkbox" id="checkGaseificadasGosta"  class="mdl-checkbox__input" th:field="*{gaseificadasGosta}" onClick="checkChange('GaseificadasGosta')"/>
+								<span class="mdl-checkbox__label">Gosta de gaseificadas</span>
+							</label>
+							
+							<div class="sn-selectfield mdl-cell mdl-cell--6-col">
+								<label class="sn-selectfield__label" for="sn-select">Quantas vezes por semana?</label>
+								<select id="selectGaseificadasGosta" class="sn-selectfield__select" th:field="*{gaseificadasFrequenciaSemanal}">
+									<option value="">Escolha uma opção</option>
+									<option th:each="f : ${frequenciasSemanais}" th:text="${f.descricao}" th:value="${f}">Volvo</option>
+								</select>
+							</div>
+							<div class="sn-textfield mdl-cell mdl-cell--6-col">
+								<label class="sn-textfield__label" for="anotacaoGaseificadas">Anotação</label>
+								<label class="sn-textfield__messages sn-error-text" for="anotacaoGaseificadas" th:if="${#fields.hasErrors('gaseificadasAnotacao')}" th:errors="*{gaseificadasAnotacao}">Title error message</label>
+								<input id="inputTextGaseificadasGosta" class="sn-textfield__input" maxlength="255" type="text" th:field="*{gaseificadasAnotacao}" />
+							</div>
+							
+							<label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect mdl-cell mdl-cell--12-col" for="checkInfusoesGosta">
+								<input type="checkbox" id="checkInfusoesGosta"  class="mdl-checkbox__input" th:field="*{infusoesGosta}" onClick="checkChange('InfusoesGosta')"/>
+								<span class="mdl-checkbox__label">Gosta de infusões</span>
+							</label>
+							
+							<div class="sn-selectfield mdl-cell mdl-cell--6-col">
+								<label class="sn-selectfield__label" for="sn-select">Quantas vezes por semana?</label>
+								<select id="selectInfusoesGosta" class="sn-selectfield__select" th:field="*{infusoesFrequenciaSemanal}">
+									<option value="">Escolha uma opção</option>
+									<option th:each="f : ${frequenciasSemanais}" th:text="${f.descricao}" th:value="${f}">Volvo</option>
+								</select>
+							</div>
+							<div class="sn-textfield mdl-cell mdl-cell--6-col">
+								<label class="sn-textfield__label" for="anotacaoInfusoes">Anotação</label>
+								<label class="sn-textfield__messages sn-error-text" for="anotacaoInfusoes" th:if="${#fields.hasErrors('infusoesAnotacao')}" th:errors="*{infusoesAnotacao}">Title error message</label>
+								<input id="inputTextInfusoesGosta" class="sn-textfield__input" maxlength="255" type="text" th:field="*{infusoesAnotacao}" />
+							</div>
+							
+							<label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect mdl-cell mdl-cell--12-col" for="checkLeguminosasGosta">
+								<input type="checkbox" id="checkLeguminosasGosta"  class="mdl-checkbox__input" th:field="*{leguminosasGosta}" onClick="checkChange('LeguminosasGosta')"/>
+								<span class="mdl-checkbox__label">Gosta de leguminosas</span>
+							</label>
+							
+							<div class="sn-selectfield mdl-cell mdl-cell--6-col">
+								<label class="sn-selectfield__label" for="sn-select">Quantas vezes por semana?</label>
+								<select id="selectLeguminosasGosta" class="sn-selectfield__select" th:field="*{leguminosasFrequenciaSemanal}">
+									<option value="">Escolha uma opção</option>
+									<option th:each="f : ${frequenciasSemanais}" th:text="${f.descricao}" th:value="${f}">Volvo</option>
+								</select>
+							</div>
+							<div class="sn-textfield mdl-cell mdl-cell--6-col">
+								<label class="sn-textfield__label" for="anotacaoLeguminosas">Anotação</label>
+								<label class="sn-textfield__messages sn-error-text" for="anotacaoLeguminosas" th:if="${#fields.hasErrors('leguminosasAnotacao')}" th:errors="*{leguminosasAnotacao}">Title error message</label>
+								<input id="inputTextLeguminosasGosta" class="sn-textfield__input" maxlength="255" type="text" th:field="*{leguminosasAnotacao}" />
+							</div>
 						
-						<div class="sn-selectfield mdl-cell mdl-cell--6-col">
-							<label class="sn-selectfield__label" for="sn-select">Quantas vezes por semana?</label>
-							<select class="sn-selectfield__select" th:field="*{aguaFrequenciaSemanal}">
-								<option value="">Escolha uma opção</option>
-								<option th:each="f : ${frequenciasSemanais}" th:text="${f.descricao}" th:value="${f}">Volvo</option>
-							</select>
-						</div>
-						<div class="sn-textfield mdl-cell mdl-cell--6-col">
-							<label class="sn-textfield__label" for="anotacaoAgua">Anotação</label>
-							<label class="sn-textfield__messages sn-error-text" for="anotacaoAgua" th:if="${#fields.hasErrors('aguaAnotacao')}" th:errors="*{aguaAnotacao}">Title error message</label>
-							<input class="sn-textfield__input" type="text" id="anotacaoAgua" th:field="*{aguaAnotacao}" />
-						</div>
+							<label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect mdl-cell mdl-cell--12-col" for="checkLeiteDerivadosGosta">
+								<input type="checkbox" id="checkLeiteDerivadosGosta"  class="mdl-checkbox__input" th:field="*{leiteDerivadosGosta}" onClick="checkChange('LeiteDerivadosGosta')"/>
+								<span class="mdl-checkbox__label">Gosta de leite ou derivados</span>
+							</label>
+							
+							<div class="sn-selectfield mdl-cell mdl-cell--6-col">
+								<label class="sn-selectfield__label" for="sn-select">Quantas vezes por semana?</label>
+								<select id="selectLeiteDerivadosGosta" class="sn-selectfield__select" th:field="*{leiteDerivadosFrequenciaSemanal}">
+									<option value="">Escolha uma opção</option>
+									<option th:each="f : ${frequenciasSemanais}" th:text="${f.descricao}" th:value="${f}">Volvo</option>
+								</select>
+							</div>
+							<div class="sn-textfield mdl-cell mdl-cell--6-col">
+								<label class="sn-textfield__label" for="anotacaoLeiteDerivados">Anotação</label>
+								<label class="sn-textfield__messages sn-error-text" for="anotacaoLeiteDerivados" th:if="${#fields.hasErrors('leiteDerivadosAnotacao')}" th:errors="*{leiteDerivadosAnotacao}">Title error message</label>
+								<input id="inputTextLeiteDerivadosGosta" class="sn-textfield__input" maxlength="255" type="text" th:field="*{leiteDerivadosAnotacao}" />
+							</div>
+							
+							<label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect mdl-cell mdl-cell--12-col" for="checkManteigaGosta">
+								<input type="checkbox" id="checkManteigaGosta"  class="mdl-checkbox__input" th:field="*{manteigaGosta}" onClick="checkChange('ManteigaGosta')"/>
+								<span class="mdl-checkbox__label">Gosta de manteiga</span>
+							</label>
+							
+							<div class="sn-selectfield mdl-cell mdl-cell--6-col">
+								<label class="sn-selectfield__label" for="sn-select">Quantas vezes por semana?</label>
+								<select id="selectManteigaGosta" class="sn-selectfield__select" th:field="*{manteigaFrequenciaSemanal}">
+									<option value="">Escolha uma opção</option>
+									<option th:each="f : ${frequenciasSemanais}" th:text="${f.descricao}" th:value="${f}">Volvo</option>
+								</select>
+							</div>
+							<div class="sn-textfield mdl-cell mdl-cell--6-col">
+								<label class="sn-textfield__label" for="anotacaoManteiga">Anotação</label>
+								<label class="sn-textfield__messages sn-error-text" for="anotacaoManteiga" th:if="${#fields.hasErrors('manteigaAnotacao')}" th:errors="*{manteigaAnotacao}">Title error message</label>
+								<input id="inputTextManteigaGosta" class="sn-textfield__input" maxlength="255" type="text" th:field="*{manteigaAnotacao}" />
+							</div>
+							
+							<label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect mdl-cell mdl-cell--12-col" for="checkMargarinaGosta">
+								<input type="checkbox" id="checkMargarinaGosta"  class="mdl-checkbox__input" th:field="*{margarinaGosta}" onClick="checkChange('MargarinaGosta')"/>
+								<span class="mdl-checkbox__label">Gosta de margarina</span>
+							</label>
+							
+							<div class="sn-selectfield mdl-cell mdl-cell--6-col">
+								<label class="sn-selectfield__label" for="sn-select">Quantas vezes por semana?</label>
+								<select id="selectMargarinaGosta" class="sn-selectfield__select" th:field="*{margarinaFrequenciaSemanal}">
+									<option value="">Escolha uma opção</option>
+									<option th:each="f : ${frequenciasSemanais}" th:text="${f.descricao}" th:value="${f}">Volvo</option>
+								</select>
+							</div>
+							<div class="sn-textfield mdl-cell mdl-cell--6-col">
+								<label class="sn-textfield__label" for="anotacaoMargarina">Anotação</label>
+								<label class="sn-textfield__messages sn-error-text" for="anotacaoMargarina" th:if="${#fields.hasErrors('margarinaAnotacao')}" th:errors="*{margarinaAnotacao}">Title error message</label>
+								<input id="inputTextMargarinaGosta" class="sn-textfield__input" maxlength="255" type="text" th:field="*{margarinaAnotacao}" />
+							</div>
+							
+							<label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect mdl-cell mdl-cell--12-col" for="checkMassasGosta">
+								<input type="checkbox" id="checkMassasGosta"  class="mdl-checkbox__input" th:field="*{massasGosta}" onClick="checkChange('MassasGosta')"/>
+								<span class="mdl-checkbox__label">Gosta de massas</span>
+							</label>
+							
+							<div class="sn-selectfield mdl-cell mdl-cell--6-col">
+								<label class="sn-selectfield__label" for="sn-select">Quantas vezes por semana?</label>
+								<select id="selectMassasGosta" class="sn-selectfield__select" th:field="*{massasFrequenciaSemanal}">
+									<option value="">Escolha uma opção</option>
+									<option th:each="f : ${frequenciasSemanais}" th:text="${f.descricao}" th:value="${f}">Volvo</option>
+								</select>
+							</div>
+							<div class="sn-textfield mdl-cell mdl-cell--6-col">
+								<label class="sn-textfield__label" for="anotacaoMassas">Anotação</label>
+								<label class="sn-textfield__messages sn-error-text" for="anotacaoMassas" th:if="${#fields.hasErrors('massasAnotacao')}" th:errors="*{massasAnotacao}">Title error message</label>
+								<input id="inputTextMassasGosta" class="sn-textfield__input" maxlength="255" type="text" th:field="*{massasAnotacao}" />
+							</div>
+							
+							<label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect mdl-cell mdl-cell--12-col" for="checkOleoGosta">
+								<input type="checkbox" id="checkOleoGosta"  class="mdl-checkbox__input" th:field="*{oleoGosta}" onClick="checkChange('OleoGosta')"/>
+								<span class="mdl-checkbox__label">Gosta de óleo</span>
+							</label>
+							
+							<div class="sn-selectfield mdl-cell mdl-cell--6-col">
+								<label class="sn-selectfield__label" for="sn-select">Quantas vezes por semana?</label>
+								<select id="selectOleoGosta" class="sn-selectfield__select" th:field="*{oleoFrequenciaSemanal}">
+									<option value="">Escolha uma opção</option>
+									<option th:each="f : ${frequenciasSemanais}" th:text="${f.descricao}" th:value="${f}">Volvo</option>
+								</select>
+							</div>
+							<div class="sn-textfield mdl-cell mdl-cell--6-col">
+								<label class="sn-textfield__label" for="anotacaoOleo">Anotação</label>
+								<label class="sn-textfield__messages sn-error-text" for="anotacaoOleo" th:if="${#fields.hasErrors('oleoAnotacao')}" th:errors="*{oleoAnotacao}">Title error message</label>
+								<input id="inputTextOleoGosta" class="sn-textfield__input" maxlength="255" type="text" th:field="*{oleoAnotacao}" />
+							</div>
 						
-						<label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect mdl-cell mdl-cell--12-col" for="checkAvesGosta">
-							<input type="checkbox" id="checkAvesGosta"  class="mdl-checkbox__input" th:field="*{avesGosta}"/>
-							<span class="mdl-checkbox__label">Gosta de aves</span>
-						</label>
-						
-						<div class="sn-selectfield mdl-cell mdl-cell--6-col">
-							<label class="sn-selectfield__label" for="sn-select">Quantas vezes por semana?</label>
-							<select class="sn-selectfield__select" th:field="*{avesFrequenciaSemanal}">
-								<option value="">Escolha uma opção</option>
-								<option th:each="f : ${frequenciasSemanais}" th:text="${f.descricao}" th:value="${f}">Volvo</option>
-							</select>
-						</div>
-						<div class="sn-textfield mdl-cell mdl-cell--6-col">
-							<label class="sn-textfield__label" for="anotacaoAves">Anotação</label>
-							<label class="sn-textfield__messages sn-error-text" for="anotacaoAves" th:if="${#fields.hasErrors('avesAnotacao')}" th:errors="*{avesAnotacao}">Title error message</label>
-							<input class="sn-textfield__input" type="text" id="anotacaoAves" th:field="*{avesAnotacao}" />
-						</div>
-						
-						<label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect mdl-cell mdl-cell--12-col" for="checkBebidasAlcoolicasGosta">
-							<input type="checkbox" id="checkBebidasAlcoolicasGosta"  class="mdl-checkbox__input" th:field="*{bebidasAlcoolicasGosta}"/>
-							<span class="mdl-checkbox__label">Gosta de bebidas alcoólicas</span>
-						</label>
-						
-						<div class="sn-selectfield mdl-cell mdl-cell--6-col">
-							<label class="sn-selectfield__label" for="sn-select">Quantas vezes por semana?</label>
-							<select class="sn-selectfield__select" th:field="*{bebidasAlcoolicasFrequenciaSemanal}">
-								<option value="">Escolha uma opção</option>
-								<option th:each="f : ${frequenciasSemanais}" th:text="${f.descricao}" th:value="${f}">Volvo</option>
-							</select>
-						</div>
-						<div class="sn-textfield mdl-cell mdl-cell--6-col">
-							<label class="sn-textfield__label" for="anotacaoBebidasAlcoolicas">Anotação</label>
-							<label class="sn-textfield__messages sn-error-text" for="anotacaoBebidasAlcoolicas" th:if="${#fields.hasErrors('bebidasAlcoolicasAnotacao')}" th:errors="*{bebidasAlcoolicasAnotacao}">Title error message</label>
-							<input class="sn-textfield__input" type="text" id="anotacaoBebidasAlcoolicas" th:field="*{bebidasAlcoolicasAnotacao}" />
-						</div>
-						
-						<label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect mdl-cell mdl-cell--12-col" for="checkBovinaGosta">
-							<input type="checkbox" id="checkBovinaGosta"  class="mdl-checkbox__input" th:field="*{bovinaGosta}"/>
-							<span class="mdl-checkbox__label">Gosta de bovina</span>
-						</label>
-						
-						<div class="sn-selectfield mdl-cell mdl-cell--6-col">
-							<label class="sn-selectfield__label" for="sn-select">Quantas vezes por semana?</label>
-							<select class="sn-selectfield__select" th:field="*{bovinaFrequenciaSemanal}">
-								<option value="">Escolha uma opção</option>
-								<option th:each="f : ${frequenciasSemanais}" th:text="${f.descricao}" th:value="${f}">Volvo</option>
-							</select>
-						</div>
-						<div class="sn-textfield mdl-cell mdl-cell--6-col">
-							<label class="sn-textfield__label" for="anotacaoBovina">Anotação</label>
-							<label class="sn-textfield__messages sn-error-text" for="anotacaoBovina" th:if="${#fields.hasErrors('bovinaAnotacao')}" th:errors="*{bovinaAnotacao}">Title error message</label>
-							<input class="sn-textfield__input" type="text" id="anotacaoBovina" th:field="*{bovinaAnotacao}" />
-						</div>
-						
-						<label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect mdl-cell mdl-cell--12-col" for="checkCereaisGosta">
-							<input type="checkbox" id="checkCereaisGosta"  class="mdl-checkbox__input" th:field="*{cereaisGosta}"/>
-							<span class="mdl-checkbox__label">Gosta de cereais</span>
-						</label>
-						
-						<div class="sn-selectfield mdl-cell mdl-cell--6-col">
-							<label class="sn-selectfield__label" for="sn-select">Quantas vezes por semana?</label>
-							<select class="sn-selectfield__select" th:field="*{cereaisFrequenciaSemanal}">
-								<option value="">Escolha uma opção</option>
-								<option th:each="f : ${frequenciasSemanais}" th:text="${f.descricao}" th:value="${f}">Volvo</option>
-							</select>
-						</div>
-						<div class="sn-textfield mdl-cell mdl-cell--6-col">
-							<label class="sn-textfield__label" for="anotacaoCereais">Anotação</label>
-							<label class="sn-textfield__messages sn-error-text" for="anotacaoCereais" th:if="${#fields.hasErrors('cereaisAnotacao')}" th:errors="*{cereaisAnotacao}">Title error message</label>
-							<input class="sn-textfield__input" type="text" id="anotacaoCereais" th:field="*{cereaisAnotacao}" />
-						</div>
-						
-						<label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect mdl-cell mdl-cell--12-col" for="checkDocesGosta">
-							<input type="checkbox" id="checkDocesGosta"  class="mdl-checkbox__input" th:field="*{docesGosta}"/>
-							<span class="mdl-checkbox__label">Gosta de doces</span>
-						</label>
-						
-						<div class="sn-selectfield mdl-cell mdl-cell--6-col">
-							<label class="sn-selectfield__label" for="sn-select">Quantas vezes por semana?</label>
-							<select class="sn-selectfield__select" th:field="*{docesFrequenciaSemanal}">
-								<option value="">Escolha uma opção</option>
-								<option th:each="f : ${frequenciasSemanais}" th:text="${f.descricao}" th:value="${f}">Volvo</option>
-							</select>
-						</div>
-						<div class="sn-textfield mdl-cell mdl-cell--6-col">
-							<label class="sn-textfield__label" for="anotacaoDoces">Anotação</label>
-							<label class="sn-textfield__messages sn-error-text" for="anotacaoDoces" th:if="${#fields.hasErrors('docesAnotacao')}" th:errors="*{docesAnotacao}">Title error message</label>
-							<input class="sn-textfield__input" type="text" id="anotacaoDoces" th:field="*{docesAnotacao}" />
-						</div>
-						
-						<label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect mdl-cell mdl-cell--12-col" for="checkFrutasGosta">
-							<input type="checkbox" id="checkFrutasGosta"  class="mdl-checkbox__input" th:field="*{frutasGosta}"/>
-							<span class="mdl-checkbox__label">Gosta de frutas</span>
-						</label>
-						
-						<div class="sn-selectfield mdl-cell mdl-cell--6-col">
-							<label class="sn-selectfield__label" for="sn-select">Quantas vezes por semana?</label>
-							<select class="sn-selectfield__select" th:field="*{frutasFrequenciaSemanal}">
-								<option value="">Escolha uma opção</option>
-								<option th:each="f : ${frequenciasSemanais}" th:text="${f.descricao}" th:value="${f}">Volvo</option>
-							</select>
-						</div>
-						<div class="sn-textfield mdl-cell mdl-cell--6-col">
-							<label class="sn-textfield__label" for="anotacaoFrutas">Anotação</label>
-							<label class="sn-textfield__messages sn-error-text" for="anotacaoFrutas" th:if="${#fields.hasErrors('frutasAnotacao')}" th:errors="*{frutasAnotacao}">Title error message</label>
-							<input class="sn-textfield__input" type="text" id="anotacaoFrutas" th:field="*{frutasAnotacao}" />
-						</div>
-						
-						<label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect mdl-cell mdl-cell--12-col" for="checkGaseificadasGosta">
-							<input type="checkbox" id="checkGaseificadasGosta"  class="mdl-checkbox__input" th:field="*{gaseificadasGosta}"/>
-							<span class="mdl-checkbox__label">Gosta de bebidas gaseificadas</span>
-						</label>
-						
-						<div class="sn-selectfield mdl-cell mdl-cell--6-col">
-							<label class="sn-selectfield__label" for="sn-select">Quantas vezes por semana?</label>
-							<select class="sn-selectfield__select" th:field="*{gaseificadasFrequenciaSemanal}">
-								<option value="">Escolha uma opção</option>
-								<option th:each="f : ${frequenciasSemanais}" th:text="${f.descricao}" th:value="${f}">Volvo</option>
-							</select>
-						</div>
-						<div class="sn-textfield mdl-cell mdl-cell--6-col">
-							<label class="sn-textfield__label" for="anotacaoGaseificadas">Anotação</label>
-							<label class="sn-textfield__messages sn-error-text" for="anotacaoGaseificadas" th:if="${#fields.hasErrors('gaseificadasAnotacao')}" th:errors="*{gaseificadasAnotacao}">Title error message</label>
-							<input class="sn-textfield__input" type="text" id="anotacaoGaseificadas" th:field="*{gaseificadasAnotacao}" />
-						</div>
-						
-						<label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect mdl-cell mdl-cell--12-col" for="checkInfusoesGosta">
-							<input type="checkbox" id="checkInfusoesGosta"  class="mdl-checkbox__input" th:field="*{infusoesGosta}"/>
-							<span class="mdl-checkbox__label">Gosta de infusões</span>
-						</label>
-						
-						<div class="sn-selectfield mdl-cell mdl-cell--6-col">
-							<label class="sn-selectfield__label" for="sn-select">Quantas vezes por semana?</label>
-							<select class="sn-selectfield__select" th:field="*{infusoesFrequenciaSemanal}">
-								<option value="">Escolha uma opção</option>
-								<option th:each="f : ${frequenciasSemanais}" th:text="${f.descricao}" th:value="${f}">Volvo</option>
-							</select>
-						</div>
-						<div class="sn-textfield mdl-cell mdl-cell--6-col">
-							<label class="sn-textfield__label" for="anotacaoInfusoes">Anotação</label>
-							<label class="sn-textfield__messages sn-error-text" for="anotacaoInfusoes" th:if="${#fields.hasErrors('infusoesAnotacao')}" th:errors="*{infusoesAnotacao}">Title error message</label>
-							<input class="sn-textfield__input" type="text" id="anotacaoInfusoes" th:field="*{infusoesAnotacao}" />
-						</div>
-						
-						<label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect mdl-cell mdl-cell--12-col" for="checkLeguminosasGosta">
-							<input type="checkbox" id="checkLeguminosasGosta"  class="mdl-checkbox__input" th:field="*{leguminosasGosta}"/>
-							<span class="mdl-checkbox__label">Gosta de leguminosas</span>
-						</label>
-						
-						<div class="sn-selectfield mdl-cell mdl-cell--6-col">
-							<label class="sn-selectfield__label" for="sn-select">Quantas vezes por semana?</label>
-							<select class="sn-selectfield__select" th:field="*{leguminosasFrequenciaSemanal}">
-								<option value="">Escolha uma opção</option>
-								<option th:each="f : ${frequenciasSemanais}" th:text="${f.descricao}" th:value="${f}">Volvo</option>
-							</select>
-						</div>
-						<div class="sn-textfield mdl-cell mdl-cell--6-col">
-							<label class="sn-textfield__label" for="anotacaoLeguminosas">Anotação</label>
-							<label class="sn-textfield__messages sn-error-text" for="anotacaoLeguminosas" th:if="${#fields.hasErrors('leguminosasAnotacao')}" th:errors="*{leguminosasAnotacao}">Title error message</label>
-							<input class="sn-textfield__input" type="text" id="anotacaoLeguminosas" th:field="*{leguminosasAnotacao}" />
-						</div>
-						
-						<label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect mdl-cell mdl-cell--12-col" for="checkLeiteDerivadosGosta">
-							<input type="checkbox" id="checkLeiteDerivadosGosta"  class="mdl-checkbox__input" th:field="*{leiteDerivadosGosta}"/>
-							<span class="mdl-checkbox__label">Gosta de leite ou derivados</span>
-						</label>
-						
-						<div class="sn-selectfield mdl-cell mdl-cell--6-col">
-							<label class="sn-selectfield__label" for="sn-select">Quantas vezes por semana?</label>
-							<select class="sn-selectfield__select" th:field="*{leiteDerivadosFrequenciaSemanal}">
-								<option value="">Escolha uma opção</option>
-								<option th:each="f : ${frequenciasSemanais}" th:text="${f.descricao}" th:value="${f}">Volvo</option>
-							</select>
-						</div>
-						<div class="sn-textfield mdl-cell mdl-cell--6-col">
-							<label class="sn-textfield__label" for="anotacaoLeiteDerivados">Anotação</label>
-							<label class="sn-textfield__messages sn-error-text" for="anotacaoLeiteDerivados" th:if="${#fields.hasErrors('leiteDerivadosAnotacao')}" th:errors="*{leiteDerivadosAnotacao}">Title error message</label>
-							<input class="sn-textfield__input" type="text" id="anotacaoLeiteDerivados" th:field="*{leiteDerivadosAnotacao}" />
-						</div>
-						
-						<label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect mdl-cell mdl-cell--12-col" for="checkManteigaGosta">
-							<input type="checkbox" id="checkManteigaGosta"  class="mdl-checkbox__input" th:field="*{manteigaGosta}"/>
-							<span class="mdl-checkbox__label">Gosta de manteiga</span>
-						</label>
-						
-						<div class="sn-selectfield mdl-cell mdl-cell--6-col">
-							<label class="sn-selectfield__label" for="sn-select">Quantas vezes por semana?</label>
-							<select class="sn-selectfield__select" th:field="*{manteigaFrequenciaSemanal}">
-								<option value="">Escolha uma opção</option>
-								<option th:each="f : ${frequenciasSemanais}" th:text="${f.descricao}" th:value="${f}">Volvo</option>
-							</select>
-						</div>
-						<div class="sn-textfield mdl-cell mdl-cell--6-col">
-							<label class="sn-textfield__label" for="anotacaoManteiga">Anotação</label>
-							<label class="sn-textfield__messages sn-error-text" for="anotacaoManteiga" th:if="${#fields.hasErrors('manteigaAnotacao')}" th:errors="*{manteigaAnotacao}">Title error message</label>
-							<input class="sn-textfield__input" type="text" id="anotacaoManteiga" th:field="*{manteigaAnotacao}" />
-						</div>
-						
-						<label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect mdl-cell mdl-cell--12-col" for="checkMargarinaGosta">
-							<input type="checkbox" id="checkMargarinaGosta"  class="mdl-checkbox__input" th:field="*{margarinaGosta}"/>
-							<span class="mdl-checkbox__label">Gosta de margarina</span>
-						</label>
-						
-						<div class="sn-selectfield mdl-cell mdl-cell--6-col">
-							<label class="sn-selectfield__label" for="sn-select">Quantas vezes por semana?</label>
-							<select class="sn-selectfield__select" th:field="*{margarinaFrequenciaSemanal}">
-								<option value="">Escolha uma opção</option>
-								<option th:each="f : ${frequenciasSemanais}" th:text="${f.descricao}" th:value="${f}">Volvo</option>
-							</select>
-						</div>
-						<div class="sn-textfield mdl-cell mdl-cell--6-col">
-							<label class="sn-textfield__label" for="anotacaoMargarina">Anotação</label>
-							<label class="sn-textfield__messages sn-error-text" for="anotacaoMargarina" th:if="${#fields.hasErrors('margarinaAnotacao')}" th:errors="*{margarinaAnotacao}">Title error message</label>
-							<input class="sn-textfield__input" type="text" id="anotacaoMargarina" th:field="*{margarinaAnotacao}" />
-						</div>
-						
-						<label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect mdl-cell mdl-cell--12-col" for="checkMassasGosta">
-							<input type="checkbox" id="checkMassasGosta"  class="mdl-checkbox__input" th:field="*{massasGosta}"/>
-							<span class="mdl-checkbox__label">Gosta de massas</span>
-						</label>
-						
-						<div class="sn-selectfield mdl-cell mdl-cell--6-col">
-							<label class="sn-selectfield__label" for="sn-select">Quantas vezes por semana?</label>
-							<select class="sn-selectfield__select" th:field="*{massasFrequenciaSemanal}">
-								<option value="">Escolha uma opção</option>
-								<option th:each="f : ${frequenciasSemanais}" th:text="${f.descricao}" th:value="${f}">Volvo</option>
-							</select>
-						</div>
-						<div class="sn-textfield mdl-cell mdl-cell--6-col">
-							<label class="sn-textfield__label" for="anotacaoMassas">Anotação</label>
-							<label class="sn-textfield__messages sn-error-text" for="anotacaoMassas" th:if="${#fields.hasErrors('massasAnotacao')}" th:errors="*{massasAnotacao}">Title error message</label>
-							<input class="sn-textfield__input" type="text" id="anotacaoMassas" th:field="*{massasAnotacao}" />
-						</div>
-						
-						<label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect mdl-cell mdl-cell--12-col" for="checkOleoGosta">
-							<input type="checkbox" id="checkOleoGosta"  class="mdl-checkbox__input" th:field="*{oleoGosta}"/>
-							<span class="mdl-checkbox__label">Gosta de óleo</span>
-						</label>
-						
-						<div class="sn-selectfield mdl-cell mdl-cell--6-col">
-							<label class="sn-selectfield__label" for="sn-select">Quantas vezes por semana?</label>
-							<select class="sn-selectfield__select" th:field="*{oleoFrequenciaSemanal}">
-								<option value="">Escolha uma opção</option>
-								<option th:each="f : ${frequenciasSemanais}" th:text="${f.descricao}" th:value="${f}">Volvo</option>
-							</select>
-						</div>
-						<div class="sn-textfield mdl-cell mdl-cell--6-col">
-							<label class="sn-textfield__label" for="anotacaoOleo">Anotação</label>
-							<label class="sn-textfield__messages sn-error-text" for="anotacaoMassas" th:if="${#fields.hasErrors('massasAnotacao')}" th:errors="*{massasAnotacao}">Title error message</label>
-							<input class="sn-textfield__input" type="text" id="anotacaoOleo" th:field="*{oleoAnotacao}" />
-						</div>
-						
-						<label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect mdl-cell mdl-cell--12-col" for="checkOvosGosta">
-							<input type="checkbox" id="checkOvosGosta"  class="mdl-checkbox__input" th:field="*{ovosGosta}"/>
-							<span class="mdl-checkbox__label">Gosta de ovos</span>
-						</label>
-						
-						<div class="sn-selectfield mdl-cell mdl-cell--6-col">
-							<label class="sn-selectfield__label" for="sn-select">Quantas vezes por semana?</label>
-							<select class="sn-selectfield__select" th:field="*{ovosFrequenciaSemanal}">
-								<option value="">Escolha uma opção</option>
-								<option th:each="f : ${frequenciasSemanais}" th:text="${f.descricao}" th:value="${f}">Volvo</option>
-							</select>
-						</div>
-						<div class="sn-textfield mdl-cell mdl-cell--6-col">
-							<label class="sn-textfield__label" for="anotacaoOvos">Anotação</label>
-							<label class="sn-textfield__messages sn-error-text" for="anotacaoOvos" th:if="${#fields.hasErrors('ovosAnotacao')}" th:errors="*{ovosAnotacao}">Title error message</label>
-							<input class="sn-textfield__input" type="text" id="anotacaoOvos" th:field="*{ovosAnotacao}" />
-						</div>
-						
-						<label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect mdl-cell mdl-cell--12-col" for="checkPeixeGosta">
-							<input type="checkbox" id="checkPeixeGosta"  class="mdl-checkbox__input" th:field="*{peixeGosta}"/>
-							<span class="mdl-checkbox__label">Gosta de peixe</span>
-						</label>
-						
-						<div class="sn-selectfield mdl-cell mdl-cell--6-col">
-							<label class="sn-selectfield__label" for="sn-select">Quantas vezes por semana?</label>
-							<select class="sn-selectfield__select" th:field="*{peixeFrequenciaSemanal}">
-								<option value="">Escolha uma opção</option>
-								<option th:each="f : ${frequenciasSemanais}" th:text="${f.descricao}" th:value="${f}">Volvo</option>
-							</select>
-						</div>
-						<div class="sn-textfield mdl-cell mdl-cell--6-col">
-							<label class="sn-textfield__label" for="anotacaoPeixe">Anotação</label>
-							<label class="sn-textfield__messages sn-error-text" for="anotacaoPeixe" th:if="${#fields.hasErrors('peixeAnotacao')}" th:errors="*{peixeAnotacao}">Title error message</label>
-							<input class="sn-textfield__input" type="text" id="anotacaoPeixe" th:field="*{peixeAnotacao}" />
-						</div>
-						
-						<label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect mdl-cell mdl-cell--12-col" for="checkSucoGosta">
-							<input type="checkbox" id="checkSucoGosta"  class="mdl-checkbox__input" th:field="*{sucoGosta}"/>
-							<span class="mdl-checkbox__label">Gosta de suco</span>
-						</label>
-						
-						<div class="sn-selectfield mdl-cell mdl-cell--6-col">
-							<label class="sn-selectfield__label" for="sn-select">Quantas vezes por semana?</label>
-							<select class="sn-selectfield__select" th:field="*{sucoFrequenciaSemanal}">
-								<option value="">Escolha uma opção</option>
-								<option th:each="f : ${frequenciasSemanais}" th:text="${f.descricao}" th:value="${f}">Volvo</option>
-							</select>
-						</div>
-						<div class="sn-textfield mdl-cell mdl-cell--6-col">
-							<label class="sn-textfield__label" for="anotacaoSuco">Anotação</label>
-							<label class="sn-textfield__messages sn-error-text" for="anotacaoSuco" th:if="${#fields.hasErrors('sucoAnotacao')}" th:errors="*{sucoAnotacao}">Title error message</label>
-							<input class="sn-textfield__input" type="text" id="anotacaoSuco" th:field="*{sucoAnotacao}" />
-						</div>
-						
-						<label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect mdl-cell mdl-cell--12-col" for="checkToucinhoBaconGosta">
-							<input type="checkbox" id="checkToucinhoBaconGosta"  class="mdl-checkbox__input" th:field="*{toucinhoBaconGosta}"/>
-							<span class="mdl-checkbox__label">Gosta de toucinho ou bacon</span>
-						</label>
-						
-						<div class="sn-selectfield mdl-cell mdl-cell--6-col">
-							<label class="sn-selectfield__label" for="sn-select">Quantas vezes por semana?</label>
-							<select class="sn-selectfield__select" th:field="*{toucinhoBaconFrequenciaSemanal}">
-								<option value="">Escolha uma opção</option>
-								<option th:each="f : ${frequenciasSemanais}" th:text="${f.descricao}" th:value="${f}">Volvo</option>
-							</select>
-						</div>
-						<div class="sn-textfield mdl-cell mdl-cell--6-col">
-							<label class="sn-textfield__label" for="anotacaoToucinhoBacon">Anotação</label>
-							<label class="sn-textfield__messages sn-error-text" for="anotacaoToucinhoBacon" th:if="${#fields.hasErrors('toucinhoBaconAnotacao')}" th:errors="*{toucinhoBaconAnotacao}">Title error message</label>
-							<input class="sn-textfield__input" type="text" id="anotacaoToucinhoBacon" th:field="*{toucinhoBaconAnotacao}" />
-						</div>
-						
-						<label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect mdl-cell mdl-cell--12-col" for="checkVegetaisCozidosGosta">
-							<input type="checkbox" id="checkVegetaisCozidosGosta"  class="mdl-checkbox__input" th:field="*{vegetaisCozidosGosta}"/>
-							<span class="mdl-checkbox__label">Gosta de vegetais cozidos</span>
-						</label>
-						
-						<div class="sn-selectfield mdl-cell mdl-cell--6-col">
-							<label class="sn-selectfield__label" for="sn-select">Quantas vezes por semana?</label>
-							<select class="sn-selectfield__select" th:field="*{vegetaisCozidosFrequenciaSemanal}">
-								<option value="">Escolha uma opção</option>
-								<option th:each="f : ${frequenciasSemanais}" th:text="${f.descricao}" th:value="${f}">Volvo</option>
-							</select>
-						</div>
-						<div class="sn-textfield mdl-cell mdl-cell--6-col">
-							<label class="sn-textfield__label" for="anotacaoVegetaisCozidos">Anotação</label>
-							<label class="sn-textfield__messages sn-error-text" for="anotacaoVegetaisCozidos" th:if="${#fields.hasErrors('vegetaisCozidosAnotacao')}" th:errors="*{vegetaisCozidosAnotacao}">Title error message</label>
-							<input class="sn-textfield__input" type="text" id="anotacaoVegetaisCozidos" th:field="*{vegetaisCozidosAnotacao}" />
-						</div>
-						
-						<label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect mdl-cell mdl-cell--12-col" for="checkVegetaisCrusGosta">
-							<input type="checkbox" id="checkVegetaisCrusGosta"  class="mdl-checkbox__input" th:field="*{vegetaisCrusGosta}"/>
-							<span class="mdl-checkbox__label">Gosta de vegetais crus</span>
-						</label>
-						
-						<div class="sn-selectfield mdl-cell mdl-cell--6-col">
-							<label class="sn-selectfield__label" for="sn-select">Quantas vezes por semana?</label>
-							<select class="sn-selectfield__select" th:field="*{vegetaisCrusFrequenciaSemanal}">
-								<option value="">Escolha uma opção</option>
-								<option th:each="f : ${frequenciasSemanais}" th:text="${f.descricao}" th:value="${f}">Volvo</option>
-							</select>
-						</div>
-						<div class="sn-textfield mdl-cell mdl-cell--6-col">
-							<label class="sn-textfield__label" for="anotacaoVegetaisCrus">Anotação</label>
-							<label class="sn-textfield__messages sn-error-text" for="anotacaoVegetaisCrus" th:if="${#fields.hasErrors('vegetaisCrusAnotacao')}" th:errors="*{vegetaisCrusAnotacao}">Title error message</label>
-							<input class="sn-textfield__input" type="text" id="anotacaoVegetaisCrus" th:field="*{vegetaisCrusAnotacao}" />
-						</div>
-						
-						<label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect mdl-cell mdl-cell--12-col" for="checkViscerasGosta">
-							<input type="checkbox" id="checkViscerasGosta"  class="mdl-checkbox__input" th:field="*{viscerasGosta}"/>
-							<span class="mdl-checkbox__label">Gosta de vísceras</span>
-						</label>
-						
-						<div class="sn-selectfield mdl-cell mdl-cell--6-col">
-							<label class="sn-selectfield__label" for="sn-select">Quantas vezes por semana?</label>
-							<select class="sn-selectfield__select" th:field="*{viscerasFrequenciaSemanal}">
-								<option value="">Escolha uma opção</option>
-								<option th:each="f : ${frequenciasSemanais}" th:text="${f.descricao}" th:value="${f}">Volvo</option>
-							</select>
-						</div>
-						<div class="sn-textfield mdl-cell mdl-cell--6-col">
-							<label class="sn-textfield__label" for="anotacaoVisceras">Anotação</label>
-							<label class="sn-textfield__messages sn-error-text" for="anotacaoVisceras" th:if="${#fields.hasErrors('viscerasAnotacao')}" th:errors="*{viscerasAnotacao}">Title error message</label>
-							<input class="sn-textfield__input" type="text" id="anotacaoVisceras" th:field="*{viscerasAnotacao}" />
-						</div>
-						
-						
-						
-						<div class="sn-textfield mdl-cell mdl-cell--12-col">
-							<label class="sn-textfield__label" for="observacoes">Observações</label>
-							<label class="sn-textfield__messages sn-error-text" for="observacoes" th:if="${#fields.hasErrors('observacoes')}" th:errors="*{observacoes}">Title error message</label>
-							<textarea class="sn-textfield__input" type="text" rows= "3" id="observacoes" th:field="*{observacoes}"></textarea>
-						</div>
-						
+							<label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect mdl-cell mdl-cell--12-col" for="checkOvosGosta">
+								<input type="checkbox" id="checkOvosGosta"  class="mdl-checkbox__input" th:field="*{ovosGosta}" onClick="checkChange('OvosGosta')"/>
+								<span class="mdl-checkbox__label">Gosta de ovos</span>
+							</label>
+							
+							<div class="sn-selectfield mdl-cell mdl-cell--6-col">
+								<label class="sn-selectfield__label" for="sn-select">Quantas vezes por semana?</label>
+								<select id="selectOvosGosta" class="sn-selectfield__select" th:field="*{ovosFrequenciaSemanal}">
+									<option value="">Escolha uma opção</option>
+									<option th:each="f : ${frequenciasSemanais}" th:text="${f.descricao}" th:value="${f}">Volvo</option>
+								</select>
+							</div>
+							<div class="sn-textfield mdl-cell mdl-cell--6-col">
+								<label class="sn-textfield__label" for="anotacaoOvos">Anotação</label>
+								<label class="sn-textfield__messages sn-error-text" for="anotacaoOvos" th:if="${#fields.hasErrors('ovosAnotacao')}" th:errors="*{ovosAnotacao}">Title error message</label>
+								<input id="inputTextOvosGosta" class="sn-textfield__input" maxlength="255" type="text" th:field="*{ovosAnotacao}" />
+							</div>
+							
+							<label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect mdl-cell mdl-cell--12-col" for="checkPeixeGosta">
+								<input type="checkbox" id="checkPeixeGosta"  class="mdl-checkbox__input" th:field="*{peixeGosta}" onClick="checkChange('PeixeGosta')"/>
+								<span class="mdl-checkbox__label">Gosta de peixe</span>
+							</label>
+							
+							<div class="sn-selectfield mdl-cell mdl-cell--6-col">
+								<label class="sn-selectfield__label" for="sn-select">Quantas vezes por semana?</label>
+								<select id="selectPeixeGosta" class="sn-selectfield__select" th:field="*{peixeFrequenciaSemanal}">
+									<option value="">Escolha uma opção</option>
+									<option th:each="f : ${frequenciasSemanais}" th:text="${f.descricao}" th:value="${f}">Volvo</option>
+								</select>
+							</div>
+							<div class="sn-textfield mdl-cell mdl-cell--6-col">
+								<label class="sn-textfield__label" for="anotacaoPeixe">Anotação</label>
+								<label class="sn-textfield__messages sn-error-text" for="anotacaoPeixe" th:if="${#fields.hasErrors('peixeAnotacao')}" th:errors="*{peixeAnotacao}">Title error message</label>
+								<input id="inputTextPeixeGosta" class="sn-textfield__input" maxlength="255" type="text" th:field="*{peixeAnotacao}" />
+							</div>
+							
+							<label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect mdl-cell mdl-cell--12-col" for="checkSucoGosta">
+								<input type="checkbox" id="checkSucoGosta"  class="mdl-checkbox__input" th:field="*{sucoGosta}" onClick="checkChange('SucoGosta')"/>
+								<span class="mdl-checkbox__label">Gosta de suco</span>
+							</label>
+							
+							<div class="sn-selectfield mdl-cell mdl-cell--6-col">
+								<label class="sn-selectfield__label" for="sn-select">Quantas vezes por semana?</label>
+								<select id="selectSucoGosta" class="sn-selectfield__select" th:field="*{sucoFrequenciaSemanal}">
+									<option value="">Escolha uma opção</option>
+									<option th:each="f : ${frequenciasSemanais}" th:text="${f.descricao}" th:value="${f}">Volvo</option>
+								</select>
+							</div>
+							<div class="sn-textfield mdl-cell mdl-cell--6-col">
+								<label class="sn-textfield__label" for="anotacaoSuco">Anotação</label>
+								<label class="sn-textfield__messages sn-error-text" for="anotacaoSuco" th:if="${#fields.hasErrors('sucoAnotacao')}" th:errors="*{sucoAnotacao}">Title error message</label>
+								<input id="inputTextSucoGosta" class="sn-textfield__input" maxlength="255" type="text" th:field="*{sucoAnotacao}" />
+							</div>
+							
+							<label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect mdl-cell mdl-cell--12-col" for="checkToucinhoBaconGosta">
+								<input type="checkbox" id="checkToucinhoBaconGosta"  class="mdl-checkbox__input" th:field="*{toucinhoBaconGosta}" onClick="checkChange('ToucinhoBaconGosta')"/>
+								<span class="mdl-checkbox__label">Gosta de toucinho ou bacon</span>
+							</label>
+							
+							<div class="sn-selectfield mdl-cell mdl-cell--6-col">
+								<label class="sn-selectfield__label" for="sn-select">Quantas vezes por semana?</label>
+								<select id="selectToucinhoBaconGosta" class="sn-selectfield__select" th:field="*{toucinhoBaconFrequenciaSemanal}">
+									<option value="">Escolha uma opção</option>
+									<option th:each="f : ${frequenciasSemanais}" th:text="${f.descricao}" th:value="${f}">Volvo</option>
+								</select>
+							</div>
+							<div class="sn-textfield mdl-cell mdl-cell--6-col">
+								<label class="sn-textfield__label" for="anotacaoToucinhoBacon">Anotação</label>
+								<label class="sn-textfield__messages sn-error-text" for="anotacaoToucinhoBacon" th:if="${#fields.hasErrors('toucinhoBaconAnotacao')}" th:errors="*{toucinhoBaconAnotacao}">Title error message</label>
+								<input id="inputTextToucinhoBaconGosta" class="sn-textfield__input" maxlength="255" type="text" th:field="*{toucinhoBaconAnotacao}" />
+							</div>
+								
+							<label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect mdl-cell mdl-cell--12-col" for="checkVegetaisCozidosGosta">
+								<input type="checkbox" id="checkVegetaisCozidosGosta"  class="mdl-checkbox__input" th:field="*{vegetaisCozidosGosta}" onClick="checkChange('VegetaisCozidosGosta')"/>
+								<span class="mdl-checkbox__label">Gosta de vegetais cozidos</span>
+							</label>
+							
+							<div class="sn-selectfield mdl-cell mdl-cell--6-col">
+								<label class="sn-selectfield__label" for="sn-select">Quantas vezes por semana?</label>
+								<select id="selectVegetaisCozidosGosta" class="sn-selectfield__select" th:field="*{vegetaisCozidosFrequenciaSemanal}">
+									<option value="">Escolha uma opção</option>
+									<option th:each="f : ${frequenciasSemanais}" th:text="${f.descricao}" th:value="${f}">Volvo</option>
+								</select>
+							</div>
+							<div class="sn-textfield mdl-cell mdl-cell--6-col">
+								<label class="sn-textfield__label" for="anotacaoVegetaisCozidos">Anotação</label>
+								<label class="sn-textfield__messages sn-error-text" for="anotacaoVegetaisCozidos" th:if="${#fields.hasErrors('vegetaisCozidosAnotacao')}" th:errors="*{vegetaisCozidosAnotacao}">Title error message</label>
+								<input id="inputTextVegetaisCozidosGosta" class="sn-textfield__input" maxlength="255" type="text" th:field="*{vegetaisCozidosAnotacao}" />
+							</div>
+							
+							<label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect mdl-cell mdl-cell--12-col" for="checkVegetaisCrusGosta">
+								<input type="checkbox" id="checkVegetaisCrusGosta"  class="mdl-checkbox__input" th:field="*{vegetaisCrusGosta}" onClick="checkChange('VegetaisCrusGosta')"/>
+								<span class="mdl-checkbox__label">Gosta de vegetais crus</span>
+							</label>
+							
+							<div class="sn-selectfield mdl-cell mdl-cell--6-col">
+								<label class="sn-selectfield__label" for="sn-select">Quantas vezes por semana?</label>
+								<select id="selectVegetaisCrusGosta" class="sn-selectfield__select" th:field="*{vegetaisCrusFrequenciaSemanal}">
+									<option value="">Escolha uma opção</option>
+									<option th:each="f : ${frequenciasSemanais}" th:text="${f.descricao}" th:value="${f}">Volvo</option>
+								</select>
+							</div>
+							<div class="sn-textfield mdl-cell mdl-cell--6-col">
+								<label class="sn-textfield__label" for="anotacaoVegetaisCrus">Anotação</label>
+								<label class="sn-textfield__messages sn-error-text" for="anotacaoVegetaisCrus" th:if="${#fields.hasErrors('vegetaisCrusAnotacao')}" th:errors="*{vegetaisCrusAnotacao}">Title error message</label>
+								<input id="inputTextVegetaisCrusGosta" class="sn-textfield__input" maxlength="255" type="text" th:field="*{vegetaisCrusAnotacao}" />
+							</div>
+							
+							<label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect mdl-cell mdl-cell--12-col" for="checkViscerasGosta">
+								<input type="checkbox" id="checkViscerasGosta"  class="mdl-checkbox__input" th:field="*{viscerasGosta}" onClick="checkChange('ViscerasGosta')"/>
+								<span class="mdl-checkbox__label">Gosta de vísceras</span>
+							</label>
+							
+							<div class="sn-selectfield mdl-cell mdl-cell--6-col">
+								<label class="sn-selectfield__label" for="sn-select">Quantas vezes por semana?</label>
+								<select id="selectViscerasGosta" class="sn-selectfield__select" th:field="*{viscerasFrequenciaSemanal}">
+									<option value="">Escolha uma opção</option>
+									<option th:each="f : ${frequenciasSemanais}" th:text="${f.descricao}" th:value="${f}">Volvo</option>
+								</select>
+							</div>
+							<div class="sn-textfield mdl-cell mdl-cell--6-col">
+								<label class="sn-textfield__label" for="anotacaoVisceras">Anotação</label>
+								<label class="sn-textfield__messages sn-error-text" for="anotacaoVisceras" th:if="${#fields.hasErrors('viscerasAnotacao')}" th:errors="*{viscerasAnotacao}">Title error message</label>
+								<input id="inputTextViscerasGosta" class="sn-textfield__input" maxlength="255" type="text" th:field="*{viscerasAnotacao}" />
+							</div>
+							
+							<div class="sn-textfield mdl-cell mdl-cell--12-col">
+								<label class="sn-textfield__label" for="observacoes">Observações</label>
+								<label class="sn-textfield__messages sn-error-text" for="observacoes" th:if="${#fields.hasErrors('observacoes')}" th:errors="*{observacoes}">Title error message</label>
+								<textarea class="sn-textfield__input" maxlength="255" type="text" rows= "3" id="observacoes" th:field="*{observacoes}"></textarea>
+							</div>
 						
 						<div class="sn-form-actions">
 							<input type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect" value="Editar" />
@@ -449,43 +446,6 @@
 	<section layout:fragment="js">
 		<script type="text/javascript" th:src="@{/js/moment.js}"></script>
 		<script type="text/javascript" th:src="@{/js/material-date-picker.js}"></script>
+		<script type="text/javascript" th:src="@{/js/inquerito-alimentar/cadastrar-editar.js}"></script>
 	</section>
-	<section layout:fragment="js">
-		<script type="text/javascript" th:src="@{/js/cookies.js}"></script>
-			<script type="text/javascript">
-	    		$( "#cancelar" ).click(function(event) {
-	    	   		if(Cookies.get("formulario-alterado")){
-		    	   		var dialog = sn_base.doRegistryDialog({
-		               		title: "Você realmente deseja descartar as alterações?", 
-		               		dialog: "#modal-cancelar", 
-		               		buttons: [
-		                    		   {
-		                          		label: "SIM",
-		                          		attrs: {href: $(this).attr("href")}, 
-		                          		action: function() {
-		                              	dialog.close();
-		                          		}
-		                      		 }, 
-		                      	 {
-		                           	label: "NÃO",
-		                           	action: function() {
-		                               dialog.close();
-		                           	}
-								}
-		               		]
-		       			});    	   
-		
-		    	   		dialog.showModal();
-		    	   		event.preventDefault();
-	    	   		}
-	    		});
-			    Cookies.remove("formulario-alterado");   
-			    $("#form-inquerito :input").each(function(index){
-			 	   $(this).change(function(){
-				    	   Cookies.set("formulario-alterado", true);   
-				       });
-			    });
-			</script>
-	</section>
-	
 </html>

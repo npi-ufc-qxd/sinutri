@@ -67,6 +67,10 @@ public class PacienteController {
 		}
 		String cpfPessoaLogada = getCpfPessoaLogada();
 		Servidor nutricionista = pessoaService.buscarServidorPorCpf(cpfPessoaLogada);
+		if(nutricionista == null){
+			redirectAttributes.addFlashAttribute("erro", "Nutricionista inexistente.");
+			return "redirect:/Nutricao/Buscar";
+		}
 		inqueritoAlimentar.setNutricionista(nutricionista);
 		consultaService.adicionarInqueritoAlimentar(inqueritoAlimentar, paciente);
 		return "redirect:/Paciente/"+idPaciente+"/InqueritoAlimentar/"+inqueritoAlimentar.getId();
@@ -93,6 +97,18 @@ public class PacienteController {
 		return "redirect:/Paciente/"+inqueritoAlimentar.getPaciente().getId()+"/InqueritoAlimentar/"+idInqueritoAlimentar;
 	}
 	
+	@RequestMapping(value = "/{idPaciente}/InqueritoAlimentar/{idInqueritoAlimentar}", method = RequestMethod.GET)
+	public String visualizarInqueritoAlimentar(@PathVariable("idInqueritoAlimentar") Long idInqueritoAlimentar, @PathVariable("idPaciente") Long idPaciente, Model model, RedirectAttributes redirectAttributes ){
+		InqueritoAlimentar inqueritoAlimentar = consultaService.buscarInqueritoAlimentarPorId(idInqueritoAlimentar);
+		if(inqueritoAlimentar == null){
+			redirectAttributes.addFlashAttribute("erro", "Inquérito Alimentar não encontrado.");
+			return "redirect:/Paciente/"+idPaciente;
+		}
+		model.addAttribute("inqueritoAlimentar", inqueritoAlimentar);
+		return "inquerito-alimentar/visualizar";
+	}
+	
+	
 	@RequestMapping(value = "/{idPaciente}/InqueritoAlimentar/{idInqueritoAlimentar}/Excluir", method = RequestMethod.GET)
 	public String excluirInqueritoAlimentar(@PathVariable("idPaciente") Long idPaciente, @PathVariable("idInqueritoAlimentar") Long idInqueritoAlimentar, RedirectAttributes redirectAttributes){
 		InqueritoAlimentar inqueritoAlimentar = consultaService.buscarInqueritoAlimentarPorId(idInqueritoAlimentar);
@@ -104,16 +120,6 @@ public class PacienteController {
 		return "redirect:/Paciente/"+idPaciente;
 	}
 	
-	@RequestMapping(value = "/{idPaciente}/InqueritoAlimentar/{idInqueritoAlimentar}", method = RequestMethod.GET)
-	public String visualizarInqueritoAlimentar(@PathVariable("idInqueritoAlimentar") Long idInqueritoAlimentar, @PathVariable("idPaciente") Long idPaciente, Model model, RedirectAttributes redirectAttributes ){
-		InqueritoAlimentar inqueritoAlimentar = consultaService.buscarInqueritoAlimentarPorId(idInqueritoAlimentar);
-		if(inqueritoAlimentar == null){
-			redirectAttributes.addFlashAttribute("erro", "Inquérito Alimentar não encontrado.");
-			return "redirect:/Paciente/"+idPaciente;
-		}
-		model.addAttribute("inqueritoAlimentar", inqueritoAlimentar);
-		return "inquerito-alimentar/visualizar";
-	}
 	
 	private boolean isInvalido(Paciente paciente){
 		return paciente == null;
