@@ -24,7 +24,7 @@ import br.ufc.quixada.npi.sinutri.service.ConsultaService;
 import br.ufc.quixada.npi.sinutri.service.PacienteService;
 import br.ufc.quixada.npi.sinutri.service.PessoaService;
 
-@Controller
+@Controller 
 @RequestMapping(value = "/Paciente")
 public class PacienteController {
 
