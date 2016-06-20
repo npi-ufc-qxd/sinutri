@@ -42,7 +42,7 @@ public class AvaliacaoLaboratorial {
 	@OneToOne
 	private Servidor nutricionista;
 
-	@OneToMany(cascade = CascadeType.PERSIST)
+	@OneToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE})
 	@JoinColumn(name = "exame_id")
 	private List<Exame> exames;
 	

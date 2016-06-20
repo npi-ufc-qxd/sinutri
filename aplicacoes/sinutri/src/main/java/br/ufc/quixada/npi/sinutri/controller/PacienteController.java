@@ -148,13 +148,13 @@ public class PacienteController {
 		return "redirect:/Paciente/"+idPaciente+"/AvaliacaoLaboratorial/"+avaliacaoLaboratorial.getId()+"/Visualizar";
 	}
 	
-	@RequestMapping(value = "/{idPaciente}/AvaliacaoLaboratorial/{idAvaliacaoLaboratorial}/Excluir/", method = RequestMethod.GET)
+	@RequestMapping(value = "/{idPaciente}/AvaliacaoLaboratorial/{idAvaliacaoLaboratorial}/Excluir", method = RequestMethod.GET)
 	public String excluirAvaliacaoLaboratorial(@PathVariable("idPaciente") Long idPaciente, @PathVariable("idAvaliacaoLaboratorial") Long idAvaliacaoLaboratorial, RedirectAttributes redirectAttributes){
 		
 		AvaliacaoLaboratorial avaliacaoLaboratorial = consultaService.buscarAvaliacaoLaboratorialPorId(idAvaliacaoLaboratorial);
 		
 		if(avaliacaoLaboratorial == null){
-			redirectAttributes.addFlashAttribute("erro", "Avaliacao Laboratorial não encontrado. Faça uma nova pesquisa");
+			redirectAttributes.addFlashAttribute("erro", "Avaliacao Laboratorial não encontrada.");
 			return "redirect:/Nutricao/Buscar";
 		}
 		

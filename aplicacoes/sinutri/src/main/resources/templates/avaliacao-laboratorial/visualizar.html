@@ -21,12 +21,26 @@
 				<div class="mdl-layout-title mdl-cell mdl-cell--12-col sn-padding--48 mdl-color--teal-500 mdl-color-text--white sn-card">
 					Avaliação Laboratorial
 
-					<button
-						class="sn-fab--bottom-right mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored sn-fab">
-						<i class="material-icons mdl-color-text--white">edit</i>
-					</button>
+					<fabgroup class="sn-fab--bottom-right">
+
+						<a th:href="@{/Paciente/__${avaliacaoLaboratorial.paciente.id}__/AvaliacaoLaboratorial/__${avaliacaoLaboratorial.id}__/Excluir}" class="sn-fab sn-fab--hide mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-js-ripple-effect mdl-color--red-700">
+							<i class="material-icons mdl-color-text--white">delete</i>
+						</a>
+
+						<a th:href="@{/Paciente/__${avaliacaoLaboratorial.paciente.id}__/AvaliacaoLaboratorial/__${avaliacaoLaboratorial.id}__/Editar}" class="sn-fab sn-fab--hide mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-js-ripple-effect mdl-color--purple">
+							<i class="material-icons mdl-color-text--white">edit</i>
+						</a>
+
+						<a class="sn-float--launcher mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored">
+							<i class="material-icons mdl-color-text--white">more_horiz</i>
+						</a>
+					</fabgroup>
 
 				</div>
+
+
+
+
 
 				<div class="mdl-grid mdl-cell mdl-cell--12-col sn-padding--48 mdl-color--white sn-card">
 					<div class="sn-attribute mdl-cell mdl-cell--4-col">
