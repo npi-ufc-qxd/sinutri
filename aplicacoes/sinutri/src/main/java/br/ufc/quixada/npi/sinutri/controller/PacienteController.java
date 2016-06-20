@@ -1,6 +1,8 @@
 package br.ufc.quixada.npi.sinutri.controller;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import javax.inject.Inject;
 import javax.validation.Valid;
@@ -17,6 +19,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import br.ufc.quixada.npi.sinutri.model.AvaliacaoLaboratorial;
 import br.ufc.quixada.npi.sinutri.model.InqueritoAlimentar;
+import br.ufc.quixada.npi.sinutri.model.Mensagem;
 import br.ufc.quixada.npi.sinutri.model.Paciente;
 import br.ufc.quixada.npi.sinutri.model.enuns.Exame;
 import br.ufc.quixada.npi.sinutri.model.enuns.FrequenciaSemanal;
@@ -58,22 +61,34 @@ public class PacienteController {
 	
 	@RequestMapping(value = "/{idPaciente}/AvaliacaoLaboratorial", method = RequestMethod.POST)
 	public String adicionarAvaliacaoLaboratorial(@PathVariable("idPaciente") Long idPaciente, @Valid AvaliacaoLaboratorial avaliacaoLaboratorial, BindingResult bindingResult, Model model, RedirectAttributes redirectAttributes){
+
+		List<Mensagem> mensagens = new ArrayList<Mensagem>();
 		
 		Paciente paciente = pacienteService.buscarPacientePorId(idPaciente);
 		
 		if(isInvalido(paciente)){
-			redirectAttributes.addFlashAttribute("erro", "Paciente não encontrado.");
+			// Erro
+			mensagens.add(new Mensagem("Erro ao adicionar Avaliação Laboratorial!", Mensagem.Tipo.ERRO, Mensagem.Prioridade.MEDIA));
+			mensagens.add(new Mensagem("Paciente não encontrado!", Mensagem.Tipo.ERRO, Mensagem.Prioridade.MEDIA));
+			redirectAttributes.addFlashAttribute("mensagens", mensagens);
 			return "redirect:/Nutricao/Buscar";
 		}
 		
 		if (bindingResult.hasErrors()) {
+			// Erro
 			avaliacaoLaboratorial.setPaciente(paciente);
 			model.addAttribute("avaliacaoLaboratorial", avaliacaoLaboratorial);
-				
+			
+			mensagens.add(new Mensagem("Erro ao adicionar Avaliação Laboratorial!", Mensagem.Tipo.ERRO, Mensagem.Prioridade.MEDIA));
+			redirectAttributes.addFlashAttribute("mensagens", mensagens);
 			return "avaliacao-laboratorial/cadastrar";
 		}
 		
 		consultaService.adicionarAvaliacaoLaboratorial(avaliacaoLaboratorial, paciente);
+		
+		mensagens.add(new Mensagem("Avaliação Laboratorial adicionada!", Mensagem.Tipo.SUCESSO, Mensagem.Prioridade.MEDIA));
+		redirectAttributes.addFlashAttribute("mensagens", mensagens);
+		
 		return "redirect:/Paciente/"+idPaciente+"/AvaliacaoLaboratorial/"+avaliacaoLaboratorial.getId()+"/Visualizar";
 	}
 	
