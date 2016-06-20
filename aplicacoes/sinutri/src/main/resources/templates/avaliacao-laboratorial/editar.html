@@ -40,13 +40,13 @@
 				<div class="mdl-cell mdl-cell--12-col">
 					<label class="sn-textfield__label">Exames</label> 
 					<div class="sn-list-exames-container mdl-color--grey-200">
-						<ul th:each="exame, state : ${avaliacaoLaboratorial.exames}" class="sn-list-exames mdl-list">
-							<li  class="mdl-list__item mdl-list__item--two-line mdl-shadow--2dp mdl-color--white sn-cloneable sn-rounded-item sn-square-item">
+						<ul class="sn-list-exames mdl-list">
+							<li th:each="exame, state : ${avaliacaoLaboratorial.exames}" class="mdl-list__item mdl-list__item--two-line mdl-shadow--2dp mdl-color--white sn-cloneable sn-rounded-item sn-square-item">
 								<input type="hidden" th:field="*{exames[__${state.index}__].nome}" class="sn-exame-input-nome"/>
 								<input type="hidden" th:field="*{exames[__${state.index}__].resultado}" class="sn-exame-input-resultado"/>
 								<span class="mdl-list__item-primary-content">
-									<span class="sn-exame-type " th:text="${exame[__${state.index}__].nome}">Exame tal</span>
-									<span class="mdl-list__item-sub-title sn-exame-value" th:text="${exame[__${state.index}__].resultado}">5.56 kg</span>
+									<span class="sn-exame-type " th:text="*{exames[__${state.index}__].nome}">Exame tal</span>
+									<span class="mdl-list__item-sub-title sn-exame-value" th:text="*{exames[__${state.index}__].resultado}">5.56 kg</span>
 								</span>
 								<span class="mdl-list__item-secondary-content">
 									<button type="button" class="mdl-button mdl-js-button mdl-button--icon mdl-button--colored sn-exame-edit">

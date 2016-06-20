@@ -1,7 +1,7 @@
 $(document).ready(function() {
 
 	componentHandler.registerUpgradedCallback("MaterialLayout", function(elem) {
-		
+
 		var dialog = null;
 
 		var dynamicList = $(".sn-list-exames").dynamicList({
