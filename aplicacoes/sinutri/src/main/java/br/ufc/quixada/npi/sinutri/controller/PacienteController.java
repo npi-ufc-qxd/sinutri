@@ -3,7 +3,6 @@ package br.ufc.quixada.npi.sinutri.controller;
 import java.util.Date;
 
 import javax.inject.Inject;
-import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.security.core.context.SecurityContextHolder;
