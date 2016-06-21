@@ -249,11 +249,11 @@ public class PacienteController {
 	
 	 @RequestMapping(value="/{idPaciente}/Prescricao/{idPrescricao}", method = RequestMethod.GET)
 	 public String visualizarPrescricao(@PathVariable("idPaciente") Long idPaciente, @PathVariable("idPrescricao") Long idPrescricao, 
-			 Prescricao prescricao, RedirectAttributes redirectAttributes, Model model){
+			 RedirectAttributes redirectAttributes, Model model){
 		 
 		 List<Mensagem> mensagens = new ArrayList<Mensagem>();
 		 Paciente paciente = pacienteService.buscarPacientePorId(idPaciente);
-		 prescricao = consultaService.buscarPrescricaoPorId(idPrescricao);
+		 Prescricao prescricao = consultaService.buscarPrescricaoPorId(idPrescricao);
 		 
 		 if(paciente==null){
 			mensagens.add(new Mensagem("Paciente inexistente!", Mensagem.Tipo.ERRO, Mensagem.Prioridade.MEDIA));

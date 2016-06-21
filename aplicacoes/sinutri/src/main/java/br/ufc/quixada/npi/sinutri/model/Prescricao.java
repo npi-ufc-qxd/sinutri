@@ -42,10 +42,6 @@ public class Prescricao {
 	
 	@ManyToOne
 	private Paciente paciente;
-	
-	public Prescricao() {
-		super();
-	}
 
 	public Long getId() {
 		return id;
