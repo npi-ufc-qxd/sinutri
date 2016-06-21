@@ -1,10 +1,8 @@
 package br.ufc.quixada.npi.sinutri.service.impl;
 
 import java.util.Date;
-
 import javax.inject.Inject;
 import javax.inject.Named;
-
 import br.ufc.quixada.npi.sinutri.model.AvaliacaoAntropometrica;
 import br.ufc.quixada.npi.sinutri.model.InqueritoAlimentar;
 import br.ufc.quixada.npi.sinutri.model.Paciente;
@@ -20,7 +18,6 @@ public class ConsultaServiceImpl implements ConsultaService {
 	
 	@Inject
 	private AvaliacaoAntropometricaRepository avaliacaoAntropometricaRepository;
-	
 	
 	@Override
 	public void adicionarInqueritoAlimentar(InqueritoAlimentar inqueritoAlimentar, Paciente paciente) {
