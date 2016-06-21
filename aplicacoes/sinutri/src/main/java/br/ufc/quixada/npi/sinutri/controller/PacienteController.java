@@ -1,5 +1,6 @@
 package br.ufc.quixada.npi.sinutri.controller;
 
+import java.util.ArrayList;
 import java.util.Date;
 import javax.inject.Inject;
 import javax.validation.Valid;
@@ -19,6 +20,7 @@ import br.ufc.quixada.npi.sinutri.model.enuns.SistemaGastrointestinal;
 import br.ufc.quixada.npi.sinutri.model.enuns.SistemaUrinario;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import br.ufc.quixada.npi.sinutri.model.InqueritoAlimentar;
+import br.ufc.quixada.npi.sinutri.model.Mensagem;
 import br.ufc.quixada.npi.sinutri.model.enuns.FrequenciaSemanal;
 import br.ufc.quixada.npi.sinutri.service.ConsultaService;
 import br.ufc.quixada.npi.sinutri.service.PacienteService;
@@ -127,7 +129,7 @@ public class PacienteController {
 	public String formAdicionarAnamnese(@PathVariable("idPaciente") Long idPaciente, Model model, RedirectAttributes redirectAttributes){
 		Paciente paciente =null;
 		paciente =  pacienteService.buscarPacientePorId(idPaciente);
-		
+		ArrayList<Mensagem> mensagens = new ArrayList<>();
 		if(!isInvalido(paciente)){
 			Anamnese anamnese =  new Anamnese();
 			anamnese.setCriadoEm(new Date());
@@ -138,13 +140,17 @@ public class PacienteController {
 			model.addAttribute("tiposSistemaGastrointestinal", SistemaGastrointestinal.values());
 			return "/anamnese/cadastrar";
 		}else{
-			redirectAttributes.addFlashAttribute("erro", "Paciente não encontrado. Faça uma nova pesquisa");
+			mensagens.add(new Mensagem("Paciente inexistente.", Mensagem.Tipo.ERRO, Mensagem.Prioridade.ALTA));
+			redirectAttributes.addFlashAttribute("mensagens", mensagens);
 			return "redirect:/Nutricao/Buscar";			
 		}
 	}
 	
 	@RequestMapping(value = "/{idPaciente}/Anamnese",method = RequestMethod.POST)
-	public String AdicionarAnamnese(@PathVariable("idPaciente") Long idPaciente, @Valid Anamnese anamnese, BindingResult result, Model model){
+	public String AdicionarAnamnese(@PathVariable("idPaciente") Long idPaciente, @Valid Anamnese anamnese, BindingResult result, Model model,
+			RedirectAttributes redirectAttributes
+			){
+		ArrayList<Mensagem> mensagens = new ArrayList<>();
 		if(result.hasErrors()){			
 			model.addAttribute("anamnese",anamnese);
 			model.addAttribute("tiposApetite",Apetite.values());
@@ -155,13 +161,15 @@ public class PacienteController {
 		Servidor nutricionista = pessoaService.buscarServidorPorCpf(getCpfPessoaLogada());
 		anamnese.setNutricionista(nutricionista);
 		consultaService.adicionarAnamnese(anamnese);
+		mensagens.add(new Mensagem("Salvo com sucesso.",Mensagem.Tipo.SUCESSO,Mensagem.Prioridade.MEDIA));
+		redirectAttributes.addFlashAttribute("mensagens", mensagens);
 		return "redirect:/Paciente/"+idPaciente+"/Anamnese/"+anamnese.getId();
 	}
 	
 	@RequestMapping(value = "/{idPaciente}/Anamnese/{idAnamnese}/Editar",method = RequestMethod.GET)
 	public String formEditarAnamnese( Model model, @PathVariable("idPaciente") Long idPaciente,@PathVariable("idAnamnese") Long idAnamnese, RedirectAttributes redirectAttributes){
 		Anamnese anamnese = consultaService.buscarAnamnese(idAnamnese);
-		
+		ArrayList<Mensagem> mensagens = new ArrayList<>();
 		
 		if(anamnese != null){
 			anamnese.setAtualizadoEm(new Date());
@@ -171,31 +179,35 @@ public class PacienteController {
 			model.addAttribute("tiposSistemaGastrointestinal", SistemaGastrointestinal.values());
 			return "/anamnese/editar";
 		}else{
-			redirectAttributes.addFlashAttribute("erro", "Anamnese não encontrada.");
+			mensagens.add(new Mensagem("Anamnese não encontrada.",Mensagem.Tipo.ERRO,Mensagem.Prioridade.ALTA));
+			redirectAttributes.addFlashAttribute("mensagens", mensagens);
 			return "redirect:/Paciente/"+idPaciente;
 		}
 	}
 	
 	@RequestMapping(value = "/{idPaciente}/Anamnese/{idAnamnese}/Editar",method=RequestMethod.POST)
 	public String editarAnamnese(@PathVariable("idPaciente") Long idPaciente,@PathVariable("idAnamnese") Long idAnanmese,
-			@ModelAttribute("Ananmnese") @Valid Anamnese anamnese,
-			BindingResult result, Model model){
+			@ModelAttribute("Ananmnese") @Valid Anamnese anamnese,	BindingResult result, Model model,RedirectAttributes redirectAttributes){
+		ArrayList<Mensagem> mensagens = new ArrayList<>();
 		if(result.hasErrors()){
 			model.addAttribute("anamnese", anamnese);
 			return "/nutricao/anamnese/editar";
 		}		
 		consultaService.editarAnamnese(anamnese);
+		mensagens.add(new Mensagem("Salvo com sucesso.",Mensagem.Tipo.SUCESSO,Mensagem.Prioridade.MEDIA));
+		redirectAttributes.addFlashAttribute("mensagens", mensagens);
 		return "redirect:/Paciente/"+idPaciente+"/Anamnese/"+anamnese.getId();
 	}
 	
 	@RequestMapping(value = "/{idPaciente}/Anamnese/{idAnamnese}",method = RequestMethod.GET)
 	public String visualizarAnamnese(@PathVariable("idPaciente") Long idPaciente,@PathVariable("idAnamnese") Long idAnamnese,Model model, RedirectAttributes redirectAttributes){
 		Anamnese anamnese = consultaService.buscarAnamnese(idAnamnese);
+		ArrayList<Mensagem> mensagens = new ArrayList<>();
 		if(anamnese != null){
 			model.addAttribute("anamnese",anamnese);
 			return "/anamnese/visualizar";
 		}else{
-			redirectAttributes.addFlashAttribute("erro", "Anamnese não encontrada.");
+			mensagens.add(new Mensagem("Anamnese não encontrada.",Mensagem.Tipo.ERRO,Mensagem.Prioridade.ALTA));
 			return "redirect:/Paciente/"+idPaciente;
 		}
 	}
@@ -203,11 +215,12 @@ public class PacienteController {
 	@RequestMapping(value = "/{idPaciente}/Anamnese/{idAnamnese}/Excluir")
 	public String excluirAnamnese(@PathVariable("idPaciente") Long idPaciente,@PathVariable("idAnamnese") Long idAnamnese, RedirectAttributes redirectAttributes){
 		Anamnese anamnese = consultaService.buscarAnamnese(idAnamnese);
+		ArrayList<Mensagem> mensagens = new ArrayList<>();
 		if(anamnese != null){
 			consultaService.excluirAnamnese(anamnese);
 			return "redirect:/Paciente/"+idPaciente;
 		}else{
-			redirectAttributes.addFlashAttribute("erro", "Anamnese não encontrada.");
+			mensagens.add(new Mensagem("Anamnese não encontrada.",Mensagem.Tipo.ERRO,Mensagem.Prioridade.ALTA));
 			return "redirect:/Paciente/"+idPaciente;			
 		}
 		

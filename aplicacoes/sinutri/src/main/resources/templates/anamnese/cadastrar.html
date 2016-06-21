@@ -42,7 +42,7 @@
 					<label class="sn-textfield__label" for="textObjetivoConsulta">Objetivo
 						da consulta:</label>
 					<textarea class="sn-textfield__input" rows="5"
-						id="textObjetivoConsulta" th:field="*{objetivoConsulta}"
+						id="textObjetivoConsulta" th:field="*{objetivoConsulta}" maxlength="255"
 						placeholder="Descreva aqui o objetivo da consulta..."></textarea>
 					<label class="sn-textfield__messages sn-error-text"
 						th:if="${#fields.hasErrors('objetivoConsulta')}"
@@ -62,7 +62,7 @@
 				<div class="sn-textfield mdl-cell mdl-cell--12-col">
 					<label class="sn-textfield__label" for="inputTextAtividadeFisica">Quais
 						atividades?</label> <input id="inputTextAtividadeFisica" type="text"
-						th:field="*{atividadeFisicaComentario}"
+						th:field="*{atividadeFisicaComentario}" maxlength="255"
 						class="sn-textfield__input" /> <label
 						class="sn-textfield__messages sn-error-text"
 						th:if="${#fields.hasErrors('atividadeFisicaComentario')}"
@@ -79,7 +79,7 @@
 				</label>
 				<div class="sn-textfield mdl-cell mdl-cell--12-col">
 					<label class="sn-textfield__label" for="inputTextDormeBem">Comentários</label>
-					<input id="inputTextDormeBem" type="text"
+					<input id="inputTextDormeBem" type="text" maxlength="255"
 						th:field="*{dormeBemComentario}" class="sn-textfield__input" />
 					<label class="sn-textfield__messages sn-error-text"
 						th:if="${#fields.hasErrors('dormeBemComentario')}"
@@ -96,7 +96,7 @@
 				</label>
 				<div class="sn-textfield mdl-cell mdl-cell--12-col">
 					<label class="sn-textfield__label" for="inputTextBebidaAlcoolica">Comentários</label>
-					<input id="inputTextBebidaAlcoolica" type="text"
+					<input id="inputTextBebidaAlcoolica" type="text" maxlength="255"
 						th:field="*{bebidaAlcoolicaComentario}"
 						class="sn-textfield__input" /> <label
 						class="sn-textfield__messages sn-error-text"
@@ -109,7 +109,7 @@
 				<h5 class="mdl-cell mdl-cell--12-col">Patologias</h5>
 				<div class="sn-textfield mdl-cell mdl-cell--12-col">
 					<label class="sn-textfield__label" for="inputTextPatologias">Comentários</label>
-					<input class="sn-textfield__input" type="text"
+					<input class="sn-textfield__input" type="text" maxlength="255"
 						id="inputTextPatologias" th:field="*{patologiasComentario}" />
 					<label class="sn-textfield__messages sn-error-text"
 						th:if="${#fields.hasErrors('patologiasComentario')}"
@@ -125,7 +125,7 @@
 				</label>
 				<div class="sn-textfield mdl-cell mdl-cell--12-col">
 					<label class="sn-textfield__label" for="inputTextMedicamento">Comentários</label>
-					<input id="inputTextMedicamento" type="text"
+					<input id="inputTextMedicamento" type="text" maxlength="255"
 						th:field="*{medicamentoComentario}" class="sn-textfield__input" />
 					<label class="sn-textfield__messages sn-error-text"
 						th:if="${#fields.hasErrors('medicamentoComentario')}"
@@ -147,7 +147,7 @@
 				<div class="sn-textfield mdl-cell mdl-cell--6-col">
 					<label class="sn-textfield__label" for="inputTextApetite">Comentário</label>
 					<input id="inputTextApetite" th:field="*{apetiteComentario}"
-						class="sn-textfield__input" type="text" /> <label
+						class="sn-textfield__input" type="text" maxlength="255" /> <label
 						class="sn-textfield__messages sn-error-text"
 						th:if="${#fields.hasErrors('apetiteComentario')}"
 						th:errors="*{apetiteComentario}">Error message</label>
@@ -167,7 +167,7 @@
 					<label class="sn-textfield__label" for="inputTextSistemaUrinario">Comentário</label>
 					<input id="inputTextSistemaUrinario"
 						th:field="*{sistemaUrinarioComentario}"
-						class="sn-textfield__input" type="text" /> <label
+						class="sn-textfield__input" type="text" maxlength="255" /> <label
 						class="sn-textfield__messages sn-error-text"
 						th:if="${#fields.hasErrors('sistemaUrinarioComentario')}"
 						th:errors="*{sistemaUrinarioComentario}">Error
@@ -179,7 +179,7 @@
 					<label class="sn-textfield__label" for="selectApetite">Sistema Gastrointestinal</label> 
 						<select id="selectSistemaGastrointestinal"
 						th:field="*{sistemaGastrointestinal}"
-						class="sn-selectfield__select "
+						class="sn-selectfield__select"
 						onchange="selectChange('SistemaGastrointestinal')">
 						<option value="">Selecione:</option>
 						<option th:each="t: ${tiposSistemaGastrointestinal}"
@@ -191,7 +191,7 @@
 						for="inputTextSistemaGastrointestinal">Comentário</label> <input
 						id="inputTextSistemaGastrointestinal"
 						th:field="*{sistemaGastrointestinalComentario}"
-						class="sn-textfield__input" type="text" /> <label
+						class="sn-textfield__input" type="text" maxlength="255"/> <label
 						class="sn-textfield__messages sn-error-text"
 						th:if="${#fields.hasErrors('sistemaGastrointestinalComentario')}"
 						th:errors="*{sistemaGastrointestinalComentario}">Error
@@ -219,7 +219,7 @@
 				</label>
 				<div class="sn-textfield mdl-cell mdl-cell--12-col">
 					<label class="sn-textfield__label" for="inputTextMastigacao">Comentários</label>
-					<input id="inputTextMastigacao" type="text"
+					<input id="inputTextMastigacao" type="text" maxlength="255"
 						th:field="*{mastigacaoComentario}" class="sn-textfield__input" />
 					<label class="sn-textfield__messages sn-error-text"
 						th:if="${#fields.hasErrors('mastigacaoComentario')}"
@@ -235,7 +235,7 @@
 				</label>
 				<div class="sn-textfield mdl-cell mdl-cell--12-col">
 					<label class="sn-textfield__label" for="inputTextDisfagia">Comentários</label>
-					<input id="inputTextDisfagia" type="text"
+					<input id="inputTextDisfagia" type="text" maxlength="255"
 						th:field="*{disfagiaComentario}" class="sn-textfield__input" />
 					<label class="sn-textfield__messages sn-error-text"
 						th:if="${#fields.hasErrors('disfagiaComentario')}"
@@ -251,7 +251,7 @@
 				</label>
 				<div class="sn-textfield mdl-cell mdl-cell--12-col">
 					<label class="sn-textfield__label" for="inputTextOdinofagia">Comentários</label>
-					<input id="inputTextOdinofagia" type="text"
+					<input id="inputTextOdinofagia" type="text" maxlength="255"
 						th:field="*{odinofagiaComentario}" class="sn-textfield__input" />
 					<label class="sn-textfield__messages sn-error-text"
 						th:if="${#fields.hasErrors('odinofagiaComentario')}"
@@ -267,7 +267,7 @@
 				</label>
 				<div class="sn-textfield mdl-cell mdl-cell--12-col">
 					<label class="sn-textfield__label" for="inputTextPirose">Comentários</label>
-					<input id="inputTextPirose" type="text"
+					<input id="inputTextPirose" type="text" maxlength="255"
 						th:field="*{piroseComentario}" class="sn-textfield__input" />
 					<label class="sn-textfield__messages sn-error-text"
 						th:if="${#fields.hasErrors('piroseComentario')}"
@@ -283,7 +283,7 @@
 				</label>
 				<div class="sn-textfield mdl-cell mdl-cell--12-col">
 					<label class="sn-textfield__label" for="inputTextNausea">Comentários</label>
-					<input id="inputTextNausea" type="text"
+					<input id="inputTextNausea" type="text" maxlength="255"
 						th:field="*{nauseaComentario}" class="sn-textfield__input" />
 					<label class="sn-textfield__messages sn-error-text"
 						th:if="${#fields.hasErrors('nauseaComentario')}"
@@ -299,7 +299,7 @@
 				</label>
 				<div class="sn-textfield mdl-cell mdl-cell--12-col">
 					<label class="sn-textfield__label" for="inputTextVomito">Comentários</label>
-					<input id="inputTextVomito" type="text"
+					<input id="inputTextVomito" type="text" maxlength="255"
 						th:field="*{vomitoComentario}" class="sn-textfield__input" />
 					<label class="sn-textfield__messages sn-error-text"
 						th:if="${#fields.hasErrors('vomitoComentario')}"
@@ -315,7 +315,7 @@
 				</label>
 				<div class="sn-textfield mdl-cell mdl-cell--12-col">
 					<label class="sn-textfield__label" for="inputTextDiarreia">Comentários</label>
-					<input id="inputTextDiarreia" type="text"
+					<input id="inputTextDiarreia" type="text" maxlength="255"
 						th:field="*{diarreiaComentario}" class="sn-textfield__input" />
 					<label class="sn-textfield__messages sn-error-text"
 						th:if="${#fields.hasErrors('diarreiaComentario')}"
@@ -331,7 +331,7 @@
 				</label>
 				<div class="sn-textfield mdl-cell mdl-cell--12-col">
 					<label class="sn-textfield__label" for="inputTextConstipacao">Comentários</label>
-					<input id="inputTextConstipacao" type="text"
+					<input id="inputTextConstipacao" type="text" maxlength="255"
 						th:field="*{constipacaoComentario}" class="sn-textfield__input" />
 					<label class="sn-textfield__messages sn-error-text"
 						th:if="${#fields.hasErrors('constipacaoComentario')}"
@@ -349,7 +349,7 @@
 				</label>
 				<div class="sn-textfield mdl-cell mdl-cell--12-col">
 					<label class="sn-textfield__label" for="inputTextAlergia">Comentários</label>
-					<input id="inputTextAlergia" type="text"
+					<input id="inputTextAlergia" type="text" maxlength="255"
 						th:field="*{alergiaComentario}" class="sn-textfield__input" />
 					<label class="sn-textfield__messages sn-error-text"
 						th:if="${#fields.hasErrors('alergiaComentario')}"
@@ -365,7 +365,7 @@
 				</label>
 				<div class="sn-textfield mdl-cell mdl-cell--12-col">
 					<label class="sn-textfield__label" for="inputTextIntolerancia">Comentários</label>
-					<input id="inputTextIntolerancia" type="text"
+					<input id="inputTextIntolerancia" type="text" maxlength="255"
 						th:field="*{intoleranciaComentario}" class="sn-textfield__input" />
 					<label class="sn-textfield__messages sn-error-text"
 						th:if="${#fields.hasErrors('intoleranciaComentario')}"
