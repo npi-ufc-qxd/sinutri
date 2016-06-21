@@ -62,8 +62,10 @@ public class PacienteController {
 	@RequestMapping(value = "/{idPaciente}/InqueritoAlimentar", method = RequestMethod.POST)
 	public String adicionarInqueritoAlimentar(Model model, @PathVariable("idPaciente") Long idPaciente, @Valid @ModelAttribute("inqueritoAlimentar") InqueritoAlimentar inqueritoAlimentar, BindingResult result, RedirectAttributes redirectAttributes){
 		Paciente paciente = pacienteService.buscarPacientePorId(idPaciente);
+		List<Mensagem> mensagens = new ArrayList<Mensagem>();
 		if(isInvalido(paciente)){
-			redirectAttributes.addFlashAttribute("erro", "Paciente inexistente.");
+			mensagens.add(new Mensagem("Paciente inexistente", Mensagem.Tipo.ERRO, Mensagem.Prioridade.ALTA));
+			redirectAttributes.addFlashAttribute("mensagens", mensagens);
 			return "redirect:/Nutricao/Buscar";
 		}
 		if (result.hasErrors()) {
@@ -72,7 +74,8 @@ public class PacienteController {
 		String cpfPessoaLogada = getCpfPessoaLogada();
 		Servidor nutricionista = pessoaService.buscarServidorPorCpf(cpfPessoaLogada);
 		if(nutricionista == null){
-			redirectAttributes.addFlashAttribute("erro", "Nutricionista inexistente.");
+			mensagens.add(new Mensagem("Nutricionista inexistente", Mensagem.Tipo.ERRO, Mensagem.Prioridade.ALTA));
+			redirectAttributes.addFlashAttribute("mensagens", mensagens);
 			return "redirect:/Nutricao/Buscar";
 		}
 		inqueritoAlimentar.setNutricionista(nutricionista);
@@ -83,8 +86,10 @@ public class PacienteController {
 	@RequestMapping(value = "/{idPaciente}/InqueritoAlimentar/{idInqueritoAlimentar}/Editar", method = RequestMethod.GET)
 	public String formEditarInqueritoAlimentar(@PathVariable("idInqueritoAlimentar") Long idInqueritoAlimentar, @PathVariable("idPaciente") Long idPaciente, Model model, RedirectAttributes redirectAttributes ){
 		InqueritoAlimentar inqueritoAlimentar = consultaService.buscarInqueritoAlimentarPorId(idInqueritoAlimentar);
+		List<Mensagem> mensagens = new ArrayList<Mensagem>();
 		if(inqueritoAlimentar == null){
-			redirectAttributes.addFlashAttribute("erro", "Inquérito Alimentar não encontrado");
+			mensagens.add(new Mensagem("Inquérito Alimentar não encontrado.", Mensagem.Tipo.ERRO, Mensagem.Prioridade.MEDIA));
+			redirectAttributes.addFlashAttribute("mensagens", mensagens);
 			return "redirect:/Paciente/"+idPaciente;
 		}
 		model.addAttribute("inqueritoAlimentar", inqueritoAlimentar);
@@ -104,8 +109,10 @@ public class PacienteController {
 	@RequestMapping(value = "/{idPaciente}/InqueritoAlimentar/{idInqueritoAlimentar}", method = RequestMethod.GET)
 	public String visualizarInqueritoAlimentar(@PathVariable("idInqueritoAlimentar") Long idInqueritoAlimentar, @PathVariable("idPaciente") Long idPaciente, Model model, RedirectAttributes redirectAttributes ){
 		InqueritoAlimentar inqueritoAlimentar = consultaService.buscarInqueritoAlimentarPorId(idInqueritoAlimentar);
+		List<Mensagem> mensagens = new ArrayList<Mensagem>();
 		if(inqueritoAlimentar == null){
-			redirectAttributes.addFlashAttribute("erro", "Inquérito Alimentar não encontrado.");
+			mensagens.add(new Mensagem("Inquérito Alimentar não encontrado.", Mensagem.Tipo.ERRO, Mensagem.Prioridade.MEDIA));
+			redirectAttributes.addFlashAttribute("mensagens", mensagens);
 			return "redirect:/Paciente/"+idPaciente;
 		}
 		model.addAttribute("inqueritoAlimentar", inqueritoAlimentar);
@@ -116,8 +123,10 @@ public class PacienteController {
 	@RequestMapping(value = "/{idPaciente}/InqueritoAlimentar/{idInqueritoAlimentar}/Excluir", method = RequestMethod.GET)
 	public String excluirInqueritoAlimentar(@PathVariable("idPaciente") Long idPaciente, @PathVariable("idInqueritoAlimentar") Long idInqueritoAlimentar, RedirectAttributes redirectAttributes){
 		InqueritoAlimentar inqueritoAlimentar = consultaService.buscarInqueritoAlimentarPorId(idInqueritoAlimentar);
+		List<Mensagem> mensagens = new ArrayList<Mensagem>();
 		if(inqueritoAlimentar == null){
-			redirectAttributes.addFlashAttribute("erro", "Inquérito Alimentar não encontrado.");
+			mensagens.add(new Mensagem("Inquérito Alimentar não encontrado.", Mensagem.Tipo.ERRO, Mensagem.Prioridade.MEDIA));
+			redirectAttributes.addFlashAttribute("mensagens", mensagens);
 			return "redirect:/Paciente/"+idPaciente;
 		}
 		consultaService.excluirInqueritoAlimentar(inqueritoAlimentar);
