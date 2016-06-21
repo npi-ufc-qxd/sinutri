@@ -18,7 +18,7 @@ public class ConsultaServiceImpl implements ConsultaService {
 	private InqueritoAlimentarRepository inqueritoAlimentarRepository;
 	
 	@Inject
-	AnamneseRepository anamneseRepository;
+	private AnamneseRepository anamneseRepository;
 	
 	@Override
 	public void adicionarInqueritoAlimentar(InqueritoAlimentar inqueritoAlimentar, Paciente paciente) {

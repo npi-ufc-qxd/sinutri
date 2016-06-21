@@ -147,7 +147,7 @@ public class PacienteController {
 	}
 	
 	@RequestMapping(value = "/{idPaciente}/Anamnese",method = RequestMethod.POST)
-	public String AdicionarAnamnese(@PathVariable("idPaciente") Long idPaciente, @Valid Anamnese anamnese, BindingResult result, Model model,
+	public String adicionarAnamnese(@PathVariable("idPaciente") Long idPaciente, @Valid Anamnese anamnese, BindingResult result, Model model,
 			RedirectAttributes redirectAttributes
 			){
 		ArrayList<Mensagem> mensagens = new ArrayList<>();
