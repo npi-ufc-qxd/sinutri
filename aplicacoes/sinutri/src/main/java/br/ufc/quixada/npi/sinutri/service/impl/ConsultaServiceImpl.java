@@ -29,18 +29,18 @@ public class ConsultaServiceImpl implements ConsultaService {
 		
 		avaliacaoLaboratorialRepository.save(avaliacaoLaboratorial);
 	}
-
-	@Override
-	public AvaliacaoLaboratorial buscarAvaliacaoLaboratorialPorId(Long idAvaliacaoLaboratorial) {
-		
-		return avaliacaoLaboratorialRepository.findOne(idAvaliacaoLaboratorial);
-	}
-
+	
 	@Override
 	public void editarAvaliacaoLaboratorial(AvaliacaoLaboratorial avaliacaoLaboratorial) {
 		
 		avaliacaoLaboratorial.setAtualizado(new Date());
 		avaliacaoLaboratorialRepository.save(avaliacaoLaboratorial);
+	}
+	
+	@Override
+	public AvaliacaoLaboratorial buscarAvaliacaoLaboratorialPorId(Long idAvaliacaoLaboratorial) {
+		
+		return avaliacaoLaboratorialRepository.findOne(idAvaliacaoLaboratorial);
 	}
 
 	@Override
