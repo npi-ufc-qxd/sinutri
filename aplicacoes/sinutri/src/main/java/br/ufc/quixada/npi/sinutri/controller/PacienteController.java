@@ -123,19 +123,7 @@ public class PacienteController {
 		return paciente == null;
 	}
 	
-	@RequestMapping(value = "/{idPaciente}/Anamnese/{idAnamnese}/",method = RequestMethod.GET)
-	public String visualizarAnamnese(@PathVariable("idPaciente") Long idPaciente,@PathVariable("idAnamnese") Long idAnamnese,Model model, RedirectAttributes redirectAttributes){
-		Anamnese anamnese = consultaService.buscarAnamnese(idAnamnese);
-		if(anamnese != null){
-			model.addAttribute("anamnese",anamnese);
-			return "/anamnese/detalhes";
-		}else{
-			redirectAttributes.addFlashAttribute("erro", "Anamnese não encontrada.");
-			return "redirect:/Paciente/"+idPaciente+"/";
-		}
-	}
-	
-	@RequestMapping(value = "/{idPaciente}/Anamnese/",method = RequestMethod.GET)
+	@RequestMapping(value = "/{idPaciente}/Anamnese",method = RequestMethod.GET)
 	public String formAdicionarAnamnese(@PathVariable("idPaciente") Long idPaciente, Model model, RedirectAttributes redirectAttributes){
 		Paciente paciente =null;
 		paciente =  pacienteService.buscarPacientePorId(idPaciente);
@@ -151,11 +139,11 @@ public class PacienteController {
 			return "/anamnese/cadastrar";
 		}else{
 			redirectAttributes.addFlashAttribute("erro", "Paciente não encontrado. Faça uma nova pesquisa");
-			return "redirect:/Nutricao/Buscar/";			
+			return "redirect:/Nutricao/Buscar";			
 		}
 	}
 	
-	@RequestMapping(value = "/{idPaciente}/Anamnese/",method = RequestMethod.POST)
+	@RequestMapping(value = "/{idPaciente}/Anamnese",method = RequestMethod.POST)
 	public String AdicionarAnamnese(@PathVariable("idPaciente") Long idPaciente, @Valid Anamnese anamnese, BindingResult result, Model model){
 		if(result.hasErrors()){			
 			model.addAttribute("anamnese",anamnese);
@@ -167,23 +155,10 @@ public class PacienteController {
 		Servidor nutricionista = pessoaService.buscarServidorPorCpf(getCpfPessoaLogada());
 		anamnese.setNutricionista(nutricionista);
 		consultaService.adicionarAnamnese(anamnese);
-		return "redirect:/Paciente/"+idPaciente+"/Anamnese/"+anamnese.getId()+"/";
+		return "redirect:/Paciente/"+idPaciente+"/Anamnese/"+anamnese.getId();
 	}
 	
-	@RequestMapping(value = "/{idPaciente}/Anamnese/{idAnamnese}/Excluir/")
-	public String excluirAnamnese(@PathVariable("idPaciente") Long idPaciente,@PathVariable("idAnamnese") Long idAnamnese, RedirectAttributes redirectAttributes){
-		Anamnese anamnese = consultaService.buscarAnamnese(idAnamnese);
-		if(anamnese != null){
-			consultaService.excluirAnamnese(anamnese);
-			return "redirect:/Paciente/"+idPaciente+"/";
-		}else{
-			redirectAttributes.addFlashAttribute("erro", "Anamnese não encontrada.");
-			return "redirect:/Paciente/"+idPaciente+"/";			
-		}
-		
-	}
-	
-	@RequestMapping(value = "/{idPaciente}/Anamnese/{idAnamnese}/Editar/",method = RequestMethod.GET)
+	@RequestMapping(value = "/{idPaciente}/Anamnese/{idAnamnese}/Editar",method = RequestMethod.GET)
 	public String formEditarAnamnese( Model model, @PathVariable("idPaciente") Long idPaciente,@PathVariable("idAnamnese") Long idAnamnese, RedirectAttributes redirectAttributes){
 		Anamnese anamnese = consultaService.buscarAnamnese(idAnamnese);
 		
@@ -197,11 +172,11 @@ public class PacienteController {
 			return "/anamnese/editar";
 		}else{
 			redirectAttributes.addFlashAttribute("erro", "Anamnese não encontrada.");
-			return "redirect:/Paciente/"+idPaciente+"/";
+			return "redirect:/Paciente/"+idPaciente;
 		}
 	}
 	
-	@RequestMapping(value = "/{idPaciente}/Anamnese/{idAnamnese}/Editar/",method=RequestMethod.POST)
+	@RequestMapping(value = "/{idPaciente}/Anamnese/{idAnamnese}/Editar",method=RequestMethod.POST)
 	public String editarAnamnese(@PathVariable("idPaciente") Long idPaciente,@PathVariable("idAnamnese") Long idAnanmese,
 			@ModelAttribute("Ananmnese") @Valid Anamnese anamnese,
 			BindingResult result, Model model){
@@ -210,8 +185,33 @@ public class PacienteController {
 			return "/nutricao/anamnese/editar";
 		}		
 		consultaService.editarAnamnese(anamnese);
-		return "redirect:/Paciente/"+idPaciente+"/Anamnese/"+anamnese.getId()+"/";
-	}	
+		return "redirect:/Paciente/"+idPaciente+"/Anamnese/"+anamnese.getId();
+	}
+	
+	@RequestMapping(value = "/{idPaciente}/Anamnese/{idAnamnese}",method = RequestMethod.GET)
+	public String visualizarAnamnese(@PathVariable("idPaciente") Long idPaciente,@PathVariable("idAnamnese") Long idAnamnese,Model model, RedirectAttributes redirectAttributes){
+		Anamnese anamnese = consultaService.buscarAnamnese(idAnamnese);
+		if(anamnese != null){
+			model.addAttribute("anamnese",anamnese);
+			return "/anamnese/visualizar";
+		}else{
+			redirectAttributes.addFlashAttribute("erro", "Anamnese não encontrada.");
+			return "redirect:/Paciente/"+idPaciente;
+		}
+	}
+	
+	@RequestMapping(value = "/{idPaciente}/Anamnese/{idAnamnese}/Excluir")
+	public String excluirAnamnese(@PathVariable("idPaciente") Long idPaciente,@PathVariable("idAnamnese") Long idAnamnese, RedirectAttributes redirectAttributes){
+		Anamnese anamnese = consultaService.buscarAnamnese(idAnamnese);
+		if(anamnese != null){
+			consultaService.excluirAnamnese(anamnese);
+			return "redirect:/Paciente/"+idPaciente;
+		}else{
+			redirectAttributes.addFlashAttribute("erro", "Anamnese não encontrada.");
+			return "redirect:/Paciente/"+idPaciente;			
+		}
+		
+	}
 
 	private String getCpfPessoaLogada() {
 		return SecurityContextHolder.getContext().getAuthentication().getName();

@@ -8,6 +8,30 @@ $(document).ready(function() {
 	for (var i = 0; i < camposSelect.length; i++) {
 		selectChange(camposSelect[i])
 	}
+	
+	$( "#bt-cancelar" ).click(function(event) {
+		alert("sdfgdfgdf")
+        var dialog = sn_base.doRegistryDialog({
+            title: "Remover",
+            dialog: "#modal-cancelar",
+            buttons: [
+                    {
+                       label: "Excluir",
+                       attrs: {href: $(this).attr("href")},
+                       action: function() {
+                           dialog.close();
+                       }
+                    },
+                    {
+                        label: "Cancelar",
+                        action: function() {
+                            dialog.close();
+                        }
+                    }
+            ]
+            });                     dialog.showModal();
+        event.preventDefault();
+    });
 });
 //Usa o sufixo do id do inputText para ocultar o inputText e o label
 function esconderCampo(nome) {
