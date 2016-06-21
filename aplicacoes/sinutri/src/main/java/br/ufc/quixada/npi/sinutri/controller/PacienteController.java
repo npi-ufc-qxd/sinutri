@@ -130,17 +130,22 @@ public class PacienteController {
 	}
 	
 	@RequestMapping(value = "/Cadastrar", method = RequestMethod.POST)
-	public String adicionarPacienteExterno(Model model, @ModelAttribute("pessoa") Pessoa pessoa, BindingResult result, RedirectAttributes redirectAttributes){
+	public String adicionarPacienteExterno(Model model, @Valid @ModelAttribute("pessoa") Pessoa pessoa, BindingResult result, RedirectAttributes redirectAttributes){
 		
 		if(result.hasErrors()){
 			model.addAttribute("pessoa", pessoa);
-			return "/paciente/cadastrar";
+			return "redirect:/Paciente/Cadastrar";
 		}
 		
 		Paciente paciente = new Paciente();
 		
 		paciente.setPessoa(pessoa);
-		pacienteService.adicionarPaciente(paciente);
+		try{
+			pacienteService.adicionarPaciente(paciente);
+		}catch(Exception e){
+			redirectAttributes.addFlashAttribute("erro", "CPF existente");
+			return "redirect:/Paciente/Cadastrar";
+		}
 		
 		model.addAttribute("pessoa", pessoa);
 		
@@ -154,7 +159,7 @@ public class PacienteController {
 		
 		if(isInvalido(paciente)){
 			redirectAttributes.addFlashAttribute("erro", "Paciente inexistente.");
-			return "nutricao/buscar";
+			return "redirect:/Nutricao/Buscar";
 		}
 		
 		Pessoa pessoa = pessoaService.buscarPessoaPorId(idPaciente);
@@ -170,7 +175,7 @@ public class PacienteController {
 		
 		if(isInvalido(paciente)){
 			redirectAttributes.addFlashAttribute("erro", "Paciente inexistente.");
-			return "nutricao/buscar";
+			return "redirect:/Nutricao/Buscar";
 		}
 		
 		pessoaService.editarPessoa(pessoa);
@@ -186,7 +191,7 @@ public class PacienteController {
 		
 		if(isInvalido(paciente)){
 			redirectAttributes.addFlashAttribute("erro", "Paciente inexistente.");
-			return "nutricao/buscar";
+			return "redirect:/Nutricao/Buscar";
 		}
 		
 		Pessoa pessoa = pessoaService.buscarPessoaPorId(idPaciente);
@@ -196,7 +201,9 @@ public class PacienteController {
 		return "/paciente/visualizar"; 
 	}
 	
-	@RequestMapping(value= {"/{idPaciente}/Excluir"}, method = RequestMethod.GET)
+	/* A ação de excluir um paciente não será incluida nesta Sprint (4)
+	 * 
+	 * @RequestMapping(value= {"/{idPaciente}/Excluir"}, method = RequestMethod.GET)
 	public String excluirPaciente(@PathVariable("idPaciente") Long idPaciente, RedirectAttributes redirectAttributes, Model model){
 		
 		Paciente paciente = pacienteService.buscarPacientePorId(idPaciente);
@@ -204,15 +211,15 @@ public class PacienteController {
 		
 		if(isInvalido(paciente)){
 			redirectAttributes.addFlashAttribute("erro", "Paciente inexistente.");
-			return "nutricao/buscar";
+			return "redirect:/Nutricao/Buscar";
 		}
 		
 		pacienteService.excluirPaciente(paciente);
 		pessoaService.excluirPessoa(pessoa);
 		
 		
-		return "nutricao/buscar";
-	}
+		return "redirect:/Nutricao/Buscar";
+	}*/
 	
 	private boolean isInvalido(Paciente paciente){
 		return paciente == null;

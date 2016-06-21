@@ -101,37 +101,10 @@
 </section>
 
 <section layout:fragment="js">
-
-	<script type="text/javascript">
-			
-			$("#cancelar").click(function(event) {
-		          var dialog = sn_base.doRegistryDialog({
-		              title: "Você realmente deseja descartar as alterações?",
-		              dialog: "#modal-cancelar",
-		              buttons: [
-		                      {
-		                         label: "SIM",
-		                         attrs: {href: $(this).attr("href")},
-		                         action: function() {
-		                             dialog.close();
-		                         }
-		                      },
-		                      {
-		                          label: "NÃO",
-		                          action: function() {
-		                              dialog.close();
-		                          }
-		                      }
-		              ]
-		              });                     
-		          dialog.showModal();
-		          event.preventDefault();
-		      });
-
-		</script>
-
         <script type="text/javascript" th:src="@{/js/moment.js}"></script>
         <script type="text/javascript" th:src="@{/js/material-date-picker.js}"></script>
+        <script type="text/javascript" th:src="@{/js/paciente-externo-cadastrar.js}"></script>
+        <script type="text/javascript" th:src="@{/js/jquery.mask.min.js}"></script>
         <script type="text/javascript" th:src="@{/js/paciente-externo-cadastrar.js}"></script>
 </section>
 

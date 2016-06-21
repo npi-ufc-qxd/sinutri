@@ -21,6 +21,7 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
+import javax.validation.Valid;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -35,6 +36,7 @@ public class Pessoa {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
+	@Valid
 	@Column(unique = true)
 	private String cpf;	
 

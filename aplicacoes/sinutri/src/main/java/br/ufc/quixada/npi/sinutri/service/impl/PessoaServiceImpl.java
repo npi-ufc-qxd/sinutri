@@ -3,7 +3,6 @@ package br.ufc.quixada.npi.sinutri.service.impl;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import br.ufc.quixada.npi.ldap.service.UsuarioService;
 import br.ufc.quixada.npi.sinutri.model.Papel;
 import br.ufc.quixada.npi.sinutri.model.Pessoa;
 import br.ufc.quixada.npi.sinutri.model.Servidor;

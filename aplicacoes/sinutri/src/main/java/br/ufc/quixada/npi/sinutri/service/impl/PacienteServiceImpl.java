@@ -4,7 +4,6 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 import br.ufc.quixada.npi.sinutri.model.Paciente;
-import br.ufc.quixada.npi.sinutri.model.Pessoa;
 import br.ufc.quixada.npi.sinutri.repository.PacienteRepository;
 import br.ufc.quixada.npi.sinutri.service.PacienteService;
 
@@ -15,11 +14,6 @@ public class PacienteServiceImpl implements PacienteService{
 	private PacienteRepository pacienteRepository;
 	
 	@Override
-	public Paciente buscarPacientePorId(Long idPaciente) {
-		return pacienteRepository.findOne(idPaciente);
-	}
-
-	@Override
 	public void adicionarPaciente(Paciente paciente) {
 		pacienteRepository.save(paciente);	
 	}
@@ -28,6 +22,11 @@ public class PacienteServiceImpl implements PacienteService{
 	public void editarPaciente(Paciente paciente) {
 		pacienteRepository.save(paciente);
 		
+	}
+	
+	@Override
+	public Paciente buscarPacientePorId(Long idPaciente) {
+		return pacienteRepository.findOne(idPaciente);
 	}
 
 	@Override
