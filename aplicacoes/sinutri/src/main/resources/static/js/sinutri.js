@@ -21,6 +21,7 @@ $(document).ready(function() {
 		sn_base.doInit();
 		sn_parallax_background.doInit();
 		sn_toast.doInit();
+		sn_inputmask.doInit();
 			
 	});
 
@@ -243,7 +244,7 @@ var sn_base = function() {
 			tryExecute(setupScrollEvents, "sn_base", "Setup scroll events done!", "Setup scroll events error!");
 			tryExecute(setupDrawer, "sn_base", "Setup drawer done!", "Setup drawer error!");
 			tryExecute(setupFab, "sn_base", "Setup Fab done!", "Setup Fab error!");	
-			// tryExecute(setupSnackBar, "sn_base", "Setup SnackBar done!", "Setup SnackBar error!");	
+			tryExecute(setupSnackBar, "sn_base", "Setup SnackBar done!", "Setup SnackBar error!");	
 
 			tryExecute(toggleDrawer, "sn_base", "Toggle drawer done!", "Toggle drawer error!");
 			tryExecute(showContent, "sn_base", "Show content done!", "Show content error!");	
@@ -537,6 +538,8 @@ var DynamicList = function(rootEl, settings) {
 		removeButton: ".dl-el-remove", 
 		// Seletor do botão responsável por editar items
 		editButton: ".dl-el-edit", 
+		// Seletor do botão responsável por clonar items
+		cloneButton: ".dl-el-clone", 
 
 		// Indica se os atributos terão o id incrementado automaticamente.
 		// Nesse caso, um id "elemento-0" sera incrementado para "elemento-1" e
@@ -560,6 +563,8 @@ var DynamicList = function(rootEl, settings) {
 		onItemRemoved: function(item) {}, 
 		onItemEdit: function(item) { return true; },
 		onItemEdited: function(item) {},
+		onItemClone: function(item) { return true; },
+		onItemCloned: function(item) {},
 		
 	};
 
@@ -720,6 +725,29 @@ var DynamicList = function(rootEl, settings) {
 
 				setRemoveFunc(item);
 
+				var setCloneFunc = function(rootEl) {
+
+					rootEl.children(self.settings.cloneButton).each(function(index, el) {
+						
+						if(!$(el).isDynamicList()) {
+
+							$(el).click(function() {
+
+								if(self.settings.onItemClone(rootEl))
+									self.doCloneItem(rootEl);
+								
+							});
+
+							setCloneFunc($(el));
+
+						}
+
+					});
+
+				}
+
+				setCloneFunc(item);
+
 			}
 
 		}
@@ -810,6 +838,32 @@ var DynamicList = function(rootEl, settings) {
 			}
 
 			setEditFunc(toRemove);
+
+
+			var setCloneFunc = function(rootEl) {
+
+				rootEl.children(self.settings.cloneButton).each(function(index, el) {
+					
+					$(el).click(function() {
+
+						if(self.settings.onItemClone(toRemove))
+							self.doCloneItem(toRemove);
+						
+					})
+
+				});
+
+				rootEl.children().each(function(index, el) {
+					
+					if(!$(el).isDynamicList()) {
+						setCloneFunc($(el));
+					}
+
+				});
+
+			}
+
+			setCloneFunc(toRemove);
 
 		});
 		//***
@@ -916,6 +970,31 @@ var DynamicList = function(rootEl, settings) {
 
 			setEditFunc(newItem);
 
+			var setCloneFunc = function(rootEl) {
+
+				rootEl.children(self.settings.cloneButton).each(function(index, el) {
+					
+					$(el).click(function() {
+
+						if(self.settings.onItemClone(newItem))
+							self.doCloneItem(newItem);
+						
+					})
+
+				});
+
+				rootEl.children().each(function(index, el) {
+					
+					if(!$(el).isDynamicList()) {
+						setCloneFunc($(el));
+					}
+
+				});
+
+			}
+
+			setCloneFunc(newItem);
+
 			if(data === undefined)
 				data = self.settings.defaultData;
 			
@@ -938,6 +1017,166 @@ var DynamicList = function(rootEl, settings) {
 
 			newItem.data("sort", data.sortValue);
 			
+
+		} else {
+
+			self.error("Nenhum elemento com o seletor " + self.settings.cloneableElement + " foi encontrado!");
+
+		}
+
+		componentHandler.upgradeElement(newItem.get(0));
+		newItem.find("*").each(function() {
+			
+			componentHandler.upgradeElement(this);
+
+		});
+
+		componentHandler.upgradeDom();
+
+		self.settings.onItemAdded(newItem);
+
+		self.showStatus("Adding");
+
+		self.sortItems();
+
+		newItem.css("min-height", "0");
+		newItem.css("min-width", "0");
+		newItem.css("border-radius", "50px");
+		newItem.css("width", "72px");
+		var anim = new Animation(newItem).doSequentially(
+			new Animation().doAnimate(
+				{"width": "100%", specialEasing: {width: "linear"}},
+				{duration: 200, queue: false}
+			), 
+			new Animation().doAnimate(
+				{"border-radius": "2px", specialEasing: {"border-radius": "linear"}},
+				{duration: 50, queue: false}
+			)
+		).doPlay();
+
+		return newItem;
+		
+	} 
+
+	this.doCloneItem = function(item) {
+		
+		var self = this;
+
+		var items = this.parent.children(this.settings.cloneableElement);
+		
+		if(self.template !== undefined) {
+			
+			var last = items.length == 0? undefined: items.last();
+			var newItem = item.clone(true);
+			newItem.find("*").off("click");
+
+			if(last === undefined)
+				self.parent.append(newItem);
+			else 
+				newItem.insertAfter(last);
+
+			newItem.css("display", self.settings.defaultItemDisplay);
+
+			var setSetupFunc = function(rootEl) {
+
+				rootEl.children().each(function(index, elm) {
+					
+					var el = $(elm);
+
+					if(el.isDynamicList()) {
+
+						var settings = el.data("dynamic-list-settings");
+						var dl = el.dynamicList(settings);
+						dl.doClearItems();
+
+					} else {
+
+						setSetupFunc(el);
+
+					}
+
+				});
+
+			}
+
+			setSetupFunc(newItem);
+
+			var setRemoveFunc = function(rootEl) {
+
+				rootEl.children(self.settings.removeButton).each(function(index, el) {
+					
+					$(el).click(function() {
+
+						if(self.settings.onItemRemove(newItem))
+							self.doRemoveItem(newItem);
+						
+					})
+
+				});
+
+				rootEl.children().each(function(index, el) {
+					
+					if(!$(el).isDynamicList()) {
+						setRemoveFunc($(el));
+					}
+
+				});
+
+			}
+
+			setRemoveFunc(newItem);
+
+			var setEditFunc = function(rootEl) {
+
+				rootEl.children(self.settings.editButton).each(function(index, el) {
+					
+					$(el).click(function() {
+
+						if(self.settings.onItemEdit(newItem, newItem.data("index")))
+							self.doEditItem(newItem);
+						
+					})
+
+				});
+
+				rootEl.children().each(function(index, el) {
+					
+					if(!$(el).isDynamicList()) {
+						setEditFunc($(el));
+					}
+
+				});
+
+			}
+
+			setEditFunc(newItem);
+
+			var setCloneFunc = function(rootEl) {
+
+				rootEl.children(self.settings.cloneButton).each(function(index, el) {
+					
+					$(el).click(function() {
+
+						if(self.settings.onCloneEdit(newItem))
+							self.doCloneItem(newItem);
+						
+					})
+
+				});
+
+				rootEl.children().each(function(index, el) {
+					
+					if(!$(el).isDynamicList()) {
+						setCloneFunc($(el));
+					}
+
+				});
+
+			}
+
+			setCloneFunc(newItem);
+
+			newItem.data("sort", item.data("sortValue"));
 
 		} else {
 
@@ -1206,19 +1445,19 @@ var sn_toast = function() {
 		var colorLoading = "";
 		var icon = "";
 
-		if(type.toLowerCase() === "informacao") {
+		if(type === "informacao") {
 			color = "mdl-color-text--blue-600";
 			colorLoading = "mdl-color--blue-300";
 			icon = "info";
-		} else if(type.toLowerCase() === "sucesso") {
+		} else if(type === "sucesso") {
 			color = "mdl-color-text--green-600";
 			colorLoading = "mdl-color--green-300";
 			icon = "done";
-		} else if(type.toLowerCase() === "aviso") {
+		} else if(type === "aviso") {
 			color = "mdl-color-text--orange-600";
 			colorLoading = "mdl-color--orange-300";
 			icon = "warning";
-		} else if(type.toLowerCase() === "erro") {
+		} else if(type === "erro") {
 			color = "mdl-color-text--red-600";
 			colorLoading = "mdl-color--red-300";
 			icon = "error";
@@ -1350,6 +1589,175 @@ var sn_toast = function() {
 
 			showToast(toast, delay, postDelay);
 
+		}
+
+	};
+
+} ();
+
+
+var sn_inputmask = function() {
+
+	var inputTipTemplate = "" +
+		"<div class=\"sn-input-tip\"> Tip </div>"
+	"";
+
+	var createTip = function() {
+		var tip = $($.parseHTML(inputTipTemplate));
+		tip.hide();
+		return tip;
+	}
+
+	var showTip = function(tip, text) {
+		
+		if(!tip.data("active")) {
+			
+			tip.data("active", true);
+			tip.text(text);
+			tip.fadeIn("fast");
+
+			setTimeout(function() {
+				tip.data("active", false);
+				tip.fadeOut("fast");
+			}, 3000);
+		}
+
+	}
+
+	var addUnit = function(el) {
+		//if(el.data("unit")) {
+		//	el.val( el.val() + " " + el.data("unit") );
+		//}
+	}
+
+	var removeUnit = function(el) {
+		//el.val( el.val().replace(" " + el.data("unit"), "") );
+	}
+
+	return {
+
+		doInit : function() {
+
+			$("input[type=text]").each(function(_, e) {
+
+				var el = $(e);
+				var tip = createTip();
+				el.parent().append(tip);
+				el.on("change paste keyup", function() {
+					var input = $(this);
+
+					if(input.data("max-length")) {
+						var reg1 = new RegExp("^.{0," + input.data("max-length") + "}$");
+						var reg2 = new RegExp("^.{0," + input.data("max-length") + "}");
+
+						if(!reg1.test(input.val())) {
+							input.val( input.val().match(reg2)[0] );
+							showTip(tip, input.data("max-length-tip"));
+						}
+					}
+				});
+
+			});
+
+			$("input[type=email]").each(function(_, e) {
+
+				var el = $(e);
+				var tip = createTip();
+				el.parent().append(tip);
+				el.on("change paste keyup", function() {
+					var input = $(this);
+
+					var reg = /^[-a-z0-9~!$%^&*_=+}{\'?]+(\.[-a-z0-9~!$%^&*_=+}{\'?]+)*@([a-z0-9_][-a-z0-9_]*(\.[-a-z0-9_]+)*\.(aero|arpa|biz|com|coop|edu|gov|info|int|mil|museum|name|net|org|pro|travel|mobi|[a-z][a-z])|([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}))(:[0-9]{1,5})?$/i
+
+					if(!reg.test(input.val())) {
+						input.addClass("sn-textfield__input-error");
+						showTip(tip, input.data("type-tip"));
+					} else {
+						input.removeClass("sn-textfield__input-error");
+					}
+				});
+
+			});
+
+			$("input[type=integer], input[type=decimal]").each(function(_, e) {
+
+				var regInteger1 = /^\-?(\d+)?$/
+				var regInteger2 = /^\-?(\d+)?/
+
+				var regDecimal1 = /^\-?(\d+)?\.?(\d{1,2})?$/
+				var regDecimal2 = /^\-?(\d+)?\.?(\d{1,2})?/
+				var regDecimal3 = /^\-?(\d+)?\.$/
+				var regDecimal4 = /^\-?\.(\d{1,2})?$/
+
+				var el = $(e);
+				var tip = createTip();
+				el.parent().append(tip);
+
+				if(el.val() === "")
+					if(el.attr("type") === "integer") 					
+						el.val("0");
+					if(el.attr("type") === "decimal") 					
+						el.val("0.00");
+				addUnit(el);
+
+				el.on("change paste keyup", function() {
+					var input = $(this);
+
+					if(input.attr("type") === "integer") {
+						
+						if(!regInteger1.test(input.val())) {
+							var match = input.val().match(regInteger2);
+							match = match == null? []: match;
+							input.val( match.length > 0? match[0]: "" );
+						}
+
+					} else if(input.attr("type") === "decimal") {
+						console.log(input.val());
+						if(!regDecimal1.test(input.val())) {
+							var match = input.val().match(regDecimal2);
+							match = match == null? []: match;
+							input.val( match.length > 0? match[0]: "" );
+						}
+
+					}
+
+					var val = parseFloat(input.val());
+
+					if(input.data("max") !== undefined) {
+						var max = parseFloat(input.data("max"));
+						if(val > max) {
+							input.val("" + max);
+							showTip(tip, input.data("max-tip"));
+						}
+					}
+					if(input.data("min") !== undefined) {
+						var min = parseFloat(input.data("min"));						
+						if(val < min) {
+							input.val("" + min);
+							showTip(tip, input.data("min-tip"));
+						}
+					}
+					
+				});
+
+				el.focusin(function() {
+					removeUnit($(this));
+				});
+
+				el.focusout(function() {
+					var input = $(this);
+					if(input.val() == "." || input.val() == "" || input.val() == "-")
+						input.val("0");
+					if(input.attr("type") === "integer") 					
+						input.val( parseInt(input.val()) );
+					if(input.attr("type") === "decimal") 					
+						input.val( parseFloat(input.val()).toFixed(2) );
+
+					addUnit(input);
+				});
+
+			});
+			
 		}
 
 	};

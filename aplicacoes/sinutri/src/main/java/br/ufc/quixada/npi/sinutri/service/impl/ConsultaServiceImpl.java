@@ -7,7 +7,9 @@ import javax.inject.Named;
 
 import br.ufc.quixada.npi.sinutri.model.InqueritoAlimentar;
 import br.ufc.quixada.npi.sinutri.model.Paciente;
+import br.ufc.quixada.npi.sinutri.model.Pessoa;
 import br.ufc.quixada.npi.sinutri.repository.InqueritoAlimentarRepository;
+import br.ufc.quixada.npi.sinutri.repository.PacienteRepository;
 import br.ufc.quixada.npi.sinutri.service.ConsultaService;
 
 @Named
@@ -15,6 +17,9 @@ public class ConsultaServiceImpl implements ConsultaService {
 
 	@Inject
 	private InqueritoAlimentarRepository inqueritoAlimentarRepository;
+	
+	@Inject
+	private PacienteRepository pacienteRepository;
 	
 	
 	@Override
@@ -39,4 +44,5 @@ public class ConsultaServiceImpl implements ConsultaService {
 	public void excluirInqueritoAlimentar(InqueritoAlimentar inqueritoAlimentar) {
 		inqueritoAlimentarRepository.delete(inqueritoAlimentar);
 	}
+
 }
