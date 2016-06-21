@@ -1,5 +1,8 @@
 package br.ufc.quixada.npi.sinutri.controller;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.inject.Inject;
 import javax.validation.Valid;
 
@@ -21,6 +24,7 @@ import br.ufc.quixada.npi.sinutri.model.enuns.Sexo;
 import br.ufc.quixada.npi.sinutri.service.ConsultaService;
 import br.ufc.quixada.npi.sinutri.service.PacienteService;
 import br.ufc.quixada.npi.sinutri.service.PessoaService;
+import br.ufc.quixada.npi.sinutri.model.Mensagem;
 
 @Controller
 @RequestMapping(value = "/Paciente")
@@ -132,10 +136,9 @@ public class PacienteController {
 	@RequestMapping(value = "/Cadastrar", method = RequestMethod.POST)
 	public String adicionarPacienteExterno(Model model, @Valid @ModelAttribute("pessoa") Pessoa pessoa, BindingResult result, RedirectAttributes redirectAttributes){
 		
-		if(result.hasErrors()){
-			model.addAttribute("pessoa", pessoa);
-			return "redirect:/Paciente/Cadastrar";
-		}
+		List<Mensagem> mensagens = new ArrayList<Mensagem>();
+
+		model.addAttribute("pessoa", pessoa);
 		
 		Paciente paciente = new Paciente();
 		
@@ -149,16 +152,22 @@ public class PacienteController {
 		
 		model.addAttribute("pessoa", pessoa);
 		
-		return "/paciente/visualizar";
+		mensagens.add(new Mensagem("Salvo com sucesso!", Mensagem.Tipo.SUCESSO, Mensagem.Prioridade.MEDIA));
+		redirectAttributes.addFlashAttribute("mensagens", mensagens);
+		
+		return "redirect:/Paciente/"+pessoa.getId();
 	}
 	
 	@RequestMapping(value = "/{idPaciente}/Editar", method = RequestMethod.GET)
 	public String formEditarPaciente(@PathVariable("idPaciente") Long idPaciente, Model model, RedirectAttributes redirectAttributes){
 		
+		List<Mensagem> mensagens = new ArrayList<Mensagem>();
+		
 		Paciente paciente = pacienteService.buscarPacientePorId(idPaciente);
 		
 		if(isInvalido(paciente)){
-			redirectAttributes.addFlashAttribute("erro", "Paciente inexistente.");
+			mensagens.add(new Mensagem("Paciente inexistente!!", Mensagem.Tipo.ERRO, Mensagem.Prioridade.MEDIA));
+			redirectAttributes.addFlashAttribute("mensagens", mensagens);
 			return "redirect:/Nutricao/Buscar";
 		}
 		
@@ -170,18 +179,31 @@ public class PacienteController {
 	
 	@RequestMapping(value = "/{idPaciente}/Editar", method = RequestMethod.POST)
 	public String editarPaciente(Model model, @PathVariable("idPaciente") Long idPaciente, @Valid Pessoa pessoa, BindingResult result, RedirectAttributes redirectAttributes){
-	
+		
+		List<Mensagem> mensagens = new ArrayList<Mensagem>();
+		
 		Paciente paciente = pacienteService.buscarPacientePorId(idPaciente);
 		
 		if(isInvalido(paciente)){
-			redirectAttributes.addFlashAttribute("erro", "Paciente inexistente.");
+			mensagens.add(new Mensagem("Paciente inexistente!!", Mensagem.Tipo.ERRO, Mensagem.Prioridade.MEDIA));
+			redirectAttributes.addFlashAttribute("mensagens", mensagens);
 			return "redirect:/Nutricao/Buscar";
 		}
 		
-		pessoaService.editarPessoa(pessoa);
+		try{
+			pessoaService.editarPessoa(pessoa);
+		}catch(Exception e){
+			mensagens.add(new Mensagem("CPF existente!", Mensagem.Tipo.ERRO, Mensagem.Prioridade.MEDIA));
+			redirectAttributes.addFlashAttribute("mensagens", mensagens);
+			return "redirect:/Paciente/Cadastrar";
+		}
+		
 		model.addAttribute("pessoa", pessoa);
+		
+		mensagens.add(new Mensagem("Salvo com sucesso!", Mensagem.Tipo.SUCESSO, Mensagem.Prioridade.MEDIA));
+		redirectAttributes.addFlashAttribute("mensagens", mensagens);
 
-		return "/paciente/visualizar"; 
+		return "redirect:/Paciente/"+idPaciente; 
 	}
 	
 	@RequestMapping(value = "/{idPaciente}", method = RequestMethod.GET)
