@@ -4,7 +4,7 @@ public enum FrequenciaSemanal {
 	
 	RARAMENTE("Raramente"),
 	UMA_VEZ_POR_SEMANA("Uma vez por semana"),	
-	POUCAS_VEZES_POR_SEMANA("Poucas vez por semana"),	
+	POUCAS_VEZES_POR_SEMANA("Poucas vezes por semana"),	
 	DIARIAMENTE("Diariamente");
 
 	private String descricao;
