@@ -54,6 +54,8 @@
 	--animation--9s: all 0.9s ease;
 	--animation--10s: all 1s ease;
 
+	--animation--bounce: all 0.2s ease;
+
 }
 
 /* Layout Base */
@@ -259,8 +261,6 @@
 
 
 .sn-form {
-	margin-top: 16px;
-	margin-bottom: 16px;
 	display: flex;
 }
 
@@ -474,18 +474,19 @@ fabgroup {
 	position: absolute;
 }
 
-fabgroup button {
-	margin: 6px !important;
-	-webkit-transition: var(--animation) !important;
-    -moz-transition: var(--animation) !important;
-    -o-transition: var(--animation) !important;
-    transition: var(--animation) !important;
+fabgroup > * {
+	margin-right: 6px !important;
+	margin-left: 6px !important;
+	-webkit-transition: var(--animation--bounce) !important;
+    -moz-transition: var(--animation--bounce) !important;
+    -o-transition: var(--animation--bounce) !important;
+    transition: var(--animation--bounce) !important;
 }
 
 .sn-fab--bottom-right {
 	position: absolute;
 	right: 26px;
-	bottom: -34px;
+	bottom: -26px;
 	z-index: 1000;
 }
 
@@ -509,13 +510,159 @@ fabgroup button {
 }
 
 .sn-fab--hide {
-	-ms-transform: scale(0, 0) !important; /* IE 9 */
-    -webkit-transform: scale(0, 0) !important; /* Safari */
-    transform: scale(0, 0) !important;
+	-ms-transform: translate(200%, 0px) !important; /* IE 9 */
+    -webkit-transform: translate(200%, 0px) !important; /* Safari */
+    transform: translate(200%, 0px) !important;
+    margin: 0px !important;
+    width: 0 !important;
+    min-width: 0 !important;
+    height: 0 !important;
+    min-height: 0 !important;
 }
 
 .sn-float--launcher {
 	z-index: 1001;
+}
+
+.sn-toast {
+
+	position: fixed;
+	bottom: 0;
+	left: 50%;
+	cursor: default;
+	z-index: 3;
+
+	align-items: center;
+	display:         flex;
+	display: -webkit-flex;
+	display:    -moz-flex;
+	display:     -ms-flex;
+	display:      -o-flex;
+	        flex-flow: column;
+	-webkit-flex-flow: column;
+	   -moz-flex-flow: column;
+	    -ms-flex-flow: column;
+	     -o-flex-flow: column;
+
+	font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+
+}
+
+.sn-toast__message {
+
+	position: relative;
+
+	        flex: 1 1 auto;
+	-webkit-flex: 1 1 auto;
+	   -moz-flex: 1 1 auto;
+	    -ms-flex: 1 1 auto;
+	     -o-flex: 1 1 auto;
+	     
+
+	     align-items: center;
+			display:         flex;
+			display: -webkit-flex;
+			display:    -moz-flex;
+			display:     -ms-flex;
+			display:      -o-flex;
+
+	    background-color: #fff;
+		box-shadow: var(--shadow--2dp);
+		margin: 8px;
+}
+
+.sn-toast__icon {
+	margin: 16px;
+	border-radius: 50%;
+}
+
+.sn-toast__icon:hover {
+	background-color: #ddd;
+}
+
+.sn-toast__icon:active {
+	background-color: #aaa;
+}
+
+
+@media (max-width: 479px) {
+
+    .sn-toast {
+
+		width: 100%;
+		left: 0;
+		min-height: 48px;
+	}
+
+}
+
+@media (min-width: 480px) {
+
+    .sn-toast {
+		min-width: 288px;
+		max-width: 568px;
+		border-radius: 2px;
+		-webkit-transform: translate(-50%, 0px);
+		      transform: translate(-50%, 0px);
+
+    } 
+
+}
+
+.sn-toast__text {
+
+	padding: 16px;
+	vertical-align: middle;
+	text-align: justify;
+	color: #000;
+	float: left;
+
+}
+
+.sn-toast__action {
+
+	background: transparent;
+	border: none;
+	color: rgb(255,64,129);
+	float: right;
+	text-transform: uppercase;
+	padding: 14px 24px 14px 12px;
+	font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+	font-size: 14px;
+	font-weight: 500;
+	text-transform: uppercase;
+	line-height: 1;
+	letter-spacing: 0;
+	overflow: hidden;
+	outline: none;
+	opacity: 0;
+	pointer-events: none;
+	cursor: pointer;
+	text-decoration: none;
+	text-align: center;
+	-webkit-align-self: center;
+	-ms-flex-item-align: center;
+	align-self: center;
+
+}
+
+.sn-toast__action::-moz-focus-inner {
+	border: 0;
+}
+
+.sn-toast__action:not([aria-hidden]) {
+	opacity: 1;
+	pointer-events: auto;
+}
+
+.sn-toast__loading {
+
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 100%;
+	height: 1px;
+
 }
 
 .sn-padding--16 { padding: 16px; }
@@ -558,6 +705,25 @@ fabgroup button {
 
 
 /* mdl override */
+
+.mdl-snackbar {
+
+	border-radius: 2px;
+	background-color: #fff;
+	box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
+
+	border-right: solid;
+	border-right-width: 8px;
+	
+}
+
+.mdl-snackbar > i {
+	height: 100%;
+}
+
+.mdl-snackbar__text {
+	color: var(--color-primary-dark);
+}
 
 table {
 
