@@ -14,7 +14,7 @@
 
 <body>
 	<section layout:fragment="conteudo">
-	
+
 		<div class="mdl-grid">
 			
 			<form action="#" 
@@ -103,18 +103,21 @@
 				    			
 				    		</tr>
 				    		
-				    		<tr th:each="refeicao, state : *{refeicoes}" class="sn-cloneable">
+				    		<tr th:each="refeicao, state : ${recordatorio.refeicoes}" class="sn-cloneable">
 				    		
 				    			<td hidden="true">
+				    			
 					    			<input type="hidden" th:field="*{refeicoes[__${state.index}__].hora}" class="sn-refeicao-input-hora" th:value="*{refeicoes[__${state.index}__].hora}" />
 					    			<input type="hidden" th:field="*{refeicoes[__${state.index}__].descricao}" class="sn-refeicao-input-descricao" th:value="*{refeicoes[__${state.index}__].descricao}"/>
 					    			<input type="hidden" th:field="*{refeicoes[__${state.index}__].itens}" class="sn-refeicao-input-itens" th:value="*{refeicoes[__${state.index}__].itens}"/>
 					    			<input type="hidden" th:field="*{refeicoes[__${state.index}__].observacao}" class="sn-refeicao-input-observacao" th:value="*{refeicoes[__${state.index}__].observacao}" />
+					    			
 				    			</td>
 				    			
 				    			<td style="width:20%" 
 				    			class="mdl-data-table__cell--non-numeric sn-refeicao-hora"
-				    			th:text="*{#dates.format(refeicoes[__${state.index}__].hora, 'HH:mm')}">
+				    			th:if="${not #lists.isEmpty(recordatorio.refeicoes)}"
+				    			th:text="*{ #lists.isEmpty(refeicoes) } ? '00:00' : *{ #dates.format(refeicoes[__${state.index}__].hora, 'HH:mm') }">
 				    				00:00
 				    			</td>
 				    			
@@ -142,6 +145,13 @@
 				    				class="mdl-button mdl-js-button mdl-button--icon sn-refeicao-editar">
 				    				
 				    					<i class="material-icons mdl-color-text--grey-700">mode_edit</i>
+				    					
+				    				</button>
+				    				
+				    				<button type="button" 
+				    				class="mdl-button mdl-js-button mdl-button--icon sn-refeicao-duplicar">
+				    				
+				    					<i class="material-icons mdl-color-text--grey-700">content_copy</i>
 				    					
 				    				</button>
 				    				

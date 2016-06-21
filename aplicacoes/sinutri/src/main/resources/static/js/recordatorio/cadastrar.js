@@ -7,6 +7,7 @@ $(function()
 			cloneableElement: ".sn-cloneable",
 			removeButton:     ".sn-refeicao-remover",
 			editButton:       ".sn-refeicao-editar",
+			cloneButton:	  ".sn-refeicao-duplicar",
 			onItemEdit:		  function(el, index) {
 				if( dialog != null ) {
 					$(dialog).find("#sn-refeicao-item-index").val("");
@@ -84,7 +85,9 @@ $(function()
 						  el.find("*").each( function(index, el) {
 							  componentHandler.upgradeElement(el);
 						  });
+						  
 						  $(dialog).find("#sn-refeicao-item-index").val("");
+						  
 		        	  }
 		          }
 			]
@@ -123,6 +126,7 @@ $(function()
 		$("#btnCancelar").click(function() {
 			confirmacao.showModal();
 		});
+		
 		
 	});
 	

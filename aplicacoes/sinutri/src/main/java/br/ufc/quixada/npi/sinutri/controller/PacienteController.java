@@ -165,6 +165,8 @@ public class PacienteController {
     		return "redirect:/Nutricao/buscar";
     	if( recordatorio == null )
     		return "redirect:/Paciente/"+idPaciente+"/Recordatorio";
+    	if( recordatorio.getRefeicoes().isEmpty() )
+    		return "redirect:/Paciente/"+idPaciente+"/Recordatorio";
     	
     	model.addAttribute("paciente", paciente);
     	model.addAttribute("recordatorio", recordatorio);
@@ -231,7 +233,7 @@ public class PacienteController {
 			this.consultaService.excluirRecordatorio(recordatorio);
 		}
 		
-		return "redirect:/Paciente/" + idPaciente + "/Recordatorio";
+		return "redirect:/Paciente/" + idPaciente;
 	}	
 	
 	@RequestMapping(value = "/{idPaciente}/Recordatorio/{idRecordatorio}", method = RequestMethod.GET)

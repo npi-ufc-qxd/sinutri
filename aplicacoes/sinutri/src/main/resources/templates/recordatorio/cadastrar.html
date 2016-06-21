@@ -91,6 +91,13 @@
 				    					
 				    				</button>
 				    				
+				    				<button type="button" 
+				    				class="mdl-button mdl-js-button mdl-button--icon sn-refeicao-duplicar">
+				    				
+				    					<i class="material-icons mdl-color-text--grey-700">content_copy</i>
+				    					
+				    				</button>
+				    				
 				    				<button type="button"	
 				    				class="mdl-button mdl-js-button mdl-button--icon sn-refeicao-remover">
 				    				
@@ -194,7 +201,7 @@
 				    <button type="button" 
 				    id="btnCancelar"
 				    class="mdl-button mdl-js-button mdl-button--colored mdl-js-ripple-effect" 
-				    th:attr="link=@{/Nutricao/}">
+				    th:attr="link=@{/Paciente/__${idPaciente}__}">
 				    	Cancelar
 				    </button>
 				</div> 
