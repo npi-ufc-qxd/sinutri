@@ -1157,7 +1157,7 @@ var DynamicList = function(rootEl, settings) {
 					
 					$(el).click(function() {
 
-						if(self.settings.onCloneEdit(newItem))
+						if(self.settings.onItemClone(newItem))
 							self.doCloneItem(newItem);
 						
 					})
