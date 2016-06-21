@@ -146,7 +146,8 @@ public class PacienteController {
 		try{
 			pacienteService.adicionarPaciente(paciente);
 		}catch(Exception e){
-			redirectAttributes.addFlashAttribute("erro", "CPF existente");
+			mensagens.add(new Mensagem("CPF inválido!", Mensagem.Tipo.ERRO, Mensagem.Prioridade.MEDIA));
+			redirectAttributes.addFlashAttribute("mensagens", mensagens);
 			return "redirect:/Paciente/Cadastrar";
 		}
 		
@@ -193,7 +194,7 @@ public class PacienteController {
 		try{
 			pessoaService.editarPessoa(pessoa);
 		}catch(Exception e){
-			mensagens.add(new Mensagem("CPF existente!", Mensagem.Tipo.ERRO, Mensagem.Prioridade.MEDIA));
+			mensagens.add(new Mensagem("CPF inválido!", Mensagem.Tipo.ERRO, Mensagem.Prioridade.MEDIA));
 			redirectAttributes.addFlashAttribute("mensagens", mensagens);
 			return "redirect:/Paciente/Cadastrar";
 		}
@@ -209,10 +210,13 @@ public class PacienteController {
 	@RequestMapping(value = "/{idPaciente}", method = RequestMethod.GET)
 	public String visualizarPaciente(@PathVariable("idPaciente") Long idPaciente, Model model, RedirectAttributes redirectAttributes){
 
+		List<Mensagem> mensagens = new ArrayList<Mensagem>();
+		
 		Paciente paciente = pacienteService.buscarPacientePorId(idPaciente);
 		
 		if(isInvalido(paciente)){
-			redirectAttributes.addFlashAttribute("erro", "Paciente inexistente.");
+			mensagens.add(new Mensagem("Paciente inexistente!!", Mensagem.Tipo.ERRO, Mensagem.Prioridade.MEDIA));
+			redirectAttributes.addFlashAttribute("mensagens", mensagens);
 			return "redirect:/Nutricao/Buscar";
 		}
 		
