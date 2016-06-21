@@ -10,26 +10,26 @@ $(document).ready(function() {
 	}
 	
 	$( "#bt-cancelar" ).click(function(event) {
-		alert("sdfgdfgdf")
         var dialog = sn_base.doRegistryDialog({
-            title: "Remover",
+            title: "Você realmente deseja descartar as alterações?",
             dialog: "#modal-cancelar",
             buttons: [
                     {
-                       label: "Excluir",
+                       label: "SIM",
                        attrs: {href: $(this).attr("href")},
                        action: function() {
                            dialog.close();
                        }
                     },
                     {
-                        label: "Cancelar",
+                        label: "NÃO",
                         action: function() {
                             dialog.close();
                         }
                     }
             ]
-            });                     dialog.showModal();
+            });                     
+		dialog.showModal();
         event.preventDefault();
     });
 });

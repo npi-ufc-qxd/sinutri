@@ -31,7 +31,7 @@
 
 				<div class="sn-textfield mdl-cell mdl-cell--6-col">
 					<label class="sn-textfield__label" for="dataModificacao">Data
-						de Edição:</label> <input class="sn-textfield__input sn-time-picker"
+						de Edição:</label> <input class="sn-textfield__input sn-date-picker"
 						type="text" id="dataModificacao" th:field="*{atualizadoEm}" /> <label
 						class="sn-textfield__messages sn-error-text"
 						th:if="${#fields.hasErrors('atualizadoEm')}"
@@ -395,7 +395,6 @@
 	
 </section>
 <section layout:fragment="js">
-	<script type="text/javascript" th:src="@{/js/jquery.js}"></script>
 	<script type="text/javascript" th:src="@{/js/moment.js}"></script>
 	<script type="text/javascript" th:src="@{/js/material-date-picker.js}"></script>
 	<script type="text/javascript" th:src="@{/js/anamnese/cadastrar-editar.js}"></script>	
