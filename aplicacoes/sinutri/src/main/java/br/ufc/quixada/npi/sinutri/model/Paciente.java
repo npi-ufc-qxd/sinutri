@@ -107,4 +107,14 @@ public class Paciente implements Serializable {
 		this.externo = externo;
 	}
 
+	public List<Prescricao> getListPrescricao() {
+		return listPrescricao;
+	}
+
+	public void setListPrescricao(List<Prescricao> listPrescricao) {
+		this.listPrescricao = listPrescricao;
+	}
+
+	
+	
 }
