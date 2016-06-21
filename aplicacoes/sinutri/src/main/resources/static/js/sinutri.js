@@ -538,6 +538,8 @@ var DynamicList = function(rootEl, settings) {
 		removeButton: ".dl-el-remove", 
 		// Seletor do botão responsável por editar items
 		editButton: ".dl-el-edit", 
+		// Seletor do botão responsável por clonar items
+		cloneButton: ".dl-el-clone", 
 
 		// Indica se os atributos terão o id incrementado automaticamente.
 		// Nesse caso, um id "elemento-0" sera incrementado para "elemento-1" e
@@ -561,6 +563,8 @@ var DynamicList = function(rootEl, settings) {
 		onItemRemoved: function(item) {}, 
 		onItemEdit: function(item) { return true; },
 		onItemEdited: function(item) {},
+		onItemClone: function(item) { return true; },
+		onItemCloned: function(item) {},
 		
 	};
 
@@ -721,6 +725,29 @@ var DynamicList = function(rootEl, settings) {
 
 				setRemoveFunc(item);
 
+				var setCloneFunc = function(rootEl) {
+
+					rootEl.children(self.settings.cloneButton).each(function(index, el) {
+						
+						if(!$(el).isDynamicList()) {
+
+							$(el).click(function() {
+
+								if(self.settings.onItemClone(rootEl))
+									self.doCloneItem(rootEl);
+								
+							});
+
+							setCloneFunc($(el));
+
+						}
+
+					});
+
+				}
+
+				setCloneFunc(item);
+
 			}
 
 		}
@@ -811,6 +838,32 @@ var DynamicList = function(rootEl, settings) {
 			}
 
 			setEditFunc(toRemove);
+
+
+			var setCloneFunc = function(rootEl) {
+
+				rootEl.children(self.settings.cloneButton).each(function(index, el) {
+					
+					$(el).click(function() {
+
+						if(self.settings.onItemClone(toRemove))
+							self.doCloneItem(toRemove);
+						
+					})
+
+				});
+
+				rootEl.children().each(function(index, el) {
+					
+					if(!$(el).isDynamicList()) {
+						setCloneFunc($(el));
+					}
+
+				});
+
+			}
+
+			setCloneFunc(toRemove);
 
 		});
 		//***
@@ -917,6 +970,31 @@ var DynamicList = function(rootEl, settings) {
 
 			setEditFunc(newItem);
 
+			var setCloneFunc = function(rootEl) {
+
+				rootEl.children(self.settings.cloneButton).each(function(index, el) {
+					
+					$(el).click(function() {
+
+						if(self.settings.onItemClone(newItem))
+							self.doCloneItem(newItem);
+						
+					})
+
+				});
+
+				rootEl.children().each(function(index, el) {
+					
+					if(!$(el).isDynamicList()) {
+						setCloneFunc($(el));
+					}
+
+				});
+
+			}
+
+			setCloneFunc(newItem);
+
 			if(data === undefined)
 				data = self.settings.defaultData;
 			
@@ -939,6 +1017,166 @@ var DynamicList = function(rootEl, settings) {
 
 			newItem.data("sort", data.sortValue);
 			
+
+		} else {
+
+			self.error("Nenhum elemento com o seletor " + self.settings.cloneableElement + " foi encontrado!");
+
+		}
+
+		componentHandler.upgradeElement(newItem.get(0));
+		newItem.find("*").each(function() {
+			
+			componentHandler.upgradeElement(this);
+
+		});
+
+		componentHandler.upgradeDom();
+
+		self.settings.onItemAdded(newItem);
+
+		self.showStatus("Adding");
+
+		self.sortItems();
+
+		newItem.css("min-height", "0");
+		newItem.css("min-width", "0");
+		newItem.css("border-radius", "50px");
+		newItem.css("width", "72px");
+		var anim = new Animation(newItem).doSequentially(
+			new Animation().doAnimate(
+				{"width": "100%", specialEasing: {width: "linear"}},
+				{duration: 200, queue: false}
+			), 
+			new Animation().doAnimate(
+				{"border-radius": "2px", specialEasing: {"border-radius": "linear"}},
+				{duration: 50, queue: false}
+			)
+		).doPlay();
+
+		return newItem;
+		
+	} 
+
+	this.doCloneItem = function(item) {
+		
+		var self = this;
+
+		var items = this.parent.children(this.settings.cloneableElement);
+		
+		if(self.template !== undefined) {
+			
+			var last = items.length == 0? undefined: items.last();
+			var newItem = item.clone(true);
+			newItem.find("*").off("click");
+
+			if(last === undefined)
+				self.parent.append(newItem);
+			else 
+				newItem.insertAfter(last);
+
+			newItem.css("display", self.settings.defaultItemDisplay);
+
+			var setSetupFunc = function(rootEl) {
+
+				rootEl.children().each(function(index, elm) {
+					
+					var el = $(elm);
+
+					if(el.isDynamicList()) {
+
+						var settings = el.data("dynamic-list-settings");
+						var dl = el.dynamicList(settings);
+						dl.doClearItems();
+
+					} else {
+
+						setSetupFunc(el);
+
+					}
+
+				});
+
+			}
+
+			setSetupFunc(newItem);
+
+			var setRemoveFunc = function(rootEl) {
+
+				rootEl.children(self.settings.removeButton).each(function(index, el) {
+					
+					$(el).click(function() {
+
+						if(self.settings.onItemRemove(newItem))
+							self.doRemoveItem(newItem);
+						
+					})
+
+				});
+
+				rootEl.children().each(function(index, el) {
+					
+					if(!$(el).isDynamicList()) {
+						setRemoveFunc($(el));
+					}
+
+				});
+
+			}
+
+			setRemoveFunc(newItem);
+
+			var setEditFunc = function(rootEl) {
+
+				rootEl.children(self.settings.editButton).each(function(index, el) {
+					
+					$(el).click(function() {
+
+						if(self.settings.onItemEdit(newItem, newItem.data("index")))
+							self.doEditItem(newItem);
+						
+					})
+
+				});
+
+				rootEl.children().each(function(index, el) {
+					
+					if(!$(el).isDynamicList()) {
+						setEditFunc($(el));
+					}
+
+				});
+
+			}
+
+			setEditFunc(newItem);
+
+			var setCloneFunc = function(rootEl) {
+
+				rootEl.children(self.settings.cloneButton).each(function(index, el) {
+					
+					$(el).click(function() {
+
+						if(self.settings.onCloneEdit(newItem))
+							self.doCloneItem(newItem);
+						
+					})
+
+				});
+
+				rootEl.children().each(function(index, el) {
+					
+					if(!$(el).isDynamicList()) {
+						setCloneFunc($(el));
+					}
+
+				});
+
+			}
+
+			setCloneFunc(newItem);
+
+			newItem.data("sort", item.data("sortValue"));
 
 		} else {
 
