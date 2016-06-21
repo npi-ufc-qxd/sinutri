@@ -36,7 +36,8 @@ public class PacienteController {
 	@Inject
 	private PacienteService pacienteService;
 	
-	@Inject PessoaService pessoaService;
+	@Inject 
+	private PessoaService pessoaService;
 	
 	@RequestMapping(value= "/{idPaciente}/InqueritoAlimentar/", method = RequestMethod.GET)
 	public String formAdicionarInqueritoAlimentar(Model model, @PathVariable("idPaciente") Long idPaciente, RedirectAttributes redirectAttributes){
