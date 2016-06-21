@@ -1,6 +1,8 @@
 package br.ufc.quixada.npi.sinutri.controller;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import javax.inject.Inject;
 import javax.validation.Valid;
@@ -16,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import br.ufc.quixada.npi.sinutri.model.InqueritoAlimentar;
+import br.ufc.quixada.npi.sinutri.model.Mensagem;
 import br.ufc.quixada.npi.sinutri.model.Paciente;
 import br.ufc.quixada.npi.sinutri.model.Prescricao;
 import br.ufc.quixada.npi.sinutri.model.Servidor;
@@ -145,15 +148,20 @@ public class PacienteController {
 	 public String adicionarPrescricao(@PathVariable("idPaciente") Long idPaciente, Model model, @Valid Prescricao prescricao,
 			 		BindingResult result, RedirectAttributes redirectAttributes){
 		
+		 List<Mensagem> mensagens = new ArrayList<Mensagem>();
+		 
 		 if(result.hasErrors()){
 			 model.addAttribute("prescricao", prescricao);
+			 mensagens.add(new Mensagem("Erro ao adicionar Prescrição!", Mensagem.Tipo.ERRO, Mensagem.Prioridade.MEDIA));
+			 redirectAttributes.addFlashAttribute("mensagens", mensagens);
 			 return "/prescricao/cadastrar";
 		 }
 		 
 		 Servidor nutricionista = pessoaService.buscarServidorPorCpf(getCpfPessoaLogada());
 		 
 		 if(nutricionista == null){
-			 redirectAttributes.addFlashAttribute("erro", "Nutricinista não encontrado.");
+			 mensagens.add(new Mensagem("Erro ao buscar nutricionista", Mensagem.Tipo.ERRO, Mensagem.Prioridade.MEDIA));
+			 redirectAttributes.addFlashAttribute("mensagens", mensagens);
 			 return "redirect:/Nutricar/Buscar";
 		 }
 		 
@@ -166,6 +174,9 @@ public class PacienteController {
 		 prescricao.setNutricionista(nutricionista);
 		 prescricao.setAtualizadoEm(new Date());
 		 consultaService.adicionarPrescricao(prescricao);
+		 mensagens.add(new Mensagem("Prescrição adicionada!", Mensagem.Tipo.SUCESSO, Mensagem.Prioridade.MEDIA));
+		 redirectAttributes.addFlashAttribute("mensagens", mensagens);
+		 
 		 return "redirect:/Paciente/"+paciente.getId()+"/Prescricao/"+prescricao.getId();
 	 }
 	
