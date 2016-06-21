@@ -1,4 +1,8 @@
 $(document).ready(function() {
+	
+	$("#botaoPesquisar").on('click', function(){
+		$("#formBuscar").submit();
+	});
     
     var dataTable = $('#sn-search-result-table').DataTable({
         columnDefs: [
@@ -63,5 +67,8 @@ $(document).ready(function() {
 		componentHandler.upgradeElement(this);
 		console.log("upgradeElement");
 	});
+	
+	
+	
 
 });

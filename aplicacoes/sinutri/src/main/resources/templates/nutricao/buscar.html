@@ -21,9 +21,11 @@
 			<div class="sn-search">
 
 				<div class="mdl-textfield mdl-js-textfield sn-search__box">
-					<input id="sn-search__input" class="mdl-textfield__input sn-search__input"></input>
-					<label class="mdl-textfield__label" for="sn-search__input">Busca pacientes...</label>
-					<i class="sn-search__icon material-icons">search</i>
+					<form id="formBuscar" th:action="@{/Nutricao/Buscar}" th:method="post">
+						<input id="sn-search__input" class="mdl-textfield__input sn-search__input" name="busca" th:value="${ultimaBusca}"></input>
+						<label class="mdl-textfield__label" for="sn-search__input">Busca pacientes...</label>
+						<i id="botaoPesquisar" class="sn-search__icon material-icons cursor_pointer">search</i>
+					</form>
 				</div>
 
 			</div>
@@ -46,12 +48,18 @@
 			</div>
 
 			<ul class="demo-list-two mdl-list">
-			
-				<li class="mdl-list__item mdl-list__item--two-line">
+				<li th:if = "${#strings.length(ultimaBusca)} and ${#lists.size(usuarios)==0}" class="mdl-list__item mdl-list__item--two-line">
+					<span class="mdl-list__item-primary-content">
+						<center> <span>Busca sem resultados!</span> </center>
+					</span>
+					
+				</li>
+				<li th:each="usuario : ${usuarios}" class="mdl-list__item mdl-list__item--two-line">
 					<span class="mdl-list__item-primary-content">
 						<i class="material-icons mdl-list__item-avatar">person</i>
-						<span>Felipe Pinho</span>
-						<span class="mdl-list__item-sub-title">felipe76857685@gmail.com</span>
+						<span th:text="${usuario.nome}">Felipe Pinho</span>
+						<span th:text="${usuario.cpf}"></span>
+						<span class="mdl-list__item-sub-title" th:text="${usuario.email}">felipe76857685@gmail.com</span>
 					</span>
 					<span class="mdl-list__item-secondary-content">
 						<a class="mdl-list__item-secondary-action mdl-button mdl-button--accent mdl-js-button mdl-js-ripple-effect" href="#">Informações</a>

@@ -118,5 +118,7 @@ public class PacienteController {
 	private String getCpfPessoaLogada() {
 		return SecurityContextHolder.getContext().getAuthentication().getName();
 	}
+	
+	
 
 }
