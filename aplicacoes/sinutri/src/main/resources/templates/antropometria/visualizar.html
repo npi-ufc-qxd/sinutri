@@ -213,40 +213,8 @@
 	
 	
 	<section layout:fragment="js">
-       
-       <script type="text/javascript">
-
-       
-       
-       $( "#excluir" ).click(function(event) {
-    	   var dialog = sn_base.doRegistryDialog({
-               title: "Você realmente deseja excluir esta Avaliação Antropométrica?", 
-               dialog: "#modal-exclusao", 
-               buttons: [
-                       {
-                          label: "Excluir",
-                          attrs: {href: $(this).attr("href")}, 
-                          action: function() {
-                              dialog.close();
-                          }
-                       }, 
-                       {
-                           label: "Cancelar",
-                           action: function() {
-                               dialog.close();
-                           }
-                       }
-               ]
-       		});    	   
-
-    	   dialog.showModal();
-    	   event.preventDefault();
-       });       
-
-       
-       
-       </script>
-   </section>
+         <script type="text/javascript" th:src="@{/js/antropometria/visualizar.js}"></script>
+    </section>
 	
 </body>
 </html>

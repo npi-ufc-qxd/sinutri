@@ -5,7 +5,6 @@ import java.util.Date;
 import java.util.List;
 
 import javax.inject.Inject;
-import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -125,9 +124,9 @@ public class PacienteController {
 	}
 	
 	@RequestMapping(value= {"/{idPaciente}/Antropometria"}, method = RequestMethod.GET)
-	public String formAdicionarAvaliacaoAntropometrica(@PathVariable("idPaciente") Long idPaciente, Model model, HttpSession session, RedirectAttributes redirectAttributes){
-		List<Mensagem> mensagens = new ArrayList<Mensagem>();
+	public String formAdicionarAvaliacaoAntropometrica(@PathVariable("idPaciente") Long idPaciente, Model model, RedirectAttributes redirectAttributes){
 		Paciente paciente = pacienteService.buscarPacientePorId(idPaciente);
+		List<Mensagem> mensagens = new ArrayList<Mensagem>();
 		if(isInvalido(paciente)){
 			mensagens.add(new Mensagem("Paciente inexistente!", Tipo.ERRO, Prioridade.MEDIA));
 			redirectAttributes.addFlashAttribute("mensagens", mensagens);
@@ -213,6 +212,7 @@ public class PacienteController {
 		}
 		avaliacaoAntropometrica.setAtualizadoEm(new Date());
 		consultaService.editarAvaliacaoAntropometrica(avaliacaoAntropometrica);
+		
 		if(isInvalidoAntropometria(avaliacaoAntropometrica)){
 			mensagens.add(new Mensagem("Erro ao editar Avaliação Antropométrica!", Tipo.ERRO, Prioridade.ALTA));
 			mensagens.add(new Mensagem("Avaliação Antropométrica não encontrada!", Tipo.ERRO, Prioridade.MEDIA));
@@ -233,6 +233,7 @@ public class PacienteController {
 			redirectAttributes.addFlashAttribute("mensagens", mensagens);
 			return "redirect:/Nutricao/Buscar";
 		}
+
 		AvaliacaoAntropometrica avaliacaoAntropometrica = consultaService.buscarAvaliacaoAntropometricaPorId(idAntropometria);
 		if(isInvalidoAntropometria(avaliacaoAntropometrica)){
 			mensagens.add(new Mensagem("Avaliação Antropométrica não encontrada!", Tipo.ERRO, Prioridade.MEDIA));
