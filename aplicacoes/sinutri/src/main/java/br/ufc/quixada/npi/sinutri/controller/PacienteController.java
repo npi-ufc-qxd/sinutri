@@ -121,15 +121,13 @@ public class PacienteController {
 	}
 	
 	@ModelAttribute("sexos")
-	Sexo[] getSexos()
-	{
+	public Sexo[] getSexos(){
 		return Sexo.values();
 	}
 	
 	@RequestMapping(value= "/Cadastrar", method = RequestMethod.GET)
 	public String formAdicionarPacienteExterno(Model model){
-		Pessoa pessoa = new Pessoa();
-		model.addAttribute("pessoa", pessoa);
+		model.addAttribute("pessoa", new Pessoa());
 		
 		return "/paciente/cadastrar";
 	}

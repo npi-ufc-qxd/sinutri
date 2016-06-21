@@ -61,124 +61,94 @@ public class Pessoa {
 	@ManyToMany
 	@JoinTable(name = "papel_pessoa", joinColumns = @JoinColumn(name = "pessoa_id"), inverseJoinColumns = @JoinColumn(name = "papel_id"))
 	private List<Papel> papeis;
-	
-	public Pessoa() {
-		super();
-	}
-
-	public Pessoa(String cpf){
-		setCpf(cpf);
-	}
 
 	public Long getId() {
 		return id;
 	}
 
-
 	public void setId(Long id) {
 		this.id = id;
 	}
-
 
 	public String getCpf() {
 		return cpf;
 	}
 
-
 	public void setCpf(String cpf) {
 		this.cpf = cpf;
 	}
-
 
 	public String getNome() {
 		return nome;
 	}
 
-
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-
 
 	public Date getDataNascimento() {
 		return dataNascimento;
 	}
 
-
 	public void setDataNascimento(Date dataNascimento) {
 		this.dataNascimento = dataNascimento;
 	}
-
 
 	public String getVinculo() {
 		return vinculo;
 	}
 
-
 	public void setVinculo(String vinculo) {
 		this.vinculo = vinculo;
 	}
-
 
 	public String getTelefone() {
 		return telefone;
 	}
 
-
 	public void setTelefone(String telefone) {
 		this.telefone = telefone;
 	}
-
 
 	public String getEmail() {
 		return email;
 	}
 
-
 	public void setEmail(String email) {
 		this.email = email;
 	}
-
 
 	public Sexo getSexo() {
 		return sexo;
 	}
 
-
 	public void setSexo(Sexo sexo) {
 		this.sexo = sexo;
 	}
-
 
 	public String getOcupacaoOuCargo() {
 		return ocupacaoOuCargo;
 	}
 
-
 	public void setOcupacaoOuCargo(String ocupacaoOuCargo) {
 		this.ocupacaoOuCargo = ocupacaoOuCargo;
 	}
-
 
 	public Boolean getExterno() {
 		return externo;
 	}
 
-
 	public void setExterno(Boolean externo) {
 		this.externo = externo;
 	}
-
 
 	public List<Papel> getPapeis() {
 		return papeis;
 	}
 
-
 	public void setPapeis(List<Papel> papeis) {
 		this.papeis = papeis;
 	}
-
 
 	public Integer getIdade(){
 		Integer idade = null;
