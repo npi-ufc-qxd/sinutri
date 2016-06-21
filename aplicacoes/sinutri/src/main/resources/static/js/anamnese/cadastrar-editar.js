@@ -1,34 +1,34 @@
 //Usa o sufixo do id do inputText para ocultar o inputText e o label
 function esconderCampo(nome) {
-	nome = '#inputText'+nome;
+	nome = "#inputText"+nome;
 	$(nome).val("");
-	$(nome).attr('disabled', 'true');
+	$(nome).attr("disabled", "true");
 	campo = $(nome).parent();
-	campo.attr('style', 'display:none');	
+	campo.attr("style", "display:none");	
 }
 //Usa o sufixo do id do inputText para mostrar o inputText e o label
 function mostrarCampo(nome){
-	var nome = '#inputText'+nome;
-	$(nome).removeAttr('disabled');
+	var nome = "#inputText"+nome;
+	$(nome).removeAttr("disabled");
 	var campo = $(nome).parent();
-	campo.attr('style', 'display:show');	
+	campo.attr("style", "display:show");	
 }
 
 function desabilitarCampo(nome) {
-	var nome = '#inputText'+nome;
+	var nome = "#inputText"+nome;
 	var campo = $(nome);
-	campo.val('');
-	campo.attr('disabled', 'true');	
+	campo.val("");
+	campo.attr("disabled", "true");	
 }
 
 function habilitarCampo(nome){
-	var nome = '#inputText'+nome;
+	var nome = "#inputText"+nome;
 	var campo = $(nome);
-	campo.removeAttr('disabled');	
+	campo.removeAttr("disabled");	
 }
 
 function existeComentario(){
-	return 'Não há comentário!';
+	return "Não há comentário!";
 }
 
 //oculta/mostra o inputText baseado no valor do checkBox

@@ -27,15 +27,15 @@
 
 				<input type="hidden" th:field="*{id}" name="id" /> <input
 					type="hidden" th:field="*{paciente.id}" /> <input type="hidden"
-					th:field="*{criadoEm}" />
+					th:field="*{atualizadoEm}" />
 
 				<div class="sn-textfield mdl-cell mdl-cell--6-col">
-					<label class="sn-textfield__label" for="dataModificacao">Data
-						de Edição:</label> <input class="sn-textfield__input sn-date-picker"
-						type="text" id="dataModificacao" th:field="*{atualizadoEm}" /> <label
+					<label class="sn-textfield__label" for="dataCriacao">Data
+						de Criação:</label> <input class="sn-textfield__input sn-date-picker"
+						type="text" id="dataCriacao" th:field="*{criadoEm}" /> <label
 						class="sn-textfield__messages sn-error-text"
-						th:if="${#fields.hasErrors('atualizadoEm')}"
-						th:errors="*{atualizadoEm}">Error message</label>
+						th:if="${#fields.hasErrors('criadoEm')}"
+						th:errors="*{criadoEm}">Error message</label>
 				</div>
 
 				<div class="sn-textfield mdl-cell mdl-cell--12-col">
