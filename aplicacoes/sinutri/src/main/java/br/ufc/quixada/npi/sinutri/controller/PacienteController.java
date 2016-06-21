@@ -218,6 +218,7 @@ public class PacienteController {
 		ArrayList<Mensagem> mensagens = new ArrayList<>();
 		if(anamnese != null){
 			consultaService.excluirAnamnese(anamnese);
+			mensagens.add(new Mensagem("Excluído com sucesso!",Mensagem.Tipo.SUCESSO,Mensagem.Prioridade.ALTA));
 			return "redirect:/Paciente/"+idPaciente;
 		}else{
 			mensagens.add(new Mensagem("Anamnese não encontrada.",Mensagem.Tipo.ERRO,Mensagem.Prioridade.ALTA));
