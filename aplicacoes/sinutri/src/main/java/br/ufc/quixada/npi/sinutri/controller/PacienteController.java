@@ -130,9 +130,11 @@ public class PacienteController {
 	public String formAdicionarPrescricao(@PathVariable("idPaciente") Long idPaciente, RedirectAttributes redirectAttributes, 
 			Model model){
 	
+		List<Mensagem> mensagens = new ArrayList<Mensagem>();
 		Paciente paciente = pacienteService.buscarPacientePorId(idPaciente);
 		if(paciente==null){
-			redirectAttributes.addFlashAttribute("erro", "Paciente inexistente.");
+			mensagens.add(new Mensagem("Paciente inexistente!", Mensagem.Tipo.ERRO, Mensagem.Prioridade.MEDIA));
+			redirectAttributes.addFlashAttribute("mensagens", mensagens);
 			return "redirect:/Nutricao/Buscar";
 		}
 	
@@ -160,7 +162,7 @@ public class PacienteController {
 		 Servidor nutricionista = pessoaService.buscarServidorPorCpf(getCpfPessoaLogada());
 		 
 		 if(nutricionista == null){
-			 mensagens.add(new Mensagem("Erro ao buscar nutricionista", Mensagem.Tipo.ERRO, Mensagem.Prioridade.MEDIA));
+			 mensagens.add(new Mensagem("Nutricionista não encontrado!", Mensagem.Tipo.ERRO, Mensagem.Prioridade.MEDIA));
 			 redirectAttributes.addFlashAttribute("mensagens", mensagens);
 			 return "redirect:/Nutricar/Buscar";
 		 }
@@ -168,13 +170,15 @@ public class PacienteController {
 		 Paciente paciente = pacienteService.buscarPacientePorId(idPaciente);
 		 
 		 if(paciente==null){
+			 mensagens.add(new Mensagem("Paciente inexistente!", Mensagem.Tipo.ERRO, Mensagem.Prioridade.MEDIA));
+			 redirectAttributes.addFlashAttribute("mensagens", mensagens);
 			return "redirect:/Nutricao/Buscar";
 		 }
 	
 		 prescricao.setNutricionista(nutricionista);
 		 prescricao.setAtualizadoEm(new Date());
 		 consultaService.adicionarPrescricao(prescricao);
-		 mensagens.add(new Mensagem("Prescrição adicionada!", Mensagem.Tipo.SUCESSO, Mensagem.Prioridade.MEDIA));
+		 mensagens.add(new Mensagem("Salvo com sucesso!", Mensagem.Tipo.SUCESSO, Mensagem.Prioridade.MEDIA));
 		 redirectAttributes.addFlashAttribute("mensagens", mensagens);
 		 
 		 return "redirect:/Paciente/"+paciente.getId()+"/Prescricao/"+prescricao.getId();
@@ -184,15 +188,19 @@ public class PacienteController {
 	 public String formEditarPrescricao(@PathVariable("idPaciente") Long idPaciente, @PathVariable("idPrescricao") Long idPrescricao,
 		 Model model, RedirectAttributes redirectAttributes){
 		
+		 List<Mensagem> mensagens = new ArrayList<Mensagem>();
+		 
 		 Paciente paciente = pacienteService.buscarPacientePorId(idPaciente);
 		 Prescricao prescricao = consultaService.buscarPrescricaoPorId(idPrescricao);
 		 if(paciente == null){
-			 redirectAttributes.addFlashAttribute("erro", "Paciente inexistente.");
+			 mensagens.add(new Mensagem("Paciente inexistente!", Mensagem.Tipo.ERRO, Mensagem.Prioridade.MEDIA));
+			 redirectAttributes.addFlashAttribute("mensagens", mensagens);
 			 return "redirect:/Nutricao/Buscar";
 		 }
 		else if(prescricao == null){
-			 redirectAttributes.addFlashAttribute("erro", "Prescrição não encontrada.");
-			 return "redirect:/Paciente/"+idPaciente;
+			mensagens.add(new Mensagem("Prescrição não encontrada!", Mensagem.Tipo.ERRO, Mensagem.Prioridade.MEDIA));
+			redirectAttributes.addFlashAttribute("mensagens", mensagens);
+			return "redirect:/Paciente/"+idPaciente;
 		}
 		 
 		 prescricao.setPaciente(paciente);
@@ -206,6 +214,7 @@ public class PacienteController {
 			 @Valid Prescricao prescricao, BindingResult result, Model model, RedirectAttributes redirectAttributes){
 		 
 		 Paciente paciente = pacienteService.buscarPacientePorId(idPaciente);
+		 List<Mensagem> mensagens = new ArrayList<Mensagem>();
 	
 		 if(result.hasErrors()){
 			 model.addAttribute("prescricao", prescricao);
@@ -215,7 +224,8 @@ public class PacienteController {
 		 Servidor nutricionista = pessoaService.buscarServidorPorCpf(getCpfPessoaLogada());
 		 
 		 if(nutricionista == null){
-			 redirectAttributes.addFlashAttribute("erro", "Nutricinista não encontrado.");
+			 mensagens.add(new Mensagem("Nutricionista não encontrado!", Mensagem.Tipo.ERRO, Mensagem.Prioridade.MEDIA));
+			 redirectAttributes.addFlashAttribute("mensagens", mensagens);
 			 return "redirect:/Nutricar/Buscar";
 		 }
 		 
@@ -224,12 +234,15 @@ public class PacienteController {
 		 prescricao.setAtualizadoEm(new Date());
 		 
 		 if(paciente==null){
-			redirectAttributes.addFlashAttribute("erro", "Paciente inexistente.");
+			mensagens.add(new Mensagem("Paciente inexistente!", Mensagem.Tipo.ERRO, Mensagem.Prioridade.MEDIA));
+			redirectAttributes.addFlashAttribute("mensagens", mensagens);
 			return "redirect:/Paciente/"+idPaciente;
 		 }
 		 
 		 prescricao.setAtualizadoEm(new Date());
 		 consultaService.editarPrescricao(prescricao);
+		 mensagens.add(new Mensagem("Salvo com sucesso!", Mensagem.Tipo.SUCESSO, Mensagem.Prioridade.MEDIA));
+		 redirectAttributes.addFlashAttribute("mensagens", mensagens);
 		
 		 return "redirect:/Paciente/"+idPaciente+"/Prescricao/"+prescricao.getId();
 	 }
@@ -238,15 +251,18 @@ public class PacienteController {
 	 public String visualizarPrescricao(@PathVariable("idPaciente") Long idPaciente, @PathVariable("idPrescricao") Long idPrescricao, 
 			 Prescricao prescricao, RedirectAttributes redirectAttributes, Model model){
 		 
+		 List<Mensagem> mensagens = new ArrayList<Mensagem>();
 		 Paciente paciente = pacienteService.buscarPacientePorId(idPaciente);
 		 prescricao = consultaService.buscarPrescricaoPorId(idPrescricao);
 		 
 		 if(paciente==null){
-			redirectAttributes.addFlashAttribute("erro", "Paciente inexistente.");
+			mensagens.add(new Mensagem("Paciente inexistente!", Mensagem.Tipo.ERRO, Mensagem.Prioridade.MEDIA));
+			redirectAttributes.addFlashAttribute("mensagens", mensagens);
 		    return "redirect:/Nutricao/Buscar";
 		 }
 		 if(prescricao==null){
-			 redirectAttributes.addFlashAttribute("erro", "Prescrição não encontrada.");
+			 mensagens.add(new Mensagem("Prescrição não encontrada!", Mensagem.Tipo.ERRO, Mensagem.Prioridade.MEDIA));
+			 redirectAttributes.addFlashAttribute("mensagens", mensagens);
 			 return "redirect:/Paciente/"+idPaciente;
 		 }
 
@@ -258,11 +274,16 @@ public class PacienteController {
 	 public String excluirPrescricao(@PathVariable("idPaciente") Long idPaciente, @PathVariable("idPrescricao") Long idPrescricao, RedirectAttributes redirectAttributes){
 
 		 Prescricao prescricao = consultaService.buscarPrescricaoPorId(idPrescricao);
+		 List<Mensagem> mensagens = new ArrayList<Mensagem>();
 
-		 if(prescricao != null)
+		 if(prescricao != null){
 			 consultaService.excluirPrescricao(prescricao);
+			 mensagens.add(new Mensagem("Excluído com sucesso!", Mensagem.Tipo.SUCESSO, Mensagem.Prioridade.MEDIA));
+			 redirectAttributes.addFlashAttribute("mensagens", mensagens);
+		 }
 		 else{
-			 redirectAttributes.addFlashAttribute("erro", "Prescrição não encontrada."); 
+			 mensagens.add(new Mensagem("Prescrição não encontrada!", Mensagem.Tipo.ERRO, Mensagem.Prioridade.MEDIA));
+			 redirectAttributes.addFlashAttribute("mensagens",mensagens); 
 		 }
 
 		 return "redirect:/Paciente/"+idPaciente;
