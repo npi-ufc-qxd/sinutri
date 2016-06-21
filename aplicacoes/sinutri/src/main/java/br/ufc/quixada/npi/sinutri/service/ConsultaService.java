@@ -8,9 +8,9 @@ public interface ConsultaService {
 	
 	void adicionarAvaliacaoLaboratorial(AvaliacaoLaboratorial avaliacaoLaboratorial, Paciente paciente);
 
-	AvaliacaoLaboratorial buscarAvaliacaoLaboratorialPorId(Long idAvaliacaoLaboratorial);
-
 	void editarAvaliacaoLaboratorial(AvaliacaoLaboratorial avaliacaoLaboratorial);
+	
+	AvaliacaoLaboratorial buscarAvaliacaoLaboratorialPorId(Long idAvaliacaoLaboratorial);
 
 	void excluirAvaliacaoLaboratorial(AvaliacaoLaboratorial avaliacaoLaboratorial);
 	

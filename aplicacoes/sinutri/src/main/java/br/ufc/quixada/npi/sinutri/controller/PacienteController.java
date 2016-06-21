@@ -41,8 +41,8 @@ public class PacienteController {
 
 		Paciente paciente = pacienteService.buscarPacientePorId(idPaciente);
 		
-		if(isInvalido(paciente)){	
-			redirectAttributes.addFlashAttribute("erro", "Paciente não encontrado.");
+		if(isInvalido(paciente)){
+			
 			return "redirect:/Nutricao/Buscar";
 		}
 		
