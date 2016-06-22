@@ -1,6 +1,5 @@
 package br.ufc.quixada.npi.sinutri.model;
 
-
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.Period;
@@ -8,67 +7,56 @@ import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.util.Date;
 import java.util.List;
-
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.EntityListeners;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
-import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
-import javax.persistence.Transient;
 import javax.persistence.UniqueConstraint;
+import javax.validation.Valid;
+import org.springframework.format.annotation.DateTimeFormat;
+import br.ufc.quixada.npi.sinutri.model.enuns.Sexo;
 
 @Entity
-@EntityListeners(PessoaEntityListener.class)
+//@EntityListeners(PessoaEntityListener.class)
 @Table(uniqueConstraints = @UniqueConstraint(columnNames = { "id", "cpf" }))
 public class Pessoa {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
+
+	@Valid
+	@Column(unique = true)
+	private String cpf;	
+
+	private String nome;
+
+	@DateTimeFormat(pattern = "dd/MM/yyyy")
+	private Date dataNascimento;
+
+	private String vinculo;
+
+	private String telefone;
+
+	private String email;
+
+	@Enumerated(EnumType.STRING)
+	private Sexo sexo;
+
+	private String ocupacaoOuCargo;
+
+	private Boolean externo;
+
 	@ManyToMany
 	@JoinTable(name = "papel_pessoa", joinColumns = @JoinColumn(name = "pessoa_id"), inverseJoinColumns = @JoinColumn(name = "papel_id"))
 	private List<Papel> papeis;
-
-	@Column(unique = true)
-	private String cpf;
-
-	@Transient
-	private String nome;
-
-	@Transient
-	private String email;
-
-	@OneToOne(cascade = CascadeType.ALL)
-	@PrimaryKeyJoinColumn
-	private Paciente paciente;
-
-	@OneToMany(mappedBy = "pessoa")
-	private List<Servidor> servidores;
-
-	@Column(columnDefinition = "char(1)")
-	private String sexo;
-
-	@Transient
-	private Date dataNascimento;
-
-	@Transient
-	private String telefone;
-
-	public Pessoa(){}
-
-	public Pessoa(String cpf){
-		setCpf(cpf);
-	}
 
 	public Long getId() {
 		return id;
@@ -76,14 +64,6 @@ public class Pessoa {
 
 	public void setId(Long id) {
 		this.id = id;
-	}
-
-	public List<Papel> getPapeis() {
-		return papeis;
-	}
-
-	public void setPapeis(List<Papel> papeis) {
-		this.papeis = papeis;
 	}
 
 	public String getCpf() {
@@ -102,44 +82,20 @@ public class Pessoa {
 		this.nome = nome;
 	}
 
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
-	public Paciente getPaciente() {
-		return paciente;
-	}
-
-	public void setPaciente(Paciente paciente) {
-		this.paciente = paciente;
-	}
-
-	public List<Servidor> getServidores() {
-		return servidores;
-	}
-
-	public void setServidores(List<Servidor> servidores) {
-		this.servidores = servidores;
-	}
-
-	public String getSexo() {
-		return sexo;
-	}
-
-	public void setSexo(String sexo) {
-		this.sexo = sexo;
-	}
-
 	public Date getDataNascimento() {
 		return dataNascimento;
 	}
 
 	public void setDataNascimento(Date dataNascimento) {
 		this.dataNascimento = dataNascimento;
+	}
+
+	public String getVinculo() {
+		return vinculo;
+	}
+
+	public void setVinculo(String vinculo) {
+		this.vinculo = vinculo;
 	}
 
 	public String getTelefone() {
@@ -150,12 +106,47 @@ public class Pessoa {
 		this.telefone = telefone;
 	}
 
-	public Integer getIdade() {
-		Integer idade = obterIdade();
-		return idade;
+	public String getEmail() {
+		return email;
 	}
-	
-	private Integer obterIdade(){
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public Sexo getSexo() {
+		return sexo;
+	}
+
+	public void setSexo(Sexo sexo) {
+		this.sexo = sexo;
+	}
+
+	public String getOcupacaoOuCargo() {
+		return ocupacaoOuCargo;
+	}
+
+	public void setOcupacaoOuCargo(String ocupacaoOuCargo) {
+		this.ocupacaoOuCargo = ocupacaoOuCargo;
+	}
+
+	public Boolean getExterno() {
+		return externo;
+	}
+
+	public void setExterno(Boolean externo) {
+		this.externo = externo;
+	}
+
+	public List<Papel> getPapeis() {
+		return papeis;
+	}
+
+	public void setPapeis(List<Papel> papeis) {
+		this.papeis = papeis;
+	}
+
+	public Integer getIdade(){
 		Integer idade = null;
 		
 		if(this.dataNascimento != null){
@@ -171,16 +162,7 @@ public class Pessoa {
 		
 		return idade;
 	}
-
-	public boolean isNutricao() {
-		for (Papel p : this.papeis) {
-			if (p.getNome().equals("ROLE_NUTRICAO")) {
-				return true;
-			}
-		}
-		return false;
-	}
-
+	
 }
 
 	
