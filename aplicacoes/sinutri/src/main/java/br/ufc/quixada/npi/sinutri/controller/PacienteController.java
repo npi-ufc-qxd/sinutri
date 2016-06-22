@@ -124,63 +124,75 @@ public class PacienteController {
 		return "redirect:/paciente/"+idPaciente+"/";
 	}
 	
-	@RequestMapping(value= {"/{idPaciente}/Antropometria"}, method = RequestMethod.GET)
-	public String formAdicionarAvaliacaoAntropometrica(@PathVariable("idPaciente") Long idPaciente, Model model, RedirectAttributes redirectAttributes){
+	@RequestMapping(value= "/{idPaciente}/PlanoAlimentar", method = RequestMethod.GET)
+	public String formAdicionarPlanoAlimentar(@PathVariable("idPaciente") Long idPaciente, Model model, RedirectAttributes redirectAttributes){
 		Paciente paciente = pacienteService.buscarPacientePorId(idPaciente);
+		
+		if (paciente==null){
+			Mensagem mensagem = new Mensagem("Paciente inexistente", Mensagem.Tipo.ERRO, Mensagem.Prioridade.MEDIA);
+			redirectAttributes.addFlashAttribute("mensagem", mensagem);
+			return "redirect:Nutricao/Buscar";
+		}
+		
+		PlanoAlimentar planoAlimentar = new PlanoAlimentar(paciente);
+		planoAlimentar.setCriadoEm(new Date());
+		model.addAttribute("planoAlimentar", planoAlimentar);
+		return "/plano-alimentar/cadastrar";
+	}
+	
+	@RequestMapping(value = "/{idPaciente}/PlanoAlimentar", method = RequestMethod.POST)
+	public String adicionarPlanoAlimentar(Model model, @ModelAttribute("planoAlimentar") PlanoAlimentar planoAlimentar, @PathVariable("idPaciente") Long idPaciente, BindingResult result, RedirectAttributes redirectAttributes){
 		List<Mensagem> mensagens = new ArrayList<Mensagem>();
-		if(isInvalido(paciente)){
+		Servidor nutricionista = pessoaService.buscarServidorPorCpf(getCpfPessoaLogada());
+		
+		if(nutricionista==null){
+			mensagens.add(new Mensagem("Erro ao adicionar Plano alimentar!", Tipo.ERRO, Prioridade.ALTA));
+			mensagens.add(new Mensagem("Nutricionista não encontrada!", Tipo.ERRO, Prioridade.MEDIA));
+			redirectAttributes.addFlashAttribute("mensagens", mensagens);
+			return "redirect:/Nutricao/Buscar";
+		}
+		
+		Paciente paciente = pacienteService.buscarPacientePorId(idPaciente);
+		if(paciente==null){
+			mensagens.add(new Mensagem("Erro ao adicionar Plano alimentar!", Tipo.ERRO, Prioridade.ALTA));
 			mensagens.add(new Mensagem("Paciente inexistente!", Tipo.ERRO, Prioridade.MEDIA));
 			redirectAttributes.addFlashAttribute("mensagens", mensagens);
 			return "redirect:/Nutricao/Buscar";
 		}
-		AvaliacaoAntropometrica avaliacaoAntropometrica = new AvaliacaoAntropometrica();
-		avaliacaoAntropometrica.setPaciente(paciente);
-		avaliacaoAntropometrica.setCriadoEm(new Date());
-		model.addAttribute("avaliacaoAntropometrica", avaliacaoAntropometrica);
-		return "antropometria/cadastrar";
-	}
-	
-	@RequestMapping(value= "/{idPaciente}/PlanoAlimentar/", method = RequestMethod.GET)
-	public String formAdicionarPlanoAlimentar(@PathVariable("idPaciente") Long idPaciente, Model model, RedirectAttributes redirectAttributes){
-		Paciente paciente = pacienteService.buscarPacientePorId(idPaciente);
-		PlanoAlimentar planoAlimentar = new PlanoAlimentar(paciente);
-		planoAlimentar.setCriadoEm(new Date());
-		model.addAttribute("planoAlimentar", planoAlimentar);
-
-		return "/plano-alimentar/cadastrar";
-	}
-	
-	@RequestMapping(value = "/{idPaciente}/PlanoAlimentar/", method = RequestMethod.POST)
-	public String adicionarPlanoAlimentar(Model model, @ModelAttribute("planoAlimentar") PlanoAlimentar planoAlimentar, @PathVariable("idPaciente") Long idPaciente, BindingResult result, RedirectAttributes redirectAttributes){
-		Servidor nutricionista = pessoaService.buscarServidorPorCpf(getCpfPessoaLogada());
-		Paciente paciente = pacienteService.buscarPacientePorId(idPaciente);
+		
 		planoAlimentar.setNutricionista(nutricionista);
-		
-		if(paciente == null){
-			redirectAttributes.addFlashAttribute("erro", "Paciente inválido. Tente novamente!");
-			return "/plano-alimentar/cadastrar";
-		}else if(result.hasErrors()){
-			model.addAttribute("planoAlimentar", planoAlimentar);
-			return "/plano-alimentar/cadastrar";
-		}
-		
 		planoAlimentar.setPaciente(paciente);
+		mensagens.add(new Mensagem("Salvo com sucesso!", Tipo.SUCESSO, Prioridade.MEDIA));
 		consultaService.adicionarPlanoAlimentar(planoAlimentar);
 		
-		return "nutricao/buscar"; //modificar
+		return "redirect:/Paciente/"+paciente.getId()+"/PlanoAlimentar/"+planoAlimentar.getId();
 	}
 	
-	@RequestMapping(value = "/{idPaciente}/PlanoAlimentar/{idPlanoAlimentar}/Editar/", method = RequestMethod.GET)
-	public String formEditarIPlanoAlimentar(@PathVariable("idPlanoAlimentar") Long idPlanoAlimentar, @PathVariable("idPaciente") Long idPaciente, Model model){
+	@RequestMapping(value = "/{idPaciente}/PlanoAlimentar/{idPlanoAlimentar}/Editar", method = RequestMethod.GET)
+	public String formEditarPlanoAlimentar(@PathVariable("idPlanoAlimentar") Long idPlanoAlimentar, @PathVariable("idPaciente") Long idPaciente, Model model, RedirectAttributes redirectAttributes){
 		//Paciente paciente = pacienteService.buscarPacientePorId(idPaciente);
-				
+		
+		List<Mensagem> mensagens = new ArrayList<Mensagem>();
+		Paciente paciente = pacienteService.buscarPacientePorId(idPaciente);
+		
+		if(paciente==null){
+			mensagens.add(new Mensagem("Paciente inexistente!", Tipo.ERRO, Prioridade.MEDIA));
+			redirectAttributes.addFlashAttribute("mensagens", mensagens);
+			return "redirect:/Nutricao/Buscar";
+		}
 		PlanoAlimentar planoAlimentar = consultaService.buscarPlanoAlimentarPorId(idPlanoAlimentar);
+		
+		if(planoAlimentar==null){
+			mensagens.add(new Mensagem("Avaliação Antropométrica não encontrada!", Tipo.ERRO, Prioridade.MEDIA));
+			redirectAttributes.addFlashAttribute("mensagens", mensagens);
+			return "redirect:/Paciente/"+paciente.getId();
+		}
 		model.addAttribute("planoAlimentar", planoAlimentar);
 		
-		return "/plano-alimentar/editar";
+		return "plano-alimentar/editar";
 	}
 	
-	@RequestMapping(value = "/{idPaciente}/PlanoAlimentar/{idPlanoAlimentar}/Editar/", method = RequestMethod.POST)
+	@RequestMapping(value = "/{idPaciente}/PlanoAlimentar/{idPlanoAlimentar}/Editar", method = RequestMethod.POST)
 	public String editarPlanoAlimentar(Model model, @PathVariable("idPlanoAlimentar") Long idPlanoAlimentar, @PathVariable("idPaciente") Long idPaciente, PlanoAlimentar planoAlimentar, BindingResult result, RedirectAttributes redirectAttributes){
 		
 		Paciente paciente = pacienteService.buscarPacientePorId(idPaciente);
@@ -198,7 +210,7 @@ public class PacienteController {
 		return "nutricao/buscar"; //modificar
 	}
 	
-	@RequestMapping(value= {"/{idPaciente}/PlanoAlimentar/{idPlanoAlimentar}/Excluir/"}, method = RequestMethod.GET)
+	@RequestMapping(value= {"/{idPaciente}/PlanoAlimentar/{idPlanoAlimentar}/Excluir"}, method = RequestMethod.GET)
 	public String excluirPlanoAlimentar(@PathVariable("idPaciente") Long idPaciente, @PathVariable("idPlanoAlimentar") Long idPlanoAlimentar, RedirectAttributes redirectAttributes, Model model){
 		PlanoAlimentar planoAlimentar = consultaService.buscarPlanoAlimentarPorId(idPlanoAlimentar);
 		Paciente paciente = pacienteService.buscarPacientePorId(idPaciente);
@@ -208,6 +220,22 @@ public class PacienteController {
 		}
 		consultaService.excluirPlanoAlimentar(planoAlimentar);
 		return "nutricao/buscar"; //modificar
+	}
+	
+	@RequestMapping(value= {"/{idPaciente}/Antropometria"}, method = RequestMethod.GET)
+	public String formAdicionarAvaliacaoAntropometrica(@PathVariable("idPaciente") Long idPaciente, Model model, RedirectAttributes redirectAttributes){
+		Paciente paciente = pacienteService.buscarPacientePorId(idPaciente);
+		List<Mensagem> mensagens = new ArrayList<Mensagem>();
+		if(isInvalido(paciente)){
+			mensagens.add(new Mensagem("Paciente inexistente!", Tipo.ERRO, Prioridade.MEDIA));
+			redirectAttributes.addFlashAttribute("mensagens", mensagens);
+			return "redirect:/Nutricao/Buscar";
+		}
+		AvaliacaoAntropometrica avaliacaoAntropometrica = new AvaliacaoAntropometrica();
+		avaliacaoAntropometrica.setPaciente(paciente);
+		avaliacaoAntropometrica.setCriadoEm(new Date());
+		model.addAttribute("avaliacaoAntropometrica", avaliacaoAntropometrica);
+		return "antropometria/cadastrar";
 	}
 
 	@RequestMapping(value={"/{idPaciente}/Antropometria"}, method = RequestMethod.POST)
