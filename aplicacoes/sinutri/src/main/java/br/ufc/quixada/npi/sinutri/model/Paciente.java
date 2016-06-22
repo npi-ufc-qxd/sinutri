@@ -13,7 +13,6 @@ import javax.persistence.OneToOne;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
-
 @Entity
 public class Paciente implements Serializable {
 
@@ -23,7 +22,7 @@ public class Paciente implements Serializable {
 	private Long id;
 
 	@MapsId
-	@OneToOne(mappedBy = "paciente")
+	@OneToOne
 	@JoinColumn(name = "id")
 	private Pessoa pessoa;
 
@@ -57,54 +56,6 @@ public class Paciente implements Serializable {
 
 	public void setPessoa(Pessoa pessoa) {
 		this.pessoa = pessoa;
-	}
-
-	public String getNome() {
-		return nome;
-	}
-
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
-
-	public Date getDataNascimento() {
-		return dataNascimento;
-	}
-
-	public void setDataNascimento(Date dataNascimento) {
-		this.dataNascimento = dataNascimento;
-	}
-
-	public String getVinculo() {
-		return vinculo;
-	}
-
-	public void setVinculo(String vinculo) {
-		this.vinculo = vinculo;
-	}
-
-	public String getTelefone() {
-		return telefone;
-	}
-
-	public void setTelefone(String telefone) {
-		this.telefone = telefone;
-	}
-
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
-	public Boolean getExterno() {
-		return externo;
-	}
-
-	public void setExterno(Boolean externo) {
-		this.externo = externo;
 	}
 
 	public List<Prescricao> getListPrescricao() {

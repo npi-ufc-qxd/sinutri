@@ -9,6 +9,7 @@ import br.ufc.quixada.npi.sinutri.model.InqueritoAlimentar;
 import br.ufc.quixada.npi.sinutri.model.Paciente;
 import br.ufc.quixada.npi.sinutri.model.Prescricao;
 import br.ufc.quixada.npi.sinutri.repository.InqueritoAlimentarRepository;
+import br.ufc.quixada.npi.sinutri.repository.PacienteRepository;
 import br.ufc.quixada.npi.sinutri.repository.PrescricaoRepository;
 import br.ufc.quixada.npi.sinutri.service.ConsultaService;
 
@@ -17,6 +18,9 @@ public class ConsultaServiceImpl implements ConsultaService {
 
 	@Inject
 	private InqueritoAlimentarRepository inqueritoAlimentarRepository;
+	
+	@Inject
+	private PacienteRepository pacienteRepository;
 	
 	
 	@Inject
@@ -65,4 +69,5 @@ public class ConsultaServiceImpl implements ConsultaService {
 		inqueritoAlimentar.setAtualizadoEm(new Date());
 		inqueritoAlimentarRepository.save(inqueritoAlimentar);
 	}
+
 }

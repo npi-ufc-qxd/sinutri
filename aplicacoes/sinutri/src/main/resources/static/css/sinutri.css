@@ -326,7 +326,7 @@
 	border-bottom-style: solid !important;
 	border-bottom-width: 2px !important;
 	border-bottom-radius: 2px !important;
-	border-bottom-color: var(--color-primary) !important;
+	border-bottom-color: var(--color-primary);
 
 }
 
@@ -346,6 +346,11 @@
 
 
 
+}
+
+.sn-textfield__input-error {
+	border-bottom-color: var(--color-danger--500) !important;
+	color: var(--color-danger--500) !important;
 }
 
 
@@ -665,6 +670,17 @@ fabgroup > * {
 
 }
 
+.sn-input-tip {
+
+	position: absolute;
+	box-shadow: var(--shadow--2dp);
+	background-color: #00BCD4;
+	padding: 8px;
+	color: #fff;
+	z-index: 10000;  
+
+}
+
 .sn-padding--16 { padding: 16px; }
 
 .sn-padding--24 { padding: 24px; }
@@ -705,6 +721,10 @@ fabgroup > * {
 
 
 /* mdl override */
+
+.mdl-list__item {
+	overflow: visible;
+}
 
 .mdl-snackbar {
 
