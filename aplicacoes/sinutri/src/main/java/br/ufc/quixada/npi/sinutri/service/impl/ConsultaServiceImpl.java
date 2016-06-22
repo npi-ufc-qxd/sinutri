@@ -53,8 +53,7 @@ public class ConsultaServiceImpl implements ConsultaService {
 		avaliacaoAntropometricaRepository.save(antropometria);
 		
 	}
-
-	@Override
+	
 	public void excluirAvaliacaoAntropometrica(AvaliacaoAntropometrica antropometria) {
 		avaliacaoAntropometricaRepository.delete(antropometria);
 	}
