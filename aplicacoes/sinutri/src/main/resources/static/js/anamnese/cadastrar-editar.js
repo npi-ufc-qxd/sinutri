@@ -3,26 +3,26 @@ function esconderCampo(nome) {
 	nome = "#inputText"+nome;
 	$(nome).val("");
 	$(nome).attr("disabled", "true");
-	campo = $(nome).parent();
+	var campo = $(nome).parent();
 	campo.attr("style", "display:none");	
 }
 //Usa o sufixo do id do inputText para mostrar o inputText e o label
 function mostrarCampo(nome){
-	var nome = "#inputText"+nome;
+	nome = "#inputText"+nome;
 	$(nome).removeAttr("disabled");
 	var campo = $(nome).parent();
 	campo.attr("style", "display:show");	
 }
 
 function desabilitarCampo(nome) {
-	var nome = "#inputText"+nome;
+	nome = "#inputText"+nome;
 	var campo = $(nome);
 	campo.val("");
 	campo.attr("disabled", "true");	
 }
 
 function habilitarCampo(nome){
-	var nome = "#inputText"+nome;
+	nome = "#inputText"+nome;
 	var campo = $(nome);
 	campo.removeAttr("disabled");	
 }
@@ -33,8 +33,8 @@ function existeComentario(){
 
 //oculta/mostra o inputText baseado no valor do checkBox
 function checkChange(nome) {
-	var check_nome = "#check"+nome;
-	var checkbox = $(check_nome);
+	var checkNome = "#check"+nome;
+	var checkbox = $(checkNome);
 	if (checkbox.is(":checked")){
 		mostrarCampo(nome);
 	}else{
@@ -44,10 +44,11 @@ function checkChange(nome) {
 
 function selectChange(nome){
 	var select = $("#select"+nome);
-	if(select.val() === "")
+	if(select.val() === ""){
 		desabilitarCampo(nome);
-	else
+	}else{
 		habilitarCampo(nome);
+	}
 }
 //Oculta todos os campos de comentários
 $(document).ready(function() {	
