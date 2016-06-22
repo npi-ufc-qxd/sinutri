@@ -400,11 +400,10 @@ public class PacienteController {
 	public String formAdicionarPrescricao(@PathVariable("idPaciente") Long idPaciente, RedirectAttributes redirectAttributes, 
 			Model model){
 	
-		List<Mensagem> mensagens = new ArrayList<Mensagem>();
 		Paciente paciente = pacienteService.buscarPacientePorId(idPaciente);
 		if(paciente==null){
-			mensagens.add(new Mensagem("Paciente inexistente!", Mensagem.Tipo.ERRO, Mensagem.Prioridade.MEDIA));
-			redirectAttributes.addFlashAttribute("mensagens", mensagens);
+			Mensagem mensagem = new Mensagem("Paciente inexistente!", Mensagem.Tipo.ERRO, Mensagem.Prioridade.MEDIA);
+			redirectAttributes.addFlashAttribute("mensagem", mensagem);
 			return "redirect:/Nutricao/Buscar";
 		}
 	
@@ -523,13 +522,12 @@ public class PacienteController {
 		 
 		 List<Mensagem> mensagens = new ArrayList<Mensagem>();
 		 Paciente paciente = pacienteService.buscarPacientePorId(idPaciente);
-		 Prescricao prescricao = consultaService.buscarPrescricaoPorId(idPrescricao);
-		 
 		 if(paciente==null){
 			mensagens.add(new Mensagem("Paciente inexistente!", Mensagem.Tipo.ERRO, Mensagem.Prioridade.MEDIA));
 			redirectAttributes.addFlashAttribute("mensagens", mensagens);
 		    return "redirect:/Nutricao/Buscar";
 		 }
+		 Prescricao prescricao = consultaService.buscarPrescricaoPorId(idPrescricao);
 		 if(prescricao==null){
 			 mensagens.add(new Mensagem("Prescrição não encontrada!", Mensagem.Tipo.ERRO, Mensagem.Prioridade.MEDIA));
 			 redirectAttributes.addFlashAttribute("mensagens", mensagens);
@@ -546,16 +544,14 @@ public class PacienteController {
 		 Prescricao prescricao = consultaService.buscarPrescricaoPorId(idPrescricao);
 		 List<Mensagem> mensagens = new ArrayList<Mensagem>();
 
-		 if(prescricao != null){
-			 consultaService.excluirPrescricao(prescricao);
-			 mensagens.add(new Mensagem("Excluído com sucesso!", Mensagem.Tipo.SUCESSO, Mensagem.Prioridade.MEDIA));
-			 redirectAttributes.addFlashAttribute("mensagens", mensagens);
-		 }
-		 else{
+		 if(prescricao == null){
 			 mensagens.add(new Mensagem("Prescrição não encontrada!", Mensagem.Tipo.ERRO, Mensagem.Prioridade.MEDIA));
-			 redirectAttributes.addFlashAttribute("mensagens",mensagens); 
+			 redirectAttributes.addFlashAttribute("mensagens",mensagens);
+			 return "redirect:/Paciente/"+idPaciente;
 		 }
-
+		 consultaService.excluirPrescricao(prescricao);
+		 mensagens.add(new Mensagem("Excluído com sucesso!", Mensagem.Tipo.SUCESSO, Mensagem.Prioridade.MEDIA));
+		 redirectAttributes.addFlashAttribute("mensagens", mensagens);
 		 return "redirect:/Paciente/"+idPaciente;
 	 }
 	
