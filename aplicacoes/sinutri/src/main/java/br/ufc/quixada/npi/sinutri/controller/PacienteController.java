@@ -3,8 +3,10 @@ package br.ufc.quixada.npi.sinutri.controller;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+
 import javax.inject.Inject;
 import javax.validation.Valid;
+
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,10 +16,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
 import br.ufc.quixada.npi.sinutri.model.AvaliacaoAntropometrica;
 import br.ufc.quixada.npi.sinutri.model.InqueritoAlimentar;
 import br.ufc.quixada.npi.sinutri.model.Mensagem;
-
 import br.ufc.quixada.npi.sinutri.model.Mensagem.Prioridade;
 import br.ufc.quixada.npi.sinutri.model.Mensagem.Tipo;
 import br.ufc.quixada.npi.sinutri.model.Paciente;
@@ -27,7 +29,6 @@ import br.ufc.quixada.npi.sinutri.model.enuns.FrequenciaSemanal;
 import br.ufc.quixada.npi.sinutri.model.enuns.Sexo;
 import br.ufc.quixada.npi.sinutri.service.ConsultaService;
 import br.ufc.quixada.npi.sinutri.service.PacienteService;
-
 import br.ufc.quixada.npi.sinutri.service.PessoaService;
 
 
@@ -45,6 +46,7 @@ public class PacienteController {
 	private PacienteService pacienteService;
 	
 	@RequestMapping(value= "/{idPaciente}/InqueritoAlimentar", method = RequestMethod.GET)
+
 	public String formAdicionarInqueritoAlimentar(Model model, @PathVariable("idPaciente") Long idPaciente, RedirectAttributes redirectAttributes){
 		Paciente paciente =  pacienteService.buscarPacientePorId(idPaciente);
 		if(isInvalido(paciente)) {
@@ -66,7 +68,6 @@ public class PacienteController {
 	public String adicionarInqueritoAlimentar(Model model, @PathVariable("idPaciente") Long idPaciente, @Valid @ModelAttribute("inqueritoAlimentar") InqueritoAlimentar inqueritoAlimentar, BindingResult result, RedirectAttributes redirectAttributes){
 		Paciente paciente = pacienteService.buscarPacientePorId(idPaciente);
 		if(isInvalido(paciente)){
-
 			redirectAttributes.addFlashAttribute("mensagem", new Mensagem("Paciente inexistente", Mensagem.Tipo.ERRO, Mensagem.Prioridade.ALTA));
 			return "redirect:/Nutricao/Buscar";
 		}
@@ -132,7 +133,6 @@ public class PacienteController {
 		consultaService.excluirInqueritoAlimentar(inqueritoAlimentar);
 		redirectAttributes.addFlashAttribute("mensagem", new Mensagem("Excluído com sucesso!", Mensagem.Tipo.SUCESSO, Mensagem.Prioridade.BAIXA));
 		return "redirect:/Paciente/"+idPaciente;
-
 	}
 	
 	@RequestMapping(value= {"/{idPaciente}/Antropometria"}, method = RequestMethod.GET)
@@ -150,7 +150,7 @@ public class PacienteController {
 		model.addAttribute("avaliacaoAntropometrica", avaliacaoAntropometrica);
 		return "antropometria/cadastrar";
 	}
-	
+
 	@RequestMapping(value={"/{idPaciente}/Antropometria"}, method = RequestMethod.POST)
 	public String adicionarAvaliacaoAntropometrica(@PathVariable("idPaciente") Long idPaciente, Model model, @Valid AvaliacaoAntropometrica avaliacaoAntropometrica, BindingResult result, RedirectAttributes redirectAttributes){
 		List<Mensagem> mensagens = new ArrayList<Mensagem>();
