@@ -5,11 +5,12 @@ import java.util.Date;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import br.ufc.quixada.npi.sinutri.model.AvaliacaoAntropometrica;
 import br.ufc.quixada.npi.sinutri.model.InqueritoAlimentar;
 import br.ufc.quixada.npi.sinutri.model.Paciente;
 import br.ufc.quixada.npi.sinutri.model.Prescricao;
+import br.ufc.quixada.npi.sinutri.repository.AvaliacaoAntropometricaRepository;
 import br.ufc.quixada.npi.sinutri.repository.InqueritoAlimentarRepository;
-import br.ufc.quixada.npi.sinutri.repository.PacienteRepository;
 import br.ufc.quixada.npi.sinutri.repository.PrescricaoRepository;
 import br.ufc.quixada.npi.sinutri.service.ConsultaService;
 
@@ -20,8 +21,7 @@ public class ConsultaServiceImpl implements ConsultaService {
 	private InqueritoAlimentarRepository inqueritoAlimentarRepository;
 	
 	@Inject
-	private PacienteRepository pacienteRepository;
-	
+	private AvaliacaoAntropometricaRepository avaliacaoAntropometricaRepository;
 	
 	@Inject
 	private PrescricaoRepository prescricaoRepository;
@@ -70,4 +70,26 @@ public class ConsultaServiceImpl implements ConsultaService {
 		inqueritoAlimentarRepository.save(inqueritoAlimentar);
 	}
 
+	@Override
+	public void adicionarAvaliacaoAntropometrica(AvaliacaoAntropometrica antropometria) {
+		avaliacaoAntropometricaRepository.save(antropometria);
+		
+	}
+
+	@Override
+	public void editarAvaliacaoAntropometrica(AvaliacaoAntropometrica antropometria) {
+		avaliacaoAntropometricaRepository.save(antropometria);
+		
+	}
+
+	@Override
+	public void excluirAvaliacaoAntropometrica(AvaliacaoAntropometrica antropometria) {
+		avaliacaoAntropometricaRepository.delete(antropometria);
+	}
+
+	@Override
+	public AvaliacaoAntropometrica buscarAvaliacaoAntropometricaPorId(Long id) {
+		return avaliacaoAntropometricaRepository.findOne(id);
+		
+	}
 }

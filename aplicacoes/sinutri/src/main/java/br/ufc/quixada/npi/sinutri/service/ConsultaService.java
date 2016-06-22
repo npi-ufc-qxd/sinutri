@@ -1,5 +1,6 @@
 package br.ufc.quixada.npi.sinutri.service;
 
+import br.ufc.quixada.npi.sinutri.model.AvaliacaoAntropometrica;
 import br.ufc.quixada.npi.sinutri.model.InqueritoAlimentar;
 import br.ufc.quixada.npi.sinutri.model.Paciente;
 import br.ufc.quixada.npi.sinutri.model.Prescricao;
@@ -22,5 +23,12 @@ public interface ConsultaService {
 	
 	void excluirPrescricao(Prescricao prescricao);
 	
+	void adicionarAvaliacaoAntropometrica(AvaliacaoAntropometrica antropometria);
+	
+	void editarAvaliacaoAntropometrica(AvaliacaoAntropometrica antropometria);
+	
+	AvaliacaoAntropometrica buscarAvaliacaoAntropometricaPorId(Long id);
+	
+	void excluirAvaliacaoAntropometrica(AvaliacaoAntropometrica antropometria);
 	
 }
