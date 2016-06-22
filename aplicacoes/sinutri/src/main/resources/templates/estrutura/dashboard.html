@@ -28,7 +28,7 @@
 		</div>
 
 		<div class="sn-main">
-			<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header mdl-color--grey-200">
+			<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header mdl-color--grey-300">
 				<header class="mdl-layout__header">
 					<div class="mdl-layout__header-row">
 						<span class="mdl-layout-title">SiNutri</span>
@@ -49,12 +49,15 @@
 			<div class="sn-main__foreground"></div>
 		</div>
 	</div>
+	
+	<div th:if="${mensagens != null}"  th:each="mensagem : ${mensagens}" class="sn-toast" th:attr="data-type=${mensagem.tipo},data-priority=${mensagem.prioridade}" th:text="${mensagem.texto}"></div>
+
+	<div th:if="${mensagem != null}" class="sn-toast" th:attr="data-type=${mensagem.tipo},data-priority=${mensagem.prioridade}" th:text="${mensagem.texto}"></div>
 
 	<script type="text/javascript" th:src="@{/js/jquery.js}"></script>
 	<script type="text/javascript" th:src="@{/js/material.min.js}"></script>
 	<script type="text/javascript" th:src="@{/js/dialog-polyfill.js}"></script>
 	<script type="text/javascript" th:src="@{/js/sinutri.js}"></script>
-
 	<section layout:fragment="js"></section>
 	
 </body>

@@ -279,3 +279,8 @@ table th:first-child, table td:first-child {
 table th:last-child, table td:last-child {
 	padding-right: 48px !important;
 }
+
+.mdl-list__item--two-line {
+	padding-left: 48px;
+	padding-right: 48px;
+}
