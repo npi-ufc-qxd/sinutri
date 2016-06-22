@@ -135,6 +135,22 @@ public class PacienteController {
 
 	}
 	
+	@RequestMapping(value= {"/{idPaciente}/Antropometria"}, method = RequestMethod.GET)
+	public String formAdicionarAvaliacaoAntropometrica(@PathVariable("idPaciente") Long idPaciente, Model model, RedirectAttributes redirectAttributes){
+		Paciente paciente = pacienteService.buscarPacientePorId(idPaciente);
+		List<Mensagem> mensagens = new ArrayList<Mensagem>();
+		if(isInvalido(paciente)){
+			mensagens.add(new Mensagem("Paciente inexistente!", Tipo.ERRO, Prioridade.MEDIA));
+			redirectAttributes.addFlashAttribute("mensagens", mensagens);
+			return "redirect:/Nutricao/Buscar";
+		}
+		AvaliacaoAntropometrica avaliacaoAntropometrica = new AvaliacaoAntropometrica();
+		avaliacaoAntropometrica.setPaciente(paciente);
+		avaliacaoAntropometrica.setCriadoEm(new Date());
+		model.addAttribute("avaliacaoAntropometrica", avaliacaoAntropometrica);
+		return "antropometria/cadastrar";
+	}
+	
 	@RequestMapping(value={"/{idPaciente}/Antropometria"}, method = RequestMethod.POST)
 	public String adicionarAvaliacaoAntropometrica(@PathVariable("idPaciente") Long idPaciente, Model model, @Valid AvaliacaoAntropometrica avaliacaoAntropometrica, BindingResult result, RedirectAttributes redirectAttributes){
 		List<Mensagem> mensagens = new ArrayList<Mensagem>();
