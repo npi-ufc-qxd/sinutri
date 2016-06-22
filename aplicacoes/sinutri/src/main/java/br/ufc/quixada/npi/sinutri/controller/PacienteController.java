@@ -51,10 +51,9 @@ public class PacienteController {
 		Paciente paciente = pacienteService.buscarPacientePorId(idPaciente);
 		
 		if(isInvalido(paciente)){
-			List<Mensagem> mensagens = new ArrayList<Mensagem>();
+			Mensagem mensagem = new Mensagem("Paciente inexistente.", Mensagem.Tipo.ERRO, Mensagem.Prioridade.ALTA);
 			
-			mensagens.add(new Mensagem("Paciente inexistente.", Mensagem.Tipo.ERRO, Mensagem.Prioridade.ALTA));
-			redirectAttributes.addFlashAttribute("mensagens", mensagens);
+			redirectAttributes.addFlashAttribute("mensagem", mensagem);
 			return "redirect:/Nutricao/Buscar";
 		}
 		
@@ -76,15 +75,6 @@ public class PacienteController {
 
 		Paciente paciente = pacienteService.buscarPacientePorId(idPaciente);
 		
-		List<Mensagem> mensagens = new ArrayList<Mensagem>();
-
-		if(isInvalido(paciente)){
-			mensagens.add(new Mensagem("Paciente inexistente.", Mensagem.Tipo.ERRO, Mensagem.Prioridade.ALTA));
-			
-			redirectAttributes.addFlashAttribute("mensagens", mensagens);
-			return "redirect:/Nutricao/Buscar";
-		}
-		
 		if (bindingResult.hasErrors()) {
 			avaliacaoLaboratorial.setPaciente(paciente);
 			model.addAttribute("avaliacaoLaboratorial", avaliacaoLaboratorial);
@@ -92,10 +82,17 @@ public class PacienteController {
 			return "avaliacao-laboratorial/cadastrar";
 		}
 		
+		if(isInvalido(paciente)){
+			Mensagem mensagem = new Mensagem("Paciente inexistente.", Mensagem.Tipo.ERRO, Mensagem.Prioridade.ALTA);
+			
+			redirectAttributes.addFlashAttribute("mensagem", mensagem);
+			return "redirect:/Nutricao/Buscar";
+		}
+		
 		consultaService.adicionarAvaliacaoLaboratorial(avaliacaoLaboratorial, paciente);
 		
-		mensagens.add(new Mensagem("Salvo com sucesso!", Mensagem.Tipo.SUCESSO, Mensagem.Prioridade.MEDIA));
-		redirectAttributes.addFlashAttribute("mensagens", mensagens);
+		Mensagem mensagem = new Mensagem("Salvo com sucesso!", Mensagem.Tipo.SUCESSO, Mensagem.Prioridade.MEDIA);
+		redirectAttributes.addFlashAttribute("mensagem", mensagem);
 		
 		return "redirect:/Paciente/"+idPaciente+"/AvaliacaoLaboratorial/"+avaliacaoLaboratorial.getId()+"/Visualizar";
 	}
@@ -103,24 +100,13 @@ public class PacienteController {
 	@RequestMapping(value = "/{idPaciente}/AvaliacaoLaboratorial/{idAvaliacaoLaboratorial}/Editar", method = RequestMethod.GET)
 	public String formEditarAvaliacaoLaboratorial(@PathVariable("idPaciente") Long idPaciente, @PathVariable("idAvaliacaoLaboratorial") Long idAvaliacaoLaboratorial, Model model, RedirectAttributes redirectAttributes){
 		
-		Paciente paciente = pacienteService.buscarPacientePorId(idPaciente);
-		
-		List<Mensagem> mensagens = new ArrayList<Mensagem>();
-		
-		if(isInvalido(paciente)){
-			mensagens.add(new Mensagem("Paciente inexistente.", Mensagem.Tipo.ERRO, Mensagem.Prioridade.ALTA));
-			
-			redirectAttributes.addFlashAttribute("mensagens", mensagens);
-			return "redirect:/Nutricao/Buscar";
-		}
-		
 		AvaliacaoLaboratorial avaliacaoLaboratorial = consultaService.buscarAvaliacaoLaboratorialPorId(idAvaliacaoLaboratorial);
 		
 		if(avaliacaoLaboratorial == null){
-			mensagens.add(new Mensagem("Avaliação Laboratorial não encontrada.", Mensagem.Tipo.ERRO, Mensagem.Prioridade.MEDIA));
+			Mensagem mensagem = new Mensagem("Avaliação Laboratorial não encontrada.", Mensagem.Tipo.ERRO, Mensagem.Prioridade.MEDIA);
 			
-			redirectAttributes.addFlashAttribute("mensagens", mensagens);
-			return "redirect:/Nutricao/Buscar";
+			redirectAttributes.addFlashAttribute("mensagem", mensagem);
+			return "redirect:/Paciente/"+idPaciente;
 		}
 		
 		model.addAttribute("avaliacaoLaboratorial", avaliacaoLaboratorial);
@@ -129,19 +115,20 @@ public class PacienteController {
 	}
 	
 	@RequestMapping(value = "/{idPaciente}/AvaliacaoLaboratorial/{idAvaliacaoLaboratorial}/Editar", method = RequestMethod.POST)
-	public String editarAvaliacaoLaboratorial(@PathVariable("idPaciente") Long idPaciente, @PathVariable("idAvaliacaoLaboratorial") Long idAvaliacaoLaboratorial, @Valid AvaliacaoLaboratorial avaliacaoLaboratorial, Model model, BindingResult bindingResult, RedirectAttributes redirectAttributes){
-		
-		Paciente paciente = pacienteService.buscarPacientePorId(idPaciente);
-		
-		if(isInvalido(paciente)){
-			redirectAttributes.addFlashAttribute("erro", "Paciente não encontrado.");
-			return "redirect:/Nutricao/Buscar";
-		}
+	public String editarAvaliacaoLaboratorial(@PathVariable("idPaciente") Long idPaciente, @PathVariable("idAvaliacaoLaboratorial") Long idAvaliacaoLaboratorial, @Valid AvaliacaoLaboratorial avaliacaoLaboratorial, BindingResult bindingResult, Model model, RedirectAttributes redirectAttributes){
 		
 		if (bindingResult.hasErrors()) {
-			avaliacaoLaboratorial.setPaciente(paciente);
 			model.addAttribute("avaliacaoLaboratorial", avaliacaoLaboratorial);
 			return "avaliacao-laboratorial/editar";
+		}
+		
+		avaliacaoLaboratorial = consultaService.buscarAvaliacaoLaboratorialPorId(avaliacaoLaboratorial.getId());
+		
+		if(avaliacaoLaboratorial == null){
+			Mensagem mensagem = new Mensagem("Avaliação Laboratorial não encontrada.", Mensagem.Tipo.ERRO, Mensagem.Prioridade.MEDIA);
+			
+			redirectAttributes.addFlashAttribute("mensagem", mensagem);
+			return "redirect:/Paciente/"+idPaciente;
 		}
 				
 		consultaService.editarAvaliacaoLaboratorial(avaliacaoLaboratorial);
@@ -154,8 +141,10 @@ public class PacienteController {
 		AvaliacaoLaboratorial avaliacaoLaboratorial = consultaService.buscarAvaliacaoLaboratorialPorId(idAvaliacaoLaboratorial);
 		
 		if(avaliacaoLaboratorial == null){
-			redirectAttributes.addFlashAttribute("erro", "Avaliacao Laboratorial não encontrada.");
-			return "redirect:/Nutricao/Buscar";
+			Mensagem mensagem = new Mensagem("Avaliação Laboratorial não encontrada.", Mensagem.Tipo.ERRO, Mensagem.Prioridade.MEDIA);
+			
+			redirectAttributes.addFlashAttribute("mensagem", mensagem);
+			return "redirect:/Paciente/"+idPaciente;
 		}
 		
 		model.addAttribute("avaliacaoLaboratorial", avaliacaoLaboratorial);
@@ -168,11 +157,13 @@ public class PacienteController {
 		AvaliacaoLaboratorial avaliacaoLaboratorial = consultaService.buscarAvaliacaoLaboratorialPorId(idAvaliacaoLaboratorial);
 		
 		if(avaliacaoLaboratorial == null){
-			redirectAttributes.addFlashAttribute("erro", "Avaliacao Laboratorial não encontrada.");
-			return "redirect:/Nutricao/Buscar";
+			Mensagem mensagem = new Mensagem("Avaliação Laboratorial não encontrada.", Mensagem.Tipo.ERRO, Mensagem.Prioridade.MEDIA);
+			
+			redirectAttributes.addFlashAttribute("mensagem", mensagem);
+		}else{
+			consultaService.excluirAvaliacaoLaboratorial(avaliacaoLaboratorial);
 		}
-		
-		consultaService.excluirAvaliacaoLaboratorial(avaliacaoLaboratorial);
+
 		return "redirect:/Paciente/"+idPaciente;
 	}
 	

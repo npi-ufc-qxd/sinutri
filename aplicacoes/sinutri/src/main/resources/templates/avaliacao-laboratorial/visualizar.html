@@ -43,19 +43,20 @@
 
 
 				<div class="mdl-grid mdl-cell mdl-cell--12-col sn-padding--48 mdl-color--white sn-card">
-					<div class="sn-attribute mdl-cell mdl-cell--4-col">
-						<div class="sn-attribute__title">Observação</div>
-						<div class="sn-attribute__value" th:text="${avaliacaoLaboratorial.observacao}">está bem!</div>
-					</div>
 					
-					<div class="sn-attribute mdl-cell mdl-cell--4-col">
+					<div class="sn-attribute mdl-cell mdl-cell--6-col">
 						<div class="sn-attribute__title">Data de Criação</div>
 						<div class="sn-attribute__value" th:text="${#dates.format(avaliacaoLaboratorial.criadoEm,'dd/MM/yyyy')}">01/01/1995</div>
 					</div>
 					
-					<div class="sn-attribute mdl-cell mdl-cell--4-col">
+					<div class="sn-attribute mdl-cell mdl-cell--6-col">
 						<div class="sn-attribute__title">Última atualização</div>
 						<div class="sn-attribute__value" th:text="${#dates.format(avaliacaoLaboratorial.atualizado,'dd/MM/yyyy')}">01/01/1995</div>
+					</div>
+					
+					<div class="sn-attribute mdl-cell mdl-cell--12-col">
+						<div class="sn-attribute__title">Observação</div>
+						<div class="sn-attribute__value" th:text="${avaliacaoLaboratorial.observacao}">está bem!</div>
 					</div>
 					
 					<div class="sn-attribute mdl-cell mdl-cell--12-col">

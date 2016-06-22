@@ -16,6 +16,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.validation.constraints.NotNull;
 
+import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
@@ -44,6 +45,7 @@ public class AvaliacaoLaboratorial {
 
 	@OneToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE})
 	@JoinColumn(name = "exame_id")
+	@NotEmpty(message = "Uma Avaliação Laboratorial tem que possuir pelo menos um exame.")
 	private List<Exame> exames;
 	
 	public AvaliacaoLaboratorial(){

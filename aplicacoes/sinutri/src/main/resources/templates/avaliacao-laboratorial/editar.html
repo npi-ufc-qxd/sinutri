@@ -41,9 +41,10 @@
 				</div>
 	
 				<div class="mdl-cell mdl-cell--12-col">
-					<label class="sn-textfield__label">Exames</label> 
+					<label class="sn-textfield__label">Exames</label>
+					<label class="sn-textfield__messages sn-error-text" for="sn-text" th:if="${#fields.hasErrors('exames')}" th:errors="*{exames}"></label> 
 					<div class="sn-list-exames-container mdl-color--grey-200">
-						<ul class="sn-list-exames mdl-list">
+						<ul class="sn-list-exames mdl-list" th:field="*{exames}">
 							<li class="mdl-list__item mdl-list__item--two-line mdl-shadow--2dp mdl-color--white sn-cloneable sn-rounded-item sn-square-item">
 								<input type="hidden" th:field="*{exames[0].nome}" class="sn-exame-input-nome"/>
 								<input type="hidden" th:field="*{exames[0].resultado}" class="sn-exame-input-resultado"/>
