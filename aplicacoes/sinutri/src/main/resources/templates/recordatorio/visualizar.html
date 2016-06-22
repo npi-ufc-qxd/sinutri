@@ -132,25 +132,25 @@
 	              		  <!-- Text atribute -->
 	                      <div class="sn-attribute mdl-cell mdl-cell--6-col">
 	                              <div class="sn-attribute__title">Nome</div>
-	                              <div class="sn-attribute__value" th:text="${paciente.nome}"></div>
+	                              <div class="sn-attribute__value" th:text="${paciente.pessoa.nome}"></div>
 	                      </div>
 
 	                      <!-- Text atribute -->
 	                      <div class="sn-attribute mdl-cell mdl-cell--6-col">
 	                              <div class="sn-attribute__title">Email</div>
-	                              <div class="sn-attribute__value" th:text="${paciente.email}"></div>
+	                              <div class="sn-attribute__value" th:text="${paciente.pessoa.email}"></div>
 	                      </div>
 	                      
 	                      <!-- Text atribute -->
 	                      <div class="sn-attribute mdl-cell mdl-cell--6-col">
 	                              <div class="sn-attribute__title">Telefone</div>
-	                              <div class="sn-attribute__value" th:text="${paciente.telefone}"></div>
+	                              <div class="sn-attribute__value" th:text="${paciente.pessoa.telefone}"></div>
 	                      </div>	                      
 	                      
 	                      <!-- Text atribute -->
 	                      <div class="sn-attribute mdl-cell mdl-cell--6-col">
 	                              <div class="sn-attribute__title">Data de Nascimento</div>
-	                              <div class="sn-attribute__value" th:text="${#dates.format(paciente.dataNascimento, 'dd/MM/yyyy')}"></div>
+	                              <div class="sn-attribute__value" th:text="${#dates.format(paciente.pessoa.dataNascimento, 'dd/MM/yyyy')}"></div>
 	                      </div>
 	              </div>
 	

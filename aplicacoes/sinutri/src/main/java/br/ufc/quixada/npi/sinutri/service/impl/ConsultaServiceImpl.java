@@ -10,6 +10,7 @@ import br.ufc.quixada.npi.sinutri.model.Paciente;
 import br.ufc.quixada.npi.sinutri.model.Recordatorio;
 import br.ufc.quixada.npi.sinutri.model.RefeicaoRecordatorio;
 import br.ufc.quixada.npi.sinutri.repository.InqueritoAlimentarRepository;
+import br.ufc.quixada.npi.sinutri.repository.PacienteRepository;
 import br.ufc.quixada.npi.sinutri.repository.RecordatorioRepository;
 import br.ufc.quixada.npi.sinutri.repository.RefeicaoRecordatorioRepository;
 import br.ufc.quixada.npi.sinutri.service.ConsultaService;
@@ -19,6 +20,9 @@ public class ConsultaServiceImpl implements ConsultaService {
 
 	@Inject
 	private InqueritoAlimentarRepository inqueritoAlimentarRepository;
+	
+	@Inject
+	private PacienteRepository pacienteRepository;
 	
 	@Inject
 	private RecordatorioRepository recordatorioRepository;
@@ -48,7 +52,6 @@ public class ConsultaServiceImpl implements ConsultaService {
 		inqueritoAlimentar.setAtualizadoEm(new Date());
 		inqueritoAlimentarRepository.save(inqueritoAlimentar);
 	}
-
 		
 	//Recordatorio	
 	@Override
@@ -83,4 +86,5 @@ public class ConsultaServiceImpl implements ConsultaService {
 	public RefeicaoRecordatorio buscarRefeicaoRecordatorio(Long id) {
 		return this.refeicaoRecordatorioRepository.findOne(id);
 	}
+
 }

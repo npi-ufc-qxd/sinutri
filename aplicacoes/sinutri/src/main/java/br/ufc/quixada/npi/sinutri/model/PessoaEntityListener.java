@@ -1,7 +1,5 @@
 package br.ufc.quixada.npi.sinutri.model;
 
-import javax.persistence.PostLoad;
-
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 
@@ -12,7 +10,7 @@ public class PessoaEntityListener implements ApplicationContextAware {
 	
 	private static ApplicationContext context;
 	
-//	@PostLoad
+	//@PostLoad
 	public void loadPessoa(Pessoa pessoa) {
 		UsuarioService usuarioService = (UsuarioService) context.getBean(UsuarioService.class);
 		Usuario usuario = usuarioService.getByCpf(pessoa.getCpf());
