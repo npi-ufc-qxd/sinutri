@@ -129,28 +129,24 @@ public class PacienteController {
 	public String formAdicionarAnamnese(@PathVariable("idPaciente") Long idPaciente, Model model, RedirectAttributes redirectAttributes){
 		Paciente paciente =null;
 		paciente =  pacienteService.buscarPacientePorId(idPaciente);
-		ArrayList<Mensagem> mensagens = new ArrayList<>();
-		if(!isInvalido(paciente)){
-			Anamnese anamnese =  new Anamnese();
-			anamnese.setCriadoEm(new Date());
-			anamnese.setPaciente(paciente);
-			model.addAttribute("anamnese",anamnese);
-			model.addAttribute("tiposApetite",Apetite.values());
-			model.addAttribute("tiposSistemaUrinario",SistemaUrinario.values());
-			model.addAttribute("tiposSistemaGastrointestinal", SistemaGastrointestinal.values());
-			return "/anamnese/cadastrar";
-		}else{
-			mensagens.add(new Mensagem("Paciente inexistente.", Mensagem.Tipo.ERRO, Mensagem.Prioridade.ALTA));
-			redirectAttributes.addFlashAttribute("mensagens", mensagens);
+		if(isInvalido(paciente)){
+			redirectAttributes.addFlashAttribute("mensagem", new Mensagem("Paciente inexistente.", Mensagem.Tipo.ERRO, Mensagem.Prioridade.ALTA));
 			return "redirect:/Nutricao/Buscar";			
 		}
+		Anamnese anamnese =  new Anamnese();
+		anamnese.setCriadoEm(new Date());
+		anamnese.setPaciente(paciente);
+		model.addAttribute("anamnese",anamnese);
+		model.addAttribute("tiposApetite",Apetite.values());
+		model.addAttribute("tiposSistemaUrinario",SistemaUrinario.values());
+		model.addAttribute("tiposSistemaGastrointestinal", SistemaGastrointestinal.values());
+		return "/anamnese/cadastrar";
 	}
 	
 	@RequestMapping(value = "/{idPaciente}/Anamnese",method = RequestMethod.POST)
 	public String adicionarAnamnese(@PathVariable("idPaciente") Long idPaciente, @Valid Anamnese anamnese, BindingResult result, Model model,
 			RedirectAttributes redirectAttributes
 			){
-		ArrayList<Mensagem> mensagens = new ArrayList<>();
 		if(result.hasErrors()){			
 			model.addAttribute("anamnese",anamnese);
 			model.addAttribute("tiposApetite",Apetite.values());
@@ -161,53 +157,45 @@ public class PacienteController {
 		Servidor nutricionista = pessoaService.buscarServidorPorCpf(getCpfPessoaLogada());
 		anamnese.setNutricionista(nutricionista);
 		consultaService.adicionarAnamnese(anamnese);
-		mensagens.add(new Mensagem("Salvo com sucesso.",Mensagem.Tipo.SUCESSO,Mensagem.Prioridade.MEDIA));
-		redirectAttributes.addFlashAttribute("mensagens", mensagens);
+		redirectAttributes.addFlashAttribute("mensagem", new Mensagem("Salvo com sucesso.",Mensagem.Tipo.SUCESSO,Mensagem.Prioridade.MEDIA));
 		return "redirect:/Paciente/"+idPaciente+"/Anamnese/"+anamnese.getId();
 	}
 	
 	@RequestMapping(value = "/{idPaciente}/Anamnese/{idAnamnese}/Editar",method = RequestMethod.GET)
 	public String formEditarAnamnese( Model model, @PathVariable("idPaciente") Long idPaciente,@PathVariable("idAnamnese") Long idAnamnese, RedirectAttributes redirectAttributes){
 		Anamnese anamnese = consultaService.buscarAnamnese(idAnamnese);
-		ArrayList<Mensagem> mensagens = new ArrayList<>();
-		
-		if(anamnese != null){
-			anamnese.setAtualizadoEm(new Date());
-			model.addAttribute("anamnese", anamnese);
-			model.addAttribute("tiposApetite",Apetite.values());
-			model.addAttribute("tiposSistemaUrinario",SistemaUrinario.values());
-			model.addAttribute("tiposSistemaGastrointestinal", SistemaGastrointestinal.values());
-			return "/anamnese/editar";
-		}else{
-			mensagens.add(new Mensagem("Anamnese não encontrada.",Mensagem.Tipo.ERRO,Mensagem.Prioridade.ALTA));
-			redirectAttributes.addFlashAttribute("mensagens", mensagens);
+		if(anamnese == null){
+			redirectAttributes.addFlashAttribute("mensagem", new Mensagem("Anamnese não encontrada.",Mensagem.Tipo.ERRO,Mensagem.Prioridade.ALTA));
 			return "redirect:/Paciente/"+idPaciente;
 		}
+		anamnese.setAtualizadoEm(new Date());
+		model.addAttribute("anamnese", anamnese);
+		model.addAttribute("tiposApetite",Apetite.values());
+		model.addAttribute("tiposSistemaUrinario",SistemaUrinario.values());
+		model.addAttribute("tiposSistemaGastrointestinal", SistemaGastrointestinal.values());
+		return "/anamnese/editar";
 	}
 	
 	@RequestMapping(value = "/{idPaciente}/Anamnese/{idAnamnese}/Editar",method=RequestMethod.POST)
 	public String editarAnamnese(@PathVariable("idPaciente") Long idPaciente,@PathVariable("idAnamnese") Long idAnanmese,
 			@ModelAttribute("Ananmnese") @Valid Anamnese anamnese,	BindingResult result, Model model,RedirectAttributes redirectAttributes){
-		ArrayList<Mensagem> mensagens = new ArrayList<>();
 		if(result.hasErrors()){
 			model.addAttribute("anamnese", anamnese);
 			return "/nutricao/anamnese/editar";
 		}		
 		consultaService.editarAnamnese(anamnese);
-		mensagens.add(new Mensagem("Salvo com sucesso.",Mensagem.Tipo.SUCESSO,Mensagem.Prioridade.MEDIA));
-		redirectAttributes.addFlashAttribute("mensagens", mensagens);
+		redirectAttributes.addFlashAttribute("mensagem", new Mensagem("Salvo com sucesso.",Mensagem.Tipo.SUCESSO,Mensagem.Prioridade.MEDIA));
 		return "redirect:/Paciente/"+idPaciente+"/Anamnese/"+anamnese.getId();
 	}
 	
 	@RequestMapping(value = "/{idPaciente}/Anamnese/{idAnamnese}",method = RequestMethod.GET)
 	public String visualizarAnamnese(@PathVariable("idPaciente") Long idPaciente,@PathVariable("idAnamnese") Long idAnamnese,Model model, RedirectAttributes redirectAttributes){
 		Anamnese anamnese = consultaService.buscarAnamnese(idAnamnese);
-		ArrayList<Mensagem> mensagens = new ArrayList<>();
 		if(anamnese != null){
 			model.addAttribute("anamnese",anamnese);
 			return "/anamnese/visualizar";
 		}else{
-			mensagens.add(new Mensagem("Anamnese não encontrada.",Mensagem.Tipo.ERRO,Mensagem.Prioridade.ALTA));
+			redirectAttributes.addFlashAttribute("mensagem", new Mensagem("Anamnese não encontrada.",Mensagem.Tipo.ERRO,Mensagem.Prioridade.ALTA));
 			return "redirect:/Paciente/"+idPaciente;
 		}
 	}
@@ -215,15 +203,13 @@ public class PacienteController {
 	@RequestMapping(value = "/{idPaciente}/Anamnese/{idAnamnese}/Excluir")
 	public String excluirAnamnese(@PathVariable("idPaciente") Long idPaciente,@PathVariable("idAnamnese") Long idAnamnese, RedirectAttributes redirectAttributes){
 		Anamnese anamnese = consultaService.buscarAnamnese(idAnamnese);
-		ArrayList<Mensagem> mensagens = new ArrayList<>();
-		if(anamnese != null){
-			consultaService.excluirAnamnese(anamnese);
-			mensagens.add(new Mensagem("Excluído com sucesso!",Mensagem.Tipo.SUCESSO,Mensagem.Prioridade.ALTA));
-			return "redirect:/Paciente/"+idPaciente;
-		}else{
-			mensagens.add(new Mensagem("Anamnese não encontrada.",Mensagem.Tipo.ERRO,Mensagem.Prioridade.ALTA));
+		if(anamnese == null){
+			redirectAttributes.addFlashAttribute("mensagem", new Mensagem("Anamnese não encontrada.",Mensagem.Tipo.ERRO,Mensagem.Prioridade.ALTA));
 			return "redirect:/Paciente/"+idPaciente;			
 		}
+		consultaService.excluirAnamnese(anamnese);
+		redirectAttributes.addFlashAttribute("mensagem", new Mensagem("Excluído com sucesso!",Mensagem.Tipo.SUCESSO,Mensagem.Prioridade.ALTA));
+		return "redirect:/Paciente/"+idPaciente;
 		
 	}
 
