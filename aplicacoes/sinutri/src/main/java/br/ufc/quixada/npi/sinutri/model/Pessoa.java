@@ -7,10 +7,8 @@ import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.util.Date;
 import java.util.List;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.EntityListeners;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
@@ -22,13 +20,11 @@ import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 import javax.validation.Valid;
-
 import org.springframework.format.annotation.DateTimeFormat;
-
 import br.ufc.quixada.npi.sinutri.model.enuns.Sexo;
 
 @Entity
-@EntityListeners(PessoaEntityListener.class)
+//@EntityListeners(PessoaEntityListener.class)
 @Table(uniqueConstraints = @UniqueConstraint(columnNames = { "id", "cpf" }))
 public class Pessoa {
 
