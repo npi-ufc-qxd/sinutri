@@ -1,6 +1,5 @@
 package br.ufc.quixada.npi.sinutri.controller;
 
-import java.util.ArrayList;
 import java.util.Date;
 import javax.inject.Inject;
 import javax.validation.Valid;
