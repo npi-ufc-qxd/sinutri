@@ -30,12 +30,19 @@ $(document).ready(function() {
 		select = divSelect.find("select")
 		divInput = divSelect.next();
 		input = divInput.find("input");
-		select.prop('selectedIndex', 0);
-		select.attr('disabled', 'true');
-		divSelect.attr('style', 'display:none');
-		input.val('')
-		input.attr('disabled', 'true');
-		divInput.attr('style', 'display:none');
+		if ($(this).is(":checked")) {
+			input.removeAttr('disabled')
+			divInput.attr('style', 'display:show');
+			select.removeAttr('disabled');
+			divSelect.attr('style', 'display:show');
+		} else if (!$(this).is(":checked")) {
+			select.prop('selectedIndex', 0);
+			select.attr('disabled', 'true');
+			divSelect.attr('style', 'display:none');
+			input.val('')
+			input.attr('disabled', 'true');
+			divInput.attr('style', 'display:none');
+		}
 		
 	});
 	
