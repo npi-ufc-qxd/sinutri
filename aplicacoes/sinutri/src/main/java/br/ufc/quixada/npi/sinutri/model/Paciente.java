@@ -1,11 +1,12 @@
 package br.ufc.quixada.npi.sinutri.model;
 
 import java.io.Serializable;
-
+import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.MapsId;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 @Entity
@@ -20,6 +21,8 @@ public class Paciente implements Serializable {
 	@OneToOne
 	@JoinColumn(name = "id")
 	private Pessoa pessoa;
+	@OneToMany(mappedBy = "paciente")
+	private List<Anamnese> anamneses;
 
 	public Long getId() {
 		return id;
@@ -36,5 +39,15 @@ public class Paciente implements Serializable {
 	public void setPessoa(Pessoa pessoa) {
 		this.pessoa = pessoa;
 	}
+
+	public List<Anamnese> getAnamneses() {
+		return anamneses;
+	}
+
+	public void setAnamneses(List<Anamnese> anamneses) {
+		this.anamneses = anamneses;
+	}
+	
+	
 
 }
