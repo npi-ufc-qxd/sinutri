@@ -26,6 +26,9 @@ public class Paciente implements Serializable {
 	@OneToMany
 	private List<Recordatorio> recordatorios;
 
+	@OneToMany(mappedBy = "paciente")
+	private List<Anamnese> anamneses;
+
 	public Long getId() {
 		return id;
 	}
@@ -48,6 +51,14 @@ public class Paciente implements Serializable {
 
 	public void setRecordatorios(List<Recordatorio> recordatorios) {
 		this.recordatorios = recordatorios;
+	}
+	
+	public List<Anamnese> getAnamneses() {
+		return anamneses;
+	}
+
+	public void setAnamneses(List<Anamnese> anamneses) {
+		this.anamneses = anamneses;
 	}
 	
 }

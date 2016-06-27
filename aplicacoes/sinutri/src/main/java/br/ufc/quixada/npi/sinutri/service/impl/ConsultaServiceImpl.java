@@ -5,12 +5,15 @@ import java.util.Date;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import br.ufc.quixada.npi.sinutri.model.Anamnese;
+import br.ufc.quixada.npi.sinutri.model.AvaliacaoAntropometrica;
 import br.ufc.quixada.npi.sinutri.model.InqueritoAlimentar;
 import br.ufc.quixada.npi.sinutri.model.Paciente;
 import br.ufc.quixada.npi.sinutri.model.Recordatorio;
 import br.ufc.quixada.npi.sinutri.model.RefeicaoRecordatorio;
+import br.ufc.quixada.npi.sinutri.repository.AnamneseRepository;
+import br.ufc.quixada.npi.sinutri.repository.AvaliacaoAntropometricaRepository;
 import br.ufc.quixada.npi.sinutri.repository.InqueritoAlimentarRepository;
-import br.ufc.quixada.npi.sinutri.repository.PacienteRepository;
 import br.ufc.quixada.npi.sinutri.repository.RecordatorioRepository;
 import br.ufc.quixada.npi.sinutri.repository.RefeicaoRecordatorioRepository;
 import br.ufc.quixada.npi.sinutri.service.ConsultaService;
@@ -22,7 +25,10 @@ public class ConsultaServiceImpl implements ConsultaService {
 	private InqueritoAlimentarRepository inqueritoAlimentarRepository;
 	
 	@Inject
-	private PacienteRepository pacienteRepository;
+	private AvaliacaoAntropometricaRepository avaliacaoAntropometricaRepository;
+	
+	@Inject
+	private AnamneseRepository anamneseRepository;
 	
 	@Inject
 	private RecordatorioRepository recordatorioRepository;
@@ -87,4 +93,50 @@ public class ConsultaServiceImpl implements ConsultaService {
 		return this.refeicaoRecordatorioRepository.findOne(id);
 	}
 
+	@Override
+	public void adicionarAvaliacaoAntropometrica(AvaliacaoAntropometrica antropometria) {
+		avaliacaoAntropometricaRepository.save(antropometria);
+		
+	}
+
+	@Override
+	public void editarAvaliacaoAntropometrica(AvaliacaoAntropometrica antropometria) {
+		avaliacaoAntropometricaRepository.save(antropometria);
+		
+	}
+
+	@Override
+	public void excluirAvaliacaoAntropometrica(AvaliacaoAntropometrica antropometria) {
+		avaliacaoAntropometricaRepository.delete(antropometria);
+	}
+
+	@Override
+	public AvaliacaoAntropometrica buscarAvaliacaoAntropometricaPorId(Long id) {
+		return avaliacaoAntropometricaRepository.findOne(id);
+		
+	}
+	
+	
+	@Override
+	public void adicionarAnamnese(Anamnese anamnese) {
+		anamnese.setAtualizadoEm(new Date());
+		anamneseRepository.save(anamnese);
+	}
+
+	@Override
+	public void editarAnamnese(Anamnese anamnese) {		
+		anamneseRepository.save(anamnese);
+		
+	}
+
+	@Override
+	public void excluirAnamnese(Anamnese anamnese) {
+		anamneseRepository.delete(anamnese);
+	}
+
+	@Override
+	public Anamnese buscarAnamnese(Long id) {
+		return anamneseRepository.findOne(id);		
+	}	
+	
 }

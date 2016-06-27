@@ -1,5 +1,7 @@
 package br.ufc.quixada.npi.sinutri.service;
 
+import br.ufc.quixada.npi.sinutri.model.AvaliacaoAntropometrica;
+import br.ufc.quixada.npi.sinutri.model.Anamnese;
 import br.ufc.quixada.npi.sinutri.model.InqueritoAlimentar;
 import br.ufc.quixada.npi.sinutri.model.Paciente;
 import br.ufc.quixada.npi.sinutri.model.Recordatorio;
@@ -28,4 +30,19 @@ public interface ConsultaService {
 	
 	RefeicaoRecordatorio buscarRefeicaoRecordatorio(Long id);
 
+	void adicionarAvaliacaoAntropometrica(AvaliacaoAntropometrica antropometria);
+	
+	void editarAvaliacaoAntropometrica(AvaliacaoAntropometrica antropometria);
+	
+	AvaliacaoAntropometrica buscarAvaliacaoAntropometricaPorId(Long id);
+	
+	void excluirAvaliacaoAntropometrica(AvaliacaoAntropometrica antropometria);
+	
+	void adicionarAnamnese(Anamnese anamnese);
+	
+	void editarAnamnese(Anamnese anamnese);
+	
+	void excluirAnamnese(Anamnese anamnese);
+	
+	Anamnese buscarAnamnese(Long id);
 }
