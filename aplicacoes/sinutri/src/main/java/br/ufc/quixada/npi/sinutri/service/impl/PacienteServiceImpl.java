@@ -14,7 +14,25 @@ public class PacienteServiceImpl implements PacienteService{
 	private PacienteRepository pacienteRepository;
 	
 	@Override
+	public void adicionarPaciente(Paciente paciente) {
+		pacienteRepository.save(paciente);	
+	}
+
+	@Override
+	public void editarPaciente(Paciente paciente) {
+		pacienteRepository.save(paciente);
+		
+	}
+	
+	@Override
 	public Paciente buscarPacientePorId(Long idPaciente) {
 		return pacienteRepository.findOne(idPaciente);
 	}
+
+	@Override
+	public void excluirPaciente(Paciente paciente) {
+		pacienteRepository.delete(paciente);
+		
+	}
+	
 }
