@@ -38,7 +38,7 @@ public class PlanoAlimentar {
 	
 	@OneToMany
 	@JoinColumn(name = "plano_alimentar_id")
-	private List<RefeicaoPlanoAlimentar> refeicoesPlanoAlimentar;
+	private List<RefeicaoPlanoAlimentar> refeicoes;
 	
 	public PlanoAlimentar() {
 		super();
@@ -48,16 +48,6 @@ public class PlanoAlimentar {
 	public PlanoAlimentar(Paciente paciente) {
 		super();
 		this.paciente = paciente;
-	}
-
-	public PlanoAlimentar(Date criadoEm, Date atualizadoEm, Servidor nutricionista, Paciente paciente,
-			List<RefeicaoPlanoAlimentar> refeicoesPlanoAlimentar) {
-		super();
-		this.criadoEm = criadoEm;
-		this.atualizadoEm = atualizadoEm;
-		this.nutricionista = nutricionista;
-		this.paciente = paciente;
-		this.refeicoesPlanoAlimentar = refeicoesPlanoAlimentar;
 	}
 
 	public Long getId() {
@@ -100,11 +90,13 @@ public class PlanoAlimentar {
 		this.paciente = paciente;
 	}
 
-	public List<RefeicaoPlanoAlimentar> getRefeicoesPlanoAlimentar() {
-		return refeicoesPlanoAlimentar;
+	public List<RefeicaoPlanoAlimentar> getRefeicoes() {
+		return refeicoes;
 	}
 
-	public void setRefeicoesPlanoAlimentar(List<RefeicaoPlanoAlimentar> refeicoesPlanoAlimentar) {
-		this.refeicoesPlanoAlimentar = refeicoesPlanoAlimentar;
+	public void setRefeicoes(List<RefeicaoPlanoAlimentar> refeicoes) {
+		this.refeicoes = refeicoes;
 	}
+
+	
 }

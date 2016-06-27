@@ -3,6 +3,8 @@ package br.ufc.quixada.npi.sinutri.model;
 import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -48,6 +50,8 @@ public class Alimento {
 	private Double vitaminaDCalciferol;
 	private Double vitaminaETocoferol;
 	private Double zinco;
+	
+	@Enumerated(EnumType.STRING)
 	private FonteAlimento fonte;
 	
 	@OneToMany
