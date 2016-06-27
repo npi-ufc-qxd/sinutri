@@ -39,7 +39,7 @@ $(function()
 			dialog: "#sn-add-refeicao-modal",
 			buttons: [
 		          {
-		        	  label: "Adicionar",
+		        	  label: "Salvar",
 		        	  attrs: {id: "btn-add", type: "button"},
 		        	  action: function() {
 		        		  

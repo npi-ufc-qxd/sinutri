@@ -12,10 +12,10 @@ $(function()
 				if( dialog != null ) {
 					$(dialog).find("#sn-refeicao-item-index").val("");
 					
-					var hora = el.find(".sn-refeicao-hora").text();
+					var hora = el.find(".sn-refeicao-input-hora").val();
 					var descricao = el.find(".sn-refeicao-input-descricao").val();
-					var itens = el.find(".sn-refeicao-itens").text();
-					var observacao = el.find(".sn-refeicao-observacao").text();
+					var itens = el.find(".sn-refeicao-input-itens").val();
+					var observacao = el.find(".sn-refeicao-input-observacao").val();
 					
 					var filtro = "[value="+descricao+"]";
 					
@@ -27,6 +27,7 @@ $(function()
 					$(dialog).find("#sn-refeicao-descricao option"+filtro).prop("selected", true);
 					
 					dialog.showModal();
+					
 				}
 				
 			}
@@ -38,7 +39,7 @@ $(function()
 			dialog: "#sn-add-refeicao-modal",
 			buttons: [
 		          {
-		        	  label: "Adicionar",
+		        	  label: "Salvar",
 		        	  attrs: {id: "btn-add", type: "button"},
 		        	  action: function() {
 		        		  
@@ -87,7 +88,6 @@ $(function()
 						  });
 						  
 						  $(dialog).find("#sn-refeicao-item-index").val("");
-						  
 		        	  }
 		          }
 			]
