@@ -459,13 +459,12 @@ public class PacienteController {
 	@RequestMapping(value = "/{idPaciente}/Anamnese/{idAnamnese}",method = RequestMethod.GET)
 	public String visualizarAnamnese(@PathVariable("idPaciente") Long idPaciente,@PathVariable("idAnamnese") Long idAnamnese,Model model, RedirectAttributes redirectAttributes){
 		Anamnese anamnese = consultaService.buscarAnamnese(idAnamnese);
-		if(anamnese != null){
-			model.addAttribute("anamnese",anamnese);
-			return "/anamnese/visualizar";
-		}else{
+		if(anamnese == null){
 			redirectAttributes.addFlashAttribute("mensagem", new Mensagem("Anamnese não encontrada.",Mensagem.Tipo.ERRO,Mensagem.Prioridade.ALTA));
 			return "redirect:/Paciente/"+idPaciente;
 		}
+		model.addAttribute("anamnese",anamnese);
+		return "/anamnese/visualizar";
 	}
 	
 	@RequestMapping(value = "/{idPaciente}/Anamnese/{idAnamnese}/Excluir")
