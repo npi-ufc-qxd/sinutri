@@ -24,47 +24,40 @@ $(document).ready(function() {
    		event.preventDefault();
 	});
 	
-	camposCheckBox = ['AguaGosta', 'AvesGosta', 'BebidasAlcoolicasGosta', 'BovinaGosta', 'CereaisGosta', 'DocesGosta', 'FrutasGosta', 'GaseificadasGosta', 'InfusoesGosta', 'LeguminosasGosta', 'LeiteDerivadosGosta', 'ManteigaGosta', 'MargarinaGosta', 'MassasGosta', 'OleoGosta', 'OvosGosta', 'PeixeGosta', 'SucoGosta', 'ToucinhoBaconGosta', 'VegetaisCozidosGosta', 'VegetaisCrusGosta', 'ViscerasGosta']
-	for (var i = 0; i < camposCheckBox.length; i++) {
-		checkChange(camposCheckBox[i])
-	}
+	$(".mdl-checkbox__input").each(function(){
+		divCheckBox = $(this).parent();
+		divSelect = divCheckBox.next();
+		select = divSelect.find("select")
+		divInput = divSelect.next();
+		input = divInput.find("input");
+		select.prop('selectedIndex', 0);
+		select.attr('disabled', 'true');
+		divSelect.attr('style', 'display:none');
+		input.val('')
+		input.attr('disabled', 'true');
+		divInput.attr('style', 'display:none');
+		
+	});
+	
+	$(".mdl-checkbox__input").change(function(){
+		divCheckBox = $(this).parent();
+		divSelect = divCheckBox.next();
+		select = divSelect.find("select")
+		divInput = divSelect.next();
+		input = divInput.find("input");
+		if ($(this).is(":checked")) {
+			input.removeAttr('disabled')
+			divInput.attr('style', 'display:show');
+			select.removeAttr('disabled');
+			divSelect.attr('style', 'display:show');
+		} else if (!$(this).is(":checked")) {
+			select.prop('selectedIndex', 0);
+			select.attr('disabled', 'true');
+			divSelect.attr('style', 'display:none');
+			input.val('')
+			input.attr('disabled', 'true');
+			divInput.attr('style', 'display:none');
+		}
+	});
+	
 });
-
-//Usa o sufixo do id do inputText para ocultar o inputText e o label
-function esconderCampo(nome) {
-	nomeInput = '#inputText'+nome
-	$(nomeInput).val('')
-	$(nomeInput).attr('disabled', 'true');
-	divInput = $(nomeInput).parent();
-	divInput.attr('style', 'display:none');
-	
-	nomeSelect = '#select'+nome
-	$(nomeSelect).prop('selectedIndex', 0);
-	$(nomeSelect).attr('disabled', 'true');
-	divSelect = $(nomeSelect).parent();
-	divSelect.attr('style', 'display:none');
-}
-//Usa o sufixo do id do inputText para mostrar o inputText e o label
-function mostrarCampo(nome){
-	nomeInput = '#inputText'+nome
-	$(nomeInput).removeAttr('disabled')
-	div = $(nomeInput).parent();
-	div.attr('style', 'display:show');
-	
-	nomeSelect = '#select'+nome
-	$(nomeSelect).removeAttr('disabled');
-	divSelect = $(nomeSelect).parent();
-	divSelect.attr('style', 'display:show');
-}
-
-
-//oculta/mostra o inputText baseado no valor do checkBox
-function checkChange(nome) {
-	check_nome = "#check"+nome;
-	checkbox = $(check_nome);
-	if (checkbox.is(":checked")){
-		mostrarCampo(nome);
-	}else{
-		esconderCampo(nome);
-	}
-}
