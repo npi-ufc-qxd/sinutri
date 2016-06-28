@@ -27,7 +27,13 @@
 		    th:action="@{/Paciente/__${idPaciente}__/Recordatorio}"
 		    th:object="${recordatorio}"
 		    accept-charset="utf-8">
-
+				
+				<input type="hidden" th:field="*{id}"></input>
+				<input type="hidden" th:field="*{criadoEm}"></input>
+				<input type="hidden" th:field="*{atualizadoEm}"></input>
+				<input type="hidden" th:field="*{nutricionista}"></input>
+				<input type="hidden" th:field="*{paciente}"></input>
+				
 				<div class="mdl-cell mdl-cell--8-col sn-padding--24">
 				
 					<div class="mdl-layout-title">
