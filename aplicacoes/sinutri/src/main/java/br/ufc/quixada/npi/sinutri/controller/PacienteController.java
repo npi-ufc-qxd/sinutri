@@ -739,16 +739,16 @@ public class PacienteController {
     		@PathVariable("idPaciente") Long idPaciente,  
     		Model model, RedirectAttributes redirect) {
     	
-    	Paciente paciente = this.pacienteService.buscarPacientePorId(idPaciente);
-    	
-    	if( paciente == null ){
-    		redirect.addFlashAttribute("mensagem", new Mensagem("Paciente não encontrado.", Tipo.ERRO, Prioridade.MEDIA));
-    		return "redirect:/Nutricao/Buscar";
-    	}
     	
     	if( recordatorio == null ){
     		redirect.addFlashAttribute("mensagem", new Mensagem("Recordatório não encontrado.", Tipo.ERRO, Prioridade.MEDIA));
     		return "redirect:/Paciente/"+idPaciente;
+    	}
+    	
+    	Paciente paciente = this.pacienteService.buscarPacientePorId(idPaciente);
+    	if( paciente == null ){
+    		redirect.addFlashAttribute("mensagem", new Mensagem("Paciente não encontrado.", Tipo.ERRO, Prioridade.MEDIA));
+    		return "redirect:/Nutricao/Buscar";
     	}
     	
     	if( recordatorio.getRefeicoes().isEmpty() ){
@@ -757,6 +757,7 @@ public class PacienteController {
     		model.addAttribute("mensagem", new Mensagem("Recordatório deve possuir refeições.", Tipo.ERRO, Prioridade.MEDIA));
     		return "recordatorio/editar";
     	}
+    	
     	
     	consultaService.editarRecordatorio(recordatorio);
     	
