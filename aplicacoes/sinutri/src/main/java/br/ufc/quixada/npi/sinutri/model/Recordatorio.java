@@ -28,7 +28,11 @@ public class Recordatorio {
 	
 	@OneToMany(cascade=CascadeType.ALL)
 	@JoinColumn(name="recordatorio_id")
-	private List<RefeicaoRecordatorio> refeicoes = new ArrayList<RefeicaoRecordatorio>();
+	private List<RefeicaoRecordatorio> refeicoes;
+	
+	public Recordatorio() {
+		this.refeicoes = new ArrayList<RefeicaoRecordatorio>();
+	}
 	
 	public long getId() {
 		return id;

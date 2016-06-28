@@ -27,6 +27,7 @@ import br.ufc.quixada.npi.sinutri.model.Paciente;
 import br.ufc.quixada.npi.sinutri.model.Pessoa;
 import br.ufc.quixada.npi.sinutri.model.Prescricao;
 import br.ufc.quixada.npi.sinutri.model.Recordatorio;
+import br.ufc.quixada.npi.sinutri.model.RefeicaoRecordatorio;
 import br.ufc.quixada.npi.sinutri.model.Servidor;
 import br.ufc.quixada.npi.sinutri.model.enuns.Apetite;
 import br.ufc.quixada.npi.sinutri.model.enuns.FrequenciaSemanal;
@@ -655,7 +656,6 @@ public class PacienteController {
 		return SecurityContextHolder.getContext().getAuthentication().getName();
 	}
 	
-	//Recordatorio cadastrar	
 	@RequestMapping(value = "/{idPaciente}/Recordatorio", method = RequestMethod.GET)
     public String formAdicionarRecordatorio( @PathVariable("idPaciente") Long idPaciente, Model model,
     		RedirectAttributes redirect) {		
@@ -677,17 +677,18 @@ public class PacienteController {
     public String adicionarRecordatorio( @ModelAttribute("recordatorio") Recordatorio recordatorio,
             @PathVariable("idPaciente") Long idPaciente, Model model, RedirectAttributes redirect ) {
     	
-    	Paciente paciente = pacienteService.buscarPacientePorId(idPaciente);
     	Servidor nutricionista = pessoaService.buscarServidorPorCpf(getCpfPessoaLogada());
-    	
     	if( nutricionista == null ){
     		redirect.addFlashAttribute("mensagem", new Mensagem("Nutricionista inexistente.", Tipo.ERRO, Prioridade.MEDIA));
     		return "redirect:/Nutricao/Buscar";
     	}
+    	
+    	Paciente paciente = pacienteService.buscarPacientePorId(idPaciente);
     	if( paciente == null ){
         	redirect.addFlashAttribute("mensagem", new Mensagem("Paciente inexistente.", Tipo.ERRO, Prioridade.MEDIA));
         	return "redirect:/Nutricao/Buscar";
 	    }
+    	
     	if( recordatorio.getRefeicoes().isEmpty() ){
     		redirect.addFlashAttribute("mensagem", new Mensagem("Recordatório deve possuir refeições.", Tipo.ERRO, Prioridade.MEDIA));
     		return "redirect:/Paciente/"+idPaciente+"/Recordatorio";
@@ -703,23 +704,23 @@ public class PacienteController {
         
     }	
 	
-    //Recordatorio editar
     @RequestMapping(value = "/{idPaciente}/Recordatorio/{idRecordatorio}/Editar", method = RequestMethod.GET )
     public String formEditarRecordatorio( @PathVariable("idRecordatorio") Long idRecordatorio,
     		@PathVariable("idPaciente") Long idPaciente,  
     		Model model, RedirectAttributes redirect) {
     	
     	Paciente paciente = this.pacienteService.buscarPacientePorId(idPaciente);
-    	Recordatorio recordatorio = this.consultaService.buscarRecordatorio(idRecordatorio);
-    	
     	if( paciente == null ){
     		redirect.addFlashAttribute("mensagem", new Mensagem("Paciente não encontrado.", Tipo.ERRO, Prioridade.MEDIA));
     		return "redirect:/Nutricao/Buscar";
     	}
+    	
+    	Recordatorio recordatorio = this.consultaService.buscarRecordatorio(idRecordatorio);
     	if( recordatorio == null ){
     		redirect.addFlashAttribute("mensagem", new Mensagem("Recordatório não encontrado.", Tipo.ERRO, Prioridade.MEDIA));
     		return "redirect:/Paciente/"+idPaciente;
     	}
+    	
     	if( recordatorio.getRefeicoes().isEmpty() ){
     		redirect.addFlashAttribute("mensagem", new Mensagem("Recordatório deve possuir refeições.", Tipo.ERRO, Prioridade.MEDIA));
     		return "redirect:/Paciente/"+idPaciente+"/Recordatorio";
@@ -744,10 +745,12 @@ public class PacienteController {
     		redirect.addFlashAttribute("mensagem", new Mensagem("Paciente não encontrado.", Tipo.ERRO, Prioridade.MEDIA));
     		return "redirect:/Nutricao/Buscar";
     	}
+    	
     	if( recordatorio == null ){
     		redirect.addFlashAttribute("mensagem", new Mensagem("Recordatório não encontrado.", Tipo.ERRO, Prioridade.MEDIA));
     		return "redirect:/Paciente/"+idPaciente;
     	}
+    	
     	if( recordatorio.getRefeicoes().isEmpty() ){
     		model.addAttribute("paciente", paciente);
     		model.addAttribute("recordatorio", recordatorio);
@@ -763,19 +766,18 @@ public class PacienteController {
     	
     }
     
-  //Recordatorio Visualizar
 	@RequestMapping(value = "/{idPaciente}/Recordatorio/{idRecordatorio}", method = RequestMethod.GET)
 	public String visulizarRecordatorio(@PathVariable("idPaciente") Long idPaciente, 
 			@PathVariable("idRecordatorio") Long idRecordatorio, 
 			Model model, RedirectAttributes redirect){
 		
-		Recordatorio recordatorio = this.consultaService.buscarRecordatorio(idRecordatorio);
 		Paciente paciente = pacienteService.buscarPacientePorId(idPaciente);
-		
 		if( paciente == null ){
     		redirect.addFlashAttribute("mensagem", new Mensagem("Paciente não encontrado.", Tipo.ERRO, Prioridade.MEDIA));
     		return "redirect:/Nutricao/Buscar";
     	}
+		
+		Recordatorio recordatorio = this.consultaService.buscarRecordatorio(idRecordatorio);
     	if( recordatorio == null ){
     		redirect.addFlashAttribute("mensagem", new Mensagem("Recordatório não encontrado.", Tipo.ERRO, Prioridade.MEDIA));
     		return "redirect:/Paciente/"+idPaciente;
@@ -787,7 +789,6 @@ public class PacienteController {
 		return "recordatorio/visualizar";
 	}
 	
-    //Recordatorio Excluir
 	@RequestMapping(value = "/{idPaciente}/Recordatorio/{idRecordatorio}/Excluir", method = RequestMethod.GET)
 	public String excluirRecordatorio(@PathVariable("idPaciente") Long idPaciente, 
 			@PathVariable("idRecordatorio") Long idRecordatorio,
