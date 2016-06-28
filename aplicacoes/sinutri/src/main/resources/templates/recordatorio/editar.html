@@ -24,7 +24,7 @@
 		    id="formAdicionarRecordatorio"
 		    method="post" 
 		    class="mdl-cell mdl-cell--2-offset mdl-cell--8-col mdl-card mdl-shadow--2dp" 
-		    th:action="@{/Paciente/__${idPaciente}__/Recordatorio}"
+		    th:action="@{/Paciente/__*{paciente.id}__/Recordatorio/__*{id}__/Editar}"
 		    th:object="${recordatorio}"
 		    accept-charset="utf-8">
 				
