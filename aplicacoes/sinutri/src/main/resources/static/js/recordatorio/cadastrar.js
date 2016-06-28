@@ -65,10 +65,10 @@ $(function()
 						  
 					      var data = {
 								  sortValue: d.getTime(),
-								  ".sn-refeicao-hora": 			   {text:  hora},
-								  ".sn-refeicao-descricao":		   {text:  textdescricao},
-								  ".sn-refeicao-itens": 		   {text:  itens},
-								  ".sn-refeicao-observacao": 	   {text:  observacao},
+								  ".sn-refeicao-hora": 			   {text:  hora.length > 27 ? hora.substr(0, 26).concat('...') : hora},
+								  ".sn-refeicao-descricao":		   {text:  textdescricao.length > 27 ? textdescricao.substr(0, 26).concat('...') : textdescricao},
+								  ".sn-refeicao-itens": 		   {text:  itens.length ? itens.substr(0, 26).concat('...') : itens},
+								  ".sn-refeicao-observacao": 	   {text:  observacao.length ? observacao.substr(0, 26).concat('...') : observacao},
 								  ".sn-refeicao-input-hora": 	   {value: hora},
 								  ".sn-refeicao-input-descricao":  {value: descricao},
 								  ".sn-refeicao-input-itens": 	   {value: itens},

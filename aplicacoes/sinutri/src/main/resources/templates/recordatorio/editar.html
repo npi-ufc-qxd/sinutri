@@ -70,22 +70,22 @@
 							    		
 						    		</div>
 						    		
-						    		<div class="mdl-cell mdl-cell--6-col">
-						    		
-							    		<span>Descrição</span>
-							    		
-								    	<span class="mdl-list__item-text-body sn-refeicao-descricao">
+							  		<div class="mdl-cell mdl-cell--6-col">
+							  		
+								    	<span>Itens</span>
+								    	
+								    	<span class="mdl-list__item-text-body sn-refeicao-itens">
 								      		Bryan Cranston played the role of Walter in Breaking Bad. He is also known
 								      		for playing Hal in Malcom in the Middle.
 							    		</span>
 							    		
 						    		</div>
 						    		
-							  		<div class="mdl-cell mdl-cell--6-col">
-							  		
-								    	<span>Itens</span>
-								    	
-								    	<span class="mdl-list__item-text-body sn-refeicao-itens">
+						    		<div class="mdl-cell mdl-cell--6-col">
+						    		
+							    		<span>Descrição</span>
+							    		
+								    	<span class="mdl-list__item-text-body sn-refeicao-descricao">
 								      		Bryan Cranston played the role of Walter in Breaking Bad. He is also known
 								      		for playing Hal in Malcom in the Middle.
 							    		</span>
@@ -165,6 +165,18 @@
 							    		
 						    		</div>
 						    		
+							  		<div class="mdl-cell mdl-cell--6-col">
+							  		
+								    	<span>Itens</span>
+								    	
+								    	<span class="mdl-list__item-text-body sn-refeicao-itens"
+								    	th:text="${#strings.length(refeicao.itens) > 27}? ${#strings.append(#strings.substring(refeicao.itens, 0, 26), '...')} : ${refeicao.itens}">
+								      		Bryan Cranston played the role of Walter in Breaking Bad. He is also known
+								      		for playing Hal in Malcom in the Middle.
+							    		</span>
+							    		
+						    		</div>
+						    		
 						    		<div class="mdl-cell mdl-cell--6-col">
 						    		
 							    		<span>Descrição</span>
@@ -177,24 +189,13 @@
 							    		
 						    		</div>
 						    		
-							  		<div class="mdl-cell mdl-cell--6-col">
-							  		
-								    	<span>Itens</span>
-								    	
-								    	<span class="mdl-list__item-text-body sn-refeicao-itens"
-								    	th:text="*{refeicoes[__${state.index}__].itens}">
-								      		Bryan Cranston played the role of Walter in Breaking Bad. He is also known
-								      		for playing Hal in Malcom in the Middle.
-							    		</span>
-							    		
-						    		</div>
 						    		
 						    		<div class="mdl-cell mdl-cell--6-col">
 						    		
 							    		<span>Observação</span>
 							    		
 								    	<span class="mdl-list__item-text-body sn-refeicao-observacao"
-								    	th:text="*{refeicoes[__${state.index}__].observacao}">
+								    	th:text="${#strings.length(refeicao.observacao) > 27}? ${#strings.append(#strings.substring(refeicao.observacao, 0, 26), '...')} : ${refeicao.observacao}">
 								      		Bryan Cranston played the role of Walter in Breaking Bad. He is also known
 								      		for playing Hal in Malcom in the Middle.
 							    		</span>
@@ -266,22 +267,22 @@
 							    		
 						    		</div>
 						    		
-						    		<div class="mdl-cell mdl-cell--6-col">
-						    		
-							    		<span>Descrição</span>
-							    		
-								    	<span class="mdl-list__item-text-body sn-refeicao-descricao">
+							  		<div class="mdl-cell mdl-cell--6-col">
+							  		
+								    	<span>Itens</span>
+								    	
+								    	<span class="mdl-list__item-text-body sn-refeicao-itens">
 								      		Bryan Cranston played the role of Walter in Breaking Bad. He is also known
 								      		for playing Hal in Malcom in the Middle.
 							    		</span>
 							    		
 						    		</div>
 						    		
-							  		<div class="mdl-cell mdl-cell--6-col">
-							  		
-								    	<span>Itens</span>
-								    	
-								    	<span class="mdl-list__item-text-body sn-refeicao-itens">
+						    		<div class="mdl-cell mdl-cell--6-col">
+						    		
+							    		<span>Descrição</span>
+							    		
+								    	<span class="mdl-list__item-text-body sn-refeicao-descricao">
 								      		Bryan Cranston played the role of Walter in Breaking Bad. He is also known
 								      		for playing Hal in Malcom in the Middle.
 							    		</span>
