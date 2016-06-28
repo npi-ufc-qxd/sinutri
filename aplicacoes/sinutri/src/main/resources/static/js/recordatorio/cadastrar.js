@@ -51,7 +51,7 @@ $(function()
 						  var observacao = $(dialog).find("#sn-refeicao-observacao").val();
 						  
 						  if( !(hora.length > 0 && descricao.length > 0
-						  &&  itens.length > 0 && observacao.length > 0) )
+						  &&  itens.trim().length > 0 && observacao.trim().length > 0) )
 							  return;
 						  
 					      dialog.close();
