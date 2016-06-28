@@ -15,7 +15,6 @@ $(function()
 					var hora = el.find(".sn-refeicao-input-hora").val();
 					var descricao = el.find(".sn-refeicao-input-descricao").val();
 					var observacao = el.find(".sn-refeicao-input-observacao").val();
-					var alimentos = el.find(".sn-refeicao-input-alimentos").val();
 					
 					var filtro = "[value="+descricao+"]";
 					
@@ -23,10 +22,20 @@ $(function()
 					$(dialog).find("#sn-refeicao-item-index").val(index);
 					$(dialog).find("#sn-refeicao-observacao").val(observacao);
 					$(dialog).find("#sn-refeicao-descricao").val(observacao);
-					$(dialog).find("#sn-refeicao-alimentos").val(alimentos);
 					dialog.showModal();
 					
 				}
+				
+			}
+		
+		});
+		
+		var dynamicList2 = $(".sn-list-alimento-porcao").dynamicList({
+			cloneableElement: ".sn-cloneable",
+			removeButton:     ".sn-alimento-porcao-remover",
+			editButton:       ".sn-alimento-porcao-editar",
+			cloneButton:	  ".sn-alimento-porcao-duplicar",
+			onItemEdit:		  function(el, index) {
 				
 			}
 		
@@ -45,10 +54,8 @@ $(function()
 		        		  var hora 		 = $(dialog).find("#sn-refeicao-hora").val();
 						  var descricao  = $(dialog).find("#sn-refeicao-descricao").val();
 						  var observacao = $(dialog).find("#sn-refeicao-observacao").val();
-						  var alimentos      = $(dialog).find("#sn-refeicao-alimentos").val();
 						  
-						  if( !(hora.length > 0 && descricao.length > 0
-						  &&  alimentos.length > 0 && observacao.length > 0) )
+						  if( !(hora.length > 0 && descricao.length > 0 && observacao.length > 0) )
 							  return;
 						  
 					      dialog.close();
@@ -65,11 +72,9 @@ $(function()
 								  ".sn-refeicao-hora": 			   {text:  hora},
 								  ".sn-refeicao-descricao":		   {text:  descricao},
 								  ".sn-refeicao-observacao": 	   {text:  observacao},
-								  ".sn-refeicao-alimentos": 		   {text:  alimentos},
 								  ".sn-refeicao-input-hora": 	   {value: hora},
 								  ".sn-refeicao-input-descricao":  {value: descricao},
 								  ".sn-refeicao-input-observacao": {value: observacao},
-								  ".sn-refeicao-input-alimentos": 	   {value: alimentos}
 					      };
 						  
 						  var el;
@@ -121,6 +126,23 @@ $(function()
 		
 		$("#btnCancelar").click(function() {
 			confirmacao.showModal();
+		});
+		
+		$("#botaoAdicionarAlimento").on("click", function(){
+			var d = new Date();
+			d.setHours( parseInt(hora2[0]) );
+			d.setMinutes( parseInt(hora2[1]) );
+			
+			var alimentoNome = $("#alimento-nome").val();
+			var porcaoQuantidade = $("#porcao-quantidade").val();
+			
+			 var data = {
+				  sortValue: d.getTime(),
+				  ".sn-alimento-nome": 			   {text:  alimentoNome},
+				  ".sn-porcao-quantidade":		   {text:  porcaoQuantidade},
+				  ".sn-alimento-input-nome":  {value: alimentoNome},
+				  ".sn-porcao-input-quantidade": {value: porcaoQuantidade},
+			};
 		});
 		
 		

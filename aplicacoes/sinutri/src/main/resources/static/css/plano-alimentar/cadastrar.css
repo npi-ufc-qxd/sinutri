@@ -1,6 +1,6 @@
 .mdl-dialog
 {
-	width: 380px !important;
+	width: 700px !important;
 }
 
 #sn-add-refeicao-button
@@ -36,4 +36,4 @@ table th:nth-child(2), table td:nth-child(2) {
 
 table th:last-child, table td:last-child {
 	padding-right: 24px !important; 
-} 
+}

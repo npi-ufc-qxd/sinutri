@@ -33,9 +33,9 @@
 					<div class="sn-form__hdivider"></div>
 					
 	
-					<div class="sn-textfield mdl-cell mdl-cell--6-col">
+					<div class="sn-textfield mdl-cell mdl-cell--2-col">
 					
-						<label class="sn-textfield__label" for="criadoEm">Date</label>
+						<label class="sn-textfield__label" for="criadoEm">Data</label>
 						<input class="sn-textfield__input sn-date-picker" th:field="*{criadoEm}" id="criadoEm"/>
 					
 					</div>
@@ -50,7 +50,6 @@
 				    			<th th:class="mdl-data-table__cell--non-numeric">Hora</th>
 				    			<th th:class="mdl-data-table__cell--non-numeric">Descrição</th>
 				    			<th th:class="mdl-data-table__cell--non-numeric">Observação</th>
-				    			<th th:class="mdl-data-table__cell--non-numeric">Alimentos</th>
 				    			<th th:class="mdl-data-table__cell--non-numeric">Opções</th>
 				    		</tr>
 				    		
@@ -66,7 +65,7 @@
 					    			<input type="hidden" th:field="*{refeicoes[0].observacao}" class="sn-refeicao-input-observacao" value="akhggf"/>
 				    			</td>
 				    			
-				    			<td style="width:20%" 
+				    			<td style="width:10%" 
 				    			class="mdl-data-table__cell--non-numeric sn-refeicao">
 				    				00:00
 				    			</td>
@@ -79,12 +78,6 @@
 				    			<td style="width:20%" 
 				    			class="mdl-data-table__cell--non-numeric sn-refeicao-observacao">
 				    				Observação
-				    			</td>
-				    			
-				    			
-				    			<td style="width:20%" 
-				    			class="mdl-data-table__cell--non-numeric sn-refeicao-alimentos">
-				    				Alimentos
 				    			</td>
 				    			
 				    			
@@ -124,7 +117,7 @@
 		    		<div class="mdl-grid">
 		    			<input type="hidden" id="sn-refeicao-item-index"/>
 							
-						<div class="sn-textfield mdl-cell mdl-cell--4-col">
+						<div class="sn-textfield mdl-cell mdl-cell--2-col">
 						
 				    		<label for="sn-refeicao-hora"
 				    		class="sn-textfield__label">
@@ -160,83 +153,107 @@
 				    		<textarea class="sn-textfield__input"
 				    		id="sn-refeicao-observacao"
 				    		name="snrefeicaoobservacao"></textarea>
-				    		
 				    	</div>
-				    		
-						
-			    		<table class="mdl-data-table mdl-js-data-table">
+				    	
+				    	<div class="sn-textfield mdl-cell mdl-cell--12-col">
+				    		<div class="mdl-grid">
+								<div class="mdl-cell mdl-cell--12-col">
+						    		<h5>Alimentos</h5>
+						    	</div>
+					    		
+					    		<div class="mdl-cell mdl-cell--4-col">
+						    		<label>Fonte:</label>
+						    		<select class="sn-selectfield__select">
+						    			<option value="">Escolha uma fonte</option>
+						    			<option value="MEUSALIMENTOS">MEUS ALIMENTOS</option>
+						    			<option value="TACO">TACO</option>
+						    			<option value="TUCUNDUVA">TUCUNDUVA</option>
+						    		</select>
+					    		</div>
+					    		
+					    		<div class="mdl-cell mdl-cell--4-col">
+						    		<label>Alimento:</label>
+						    		<select id="alimento-nome" class="sn-selectfield__select">
+						    			<option value="">Escolha um alimento</option>
+						    		</select>
+					    		</div>
+					    		
+					    		<div class="mdl-cell mdl-cell--3-col">
+						    		<label>Quantidade:</label>
+						    		<input id="porcao-quantidade" type="number" min="0" max="999999" class="sn-textfield__input" step="0.01"/>
+					    		</div>
+					    		<div class="mdl-cell mdl-cell--1-col">
+						    		<button id="botaoAdicionarAlimento" class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-button--colored mdl-color-text--white">
+									  <i class="material-icons">add</i>
+									</button>
+								</div>
+				    		</div>
+				    		<div class="mdl-grid">
+				    			
+				    			<table class="mdl-data-table mdl-js-data-table">
 				    
-					    	<thead>
-					    	
-					    		<tr>
-					    			<th hidden="true"></th>
-					    			<th th:class="mdl-data-table__cell--non-numeric">Alimento</th>
-					    			<th th:class="mdl-data-table__cell--non-numeric">Quantidade</th>
-					    			<th th:class="mdl-data-table__cell--non-numeric">Opções</th>
-					    		</tr>
-					    		
-					    	</thead>
-					    		
-					    	<tbody class="sn-list-refeicoes">
-					    	
-					    		<tr class="sn-cloneable">
-					    			
-					    			<td hidden="true">
-						    			<input type="hidden" th:field="*{refeicoes.alimentos[0].descricao}" class="sn-refeicao-input-descricao" value="CAFEMANHA"/>
-					    			</td>
-					    			
-					    			<td style="width:20%" 
-					    			class="mdl-data-table__cell--non-numeric sn-refeicao">
-					    				00:00
-					    			</td>
-					    			
-					    			<td style="width:20%" 
-					    			class="mdl-data-table__cell--non-numeric sn-refeicao-descricao">
-					    				Descrição
-					    			</td>
-					    			
-					    			<td style="width:20%" 
-					    			class="mdl-data-table__cell--non-numeric sn-refeicao-observacao">
-					    				Observação
-					    			</td>
-					    			
-					    			
-					    			<td style="width:20%" 
-					    			class="mdl-data-table__cell--non-numeric sn-refeicao-alimentos">
-					    				Alimentos
-					    			</td>
-					    			
-					    			
-					    			<td style="width:20%">
-					    			
-					    				<button type="button" 
-					    				class="mdl-button mdl-js-button mdl-button--icon sn-refeicao-editar">
-					    				
-					    					<i class="material-icons mdl-color-text--grey-700">mode_edit</i>
-					    					
-					    				</button>
-					    				
-					    				<button type="button" 
-					    				class="mdl-button mdl-js-button mdl-button--icon sn-refeicao-duplicar">
-					    				
-					    					<i class="material-icons mdl-color-text--grey-700">content_copy</i>
-					    					
-					    				</button>
-					    				
-					    				<button type="button"	
-					    				class="mdl-button mdl-js-button mdl-button--icon sn-refeicao-remover">
-					    				
-					    					<i class="material-icons mdl-color-text--grey-700">close</i>
-					    					
-					    				</button>
-					    				
-					    			</td>
-					    			
-					    		</tr>
-					    		
-					    	</tbody>
-					    	
-					</table>
+							    	<thead>
+							    	
+							    		<tr>
+							    			<th hidden="true"></th>
+							    			<th th:class="mdl-data-table__cell--non-numeric">Alimento</th>
+							    			<th th:class="mdl-data-table__cell--non-numeric">Quantidade</th>
+							    			<th th:class="mdl-data-table__cell--non-numeric">Opções</th>
+							    		</tr>
+							    		
+							    	</thead>
+							    		
+							    	<tbody class="sn-list-alimento-porcao">
+							    	
+							    		<tr id="sn-refeicao-alimentos" class="sn-cloneable">
+							    			
+							    			<td hidden="true">
+								    			<input type="hidden" th:field="*{refeicoes[0].hora}" class="sn-alimento-input-nome" value="00:00"/>
+								    			<input type="hidden" th:field="*{refeicoes[0].descricao}" class="sn-porcao-input-quantidade" value="CAFEMANHA"/>
+							    			</td>
+							    			<td style="width:33.3%" 
+							    			class="mdl-data-table__cell--non-numeric sn-alimento-nome">
+							    				Nome
+							    			</td>
+							    			
+							    			<td style="width:33.3%" 
+							    			class="mdl-data-table__cell--non-numeric sn-porcao-quantidade">
+							    				Quantidade
+							    			</td>
+							    			
+							    			<td style="width:33.3%">
+							    			
+							    				<button type="button" 
+							    				class="mdl-button mdl-js-button mdl-button--icon sn-refeicao-editar">
+							    				
+							    					<i class="material-icons mdl-color-text--grey-700">mode_edit</i>
+							    					
+							    				</button>
+							    				
+							    				<button type="button" 
+							    				class="mdl-button mdl-js-button mdl-button--icon sn-refeicao-duplicar">
+							    				
+							    					<i class="material-icons mdl-color-text--grey-700">content_copy</i>
+							    					
+							    				</button>
+							    				
+							    				<button type="button"	
+							    				class="mdl-button mdl-js-button mdl-button--icon sn-refeicao-remover">
+							    				
+							    					<i class="material-icons mdl-color-text--grey-700">close</i>
+							    					
+							    				</button>
+							    				
+							    			</td>
+							    			
+							    		</tr>
+							    		
+							    	</tbody>
+							    	
+							</table>	
+				    				
+				    		</div>
+				    	</div>
 				    		
 				    		
 	   				</div>
