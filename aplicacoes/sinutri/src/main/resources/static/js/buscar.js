@@ -1,9 +1,28 @@
 $(document).ready(function() {
-	
+	//colocar focus no campo após o texto 
+	$.fn.setCursorPosition = function (pos) {
+	    this.each(function (index, elem) {
+	        if (elem.setSelectionRange) {
+	            elem.setSelectionRange(pos, pos);
+	        } else if (elem.createTextRange) {
+	            var range = elem.createTextRange();
+	            range.collapse(true);
+	            range.moveEnd('character', pos);
+	            range.moveStart('character', pos);
+	            range.select();
+	        }
+	    });
+	    return this;
+	};	
+
+	$("#sn-search__input").focus().setCursorPosition($("#sn-search__input").val().length);
+
 	$("#botaoPesquisar").on('click', function(){
 		$("#formBuscar").submit();
 	});
     
+	
+	
     var dataTable = $('#sn-search-result-table').DataTable({
         columnDefs: [
             {
