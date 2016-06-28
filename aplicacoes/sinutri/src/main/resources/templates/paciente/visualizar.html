@@ -102,7 +102,7 @@
 					</div>
 
 				</div>
-				
+
 				<div class="sn-card-paciente mdl-cell mdl-cell--6-col-desktop mdl-cell--8-col-tablet mdl-cell--4-col-phone sn-card ">
 
 					<div class="mdl-grid mdl-grid--no-spacing">
@@ -119,7 +119,7 @@
 										<span class="sn-card-list__item-text">12/12/2012</span>
 									</span>
 									<span class="mdl-list__item-secondary-content">
-										<button id="sn-antropometria-0" class="mdl-button mdl-js-button mdl-button--icon">
+										<button th:id="|sn-antropometria-${iterationStatus}|" class="mdl-button mdl-js-button mdl-button--icon">
 											<i class="material-icons">more_vert</i>
 										</button>
 										<div class="mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect" for="sn-antropometria-0">
@@ -136,6 +136,7 @@
 					</div>
 
 				</div>
+				
 				
 				<div class="sn-card-paciente mdl-cell mdl-cell--6-col-desktop mdl-cell--8-col-tablet mdl-cell--4-col-phone sn-card ">
 
@@ -210,8 +211,8 @@
 					<div class="mdl-grid mdl-grid--no-spacing">
 
 						<div class="mdl-cell mdl-cell--12-col sn-padding--48">
-							<div class="sn-card-title mdl-layout-title sn-display--inline mdl-color-text--green-600">Inquérito</div>
-							<a th:href="@{${'/Paciente/' + paciente.id + '/Inquerito'}}" class="sn-card-add mdl-button mdl-button--raised mdl-js-button mdl-color-text--white mdl-js-ripple-effect sn-float--right mdl-color--green-500">ADICIONAR</a>
+							<div class="sn-card-title mdl-layout-title sn-display--inline mdl-color-text--green-600">Inquérito Alimentar</div>
+							<a th:href="@{${'/Paciente/' + paciente.id + '/InqueritoAlimentar'}}" class="sn-card-add mdl-button mdl-button--raised mdl-js-button mdl-color-text--white mdl-js-ripple-effect sn-float--right mdl-color--green-500">ADICIONAR</a>
 						</div>
 
 						<div class="sn-card-list-container mdl-cell mdl-cell--12-col">
@@ -306,7 +307,7 @@
 					</div>
 
 				</div>
-					
+				
 			</div>
             	
         </div>
