@@ -1,15 +1,19 @@
 package br.ufc.quixada.npi.sinutri.service.impl;
 
 import java.util.Date;
+
 import javax.inject.Inject;
 import br.ufc.quixada.npi.sinutri.model.Anamnese;
 import br.ufc.quixada.npi.sinutri.repository.AnamneseRepository;
 import javax.inject.Named;
+
 import br.ufc.quixada.npi.sinutri.model.AvaliacaoAntropometrica;
 import br.ufc.quixada.npi.sinutri.model.InqueritoAlimentar;
 import br.ufc.quixada.npi.sinutri.model.Paciente;
+import br.ufc.quixada.npi.sinutri.model.Prescricao;
 import br.ufc.quixada.npi.sinutri.repository.AvaliacaoAntropometricaRepository;
 import br.ufc.quixada.npi.sinutri.repository.InqueritoAlimentarRepository;
+import br.ufc.quixada.npi.sinutri.repository.PrescricaoRepository;
 import br.ufc.quixada.npi.sinutri.service.ConsultaService;
 
 @Named
@@ -22,8 +26,30 @@ public class ConsultaServiceImpl implements ConsultaService {
 	private AvaliacaoAntropometricaRepository avaliacaoAntropometricaRepository;
 	
 	@Inject
+	private PrescricaoRepository prescricaoRepository;
+	
+	@Inject
 	private AnamneseRepository anamneseRepository;
 	
+	@Override
+	public void adicionarPrescricao(Prescricao prescricao){
+		prescricaoRepository.save(prescricao);
+	}
+	
+	@Override
+	public void excluirPrescricao(Prescricao prescricao){
+		prescricaoRepository.delete(prescricao);
+	}
+	
+	@Override
+	public void editarPrescricao(Prescricao prescricao){
+		prescricaoRepository.save(prescricao);
+	}
+	
+	@Override
+	public Prescricao buscarPrescricaoPorId(Long idPrescricao){
+		return prescricaoRepository.findOne(idPrescricao);
+	}
 	
 	@Override
 	public void adicionarInqueritoAlimentar(InqueritoAlimentar inqueritoAlimentar, Paciente paciente) {

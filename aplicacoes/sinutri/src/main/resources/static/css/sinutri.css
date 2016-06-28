@@ -898,3 +898,8 @@ table {
 }
 
 
+/* quebrar palavras grandes */
+body{
+	word-wrap: break-word;
+}
+
