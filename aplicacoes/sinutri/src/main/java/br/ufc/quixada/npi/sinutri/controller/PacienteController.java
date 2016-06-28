@@ -596,8 +596,10 @@ public class PacienteController {
     		return "redirect:/Paciente/"+idPaciente;
     	}
     	if( recordatorio.getRefeicoes().isEmpty() ){
-    		redirect.addFlashAttribute("mensagem", new Mensagem("Recordatório deve possuir refeições.", Tipo.ERRO, Prioridade.MEDIA));
-    		return "redirect:/Paciente/"+idPaciente+"/Recordatorio/"+idRecordatorio+"/Editar";
+    		model.addAttribute("paciente", paciente);
+    		model.addAttribute("recordatorio", recordatorio);
+    		model.addAttribute("mensagem", new Mensagem("Recordatório deve possuir refeições.", Tipo.ERRO, Prioridade.MEDIA));
+    		return "recordatorio/editar";
     	}
     	
     	consultaService.editarRecordatorio(recordatorio);
