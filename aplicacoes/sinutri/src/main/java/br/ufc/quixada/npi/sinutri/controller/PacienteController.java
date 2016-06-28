@@ -626,11 +626,10 @@ public class PacienteController {
 	 public String excluirPrescricao(@PathVariable("idPaciente") Long idPaciente, @PathVariable("idPrescricao") Long idPrescricao, RedirectAttributes redirectAttributes){
 
 		 Prescricao prescricao = consultaService.buscarPrescricaoPorId(idPrescricao);
-		 List<Mensagem> mensagens = new ArrayList<Mensagem>();
 
 		 if(prescricao == null){
-			 mensagens.add(new Mensagem("Prescrição não encontrada!", Mensagem.Tipo.ERRO, Mensagem.Prioridade.MEDIA));
-			 redirectAttributes.addFlashAttribute("mensagens",mensagens);
+			 Mensagem mensagem = new Mensagem("Prescrição não encontrada!", Mensagem.Tipo.ERRO, Mensagem.Prioridade.MEDIA);
+			 redirectAttributes.addFlashAttribute("mensagem", mensagem);
 			 return "redirect:/Paciente/"+idPaciente;
 		 }
 		 consultaService.excluirPrescricao(prescricao);
