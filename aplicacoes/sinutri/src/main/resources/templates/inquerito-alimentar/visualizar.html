@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" 
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorator="estrutura/dashboard">
+
+	<head>
+		<title>Sinutri | Visualizar Inquérito Alimentar</title>
+		<style type="text/css">
+	
+	
+	
+		</style>
+	</head>
+	
+	<section layout:fragment="conteudo">
+		<div class="mdl-grid">
+			<div class="mdl-cell mdl-cell--7-col-desktop mdl-cell--1-offset-desktop mdl-cell--8-col-tablet mdl-cell--4-col-phone mdl-grid mdl-grid--no-spacing sn-main-card">
+				<div class="mdl-cell mdl-cell--12-col sn-card sn-padding--48 mdl-color--teal">
+					<div class="mdl-layout-title mdl-color-text--white">Inquérito Alimentar</div>
+					<fabgroup class="sn-fab--bottom-right">
+					          <a id="excluir" th:href="@{${'/Paciente/'+ inqueritoAlimentar.paciente.id +'/InqueritoAlimentar/'+inqueritoAlimentar.id+'/Excluir'}}" class="sn-fab sn-fab--hide mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-js-ripple-effect mdl-color--red-700">
+	                                     <i class="material-icons mdl-color-text--white">delete</i>
+	                             </a>
+					          <a th:href="@{${'/Paciente/'+ inqueritoAlimentar.paciente.id +'/InqueritoAlimentar/'+inqueritoAlimentar.id+'/Editar'}}" class="sn-fab sn-fab--hide mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-js-ripple-effect mdl-color--purple">
+	                                     <i class="material-icons mdl-color-text--white">edit</i>
+	                             </a>
+					          <button class="sn-float--launcher mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored">
+	                                     <i class="material-icons mdl-color-text--white">more_horiz</i>
+	                             </button>
+					</fabgroup>
+				</div>
+				<div class="mdl-grid mdl-grid--no-spacing">
+					 <div class="sn-card-top mdl-cell mdl-cell--12-col sn-card sn-padding--48 mdl-color--white mdl-grid">
+						<div class="sn-attribute mdl-cell mdl-cell--12-col">
+							<div class="sn-attribute__title">Data de Criação</div>
+							<div class="sn-attribute__value" th:text="${#dates.format(inqueritoAlimentar.criadoEm,'dd/MM/yyyy')}">10/10/1010</div>
+						</div>
+						
+						<div class="sn-form__hdivider"></div>
+						<label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect mdl-cell mdl-cell--12-col" for="checkbox-1">
+							<input type="checkbox" id="checkbox-1" class="mdl-checkbox__input" th:field="${inqueritoAlimentar.aguaGosta}" disabled="true"/>
+							<span class="mdl-checkbox__label sn-attribute__title">Gosta de água</span>
+						</label>
+						<div class="sn-attribute mdl-cell mdl-cell--6-col" th:if="${inqueritoAlimentar.aguaGosta}">
+							<div class="sn-attribute__title">Frequência</div>
+							<div class="sn-attribute__value" th:text="${inqueritoAlimentar.aguaFrequenciaSemanal } ? ${inqueritoAlimentar.aguaFrequenciaSemanal.descricao} : 'Sem frequencia' ">Frequencia semanal</div>
+						</div>
+						<div class="sn-attribute mdl-cell mdl-cell--6-col" th:if="${inqueritoAlimentar.aguaGosta}">
+							<div class="sn-attribute__title">Anotação</div>
+							<div class="sn-attribute__value" th:text="${inqueritoAlimentar.aguaAnotacao != null and inqueritoAlimentar.aguaAnotacao != ''} ? ${inqueritoAlimentar.aguaAnotacao} : 'Sem anotação' ">Anotação</div>
+						</div>
+						
+						<div class="sn-form__hdivider"></div>
+						<label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect mdl-cell mdl-cell--12-col" for="checkbox-1">
+							<input type="checkbox" id="checkbox-1" class="mdl-checkbox__input" th:field="${inqueritoAlimentar.avesGosta}" disabled="true"/>
+							<span class="mdl-checkbox__label sn-attribute__title">Gosta de aves</span>
+						</label>
+						<div class="sn-attribute mdl-cell mdl-cell--6-col" th:if="${inqueritoAlimentar.avesGosta}">
+							<div class="sn-attribute__title">Frequência</div>
+							<div class="sn-attribute__value" th:text="${inqueritoAlimentar.avesFrequenciaSemanal != null} ? ${inqueritoAlimentar.avesFrequenciaSemanal.descricao} : 'Sem frequencia' ">Frequencia semanal</div>
+						</div>
+						<div class="sn-attribute mdl-cell mdl-cell--6-col" th:if="${inqueritoAlimentar.avesGosta}">
+							<div class="sn-attribute__title">Anotação</div>
+							<div class="sn-attribute__value" th:text="${inqueritoAlimentar.avesAnotacao != null and inqueritoAlimentar.avesAnotacao != ''} ? ${inqueritoAlimentar.avesAnotacao} : 'Sem anotação' ">Anotação</div>
+						</div>
+						
+						<div class="sn-form__hdivider"></div>
+						<label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect mdl-cell mdl-cell--12-col" for="checkbox-1">
+							<input type="checkbox" id="checkbox-1" class="mdl-checkbox__input" th:field="${inqueritoAlimentar.bebidasAlcoolicasGosta}" disabled="true"/>
+							<span class="mdl-checkbox__label sn-attribute__title">Gosta de bebidas alcoólicas</span>
+						</label>
+						<div class="sn-attribute mdl-cell mdl-cell--6-col" th:if="${inqueritoAlimentar.bebidasAlcoolicasGosta}">
+							<div class="sn-attribute__title">Frequência</div>
+							<div class="sn-attribute__value" th:text="${inqueritoAlimentar.bebidasAlcoolicasFrequenciaSemanal != null} ? ${inqueritoAlimentar.bebidasAlcoolicasFrequenciaSemanal.descricao} : 'Sem frequencia' ">Frequencia semanal</div>
+						</div>
+						<div class="sn-attribute mdl-cell mdl-cell--6-col" th:if="${inqueritoAlimentar.bebidasAlcoolicasGosta}">
+							<div class="sn-attribute__title">Anotação</div>
+							<div class="sn-attribute__value" th:text="${inqueritoAlimentar.bebidasAlcoolicasAnotacao != null and inqueritoAlimentar.bebidasAlcoolicasAnotacao != ''} ? ${inqueritoAlimentar.bebidasAlcoolicasAnotacao} : 'Sem anotação' ">Anotação</div>
+						</div>
+						
+						<div class="sn-form__hdivider"></div>
+						<label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect mdl-cell mdl-cell--12-col" for="checkbox-1">
+							<input type="checkbox" id="checkbox-1" class="mdl-checkbox__input" th:field="${inqueritoAlimentar.bovinaGosta}" disabled="true"/>
+							<span class="mdl-checkbox__label sn-attribute__title">Gosta de bovina</span>
+						</label>
+						<div class="sn-attribute mdl-cell mdl-cell--6-col" th:if="${inqueritoAlimentar.bovinaGosta}">
+							<div class="sn-attribute__title">Frequência</div>
+							<div class="sn-attribute__value" th:text="${inqueritoAlimentar.bovinaFrequenciaSemanal != null} ? ${inqueritoAlimentar.bovinaFrequenciaSemanal.descricao} : 'Sem frequencia' ">Frequencia semanal</div>
+						</div>
+						<div class="sn-attribute mdl-cell mdl-cell--6-col" th:if="${inqueritoAlimentar.bovinaGosta}">
+							<div class="sn-attribute__title">Anotação</div>
+							<div class="sn-attribute__value" th:text="${inqueritoAlimentar.bovinaAnotacao != null and inqueritoAlimentar.bovinaAnotacao != ''} ? ${inqueritoAlimentar.bovinaAnotacao} : 'Sem anotação' ">Anotação</div>
+						</div>
+						
+						<div class="sn-form__hdivider"></div>
+						<label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect mdl-cell mdl-cell--12-col" for="checkbox-1">
+							<input type="checkbox" id="checkbox-1" class="mdl-checkbox__input" th:field="${inqueritoAlimentar.cereaisGosta}" disabled="true"/>
+							<span class="mdl-checkbox__label sn-attribute__title">Gosta de cereais</span>
+						</label>
+						<div class="sn-attribute mdl-cell mdl-cell--6-col" th:if="${inqueritoAlimentar.cereaisGosta}">
+							<div class="sn-attribute__title">Frequência</div>
+							<div class="sn-attribute__value" th:text="${inqueritoAlimentar.cereaisFrequenciaSemanal != null} ? ${inqueritoAlimentar.cereaisFrequenciaSemanal.descricao} : 'Sem frequencia' ">Frequencia semanal</div>
+						</div> 
+						<div class="sn-attribute mdl-cell mdl-cell--6-col" th:if="${inqueritoAlimentar.cereaisGosta}">
+							<div class="sn-attribute__title">Anotação</div>
+							<div class="sn-attribute__value" th:text="${inqueritoAlimentar.cereaisAnotacao != null and inqueritoAlimentar.cereaisAnotacao != ''} ? ${inqueritoAlimentar.cereaisAnotacao} : 'Sem anotação' ">Anotação</div>
+						</div>
+						
+						<div class="sn-form__hdivider"></div>
+						<label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect mdl-cell mdl-cell--12-col" for="checkbox-1">
+							<input type="checkbox" id="checkbox-1" class="mdl-checkbox__input" th:field="${inqueritoAlimentar.docesGosta}" disabled="true"/>
+							<span class="mdl-checkbox__label sn-attribute__title">Gosta de doces</span>
+						</label>
+						<div class="sn-attribute mdl-cell mdl-cell--6-col" th:if="${inqueritoAlimentar.docesGosta}">
+							<div class="sn-attribute__title">Frequência</div>
+							<div class="sn-attribute__value" th:text="${inqueritoAlimentar.docesFrequenciaSemanal != null} ? ${inqueritoAlimentar.docesFrequenciaSemanal.descricao} : 'Sem frequencia' ">Frequencia semanal</div>
+						</div>
+						<div class="sn-attribute mdl-cell mdl-cell--6-col" th:if="${inqueritoAlimentar.docesGosta}">
+							<div class="sn-attribute__title">Anotação</div>
+							<div class="sn-attribute__value" th:text="${inqueritoAlimentar.docesAnotacao != null and inqueritoAlimentar.docesAnotacao != ''} ? ${inqueritoAlimentar.docesAnotacao} : 'Sem anotação' ">Anotação</div>
+						</div>
+						
+						<div class="sn-form__hdivider"></div>
+						<label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect mdl-cell mdl-cell--12-col" for="checkbox-1">
+							<input type="checkbox" id="checkbox-1" class="mdl-checkbox__input" th:field="${inqueritoAlimentar.frutasGosta}" disabled="true"/>
+							<span class="mdl-checkbox__label sn-attribute__title">Gosta de frutas</span>
+						</label>
+						<div class="sn-attribute mdl-cell mdl-cell--6-col" th:if="${inqueritoAlimentar.frutasGosta}">
+							<div class="sn-attribute__title">Frequência</div>
+							<div class="sn-attribute__value" th:text="${inqueritoAlimentar.frutasFrequenciaSemanal != null} ? ${inqueritoAlimentar.frutasFrequenciaSemanal.descricao} : 'Sem frequencia' ">Frequencia semanal</div>
+						</div>
+						<div class="sn-attribute mdl-cell mdl-cell--6-col" th:if="${inqueritoAlimentar.frutasGosta}">
+							<div class="sn-attribute__title">Anotação</div>
+							<div class="sn-attribute__value" th:text="${inqueritoAlimentar.frutasAnotacao != null and inqueritoAlimentar.frutasAnotacao != ''} ? ${inqueritoAlimentar.frutasAnotacao} : 'Sem anotação' ">Anotação</div>
+						</div>
+						
+						<div class="sn-form__hdivider"></div>
+						<label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect mdl-cell mdl-cell--12-col" for="checkbox-1">
+							<input type="checkbox" id="checkbox-1" class="mdl-checkbox__input" th:field="${inqueritoAlimentar.gaseificadasGosta}" disabled="true"/>
+							<span class="mdl-checkbox__label sn-attribute__title">Gosta de bebidas gaseificadas</span>
+						</label>
+						<div class="sn-attribute mdl-cell mdl-cell--6-col" th:if="${inqueritoAlimentar.gaseificadasGosta}">
+							<div class="sn-attribute__title">Frequência</div>
+							<div class="sn-attribute__value" th:text="${inqueritoAlimentar.gaseificadasFrequenciaSemanal != null} ? ${inqueritoAlimentar.gaseificadasFrequenciaSemanal.descricao} : 'Sem frequencia' ">Frequencia semanal</div>
+						</div>
+						<div class="sn-attribute mdl-cell mdl-cell--6-col" th:if="${inqueritoAlimentar.gaseificadasGosta}">
+							<div class="sn-attribute__title">Anotação</div>
+							<div class="sn-attribute__value" th:text="${inqueritoAlimentar.gaseificadasAnotacao != null and inqueritoAlimentar.gaseificadasAnotacao != ''} ? ${inqueritoAlimentar.gaseificadasAnotacao} : 'Sem anotação' ">Anotação</div>
+						</div>
+						
+						<div class="sn-form__hdivider"></div>
+						<label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect mdl-cell mdl-cell--12-col" for="checkbox-1">
+							<input type="checkbox" id="checkbox-1" class="mdl-checkbox__input" th:field="${inqueritoAlimentar.infusoesGosta}" disabled="true"/>
+							<span class="mdl-checkbox__label sn-attribute__title">Gosta de infusões</span>
+						</label>
+						<div class="sn-attribute mdl-cell mdl-cell--6-col" th:if="${inqueritoAlimentar.infusoesGosta}">
+							<div class="sn-attribute__title">Frequência</div>
+							<div class="sn-attribute__value" th:text="${inqueritoAlimentar.infusoesFrequenciaSemanal != null} ? ${inqueritoAlimentar.infusoesFrequenciaSemanal.descricao} : 'Sem frequencia' ">Frequencia semanal</div>
+						</div>
+						<div class="sn-attribute mdl-cell mdl-cell--6-col" th:if="${inqueritoAlimentar.infusoesGosta}">
+							<div class="sn-attribute__title">Anotação</div>
+							<div class="sn-attribute__value" th:text="${inqueritoAlimentar.infusoesAnotacao != null and inqueritoAlimentar.infusoesAnotacao != ''} ? ${inqueritoAlimentar.infusoesAnotacao} : 'Sem anotação' ">Anotação</div>
+						</div>
+						
+						<div class="sn-form__hdivider"></div>
+						<label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect mdl-cell mdl-cell--12-col" for="checkbox-1">
+							<input type="checkbox" id="checkbox-1" class="mdl-checkbox__input" th:field="${inqueritoAlimentar.leguminosasGosta}" disabled="true"/>
+							<span class="mdl-checkbox__label sn-attribute__title">Gosta de leguminosas</span>
+						</label>
+						<div class="sn-attribute mdl-cell mdl-cell--6-col" th:if="${inqueritoAlimentar.leguminosasGosta}">
+							<div class="sn-attribute__title">Frequência</div>
+							<div class="sn-attribute__value" th:text="${inqueritoAlimentar.leguminosasFrequenciaSemanal != null} ? ${inqueritoAlimentar.leguminosasFrequenciaSemanal.descricao} : 'Sem frequencia' ">Frequencia semanal</div>
+						</div>
+						<div class="sn-attribute mdl-cell mdl-cell--6-col" th:if="${inqueritoAlimentar.leguminosasGosta}">
+							<div class="sn-attribute__title">Anotação</div>
+							<div class="sn-attribute__value" th:text="${inqueritoAlimentar.leguminosasAnotacao != null and inqueritoAlimentar.leguminosasAnotacao != ''} ? ${inqueritoAlimentar.leguminosasAnotacao} : 'Sem anotação' ">Anotação</div>
+						</div>
+						
+						<div class="sn-form__hdivider"></div>
+						<label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect mdl-cell mdl-cell--12-col" for="checkbox-1">
+							<input type="checkbox" id="checkbox-1" class="mdl-checkbox__input" th:field="${inqueritoAlimentar.leiteDerivadosGosta}" disabled="true"/>
+							<span class="mdl-checkbox__label sn-attribute__title">Gosta de leite ou derivados</span>
+						</label>
+						<div class="sn-attribute mdl-cell mdl-cell--6-col" th:if="${inqueritoAlimentar.leiteDerivadosGosta}">
+							<div class="sn-attribute__title">Frequência</div>
+							<div class="sn-attribute__value" th:text="${inqueritoAlimentar.leiteDerivadosFrequenciaSemanal != null} ? ${inqueritoAlimentar.leiteDerivadosFrequenciaSemanal.descricao} : 'Sem frequencia' ">Frequencia semanal</div>
+						</div>
+						<div class="sn-attribute mdl-cell mdl-cell--6-col" th:if="${inqueritoAlimentar.leiteDerivadosGosta}">
+							<div class="sn-attribute__title">Anotação</div>
+							<div class="sn-attribute__value" th:text="${inqueritoAlimentar.leiteDerivadosAnotacao != null and inqueritoAlimentar.leiteDerivadosAnotacao != ''} ? ${inqueritoAlimentar.leiteDerivadosAnotacao} : 'Sem anotação' ">Anotação</div>
+						</div>
+						
+						<div class="sn-form__hdivider"></div>
+						<label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect mdl-cell mdl-cell--12-col" for="checkbox-1">
+							<input type="checkbox" id="checkbox-1" class="mdl-checkbox__input" th:field="${inqueritoAlimentar.manteigaGosta}" disabled="true"/>
+							<span class="mdl-checkbox__label sn-attribute__title">Gosta de Manteiga</span>
+						</label>
+						<div class="sn-attribute mdl-cell mdl-cell--6-col" th:if="${inqueritoAlimentar.manteigaGosta}">
+							<div class="sn-attribute__title">Frequência</div>
+							<div class="sn-attribute__value" th:text="${inqueritoAlimentar.manteigaFrequenciaSemanal != null} ? ${inqueritoAlimentar.manteigaFrequenciaSemanal.descricao} : 'Sem frequencia' ">Frequencia semanal</div>
+						</div>
+						<div class="sn-attribute mdl-cell mdl-cell--6-col" th:if="${inqueritoAlimentar.manteigaGosta}">
+							<div class="sn-attribute__title">Anotação</div>
+							<div class="sn-attribute__value" th:text="${inqueritoAlimentar.manteigaAnotacao != null and inqueritoAlimentar.manteigaAnotacao != ''} ? ${inqueritoAlimentar.manteigaAnotacao} : 'Sem anotação' ">Anotação</div>
+						</div>
+						
+						<div class="sn-form__hdivider"></div>
+						<label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect mdl-cell mdl-cell--12-col" for="checkbox-1">
+							<input type="checkbox" id="checkbox-1" class="mdl-checkbox__input" th:field="${inqueritoAlimentar.margarinaGosta}" disabled="true"/>
+							<span class="mdl-checkbox__label sn-attribute__title">Gosta de margarina</span>
+						</label>
+						<div class="sn-attribute mdl-cell mdl-cell--6-col" th:if="${inqueritoAlimentar.margarinaGosta}">
+							<div class="sn-attribute__title">Frequência</div>
+							<div class="sn-attribute__value" th:text="${inqueritoAlimentar.margarinaFrequenciaSemanal != null} ? ${inqueritoAlimentar.margarinaFrequenciaSemanal.descricao} : 'Sem frequencia' ">Frequencia semanal</div>
+						</div>
+						<div class="sn-attribute mdl-cell mdl-cell--6-col" th:if="${inqueritoAlimentar.margarinaGosta}">
+							<div class="sn-attribute__title">Anotação</div>
+							<div class="sn-attribute__value" th:text="${inqueritoAlimentar.margarinaAnotacao != null and inqueritoAlimentar.margarinaAnotacao != ''} ? ${inqueritoAlimentar.margarinaAnotacao} : 'Sem anotação' ">Anotação</div>
+						</div>
+						
+						<div class="sn-form__hdivider"></div>
+						<label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect mdl-cell mdl-cell--12-col" for="checkbox-1">
+							<input type="checkbox" id="checkbox-1" class="mdl-checkbox__input" th:field="${inqueritoAlimentar.massasGosta}" disabled="true"/>
+							<span class="mdl-checkbox__label sn-attribute__title">Gosta de massas</span>
+						</label>
+						<div class="sn-attribute mdl-cell mdl-cell--6-col" th:if="${inqueritoAlimentar.massasGosta}">
+							<div class="sn-attribute__title">Frequência</div>
+							<div class="sn-attribute__value" th:text="${inqueritoAlimentar.massasFrequenciaSemanal != null} ? ${inqueritoAlimentar.massasFrequenciaSemanal.descricao} : 'Sem frequencia' ">Frequencia semanal</div>
+						</div>
+						<div class="sn-attribute mdl-cell mdl-cell--6-col"  th:if="${inqueritoAlimentar.massasGosta}">
+							<div class="sn-attribute__title">Anotação</div>
+							<div class="sn-attribute__value" th:text="${inqueritoAlimentar.massasAnotacao != null and inqueritoAlimentar.massasAnotacao != ''} ? ${inqueritoAlimentar.massasAnotacao} : 'Sem anotação' ">Anotação</div>
+						</div>
+						
+						<div class="sn-form__hdivider"></div>
+						<label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect mdl-cell mdl-cell--12-col" for="checkbox-1">
+							<input type="checkbox" id="checkbox-1" class="mdl-checkbox__input" th:field="${inqueritoAlimentar.oleoGosta}" disabled="true"/>
+							<span class="mdl-checkbox__label sn-attribute__title">Gosta de óleo</span>
+						</label>
+						<div class="sn-attribute mdl-cell mdl-cell--6-col" th:if="${inqueritoAlimentar.oleoGosta}">
+							<div class="sn-attribute__title">Óleo</div>
+							<div class="sn-attribute__value" th:text="${inqueritoAlimentar.oleoFrequenciaSemanal != null} ? ${inqueritoAlimentar.oleoFrequenciaSemanal.descricao} : 'Sem frequencia' ">Frequencia semanal</div>
+						</div>
+						<div class="sn-attribute mdl-cell mdl-cell--6-col" th:if="${inqueritoAlimentar.oleoGosta}">
+							<div class="sn-attribute__title">Anotação</div>
+							<div class="sn-attribute__value" th:text="${inqueritoAlimentar.oleoAnotacao != null and inqueritoAlimentar.oleoAnotacao != ''} ? ${inqueritoAlimentar.oleoAnotacao} : 'Sem anotação' ">Anotação</div>
+						</div>
+						
+						<div class="sn-form__hdivider"></div>
+						<label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect mdl-cell mdl-cell--12-col" for="checkbox-1">
+							<input type="checkbox" id="checkbox-1" class="mdl-checkbox__input" th:field="${inqueritoAlimentar.ovosGosta}" disabled="true"/>
+							<span class="mdl-checkbox__label sn-attribute__title">Gosta de ovos</span>
+						</label>
+						<div class="sn-attribute mdl-cell mdl-cell--6-col" th:if="${inqueritoAlimentar.ovosGosta}">
+							<div class="sn-attribute__title">Frequência</div>
+							<div class="sn-attribute__value" th:text="${inqueritoAlimentar.ovosFrequenciaSemanal != null} ? ${inqueritoAlimentar.ovosFrequenciaSemanal.descricao} : 'Sem frequencia' ">Frequencia semanal</div>
+						</div>
+						<div class="sn-attribute mdl-cell mdl-cell--6-col" th:if="${inqueritoAlimentar.ovosGosta}">
+							<div class="sn-attribute__title">Anotação</div>
+							<div class="sn-attribute__value" th:text="${inqueritoAlimentar.ovosAnotacao != null and inqueritoAlimentar.ovosAnotacao != ''} ? ${inqueritoAlimentar.ovosAnotacao} : 'Sem anotação' ">Anotação</div>
+						</div>
+						
+						<div class="sn-form__hdivider"></div>
+						<label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect mdl-cell mdl-cell--12-col" for="checkbox-1">
+							<input type="checkbox" id="checkbox-1" class="mdl-checkbox__input" th:field="${inqueritoAlimentar.peixeGosta}" disabled="true"/>
+							<span class="mdl-checkbox__label sn-attribute__title">Gosta de peixe</span>
+						</label>
+						<div class="sn-attribute mdl-cell mdl-cell--6-col" th:if="${inqueritoAlimentar.peixeGosta}">
+							<div class="sn-attribute__title">Frequência</div>
+							<div class="sn-attribute__value" th:text="${inqueritoAlimentar.peixeFrequenciaSemanal != null} ? ${inqueritoAlimentar.peixeFrequenciaSemanal.descricao} : 'Sem frequencia' ">Frequencia semanal</div>
+						</div>
+						<div class="sn-attribute mdl-cell mdl-cell--6-col" th:if="${inqueritoAlimentar.peixeGosta}">
+							<div class="sn-attribute__title">Anotação</div>
+							<div class="sn-attribute__value" th:text="${inqueritoAlimentar.peixeAnotacao != null and inqueritoAlimentar.peixeAnotacao != ''} ? ${inqueritoAlimentar.peixeAnotacao} : 'Sem anotação' ">Anotação</div>
+						</div>
+						
+						<div class="sn-form__hdivider"></div>
+						<label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect mdl-cell mdl-cell--12-col" for="checkbox-1">
+							<input type="checkbox" id="checkbox-1" class="mdl-checkbox__input" th:field="${inqueritoAlimentar.sucoGosta}" disabled="true"/>
+							<span class="mdl-checkbox__label sn-attribute__title">Gosta de suco</span>
+						</label>
+						<div class="sn-attribute mdl-cell mdl-cell--6-col" th:if="${inqueritoAlimentar.sucoGosta}">
+							<div class="sn-attribute__title">Frequência</div>
+							<div class="sn-attribute__value" th:text="${inqueritoAlimentar.sucoFrequenciaSemanal != null} ? ${inqueritoAlimentar.sucoFrequenciaSemanal.descricao} : 'Sem frequencia' ">Frequencia semanal</div>
+						</div>
+						<div class="sn-attribute mdl-cell mdl-cell--6-col" th:if="${inqueritoAlimentar.sucoGosta}">
+							<div class="sn-attribute__title">Anotação</div>
+							<div class="sn-attribute__value" th:text="${inqueritoAlimentar.sucoAnotacao != null and inqueritoAlimentar.sucoAnotacao != ''} ? ${inqueritoAlimentar.sucoAnotacao} : 'Sem anotação' ">Anotação</div>
+						</div>
+						
+						<div class="sn-form__hdivider"></div>
+						<label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect mdl-cell mdl-cell--12-col" for="checkbox-1">
+							<input type="checkbox" id="checkbox-1" class="mdl-checkbox__input" th:field="${inqueritoAlimentar.toucinhoBaconGosta}" disabled="true"/>
+							<span class="mdl-checkbox__label sn-attribute__title">Gosta de toucinho ou bacon</span>
+						</label>
+						<div class="sn-attribute mdl-cell mdl-cell--6-col" th:if="${inqueritoAlimentar.toucinhoBaconGosta}">
+							<div class="sn-attribute__title">Frequência</div>
+							<div class="sn-attribute__value" th:text="${inqueritoAlimentar.toucinhoBaconFrequenciaSemanal != null} ? ${inqueritoAlimentar.toucinhoBaconFrequenciaSemanal.descricao} : 'Sem frequencia' ">Frequencia semanal</div>
+						</div>
+						<div class="sn-attribute mdl-cell mdl-cell--6-col" th:if="${inqueritoAlimentar.toucinhoBaconGosta}">
+							<div class="sn-attribute__title">Anotação</div>
+							<div class="sn-attribute__value" th:text="${inqueritoAlimentar.toucinhoBaconAnotacao != null and inqueritoAlimentar.toucinhoBaconAnotacao != ''} ? ${inqueritoAlimentar.toucinhoBaconAnotacao} : 'Sem anotação' ">Anotação</div>
+						</div>
+						
+						<div class="sn-form__hdivider"></div>
+						<label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect mdl-cell mdl-cell--12-col" for="checkbox-1">
+							<input type="checkbox" id="checkbox-1" class="mdl-checkbox__input" th:field="${inqueritoAlimentar.vegetaisCozidosGosta}" disabled="true"/>
+							<span class="mdl-checkbox__label sn-attribute__title">Gosta de vegetais cozidos</span>
+						</label>
+						<div class="sn-attribute mdl-cell mdl-cell--6-col" th:if="${inqueritoAlimentar.vegetaisCozidosGosta}">
+							<div class="sn-attribute__title">Frequência</div>
+							<div class="sn-attribute__value" th:text="${inqueritoAlimentar.vegetaisCozidosFrequenciaSemanal != null} ? ${inqueritoAlimentar.vegetaisCozidosFrequenciaSemanal.descricao} : 'Sem frequencia' ">Frequencia semanal</div>
+						</div>
+						<div class="sn-attribute mdl-cell mdl-cell--6-col" th:if="${inqueritoAlimentar.vegetaisCozidosGosta}">
+							<div class="sn-attribute__title">Anotação</div>
+							<div class="sn-attribute__value" th:text="${inqueritoAlimentar.vegetaisCozidosAnotacao != null and inqueritoAlimentar.vegetaisCozidosAnotacao != ''} ? ${inqueritoAlimentar.vegetaisCozidosAnotacao} : 'Sem anotação' ">Anotação</div>
+						</div>
+						
+						<div class="sn-form__hdivider"></div>
+						<label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect mdl-cell mdl-cell--12-col" for="checkbox-1">
+							<input type="checkbox" id="checkbox-1" class="mdl-checkbox__input" th:field="${inqueritoAlimentar.vegetaisCrusGosta}" disabled="true"/>
+							<span class="mdl-checkbox__label sn-attribute__title">Gosta de vegetais crus</span>
+						</label>
+						<div class="sn-attribute mdl-cell mdl-cell--6-col" th:if="${inqueritoAlimentar.vegetaisCrusGosta}">
+							<div class="sn-attribute__title">Frequência</div>
+							<div class="sn-attribute__value" th:text="${inqueritoAlimentar.vegetaisCrusFrequenciaSemanal != null} ? ${inqueritoAlimentar.vegetaisCrusFrequenciaSemanal.descricao} : 'Sem frequencia' ">Frequencia semanal</div>
+						</div>
+						<div class="sn-attribute mdl-cell mdl-cell--6-col" th:if="${inqueritoAlimentar.vegetaisCrusGosta}">
+							<div class="sn-attribute__title">Anotação</div>
+							<div class="sn-attribute__value" th:text="${inqueritoAlimentar.vegetaisCrusAnotacao != null and inqueritoAlimentar.vegetaisCrusAnotacao != ''} ? ${inqueritoAlimentar.vegetaisCrusAnotacao} : 'Sem anotação' ">Anotação</div>
+						</div>
+						
+						<div class="sn-form__hdivider"></div>
+						<label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect mdl-cell mdl-cell--12-col" for="checkbox-1">
+							<input type="checkbox" id="checkbox-1" class="mdl-checkbox__input" th:field="${inqueritoAlimentar.viscerasGosta}" disabled="true"/>
+							<span class="mdl-checkbox__label sn-attribute__title">Gosta de vísceras</span>
+						</label>
+						<div class="sn-attribute mdl-cell mdl-cell--6-col" th:if="${inqueritoAlimentar.viscerasGosta}">
+							<div class="sn-attribute__title">Frequência</div>
+							<div class="sn-attribute__value" th:text="${inqueritoAlimentar.viscerasFrequenciaSemanal != null} ? ${inqueritoAlimentar.viscerasFrequenciaSemanal.descricao} : 'Sem frequencia' ">Frequencia semanal</div>
+						</div>
+						<div class="sn-attribute mdl-cell mdl-cell--6-col" th:if="${inqueritoAlimentar.viscerasGosta}">
+							<div class="sn-attribute__title">Anotação</div>
+							<div class="sn-attribute__value" th:text="${inqueritoAlimentar.viscerasAnotacao != null and inqueritoAlimentar.viscerasAnotacao != ''} ? ${inqueritoAlimentar.viscerasAnotacao} : 'Sem anotação' ">Anotação</div>
+						</div>
+						
+						<div class="sn-attribute mdl-cell mdl-cell--12-col">
+							<div class="sn-attribute__title">Observações</div>
+							<div class="sn-attribute__value" th:text="${inqueritoAlimentar.observacoes != null and inqueritoAlimentar.observacoes != ''} ? ${inqueritoAlimentar.observacoes} : 'Sem observações' ">Aemon Targaryen está vivo!</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="mdl-cell mdl-cell--3-col-desktop mdl-cell--8-col-tablet mdl-cell--4-col-phone">
+				<div class="sn-card sn-padding--48">
+					<div class="mdl-layout-title">Informações do Paciente</div>
+										
+					<div class="sn-attribute__title">Nome</div>
+					<div class="sn-attribute__value" th:text="${inqueritoAlimentar.paciente.pessoa.nome}"></div>
+					
+					<div class="sn-attribute__title">Sexo</div>
+					<div class="sn-attribute__value" th:text="${inqueritoAlimentar.paciente.pessoa.sexo}"></div>
+					
+					<div class="sn-attribute__title">Idade</div>
+					<div class="sn-attribute__value" th:text="${inqueritoAlimentar.paciente.pessoa.getIdade()}"></div>
+					
+					<div class="sn-attribute__title">CPF</div>
+					<div class="sn-attribute__value" th:text="${inqueritoAlimentar.paciente.pessoa.cpf}"></div>
+					
+					<div class="sn-attribute__title">Telefone</div>
+					<div class="sn-attribute__value" th:text="${inqueritoAlimentar.paciente.pessoa.telefone}"></div>
+					
+					<div class="sn-attribute__title">Cargo/Ocupação</div>
+					<div class="sn-attribute__value" th:text="${inqueritoAlimentar.paciente.pessoa.ocupacaoOuCargo}"></div>
+					
+					<div class="sn-attribute__title">Email</div>
+					<div class="sn-attribute__value" th:text="${inqueritoAlimentar.paciente.pessoa.email}"></div>
+							
+					<div class="sn-attribute__title">Vínculo</div>
+					<div class="sn-attribute__value" th:text="${inqueritoAlimentar.paciente.pessoa.vinculo}"></div>
+				</div>
+			</div>
+		</div>
+		<div id="modal-exclusao"></div>
+	</section>
+	<section layout:fragment="js">
+		<script type="text/javascript" th:src="@{/js/inquerito-alimentar/visualizar.js}"></script>
+	</section>
+</html>
