@@ -897,3 +897,7 @@ table {
 	color:  var(--color-accent);
 }
 
+/* quebrar palavras grandes */
+body{
+	word-wrap: break-word;
+}

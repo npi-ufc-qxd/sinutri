@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" 
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorator="estrutura/dashboard">
+
+<head>
+	<title>Sinutri | Detalhes</title>
+	
+</head>
+<section layout:fragment="conteudo">
+ 
+	<div class="mdl-grid">
+
+    	<div class="
+              mdl-cell
+              mdl-cell--7-col-desktop mdl-cell--1-offset-desktop
+              mdl-cell--8-col-tablet
+              mdl-cell--4-col-phone
+              mdl-grid mdl-grid--no-spacing
+              sn-main-card">
+
+              <div class="mdl-cell mdl-cell--12-col sn-card sn-padding--48 mdl-color--teal">
+
+                    <div class="mdl-layout-title mdl-color-text--white">Prescrição</div>
+
+                      <fabgroup class="sn-fab--bottom-right">
+
+                              <a id="excluir" th:href="@{${'/Paciente/'+prescricao.paciente.id+'/Prescricao/'+ prescricao.id +'/Excluir'}}" class="sn-fab sn-fab--hide mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-js-ripple-effect mdl-color--red-700">
+                                      <i class="material-icons mdl-color-text--white">delete</i>
+                              </a>
+
+                              <a th:href="@{${'/Paciente/'+prescricao.paciente.id+'/Prescricao/'+ prescricao.id +'/Editar'}}" class="sn-fab sn-fab--hide mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-js-ripple-effect mdl-color--purple">
+                                      <i class="material-icons mdl-color-text--white">edit</i>
+                              </a>
+
+                              <button class="sn-float--launcher mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored">
+                                      <i class="material-icons mdl-color-text--white">more_horiz</i>
+                              </button>
+                      </fabgroup>
+
+              </div>
+
+              <div class="sn-card-top mdl-cell mdl-cell--12-col sn-card sn-padding--48 mdl-color--white mdl-grid">
+
+                     <div class="mdl-layout-title mdl-cell mdl-cell--12-col"> Informações gerais:</div>
+                 	 
+					<div class="sn-attribute mdl-cell mdl-cell--6-col">
+						<div class="sn-attribute__title"> Data de criação:</div>
+						<div class="sn-attribute__value" th:text="${#dates.format(prescricao.criadoEm,'dd/MM/yyyy')}"> </div>
+					</div>
+					
+					<div class="sn-attribute mdl-cell mdl-cell--6-col">
+						<div class="sn-attribute__title"> Data de última atualização:</div>
+						<div class="sn-attribute__value" th:text="${#dates.format(prescricao.atualizadoEm,'dd/MM/yyyy')}"> </div>
+					</div>
+					
+					<div class="sn-attribute mdl-cell mdl-cell--12-col">
+						<div class="sn-attribute__title"> Descrição: </div>
+						<div class="sn-attribute__value" th:text="${prescricao.descricao}"> </div> 
+					</div>					
+
+					<div class="sn-attribute mdl-cell mdl-cell--12-col"> 
+						<div class="sn-attribute__title"> Texto: </div>
+						<div class="sn-attribute__value" th:text="${prescricao.texto}"> </div>					
+					</div>		
+
+              </div>
+		</div>
+	</div>
+
+	<div id="modal-exclusao">
+		
+	</div>  
+		
+</section>
+
+
+
+	<section layout:fragment="js"> 
+		<script type="text/javascript">
+		
+		$( "#excluir" ).click(function(event) {
+		          var dialog = sn_base.doRegistryDialog({
+		              title: "Você realmente deseja excluir esta prescrição?",
+		              dialog: "#modal-exclusao",
+		              buttons: [
+		                      {
+		                         label: "SIM",
+		                         attrs: {href: $(this).attr("href")},
+		                         action: function() {
+		                             dialog.close();
+		                         }
+		                      },
+		                      {
+		                          label: "NÃO",
+		                          action: function() {
+		                              dialog.close();
+		                          }
+		                      }
+		              ]
+		              });                     
+		          dialog.showModal();
+		          event.preventDefault();
+		      });
+		
+		</script>
+	</section>
+
+</html>

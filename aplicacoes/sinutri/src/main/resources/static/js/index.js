@@ -14,26 +14,6 @@ $(document).ready(function() {
 		
 		$("form").animate({opacity: "1.0"}, 1500);
 
-		var size = 0;
-		$(".sn-index__left-logo").click(function()  {
-			size++;
-
-			if(size === 20) {
-				$(".sn-index__background").css("background-image", "url(https://raw.githubusercontent.com/FelipePinhoUFC/felipestrap/master/img/13405552_1692809590984831_1994774923_o.jpg)");
-				
-				$(".sn-hide-right-flag").each(function(index, el) {
-					$(this).addClass("sn-hide-right");
-				});
-
-				$(".sn-hide-left-flag").each(function(index, el) {
-					$(this).addClass("sn-hide-left");
-				});
-
-				$("form").fadeOut();
-
-			};
-		});
-
 	});
 
 });
