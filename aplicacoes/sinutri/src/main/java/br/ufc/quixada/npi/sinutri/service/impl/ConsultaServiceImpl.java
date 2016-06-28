@@ -28,6 +28,8 @@ public class ConsultaServiceImpl implements ConsultaService {
 	@Inject
 	private PrescricaoRepository prescricaoRepository;
 	
+	@Inject
+	private AnamneseRepository anamneseRepository;
 	
 	@Override
 	public void adicionarPrescricao(Prescricao prescricao){
@@ -49,8 +51,6 @@ public class ConsultaServiceImpl implements ConsultaService {
 		return prescricaoRepository.findOne(idPrescricao);
 	}
 	
-	private AnamneseRepository anamneseRepository;
-		
 	@Override
 	public void adicionarInqueritoAlimentar(InqueritoAlimentar inqueritoAlimentar, Paciente paciente) {
 		inqueritoAlimentar.setPaciente(paciente);
