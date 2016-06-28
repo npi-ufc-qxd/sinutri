@@ -14,6 +14,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotEmpty;
@@ -33,7 +34,7 @@ public class AvaliacaoLaboratorial {
 	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	private Date atualizado;
 
-	@Column(length = 1024)
+	@Column(length = 255)
 	private String observacao;
 
 	@ManyToOne
@@ -45,6 +46,7 @@ public class AvaliacaoLaboratorial {
 
 	@OneToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE})
 	@JoinColumn(name = "exame_id")
+	@Valid
 	@NotEmpty(message = "Uma Avaliação Laboratorial tem que possuir pelo menos um exame.")
 	private List<Exame> exames;
 	

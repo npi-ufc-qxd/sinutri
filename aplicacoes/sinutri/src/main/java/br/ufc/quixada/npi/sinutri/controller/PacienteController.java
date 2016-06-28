@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.List;
 
 import javax.inject.Inject;
+import javax.swing.JOptionPane;
 import javax.validation.Valid;
 
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -83,7 +84,7 @@ public class PacienteController {
 		if (bindingResult.hasErrors()) {
 			avaliacaoLaboratorial.setPaciente(paciente);
 			model.addAttribute("avaliacaoLaboratorial", avaliacaoLaboratorial);
-			
+		
 			return "avaliacao-laboratorial/cadastrar";
 		}
 		
@@ -137,6 +138,10 @@ public class PacienteController {
 		}
 				
 		consultaService.editarAvaliacaoLaboratorial(avaliacaoLaboratorial);
+		
+		Mensagem mensagem = new Mensagem("Salvo com sucesso!", Mensagem.Tipo.SUCESSO, Mensagem.Prioridade.MEDIA);
+		redirectAttributes.addFlashAttribute("mensagem", mensagem);
+		
 		return "redirect:/Paciente/"+idPaciente+"/AvaliacaoLaboratorial/"+avaliacaoLaboratorial.getId()+"/Visualizar";
 	}
 	
@@ -167,6 +172,9 @@ public class PacienteController {
 			redirectAttributes.addFlashAttribute("mensagem", mensagem);
 		}else{
 			consultaService.excluirAvaliacaoLaboratorial(avaliacaoLaboratorial);
+			
+			Mensagem mensagem = new Mensagem("Excluído com sucesso!", Mensagem.Tipo.SUCESSO, Mensagem.Prioridade.MEDIA);
+			redirectAttributes.addFlashAttribute("mensagem", mensagem);
 		}
 
 		return "redirect:/Paciente/"+idPaciente;

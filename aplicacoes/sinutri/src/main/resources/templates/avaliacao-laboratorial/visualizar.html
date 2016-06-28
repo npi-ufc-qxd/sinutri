@@ -23,7 +23,7 @@
 
 					<fabgroup class="sn-fab--bottom-right">
 
-						<a th:href="@{/Paciente/__${avaliacaoLaboratorial.paciente.id}__/AvaliacaoLaboratorial/__${avaliacaoLaboratorial.id}__/Excluir}" class="sn-fab sn-fab--hide mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-js-ripple-effect mdl-color--red-700">
+						<a id="sn-excluir" th:href="@{/Paciente/__${avaliacaoLaboratorial.paciente.id}__/AvaliacaoLaboratorial/__${avaliacaoLaboratorial.id}__/Excluir}" class="sn-fab sn-fab--hide mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-js-ripple-effect mdl-color--red-700">
 							<i class="material-icons mdl-color-text--white">delete</i>
 						</a>
 
@@ -87,13 +87,14 @@
 
 	</div>
 	
+	<div id="sn-excluir-modal"></div>
 </section>
 
 <section layout:fragment="js">
 
 	<script type="text/javascript" th:src="@{/js/moment.js}"></script>
 	<script type="text/javascript" th:src="@{/js/material-date-picker.js}"></script>
-
+	<script type="text/javascript" th:src="@{/js/avaliacao-laboratorial/visualizar.js}"></script>
 </section>
 
 </html>

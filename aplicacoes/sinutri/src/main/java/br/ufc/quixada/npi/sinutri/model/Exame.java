@@ -15,11 +15,11 @@ public class Exame {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@NotNull
+	@NotNull(message = "nome do exame deve ser selecionado.")
 	@Enumerated(EnumType.STRING)
 	private br.ufc.quixada.npi.sinutri.model.enuns.Exame nome;
 	
-	@NotNull
+	@NotNull(message = "resultado do exame deve ser preenchido.")
 	private Double resultado;
 
 	public Long getId() {
