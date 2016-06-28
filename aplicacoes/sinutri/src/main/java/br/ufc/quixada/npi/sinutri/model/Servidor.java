@@ -29,22 +29,6 @@ public class Servidor {
 		this.pessoa = pessoa;
 	}
 
-	public String getSiap() {
-		return siap;
-	}
-
-	public void setSiap(String siap) {
-		this.siap = siap;
-	}
-
-	public Pessoa getUsuario() {
-		return pessoa;
-	}
-
-	public void setUsuario(Pessoa pessoa) {
-		this.pessoa = pessoa;
-	}
-
 	public Long getId() {
 		return id;
 	}
@@ -53,4 +37,21 @@ public class Servidor {
 		this.id = id;
 	}
 
+	public String getSiap() {
+		return siap;
+	}
+
+	public void setSiap(String siap) {
+		this.siap = siap;
+	}
+
+	public Pessoa getPessoa() {
+		return pessoa;
+	}
+
+	public void setPessoa(Pessoa pessoa) {
+		this.pessoa = pessoa;
+	}
+
+	
 }

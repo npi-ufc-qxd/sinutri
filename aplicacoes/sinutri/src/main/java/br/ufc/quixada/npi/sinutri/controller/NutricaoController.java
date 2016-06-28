@@ -35,6 +35,7 @@ public class NutricaoController {
 		usuarios = usuarioService.getByCpfOrNome(busca);
 		model.addAttribute("usuarios",usuarios);
 		model.addAttribute("ultimaBusca", busca);
+
 		return "nutricao/buscar";
 	}
 
