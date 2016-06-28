@@ -43,6 +43,9 @@ public class Paciente implements Serializable {
 	
 	@OneToMany(mappedBy = "paciente")
 	private List<Anamnese> anamneses;
+	
+	@OneToMany(mappedBy = "paciente")
+	private List<InqueritoAlimentar> inqueritosAlimentares;
 
 	public Long getId() {
 		return id;
@@ -66,6 +69,14 @@ public class Paciente implements Serializable {
 
 	public void setAnamneses(List<Anamnese> anamneses) {
 		this.anamneses = anamneses;
+	}
+
+	public List<InqueritoAlimentar> getInqueritosAlimentares() {
+		return inqueritosAlimentares;
+	}
+
+	public void setInqueritosAlimentares(List<InqueritoAlimentar> inqueritosAlimentares) {
+		this.inqueritosAlimentares = inqueritosAlimentares;
 	}
 
 	public List<Prescricao> getPrescricoes() {

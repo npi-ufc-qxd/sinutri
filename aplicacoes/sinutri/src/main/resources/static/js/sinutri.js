@@ -1068,7 +1068,9 @@ var DynamicList = function(rootEl, settings) {
 			
 			var last = items.length == 0? undefined: items.last();
 			var newItem = item.clone(true);
+			newItem.data("sort", item.data("sort"));
 			newItem.find("*").off("click");
+
 
 			if(last === undefined)
 				self.parent.append(newItem);
