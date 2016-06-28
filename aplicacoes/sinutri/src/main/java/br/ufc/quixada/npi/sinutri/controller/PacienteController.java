@@ -46,7 +46,7 @@ public class PacienteController {
 	@Inject
 	private PessoaService pessoaService;
 
-	@RequestMapping(value= "/{idPaciente}/InqueritoAlimentar/", method = RequestMethod.GET)
+	@RequestMapping(value= "/{idPaciente}/InqueritoAlimentar", method = RequestMethod.GET)
 	public String formAdicionarInqueritoAlimentar(Model model, @PathVariable("idPaciente") Long idPaciente, RedirectAttributes redirectAttributes){
 		Paciente paciente =  pacienteService.buscarPacientePorId(idPaciente);
 		if(isInvalido(paciente)) {
