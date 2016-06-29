@@ -35,8 +35,16 @@ public class RefeicaoPlanoAlimentar {
 	private String observacao;
 	
 	@OneToMany(mappedBy = "refeicaoPlanoAlimentar")
-	private List<PorcaoAlimento> refeicoesPlanoAlimentar;
+	private List<PorcaoAlimento> PorcoesAlimentos;
 	
+	public List<PorcaoAlimento> getPorcoesAlimentos() {
+		return PorcoesAlimentos;
+	}
+
+	public void setPorcoesAlimentos(List<PorcaoAlimento> porcoesAlimentos) {
+		PorcoesAlimentos = porcoesAlimentos;
+	}
+
 	public Long getId() {
 		return id;
 	}
