@@ -131,13 +131,13 @@ $(function()
 		$("#botaoAdicionarAlimento").on("click", function(){
 			var index 	 = $(dialog).find("#sn-porcao-alimento-item-index").val();
 			var alimentoNome = $("#alimento-nome").val();
-			var porcaoQuantidade = $("#porcao-quantidade").val();
+			var porcaoQuantidade = $("#alimento-quantidade").val();
 			
 			var data = {
 				  ".sn-alimento-nome": 			   {text:  alimentoNome},
-				  ".sn-porcao-quantidade":		   {text:  porcaoQuantidade},
+				  ".sn-alimento-quantidade":		   {text:  porcaoQuantidade},
 				  ".sn-alimento-input-nome":  {value: alimentoNome},
-				  ".sn-porcao-input-quantidade": {value: porcaoQuantidade},
+				  ".sn-alimento-input-quantidade": {value: porcaoQuantidade},
 			};
 			 
 			 var el;
@@ -153,6 +153,17 @@ $(function()
 			  });
 		});
 		
+		$("#alimento-fonte").on("change", function(){
+			var fonte = $(this).val();
+			var alimento_nome = $("#alimento-nome");
+			var url = alimento_nome.attr("data-url") + fonte;
+			$.getJSON(url, function(data, status){
+				$(".select2").select2({
+					 data : data
+				});
+				
+			});
+		});
 		
 	});
 	

@@ -8,13 +8,13 @@
 	<title>Sinutri | Novo Plano Alimentar</title>
 	<link rel="stylesheet" type="text/css" th:href="@{/css/material-date-picker.css}"/>
 	<link rel="stylesheet" type="text/css" th:href="@{/css/plano-alimentar/cadastrar.css}"/>
+	<link rel="stylesheet" type="text/css" th:href="@{/css/select2.min.css}"/>
 </head>
 
 <body>
 <section layout:fragment="conteudo">
 	
 	<div class="mdl-grid">
-
 			<form action="#" 
 		    id="formAdicionarPlanoAlimentar"
 		    method="post" 
@@ -130,7 +130,7 @@
 				    		name="snrefeicaohora"/>
 				    		
 				    	</div>
-						
+						<!--/*
 						<div class="sn-textfield mdl-cell mdl-cell--12-col">
 				    		
 				    		<label for="sn-refeicao-descricao"
@@ -164,7 +164,7 @@
 					    		
 					    		<div class="mdl-cell mdl-cell--4-col">
 						    		<label>Fonte:</label>
-						    		<select class="sn-selectfield__select">
+						    		<select id="alimento-fonte" class="sn-selectfield__select">
 						    			<option value="">Escolha uma fonte</option>
 						    			<option value="MEUSALIMENTOS">MEUS ALIMENTOS</option>
 						    			<option value="TACO">TACO</option>
@@ -174,14 +174,14 @@
 					    		
 					    		<div class="mdl-cell mdl-cell--4-col">
 						    		<label>Alimento:</label>
-						    		<select id="alimento-nome" class="sn-selectfield__select">
+						    		<select id="alimento-nome" class="sn-selectfield__select select2" th:attr="data-url=@{/Paciente/__${idPaciente}__/PlanoAlimentar/Alimentos/?fonte=}" >
 						    			<option value="">Escolha um alimento</option>
 						    		</select>
 					    		</div>
 					    		
 					    		<div class="mdl-cell mdl-cell--3-col">
 						    		<label>Quantidade:</label>
-						    		<input id="porcao-quantidade" type="number" min="0" max="999999" class="sn-textfield__input" step="0.01"/>
+						    		<input id="alimento-quantidade" type="number" min="0" max="999999" class="sn-textfield__input" step="0.01"/>
 					    		</div>
 					    		<div class="mdl-cell mdl-cell--1-col">
 						    		<button id="botaoAdicionarAlimento" class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-button--colored mdl-color-text--white">
@@ -210,7 +210,7 @@
 							    			
 							    			<td hidden="true">
 								    			<input type="hidden" th:field="*{refeicoes[0].hora}" class="sn-alimento-input-nome" value="00:00"/>
-								    			<input type="hidden" th:field="*{refeicoes[0].descricao}" class="sn-porcao-input-quantidade" value="CAFEMANHA"/>
+								    			<input type="hidden" th:field="*{refeicoes[0].descricao}" class="sn-alimento-input-quantidade" value="CAFEMANHA"/>
 							    			</td>
 							    			<td style="width:33.3%" 
 							    			class="mdl-data-table__cell--non-numeric sn-alimento-nome">
@@ -218,7 +218,7 @@
 							    			</td>
 							    			
 							    			<td style="width:33.3%" 
-							    			class="mdl-data-table__cell--non-numeric sn-porcao-quantidade">
+							    			class="mdl-data-table__cell--non-numeric sn-alimento-quantidade">
 							    				Quantidade
 							    			</td>
 							    			
@@ -248,15 +248,14 @@
 							    			</td>
 							    			
 							    		</tr>
-							    		
+							    	
 							    	</tbody>
 							    	
 							</table>	
-				    				
 				    		</div>
 				    	</div>
 				    		
-				    		
+				    */-->		
 	   				</div>
 			    	
 			    </div>
@@ -301,6 +300,7 @@
 	<script type="text/javascript" th:src="@{/js/moment.js}"></script>
 	<script type="text/javascript" th:src="@{/js/material-date-picker.js}"></script>
 	<script type="text/javascript" th:src="@{/js/plano-alimentar/cadastrar.js}"></script>
+	<script type="text/javascript" th:src="@{/js/select2.min.js}"></script>
 </section>
 
 </body>
