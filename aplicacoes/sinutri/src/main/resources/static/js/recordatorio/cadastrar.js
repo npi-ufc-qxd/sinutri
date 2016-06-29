@@ -14,28 +14,21 @@ $(function()
 					
 					var hora = el.find(".sn-refeicao-input-hora").val();
 					var descricao = el.find(".sn-refeicao-input-descricao").val();
+					var itens = el.find(".sn-refeicao-input-itens").val();
 					var observacao = el.find(".sn-refeicao-input-observacao").val();
 					
 					var filtro = "[value="+descricao+"]";
 					
 					$(dialog).find("#sn-refeicao-hora").val(hora);
+					$(dialog).find("#sn-refeicao-itens").val(itens);
 					$(dialog).find("#sn-refeicao-item-index").val(index);
 					$(dialog).find("#sn-refeicao-observacao").val(observacao);
-					$(dialog).find("#sn-refeicao-descricao").val(observacao);
+					$(dialog).find("#sn-refeicao-descricao option").removeAttr("selected");
+					$(dialog).find("#sn-refeicao-descricao option"+filtro).prop("selected", true);
+					
 					dialog.showModal();
 					
 				}
-				
-			}
-		
-		});
-		
-		var dynamicList2 = $(".sn-list-alimento-porcao").dynamicList({
-			cloneableElement: ".sn-cloneable",
-			removeButton:     ".sn-alimento-porcao-remover",
-			editButton:       ".sn-alimento-porcao-editar",
-			cloneButton:	  ".sn-alimento-porcao-duplicar",
-			onItemEdit:		  function(el, index) {
 				
 			}
 		
@@ -53,9 +46,12 @@ $(function()
 		        		  var index 	 = $(dialog).find("#sn-refeicao-item-index").val();
 		        		  var hora 		 = $(dialog).find("#sn-refeicao-hora").val();
 						  var descricao  = $(dialog).find("#sn-refeicao-descricao").val();
+						  var textdescricao  = $(dialog).find("#sn-refeicao-descricao option:selected").text();
+						  var itens      = $(dialog).find("#sn-refeicao-itens").val();
 						  var observacao = $(dialog).find("#sn-refeicao-observacao").val();
 						  
-						  if( !(hora.length > 0 && descricao.length > 0 && observacao.length > 0) )
+						  if( !(hora.length > 0 && descricao.length > 0
+						  &&  itens.trim().length > 0 && observacao.trim().length > 0) )
 							  return;
 						  
 					      dialog.close();
@@ -70,12 +66,14 @@ $(function()
 					      var data = {
 								  sortValue: d.getTime(),
 								  ".sn-refeicao-hora": 			   {text:  hora},
-								  ".sn-refeicao-descricao":		   {text:  descricao},
-								  ".sn-refeicao-observacao": 	   {text:  observacao},
+								  ".sn-refeicao-descricao":		   {text:  textdescricao},
+								  ".sn-refeicao-itens": 		   {text:  itens.length > 27 ? itens.substr(0, 26).concat('...') : itens},
+								  ".sn-refeicao-observacao": 	   {text:  observacao.length > 27 ? observacao.substr(0, 26).concat('...') : observacao},
 								  ".sn-refeicao-input-hora": 	   {value: hora},
 								  ".sn-refeicao-input-descricao":  {value: descricao},
-								  ".sn-refeicao-input-observacao": {value: observacao},
-					      };
+								  ".sn-refeicao-input-itens": 	   {value: itens},
+								  ".sn-refeicao-input-observacao": {value: observacao}
+						  };
 						  
 						  var el;
 						  
@@ -99,8 +97,9 @@ $(function()
 			
 			$(dialog).find("#sn-refeicao-hora").val("");
 			$(dialog).find("#sn-refeicao-descricao").val("");
+			$(dialog).find("#sn-refeicao-descricao").selectedIndex = 0;
+			$(dialog).find("#sn-refeicao-itens").val("");
 			$(dialog).find("#sn-refeicao-observacao").val("");
-			$(dialog).find("#sn-refeicao-alimentos").val("");
 			
 			$(dialog).find("#sn-refeicao-item-index").val("");
 			
@@ -128,43 +127,6 @@ $(function()
 			confirmacao.showModal();
 		});
 		
-		$("#botaoAdicionarAlimento").on("click", function(){
-			var index 	 = $(dialog).find("#sn-porcao-alimento-item-index").val();
-			var alimentoNome = $("#alimento-nome").val();
-			var porcaoQuantidade = $("#alimento-quantidade").val();
-			
-			var data = {
-				  ".sn-alimento-nome": 			   {text:  alimentoNome},
-				  ".sn-alimento-quantidade":		   {text:  porcaoQuantidade},
-				  ".sn-alimento-input-nome":  {value: alimentoNome},
-				  ".sn-alimento-input-quantidade": {value: porcaoQuantidade},
-			};
-			 
-			 var el;
-			  
-			  if(index.length != 0)
-				  el = dynamicList2.doEditItem(index, data);
-			  else 
-				  el = dynamicList2.doAddItem(data);
-			 
-			  componentHandler.upgradeElement(el[0]);
-			  el.find("*").each( function(index, el) {
-				  componentHandler.upgradeElement(el);
-			  });
-		});
-		
-		$("#alimento-fonte").on("change", function(){
-			var fonte = $(this).val();
-			var alimento_nome = $("#alimento-nome");
-			var url = alimento_nome.attr("data-url") + fonte;
-			$.getJSON(url, function(data, status){
-				alimento_nome.empty();
-				alimento_nome.select2({
-					 'data' : data
-				});
-				
-			});
-		});
 		
 	});
 	

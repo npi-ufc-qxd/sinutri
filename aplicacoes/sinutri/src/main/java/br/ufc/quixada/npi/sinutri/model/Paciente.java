@@ -1,11 +1,13 @@
 package br.ufc.quixada.npi.sinutri.model;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.MapsId;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 @Entity
@@ -20,6 +22,18 @@ public class Paciente implements Serializable {
 	@OneToOne
 	@JoinColumn(name = "id")
 	private Pessoa pessoa;
+	
+	@OneToMany
+	private List<Recordatorio> recordatorios;
+	
+	@OneToMany(mappedBy="paciente")
+	private List<Prescricao> prescricoes;
+	
+	@OneToMany(mappedBy = "paciente")
+	private List<Anamnese> anamneses;
+	
+	@OneToMany(mappedBy = "paciente")
+	private List<InqueritoAlimentar> inqueritosAlimentares;
 
 	public Long getId() {
 		return id;
@@ -37,4 +51,36 @@ public class Paciente implements Serializable {
 		this.pessoa = pessoa;
 	}
 
+	public List<Recordatorio> getRecordatorios() {
+		return recordatorios;
+	}
+
+	public void setRecordatorios(List<Recordatorio> recordatorios) {
+		this.recordatorios = recordatorios;
+	}
+	
+	public List<Anamnese> getAnamneses() {
+		return anamneses;
+	}
+
+	public void setAnamneses(List<Anamnese> anamneses) {
+		this.anamneses = anamneses;
+	}
+
+	public List<InqueritoAlimentar> getInqueritosAlimentares() {
+		return inqueritosAlimentares;
+	}
+
+	public void setInqueritosAlimentares(List<InqueritoAlimentar> inqueritosAlimentares) {
+		this.inqueritosAlimentares = inqueritosAlimentares;
+	}
+
+	public List<Prescricao> getPrescricoes() {
+		return prescricoes;
+	}
+
+	public void setPrescricoes(List<Prescricao> prescricoes) {
+		this.prescricoes = prescricoes;
+	}
+	
 }

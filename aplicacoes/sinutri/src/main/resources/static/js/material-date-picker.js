@@ -29,6 +29,10 @@
       this.name = "dtp_" + this.setName();
       this.$element.attr("data-dtp", this.name);
 
+      // Custom
+      this.parent = this.params.parent == undefined? $("body"): this.params.parent;
+      //
+
       moment.locale(this.params.lang);
 
       this.init();
@@ -267,16 +271,16 @@
                          '</div>' +
                          '</div>';
 
-                 if ($('body').find("#" + this.name).length <= 0)
+                 if (this.parent.find("#" + this.name).length <= 0)
                  {
-                    $('body').append(this.template);
+                    this.parent.append(this.template);
 
                     if (this)
-                       this.dtpElement = $('body').find("#" + this.name);
+                       this.dtpElement = this.parent.find("#" + this.name);
                     this.$dtpElement = $(this.dtpElement);
                  }
 
-                 //componentHandler.upgradeDom();
+                 componentHandler.upgradeElement(this.$dtpElement[0]);
               },
               initButtons: function ()
               {
