@@ -129,20 +129,28 @@ $(function()
 		});
 		
 		$("#botaoAdicionarAlimento").on("click", function(){
-			var d = new Date();
-			d.setHours( parseInt(hora2[0]) );
-			d.setMinutes( parseInt(hora2[1]) );
-			
+			var index 	 = $(dialog).find("#sn-porcao-alimento-item-index").val();
 			var alimentoNome = $("#alimento-nome").val();
 			var porcaoQuantidade = $("#porcao-quantidade").val();
 			
-			 var data = {
-				  sortValue: d.getTime(),
+			var data = {
 				  ".sn-alimento-nome": 			   {text:  alimentoNome},
 				  ".sn-porcao-quantidade":		   {text:  porcaoQuantidade},
 				  ".sn-alimento-input-nome":  {value: alimentoNome},
 				  ".sn-porcao-input-quantidade": {value: porcaoQuantidade},
 			};
+			 
+			 var el;
+			  
+			  if(index.length != 0)
+				  el = dynamicList2.doEditItem(index, data);
+			  else 
+				  el = dynamicList2.doAddItem(data);
+			 
+			  componentHandler.upgradeElement(el[0]);
+			  el.find("*").each( function(index, el) {
+				  componentHandler.upgradeElement(el);
+			  });
 		});
 		
 		
