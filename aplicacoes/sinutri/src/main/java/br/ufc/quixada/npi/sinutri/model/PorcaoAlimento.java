@@ -1,27 +1,53 @@
 package br.ufc.quixada.npi.sinutri.model;
 
+import java.util.List;
+
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.IdClass;
-import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 @Entity
-@IdClass(PorcaoAlimentoId.class)
 public class PorcaoAlimento {
 	
 	@Id
-	@ManyToOne
-	@JoinColumn(name = "alimento_id")
-	private Alimento alimento;
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
 
-	@Id
 	@ManyToOne
-	@JoinColumn(name = "refeicao_plano_alimentar_id")
 	private RefeicaoPlanoAlimentar refeicaoPlanoAlimentar;
+	
+	@OneToMany(mappedBy = "porcaoAlimentar")
+	private List<Alimento> alimentos;
 	
 	private Integer quantidade;
 	
+	public Long getId() {
+		return id;
+	}
+	
+	public void setId(Long id) {
+		this.id = id;
+	}
+	
+	public RefeicaoPlanoAlimentar getRefeicaoPlanoAlimentar() {
+		return refeicaoPlanoAlimentar;
+	}
+
+	public void setRefeicaoPlanoAlimentar(RefeicaoPlanoAlimentar refeicaoPlanoAlimentar) {
+		this.refeicaoPlanoAlimentar = refeicaoPlanoAlimentar;
+	}
+
+	public List<Alimento> getAlimentos() {
+		return alimentos;
+	}
+
+	public void setAlimentos(List<Alimento> alimentos) {
+		this.alimentos = alimentos;
+	}
+
 	public Integer getQuantidade() {
 		return quantidade;
 	}
@@ -29,22 +55,4 @@ public class PorcaoAlimento {
 	public void setQuantidade(Integer quantidade) {
 		this.quantidade = quantidade;
 	}
-
-	public Alimento getAlimento() {
-		return alimento;
-	}
-
-	public void setAlimento(Alimento alimento) {
-		this.alimento = alimento;
-	}
-
-	public RefeicaoPlanoAlimentar getRefeicaoPlanoAlimentar() {
-		return refeicaoPlanoAlimentar;
-	}
-
-	public void setRefeicaoPlanoAlimentar(
-			RefeicaoPlanoAlimentar refeicaoPlanoAlimentar) {
-		this.refeicaoPlanoAlimentar = refeicaoPlanoAlimentar;
-	}
-
 }
