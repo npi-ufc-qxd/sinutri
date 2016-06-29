@@ -1,10 +1,12 @@
 package br.ufc.quixada.npi.sinutri.controller;
 
-import java.util.Date;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+
 import javax.inject.Inject;
 import javax.validation.Valid;
+
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,16 +15,23 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import com.fasterxml.jackson.annotation.JsonInclude;
+
+import br.ufc.quixada.npi.sinutri.model.Alimento;
 import br.ufc.quixada.npi.sinutri.model.AvaliacaoAntropometrica;
 import br.ufc.quixada.npi.sinutri.model.InqueritoAlimentar;
 import br.ufc.quixada.npi.sinutri.model.Mensagem;
 import br.ufc.quixada.npi.sinutri.model.Mensagem.Prioridade;
 import br.ufc.quixada.npi.sinutri.model.Mensagem.Tipo;
 import br.ufc.quixada.npi.sinutri.model.Paciente;
-import br.ufc.quixada.npi.sinutri.model.PlanoAlimentar;
 import br.ufc.quixada.npi.sinutri.model.Pessoa;
+import br.ufc.quixada.npi.sinutri.model.PlanoAlimentar;
 import br.ufc.quixada.npi.sinutri.model.Servidor;
+import br.ufc.quixada.npi.sinutri.model.enuns.FonteAlimento;
 import br.ufc.quixada.npi.sinutri.model.enuns.FrequenciaSemanal;
 import br.ufc.quixada.npi.sinutri.model.enuns.Sexo;
 import br.ufc.quixada.npi.sinutri.service.ConsultaService;
@@ -124,6 +133,7 @@ public class PacienteController {
 		return "redirect:/paciente/"+idPaciente+"/";
 	}
 	
+//************************************************************************************************************ INICIO PLANO ALIMENTAR	
 	@RequestMapping(value= "/{idPaciente}/PlanoAlimentar", method = RequestMethod.GET)
 	public String formAdicionarPlanoAlimentar(@PathVariable("idPaciente") Long idPaciente, Model model, RedirectAttributes redirectAttributes){
 		Paciente paciente = pacienteService.buscarPacientePorId(idPaciente);
@@ -221,6 +231,17 @@ public class PacienteController {
 		consultaService.excluirPlanoAlimentar(planoAlimentar);
 		return "nutricao/buscar"; //modificar
 	}
+
+//************************************************************************************************************** FIM PLANO ALIMENTAR
+	
+//************************************************************************************************************** INICIO REFEIÇÃO
+	@RequestMapping(value= "/{idPaciente}/PlanoAlimentar/Alimentos", params = {"fonte"}, method = RequestMethod.GET)
+	@JsonInclude(JsonInclude.Include.NON_NULL)
+	@ResponseBody
+	public List<Alimento> pegarAlimentos(@RequestParam("fonte") FonteAlimento fonte){
+		return consultaService.buscarAlimentosPorFonte(fonte);
+	}
+//************************************************************************************************************** FIM REFEIÇÃO
 	
 	@RequestMapping(value= {"/{idPaciente}/Antropometria"}, method = RequestMethod.GET)
 	public String formAdicionarAvaliacaoAntropometrica(@PathVariable("idPaciente") Long idPaciente, Model model, RedirectAttributes redirectAttributes){

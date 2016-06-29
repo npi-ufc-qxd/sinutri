@@ -1,9 +1,13 @@
 package br.ufc.quixada.npi.sinutri.service;
 
+import java.util.List;
+
+import br.ufc.quixada.npi.sinutri.model.Alimento;
 import br.ufc.quixada.npi.sinutri.model.AvaliacaoAntropometrica;
 import br.ufc.quixada.npi.sinutri.model.InqueritoAlimentar;
 import br.ufc.quixada.npi.sinutri.model.Paciente;
 import br.ufc.quixada.npi.sinutri.model.PlanoAlimentar;
+import br.ufc.quixada.npi.sinutri.model.enuns.FonteAlimento;
 
 public interface ConsultaService {
 	
@@ -30,4 +34,7 @@ public interface ConsultaService {
 	AvaliacaoAntropometrica buscarAvaliacaoAntropometricaPorId(Long id);
 	
 	void excluirAvaliacaoAntropometrica(AvaliacaoAntropometrica antropometria);
+	
+	List<Alimento> buscarAlimentosPorFonte(FonteAlimento fonte);
+	
 }
