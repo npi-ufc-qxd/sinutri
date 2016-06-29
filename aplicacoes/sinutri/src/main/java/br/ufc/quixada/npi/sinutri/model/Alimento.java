@@ -9,7 +9,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 import br.ufc.quixada.npi.sinutri.model.enuns.FonteAlimento;
 
@@ -50,7 +52,26 @@ public class Alimento {
 	private Double vitaminaDCalciferol;
 	private Double vitaminaETocoferol;
 	private Double zinco;
+
+	@ManyToOne
+	private Grupo grupo;
 	
+	public Grupo getGrupo() {
+		return grupo;
+	}
+
+	public void setGrupo(Grupo grupo) {
+		this.grupo = grupo;
+	}
+
+	public List<PorcaoAlimento> getRefeicoesPlanoAlimentar() {
+		return refeicoesPlanoAlimentar;
+	}
+
+	public void setRefeicoesPlanoAlimentar(List<PorcaoAlimento> refeicoesPlanoAlimentar) {
+		this.refeicoesPlanoAlimentar = refeicoesPlanoAlimentar;
+	}
+
 	@Enumerated(EnumType.STRING)
 	private FonteAlimento fonte;
 	
