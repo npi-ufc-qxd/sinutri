@@ -1,6 +1,7 @@
 package br.ufc.quixada.npi.sinutri.controller;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -9,8 +10,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class NutricaoController {
 
 	@RequestMapping(value = {"", "/", "/Buscar"}, method = RequestMethod.GET)
-	public String paginaInicial() {
+	public String paginaInicial(Model model) {	
+		
 		return "nutricao/buscar";
 	}
 
 }
+
