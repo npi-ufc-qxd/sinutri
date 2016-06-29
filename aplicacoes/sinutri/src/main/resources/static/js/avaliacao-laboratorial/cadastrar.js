@@ -33,11 +33,16 @@ $(document).ready(function() {
 					label: "OK",
 					attrs: {id: "btn-ok", type: "submit"}, 
 					action: function() {
-						dialog.close();
 
 						var index = $(dialog).find("#sn-exame-item-index").val();
 						var type = $(dialog).find("#sn-exame-type").val();
 						var val = $(dialog).find("#sn-exame-value").val();
+						
+						if( !(type.length > 0 && val.length > 0) )
+							return;
+						
+						dialog.close();
+						
 						var data = {  
 							".sn-exame-type": {text: type},
 							".sn-exame-value": {text: val},

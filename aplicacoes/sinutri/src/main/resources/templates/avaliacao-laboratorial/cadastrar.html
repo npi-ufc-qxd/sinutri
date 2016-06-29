@@ -65,10 +65,10 @@
 									<input type="hidden" th:field="*{exames[__${state.index}__].resultado}" class="sn-exame-input-resultado"/>
 									<span class="mdl-list__item-primary-content">
 										<span class="sn-exame-type " th:text="*{exames[__${state.index}__].nome}">
-										
+											<label class="sn-textfield__messages sn-error-text" for="sn-text" th:if="${#fields.hasErrors('exames[__${state.index}__].nome')}" th:errors="*{exames[__${state.index}__].nome}"></label>
 										</span>
 										<span class="mdl-list__item-sub-title sn-exame-value" th:text="*{exames[__${state.index}__].resultado}">
-											
+											<label class="sn-textfield__messages sn-error-text" for="sn-text" th:if="${#fields.hasErrors('exames[__${state.index}__].resultado')}" th:errors="*{exames[__${state.index}__].resultado}"></label>
 										</span>
 									</span>
 									<span class="mdl-list__item-secondary-content">
@@ -119,7 +119,7 @@
 				
 				<div class="sn-textfield mdl-cell mdl-cell--12-col">
 					<label class="sn-textfield__label" for="sn-text">Observação:</label>
-					<textarea class="sn-textfield__input" type="text" data-max-length="255" data-max-length-tip="O tamanho máximo deve ser 10 caracteres!" id="sn-text" th:field="*{observacao}" th:value="*{observacao}"></textarea>
+					<textarea class="sn-textfield__input" type="text" data-max-length="255" data-max-length-tip="O tamanho máximo deve ser 255 caracteres!" id="sn-text" th:field="*{observacao}" th:value="*{observacao}"></textarea>
 				</div>
 	
 				<div class="sn-form-actions">
@@ -147,7 +147,7 @@
 			<input type="hidden" id="sn-exame-item-index"/>
 			
 			<div class="sn-selectfield mdl-cell mdl-cell--12-col">
-				<label class="sn-selectfield__label" for="sn-exame-type">Tipo do Exame</label>
+				<label class="sn-selectfield__label" for="sn-exame-type">Nome</label>
 				<select class="sn-selectfield__select" id="sn-exame-type">
 					<option value="">Selecione um tipo</option>	
 					<option th:each="exame : ${exames}" th:value="${exame}" th:text="${exame.nome}"></option>	
@@ -169,7 +169,6 @@
 	<script type="text/javascript" th:src="@{/js/moment.js}"></script>
 	<script type="text/javascript" th:src="@{/js/material-date-picker.js}"></script>
 	<script type="text/javascript" th:src="@{/js/avaliacao-laboratorial/cadastrar.js}"></script>
-
 </section>
 
 </html>
