@@ -14,10 +14,10 @@ public class Recordatorio {
 	@GeneratedValue
 	private long id;
 	
-	@DateTimeFormat(pattern="dd/MM/yyyy HH:mm")
+	@DateTimeFormat(pattern="dd/MM/yyyy")
 	private Date criadoEm;
 	
-	@DateTimeFormat(pattern="dd/MM/yyyy HH:mm")
+	@DateTimeFormat(pattern="dd/MM/yyyy")
 	private Date atualizadoEm;
 	
 	@OneToOne
