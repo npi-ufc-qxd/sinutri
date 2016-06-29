@@ -129,15 +129,6 @@ public class PacienteController {
 			model.addAttribute("avaliacaoLaboratorial", avaliacaoLaboratorial);
 			return "avaliacao-laboratorial/editar";
 		}
-		
-		avaliacaoLaboratorial = consultaService.buscarAvaliacaoLaboratorialPorId(avaliacaoLaboratorial.getId());
-		
-		if(avaliacaoLaboratorial == null){
-			Mensagem mensagem = new Mensagem("Avaliação Laboratorial não encontrada.", Mensagem.Tipo.ERRO, Mensagem.Prioridade.MEDIA);
-			
-			redirectAttributes.addFlashAttribute("mensagem", mensagem);
-			return "redirect:/Paciente/"+idPaciente;
-		}
 				
 		consultaService.editarAvaliacaoLaboratorial(avaliacaoLaboratorial);
 		

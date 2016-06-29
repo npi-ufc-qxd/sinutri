@@ -60,16 +60,14 @@
 								</li>
 								
 								<li th:each="exame, state : ${avaliacaoLaboratorial.exames}" class="mdl-list__item mdl-list__item--two-line mdl-shadow--2dp mdl-color--white sn-cloneable sn-rounded-item sn-square-item">
-									
 									<input type="hidden" th:field="*{exames[__${state.index}__].nome}" class="sn-exame-input-nome"/>
 									<input type="hidden" th:field="*{exames[__${state.index}__].resultado}" class="sn-exame-input-resultado"/>
 									<span class="mdl-list__item-primary-content">
-										<span class="sn-exame-type " th:text="*{exames[__${state.index}__].nome}">
-											<label class="sn-textfield__messages sn-error-text" for="sn-text" th:if="${#fields.hasErrors('exames[__${state.index}__].nome')}" th:errors="*{exames[__${state.index}__].nome}"></label>
-										</span>
-										<span class="mdl-list__item-sub-title sn-exame-value" th:text="*{exames[__${state.index}__].resultado}">
-											<label class="sn-textfield__messages sn-error-text" for="sn-text" th:if="${#fields.hasErrors('exames[__${state.index}__].resultado')}" th:errors="*{exames[__${state.index}__].resultado}"></label>
-										</span>
+										<label class="sn-textfield__messages sn-error-text" for="sn-text" th:if="${#fields.hasErrors('exames[__${state.index}__].nome')}" th:errors="*{exames[__${state.index}__].nome}"></label>
+										<span class="sn-exame-type " th:text="*{exames[__${state.index}__].nome}"></span>
+										
+										<label class="sn-textfield__messages sn-error-text" for="sn-text" th:if="${#fields.hasErrors('exames[__${state.index}__].resultado')}" th:errors="*{exames[__${state.index}__].resultado}"></label>
+										<span class="mdl-list__item-sub-title sn-exame-value" th:text="*{exames[__${state.index}__].resultado}"></span>
 									</span>
 									<span class="mdl-list__item-secondary-content">
 										<button type="button" class="mdl-button mdl-js-button mdl-button--icon mdl-button--colored sn-exame-edit">
@@ -132,13 +130,35 @@
 
 		</form>
 
-		<div class="mdl-cell
-			mdl-cell--3-col-desktop">
-			<div class="sn-card sn-padding--48">
-				<div class="mdl-layout-title">Informações</div>
+		<div class="mdl-cell mdl-cell--3-col-desktop mdl-cell--8-col-tablet mdl-cell--4-col-phone">
+				<div class="sn-card sn-padding--48">
+					<div class="mdl-layout-title">Informações do Paciente</div>
+										
+					<div class="sn-attribute__title">Nome</div>
+					<div class="sn-attribute__value" th:text="${avaliacaoLaboratorial.paciente.pessoa.nome}"></div>
+					
+					<div class="sn-attribute__title">Sexo</div>
+					<div class="sn-attribute__value" th:text="${avaliacaoLaboratorial.paciente.pessoa.sexo}"></div>
+					
+					<div class="sn-attribute__title">Idade</div>
+					<div class="sn-attribute__value" th:text="${avaliacaoLaboratorial.paciente.pessoa.getIdade()}"></div>
+					
+					<div class="sn-attribute__title">CPF</div>
+					<div class="sn-attribute__value" th:text="${avaliacaoLaboratorial.paciente.pessoa.cpf}"></div>
+					
+					<div class="sn-attribute__title">Telefone</div>
+					<div class="sn-attribute__value" th:text="${avaliacaoLaboratorial.paciente.pessoa.telefone}"></div>
+					
+					<div class="sn-attribute__title">Cargo/Ocupação</div>
+					<div class="sn-attribute__value" th:text="${avaliacaoLaboratorial.paciente.pessoa.ocupacaoOuCargo}"></div>
+					
+					<div class="sn-attribute__title">Email</div>
+					<div class="sn-attribute__value" th:text="${avaliacaoLaboratorial.paciente.pessoa.email}"></div>
+							
+					<div class="sn-attribute__title">Vínculo</div>
+					<div class="sn-attribute__value" th:text="${avaliacaoLaboratorial.paciente.pessoa.vinculo}"></div>
+				</div>
 			</div>
-		</div>
-		 		
 	</div>	
  			
 	<!-- Modal Content -->

@@ -34,11 +34,6 @@
 					<label class="sn-textfield__label" for="criadoEm">Data de criação</label>
 					<input class="sn-textfield__input sn-date-picker" type="text" id="criadoEm" th:field="*{criadoEm}" th:value="*{criadoEm}"/> 
 				</div>
-				
-				<div class="sn-textfield mdl-cell mdl-cell--6-col">
-					<label class="sn-textfield__label" for="sn-date">Última atualização:</label> 
-					<input class="sn-textfield__input sn-date-picker" type="text" id="sn-date" th:field="*{atualizado}" th:value="*{atualizado}"/>
-				</div>
 	
 				<div class="mdl-cell mdl-cell--12-col">
 					<label class="sn-textfield__label">Exames</label>
@@ -71,8 +66,11 @@
 									<input type="hidden" th:field="*{exames[__${state.index}__].nome}" class="sn-exame-input-nome"/>
 									<input type="hidden" th:field="*{exames[__${state.index}__].resultado}" class="sn-exame-input-resultado"/>
 									<span class="mdl-list__item-primary-content">
-										<span class="sn-exame-type " th:text="*{exames[__${state.index}__].nome}">Exame tal</span>
-										<span class="mdl-list__item-sub-title sn-exame-value" th:text="*{exames[__${state.index}__].resultado}">5.56 kg</span>
+										<label class="sn-textfield__messages sn-error-text" for="sn-text" th:if="${#fields.hasErrors('exames[__${state.index}__].nome')}" th:errors="*{exames[__${state.index}__].nome}"></label>
+										<span class="sn-exame-type " th:text="*{exames[__${state.index}__].nome}"></span>
+										
+										<label class="sn-textfield__messages sn-error-text" for="sn-text" th:if="${#fields.hasErrors('exames[__${state.index}__].resultado')}" th:errors="*{exames[__${state.index}__].resultado}"></label>
+										<span class="mdl-list__item-sub-title sn-exame-value" th:text="*{exames[__${state.index}__].resultado}"></span>
 									</span>
 									<span class="mdl-list__item-secondary-content">
 										<button type="button" class="mdl-button mdl-js-button mdl-button--icon mdl-button--colored sn-exame-edit">
