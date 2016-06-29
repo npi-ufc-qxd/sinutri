@@ -869,6 +869,73 @@ var DynamicList = function(rootEl, settings) {
 		//***
 
 
+		//***
+		items.each(function(_, e) {
+
+			var toRemove = undefined;
+
+			if($(e).attr("id") == undefined) {
+				DynamicList.objectCount++;
+				$(e).attr("id", "sn-cloneableElement-" + DynamicList.objectCount);
+				toRemove = $("#sn-cloneableElement-" + DynamicList.objectCount);
+			} else {
+				toRemove = $("#" + $(e).attr("id"));
+			}
+
+			var setRemoveFunc = function(rootEl) {
+
+				rootEl.children(self.settings.removeButton).each(function(index, el) {
+					
+					$(el).click(function() {
+
+						if(self.settings.onItemRemove(toRemove))
+							self.doRemoveItem(toRemove);
+						
+					})
+
+				});
+
+				rootEl.children().each(function(index, el) {
+					
+					if(!$(el).isDynamicList()) {
+						setRemoveFunc($(el));
+					}
+
+				});
+
+			}
+
+			setRemoveFunc($(e));
+
+			var setEditFunc = function(rootEl) {
+
+				rootEl.children(self.settings.editButton).each(function(index, el) {
+					
+					$(el).click(function() {
+
+						if(self.settings.onItemEdit(toRemove, toRemove.data("index")))
+							self.doEditItem(toRemove);
+						
+					})
+
+				});
+
+				rootEl.children().each(function(index, el) {
+					
+					if(!$(el).isDynamicList()) {
+						setEditFunc($(el));
+					}
+
+				});
+
+			}
+
+			setEditFunc(toRemove);
+
+		});
+		//***
+
+
 		self.sortItems();
 
 		self.showStatus("Initializing");
