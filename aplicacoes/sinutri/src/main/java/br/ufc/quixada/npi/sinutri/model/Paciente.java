@@ -23,7 +23,7 @@ public class Paciente implements Serializable {
 	@JoinColumn(name = "id")
 	private Pessoa pessoa;
 	
-	@OneToMany
+	@OneToMany(mappedBy="paciente")
 	private List<Recordatorio> recordatorios;
 	
 	@OneToMany(mappedBy="paciente")
