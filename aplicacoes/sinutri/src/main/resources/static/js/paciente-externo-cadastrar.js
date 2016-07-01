@@ -51,8 +51,8 @@ $(document).ready(function() {
     });
 	
 	$( "#excluir" ).click(function(event) {
- 	   var dialog = sn_base.doRegistryDialog({
-            title: "Você realmente deseja excluir este Paciente? ", 
+		var dialog = sn_base.doRegistryDialog({
+			title: "Você realmente deseja excluir este Paciente? ", 
             dialog: "#modal-exclusao", 
             buttons: [
                     {
@@ -69,9 +69,8 @@ $(document).ready(function() {
                         }
                     }
             ]
-    		});    	   
- 	   dialog.showModal();
- 	   event.preventDefault();
-    });    
-	
+		});    	   
+		dialog.showModal();
+		event.preventDefault();
+	});    
 });
