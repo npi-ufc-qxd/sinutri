@@ -13,6 +13,10 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+
+import br.ufc.quixada.npi.ldap.model.Affiliation;
+import br.ufc.quixada.npi.ldap.model.Usuario;
+import br.ufc.quixada.npi.ldap.service.UsuarioService;
 import br.ufc.quixada.npi.sinutri.model.Anamnese;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import br.ufc.quixada.npi.sinutri.model.AvaliacaoAntropometrica;
@@ -45,6 +49,9 @@ public class PacienteController {
 	
 	@Inject
 	private PessoaService pessoaService;
+	
+	@Inject
+	private UsuarioService usuarioService;
 
 	@RequestMapping(value= "/{idPaciente}/InqueritoAlimentar", method = RequestMethod.GET)
 	public String formAdicionarInqueritoAlimentar(Model model, @PathVariable("idPaciente") Long idPaciente, RedirectAttributes redirectAttributes){
@@ -634,6 +641,36 @@ public class PacienteController {
 		 return "redirect:/Paciente/"+idPaciente;
 	}
 	
+		
+	@RequestMapping(value ="/Registrar/{cpf}", method = RequestMethod.GET)
+	public String registrarPaciente(@PathVariable("cpf") String cpf, RedirectAttributes redirectAttributes){
+		
+		Usuario usuario = usuarioService.getByCpf(cpf);
+		if (usuario == null){
+			redirectAttributes.addFlashAttribute("mensagem", new Mensagem("CPF invalido!", Mensagem.Tipo.ERRO, Mensagem.Prioridade.ALTA));
+			return "Nutricao/Buscar";
+		}
+		
+		Paciente paciente  = pacienteService.buscarPacientePorCPF(cpf);
+		if (isInvalido(paciente)) {
+			Pessoa pessoa = new Pessoa();
+			pessoa.setNome(usuario.getNome());
+			pessoa.setCpf(usuario.getCpf());
+			pessoa.setDataNascimento(usuario.getNascimento());
+			pessoa.setEmail(usuario.getEmail());
+			pessoa.setSexo(null);
+			pessoa.setOcupacaoOuCargo(usuario.getCargo());
+			pessoa.setTelefone(usuario.getTelefone());
+			pessoa.setVinculo(null);
+			pessoa.setExterno(false);
+			
+			paciente  = new Paciente();
+			paciente.setPessoa(pessoa);
+			pacienteService.adicionarPaciente(paciente);
+		}
+		return "redirect:/Paciente/"+paciente.getId();
+	}
+	 
 	private boolean isInvalidoAntropometria(AvaliacaoAntropometrica avaliacaoAntropometrica){
 		return avaliacaoAntropometrica == null;
 	}
@@ -648,7 +685,5 @@ public class PacienteController {
 	private boolean isInvalido(Paciente paciente){
 		return paciente == null;
 	}
-	
-
 }
 

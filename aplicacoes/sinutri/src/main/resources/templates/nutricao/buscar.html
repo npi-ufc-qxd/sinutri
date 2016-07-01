@@ -23,7 +23,7 @@
 				<div class="mdl-textfield mdl-js-textfield sn-search__box">
 					<form id="formBuscar" th:action="@{/Nutricao/Buscar}" th:method="post">
 						<input id="sn-search__input" class="mdl-textfield__input sn-search__input" name="busca" th:value="${ultimaBusca}"></input>
-						<label class="mdl-textfield__label" for="sn-search__input">Busca pacientes...</label>
+						<label class="mdl-textfield__label" for="sn-search__input">Buscar pacientes...</label>
 						<i id="botaoPesquisar" class="sn-search__icon material-icons cursor_pointer">search</i>
 					</form>
 				</div>
@@ -47,8 +47,8 @@
 
 			</div>
 
-			<ul class="demo-list-two mdl-list">
-				<li th:if = "${#strings.length(ultimaBusca)} and ${#lists.size(usuarios)==0}" class="mdl-list__item mdl-list__item--two-line">
+			<ul th:if = "${usuarios != null}" class="demo-list-two mdl-list">
+				<li th:if = "${#lists.size(usuarios)==0}" class="mdl-list__item mdl-list__item--two-line">
 					<span class="mdl-list__item-primary-content">
 						<center> <span>Busca sem resultados!</span> </center>
 					</span>

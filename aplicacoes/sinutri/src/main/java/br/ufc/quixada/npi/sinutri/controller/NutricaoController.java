@@ -16,7 +16,6 @@ public class NutricaoController {
 
 	@RequestMapping(value = {"", "/", "/Buscar"}, method = RequestMethod.GET)
 	public String paginaInicial(Model model) {
-		model.addAttribute("ultimaBusca", "");
 		return "nutricao/buscar";
 	}
 	
