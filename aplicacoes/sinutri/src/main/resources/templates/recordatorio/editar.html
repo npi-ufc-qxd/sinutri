@@ -29,7 +29,6 @@
 		    accept-charset="utf-8">
 				
 				<input type="hidden" th:field="*{id}"></input>
-				<input type="hidden" th:field="*{criadoEm}"></input>
 				<input type="hidden" th:field="*{atualizadoEm}"></input>
 				<input type="hidden" th:field="*{nutricionista}"></input>
 				<input type="hidden" th:field="*{paciente}"></input>
@@ -43,6 +42,16 @@
 				</div>
 				
 				<div class="sn-form__hdivider"></div>
+				
+				<div class="sn-textfield mdl-cell mdl-cell--6-col">
+					<label class="sn-textfield__label" 
+					for="criadoEm">Data de criação</label> 
+					
+					<input class="sn-textfield__input sn-date-picker" 
+					type="text" 
+					id="criadoEm" 
+					th:field="*{criadoEm}"/>
+				</div>
 				
 				<div th:if="*{not #lists.isEmpty(refeicoes)}">
 				

@@ -25,6 +25,7 @@ $( "#cancelar" ).click(function(event) {
    }
 });
 
+
 Cookies.remove("formulario-alterado");   
 
 

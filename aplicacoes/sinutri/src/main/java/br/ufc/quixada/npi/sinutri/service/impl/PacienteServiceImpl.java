@@ -34,5 +34,10 @@ public class PacienteServiceImpl implements PacienteService{
 		pacienteRepository.delete(paciente);
 		
 	}
+
+	@Override
+	public Paciente buscarPacientePorCPF(String cpf) {
+		return pacienteRepository.findByCPF(cpf);
+	}
 	
 }
