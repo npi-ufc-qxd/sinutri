@@ -4,14 +4,14 @@ $( "#excluir" ).click(function(event) {
            dialog: "#modal-exclusao", 
            buttons: [
                    {
-                      label: "Excluir",
+                      label: "SIM",
                       attrs: {href: $(this).attr("href")}, 
                       action: function() {
                           dialog.close();
                       }
                    }, 
                    {
-                       label: "Cancelar",
+                       label: "NÃO",
                        action: function() {
                            dialog.close();
                        }
