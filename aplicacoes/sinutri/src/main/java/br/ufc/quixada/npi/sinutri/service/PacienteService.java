@@ -11,6 +11,8 @@ public interface PacienteService {
 	
 	Paciente buscarPacientePorId(Long idPaciente);
 	
+	Paciente buscarPacientePorCPF(String cpf);
+	
 	void excluirPaciente(Paciente paciente);
 	
 
