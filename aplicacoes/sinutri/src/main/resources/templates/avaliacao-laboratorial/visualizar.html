@@ -64,7 +64,7 @@
 						<ul class="sn-list-exames mdl-list">
 							<li th:each="exame : ${avaliacaoLaboratorial.exames}" class="mdl-list__item mdl-list__item--two-line mdl-color--grey-100">
 								<span class="mdl-list__item-primary-content">
-									<span class="sn-exame-type" th:text="${exame.nome}">Exame tal</span>
+									<span class="sn-exame-type" th:text="${exame.nome.nome}">Exame tal</span>
 									<span class="mdl-list__item-sub-title sn-exame-value" th:text="${exame.resultado}">5.56 kg</span>
 								</span>
 							</li>
@@ -77,12 +77,34 @@
 
 		</div>
 
-		<div class="mdl-cell mdl-cell--3-col-desktop">
-
+		<div class="mdl-cell mdl-cell--3-col-desktop mdl-cell--8-col-tablet mdl-cell--4-col-phone">
 			<div class="sn-card sn-padding--48">
-				<div class="mdl-layout-title">Informações</div>
+				<div class="mdl-layout-title">Informações do Paciente</div>
+										
+				<div class="sn-attribute__title">Nome</div>
+				<div class="sn-attribute__value" th:text="${avaliacaoLaboratorial.paciente.pessoa.nome}"></div>
+					
+				<div class="sn-attribute__title">Sexo</div>
+				<div class="sn-attribute__value" th:text="${avaliacaoLaboratorial.paciente.pessoa.sexo}"></div>
+					
+				<div class="sn-attribute__title">Idade</div>
+				<div class="sn-attribute__value" th:text="${avaliacaoLaboratorial.paciente.pessoa.getIdade()}"></div>
+					
+				<div class="sn-attribute__title">CPF</div>
+				<div class="sn-attribute__value" th:text="${avaliacaoLaboratorial.paciente.pessoa.cpf}"></div>
+					
+				<div class="sn-attribute__title">Telefone</div>
+				<div class="sn-attribute__value" th:text="${avaliacaoLaboratorial.paciente.pessoa.telefone}"></div>
+					
+				<div class="sn-attribute__title">Cargo/Ocupação</div>
+				<div class="sn-attribute__value" th:text="${avaliacaoLaboratorial.paciente.pessoa.ocupacaoOuCargo}"></div>
+					
+				<div class="sn-attribute__title">Email</div>
+				<div class="sn-attribute__value" th:text="${avaliacaoLaboratorial.paciente.pessoa.email}"></div>
+							
+				<div class="sn-attribute__title">Vínculo</div>
+				<div class="sn-attribute__value" th:text="${avaliacaoLaboratorial.paciente.pessoa.vinculo}"></div>
 			</div>
-
 		</div>
 
 	</div>

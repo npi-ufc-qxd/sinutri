@@ -38,10 +38,9 @@ public class AvaliacaoLaboratorial {
 	private String observacao;
 
 	@ManyToOne
-	@JoinColumn(name = "paciente_id")
 	private Paciente paciente;
 
-	@OneToOne
+	@ManyToOne
 	private Servidor nutricionista;
 
 	@OneToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE})

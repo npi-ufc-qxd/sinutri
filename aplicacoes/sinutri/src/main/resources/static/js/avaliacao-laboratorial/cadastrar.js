@@ -13,7 +13,7 @@ $(document).ready(function() {
 				if(dialog != null) {
 					var type = el.find(".sn-exame-type").text();
 					var val = el.find(".sn-exame-value").text();
-
+					
 					$(dialog).find("#sn-exame-type").val(type);
 					$(dialog).find("#sn-exame-value").val(val);
 					$(dialog).find("#sn-exame-item-index").val(index);
@@ -37,6 +37,7 @@ $(document).ready(function() {
 						var index = $(dialog).find("#sn-exame-item-index").val();
 						var type = $(dialog).find("#sn-exame-type").val();
 						var val = $(dialog).find("#sn-exame-value").val();
+						var text  = $(dialog).find("#sn-exame-type option:selected").text();
 						
 						if( !(type.length > 0 && val.length > 0) )
 							return;
@@ -44,7 +45,7 @@ $(document).ready(function() {
 						dialog.close();
 						
 						var data = {  
-							".sn-exame-type": {text: type},
+							".sn-exame-type": {text: text},
 							".sn-exame-value": {text: val},
 							".sn-exame-input-nome": {value: type},
 							".sn-exame-input-resultado": {value: val}

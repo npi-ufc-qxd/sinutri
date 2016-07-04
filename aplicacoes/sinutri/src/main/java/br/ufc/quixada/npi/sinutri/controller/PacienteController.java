@@ -102,6 +102,15 @@ public class PacienteController {
 			return "redirect:/Nutricao/Buscar";
 		}
 		
+		String cpfPessoaLogada = getCpfPessoaLogada();
+		Servidor nutricionista = pessoaService.buscarServidorPorCpf(cpfPessoaLogada);
+		
+		if(nutricionista == null){
+			redirectAttributes.addFlashAttribute("mensagem", new Mensagem("Nutricionista inexistente", Mensagem.Tipo.ERRO, Mensagem.Prioridade.ALTA));
+			return "redirect:/Nutricao/Buscar";
+		}
+		
+		avaliacaoLaboratorial.setNutricionista(nutricionista);
 		consultaService.adicionarAvaliacaoLaboratorial(avaliacaoLaboratorial, paciente);
 		
 		Mensagem mensagem = new Mensagem("Salvo com sucesso!", Mensagem.Tipo.SUCESSO, Mensagem.Prioridade.MEDIA);
@@ -168,12 +177,12 @@ public class PacienteController {
 			Mensagem mensagem = new Mensagem("Avaliação Laboratorial não encontrada.", Mensagem.Tipo.ERRO, Mensagem.Prioridade.MEDIA);
 			
 			redirectAttributes.addFlashAttribute("mensagem", mensagem);
-		}else{
-			consultaService.excluirAvaliacaoLaboratorial(avaliacaoLaboratorial);
-			
-			Mensagem mensagem = new Mensagem("Excluído com sucesso!", Mensagem.Tipo.SUCESSO, Mensagem.Prioridade.MEDIA);
-			redirectAttributes.addFlashAttribute("mensagem", mensagem);
 		}
+		
+		consultaService.excluirAvaliacaoLaboratorial(avaliacaoLaboratorial);
+			
+		Mensagem mensagem = new Mensagem("Excluído com sucesso!", Mensagem.Tipo.SUCESSO, Mensagem.Prioridade.MEDIA);
+		redirectAttributes.addFlashAttribute("mensagem", mensagem);
 
 		return "redirect:/Paciente/"+idPaciente;
 	}
