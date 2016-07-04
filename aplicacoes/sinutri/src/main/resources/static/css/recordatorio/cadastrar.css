@@ -3,14 +3,6 @@
 	width: 380px !important;
 }
 
-#sn-add-refeicao-button
-{
-	position: absolute;
-	right: -28px;
-	top: 26px;
-	color: #fff;
-}
-
 .sn-form-actions {
 	width: calc(100% - 30px);
 	float: right;
