@@ -9,7 +9,12 @@
 	<link rel="stylesheet" type="text/css" th:href="@{/css/material-date-picker.css}"/>
 	<link rel="stylesheet" type="text/css" th:href="@{/css/avaliacao-laboratorial/editar.css}"/>
 </head>
-
+<section layout:fragment="breadcrumbs">
+    <a th:href="@{/Nutricao/Buscar}" class="sn-breadcrumbs mdl-layout-title">SiNutri</a>
+    <a th:href="@{/Nutricao/Buscar}" class="sn-breadcrumbs mdl-layout-title">Buscar</a>
+    <a th:href="@{${'/Paciente/'+paciente.id}}" class="sn-breadcrumbs mdl-layout-title">Paciente</a>
+    <a class="mdl-layout-title sn-breadcrumbs">Visualizar Avaliação Laboratorial</a>
+</section>
 <section layout:fragment="conteudo">
 
 	<div class="mdl-grid">
