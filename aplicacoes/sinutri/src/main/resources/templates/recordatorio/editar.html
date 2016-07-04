@@ -23,7 +23,15 @@
 			<form action="#" 
 		    id="formAdicionarRecordatorio"
 		    method="post" 
-		    class="mdl-cell mdl-cell--2-offset mdl-cell--8-col mdl-card mdl-shadow--2dp" 
+		    class="sn-form 
+			    mdl-cell 
+			    mdl-cell--7-col-desktop 
+			    mdl-cell--1-offset-desktop 
+			    mdl-cell--8-col-tablet 
+			    mdl-cell--4-col-phone 
+			    mdl-grid 
+			    mdl-grid--no-spacing 
+			    sn-main-card" 
 		    th:action="@{/Paciente/__*{paciente.id}__/Recordatorio/__*{id}__/Editar}"
 		    th:object="${recordatorio}"
 		    accept-charset="utf-8">
@@ -33,320 +41,347 @@
 				<input type="hidden" th:field="*{nutricionista}"></input>
 				<input type="hidden" th:field="*{paciente}"></input>
 				
-				<div class="mdl-cell mdl-cell--8-col sn-padding--24">
+				<div id="titulo" class="mdl-cell mdl-cell--12-col sn-card sn-padding--48 mdl-color--teal">
 				
-					<div class="mdl-layout-title">
-						Editar Recordatório
+					<div class="mdl-layout-title mdl-color-text--white">
+						Cadastrar Recordatório
 					</div>
 					
+					<button type="button" 
+	   				class="mdl-button 
+	   				mdl-js-button 
+	   				mdl-button--fab 
+	   				mdl-js-ripple-effect 
+	   				mdl-button--colored 
+	   				mdl-color-text--white
+	   				sn-fab--bottom-right" 
+	   				id="sn-add-refeicao-button">
+	   				
+	   					<i class="material-icons">add</i>
+	   					
+	   				</button>
+					
 				</div>
 				
-				<div class="sn-form__hdivider"></div>
 				
-				<div class="sn-textfield mdl-cell mdl-cell--6-col">
-					<label class="sn-textfield__label" 
-					for="criadoEm">Data de criação</label> 
+				<div class="sn-card-top mdl-cell mdl-cell--12-col sn-card sn-padding--48 mdl-color--white mdl-grid">
+				
+					<div class="sn-textfield mdl-cell mdl-cell--6-col">
+						<label class="sn-textfield__label" 
+						for="criadoEm">Data de criação</label> 
+						
+						<input class="sn-textfield__input sn-date-picker" 
+						type="text" 
+						id="criadoEm" 
+						th:field="*{criadoEm}"/>
+					</div>
 					
-					<input class="sn-textfield__input sn-date-picker" 
-					type="text" 
-					id="criadoEm" 
-					th:field="*{criadoEm}"/>
-				</div>
-				
-				<div th:if="*{not #lists.isEmpty(refeicoes)}">
-				
-					<ul class="demo-list-three mdl-list sn-list-refeicoes mdl-color--grey-200">
+					<div class="sn-form__hdivider"></div>
 					
-						<li class="mdl-list__item mdl-list__item--three-line mdl-shadow--2dp sn-card sn-cloneable">
-						  	
-						  	<input type="hidden" th:field="*{refeicoes[0].hora}" class="sn-refeicao-input-hora" value="00:00"/>
-			    			<input type="hidden" th:field="*{refeicoes[0].descricao}" class="sn-refeicao-input-descricao" value="CAFEMANHA"/>
-			    			<input type="hidden" th:field="*{refeicoes[0].itens}" class="sn-refeicao-input-itens" value="das"/>
-			    			<input type="hidden" th:field="*{refeicoes[0].observacao}" class="sn-refeicao-input-observacao" value="akhggf"/>
-						  	
-						  	<span class="mdl-list__item-primary-content">
-						  	
-						  		<div class="mdl-grid mdl-grid--no-spacing">
+					<div th:if="*{not #lists.isEmpty(refeicoes)}" class="mdl-cell mdl-offset--6-col mdl-cell--12-col">
+						
+						<label class="sn-textfield__label" 
+						for="refeicoes">Refeições</label>
+						
+						<ul id="refeicoes" class="demo-list-three mdl-list sn-list-refeicoes mdl-color--grey-200">
+						
+							<li class="mdl-list__item mdl-list__item--three-line mdl-shadow--2dp sn-card sn-cloneable">
+							  	
+							  	<input type="hidden" th:field="*{refeicoes[0].hora}" class="sn-refeicao-input-hora" value="00:00"/>
+				    			<input type="hidden" th:field="*{refeicoes[0].descricao}" class="sn-refeicao-input-descricao" value="CAFEMANHA"/>
+				    			<input type="hidden" th:field="*{refeicoes[0].itens}" class="sn-refeicao-input-itens" value="das"/>
+				    			<input type="hidden" th:field="*{refeicoes[0].observacao}" class="sn-refeicao-input-observacao" value="akhggf"/>
+							  	
+							  	<span class="mdl-list__item-primary-content">
+							  	
+							  		<div class="mdl-grid mdl-grid--no-spacing">
+							  		
+								  		<div class="mdl-cell mdl-cell--6-col">
+								  		
+									    	<span>Hora</span>
+									    	
+									    	<span class="mdl-list__item-text-body sn-refeicao-hora">
+									      		Bryan Cranston played the role of Walter in Breaking Bad. He is also known
+									      		for playing Hal in Malcom in the Middle.
+								    		</span>
+								    		
+							    		</div>
+							    		
+								  		<div class="mdl-cell mdl-cell--6-col">
+								  		
+									    	<span>Itens</span>
+									    	
+									    	<span class="mdl-list__item-text-body sn-refeicao-itens">
+									      		Bryan Cranston played the role of Walter in Breaking Bad. He is also known
+									      		for playing Hal in Malcom in the Middle.
+								    		</span>
+								    		
+							    		</div>
+							    		
+							    		<div class="mdl-cell mdl-cell--6-col">
+							    		
+								    		<span>Descrição</span>
+								    		
+									    	<span class="mdl-list__item-text-body sn-refeicao-descricao">
+									      		Bryan Cranston played the role of Walter in Breaking Bad. He is also known
+									      		for playing Hal in Malcom in the Middle.
+								    		</span>
+								    		
+							    		</div>
+							    		
+							    		<div class="mdl-cell mdl-cell--6-col">
+							    		
+								    		<span>Observação</span>
+								    		
+									    	<span class="mdl-list__item-text-body sn-refeicao-observacao">
+									      		Bryan Cranston played the role of Walter in Breaking Bad. He is also known
+									      		for playing Hal in Malcom in the Middle.
+								    		</span>
+								    		
+							    		</div>
+							    		
+							  		</div>
+		
+						  		</span>
 						  		
-							  		<div class="mdl-cell mdl-cell--6-col">
-							  		
-								    	<span>Hora</span>
-								    	
-								    	<span class="mdl-list__item-text-body sn-refeicao-hora">
-								      		Bryan Cranston played the role of Walter in Breaking Bad. He is also known
-								      		for playing Hal in Malcom in the Middle.
-							    		</span>
-							    		
-						    		</div>
-						    		
-							  		<div class="mdl-cell mdl-cell--6-col">
-							  		
-								    	<span>Itens</span>
-								    	
-								    	<span class="mdl-list__item-text-body sn-refeicao-itens">
-								      		Bryan Cranston played the role of Walter in Breaking Bad. He is also known
-								      		for playing Hal in Malcom in the Middle.
-							    		</span>
-							    		
-						    		</div>
-						    		
-						    		<div class="mdl-cell mdl-cell--6-col">
-						    		
-							    		<span>Descrição</span>
-							    		
-								    	<span class="mdl-list__item-text-body sn-refeicao-descricao">
-								      		Bryan Cranston played the role of Walter in Breaking Bad. He is also known
-								      		for playing Hal in Malcom in the Middle.
-							    		</span>
-							    		
-						    		</div>
-						    		
-						    		<div class="mdl-cell mdl-cell--6-col">
-						    		
-							    		<span>Observação</span>
-							    		
-								    	<span class="mdl-list__item-text-body sn-refeicao-observacao">
-								      		Bryan Cranston played the role of Walter in Breaking Bad. He is also known
-								      		for playing Hal in Malcom in the Middle.
-							    		</span>
-							    		
-						    		</div>
-						    		
-						  		</div>
-	
-					  		</span>
-					  		
-					  		
-						  	<span class="mdl-list__item-secondary-content">
-						  	
-						   		<button type="button" class="mdl-button mdl-js-button mdl-button--icon sn-refeicao-editar">
-			    					
-			    					<i class="material-icons mdl-color-text--grey-700">mode_edit</i>
-			    					
-			    				</button>
-			    				
-			    			</span>
-			    			
-			    			<span class="mdl-list__item-secondary-content">
-			    			
-			    				<button type="button" class="mdl-button mdl-js-button mdl-button--icon sn-refeicao-duplicar">
-			    					
-			    					<i class="material-icons mdl-color-text--grey-700">content_copy</i>
-			    					
-			    				</button>
-			    				
-			    			</span>
-			    			
-			    			<span class="mdl-list__item-secondary-content">	
-			    			
-			    				<button type="button" class="mdl-button mdl-js-button mdl-button--icon sn-refeicao-remover">
-			    					
-			    					<i class="material-icons mdl-color-text--grey-700">close</i>
-			    					
-			    				</button>
-			    				
-						  	</span>
-						  	
-						</li>
-						
-						
-						
-						<li th:each="refeicao, state : ${recordatorio.refeicoes}" class="mdl-list__item mdl-list__item--three-line mdl-shadow--2dp sn-card sn-cloneable">
-						  	
-						  	<input type="hidden" th:field="*{refeicoes[__${state.index}__].hora}" class="sn-refeicao-input-hora" th:value="*{refeicoes[__${state.index}__].hora}" />
-			    			<input type="hidden" th:field="*{refeicoes[__${state.index}__].descricao}" class="sn-refeicao-input-descricao" th:value="*{refeicoes[__${state.index}__].descricao}"/>
-			    			<input type="hidden" th:field="*{refeicoes[__${state.index}__].itens}" class="sn-refeicao-input-itens" th:value="*{refeicoes[__${state.index}__].itens}"/>
-			    			<input type="hidden" th:field="*{refeicoes[__${state.index}__].observacao}" class="sn-refeicao-input-observacao" th:value="*{refeicoes[__${state.index}__].observacao}" />
-						  	
-						  	<span class="mdl-list__item-primary-content">
-						  	
-						  		<div class="mdl-grid mdl-grid--no-spacing">
 						  		
-							  		<div class="mdl-cell mdl-cell--6-col">
+							  	<span class="mdl-list__item-secondary-content">
+							  	
+							   		<button type="button" class="mdl-button mdl-js-button mdl-button--icon sn-refeicao-editar">
+				    					
+				    					<i class="material-icons mdl-color-text--grey-700">mode_edit</i>
+				    					
+				    				</button>
+				    				
+				    			</span>
+				    			
+				    			<span class="mdl-list__item-secondary-content">
+				    			
+				    				<button type="button" class="mdl-button mdl-js-button mdl-button--icon sn-refeicao-duplicar">
+				    					
+				    					<i class="material-icons mdl-color-text--grey-700">content_copy</i>
+				    					
+				    				</button>
+				    				
+				    			</span>
+				    			
+				    			<span class="mdl-list__item-secondary-content">	
+				    			
+				    				<button type="button" class="mdl-button mdl-js-button mdl-button--icon sn-refeicao-remover">
+				    					
+				    					<i class="material-icons mdl-color-text--grey-700">close</i>
+				    					
+				    				</button>
+				    				
+							  	</span>
+							  	
+							</li>
+							
+							
+							
+							<li th:each="refeicao, state : ${recordatorio.refeicoes}" class="mdl-list__item mdl-list__item--three-line mdl-shadow--2dp sn-card sn-cloneable">
+							  	
+							  	<input type="hidden" th:field="*{refeicoes[__${state.index}__].hora}" class="sn-refeicao-input-hora" th:value="*{refeicoes[__${state.index}__].hora}" />
+				    			<input type="hidden" th:field="*{refeicoes[__${state.index}__].descricao}" class="sn-refeicao-input-descricao" th:value="*{refeicoes[__${state.index}__].descricao}"/>
+				    			<input type="hidden" th:field="*{refeicoes[__${state.index}__].itens}" class="sn-refeicao-input-itens" th:value="*{refeicoes[__${state.index}__].itens}"/>
+				    			<input type="hidden" th:field="*{refeicoes[__${state.index}__].observacao}" class="sn-refeicao-input-observacao" th:value="*{refeicoes[__${state.index}__].observacao}" />
+							  	
+							  	<span class="mdl-list__item-primary-content">
+							  	
+							  		<div class="mdl-grid mdl-grid--no-spacing">
 							  		
-								    	<span>Hora</span>
-								    	
-								    	<span class="mdl-list__item-text-body sn-refeicao-hora"
-								    	th:text="*{ #dates.format(refeicoes[__${state.index}__].hora, 'HH:mm') }">
-								      		Bryan Cranston played the role of Walter in Breaking Bad. He is also known
-								      		for playing Hal in Malcom in the Middle.
-							    		</span>
+								  		<div class="mdl-cell mdl-cell--6-col">
+								  		
+									    	<span>Hora</span>
+									    	
+									    	<span class="mdl-list__item-text-body sn-refeicao-hora"
+									    	th:text="*{ #dates.format(refeicoes[__${state.index}__].hora, 'HH:mm') }">
+									      		Bryan Cranston played the role of Walter in Breaking Bad. He is also known
+									      		for playing Hal in Malcom in the Middle.
+								    		</span>
+								    		
+							    		</div>
 							    		
-						    		</div>
-						    		
-							  		<div class="mdl-cell mdl-cell--6-col">
-							  		
-								    	<span>Itens</span>
-								    	
-								    	<span class="mdl-list__item-text-body sn-refeicao-itens"
-								    	th:text="${#strings.length(refeicao.itens) > 27}? ${#strings.append(#strings.substring(refeicao.itens, 0, 26), '...')} : ${refeicao.itens}">
-								      		Bryan Cranston played the role of Walter in Breaking Bad. He is also known
-								      		for playing Hal in Malcom in the Middle.
-							    		</span>
+								  		<div class="mdl-cell mdl-cell--6-col">
+								  		
+									    	<span>Itens</span>
+									    	
+									    	<span class="mdl-list__item-text-body sn-refeicao-itens"
+									    	th:text="${#strings.length(refeicao.itens) > 27}? ${#strings.append(#strings.substring(refeicao.itens, 0, 26), '...')} : ${refeicao.itens}">
+									      		Bryan Cranston played the role of Walter in Breaking Bad. He is also known
+									      		for playing Hal in Malcom in the Middle.
+								    		</span>
+								    		
+							    		</div>
 							    		
-						    		</div>
-						    		
-						    		<div class="mdl-cell mdl-cell--6-col">
-						    		
-							    		<span>Descrição</span>
+							    		<div class="mdl-cell mdl-cell--6-col">
 							    		
-								    	<span class="mdl-list__item-text-body sn-refeicao-descricao"
-								    	th:text="*{refeicoes[__${state.index}__].descricao.nome}">
-								      		Bryan Cranston played the role of Walter in Breaking Bad. He is also known
-								      		for playing Hal in Malcom in the Middle.
-							    		</span>
+								    		<span>Descrição</span>
+								    		
+									    	<span class="mdl-list__item-text-body sn-refeicao-descricao"
+									    	th:text="*{refeicoes[__${state.index}__].descricao.nome}">
+									      		Bryan Cranston played the role of Walter in Breaking Bad. He is also known
+									      		for playing Hal in Malcom in the Middle.
+								    		</span>
+								    		
+							    		</div>
 							    		
-						    		</div>
-						    		
-						    		
-						    		<div class="mdl-cell mdl-cell--6-col">
-						    		
-							    		<span>Observação</span>
 							    		
-								    	<span class="mdl-list__item-text-body sn-refeicao-observacao"
-								    	th:text="${#strings.length(refeicao.observacao) > 27}? ${#strings.append(#strings.substring(refeicao.observacao, 0, 26), '...')} : ${refeicao.observacao}">
-								      		Bryan Cranston played the role of Walter in Breaking Bad. He is also known
-								      		for playing Hal in Malcom in the Middle.
-							    		</span>
+							    		<div class="mdl-cell mdl-cell--6-col">
 							    		
-						    		</div>
+								    		<span>Observação</span>
+								    		
+									    	<span class="mdl-list__item-text-body sn-refeicao-observacao"
+									    	th:text="${#strings.length(refeicao.observacao) > 27}? ${#strings.append(#strings.substring(refeicao.observacao, 0, 26), '...')} : ${refeicao.observacao}">
+									      		Bryan Cranston played the role of Walter in Breaking Bad. He is also known
+									      		for playing Hal in Malcom in the Middle.
+								    		</span>
+								    		
+							    		</div>
+							    		
+							  		</div>
+							  	
+							  	
 						    		
-						  		</div>
-						  	
-						  	
-					    		
-					  		</span>
-	
-						  	<span class="mdl-list__item-secondary-content">
-						  	
-						   		<button type="button" class="mdl-button mdl-js-button mdl-button--icon sn-refeicao-editar">
-			    					
-			    					<i class="material-icons mdl-color-text--grey-700">mode_edit</i>
-			    					
-			    				</button>
-			    				
-			    			</span>
-			    			
-			    			<span class="mdl-list__item-secondary-content">
-			    			
-			    				<button type="button" class="mdl-button mdl-js-button mdl-button--icon sn-refeicao-duplicar">
-			    					
-			    					<i class="material-icons mdl-color-text--grey-700">content_copy</i>
-			    					
-			    				</button>
-			    			</span>
-			    			
-			    			<span class="mdl-list__item-secondary-content">	
-			    				
-			    				<button type="button" class="mdl-button mdl-js-button mdl-button--icon sn-refeicao-remover">
-			    					
-			    					<i class="material-icons mdl-color-text--grey-700">close</i>
-			    					
-			    				</button>
-			    				
-						  	</span>
-						  	
-						</li>
-						
-					</ul>
-				</div>
-				
-				<div th:if="*{#lists.isEmpty(refeicoes)}">
-					<ul class="demo-list-three mdl-list sn-list-refeicoes mdl-color--grey-200">
+						  		</span>
+		
+							  	<span class="mdl-list__item-secondary-content">
+							  	
+							   		<button type="button" class="mdl-button mdl-js-button mdl-button--icon sn-refeicao-editar">
+				    					
+				    					<i class="material-icons mdl-color-text--grey-700">mode_edit</i>
+				    					
+				    				</button>
+				    				
+				    			</span>
+				    			
+				    			<span class="mdl-list__item-secondary-content">
+				    			
+				    				<button type="button" class="mdl-button mdl-js-button mdl-button--icon sn-refeicao-duplicar">
+				    					
+				    					<i class="material-icons mdl-color-text--grey-700">content_copy</i>
+				    					
+				    				</button>
+				    			</span>
+				    			
+				    			<span class="mdl-list__item-secondary-content">	
+				    				
+				    				<button type="button" class="mdl-button mdl-js-button mdl-button--icon sn-refeicao-remover">
+				    					
+				    					<i class="material-icons mdl-color-text--grey-700">close</i>
+				    					
+				    				</button>
+				    				
+							  	</span>
+							  	
+							</li>
+							
+						</ul>
+					</div>
 					
-						<li class="mdl-list__item mdl-list__item--three-line mdl-shadow--2dp sn-card sn-cloneable">
-						  	
-						  	<input type="hidden" th:field="*{refeicoes[0].hora}" class="sn-refeicao-input-hora" value="00:00"/>
-			    			<input type="hidden" th:field="*{refeicoes[0].descricao}" class="sn-refeicao-input-descricao" value="CAFEMANHA"/>
-			    			<input type="hidden" th:field="*{refeicoes[0].itens}" class="sn-refeicao-input-itens" value="das"/>
-			    			<input type="hidden" th:field="*{refeicoes[0].observacao}" class="sn-refeicao-input-observacao" value="akhggf"/>
-						  	
-						  	<span class="mdl-list__item-primary-content">
-						  	
-						  		<div class="mdl-grid mdl-grid--no-spacing">
-						  		
-							  		<div class="mdl-cell mdl-cell--6-col">
-							  		
-								    	<span>Hora</span>
-								    	
-								    	<span class="mdl-list__item-text-body sn-refeicao-hora">
-								      		Bryan Cranston played the role of Walter in Breaking Bad. He is also known
-								      		for playing Hal in Malcom in the Middle.
-							    		</span>
-							    		
-						    		</div>
-						    		
-							  		<div class="mdl-cell mdl-cell--6-col">
-							  		
-								    	<span>Itens</span>
-								    	
-								    	<span class="mdl-list__item-text-body sn-refeicao-itens">
-								      		Bryan Cranston played the role of Walter in Breaking Bad. He is also known
-								      		for playing Hal in Malcom in the Middle.
-							    		</span>
-							    		
-						    		</div>
-						    		
-						    		<div class="mdl-cell mdl-cell--6-col">
-						    		
-							    		<span>Descrição</span>
-							    		
-								    	<span class="mdl-list__item-text-body sn-refeicao-descricao">
-								      		Bryan Cranston played the role of Walter in Breaking Bad. He is also known
-								      		for playing Hal in Malcom in the Middle.
-							    		</span>
-							    		
-						    		</div>
-						    		
-						    		<div class="mdl-cell mdl-cell--6-col">
-						    		
-							    		<span>Observação</span>
-							    		
-								    	<span class="mdl-list__item-text-body sn-refeicao-observacao">
-								      		Bryan Cranston played the role of Walter in Breaking Bad. He is also known
-								      		for playing Hal in Malcom in the Middle.
-							    		</span>
-							    		
-						    		</div>
-						    		
-						  		</div>
-	
-					  		</span>
-					  		
-					  		
-						  	<span class="mdl-list__item-secondary-content">
-						  	
-						   		<button type="button" class="mdl-button mdl-js-button mdl-button--icon sn-refeicao-editar">
-			    					
-			    					<i class="material-icons mdl-color-text--grey-700">mode_edit</i>
-			    					
-			    				</button>
-			    				
-			    			</span>
-			    			
-			    			<span class="mdl-list__item-secondary-content">
-			    			
-			    				<button type="button" class="mdl-button mdl-js-button mdl-button--icon sn-refeicao-duplicar">
-			    					
-			    					<i class="material-icons mdl-color-text--grey-700">content_copy</i>
-			    					
-			    				</button>
-			    				
-			    			</span>
-			    			
-			    			<span class="mdl-list__item-secondary-content">	
-			    			
-			    				<button type="button" class="mdl-button mdl-js-button mdl-button--icon sn-refeicao-remover">
-			    					
-			    					<i class="material-icons mdl-color-text--grey-700">close</i>
-			    					
-			    				</button>
-			    				
-						  	</span>
-						  	
-						</li>
+					<div th:if="*{#lists.isEmpty(refeicoes)}" class="mdl-cell mdl-offset--6-col mdl-cell--12-col">
+					
+						<label class="sn-textfield__label" 
+						for="refeicoes">Refeições</label>
+					
+						<ul id="refeicoes" class="demo-list-three mdl-list sn-list-refeicoes mdl-color--grey-200">
 						
-					</ul>
+							<li class="mdl-list__item mdl-list__item--three-line mdl-shadow--2dp sn-card sn-cloneable">
+							  	
+							  	<input type="hidden" th:field="*{refeicoes[0].hora}" class="sn-refeicao-input-hora" value="00:00"/>
+				    			<input type="hidden" th:field="*{refeicoes[0].descricao}" class="sn-refeicao-input-descricao" value="CAFEMANHA"/>
+				    			<input type="hidden" th:field="*{refeicoes[0].itens}" class="sn-refeicao-input-itens" value="das"/>
+				    			<input type="hidden" th:field="*{refeicoes[0].observacao}" class="sn-refeicao-input-observacao" value="akhggf"/>
+							  	
+							  	<span class="mdl-list__item-primary-content">
+							  	
+							  		<div class="mdl-grid mdl-grid--no-spacing">
+							  		
+								  		<div class="mdl-cell mdl-cell--6-col">
+								  		
+									    	<span>Hora</span>
+									    	
+									    	<span class="mdl-list__item-text-body sn-refeicao-hora">
+									      		Bryan Cranston played the role of Walter in Breaking Bad. He is also known
+									      		for playing Hal in Malcom in the Middle.
+								    		</span>
+								    		
+							    		</div>
+							    		
+								  		<div class="mdl-cell mdl-cell--6-col">
+								  		
+									    	<span>Itens</span>
+									    	
+									    	<span class="mdl-list__item-text-body sn-refeicao-itens">
+									      		Bryan Cranston played the role of Walter in Breaking Bad. He is also known
+									      		for playing Hal in Malcom in the Middle.
+								    		</span>
+								    		
+							    		</div>
+							    		
+							    		<div class="mdl-cell mdl-cell--6-col">
+							    		
+								    		<span>Descrição</span>
+								    		
+									    	<span class="mdl-list__item-text-body sn-refeicao-descricao">
+									      		Bryan Cranston played the role of Walter in Breaking Bad. He is also known
+									      		for playing Hal in Malcom in the Middle.
+								    		</span>
+								    		
+							    		</div>
+							    		
+							    		<div class="mdl-cell mdl-cell--6-col">
+							    		
+								    		<span>Observação</span>
+								    		
+									    	<span class="mdl-list__item-text-body sn-refeicao-observacao">
+									      		Bryan Cranston played the role of Walter in Breaking Bad. He is also known
+									      		for playing Hal in Malcom in the Middle.
+								    		</span>
+								    		
+							    		</div>
+							    		
+							  		</div>
+		
+						  		</span>
+						  		
+						  		
+							  	<span class="mdl-list__item-secondary-content">
+							  	
+							   		<button type="button" class="mdl-button mdl-js-button mdl-button--icon sn-refeicao-editar">
+				    					
+				    					<i class="material-icons mdl-color-text--grey-700">mode_edit</i>
+				    					
+				    				</button>
+				    				
+				    			</span>
+				    			
+				    			<span class="mdl-list__item-secondary-content">
+				    			
+				    				<button type="button" class="mdl-button mdl-js-button mdl-button--icon sn-refeicao-duplicar">
+				    					
+				    					<i class="material-icons mdl-color-text--grey-700">content_copy</i>
+				    					
+				    				</button>
+				    				
+				    			</span>
+				    			
+				    			<span class="mdl-list__item-secondary-content">	
+				    			
+				    				<button type="button" class="mdl-button mdl-js-button mdl-button--icon sn-refeicao-remover">
+				    					
+				    					<i class="material-icons mdl-color-text--grey-700">close</i>
+				    					
+				    				</button>
+				    				
+							  	</span>
+							  	
+							</li>
+							
+						</ul>
+						
+					</div>
+					
 				</div>
 		
 			    <div id="sn-add-refeicao-modal">
@@ -424,14 +459,6 @@
 	   				</div>
 			    	
 			    </div>
-			    
-			    <button type="button" 
-   				class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored" 
-   				id="sn-add-refeicao-button">
-   				
-   					<i class="material-icons">add</i>
-   					
-   				</button>
    				
    				<div class="sn-form-actions">
    				
@@ -450,6 +477,68 @@
 				</div> 
 				
 		    </form>
+		    
+		    <div class="mdl-cell
+	              mdl-cell--3-col-desktop
+	              mdl-cell--8-col-tablet
+	              mdl-cell--4-col-phone">
+	
+	              <div class="sn-card sn-padding--48">
+	                      <div class="mdl-layout-title">Informações do Paciente</div>
+	              </div>
+	              
+	              <div class="sn-card sn-padding--48">
+	              		  <!-- Text atribute -->
+	                      <div th:if="${paciente.pessoa.nome != null}" class="sn-attribute mdl-cell mdl-cell--6-col">
+	                              <div class="sn-attribute__title">Nome</div>
+	                              <div class="sn-attribute__value" 
+	                              th:text="${paciente.pessoa.nome}"></div>
+	                      </div>
+	                      
+	                      <!-- Text atribute -->
+	                      <div th:if="${paciente.pessoa.sexo != null}" class="sn-attribute mdl-cell mdl-cell--6-col">
+	                              <div class="sn-attribute__title">Sexo</div>
+	                              <div class="sn-attribute__value" th:text="${paciente.pessoa.sexo}"></div>
+	                      </div>
+	                      
+	                      <!-- Text atribute -->
+	                      <div th:if="${paciente.pessoa.idade != null}" class="sn-attribute mdl-cell mdl-cell--6-col">
+	                              <div class="sn-attribute__title">Idade</div>
+	                              <div class="sn-attribute__value" th:text="${paciente.pessoa.idade}"></div>
+	                      </div>
+	                      
+	                      <!-- Text atribute -->
+	                      <div th:if="${paciente.pessoa.cpf != null}" class="sn-attribute mdl-cell mdl-cell--6-col">
+	                              <div class="sn-attribute__title">CPF</div>
+	                              <div class="sn-attribute__value" th:text="${paciente.pessoa.cpf}"></div>
+	                      </div>
+	                      
+	                      <!-- Text atribute -->
+	                      <div th:if="${paciente.pessoa.telefone != null}" class="sn-attribute mdl-cell mdl-cell--6-col">
+	                              <div class="sn-attribute__title">Telefone</div>
+	                              <div class="sn-attribute__value" th:text="${paciente.pessoa.telefone}"></div>
+	                      </div>	      
+	                      
+	                      <!-- Text atribute -->
+	                      <div th:if="${paciente.pessoa.ocupacaoOuCargo != null}" class="sn-attribute mdl-cell mdl-cell--6-col">
+	                              <div class="sn-attribute__title">Cargo/Ocupação</div>
+	                              <div class="sn-attribute__value" th:text="${paciente.pessoa.ocupacaoOuCargo}"></div>
+	                      </div>                
+
+	                      <!-- Text atribute -->
+	                      <div th:if="${paciente.pessoa.email != null}" class="sn-attribute mdl-cell mdl-cell--6-col">
+	                              <div class="sn-attribute__title">Email</div>
+	                              <div class="sn-attribute__value" th:text="${paciente.pessoa.email}"></div>
+	                      </div>
+	                      
+	                      <!-- Text atribute -->
+	                      <div th:if="${paciente.pessoa.vinculo !=  null}" class="sn-attribute mdl-cell mdl-cell--6-col">
+	                              <div class="sn-attribute__title">Vinculo</div>
+	                              <div class="sn-attribute__value" th:text="${paciente.pessoa.vinculo}"></div>
+	                      </div>
+	              </div>
+	
+	      </div>
 		    
 		    <div id="sn-confirma-cancelar-modal">
 				Você realmente deseja descartar as alterações?
