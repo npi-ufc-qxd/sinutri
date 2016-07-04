@@ -78,7 +78,7 @@
 							<a th:href="@{${'/Paciente/' + paciente.id + '/Anamnese'}}" class="sn-card-add mdl-button mdl-button--raised mdl-js-button mdl-color-text--white mdl-js-ripple-effect sn-float--right mdl-color--red-500">ADICIONAR</a>
 						</div>
 
-						<div id="anamneses" class="sn-card-list-container mdl-cell mdl-cell--12-col">
+						<div th:id="anamneses" class="sn-card-list-container mdl-cell mdl-cell--12-col">
 							<ul class="sn-card-list mdl-list list">
 								<li th:each="anamnese,iterationStatus : ${paciente.anamneses}" class="sn-card-list__item mdl-list__item mdl-list__item--one-line mdl-color--grey-200">
 									<span class="mdl-list__item-primary-content">
@@ -113,7 +113,7 @@
 							<a th:href="@{${'/Paciente/' + paciente.id + '/Antropometria'}}" class="sn-card-add mdl-button mdl-button--raised mdl-js-button mdl-color-text--white mdl-js-ripple-effect sn-float--right mdl-color--purple-500">ADICIONAR</a>
 						</div>
 
-						<div id="antropometria" class="sn-card-list-container mdl-cell mdl-cell--12-col">
+						<div th:id="avaliacoesAntropometricas" class="sn-card-list-container mdl-cell mdl-cell--12-col">
 							<ul class="sn-card-list mdl-list list">
 								<li th:each="avaliacaoAntropometrica,iterationStatus : ${paciente.avaliacoesAntropometricas}" class="sn-card-list__item mdl-list__item mdl-list__item--one-line mdl-color--grey-200">
 									<span class="mdl-list__item-primary-content">
@@ -146,7 +146,7 @@
 							<a th:href="@{${'/Paciente/' + paciente.id + '/Recordatorio'}}" class="sn-card-add mdl-button mdl-button--raised mdl-js-button mdl-color-text--white mdl-js-ripple-effect sn-float--right mdl-color--indigo-500">ADICIONAR</a>
 						</div>
 
-						<div id="recordatorios" class="sn-card-list-container mdl-cell mdl-cell--12-col">
+						<div th:id="recordatorios" class="sn-card-list-container mdl-cell mdl-cell--12-col">
 							<ul class="sn-card-list mdl-list list">
 								<li th:each="recordatorio,iterationStatus : ${paciente.recordatorios}" class="sn-card-list__item mdl-list__item mdl-list__item--one-line mdl-color--grey-200">
 									<span class="mdl-list__item-primary-content">
@@ -180,7 +180,7 @@
 							<a th:href="@{${'/Paciente/' + paciente.id + '/Prescricao'}}" class="sn-card-add mdl-button mdl-button--raised mdl-js-button mdl-color-text--white mdl-js-ripple-effect sn-float--right mdl-color--blue-500">ADICIONAR</a>
 						</div>
 
-						<div id="prescricoes" class="sn-card-list-container mdl-cell mdl-cell--12-col">
+						<div th:id="prescricoes" class="sn-card-list-container mdl-cell mdl-cell--12-col">
 							<ul class="sn-card-list mdl-list list">
 								<li th:each="prescricao,iterationStatus : ${paciente.prescricoes}" class="sn-card-list__item mdl-list__item mdl-list__item--one-line mdl-color--grey-200">
 									<span class="mdl-list__item-primary-content">
@@ -250,10 +250,10 @@
 						</div>
 
 						<div class="sn-card-list-container mdl-cell mdl-cell--12-col">
-							<ul class="sn-card-list mdl-list">
+							<ul class="sn-card-list mdl-list list">
 								<li class="sn-card-list__item mdl-list__item mdl-list__item--one-line mdl-color--grey-200">
 									<span class="mdl-list__item-primary-content">
-										<span class="sn-card-list__item-text">dd/MM/yyyy</span>
+										<span class="sn-card-list__item-text timestamp">dd/MM/yyyy</span>
 									</span>
 									<span class="mdl-list__item-secondary-content">
 										<button id="sn-avaliacao-laboratorial-0" class="mdl-button mdl-js-button mdl-button--icon">
@@ -285,10 +285,10 @@
 						</div>
 
 						<div class="sn-card-list-container mdl-cell mdl-cell--12-col">
-							<ul class="sn-card-list mdl-list">
+							<ul class="sn-card-list mdl-list list">
 								<li class="sn-card-list__item mdl-list__item mdl-list__item--one-line mdl-color--grey-200">
 									<span class="mdl-list__item-primary-content">
-										<span class="sn-card-list__item-text">dd/MM/yyyy</span>
+										<span class="sn-card-list__item-text timestamp">dd/MM/yyyy</span>
 									</span>
 									<span class="mdl-list__item-secondary-content">
 										<button id="sn-plano-alimentar-0" class="mdl-button mdl-js-button mdl-button--icon">
@@ -327,9 +327,12 @@
 				};
 
 		var anamnese = new List('anamneses', options).sort('timestamp', { order: "desc" });
+		var avaliacaoAntropometrica = new List('avaliacoesAntropometricas', options).sort('timestamp', { order: "desc" });
 		var recordatorio = new List('recordatorios', options).sort('timestamp', { order: "desc" });
 		var prescricao = new List('prescricoes', options).sort('timestamp', { order: "desc" });
 		var inqueritoAlimentar = new List('inqueritosAlimentares', options).sort('timestamp', { order: "desc" });
+		var avaliacaoLaboratorial = new List('avaliacoesLaboratoriais', options).sort('timestamp', { order: "desc" });
+		var planoAlimentar = new List('planosAlimentares', options).sort('timestamp', { order: "desc" });
 		
 		</script>
 		     
