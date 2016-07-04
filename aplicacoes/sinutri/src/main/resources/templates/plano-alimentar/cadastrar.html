@@ -172,7 +172,10 @@
 						    		</select>
 					    		</div>
 					    		
-					    		<div class="mdl-cell mdl-cell--4-col">
+					    		<div class="mdl-cell mdl-cell--8-col">
+					    		</div>
+				    			
+				    			<div class="mdl-cell mdl-cell--8-col">
 						    		<label>Alimento:</label>
 						    		<select id="alimento-nome" class="sn-selectfield__select select2" th:attr="data-url=@{/Paciente/__${idPaciente}__/PlanoAlimentar/Alimentos/?fonte=}" >
 						    			<option value="">Escolha um alimento</option>
@@ -183,6 +186,7 @@
 						    		<label>Quantidade:</label>
 						    		<input id="alimento-quantidade" type="number" min="0" max="999999" class="sn-textfield__input" step="0.01"/>
 					    		</div>
+					    		
 					    		<div class="mdl-cell mdl-cell--1-col">
 						    		<button id="botaoAdicionarAlimento" class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-button--colored mdl-color-text--white">
 									  <i class="material-icons">add</i>

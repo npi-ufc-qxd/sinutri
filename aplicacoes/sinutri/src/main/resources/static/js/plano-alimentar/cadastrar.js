@@ -160,7 +160,8 @@ $(function()
 			$.getJSON(url, function(data, status){
 				alimento_nome.empty();
 				alimento_nome.select2({
-					 'data' : data
+					 'data' : data,
+					 'dropdownParent': $("#sn-add-refeicao-modal")
 				});
 				
 			});
