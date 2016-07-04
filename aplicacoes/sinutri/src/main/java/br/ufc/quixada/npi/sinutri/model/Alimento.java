@@ -58,9 +58,6 @@ public class Alimento {
 	@Enumerated(EnumType.STRING)
 	private FonteAlimento fonte;
 	
-	@ManyToOne
-	private PorcaoAlimento porcaoAlimentar;
-	
 	@OneToMany
 	@JoinColumn(name = "alimento_id")
 	private List<MedidaCaseira> medidasCaseira;
@@ -73,14 +70,6 @@ public class Alimento {
 		this.grupo = grupo;
 	}
 	
-	public PorcaoAlimento getPorcaoAlimentar() {
-		return porcaoAlimentar;
-	}
-
-	public void setPorcaoAlimentar(PorcaoAlimento porcaoAlimentar) {
-		this.porcaoAlimentar = porcaoAlimentar;
-	}
-
 	public Long getId() {
 		return id;
 	}

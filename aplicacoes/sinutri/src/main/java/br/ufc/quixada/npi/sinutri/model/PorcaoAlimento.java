@@ -1,7 +1,5 @@
 package br.ufc.quixada.npi.sinutri.model;
 
-import java.util.List;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -19,8 +17,8 @@ public class PorcaoAlimento {
 	@ManyToOne
 	private RefeicaoPlanoAlimentar refeicaoPlanoAlimentar;
 	
-	@OneToMany(mappedBy = "porcaoAlimentar")
-	private List<Alimento> alimentos;
+	@OneToMany
+	private Alimento alimento;
 	
 	private Integer quantidade;
 	
@@ -38,14 +36,6 @@ public class PorcaoAlimento {
 
 	public void setRefeicaoPlanoAlimentar(RefeicaoPlanoAlimentar refeicaoPlanoAlimentar) {
 		this.refeicaoPlanoAlimentar = refeicaoPlanoAlimentar;
-	}
-
-	public List<Alimento> getAlimentos() {
-		return alimentos;
-	}
-
-	public void setAlimentos(List<Alimento> alimentos) {
-		this.alimentos = alimentos;
 	}
 
 	public Integer getQuantidade() {
