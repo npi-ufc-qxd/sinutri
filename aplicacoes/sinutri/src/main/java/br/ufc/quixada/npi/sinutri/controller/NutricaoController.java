@@ -29,7 +29,7 @@ public class NutricaoController {
 		if(!buscarPacienteExterno)
 			model.addAttribute("usuarios", usuarioService.getByCpfOrNome(busca));	
 		else
-			model.addAttribute("usuarios", pacienteService.buscarPacientePorCpfOuNome(busca));
+			model.addAttribute("pacientes", pacienteService.buscarPacientePorCpfOuNome(busca));
 		
 		model.addAttribute("ultimaBusca", busca);
 
