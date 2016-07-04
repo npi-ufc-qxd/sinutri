@@ -36,7 +36,9 @@
 			<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header mdl-color--grey-300">
 				<header class="mdl-layout__header">
 					<div class="mdl-layout__header-row">
-						<span class="mdl-layout-title">SiNutri</span>
+						<a th:href="@{/Nutricao/Buscar}" class="mdl-layout-title">SiNutri</a>
+						<section layout:fragment="breadcrumbs"></section>
+						
 						<div class="mdl-layout-spacer"></div>
 
 						<button id="sn-menu-account" class="mdl-button mdl-js-button mdl-button--icon"><i class="material-icons">person</i></button>
@@ -54,6 +56,8 @@
 			<div class="sn-main__foreground"></div>
 		</div>
 	</div>
+	
+	<div class="sn-foreground"></div>
 	
 	<div th:if="${mensagens != null}"  th:each="mensagem : ${mensagens}" class="sn-toast" th:attr="data-type=${mensagem.tipo},data-priority=${mensagem.prioridade}" th:text="${mensagem.texto}"></div>
 
