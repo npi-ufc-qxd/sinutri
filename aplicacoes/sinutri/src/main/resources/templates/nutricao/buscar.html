@@ -17,19 +17,26 @@
 			mdl-cell--6-col-tablet mdl-cell--1-offset-tablet
 			mdl-cell--4-col-phone
 			mdl-shadow--2dp mdl-color--white">
-
-			<div class="sn-search">
-
-				<div class="mdl-textfield mdl-js-textfield sn-search__box">
-					<form id="formBuscar" th:action="@{/Nutricao/Buscar}" th:method="post">
-						<input id="sn-search__input" class="mdl-textfield__input sn-search__input" name="busca" th:value="${ultimaBusca}"></input>
+			
+			<form id="formBuscar" th:action="@{/Nutricao/Buscar}" th:method="post">
+				<div class="sn-search">				
+					<div class="mdl-textfield mdl-js-textfield sn-search__box">
+						<input id="sn-search__input" class="mdl-textfield__input sn-search__input" name="busca" th:value="${ultimaBusca}"></input>						
 						<label class="mdl-textfield__label" for="sn-search__input">Buscar pacientes...</label>
-						<i id="botaoPesquisar" class="sn-search__icon material-icons cursor_pointer">search</i>
-					</form>
-				</div>
-
-			</div>
-
+						<i id="botaoPesquisar" class="sn-search__icon material-icons cursor_pointer">search</i>												
+					</div>
+					<label
+						class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect mdl-cell mdl-cell--12-col"
+						for="checkPacienteExterno"> 
+						<input type="checkbox"	id="checkPacienteExterno" 
+							th:name="buscarPacienteExterno" class="mdl-checkbox__input" /> 
+						<span class="mdl-checkbox__label">Buscar Paciente Externo</span>
+					</label>
+				</div>				
+			</form>
+			
+			
+			
 			<div class="sn-search-actions">
 
 				<div class="mdl-layout-spacer"></div>
@@ -37,6 +44,7 @@
 				<button id="sn-search-actions__entries" class="sn-search-actions__entries mdl-button mdl-button--accent mdl-js-button mdl-js-ripple-effect">
 					<i class="material-icons mdl-list__item-icon mdl-color-text--accent">arrow_drop_down</i>Mostrando <span class="sn-search-actions__entries-value"></span> resultados
 				</button>
+				
 
 				<ul class="sn-show-entries__list mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect" for="sn-search-actions__entries">
 					<li class="mdl-menu__item">10</li>
