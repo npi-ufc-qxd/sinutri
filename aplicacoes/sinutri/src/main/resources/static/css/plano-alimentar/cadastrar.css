@@ -3,14 +3,6 @@
 	width: 700px !important;
 }
 
-#sn-add-refeicao-button
-{
-	position: absolute;
-	right: -28px;
-	top: 26px;
-	color: #fff;
-}
-
 .sn-form-actions {
 	width: calc(100% - 30px);
 	float: right;
@@ -24,16 +16,26 @@
 	overflow: visible;
 }
 
-table
-{
-	width: 100%;
-	box-shadow: none !important;
+.mdl-list__item-primary-content {
+	height: auto !important;
 }
 
-table th:nth-child(2), table td:nth-child(2) {
-	padding-left: 24px !important; 
-} 
+.mdl-list__item {
+	height: auto !important;
+	margin-bottom: 8px;
+}
 
-table th:last-child, table td:last-child {
-	padding-right: 24px !important; 
+.mdl-list__item-text-body {
+	height: auto !important;
+}
+
+.mdl-list__item-secondary-content {
+	height: auto !important;
+}
+
+.sn-list-refeicoes {
+	
+	padding: 16px;
+	margin: 16px;
+		
 }

@@ -21,6 +21,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 
+import br.ufc.quixada.npi.ldap.model.Usuario;
+import br.ufc.quixada.npi.ldap.service.UsuarioService;
 import br.ufc.quixada.npi.sinutri.model.Alimento;
 import br.ufc.quixada.npi.sinutri.model.Anamnese;
 import br.ufc.quixada.npi.sinutri.model.AvaliacaoAntropometrica;
@@ -50,14 +52,17 @@ import br.ufc.quixada.npi.sinutri.service.PessoaService;
 public class PacienteController {
 	
 	@Inject
-	private ConsultaService consultaService;
-	
-	@Inject
 	private PacienteService pacienteService;
 	
 	@Inject
 	private PessoaService pessoaService;
+	
+	@Inject
+	private UsuarioService usuarioService;
 
+	@Inject
+	private ConsultaService consultaService;
+	
 	@RequestMapping(value= "/{idPaciente}/InqueritoAlimentar", method = RequestMethod.GET)
 	public String formAdicionarInqueritoAlimentar(Model model, @PathVariable("idPaciente") Long idPaciente, RedirectAttributes redirectAttributes){
 		Paciente paciente =  pacienteService.buscarPacientePorId(idPaciente);
@@ -256,9 +261,10 @@ public class PacienteController {
 	@RequestMapping(value= {"/{idPaciente}/Antropometria"}, method = RequestMethod.GET)
 	public String formAdicionarAvaliacaoAntropometrica(@PathVariable("idPaciente") Long idPaciente, Model model, RedirectAttributes redirectAttributes){
 		Paciente paciente = pacienteService.buscarPacientePorId(idPaciente);
-		Mensagem mensagem = new Mensagem("Paciente inexistente!", Tipo.ERRO, Prioridade.MEDIA);
+		List<Mensagem> mensagens = new ArrayList<Mensagem>();
 		if(isInvalido(paciente)){
-			redirectAttributes.addFlashAttribute("mensagem", mensagem);
+			mensagens.add(new Mensagem("Paciente inexistente!", Tipo.ERRO, Prioridade.MEDIA));
+			redirectAttributes.addFlashAttribute("mensagens", mensagens);
 			return "redirect:/Nutricao/Buscar";
 		}
 		AvaliacaoAntropometrica avaliacaoAntropometrica = new AvaliacaoAntropometrica();
@@ -267,6 +273,7 @@ public class PacienteController {
 		model.addAttribute("avaliacaoAntropometrica", avaliacaoAntropometrica);
 		return "antropometria/cadastrar";
 	}
+	
 
 	@RequestMapping(value={"/{idPaciente}/Antropometria"}, method = RequestMethod.POST)
 	public String adicionarAvaliacaoAntropometrica(@PathVariable("idPaciente") Long idPaciente, Model model, @Valid AvaliacaoAntropometrica avaliacaoAntropometrica, BindingResult result, RedirectAttributes redirectAttributes){
@@ -400,7 +407,7 @@ public class PacienteController {
 		redirectAttributes.addFlashAttribute("mensagem", mensagem);
 		return "redirect:/Paciente/"+paciente.getId();
 	}
-
+	
 	@ModelAttribute("sexos")
 	public Sexo[] getSexos(){
 		return Sexo.values();
@@ -500,9 +507,7 @@ public class PacienteController {
 			return "redirect:/Nutricao/Buscar";
 		}
 		
-		Pessoa pessoa = pessoaService.buscarPessoaPorId(idPaciente);
-		
-		model.addAttribute("pessoa", pessoa);
+		model.addAttribute("paciente", paciente);
 
 		return "/paciente/visualizar"; 
 	}
@@ -526,7 +531,6 @@ public class PacienteController {
 		
 		return "redirect:/Nutricao/Buscar";
 	}*/
-	
 	@RequestMapping(value = "/{idPaciente}/Anamnese",method = RequestMethod.GET)
 	public String formAdicionarAnamnese(@PathVariable("idPaciente") Long idPaciente, Model model, RedirectAttributes redirectAttributes){
 		Paciente paciente =null;
@@ -613,11 +617,7 @@ public class PacienteController {
 		return "redirect:/Paciente/"+idPaciente;
 		
 	}
-	
-	private boolean isInvalido(Paciente paciente){
-		return paciente == null;
-	}
-	
+
 	@RequestMapping(value="/{idPaciente}/Prescricao", method = RequestMethod.GET)
 	public String formAdicionarPrescricao(@PathVariable("idPaciente") Long idPaciente, RedirectAttributes redirectAttributes, 
 			Model model){
@@ -767,18 +767,7 @@ public class PacienteController {
 		 redirectAttributes.addFlashAttribute("mensagem", mensagem);
 		 return "redirect:/Paciente/"+idPaciente;
 	}
-	
-	private boolean isInvalidoAntropometria(AvaliacaoAntropometrica avaliacaoAntropometrica){
-		return avaliacaoAntropometrica == null;
-	}
 
-	private boolean isInvalidoNutricionista(Servidor nutricionista){
-		return nutricionista == null;
-	}
-		private String getCpfPessoaLogada() {
-		return SecurityContextHolder.getContext().getAuthentication().getName();
-	}
-	
 	@RequestMapping(value = "/{idPaciente}/Recordatorio", method = RequestMethod.GET)
     public String formAdicionarRecordatorio( @PathVariable("idPaciente") Long idPaciente, Model model,
     		RedirectAttributes redirect) {		
@@ -930,12 +919,56 @@ public class PacienteController {
 		redirect.addFlashAttribute("mensagem", new Mensagem("Excluído com sucesso!", Tipo.SUCESSO, Prioridade.MEDIA));
 		
 		return "redirect:/Paciente/" + idPaciente;
-	}	
+	}
+	
+	@RequestMapping(value ="/Registrar/{cpf}", method = RequestMethod.GET)
+	public String registrarPaciente(@PathVariable("cpf") String cpf, RedirectAttributes redirectAttributes){
+		
+		Usuario usuario = usuarioService.getByCpf(cpf);
+		if (usuario == null){
+			redirectAttributes.addFlashAttribute("mensagem", new Mensagem("CPF invalido!", Mensagem.Tipo.ERRO, Mensagem.Prioridade.ALTA));
+			return "Nutricao/Buscar";
+		}
+		
+		Paciente paciente  = pacienteService.buscarPacientePorCPF(cpf);
+		if (isInvalido(paciente)) {
+			Pessoa pessoa = new Pessoa();
+			pessoa.setNome(usuario.getNome());
+			pessoa.setCpf(usuario.getCpf());
+			pessoa.setDataNascimento(usuario.getNascimento());
+			pessoa.setEmail(usuario.getEmail());
+			pessoa.setSexo(null);
+			pessoa.setOcupacaoOuCargo(usuario.getCargo());
+			pessoa.setTelefone(usuario.getTelefone());
+			pessoa.setVinculo(null);
+			pessoa.setExterno(false);
+			
+			paciente  = new Paciente();
+			paciente.setPessoa(pessoa);
+			pacienteService.adicionarPaciente(paciente);
+		}
+		return "redirect:/Paciente/"+paciente.getId();
+	}
 
 	@ModelAttribute("tiposRefeicao")
 	public Refeicao[] getTiposRefeicao(){
 		return Refeicao.values();
 	}
 	
+	private boolean isInvalidoNutricionista(Servidor nutricionista){
+		return nutricionista == null;
+	}
+	
+	private String getCpfPessoaLogada() {
+		return SecurityContextHolder.getContext().getAuthentication().getName();
+	}
+	
+	private boolean isInvalido(Paciente paciente){
+		return paciente == null;
+	}
+
+	private boolean isInvalidoAntropometria(AvaliacaoAntropometrica avaliacaoAntropometrica){
+		return avaliacaoAntropometrica == null;
+	}
 }
 

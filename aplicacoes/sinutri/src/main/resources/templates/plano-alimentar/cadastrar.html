@@ -15,260 +15,143 @@
 <section layout:fragment="conteudo">
 	
 	<div class="mdl-grid">
-			<form action="#" 
-		    id="formAdicionarPlanoAlimentar"
-		    method="post" 
-		    class="mdl-cell mdl-cell--2-offset mdl-cell--8-col mdl-card mdl-shadow--2dp" 
-		    th:action="@{/Paciente/__${idPaciente}__/PlanoAlimentar/}"
-		    th:object="${planoAlimentar}"
-		    accept-charset="utf-8">
-					<div class="mdl-cell mdl-cell--8-col sn-padding--24">
+		<form action="#" 
+	    id="formAdicionarPlanoAlimentar"
+	    method="post" 
+	    class="sn-form 
+		    mdl-cell 
+		    mdl-cell--7-col-desktop 
+		    mdl-cell--1-offset-desktop 
+		    mdl-cell--8-col-tablet 
+		    mdl-cell--4-col-phone 
+		    mdl-grid 
+		    mdl-grid--no-spacing 
+		    sn-main-card" 
+	    th:action="@{/Paciente/__${idPaciente}__/PlanoAlimentar/}"
+	    th:object="${planoAlimentar}"
+	    accept-charset="utf-8">
+			<div class="mdl-cell mdl-cell--12-col sn-card sn-padding--48 mdl-color--teal">
+		
+				<div class="mdl-layout-title mdl-color-text--white">
+					Cadastrar Plano Alimentar
+				</div>
 				
-						<div class="mdl-layout-title">
-							Cadastrar Recordatório
-						</div>
-						
-					</div>
-					
-					<div class="sn-form__hdivider"></div>
-					
-	
-					<div class="sn-textfield mdl-cell mdl-cell--2-col">
-					
-						<label class="sn-textfield__label" for="criadoEm">Data</label>
-						<input class="sn-textfield__input sn-date-picker" th:field="*{criadoEm}" id="criadoEm"/>
-					
-					</div>
-					
-					
-					<table class="mdl-data-table mdl-js-data-table">
-				    
-				    	<thead>
-				    	
-				    		<tr>
-				    			<th hidden="true"></th>
-				    			<th th:class="mdl-data-table__cell--non-numeric">Hora</th>
-				    			<th th:class="mdl-data-table__cell--non-numeric">Descrição</th>
-				    			<th th:class="mdl-data-table__cell--non-numeric">Observação</th>
-				    			<th th:class="mdl-data-table__cell--non-numeric">Opções</th>
-				    		</tr>
-				    		
-				    	</thead>
-				    		
-				    	<tbody class="sn-list-refeicoes">
-				    	
-				    		<tr class="sn-cloneable">
-				    			
-				    			<td hidden="true">
-					    			<input type="hidden" th:field="*{refeicoes[0].hora}" class="sn-refeicao-input-hora" value="00:00"/>
-					    			<input type="hidden" th:field="*{refeicoes[0].descricao}" class="sn-refeicao-input-descricao" value="CAFEMANHA"/>
-					    			<input type="hidden" th:field="*{refeicoes[0].observacao}" class="sn-refeicao-input-observacao" value="akhggf"/>
-				    			</td>
-				    			
-				    			<td style="width:10%" 
-				    			class="mdl-data-table__cell--non-numeric sn-refeicao">
-				    				00:00
-				    			</td>
-				    			
-				    			<td style="width:20%" 
-				    			class="mdl-data-table__cell--non-numeric sn-refeicao-descricao">
-				    				Descrição
-				    			</td>
-				    			
-				    			<td style="width:20%" 
-				    			class="mdl-data-table__cell--non-numeric sn-refeicao-observacao">
-				    				Observação
-				    			</td>
-				    			
-				    			
-				    			<td style="width:20%">
-				    			
-				    				<button type="button" 
-				    				class="mdl-button mdl-js-button mdl-button--icon sn-refeicao-editar">
-				    				
-				    					<i class="material-icons mdl-color-text--grey-700">mode_edit</i>
-				    					
-				    				</button>
-				    				
-				    				<button type="button" 
-				    				class="mdl-button mdl-js-button mdl-button--icon sn-refeicao-duplicar">
-				    				
-				    					<i class="material-icons mdl-color-text--grey-700">content_copy</i>
-				    					
-				    				</button>
-				    				
-				    				<button type="button"	
-				    				class="mdl-button mdl-js-button mdl-button--icon sn-refeicao-remover">
-				    				
-				    					<i class="material-icons mdl-color-text--grey-700">close</i>
-				    					
-				    				</button>
-				    				
-				    			</td>
-				    			
-				    		</tr>
-				    		
-				    	</tbody>
-				    	
-				</table>
+				<button type="button" 
+   				class="mdl-button 
+   				mdl-js-button 
+   				mdl-button--fab 
+   				mdl-js-ripple-effect 
+   				mdl-button--colored 
+   				mdl-color-text--white
+   				sn-fab--bottom-right" 
+   				id="sn-add-refeicao-button">
+   				
+   					<i class="material-icons">add</i>
+   					
+   				</button>
 				
-				<div id="sn-add-refeicao-modal">
-			    		
-		    		<div class="mdl-grid">
-		    			<input type="hidden" id="sn-refeicao-item-index"/>
-							
-						<div class="sn-textfield mdl-cell mdl-cell--2-col">
-						
-				    		<label for="sn-refeicao-hora"
-				    		class="sn-textfield__label">
-				    			Hora
-				    		</label>
-				    		<input type="text" 
-				    		pattern="^(0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$" 
-				    		class="sn-textfield__input sn-time-picker" 
-				    		id="sn-refeicao-hora"
-				    		name="snrefeicaohora"/>
-				    		
-				    	</div>
-				    	
-						<div class="sn-textfield mdl-cell mdl-cell--12-col">
-				    		
-				    		<label for="sn-refeicao-descricao"
-				    		class="sn-textfield__label">
-				    			Descrição 
-				    		</label>
-				    		<textarea class="sn-textfield__input"
-				    		id="sn-refeicao-descricao"
-				    		name="snrefeicaodescricao"></textarea>
-				    		
-				    	</div>
-				    	
-				    	
-						<div class="sn-textfield mdl-cell mdl-cell--12-col">
-				    		
-				    		<label for="sn-refeicao-observacao"
-				    		class="sn-textfield__label">
-				    			Observação
-				    		</label>
-				    		<textarea class="sn-textfield__input"
-				    		id="sn-refeicao-observacao"
-				    		name="snrefeicaoobservacao"></textarea>
-				    	</div>
-				    	
-				    	<div class="sn-textfield mdl-cell mdl-cell--12-col">
-				    		<div class="mdl-grid">
-				    			<input type="hidden" id="sn-porcao-alimento-item-index"/>
-								<div class="mdl-cell mdl-cell--12-col">
-						    		<h5>Alimentos</h5>
-						    	</div>
+			</div>					
+
+			<div class="sn-card-top mdl-cell mdl-cell--12-col sn-card sn-padding--48 mdl-color--white mdl-grid">					
+				
+				<div class="sn-textfield mdl-cell mdl-cell--6-col">
+					<label class="sn-textfield__label" 
+					for="criadoEm">Data de criação</label> 
+					
+					<input class="sn-textfield__input sn-date-picker" 
+					type="text" 
+					id="criadoEm" 
+					th:field="*{criadoEm}"/>
+					
+				</div>
+				
+				<div class="sn-form__hdivider"></div>
+				
+				<label class="sn-textfield__label" 
+					for="refeicoes">Refeições</label>
+				
+				<ul id="refeicoes" class="mdl-cell mdl-offset--6-col mdl-cell--12-col demo-list-three mdl-list sn-list-refeicoes mdl-color--grey-200">
+				
+					<li class="mdl-list__item mdl-list__item--three-line mdl-shadow--2dp sn-card sn-cloneable">
+					  	
+					  	<input type="hidden" th:field="*{refeicoes[0].hora}" class="sn-refeicao-input-hora" value="00:00"/>
+		    			<input type="hidden" th:field="*{refeicoes[0].descricao}" class="sn-refeicao-input-descricao" value="CAFEMANHA"/>
+		    			<input type="hidden" th:field="*{refeicoes[0].observacao}" class="sn-refeicao-input-observacao" value="akhggf"/>
+					  	
+					  	<span class="mdl-list__item-primary-content">
+					  	
+					  		<div class="mdl-grid mdl-grid--no-spacing">
+						  		<div class="mdl-cell mdl-cell--2-col">
+						  		
+							    	<span>Hora</span>
+							    	
+							    	<span class="mdl-list__item-text-body sn-refeicao-hora">
+							      		Bryan Cranston played the role of Walter in Breaking Bad. He is also known
+							      		for playing Hal in Malcom in the Middle.
+						    		</span>
+						    		
+					    		</div>
 					    		
 					    		<div class="mdl-cell mdl-cell--4-col">
-						    		<label>Fonte:</label>
-						    		<select id="alimento-fonte" class="sn-selectfield__select" data-role="select">
-						    			<option value="">Escolha uma fonte</option>
-						    			<option value="MEUSALIMENTOS">MEUS ALIMENTOS</option>
-						    			<option value="TACO">TACO</option>
-						    			<option value="TUCUNDUVA">TUCUNDUVA</option>
-						    		</select>
+					    		
+						    		<span>Descrição</span>
+						    		
+							    	<span class="mdl-list__item-text-body sn-refeicao-descricao">
+							      		Bryan Cranston played the role of Walter in Breaking Bad. He is also known
+							      		for playing Hal in Malcom in the Middle.
+						    		</span>
+						    		
 					    		</div>
 					    		
-					    		<div class="mdl-cell mdl-cell--8-col">
-					    		</div>
-				    			
-				    			<div class="mdl-cell mdl-cell--8-col">
-						    		<label>Alimento:</label>
-						    		<select id="alimento-nome" class="sn-selectfield__select select2" th:attr="data-url=@{/Paciente/__${idPaciente}__/PlanoAlimentar/Alimentos/?fonte=}" >
-						    			<option value="">Escolha um alimento</option>
-						    		</select>
-					    		</div>
+					    		<div class="mdl-cell mdl-cell--4-col">
 					    		
-					    		<div class="mdl-cell mdl-cell--3-col">
-						    		<label>Quantidade:</label>
-						    		<input id="alimento-quantidade" type="number" min="0" max="999999" class="sn-textfield__input" step="0.01"/>
+						    		<span>Observação</span>
+						    		
+							    	<span class="mdl-list__item-text-body sn-refeicao-observacao">
+							      		Bryan Cranston played the role of Walter in Breaking Bad. He is also known
+							      		for playing Hal in Malcom in the Middle.
+						    		</span>
+						    		
 					    		</div>
-					    		
-					    		<div class="mdl-cell mdl-cell--1-col">
-						    		<button id="botaoAdicionarAlimento" class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-button--colored mdl-color-text--white">
-									  <i class="material-icons">add</i>
-									</button>
-								</div>
-				    		</div>
-				    		<div class="mdl-grid">
-				    			
-				    			<table class="mdl-data-table mdl-js-data-table">
-				    
-							    	<thead>
-							    	
-							    		<tr>
-							    			<th hidden="true"></th>
-							    			<th th:class="mdl-data-table__cell--non-numeric">Alimento</th>
-							    			<th th:class="mdl-data-table__cell--non-numeric">Quantidade</th>
-							    			<th th:class="mdl-data-table__cell--non-numeric">Opções</th>
-							    		</tr>
-							    		
-							    	</thead>
-							    		
-							    	<tbody class="sn-list-alimento-porcao">
-							    	
-							    		<tr id="sn-refeicao-alimentos" class="sn-cloneable">
-							    			
-							    			<td hidden="true">
-								    			<input type="hidden" th:field="*{refeicoes[0].hora}" class="sn-alimento-input-nome" value="00:00"/>
-								    			<input type="hidden" th:field="*{refeicoes[0].descricao}" class="sn-alimento-input-quantidade" value="CAFEMANHA"/>
-							    			</td>
-							    			<td style="width:33.3%" 
-							    			class="mdl-data-table__cell--non-numeric sn-alimento-nome">
-							    				Nome
-							    			</td>
-							    			
-							    			<td style="width:33.3%" 
-							    			class="mdl-data-table__cell--non-numeric sn-alimento-quantidade">
-							    				Quantidade
-							    			</td>
-							    			
-							    			<td style="width:33.3%">
-							    			
-							    				<button type="button" 
-							    				class="mdl-button mdl-js-button mdl-button--icon sn-refeicao-editar">
-							    				
-							    					<i class="material-icons mdl-color-text--grey-700">mode_edit</i>
-							    					
-							    				</button>
-							    				
-							    				<button type="button" 
-							    				class="mdl-button mdl-js-button mdl-button--icon sn-refeicao-duplicar">
-							    				
-							    					<i class="material-icons mdl-color-text--grey-700">content_copy</i>
-							    					
-							    				</button>
-							    				
-							    				<button type="button"	
-							    				class="mdl-button mdl-js-button mdl-button--icon sn-refeicao-remover">
-							    				
-							    					<i class="material-icons mdl-color-text--grey-700">close</i>
-							    					
-							    				</button>
-							    				
-							    			</td>
-							    			
-							    		</tr>
-							    	
-							    	</tbody>
-							    	
-							</table>	
-				    		</div>
-				    	</div>	
-	   				</div>
-			    	
-			    </div>
+					    	</div>
+				    		
+				  		</span>
+				  		
+					  	<span class="mdl-list__item-secondary-content">
+					  	
+					   		<button type="button" class="mdl-button mdl-js-button mdl-button--icon sn-refeicao-editar">
+		    					
+		    					<i class="material-icons mdl-color-text--grey-700">mode_edit</i>
+		    					
+		    				</button>
+		    				
+		    			</span>
+		    			
+		    			<span class="mdl-list__item-secondary-content">
+		    				
+		    				<button type="button" class="mdl-button mdl-js-button mdl-button--icon sn-refeicao-duplicar">
+		    					
+		    					<i class="material-icons mdl-color-text--grey-700">content_copy</i>
+		    					
+		    				</button>
+		    				
+		    			</span>
+		    			
+		    			<span class="mdl-list__item-secondary-content">	
+		    			
+		    				<button type="button" class="mdl-button mdl-js-button mdl-button--icon sn-refeicao-remover">
+		    					
+		    					<i class="material-icons mdl-color-text--grey-700">close</i>
+		    					
+		    				</button>
+		    				
+					  	</span>
+					  	
+					</li>
 					
-				<button type="button" 
-   				class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored" 
-   				id="sn-add-refeicao-button">
-   					<i class="material-icons">add</i>
-   				</button>
-   				
-   				<div class="sn-form-actions">
+				</ul>
+				
+				<div class="sn-form-actions">
 	   				<input type="submit" 
 	   				id="btnAdicionarRecordatorio"
 				    class="mdl-button mdl-js-button mdl-button--raised mdl-button--primary mdl-js-ripple-effect" 
@@ -281,12 +164,265 @@
 				    	Cancelar
 				    </button>
 				</div>
-
-			</form>
-			
-			<div id="sn-confirma-cancelar-modal">
-				Você realmente deseja descartar as alterações?
+				
 			</div>
+			
+			<div id="sn-add-refeicao-modal">
+		    		
+	    		<div class="mdl-grid">
+	    			<input type="hidden" id="sn-refeicao-item-index"/>
+						
+					<div class="sn-textfield mdl-cell mdl-cell--2-col">
+					
+			    		<label for="sn-refeicao-hora"
+			    		class="sn-textfield__label">
+			    			Hora
+			    		</label>
+			    		<input type="text" 
+			    		pattern="^(0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$" 
+			    		class="sn-textfield__input sn-time-picker" 
+			    		id="sn-refeicao-hora"
+			    		name="snrefeicaohora"/>
+			    		
+			    	</div>
+			    	
+					<div class="sn-textfield mdl-cell mdl-cell--12-col">
+			    		
+			    		<label for="sn-refeicao-descricao"
+			    		class="sn-textfield__label">
+			    			Descrição 
+			    		</label>
+			    		<textarea class="sn-textfield__input"
+			    		id="sn-refeicao-descricao"
+			    		name="snrefeicaodescricao"></textarea>
+			    		
+			    	</div>
+			    	
+			    	
+					<div class="sn-textfield mdl-cell mdl-cell--12-col">
+			    		
+			    		<label for="sn-refeicao-observacao"
+			    		class="sn-textfield__label">
+			    			Observação
+			    		</label>
+			    		<textarea class="sn-textfield__input"
+			    		id="sn-refeicao-observacao"
+			    		name="snrefeicaoobservacao"></textarea>
+			    	</div>
+			    	
+			    	<div class="sn-textfield mdl-cell mdl-cell--12-col">
+			    		<div class="mdl-grid">
+			    			<input type="hidden" id="sn-porcao-alimento-item-index"/>
+							<div class="mdl-cell mdl-cell--12-col">
+					    		<h5>Alimentos</h5>
+					    	</div>
+				    		
+				    		<div class="mdl-cell mdl-cell--4-col">
+					    		<label>Fonte:</label>
+					    		<select id="alimento-fonte" class="sn-selectfield__select" data-role="select">
+					    			<option value="">Escolha uma fonte</option>
+					    			<option value="MEUSALIMENTOS">MEUS ALIMENTOS</option>
+					    			<option value="TACO">TACO</option>
+					    			<option value="TUCUNDUVA">TUCUNDUVA</option>
+					    		</select>
+				    		</div>
+				    		
+				    		<div class="mdl-cell mdl-cell--8-col">
+				    		</div>
+			    			
+			    			<div class="mdl-cell mdl-cell--8-col">
+					    		<label>Alimento:</label>
+					    		<select id="alimento-nome" class="sn-selectfield__select select2" th:attr="data-url=@{/Paciente/__${idPaciente}__/PlanoAlimentar/Alimentos/?fonte=}" >
+					    			<option value="">Escolha um alimento</option>
+					    		</select>
+				    		</div>
+				    		
+				    		<div class="mdl-cell mdl-cell--3-col">
+					    		<label>Quantidade:</label>
+					    		<input id="alimento-quantidade" type="number" min="0" max="999999" class="sn-textfield__input" step="0.01"/>
+				    		</div>
+				    		
+				    		<div class="mdl-cell mdl-cell--1-col">
+					    		<button id="botaoAdicionarAlimento" class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-button--colored mdl-color-text--white">
+								  <i class="material-icons">add</i>
+								</button>
+							</div>
+			    		</div>
+			    		<div class="mdl-grid">
+			    			
+			    			
+			    			
+			    			
+			    			
+			    			
+			    			
+			    			
+			    			
+			    			
+			    			
+			    			
+			    			
+			    			
+			    			
+			    			
+			    			
+			    			<label class="sn-textfield__label" for="alimentos">Alimentos</label>
+				
+							<ul id="alimentos" class="mdl-cell mdl-offset--6-col mdl-cell--12-col demo-list-three mdl-list sn-list-alimento-porcao mdl-color--grey-200">
+							
+								<li class="mdl-list__item mdl-list__item--three-line mdl-shadow--2dp sn-card sn-cloneable">
+								  	
+								  	<input type="hidden" th:field="*{refeicoes[0].hora}" class="sn-alimento-input-nome" value="00:00"/>
+							    	<input type="hidden" th:field="*{refeicoes[0].descricao}" class="sn-alimento-input-quantidade" value="CAFEMANHA"/>
+								  	
+								  	<span class="mdl-list__item-primary-content">
+								  	
+								  		<div class="mdl-grid mdl-grid--no-spacing">
+									  		<div class="mdl-cell mdl-cell--2-col">
+									  		
+										    	<span>Hora</span>
+										    	
+										    	<span class="mdl-list__item-text-body sn-refeicao-hora">
+										      		Bryan Cranston played the role of Walter in Breaking Bad. He is also known
+										      		for playing Hal in Malcom in the Middle.
+									    		</span>
+									    		
+								    		</div>
+								    		
+								    		<div class="mdl-cell mdl-cell--4-col">
+								    		
+									    		<span>Descrição</span>
+									    		
+										    	<span class="mdl-list__item-text-body sn-refeicao-descricao">
+										      		Bryan Cranston played the role of Walter in Breaking Bad. He is also known
+										      		for playing Hal in Malcom in the Middle.
+									    		</span>
+									    		
+								    		</div>
+								    		
+								    		<div class="mdl-cell mdl-cell--4-col">
+								    		
+									    		<span>Observação</span>
+									    		
+										    	<span class="mdl-list__item-text-body sn-refeicao-observacao">
+										      		Bryan Cranston played the role of Walter in Breaking Bad. He is also known
+										      		for playing Hal in Malcom in the Middle.
+									    		</span>
+									    		
+								    		</div>
+								    	</div>
+							    		
+							  		</span>
+							  		
+								  	<span class="mdl-list__item-secondary-content">
+								  	
+								   		<button type="button" class="mdl-button mdl-js-button mdl-button--icon sn-refeicao-editar">
+					    					
+					    					<i class="material-icons mdl-color-text--grey-700">mode_edit</i>
+					    					
+					    				</button>
+					    				
+					    			</span>
+					    			
+					    			<span class="mdl-list__item-secondary-content">
+					    				
+					    				<button type="button" class="mdl-button mdl-js-button mdl-button--icon sn-refeicao-duplicar">
+					    					
+					    					<i class="material-icons mdl-color-text--grey-700">content_copy</i>
+					    					
+					    				</button>
+					    				
+					    			</span>
+					    			
+					    			<span class="mdl-list__item-secondary-content">	
+					    			
+					    				<button type="button" class="mdl-button mdl-js-button mdl-button--icon sn-refeicao-remover">
+					    					
+					    					<i class="material-icons mdl-color-text--grey-700">close</i>
+					    					
+					    				</button>
+					    				
+								  	</span>
+								  	
+								</li>
+								
+							</ul>
+			    			
+			    			<table class="mdl-data-table mdl-js-data-table">
+			    
+						    	<thead>
+						    	
+						    		<tr>
+						    			<th hidden="true"></th>
+						    			<th th:class="mdl-data-table__cell--non-numeric">Alimento</th>
+						    			<th th:class="mdl-data-table__cell--non-numeric">Quantidade</th>
+						    			<th th:class="mdl-data-table__cell--non-numeric">Opções</th>
+						    		</tr>
+						    		
+						    	</thead>
+						    		
+						    	<tbody class="sn-list-alimento-porcao">
+						    	
+						    		<tr id="sn-refeicao-alimentos" class="sn-cloneable">
+						    			
+						    			<td style="width:33.3%" 
+						    			class="mdl-data-table__cell--non-numeric sn-alimento-nome">
+						    				Nome
+						    			</td>
+						    			
+						    			<td style="width:33.3%" 
+						    			class="mdl-data-table__cell--non-numeric sn-alimento-quantidade">
+						    				Quantidade
+						    			</td>
+						    			
+						    			<td style="width:33.3%">
+						    			
+						    				<button type="button" 
+						    				class="mdl-button mdl-js-button mdl-button--icon sn-refeicao-editar">
+						    				
+						    					<i class="material-icons mdl-color-text--grey-700">mode_edit</i>
+						    					
+						    				</button>
+						    				
+						    				<button type="button" 
+						    				class="mdl-button mdl-js-button mdl-button--icon sn-refeicao-duplicar">
+						    				
+						    					<i class="material-icons mdl-color-text--grey-700">content_copy</i>
+						    					
+						    				</button>
+						    				
+						    				<button type="button"	
+						    				class="mdl-button mdl-js-button mdl-button--icon sn-refeicao-remover">
+						    				
+						    					<i class="material-icons mdl-color-text--grey-700">close</i>
+						    					
+						    				</button>
+						    				
+						    			</td>
+						    			
+						    		</tr>
+						    	
+						    	</tbody>
+						    	
+							</table>
+						
+						
+						
+						
+						
+						
+							
+			    		</div>
+			    	</div>	
+   				</div>
+		    	
+		    </div>
+
+		</form>
+		
+		<div id="sn-confirma-cancelar-modal">
+			Você realmente deseja descartar as alterações?
+		</div>
 	
 		<div class="mdl-cell
 			mdl-cell--3-col-desktop">

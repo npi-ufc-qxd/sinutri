@@ -23,7 +23,7 @@ public class Paciente implements Serializable {
 	@JoinColumn(name = "id")
 	private Pessoa pessoa;
 	
-	@OneToMany
+	@OneToMany(mappedBy="paciente")
 	private List<Recordatorio> recordatorios;
 	
 	@OneToMany(mappedBy="paciente")
@@ -35,6 +35,9 @@ public class Paciente implements Serializable {
 	@OneToMany(mappedBy = "paciente")
 	private List<InqueritoAlimentar> inqueritosAlimentares;
 
+	@OneToMany(mappedBy = "paciente")
+	private List<AvaliacaoAntropometrica> avaliacoesAntropometricas;
+	
 	public Long getId() {
 		return id;
 	}
@@ -81,6 +84,14 @@ public class Paciente implements Serializable {
 
 	public void setPrescricoes(List<Prescricao> prescricoes) {
 		this.prescricoes = prescricoes;
+	}
+
+	public List<AvaliacaoAntropometrica> getAvaliacoesAntropometricas() {
+		return avaliacoesAntropometricas;
+	}
+
+	public void setAvaliacoesAntropometricas(List<AvaliacaoAntropometrica> avaliacoesAntropometricas) {
+		this.avaliacoesAntropometricas = avaliacoesAntropometricas;
 	}
 	
 }
