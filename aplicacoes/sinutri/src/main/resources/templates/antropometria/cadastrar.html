@@ -275,7 +275,31 @@
 				
 			<div class="mdl-cell mdl-cell--3-col-desktop">
 				<div class="sn-card sn-padding--48">
-					<div class="mdl-layout-title">Informações</div>
+					<div class="mdl-layout-title">Informações do Paciente</div>
+										
+					<div class="sn-attribute__title">Nome</div>
+					<div class="sn-attribute__value" th:text="${avaliacaoAntropometrica.paciente.pessoa.nome}"></div>
+					
+					<div class="sn-attribute__title">Sexo</div>
+					<div class="sn-attribute__value" th:text="${avaliacaoAntropometrica.paciente.pessoa.sexo}"></div>
+					
+					<div class="sn-attribute__title">Idade</div>
+					<div class="sn-attribute__value" th:text="${avaliacaoAntropometrica.paciente.pessoa.getIdade()}"></div>
+					
+					<div class="sn-attribute__title">CPF</div>
+					<div class="sn-attribute__value" th:text="${avaliacaoAntropometrica.paciente.pessoa.cpf}"></div>
+					
+					<div class="sn-attribute__title">Telefone</div>
+					<div class="sn-attribute__value" th:text="${avaliacaoAntropometrica.paciente.pessoa.telefone}"></div>
+					
+					<div class="sn-attribute__title">Cargo/Ocupação</div>
+					<div class="sn-attribute__value" th:text="${avaliacaoAntropometrica.paciente.pessoa.ocupacaoOuCargo}"></div>
+					
+					<div class="sn-attribute__title">Email</div>
+					<div class="sn-attribute__value" th:text="${avaliacaoAntropometrica.paciente.pessoa.email}"></div>
+							
+					<div class="sn-attribute__title">Vínculo</div>
+					<div class="sn-attribute__value" th:text="${avaliacaoAntropometrica.paciente.pessoa.vinculo}"></div>
 				</div>
 			</div>
 		</div>
