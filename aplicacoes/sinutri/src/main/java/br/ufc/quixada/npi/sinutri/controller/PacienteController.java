@@ -116,7 +116,7 @@ public class PacienteController {
 		Mensagem mensagem = new Mensagem("Salvo com sucesso!", Mensagem.Tipo.SUCESSO, Mensagem.Prioridade.MEDIA);
 		redirectAttributes.addFlashAttribute("mensagem", mensagem);
 		
-		return "redirect:/Paciente/"+idPaciente+"/AvaliacaoLaboratorial/"+avaliacaoLaboratorial.getId()+"/Visualizar";
+		return "redirect:/Paciente/"+idPaciente+"/AvaliacaoLaboratorial/"+avaliacaoLaboratorial.getId();
 	}
 	
 	@RequestMapping(value = "/{idPaciente}/AvaliacaoLaboratorial/{idAvaliacaoLaboratorial}/Editar", method = RequestMethod.GET)
@@ -149,10 +149,10 @@ public class PacienteController {
 		Mensagem mensagem = new Mensagem("Salvo com sucesso!", Mensagem.Tipo.SUCESSO, Mensagem.Prioridade.MEDIA);
 		redirectAttributes.addFlashAttribute("mensagem", mensagem);
 		
-		return "redirect:/Paciente/"+idPaciente+"/AvaliacaoLaboratorial/"+avaliacaoLaboratorial.getId()+"/Visualizar";
+		return "redirect:/Paciente/"+idPaciente+"/AvaliacaoLaboratorial/"+avaliacaoLaboratorial.getId();
 	}
 	
-	@RequestMapping(value = "/{idPaciente}/AvaliacaoLaboratorial/{idAvaliacaoLaboratorial}/Visualizar", method = RequestMethod.GET)
+	@RequestMapping(value = "/{idPaciente}/AvaliacaoLaboratorial/{idAvaliacaoLaboratorial}", method = RequestMethod.GET)
 	public String visualizarAvaliacaoLaboratorial(@PathVariable("idPaciente") Long idPaciente, @PathVariable("idAvaliacaoLaboratorial") Long idAvaliacaoLaboratorial, RedirectAttributes redirectAttributes, Model model){
 		
 		AvaliacaoLaboratorial avaliacaoLaboratorial = consultaService.buscarAvaliacaoLaboratorialPorId(idAvaliacaoLaboratorial);
