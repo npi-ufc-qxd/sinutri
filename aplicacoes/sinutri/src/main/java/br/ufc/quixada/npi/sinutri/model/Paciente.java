@@ -11,7 +11,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 @Entity
-public class Paciente implements Serializable {
+public class Paciente implements Serializable, Comparable<Paciente> {
 
 	private static final long serialVersionUID = 6651490753121518188L;
 
@@ -92,6 +92,11 @@ public class Paciente implements Serializable {
 
 	public void setAvaliacoesAntropometricas(List<AvaliacaoAntropometrica> avaliacoesAntropometricas) {
 		this.avaliacoesAntropometricas = avaliacoesAntropometricas;
+	}
+
+	@Override
+	public int compareTo(Paciente o) {
+		return this.pessoa.getNome().compareTo(o.pessoa.getNome());
 	}
 	
 }
