@@ -232,10 +232,10 @@ public class PacienteController {
 			redirectAttributes.addFlashAttribute("mensagens", mensagens);
 			return "redirect:/Nutricao/Buscar";
 		}
-		if (avaliacaoAntropometrica.getId()!=null){
+		if (avaliacaoAntropometrica.getId()==null){
 			mensagens.add(new Mensagem("Erro ao adicionar Avaliação Antropométrica!", Tipo.ERRO, Prioridade.ALTA));
 			redirectAttributes.addFlashAttribute("mensagens", mensagens);
-			return "redirect:/Paciente/"+paciente.getId()+"/Antropometria/"+avaliacaoAntropometrica.getId();			
+			return "redirect:/Paciente/"+paciente.getId();			
 		} 
 		Servidor nutricionista = pessoaService.buscarServidorPorCpf(getCpfPessoaLogada());
 		if(isInvalidoNutricionista(nutricionista)){
