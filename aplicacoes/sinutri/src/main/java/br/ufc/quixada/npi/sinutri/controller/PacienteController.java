@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import br.ufc.quixada.npi.ldap.model.Usuario;
+import br.ufc.quixada.npi.ldap.service.UsuarioService;
 import br.ufc.quixada.npi.sinutri.model.Anamnese;
 import br.ufc.quixada.npi.sinutri.model.AvaliacaoAntropometrica;
 import br.ufc.quixada.npi.sinutri.model.AvaliacaoLaboratorial;
@@ -45,14 +47,17 @@ import br.ufc.quixada.npi.sinutri.service.PessoaService;
 public class PacienteController {
 	
 	@Inject
-	private ConsultaService consultaService;
-	
-	@Inject
 	private PacienteService pacienteService;
 	
 	@Inject
 	private PessoaService pessoaService;
 	
+	@Inject
+	private UsuarioService usuarioService;
+
+	@Inject
+	private ConsultaService consultaService;
+		
 	@RequestMapping(value = "/{idPaciente}/AvaliacaoLaboratorial", method = RequestMethod.GET)
 	public String formAdicionarAvaliacaoLaboratorial(@PathVariable("idPaciente") Long idPaciente, Model model, RedirectAttributes redirectAttributes){
 
@@ -259,6 +264,7 @@ public class PacienteController {
 		return "redirect:/Paciente/"+idPaciente;
 	}
 	
+	
 	@RequestMapping(value= {"/{idPaciente}/Antropometria"}, method = RequestMethod.GET)
 	public String formAdicionarAvaliacaoAntropometrica(@PathVariable("idPaciente") Long idPaciente, Model model, RedirectAttributes redirectAttributes){
 		Paciente paciente = pacienteService.buscarPacientePorId(idPaciente);
@@ -274,6 +280,7 @@ public class PacienteController {
 		model.addAttribute("avaliacaoAntropometrica", avaliacaoAntropometrica);
 		return "antropometria/cadastrar";
 	}
+	
 
 	@RequestMapping(value={"/{idPaciente}/Antropometria"}, method = RequestMethod.POST)
 	public String adicionarAvaliacaoAntropometrica(@PathVariable("idPaciente") Long idPaciente, Model model, @Valid AvaliacaoAntropometrica avaliacaoAntropometrica, BindingResult result, RedirectAttributes redirectAttributes){
@@ -307,7 +314,7 @@ public class PacienteController {
 		avaliacaoAntropometrica.setAtualizadoEm(new Date());
 		
 		consultaService.adicionarAvaliacaoAntropometrica(avaliacaoAntropometrica);
-		mensagens.add(new Mensagem("Avaliação Antropométrica Adicionada!", Tipo.SUCESSO, Prioridade.MEDIA));
+		mensagens.add(new Mensagem("Salvo com sucesso!", Tipo.SUCESSO, Prioridade.MEDIA));
 		redirectAttributes.addFlashAttribute("mensagens", mensagens);
 		return "redirect:/Paciente/"+paciente.getId()+"/Antropometria/"+avaliacaoAntropometrica.getId();
 	}
@@ -315,22 +322,23 @@ public class PacienteController {
 	@RequestMapping(value= {"/{idPaciente}/Antropometria/{idAntropometria}/Editar"}, method = RequestMethod.GET)
 	public String formEditarAvaliacaoAntropometrica(@PathVariable("idPaciente") Long idPaciente, @PathVariable("idAntropometria") Long idAntropometria
 			, Model model, RedirectAttributes redirectAttributes){
-		List<Mensagem> mensagens = new ArrayList<Mensagem>();
 		Paciente paciente = pacienteService.buscarPacientePorId(idPaciente);
+		
 		if(isInvalido(paciente)){
-			mensagens.add(new Mensagem("Paciente inexistente!", Tipo.ERRO, Prioridade.MEDIA));
-			redirectAttributes.addFlashAttribute("mensagens", mensagens);
+			Mensagem mensagem = new Mensagem("Paciente inexistente!", Tipo.ERRO, Prioridade.MEDIA);
+			redirectAttributes.addFlashAttribute("mensagem", mensagem);
 			return "redirect:/Nutricao/Buscar";
 		}
-		
-		InqueritoAlimentar inqueritoAlimentar = new InqueritoAlimentar();
-		inqueritoAlimentar.setPaciente(paciente);
-		model.addAttribute("inqueritoAlimentar", inqueritoAlimentar);
-		model.addAttribute("FrequenciasSemanais", FrequenciaSemanal.values());
-
-		return "/inquerito-alimentar/cadastrar";
+		AvaliacaoAntropometrica avaliacaoAntropometrica = consultaService.buscarAvaliacaoAntropometricaPorId(idAntropometria);
+		if(isInvalidoAntropometria(avaliacaoAntropometrica)){
+			Mensagem mensagem = new Mensagem("Avaliação Antropométrica não encontrada!", Tipo.ERRO, Prioridade.MEDIA);
+			redirectAttributes.addFlashAttribute("mensagem", mensagem);
+			return "redirect:/Paciente/"+paciente.getId();
+		}
+		model.addAttribute("avaliacaoAntropometrica", avaliacaoAntropometrica);
+		return "antropometria/editar";
 	}
-	
+
 	@RequestMapping(value={"/{idPaciente}/Antropometria/{idAntropometria}/Editar"}, method = RequestMethod.POST)
 	public String editarAvaliacaoAntropometrica(@PathVariable("idPaciente") Long idPaciente, Model model, @Valid AvaliacaoAntropometrica avaliacaoAntropometrica, BindingResult result, RedirectAttributes redirectAttributes){
 		List<Mensagem> mensagens = new ArrayList<Mensagem>();
@@ -346,60 +354,67 @@ public class PacienteController {
 			redirectAttributes.addFlashAttribute("mensagens", mensagens);
 			return "redirect:/Nutricao/Buscar";
 		}
-		avaliacaoAntropometrica.setAtualizadoEm(new Date());
-		consultaService.editarAvaliacaoAntropometrica(avaliacaoAntropometrica);
-		
-		if(isInvalidoAntropometria(avaliacaoAntropometrica)){
-			mensagens.add(new Mensagem("Erro ao editar Avaliação Antropométrica!", Tipo.ERRO, Prioridade.ALTA));
-			mensagens.add(new Mensagem("Avaliação Antropométrica não encontrada!", Tipo.ERRO, Prioridade.MEDIA));
+		if (avaliacaoAntropometrica.getId()!=null){
+			mensagens.add(new Mensagem("Erro ao adicionar Avaliação Antropométrica!", Tipo.ERRO, Prioridade.ALTA));
 			redirectAttributes.addFlashAttribute("mensagens", mensagens);
-			return "redirect:/Paciente/"+paciente.getId();
+			return "redirect:/Paciente/"+paciente.getId()+"/Antropometria/"+avaliacaoAntropometrica.getId();			
+		} 
+		Servidor nutricionista = pessoaService.buscarServidorPorCpf(getCpfPessoaLogada());
+		if(isInvalidoNutricionista(nutricionista)){
+			mensagens.add(new Mensagem("Erro ao adicionar Avaliação Antropométrica!", Tipo.ERRO, Prioridade.ALTA));
+			mensagens.add(new Mensagem("Nutricionista não encontrada!", Tipo.ERRO, Prioridade.MEDIA));
+			redirectAttributes.addFlashAttribute("mensagens", mensagens);
+			return "redirect:/Nutricao/Buscar";
 		}
-		mensagens.add(new Mensagem("Avaliação Antropométrica Editada!", Tipo.SUCESSO, Prioridade.MEDIA));
+		mensagens.add(new Mensagem("Salvo com sucesso!", Tipo.SUCESSO, Prioridade.MEDIA));
 		redirectAttributes.addFlashAttribute("mensagens", mensagens);
+		avaliacaoAntropometrica.setNutricionista(nutricionista);
+		avaliacaoAntropometrica.setPaciente(paciente);
+		avaliacaoAntropometrica.setAtualizadoEm(new Date());
+		consultaService.adicionarAvaliacaoAntropometrica(avaliacaoAntropometrica);
 		return "redirect:/Paciente/"+paciente.getId()+"/Antropometria/"+avaliacaoAntropometrica.getId();
 	}
 	@RequestMapping(value= {"/{idPaciente}/Antropometria/{idAntropometria}"}, method = RequestMethod.GET)
 	public String visualizarAvaliacaoAntropometrica(@PathVariable("idPaciente") Long idPaciente, @PathVariable("idAntropometria") Long idAntropometria, RedirectAttributes redirectAttributes, Model model){
-		List<Mensagem> mensagens = new ArrayList<Mensagem>();
 		Paciente paciente = pacienteService.buscarPacientePorId(idPaciente);
 
 		if(isInvalido(paciente)){
-			mensagens.add(new Mensagem("Paciente inexistente!", Tipo.ERRO, Prioridade.MEDIA));
-			redirectAttributes.addFlashAttribute("mensagens", mensagens);
+			Mensagem mensagem = new Mensagem("Paciente inexistente!", Tipo.ERRO, Prioridade.MEDIA);
+			redirectAttributes.addFlashAttribute("mensagem", mensagem);
 			return "redirect:/Nutricao/Buscar";
 		}
 
 		AvaliacaoAntropometrica avaliacaoAntropometrica = consultaService.buscarAvaliacaoAntropometricaPorId(idAntropometria);
 		if(isInvalidoAntropometria(avaliacaoAntropometrica)){
-			mensagens.add(new Mensagem("Avaliação Antropométrica não encontrada!", Tipo.ERRO, Prioridade.MEDIA));
-			redirectAttributes.addFlashAttribute("mensagens", mensagens);
+			Mensagem mensagem = new Mensagem("Avaliação Antropométrica não encontrada!", Tipo.ERRO, Prioridade.MEDIA);
+			redirectAttributes.addFlashAttribute("mensagem", mensagem);
 			return "redirect:/Paciente/"+paciente.getId();
 		}
 		model.addAttribute("avaliacaoAntropometrica", avaliacaoAntropometrica);
 		return "antropometria/visualizar";
 	}
+	
 	@RequestMapping(value= {"/{idPaciente}/Antropometria/{idAntropometria}/Excluir"}, method = RequestMethod.GET)
 	public String excluirAvaliacaoAntropometrica(@PathVariable("idPaciente") Long idPaciente, @PathVariable("idAntropometria") Long idAntropometria
 			, RedirectAttributes redirectAttributes, Model model){
-		List<Mensagem> mensagens = new ArrayList<Mensagem>();
 		Paciente paciente = pacienteService.buscarPacientePorId(idPaciente);
 		if(isInvalido(paciente)){
-			redirectAttributes.addFlashAttribute("erro", "Paciente inexistente.");
+			Mensagem mensagem = new Mensagem("Paciente inexestente", Tipo.SUCESSO, Prioridade.MEDIA);
+			redirectAttributes.addFlashAttribute("mensagem", mensagem);
 			return "redirect:/Nutricao/Buscar";
 		}
 		AvaliacaoAntropometrica avaliacaoAntropometrica = consultaService.buscarAvaliacaoAntropometricaPorId(idAntropometria);
 		if(isInvalidoAntropometria(avaliacaoAntropometrica)){
-			mensagens.add(new Mensagem("Avaliação Antropométrica não encontrada!", Tipo.ERRO, Prioridade.MEDIA));
-			redirectAttributes.addFlashAttribute("mensagens", mensagens);
+			Mensagem mensagem = new Mensagem("Avaliação Antropométrica não encontrada!", Tipo.ERRO, Prioridade.MEDIA);
+			redirectAttributes.addFlashAttribute("mensagem", mensagem);
 			return "redirect:/Paciente/"+paciente.getId();
 		}
 		consultaService.excluirAvaliacaoAntropometrica(avaliacaoAntropometrica);
-		mensagens.add(new Mensagem("Avaliação Antropométrica Excluida!", Tipo.SUCESSO, Prioridade.MEDIA));
-		redirectAttributes.addFlashAttribute("mensagens", mensagens);
+		Mensagem mensagem = new Mensagem("Excluído com sucesso!", Tipo.SUCESSO, Prioridade.MEDIA);
+		redirectAttributes.addFlashAttribute("mensagem", mensagem);
 		return "redirect:/Paciente/"+paciente.getId();
 	}
-
+	
 	@ModelAttribute("sexos")
 	public Sexo[] getSexos(){
 		return Sexo.values();
@@ -499,9 +514,7 @@ public class PacienteController {
 			return "redirect:/Nutricao/Buscar";
 		}
 		
-		Pessoa pessoa = pessoaService.buscarPessoaPorId(idPaciente);
-		
-		model.addAttribute("pessoa", pessoa);
+		model.addAttribute("paciente", paciente);
 
 		return "/paciente/visualizar"; 
 	}
@@ -525,7 +538,6 @@ public class PacienteController {
 		
 		return "redirect:/Nutricao/Buscar";
 	}*/
-	
 	@RequestMapping(value = "/{idPaciente}/Anamnese",method = RequestMethod.GET)
 	public String formAdicionarAnamnese(@PathVariable("idPaciente") Long idPaciente, Model model, RedirectAttributes redirectAttributes){
 		Paciente paciente =null;
@@ -612,11 +624,7 @@ public class PacienteController {
 		return "redirect:/Paciente/"+idPaciente;
 		
 	}
-	
-	private boolean isInvalido(Paciente paciente){
-		return paciente == null;
-	}
-	
+
 	@RequestMapping(value="/{idPaciente}/Prescricao", method = RequestMethod.GET)
 	public String formAdicionarPrescricao(@PathVariable("idPaciente") Long idPaciente, RedirectAttributes redirectAttributes, 
 			Model model){
@@ -766,18 +774,7 @@ public class PacienteController {
 		 redirectAttributes.addFlashAttribute("mensagem", mensagem);
 		 return "redirect:/Paciente/"+idPaciente;
 	}
-	
-	private boolean isInvalidoAntropometria(AvaliacaoAntropometrica avaliacaoAntropometrica){
-		return avaliacaoAntropometrica == null;
-	}
 
-	private boolean isInvalidoNutricionista(Servidor nutricionista){
-		return nutricionista == null;
-	}
-		private String getCpfPessoaLogada() {
-		return SecurityContextHolder.getContext().getAuthentication().getName();
-	}
-	
 	@RequestMapping(value = "/{idPaciente}/Recordatorio", method = RequestMethod.GET)
     public String formAdicionarRecordatorio( @PathVariable("idPaciente") Long idPaciente, Model model,
     		RedirectAttributes redirect) {		
@@ -929,11 +926,55 @@ public class PacienteController {
 		redirect.addFlashAttribute("mensagem", new Mensagem("Excluído com sucesso!", Tipo.SUCESSO, Prioridade.MEDIA));
 		
 		return "redirect:/Paciente/" + idPaciente;
-	}	
+	}
+	
+	@RequestMapping(value ="/Registrar/{cpf}", method = RequestMethod.GET)
+	public String registrarPaciente(@PathVariable("cpf") String cpf, RedirectAttributes redirectAttributes){
+		
+		Usuario usuario = usuarioService.getByCpf(cpf);
+		if (usuario == null){
+			redirectAttributes.addFlashAttribute("mensagem", new Mensagem("CPF invalido!", Mensagem.Tipo.ERRO, Mensagem.Prioridade.ALTA));
+			return "Nutricao/Buscar";
+		}
+		
+		Paciente paciente  = pacienteService.buscarPacientePorCPF(cpf);
+		if (isInvalido(paciente)) {
+			Pessoa pessoa = new Pessoa();
+			pessoa.setNome(usuario.getNome());
+			pessoa.setCpf(usuario.getCpf());
+			pessoa.setDataNascimento(usuario.getNascimento());
+			pessoa.setEmail(usuario.getEmail());
+			pessoa.setSexo(null);
+			pessoa.setOcupacaoOuCargo(usuario.getCargo());
+			pessoa.setTelefone(usuario.getTelefone());
+			pessoa.setVinculo(null);
+			pessoa.setExterno(false);
+			
+			paciente  = new Paciente();
+			paciente.setPessoa(pessoa);
+			pacienteService.adicionarPaciente(paciente);
+		}
+		return "redirect:/Paciente/"+paciente.getId();
+	}
 
 	@ModelAttribute("tiposRefeicao")
 	public Refeicao[] getTiposRefeicao(){
 		return Refeicao.values();
 	}
 	
+	private boolean isInvalidoNutricionista(Servidor nutricionista){
+		return nutricionista == null;
+	}
+	
+	private String getCpfPessoaLogada() {
+		return SecurityContextHolder.getContext().getAuthentication().getName();
+	}
+	
+	private boolean isInvalido(Paciente paciente){
+		return paciente == null;
+	}
+
+	private boolean isInvalidoAntropometria(AvaliacaoAntropometrica avaliacaoAntropometrica){
+		return avaliacaoAntropometrica == null;
+	}
 }

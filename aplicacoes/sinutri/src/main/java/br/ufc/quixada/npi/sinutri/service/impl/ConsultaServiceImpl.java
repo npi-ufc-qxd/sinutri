@@ -117,10 +117,8 @@ public class ConsultaServiceImpl implements ConsultaService {
 		inqueritoAlimentarRepository.delete(inqueritoAlimentar);
 	}
 		
-	//Recordatorio	
 	@Override
 	public void adicionarRecordatorio(Recordatorio recordatorio) {	
-		recordatorio.setCriadoEm(new Date());
     	recordatorio.setAtualizadoEm(new Date());
 		this.recordatorioRepository.save(recordatorio);
 	}
