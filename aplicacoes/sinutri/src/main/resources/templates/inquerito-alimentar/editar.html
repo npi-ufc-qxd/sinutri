@@ -17,8 +17,8 @@
 	<section layout:fragment="conteudo">
 		<div class="mdl-grid">
 				<form id="form-inquerito" class="sn-form mdl-cell mdl-cell--7-col-desktop mdl-cell--1-offset-desktop mdl-cell--8-col-tablet mdl-cell--4-col-phone mdl-grid mdl-grid--no-spacing sn-main-card" action="#" th:object="${inqueritoAlimentar}" th:method="post" th:action="@{${'/Paciente/'+ inqueritoAlimentar.paciente.id +'/InqueritoAlimentar/'+inqueritoAlimentar.id+'/Editar/'}}">
-					<div class="mdl-cell mdl-cell--12-col sn-card sn-padding--48 mdl-color--teal">
-               			<div class="mdl-layout-title mdl-color-text--white">Editar Inquérito Alimentar</div>
+					<div class="mdl-cell mdl-cell--12-col sn-card sn-padding--48 mdl-color--white">
+               			<div class="mdl-layout-title mdl-color-text--green-600">Editar Inquérito Alimentar</div>
        				</div>
 					
 					<input type="hidden" id="id" th:field="*{id}"/>
