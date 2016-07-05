@@ -1,5 +1,6 @@
 package br.ufc.quixada.npi.sinutri.service;
 
+import br.ufc.quixada.npi.sinutri.model.AvaliacaoLaboratorial;
 import br.ufc.quixada.npi.sinutri.model.AvaliacaoAntropometrica;
 import br.ufc.quixada.npi.sinutri.model.Anamnese;
 import br.ufc.quixada.npi.sinutri.model.InqueritoAlimentar;
@@ -9,6 +10,14 @@ import br.ufc.quixada.npi.sinutri.model.RefeicaoRecordatorio;
 import br.ufc.quixada.npi.sinutri.model.Prescricao;
 
 public interface ConsultaService {
+	
+	void adicionarAvaliacaoLaboratorial(AvaliacaoLaboratorial avaliacaoLaboratorial, Paciente paciente);
+
+	void editarAvaliacaoLaboratorial(AvaliacaoLaboratorial avaliacaoLaboratorial);
+	
+	AvaliacaoLaboratorial buscarAvaliacaoLaboratorialPorId(Long idAvaliacaoLaboratorial);
+
+	void excluirAvaliacaoLaboratorial(AvaliacaoLaboratorial avaliacaoLaboratorial);
 	
 	void adicionarInqueritoAlimentar(InqueritoAlimentar inqueritoAlimentar, Paciente paciente);
 	
