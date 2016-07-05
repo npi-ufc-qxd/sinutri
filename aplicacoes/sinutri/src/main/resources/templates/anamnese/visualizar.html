@@ -9,6 +9,13 @@
 	<link rel="stylesheet" type="text/css" th:href="@{/css/buscar.css}"/>
 </head>
 
+<section layout:fragment="breadcrumbs">
+	<a th:href="@{/Nutricao/Buscar}" class="sn-breadcrumbs mdl-layout-title">SiNutri</a>
+	<a th:href="@{/Nutricao/Buscar}" class="sn-breadcrumbs mdl-layout-title">Buscar</a>
+	<a th:href="@{${'/Paciente/'+anamnese.paciente.id}}" class="sn-breadcrumbs mdl-layout-title">Paciente</a>
+	<a class="mdl-layout-title sn-breadcrumbs">Visualizar Anamnese</a>
+</section>
+
 <section layout:fragment="conteudo">
 	<div class="mdl-grid">
 
