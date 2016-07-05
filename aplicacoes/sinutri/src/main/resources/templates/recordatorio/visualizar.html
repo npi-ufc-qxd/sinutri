@@ -140,6 +140,36 @@
 	                              <div class="sn-attribute__value" 
 	                              th:text="${paciente.pessoa.nome}"></div>
 	                      </div>
+	                      
+	                      <!-- Text atribute -->
+	                      <div th:if="${paciente.pessoa.sexo != null}" class="sn-attribute mdl-cell mdl-cell--6-col">
+	                              <div class="sn-attribute__title">Sexo</div>
+	                              <div class="sn-attribute__value" th:text="${paciente.pessoa.sexo}"></div>
+	                      </div>
+	                      
+	                      <!-- Text atribute -->
+	                      <div th:if="${paciente.pessoa.idade != null}" class="sn-attribute mdl-cell mdl-cell--6-col">
+	                              <div class="sn-attribute__title">Idade</div>
+	                              <div class="sn-attribute__value" th:text="${paciente.pessoa.idade}"></div>
+	                      </div>
+	                      
+	                      <!-- Text atribute -->
+	                      <div th:if="${paciente.pessoa.cpf != null}" class="sn-attribute mdl-cell mdl-cell--6-col">
+	                              <div class="sn-attribute__title">CPF</div>
+	                              <div class="sn-attribute__value" th:text="${paciente.pessoa.cpf}"></div>
+	                      </div>
+	                      
+	                      <!-- Text atribute -->
+	                      <div th:if="${paciente.pessoa.telefone != null}" class="sn-attribute mdl-cell mdl-cell--6-col">
+	                              <div class="sn-attribute__title">Telefone</div>
+	                              <div class="sn-attribute__value" th:text="${paciente.pessoa.telefone}"></div>
+	                      </div>	      
+	                      
+	                      <!-- Text atribute -->
+	                      <div th:if="${paciente.pessoa.ocupacaoOuCargo != null}" class="sn-attribute mdl-cell mdl-cell--6-col">
+	                              <div class="sn-attribute__title">Cargo/Ocupação</div>
+	                              <div class="sn-attribute__value" th:text="${paciente.pessoa.ocupacaoOuCargo}"></div>
+	                      </div>                
 
 	                      <!-- Text atribute -->
 	                      <div th:if="${paciente.pessoa.email != null}" class="sn-attribute mdl-cell mdl-cell--6-col">
@@ -148,15 +178,9 @@
 	                      </div>
 	                      
 	                      <!-- Text atribute -->
-	                      <div th:if="${paciente.pessoa.telefone != null}" class="sn-attribute mdl-cell mdl-cell--6-col">
-	                              <div class="sn-attribute__title">Telefone</div>
-	                              <div class="sn-attribute__value" th:text="${paciente.pessoa.telefone}"></div>
-	                      </div>	                      
-	                      
-	                      <!-- Text atribute -->
-	                      <div th:if="${paciente.pessoa.dataNascimento !=  null}" class="sn-attribute mdl-cell mdl-cell--6-col">
-	                              <div class="sn-attribute__title">Data de Nascimento</div>
-	                              <div class="sn-attribute__value" th:text="${#dates.format(paciente.pessoa.dataNascimento, 'dd/MM/yyyy')}"></div>
+	                      <div th:if="${paciente.pessoa.vinculo !=  null}" class="sn-attribute mdl-cell mdl-cell--6-col">
+	                              <div class="sn-attribute__title">Vinculo</div>
+	                              <div class="sn-attribute__value" th:text="${paciente.pessoa.vinculo}"></div>
 	                      </div>
 	              </div>
 	
