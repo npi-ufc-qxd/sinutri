@@ -595,6 +595,8 @@ var DynamicList = function(rootEl, settings) {
 		// Trás os valores padrão para os elementos da lista
 		defaultData: {}, 
 
+		recurssiveIndex: 0, 
+
 		// Lista de callbacks
 		// Para que o item seja adicionado, removido ou editado, retorne true
 		onItemAdd: function(item) { return true; }, 
@@ -653,9 +655,20 @@ var DynamicList = function(rootEl, settings) {
 
 	this.doIncrementItem = function(name, index) {
 		
-		if( /[\w]+\[[\d]+\]\.[\w]+/.test(name) ) {
-			return name.replace( /\[[\d]+\]+/, "[" + index + "]")
+		var reStr = "[\\w\\d]+\\[)(\\d+)(\\][\.\w\d\[\]]*)";
+
+		for(var i = 0; i < this.settings.recurssiveIndex; i++) {
+			reStr = "[\\w\\d\\[\\]]+\\." + reStr;
+		}
+		reStr = "(" + reStr;
+
+		regExp = new RegExp(reStr, 'g');
+
+		if( regExp.test(name) ) {
+			name = name.replace(regExp, "$1" + index + "$3")
 		} 
+
+		console.log(regExp + " : " + name);
 
 		return name;
 
@@ -1834,5 +1847,4 @@ var sn_toast = function() {
 	};
 
 } ();
-
 

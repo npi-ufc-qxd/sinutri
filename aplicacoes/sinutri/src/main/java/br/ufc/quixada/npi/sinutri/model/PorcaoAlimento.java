@@ -38,6 +38,14 @@ public class PorcaoAlimento {
 		this.refeicaoPlanoAlimentar = refeicaoPlanoAlimentar;
 	}
 
+	public Alimento getAlimento() {
+		return alimento;
+	}
+
+	public void setAlimento(Alimento alimento) {
+		this.alimento = alimento;
+	}
+
 	public Integer getQuantidade() {
 		return quantidade;
 	}
