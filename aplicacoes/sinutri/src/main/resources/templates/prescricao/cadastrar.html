@@ -7,7 +7,7 @@
 <head>
 	<title>Sinutri | Cadastrar Prescrição</title>
 	
-	<link rel="stylesheet" type="text/css" th:href="@{/css/material-date-picker.css}"/>
+	<link rel="stylesheet" type="text/css" th:href="@{/css/material--picker.css}"/>
 	
 </head>
 	<section layout:fragment="breadcrumbs">
@@ -37,10 +37,18 @@
 										
 						
 						<div class="mdl-cell mdl-cell--12-col sn-card sn-padding--48 mdl-color--teal">
- 							<div class="mdl-layout-title mdl-color-text--white">Cadastrando nova prescrição</div>
+ 							<div class="mdl-layout-title mdl-color-text--white">Cadastrar prescrição</div>
 						</div>	
 						
 						<div class="sn-card-top mdl-cell mdl-cell--12-col sn-card sn-padding--48 mdl-color--white mdl-grid">
+						
+						<div class="sn-textfield mdl-cell mdl-cell--6-col">
+							<label class="sn-textfield__label" for="inputDataCriacao">Data de Criação</label>
+							<label class="sn-textfield__messages sn-error-text" 
+								th:if="${#fields.hasErrors('criadoEm')}" th:errors="*{criadoEm}"> Erro na data de criação </label>
+							<input class="sn-textfield__input sn--picker" type="text" 
+									id="inputDataCriacao" th:field="*{criadoEm}" />
+						</div>
 						
 						<div class="sn-textfield mdl-cell mdl-cell--12-col">	
 							<label class="sn-textfield__label" for="inputTextDescricao">Descrição</label>
@@ -56,14 +64,6 @@
 							<textarea class="sn-textfield__input" rows= "5" id="inputTextTexto" th:field="*{texto}" maxlength="255"></textarea>
 						</div>
 				
-						<div class="sn-textfield mdl-cell mdl-cell--6-col">
-							<label class="sn-textfield__label" for="inputDataCriacao">Data de Criação</label>
-							<label class="sn-textfield__messages sn-error-text" 
-								th:if="${#fields.hasErrors('criadoEm')}" th:errors="*{criadoEm}"> Erro na data de criação </label>
-							<input class="sn-textfield__input sn-date-picker" type="text" 
-									id="inputDataCriacao" th:field="*{criadoEm}" />
-						</div>
-							
 						<div class="sn-form-actions">
 							<input type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect" 
 								value="Cadastrar" data-upgraded=",MaterialButton,MaterialRipple"></input>
@@ -112,7 +112,7 @@
 	</section>
 	<section layout:fragment="js"> 
 		<script type="text/javascript" th:src="@{/js/moment.js}"></script>
-		<script type="text/javascript" th:src="@{/js/material-date-picker.js}"></script>
+		<script type="text/javascript" th:src="@{/js/material--picker.js}"></script>
 		
 		<script type="text/javascript">
 		

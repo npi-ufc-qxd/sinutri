@@ -57,23 +57,23 @@
 
               <div class="sn-card-top mdl-cell mdl-cell--12-col sn-card sn-padding--48 mdl-color--white mdl-grid">
 					<div class="sn-attribute mdl-cell mdl-cell--6-col">
-                        <div class="sn-attribute__title">Criação:</div>
+                        <div class="sn-attribute__title">Criação</div>
                         <div class="sn-attribute__value" th:text="${#dates.format(anamnese.criadoEm,'dd/MM/yyyy')}">01/01/1995</div>
                     </div>
                     <div class="sn-attribute mdl-cell mdl-cell--6-col">
-                        <div class="sn-attribute__title">Última atualização:</div>
+                        <div class="sn-attribute__title">Última atualização</div>
                         <div class="sn-attribute__value" th:text="${#dates.format(anamnese.atualizadoEm,'dd/MM/yyyy')}">01/01/1995</div>
                     </div>					
 										
 					<div class="sn-attribute mdl-cell mdl-cell--6-col">
-						<div class="sn-attribute__title">Paciente:</div>
+						<div class="sn-attribute__title">Paciente</div>
 						<div class="sn-attribute__value">
 							<label th:text="${anamnese.paciente.pessoa.nome}">Nome paciente</label>
 						</div>
 					</div>									
 					
 					<div class="sn-attribute mdl-cell mdl-cell--12-col">
-						<div class="sn-attribute__title">Objetivo:</div>
+						<div class="sn-attribute__title">Objetivo</div>
 						<div class="sn-attribute__value">
 							<label th:text="${anamnese.objetivoConsulta}">Objetivo</label>
 						</div>
@@ -97,7 +97,7 @@
 					</div>
 					
 					<div class="sn-attribute__value mdl-cell mdl-cell--6-col">
-						<div class="sn-attribute__title ">Comentário:</div>
+						<div class="sn-attribute__title ">Comentário</div>
 							<label th:text=
 								"${anamnese.atividadeFisicaComentario}? 
 								(${#strings.length(anamnese.atividadeFisicaComentario) != 0?
@@ -119,7 +119,7 @@
 					</div>
 					
 					<div class="sn-attribute__value mdl-cell mdl-cell--6-col">
-						<div class="sn-attribute__title ">Comentário:</div>
+						<div class="sn-attribute__title ">Comentário</div>
 							<label th:text=
 								"${anamnese.dormeBemComentario}? 
 								(${#strings.length(anamnese.dormeBemComentario) != 0?
@@ -141,7 +141,7 @@
 					</div>
 					
 					<div class="sn-attribute__value mdl-cell mdl-cell--6-col">
-						<div class="sn-attribute__title ">Comentário:</div>
+						<div class="sn-attribute__title ">Comentário</div>
 							<label th:text=
 								"${anamnese.bebidaAlcoolicaComentario}? 
 								(${#strings.length(anamnese.bebidaAlcoolicaComentario) != 0?
@@ -159,7 +159,7 @@
 					<h5 class="mdl-cell mdl-cell--12-col">Patologias</h5>
 					 
 					<div class="sn-attribute mdl-cell mdl-cell--12-col" >
-						<div class="sn-attribute__title ">Patologias:</div>
+						<div class="sn-attribute__title ">Patologias</div>
 						<div class="sn-attribute__value">
 						<label th:text=
 								"${anamnese.patologiasComentario}? 
@@ -183,7 +183,7 @@
 						</label>			
 					</div>
 					<div class="sn-attribute__value mdl-cell mdl-cell--6-col">
-						<div class="sn-attribute__title ">Comentário:</div>
+						<div class="sn-attribute__title ">Comentário</div>
 						<label th:text=
 								"${anamnese.medicamentoComentario}? 
 								(${#strings.length(anamnese.medicamentoComentario) != 0?
@@ -201,13 +201,13 @@
 					<h5 class="mdl-cell mdl-cell--12-col">Avaliação Clínica</h5>
 					
 					<div class="sn-attribute mdl-cell mdl-cell--6-col">
-						<div class="sn-attribute__title ">Apetite:</div>
+						<div class="sn-attribute__title ">Apetite</div>
 						<div class="sn-attribute__value">
 							<label th:text="${anamnese.apetite}">Apetite</label>
 						</div>						
 					</div>
 					<div class="sn-attribute__value  mdl-cell mdl-cell--6-col">
-						<div class="sn-attribute__title ">Comentário:</div>
+						<div class="sn-attribute__title ">Comentário</div>
 						<label th:text=
 								"${anamnese.apetiteComentario}? 
 								(${#strings.length(anamnese.apetiteComentario) != 0?
@@ -219,13 +219,13 @@
 					</div>					
 
 					<div class="sn-attribute mdl-cell mdl-cell--6-col">
-						<div class="sn-attribute__title ">Sistema Urinário:</div>
+						<div class="sn-attribute__title ">Sistema Urinário</div>
 						<div class="sn-attribute__value">
 							<label th:text="${anamnese.sistemaUrinario}">Sistema Urinário</label>
 						</div>						
 					</div>
 					<div class="sn-attribute__value  mdl-cell mdl-cell--6-col">
-						<div class="sn-attribute__title ">Comentário:</div>
+						<div class="sn-attribute__title ">Comentário</div>
 						<label th:text=
 								"${anamnese.sistemaUrinarioComentario}? 
 								(${#strings.length(anamnese.sistemaUrinarioComentario) != 0?
@@ -237,13 +237,13 @@
 					</div>					
 
 					<div class="sn-attribute mdl-cell mdl-cell--6-col">
-						<div class="sn-attribute__title ">Sistema Gastrointestinal:</div>
+						<div class="sn-attribute__title ">Sistema Gastrointestinal</div>
 						<div class="sn-attribute__value">
 							<label th:text="${anamnese.sistemaGastrointestinal}">Sistema Gastrointestinal</label>
 						</div>						
 					</div>
 					<div class="sn-attribute__value  mdl-cell mdl-cell--6-col">
-						<div class="sn-attribute__title ">Comentário:</div>
+						<div class="sn-attribute__title ">Comentário</div>
 						<label th:text=
 								"${anamnese.sistemaGastrointestinalComentario}? 
 								(${#strings.length(anamnese.sistemaGastrointestinalComentario) != 0?
@@ -255,7 +255,7 @@
 					</div>
 					
 					<div class="sn-attribute mdl-cell mdl-cell--12-col">
-						<div class="sn-attribute__title">Água:</div>
+						<div class="sn-attribute__title">Água</div>
 						<div class="sn-attribute__value">
 							<label th:text=
 								"${anamnese.agua}? 
@@ -279,7 +279,7 @@
 						</label>			
 					</div>
 					<div class="sn-attribute__value mdl-cell mdl-cell--6-col">
-						<div class="sn-attribute__title ">Comentário:</div>
+						<div class="sn-attribute__title ">Comentário</div>
 						<label th:text=
 								"${anamnese.mastigacaoComentario}? 
 								(${#strings.length(anamnese.mastigacaoComentario) != 0?
@@ -301,7 +301,7 @@
 						</label>			
 					</div>
 					<div class="sn-attribute__value mdl-cell mdl-cell--6-col">
-						<div class="sn-attribute__title ">Comentário:</div>
+						<div class="sn-attribute__title ">Comentário</div>
 						<label th:text=
 								"${anamnese.disfagiaComentario}? 
 								(${#strings.length(anamnese.disfagiaComentario) != 0?
@@ -323,7 +323,7 @@
 						</label>			
 					</div>
 					<div class="sn-attribute__value mdl-cell mdl-cell--6-col">
-						<div class="sn-attribute__title ">Comentário:</div>
+						<div class="sn-attribute__title ">Comentário</div>
 						<label th:text=
 								"${anamnese.odinofagiaComentario}? 
 								(${#strings.length(anamnese.odinofagiaComentario) != 0?
@@ -345,7 +345,7 @@
 						</label>			
 					</div>
 					<div class="sn-attribute__value mdl-cell mdl-cell--6-col">
-						<div class="sn-attribute__title ">Comentário:</div>
+						<div class="sn-attribute__title ">Comentário</div>
 						<label th:text=
 								"${anamnese.piroseComentario}? 
 								(${#strings.length(anamnese.piroseComentario) != 0?
@@ -367,7 +367,7 @@
 						</label>			
 					</div>
 					<div class="sn-attribute__value mdl-cell mdl-cell--6-col">
-						<div class="sn-attribute__title ">Comentário:</div>
+						<div class="sn-attribute__title ">Comentário</div>
 						<label th:text=
 								"${anamnese.nauseaComentario}? 
 								(${#strings.length(anamnese.nauseaComentario) != 0?
@@ -389,7 +389,7 @@
 						</label>			
 					</div>
 					<div class="sn-attribute__value mdl-cell mdl-cell--6-col">
-						<div class="sn-attribute__title ">Comentário:</div>
+						<div class="sn-attribute__title ">Comentário</div>
 						<label th:text=
 								"${anamnese.vomitoComentario}? 
 								(${#strings.length(anamnese.vomitoComentario) != 0?
@@ -411,7 +411,7 @@
 						</label>			
 					</div>
 					<div class="sn-attribute__value mdl-cell mdl-cell--6-col">
-						<div class="sn-attribute__title ">Comentário:</div>
+						<div class="sn-attribute__title ">Comentário</div>
 						<label th:text=
 								"${anamnese.diarreiaComentario}? 
 								(${#strings.length(anamnese.diarreiaComentario) != 0?
@@ -433,7 +433,7 @@
 						</label>			
 					</div>
 					<div class="sn-attribute__value mdl-cell mdl-cell--6-col">
-						<div class="sn-attribute__title ">Comentário:</div>
+						<div class="sn-attribute__title ">Comentário</div>
 						<label th:text=
 								"${anamnese.constipacaoComentario}? 
 								(${#strings.length(anamnese.constipacaoComentario) != 0?
@@ -461,7 +461,7 @@
 						</label>			
 					</div>
 					<div class="sn-attribute__value mdl-cell mdl-cell--6-col">
-						<div class="sn-attribute__title ">Comentário:</div>
+						<div class="sn-attribute__title ">Comentário</div>
 						<label th:text=
 								"${anamnese.alergiaComentario}? 
 								(${#strings.length(anamnese.alergiaComentario) != 0?
@@ -483,7 +483,7 @@
 						</label>			
 					</div>
 					<div class="sn-attribute__value mdl-cell mdl-cell--6-col">
-						<div class="sn-attribute__title ">Comentário:</div>
+						<div class="sn-attribute__title ">Comentário</div>
 						<label th:text=
 								"${anamnese.intoleranciaComentario}? 
 								(${#strings.length(anamnese.intoleranciaComentario) != 0?
