@@ -85,21 +85,21 @@ public class PacienteController {
 	
 	@RequestMapping(value = "/{idPaciente}/AvaliacaoLaboratorial", method = RequestMethod.POST)
 	public String adicionarAvaliacaoLaboratorial(@PathVariable("idPaciente") Long idPaciente, @Valid AvaliacaoLaboratorial avaliacaoLaboratorial, BindingResult bindingResult, Model model, RedirectAttributes redirectAttributes){
-
+		
 		Paciente paciente = pacienteService.buscarPacientePorId(idPaciente);
-		
-		if (bindingResult.hasErrors()) {
-			avaliacaoLaboratorial.setPaciente(paciente);
-			model.addAttribute("avaliacaoLaboratorial", avaliacaoLaboratorial);
-		
-			return "avaliacao-laboratorial/cadastrar";
-		}
 		
 		if(isInvalido(paciente)){
 			Mensagem mensagem = new Mensagem("Paciente inexistente.", Mensagem.Tipo.ERRO, Mensagem.Prioridade.ALTA);
 			
 			redirectAttributes.addFlashAttribute("mensagem", mensagem);
 			return "redirect:/Nutricao/Buscar";
+		}
+		
+		if (bindingResult.hasErrors()) {
+			avaliacaoLaboratorial.setPaciente(paciente);
+			model.addAttribute("avaliacaoLaboratorial", avaliacaoLaboratorial);
+		
+			return "avaliacao-laboratorial/cadastrar";
 		}
 		
 		String cpfPessoaLogada = getCpfPessoaLogada();

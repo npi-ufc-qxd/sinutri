@@ -44,7 +44,7 @@ public class AvaliacaoLaboratorial {
 	private Servidor nutricionista;
 
 	@OneToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE})
-	@JoinColumn(name = "exame_id")
+	@JoinColumn(name = "avaliacao_laboratorial_id")
 	@Valid
 	@NotEmpty(message = "Uma Avaliação Laboratorial tem que possuir pelo menos um exame.")
 	private List<Exame> exames;
