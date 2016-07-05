@@ -36,13 +36,12 @@
 	
 	                      <fabgroup class="sn-fab--bottom-right">
 	
-	                              <button id="sn-excluir-recordatorio" 
-	                              th:attr="link=@{/Paciente/__${paciente.id}__/Recordatorio/__${recordatorio.id}__/Excluir}" 
+	                              <a th:href="@{/Paciente/__${paciente.id}__/Recordatorio/__${recordatorio.id}__/Excluir}" 
 	                              class="sn-fab sn-fab--hide mdl-button mdl-js-button 
 	                              mdl-button--fab mdl-button--mini-fab 
-	                              mdl-js-ripple-effect mdl-color--red-700">
+	                              mdl-js-ripple-effect mdl-color--red-700 bt-excluir-recordatorio">
 	                                      <i class="material-icons mdl-color-text--white">delete</i>
-	                              </button>
+	                              </a>
 	
 	                              <a th:href="@{/Paciente/__${paciente.id}__/Recordatorio/__${recordatorio.id}__/Editar}" 
 	                              class="sn-fab sn-fab--hide mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-js-ripple-effect mdl-color--purple">
@@ -188,7 +187,7 @@
 	      
 		</div>
 		
-		<div id="sn-confirma-excluir-modal">
+		<div id="modal-exclusao-recordatorio" class="sn-display-none">
 			Você realmente deseja excluir este Recordatório?
 		</div>
 		

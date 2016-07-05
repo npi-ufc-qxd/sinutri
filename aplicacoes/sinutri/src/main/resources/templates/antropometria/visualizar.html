@@ -27,7 +27,7 @@
 			<div class="mdl-cell mdl-cell--12-col sn-card sn-padding--48 mdl-color--teal">
 				 <div class="mdl-layout-title mdl-color-text--white">Avaliação Antropometrica</div>
 				 <fabgroup class="sn-fab--bottom-right">
-			         <a id="excluir" th:href="@{${'/Paciente/' + avaliacaoAntropometrica.paciente.id + '/Antropometria/' + avaliacaoAntropometrica.id + '/Excluir'}}"  class="sn-fab sn-fab--hide mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-js-ripple-effect mdl-color--red-700">
+			         <a th:href="@{${'/Paciente/' + avaliacaoAntropometrica.paciente.id + '/Antropometria/' + avaliacaoAntropometrica.id + '/Excluir'}}"  class="sn-fab sn-fab--hide mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-js-ripple-effect mdl-color--red-700 bt-excluir-avaliacao-antropometrica">
 			              <i class="material-icons mdl-color-text--white">delete</i>
 			         </a>
 			         <a th:href="@{'/Paciente/' + ${avaliacaoAntropometrica.paciente.id + '/Antropometria/' + avaliacaoAntropometrica.id + '/Editar'}}" class="sn-fab sn-fab--hide mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-js-ripple-effect mdl-color--purple">

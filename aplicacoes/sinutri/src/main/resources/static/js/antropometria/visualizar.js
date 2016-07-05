@@ -1,4 +1,4 @@
-$( "#excluir" ).click(function(event) {
+$( ".bt-excluir-avaliacao-antropometrica" ).click(function(event) {
 	   var dialog = sn_base.doRegistryDialog({
            title: "Você realmente deseja excluir esta Avaliação Antropométrica?", 
            dialog: "#modal-exclusao", 
