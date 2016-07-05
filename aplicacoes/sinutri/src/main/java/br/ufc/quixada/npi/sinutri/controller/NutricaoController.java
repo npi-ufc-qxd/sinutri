@@ -40,7 +40,7 @@ public class NutricaoController {
 			model.addAttribute("usuarios", usuarios);
 		}
 		else{
-			List<Paciente> pacientes = pacienteService.buscarPacientePorCpfOuNome(busca);
+			List<Paciente> pacientes = pacienteService.buscarPacientePorCpfOuNome("%"+busca.toLowerCase()+"%");
 			Collections.sort(pacientes);
 			model.addAttribute("pacientes", pacientes);
 		}

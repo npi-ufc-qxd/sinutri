@@ -13,8 +13,7 @@ public interface PacienteRepository extends JpaRepository<Paciente, Long> {
 	@Query("from Paciente p where p.pessoa.cpf = :cpf")
 	Paciente findByCPF(@Param("cpf") String cpf);
 		
-	@Query("from Paciente p where (p.pessoa.cpf = :busca or lower(p.pessoa.nome) like CONCAT(:busca, '%')")
+	@Query("from Paciente p where ((p.pessoa.cpf = :busca) or (lower(p.pessoa.nome) like :busca)) and p.pessoa.externo = true")
 	List<Paciente> findByCPForNome(@Param("busca") String busca);
-	
-	
+
 }
