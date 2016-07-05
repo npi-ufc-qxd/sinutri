@@ -1,6 +1,3 @@
-.sn-list-exames-container {
-
-}
 
 .sn-list-exames {
 	margin: 0;
@@ -8,6 +5,12 @@
 	padding-top: 16px;
 	padding-left: 16px;
 	padding-right: 16px;
+}
+
+.sn-list-exames li {
+	width: 100%;
+	margin-right: auto;
+	margin-left: auto;
 }
 
 .sn-list-exames li:last-child {
