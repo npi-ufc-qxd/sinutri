@@ -208,7 +208,7 @@
 							<ul class="sn-card-list mdl-list list">
 								<li th:each="prescricao,iterationStatus : ${paciente.prescricoes}" class="sn-card-list__item mdl-list__item mdl-list__item--one-line mdl-color--grey-200">
 									<span class="mdl-list__item-primary-content">
-										<span class="sn-card-list__item-text timestamp" th:attr="data-timestamp=${#dates.format(prescricao.criadoEm,'yyyyMMdd')}" th:text="${#dates.format(prescricao.criadoEm,'dd/MM/yyyy')}">dd/MMM/yyyy</span>
+										<span class="sn-card-list__item-text timestamp" th:attr="data-timestamp=${#dates.format(prescricao.criadoEm,'yyyyMMdd')}" th:text="${#dates.format(prescricao.criadoEm,'dd/MM/yyyy')}">dd/MMM/yyyy</span>										
 									</span>
 									<span class="mdl-list__item-secondary-content">
 										<button th:id="|sn-prescricao-${iterationStatus.index}|" class="mdl-button mdl-js-button mdl-button--icon">
