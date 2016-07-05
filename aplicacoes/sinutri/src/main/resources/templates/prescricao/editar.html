@@ -44,7 +44,7 @@
 						<label class="sn-textfield__label" for="inputDataCriacao">Data de Criação</label>
 						<label class="sn-textfield__messages sn-error-text" 
 								th:if="${#fields.hasErrors('criadoEm')}" th:errors="*{criadoEm}"> Erro na descrição </label>
-						<input class="sn-textfield__input sn-date-time-picker" type="text" 
+						<input class="sn-textfield__input sn-date-picker" type="text" 
 								id="inputDataCriacao" th:field="*{criadoEm}" />
 					</div>
 					
