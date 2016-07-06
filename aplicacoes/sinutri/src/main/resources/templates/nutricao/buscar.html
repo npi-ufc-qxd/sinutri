@@ -29,7 +29,7 @@
 						class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect mdl-cell mdl-cell--12-col"
 						for="checkPacienteExterno"> 
 						<input type="checkbox"	id="checkPacienteExterno" 
-							th:name="buscarPacienteExterno" class="mdl-checkbox__input" /> 
+							th:name="buscarPacienteExterno" class="mdl-checkbox__input"  /> 
 						<span class="mdl-checkbox__label">Buscar Paciente Externo</span>
 					</label>
 				</div>				
@@ -54,49 +54,50 @@
 				</ul>
 
 			</div>
-			<div id="u" >
-			<ul th:if = "${usuarios != null}" class="demo-list-two mdl-list list">
-				<li th:if = "${#lists.size(usuarios)==0}" class="mdl-list__item mdl-list__item--two-line">
-					<span class="mdl-list__item-primary-content">
-						<center> <span>Busca sem resultados!</span> </center>
-					</span>
-					
-				</li>
-				<li th:each="usuario : ${usuarios}" class="mdl-list__item mdl-list__item--two-line">
-					<span class="mdl-list__item-primary-content">
-						<i class="material-icons mdl-list__item-avatar">person</i>
-						<span th:text="${usuario.nome}" class="name" th:attr="data-name=${usuario.nome}">Felipe Pinho</span>						
-						<span class="mdl-list__item-sub-title" th:text="${usuario.email}">felipe76857685@gmail.com</span>
-					</span>
-					<span class="mdl-list__item-secondary-content">
-						<a class="mdl-list__item-secondary-action mdl-button 
-								  mdl-button--accent mdl-js-button mdl-js-ripple-effect" 
-								  th:href="@{'/Paciente/Registrar/' + ${usuario.cpf}}">Informações</a>
-					</span>
-				</li>				
-			</ul>
+			<div id="usuarios" >
+				<ul th:if = "${usuarios != null}" class="demo-list-two mdl-list list">
+					<li th:if = "${#lists.size(usuarios)==0}" class="mdl-list__item mdl-list__item--two-line">
+						<span class="mdl-list__item-primary-content">
+							<center> <span>Busca sem resultados!</span> </center>
+						</span>
+						
+					</li>
+					<li th:each="usuario: ${usuarios}" class="mdl-list__item mdl-list__item--two-line">
+						<span class="mdl-list__item-primary-content">
+							<i class="material-icons mdl-list__item-avatar">person</i>
+							<span th:text="${usuario.nome}" class="name">Felipe Pinho</span>						
+							<span class="mdl-list__item-sub-title" th:text="${usuario.email}">felipe76857685@gmail.com</span>
+						</span>
+						<span class="mdl-list__item-secondary-content">
+							<a class="mdl-list__item-secondary-action mdl-button 
+									  mdl-button--accent mdl-js-button mdl-js-ripple-effect" 
+									  th:href="@{'/Paciente/Registrar/' + ${usuario.cpf}}">Informações</a>
+						</span>
+					</li>				
+				</ul>
 			</div>
-			<ul th:if = "${pacientes != null}" class="demo-list-two mdl-list">
-				<li th:if = "${#lists.size(pacientes)==0}" class="mdl-list__item mdl-list__item--two-line">
-					<span class="mdl-list__item-primary-content">
-						<center> <span>Busca sem resultados!</span> </center>
-					</span>
-					
-				</li>
-				<li th:each="paciente : ${pacientes}" class="mdl-list__item mdl-list__item--two-line">
-					<span class="mdl-list__item-primary-content">
-						<i class="material-icons mdl-list__item-avatar">person</i>
-						<span th:text="${paciente.pessoa.nome}" >Felipe Pinho</span>						
-						<span class="mdl-list__item-sub-title" th:text="${paciente.pessoa.email}">felipe76857685@gmail.com</span>
-					</span>
-					<span class="mdl-list__item-secondary-content">
-						<a class="mdl-list__item-secondary-action mdl-button 
-								  mdl-button--accent mdl-js-button mdl-js-ripple-effect" 
-								  th:href="@{'/Paciente/' + ${paciente.pessoa.cpf}}">Informações</a>
-					</span>
-				</li>				
-			</ul>
-			
+			<div id="pacientes">
+				<ul th:if = "${pacientes != null}" class="demo-list-two mdl-list">
+					<li th:if = "${#lists.size(pacientes)==0}" class="mdl-list__item mdl-list__item--two-line">
+						<span class="mdl-list__item-primary-content">
+							<center> <span>Busca sem resultados!</span> </center>
+						</span>
+						
+					</li>
+					<li th:each="paciente : ${pacientes}" class="mdl-list__item mdl-list__item--two-line">
+						<span class="mdl-list__item-primary-content">
+							<i class="material-icons mdl-list__item-avatar">person</i>
+							<span th:text="${paciente.pessoa.nome}" class="name">Felipe Pinho</span>						
+							<span class="mdl-list__item-sub-title" th:text="${paciente.pessoa.email}">felipe76857685@gmail.com</span>
+						</span>
+						<span class="mdl-list__item-secondary-content">
+							<a class="mdl-list__item-secondary-action mdl-button 
+									  mdl-button--accent mdl-js-button mdl-js-ripple-effect" 
+									  th:href="@{'/Paciente/' + ${paciente.pessoa.id}}">Informações</a>
+						</span>
+					</li>				
+				</ul>
+			</div>
 		</div>
 	</div>
 	
@@ -110,15 +111,14 @@
 	<script type="text/javascript" th:src="@{/js/list.js}"></script>
 	<script type="text/javascript">
 		var options = {
-					valueNames: ['nome'],
-					{ attr: 'data-name', name: 'name' }
+					valueNames: ['name']
 				  	};
-		var usuario = new List('u', options).sort('name', { order: "desc" });
+		
+		var userList = new List('usuarios', options).sort('name');
+		var pacienteList = new List('pacientes', options).sort('name');
 	</script>
 	
-	<script type="text/javascript" th:src="@{http://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js}"></script>
-	
-	<script type="text/javascript" th:src="@{http://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js}"></script>
+	<script type="text/javascript" th:src="@{http://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js}"></script>	
 </section>
 
 </html>

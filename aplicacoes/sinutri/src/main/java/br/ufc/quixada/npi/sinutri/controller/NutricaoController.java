@@ -43,8 +43,7 @@ public class NutricaoController {
 			List<Paciente> pacientes = pacienteService.buscarPacientePorCpfOuNome("%"+busca.toLowerCase()+"%");
 			Collections.sort(pacientes);
 			model.addAttribute("pacientes", pacientes);
-		}
-		
+		}		
 		model.addAttribute("ultimaBusca", busca);
 
 		return "nutricao/buscar";
