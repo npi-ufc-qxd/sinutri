@@ -961,5 +961,7 @@ table {
 	
 }
 
-
+.sn-display-none {
+	display: none;
+}
 

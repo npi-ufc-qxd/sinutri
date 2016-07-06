@@ -32,7 +32,7 @@
 
                       <fabgroup class="sn-fab--bottom-right">
 
-                              <a id="excluir" th:href="@{${'/Paciente/'+prescricao.paciente.id+'/Prescricao/'+ prescricao.id +'/Excluir'}}" class="sn-fab sn-fab--hide mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-js-ripple-effect mdl-color--red-700">
+                              <a id="excluir" th:href="@{${'/Paciente/'+prescricao.paciente.id+'/Prescricao/'+ prescricao.id +'/Excluir'}}" class="sn-fab sn-fab--hide mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-js-ripple-effect mdl-color--red-700 bt-excluir-prescricao">
                                       <i class="material-icons mdl-color-text--white">delete</i>
                               </a>
 
@@ -106,42 +106,14 @@
 		
 	</div>
 
-	<div id="modal-exclusao">
-		
-	</div>  
+	<div id="modal-exclusao-prescricao" class="sn-display-none">
+		Você realmente deseja excluir este Prescrição?
+	</div>
 		
 </section>
 
-
-
 	<section layout:fragment="js"> 
-		<script type="text/javascript">
-		
-		$( "#excluir" ).click(function(event) {
-		          var dialog = sn_base.doRegistryDialog({
-		              title: "Você realmente deseja excluir esta prescrição?",
-		              dialog: "#modal-exclusao",
-		              buttons: [
-		                      {
-		                         label: "SIM",
-		                         attrs: {href: $(this).attr("href")},
-		                         action: function() {
-		                             dialog.close();
-		                         }
-		                      },
-		                      {
-		                          label: "NÃO",
-		                          action: function() {
-		                              dialog.close();
-		                          }
-		                      }
-		              ]
-		              });                     
-		          dialog.showModal();
-		          event.preventDefault();
-		      });
-		
-		</script>
+		<script type="text/javascript" th:src="@{/js/prescricao/visualizar.js}"></script>
 	</section>
 
 </html>

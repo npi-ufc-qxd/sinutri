@@ -35,9 +35,8 @@
 
                       <fabgroup class="sn-fab--bottom-right">
 
-                              <a id="bt-excluir"
-									th:href="@{${'/Paciente/' + anamnese.paciente.id +'/Anamnese/'+ anamnese.id +'/Excluir/'}}" 
-                              		class="sn-fab sn-fab--hide mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-js-ripple-effect mdl-color--red-700">
+                              <a th:href="@{${'/Paciente/' + anamnese.paciente.id +'/Anamnese/'+ anamnese.id +'/Excluir/'}}" 
+                              		class="sn-fab sn-fab--hide mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-js-ripple-effect mdl-color--red-700 bt-excluir-anamnese">
                                     <i class="material-icons mdl-color-text--white">delete</i>
                               </a>
 
@@ -532,9 +531,9 @@
               </div>
       </div>
       
-      <div id="modal-exclusao">
-		
-	</div>
+      <div id="modal-exclusao-anamnese" class="sn-display-none">
+		Você realmente deseja excluir esta Anamnese?
+	  </div> 
 
 </div>
 
@@ -542,31 +541,7 @@
 </section>
 
 <section layout:fragment="js">
-	<script type="text/javascript">
-		$( "#bt-excluir" ).click(function(event) {
-	        var dialog = sn_base.doRegistryDialog({
-	            title: "Você realmente deseja excluir esta Anamnese?",
-	            dialog: "#modal-exclusao",
-	            buttons: [
-	                    {
-	                       label: "SIM",
-	                       attrs: {href: $(this).attr("href")},
-	                       action: function() {
-	                           dialog.close();
-	                       }
-	                    },
-	                    {
-	                        label: "NÃO",
-	                        action: function() {
-	                            dialog.close();
-	                        }
-	                    }
-	            ]
-	            });                     dialog.showModal();
-	        event.preventDefault();
-	    });
-	</script>
-
+	<script type="text/javascript" th:src="@{/js/anamnese/visualizar.js}"></script>
 </section>
 
 </html>

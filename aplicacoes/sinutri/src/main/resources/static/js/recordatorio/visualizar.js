@@ -1,12 +1,16 @@
 $(function() {
-	componentHandler.registerUpgradedCallback("MaterialLayout", function(elem) {
+	$(".bt-excluir-recordatorio").click( function(event) {
+		$("#modal-exclusao-recordatorio").removeClass("sn-display-none");
 		var dialog = sn_base.doRegistryDialog({
 			title: "Excluir Recordatório",
-			dialog: "#sn-confirma-excluir-modal",
+			dialog: "#modal-exclusao-recordatorio",
 			buttons: [
 		          {
 		        	  label: "SIM",
-		        	  attrs: {href: $("#sn-excluir-recordatorio").attr("link")},
+		        	  attrs: {href: $(this).attr("href")}, 
+                      action: function() {
+                          dialog.close();
+                      }
 		          },
 		          {
 		        	  label: "NÃO",
@@ -17,9 +21,7 @@ $(function() {
 			]
 		});
 		
-		$("#sn-excluir-recordatorio").click( function() {
-			dialog.showModal();
-		});
-		
+		dialog.showModal();
+		event.preventDefault();
 	});
 });
