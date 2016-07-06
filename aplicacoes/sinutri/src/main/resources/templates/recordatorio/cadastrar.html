@@ -16,6 +16,12 @@
 </head>
 
 <body>
+	<section layout:fragment="breadcrumbs">
+		<a th:href="@{/Nutricao/Buscar}" class="sn-breadcrumbs mdl-layout-title">SiNutri</a>
+		<a th:href="@{/Nutricao/Buscar}" class="sn-breadcrumbs mdl-layout-title">Buscar</a>
+		<a th:href="@{${'/Paciente/'+paciente.id}}" class="sn-breadcrumbs mdl-layout-title">Paciente</a>
+		<a class="mdl-layout-title sn-breadcrumbs">Cadastrar Recordatório</a>
+	</section>
 	<section layout:fragment="conteudo">
 	
 		<div class="mdl-grid">
@@ -37,26 +43,11 @@
 		    th:object="${recordatorio}"
 		    accept-charset="utf-8">
 
-				<div id="titulo" class="mdl-cell mdl-cell--12-col sn-card sn-padding--48 mdl-color--teal">
+				<div id="titulo" class="mdl-cell mdl-cell--12-col sn-card sn-padding--48 mdl-color--white">
 				
-					<div class="mdl-layout-title mdl-color-text--white">
+					<div class="mdl-layout-title mdl-color-text--indigo-600">
 						Cadastrar Recordatório
-					</div>
-					
-					<button type="button" 
-	   				class="mdl-button 
-	   				mdl-js-button 
-	   				mdl-button--fab 
-	   				mdl-js-ripple-effect 
-	   				mdl-button--colored 
-	   				mdl-color-text--white
-	   				sn-fab--bottom-right" 
-	   				id="sn-add-refeicao-button">
-	   				
-	   					<i class="material-icons">add</i>
-	   					
-	   				</button>
-					
+					</div>				
 				</div>
 				
 				
@@ -167,6 +158,9 @@
 			    				
 						  	</span>
 						  	
+						</li>
+						<li>
+							<button id="sn-add-refeicao-button" type="button" class="mdl-button mdl-button--primary mdl-js-button mdl-js-ripple-effect">Adicionar Refeição</button>
 						</li>
 						
 					</ul>

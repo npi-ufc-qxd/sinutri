@@ -35,14 +35,11 @@ public class NutricaoController {
 	@RequestMapping(value="/Buscar", method = RequestMethod.POST)
 	public String paginaInicial(Model model, @RequestParam("busca") String busca, @RequestParam(value ="buscarPacienteExterno", required=false) boolean buscarPacienteExterno){		
 		
-		if(!buscarPacienteExterno){
-			List<Usuario> usuarios = usuarioService.getByCpfOrNome(busca);			
-			model.addAttribute("usuarios", usuarios);
+		if(!buscarPacienteExterno){	
+			model.addAttribute("usuarios", usuarioService.getByCpfOrNome(busca));
 		}
-		else{
-			List<Paciente> pacientes = pacienteService.buscarPacientePorCpfOuNome("%"+busca.toLowerCase()+"%");
-			Collections.sort(pacientes);
-			model.addAttribute("pacientes", pacientes);
+		else{			
+			model.addAttribute("pacientes", pacienteService.buscarPacientePorCpfOuNome("%"+busca.toLowerCase()+"%"));
 		}		
 		model.addAttribute("ultimaBusca", busca);
 

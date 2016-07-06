@@ -950,6 +950,18 @@ table {
 
 }
 
+.sn-breadcrumbs-container {
+	
+	align-items: center;
+	display:         flex;
+	display: -webkit-flex;
+	display:    -moz-flex;
+	display:     -ms-flex;
+	display:      -o-flex;
+	
+}
 
-
+.sn-display-none {
+	display: none;
+}
 

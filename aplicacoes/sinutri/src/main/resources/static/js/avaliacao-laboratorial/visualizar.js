@@ -1,9 +1,9 @@
 $(function() {
-	$(".bt-excluir-inquerito-alimentar").click( function(event) {
-		$("#modal-exclusao-inquerito-alimentar").removeClass("sn-display-none");
+	$(".bt-excluir-avaliacao-laboratorial").click( function(event) {
+		$("#modal-exclusao-avaliacao-laboratorial").removeClass("sn-display-none");
 		var dialog = sn_base.doRegistryDialog({
-			title: "Excluir Inquérito Alimentar",
-			dialog: "#modal-exclusao-inquerito-alimentar",
+			title: "Excluir Avaliação Laboratorial",
+			dialog: "#modal-exclusao-avaliacao-laboratorial",
 			buttons: [
 		          {
 		        	  label: "SIM",
