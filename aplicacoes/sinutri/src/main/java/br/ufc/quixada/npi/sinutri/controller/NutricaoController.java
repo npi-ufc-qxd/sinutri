@@ -1,21 +1,14 @@
 package br.ufc.quixada.npi.sinutri.controller;
 
-import java.util.Collection;
-import java.util.Collections;
-import java.util.List;
-
 import javax.inject.Inject;
 
-import org.mockito.internal.matchers.CompareTo;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import br.ufc.quixada.npi.ldap.model.Usuario;
 import br.ufc.quixada.npi.ldap.service.UsuarioService;
-import br.ufc.quixada.npi.sinutri.model.Paciente;
 import br.ufc.quixada.npi.sinutri.service.PacienteService;
 
 @Controller
