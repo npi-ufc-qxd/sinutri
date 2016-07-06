@@ -29,7 +29,7 @@
 
 					<fabgroup class="sn-fab--bottom-right">
 
-						<a id="sn-excluir" th:href="@{/Paciente/__${avaliacaoLaboratorial.paciente.id}__/AvaliacaoLaboratorial/__${avaliacaoLaboratorial.id}__/Excluir}" class="sn-fab sn-fab--hide mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-js-ripple-effect mdl-color--red-700">
+						<a id="sn-excluir" th:href="@{/Paciente/__${avaliacaoLaboratorial.paciente.id}__/AvaliacaoLaboratorial/__${avaliacaoLaboratorial.id}__/Excluir}" class="sn-fab sn-fab--hide mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-js-ripple-effect mdl-color--red-700 bt-excluir-avaliacao-laboratorial">
 							<i class="material-icons mdl-color-text--white">delete</i>
 						</a>
 
@@ -115,7 +115,10 @@
 
 	</div>
 	
-	<div id="sn-excluir-modal"></div>
+	<div id="modal-exclusao-avaliacao-laboratorial" class="sn-display-none">
+		Você realmente deseja excluir esta Avaliação Laboratorial?
+	</div>
+		
 </section>
 
 <section layout:fragment="js">

@@ -1,24 +1,27 @@
-$( "#excluir" ).click(function(event) {
-      var dialog = sn_base.doRegistryDialog({
-          title: "Você realmente deseja excluir esta prescrição?",
-          dialog: "#modal-exclusao",
-          buttons: [
-                  {
-                     label: "SIM",
-                     attrs: {href: $(this).attr("href")},
-                     action: function() {
-                         dialog.close();
-                     }
-                  },
-                  {
-                      label: "NÃO",
+$(function() {
+	$(".bt-excluir-prescricao").click( function(event) {
+		$("#modal-exclusao-prescricao").removeClass("sn-display-none");
+		var dialog = sn_base.doRegistryDialog({
+			title: "Excluir Prescrição",
+			dialog: "#modal-exclusao-prescricao",
+			buttons: [
+		          {
+		        	  label: "SIM",
+		        	  attrs: {href: $(this).attr("href")}, 
                       action: function() {
                           dialog.close();
                       }
-                  }
-          ]
-          });                     
-      dialog.showModal();
-      event.preventDefault();
-  });
+		          },
+		          {
+		        	  label: "NÃO",
+		        	  action: function() {
+		        		  dialog.close();
+		        	  }
+		          }
+			]
+		});
 		
+		dialog.showModal();
+		event.preventDefault();
+	});
+});

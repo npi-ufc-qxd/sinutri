@@ -219,7 +219,7 @@
 											<a th:href="@{${'/Paciente/' + paciente.id + '/Prescricao/'+ prescricao.id }}" class="mdl-menu__item">Visualizar</a>
 											<a th:href="@{${'/Paciente/' + paciente.id + '/Prescricao/' + prescricao.id + '/Editar'}}" class="mdl-menu__item">Editar</a>
 											<div class="mdl-menu__item--full-bleed-divider"></div>
-											<a th:href="@{${'/Paciente/' + paciente.id + '/Prescricao/' + prescricao.id + '/Excluir'}}" class="mdl-menu__item">Excluir</a>
+											<a th:href="@{${'/Paciente/' + paciente.id + '/Prescricao/' + prescricao.id + '/Excluir'}}" class="mdl-menu__item  bt-excluir-prescricao">Excluir</a>
 										</div>
 									</span>
 
@@ -253,7 +253,7 @@
 											<a th:href="@{${'/Paciente/' + paciente.id + '/InqueritoAlimentar/'+ inqueritoAlimentar.id }}" class="mdl-menu__item">Visualizar</a>
 											<a th:href="@{${'/Paciente/' + paciente.id + '/InqueritoAlimentar/'+ inqueritoAlimentar.id + '/Editar'}}" class="mdl-menu__item">Editar</a>
 											<div class="mdl-menu__item--full-bleed-divider"></div>
-											<a th:href="@{${'/Paciente/' + paciente.id + '/InqueritoAlimentar/'+ inqueritoAlimentar.id + '/Excluir'}}" class="mdl-menu__item bt-excluir-prescricao">Excluir</a>
+											<a th:href="@{${'/Paciente/' + paciente.id + '/InqueritoAlimentar/'+ inqueritoAlimentar.id + '/Excluir'}}" class="mdl-menu__item bt-excluir-inquerito-alimentar">Excluir</a>
 										</div>
 									</span>
 
@@ -287,7 +287,7 @@
 											<a th:href="@{${'/Paciente/' + paciente.id + '/AvaliacaoLaboratorial/'+ avaliacaoLaboratorial.id }}" class="mdl-menu__item">Visualizar</a>
 											<a th:href="@{${'/Paciente/' + paciente.id + '/AvaliacaoLaboratorial/'+ avaliacaoLaboratorial.id + '/Editar'}}" class="mdl-menu__item">Editar</a>
 											<div class="mdl-menu__item--full-bleed-divider"></div>
-											<a th:href="@{${'/Paciente/' + paciente.id + '/AvaliacaoLaboratorial/'+ avaliacaoLaboratorial.id + '/Excluir'}}" class="mdl-menu__item">Excluir</a>
+											<a th:href="@{${'/Paciente/' + paciente.id + '/AvaliacaoLaboratorial/'+ avaliacaoLaboratorial.id + '/Excluir'}}" class="mdl-menu__item bt-excluir-avaliacao-laboratorial">Excluir</a>
 										</div>
 									</span>
 
@@ -353,8 +353,8 @@
 		</div>
 		
 		<div id="modal-exclusao-prescricao" class="sn-display-none">
-			Você realmente deseja excluir esta Prescrição?
-		</div>  
+			Você realmente deseja excluir este Prescrição?
+		</div>
 		
 		<div id="modal-exclusao-inquerito-alimentar" class="sn-display-none">
 			Você realmente deseja excluir este Inquérito Alimentar?
@@ -362,7 +362,7 @@
 		
 		<div id="modal-exclusao-avaliacao-laboratorial" class="sn-display-none">
 			Você realmente deseja excluir esta Avaliação Laboratorial?
-		</div>  
+		</div>
 		
 		<div id="modal-exclusao-plano-alimentar" class="sn-display-none">
 			Você realmente deseja excluir este Plano Alimentar?
