@@ -39,8 +39,8 @@
 		<div class="mdl-grid">
 				<form class="sn-form mdl-cell mdl-cell--7-col-desktop mdl-cell--1-offset-desktop mdl-cell--8-col-tablet mdl-cell--4-col-phone mdl-grid mdl-grid--no-spacing sn-main-card" id="form-antropometria" action="#" th:action="@{${'/Paciente/'+avaliacaoAntropometrica.paciente.id+'/Antropometria/+avaliacaoAntropometrica+/Editar'}}" th:object="${avaliacaoAntropometrica}" th:method="post" enctype="multipart/form-data">
 					
-						<div class="mdl-cell mdl-cell--12-col sn-card sn-padding--48 mdl-color--teal">
-              				<div class="mdl-layout-title mdl-color-text--white">Editar Avaliação Antropométrica</div>
+						<div class="mdl-cell mdl-cell--12-col sn-card sn-padding--48 mdl-color--white">
+              				<div class="mdl-layout-title mdl-color-text--purple-600">Editar Avaliação Antropométrica</div>
        					</div>
 						
 						<input type="hidden" th:field="*{id}" />
@@ -57,6 +57,9 @@
 								<label th:for="${#ids.next('criadoEm')}" class="sn-textfield__label">Data de Criação:</label>
 								<label class="sn-textfield__messages sn-error-text" th:for="${#ids.next('criadoEm')}" th:if="${#fields.hasErrors('criadoEm')}" th:errors="*{criadoEm}">Data inválida</label>
 								<input type="text" th:field="*{criadoEm}" class="sn-textfield__input sn-date-picker" required="required" />
+							</div>
+							
+							<div class="sn-textfield mdl-cell mdl-cell--6-col">
 							</div>
 							
 							<div class="sn-textfield mdl-cell mdl-cell--6-col">

@@ -30,8 +30,8 @@
 			th:object="${anamnese}">
 
 			<div
-				class="mdl-cell mdl-cell--12-col sn-card sn-padding--48 mdl-color--teal">
-				<div class="mdl-layout-title mdl-color-text--white">Editar Anamnese</div>
+				class="mdl-cell mdl-cell--12-col sn-card sn-padding--48 mdl-color--white">
+				<div class="mdl-layout-title mdl-color-text--red-600">Editar Anamnese</div>
 			</div>
 
 			<div class="sn-card-top mdl-cell mdl-cell--12-col sn-card sn-padding--48 mdl-color--white mdl-grid">
@@ -42,7 +42,7 @@
 
 				<div class="sn-textfield mdl-cell mdl-cell--6-col">
 					<label class="sn-textfield__label" for="dataModificacao">Data
-						de Edição:</label> <input class="sn-textfield__input sn-date-picker"
+						de Edição</label> <input class="sn-textfield__input sn-date-picker"
 						type="text" id="dataModificacao" th:field="*{atualizadoEm}" /> <label
 						class="sn-textfield__messages sn-error-text"
 						th:if="${#fields.hasErrors('atualizadoEm')}"
@@ -51,7 +51,7 @@
 
 				<div class="sn-textfield mdl-cell mdl-cell--12-col">
 					<label class="sn-textfield__label" for="textObjetivoConsulta">Objetivo
-						da consulta:</label>
+						da consulta</label>
 					<textarea class="sn-textfield__input" rows="5"
 						id="textObjetivoConsulta" th:field="*{objetivoConsulta}" maxlength="255"
 						placeholder="Descreva aqui o objetivo da consulta..."></textarea>
@@ -68,7 +68,7 @@
 					id="checkAtividadeFisica" th:field="*{atividadeFisica}"
 					class="mdl-checkbox__input"
 					onClick="checkChange('AtividadeFisica')" /> <span
-					class="mdl-checkbox__label">Atividade Física:</span>
+					class="mdl-checkbox__label">Atividade Física</span>
 				</label>
 				<div class="sn-textfield mdl-cell mdl-cell--12-col">
 					<label class="sn-textfield__label" for="inputTextAtividadeFisica">Quais
@@ -103,7 +103,7 @@
 					id="checkBebidaAlcoolica" th:field="*{bebidaAlcoolica}"
 					class="mdl-checkbox__input"
 					onClick="checkChange('BebidaAlcoolica')" /> <span
-					class="mdl-checkbox__label">Bebida alcóolica:</span>
+					class="mdl-checkbox__label">Bebida alcóolica</span>
 				</label>
 				<div class="sn-textfield mdl-cell mdl-cell--12-col">
 					<label class="sn-textfield__label" for="inputTextBebidaAlcoolica">Comentários</label>
@@ -132,7 +132,7 @@
 					for="checkMedicamento"> <input type="checkbox"
 					id="checkMedicamento" th:field="*{medicamento}"
 					class="mdl-checkbox__input" onclick="checkChange('Medicamento')" />
-					<span class="mdl-checkbox__label">Medicação:</span>
+					<span class="mdl-checkbox__label">Medicação</span>
 				</label>
 				<div class="sn-textfield mdl-cell mdl-cell--12-col">
 					<label class="sn-textfield__label" for="inputTextMedicamento">Comentários</label>
@@ -150,7 +150,7 @@
 					<label class="sn-textfield__label" for="selectApetite">Apetite</label>
 					<select id="selectApetite" th:field="*{apetite}"
 						class="sn-selectfield__select" onchange="selectChange('Apetite')">
-						<option value="">Selecione:</option>
+						<option value="">Selecione</option>
 						<option th:each="t: ${tiposApetite}" th:value="${t.tipo}"
 							th:text="${t.tipo}"></option>
 					</select>
@@ -169,7 +169,7 @@
 						Urinário</label> <select id="selectSistemaUrinario"
 						th:field="*{sistemaUrinario}" class="sn-selectfield__select"
 						onchange="selectChange('SistemaUrinario')">
-						<option value="">Selecione:</option>
+						<option value="">Selecione</option>
 						<option th:each="t: ${tiposSistemaUrinario}" th:value="${t.tipo}"
 							th:text="${t.tipo}"></option>
 					</select>
@@ -192,7 +192,7 @@
 						th:field="*{sistemaGastrointestinal}"
 						class="sn-selectfield__select"
 						onchange="selectChange('SistemaGastrointestinal')">
-						<option value="">Selecione:</option>
+						<option value="">Selecione</option>
 						<option th:each="t: ${tiposSistemaGastrointestinal}"
 							th:value="${t.tipo}" th:text="${t.tipo}"></option>
 					</select>
@@ -211,7 +211,7 @@
 
 				<div class="sn-textfield mdl-cell mdl-cell--12-col">
 					<label class="sn-textfield__label" for="inputTextAgua">Consumo
-						de água (copos):</label> <input id="inputTextAgua" th:field="*{agua}"
+						de água (copos)</label> <input id="inputTextAgua" th:field="*{agua}"
 						class="sn-textfield__input" type="number" step="0.01" min="0"
 						max="9999999" pattern="-?[0-9]*(\.[0-9]+)?" />
 					<div class="error-validation">
@@ -226,7 +226,7 @@
 					for="checkMastigacao"> <input type="checkbox"
 					id="checkMastigacao" th:field="*{mastigacao}"
 					class="mdl-checkbox__input" onclick="checkChange('Mastigacao')" />
-					<span class="mdl-checkbox__label">Mastigação:</span>
+					<span class="mdl-checkbox__label">Mastigação</span>
 				</label>
 				<div class="sn-textfield mdl-cell mdl-cell--12-col">
 					<label class="sn-textfield__label" for="inputTextMastigacao">Comentários</label>
@@ -242,7 +242,7 @@
 					for="checkDisfagia"> <input type="checkbox"
 					id="checkDisfagia" th:field="*{disfagia}"
 					class="mdl-checkbox__input" onclick="checkChange('Disfagia')" /> <span
-					class="mdl-checkbox__label">Disfagia:</span>
+					class="mdl-checkbox__label">Disfagia</span>
 				</label>
 				<div class="sn-textfield mdl-cell mdl-cell--12-col">
 					<label class="sn-textfield__label" for="inputTextDisfagia">Comentários</label>
@@ -258,7 +258,7 @@
 					for="checkOdinofagia"> <input type="checkbox"
 					id="checkOdinofagia" th:field="*{odinofagia}"
 					class="mdl-checkbox__input" onclick="checkChange('Odinofagia')" />
-					<span class="mdl-checkbox__label">Odinofagia:</span>
+					<span class="mdl-checkbox__label">Odinofagia</span>
 				</label>
 				<div class="sn-textfield mdl-cell mdl-cell--12-col">
 					<label class="sn-textfield__label" for="inputTextOdinofagia">Comentários</label>
@@ -274,7 +274,7 @@
 					for="checkPirose"> <input type="checkbox" id="checkPirose"
 					th:field="*{pirose}" class="mdl-checkbox__input"
 					onclick="checkChange('Pirose')" /> <span
-					class="mdl-checkbox__label">Pirose:</span>
+					class="mdl-checkbox__label">Pirose</span>
 				</label>
 				<div class="sn-textfield mdl-cell mdl-cell--12-col">
 					<label class="sn-textfield__label" for="inputTextPirose">Comentários</label>
@@ -290,7 +290,7 @@
 					for="checkNausea"> <input type="checkbox" id="checkNausea"
 					th:field="*{nausea}" class="mdl-checkbox__input"
 					onclick="checkChange('Nausea')" /> <span
-					class="mdl-checkbox__label">Nausea:</span>
+					class="mdl-checkbox__label">Nausea</span>
 				</label>
 				<div class="sn-textfield mdl-cell mdl-cell--12-col">
 					<label class="sn-textfield__label" for="inputTextNausea">Comentários</label>
@@ -306,7 +306,7 @@
 					for="checkVomito"> <input type="checkbox" id="checkVomito"
 					th:field="*{vomito}" class="mdl-checkbox__input"
 					onclick="checkChange('Vomito')" /> <span
-					class="mdl-checkbox__label">Vomito:</span>
+					class="mdl-checkbox__label">Vomito</span>
 				</label>
 				<div class="sn-textfield mdl-cell mdl-cell--12-col">
 					<label class="sn-textfield__label" for="inputTextVomito">Comentários</label>
@@ -322,7 +322,7 @@
 					for="checkDiarreia"> <input type="checkbox"
 					id="checkDiarreia" th:field="*{diarreia}"
 					class="mdl-checkbox__input" onclick="checkChange('Diarreia')" /> <span
-					class="mdl-checkbox__label">Diarréia:</span>
+					class="mdl-checkbox__label">Diarréia</span>
 				</label>
 				<div class="sn-textfield mdl-cell mdl-cell--12-col">
 					<label class="sn-textfield__label" for="inputTextDiarreia">Comentários</label>
@@ -338,7 +338,7 @@
 					for="checkConstipacao"> <input type="checkbox"
 					id="checkConstipacao" th:field="*{constipacao}"
 					class="mdl-checkbox__input" onclick="checkChange('Constipacao')" />
-					<span class="mdl-checkbox__label">Constipacao:</span>
+					<span class="mdl-checkbox__label">Constipacao</span>
 				</label>
 				<div class="sn-textfield mdl-cell mdl-cell--12-col">
 					<label class="sn-textfield__label" for="inputTextConstipacao">Comentários</label>
@@ -356,7 +356,7 @@
 					for="checkAlergia"> <input type="checkbox"
 					id="checkAlergia" th:field="*{alergia}" class="mdl-checkbox__input"
 					onclick="checkChange('Alergia')" /> <span
-					class="mdl-checkbox__label">Alergia:</span>
+					class="mdl-checkbox__label">Alergia</span>
 				</label>
 				<div class="sn-textfield mdl-cell mdl-cell--12-col">
 					<label class="sn-textfield__label" for="inputTextAlergia">Comentários</label>
@@ -372,7 +372,7 @@
 					for="checkIntolerancia"> <input type="checkbox"
 					id="checkIntolerancia" th:field="*{intolerancia}"
 					class="mdl-checkbox__input" onclick="checkChange('Intolerancia')" />
-					<span class="mdl-checkbox__label">Intolerância:</span>
+					<span class="mdl-checkbox__label">Intolerância</span>
 				</label>
 				<div class="sn-textfield mdl-cell mdl-cell--12-col">
 					<label class="sn-textfield__label" for="inputTextIntolerancia">Comentários</label>
