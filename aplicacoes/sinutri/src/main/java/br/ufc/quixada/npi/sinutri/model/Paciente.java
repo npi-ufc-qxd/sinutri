@@ -97,6 +97,7 @@ public class Paciente implements Serializable {
 		this.avaliacoesAntropometricas = avaliacoesAntropometricas;
 	}
 
+
 	public List<AvaliacaoLaboratorial> getAvaliacoesLaboratoriais() {
 		return avaliacoesLaboratoriais;
 	}

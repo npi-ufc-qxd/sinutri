@@ -1,5 +1,7 @@
 package br.ufc.quixada.npi.sinutri.service.impl;
 
+import java.util.List;
+
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -38,6 +40,11 @@ public class PacienteServiceImpl implements PacienteService{
 	@Override
 	public Paciente buscarPacientePorCPF(String cpf) {
 		return pacienteRepository.findByCPF(cpf);
+	}
+
+	@Override
+	public List<Paciente> buscarPacientePorCpfOuNome(String busca) {		
+		return pacienteRepository.findByCPForNome(busca);
 	}
 	
 }
