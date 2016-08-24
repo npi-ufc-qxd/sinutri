@@ -445,6 +445,8 @@ public class PacienteController {
 		
 		Paciente paciente = new Paciente();
 		
+		pessoa.setExterno(true);
+		
 		paciente.setPessoa(pessoa);
 		try{
 			pacienteService.adicionarPaciente(paciente);
