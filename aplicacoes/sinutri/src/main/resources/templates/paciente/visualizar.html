@@ -41,16 +41,11 @@
 	
             	<div class="mdl-cell mdl-cell--12-col sn-card">
 
-                     <div class="mdl-layout-title mdl-color-text--white sn-padding--48 mdl-color--teal">Paciente</div>
+                     <div class="mdl-layout-title mdl-color-text--white sn-padding--48 mdl-color--teal" th:text="${paciente.pessoa.nome}"></div>
 
 					<div class="sn-padding--48 mdl-color--white">
 						
 						<div class="mdl-grid mdl-grid--no-spacing">
-										
-							<div class="sn-attribute mdl-cell mdl-cell--4-col">
-						        <div class="sn-attribute__title">Nome</div>
-						        <div class="sn-attribute__value" th:text="${paciente.pessoa.nome}"></div>
-							</div>
 
 							<div class="sn-attribute mdl-cell mdl-cell--4-col">
 						        <div class="sn-attribute__title">Idade</div>
