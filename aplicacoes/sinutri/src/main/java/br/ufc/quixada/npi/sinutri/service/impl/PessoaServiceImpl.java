@@ -48,4 +48,14 @@ public class PessoaServiceImpl implements PessoaService {
 		pessoaRepository.delete(pessoa);
 		
 	}
+
+	@Override
+	public Pessoa adicionarPessoa(Pessoa pessoa) {
+		return pessoaRepository.save(pessoa);
+	}
+
+	@Override
+	public Servidor adicionarServidor(Servidor servidor) {
+		return servidorRepository.save(servidor);
+	}
 }
