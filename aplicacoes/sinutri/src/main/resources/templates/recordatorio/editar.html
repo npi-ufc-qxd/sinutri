@@ -50,7 +50,7 @@
 				<div id="titulo" class="mdl-cell mdl-cell--12-col sn-card sn-padding--48 mdl-color--white">
 				
 					<div class="mdl-layout-title mdl-color-text--indigo-600">
-						Cadastrar Recordatório
+						Editar Recordatório
 					</div>
 					
 				</div>
@@ -379,7 +379,22 @@
 						</ul>
 						
 					</div>
+					<div class="sn-form-actions">
+   				
+		   				<input type="submit" 
+		   				id="btnAdicionarRecordatorio"
+					    class="mdl-button mdl-js-button mdl-button--raised mdl-button--primary mdl-js-ripple-effect" 
+					    value="Editar" /> 
+					    
+					    <button type="button" 
+					    id="btnCancelar"
+					    class="mdl-button mdl-js-button mdl-button--colored mdl-js-ripple-effect" 
+					    th:attr="link=@{/Paciente/__${paciente.id}__/Recordatorio/__*{id}__}">
+					    	Cancelar
+						</button>
 					
+					</div> 
+				
 				</div>
 		
 			    <div id="sn-add-refeicao-modal">
@@ -457,22 +472,6 @@
 	   				</div>
 			    	
 			    </div>
-   				
-   				<div class="sn-form-actions">
-   				
-	   				<input type="submit" 
-	   				id="btnAdicionarRecordatorio"
-				    class="mdl-button mdl-js-button mdl-button--raised mdl-button--primary mdl-js-ripple-effect" 
-				    value="Editar" /> 
-				    
-				    <button type="button" 
-				    id="btnCancelar"
-				    class="mdl-button mdl-js-button mdl-button--colored mdl-js-ripple-effect" 
-				    th:attr="link=@{/Paciente/__${paciente.id}__/Recordatorio/__*{id}__}">
-				    	Cancelar
-					</button>
-					
-				</div> 
 				
 		    </form>
 		    
