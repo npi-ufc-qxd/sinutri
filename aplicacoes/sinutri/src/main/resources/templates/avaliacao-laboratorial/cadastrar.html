@@ -10,16 +10,17 @@
 	<link rel="stylesheet" type="text/css" th:href="@{/css/avaliacao-laboratorial/cadastrar.css}"/>
 	
 </head>
-<section layout:fragment="breadcrumbs">
-	<a th:href="@{/Nutricao/Buscar}" class="sn-breadcrumbs mdl-layout-title">SiNutri</a>
-	<a th:href="@{/Nutricao/Buscar}" class="sn-breadcrumbs mdl-layout-title">Buscar</a>
-	<a th:href="@{${'/Paciente/'+avaliacaoLaboratorial.paciente.id}}" class="sn-breadcrumbs mdl-layout-title">Paciente</a>
-	<a class="mdl-layout-title sn-breadcrumbs">Visualizar Avaliação Laboratorial</a>
+<section layout:fragment="title">
+	<label class="mdl-layout-title">Cadastrar Avaliação Laboratorial</label>
 </section>
 <section layout:fragment="conteudo">
-
 	<div class="mdl-grid">
-
+		<div class="mdl-cell--1-offset-desktop">
+			<a th:href="@{/Nutricao/Buscar}" class="sn-breadcrumbs sn-attribute__title">SiNutri</a>
+			<a th:href="@{/Nutricao/Buscar}" class="sn-breadcrumbs sn-attribute__title">Buscar</a>
+			<a th:href="@{${'/Paciente/'+avaliacaoLaboratorial.paciente.id}}" class="sn-breadcrumbs sn-attribute__title">Paciente</a>
+			<a class="sn-attribute__title sn-breadcrumbs">Cadastrar Avaliação Laboratorial</a>
+		</div>
 		<form class="sn-form mdl-cell
 	            mdl-cell--7-col-desktop mdl-cell--1-offset-desktop
 	            mdl-cell--8-col-tablet
