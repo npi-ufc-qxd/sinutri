@@ -8,14 +8,16 @@
 	<title>Sinutri | Novo Paciente Externo</title>
 	<link rel="stylesheet" type="text/css" th:href="@{/css/material-date-picker.css}"/>
 </head>
-<section layout:fragment="breadcrumbs">
-	<a th:href="@{/Nutricao/Buscar}" class="sn-breadcrumbs mdl-layout-title">SiNutri</a>
-	<a class="mdl-layout-title sn-breadcrumbs">Cadastrar Paciente</a>
+<section layout:fragment="title">
+	<label class="mdl-layout-title">Cadastrar Paciente</label>
 </section>
 <section layout:fragment="conteudo">
 	
 	<div class="mdl-grid">
-
+		<div class="mdl-cell--1-offset-desktop">
+			<a th:href="@{/Nutricao/Buscar}" class="sn-breadcrumbs sn-attribute__title">SiNutri</a>
+			<a class="sn-attribute__title sn-breadcrumbs">Cadastrar Paciente</a>
+		</div>
 		<div class="
 			mdl-cell mdl-cell--10-col-desktop
 			mdl-cell--7-col-desktop mdl-cell--1-offset-desktop

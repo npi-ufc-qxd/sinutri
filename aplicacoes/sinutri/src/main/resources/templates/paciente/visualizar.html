@@ -27,19 +27,19 @@
 
 <body>
 
-	<section layout:fragment="breadcrumbs">
-		<a th:href="@{/Nutricao/Buscar}" class="sn-breadcrumbs mdl-layout-title">SiNutri</a>
-		<a th:href="@{/Nutricao/Buscar}" class="sn-breadcrumbs mdl-layout-title">Buscar</a>
-		<a class="mdl-layout-title sn-breadcrumbs">Paciente</a>
+	<section layout:fragment="title">
+		<label class="mdl-layout-title">Visualizar Paciente</label>
 	</section>
 	
 	<section layout:fragment="conteudo">
-	
 		<div class="mdl-grid">
-			
+			<div class="sn-breadcrumbs-position">
+				<a th:href="@{/Nutricao/Buscar}" class="sn-attribute__title sn-breadcrumbs">SiNutri</a>
+				<a th:href="@{/Nutricao/Buscar}" class="sn-attribute__title sn-breadcrumbs">Buscar</a>
+				<a class="sn-attribute__title sn-breadcrumbs">Paciente</a>
+			</div>
 			<div  class="mdl-cell mdl-cell--10-col-desktop mdl-cell--1-offset-desktop mdl-cell--8-col-tablet mdl-cell--4-col-phone mdl-grid sn-main-grid">
-	
-            	<div class="mdl-cell mdl-cell--12-col sn-card">
+				<div class="mdl-cell mdl-cell--12-col sn-card">
 
                      <div class="mdl-layout-title mdl-color-text--white sn-padding--48 mdl-color--teal" th:text="${paciente.pessoa.nome}"></div>
 

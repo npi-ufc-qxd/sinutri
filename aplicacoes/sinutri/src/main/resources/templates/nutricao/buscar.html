@@ -8,14 +8,15 @@
 	<title>Sinutri | Buscar</title>
 	<link rel="stylesheet" type="text/css" th:href="@{/css/buscar.css}"/>
 </head>
-
-<section layout:fragment="breadcrumbs">
-	<a th:href="@{/Nutricao/Buscar}" class="sn-breadcrumbs mdl-layout-title">SiNutri</a>
-	<a class="sn-breadcrumbs mdl-layout-title">Buscar</a>
+<section layout:fragment="title">
+	<label class="mdl-layout-title">Buscar Pacientes</label>
 </section>
-
 <section layout:fragment="conteudo">
 	<div class="page-content mdl-grid">
+		<div class="mdl-cell--1-offset-desktop">
+			<a th:href="@{/Nutricao/Buscar}" class="sn-breadcrumbs sn-attribute__title">SiNutri</a>
+			<a class="sn-breadcrumbs sn-attribute__title">Buscar</a>
+		</div>
 
 		<div class="sn-main-page mdl-cell
 			mdl-cell--10-col-desktop mdl-cell--1-offset-desktop
