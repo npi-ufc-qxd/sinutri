@@ -73,6 +73,16 @@ $(document).ready(function() {
 
 		});
 		
+		$("#sn-add-exame-button").click(function() {
+			$(dialog).find("#sn-exame-type").val("");
+			$(dialog).find("#sn-exame-type").selectedIndex = 0;
+			$(dialog).find("#sn-exame-value").val("");
+			
+			$(dialog).find("##sn-exame-item-index").val("");
+			
+			dialog.showModal();
+		});
+		
 		$( "#sn-cancelar" ).click(function(event) {
 	          var dialog = sn_base.doRegistryDialog({
 	              title: "Você realmente deseja descartar as alterações?", 
