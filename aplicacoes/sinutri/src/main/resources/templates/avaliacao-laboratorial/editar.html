@@ -50,7 +50,7 @@
 					<div class="sn-list-exames-container mdl-color--grey-200">
 						<div th:if="!${#lists.isEmpty(avaliacaoLaboratorial.exames)}">
 							<ul class="sn-list-exames mdl-list" th:field="*{exames}">
-								<li class="mdl-list__item mdl-list__item--two-line mdl-shadow--2dp mdl-color--white sn-cloneable sn-rounded-item sn-square-item">
+								<li class="mdl-list__item mdl-list__item--two-line mdl-shadow--2dp sn-card sn-cloneable">
 								
 									<input type="hidden" th:field="*{exames[0].nome}" class="sn-exame-input-nome"/>
 									<input type="hidden" th:field="*{exames[0].resultado}" class="sn-exame-input-resultado"/>
@@ -70,7 +70,7 @@
 									</span>
 								</li>
 								
-								<li th:each="exame, state : ${avaliacaoLaboratorial.exames}" class="mdl-list__item mdl-list__item--two-line mdl-shadow--2dp mdl-color--white sn-cloneable sn-rounded-item sn-square-item">
+								<li th:each="exame, state : ${avaliacaoLaboratorial.exames}" class="mdl-list__item mdl-list__item--two-line mdl-shadow--2dp sn-card sn-cloneable">
 									
 									<input type="hidden" th:field="*{exames[__${state.index}__].nome}" class="sn-exame-input-nome"/>
 									<input type="hidden" th:field="*{exames[__${state.index}__].resultado}" class="sn-exame-input-resultado"/>
@@ -97,7 +97,7 @@
 						
 						<div th:if="${#lists.isEmpty(avaliacaoLaboratorial.exames)}">
 							<ul class="sn-list-exames mdl-list" th:field="*{exames}">
-								<li class="mdl-list__item mdl-list__item--two-line mdl-shadow--2dp mdl-color--white sn-cloneable sn-rounded-item sn-square-item">
+								<li class="mdl-list__item mdl-list__item--two-line mdl-shadow--2dp sn-card sn-cloneable">
 								
 									<input type="hidden" th:field="*{exames[0].nome}" class="sn-exame-input-nome"/>
 									<input type="hidden" th:field="*{exames[0].resultado}" class="sn-exame-input-resultado"/>
