@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html  xmlns="http://www.w3.org/1999/xhtml" 
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorator="estrutura/dashboard">
+<head>
+	<title>Cadastrar</title>
+	<link rel="stylesheet" type="text/css" th:href="@{/css/material--picker.css}"/>
+
+</head>
+<body>
+
+	<div class="mdl-grid">
+		<form th:object="${calculoEnergetico}" 
+		th:action="@{${'/Paciente/'+calculoEnergetico.paciente.id+'/CalculoEnergetico'}}" th:method="post">
+	            
+			<input type="hidden" id="id" th:field="*{id}"/>
+			<input type="hidden" id="id" th:field="*{paciente.id}"/>
+			<input type="hidden" id="id" th:field="*{nutricionista.id}"/>
+			<input type="hidden" id="id" th:field="*{atualizadoEm}"/>
+			
+			<div class="sn-textfield mdl-cell mdl-cell--6-col">
+				<label th:for="${#ids.next('pesoSugerido')}" class="sn-textfield__label">Peso sugerido (kg):</label>
+				<label class="sn-textfield__messages sn-error-text" th:for="${#ids.next('pesoSugerido')}" th:if="${#fields.hasErrors('pesoSugerido')}" 
+					th:errors="*{pesoSugerido}">Erro no peso</label>
+				<input type="number" min="0"  max="999999" th:field="*{pesoSugerido}" class="sn-textfield__input"  step="0.01"/>
+			</div>
+			
+			<div class="sn-textfield mdl-cell mdl-cell--6-col">
+				<label th:for="${#ids.next('ajuste')}" class="sn-textfield__label">Peso sugerido (kg):</label>
+				<label class="sn-textfield__messages sn-error-text" th:for="${#ids.next('ajuste')}" th:if="${#fields.hasErrors('ajuste')}" 
+					th:errors="*{ajuste}">Erro no ajuste</label>
+				<input type="number" min="0"  max="999999" th:field="*{ajuste}" class="sn-textfield__input"  step="0.01"/>
+			</div>
+			
+			<div class="sn-textfield mdl-cell mdl-cell--6-col">
+				<label th:for="${#ids.next('glicidio')}" class="sn-textfield__label">glicidio:</label>
+				<label class="sn-textfield__messages sn-error-text" th:for="${#ids.next('glicidio')}" th:if="${#fields.hasErrors('glicidio')}" 
+					th:errors="*{glicidio}">Erro no peso</label>
+				<input type="number" min="0"  max="999999" th:field="*{glicidio}" class="sn-textfield__input"  step="0.01"/>
+			</div>
+			
+			<div class="sn-textfield mdl-cell mdl-cell--6-col">
+				<label th:for="${#ids.next('lipidio')}" class="sn-textfield__label">lipidio:</label>
+				<label class="sn-textfield__messages sn-error-text" th:for="${#ids.next('lipidio')}" th:if="${#fields.hasErrors('lipidio')}" 
+					th:errors="*{lipidio}">Erro no peso</label>
+				<input type="number" min="0"  max="999999" th:field="*{lipidio}" class="sn-textfield__input"  step="0.01"/>
+			</div>
+			
+			<div class="sn-textfield mdl-cell mdl-cell--6-col">
+				<label th:for="${#ids.next('proteina')}" class="sn-textfield__label">proteina:</label>
+				<label class="sn-textfield__messages sn-error-text" th:for="${#ids.next('proteina')}" th:if="${#fields.hasErrors('proteina')}" 
+					th:errors="*{proteina}">Erro no peso</label>
+				<input type="number" min="0"  max="999999" th:field="*{lipidio}" class="sn-textfield__input"  step="0.01"/>
+			</div>
+			
+			<div class="sn-form-actions">
+				<input type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect" value="Cadastrar" />
+				<a id="cancelar" th:href="@{${'/Paciente/'+calculoEnergetico.paciente.id}}" class="mdl-button mdl-js-button mdl-button--colored mdl-js-ripple-effect">Cancelar</a>
+			</div>			
+			
+		</form>
+	</div>
+	
+</body>
+</html>

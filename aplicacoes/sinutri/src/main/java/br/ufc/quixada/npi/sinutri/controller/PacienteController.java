@@ -22,6 +22,7 @@ import br.ufc.quixada.npi.ldap.service.UsuarioService;
 import br.ufc.quixada.npi.sinutri.model.Anamnese;
 import br.ufc.quixada.npi.sinutri.model.AvaliacaoAntropometrica;
 import br.ufc.quixada.npi.sinutri.model.AvaliacaoLaboratorial;
+import br.ufc.quixada.npi.sinutri.model.CalculoGastoEnergetico;
 import br.ufc.quixada.npi.sinutri.model.InqueritoAlimentar;
 import br.ufc.quixada.npi.sinutri.model.Mensagem;
 import br.ufc.quixada.npi.sinutri.model.Mensagem.Prioridade;
@@ -935,6 +936,150 @@ public class PacienteController {
 		redirect.addFlashAttribute("mensagem", new Mensagem("Excluído com sucesso!", Tipo.SUCESSO, Prioridade.MEDIA));
 		
 		return "redirect:/Paciente/" + idPaciente;
+	}
+
+	@RequestMapping(value="/{idPaciente}/CalculoEnergetico", method = RequestMethod.GET)
+	public String formAdicionarCalculosGastosEnergeticos(@PathVariable("idPaciente") Long idPaciente, RedirectAttributes redirectAttributes, 
+			Model model){
+		
+		Paciente paciente = pacienteService.buscarPacientePorId(idPaciente);
+		if(paciente==null){
+			Mensagem mensagem = new Mensagem("Paciente inexistente!", Mensagem.Tipo.ERRO, Mensagem.Prioridade.MEDIA);
+			redirectAttributes.addFlashAttribute("mensagem", mensagem);
+			return "redirect:/Nutricao/Buscar";
+		}
+		CalculoGastoEnergetico calculoEnergetico = new CalculoGastoEnergetico();
+		calculoEnergetico.setPaciente(paciente);
+		model.addAttribute("calculoEnergetico",calculoEnergetico);
+		
+		return "/calculo-energetico/cadastrar";	
+	}
+	
+	@RequestMapping(value="/{idPaciente}/CalculoEnergetico", method = RequestMethod.POST)
+	public String adicionarCalculoGastosEnergeticos(@PathVariable("idPaciente") Long idPaciente, Model model, @Valid CalculoGastoEnergetico calculoEnergetico,
+	 		BindingResult result, RedirectAttributes redirectAttributes){
+		
+		if(result.hasErrors()){
+			model.addAttribute("calculoEnergetico", calculoEnergetico);
+			Mensagem mensagem = new Mensagem("Erro ao adicionar cálculo energético!", Mensagem.Tipo.ERRO, Mensagem.Prioridade.MEDIA);
+			redirectAttributes.addFlashAttribute("mensagem", mensagem);
+			return "/calculo-energetico/cadastrar";
+		}
+		
+		
+		Servidor nutricionista = pessoaService.buscarServidorPorCpf(getCpfPessoaLogada());
+		 
+		 if(nutricionista == null){
+			 Mensagem mensagem = new Mensagem("Nutricionista não encontrado!", Mensagem.Tipo.ERRO, Mensagem.Prioridade.MEDIA);
+			 redirectAttributes.addFlashAttribute("mensagem", mensagem);
+			 return "redirect:/Nutricao/Buscar";
+		 }
+		 
+		 Paciente paciente = pacienteService.buscarPacientePorId(idPaciente);
+		 
+		 if(paciente==null){
+			Mensagem mensagem = new Mensagem("Paciente inexistente!", Mensagem.Tipo.ERRO, Mensagem.Prioridade.MEDIA);
+			redirectAttributes.addFlashAttribute("mensagem", mensagem);
+			return "redirect:/Nutricao/Buscar";
+		 }
+		 
+		calculoEnergetico.setNutricionista(nutricionista);
+		consultaService.adicionarCalculoGastoEnergetico(calculoEnergetico);
+		Mensagem mensagem = new Mensagem("Salvo com sucesso!", Mensagem.Tipo.SUCESSO, Mensagem.Prioridade.MEDIA);
+		redirectAttributes.addFlashAttribute("mensagem", mensagem);
+		return "redirect:/Paciente/"+paciente.getId()+"/calculoEnergetico/"+calculoEnergetico.getId();
+	}
+	
+	@RequestMapping(value="/{idPaciente}/Prescricao/{idCalculoEnergeticos}/Editar", method = RequestMethod.GET)
+	public String formEditarCalculoGastosEnergeticos(@PathVariable("idPaciente") Long idPaciente, @PathVariable("idCalculoEnergetico") 
+			Long idCalculoEnergetico, Model model, RedirectAttributes redirectAttributes){
+		
+		Paciente paciente = pacienteService.buscarPacientePorId(idPaciente);
+		if(paciente == null){
+			Mensagem mensagem = new Mensagem("Paciente inexistente!", Mensagem.Tipo.ERRO, Mensagem.Prioridade.MEDIA);
+			redirectAttributes.addFlashAttribute("mensagem", mensagem);
+			return "redirect:/Nutricao/Buscar";
+		}
+		
+		CalculoGastoEnergetico calculoEnergetico = consultaService.buscarCalculoGastoEnergeticoPorId(idCalculoEnergetico);
+		if(calculoEnergetico == null){
+			Mensagem mensagem = new Mensagem("Cálculo energético não encontrado!", Mensagem.Tipo.ERRO, Mensagem.Prioridade.MEDIA);
+			redirectAttributes.addFlashAttribute("mensagem", mensagem);
+			return "redirect:/Paciente/"+idPaciente;
+		}
+		
+		calculoEnergetico.setPaciente(paciente);
+		model.addAttribute("calculoEnergetico", calculoEnergetico);
+		return "calculo-energetico/editar";
+	}
+	
+	@RequestMapping(value="/{idPaciente}/Prescricao/{idCalculoEnergeticos}/Editar", method = RequestMethod.POST)
+	public String editarCalculoGastosEnergeticos(@PathVariable("idPaciente") Long idPaciente, @PathVariable("idCalculoEnergetico") Long idCalculoEnergetico,
+			@Valid CalculoGastoEnergetico calculoEnergetico ,Model model, RedirectAttributes redirectAttributes){
+		
+		Paciente paciente = pacienteService.buscarPacientePorId(idPaciente);
+		if(paciente == null){
+			Mensagem mensagem = new Mensagem("Paciente inexistente!", Mensagem.Tipo.ERRO, Mensagem.Prioridade.MEDIA);
+			redirectAttributes.addFlashAttribute("mensagem", mensagem);
+			return "redirect:/Nutricao/Buscar";
+		}
+		
+		if(calculoEnergetico == null){
+			Mensagem mensagem = new Mensagem("Cálculo energético não encontrado!", Mensagem.Tipo.ERRO, Mensagem.Prioridade.MEDIA);
+			redirectAttributes.addFlashAttribute("mensagem", mensagem);
+			return "redirect:/Paciente/"+idPaciente+"/CalculoEnergetico/"+idCalculoEnergetico;
+		}
+		
+		consultaService.editarCalculoGastoEnergetico(calculoEnergetico);
+		Mensagem mensagem = new Mensagem("Salvo com sucesso!", Mensagem.Tipo.SUCESSO, Mensagem.Prioridade.MEDIA);
+		redirectAttributes.addFlashAttribute("mensagem", mensagem);
+		return "redirect:/Paciente/"+idPaciente+"/CalculoEnergetico/"+idCalculoEnergetico;
+	}
+	
+	public String visualizarCalculoGastoEnergetico(@PathVariable("idPaciente") Long idPaciente, @PathVariable("idCalculoEnergetico") Long idCalculoEnergetico, 
+			Model model, RedirectAttributes redirectAttributes){
+		
+		 Paciente paciente = pacienteService.buscarPacientePorId(idPaciente);
+		 if(paciente==null){
+			Mensagem mensagem = new Mensagem("Paciente inexistente!", Mensagem.Tipo.ERRO, Mensagem.Prioridade.MEDIA);
+			redirectAttributes.addFlashAttribute("mensagem", mensagem);
+		    return "redirect:/Nutricao/Buscar";
+		 }
+		 
+		 CalculoGastoEnergetico calculoEnergetico = consultaService.buscarCalculoGastoEnergeticoPorId(idCalculoEnergetico);
+		 if(calculoEnergetico == null){
+			 Mensagem mensagem = new Mensagem("Cálculo energético não encontrado!", Mensagem.Tipo.ERRO, Mensagem.Prioridade.MEDIA);
+			 redirectAttributes.addFlashAttribute("mensagem", mensagem);
+			 return "redirect:/Paciente/"+idPaciente;
+		 }
+		
+		model.addAttribute("calculoEnergetico", calculoEnergetico);
+		return "calculo-energetico/visualizar";
+	}
+	
+	@RequestMapping(value="/{idPaciente}/CalculoEnergetico/{idPrescricao}/Excluir", method = RequestMethod.GET)
+	public String excluirCalculoGastoEnergetico(@PathVariable("idPaciente") Long idPaciente, @PathVariable("idCalculoEnergetico") Long idCalculoEnergetico, 
+			 RedirectAttributes redirectAttributes, Model model){
+		
+		Paciente paciente = pacienteService.buscarPacientePorId(idPaciente);
+		if(paciente==null){
+			Mensagem mensagem = new Mensagem("Paciente não encontrado!", Mensagem.Tipo.ERRO, Mensagem.Prioridade.MEDIA);
+			redirectAttributes.addFlashAttribute("mensagem", mensagem);
+			return "Nutricao/Buscar";
+		}
+		
+		CalculoGastoEnergetico calculoEnergetico = consultaService.buscarCalculoGastoEnergeticoPorId(idCalculoEnergetico);
+		
+		if(calculoEnergetico==null){
+			Mensagem mensagem = new Mensagem("Cálculo energético não encontrado!", Mensagem.Tipo.ERRO, Mensagem.Prioridade.MEDIA);
+			redirectAttributes.addFlashAttribute("mensagem", mensagem);
+			return "redirect:/Paciente/"+idPaciente;
+		}
+		
+		consultaService.excluirCalculoGastoEnergetico(calculoEnergetico);
+		Mensagem mensagem = new Mensagem("Excluído com sucesso!", Mensagem.Tipo.SUCESSO, Mensagem.Prioridade.MEDIA);
+		redirectAttributes.addFlashAttribute("mensagem", mensagem);
+		return "redirect:/Paciente/"+idPaciente;
 	}
 	
 	@RequestMapping(value ="/Registrar/{cpf}", method = RequestMethod.GET)

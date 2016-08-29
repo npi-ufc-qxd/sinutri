@@ -40,6 +40,9 @@ public class Paciente implements Serializable {
 	
 	@OneToMany(mappedBy = "paciente")
 	private List<AvaliacaoLaboratorial> avaliacoesLaboratoriais;
+
+	@OneToMany(mappedBy = "paciente")
+	private List<CalculoGastoEnergetico> calculosGastosEnergeticos;
 	
 	public Long getId() {
 		return id;
