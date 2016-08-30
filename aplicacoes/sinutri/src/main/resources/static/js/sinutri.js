@@ -541,10 +541,9 @@ var Animation = function(el) {
 
 };
 
-
 /* _sn-2-dynamic-list.js */
 
-// Método atribuído ao namespace do JQuery para criação de DynamicList's
+//Método atribuído ao namespace do JQuery para criação de DynamicList's
 jQuery.fn.dynamicList = function(settings) {
 
 	// Criação de um novo objeto do tipo DynamicList
@@ -552,8 +551,8 @@ jQuery.fn.dynamicList = function(settings) {
 
 }
 
-// Método atribuído ao namespace do JQuery para verificar se o objeto já contém 
-// a atribuição de uma DynamicList
+//Método atribuído ao namespace do JQuery para verificar se o objeto já contém 
+//a atribuição de uma DynamicList
 jQuery.fn.isDynamicList = function(settings) {
 
 	return $(this).data("dynamic-list-settings") !== undefined;
@@ -561,7 +560,7 @@ jQuery.fn.isDynamicList = function(settings) {
 }
 
 
-// Classe responsável por guardar métodos e atributos do componente DynamicList
+//Classe responsável por guardar métodos e atributos do componente DynamicList
 
 var DynamicList = function(rootEl, settings) {
 
@@ -655,20 +654,22 @@ var DynamicList = function(rootEl, settings) {
 
 	this.doIncrementItem = function(name, index) {
 		
-		var reStr = "[\\w\\d]+\\[)(\\d+)(\\][\.\w\d\[\]]*)";
+		if(name) {
+			var reStr = "[\\w\\d]+\\[)(\\d+)(\\][\.\\w\\d\\[\\]]*)";
 
-		for(var i = 0; i < this.settings.recurssiveIndex; i++) {
-			reStr = "[\\w\\d\\[\\]]+\\." + reStr;
+			for(var i = 0; i < this.settings.recurssiveIndex; i++) {
+				reStr = "[\\w\\d\\[\\]]+\\." + reStr;
+			}
+			reStr = "(" + reStr;
+
+			regExp = new RegExp(reStr, 'g');
+
+			if( regExp.test(name) ) {
+				name = name.replace(regExp, "$1" + index + "$3")
+			} 
+
+			console.log(name + ":" + regExp + " : " + name);
 		}
-		reStr = "(" + reStr;
-
-		regExp = new RegExp(reStr, 'g');
-
-		if( regExp.test(name) ) {
-			name = name.replace(regExp, "$1" + index + "$3")
-		} 
-
-		console.log(regExp + " : " + name);
 
 		return name;
 
@@ -676,6 +677,7 @@ var DynamicList = function(rootEl, settings) {
 
 	this.sortItems = function() {
 		var items = $(this.settings.cloneableElement);
+
 		items.sort(function (a, b) {
 			var contentA = parseInt( $(a).data('sort'));
 			var contentB = parseInt( $(b).data('sort'));
@@ -1394,7 +1396,6 @@ var DynamicList = function(rootEl, settings) {
 };
 
 DynamicList.objectCount = 0;
-
 
 /* _sn-3-input-mask.js */
 

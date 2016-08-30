@@ -4,6 +4,7 @@ $(function()  {
 		
 		var dynamicList = $(".sn-list-refeicoes").dynamicList({
 			cloneableElement: ".sn-cloneable",
+			recurssiveIndex: 0, 
 			removeButton:     ".sn-refeicao-remover",
 			editButton:       ".sn-refeicao-editar",
 			cloneButton:	  ".sn-refeicao-duplicar",
@@ -89,23 +90,24 @@ $(function()  {
 		
 		var dynamicListAlimento = $(".sn-list-alimento-porcao").dynamicList({
 			cloneableElement: ".sn-cloneable",
+			recurssiveIndex: 1,
 			removeButton:     ".sn-alimento-remover",
 			editButton:       ".sn-alimento-editar",
 			cloneButton:	  ".sn-alimento-duplicar",
 			onItemEdit:		  function(el, index) {
 				if( dialog != null ) {
-					$(dialog).find("#sn-refeicao-item-index").val("");
+					$(dialog).find("#sn-alimento-item-index").val("");
 					
-					var hora = el.find(".sn-refeicao-input-hora").val();
-					var descricao = el.find(".sn-refeicao-input-descricao").val();
-					var observacao = el.find(".sn-refeicao-input-observacao").val();
-					
+					var index 	 = $(dialogAlimento).find("#sn-alimento-item-index").val();
+	        		var nome 		 = $(dialogAlimento).find("#sn-alimento-nome").val();
+					var quantidade  = $(dialogAlimento).find("#sn-alimento-quantidade").val();
+					  
 					var filtro = "[value="+descricao+"]";
 					
-					$(dialog).find("#sn-refeicao-hora").val(hora);
-					$(dialog).find("#sn-refeicao-item-index").val(index);
-					$(dialog).find("#sn-refeicao-observacao").val(observacao);
-					$(dialog).find("#sn-refeicao-descricao").val(observacao);
+					$(dialog).find("#sn-alimento-nome").val(nome);
+					$(dialog).find("#sn-alimento-item-index").val(index);
+					$(dialog).find("#sn-alimento-quantidade").val(quantidade);
+					
 					dialog.showModal();
 					
 				}
@@ -150,10 +152,36 @@ $(function()  {
 							  componentHandler.upgradeElement(el);
 						  });
 						  
-						  $(dialogAlimento).find("#sn-refeicao-item-index").val("");
+						  $(dialogAlimento).find("#sn-alimento-item-index").val("");
 		        	  }
 		          }
 			]
+		});
+		
+		
+		$("#sn-add-refeicao-button").click(function() {
+			
+			$(dialog).find("#sn-refeicao-hora").val("");
+			$(dialog).find("#sn-refeicao-descricao").val("");
+			$(dialog).find("#sn-refeicao-descricao").selectedIndex = 0;
+			$(dialog).find("#sn-refeicao-observacao").val("");
+			
+			$(dialog).find("#sn-refeicao-item-index").val("");
+			
+			dialog.showModal();
+		});
+		
+		$("#sn-add-alimento-button").click(function() {
+			var dialog = $("#sn-add-alimento-modal"); 
+			dialog.find("#sn-alimento-nome").val("");
+			dialog.find("#sn-alimento-nome").selectedIndex = 0;
+			dialog.find("#sn-alimento-fonte").val("");
+			dialog.find("#sn-alimento-fonte").selectedIndex = 0;
+			dialog.find("#sn-alimento-quantidade").val("");
+			
+			dialog.find("#sn-alimento-item-index").val("");
+			
+			dialog.showModal();
 		});
 		
 		/***********/
