@@ -14,18 +14,17 @@ public class Servidor {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	private String siap;
+	private String siape;
 
 	@ManyToOne
 	private Pessoa pessoa;
 
 	public Servidor() {
-		super();
 	}
 
-	public Servidor(String siap, Pessoa pessoa) {
+	public Servidor(String siape, Pessoa pessoa) {
 		super();
-		this.siap = siap;
+		this.siape = siape;
 		this.pessoa = pessoa;
 	}
 
@@ -37,12 +36,12 @@ public class Servidor {
 		this.id = id;
 	}
 
-	public String getSiap() {
-		return siap;
+	public String getSiape() {
+		return siape;
 	}
 
-	public void setSiap(String siap) {
-		this.siap = siap;
+	public void setSiape(String siape) {
+		this.siape = siape;
 	}
 
 	public Pessoa getPessoa() {
@@ -53,5 +52,4 @@ public class Servidor {
 		this.pessoa = pessoa;
 	}
 
-	
 }

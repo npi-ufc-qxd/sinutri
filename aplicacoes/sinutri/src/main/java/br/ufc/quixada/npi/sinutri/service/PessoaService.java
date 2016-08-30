@@ -16,4 +16,8 @@ public interface PessoaService {
 
 	void excluirPessoa(Pessoa pessoa); 
 
+	Pessoa adicionarPessoa(Pessoa pessoa);
+
+	Servidor adicionarServidor(Servidor servidor);
+
 }

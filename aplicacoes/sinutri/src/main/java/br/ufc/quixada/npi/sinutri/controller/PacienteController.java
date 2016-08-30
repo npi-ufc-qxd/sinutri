@@ -728,7 +728,7 @@ public class PacienteController {
 		 if(nutricionista == null){
 			 Mensagem mensagem = new Mensagem("Nutricionista não encontrado!", Mensagem.Tipo.ERRO, Mensagem.Prioridade.MEDIA);
 			 redirectAttributes.addFlashAttribute("mensagem", mensagem);
-			 return "redirect:/Nutricar/Buscar";
+			 return "redirect:/Nutricao/Buscar";
 		 }
 		 
 		 prescricao.setNutricionista(nutricionista);

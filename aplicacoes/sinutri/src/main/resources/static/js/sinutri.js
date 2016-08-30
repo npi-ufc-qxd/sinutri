@@ -1,4 +1,4 @@
-/* _sn-0-base.js */
+ /* _sn-0-base.js */
 
 // Modifique o valor para mostrar ou não logs na tela
 var DEBUG = true;
@@ -1096,6 +1096,8 @@ var DynamicList = function(rootEl, settings) {
 			)
 		).doPlay();
 
+		$(newItem).addClass("sn-list-refeicao-li");
+		
 		return newItem;
 		
 	} 
@@ -1753,13 +1755,6 @@ var sn_toast = function() {
 				{duration: delay + postDelay + 200}
 			)
 		).doPlay();
-
-		setTimeout(function() {
-
-			removeToast(toast);
-
-		}, postDelay + delay + 200);
-
 	}
 
 	var removeToast = function(toast) {

@@ -16,15 +16,18 @@
 </head>
 
 <body>
-	<section layout:fragment="breadcrumbs">
-		<a th:href="@{/Nutricao/Buscar}" class="sn-breadcrumbs mdl-layout-title">SiNutri</a>
-		<a th:href="@{/Nutricao/Buscar}" class="sn-breadcrumbs mdl-layout-title">Buscar</a>
-		<a th:href="@{${'/Paciente/'+paciente.id}}" class="sn-breadcrumbs mdl-layout-title">Paciente</a>
-		<a class="mdl-layout-title sn-breadcrumbs">Cadastrar Recordatório</a>
+	<section layout:fragment="title">
+		<label class="mdl-layout-title">Cadastrar Recordatório</label>
 	</section>
 	<section layout:fragment="conteudo">
 	
 		<div class="mdl-grid">
+			<div class="mdl-cell--1-offset-desktop">
+				<a th:href="@{/Nutricao/Buscar}" class="sn-breadcrumbs sn-attribute__title">SiNutri</a>
+				<a th:href="@{/Nutricao/Buscar}" class="sn-breadcrumbs sn-attribute__title">Buscar</a>
+				<a th:href="@{${'/Paciente/'+paciente.id}}" class="sn-breadcrumbs sn-attribute__title">Paciente</a>
+				<a class="sn-attribute__title sn-breadcrumbs">Cadastrar Recordatório</a>
+			</div>
 		
 			
 			<form action="#" 
@@ -68,8 +71,10 @@
 					
 					<label class="sn-textfield__label mdl-cell mdl-cell--6-col" 
 					for="refeicoes">Refeições</label>
+
+					<div class="mdl-cell mdl-offset--6-col mdl-cell--12-col demo-list-three mdl-list mdl-color--grey-200">
 					
-					<ul id="refeicoes" class="mdl-cell mdl-offset--6-col mdl-cell--12-col demo-list-three mdl-list sn-list-refeicoes mdl-color--grey-200">
+					<ul id="refeicoes" class="sn-list-refeicoes">
 					
 						<li class="mdl-list__item mdl-list__item--three-line mdl-shadow--2dp sn-card sn-cloneable">
 						  	
@@ -159,11 +164,13 @@
 						  	</span>
 						  	
 						</li>
-						<li>
-							<button id="sn-add-refeicao-button" type="button" class="mdl-button mdl-button--primary mdl-js-button mdl-js-ripple-effect">Adicionar Refeição</button>
-						</li>
 						
 					</ul>
+					<div class="sn-list-refeicao__actions">
+						<button id="sn-add-refeicao-button" type="button" class="mdl-button mdl-button--primary mdl-js-button mdl-js-ripple-effect">Adicionar Refeição</button>
+					</div>
+					
+					</div>
 					
 				    
 	   				

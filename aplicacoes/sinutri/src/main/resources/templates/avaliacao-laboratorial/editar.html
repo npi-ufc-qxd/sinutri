@@ -9,16 +9,19 @@
 	<link rel="stylesheet" type="text/css" th:href="@{/css/material-date-picker.css}"/>
 	<link rel="stylesheet" type="text/css" th:href="@{/css/avaliacao-laboratorial/editar.css}"/>
 </head>
-<section layout:fragment="breadcrumbs">
-    <a th:href="@{/Nutricao/Buscar}" class="sn-breadcrumbs mdl-layout-title">SiNutri</a>
-    <a th:href="@{/Nutricao/Buscar}" class="sn-breadcrumbs mdl-layout-title">Buscar</a>
-    <a th:href="@{${'/Paciente/'+avaliacaoLaboratorial.paciente.id}}" class="sn-breadcrumbs mdl-layout-title">Paciente</a>
-    <a class="mdl-layout-title sn-breadcrumbs">Editar Avaliação Laboratorial</a>
+<section layout:fragment="title">
+	<label class="mdl-layout-title">Editar Avaliação Laboratorial</label>
 </section>
+
 <section layout:fragment="conteudo">
 
 	<div class="mdl-grid">
-
+		<div class="mdl-cell--1-offset-desktop">
+		    <a th:href="@{/Nutricao/Buscar}" class="sn-breadcrumbs sn-attribute__title">SiNutri</a>
+		    <a th:href="@{/Nutricao/Buscar}" class="sn-breadcrumbs sn-attribute__title">Buscar</a>
+		    <a th:href="@{${'/Paciente/'+avaliacaoLaboratorial.paciente.id}}" class="sn-breadcrumbs sn-attribute__title">Paciente</a>
+		    <a class="sn-attribute__title sn-breadcrumbs">Editar Avaliação Laboratorial</a>
+		</div>
 		<form class="sn-form mdl-cell
 	            mdl-cell--7-col-desktop mdl-cell--1-offset-desktop
 	            mdl-cell--8-col-tablet
@@ -47,7 +50,7 @@
 					<div class="sn-list-exames-container mdl-color--grey-200">
 						<div th:if="!${#lists.isEmpty(avaliacaoLaboratorial.exames)}">
 							<ul class="sn-list-exames mdl-list" th:field="*{exames}">
-								<li class="mdl-list__item mdl-list__item--two-line mdl-shadow--2dp mdl-color--white sn-cloneable sn-rounded-item sn-square-item">
+								<li class="mdl-list__item mdl-list__item--two-line mdl-shadow--2dp sn-card sn-cloneable">
 								
 									<input type="hidden" th:field="*{exames[0].nome}" class="sn-exame-input-nome"/>
 									<input type="hidden" th:field="*{exames[0].resultado}" class="sn-exame-input-resultado"/>
@@ -67,7 +70,7 @@
 									</span>
 								</li>
 								
-								<li th:each="exame, state : ${avaliacaoLaboratorial.exames}" class="mdl-list__item mdl-list__item--two-line mdl-shadow--2dp mdl-color--white sn-cloneable sn-rounded-item sn-square-item">
+								<li th:each="exame, state : ${avaliacaoLaboratorial.exames}" class="mdl-list__item mdl-list__item--two-line mdl-shadow--2dp sn-card sn-cloneable">
 									
 									<input type="hidden" th:field="*{exames[__${state.index}__].nome}" class="sn-exame-input-nome"/>
 									<input type="hidden" th:field="*{exames[__${state.index}__].resultado}" class="sn-exame-input-resultado"/>
@@ -94,7 +97,7 @@
 						
 						<div th:if="${#lists.isEmpty(avaliacaoLaboratorial.exames)}">
 							<ul class="sn-list-exames mdl-list" th:field="*{exames}">
-								<li class="mdl-list__item mdl-list__item--two-line mdl-shadow--2dp mdl-color--white sn-cloneable sn-rounded-item sn-square-item">
+								<li class="mdl-list__item mdl-list__item--two-line mdl-shadow--2dp sn-card sn-cloneable">
 								
 									<input type="hidden" th:field="*{exames[0].nome}" class="sn-exame-input-nome"/>
 									<input type="hidden" th:field="*{exames[0].resultado}" class="sn-exame-input-resultado"/>
