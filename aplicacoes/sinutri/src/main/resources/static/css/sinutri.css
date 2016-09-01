@@ -52,6 +52,7 @@
 
 .sn-fill--height { height: 100%; }
 
+.sn-margin--none {margin: 0px !important;}
 
 .sn-color--primary { background-color: var(--color-primary); }
 .sn-color--primary-dark { background-color: var(--color-primary-dark); }
