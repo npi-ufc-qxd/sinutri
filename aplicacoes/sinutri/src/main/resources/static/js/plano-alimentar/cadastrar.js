@@ -16,7 +16,7 @@ $(function()  {
 					var descricao = el.find(".sn-refeicao-input-descricao").val();
 					var observacao = el.find(".sn-refeicao-input-observacao").val();
 					
-					var filtro = "[value="+descricao+"]";
+					var filtro = "[value=" + descricao + "]";
 					
 					$(dialog).find("#sn-refeicao-hora").val(hora);
 					$(dialog).find("#sn-refeicao-item-index").val(index);
@@ -80,6 +80,34 @@ $(function()  {
 						  });
 						  
 						  $(dialog).find("#sn-refeicao-item-index").val("");
+						  
+						  /*** ALIMENTOS ***/
+						  
+						  el.find("#sn-alimentos-sub-items").remove();
+						  el.append(
+							  $.parseHTML(
+								  "<span id=\"sn-alimentos-sub-items\"></span>"
+							  )
+						  );
+						  
+						  $("#sn-add-refeicao-modal #alimentos").children(".sn-cloneable").each(function(_, e) {
+							  
+							  var nome = $(e).find(".sn-alimento-input-nome").val();
+							  var nomePath = $(e).find(".sn-alimento-input-nome").attr("name");
+							  var quantidade = $(e).find(".sn-alimento-input-quantidade").val();
+							  var quantidadePath = $(e).find(".sn-alimento-input-quantidade").attr("name");
+							  el.find("#sn-alimentos-sub-items").append(
+								  $.parseHTML(
+									  "<input type=\"hidden\" name=\"" + nomePath + "\" value=\"" + nome + "\" />" + 
+									  "<input type=\"hidden\" name=\"" + quantidadePath + "\" value=\"" + quantidade + "\" />"
+								  )  
+							  );							  
+							  
+						  });
+						  
+						  dynamicList.doSortItems();
+						  
+						  /*** ... ***/
 		        	  }
 		          }
 			]
@@ -128,7 +156,11 @@ $(function()  {
 		        		  
 		        		  var index 	 = $(dialogAlimento).find("#sn-alimento-item-index").val();
 		        		  var nome 		 = $(dialogAlimento).find("#sn-alimento-nome").val();
-						  var quantidade  = $(dialogAlimento).find("#sn-alimento-quantidade").val();
+		        		  var quantidade  = $(dialogAlimento).find("#sn-alimento-quantidade").val();
+		        		  
+		        		  /* Extraindo id do name */
+		        		  reg = /^(\d+)/;
+		        		  var id = nome.match(reg)[1];						  
 						  
 						  if( !(nome.length > 0 && quantidade.length > 0) )
 							  return;
@@ -137,7 +169,9 @@ $(function()  {
 					      var data = {
 								  sortValue: quantidade,
 								  ".sn-alimento-nome": 			{text:  nome},
-								  ".sn-alimento-quantidade":	{text:  quantidade}
+								  ".sn-alimento-quantidade":	{text:  quantidade},
+								  ".sn-alimento-input-nome":	{value: id},
+								  ".sn-alimento-input-quantidade":	{value: quantidade}
 					      };
 						  
 						  var el;
@@ -168,15 +202,13 @@ $(function()  {
 			
 			$(dialog).find("#sn-refeicao-item-index").val("");
 			
+			dynamicListAlimento.doClearItems();
+			
 			dialog.showModal();
 		});
 		
 		$("#sn-add-alimento-button").click(function() {
 			var dialog = $("#sn-add-alimento-modal"); 
-			dialog.find("#sn-alimento-nome").val("");
-			dialog.find("#sn-alimento-nome").selectedIndex = 0;
-			dialog.find("#sn-alimento-fonte").val("");
-			dialog.find("#sn-alimento-fonte").selectedIndex = 0;
 			dialog.find("#sn-alimento-quantidade").val("");
 			
 			dialog.find("#sn-alimento-item-index").val("");

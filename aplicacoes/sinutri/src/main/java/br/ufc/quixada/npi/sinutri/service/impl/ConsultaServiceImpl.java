@@ -12,8 +12,10 @@ import br.ufc.quixada.npi.sinutri.model.AvaliacaoAntropometrica;
 import br.ufc.quixada.npi.sinutri.model.InqueritoAlimentar;
 import br.ufc.quixada.npi.sinutri.model.Paciente;
 import br.ufc.quixada.npi.sinutri.model.PlanoAlimentar;
+import br.ufc.quixada.npi.sinutri.model.PorcaoAlimento;
 import br.ufc.quixada.npi.sinutri.model.Prescricao;
 import br.ufc.quixada.npi.sinutri.model.Recordatorio;
+import br.ufc.quixada.npi.sinutri.model.RefeicaoPlanoAlimentar;
 import br.ufc.quixada.npi.sinutri.model.RefeicaoRecordatorio;
 import br.ufc.quixada.npi.sinutri.model.enuns.FonteAlimento;
 import br.ufc.quixada.npi.sinutri.repository.AlimentoRepository;
@@ -21,8 +23,10 @@ import br.ufc.quixada.npi.sinutri.repository.AnamneseRepository;
 import br.ufc.quixada.npi.sinutri.repository.AvaliacaoAntropometricaRepository;
 import br.ufc.quixada.npi.sinutri.repository.InqueritoAlimentarRepository;
 import br.ufc.quixada.npi.sinutri.repository.PlanoAlimentarRepository;
+import br.ufc.quixada.npi.sinutri.repository.PorcaoAlimentoRepository;
 import br.ufc.quixada.npi.sinutri.repository.PrescricaoRepository;
 import br.ufc.quixada.npi.sinutri.repository.RecordatorioRepository;
+import br.ufc.quixada.npi.sinutri.repository.RefeicaoPlanoAlimentarRepository;
 import br.ufc.quixada.npi.sinutri.repository.RefeicaoRecordatorioRepository;
 import br.ufc.quixada.npi.sinutri.service.ConsultaService;
 
@@ -52,6 +56,12 @@ public class ConsultaServiceImpl implements ConsultaService {
 	
 	@Inject
 	private RefeicaoRecordatorioRepository refeicaoRecordatorioRepository;
+	
+	@Inject
+	private RefeicaoPlanoAlimentarRepository rpar;
+	
+	@Inject
+	private PorcaoAlimentoRepository par;
 	
 	@Override
 	public void adicionarPrescricao(Prescricao prescricao){
@@ -131,6 +141,13 @@ public class ConsultaServiceImpl implements ConsultaService {
 	@Override
 	public void adicionarPlanoAlimentar(PlanoAlimentar planoAlimentar) {
 		planoAlimentar.setAtualizadoEm(new Date());
+		for (RefeicaoPlanoAlimentar	refeicao: planoAlimentar.getRefeicoes()) {
+			rpar.save(refeicao);
+			for (PorcaoAlimento pa: refeicao.getPorcoesAlimentos()) {
+				pa.setRefeicaoPlanoAlimentar(refeicao);
+				par.save(pa);
+			}
+		}
 		planoAlimentarRepository.save(planoAlimentar);
 	}
 

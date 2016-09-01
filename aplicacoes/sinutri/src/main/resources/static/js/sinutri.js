@@ -668,7 +668,6 @@ var DynamicList = function(rootEl, settings) {
 				name = name.replace(regExp, "$1" + index + "$3")
 			} 
 
-			console.log(name + ":" + regExp + " : " + name);
 		}
 
 		return name;
@@ -676,7 +675,8 @@ var DynamicList = function(rootEl, settings) {
 	}
 
 	this.sortItems = function() {
-		var items = $(this.settings.cloneableElement);
+		console.log("Sorting items...");
+		var items = $(this.parent.children(settings.cloneableElement));
 
 		items.sort(function (a, b) {
 			var contentA = parseInt( $(a).data('sort'));
@@ -1275,7 +1275,10 @@ var DynamicList = function(rootEl, settings) {
 		
 	} 
 
-	this.doRemoveItem = function(item) {
+	this.doRemoveItem = function(item, isAnimate) {
+		
+		if(isAnimate == undefined)
+			isAnimate = true;
 
 		var self = this;
 		var items = self.parent.children(self.settings.cloneableElement);
@@ -1283,33 +1286,36 @@ var DynamicList = function(rootEl, settings) {
 		if(items.length > 0) {
 
 			el = item;
-				
+			
+			if(isAnimate) {
 			el.css("min-height", "0px");
 			el.css("min-width", "0px");
 			el.css("margin-left", "auto");
 			
-			var anim = new Animation(el).doSequentially(
-				new Animation().doAnimate(
-					{"border-radius": "50px", specialEasing: {"border-radius": "linear"}},
-					{duration: 100, queue: false}
-				),
-				new Animation().doAnimate(
-					{width: "72px", height: "72px", specialEasing: {width: "linear"}},
-					{duration: 100, queue: false}
-				),
-				new Animation().doAnimate(
-					{width: "0px", height: "0px", specialEasing: {width: "linear"}},
-					{duration: 50, queue: false}
-				)
+				var anim = new Animation(el).doSequentially(
+					new Animation().doAnimate(
+						{"border-radius": "50px", specialEasing: {"border-radius": "linear"}},
+						{duration: 100, queue: false}
+					),
+					new Animation().doAnimate(
+						{width: "72px", height: "72px", specialEasing: {width: "linear"}},
+						{duration: 100, queue: false}
+					),
+					new Animation().doAnimate(
+						{width: "0px", height: "0px", specialEasing: {width: "linear"}},
+						{duration: 50, queue: false}
+					)
+					
+				).doPlay();
 				
-			).doPlay();
+			}
 
 			setTimeout(function() {
 				item.find("*").remove();
 				item.remove();
 				self.settings.onItemRemoved(item);
 				self.sortItems();
-			}, 250);		
+			}, isAnimate? 250: 0);		
 
 		}
 
@@ -1370,15 +1376,18 @@ var DynamicList = function(rootEl, settings) {
 		
 		var self = this;
 		self.parent.children(self.settings.cloneableElement).each(function(i, el) {
-
-			if(i > 0) 
-				self.doRemoveItem($(this));
+ 
+			self.doRemoveItem($(this), false);
 			
 		});
 
 		self.showStatus("Clearing");
 
 	} 
+	
+	this.doSortItems = function() {
+		this.sortItems();
+	}
 
 	this.getSettings = function() {
 

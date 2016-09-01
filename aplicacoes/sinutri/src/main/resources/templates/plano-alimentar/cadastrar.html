@@ -188,17 +188,27 @@
 			    		
 			    	</div>
 			    	
-					<div class="sn-textfield mdl-cell mdl-cell--12-col">
+					<div class="sn-selectfield mdl-cell mdl-cell--8-col">
+						
+				    		<label for="sn-refeicao-descricao"
+				    		class="sn-textfield__label">
+				    			Tipo
+				    		</label>
+				    		
+				    		<select class="sn-selectfield__select"
+				    		id="sn-refeicao-descricao"
+				    		name="snrefeicaodescricao">
+				    		
+				    			<option value="">Selecione uma opção</option>
+				    			
+				    			<option th:each="tipo : ${tiposRefeicao}" 
+				    			th:value="${tipo}" 
+				    			th:text="${tipo.nome}">
+				    			</option>
+							    			
+				    		</select>
 			    		
-			    		<label for="sn-refeicao-descricao"
-			    		class="sn-textfield__label">
-			    			Descrição 
-			    		</label>
-			    		<textarea class="sn-textfield__input"
-			    		id="sn-refeicao-descricao"
-			    		name="snrefeicaodescricao"></textarea>
-			    		
-			    	</div>
+			    		</div>
 			    	
 			    	
 					<div class="sn-textfield mdl-cell mdl-cell--12-col">
@@ -210,17 +220,17 @@
 			    		<textarea class="sn-textfield__input"
 			    		id="sn-refeicao-observacao"
 			    		name="snrefeicaoobservacao"></textarea>
-			    	</div>
+			    	</div> 
 			    	
 	    			<input type="hidden" id="sn-alimento-item-index"/>
 		    		
 	    			<label class="sn-textfield__label" for="alimentos">Alimentos</label>
 		
 					<ul id="alimentos" class="mdl-cell mdl-cell--12-col demo-list-three mdl-list sn-list-alimento-porcao mdl-color--grey-200">
-					
+					       
 						<li class="mdl-list__item mdl-list__item--three-line mdl-shadow--2dp sn-card sn-cloneable">
 						  	
-						  	<input type="hidden" th:field="*{refeicoes[0].porcoesAlimentos[0].alimento.nome}" class="sn-alimento-input-nome" value="00:00"/>
+						  	<input type="hidden" th:field="*{refeicoes[0].porcoesAlimentos[0].alimento.id}" class="sn-alimento-input-nome" value="00:00"/>
 					    	<input type="hidden" th:field="*{refeicoes[0].porcoesAlimentos[0].quantidade}" class="sn-alimento-input-quantidade" value="CAFEMANHA"/>
 						  	
 						  	<span class="mdl-list__item-primary-content">
@@ -313,7 +323,7 @@
 			    		<label>Alimento:</label>
 			    		<select id="sn-alimento-nome" class="sn-selectfield__select select2" th:attr="data-url=@{/Paciente/__${idPaciente}__/PlanoAlimentar/Alimentos/?fonte=}" >
 			    			<option value="">Escolha um alimento</option>
-			    		</select>
+			    		</select> 
 		    		</div>
 		    		
 		    		<div class="mdl-cell mdl-cell--16-col">

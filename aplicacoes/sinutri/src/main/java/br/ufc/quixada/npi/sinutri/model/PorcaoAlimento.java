@@ -17,7 +17,7 @@ public class PorcaoAlimento {
 	@ManyToOne
 	private RefeicaoPlanoAlimentar refeicaoPlanoAlimentar;
 	
-	@OneToOne
+	@ManyToOne
 	private Alimento alimento;
 	
 	private Integer quantidade;
