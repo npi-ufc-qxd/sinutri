@@ -293,6 +293,13 @@ var sn_base = function() {
 		});
 
 	}
+	
+	var setupCollapse = function() {
+		$(".sn-colapsable-div").addClass("sn-hide-height");
+		$(".sn-colapse-div").click(function() {
+			$(".sn-colapsable-div").toggleClass("sn-hide-height");
+		});
+	}
 
 	return {
 
@@ -304,7 +311,8 @@ var sn_base = function() {
 			tryExecute(setupFab, "sn_base", "Setup Fab done!", "Setup Fab error!");	
 			tryExecute(setupSnackBar, "sn_base", "Setup SnackBar done!", "Setup SnackBar error!");	
 			tryExecute(setupTheme, "sn_base", "Setup Theme done!", "Setup Theme error!");	
-			tryExecute(setupBreadCrumbs, "sn_base", "Setup BreadCrumbs done!", "Setup BreadCrumbs error!");	
+			tryExecute(setupBreadCrumbs, "sn_base", "Setup BreadCrumbs done!", "Setup BreadCrumbs error!");
+			tryExecute(setupCollapse, "sn_base", "Setup Collapse done!", "Setup Collapse error!");
 
 			tryExecute(toggleDrawer, "sn_base", "Toggle drawer done!", "Toggle drawer error!");
 			tryExecute(showContent, "sn_base", "Show content done!", "Show content error!");	

@@ -20,9 +20,12 @@
 								<a class="sn-attribute__title sn-breadcrumbs">Cadastrar Inquérito Alimentar</a>
 							</div>
 							<div class="mdl-cell mdl-cell--12-col sn-card">
-								<div class="mdl-layout-title mdl-color-text--green-600 sn-padding--48">Cadastrar Inquérito Alimentar</div>
+								<div class="sn-colapse-div mdl-layout-title mdl-color-text--green-600 sn-padding--48">
+									Cadastrar Inquérito Alimentar
+									<div class="sn-attribute__title" th:text="${inqueritoAlimentar.paciente.pessoa.nome+', '+inqueritoAlimentar.paciente.pessoa.getIdade()+' anos'}"></div>
+								</div>
 		        				<div class="sn-form__hdivider sn-margin--none"></div>
-								<div class="sn-padding--48 mdl-color--white">
+								<div class="sn-colapsable-div sn-padding--48 mdl-color--white">
 						
 									<div class="mdl-grid mdl-grid--no-spacing">
 										<div class="sn-attribute mdl-cell mdl-cell--4-col">
