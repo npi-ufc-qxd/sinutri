@@ -22,6 +22,25 @@ $(function()  {
 					$(dialog).find("#sn-refeicao-item-index").val(index);
 					$(dialog).find("#sn-refeicao-observacao").val(observacao);
 					$(dialog).find("#sn-refeicao-descricao").val(observacao);
+					
+					dynamicListAlimento.doClearItems();
+					
+					el.find("#sn-alimentos-sub-items").children().each(function(_, e_) {
+						e = $(e_);
+						name = e.find("#sub-item-name").val();
+						namePath = e.find("#sub-item-name").attr("name");
+						quantidade = e.find("#sub-item-quantidade").val();
+						quantidadePath = e.find("#sub-item-quantidade").attr("name");
+						
+						dynamicListAlimento.doAddItem({
+							".sn-alimento-input-nome": {value: name, name: namePath}, 
+							".sn-alimento-input-quantidade": {value: quantidade, name: quantidadePath}, 
+							".sn-alimento-nome": {text: name}, 
+							".sn-alimento-quantidade": {text: quantidade} 
+						});
+						
+					});
+					
 					dialog.showModal();
 					
 				}
@@ -86,7 +105,7 @@ $(function()  {
 						  el.find("#sn-alimentos-sub-items").remove();
 						  el.append(
 							  $.parseHTML(
-								  "<span id=\"sn-alimentos-sub-items\"></span>"
+								  "<div id=\"sn-alimentos-sub-items\"></div>"
 							  )
 						  );
 						  
@@ -98,8 +117,10 @@ $(function()  {
 							  var quantidadePath = $(e).find(".sn-alimento-input-quantidade").attr("name");
 							  el.find("#sn-alimentos-sub-items").append(
 								  $.parseHTML(
-									  "<input type=\"hidden\" name=\"" + nomePath + "\" value=\"" + nome + "\" />" + 
-									  "<input type=\"hidden\" name=\"" + quantidadePath + "\" value=\"" + quantidade + "\" />"
+									  "<div>" + 
+										  "<input type=\"hidden\" id=\"sub-item-name\" name=\"" + nomePath + "\" value=\"" + nome + "\" />" + 
+										  "<input type=\"hidden\" id=\"sub-item-quantidade\" name=\"" + quantidadePath + "\" value=\"" + quantidade + "\" />" + 
+									  "</div>"
 								  )  
 							  );							  
 							  
@@ -130,8 +151,6 @@ $(function()  {
 	        		var nome 		 = $(dialogAlimento).find("#sn-alimento-nome").val();
 					var quantidade  = $(dialogAlimento).find("#sn-alimento-quantidade").val();
 					  
-					var filtro = "[value="+descricao+"]";
-					
 					$(dialog).find("#sn-alimento-nome").val(nome);
 					$(dialog).find("#sn-alimento-item-index").val(index);
 					$(dialog).find("#sn-alimento-quantidade").val(quantidade);
