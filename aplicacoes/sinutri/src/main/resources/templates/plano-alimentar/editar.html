@@ -28,7 +28,7 @@
 		    mdl-grid 
 		    mdl-grid--no-spacing 
 		    sn-main-card" 
-	    th:action="@{/Paciente/__${idPaciente}__/PlanoAlimentar/Editar/}"
+	    th:action="@{/Paciente/__${idPaciente}__/PlanoAlimentar/__${planoAlimentar.id}__/Editar/}"
 	    th:object="${planoAlimentar}"
 	    accept-charset="utf-8">
 	    
@@ -225,11 +225,12 @@
 				    				</button>
 				    				
 							  	</span>
-							  	<span id="sn-alimentos-sub-items">
-							  					
-							  		<input type="hidden" th:each="porcao, stateAlimento : ${planoAlimentar.refeicoes[__${state.index}__].porcoesAlimentos}" th:field="*{refeicoes[__${state.index}__].porcoesAlimentos[__${stateAlimento.index}__].alimento.id}"/>
-							  		<input type="hidden" th:each="porcao, stateQuantidade : ${planoAlimentar.refeicoes[__${state.index}__].porcoesAlimentos}" th:field="*{refeicoes[__${state.index}__].porcoesAlimentos[__${stateQuantidade.index}__].quantidade}"/>
-							  	</span>
+							  	<div id="sn-alimentos-sub-items">
+							  		<div th:each="porcao, statePorcao : ${planoAlimentar.refeicoes[__${state.index}__].porcoesAlimentos}">
+							  			<input type="hidden" id="sub-item-name" th:field="*{refeicoes[__${state.index}__].porcoesAlimentos[__${statePorcao.index}__].alimento.id}"/>
+							  			<input type="hidden" id="sub-item-quantidade" th:field="*{refeicoes[__${state.index}__].porcoesAlimentos[__${statePorcao.index}__].quantidade}"/>
+							  		</div>			
+							  	</div>
 						</li>
 						
 						<li>

@@ -58,10 +58,10 @@ public class ConsultaServiceImpl implements ConsultaService {
 	private RefeicaoRecordatorioRepository refeicaoRecordatorioRepository;
 	
 	@Inject
-	private RefeicaoPlanoAlimentarRepository rpar;
+	private RefeicaoPlanoAlimentarRepository refeicaoPlanoAlimentarRepository;
 	
 	@Inject
-	private PorcaoAlimentoRepository par;
+	private PorcaoAlimentoRepository porcaoAlimentoRepository;
 	
 	@Override
 	public void adicionarPrescricao(Prescricao prescricao){
@@ -142,10 +142,10 @@ public class ConsultaServiceImpl implements ConsultaService {
 	public void adicionarPlanoAlimentar(PlanoAlimentar planoAlimentar) {
 		planoAlimentar.setAtualizadoEm(new Date());
 		for (RefeicaoPlanoAlimentar	refeicao: planoAlimentar.getRefeicoes()) {
-			rpar.save(refeicao);
-			for (PorcaoAlimento pa: refeicao.getPorcoesAlimentos()) {
-				pa.setRefeicaoPlanoAlimentar(refeicao);
-				par.save(pa);
+			refeicaoPlanoAlimentarRepository.save(refeicao);
+			for (PorcaoAlimento porcaoAlimento: refeicao.getPorcoesAlimentos()) {
+				porcaoAlimento.setRefeicaoPlanoAlimentar(refeicao);
+				porcaoAlimentoRepository.save(porcaoAlimento);
 			}
 		}
 		planoAlimentarRepository.save(planoAlimentar);

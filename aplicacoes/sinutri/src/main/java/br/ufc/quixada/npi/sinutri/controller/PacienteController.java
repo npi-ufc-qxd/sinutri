@@ -207,7 +207,7 @@ public class PacienteController {
 		PlanoAlimentar planoAlimentar = consultaService.buscarPlanoAlimentarPorId(idPlanoAlimentar);
 		
 		if(planoAlimentar==null){
-			Mensagem mensagem = new Mensagem("Avaliação Antropométrica não encontrada!", Tipo.ERRO, Prioridade.MEDIA);
+			Mensagem mensagem = new Mensagem("Plano Alimentar não encontrada!", Tipo.ERRO, Prioridade.MEDIA);
 			redirectAttributes.addFlashAttribute("mensagens", mensagem);
 			return "redirect:/Paciente/"+paciente.getId();
 		}
@@ -245,7 +245,7 @@ public class PacienteController {
 		Mensagem mensagem = new Mensagem("Editado com sucesso!", Tipo.SUCESSO, Prioridade.MEDIA);
 		redirectAttributes.addFlashAttribute("mensagens", mensagem);
 		consultaService.editarPlanoAlimentar(planoAlimentar);
-		return "nutricao/buscar"; //modificar
+		return "redirect:/Paciente/"+paciente.getId()+"/PlanoAlimentar/"+planoAlimentar.getId();
 	}
 	
 	@RequestMapping(value= {"/{idPaciente}/PlanoAlimentar/{idPlanoAlimentar}/Excluir"}, method = RequestMethod.GET)

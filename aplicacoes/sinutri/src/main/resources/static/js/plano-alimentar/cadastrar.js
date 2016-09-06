@@ -21,7 +21,8 @@ $(function()  {
 					$(dialog).find("#sn-refeicao-hora").val(hora);
 					$(dialog).find("#sn-refeicao-item-index").val(index);
 					$(dialog).find("#sn-refeicao-observacao").val(observacao);
-					$(dialog).find("#sn-refeicao-descricao").val(observacao);
+					$(dialog).find("#sn-refeicao-descricao option").removeAttr("selected");
+					$(dialog).find("#sn-refeicao-descricao option"+filtro).prop("selected", true);
 					
 					dynamicListAlimento.doClearItems();
 					
@@ -144,18 +145,18 @@ $(function()  {
 			editButton:       ".sn-alimento-editar",
 			cloneButton:	  ".sn-alimento-duplicar",
 			onItemEdit:		  function(el, index) {
-				if( dialog != null ) {
-					$(dialog).find("#sn-alimento-item-index").val("");
+				if( dialogAlimento != null ) {
 					
-					var index 	 = $(dialogAlimento).find("#sn-alimento-item-index").val();
-	        		var nome 		 = $(dialogAlimento).find("#sn-alimento-nome").val();
-					var quantidade  = $(dialogAlimento).find("#sn-alimento-quantidade").val();
-					  
-					$(dialog).find("#sn-alimento-nome").val(nome);
-					$(dialog).find("#sn-alimento-item-index").val(index);
-					$(dialog).find("#sn-alimento-quantidade").val(quantidade);
+					$(dialogAlimento).find("#sn-alimento-item-index").val("");
 					
-					dialog.showModal();
+					var nome 		=  el.find(".sn-alimento-input-nome").val();
+					var quantidade  =  el.find(".sn-alimento-input-quantidade").val();
+					
+					$(dialogAlimento).find("#sn-alimento-item-index").val(index);
+					$(dialogAlimento).find("#sn-alimento-nome").val(nome);
+					$(dialogAlimento).find("#sn-alimento-quantidade").val(quantidade);
+					
+					dialogAlimento.showModal();
 					
 				}
 				
@@ -229,7 +230,10 @@ $(function()  {
 		$("#sn-add-alimento-button").click(function() {
 			var dialog = $("#sn-add-alimento-modal"); 
 			dialog.find("#sn-alimento-quantidade").val("");
+			$(dialog).find("#sn-alimento-fonte").val("");
+			$(dialog).find("#sn-alimento-fonte").selectedIndex = 0;
 			
+			dialog.find("#sn-alimento-nome").empty();
 			dialog.find("#sn-alimento-item-index").val("");
 			
 			dialog.showModal();

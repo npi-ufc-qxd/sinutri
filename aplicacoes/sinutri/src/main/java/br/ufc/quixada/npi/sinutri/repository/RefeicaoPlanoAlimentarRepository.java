@@ -6,4 +6,5 @@ import br.ufc.quixada.npi.sinutri.model.RefeicaoPlanoAlimentar;
 
 public interface RefeicaoPlanoAlimentarRepository extends JpaRepository<RefeicaoPlanoAlimentar, Long>{
 	
+	
 }
