@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" 
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorator="estrutura/dashboard">
+
+<head>
+	<title>Sinutri | Cálculo dos Gastos Energético</title>
+	<link rel="stylesheet" type="text/css" th:href="@{/css/material-date-picker.css}"/>
+</head>
+<section layout:fragment="title">
+	<label class="mdl-layout-title">Cálculo dos Gastos Energéticos</label>
+</section>
+<section layout:fragment="conteudo">
+	
+	<div class="mdl-grid">
+		<div class="mdl-cell--1-offset-desktop">
+			<a th:href="@{/Nutricao/Buscar}" class="sn-breadcrumbs sn-attribute__title">SiNutri</a>
+			<a class="sn-attribute__title sn-breadcrumbs">Gastos Energéticos</a>
+		</div>
+		<div class="
+			mdl-cell mdl-cell--10-col-desktop
+			mdl-cell--7-col-desktop mdl-cell--1-offset-desktop
+			mdl-cell--8-col-tablet
+			mdl-cell--4-col-phone
+			mdl-grid mdl-grid--no-spacing
+			sn-main-card">
+	
+			<div class="mdl-cell mdl-cell--12-col sn-card sn-padding--48 mdl-color--teal">
+					
+				<div class="mdl-layout-title mdl-color-text--white">
+					<div class="mdl-layout-title">Cálculo dos Gastos Energéticos</div>
+				</div>
+				
+			</div>
+
+						
+			<form class="sn-form mdl-cell mdl-cell--12-col mdl-grid--no-spacing mdl-grid sn-main-card">
+<!-- iniico do Primeiro card ********************************************************************* -->
+				<div
+					class="mdl-grid mdl-cell mdl-cell--12-col sn-card sn-padding--48 mdl-color--white">
+
+					<div class="sn-textfield mdl-cell mdl-cell--12-col">
+						<label class="mdl-cell--3-col sn-textfield__label">Peso
+							Desejado (kg):</label> <input type="number" min="0" max="9999"
+							class="mdl-cell--3-col  " step="0.01" />
+					</div>
+
+					<div class="sn-textfield mdl-cell mdl-cell--4-col">
+						<label class="mdl-cell--3-col sn-textfield__label">VET:</label> <input
+							type="number" min="0" max="9999"
+							class="mdl-cell--10-col  " step="0.01" />
+					</div>
+
+					<div class="sn-textfield mdl-cell mdl-cell--3-col">
+						<label class="mdl-cell--3-col sn-textfield__label">Glicídio:</label>
+						<input type="number" min="0" max="9999"
+							class="mdl-cell--8-col  " step="0.01" />
+					</div>
+
+					<div class="sn-textfield mdl-cell mdl-cell--2-col">
+						<input type="text" th:readonly="true"
+							class="mdl-cell--12-col" th:value="calorias"/>
+					</div>
+
+					<div class="sn-textfield mdl-cell mdl-cell--2-col">
+						<input type="text" th:readonly="true"
+							class="mdl-cell--12-col" th:value="gramas"/>
+					</div>
+
+					<div class="sn-textfield mdl-cell mdl-cell--4-col">
+						<label class="mdl-cell--3-col sn-textfield__label">VET
+							Ajuste:</label> <input type="number" min="0" max="9999"
+							class="mdl-cell--8-col  " step="0.01" />
+					</div>
+
+					<div class="sn-textfield mdl-cell mdl-cell--3-col">
+						<label class="mdl-cell--3-col sn-textfield__label">Proteina:</label>
+						<input type="number" min="0" max="9999"
+							class="mdl-cell--8-col  " step="0.01" />
+					</div>
+
+					<div class="sn-textfield mdl-cell mdl-cell--2-col">
+						<input type="text" th:readonly="true"
+							class="mdl-cell--12-col" th:value="gramas"/>
+					</div>
+
+					<div class="sn-textfield mdl-cell mdl-cell--2-col">
+						<input type="text" th:readonly="true"
+							class="mdl-cell--12-col" th:value="calorias"/>
+					</div>
+
+					<div class="sn-textfield mdl-cell mdl-cell--4-col">
+						<label class="mdl-cell--3-col sn-textfield__label">VET com
+							redução:</label> <input type="number" min="0" max="9999"
+							class="mdl-cell--6-col  " step="0.01" />
+					</div>
+
+					<div class="sn-textfield mdl-cell mdl-cell--3-col">
+						<label class="mdl-cell--3-col sn-textfield__label">Lipídio:</label>
+						<input type="number" min="0" max="9999"
+							class="mdl-cell--8-col  " step="0.01" />
+					</div>
+
+					<div class="sn-textfield mdl-cell mdl-cell--2-col">
+						<input type="text" th:readonly="true"
+							class="mdl-cell--12-col" th:value="gramas" />
+					</div>
+
+					<div class="sn-textfield mdl-cell mdl-cell--2-col">
+						<input type="text" th:readonly="true"
+							class="mdl-cell--12-col" th:value="calorias"/>
+					</div>
+					<div class="sn-textfield mdl-cell mdl-cell--11-col mdl-grid--no-spacing" th:align="center">
+						<input type="text" th:readonly="true" th:align="center"
+							class="mdl-grid--no-spacing mdl-cell--1-col" th:value="total"/>
+					</div>
+				</div>
+<!-- Fim do Primeiro card ********************************************************************* -->				
+
+<!-- Inicio do Segundo card ********************************************************************* -->
+				<div
+					class="mdl-cell mdl-cell--12-col mdl-grid sn-card sn-padding--48 mdl-color--white mdl-grid" >
+					
+					<div class="mdl-cell mdl-cell--8-col mdl-grid">
+				
+						<div class="mdl-title mdl-color-text--black mdl-cell--12-col">Grupo Alimentar</div>
+		        		
+		        		<div class="mdl-subtitle mdl-color-text--black mdl-cell--12-col">Leite, Iorgute, Coalhada</div>
+		        		
+						<div class="sn-textfield mdl-cell mdl-cell--3-col">
+								<label class="mdl-cell--3-col sn-textfield__label">N° de Porções:</label>
+								<input type="number" min="0"  max="9999" class="mdl-cell--10-col  " step="0.01"/>
+						</div>
+						<div class="sn-textfield mdl-cell mdl-cell--3-col">
+								<label class="mdl-cell--3-col sn-textfield__label">Glicídio</label>
+								<input type="number" min="0"  max="9999" class="mdl-cell--10-col  " step="0.01"/>
+						</div>
+						
+						<div class="sn-textfield mdl-cell mdl-cell--3-col">
+								<label class="mdl-cell--3-col sn-textfield__label">Lipídio</label>
+								<input type="number" min="0"  max="9999" class="mdl-cell--10-col  " step="0.01"/>
+						</div>
+						<div class="sn-textfield mdl-cell mdl-cell--3-col">
+								<label class="mdl-cell--3-col sn-textfield__label">Proteina</label>
+								<input type="number" min="0"  max="9999" class="mdl-cell--10-col  " step="0.01"/>
+						</div>						
+						
+						<div class="mdl-subtitle mdl-color-text--black mdl-cell--12-col">Verdura</div>
+		        		
+						<div class="sn-textfield mdl-cell mdl-cell--3-col">
+								<label class="mdl-cell--3-col sn-textfield__label">N° de Porções:</label>
+								<input type="number" min="0"  max="9999" class="mdl-cell--10-col  " step="0.01"/>
+						</div>
+						<div class="sn-textfield mdl-cell mdl-cell--3-col">
+								<label class="mdl-cell--3-col sn-textfield__label">Glicídio</label>
+								<input type="number" min="0"  max="9999" class="mdl-cell--10-col  " step="0.01"/>
+						</div>
+						
+						<div class="sn-textfield mdl-cell mdl-cell--3-col">
+								<label class="mdl-cell--3-col sn-textfield__label">Lipídio</label>
+								<input type="number" min="0"  max="9999" class="mdl-cell--10-col  " step="0.01"/>
+						</div>
+						<div class="sn-textfield mdl-cell mdl-cell--3-col">
+								<label class="mdl-cell--3-col sn-textfield__label">Proteina</label>
+								<input type="number" min="0"  max="9999" class="mdl-cell--10-col  " step="0.01"/>
+						</div>
+						
+						
+						<div class="mdl-subtitle mdl-color-text--black mdl-cell--12-col">Frutas</div>
+		        		
+						<div class="sn-textfield mdl-cell mdl-cell--3-col">
+								<label class="mdl-cell--3-col sn-textfield__label">N° de Porções:</label>
+								<input type="number" min="0"  max="9999" class="mdl-cell--10-col  " step="0.01"/>
+						</div>
+						<div class="sn-textfield mdl-cell mdl-cell--3-col">
+								<label class="mdl-cell--3-col sn-textfield__label">Glicídio</label>
+								<input type="number" min="0"  max="9999" class="mdl-cell--10-col  " step="0.01"/>
+						</div>
+						
+						<div class="sn-textfield mdl-cell mdl-cell--3-col">
+								<label class="mdl-cell--3-col sn-textfield__label">Lipídio</label>
+								<input type="number" min="0"  max="9999" class="mdl-cell--10-col  " step="0.01"/>
+						</div>
+						<div class="sn-textfield mdl-cell mdl-cell--3-col">
+								<label class="mdl-cell--3-col sn-textfield__label">Proteina</label>
+								<input type="number" min="0"  max="9999" class="mdl-cell--10-col  " step="0.01"/>
+						</div>
+						
+						
+						<div class="mdl-subtitle mdl-color-text--black mdl-cell--12-col">Açucares</div>
+		        		
+						<div class="sn-textfield mdl-cell mdl-cell--3-col">
+								<label class="mdl-cell--3-col sn-textfield__label">N° de Porções:</label>
+								<input type="number" min="0"  max="9999" class="mdl-cell--10-col  " step="0.01"/>
+						</div>
+						<div class="sn-textfield mdl-cell mdl-cell--3-col">
+								<label class="mdl-cell--3-col sn-textfield__label">Glicídio</label>
+								<input type="number" min="0"  max="9999" class="mdl-cell--10-col  " step="0.01"/>
+						</div>
+						
+						<div class="sn-textfield mdl-cell mdl-cell--3-col">
+								<label class="mdl-cell--3-col sn-textfield__label">Lipídio</label>
+								<input type="number" min="0"  max="9999" class="mdl-cell--10-col  " step="0.01"/>
+						</div>
+						<div class="sn-textfield mdl-cell mdl-cell--3-col">
+								<label class="mdl-cell--3-col sn-textfield__label">Proteina</label>
+								<input type="number" min="0"  max="9999" class="mdl-cell--10-col  " step="0.01"/>
+						</div>
+						
+						
+						<div class="mdl-subtitle mdl-color-text--black mdl-cell--12-col">Pães, Cereais, Arroz e Massas</div>
+		        		
+						<div class="sn-textfield mdl-cell mdl-cell--3-col">
+								<label class="mdl-cell--3-col sn-textfield__label">N° de Porções:</label>
+								<input type="number" min="0"  max="9999" class="mdl-cell--10-col  " step="0.01"/>
+						</div>
+						<div class="sn-textfield mdl-cell mdl-cell--3-col">
+								<label class="mdl-cell--3-col sn-textfield__label">Glicídio</label>
+								<input type="number" min="0"  max="9999" class="mdl-cell--10-col  " step="0.01"/>
+						</div>
+						
+						<div class="sn-textfield mdl-cell mdl-cell--3-col">
+								<label class="mdl-cell--3-col sn-textfield__label">Lipídio</label>
+								<input type="number" min="0"  max="9999" class="mdl-cell--10-col  " step="0.01"/>
+						</div>
+						<div class="sn-textfield mdl-cell mdl-cell--3-col">
+								<label class="mdl-cell--3-col sn-textfield__label">Proteina</label>
+								<input type="number" min="0"  max="9999" class="mdl-cell--10-col  " step="0.01"/>
+						</div>
+						
+						
+						<div class="mdl-subtitle mdl-color-text--black mdl-cell--12-col">Carnes, Aves, Peixes e Ovos</div>
+		        		
+						<div class="sn-textfield mdl-cell mdl-cell--3-col">
+								<label class="mdl-cell--3-col sn-textfield__label">N° de Porções:</label>
+								<input type="number" min="0"  max="9999" class="mdl-cell--10-col  " step="0.01"/>
+						</div>
+						<div class="sn-textfield mdl-cell mdl-cell--3-col">
+								<label class="mdl-cell--3-col sn-textfield__label">Glicídio</label>
+								<input type="number" min="0"  max="9999" class="mdl-cell--10-col  " step="0.01"/>
+						</div>
+						
+						<div class="sn-textfield mdl-cell mdl-cell--3-col">
+								<label class="mdl-cell--3-col sn-textfield__label">Lipídio</label>
+								<input type="number" min="0"  max="9999" class="mdl-cell--10-col  " step="0.01"/>
+						</div>
+						<div class="sn-textfield mdl-cell mdl-cell--3-col">
+								<label class="mdl-cell--3-col sn-textfield__label">Proteina</label>
+								<input type="number" min="0"  max="9999" class="mdl-cell--10-col  " step="0.01"/>
+						</div>
+						
+						
+						<div class="mdl-subtitle mdl-color-text--black mdl-cell--12-col">Gorduras e Óleos</div>
+		        		
+						<div class="sn-textfield mdl-cell mdl-cell--3-col">
+								<label class="mdl-cell--3-col sn-textfield__label">N° de Porções:</label>
+								<input type="number" min="0"  max="9999" class="mdl-cell--10-col  " step="0.01"/>
+						</div>
+						<div class="sn-textfield mdl-cell mdl-cell--3-col">
+								<label class="mdl-cell--3-col sn-textfield__label">Glicídio</label>
+								<input type="number" min="0"  max="9999" class="mdl-cell--10-col  " step="0.01"/>
+						</div>
+						
+						<div class="sn-textfield mdl-cell mdl-cell--3-col">
+								<label class="mdl-cell--3-col sn-textfield__label">Lipídio</label>
+								<input type="number" min="0"  max="9999" class="mdl-cell--10-col  " step="0.01"/>
+						</div>
+						<div class="sn-textfield mdl-cell mdl-cell--3-col">
+								<label class="mdl-cell--3-col sn-textfield__label">Proteina</label>
+								<input type="number" min="0"  max="9999" class="mdl-cell--10-col  " step="0.01"/>
+						</div>
+					</div>
+					
+					<!--  2ª card -->
+					
+					<div class="mdl-cell mdl-cell--4-col sn-adapter mdl-grid sn-card mdl-color--white mdl-grid" >
+						<div class="mdl-title mdl-color-text--black mdl-cell--12-col" th:align="center"></div>
+						<div class="mdl-title mdl-color-text--black mdl-cell--12-col" th:align="center">Adequação</div>
+						<div class="mdl-subtitle mdl-color-text--black mdl-cell--9-col" th:align="right">Variação</div>
+						
+						<!--  Não apague!!! -->
+						<div class="mdl-cell mdl-cell--1-col mdl-grid--no-spacing">
+						</div>
+						
+						<div class="mdl-subtitle mdl-color-text--black mdl-cell--4-col">Glicídio:</div>
+						<div class="sn-textfield mdl-cell mdl-cell--3-col mdl-grid--no-spacing">
+							<input type="text" th:readonly="true"
+								class="mdl-cell--12-col" th:value="0"/>
+						</div>
+						<div class="mdl-cell mdl-cell--1-col mdl-grid--no-spacing">
+							<span>%</span>	
+						</div>
+						<div class="sn-textfield mdl-cell mdl-cell--3-col mdl-grid--no-spacing">
+							<input type="text" th:readonly="true"
+								class="mdl-cell--12-col" th:value="0" />
+						</div>
+						<div class="mdl-cell mdl-cell--1-col mdl-grid--no-spacing">
+							<span>g</span>	
+						</div>
+						
+						
+						<div class="mdl-subtitle mdl-color-text--black mdl-cell--4-col">Proteina:</div>
+						<div
+							class="sn-textfield mdl-cell mdl-cell--3-col mdl-grid--no-spacing">
+							<input type="text" th:readonly="true"
+								class="mdl-cell--12-col " th:value="0"/>
+						</div>
+						<div class="mdl-cell mdl-cell--1-col mdl-grid--no-spacing">
+							<span>%</span>
+						</div>
+						<div
+							class="sn-textfield mdl-cell mdl-cell--3-col mdl-grid--no-spacing">
+							<input type="text" th:readonly="true"
+								class="mdl-cell--12-col  " th:value="0"/>
+						</div>
+						<div class="mdl-cell mdl-cell--1-col mdl-grid--no-spacing">
+							<span>g</span>
+						</div>
+
+
+						<div class="mdl-subtitle mdl-color-text--black mdl-cell--4-col">Lipídio</div>
+						<div
+							class="sn-textfield mdl-cell mdl-cell--3-col mdl-grid--no-spacing">
+							<input type="text" th:readonly="true"
+								class="mdl-cell--12-col  " th:value="0"/>
+						</div>
+						<div class="mdl-cell mdl-cell--1-col mdl-grid--no-spacing">
+							<span>%</span>
+						</div>
+						<div
+							class="sn-textfield mdl-cell mdl-cell--3-col mdl-grid--no-spacing">
+							<input type="text" th:readonly="true"
+								class="mdl-cell--12-col  " th:value="0"/>
+						</div>
+						<div class="mdl-cell mdl-cell--1-col mdl-grid--no-spacing">
+							<span>g</span>
+						</div>
+					</div>
+					
+				</div>
+<!-- Fim do Segundo card ********************************************************************* -->				
+
+<!-- Inicio do Terceiro card ********************************************************************* -->
+				<div class="mdl-cell mdl-grid mdl-cell--12-col sn-card sn-padding--48 mdl-color--white">
+					<div class="mdl-title mdl-color-text--black mdl-cell--12-col">Redistribuição</div>
+					
+					<div class="mdl-title mdl-color-text--black mdl-cell--12-col" th:align="center">Refeições</div>
+					
+					<div class="mdl-subtitle mdl-color-text--black mdl-cell--4-col"></div>					
+						<div class="mdl-cell mdl-cell--1-col" th:align="center" >
+							<label class="mdl-cell--3-col sn-textfield__label">Desjejum</label>
+						</div>
+						<div class="mdl-cell mdl-cell--1-col" th:align="center">
+							<label class="mdl-cell--3-col sn-textfield__label">Lanche</label>
+						</div>
+						<div class="mdl-cell mdl-cell--1-col" th:align="center">
+							<label class="mdl-cell--3-col sn-textfield__label">Almoço</label>
+						</div>
+						<div class="mdl-cell mdl-cell--1-col" th:align="center">
+							<label class="mdl-cell--3-col sn-textfield__label">Merenda</label>
+						</div>
+						<div class="mdl-cell mdl-cell--1-col" th:align="center">
+							<label class="mdl-cell--3-col sn-textfield__label">Janta</label>
+						</div>
+						<div class="mdl-cell mdl-cell--1-col" th:align="center">
+							<label class="mdl-cell--3-col sn-textfield__label">Colação</label>
+						</div>
+						<div class="mdl-subtitle mdl-color-text--black mdl-cell--1-col" th:align="center">Porções</div>
+					
+						
+					<div class="mdl-subtitle mdl-color-text--black mdl-cell--4-col">Leite, Iorgute, Coalhada</div>
+						<div class="sn-textfield mdl-cell mdl-cell--1-col mdl-grid--no-spacing" th:align="center">
+							<input type="number" min="0"  max="9999" class="mdl-cell--10-col  " step="0.01"/>
+						</div>
+						<div class="sn-textfield mdl-cell mdl-cell--1-col mdl-grid--no-spacing" th:align="center">
+							<input type="number" min="0"  max="9999" class="mdl-cell--10-col  " step="0.01"/>
+						</div>
+						<div class="sn-textfield mdl-cell mdl-cell--1-col mdl-grid--no-spacing" th:align="center">
+							<input type="number" min="0"  max="9999" class="mdl-cell--10-col  " step="0.01"/>
+						</div>
+						<div class="sn-textfield mdl-cell mdl-cell--1-col mdl-grid--no-spacing" th:align="center">
+							<input type="number" min="0"  max="9999" class="mdl-cell--10-col  " step="0.01"/>
+						</div>
+						<div class="sn-textfield mdl-cell mdl-cell--1-col mdl-grid--no-spacing" th:align="center">
+							<input type="number" min="0"  max="9999" class="mdl-cell--10-col  " step="0.01"/>
+						</div>
+						<div class="sn-textfield mdl-cell mdl-cell--1-col mdl-grid--no-spacing" th:align="center">
+							<input type="number" min="0"  max="9999" class="mdl-cell--10-col  " step="0.01"/>
+						</div>
+						<div class="sn-textfield mdl-cell mdl-cell--1-col mdl-grid--no-spacing" th:align="center">
+							<input type="text" th:readonly="true"
+								class="mdl-cell--12-col  " th:value="QTD" />
+						</div>
+					
+					
+					<div class="mdl-subtitle mdl-color-text--black mdl-cell--4-col">Verdura</div>
+	        			<div class="sn-textfield mdl-cell mdl-cell--1-col mdl-grid--no-spacing" th:align="center">
+							<input type="number" min="0"  max="9999" class="mdl-cell--10-col  " step="0.01"/>
+						</div>
+						<div class="sn-textfield mdl-cell mdl-cell--1-col mdl-grid--no-spacing" th:align="center">
+							<input type="number" min="0"  max="9999" class="mdl-cell--10-col  " step="0.01"/>
+						</div>
+						<div class="sn-textfield mdl-cell mdl-cell--1-col mdl-grid--no-spacing" th:align="center">
+							<input type="number" min="0"  max="9999" class="mdl-cell--10-col  " step="0.01"/>
+						</div>
+						<div class="sn-textfield mdl-cell mdl-cell--1-col mdl-grid--no-spacing" th:align="center">
+							<input type="number" min="0"  max="9999" class="mdl-cell--10-col  " step="0.01"/>
+						</div>
+						<div class="sn-textfield mdl-cell mdl-cell--1-col mdl-grid--no-spacing" th:align="center">
+							<input type="number" min="0"  max="9999" class="mdl-cell--10-col  " step="0.01"/>
+						</div>
+						<div class="sn-textfield mdl-cell mdl-cell--1-col mdl-grid--no-spacing" th:align="center">
+							<input type="number" min="0"  max="9999" class="mdl-cell--10-col  " step="0.01"/>
+						</div>
+						<div class="sn-textfield mdl-cell mdl-cell--1-col mdl-grid--no-spacing" th:align="center">
+							<input type="text" th:readonly="true"
+								class="mdl-cell--12-col  " th:value="QTD" />
+						</div>
+					
+					
+					<div class="mdl-subtitle mdl-color-text--black mdl-cell--4-col">Frutas</div>
+	        			<div class="sn-textfield mdl-cell mdl-cell--1-col mdl-grid--no-spacing" th:align="center">
+							<input type="number" min="0"  max="9999" class="mdl-cell--10-col  " step="0.01"/>
+						</div>
+						<div class="sn-textfield mdl-cell mdl-cell--1-col mdl-grid--no-spacing" th:align="center">
+							<input type="number" min="0"  max="9999" class="mdl-cell--10-col  " step="0.01"/>
+						</div>
+						<div class="sn-textfield mdl-cell mdl-cell--1-col mdl-grid--no-spacing" th:align="center">
+							<input type="number" min="0"  max="9999" class="mdl-cell--10-col  " step="0.01"/>
+						</div>
+						<div class="sn-textfield mdl-cell mdl-cell--1-col mdl-grid--no-spacing" th:align="center">
+							<input type="number" min="0"  max="9999" class="mdl-cell--10-col  " step="0.01"/>
+						</div>
+						<div class="sn-textfield mdl-cell mdl-cell--1-col mdl-grid--no-spacing" th:align="center">
+							<input type="number" min="0"  max="9999" class="mdl-cell--10-col  " step="0.01"/>
+						</div>
+						<div class="sn-textfield mdl-cell mdl-cell--1-col mdl-grid--no-spacing" th:align="center">
+							<input type="number" min="0"  max="9999" class="mdl-cell--10-col  " step="0.01"/>
+						</div>
+						<div class="sn-textfield mdl-cell mdl-cell--1-col mdl-grid--no-spacing" th:align="center">
+							<input type="text" th:readonly="true"
+								class="mdl-cell--12-col  " th:value="QTD" />
+						</div>
+					
+					
+					<div class="mdl-subtitle mdl-color-text--black mdl-cell--4-col">Açucares</div>
+						<div class="sn-textfield mdl-cell mdl-cell--1-col mdl-grid--no-spacing" th:align="center">
+							<input type="number" min="0"  max="9999" class="mdl-cell--10-col  " step="0.01"/>
+						</div>
+						<div class="sn-textfield mdl-cell mdl-cell--1-col mdl-grid--no-spacing" th:align="center">
+							<input type="number" min="0"  max="9999" class="mdl-cell--10-col  " step="0.01"/>
+						</div>
+						<div class="sn-textfield mdl-cell mdl-cell--1-col mdl-grid--no-spacing" th:align="center">
+							<input type="number" min="0"  max="9999" class="mdl-cell--10-col  " step="0.01"/>
+						</div>
+						<div class="sn-textfield mdl-cell mdl-cell--1-col mdl-grid--no-spacing" th:align="center">
+							<input type="number" min="0"  max="9999" class="mdl-cell--10-col  " step="0.01"/>
+						</div>
+						<div class="sn-textfield mdl-cell mdl-cell--1-col mdl-grid--no-spacing" th:align="center">
+							<input type="number" min="0"  max="9999" class="mdl-cell--10-col  " step="0.01"/>
+						</div>
+						<div class="sn-textfield mdl-cell mdl-cell--1-col mdl-grid--no-spacing" th:align="center">
+							<input type="number" min="0"  max="9999" class="mdl-cell--10-col  " step="0.01"/>
+						</div>
+						<div class="sn-textfield mdl-cell mdl-cell--1-col mdl-grid--no-spacing" th:align="center">
+							<input type="text" th:readonly="true"
+								class="mdl-cell--12-col  " th:value="QTD" />
+						</div>
+					
+						
+					<div class="mdl-subtitle mdl-color-text--black mdl-cell--4-col">Pães, Cereais, Arroz e Massas</div>
+	        			<div class="sn-textfield mdl-cell mdl-cell--1-col mdl-grid--no-spacing" th:align="center">
+							<input type="number" min="0"  max="9999" class="mdl-cell--10-col  " step="0.01"/>
+						</div>
+						<div class="sn-textfield mdl-cell mdl-cell--1-col mdl-grid--no-spacing" th:align="center">
+							<input type="number" min="0"  max="9999" class="mdl-cell--10-col  " step="0.01"/>
+						</div>
+						<div class="sn-textfield mdl-cell mdl-cell--1-col mdl-grid--no-spacing" th:align="center">
+							<input type="number" min="0"  max="9999" class="mdl-cell--10-col  " step="0.01"/>
+						</div>
+						<div class="sn-textfield mdl-cell mdl-cell--1-col mdl-grid--no-spacing" th:align="center">
+							<input type="number" min="0"  max="9999" class="mdl-cell--10-col  " step="0.01"/>
+						</div>
+						<div class="sn-textfield mdl-cell mdl-cell--1-col mdl-grid--no-spacing" th:align="center">
+							<input type="number" min="0"  max="9999" class="mdl-cell--10-col  " step="0.01"/>
+						</div>
+						<div class="sn-textfield mdl-cell mdl-cell--1-col mdl-grid--no-spacing" th:align="center">
+							<input type="number" min="0"  max="9999" class="mdl-cell--10-col  " step="0.01"/>
+						</div>
+						<div class="sn-textfield mdl-cell mdl-cell--1-col mdl-grid--no-spacing" th:align="center">
+							<input type="text" th:readonly="true"
+								class="mdl-cell--12-col  " th:value="QTD" />
+						</div>
+					
+					
+					<div class="mdl-subtitle mdl-color-text--black mdl-cell--4-col">Carnes, Aves, Peixes e Ovos</div>
+						<div class="sn-textfield mdl-cell mdl-cell--1-col mdl-grid--no-spacing" th:align="center">
+							<input type="number" min="0"  max="9999" class="mdl-cell--10-col  " step="0.01"/>
+						</div>
+						<div class="sn-textfield mdl-cell mdl-cell--1-col mdl-grid--no-spacing" th:align="center">
+							<input type="number" min="0"  max="9999" class="mdl-cell--10-col  " step="0.01"/>
+						</div>
+						<div class="sn-textfield mdl-cell mdl-cell--1-col mdl-grid--no-spacing" th:align="center">
+							<input type="number" min="0"  max="9999" class="mdl-cell--10-col  " step="0.01"/>
+						</div>
+						<div class="sn-textfield mdl-cell mdl-cell--1-col mdl-grid--no-spacing" th:align="center">
+							<input type="number" min="0"  max="9999" class="mdl-cell--10-col  " step="0.01"/>
+						</div>
+						<div class="sn-textfield mdl-cell mdl-cell--1-col mdl-grid--no-spacing" th:align="center">
+							<input type="number" min="0"  max="9999" class="mdl-cell--10-col  " step="0.01"/>
+						</div>
+						<div class="sn-textfield mdl-cell mdl-cell--1-col mdl-grid--no-spacing" th:align="center">
+							<input type="number" min="0"  max="9999" class="mdl-cell--10-col  " step="0.01"/>
+						</div>
+						<div class="sn-textfield mdl-cell mdl-cell--1-col mdl-grid--no-spacing" th:align="center">
+							<input type="text" th:readonly="true"
+								class="mdl-cell--12-col  " th:value="QTD" />
+						</div>
+					
+						        		
+					<div class="mdl-subtitle mdl-color-text--black mdl-cell--4-col">Gorduras e Óleos</div>	
+						<div class="sn-textfield mdl-cell mdl-cell--1-col mdl-grid--no-spacing" th:align="center">
+							<input type="number" min="0"  max="9999" class="mdl-cell--10-col  " step="0.01"/>
+						</div>
+						<div class="sn-textfield mdl-cell mdl-cell--1-col mdl-grid--no-spacing" th:align="center">
+							<input type="number" min="0"  max="9999" class="mdl-cell--10-col  " step="0.01"/>
+						</div>
+						<div class="sn-textfield mdl-cell mdl-cell--1-col mdl-grid--no-spacing" th:align="center">
+							<input type="number" min="0"  max="9999" class="mdl-cell--10-col  " step="0.01"/>
+						</div>
+						<div class="sn-textfield mdl-cell mdl-cell--1-col mdl-grid--no-spacing" th:align="center">
+							<input type="number" min="0"  max="9999" class="mdl-cell--10-col  " step="0.01"/>
+						</div>
+						<div class="sn-textfield mdl-cell mdl-cell--1-col mdl-grid--no-spacing" th:align="center">
+							<input type="number" min="0"  max="9999" class="mdl-cell--10-col  " step="0.01"/>
+						</div>
+						<div class="sn-textfield mdl-cell mdl-cell--1-col mdl-grid--no-spacing" th:align="center">
+							<input type="number" min="0"  max="9999" class="mdl-cell--10-col  " step="0.01"/>
+						</div>
+						<div class="sn-textfield mdl-cell mdl-cell--1-col mdl-grid--no-spacing" th:align="center">
+							<input type="text" th:readonly="true"
+								class="mdl-cell--12-col  " th:value="QTD" />
+						</div>
+					
+					<!-- botões -->
+					<div class="sn-form-actions">
+
+						<input type="submit"
+							class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect"
+							value="Cadastrar" /> <a id="cancelar"
+							th:href="@{${'/Nutricao/Buscar'}}" href="#"
+							class="mdl-button mdl-js-button mdl-button--colored mdl-js-ripple-effect">Cancelar</a>
+					</div>
+					
+				</div>
+			</form>
+		
+		</div>
+	
+	</div>
+	
+</section>
+
+<section layout:fragment="js">
+				
+        <script type="text/javascript" th:src="@{/js/moment.js}"></script>
+        <script type="text/javascript" th:src="@{/js/material-date-picker.js}"></script>
+        <script type="text/javascript" th:src="@{/js/jquery.mask.min.js}"></script>
+        <script type="text/javascript" th:src="@{/js/paciente/paciente-externo-cadastrar.js}"></script>
+              
+</section>
+
+</html>

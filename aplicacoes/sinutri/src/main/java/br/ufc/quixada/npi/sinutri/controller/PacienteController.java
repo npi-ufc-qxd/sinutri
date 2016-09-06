@@ -988,4 +988,12 @@ public class PacienteController {
 	private boolean isInvalidoAntropometria(AvaliacaoAntropometrica avaliacaoAntropometrica){
 		return avaliacaoAntropometrica == null;
 	}
+	
+	@RequestMapping(value = "/prototipo", method = RequestMethod.GET)
+	public String visulizarRecordatorio(){
+		
+		
+		return "prototipo";
+	}
+	
 }
