@@ -1096,6 +1096,8 @@ var DynamicList = function(rootEl, settings) {
 			)
 		).doPlay();
 
+		$(newItem).addClass("sn-list-refeicao-li");
+		
 		return newItem;
 		
 	} 

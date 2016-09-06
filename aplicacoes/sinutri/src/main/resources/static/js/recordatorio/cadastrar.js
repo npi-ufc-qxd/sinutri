@@ -77,16 +77,17 @@ $(function()
 						  
 						  var el;
 						  
-						  if(index.length != 0)
+						  if(index.length != 0) {
 							  el = dynamicList.doEditItem(index, data);
-						  else 
+						  } else {
 							  el = dynamicList.doAddItem(data);
-						 
+						  } 
+						  
 						  componentHandler.upgradeElement(el[0]);
 						  el.find("*").each( function(index, el) {
 							  componentHandler.upgradeElement(el);
 						  });
-						  
+
 						  $(dialog).find("#sn-refeicao-item-index").val("");
 		        	  }
 		          }
