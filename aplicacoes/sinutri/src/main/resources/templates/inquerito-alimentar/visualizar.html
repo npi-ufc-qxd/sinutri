@@ -127,6 +127,20 @@
 						
 						<div class="sn-form__hdivider"></div>
 						<label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect mdl-cell mdl-cell--12-col" for="checkbox-1">
+							<input type="checkbox" id="checkbox-1" class="mdl-checkbox__input" th:field="${inqueritoAlimentar.embutidosGosta}" disabled="true"/>
+							<span class="mdl-checkbox__label sn-attribute__title">Gosta de embutidos</span>
+						</label>
+						<div class="sn-attribute mdl-cell mdl-cell--6-col" th:if="${inqueritoAlimentar.embutidosGosta}">
+							<div class="sn-attribute__title">Frequência</div>
+							<div class="sn-attribute__value" th:text="${inqueritoAlimentar.embutidosFrequenciaSemanal != null} ? ${inqueritoAlimentar.embutidosFrequenciaSemanal.descricao} : 'Sem frequencia' ">Frequencia semanal</div>
+						</div>
+						<div class="sn-attribute mdl-cell mdl-cell--6-col" th:if="${inqueritoAlimentar.embutidosGosta}">
+							<div class="sn-attribute__title">Anotação</div>
+							<div class="sn-attribute__value" th:text="${inqueritoAlimentar.embutidosAnotacao != null and inqueritoAlimentar.embutidosAnotacao != ''} ? ${inqueritoAlimentar.embutidosAnotacao} : 'Sem anotação' ">Anotação</div>
+						</div>
+						
+						<div class="sn-form__hdivider"></div>
+						<label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect mdl-cell mdl-cell--12-col" for="checkbox-1">
 							<input type="checkbox" id="checkbox-1" class="mdl-checkbox__input" th:field="${inqueritoAlimentar.frutasGosta}" disabled="true"/>
 							<span class="mdl-checkbox__label sn-attribute__title">Gosta de frutas</span>
 						</label>
@@ -349,6 +363,7 @@
 							<div class="sn-attribute__value" th:text="${inqueritoAlimentar.viscerasAnotacao != null and inqueritoAlimentar.viscerasAnotacao != ''} ? ${inqueritoAlimentar.viscerasAnotacao} : 'Sem anotação' ">Anotação</div>
 						</div>
 						
+						<div class="sn-form__hdivider"></div>
 						<div class="sn-attribute mdl-cell mdl-cell--12-col">
 							<div class="sn-attribute__title">Observações</div>
 							<div class="sn-attribute__value" th:text="${inqueritoAlimentar.observacoes != null and inqueritoAlimentar.observacoes != ''} ? ${inqueritoAlimentar.observacoes} : 'Sem observações' ">Aemon Targaryen está vivo!</div>
