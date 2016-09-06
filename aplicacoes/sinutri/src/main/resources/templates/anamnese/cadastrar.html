@@ -8,14 +8,17 @@
 	<title>Sinutri | Cadastrar Anamnese</title>
 	<link rel="stylesheet" type="text/css" th:href="@{/css/material-date-picker.css}"/>
 </head>
-<section layout:fragment="breadcrumbs">
-	<a th:href="@{/Nutricao/Buscar}" class="sn-breadcrumbs mdl-layout-title">SiNutri</a>
-	<a th:href="@{/Nutricao/Buscar}" class="sn-breadcrumbs mdl-layout-title">Buscar</a>
-	<a th:href="@{${'/Paciente/'+anamnese.paciente.id}}" class="sn-breadcrumbs mdl-layout-title">Paciente</a>
-	<a class="mdl-layout-title sn-breadcrumbs">Cadastrar Anamnese</a>
+<section layout:fragment="title">
+	<label class="mdl-layout-title">Cadastrar Anamnese</label>
 </section>
 <section layout:fragment="conteudo">
 	<div class="mdl-grid">
+		<div class="mdl-cell--1-offset-desktop">
+			<a th:href="@{/Nutricao/Buscar}" class="sn-breadcrumbs sn-attribute__title">SiNutri</a>
+			<a th:href="@{/Nutricao/Buscar}" class="sn-breadcrumbs sn-attribute__title">Buscar</a>
+			<a th:href="@{${'/Paciente/'+anamnese.paciente.id}}" class="sn-breadcrumbs sn-attribute__title">Paciente</a>
+			<a class="sn-attribute__title sn-breadcrumbs">Cadastrar Anamnese</a>
+		</div>
 		<form class="
             sn-form mdl-cell
             mdl-cell--7-col-desktop mdl-cell--1-offset-desktop
@@ -207,7 +210,7 @@
 				<div class="sn-textfield mdl-cell mdl-cell--12-col">
 					<label class="sn-textfield__label" for="inputTextAgua">Consumo
 						de água (copos)</label> <input id="inputTextAgua" th:field="*{agua}"
-						class="sn-textfield__input" type="number" step="0.01" min="0"
+						class="sn-textfield__input" type="number" step="0.5" min="0"
 						max="9999999" pattern="-?[0-9]*(\.[0-9]+)?" />
 					<div class="error-validation">
 						<label class=" label label-danger"

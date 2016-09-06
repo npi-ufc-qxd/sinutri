@@ -16,16 +16,18 @@
 </head>
 
 <body>
-	<section layout:fragment="breadcrumbs">
-		<a th:href="@{/Nutricao/Buscar}" class="sn-breadcrumbs mdl-layout-title">SiNutri</a>
-		<a th:href="@{/Nutricao/Buscar}" class="sn-breadcrumbs mdl-layout-title">Buscar</a>
-		<a th:href="@{${'/Paciente/'+paciente.id}}" class="sn-breadcrumbs mdl-layout-title">Paciente</a>
-		<a class="mdl-layout-title sn-breadcrumbs">Editar Recordatório</a>
+	<section layout:fragment="title">
+		<label class="mdl-layout-title">Editar Recordatório</label>
 	</section>
 	<section layout:fragment="conteudo">
 
 		<div class="mdl-grid">
-			
+			<div class="mdl-cell--1-offset-desktop">
+				<a th:href="@{/Nutricao/Buscar}" class="sn-breadcrumbs sn-attribute__title">SiNutri</a>
+				<a th:href="@{/Nutricao/Buscar}" class="sn-breadcrumbs sn-attribute__title">Buscar</a>
+				<a th:href="@{${'/Paciente/'+paciente.id}}" class="sn-breadcrumbs sn-attribute__title">Paciente</a>
+				<a class="sn-attribute__title sn-breadcrumbs">Editar Recordatório</a>
+			</div>			
 			<form action="#" 
 		    id="formAdicionarRecordatorio"
 		    method="post" 
@@ -50,7 +52,7 @@
 				<div id="titulo" class="mdl-cell mdl-cell--12-col sn-card sn-padding--48 mdl-color--white">
 				
 					<div class="mdl-layout-title mdl-color-text--indigo-600">
-						Cadastrar Recordatório
+						Editar Recordatório
 					</div>
 					
 				</div>
@@ -379,7 +381,22 @@
 						</ul>
 						
 					</div>
+					<div class="sn-form-actions">
+   				
+		   				<input type="submit" 
+		   				id="btnAdicionarRecordatorio"
+					    class="mdl-button mdl-js-button mdl-button--raised mdl-button--primary mdl-js-ripple-effect" 
+					    value="Editar" /> 
+					    
+					    <button type="button" 
+					    id="btnCancelar"
+					    class="mdl-button mdl-js-button mdl-button--colored mdl-js-ripple-effect" 
+					    th:attr="link=@{/Paciente/__${paciente.id}__/Recordatorio/__*{id}__}">
+					    	Cancelar
+						</button>
 					
+					</div> 
+				
 				</div>
 		
 			    <div id="sn-add-refeicao-modal">
@@ -457,22 +474,6 @@
 	   				</div>
 			    	
 			    </div>
-   				
-   				<div class="sn-form-actions">
-   				
-	   				<input type="submit" 
-	   				id="btnAdicionarRecordatorio"
-				    class="mdl-button mdl-js-button mdl-button--raised mdl-button--primary mdl-js-ripple-effect" 
-				    value="Editar" /> 
-				    
-				    <button type="button" 
-				    id="btnCancelar"
-				    class="mdl-button mdl-js-button mdl-button--colored mdl-js-ripple-effect" 
-				    th:attr="link=@{/Paciente/__${paciente.id}__/Recordatorio/__*{id}__}">
-				    	Cancelar
-					</button>
-					
-				</div> 
 				
 		    </form>
 		    

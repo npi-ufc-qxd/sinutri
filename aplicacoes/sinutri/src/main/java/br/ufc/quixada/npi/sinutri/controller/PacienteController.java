@@ -23,6 +23,8 @@ import br.ufc.quixada.npi.sinutri.model.Anamnese;
 import br.ufc.quixada.npi.sinutri.model.AvaliacaoAntropometrica;
 import br.ufc.quixada.npi.sinutri.model.AvaliacaoLaboratorial;
 import br.ufc.quixada.npi.sinutri.model.CalculoGastoEnergetico;
+import br.ufc.quixada.npi.sinutri.model.DistribuicaoAlimentar;
+import br.ufc.quixada.npi.sinutri.model.Grupo;
 import br.ufc.quixada.npi.sinutri.model.InqueritoAlimentar;
 import br.ufc.quixada.npi.sinutri.model.Mensagem;
 import br.ufc.quixada.npi.sinutri.model.Mensagem.Prioridade;
@@ -446,6 +448,8 @@ public class PacienteController {
 		
 		Paciente paciente = new Paciente();
 		
+		pessoa.setExterno(true);
+		
 		paciente.setPessoa(pessoa);
 		try{
 			pacienteService.adicionarPaciente(paciente);
@@ -727,7 +731,7 @@ public class PacienteController {
 		 if(nutricionista == null){
 			 Mensagem mensagem = new Mensagem("Nutricionista não encontrado!", Mensagem.Tipo.ERRO, Mensagem.Prioridade.MEDIA);
 			 redirectAttributes.addFlashAttribute("mensagem", mensagem);
-			 return "redirect:/Nutricar/Buscar";
+			 return "redirect:/Nutricao/Buscar";
 		 }
 		 
 		 prescricao.setNutricionista(nutricionista);
@@ -948,8 +952,17 @@ public class PacienteController {
 			redirectAttributes.addFlashAttribute("mensagem", mensagem);
 			return "redirect:/Nutricao/Buscar";
 		}
+		List<DistribuicaoAlimentar> distribuicoesAlimentares = new ArrayList<DistribuicaoAlimentar>();
+		
+		for(Grupo grupo: consultaService.getGrupos()){
+			DistribuicaoAlimentar distribuicaoAlimentar = new DistribuicaoAlimentar();
+			distribuicaoAlimentar.setGrupo(grupo);			
+			distribuicoesAlimentares.add(distribuicaoAlimentar);
+		}
 		CalculoGastoEnergetico calculoEnergetico = new CalculoGastoEnergetico();
 		calculoEnergetico.setPaciente(paciente);
+		calculoEnergetico.setDistribuicoesAlimentares(distribuicoesAlimentares);
+		
 		model.addAttribute("calculoEnergetico",calculoEnergetico);
 		
 		return "/calculo-energetico/cadastrar";	
@@ -982,15 +995,14 @@ public class PacienteController {
 			redirectAttributes.addFlashAttribute("mensagem", mensagem);
 			return "redirect:/Nutricao/Buscar";
 		 }
-		 
-		calculoEnergetico.setNutricionista(nutricionista);
-		consultaService.adicionarCalculoGastoEnergetico(calculoEnergetico);
-		Mensagem mensagem = new Mensagem("Salvo com sucesso!", Mensagem.Tipo.SUCESSO, Mensagem.Prioridade.MEDIA);
-		redirectAttributes.addFlashAttribute("mensagem", mensagem);
-		return "redirect:/Paciente/"+paciente.getId()+"/calculoEnergetico/"+calculoEnergetico.getId();
+		 calculoEnergetico.setNutricionista(nutricionista);
+		 consultaService.adicionarCalculoGastoEnergetico(calculoEnergetico);
+		 Mensagem mensagem = new Mensagem("Salvo com sucesso!", Mensagem.Tipo.SUCESSO, Mensagem.Prioridade.MEDIA);
+		 redirectAttributes.addFlashAttribute("mensagem", mensagem);
+		 return "redirect:/Paciente/"+paciente.getId()+"/calculoEnergetico/"+calculoEnergetico.getId();
 	}
 	
-	@RequestMapping(value="/{idPaciente}/Prescricao/{idCalculoEnergeticos}/Editar", method = RequestMethod.GET)
+	@RequestMapping(value="/{idPaciente}/CalculoEnergetico/{idCalculoEnergetico}/Editar", method = RequestMethod.GET)
 	public String formEditarCalculoGastosEnergeticos(@PathVariable("idPaciente") Long idPaciente, @PathVariable("idCalculoEnergetico") 
 			Long idCalculoEnergetico, Model model, RedirectAttributes redirectAttributes){
 		
@@ -1013,7 +1025,7 @@ public class PacienteController {
 		return "calculo-energetico/editar";
 	}
 	
-	@RequestMapping(value="/{idPaciente}/Prescricao/{idCalculoEnergeticos}/Editar", method = RequestMethod.POST)
+	@RequestMapping(value="/{idPaciente}/CalculoEnergetico/{idCalculoEnergetico}/Editar", method = RequestMethod.POST)
 	public String editarCalculoGastosEnergeticos(@PathVariable("idPaciente") Long idPaciente, @PathVariable("idCalculoEnergetico") Long idCalculoEnergetico,
 			@Valid CalculoGastoEnergetico calculoEnergetico ,Model model, RedirectAttributes redirectAttributes){
 		
@@ -1057,7 +1069,7 @@ public class PacienteController {
 		return "calculo-energetico/visualizar";
 	}
 	
-	@RequestMapping(value="/{idPaciente}/CalculoEnergetico/{idPrescricao}/Excluir", method = RequestMethod.GET)
+	@RequestMapping(value="/{idPaciente}/CalculoEnergetico/{idCalculoEnergetico}/Excluir", method = RequestMethod.GET)
 	public String excluirCalculoGastoEnergetico(@PathVariable("idPaciente") Long idPaciente, @PathVariable("idCalculoEnergetico") Long idCalculoEnergetico, 
 			 RedirectAttributes redirectAttributes, Model model){
 		

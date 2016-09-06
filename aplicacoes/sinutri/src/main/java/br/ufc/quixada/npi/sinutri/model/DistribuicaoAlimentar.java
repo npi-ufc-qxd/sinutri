@@ -13,131 +13,138 @@ public class DistribuicaoAlimentar {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	private Integer porcao;
+	private Double valorLipidio;
+	private Double valorGlicidio;
+	private Double valorProteina;
+	private Integer porcaoDesjejum;
+	private Integer porcaoCafeManha;
+	private Integer porcaoColacao;
+	private Integer porcaoAlmoco;
+	private Integer porcaoLancheTarde;
+	private Integer porcaoJantar;
+	private Integer preTreino;
+	private Integer posTreino;
 	
-	private Long porcao;
-	private Long valorLipidio;
-	private Long valorGlicidio;
-	private Long valorProteina;
-	private Long porcaoDesjejum;
-	private Long porcaoCafeManha;
-	private Long porcaoColacao;
-	private Long porcaoAlmoco;
-	private Long porcaoLancheTarde;
-	private Long porcaoJantar;
-	private Long preTreino;
-	private Long posTreino;
-	
-	@ManyToOne
-	private CalculoGastoEnergetico calculoGastosEnergeticos;
-	
+//	@ManyToOne
+//	private CalculoGastoEnergetico calculoGastosEnergeticos;
+
 	@OneToOne
 	private Grupo grupo;
 	
 	
-	public Long getPorcao() {
+	public Integer getPorcao() {
 		return porcao;
 	}
 	
-	public void setPorcao(Long porcao) {
+	public void setPorcao(Integer porcao) {
 		this.porcao = porcao;
 	}
 	
-	public Long getValorLipidio() {
+	public Double getValorLipidio() {
 		return valorLipidio;
 	}
 	
-	public void setValorLipidio(Long valorLipidio) {
+	public void setValorLipidio(Double valorLipidio) {
 		this.valorLipidio = valorLipidio;
 	}
 	
-	public Long getValorGlicidio() {
+	public Double getValorGlicidio() {
 		return valorGlicidio;
 	}
 	
-	public void setValorGlicidio(Long valorGlicidio) {
+	public Integer getPorcaoColacao() {
+		return porcaoColacao;
+	}
+
+	public void setPorcaoColacao(Integer porcaoColacao) {
+		this.porcaoColacao = porcaoColacao;
+	}
+
+	public void setValorGlicidio(Double valorGlicidio) {
 		this.valorGlicidio = valorGlicidio;
 	}
 	
-	public Long getValorProteina() {
+	public Double getValorProteina() {
 		return valorProteina;
 	}
 	
-	public void setValorProteina(Long valorProteina) {
+	public void setValorProteina(Double valorProteina) {
 		this.valorProteina = valorProteina;
 	}
 	
-	public Long getPorcaoDesjejum() {
+	public Integer getPorcaoDesjejum() {
 		return porcaoDesjejum;
 	}
 	
-	public void setPorcaoDesjejum(Long porcaoDesjejum) {
+	public void setPorcaoDesjejum(Integer porcaoDesjejum) {
 		this.porcaoDesjejum = porcaoDesjejum;
 	}
 	
-	public Long getPorcaoCafeManha() {
+	public Integer getPorcaoCafeManha() {
 		return porcaoCafeManha;
 	}
 	
-	public void setPorcaoCafeManha(Long porcaoCafeManha) {
+	public void setPorcaoCafeManha(Integer porcaoCafeManha) {
 		this.porcaoCafeManha = porcaoCafeManha;
 	}
 	
-	public Long getProcaoColacao() {
+	public Integer getProcaoColacao() {
 		return porcaoColacao;
 	}
 	
-	public void setProcaoColacao(Long procaoColacao) {
+	public void setProcaoColacao(Integer procaoColacao) {
 		this.porcaoColacao = procaoColacao;
 	}
 	
-	public Long getPorcaoAlmoco() {
+	public Integer getPorcaoAlmoco() {
 		return porcaoAlmoco;
 	}
 	
-	public void setPorcaoAlmoco(Long porcaoAlmoco) {
+	public void setPorcaoAlmoco(Integer porcaoAlmoco) {
 		this.porcaoAlmoco = porcaoAlmoco;
 	}
 	
-	public Long getPorcaoLancheTarde() {
+	public Integer getPorcaoLancheTarde() {
 		return porcaoLancheTarde;
 	}
 	
-	public void setPorcaoLancheTarde(Long porcaoLancheTarde) {
+	public void setPorcaoLancheTarde(Integer porcaoLancheTarde) {
 		this.porcaoLancheTarde = porcaoLancheTarde;
 	}
 	
-	public Long getPorcaoJantar() {
+	public Integer getPorcaoJantar() {
 		return porcaoJantar;
 	}
 	
-	public void setPorcaoJantar(Long porcaoJantar) {
+	public void setPorcaoJantar(Integer porcaoJantar) {
 		this.porcaoJantar = porcaoJantar;
 	}
 	
-	public Long getPreTreino() {
+	public Integer getPreTreino() {
 		return preTreino;
 	}
 	
-	public void setPreTreino(Long preTreino) {
+	public void setPreTreino(Integer preTreino) {
 		this.preTreino = preTreino;
 	}
 	
-	public Long getPosTreino() {
+	public Integer getPosTreino() {
 		return posTreino;
 	}
 	
-	public void setPosTreino(Long posTreino) {
+	public void setPosTreino(Integer posTreino) {
 		this.posTreino = posTreino;
 	}                                              
 
-	public CalculoGastoEnergetico getCalculoGastosEnergeticos() {
-		return calculoGastosEnergeticos;
-	}
-	
-	public void setCalculoGastosEnergeticos(
-			CalculoGastoEnergetico calculoGastosEnergeticos) {
-		this.calculoGastosEnergeticos = calculoGastosEnergeticos;
-	}
+//	public CalculoGastoEnergetico getCalculoGastosEnergeticos() {
+//		return calculoGastosEnergeticos;
+//	}
+//	
+//	public void setCalculoGastosEnergeticos(
+//			CalculoGastoEnergetico calculoGastosEnergeticos) {
+//		this.calculoGastosEnergeticos = calculoGastosEnergeticos;
+//	}
 	
 	public Grupo getGrupo() {
 		return grupo;

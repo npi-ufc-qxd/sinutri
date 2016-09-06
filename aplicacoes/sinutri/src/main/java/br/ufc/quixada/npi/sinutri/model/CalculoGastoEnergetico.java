@@ -2,6 +2,7 @@ package br.ufc.quixada.npi.sinutri.model;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -14,7 +15,7 @@ public class CalculoGastoEnergetico {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Double id;
+	private Long id;
 	
 	private Double pesoSugerido;
 	private Double vet;
@@ -27,7 +28,7 @@ public class CalculoGastoEnergetico {
 	@ManyToOne
 	private Servidor nutricionista;
 	
-	@OneToMany(mappedBy="calculoGastosEnergeticos")
+	@OneToMany(cascade=CascadeType.ALL)
 	private List<DistribuicaoAlimentar> distribuicoesAlimentares;
 	
 	@ManyToOne
@@ -94,10 +95,10 @@ public class CalculoGastoEnergetico {
 	public void setPaciente(Paciente paciente) {
 		this.paciente = paciente;
 	}
-	public Double getId() {
+	public Long getId() {
 		return id;
 	}
-	public void setId(Double id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 }
