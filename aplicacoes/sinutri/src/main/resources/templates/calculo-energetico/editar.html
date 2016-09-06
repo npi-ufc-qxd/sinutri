@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html  xmlns="http://www.w3.org/1999/xhtml" 
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorator="estrutura/dashboard">
+<head>
+	<title>Cadastrar</title>
+	<link rel="stylesheet" type="text/css" th:href="@{/css/material--picker.css}"/>
+
+</head>
+<body>
+ 
+	<section layout:fragment="title">
+		<label class="mdl-layout-title">Cadastrar Cálculo Energético</label>
+	</section>
+	
+	<section layout:fragment="conteudo">
+	<div class="mdl-grid">
+	
+		<form th:object="${calculoEnergetico}" 
+		th:action="@{${'/Paciente/'+calculoEnergetico.paciente.id+'/CalculoEnergetico/'+calculoEnergetico.id+'/Editar'}}" th:method="post">
+	            
+			<input type="hidden" id="id" th:field="*{id}"/>
+			<input type="hidden" id="id" th:field="*{paciente.id}"/>
+			<input type="hidden" id="id" th:field="*{nutricionista.id}"/>
+			
+			<div class="sn-textfield mdl-cell mdl-cell--6-col">
+				<label th:for="${#ids.next('pesoSugerido')}" class="sn-textfield__label">Peso sugerido (kg):</label>
+				<label class="sn-textfield__messages sn-error-text" th:for="${#ids.next('pesoSugerido')}" th:if="${#fields.hasErrors('pesoSugerido')}" 
+					th:errors="*{pesoSugerido}">Erro no peso</label>
+				<input type="number" min="0"  max="999999" th:field="*{pesoSugerido}" class="sn-textfield__input"  step="0.01"/>
+			</div>
+			
+			<div class="sn-textfield mdl-cell mdl-cell--6-col">
+				<label th:for="${#ids.next('ajuste')}" class="sn-textfield__label">Ajuste:</label>
+				<label class="sn-textfield__messages sn-error-text" th:for="${#ids.next('ajuste')}" th:if="${#fields.hasErrors('ajuste')}" 
+					th:errors="*{ajuste}">Erro no ajuste</label>
+				<input type="number" min="0"  max="999999" th:field="*{ajuste}" class="sn-textfield__input"  step="0.01"/>
+			</div>
+			
+			<div class="sn-textfield mdl-cell mdl-cell--6-col">
+				<label th:for="${#ids.next('glicidio')}" class="sn-textfield__label">glicidio:</label>
+				<label class="sn-textfield__messages sn-error-text" th:for="${#ids.next('glicidio')}" th:if="${#fields.hasErrors('glicidio')}" 
+					th:errors="*{glicidio}">Erro no peso</label>
+				<input type="number" min="0"  max="999999" th:field="*{glicidio}" class="sn-textfield__input"  step="0.01"/>
+			</div>
+			
+			<div class="sn-textfield mdl-cell mdl-cell--6-col">
+				<label th:for="${#ids.next('lipidio')}" class="sn-textfield__label">lipidio:</label>
+				<label class="sn-textfield__messages sn-error-text" th:for="${#ids.next('lipidio')}" th:if="${#fields.hasErrors('lipidio')}" 
+					th:errors="*{lipidio}">Erro no peso</label>
+				<input type="number" min="0"  max="999999" th:field="*{lipidio}" class="sn-textfield__input"  step="0.01"/>
+			</div>
+			
+			<div class="sn-textfield mdl-cell mdl-cell--6-col">
+				<label th:for="${#ids.next('proteina')}" class="sn-textfield__label">proteina:</label>
+				<label class="sn-textfield__messages sn-error-text" th:for="${#ids.next('proteina')}" th:if="${#fields.hasErrors('proteina')}" 
+					th:errors="*{proteina}">Erro no peso</label>
+				<input type="number" min="0"  max="999999" th:field="*{proteina}" class="sn-textfield__input"  step="0.01"/>
+			</div>
+			
+			
+			<div th:each="distribuicao, state : *{distribuicoesAlimentares}" class="sn-textfield mdl-cell mdl-cell--6-col">
+				
+				<input hidden="true" th:name = "distribuicoesAlimentares[__${state.index}__].grupo.id" th:value="${distribuicao.grupo.id}"/>
+				<p th:text = "${distribuicao.grupo.nome}" class="sn-textfield__label">Porção:</p>				
+				<label th:for="${#ids.next('distribuicao.porcao')}" class="sn-textfield__label">Porção:</label>								
+				<input type="number" min="0"  max="999999" th:field="*{distribuicoesAlimentares[__${state.index}__].porcao}" class="sn-textfield__input"  step="1.0"/>
+				
+				<label th:for="${#ids.next('distribuicao.valorGlicidio')}" class="sn-textfield__label">Valor Glicídio:</label>				
+				<input type="number"  min="0"  max="999999" th:name="distribuicoesAlimentares[__${state.index}__].valorGlicidio" th:value="${distribuicao.grupo.valorGlicidio}" class="sn-textfield__input"  step="0.1"/>
+								
+				<label th:for="${#ids.next('distribuicao.valorProteina')}" class="sn-textfield__label">Valor Proteína:</label>				
+				<input type="number"  min="0"  max="999999" th:name="distribuicoesAlimentares[__${state.index}__].valorProteina" th:value="${distribuicao.grupo.valorProteina}" class="sn-textfield__input"  step="0.1"/>
+				
+				<label th:for="${#ids.next('distribuicao.valorLipidio')}" class="sn-textfield__label">Valor Lipídio:</label>				
+				<input type="number"  min="0"  max="999999" th:name="distribuicoesAlimentares[__${state.index}__].valorLipidio" th:value="${distribuicao.grupo.valorLipidio}" class="sn-textfield__input"  step="0.1"/>
+				
+				<label th:for="${#ids.next('distribuicao.porcaoDesjejum')}" class="sn-textfield__label">porcao Desjejum:</label>				
+				<input type="number" min="0"  max="999999" th:field="*{distribuicoesAlimentares[__${state.index}__].porcaoDesjejum}" class="sn-textfield__input"  step="1.0"/>
+
+				<label th:for="${#ids.next('distribuicao.porcaoCafeManha')}" class="sn-textfield__label">porcao Cafe Manha:</label>				
+				<input type="number" min="0"  max="999999" th:field="*{distribuicoesAlimentares[__${state.index}__].porcaoCafeManha}" class="sn-textfield__input"  step="1.0"/>
+
+				<label th:for="${#ids.next('distribuicao.porcaoColacao')}" class="sn-textfield__label">porcao Colacao:</label>				
+				<input type="number" min="0"  max="999999" th:field="*{distribuicoesAlimentares[__${state.index}__].porcaoColacao}" class="sn-textfield__input"  step="1.0"/>
+
+				<label th:for="${#ids.next('distribuicao.porcaoAlmoco')}" class="sn-textfield__label">porcao Almoco:</label>				
+				<input type="number" min="0"  max="999999" th:field="*{distribuicoesAlimentares[__${state.index}__].porcaoAlmoco}" class="sn-textfield__input"  step="1.0"/>
+
+				<label th:for="${#ids.next('distribuicao.porcaoLancheTarde')}" class="sn-textfield__label">porcao Lanche Tarde:</label>				
+				<input type="number" min="0"  max="999999" th:field="*{distribuicoesAlimentares[__${state.index}__].porcaoLancheTarde}" class="sn-textfield__input"  step="1.0"/>
+
+				<label th:for="${#ids.next('distribuicao.porcaoJantar')}" class="sn-textfield__label">porcao Jantar:</label>				
+				<input type="number" min="0"  max="999999" th:field="*{distribuicoesAlimentares[__${state.index}__].porcaoJantar}" class="sn-textfield__input"  step="1.0"/>
+
+				<label th:for="${#ids.next('distribuicao.preTreino')}" class="sn-textfield__label">pre Treino:</label>				
+				<input type="number" min="0"  max="999999" th:field="*{distribuicoesAlimentares[__${state.index}__].preTreino}" class="sn-textfield__input"  step="1.0"/>
+
+				<label th:for="${#ids.next('distribuicao.posTreino')}" class="sn-textfield__label">pos Treino:</label>				
+				<input type="number" min="0"  max="999999" th:field="*{distribuicoesAlimentares[__${state.index}__].posTreino}" class="sn-textfield__input"  step="1.0"/>
+
+				
+			</div>
+			
+			
+			<div class="sn-form-actions">
+				<input type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect" value="Cadastrar" />
+				<a id="cancelar" th:href="@{${'/Paciente/'+calculoEnergetico.paciente.id}}" class="mdl-button mdl-js-button mdl-button--colored mdl-js-ripple-effect">Cancelar</a>
+			</div>			
+			
+		</form>
+	</div>	
+	</section>
+</body>
+</html>
