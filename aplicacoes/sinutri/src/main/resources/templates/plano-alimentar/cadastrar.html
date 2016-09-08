@@ -11,11 +11,20 @@
 	<link rel="stylesheet" type="text/css" th:href="@{/css/select2.min.css}"/>
 </head>
 
-<body>
 
+<body>
+<section layout:fragment="title">
+	<label class="mdl-layout-title">Cadastrar Plano Alimentar</label>
+</section>
 <section layout:fragment="conteudo">
 	
 	<div class="mdl-grid">
+		<div class="mdl-cell mdl-cell--11-col mdl-cell--1-offset-desktop">
+			<a th:href="@{/Nutricao/Buscar}" class="sn-breadcrumbs sn-attribute__title">Início</a>
+			<a th:href="@{/Paciente/__${planoAlimentar.paciente.id}__}" class="sn-breadcrumbs sn-attribute__title">Paciente</a>
+			<a class="sn-attribute__title sn-breadcrumbs">Cadastrar Plano Alimentar</a>
+		</div>
+		
 		<form action="#" 
 	    id="formAdicionarPlanoAlimentar"
 	    method="post" 
@@ -339,12 +348,36 @@
 			Você realmente deseja descartar as alterações?
 		</div>
 	
-		<div class="mdl-cell
-			mdl-cell--3-col-desktop">
+		<div class="mdl-cell mdl-cell--3-col-desktop mdl-cell--8-col-tablet mdl-cell--4-col-phone">
 			<div class="sn-card sn-padding--48">
-				<div class="mdl-layout-title">Informações</div>
+				 <div class="mdl-layout-title">Informações do Paciente</div>
+					
+					<div class="sn-attribute__title">Nome</div>
+					<div class="sn-attribute__value" th:text="${planoAlimentar.paciente.pessoa.nome}"></div>
+					
+					<div class="sn-attribute__title">Sexo</div>
+					<div class="sn-attribute__value" th:text="${planoAlimentar.paciente.pessoa.sexo}"></div>
+					
+					<div class="sn-attribute__title">Idade</div>
+					<div class="sn-attribute__value" th:text="${planoAlimentar.paciente.pessoa.getIdade()}"></div>
+					
+					<div class="sn-attribute__title">CPF</div>
+					<div class="sn-attribute__value" th:text="${planoAlimentar.paciente.pessoa.cpf}"></div>
+					
+					<div class="sn-attribute__title">Telefone</div>
+					<div class="sn-attribute__value" th:text="${planoAlimentar.paciente.pessoa.telefone}"></div>
+					
+					<div class="sn-attribute__title">Cargo/Ocupação</div>
+					<div class="sn-attribute__value" th:text="${planoAlimentar.paciente.pessoa.ocupacaoOuCargo}"></div>
+					
+					<div class="sn-attribute__title">Email</div>
+					<div class="sn-attribute__value" th:text="${planoAlimentar.paciente.pessoa.email}"></div>
+							
+					<div class="sn-attribute__title">Vínculo</div>
+					<div class="sn-attribute__value" th:text="${planoAlimentar.paciente.pessoa.vinculo}"></div>
 			</div>
 		</div>
+	
 	
 	</div>
 </section>
