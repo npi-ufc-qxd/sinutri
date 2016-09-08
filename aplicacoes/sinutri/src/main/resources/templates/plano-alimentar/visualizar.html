@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" 
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorator="estrutura/dashboard">
+
+<head>
+	
+	<title>Sinutri | Visualizar Plano Alimentar</title>
+	<meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0"/>
+	<link rel="stylesheet" type="text/css" th:href="@{/css/material-date-picker.css}"/>
+	
+</head>
+
+<body>
+
+	<section layout:fragment="conteudo">
+		<div class="mdl-grid">
+			<div class="mdl-cell mdl-cell--7-col-desktop mdl-cell--1-offset-desktop mdl-cell--8-col-tablet mdl-cell--4-col-phone mdl-grid mdl-grid--no-spacing sn-main-card">
+				<div class="mdl-cell mdl-cell--12-col sn-card sn-padding--48 mdl-color--teal">
+					<div class="mdl-layout-title mdl-color-text--white">Plano Alimentar</div>
+						<fabgroup class="sn-fab--bottom-right">
+							<a id="excluir" th:href="@{/Paciente/__${planoAlimentar.paciente.id}__/PlanoAlimentar/__${planoAlimentar.id}__/Excluir}" class="sn-fab sn-fab--hide mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-js-ripple-effect mdl-color--red-700">
+								<i class="material-icons mdl-color-text--white">delete</i>
+							</a>
+							<a th:href="@{/Paciente/__${paciente.id}__/PlanoAlimentar/__${planoAlimentar.id}__/Editar}" 
+	                        class="sn-fab sn-fab--hide mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-js-ripple-effect mdl-color--purple">
+								<i class="material-icons mdl-color-text--white">edit</i>
+							</a>
+	
+							<button class="sn-float--launcher mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored">
+								<i class="material-icons mdl-color-text--white">more_horiz</i>
+							</button>
+	                    </fabgroup>
+					</div>
+					<div class="sn-card-top mdl-cell mdl-cell--12-col sn-card sn-padding--48 mdl-color--white mdl-grid">
+						<!-- Text atribute -->
+						<div class="sn-attribute mdl-cell mdl-cell--4-col">
+							<div class="sn-attribute__title">Criado em</div>
+							<div class="sn-attribute__value" th:text="${#dates.format(planoAlimentar.criadoEm, 'dd/MM/yyyy')}"></div>
+						</div>
+						<!-- Text atribute -->
+						<div class="sn-attribute mdl-cell mdl-cell--4-col">
+							<div class="sn-attribute__title">Atualizado em</div>
+							<div class="sn-attribute__value" th:text="${#dates.format(planoAlimentar.atualizadoEm, 'dd/MM/yyyy')}"></div>
+						</div>
+					</div>
+					<div class="sn-card-top mdl-cell mdl-cell--12-col sn-card sn-padding--48 mdl-color--white mdl-grid">
+						<!-- Text atribute -->
+						<div class="mdl-grid--no-spacing mdl-cell mdl-cell--12-col">
+							<h5>Refeições</h5>
+						</div>
+						<div class="sn-attribute mdl-cell mdl-cell--12-col" th:each="refeicao : ${planoAlimentar.refeicoes}">
+							<div class="sn-attribute__title" th:text="${#dates.format(refeicao.hora, 'HH:mm')}+' | '+ ${refeicao.descricao.nome}"></div>
+		                    <table class="mdl-data-table mdl-js-data-table">
+		                      	<thead>
+									<tr>
+								    	<th th:class="mdl-data-table__cell--non-numeric">Alimento</th>
+								    	<th th:class="mdl-data-table__cell--non-numeric">Quantidade</th>
+								    </tr>
+								</thead>
+								<tbody>
+	                      		   	<tr th:each="porcao : ${refeicao.porcoesAlimentos}">
+										<td style="width:20%" class="mdl-data-table__cell--non-numeric sn-refeicao-hora" th:text="${porcao.alimento.nome}"></td>
+								    	<td style="width:20%" class="mdl-data-table__cell--non-numeric sn-refeicao-descricao" th:text="${porcao.quantidade}"></td>
+									</tr>
+								</tbody>
+							</table>
+							<div class="sn-attribute mdl-cell mdl-cell--12  -col">
+								<div class="sn-attribute__title">Observações</div>
+								<div class="sn-attribute__value" th:text="${refeicao.observacao }"></div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="mdl-cell mdl-cell--3-col-desktop mdl-cell--8-col-tablet mdl-cell--4-col-phone">
+	
+					<div class="sn-card sn-padding--48">
+						<div class="mdl-layout-title">Informações do Paciente</div>
+	              </div>
+	              
+	              <div class="sn-card sn-padding--48">
+	              		  <!-- Text atribute -->
+	                      <div th:if="${paciente.pessoa.nome != null}" class="sn-attribute mdl-cell mdl-cell--6-col">
+	                              <div class="sn-attribute__title">Nome</div>
+	                              <div class="sn-attribute__value" 
+	                              th:text="${paciente.pessoa.nome}"></div>
+	                      </div>
+	                      
+	                      <!-- Text atribute -->
+	                      <div th:if="${paciente.pessoa.sexo != null}" class="sn-attribute mdl-cell mdl-cell--6-col">
+	                              <div class="sn-attribute__title">Sexo</div>
+	                              <div class="sn-attribute__value" th:text="${paciente.pessoa.sexo}"></div>
+	                      </div>
+	                      
+	                      <!-- Text atribute -->
+	                      <div th:if="${paciente.pessoa.idade != null}" class="sn-attribute mdl-cell mdl-cell--6-col">
+	                              <div class="sn-attribute__title">Idade</div>
+	                              <div class="sn-attribute__value" th:text="${paciente.pessoa.idade}"></div>
+	                      </div>
+	                      
+	                      <!-- Text atribute -->
+	                      <div th:if="${paciente.pessoa.cpf != null}" class="sn-attribute mdl-cell mdl-cell--6-col">
+	                              <div class="sn-attribute__title">CPF</div>
+	                              <div class="sn-attribute__value" th:text="${paciente.pessoa.cpf}"></div>
+	                      </div>
+	                      
+	                      <!-- Text atribute -->
+	                      <div th:if="${paciente.pessoa.telefone != null}" class="sn-attribute mdl-cell mdl-cell--6-col">
+	                              <div class="sn-attribute__title">Telefone</div>
+	                              <div class="sn-attribute__value" th:text="${paciente.pessoa.telefone}"></div>
+	                      </div>	      
+	                      
+	                      <!-- Text atribute -->
+	                      <div th:if="${paciente.pessoa.ocupacaoOuCargo != null}" class="sn-attribute mdl-cell mdl-cell--6-col">
+	                              <div class="sn-attribute__title">Cargo/Ocupação</div>
+	                              <div class="sn-attribute__value" th:text="${paciente.pessoa.ocupacaoOuCargo}"></div>
+	                      </div>                
+
+	                      <!-- Text atribute -->
+	                      <div th:if="${paciente.pessoa.email != null}" class="sn-attribute mdl-cell mdl-cell--6-col">
+	                              <div class="sn-attribute__title">Email</div>
+	                              <div class="sn-attribute__value" th:text="${paciente.pessoa.email}"></div>
+	                      </div>
+	                      
+	                      <!-- Text atribute -->
+	                      <div th:if="${paciente.pessoa.vinculo !=  null}" class="sn-attribute mdl-cell mdl-cell--6-col">
+	                              <div class="sn-attribute__title">Vinculo</div>
+	                              <div class="sn-attribute__value" th:text="${paciente.pessoa.vinculo}"></div>
+	                      </div>
+	              </div>
+	
+	      </div>
+	      
+		</div>
+		
+		<div id="sn-confirma-excluir-modal">
+			Você realmente deseja excluir este Recordatório?
+		</div>
+		
+	</section>
+	
+	<section layout:fragment="js">	
+		
+		<script type="text/javascript" th:src="@{/js/moment.js}"></script>
+		<script type="text/javascript" th:src="@{/js/material-date-picker.js}"></script>
+		<script type="text/javascript" th:src="@{/js/recordatorio/visualizar.js}"></script>
+		
+	</section>
+
+</body>
+</html>

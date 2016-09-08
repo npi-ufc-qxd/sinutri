@@ -246,16 +246,38 @@ public class PacienteController {
 		return "redirect:/Paciente/"+paciente.getId()+"/PlanoAlimentar/"+planoAlimentar.getId();
 	}
 	
+	@RequestMapping(value= {"/{idPaciente}/PlanoAlimentar/{idPlanoAlimentar}"}, method = RequestMethod.GET)
+	public String visualizarPlanoAlimentar(@PathVariable("idPlanoAlimentar") Long idPlanoAlimentar, @PathVariable("idPaciente") Long idPaciente, Model model, RedirectAttributes redirectAttributes){
+		Paciente paciente = pacienteService.buscarPacientePorId(idPaciente);
+		
+		if(paciente==null){
+			Mensagem mensagem = new Mensagem("Paciente inexistente!", Tipo.ERRO, Prioridade.MEDIA);
+			redirectAttributes.addFlashAttribute("mensagens", mensagem);
+			return "redirect:/Nutricao/Buscar";
+		}
+		PlanoAlimentar planoAlimentar = consultaService.buscarPlanoAlimentarPorId(idPlanoAlimentar);
+		
+		if(planoAlimentar==null){
+			Mensagem mensagem = new Mensagem("Plano Alimentar não encontrada!", Tipo.ERRO, Prioridade.MEDIA);
+			redirectAttributes.addFlashAttribute("mensagens", mensagem);
+			return "redirect:/Paciente/"+paciente.getId();
+		}
+		model.addAttribute("paciente", paciente);
+		model.addAttribute("planoAlimentar", planoAlimentar);
+		
+		return "plano-alimentar/visualizar";
+	}
 	@RequestMapping(value= {"/{idPaciente}/PlanoAlimentar/{idPlanoAlimentar}/Excluir"}, method = RequestMethod.GET)
 	public String excluirPlanoAlimentar(@PathVariable("idPaciente") Long idPaciente, @PathVariable("idPlanoAlimentar") Long idPlanoAlimentar, RedirectAttributes redirectAttributes, Model model){
 		PlanoAlimentar planoAlimentar = consultaService.buscarPlanoAlimentarPorId(idPlanoAlimentar);
 		Paciente paciente = pacienteService.buscarPacientePorId(idPaciente);
 		if(paciente == null){
-			redirectAttributes.addFlashAttribute("erro", "Paciente inválido. Tente novamente!");
-			return "/plano-alimentar/cadastrar";
+			Mensagem mensagem = new Mensagem("Paciente inexistente!", Tipo.ERRO, Prioridade.MEDIA);
+			redirectAttributes.addFlashAttribute("mensagens", mensagem);
+			return "redirect:/Nutricao/Buscar";
 		}
 		consultaService.excluirPlanoAlimentar(planoAlimentar);
-		return "nutricao/buscar"; //modifica
+		return "redirect:/Paciente/"+paciente.getId();
 	}
 
 	@RequestMapping(value= "/{idPaciente}/PlanoAlimentar/Alimentos", params = {"fonte"}, method = RequestMethod.GET)
