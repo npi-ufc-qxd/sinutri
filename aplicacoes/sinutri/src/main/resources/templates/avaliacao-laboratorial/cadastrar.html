@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="estrutura/dashboard">
+
+<head>
+	<title>Sinutri | Cadastrar Avaliação Laboratorial</title>
+	<link rel="stylesheet" type="text/css" th:href="@{/css/material-date-picker.css}"/>
+	<link rel="stylesheet" type="text/css" th:href="@{/css/avaliacao-laboratorial/cadastrar.css}"/>
+	
+</head>
+<section layout:fragment="title">
+	<label class="mdl-layout-title">Cadastrar Avaliação Laboratorial</label>
+</section>
+<section layout:fragment="conteudo">
+	<div class="mdl-grid">
+		<div class="mdl-cell mdl-cell--11-col mdl-cell--1-offset-desktop">
+			<a th:href="@{/Nutricao/Buscar}" class="sn-breadcrumbs sn-attribute__title">Início</a>
+			<a th:href="@{${'/Paciente/'+avaliacaoLaboratorial.paciente.id}}" class="sn-breadcrumbs sn-attribute__title">Paciente</a>
+			<a class="sn-attribute__title sn-breadcrumbs">Cadastrar Avaliação Laboratorial</a>
+		</div>
+		<form class="sn-form mdl-cell
+	            mdl-cell--7-col-desktop mdl-cell--1-offset-desktop
+	            mdl-cell--8-col-tablet
+	            mdl-cell--4-col-phone
+	            mdl-grid mdl-grid--no-spacing
+	            sn-main-card" action="#" th:action="@{/Paciente/__*{paciente.id}__/AvaliacaoLaboratorial}" th:object="${avaliacaoLaboratorial}" method="post">
+	
+			<div class="mdl-cell mdl-cell--12-col sn-card sn-padding--48 mdl-color--white">
+				<div class="mdl-layout-title mdl-color-text--orange-600">Cadastrar Avaliação Laboratorial</div>
+			</div>
+			
+			<div class="sn-card-top mdl-cell mdl-cell--12-col sn-card sn-padding--48 mdl-color--white mdl-grid">
+			
+				<div class="sn-textfield mdl-cell mdl-cell--6-col">
+					<label class="sn-textfield__label" for="criadoEm">Data de criação</label>
+					<label class="sn-textfield__messages sn-error-text" for="sn-text" th:if="${#fields.hasErrors('criadoEm')}" th:errors="*{criadoEm}"></label>
+					<input class="sn-textfield__input sn-date-picker" type="text" id="criadoEm" th:field="*{criadoEm}" th:value="*{criadoEm}"/>
+				</div>
+	
+				<div class="mdl-cell mdl-cell--12-col">
+					<label class="sn-textfield__label">Exames</label> 
+					<label class="sn-textfield__messages sn-error-text" for="sn-text" th:if="${#fields.hasErrors('exames')}" th:errors="*{exames}"></label>
+					<div class="sn-list-exames-container mdl-color--grey-200">
+						<div th:if="!${#lists.isEmpty(avaliacaoLaboratorial.exames)}">
+							<ul class="sn-list-exames mdl-cell mdl-offset--6-col mdl-cell--12-col demo-list-two mdl-list mdl-color--grey-200" th:field="*{exames}">		
+								<li class="mdl-list__item mdl-list__item--two-line mdl-shadow--2dp sn-card sn-cloneable">
+								
+									<input type="hidden" th:field="*{exames[0].nome}" class="sn-exame-input-nome"/>
+									<input type="hidden" th:field="*{exames[0].resultado}" class="sn-exame-input-resultado"/>
+									<span class="mdl-list__item-primary-content">
+										<span class="sn-exame-type " th:text="*{exames[0].nome}">Exame tal</span>
+										<span class="mdl-list__item-sub-title sn-exame-value" th:text="*{exames[0].resultado}">5.56 kg</span>
+									</span>
+									<span class="mdl-list__item-secondary-content">
+										<button type="button" class="mdl-button mdl-js-button mdl-button--icon mdl-button--colored sn-exame-edit">
+											<i class="material-icons">edit</i>
+										</button>
+									</span>
+									<span class="mdl-list__item-secondary-content">
+										<button type="button" class="mdl-button mdl-js-button mdl-button--icon mdl-button--colored sn-exame-remove">
+											<i class="material-icons">close</i>
+										</button>
+									</span>
+								</li>
+								
+								<li th:each="exame, state : ${avaliacaoLaboratorial.exames}" class="mdl-list__item mdl-list__item--two-line mdl-shadow--2dp sn-card sn-cloneable">
+									<input type="hidden" th:field="*{exames[__${state.index}__].nome}" class="sn-exame-input-nome"/>
+									<input type="hidden" th:field="*{exames[__${state.index}__].resultado}" class="sn-exame-input-resultado"/>
+									<span class="mdl-list__item-primary-content">
+										<label class="sn-textfield__messages sn-error-text" for="sn-text" th:if="${#fields.hasErrors('exames[__${state.index}__].nome')}" th:errors="*{exames[__${state.index}__].nome}"></label>
+										<span class="sn-exame-type " th:text="*{exames[__${state.index}__].nome}"></span>
+										
+										<label class="sn-textfield__messages sn-error-text" for="sn-text" th:if="${#fields.hasErrors('exames[__${state.index}__].resultado')}" th:errors="*{exames[__${state.index}__].resultado}"></label>
+										<span class="mdl-list__item-sub-title sn-exame-value" th:text="*{exames[__${state.index}__].resultado}"></span>
+									</span>
+									<span class="mdl-list__item-secondary-content">
+										<button type="button" class="mdl-button mdl-js-button mdl-button--icon mdl-button--colored sn-exame-edit">
+											<i class="material-icons">edit</i>
+										</button>
+									</span>
+									<span class="mdl-list__item-secondary-content">
+										<button type="button" class="mdl-button mdl-js-button mdl-button--icon mdl-button--colored sn-exame-remove">
+											<i class="material-icons">close</i>
+										</button>
+									</span>
+								</li>
+							</ul>
+						</div>
+						
+						<div th:if="${#lists.isEmpty(avaliacaoLaboratorial.exames)}">
+							<ul class="sn-list-exames mdl-list" th:field="*{exames}">
+								<li class="mdl-list__item mdl-list__item--two-line mdl-shadow--2dp sn-card sn-cloneable">
+								
+									<input type="hidden" th:field="*{exames[0].nome}" class="sn-exame-input-nome"/>
+									<input type="hidden" th:field="*{exames[0].resultado}" class="sn-exame-input-resultado"/>
+									<span class="mdl-list__item-primary-content">
+										<span class="sn-exame-type " th:text="*{exames[0].nome}">Exame tal</span>
+										<span class="mdl-list__item-sub-title sn-exame-value" th:text="*{exames[0].resultado}">5.56 kg</span>
+									</span>
+									<span class="mdl-list__item-secondary-content">
+										<button type="button" class="mdl-button mdl-js-button mdl-button--icon mdl-button--colored sn-exame-edit">
+											<i class="material-icons">edit</i>
+										</button>
+									</span>
+									<span class="mdl-list__item-secondary-content">
+										<button type="button" class="mdl-button mdl-js-button mdl-button--icon mdl-button--colored sn-exame-remove">
+											<i class="material-icons">close</i>
+										</button>
+									</span>
+								</li>
+							</ul>
+						</div>
+	
+						<div class="sn-list-exames__actions" >
+							<button id="sn-add-exame-button" type="button" class="mdl-button mdl-button--primary mdl-js-button mdl-js-ripple-effect">Adicionar Exame</button>
+						</div>
+	
+					</div>
+						
+				</div>
+				
+				<div class="sn-textfield mdl-cell mdl-cell--12-col">
+					<label class="sn-textfield__label" for="sn-text">Observação:</label>
+					<textarea class="sn-textfield__input" type="text" data-max-length="255" data-max-length-tip="O tamanho máximo deve ser 255 caracteres!" id="sn-text" th:field="*{observacao}" th:value="*{observacao}"></textarea>
+				</div>
+	
+				<div class="sn-form-actions">
+	
+					<button type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect" >Salvar</button> 
+					<button id="sn-cancelar" type="button"  th:href="@{${'/Paciente/'+avaliacaoLaboratorial.paciente.id}}" class="mdl-button mdl-js-button mdl-button--colored mdl-js-ripple-effect" >Cancelar</button>
+	
+				</div>
+			</div>
+
+		</form>
+
+		<div class="mdl-cell mdl-cell--3-col-desktop mdl-cell--8-col-tablet mdl-cell--4-col-phone">
+			<div class="sn-card sn-padding--48">
+				<div class="mdl-layout-title">Informações do Paciente</div>
+										
+				<div class="sn-attribute__title">Nome</div>
+				<div class="sn-attribute__value" th:text="${avaliacaoLaboratorial.paciente.pessoa.nome}"></div>
+					
+				<div class="sn-attribute__title">Sexo</div>
+				<div class="sn-attribute__value" th:text="${avaliacaoLaboratorial.paciente.pessoa.sexo}"></div>
+					
+				<div class="sn-attribute__title">Idade</div>
+				<div class="sn-attribute__value" th:text="${avaliacaoLaboratorial.paciente.pessoa.getIdade()}"></div>
+					
+				<div class="sn-attribute__title">CPF</div>
+				<div class="sn-attribute__value" th:text="${avaliacaoLaboratorial.paciente.pessoa.cpf}"></div>
+					
+				<div class="sn-attribute__title">Telefone</div>
+				<div class="sn-attribute__value" th:text="${avaliacaoLaboratorial.paciente.pessoa.telefone}"></div>
+					
+				<div class="sn-attribute__title">Cargo/Ocupação</div>
+				<div class="sn-attribute__value" th:text="${avaliacaoLaboratorial.paciente.pessoa.ocupacaoOuCargo}"></div>
+					
+				<div class="sn-attribute__title">Email</div>
+				<div class="sn-attribute__value" th:text="${avaliacaoLaboratorial.paciente.pessoa.email}"></div>
+							
+				<div class="sn-attribute__title">Vínculo</div>
+				<div class="sn-attribute__value" th:text="${avaliacaoLaboratorial.paciente.pessoa.vinculo}"></div>
+			</div>
+		</div>
+	</div>	
+ 			
+	<!-- Modal Content -->
+	<div id="sn-add-exame-modal">
+		<div class="mdl-grid">
+			<input type="hidden" id="sn-exame-item-index"/>
+			
+			<div class="sn-selectfield mdl-cell mdl-cell--12-col">
+				<label class="sn-selectfield__label" for="sn-exame-type">Nome</label>
+				<select class="sn-selectfield__select" id="sn-exame-type">
+					<option value="">Selecione um tipo</option>	
+					<option th:each="exame : ${exames}" th:value="${exame}" th:text="${exame.nome}"></option>	
+				</select>
+			</div>
+			
+			<div class="sn-textfield mdl-cell mdl-cell--12-col">
+				<label class="sn-textfield__label" for="sn-exame-value">Resultado</label>
+				<input class="sn-textfield__input" type="number" step="0.01" id="sn-exame-value"/>
+			</div>
+		</div>
+	</div>
+	
+ 	<div id="sn-cancelar-modal"></div>
+</section>
+
+<section layout:fragment="js">
+
+	<script type="text/javascript" th:src="@{/js/moment.js}"></script>
+	<script type="text/javascript" th:src="@{/js/material-date-picker.js}"></script>
+	<script type="text/javascript" th:src="@{/js/avaliacao-laboratorial/cadastrar.js}"></script>
+</section>
+
+</html>
+

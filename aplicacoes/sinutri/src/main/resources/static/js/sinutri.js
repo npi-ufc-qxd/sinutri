@@ -1,4 +1,4 @@
-/* _sn-0-base.js */
+ /* _sn-0-base.js */
 
 // Modifique o valor para mostrar ou não logs na tela
 var DEBUG = true;
@@ -240,42 +240,44 @@ var sn_base = function() {
 
 	var setupTheme = function() {
 
-		var classList = $("body").attr("class");
-		var reg = /sn-theme-\w+-*\w*/;
-		var reg2 = /sn-theme-/;
-		if(reg.test(classList)) {
-			
-			var theme = classList.match(reg)[0].replace(reg2, "");
-			$(".mdl-button, .mdl-layout-title, .mdl-layout__header, .dtp-date, .dtp-header, .dtp .selected").not(".sn-fab").each(function() {
-				$(this)[0].className = $(this)[0].className.replace(/mdl-color-*(\w|\d)*-*(\w|\d)*-*(\w|\d)*/, '');	
-
-				if($(this).hasClass("mdl-button--raised")) {
-					$(this).addClass("mdl-color--" + theme);
-					$(this).addClass("mdl-color-text--white");
-				} else if($(this).hasClass("mdl-button")) {
-					$(this).addClass("mdl-color-text--" + theme + "-600");
-				} 
-
-				if($(this).hasClass("mdl-layout__header") ||
-					$(this).hasClass("selected") ||
-					$(this).hasClass("dtp-date")) {
-					$(this).addClass("mdl-color--" + theme);
-				}
-
-				if($(this).hasClass("dtp-header")) {
-					$(this).addClass("mdl-color--" + theme + "-700");
-				}
-
-				if($(this).hasClass("mdl-layout-title") && !$(this).parent().hasClass("mdl-layout__header-row")) {
-					$(this).addClass("mdl-color-text--" + theme + "-600");
-					$(this).parent().addClass("mdl-color--white");
-				}
-
-			});
-
+		if($(".sn-theme").exists()) {
+			var classList = $(".sn-theme").attr("class");
+			var reg = /sn-theme-\w+-*\w*/;
+			var reg2 = /sn-theme-/;
+			if(reg.test(classList)) {
+				
+				var theme = classList.match(reg)[0].replace(reg2, "");
+				$(".mdl-button, .mdl-layout-title, .mdl-layout__header, .dtp-date, .dtp-header, .dtp .selected").not(".sn-fab").each(function() {
+					$(this)[0].className = $(this)[0].className.replace(/mdl-color-*(\w|\d)*-*(\w|\d)*-*(\w|\d)*/, '');	
+	
+					if($(this).hasClass("mdl-button--raised")) {
+						$(this).addClass("mdl-color--" + theme);
+						$(this).addClass("mdl-color-text--white");
+					} else if($(this).hasClass("mdl-button")) {
+						$(this).addClass("mdl-color-text--" + theme + "-600");
+					} 
+	
+					if($(this).hasClass("mdl-layout__header") ||
+						$(this).hasClass("selected") ||
+						$(this).hasClass("dtp-date")) {
+						$(this).addClass("mdl-color--" + theme);
+					}
+	
+					if($(this).hasClass("dtp-header")) {
+						$(this).addClass("mdl-color--" + theme + "-700");
+					}
+	
+					if($(this).hasClass("mdl-layout-title") && !$(this).parent().hasClass("mdl-layout__header-row") && !$(this).parent().parent().hasClass("mdl-layout__header-row")) {
+						$(this).addClass("mdl-color-text--" + theme + "-600");
+						$(this).parent().addClass("mdl-color--white");
+					}
+	
+				});
+	
+			}
+	
+			sn_log($(".selected").length);
 		}
-
-		sn_log($(".selected").length);
 
 	}
 
@@ -1109,6 +1111,8 @@ var DynamicList = function(rootEl, settings) {
 			)
 		).doPlay();
 
+		$(newItem).addClass("sn-list-refeicao-li");
+		
 		return newItem;
 		
 	} 
@@ -1774,13 +1778,6 @@ var sn_toast = function() {
 				{duration: delay + postDelay + 200}
 			)
 		).doPlay();
-
-		setTimeout(function() {
-
-			removeToast(toast);
-
-		}, postDelay + delay + 200);
-
 	}
 
 	var removeToast = function(toast) {

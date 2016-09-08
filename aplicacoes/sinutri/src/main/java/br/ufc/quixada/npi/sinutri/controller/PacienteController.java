@@ -26,6 +26,10 @@ import br.ufc.quixada.npi.ldap.service.UsuarioService;
 import br.ufc.quixada.npi.sinutri.model.Alimento;
 import br.ufc.quixada.npi.sinutri.model.Anamnese;
 import br.ufc.quixada.npi.sinutri.model.AvaliacaoAntropometrica;
+import br.ufc.quixada.npi.sinutri.model.AvaliacaoLaboratorial;
+import br.ufc.quixada.npi.sinutri.model.CalculoGastoEnergetico;
+import br.ufc.quixada.npi.sinutri.model.DistribuicaoAlimentar;
+import br.ufc.quixada.npi.sinutri.model.Grupo;
 import br.ufc.quixada.npi.sinutri.model.InqueritoAlimentar;
 import br.ufc.quixada.npi.sinutri.model.Mensagem;
 import br.ufc.quixada.npi.sinutri.model.Mensagem.Prioridade;
@@ -37,6 +41,7 @@ import br.ufc.quixada.npi.sinutri.model.Prescricao;
 import br.ufc.quixada.npi.sinutri.model.Recordatorio;
 import br.ufc.quixada.npi.sinutri.model.Servidor;
 import br.ufc.quixada.npi.sinutri.model.enuns.Apetite;
+import br.ufc.quixada.npi.sinutri.model.enuns.Exame;
 import br.ufc.quixada.npi.sinutri.model.enuns.FonteAlimento;
 import br.ufc.quixada.npi.sinutri.model.enuns.FrequenciaSemanal;
 import br.ufc.quixada.npi.sinutri.model.enuns.Refeicao;
@@ -62,10 +67,140 @@ public class PacienteController {
 
 	@Inject
 	private ConsultaService consultaService;
+		
+	@RequestMapping(value = "/{idPaciente}/AvaliacaoLaboratorial", method = RequestMethod.GET)
+	public String formAdicionarAvaliacaoLaboratorial(@PathVariable("idPaciente") Long idPaciente, Model model, RedirectAttributes redirectAttributes){
+
+		Paciente paciente = pacienteService.buscarPacientePorId(idPaciente);
+		
+		if(isInvalido(paciente)){
+			Mensagem mensagem = new Mensagem("Paciente inexistente.", Mensagem.Tipo.ERRO, Mensagem.Prioridade.ALTA);
+			
+			redirectAttributes.addFlashAttribute("mensagem", mensagem);
+			return "redirect:/Nutricao/Buscar";
+		}
+		
+		AvaliacaoLaboratorial avaliacaoLaboratorial = new AvaliacaoLaboratorial();
+		avaliacaoLaboratorial.setPaciente(paciente);
+		avaliacaoLaboratorial.setCriadoEm(new Date());
+		model.addAttribute("avaliacaoLaboratorial", avaliacaoLaboratorial);
+
+		return "avaliacao-laboratorial/cadastrar";
+	}
 	
+	@ModelAttribute("exames")
+	public Exame[] getExames(){
+		return Exame.values();
+	}
+	
+	@RequestMapping(value = "/{idPaciente}/AvaliacaoLaboratorial", method = RequestMethod.POST)
+	public String adicionarAvaliacaoLaboratorial(@PathVariable("idPaciente") Long idPaciente, @Valid AvaliacaoLaboratorial avaliacaoLaboratorial, BindingResult bindingResult, Model model, RedirectAttributes redirectAttributes){
+		
+		Paciente paciente = pacienteService.buscarPacientePorId(idPaciente);
+		
+		if(isInvalido(paciente)){
+			Mensagem mensagem = new Mensagem("Paciente inexistente.", Mensagem.Tipo.ERRO, Mensagem.Prioridade.ALTA);
+			
+			redirectAttributes.addFlashAttribute("mensagem", mensagem);
+			return "redirect:/Nutricao/Buscar";
+		}
+		
+		if (bindingResult.hasErrors()) {
+			avaliacaoLaboratorial.setPaciente(paciente);
+			model.addAttribute("avaliacaoLaboratorial", avaliacaoLaboratorial);
+		
+			return "avaliacao-laboratorial/cadastrar";
+		}
+		
+		String cpfPessoaLogada = getCpfPessoaLogada();
+		Servidor nutricionista = pessoaService.buscarServidorPorCpf(cpfPessoaLogada);
+		
+		if(nutricionista == null){
+			redirectAttributes.addFlashAttribute("mensagem", new Mensagem("Nutricionista inexistente", Mensagem.Tipo.ERRO, Mensagem.Prioridade.ALTA));
+			return "redirect:/Nutricao/Buscar";
+		}
+		
+		avaliacaoLaboratorial.setNutricionista(nutricionista);
+		consultaService.adicionarAvaliacaoLaboratorial(avaliacaoLaboratorial, paciente);
+		
+		Mensagem mensagem = new Mensagem("Salvo com sucesso!", Mensagem.Tipo.SUCESSO, Mensagem.Prioridade.MEDIA);
+		redirectAttributes.addFlashAttribute("mensagem", mensagem);
+		
+		return "redirect:/Paciente/"+idPaciente+"/AvaliacaoLaboratorial/"+avaliacaoLaboratorial.getId();
+	}
+	
+	@RequestMapping(value = "/{idPaciente}/AvaliacaoLaboratorial/{idAvaliacaoLaboratorial}/Editar", method = RequestMethod.GET)
+	public String formEditarAvaliacaoLaboratorial(@PathVariable("idPaciente") Long idPaciente, @PathVariable("idAvaliacaoLaboratorial") Long idAvaliacaoLaboratorial, Model model, RedirectAttributes redirectAttributes){
+		
+		AvaliacaoLaboratorial avaliacaoLaboratorial = consultaService.buscarAvaliacaoLaboratorialPorId(idAvaliacaoLaboratorial);
+		
+		if(avaliacaoLaboratorial == null){
+			Mensagem mensagem = new Mensagem("Avaliação Laboratorial não encontrada.", Mensagem.Tipo.ERRO, Mensagem.Prioridade.MEDIA);
+			
+			redirectAttributes.addFlashAttribute("mensagem", mensagem);
+			return "redirect:/Paciente/"+idPaciente;
+		}
+		
+		model.addAttribute("avaliacaoLaboratorial", avaliacaoLaboratorial);
+	
+		return "avaliacao-laboratorial/editar";
+	}
+	
+	@RequestMapping(value = "/{idPaciente}/AvaliacaoLaboratorial/{idAvaliacaoLaboratorial}/Editar", method = RequestMethod.POST)
+	public String editarAvaliacaoLaboratorial(@PathVariable("idPaciente") Long idPaciente, @PathVariable("idAvaliacaoLaboratorial") Long idAvaliacaoLaboratorial, @Valid AvaliacaoLaboratorial avaliacaoLaboratorial, BindingResult bindingResult, Model model, RedirectAttributes redirectAttributes){
+		
+		if (bindingResult.hasErrors()) {
+			model.addAttribute("avaliacaoLaboratorial", avaliacaoLaboratorial);
+			return "avaliacao-laboratorial/editar";
+		}
+				
+		consultaService.editarAvaliacaoLaboratorial(avaliacaoLaboratorial);
+		
+		Mensagem mensagem = new Mensagem("Salvo com sucesso!", Mensagem.Tipo.SUCESSO, Mensagem.Prioridade.MEDIA);
+		redirectAttributes.addFlashAttribute("mensagem", mensagem);
+		
+		return "redirect:/Paciente/"+idPaciente+"/AvaliacaoLaboratorial/"+avaliacaoLaboratorial.getId();
+	}
+	
+	@RequestMapping(value = "/{idPaciente}/AvaliacaoLaboratorial/{idAvaliacaoLaboratorial}", method = RequestMethod.GET)
+	public String visualizarAvaliacaoLaboratorial(@PathVariable("idPaciente") Long idPaciente, @PathVariable("idAvaliacaoLaboratorial") Long idAvaliacaoLaboratorial, RedirectAttributes redirectAttributes, Model model){
+		
+		AvaliacaoLaboratorial avaliacaoLaboratorial = consultaService.buscarAvaliacaoLaboratorialPorId(idAvaliacaoLaboratorial);
+		
+		if(avaliacaoLaboratorial == null){
+			Mensagem mensagem = new Mensagem("Avaliação Laboratorial não encontrada.", Mensagem.Tipo.ERRO, Mensagem.Prioridade.MEDIA);
+			
+			redirectAttributes.addFlashAttribute("mensagem", mensagem);
+			return "redirect:/Paciente/"+idPaciente;
+		}
+		
+		model.addAttribute("avaliacaoLaboratorial", avaliacaoLaboratorial);
+		return "avaliacao-laboratorial/visualizar";
+	}
+	
+	@RequestMapping(value = "/{idPaciente}/AvaliacaoLaboratorial/{idAvaliacaoLaboratorial}/Excluir", method = RequestMethod.GET)
+	public String excluirAvaliacaoLaboratorial(@PathVariable("idPaciente") Long idPaciente, @PathVariable("idAvaliacaoLaboratorial") Long idAvaliacaoLaboratorial, RedirectAttributes redirectAttributes){
+		
+		AvaliacaoLaboratorial avaliacaoLaboratorial = consultaService.buscarAvaliacaoLaboratorialPorId(idAvaliacaoLaboratorial);
+		
+		if(avaliacaoLaboratorial == null){
+			Mensagem mensagem = new Mensagem("Avaliação Laboratorial não encontrada.", Mensagem.Tipo.ERRO, Mensagem.Prioridade.MEDIA);
+			
+			redirectAttributes.addFlashAttribute("mensagem", mensagem);
+		}
+		
+		consultaService.excluirAvaliacaoLaboratorial(avaliacaoLaboratorial);
+			
+		Mensagem mensagem = new Mensagem("Excluído com sucesso!", Mensagem.Tipo.SUCESSO, Mensagem.Prioridade.MEDIA);
+		redirectAttributes.addFlashAttribute("mensagem", mensagem);
+
+		return "redirect:/Paciente/"+idPaciente;
+	}
+
 	@RequestMapping(value= "/{idPaciente}/InqueritoAlimentar", method = RequestMethod.GET)
 	public String formAdicionarInqueritoAlimentar(Model model, @PathVariable("idPaciente") Long idPaciente, RedirectAttributes redirectAttributes){
 		Paciente paciente =  pacienteService.buscarPacientePorId(idPaciente);
+
 		if(isInvalido(paciente)) {
 			redirectAttributes.addFlashAttribute("mensagem", new Mensagem("Paciente inexistente", Mensagem.Tipo.ERRO, Mensagem.Prioridade.ALTA));
 			return "redirect:/Nutricao/Buscar";
@@ -376,14 +511,14 @@ public class PacienteController {
 			redirectAttributes.addFlashAttribute("mensagens", mensagens);
 			return "redirect:/Nutricao/Buscar";
 		}
-		if (avaliacaoAntropometrica.getId()!=null){
-			mensagens.add(new Mensagem("Erro ao adicionar Avaliação Antropométrica!", Tipo.ERRO, Prioridade.ALTA));
+		if (avaliacaoAntropometrica.getId()==null){
+			mensagens.add(new Mensagem("Erro ao editar Avaliação Antropométrica!", Tipo.ERRO, Prioridade.ALTA));
 			redirectAttributes.addFlashAttribute("mensagens", mensagens);
-			return "redirect:/Paciente/"+paciente.getId()+"/Antropometria/"+avaliacaoAntropometrica.getId();			
+			return "redirect:/Paciente/"+paciente.getId();			
 		} 
 		Servidor nutricionista = pessoaService.buscarServidorPorCpf(getCpfPessoaLogada());
 		if(isInvalidoNutricionista(nutricionista)){
-			mensagens.add(new Mensagem("Erro ao adicionar Avaliação Antropométrica!", Tipo.ERRO, Prioridade.ALTA));
+			mensagens.add(new Mensagem("Erro ao editar Avaliação Antropométrica!", Tipo.ERRO, Prioridade.ALTA));
 			mensagens.add(new Mensagem("Nutricionista não encontrada!", Tipo.ERRO, Prioridade.MEDIA));
 			redirectAttributes.addFlashAttribute("mensagens", mensagens);
 			return "redirect:/Nutricao/Buscar";
@@ -457,6 +592,8 @@ public class PacienteController {
 		model.addAttribute("pessoa", pessoa);
 		
 		Paciente paciente = new Paciente();
+		
+		pessoa.setExterno(true);
 		
 		paciente.setPessoa(pessoa);
 		try{
@@ -682,7 +819,7 @@ public class PacienteController {
 		 if(nutricionista == null){
 			 Mensagem mensagem = new Mensagem("Nutricionista não encontrado!", Mensagem.Tipo.ERRO, Mensagem.Prioridade.MEDIA);
 			 redirectAttributes.addFlashAttribute("mensagem", mensagem);
-			 return "redirect:/Nutricar/Buscar";
+			 return "redirect:/Nutricao/Buscar";
 		 }
 		 
 		 Paciente paciente = pacienteService.buscarPacientePorId(idPaciente);
@@ -739,7 +876,7 @@ public class PacienteController {
 		 if(nutricionista == null){
 			 Mensagem mensagem = new Mensagem("Nutricionista não encontrado!", Mensagem.Tipo.ERRO, Mensagem.Prioridade.MEDIA);
 			 redirectAttributes.addFlashAttribute("mensagem", mensagem);
-			 return "redirect:/Nutricar/Buscar";
+			 return "redirect:/Nutricao/Buscar";
 		 }
 		 
 		 prescricao.setNutricionista(nutricionista);
@@ -949,6 +1086,158 @@ public class PacienteController {
 		
 		return "redirect:/Paciente/" + idPaciente;
 	}
+
+	@RequestMapping(value="/{idPaciente}/CalculoEnergetico", method = RequestMethod.GET)
+	public String formAdicionarCalculosGastosEnergeticos(@PathVariable("idPaciente") Long idPaciente, RedirectAttributes redirectAttributes, 
+			Model model){
+		
+		Paciente paciente = pacienteService.buscarPacientePorId(idPaciente);
+		if(paciente==null){
+			Mensagem mensagem = new Mensagem("Paciente inexistente!", Mensagem.Tipo.ERRO, Mensagem.Prioridade.MEDIA);
+			redirectAttributes.addFlashAttribute("mensagem", mensagem);
+			return "redirect:/Nutricao/Buscar";
+		}
+		List<DistribuicaoAlimentar> distribuicoesAlimentares = new ArrayList<DistribuicaoAlimentar>();
+		
+		for(Grupo grupo: consultaService.getGrupos()){
+			DistribuicaoAlimentar distribuicaoAlimentar = new DistribuicaoAlimentar();
+			distribuicaoAlimentar.setGrupo(grupo);			
+			distribuicoesAlimentares.add(distribuicaoAlimentar);
+		}
+		CalculoGastoEnergetico calculoEnergetico = new CalculoGastoEnergetico();
+		calculoEnergetico.setPaciente(paciente);
+		calculoEnergetico.setDistribuicoesAlimentares(distribuicoesAlimentares);
+		
+		model.addAttribute("calculoEnergetico",calculoEnergetico);
+		
+		return "/calculo-energetico/cadastrar";	
+	}
+	
+	@RequestMapping(value="/{idPaciente}/CalculoEnergetico", method = RequestMethod.POST)
+	public String adicionarCalculoGastosEnergeticos(@PathVariable("idPaciente") Long idPaciente, Model model, @Valid CalculoGastoEnergetico calculoEnergetico,
+	 		BindingResult result, RedirectAttributes redirectAttributes){
+		
+		if(result.hasErrors()){
+			model.addAttribute("calculoEnergetico", calculoEnergetico);
+			Mensagem mensagem = new Mensagem("Erro ao adicionar cálculo energético!", Mensagem.Tipo.ERRO, Mensagem.Prioridade.MEDIA);
+			redirectAttributes.addFlashAttribute("mensagem", mensagem);
+			return "/calculo-energetico/cadastrar";
+		}
+		
+		
+		Servidor nutricionista = pessoaService.buscarServidorPorCpf(getCpfPessoaLogada());
+		 
+		 if(nutricionista == null){
+			 Mensagem mensagem = new Mensagem("Nutricionista não encontrado!", Mensagem.Tipo.ERRO, Mensagem.Prioridade.MEDIA);
+			 redirectAttributes.addFlashAttribute("mensagem", mensagem);
+			 return "redirect:/Nutricao/Buscar";
+		 }
+		 
+		 Paciente paciente = pacienteService.buscarPacientePorId(idPaciente);
+		 
+		 if(paciente==null){
+			Mensagem mensagem = new Mensagem("Paciente inexistente!", Mensagem.Tipo.ERRO, Mensagem.Prioridade.MEDIA);
+			redirectAttributes.addFlashAttribute("mensagem", mensagem);
+			return "redirect:/Nutricao/Buscar";
+		 }
+		 calculoEnergetico.setNutricionista(nutricionista);
+		 consultaService.adicionarCalculoGastoEnergetico(calculoEnergetico);
+		 Mensagem mensagem = new Mensagem("Salvo com sucesso!", Mensagem.Tipo.SUCESSO, Mensagem.Prioridade.MEDIA);
+		 redirectAttributes.addFlashAttribute("mensagem", mensagem);
+		 return "redirect:/Paciente/"+paciente.getId()+"/calculoEnergetico/"+calculoEnergetico.getId();
+	}
+	
+	@RequestMapping(value="/{idPaciente}/CalculoEnergetico/{idCalculoEnergetico}/Editar", method = RequestMethod.GET)
+	public String formEditarCalculoGastosEnergeticos(@PathVariable("idPaciente") Long idPaciente, @PathVariable("idCalculoEnergetico") 
+			Long idCalculoEnergetico, Model model, RedirectAttributes redirectAttributes){
+		
+		Paciente paciente = pacienteService.buscarPacientePorId(idPaciente);
+		if(paciente == null){
+			Mensagem mensagem = new Mensagem("Paciente inexistente!", Mensagem.Tipo.ERRO, Mensagem.Prioridade.MEDIA);
+			redirectAttributes.addFlashAttribute("mensagem", mensagem);
+			return "redirect:/Nutricao/Buscar";
+		}
+		
+		CalculoGastoEnergetico calculoEnergetico = consultaService.buscarCalculoGastoEnergeticoPorId(idCalculoEnergetico);
+		if(calculoEnergetico == null){
+			Mensagem mensagem = new Mensagem("Cálculo energético não encontrado!", Mensagem.Tipo.ERRO, Mensagem.Prioridade.MEDIA);
+			redirectAttributes.addFlashAttribute("mensagem", mensagem);
+			return "redirect:/Paciente/"+idPaciente;
+		}
+		
+		calculoEnergetico.setPaciente(paciente);
+		model.addAttribute("calculoEnergetico", calculoEnergetico);
+		return "calculo-energetico/editar";
+	}
+	
+	@RequestMapping(value="/{idPaciente}/CalculoEnergetico/{idCalculoEnergetico}/Editar", method = RequestMethod.POST)
+	public String editarCalculoGastosEnergeticos(@PathVariable("idPaciente") Long idPaciente, @PathVariable("idCalculoEnergetico") Long idCalculoEnergetico,
+			@Valid CalculoGastoEnergetico calculoEnergetico ,Model model, RedirectAttributes redirectAttributes){
+		
+		Paciente paciente = pacienteService.buscarPacientePorId(idPaciente);
+		if(paciente == null){
+			Mensagem mensagem = new Mensagem("Paciente inexistente!", Mensagem.Tipo.ERRO, Mensagem.Prioridade.MEDIA);
+			redirectAttributes.addFlashAttribute("mensagem", mensagem);
+			return "redirect:/Nutricao/Buscar";
+		}
+		
+		if(calculoEnergetico == null){
+			Mensagem mensagem = new Mensagem("Cálculo energético não encontrado!", Mensagem.Tipo.ERRO, Mensagem.Prioridade.MEDIA);
+			redirectAttributes.addFlashAttribute("mensagem", mensagem);
+			return "redirect:/Paciente/"+idPaciente+"/CalculoEnergetico/"+idCalculoEnergetico;
+		}
+		
+		consultaService.editarCalculoGastoEnergetico(calculoEnergetico);
+		Mensagem mensagem = new Mensagem("Salvo com sucesso!", Mensagem.Tipo.SUCESSO, Mensagem.Prioridade.MEDIA);
+		redirectAttributes.addFlashAttribute("mensagem", mensagem);
+		return "redirect:/Paciente/"+idPaciente+"/CalculoEnergetico/"+idCalculoEnergetico;
+	}
+	
+	public String visualizarCalculoGastoEnergetico(@PathVariable("idPaciente") Long idPaciente, @PathVariable("idCalculoEnergetico") Long idCalculoEnergetico, 
+			Model model, RedirectAttributes redirectAttributes){
+		
+		 Paciente paciente = pacienteService.buscarPacientePorId(idPaciente);
+		 if(paciente==null){
+			Mensagem mensagem = new Mensagem("Paciente inexistente!", Mensagem.Tipo.ERRO, Mensagem.Prioridade.MEDIA);
+			redirectAttributes.addFlashAttribute("mensagem", mensagem);
+		    return "redirect:/Nutricao/Buscar";
+		 }
+		 
+		 CalculoGastoEnergetico calculoEnergetico = consultaService.buscarCalculoGastoEnergeticoPorId(idCalculoEnergetico);
+		 if(calculoEnergetico == null){
+			 Mensagem mensagem = new Mensagem("Cálculo energético não encontrado!", Mensagem.Tipo.ERRO, Mensagem.Prioridade.MEDIA);
+			 redirectAttributes.addFlashAttribute("mensagem", mensagem);
+			 return "redirect:/Paciente/"+idPaciente;
+		 }
+		
+		model.addAttribute("calculoEnergetico", calculoEnergetico);
+		return "calculo-energetico/visualizar";
+	}
+	
+	@RequestMapping(value="/{idPaciente}/CalculoEnergetico/{idCalculoEnergetico}/Excluir", method = RequestMethod.GET)
+	public String excluirCalculoGastoEnergetico(@PathVariable("idPaciente") Long idPaciente, @PathVariable("idCalculoEnergetico") Long idCalculoEnergetico, 
+			 RedirectAttributes redirectAttributes, Model model){
+		
+		Paciente paciente = pacienteService.buscarPacientePorId(idPaciente);
+		if(paciente==null){
+			Mensagem mensagem = new Mensagem("Paciente não encontrado!", Mensagem.Tipo.ERRO, Mensagem.Prioridade.MEDIA);
+			redirectAttributes.addFlashAttribute("mensagem", mensagem);
+			return "Nutricao/Buscar";
+		}
+		
+		CalculoGastoEnergetico calculoEnergetico = consultaService.buscarCalculoGastoEnergeticoPorId(idCalculoEnergetico);
+		
+		if(calculoEnergetico==null){
+			Mensagem mensagem = new Mensagem("Cálculo energético não encontrado!", Mensagem.Tipo.ERRO, Mensagem.Prioridade.MEDIA);
+			redirectAttributes.addFlashAttribute("mensagem", mensagem);
+			return "redirect:/Paciente/"+idPaciente;
+		}
+		
+		consultaService.excluirCalculoGastoEnergetico(calculoEnergetico);
+		Mensagem mensagem = new Mensagem("Excluído com sucesso!", Mensagem.Tipo.SUCESSO, Mensagem.Prioridade.MEDIA);
+		redirectAttributes.addFlashAttribute("mensagem", mensagem);
+		return "redirect:/Paciente/"+idPaciente;
+	}
 	
 	@RequestMapping(value ="/Registrar/{cpf}", method = RequestMethod.GET)
 	public String registrarPaciente(@PathVariable("cpf") String cpf, RedirectAttributes redirectAttributes){
@@ -1000,4 +1289,3 @@ public class PacienteController {
 		return avaliacaoAntropometrica == null;
 	}
 }
-
