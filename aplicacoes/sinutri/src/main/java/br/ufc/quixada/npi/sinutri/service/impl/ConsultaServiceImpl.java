@@ -158,14 +158,16 @@ public class ConsultaServiceImpl implements ConsultaService {
 
 	@Override
 	public void editarPlanoAlimentar(PlanoAlimentar planoAlimentar) {
+		this.excluirPlanoAlimentar(planoAlimentar);
 		planoAlimentar.setAtualizadoEm(new Date());
-		planoAlimentarRepository.save(planoAlimentar);
+		planoAlimentar.setId(null);
+		this.adicionarPlanoAlimentar(planoAlimentar);
 		
 	}
 
 	@Override
 	public void excluirPlanoAlimentar(PlanoAlimentar planoAlimentar) {
-		planoAlimentarRepository.delete(planoAlimentar);
+		planoAlimentarRepository.deleteAll();
 		
 	}
 

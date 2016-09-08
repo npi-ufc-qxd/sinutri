@@ -3,6 +3,7 @@ package br.ufc.quixada.npi.sinutri.model;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -34,7 +35,7 @@ public class RefeicaoPlanoAlimentar {
 	@Size(max=256, message="Máximo de caracteres excedido")
 	private String observacao;
 	
-	@OneToMany(mappedBy = "refeicaoPlanoAlimentar")
+	@OneToMany(cascade = CascadeType.ALL ,mappedBy = "refeicaoPlanoAlimentar")
 	private List<PorcaoAlimento> porcoesAlimentos;
 	
 	public List<PorcaoAlimento> getPorcoesAlimentos() {

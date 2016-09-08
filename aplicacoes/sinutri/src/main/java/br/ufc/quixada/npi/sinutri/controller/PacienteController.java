@@ -195,8 +195,6 @@ public class PacienteController {
 	
 	@RequestMapping(value = "/{idPaciente}/PlanoAlimentar/{idPlanoAlimentar}/Editar", method = RequestMethod.GET)
 	public String formEditarPlanoAlimentar(@PathVariable("idPlanoAlimentar") Long idPlanoAlimentar, @PathVariable("idPaciente") Long idPaciente, Model model, RedirectAttributes redirectAttributes){
-		//Paciente paciente = pacienteService.buscarPacientePorId(idPaciente);
-		
 		Paciente paciente = pacienteService.buscarPacientePorId(idPaciente);
 		
 		if(paciente==null){

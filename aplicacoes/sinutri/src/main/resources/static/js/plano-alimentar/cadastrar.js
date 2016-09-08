@@ -28,15 +28,16 @@ $(function()  {
 					
 					el.find("#sn-alimentos-sub-items").children().each(function(_, e_) {
 						e = $(e_);
-						name = e.find("#sub-item-name").val();
-						namePath = e.find("#sub-item-name").attr("name");
+						nome = e.find("#sub-item-nome").text();
+						id = e.find("#sub-item-id").val();
+						namePath = e.find("#sub-item-id").attr("name");
 						quantidade = e.find("#sub-item-quantidade").val();
 						quantidadePath = e.find("#sub-item-quantidade").attr("name");
 						
 						dynamicListAlimento.doAddItem({
-							".sn-alimento-input-nome": {value: name, name: namePath}, 
+							".sn-alimento-input-nome": {value: id, name: namePath}, 
 							".sn-alimento-input-quantidade": {value: quantidade, name: quantidadePath}, 
-							".sn-alimento-nome": {text: name}, 
+							".sn-alimento-nome": {text: nome}, 
 							".sn-alimento-quantidade": {text: quantidade} 
 						});
 						
@@ -111,15 +112,16 @@ $(function()  {
 						  );
 						  
 						  $("#sn-add-refeicao-modal #alimentos").children(".sn-cloneable").each(function(_, e) {
-							  
-							  var nome = $(e).find(".sn-alimento-input-nome").val();
+							  var nome = $(e).find(".sn-alimento-nome").text();
+							  var id = $(e).find(".sn-alimento-input-nome").val();
 							  var nomePath = $(e).find(".sn-alimento-input-nome").attr("name");
 							  var quantidade = $(e).find(".sn-alimento-input-quantidade").val();
 							  var quantidadePath = $(e).find(".sn-alimento-input-quantidade").attr("name");
 							  el.find("#sn-alimentos-sub-items").append(
 								  $.parseHTML(
 									  "<div>" + 
-										  "<input type=\"hidden\" id=\"sub-item-name\" name=\"" + nomePath + "\" value=\"" + nome + "\" />" + 
+									  	  "<span class=\"hidden\" id=\"sub-item-nome\">" + nome + "</span>"+								  
+										  "<input type=\"hidden\" id=\"sub-item-id\" name=\"" + nomePath + "\" value=\"" + id + "\" />" + 
 										  "<input type=\"hidden\" id=\"sub-item-quantidade\" name=\"" + quantidadePath + "\" value=\"" + quantidade + "\" />" + 
 									  "</div>"
 								  )  
@@ -179,8 +181,11 @@ $(function()  {
 		        		  var quantidade  = $(dialogAlimento).find("#sn-alimento-quantidade").val();
 		        		  
 		        		  /* Extraindo id do name */
-		        		  reg = /^(\d+)/;
-		        		  var id = nome.match(reg)[1];						  
+		        		  regId = /^(\d+)/;
+		        		  regNome = /([a-zA-Z]+.+)/;
+		        		  
+		        		  var idAlimento = nome.match(regId)[1];						  
+						  var nomeAlimento = nome.match(regNome)[1];
 						  
 						  if( !(nome.length > 0 && quantidade.length > 0) )
 							  return;
@@ -188,9 +193,9 @@ $(function()  {
 					      dialogAlimento.close();
 					      var data = {
 								  sortValue: quantidade,
-								  ".sn-alimento-nome": 			{text:  nome},
+								  ".sn-alimento-nome": 			{text:  nomeAlimento},
 								  ".sn-alimento-quantidade":	{text:  quantidade},
-								  ".sn-alimento-input-nome":	{value: id},
+								  ".sn-alimento-input-nome":	{value: idAlimento},
 								  ".sn-alimento-input-quantidade":	{value: quantidade}
 					      };
 						  

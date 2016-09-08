@@ -3,6 +3,7 @@ package br.ufc.quixada.npi.sinutri.model;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -36,7 +37,7 @@ public class PlanoAlimentar {
 	@ManyToOne
 	private Paciente paciente;
 	
-	@OneToMany
+	@OneToMany (cascade = CascadeType.ALL)
 	@JoinColumn(name = "plano_alimentar_id")
 	private List<RefeicaoPlanoAlimentar> refeicoes;
 	

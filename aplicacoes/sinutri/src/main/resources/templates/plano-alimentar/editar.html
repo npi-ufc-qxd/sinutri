@@ -52,10 +52,7 @@
 					<label class="sn-textfield__label" 
 					for="criadoEm">Data de criação</label> 
 					
-					<input class="sn-textfield__input sn-date-picker" 
-					type="text" 
-					id="criadoEm" 
-					th:field="*{criadoEm}"/>
+					<input class="sn-textfield__input sn-date-picker" type="text" id="criadoEm" th:field="*{criadoEm}"/>
 					
 				</div>
 				
@@ -145,7 +142,6 @@
 						</li>
 						
 						<li th:each="refeicao, state : ${planoAlimentar.refeicoes}" class="mdl-list__item mdl-list__item--three-line mdl-shadow--2dp sn-card sn-cloneable">
-							  	
 							  	<input type="hidden" th:field="*{refeicoes[__${state.index}__].hora}" class="sn-refeicao-input-hora" th:value="*{refeicoes[__${state.index}__].hora}" />
 				    			<input type="hidden" th:field="*{refeicoes[__${state.index}__].descricao}" class="sn-refeicao-input-descricao" th:value="*{refeicoes[__${state.index}__].descricao}"/>
 				    			<input type="hidden" th:field="*{refeicoes[__${state.index}__].observacao}" class="sn-refeicao-input-observacao" th:value="*{refeicoes[__${state.index}__].observacao}" />
@@ -227,7 +223,8 @@
 							  	</span>
 							  	<div id="sn-alimentos-sub-items">
 							  		<div th:each="porcao, statePorcao : ${planoAlimentar.refeicoes[__${state.index}__].porcoesAlimentos}">
-							  			<input type="hidden" id="sub-item-name" th:field="*{refeicoes[__${state.index}__].porcoesAlimentos[__${statePorcao.index}__].alimento.id}"/>
+							  			<span class="hidden" id="sub-item-nome" th:text="*{refeicoes[__${state.index}__].porcoesAlimentos[__${statePorcao.index}__].alimento.nome}"></span>
+							  			<input type="hidden" id="sub-item-id" th:field="*{refeicoes[__${state.index}__].porcoesAlimentos[__${statePorcao.index}__].alimento.id}"/>
 							  			<input type="hidden" id="sub-item-quantidade" th:field="*{refeicoes[__${state.index}__].porcoesAlimentos[__${statePorcao.index}__].quantidade}"/>
 							  		</div>			
 							  	</div>
