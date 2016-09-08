@@ -215,7 +215,7 @@ public class ConsultaServiceImpl implements ConsultaService {
 
 	@Override
 	public void excluirPlanoAlimentar(PlanoAlimentar planoAlimentar) {
-		planoAlimentarRepository.deleteAll();
+		planoAlimentarRepository.delete(planoAlimentar);
 		
 	}
 
