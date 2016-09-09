@@ -65,9 +65,11 @@ $(function()  {
 		        		  var hora 		 = $(dialog).find("#sn-refeicao-hora").val();
 						  var descricao  = $(dialog).find("#sn-refeicao-descricao").val();
 						  var observacao = $(dialog).find("#sn-refeicao-observacao").val();
+						  var tamListAlimentos = $("#sn-add-refeicao-modal #alimentos").children(".sn-cloneable").length
 						  
-						  if( !(hora.length > 0 && descricao.length > 0 && observacao.length > 0) )
+						  if( !(hora.length > 0 && descricao.length > 0 && observacao.length > 0 && tamListAlimentos > 0) )
 							  return;
+						  
 						  
 					      dialog.close();
 						  
