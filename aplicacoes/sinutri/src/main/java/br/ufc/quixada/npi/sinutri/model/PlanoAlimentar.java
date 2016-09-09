@@ -37,7 +37,7 @@ public class PlanoAlimentar {
 	@ManyToOne
 	private Paciente paciente;
 	
-	@OneToMany (cascade = CascadeType.ALL)
+	@OneToMany (cascade = CascadeType.REMOVE)
 	@JoinColumn(name = "plano_alimentar_id")
 	private List<RefeicaoPlanoAlimentar> refeicoes;
 	

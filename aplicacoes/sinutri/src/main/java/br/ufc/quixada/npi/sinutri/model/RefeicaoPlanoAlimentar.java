@@ -35,7 +35,7 @@ public class RefeicaoPlanoAlimentar {
 	@Size(max=256, message="Máximo de caracteres excedido")
 	private String observacao;
 	
-	@OneToMany(cascade = CascadeType.ALL ,mappedBy = "refeicaoPlanoAlimentar")
+	@OneToMany(cascade = CascadeType.REMOVE ,mappedBy = "refeicaoPlanoAlimentar")
 	private List<PorcaoAlimento> porcoesAlimentos;
 	
 	public List<PorcaoAlimento> getPorcoesAlimentos() {
