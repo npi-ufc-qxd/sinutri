@@ -4,10 +4,9 @@ package br.ufc.quixada.npi.sinutri.model.enuns;
 public enum Refeicao {
 
 	DESJEJUM("Desjejum"),
-	CAFEMANHA("Café da manhã"),
 	COLACAO("Colação"), 
 	ALMOCO("Almoço"),
-	LANCHETARDE("Lanche da tarde"), 
+	LANCHE("Lanche"), 
 	JANTAR("Jantar"), 
 	CEIA("Ceia"),
 	PRETREINO("Pré-treino"),
