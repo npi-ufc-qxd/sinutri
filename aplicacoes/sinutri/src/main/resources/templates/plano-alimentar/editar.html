@@ -183,12 +183,12 @@
 							    		</div>
 							    		
 							    		
-							    		<div class="mdl-cell mdl-cell--4-col">
+							    		<div class="mdl-cell mdl-cell--12-col">
 							    		
 								    		<span>Observação</span>
 								    		
 									    	<span class="mdl-list__item-text-body sn-refeicao-observacao"
-									    	th:text="${#strings.length(refeicao.observacao) > 27}? ${#strings.append(#strings.substring(refeicao.observacao, 0, 26), '...')} : ${refeicao.observacao}">
+									    	th:text="${refeicao.observacao}">
 									      		Bryan Cranston played the role of Walter in Breaking Bad. He is also known
 									      		for playing Hal in Malcom in the Middle.
 								    		</span>

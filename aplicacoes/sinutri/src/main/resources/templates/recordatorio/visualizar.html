@@ -96,24 +96,24 @@
                       		   		<tbody>
                       		   			
                       		   			<tr th:each="refeicao : ${recordatorio.refeicoes}">
-	                      		   			<td style="width:20%" 
+	                      		   			<td style="width:10%" 
 							    			class="mdl-data-table__cell--non-numeric sn-refeicao-hora"
 							    			th:text="${#dates.format(refeicao.hora, 'HH:mm')}">
 							    			</td>
 							    			
-							    			<td style="width:20%" 
+							    			<td style="width:10%" 
 							    			class="mdl-data-table__cell--non-numeric sn-refeicao-descricao"
 							    			th:text="${refeicao.descricao.nome}">
 							    			</td>
 							    			
-							    			<td style="width:20%" 
+							    			<td style="width:30%" 
 							    			class="mdl-data-table__cell--non-numeric sn-refeicao-itens"
-							    			th:text="${#strings.length(refeicao.itens) > 27}? ${#strings.append(#strings.substring(refeicao.itens, 0, 26), '...')} : ${refeicao.itens}">
+							    			th:text="${refeicao.itens}">
 							    			</td>
 							    			
-							    			<td style="width:20%" 
+							    			<td style="width:30%" 
 							    			class="mdl-data-table__cell--non-numeric sn-refeicao-observacao"
-							    			th:text="${#strings.length(refeicao.observacao) > 27}? ${#strings.append(#strings.substring(refeicao.observacao, 0, 26), '...')} : ${refeicao.observacao}">
+							    			th:text="${refeicao.observacao}">
 							    			</td>
                       		   			</tr>
                       		   			

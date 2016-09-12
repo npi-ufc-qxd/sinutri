@@ -58,26 +58,35 @@
 						<div class="mdl-grid--no-spacing mdl-cell mdl-cell--12-col">
 							<h5>Refeições</h5>
 						</div>
-						<div class="sn-attribute mdl-cell mdl-cell--12-col" th:each="refeicao : ${planoAlimentar.refeicoes}">
+						<div class="mdl-cell mdl-cell--12-col" th:each="refeicao : ${planoAlimentar.refeicoes}">
+							<div class="sn-form__hdivider-5"></div>
 							<div class="sn-attribute__title" th:text="${#dates.format(refeicao.hora, 'HH:mm')}+' | '+ ${refeicao.descricao.nome}"></div>
-		                    <table class="mdl-data-table mdl-js-data-table">
+		                    <table class="mdl-cell mdl-cell--12-col mdl-data-table mdl-js-data-table">
 		                      	<thead>
 									<tr>
-								    	<th th:class="mdl-data-table__cell--non-numeric">Alimento</th>
-								    	<th th:class="mdl-data-table__cell--non-numeric">Quantidade</th>
+								    	<th class="sn-attribute__title mdl-data-table__cell--non-numeric">Alimentos</th>
+								    	<th class="sn-attribute__title mdl-data-table__cell--non-numeric">Quantidade</th>
 								    </tr>
 								</thead>
 								<tbody>
 	                      		   	<tr th:each="porcao : ${refeicao.porcoesAlimentos}">
-										<td style="width:20%" class="mdl-data-table__cell--non-numeric sn-refeicao-hora" th:text="${porcao.alimento.nome}"></td>
-								    	<td style="width:20%" class="mdl-data-table__cell--non-numeric sn-refeicao-descricao" th:text="${porcao.quantidade}"></td>
+										<td style="width:20%" class="mdl-data-table__cell--non-numeric" th:text="${porcao.alimento.nome}"></td>
+								    	<td style="width:20%" class="mdl-data-table__cell--non-numeric" th:text="${porcao.quantidade}"></td>
 									</tr>
+									
+								</tbody>
+								<thead>
+									<tr>
+								    	<th colspan="2" class="sn-attribute__title mdl-data-table__cell--non-numeric">Observações</th>
+								    </tr>
+								</thead>
+								<tbody>
+	                      		   	<tr>
+										<td colspan="2" style="width:20%" class="mdl-data-table__cell--non-numeric" th:text="${refeicao.observacao}"></td>
+								    </tr>
+									
 								</tbody>
 							</table>
-							<div class="sn-attribute mdl-cell mdl-cell--12  -col">
-								<div class="sn-attribute__title">Observações</div>
-								<div class="sn-attribute__value" th:text="${refeicao.observacao }"></div>
-							</div>
 						</div>
 					</div>
 				</div>
