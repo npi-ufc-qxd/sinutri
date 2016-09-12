@@ -440,31 +440,26 @@ public class PacienteController {
 	}
 	
 	@RequestMapping(value = "/Cadastrar", method = RequestMethod.POST)
-	public String adicionarPacienteExterno(Model model, @Valid @ModelAttribute("pessoa") Pessoa pessoa, BindingResult result, RedirectAttributes redirectAttributes){
+	public String adicionarPacienteExterno(Model model, @Valid @ModelAttribute("pessoa") Pessoa pessoa, BindingResult bindingResult, RedirectAttributes redirectAttributes){
 		
-		List<Mensagem> mensagens = new ArrayList<Mensagem>();
-
-		model.addAttribute("pessoa", pessoa);
+		if (bindingResult.hasErrors()) {
+			
+			model.addAttribute("pessoa", pessoa);
 		
-		Paciente paciente = new Paciente();
-		
-		pessoa.setExterno(true);
-		
-		paciente.setPessoa(pessoa);
-		try{
-			pacienteService.adicionarPaciente(paciente);
-		}catch(Exception e){
-			mensagens.add(new Mensagem("CPF inválido!", Mensagem.Tipo.ERRO, Mensagem.Prioridade.MEDIA));
-			redirectAttributes.addFlashAttribute("mensagens", mensagens);
-			return "redirect:/Paciente/Cadastrar";
+			return "/paciente/cadastrar";
 		}
 		
-		model.addAttribute("pessoa", pessoa);
+		pessoa.setExterno(true);
+		pessoaService.adicionarPessoa(pessoa);
 		
-		mensagens.add(new Mensagem("Salvo com sucesso!", Mensagem.Tipo.SUCESSO, Mensagem.Prioridade.MEDIA));
-		redirectAttributes.addFlashAttribute("mensagens", mensagens);
+		Paciente paciente = new Paciente();
+		paciente.setPessoa(pessoa);
+		pacienteService.adicionarPaciente(paciente);
+
+		Mensagem mensagem = new Mensagem("Salvo com sucesso!", Mensagem.Tipo.SUCESSO, Mensagem.Prioridade.MEDIA);
+		redirectAttributes.addFlashAttribute("mensagem", mensagem);
 		
-		return "redirect:/Paciente/"+pessoa.getId();
+		return "redirect:/Paciente/" + paciente.getId();
 	}
 	
 	@RequestMapping(value = "/{idPaciente}/Editar", method = RequestMethod.GET)
