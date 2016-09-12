@@ -183,7 +183,7 @@ public class Anamnese {
 		this.atividadeFisicaComentario = atividadeFisicaComentario;
 	}
 
-	public boolean getSono() {
+	public boolean isSono() {
 		return sono;
 	}
 
