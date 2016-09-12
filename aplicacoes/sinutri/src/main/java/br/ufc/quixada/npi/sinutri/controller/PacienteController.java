@@ -135,7 +135,6 @@ public class PacienteController {
 		}
 		
 		model.addAttribute("avaliacaoLaboratorial", avaliacaoLaboratorial);
-	
 		return "avaliacao-laboratorial/editar";
 	}
 	

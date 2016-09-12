@@ -124,6 +124,41 @@
 					</div>
 			
 				</div>
+
+
+				<div class="sn-card-paciente mdl-cell mdl-cell--6-col-desktop mdl-cell--8-col-tablet mdl-cell--4-col-phone sn-card ">
+
+					<div class="mdl-grid mdl-grid--no-spacing">
+
+						<div class="mdl-cell mdl-cell--12-col sn-padding--48">
+							<div class="sn-card-title mdl-layout-title sn-display--inline mdl-color-text--orange-600">Avaliação Laboratorial</div>
+							<a th:href="@{${'/Paciente/' + paciente.id + '/AvaliacaoLaboratorial'}}" class="sn-card-add mdl-button mdl-button--raised mdl-js-button mdl-color-text--white mdl-js-ripple-effect sn-float--right mdl-color--orange-500">ADICIONAR</a>
+						</div>
+
+						<div th:id="avaliacoesLaboratoriais" class="sn-card-list-container mdl-cell mdl-cell--12-col">
+							<ul class="sn-card-list mdl-list list">
+								<li th:each="avaliacaoLaboratorial,iterationStatus : ${paciente.avaliacoesLaboratoriais}" class="sn-card-list__item mdl-list__item mdl-list__item--one-line mdl-color--grey-200">
+									<span class="mdl-list__item-primary-content">
+										<span class="sn-card-list__item-text timestamp" th:attr="data-timestamp=${#dates.format(avaliacaoLaboratorial.criadoEm,'yyyyMMdd')}" th:text="${#dates.format(avaliacaoLaboratorial.criadoEm,'dd/MM/yyyy')}">dd/MM/yyyy</span>
+									</span>
+									<span class="mdl-list__item-secondary-content">
+										<button th:id="|sn-avaliacaoLaboratorial-${iterationStatus.index}|" class="mdl-button mdl-js-button mdl-button--icon">
+											<i class="material-icons">more_vert</i>
+										</button>
+										<div class="mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect" th:attr="for=|sn-avaliacaoLaboratorial-${iterationStatus.index}|">
+											<a th:href="@{${'/Paciente/' + paciente.id + '/AvaliacaoLaboratorial/'+ avaliacaoLaboratorial.id }}" class="mdl-menu__item">Visualizar</a>
+											<a th:href="@{${'/Paciente/' + paciente.id + '/AvaliacaoLaboratorial/'+ avaliacaoLaboratorial.id + '/Editar'}}" class="mdl-menu__item">Editar</a>
+											<div class="mdl-menu__item--full-bleed-divider"></div>
+											<a th:href="@{${'/Paciente/' + paciente.id + '/AvaliacaoLaboratorial/'+ avaliacaoLaboratorial.id + '/Excluir'}}" class="mdl-menu__item bt-excluir-avaliacao-laboratorial">Excluir</a>
+										</div>
+									</span>
+
+								</li>
+							</ul>
+						</div>
+					</div>
+
+				</div>
 				
 				
 				<div class="sn-card-paciente mdl-cell mdl-cell--6-col-desktop mdl-cell--8-col-tablet mdl-cell--4-col-phone sn-card ">
@@ -157,74 +192,6 @@
 							</ul>
 						</div>
 					</div>
-				</div>
-				
-				<div class="sn-card-paciente mdl-cell mdl-cell--6-col-desktop mdl-cell--8-col-tablet mdl-cell--4-col-phone sn-card ">
-
-					<div class="mdl-grid mdl-grid--no-spacing">
-
-						<div class="mdl-cell mdl-cell--12-col sn-padding--48">
-							<div class="sn-card-title mdl-layout-title sn-display--inline mdl-color-text--indigo-600">Recordatório</div>
-							<a th:href="@{${'/Paciente/' + paciente.id + '/Recordatorio'}}" class="sn-card-add mdl-button mdl-button--raised mdl-js-button mdl-color-text--white mdl-js-ripple-effect sn-float--right mdl-color--indigo-500">ADICIONAR</a>
-						</div>
-
-						<div th:id="recordatorios" class="sn-card-list-container mdl-cell mdl-cell--12-col">
-							<ul class="sn-card-list mdl-list list">
-								<li th:each="recordatorio,iterationStatus : ${paciente.recordatorios}" class="sn-card-list__item mdl-list__item mdl-list__item--one-line mdl-color--grey-200">
-									<span class="mdl-list__item-primary-content">
-										<span class="sn-card-list__item-text timestamp" th:attr="data-timestamp=${#dates.format(recordatorio.criadoEm,'yyyyMMdd')}" th:text="${#dates.format(recordatorio.criadoEm,'dd/MM/yyyy')}">dd/MMM/yyyy</span>
-									</span>
-									<span class="mdl-list__item-secondary-content">
-										<button th:id="|sn-recordatorio-${iterationStatus.index}|" class="mdl-button mdl-js-button mdl-button--icon">
-											<i class="material-icons">more_vert</i>
-										</button>
-										<div class="mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect" th:attr="for=|sn-recordatorio-${iterationStatus.index}|">
-											<a th:href="@{${'/Paciente/' + paciente.id + '/Recordatorio/'+ recordatorio.id }}" class="mdl-menu__item">Visualizar</a>
-											<a th:href="@{${'/Paciente/' + paciente.id + '/Recordatorio/'+ recordatorio.id + '/Editar'}}" class="mdl-menu__item">Editar</a>
-											<div class="mdl-menu__item--full-bleed-divider"></div>
-											<a th:href="@{${'/Paciente/' + paciente.id + '/Recordatorio/'+ recordatorio.id + '/Excluir'}}" class="mdl-menu__item bt-excluir-recordatorio">Excluir</a>
-										</div>
-									</span>
-
-								</li>
-							</ul>
-						</div>
-					</div>
-
-				</div>
-				
-				<div class="sn-card-paciente mdl-cell mdl-cell--6-col-desktop mdl-cell--8-col-tablet mdl-cell--4-col-phone sn-card ">
-
-					<div class="mdl-grid mdl-grid--no-spacing">
-
-						<div class="mdl-cell mdl-cell--12-col sn-padding--48">
-							<div class="sn-card-title mdl-layout-title sn-display--inline mdl-color-text--blue-600">Prescrição</div>
-							<a th:href="@{${'/Paciente/' + paciente.id + '/Prescricao'}}" class="sn-card-add mdl-button mdl-button--raised mdl-js-button mdl-color-text--white mdl-js-ripple-effect sn-float--right mdl-color--blue-500">ADICIONAR</a>
-						</div>
-
-						<div th:id="prescricoes" class="sn-card-list-container mdl-cell mdl-cell--12-col">
-							<ul class="sn-card-list mdl-list list">
-								<li th:each="prescricao,iterationStatus : ${paciente.prescricoes}" class="sn-card-list__item mdl-list__item mdl-list__item--one-line mdl-color--grey-200">
-									<span class="mdl-list__item-primary-content">
-										<span class="sn-card-list__item-text timestamp" th:attr="data-timestamp=${#dates.format(prescricao.criadoEm,'yyyyMMdd')}" th:text="${#dates.format(prescricao.criadoEm,'dd/MM/yyyy')}">dd/MMM/yyyy</span>										
-									</span>
-									<span class="mdl-list__item-secondary-content">
-										<button th:id="|sn-prescricao-${iterationStatus.index}|" class="mdl-button mdl-js-button mdl-button--icon">
-											<i class="material-icons">more_vert</i>
-										</button>
-										<div class="mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect" th:attr="for=|sn-prescricao-${iterationStatus.index}|">
-											<a th:href="@{${'/Paciente/' + paciente.id + '/Prescricao/'+ prescricao.id }}" class="mdl-menu__item">Visualizar</a>
-											<a th:href="@{${'/Paciente/' + paciente.id + '/Prescricao/' + prescricao.id + '/Editar'}}" class="mdl-menu__item">Editar</a>
-											<div class="mdl-menu__item--full-bleed-divider"></div>
-											<a th:href="@{${'/Paciente/' + paciente.id + '/Prescricao/' + prescricao.id + '/Excluir'}}" class="mdl-menu__item  bt-excluir-prescricao">Excluir</a>
-										</div>
-									</span>
-
-								</li>
-							</ul>
-						</div>
-					</div>
-
 				</div>
 				
 				<div class="sn-card-paciente mdl-cell mdl-cell--6-col-desktop mdl-cell--8-col-tablet mdl-cell--4-col-phone sn-card ">
@@ -266,25 +233,25 @@
 					<div class="mdl-grid mdl-grid--no-spacing">
 
 						<div class="mdl-cell mdl-cell--12-col sn-padding--48">
-							<div class="sn-card-title mdl-layout-title sn-display--inline mdl-color-text--orange-600">Avaliação Laboratorial</div>
-							<a th:href="@{${'/Paciente/' + paciente.id + '/AvaliacaoLaboratorial'}}" class="sn-card-add mdl-button mdl-button--raised mdl-js-button mdl-color-text--white mdl-js-ripple-effect sn-float--right mdl-color--orange-500">ADICIONAR</a>
+							<div class="sn-card-title mdl-layout-title sn-display--inline mdl-color-text--indigo-600">Recordatório</div>
+							<a th:href="@{${'/Paciente/' + paciente.id + '/Recordatorio'}}" class="sn-card-add mdl-button mdl-button--raised mdl-js-button mdl-color-text--white mdl-js-ripple-effect sn-float--right mdl-color--indigo-500">ADICIONAR</a>
 						</div>
 
-						<div th:id="avaliacoesLaboratoriais" class="sn-card-list-container mdl-cell mdl-cell--12-col">
+						<div th:id="recordatorios" class="sn-card-list-container mdl-cell mdl-cell--12-col">
 							<ul class="sn-card-list mdl-list list">
-								<li th:each="avaliacaoLaboratorial,iterationStatus : ${paciente.avaliacoesLaboratoriais}" class="sn-card-list__item mdl-list__item mdl-list__item--one-line mdl-color--grey-200">
+								<li th:each="recordatorio,iterationStatus : ${paciente.recordatorios}" class="sn-card-list__item mdl-list__item mdl-list__item--one-line mdl-color--grey-200">
 									<span class="mdl-list__item-primary-content">
-										<span class="sn-card-list__item-text timestamp" th:attr="data-timestamp=${#dates.format(avaliacaoLaboratorial.criadoEm,'yyyyMMdd')}" th:text="${#dates.format(avaliacaoLaboratorial.criadoEm,'dd/MM/yyyy')}">dd/MM/yyyy</span>
+										<span class="sn-card-list__item-text timestamp" th:attr="data-timestamp=${#dates.format(recordatorio.criadoEm,'yyyyMMdd')}" th:text="${#dates.format(recordatorio.criadoEm,'dd/MM/yyyy')}">dd/MMM/yyyy</span>
 									</span>
 									<span class="mdl-list__item-secondary-content">
-										<button th:id="|sn-avaliacaoLaboratorial-${iterationStatus.index}|" class="mdl-button mdl-js-button mdl-button--icon">
+										<button th:id="|sn-recordatorio-${iterationStatus.index}|" class="mdl-button mdl-js-button mdl-button--icon">
 											<i class="material-icons">more_vert</i>
 										</button>
-										<div class="mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect" th:attr="for=|sn-avaliacaoLaboratorial-${iterationStatus.index}|">
-											<a th:href="@{${'/Paciente/' + paciente.id + '/AvaliacaoLaboratorial/'+ avaliacaoLaboratorial.id }}" class="mdl-menu__item">Visualizar</a>
-											<a th:href="@{${'/Paciente/' + paciente.id + '/AvaliacaoLaboratorial/'+ avaliacaoLaboratorial.id + '/Editar'}}" class="mdl-menu__item">Editar</a>
+										<div class="mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect" th:attr="for=|sn-recordatorio-${iterationStatus.index}|">
+											<a th:href="@{${'/Paciente/' + paciente.id + '/Recordatorio/'+ recordatorio.id }}" class="mdl-menu__item">Visualizar</a>
+											<a th:href="@{${'/Paciente/' + paciente.id + '/Recordatorio/'+ recordatorio.id + '/Editar'}}" class="mdl-menu__item">Editar</a>
 											<div class="mdl-menu__item--full-bleed-divider"></div>
-											<a th:href="@{${'/Paciente/' + paciente.id + '/AvaliacaoLaboratorial/'+ avaliacaoLaboratorial.id + '/Excluir'}}" class="mdl-menu__item bt-excluir-avaliacao-laboratorial">Excluir</a>
+											<a th:href="@{${'/Paciente/' + paciente.id + '/Recordatorio/'+ recordatorio.id + '/Excluir'}}" class="mdl-menu__item bt-excluir-recordatorio">Excluir</a>
 										</div>
 									</span>
 
@@ -328,8 +295,41 @@
 						</div>
 					</div>
 
-				</div>
+				</div>				
 				
+				<div class="sn-card-paciente mdl-cell mdl-cell--6-col-desktop mdl-cell--8-col-tablet mdl-cell--4-col-phone sn-card ">
+
+					<div class="mdl-grid mdl-grid--no-spacing">
+
+						<div class="mdl-cell mdl-cell--12-col sn-padding--48">
+							<div class="sn-card-title mdl-layout-title sn-display--inline mdl-color-text--blue-600">Prescrição</div>
+							<a th:href="@{${'/Paciente/' + paciente.id + '/Prescricao'}}" class="sn-card-add mdl-button mdl-button--raised mdl-js-button mdl-color-text--white mdl-js-ripple-effect sn-float--right mdl-color--blue-500">ADICIONAR</a>
+						</div>
+
+						<div th:id="prescricoes" class="sn-card-list-container mdl-cell mdl-cell--12-col">
+							<ul class="sn-card-list mdl-list list">
+								<li th:each="prescricao,iterationStatus : ${paciente.prescricoes}" class="sn-card-list__item mdl-list__item mdl-list__item--one-line mdl-color--grey-200">
+									<span class="mdl-list__item-primary-content">
+										<span class="sn-card-list__item-text timestamp" th:attr="data-timestamp=${#dates.format(prescricao.criadoEm,'yyyyMMdd')}" th:text="${#dates.format(prescricao.criadoEm,'dd/MM/yyyy')}">dd/MMM/yyyy</span>										
+									</span>
+									<span class="mdl-list__item-secondary-content">
+										<button th:id="|sn-prescricao-${iterationStatus.index}|" class="mdl-button mdl-js-button mdl-button--icon">
+											<i class="material-icons">more_vert</i>
+										</button>
+										<div class="mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect" th:attr="for=|sn-prescricao-${iterationStatus.index}|">
+											<a th:href="@{${'/Paciente/' + paciente.id + '/Prescricao/'+ prescricao.id }}" class="mdl-menu__item">Visualizar</a>
+											<a th:href="@{${'/Paciente/' + paciente.id + '/Prescricao/' + prescricao.id + '/Editar'}}" class="mdl-menu__item">Editar</a>
+											<div class="mdl-menu__item--full-bleed-divider"></div>
+											<a th:href="@{${'/Paciente/' + paciente.id + '/Prescricao/' + prescricao.id + '/Excluir'}}" class="mdl-menu__item  bt-excluir-prescricao">Excluir</a>
+										</div>
+									</span>
+
+								</li>
+							</ul>
+						</div>
+					</div>
+
+				</div>
 				
 			</div>
             	
