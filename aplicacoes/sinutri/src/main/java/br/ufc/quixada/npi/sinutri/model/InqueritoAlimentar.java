@@ -58,6 +58,7 @@ public class InqueritoAlimentar {
 	private boolean bebidasAlcoolicasGosta;
 	private boolean gaseificadasGosta;
 	private boolean infusoesGosta;
+	private boolean embutidosGosta;
 	
 	@Enumerated(EnumType.STRING)
 	private FrequenciaSemanal bovinaFrequenciaSemanal;
@@ -103,6 +104,8 @@ public class InqueritoAlimentar {
 	private FrequenciaSemanal gaseificadasFrequenciaSemanal;
 	@Enumerated(EnumType.STRING)
 	private FrequenciaSemanal infusoesFrequenciaSemanal;
+	@Enumerated(EnumType.STRING)
+	private FrequenciaSemanal embutidosFrequenciaSemanal;
 	
 	@Size(max=256, message="(Máximo de caracteres excedido)")
 	private String bovinaAnotacao;
@@ -169,6 +172,9 @@ public class InqueritoAlimentar {
 	
 	@Size(max=256, message="(Máximo de caracteres excedido)")
 	private String infusoesAnotacao;
+
+	@Size(max=256, message="(Máximo de caracteres excedido)")
+	private String embutidosAnotacao;
 	
 	@Size(max=256, message="(Máximo de caracteres excedido)")
 	private String observacoes;
@@ -380,6 +386,14 @@ public class InqueritoAlimentar {
 	public void setInfusoesGosta(boolean infusoesGosta) {
 		this.infusoesGosta = infusoesGosta;
 	}
+	
+	public boolean isEmbutidosGosta() {
+		return embutidosGosta;
+	}
+
+	public void setEmbutidosGosta(boolean embutidosGosta) {
+		this.embutidosGosta = embutidosGosta;
+	}
 
 	public FrequenciaSemanal getAguaFrequenciaSemanal() {
 		return aguaFrequenciaSemanal;
@@ -556,7 +570,15 @@ public class InqueritoAlimentar {
 	public void setViscerasFrequenciaSemanal(FrequenciaSemanal viscerasFrequenciaSemanal) {
 		this.viscerasFrequenciaSemanal = viscerasFrequenciaSemanal;
 	}
+	
+	public FrequenciaSemanal getEmbutidosFrequenciaSemanal() {
+		return embutidosFrequenciaSemanal;
+	}
 
+	public void setEmbutidosFrequenciaSemanal(
+			FrequenciaSemanal embutidosFrequenciaSemanal) {
+		this.embutidosFrequenciaSemanal = embutidosFrequenciaSemanal;
+	}
 
 	public String getAvesAnotacao() {
 		return avesAnotacao;
@@ -724,6 +746,14 @@ public class InqueritoAlimentar {
 
 	public void setInfusoesAnotacao(String infusoesAnotacao) {
 		this.infusoesAnotacao = infusoesAnotacao;
+	}
+
+	public String getEmbutidosAnotacao() {
+		return embutidosAnotacao;
+	}
+
+	public void setEmbutidosAnotacao(String embutidosAnotacao) {
+		this.embutidosAnotacao = embutidosAnotacao;
 	}
 
 	public void setObservacoes(String observacoes) {
