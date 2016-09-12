@@ -20,24 +20,29 @@ import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
+
+import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.format.annotation.DateTimeFormat;
 import br.ufc.quixada.npi.sinutri.model.enuns.Sexo;
 
 @Entity
 //@EntityListeners(PessoaEntityListener.class)
-@Table(uniqueConstraints = @UniqueConstraint(columnNames = { "id", "cpf" }))
+@Table(uniqueConstraints = @UniqueConstraint(columnNames = { "id" }))
 public class Pessoa {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@Valid
-	@Column(unique = true)
 	private String cpf;	
 
+	@Valid
+	@NotEmpty(message = "Especifique um nome.")
 	private String nome;
 
+	@Valid
+	@NotNull(message = "Data de nascimento deve ser especificada")
 	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	private Date dataNascimento;
 
@@ -47,6 +52,8 @@ public class Pessoa {
 
 	private String email;
 
+	@Valid
+	@NotNull(message = "O sexo deve ser especificado.")
 	@Enumerated(EnumType.STRING)
 	private Sexo sexo;
 
