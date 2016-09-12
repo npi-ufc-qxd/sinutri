@@ -65,12 +65,109 @@
 				</div>
 				
 				<div class="sn-form__hdivider"></div>
-				
-				<div th:if="*{not #lists.isEmpty(refeicoes)}" class="mdl-cell mdl-offset--6-col mdl-cell--12-col">
-				
-					<span class="sn-textfield__label mdl-cell mdl-cell--12-col">Refeições</span>
-					
+				<div th:if="*{#lists.isEmpty(refeicoes)}" class="mdl-cell mdl-offset--6-col mdl-cell--12-col">
+					<label class="sn-textfield__label">Kerley</label>
+					<label class="sn-textfield__messages sn-error-text" for="sn-text" th:if="${#fields.hasErrors('refeicoes')}" th:errors="*{refeicoes}"></label>
 					<ul id="refeicoes" class="mdl-cell mdl-offset--6-col mdl-cell--12-col demo-list-three mdl-list sn-list-refeicoes mdl-color--grey-200">
+					
+						<li class="mdl-list__item mdl-list__item--three-line mdl-shadow--2dp sn-card sn-cloneable">
+						  	
+						  	<input type="hidden" th:field="*{refeicoes[0].hora}" class="sn-refeicao-input-hora" value="00:00"/>
+			    			<input type="hidden" th:field="*{refeicoes[0].descricao}" class="sn-refeicao-input-descricao" value="CAFEMANHA"/>
+			    			<input type="hidden" th:field="*{refeicoes[0].observacao}" class="sn-refeicao-input-observacao" value="akhggf"/>
+						  	
+						  	<span class="mdl-list__item-primary-content">
+						  	
+						  		<div class="mdl-grid mdl-grid--no-spacing">
+							  		<div class="mdl-cell mdl-cell--4-col">
+							  		
+								    	<span>Hora</span>
+								    	
+								    	<span class="mdl-list__item-text-body sn-refeicao-hora">
+								      		Bryan Cranston played the role of Walter in Breaking Bad. He is also known
+								      		for playing Hal in Malcom in the Middle.
+							    		</span>
+							    		
+						    		</div>
+						    		
+						    		<div class="mdl-cell mdl-cell--4-col">
+						    		
+							    		<span>Descrição</span>
+							    		
+								    	<span class="mdl-list__item-text-body sn-refeicao-descricao">
+								      		Bryan Cranston played the role of Walter in Breaking Bad. He is also known
+								      		for playing Hal in Malcom in the Middle.
+							    		</span>
+							    		
+						    		</div>
+						    		
+						    		<div class="mdl-cell mdl-cell--12-col">
+						    		
+							    		<span>Observação</span>
+							    		
+								    	<span class="mdl-list__item-text-body sn-refeicao-observacao">
+								      		Bryan Cranston played the role of Walter in Breaking Bad. He is also known
+								      		for playing Hal in Malcom in the Middle.
+							    		</span>
+							    		
+						    		</div>
+						    	</div>
+					    		
+					  		</span>
+					  		
+						  	<span class="mdl-list__item-secondary-content">
+						  	
+						   		<button type="button" class="mdl-button mdl-js-button mdl-button--icon sn-refeicao-editar">
+			    					
+			    					<i class="material-icons mdl-color-text--grey-700">mode_edit</i>
+			    					
+			    				</button>
+			    				
+			    			</span>
+			    			
+			    			<span class="mdl-list__item-secondary-content">
+			    				
+			    				<button type="button" class="mdl-button mdl-js-button mdl-button--icon sn-refeicao-duplicar">
+			    					
+			    					<i class="material-icons mdl-color-text--grey-700">content_copy</i>
+			    					
+			    				</button>
+			    				
+			    			</span>
+			    			
+			    			<span class="mdl-list__item-secondary-content">	
+			    			
+			    				<button type="button" class="mdl-button mdl-js-button mdl-button--icon sn-refeicao-remover">
+			    					
+			    					<i class="material-icons mdl-color-text--grey-700">close</i>
+			    					
+			    				</button>
+			    				
+						  	</span>
+						  	
+						</li>
+						
+						<li>
+							<button type="button" 
+			   				class="mdl-button 
+			   				mdl-js-button 
+			   				mdl-js-ripple-effect 
+			   				mdl-button--colored"  
+			   				id="sn-add-refeicao-button">
+				   				Adicionar Refeição
+			   				</button>
+						
+						</li>
+						
+					</ul>
+				
+				</div>
+				
+				<div th:if="!*{#lists.isEmpty(refeicoes)}" class="mdl-cell mdl-offset--6-col mdl-cell--12-col">
+				
+					<label class="sn-textfield__label">Refeições</label>
+					<label class="sn-textfield__messages sn-error-text" for="sn-text" th:if="${#fields.hasErrors('refeicoes')}" th:errors="*{refeicoes}"></label>
+					<ul id="refeicoes" class="mdl-cell mdl-offset--6-col mdl-cell--12-col demo-list-three mdl-list sn-list-refeicoes mdl-color--grey-200"  th:field="*{refeicoes}">
 					
 						<li class="mdl-list__item mdl-list__item--three-line mdl-shadow--2dp sn-card sn-cloneable">
 						  	

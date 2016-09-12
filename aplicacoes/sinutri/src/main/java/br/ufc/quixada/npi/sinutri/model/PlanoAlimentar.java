@@ -1,5 +1,6 @@
 package br.ufc.quixada.npi.sinutri.model;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -11,8 +12,10 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
+import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
@@ -26,7 +29,6 @@ public class PlanoAlimentar {
 	@DateTimeFormat(pattern="dd/MM/yyyy")
 	private Date criadoEm;
 	
-	@NotNull
 	@DateTimeFormat(pattern="dd/MM/yyyy")
 	private Date atualizadoEm;
 	
@@ -39,11 +41,12 @@ public class PlanoAlimentar {
 	
 	@OneToMany (cascade = CascadeType.REMOVE)
 	@JoinColumn(name = "plano_alimentar_id")
+	@Valid
+	@NotEmpty(message = " (Adicione pelo menos um exame.)")
 	private List<RefeicaoPlanoAlimentar> refeicoes;
 	
 	public PlanoAlimentar() {
-		super();
-		// TODO Auto-generated constructor stub
+		this.refeicoes = new ArrayList<RefeicaoPlanoAlimentar>();
 	}
 
 	public PlanoAlimentar(Paciente paciente) {

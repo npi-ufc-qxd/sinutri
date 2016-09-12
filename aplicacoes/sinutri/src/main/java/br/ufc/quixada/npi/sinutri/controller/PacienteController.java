@@ -301,8 +301,23 @@ public class PacienteController {
 	}
 	
 	@RequestMapping(value = "/{idPaciente}/PlanoAlimentar", method = RequestMethod.POST)
-	public String adicionarPlanoAlimentar(Model model, @ModelAttribute("planoAlimentar") PlanoAlimentar planoAlimentar, @PathVariable("idPaciente") Long idPaciente, BindingResult result, RedirectAttributes redirectAttributes){
+	public String adicionarPlanoAlimentar(@PathVariable("idPaciente") Long idPaciente, @Valid PlanoAlimentar planoAlimentar, BindingResult result, Model model, RedirectAttributes redirectAttributes){
 		List<Mensagem> mensagens = new ArrayList<Mensagem>();
+		Paciente paciente = pacienteService.buscarPacientePorId(idPaciente);
+		
+		if(paciente==null){
+			mensagens.add(new Mensagem("Erro ao adicionar Plano alimentar!", Tipo.ERRO, Prioridade.ALTA));
+			mensagens.add(new Mensagem("Paciente inexistente!", Tipo.ERRO, Prioridade.MEDIA));
+			redirectAttributes.addFlashAttribute("mensagens", mensagens);
+			return "redirect:/Nutricao/Buscar";
+		}
+		
+		if(result.hasErrors()){
+			planoAlimentar.setPaciente(paciente);
+			model.addAttribute("planoAlimentar", planoAlimentar);
+			return "/plano-alimentar/cadastrar";
+		}
+		
 		Servidor nutricionista = pessoaService.buscarServidorPorCpf(getCpfPessoaLogada());
 		
 		if(nutricionista==null){
@@ -312,13 +327,6 @@ public class PacienteController {
 			return "redirect:/Nutricao/Buscar";
 		}
 		
-		Paciente paciente = pacienteService.buscarPacientePorId(idPaciente);
-		if(paciente==null){
-			mensagens.add(new Mensagem("Erro ao adicionar Plano alimentar!", Tipo.ERRO, Prioridade.ALTA));
-			mensagens.add(new Mensagem("Paciente inexistente!", Tipo.ERRO, Prioridade.MEDIA));
-			redirectAttributes.addFlashAttribute("mensagens", mensagens);
-			return "redirect:/Nutricao/Buscar";
-		}
 		
 		planoAlimentar.setNutricionista(nutricionista);
 		planoAlimentar.setPaciente(paciente);
@@ -350,12 +358,12 @@ public class PacienteController {
 	}
 	
 	@RequestMapping(value = "/{idPaciente}/PlanoAlimentar/{idPlanoAlimentar}/Editar", method = RequestMethod.POST)
-	public String editarPlanoAlimentar(Model model, @PathVariable("idPlanoAlimentar") Long idPlanoAlimentar, @PathVariable("idPaciente") Long idPaciente, PlanoAlimentar planoAlimentar, BindingResult result, RedirectAttributes redirectAttributes){		
+	public String editarPlanoAlimentar(Model model, @PathVariable("idPlanoAlimentar") Long idPlanoAlimentar, @PathVariable("idPaciente") Long idPaciente, @Valid PlanoAlimentar planoAlimentar, BindingResult result, RedirectAttributes redirectAttributes){		
 		Paciente paciente = pacienteService.buscarPacientePorId(idPaciente);
 		
 		if(result.hasErrors()){
 			model.addAttribute("planoAlimentar", planoAlimentar);
-			return "/plano-alimentar/cadastrar";
+			return "/plano-alimentar/editar";
 		}
 		if(paciente == null){
 			Mensagem mensagem = new Mensagem("Paciente inexistente!", Tipo.ERRO, Prioridade.MEDIA);

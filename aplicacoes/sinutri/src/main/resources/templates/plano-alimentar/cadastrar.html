@@ -64,8 +64,8 @@
 				
 				<div class="sn-form__hdivider"></div>
 				
-				<span class="sn-textfield__label mdl-cell mdl-cell--12-col">Refeições</span>
-				
+				<label class="sn-textfield__label">Refeições</label>
+				<label class="sn-textfield__messages sn-error-text" for="sn-text" th:if="${#fields.hasErrors('refeicoes')}" th:errors="*{refeicoes}"></label>
 				<ul id="refeicoes" class="mdl-cell mdl-offset--6-col mdl-cell--12-col demo-list-three mdl-list sn-list-refeicoes mdl-color--grey-200">
 				
 					<li class="mdl-list__item mdl-list__item--three-line mdl-shadow--2dp sn-card sn-cloneable">
