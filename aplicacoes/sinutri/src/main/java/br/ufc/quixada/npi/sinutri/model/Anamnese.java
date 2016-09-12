@@ -47,9 +47,9 @@ public class Anamnese {
 	@Size(max=256, message="Os comentários sobre atividade física precisam ocupar menos que 256 caracteres")
 	private String atividadeFisicaComentario;
 	
-	private boolean dormeBem;
+	private boolean sono;
 	@Size(max=256, message="Os comentários sobre o sono precisam ocupar menos que 256 caracteres")
-	private String dormeBemComentario;
+	private String sonoComentario;
 	
 	private boolean medicamento;
 	@Size(max=256, message="A descrição dos medicamentos precisam ter menos de 256 caracteres")
@@ -183,20 +183,20 @@ public class Anamnese {
 		this.atividadeFisicaComentario = atividadeFisicaComentario;
 	}
 
-	public boolean isDormeBem() {
-		return dormeBem;
+	public boolean getSono() {
+		return sono;
 	}
 
-	public void setDormeBem(boolean dormeBem) {
-		this.dormeBem = dormeBem;
+	public void setSono(boolean sono) {
+		this.sono = sono;
 	}
 
-	public String getDormeBemComentario() {
-		return dormeBemComentario;
+	public String getSonoComentario() {
+		return sonoComentario;
 	}
 
-	public void setDormeBemComentario(String dormeBemComentario) {
-		this.dormeBemComentario = dormeBemComentario;
+	public void setSonoComentario(String sonoComentario) {
+		this.sonoComentario = sonoComentario;
 	}
 
 	public boolean isMedicamento() {

@@ -112,18 +112,18 @@
 							class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect"
 							for="checkbox-1"> 
 							<input type="checkbox"
-								th:checked="${anamnese.dormeBem}"
+								th:checked="${anamnese.sono}"
 								class="mdl-checkbox__input" readonly="true" disabled="true" />
-							<span class="mdl-checkbox__label sn-attribute__title">Dorme Bem</span>
+							<span class="mdl-checkbox__label sn-attribute__title">Sono</span>
 						</label>
 					</div>
 					
 					<div class="sn-attribute__value mdl-cell mdl-cell--6-col">
 						<div class="sn-attribute__title ">Comentário</div>
 							<label th:text=
-								"${anamnese.dormeBemComentario}? 
-								(${#strings.length(anamnese.dormeBemComentario) != 0?
-								anamnese.dormeBemComentario:
+								"${anamnese.sonoComentario}? 
+								(${#strings.length(anamnese.sonoComentario) != 0?
+								anamnese.sonoComentario:
 								'Não há comentário!'}): 
 								'Não há comentário!'">
 								Comentário
