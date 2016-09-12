@@ -7,7 +7,7 @@ import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.util.Date;
 import java.util.List;
-import javax.persistence.Column;
+
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -19,11 +19,10 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
-import javax.validation.Valid;
-import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.format.annotation.DateTimeFormat;
+
 import br.ufc.quixada.npi.sinutri.model.enuns.Sexo;
 
 @Entity
@@ -37,12 +36,9 @@ public class Pessoa {
 
 	private String cpf;	
 
-	@Valid
 	@NotEmpty(message = "Especifique um nome.")
 	private String nome;
 
-	@Valid
-	@NotNull(message = "Data de nascimento deve ser especificada")
 	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	private Date dataNascimento;
 
@@ -52,8 +48,6 @@ public class Pessoa {
 
 	private String email;
 
-	@Valid
-	@NotNull(message = "O sexo deve ser especificado.")
 	@Enumerated(EnumType.STRING)
 	private Sexo sexo;
 
