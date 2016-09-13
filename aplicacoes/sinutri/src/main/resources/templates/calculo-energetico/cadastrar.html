@@ -60,19 +60,20 @@
 
 					<div class="sn-textfield mdl-cell mdl-cell--3-col">
 						<label class="mdl-cell--3-col sn-textfield__label" >Glicídio:</label>
-						<input id="inputGlicidio" type="number" th:field="*{glicidio}" min="0" max="9999"
-							class="mdl-cell--8-col  " step="0.01" />
+						<input id="inputGlicidio" max="100" min="0" type="number" th:field="*{glicidio}"
+							class="mdl-cell--8-col" step="0.01" />
 					</div>
 
 					<div class="sn-textfield mdl-cell mdl-cell--2-col">
-						<input type="text" th:readonly="true"
+						<input id="inputGramasGlicidio" type="text" th:readonly="true"
+							class="mdl-cell--12-col" th:value="gramas"/>
+					</div>
+
+					<div class="sn-textfield mdl-cell mdl-cell--2-col">
+						<input id="inputCaloriasGlicidio" type="text" th:readonly="true"
 							class="mdl-cell--12-col" th:value="calorias"/>
 					</div>
 
-					<div class="sn-textfield mdl-cell mdl-cell--2-col">
-						<input type="text" th:readonly="true"
-							class="mdl-cell--12-col" th:value="gramas"/>
-					</div>
 
 					<div class="sn-textfield mdl-cell mdl-cell--4-col">
 						<label class="mdl-cell--3-col sn-textfield__label">VET
@@ -82,17 +83,17 @@
 
 					<div class="sn-textfield mdl-cell mdl-cell--3-col">
 						<label class="mdl-cell--3-col sn-textfield__label">Proteina:</label>
-						<input id="inputProteina" type="number" th:field="*{proteina}" min="0" max="9999"
+						<input id="inputProteina" max="100" min="0"  type="number" th:field="*{proteina}"
 							class="mdl-cell--8-col  " step="0.01" />
 					</div>
 
 					<div class="sn-textfield mdl-cell mdl-cell--2-col">
-						<input type="text" th:readonly="true"
+						<input id="inputGramasProteina" type="text" th:readonly="true"
 							class="mdl-cell--12-col" th:value="gramas"/>
 					</div>
 
 					<div class="sn-textfield mdl-cell mdl-cell--2-col">
-						<input type="text" th:readonly="true"
+						<input id="inputCaloriasProteina" type="text" th:readonly="true"
 							class="mdl-cell--12-col" th:value="calorias"/>
 					</div>
 
@@ -104,17 +105,17 @@
 
 					<div class="sn-textfield mdl-cell mdl-cell--3-col">
 						<label class="mdl-cell--3-col sn-textfield__label">Lipídio:</label>
-						<input id="inputLipidio" type="number" th:field="*{lipidio}" min="0" max="9999"
+						<input id="inputLipidio" max="100" min="0" type="number" th:field="*{lipidio}" 
 							class="mdl-cell--8-col  " step="0.01" />
 					</div>
 
 					<div class="sn-textfield mdl-cell mdl-cell--2-col">
-						<input type="text" th:readonly="true"
+						<input id="inputGramasLipidio" type="text" th:readonly="true"
 							class="mdl-cell--12-col" th:value="gramas" />
 					</div>
 
 					<div class="sn-textfield mdl-cell mdl-cell--2-col">
-						<input type="text" th:readonly="true"
+						<input id="inputCaloriasLipidio" type="text" th:readonly="true"
 							class="mdl-cell--12-col" th:value="calorias"/>
 					</div>
 					<div class="sn-textfield mdl-cell mdl-cell--11-col mdl-grid--no-spacing" th:align="center">
@@ -131,14 +132,14 @@
 				
 						<div class="mdl-title mdl-color-text--black mdl-cell--12-col">Grupo Alimentar</div>
 						
-						<div th:each="distribuicao, state : *{distribuicoesAlimentares}" class="sn-textfield mdl-cell mdl-grid mdl-cell--12-col">
+						<div id="divListaGrupoAlimentar" th:each="distribuicao, state : *{distribuicoesAlimentares}" class="sn-textfield mdl-cell mdl-grid mdl-cell--12-col">
 							<input hidden="true" th:name = "distribuicoesAlimentares[__${state.index}__].grupo.id" th:value="${distribuicao.grupo.id}"/>
 							
 							<div class="mdl-subtitle mdl-color-text--black mdl-cell--12-col" th:text = "${distribuicao.grupo.nome}"> o caina é bonito</div>
 							
 							<div class="sn-textfield mdl-cell mdl-cell--3-col">
 								<label class="mdl-cell--3-col sn-textfield__label">N° de Porções:</label>
-								<input type="number" min="0"  max="9999" th:field="*{distribuicoesAlimentares[__${state.index}__].porcao}" class="mdl-cell--10-col" step="1.0"/>
+								<input type="number" min="0"  max="9999" th:field="*{distribuicoesAlimentares[__${state.index}__].porcao}" class="mdl-cell--10-col numero-porcao" step="1.0" th:attr="data-id-grupo=${distribuicao.grupo.id}"/>
 							</div>
 							
 							<div class="sn-textfield mdl-cell mdl-cell--3-col">
@@ -284,7 +285,7 @@
 							</div>
 					
 							<div class="sn-textfield mdl-cell mdl-cell--1-col mdl-grid--no-spacing" th:align="center">
-								<input type="text" th:readonly="true" class="mdl-cell--12-col" th:value="QTD" />
+								<input type="text" th:readonly="true" class="mdl-cell--12-col porcao-distribuicao" th:attr="data-id-grupo=${distribuicao.grupo.id}" th:value="QTD" />
 							</div>
 					</div>
 					
