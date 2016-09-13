@@ -1,6 +1,7 @@
 package br.ufc.quixada.npi.sinutri.service.impl;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -8,6 +9,9 @@ import javax.inject.Named;
 import br.ufc.quixada.npi.sinutri.model.AvaliacaoLaboratorial;
 import br.ufc.quixada.npi.sinutri.model.Anamnese;
 import br.ufc.quixada.npi.sinutri.model.AvaliacaoAntropometrica;
+import br.ufc.quixada.npi.sinutri.model.CalculoGastoEnergetico;
+import br.ufc.quixada.npi.sinutri.model.DistribuicaoAlimentar;
+import br.ufc.quixada.npi.sinutri.model.Grupo;
 import br.ufc.quixada.npi.sinutri.model.InqueritoAlimentar;
 import br.ufc.quixada.npi.sinutri.model.Paciente;
 import br.ufc.quixada.npi.sinutri.repository.AvaliacaoLaboratorialRepository;
@@ -16,6 +20,9 @@ import br.ufc.quixada.npi.sinutri.model.Recordatorio;
 import br.ufc.quixada.npi.sinutri.model.RefeicaoRecordatorio;
 import br.ufc.quixada.npi.sinutri.repository.AnamneseRepository;
 import br.ufc.quixada.npi.sinutri.repository.AvaliacaoAntropometricaRepository;
+import br.ufc.quixada.npi.sinutri.repository.CalculoGastosEnergeticosRepository;
+import br.ufc.quixada.npi.sinutri.repository.DistribuicaoAlimentarRepository;
+import br.ufc.quixada.npi.sinutri.repository.GrupoRepository;
 import br.ufc.quixada.npi.sinutri.repository.InqueritoAlimentarRepository;
 import br.ufc.quixada.npi.sinutri.repository.PrescricaoRepository;
 import br.ufc.quixada.npi.sinutri.repository.RecordatorioRepository;
@@ -45,6 +52,15 @@ public class ConsultaServiceImpl implements ConsultaService {
 	
 	@Inject
 	private RefeicaoRecordatorioRepository refeicaoRecordatorioRepository;
+	
+	@Inject
+	private CalculoGastosEnergeticosRepository calculoGastosEnergeticosRepository;
+	
+	@Inject
+	private DistribuicaoAlimentarRepository distribuicaoAlimentarRepository;
+	
+	@Inject
+	private GrupoRepository grupoRepository;
 	
 	@Override
 	public void adicionarAvaliacaoLaboratorial(AvaliacaoLaboratorial avaliacaoLaboratorial, Paciente paciente) {
@@ -171,7 +187,6 @@ public class ConsultaServiceImpl implements ConsultaService {
 		
 	}
 	
-	
 	@Override
 	public void adicionarAnamnese(Anamnese anamnese) {
 		anamnese.setAtualizadoEm(new Date());
@@ -192,6 +207,57 @@ public class ConsultaServiceImpl implements ConsultaService {
 	@Override
 	public Anamnese buscarAnamnese(Long id) {
 		return anamneseRepository.findOne(id);		
+	}
+
+	@Override
+	public void adicionarCalculoGastoEnergetico(
+			CalculoGastoEnergetico calculoEnergetico) {
+		calculoGastosEnergeticosRepository.save(calculoEnergetico);
+	}
+
+	@Override
+	public void editarCalculoGastoEnergetico(
+			CalculoGastoEnergetico calculoEnergetico) {
+		calculoGastosEnergeticosRepository.save(calculoEnergetico);
+	}
+
+	@Override
+	public void excluirCalculoGastoEnergetico(
+			CalculoGastoEnergetico calculoEnergetico) {
+		calculoGastosEnergeticosRepository.delete(calculoEnergetico);
+	}
+
+	@Override
+	public CalculoGastoEnergetico buscarCalculoGastoEnergeticoPorId(Long id) {
+		return calculoGastosEnergeticosRepository.findOne(id);
+	}
+
+	@Override
+	public void adicionarDistribuicaoAlimentar(
+			DistribuicaoAlimentar distribuicaoAlimentar) {
+		distribuicaoAlimentarRepository.save(distribuicaoAlimentar);
+	}
+
+	@Override
+	public void editarDistribuicaoAlimentar(
+			DistribuicaoAlimentar distribuicaoAlimentar) {
+		distribuicaoAlimentarRepository.save(distribuicaoAlimentar);		
+	}
+
+	@Override
+	public void excluirDistribuicaoAlimentar(
+			DistribuicaoAlimentar distribuicaoAlimentar) {
+		distribuicaoAlimentarRepository.delete(distribuicaoAlimentar);
+	}
+
+	@Override
+	public DistribuicaoAlimentar buscarDistribuicaoAlimentar(Long id) {
+		return distribuicaoAlimentarRepository.findOne(id);
+	}
+
+	@Override
+	public List<Grupo> getGrupos() {
+		return grupoRepository.findAll();
 	}	
 	
 }

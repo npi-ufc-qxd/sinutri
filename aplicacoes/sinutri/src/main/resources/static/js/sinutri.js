@@ -26,6 +26,15 @@ $(document).ready(function() {
 		sn_inputmask.doInit();
 			
 	});
+	$("#div_arrow").click(function() {
+		var str = $(".arrow_icon_position").text();
+		if (str == 'keyboard_arrow_down') {
+			$(".arrow_icon_position").text('keyboard_arrow_up'); 
+		} else {
+			$(".arrow_icon_position").text('keyboard_arrow_down');
+		}
+		
+	});
 
 });
 

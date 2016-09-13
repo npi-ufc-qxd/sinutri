@@ -35,17 +35,62 @@
 		 -->
 		
 		<div class="mdl-grid">
-			<div class="mdl-cell mdl-cell--11-col mdl-cell--1-offset-desktop">
+		<div  class="sn-breadcrumbs__position mdl-cell mdl-cell--10-col-desktop mdl-cell--1-offset-desktop mdl-cell--8-col-tablet mdl-cell--4-col-phone mdl-grid sn-main-grid">	
+			<div class="mdl-cell mdl-cell--12-col">
 			<a th:href="@{/Nutricao/Buscar}" class="sn-breadcrumbs sn-attribute__title">Início</a>
 				<a th:href="@{${'/Paciente/'+avaliacaoAntropometrica.paciente.id}}" class="sn-breadcrumbs sn-attribute__title">Paciente</a>
-				<a class="sn-attribute__title sn-breadcrumbs">Editar Antropometria</a>
+				<a class="sn-attribute__title sn-breadcrumbs">Editar Avaliação Antropométrica</a>
 			</div>
-				<form class="sn-form mdl-cell mdl-cell--7-col-desktop mdl-cell--1-offset-desktop mdl-cell--8-col-tablet mdl-cell--4-col-phone mdl-grid mdl-grid--no-spacing sn-main-card" id="form-antropometria" action="#" th:action="@{${'/Paciente/'+avaliacaoAntropometrica.paciente.id+'/Antropometria/+avaliacaoAntropometrica+/Editar'}}" th:object="${avaliacaoAntropometrica}" th:method="post" enctype="multipart/form-data">
-					
-						<div class="mdl-cell mdl-cell--12-col sn-card sn-padding--48 mdl-color--white">
-              				<div class="mdl-layout-title mdl-color-text--purple-600">Editar Avaliação Antropométrica</div>
-       					</div>
+			<div class="mdl-cell mdl-cell--12-col sn-card">
+								<div class="mdl-layout-title mdl-color-text--purple-600 sn-padding--48">
+									Cadastrar Avaliação Antropométrica
+									<div id="div_arrow" class="sn-colapse-div sn-attribute__title">									
+										<span th:text="${avaliacaoAntropometrica.paciente.pessoa.nome+', '+avaliacaoAntropometrica.paciente.pessoa.getIdade()+' anos'}"></span>
+										<i class="sn-breadcrumbs__icon material-icons arrow_icon_position">keyboard_arrow_down</i>
+									</div>
+									
+								</div>
+		        				<div class="sn-form__hdivider sn-margin--none"></div>
+								<div class="sn-colapsable-div sn-padding--48 mdl-color--white">
 						
+									<div class="mdl-grid mdl-grid--no-spacing">										
+			
+										<div class="sn-attribute mdl-cell mdl-cell--4-col">
+									        <div class="sn-attribute__title">Sexo</div>
+											<div class="sn-attribute__value" th:text="${avaliacaoAntropometrica.paciente.pessoa.sexo}"></div>
+										</div>
+			
+										<div class="sn-attribute mdl-cell mdl-cell--4-col">
+									        <div class="sn-attribute__title">Telefone</div>
+											<div class="sn-attribute__value" th:text="${avaliacaoAntropometrica.paciente.pessoa.telefone}"></div>
+										</div>
+										
+										<div class="sn-attribute mdl-cell mdl-cell--4-col">
+									        <div class="sn-attribute__title">Email</div>
+											<div class="sn-attribute__value" th:text="${avaliacaoAntropometrica.paciente.pessoa.email}"></div>
+										</div>
+										
+										<div class="sn-attribute mdl-cell mdl-cell--4-col">
+									        <div class="sn-attribute__title">CPF</div>
+											<div class="sn-attribute__value" th:text="${avaliacaoAntropometrica.paciente.pessoa.cpf}"></div>
+										</div>
+										
+										<div class="sn-attribute mdl-cell mdl-cell--4-col">
+									        <div class="sn-attribute__title">Cargo/Ocupação</div>
+											<div class="sn-attribute__value" th:text="${avaliacaoAntropometrica.paciente.pessoa.ocupacaoOuCargo}"></div>
+										</div>
+										
+										<div class="sn-attribute mdl-cell mdl-cell--4-col">
+									        <div class="sn-attribute__title">Vínculo</div>
+											<div class="sn-attribute__value" th:text="${avaliacaoAntropometrica.paciente.pessoa.vinculo}"></div>
+										</div>
+								</div>
+								</div>
+								
+			            	</div>
+				<form class="sn-form mdl-cell mdl-cell--12-col-desktop mdl-cell--8-col-tablet mdl-cell--4-col-phone mdl-grid mdl-grid--no-spacing sn-main-card" id="form-antropometria" action="#" th:action="@{${'/Paciente/'+avaliacaoAntropometrica.paciente.id+'/Antropometria/+avaliacaoAntropometrica+/Editar'}}" th:object="${avaliacaoAntropometrica}" th:method="post" enctype="multipart/form-data">
+					
+				
 						<input type="hidden" th:field="*{id}" />
 						<input type="hidden" th:field="*{atualizadoEm}" />
 						<input type="hidden" th:field="*{paciente.id}" />
@@ -281,37 +326,9 @@
 							</div>
 						</div>
 				</form>
-			<div class="mdl-cell mdl-cell--3-col-desktop">
-				<div class="sn-card sn-padding--48">
-					<div class="mdl-layout-title">Informações do Paciente</div>
-										
-					<div class="sn-attribute__title">Nome</div>
-					<div class="sn-attribute__value" th:text="${avaliacaoAntropometrica.paciente.pessoa.nome}"></div>
-					
-					<div class="sn-attribute__title">Sexo</div>
-					<div class="sn-attribute__value" th:text="${avaliacaoAntropometrica.paciente.pessoa.sexo}"></div>
-					
-					<div class="sn-attribute__title">Idade</div>
-					<div class="sn-attribute__value" th:text="${avaliacaoAntropometrica.paciente.pessoa.getIdade()}"></div>
-					
-					<div class="sn-attribute__title">CPF</div>
-					<div class="sn-attribute__value" th:text="${avaliacaoAntropometrica.paciente.pessoa.cpf}"></div>
-					
-					<div class="sn-attribute__title">Telefone</div>
-					<div class="sn-attribute__value" th:text="${avaliacaoAntropometrica.paciente.pessoa.telefone}"></div>
-					
-					<div class="sn-attribute__title">Cargo/Ocupação</div>
-					<div class="sn-attribute__value" th:text="${avaliacaoAntropometrica.paciente.pessoa.ocupacaoOuCargo}"></div>
-					
-					<div class="sn-attribute__title">Email</div>
-					<div class="sn-attribute__value" th:text="${avaliacaoAntropometrica.paciente.pessoa.email}"></div>
-							
-					<div class="sn-attribute__title">Vínculo</div>
-					<div class="sn-attribute__value" th:text="${avaliacaoAntropometrica.paciente.pessoa.vinculo}"></div>
-				</div>
-			</div>
+			
 		</div>
-		
+		</div>
 		<div id="modal-cancelar"></div>
 	</section>
 	

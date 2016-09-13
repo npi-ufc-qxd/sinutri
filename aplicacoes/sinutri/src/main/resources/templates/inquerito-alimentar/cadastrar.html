@@ -22,9 +22,11 @@
 							<div class="mdl-cell mdl-cell--12-col sn-card">
 								<div class="mdl-layout-title mdl-color-text--green-600 sn-padding--48">
 									Cadastrar Inquérito Alimentar
-									<div class="sn-colapse-div sn-attribute__title" th:text="${inqueritoAlimentar.paciente.pessoa.nome+', '+inqueritoAlimentar.paciente.pessoa.getIdade()+' anos'}">
+									<div id="div_arrow" class="sn-colapse-div sn-attribute__title">									
+										<span th:text="${inqueritoAlimentar.paciente.pessoa.nome+', '+inqueritoAlimentar.paciente.pessoa.getIdade()+' anos'}"></span>
+										<i class="sn-breadcrumbs__icon material-icons arrow_icon_position">keyboard_arrow_down</i>
 									</div>
-									<i class="sn-breadcrumbs__icon material-icons">keyboard_arrow_right</i>
+									
 								</div>
 		        				<div class="sn-form__hdivider sn-margin--none"></div>
 								<div class="sn-colapsable-div sn-padding--48 mdl-color--white">

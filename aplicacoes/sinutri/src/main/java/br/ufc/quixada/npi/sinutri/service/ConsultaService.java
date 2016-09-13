@@ -1,8 +1,13 @@
 package br.ufc.quixada.npi.sinutri.service;
 
+import java.util.List;
+
 import br.ufc.quixada.npi.sinutri.model.AvaliacaoLaboratorial;
 import br.ufc.quixada.npi.sinutri.model.AvaliacaoAntropometrica;
 import br.ufc.quixada.npi.sinutri.model.Anamnese;
+import br.ufc.quixada.npi.sinutri.model.CalculoGastoEnergetico;
+import br.ufc.quixada.npi.sinutri.model.DistribuicaoAlimentar;
+import br.ufc.quixada.npi.sinutri.model.Grupo;
 import br.ufc.quixada.npi.sinutri.model.InqueritoAlimentar;
 import br.ufc.quixada.npi.sinutri.model.Paciente;
 import br.ufc.quixada.npi.sinutri.model.Recordatorio;
@@ -63,5 +68,23 @@ public interface ConsultaService {
 	void excluirAnamnese(Anamnese anamnese);
 	
 	Anamnese buscarAnamnese(Long id);
+	
+	void adicionarCalculoGastoEnergetico(CalculoGastoEnergetico calculoEnergetico);
+	
+	void editarCalculoGastoEnergetico(CalculoGastoEnergetico calculoEnergetico);
+	
+	void excluirCalculoGastoEnergetico(CalculoGastoEnergetico calculoEnergetico);
+	
+	CalculoGastoEnergetico buscarCalculoGastoEnergeticoPorId(Long id);
+	
+	void adicionarDistribuicaoAlimentar(DistribuicaoAlimentar distribuicaoAlimentar);
+	
+	void editarDistribuicaoAlimentar(DistribuicaoAlimentar distribuicaoAlimentar);
+	
+	void excluirDistribuicaoAlimentar(DistribuicaoAlimentar distribuicaoAlimentar);
+	
+	DistribuicaoAlimentar buscarDistribuicaoAlimentar(Long id);
+	
+	List<Grupo> getGrupos();
 
 }
