@@ -29,6 +29,7 @@ $(function()  {
 					el.find("#sn-alimentos-sub-items").children().each(function(_, e_) {
 						e = $(e_);
 						nome = e.find("#sub-item-nome").text();
+						fonte = e.find("#sub-item-fonte").text();
 						id = e.find("#sub-item-id").val();
 						namePath = e.find("#sub-item-id").attr("name");
 						quantidade = e.find("#sub-item-quantidade").val();
@@ -37,7 +38,8 @@ $(function()  {
 						dynamicListAlimento.doAddItem({
 							".sn-alimento-input-nome": {value: id, name: namePath}, 
 							".sn-alimento-input-quantidade": {value: quantidade, name: quantidadePath}, 
-							".sn-alimento-nome": {text: nome}, 
+							".sn-alimento-nome": {text: nome},
+							".sn-alimento-input-fonte": {text: fonte},
 							".sn-alimento-quantidade": {text: quantidade} 
 						});
 						
@@ -116,6 +118,7 @@ $(function()  {
 						  
 						  $("#sn-add-refeicao-modal #alimentos").children(".sn-cloneable").each(function(_, e) {
 							  var nome = $(e).find(".sn-alimento-nome").text();
+							  var fonte = $(e).find(".sn-alimento-input-fonte").text();
 							  var id = $(e).find(".sn-alimento-input-nome").val();
 							  var nomePath = $(e).find(".sn-alimento-input-nome").attr("name");
 							  var quantidade = $(e).find(".sn-alimento-input-quantidade").val();
@@ -123,6 +126,7 @@ $(function()  {
 							  el.find("#sn-alimentos-sub-items").append(
 								  $.parseHTML(
 									  "<div>" + 
+									  	  "<span class=\"hidden\" id=\"sub-item-fonte\">" + fonte + "</span>"+
 									  	  "<span class=\"hidden\" id=\"sub-item-nome\">" + nome + "</span>"+								  
 										  "<input type=\"hidden\" id=\"sub-item-id\" name=\"" + nomePath + "\" value=\"" + id + "\" />" + 
 										  "<input type=\"hidden\" id=\"sub-item-quantidade\" name=\"" + quantidadePath + "\" value=\"" + quantidade + "\" />" + 
@@ -154,12 +158,21 @@ $(function()  {
 					
 					$(dialogAlimento).find("#sn-alimento-item-index").val("");
 					
-					var nome 		=  el.find(".sn-alimento-input-nome").val();
+					var nome =  el.find(".sn-alimento-nome").text();
+					var id	=  el.find(".sn-alimento-input-nome").val();
 					var quantidade  =  el.find(".sn-alimento-input-quantidade").val();
+					var fonte		=  el.find(".sn-alimento-input-fonte").text();
+					
+					buscarAlimentos(fonte);
+					
+					var filtro1 = "[value=" + fonte + "]";
+					var filtro2 = "[value=" + id+","+nome + "]";
 					
 					$(dialogAlimento).find("#sn-alimento-item-index").val(index);
 					$(dialogAlimento).find("#sn-alimento-nome").val(nome);
 					$(dialogAlimento).find("#sn-alimento-quantidade").val(quantidade);
+					$(dialogAlimento).find("#sn-alimento-fonte option").removeAttr("selected");
+					$(dialogAlimento).find("#sn-alimento-fonte option"+filtro1).prop("selected", true);
 					
 					dialogAlimento.showModal();
 					
@@ -181,6 +194,7 @@ $(function()  {
 		        		  
 		        		  var index 	 = $(dialogAlimento).find("#sn-alimento-item-index").val();
 		        		  var nome 		 = $(dialogAlimento).find("#sn-alimento-nome").val();
+		        		  var fonte		 = $(dialogAlimento).find("#sn-alimento-fonte").val();
 		        		  var quantidade  = $(dialogAlimento).find("#sn-alimento-quantidade").val();
 		        		  
 		        		  /* Extraindo id do name */
@@ -198,6 +212,7 @@ $(function()  {
 								  sortValue: quantidade,
 								  ".sn-alimento-nome": 			{text:  nomeAlimento},
 								  ".sn-alimento-quantidade":	{text:  quantidade},
+								  ".sn-alimento-input-fonte":	{text: fonte},
 								  ".sn-alimento-input-nome":	{value: idAlimento},
 								  ".sn-alimento-input-quantidade":	{value: quantidade}
 					      };
@@ -272,6 +287,10 @@ $(function()  {
 		
 		$("#sn-alimento-fonte").on("change", function(){
 			var fonte = $(this).val();
+			buscarAlimentos(fonte);
+		});
+		
+		function buscarAlimentos(fonte){
 			var alimento_nome = $("#sn-alimento-nome");
 			var url = alimento_nome.attr("data-url") + fonte;
 			$.getJSON(url, function(data, status){
@@ -282,7 +301,7 @@ $(function()  {
 				});
 				
 			});
-		});
+		};
 		
 	});
 	

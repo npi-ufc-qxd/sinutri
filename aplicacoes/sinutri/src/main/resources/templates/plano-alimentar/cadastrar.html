@@ -182,7 +182,6 @@
 		    		
 	    		<div class="mdl-grid">
 	    			<input type="hidden" id="sn-refeicao-item-index"/>
-						
 					<div class="sn-textfield mdl-cell mdl-cell--2-col"> 
 					
 			    		<label for="sn-refeicao-hora"
@@ -228,6 +227,7 @@
 			    		</label>
 			    		<textarea class="sn-textfield__input"
 			    		id="sn-refeicao-observacao"
+			    		maxlength="255"
 			    		name="snrefeicaoobservacao"></textarea>
 			    	</div> 
 			    	
@@ -241,7 +241,7 @@
 						  	
 						  	<input type="hidden" th:field="*{refeicoes[0].porcoesAlimentos[0].alimento.id}" class="sn-alimento-input-nome" value="00:00"/>
 					    	<input type="hidden" th:field="*{refeicoes[0].porcoesAlimentos[0].quantidade}" class="sn-alimento-input-quantidade" value="CAFEMANHA"/>
-						  	
+						  	<span class ="hidden sn-alimento-input-fonte"></span>
 						  	<span class="mdl-list__item-primary-content">
 						  	
 						  		<div class="mdl-grid mdl-grid--no-spacing">
