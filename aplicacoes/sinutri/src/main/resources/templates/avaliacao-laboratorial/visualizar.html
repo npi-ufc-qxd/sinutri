@@ -46,7 +46,7 @@
 
 							<fabgroup class="sn-fab--bottom-right"> <a
 								th:href="@{${'/Paciente/' + avaliacaoLaboratorial.paciente.id +'/AvaliacaoLaboratorial/'+ avaliacaoLaboratorial.id +'/Excluir/'}}"
-								class="sn-fab sn-fab--hide mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-js-ripple-effect mdl-color--red-700 bt-excluir-avaliacaoLaboratorial">
+								class="sn-fab sn-fab--hide mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-js-ripple-effect mdl-color--red-700 bt-excluir-avaliacao-laboratorial">
 								<i class="material-icons mdl-color-text--white">delete</i>
 							</a> <a
 								th:href="@{${'/Paciente/' + avaliacaoLaboratorial.paciente.id +'/AvaliacaoLaboratorial/'+ avaliacaoLaboratorial.id +'/Editar/'}}"
@@ -149,13 +149,13 @@
 				</div>
 
 			</div>
-
+	<div id="modal-exclusao-avaliacao-laboratorial" class="sn-display-none">Você
+		realmente deseja excluir esta Avaliação Laboratorial?</div>
 		</div>
 
 	</div>
 
-	<div id="modal-exclusao-avaliacao-laboratorial" class="sn-display-none">Você
-		realmente deseja excluir esta Avaliação Laboratorial?</div>
+	
 
 </section>
 
