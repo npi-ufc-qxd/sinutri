@@ -2,17 +2,20 @@ package br.ufc.quixada.npi.sinutri.service;
 
 import java.util.List;
 
-import br.ufc.quixada.npi.sinutri.model.AvaliacaoLaboratorial;
-import br.ufc.quixada.npi.sinutri.model.AvaliacaoAntropometrica;
+import br.ufc.quixada.npi.sinutri.model.Alimento;
 import br.ufc.quixada.npi.sinutri.model.Anamnese;
+import br.ufc.quixada.npi.sinutri.model.AvaliacaoAntropometrica;
+import br.ufc.quixada.npi.sinutri.model.AvaliacaoLaboratorial;
 import br.ufc.quixada.npi.sinutri.model.CalculoGastoEnergetico;
 import br.ufc.quixada.npi.sinutri.model.DistribuicaoAlimentar;
 import br.ufc.quixada.npi.sinutri.model.Grupo;
 import br.ufc.quixada.npi.sinutri.model.InqueritoAlimentar;
 import br.ufc.quixada.npi.sinutri.model.Paciente;
+import br.ufc.quixada.npi.sinutri.model.PlanoAlimentar;
+import br.ufc.quixada.npi.sinutri.model.Prescricao;
 import br.ufc.quixada.npi.sinutri.model.Recordatorio;
 import br.ufc.quixada.npi.sinutri.model.RefeicaoRecordatorio;
-import br.ufc.quixada.npi.sinutri.model.Prescricao;
+import br.ufc.quixada.npi.sinutri.model.enuns.FonteAlimento;
 
 public interface ConsultaService {
 	
@@ -31,6 +34,14 @@ public interface ConsultaService {
 	InqueritoAlimentar buscarInqueritoAlimentarPorId(Long idInqueritoAlimentar);
 	
 	void excluirInqueritoAlimentar(InqueritoAlimentar inqueritoAlimentar);
+	
+	void adicionarPlanoAlimentar(PlanoAlimentar planoAlimentar);
+	
+	PlanoAlimentar buscarPlanoAlimentarPorId(Long idPlanoAlimentar);
+
+	void editarPlanoAlimentar(PlanoAlimentar planoAlimentar);
+
+	void excluirPlanoAlimentar(PlanoAlimentar planoAlimentar); 
 	
 	//Recordatorio
 	void adicionarRecordatorio(Recordatorio recordatorio);
@@ -60,6 +71,8 @@ public interface ConsultaService {
 	AvaliacaoAntropometrica buscarAvaliacaoAntropometricaPorId(Long id);
 	
 	void excluirAvaliacaoAntropometrica(AvaliacaoAntropometrica antropometria);
+	
+	List<Alimento> buscarAlimentosPorFonte(FonteAlimento fonte);
 
 	void adicionarAnamnese(Anamnese anamnese);
 	

@@ -1,4 +1,3 @@
-
 package br.ufc.quixada.npi.sinutri.model.enuns;
 
 public enum Refeicao {

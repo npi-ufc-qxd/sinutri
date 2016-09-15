@@ -498,6 +498,14 @@ color: var(--color-danger--500); }
 	margin-bottom: 8px;
 }
 
+.sn-form__hdivider-5 {
+	width: 100%;
+	height: 5px;
+	background-color: #ddd;
+	margin-top: 8px;
+	margin-bottom: 8px;
+}
+
 .sn-is-focused {
 	color: var(--color-primary);
 }
@@ -993,6 +1001,9 @@ table {
 	display: none;
 }
 
+.mdl-data-table {
+	white-space: normal;
+}
 .arrow_icon_position {
 	margin-bottom: 4px;
 }

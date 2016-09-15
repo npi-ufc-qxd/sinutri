@@ -1,6 +1,6 @@
 .mdl-dialog
 {
-	width: 380px !important;
+	width: 700px !important;
 }
 
 .sn-form-actions {
@@ -19,7 +19,7 @@
 	float: right;
 }
 
-#formAdicionarRecordatorio
+#formAdicionarPlanoAlimentar
 {
 	position: relative;
 	overflow: visible;
@@ -58,4 +58,22 @@
 	padding-top: 16px;
 	padding-left: 16px;
 	padding-right: 16px;
+}
+
+.sn-list-alimento-porcao {
+	margin: 0;
+	padding: 0;
+	padding-top: 16px;
+	padding-left: 16px;
+	padding-right: 16px;
+}
+
+.sn-list-alimento-porcao li {
+	width: 100%;
+	margin-right: auto;
+	margin-left: auto;
+}
+
+#sn-add-alimento-button {
+	margin: -6px 20px;
 }

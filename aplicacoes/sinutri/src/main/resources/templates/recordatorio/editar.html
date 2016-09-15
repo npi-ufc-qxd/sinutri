@@ -7,7 +7,7 @@
 
 <head>
 
-<title>Sinutri | Adicionar Recordatório</title>
+<title>Sinutri | Editar Recordatório</title>
 <meta charset="UTF-8" />
 <meta name="viewport"
 	content="width=device-width, initial-scale=1.0, minimum-scale=1.0" />
@@ -112,15 +112,14 @@
 								type="text" id="criadoEm" th:field="*{criadoEm}" />
 						</div>
 
-						<div class="sn-form__hdivider"></div>
-
+						<div class="sn-form__hdivider mdl-cell mdl-cell--6-col"></div>
+						
+						<label class="sn-textfield__label mdl-cell mdl-cell--6-col"
+							for="refeicoes">Refeições</label>
+						
 						<div th:if="*{not #lists.isEmpty(refeicoes)}"
-							class="mdl-cell mdl-offset--6-col mdl-cell--12-col">
-
-							<label class="sn-textfield__label" for="refeicoes">Refeições</label>
-
-							<ul id="refeicoes"
-								class="demo-list-three mdl-list sn-list-refeicoes mdl-color--grey-200">
+							class="mdl-cell mdl-offset--6-col mdl-cell--12-col demo-list-three mdl-list mdl-color--grey-200">
+							<ul id="refeicoes" class="sn-list-refeicoes">
 
 								<li
 									class="mdl-list__item mdl-list__item--three-line mdl-shadow--2dp sn-card sn-cloneable">
@@ -299,13 +298,12 @@
 								</span>
 
 								</li>
-								<li>
-									<button id="sn-add-refeicao-button" type="button"
-										class="mdl-button mdl-button--primary mdl-js-button mdl-js-ripple-effect">Adicionar
-										Refeição</button>
-								</li>
-
 							</ul>
+							<div class="sn-list-refeicao__actions">
+								<button id="sn-add-refeicao-button" type="button"
+									class="mdl-button mdl-button--primary mdl-js-button mdl-js-ripple-effect">Adicionar
+									Refeição</button>
+							</div>
 						</div>
 
 						<div th:if="*{#lists.isEmpty(refeicoes)}"

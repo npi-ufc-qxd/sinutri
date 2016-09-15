@@ -21,6 +21,7 @@
 	</section>
 	<section layout:fragment="conteudo">
 		<div class="mdl-grid">
+
 			<div
 				class="sn-breadcrumbs__position mdl-cell mdl-cell--10-col-desktop mdl-cell--1-offset-desktop mdl-cell--8-col-tablet mdl-cell--4-col-phone mdl-grid sn-main-grid">
 				<div class="mdl-cell mdl-cell--12-col">
@@ -161,12 +162,12 @@
 
 									<td style="width: 20%"
 										class="mdl-data-table__cell--non-numeric sn-refeicao-itens"
-										th:text="${#strings.length(refeicao.itens) > 27}? ${#strings.append(#strings.substring(refeicao.itens, 0, 26), '...')} : ${refeicao.itens}">
+										th:text="${refeicao.itens}">
 									</td>
 
 									<td style="width: 20%"
 										class="mdl-data-table__cell--non-numeric sn-refeicao-observacao"
-										th:text="${#strings.length(refeicao.observacao) > 27}? ${#strings.append(#strings.substring(refeicao.observacao, 0, 26), '...')} : ${refeicao.observacao}">
+										th:text="${refeicao.observacao}">
 									</td>
 								</tr>
 
