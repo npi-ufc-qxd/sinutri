@@ -52,7 +52,7 @@ function selectChange(nome){
 }
 //Oculta todos os campos de comentários
 $(document).ready(function() {	
-	var camposCheckBox = ["AtividadeFisica","DormeBem","BebidaAlcoolica","Medicamento","Mastigacao","Disfagia", "Odinofagia","Pirose","Nausea","Vomito","Diarreia","Constipacao","Alergia","Intolerancia"];
+	var camposCheckBox = ["AtividadeFisica","Sono","BebidaAlcoolica","Medicamento","Mastigacao","Disfagia", "Odinofagia","Pirose","Nausea","Vomito","Diarreia","Constipacao","Alergia","Intolerancia"];
 	for (var i = 0; i < camposCheckBox.length; i++) {
 		checkChange(camposCheckBox[i]);
 	}

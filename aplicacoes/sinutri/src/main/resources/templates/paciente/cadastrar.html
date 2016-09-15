@@ -40,11 +40,13 @@
 	
 				<div class="sn-textfield mdl-cell mdl-cell--12-col">
 					<label class="sn-textfield__label" for="nome">Nome</label>
+					<label class="sn-textfield__messages sn-error-text" for="sn-text" th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}"></label>
 					<input class="sn-textfield__input" type="text" th:field="*{nome}" id="nome" />
 				</div>
 				
 				<div class="sn-selectfield mdl-cell mdl-cell--6-col">
 					<label class="sn-selectfield__label" for="sexo">Sexo</label>
+					<label class="sn-textfield__messages sn-error-text" for="sn-text" th:if="${#fields.hasErrors('sexo')}" th:errors="*{sexo}"></label>							
 					<select class="sn-selectfield__select" th:field="*{sexo}" id="sexo" >
 						<option value="">Selecione um sexo</option>							
 						<option th:each="sexo : ${sexos}" th:value="${sexo}" th:text="${sexo.sexo}"></option>	
@@ -54,6 +56,7 @@
 					
 				<div class="sn-textfield mdl-cell mdl-cell--6-col">
 					<label class="sn-textfield__label" for="dataNascimento">Data de Nascimento</label>
+					<label class="sn-textfield__messages sn-error-text" for="sn-text" th:if="${#fields.hasErrors('dataNascimento')}" th:errors="*{dataNascimento}"></label>							
 					<label class="sn-textfield__messages sn-error-text" th:for="${#ids.next('dataNascimento')}" th:if="${#fields.hasErrors('dataNascimento')}" th:errors="*{dataNascimento}">Data inválida</label>
 					<input class="sn-textfield__input sn-date-picker" th:field="*{dataNascimento}" id="dataNascimento"/>
 				</div>

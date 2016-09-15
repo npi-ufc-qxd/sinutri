@@ -81,18 +81,18 @@
 
 				<label
 					class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect mdl-cell mdl-cell--12-col"
-					for="checkDormeBem"> <input type="checkbox"
-					id="checkDormeBem" th:field="*{dormeBem}"
-					class="mdl-checkbox__input" onClick="checkChange('DormeBem')" /> <span
-					class="mdl-checkbox__label">Dorme bem?</span>
+					for="checkSono"> <input type="checkbox"
+					id="checkSono" th:field="*{sono}"
+					class="mdl-checkbox__input" onClick="checkChange('Sono')" /> <span
+					class="mdl-checkbox__label">Sono</span>
 				</label>
 				<div class="sn-textfield mdl-cell mdl-cell--12-col">
-					<label class="sn-textfield__label" for="inputTextDormeBem">Comentários</label>
-					<input id="inputTextDormeBem" type="text" maxlength="255"
-						th:field="*{dormeBemComentario}" class="sn-textfield__input" />
+					<label class="sn-textfield__label" for="inputTextSono">Comentários</label>
+					<input id="inputTextSono" type="text" maxlength="255"
+						th:field="*{sonoComentario}" class="sn-textfield__input" />
 					<label class="sn-textfield__messages sn-error-text"
-						th:if="${#fields.hasErrors('dormeBemComentario')}"
-						th:errors="*{dormeBemComentario}">Error message</label>
+						th:if="${#fields.hasErrors('sonoComentario')}"
+						th:errors="*{sonoComentario}">Error message</label>
 				</div>
 
 				<label
