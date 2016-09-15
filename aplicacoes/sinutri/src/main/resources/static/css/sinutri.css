@@ -52,6 +52,26 @@
 
 .sn-fill--height { height: 100%; }
 
+.sn-margin--none {margin: 0px !important;}
+
+.sn-hide-height {
+	margin: 0px !important;
+	padding-top: 0px !important;
+	padding-bottom: 0px !important;
+	height: 0px !important;
+}
+
+.sn-colapse-div {
+	cursor: pointer;
+}
+
+.sn-colapsable-div {
+	overflow: hidden;
+	-webkit-transition: var(--animation) !important;
+    -moz-transition: var(--animation) !important;
+    -o-transition: var(--animation) !important;
+    transition: var(--animation) !important;
+}
 
 .sn-color--primary { background-color: var(--color-primary); }
 .sn-color--primary-dark { background-color: var(--color-primary-dark); }
@@ -973,3 +993,6 @@ table {
 	display: none;
 }
 
+.arrow_icon_position {
+	margin-bottom: 4px;
+}

@@ -794,8 +794,10 @@ public class PacienteController {
         	return "redirect:/Nutricao/Buscar";
 	    }	        
         
+        Recordatorio recordatorio = new Recordatorio();
+        recordatorio.setPaciente(paciente);
         model.addAttribute("paciente", paciente);
-        model.addAttribute("recordatorio", new Recordatorio());
+        model.addAttribute("recordatorio", recordatorio);
         
         return "recordatorio/cadastrar";
         

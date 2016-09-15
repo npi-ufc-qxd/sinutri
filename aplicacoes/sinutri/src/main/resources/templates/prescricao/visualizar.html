@@ -1,121 +1,159 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" 
+<html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:th="http://www.thymeleaf.org"
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-    layout:decorator="estrutura/dashboard">
+	layout:decorator="estrutura/dashboard">
 
 <head>
-	<title>Sinutri | Visualizar Prescrição</title>
-	
+<title>Sinutri | Visualizar Prescrição</title>
+
 </head>
 <section layout:fragment="title">
 	<label class="mdl-layout-title">Visualizar Prescrição</label>
 </section>
 <section layout:fragment="conteudo">
- 
-	<div class="mdl-grid">
-		<div class="mdl-cell mdl-cell--11-col mdl-cell--1-offset-desktop">
-			<a th:href="@{/Nutricao/Buscar}" class="sn-breadcrumbs sn-attribute__title">Início</a>
-			<a th:href="@{${'/Paciente/'+prescricao.paciente.id}}" class="sn-breadcrumbs sn-attribute__title">Paciente</a>
-			<a class="sn-attribute__title sn-breadcrumbs">Visualizar Prescrição</a>
-		</div>
 
-    	<div class="
+	<div class="mdl-grid">
+		<div
+			class="sn-breadcrumbs__position mdl-cell mdl-cell--10-col-desktop mdl-cell--1-offset-desktop mdl-cell--8-col-tablet mdl-cell--4-col-phone mdl-grid sn-main-grid">
+			<div class="mdl-cell mdl-cell--11-col ">
+				<a th:href="@{/Nutricao/Buscar}"
+					class="sn-breadcrumbs sn-attribute__title">Início</a> <a
+					th:href="@{${'/Paciente/'+prescricao.paciente.id}}"
+					class="sn-breadcrumbs sn-attribute__title">Paciente</a> <a
+					class="sn-attribute__title sn-breadcrumbs">Visualizar
+					Prescrição</a>
+			</div>
+
+			<div
+				class="
               mdl-cell
-              mdl-cell--7-col-desktop mdl-cell--1-offset-desktop
-              mdl-cell--8-col-tablet
+              mdl-cell--12-col-desktop mdl-cell--8-col-tablet
               mdl-cell--4-col-phone
               mdl-grid mdl-grid--no-spacing
               sn-main-card">
 
-              <div class="mdl-cell mdl-cell--12-col sn-card sn-padding--48 mdl-color--white">
-
-                    <div class="mdl-layout-title mdl-color-text--blue-600">Prescrição</div>
-
-                      <fabgroup class="sn-fab--bottom-right">
-
-                              <a id="excluir" th:href="@{${'/Paciente/'+prescricao.paciente.id+'/Prescricao/'+ prescricao.id +'/Excluir'}}" class="sn-fab sn-fab--hide mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-js-ripple-effect mdl-color--red-700 bt-excluir-prescricao">
-                                      <i class="material-icons mdl-color-text--white">delete</i>
-                              </a>
-
-                              <a th:href="@{${'/Paciente/'+prescricao.paciente.id+'/Prescricao/'+ prescricao.id +'/Editar'}}" class="sn-fab sn-fab--hide mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-js-ripple-effect mdl-color--purple">
-                                      <i class="material-icons mdl-color-text--white">edit</i>
-                              </a>
-
-                              <button class="sn-float--launcher mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored">
-                                      <i class="material-icons mdl-color-text--white">more_horiz</i>
-                              </button>
-                      </fabgroup>
-
-              </div>
-
-              <div class="sn-card-top mdl-cell mdl-cell--12-col sn-card sn-padding--48 mdl-color--white mdl-grid">
-
-                     <div class="mdl-layout-title mdl-cell mdl-cell--12-col"> Informações gerais:</div>
-                 	 
-					<div class="sn-attribute mdl-cell mdl-cell--6-col">
-						<div class="sn-attribute__title"> Data de criação:</div>
-						<div class="sn-attribute__value" th:text="${#dates.format(prescricao.criadoEm,'dd/MM/yyyy')}"> </div>
+				<div class="mdl-cell mdl-cell--12-col sn-card">
+				<div
+					class="mdl-layout-title mdl-color-text--blue-600 sn-padding--48">
+					Prescrição
+					<div id="div_arrow" class="sn-colapse-div sn-attribute__title">
+						<span
+							th:text="${prescricao.paciente.pessoa.nome+', '+prescricao.paciente.pessoa.getIdade()+' anos'}"></span>
+						<i class="sn-breadcrumbs__icon material-icons arrow_icon_position">keyboard_arrow_down</i>
 					</div>
 					
-					<div class="sn-attribute mdl-cell mdl-cell--6-col">
-						<div class="sn-attribute__title"> Data de última atualização:</div>
-						<div class="sn-attribute__value" th:text="${#dates.format(prescricao.atualizadoEm,'dd/MM/yyyy')}"> </div>
+					<fabgroup class="sn-fab--bottom-right">
+	
+	                              <a th:href="@{${'/Paciente/' + prescricao.paciente.id +'/Prescricao/'+ prescricao.id +'/Excluir/'}}" 
+	                              		class="sn-fab sn-fab--hide mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-js-ripple-effect mdl-color--red-700 bt-excluir-prescricao">
+	                                    <i class="material-icons mdl-color-text--white">delete</i>
+	                              </a>
+	
+	                              <a th:href="@{${'/Paciente/' + prescricao.paciente.id +'/Prescricao/'+ prescricao.id +'/Editar/'}}" 
+	                              class="sn-fab sn-fab--hide mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-js-ripple-effect mdl-color--purple">
+	                                      <i class="material-icons mdl-color-text--white">edit</i>
+	                              </a>
+	
+	
+	                              <button class="sn-float--launcher mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored">
+	                                      <i class="material-icons mdl-color-text--white">more_horiz</i>
+	                              </button>
+	                              
+	                      </fabgroup>
+	
+				</div>
+				<div class="sn-form__hdivider sn-margin--none"></div>
+				<div class="sn-colapsable-div sn-padding--48 mdl-color--white">
+	
+					<div class="mdl-grid mdl-grid--no-spacing">
+							
+						<div class="sn-attribute mdl-cell mdl-cell--4-col">
+							<div class="sn-attribute__title">Sexo</div>
+							<div class="sn-attribute__value"
+								th:text="${prescricao.paciente.pessoa.sexo}"></div>
+						</div>
+	
+						<div class="sn-attribute mdl-cell mdl-cell--4-col">
+							<div class="sn-attribute__title">Telefone</div>
+							<div class="sn-attribute__value"
+								th:text="${prescricao.paciente.pessoa.telefone}"></div>
+						</div>
+	
+						<div class="sn-attribute mdl-cell mdl-cell--4-col">
+							<div class="sn-attribute__title">Email</div>
+							<div class="sn-attribute__value"
+								th:text="${prescricao.paciente.pessoa.email}"></div>
+						</div>
+	
+						<div class="sn-attribute mdl-cell mdl-cell--4-col">
+							<div class="sn-attribute__title">CPF</div>
+							<div class="sn-attribute__value"
+								th:text="${prescricao.paciente.pessoa.cpf}"></div>
+						</div>
+	
+						<div class="sn-attribute mdl-cell mdl-cell--4-col">
+							<div class="sn-attribute__title">Cargo/Ocupação</div>
+							<div class="sn-attribute__value"
+								th:text="${prescricao.paciente.pessoa.ocupacaoOuCargo}"></div>
+						</div>
+	
+						<div class="sn-attribute mdl-cell mdl-cell--4-col">
+							<div class="sn-attribute__title">Vínculo</div>
+							<div class="sn-attribute__value"
+								th:text="${prescricao.paciente.pessoa.vinculo}"></div>
+						</div>
 					</div>
-					
-					<div class="sn-attribute mdl-cell mdl-cell--12-col">
-						<div class="sn-attribute__title"> Descrição: </div>
-						<div class="sn-attribute__value" th:text="${prescricao.descricao}"> </div> 
-					</div>					
-
-					<div class="sn-attribute mdl-cell mdl-cell--12-col"> 
-						<div class="sn-attribute__title"> Texto: </div>
-						<div class="sn-attribute__value" th:text="${prescricao.texto}"> </div>					
-					</div>		
-
-              </div>
-		</div>
-		
-		<div class="mdl-cell mdl-cell--3-col-desktop mdl-cell--8-col-tablet mdl-cell--4-col-phone">
-			<div class="sn-card sn-padding--48">
-				<div class="mdl-layout-title">Informações do Paciente</div>
-											
-				<div class="sn-attribute__title"> Nome </div>
-				<div class="sn-attribute__value" th:text="${prescricao.paciente.pessoa.nome}"></div>
-				
-				<div class="sn-attribute__title"> Idade </div>
-				<div class="sn-atribute__value" th:text="${prescricao.paciente.pessoa.idade}"></div>
-				
-				<div class="sn-attribute__title"> Sexo </div>
-				<div class="sn-attribute__value" th:text="${prescricao.paciente.pessoa.sexo}"></div>
-						
-				<div class="sn-attribute__title"> Telefone </div>
-				<div class="sn-attribute__value" th:text="${prescricao.paciente.pessoa.telefone}"></div>
-						
-				<div class="sn-attribute__title"> Email </div>
-				<div class="sn-attribute__value" th:text="${prescricao.paciente.pessoa.email}"></div>
-						
-				<div class="sn-attribute__title"> CPF </div>
-				<div class="sn-attribute__value" th:text="${prescricao.paciente.pessoa.cpf}"></div>
-					
-				<div class="sn-attribute__title"> Cargo/Ocupação </div>
-				<div class="sn-attribute__value" th:text="${prescricao.paciente.pessoa.ocupacaoOuCargo}"></div>
-						
-				<div class="sn-attribute__title"> Vínculo </div>
-				<div class="sn-attribute__value" th:text="${prescricao.paciente.pessoa.vinculo}"></div>
+				</div>
+	
 			</div>
+	
+
+				<div
+					class="sn-card-top mdl-cell mdl-cell--12-col sn-card sn-padding--48 mdl-color--white mdl-grid">
+
+					<div class="mdl-layout-title mdl-cell mdl-cell--12-col">
+						Informações gerais:</div>
+
+					<div class="sn-attribute mdl-cell mdl-cell--6-col">
+						<div class="sn-attribute__title">Data de criação:</div>
+						<div class="sn-attribute__value"
+							th:text="${#dates.format(prescricao.criadoEm,'dd/MM/yyyy')}">
+						</div>
+					</div>
+
+					<div class="sn-attribute mdl-cell mdl-cell--6-col">
+						<div class="sn-attribute__title">Data de última atualização:</div>
+						<div class="sn-attribute__value"
+							th:text="${#dates.format(prescricao.atualizadoEm,'dd/MM/yyyy')}">
+						</div>
+					</div>
+
+					<div class="sn-attribute mdl-cell mdl-cell--12-col">
+						<div class="sn-attribute__title">Descrição:</div>
+						<div class="sn-attribute__value" th:text="${prescricao.descricao}">
+						</div>
+					</div>
+
+					<div class="sn-attribute mdl-cell mdl-cell--12-col">
+						<div class="sn-attribute__title">Texto:</div>
+						<div class="sn-attribute__value" th:text="${prescricao.texto}">
+						</div>
+					</div>
+
+				</div>
+			</div>
+
 		</div>
-		
+
+		<div id="modal-exclusao-prescricao" class="sn-display-none">
+			Você realmente deseja excluir este Prescrição?</div>
 	</div>
 
-	<div id="modal-exclusao-prescricao" class="sn-display-none">
-		Você realmente deseja excluir este Prescrição?
-	</div>
-		
 </section>
 
-	<section layout:fragment="js"> 
-		<script type="text/javascript" th:src="@{/js/prescricao/visualizar.js}"></script>
-	</section>
+<section layout:fragment="js">
+	<script type="text/javascript" th:src="@{/js/prescricao/visualizar.js}"></script>
+</section>
 
 </html>
