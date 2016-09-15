@@ -11,10 +11,12 @@ $(document).ready(function() {
 			onItemEdit: function(el, index) {
 
 				if(dialog != null) {
-					var type = el.find(".sn-exame-type").text();
+					var type = el.find(".sn-exame-input-nome").val();
 					var val = el.find(".sn-exame-value").text();
-					
-					$(dialog).find("#sn-exame-type").val(type);
+					var filter = "[value=" + type + "]";
+										
+					$(dialog).find("#sn-exame-type").removeAttr("selected");
+					$(dialog).find("#sn-exame-type option"+filter).prop("selected", true);
 					$(dialog).find("#sn-exame-value").val(val);
 					$(dialog).find("#sn-exame-item-index").val(index);
 
@@ -78,7 +80,7 @@ $(document).ready(function() {
 			$(dialog).find("#sn-exame-type").selectedIndex = 0;
 			$(dialog).find("#sn-exame-value").val("");
 			
-			$(dialog).find("##sn-exame-item-index").val("");
+			$(dialog).find("#sn-exame-item-index").val("");
 			
 			dialog.showModal();
 		});
