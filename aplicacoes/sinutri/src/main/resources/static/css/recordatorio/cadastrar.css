@@ -3,6 +3,13 @@
 	width: 380px !important;
 }
 
+.sn-form-actions {
+	width: calc(100% - 30px);
+	float: right;
+	margin-top: 100px;
+	color: #fff;
+}
+
 .sn-list-refeicao__actions {
 	padding-top: 0;
 	height: calc(36px);
@@ -10,13 +17,6 @@
 
 .sn-list-refeicao__actions button{
 	float: right;
-}
-
-.sn-form-actions {
-	width: calc(100% - 30px);
-	float: right;
-	margin-top: 100px;
-	color: #fff;
 }
 
 #formAdicionarRecordatorio
@@ -42,14 +42,20 @@
 	height: auto !important;
 }
 
-.sn-list-refeicoes {
-}
-
-.sn-list-refeicao-li {
-	padding: 16px;
-	margin: 0px -20px;
+.sn-list-refeicoes li {
+	width: 100%;
+	margin-right: auto;
+	margin-left: auto;
 }
 
 #sn-add-refeicao-button {
 	margin: -6px 20px;
+}
+
+.sn-list-refeicoes {
+	margin: 0;
+	padding: 0;
+	padding-top: 16px;
+	padding-left: 16px;
+	padding-right: 16px;
 }
