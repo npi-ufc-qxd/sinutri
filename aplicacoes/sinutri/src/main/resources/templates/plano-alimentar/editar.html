@@ -67,7 +67,7 @@
 					</div>
 
 					<div class="sn-form__hdivider"></div>
-					<label class="sn-textfield__label">Kerley</label> <label
+					<label class="sn-textfield__label">Refeições</label> <label
 						class="sn-textfield__messages sn-error-text" for="sn-text"
 						th:if="${#fields.hasErrors('refeicoes')}" th:errors="*{refeicoes}"></label>
 					<div th:if="${#lists.isEmpty(planoAlimentar.refeicoes)}"
@@ -319,6 +319,8 @@
 								<div id="sn-alimentos-sub-items">
 									<div
 										th:each="porcao, statePorcao : ${planoAlimentar.refeicoes[__${state.index}__].porcoesAlimentos}">
+										<span class="hidden" id="sub-item-fonte"
+											th:text="*{refeicoes[__${state.index}__].porcoesAlimentos[__${statePorcao.index}__].alimento.fonte}"></span> 
 										<span class="hidden" id="sub-item-nome"
 											th:text="*{refeicoes[__${state.index}__].porcoesAlimentos[__${statePorcao.index}__].alimento.nome}"></span>
 										<input type="hidden" id="sub-item-id"
@@ -407,12 +409,12 @@
 
 								<input type="hidden"
 								th:field="*{refeicoes[0].porcoesAlimentos[0].alimento.id}"
-								class="sn-alimento-input-nome" value="00:00" /> <input
-								type="hidden"
+								class="sn-alimento-input-nome" value="00:00" />
+								<input type="hidden"
 								th:field="*{refeicoes[0].porcoesAlimentos[0].quantidade}"
 								class="sn-alimento-input-quantidade" value="CAFEMANHA" /> <span
 								class="mdl-list__item-primary-content">
-
+								<span class ="hidden sn-alimento-input-fonte"></span>
 									<div class="mdl-grid mdl-grid--no-spacing">
 
 										<div class="mdl-cell mdl-cell--4-col">
