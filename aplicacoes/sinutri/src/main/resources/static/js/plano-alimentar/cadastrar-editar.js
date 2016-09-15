@@ -162,14 +162,12 @@ $(function()  {
 					var id	=  el.find(".sn-alimento-input-nome").val();
 					var quantidade  =  el.find(".sn-alimento-input-quantidade").val();
 					var fonte		=  el.find(".sn-alimento-input-fonte").text();
-					
-					buscarAlimentos(fonte);
-					
 					var filtro1 = "[value=" + fonte + "]";
-					var filtro2 = "[value=" + id+","+nome + "]";
+					var value = id+","+nome;
+					
+					buscarAlimentos(fonte, value);
 					
 					$(dialogAlimento).find("#sn-alimento-item-index").val(index);
-					$(dialogAlimento).find("#sn-alimento-nome").val(nome);
 					$(dialogAlimento).find("#sn-alimento-quantidade").val(quantidade);
 					$(dialogAlimento).find("#sn-alimento-fonte option").removeAttr("selected");
 					$(dialogAlimento).find("#sn-alimento-fonte option"+filtro1).prop("selected", true);
@@ -290,7 +288,7 @@ $(function()  {
 			buscarAlimentos(fonte);
 		});
 		
-		function buscarAlimentos(fonte){
+		function buscarAlimentos(fonte, value){
 			var alimento_nome = $("#sn-alimento-nome");
 			var url = alimento_nome.attr("data-url") + fonte;
 			$.getJSON(url, function(data, status){
@@ -299,7 +297,9 @@ $(function()  {
 					 'data' : data,
 					 'dropdownParent': $("#sn-add-alimento-modal")
 				});
-				
+				if(value != undefined){
+					alimento_nome.val(value, value).change();
+				}
 			});
 		};
 		
