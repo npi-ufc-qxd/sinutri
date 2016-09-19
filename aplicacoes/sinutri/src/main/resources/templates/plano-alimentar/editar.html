@@ -120,8 +120,8 @@
 						</div>
 
 						<div class="sn-form__hdivider mdl-cell mdl-cell--6-col"></div>
-						<label class="sn-textfield__label mdl-cell mdl-cell--6-col">Refeições</label> <label
-							class="sn-textfield__messages sn-error-text" for="sn-text"
+						<label class="sn-textfield__label mdl-cell mdl-cell--1-col">Refeições</label> <label
+							class="sn-textfield__messages sn-error-text mdl-cell mdl-cell--3-col" for="sn-text"
 							th:if="${#fields.hasErrors('refeicoes')}"
 							th:errors="*{refeicoes}"></label>
 						<div th:if="${#lists.isEmpty(planoAlimentar.refeicoes)}"
@@ -526,7 +526,7 @@
 
 						<input type="hidden" id="sn-alimento-item-index" val="" />
 						<div class="mdl-cell mdl-cell--6-col">
-							<label>Fonte:</label> <select id="sn-alimento-fonte"
+							<label class="sn-textfield__label">Fonte:</label> <select id="sn-alimento-fonte"
 								class="sn-selectfield__select" data-role="select">
 								<option value="">Escolha uma fonte</option>
 								<option value="MEUSALIMENTOS">MEUS ALIMENTOS</option>
@@ -536,7 +536,7 @@
 						</div>
 
 						<div class="mdl-cell mdl-cell--6-col">
-							<label>Alimento:</label> <select id="sn-alimento-nome"
+							<label class="sn-textfield__label">Alimento:</label> <select id="sn-alimento-nome"
 								class="sn-selectfield__select select2"
 								th:attr="data-url=@{/Paciente/__${idPaciente}__/PlanoAlimentar/Alimentos/?fonte=}">
 								<option value="">Escolha um alimento</option>
@@ -544,7 +544,7 @@
 						</div>
 
 						<div class="mdl-cell mdl-cell--16-col">
-							<label>Quantidade:</label> <input id="sn-alimento-quantidade"
+							<label class="sn-textfield__label">Quantidade:</label> <input id="sn-alimento-quantidade"
 								type="number" min="0" max="999999" class="sn-textfield__input"
 								step="0.01" />
 						</div>
