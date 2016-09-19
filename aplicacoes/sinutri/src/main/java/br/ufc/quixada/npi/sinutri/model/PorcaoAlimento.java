@@ -19,7 +19,7 @@ public class PorcaoAlimento {
 	@ManyToOne
 	private Alimento alimento;
 	
-	private Integer quantidade;
+	private Double quantidade;
 	
 	public Long getId() {
 		return id;
@@ -45,11 +45,11 @@ public class PorcaoAlimento {
 		this.alimento = alimento;
 	}
 
-	public Integer getQuantidade() {
+	public Double getQuantidade() {
 		return quantidade;
 	}
 
-	public void setQuantidade(Integer quantidade) {
+	public void setQuantidade(Double quantidade) {
 		this.quantidade = quantidade;
 	}
 }
