@@ -7,8 +7,7 @@
 <head>
 <title>Sinutri | Cadastrar Prescrição</title>
 
-<link rel="stylesheet" type="text/css"
-	th:href="@{/css/material--picker.css}" />
+<link rel="stylesheet" type="text/css" th:href="@{/css/material-date-picker.css}"/>
 
 </head>
 <section layout:fragment="title">
@@ -103,12 +102,10 @@
 					class="sn-card-top mdl-cell mdl-cell--12-col sn-card sn-padding--48 mdl-color--white mdl-grid">
 
 					<div class="sn-textfield mdl-cell mdl-cell--6-col">
-						<label class="sn-textfield__label" for="inputDataCriacao">Data
-							de Criação</label> <label class="sn-textfield__messages sn-error-text"
-							th:if="${#fields.hasErrors('criadoEm')}" th:errors="*{criadoEm}">
-							Erro na data de criação </label> <input
-							class="sn-textfield__input sn--picker" type="text"
-							id="inputDataCriacao" th:field="*{criadoEm}" />
+						<label class="sn-textfield__label" for="inputDataCriacao">Data de Criação</label> 
+						<label class="sn-textfield__messages sn-error-text" th:if="${#fields.hasErrors('criadoEm')}" th:errors="*{criadoEm}">Erro na data de criação </label>
+						<input type="text" th:field="*{criadoEm}" class="sn-textfield__input sn-date-picker" required="required" /> 
+					<!-- <input class="sn-textfield__input sn-date-picker" type="text" id="inputDataCriacao" th:field="*{criadoEm}" /> -->
 					</div>
 
 					<div class="sn-textfield mdl-cell mdl-cell--12-col">
@@ -148,38 +145,11 @@
 	</div>
 
 </section>
+
 <section layout:fragment="js">
 	<script type="text/javascript" th:src="@{/js/moment.js}"></script>
-	<script type="text/javascript" th:src="@{/js/material--picker.js}"></script>
-
-	<script type="text/javascript">
-		
-		$( "#cancelar" ).click(function(event) {
-		          var dialog = sn_base.doRegistryDialog({
-		              title: "Você realmente deseja descartar as alterações?",
-		              dialog: "#modal-cancelar",
-		              buttons: [
-		                      {
-		                         label: "SIM",
-		                         attrs: {href: $(this).attr("href")},
-		                         action: function() {
-		                             dialog.close();
-		                         }
-		                      },
-		                      {
-		                          label: "NÃO",
-		                          action: function() {
-		                              dialog.close();
-		                          }
-		                      }
-		              ]
-		              });                     
-		          dialog.showModal();
-		          event.preventDefault();
-		      });
-		
-		</script>
-
+	<script type="text/javascript" th:src="@{/js/material-date-picker.js}"></script>
+	<script type="text/javascript" th:src="@{/js/prescricao/cadastrar.js}"></script>
 </section>
 
 </html>
