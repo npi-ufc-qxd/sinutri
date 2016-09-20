@@ -411,7 +411,7 @@
 								<label for="sn-refeicao-hora" class="sn-textfield__label">
 									Hora </label> <input type="text"
 									pattern="^(0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$"
-									class="sn-textfield__input sn-time-picker"
+									class="validate sn-textfield__input sn-time-picker"
 									id="sn-refeicao-hora" name="snrefeicaohora" />
 
 							</div>
@@ -419,7 +419,7 @@
 							<div class="sn-selectfield mdl-cell mdl-cell--9-col">
 
 								<label for="sn-refeicao-descricao" class="sn-textfield__label">
-									Tipo </label> <select class="sn-selectfield__select"
+									Tipo </label> <select class="validate sn-selectfield__select"
 									id="sn-refeicao-descricao" name="snrefeicaodescricao">
 
 									<option value="">Selecione uma opção</option>
@@ -527,7 +527,7 @@
 						<input type="hidden" id="sn-alimento-item-index" val="" />
 						<div class="mdl-cell mdl-cell--6-col">
 							<label>Fonte:</label> <select id="sn-alimento-fonte"
-								class="sn-selectfield__select" data-role="select">
+								class="validate sn-selectfield__select" data-role="select">
 								<option value="">Escolha uma fonte</option>
 								<option value="MEUSALIMENTOS">MEUS ALIMENTOS</option>
 								<option value="TACO">TACO</option>
@@ -545,7 +545,7 @@
 
 						<div class="mdl-cell mdl-cell--16-col">
 							<label>Quantidade:</label> <input id="sn-alimento-quantidade"
-								type="number" min="0" max="999999" class="sn-textfield__input"
+								type="number" min="0" max="999999" class="validate sn-textfield__input"
 								step="0.01" />
 						</div>
 
@@ -560,6 +560,7 @@
 
 	<section layout:fragment="js">
 		<script type="text/javascript" th:src="@{/js/moment.js}"></script>
+		<script type="text/javascript" th:src="@{/js/validacao.js}"></script>
 		<script type="text/javascript" th:src="@{/js/material-date-picker.js}"></script>
 		<script type="text/javascript"
 			th:src="@{/js/plano-alimentar/cadastrar-editar.js}"></script>

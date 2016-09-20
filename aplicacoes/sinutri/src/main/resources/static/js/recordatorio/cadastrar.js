@@ -50,9 +50,9 @@ $(function()
 						  var itens      = $(dialog).find("#sn-refeicao-itens").val();
 						  var observacao = $(dialog).find("#sn-refeicao-observacao").val();
 						  
-						  if( !(hora.length > 0 && descricao.length > 0
-						  &&  itens.trim().length > 0 && observacao.trim().length > 0) )
-							  return;
+						  if(validacaoVazio($(dialog))){
+								return;
+							}
 						  
 					      dialog.close();
 						  

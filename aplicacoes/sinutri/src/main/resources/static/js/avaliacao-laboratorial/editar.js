@@ -41,8 +41,9 @@ $(document).ready(function() {
 						var val = $(dialog).find("#sn-exame-value").val();
 						var text  = $(dialog).find("#sn-exame-type option:selected").text();
 						
-						if( !(type.length > 0 && val.length > 0) )
+						if(validacaoVazio($(dialog))){
 							return;
+						}
 						
 						dialog.close();
 						

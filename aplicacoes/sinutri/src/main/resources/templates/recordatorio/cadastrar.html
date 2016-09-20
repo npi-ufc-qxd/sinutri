@@ -231,7 +231,7 @@ refeicoes
 								<label for="sn-refeicao-hora" class="sn-textfield__label">
 									Hora </label> <input type="text"
 									pattern="^(0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$"
-									class="sn-textfield__input sn-time-picker"
+									class="validate sn-textfield__input sn-time-picker"
 									id="sn-refeicao-hora" name="snrefeicaohora" />
 
 							</div>
@@ -239,7 +239,7 @@ refeicoes
 							<div class="sn-selectfield mdl-cell mdl-cell--8-col">
 
 								<label for="sn-refeicao-descricao" class="sn-textfield__label">
-									Tipo </label> <select class="sn-selectfield__select"
+									Tipo </label> <select class="validate sn-selectfield__select"
 									id="sn-refeicao-descricao" name="snrefeicaodescricao">
 
 									<option value="">Selecione uma opção</option>
@@ -256,7 +256,7 @@ refeicoes
 								<label for="sn-refeicao-itens" class="sn-textfield__label">
 									Itens </label>
 
-								<textarea class="sn-textfield__input" id="sn-refeicao-itens"
+								<textarea class="validate sn-textfield__input" id="sn-refeicao-itens"
 									name="snrefeicaoitens" maxlength="255"></textarea>
 
 							</div>
@@ -289,6 +289,7 @@ refeicoes
 	<section layout:fragment="js">
 
 		<script type="text/javascript" th:src="@{/js/moment.js}"></script>
+		<script type="text/javascript" th:src="@{/js/validacao.js}"></script>
 		<script type="text/javascript" th:src="@{/js/material-date-picker.js}"></script>
 		<script type="text/javascript"
 			th:src="@{/js/recordatorio/cadastrar.js}"></script>

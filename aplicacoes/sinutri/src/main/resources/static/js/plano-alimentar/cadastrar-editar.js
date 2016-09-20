@@ -68,10 +68,10 @@ $(function()  {
 						  var descricao  = $(dialog).find("#sn-refeicao-descricao").val();
 						  var textdescricao  = $(dialog).find("#sn-refeicao-descricao option:selected").text();
 						  var observacao = $(dialog).find("#sn-refeicao-observacao").val();
-						  var tamListAlimentos = $("#sn-add-refeicao-modal #alimentos").children(".sn-cloneable").length
-						  
-						  if( !(hora.length > 0 && descricao.length > 0 && observacao.length > 0 && tamListAlimentos > 0) )
-							  return;
+						  //var listAlimentos = $("#sn-add-refeicao-modal #alimentos").children(".sn-cloneable");
+						  if(validacaoVazio($(dialog),"alimentos")){
+								return;
+							}
 						  
 						  
 					      dialog.close();
@@ -199,11 +199,12 @@ $(function()  {
 		        		  regId = /^(\d+)/;
 		        		  regNome = /([a-zA-Z]+.+)/;
 		        		  
+		        		  if(validacaoVazio($(dialogAlimento))){
+								return;
+						  }
+		        		  
 		        		  var idAlimento = nome.match(regId)[1];						  
 						  var nomeAlimento = nome.match(regNome)[1];
-						  
-						  if( !(nome.length > 0 && quantidade.length > 0) )
-							  return;
 						  
 					      dialogAlimento.close();
 					      var data = {
