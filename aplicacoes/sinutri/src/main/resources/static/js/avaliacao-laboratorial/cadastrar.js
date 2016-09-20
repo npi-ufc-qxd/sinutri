@@ -1,5 +1,4 @@
 $(document).ready(function() {
-
 	componentHandler.registerUpgradedCallback("MaterialLayout", function(elem) {
 		
 		var dialog = null;
@@ -41,8 +40,9 @@ $(document).ready(function() {
 						var val = $(dialog).find("#sn-exame-value").val();
 						var text  = $(dialog).find("#sn-exame-type option:selected").text();
 						
-						if( !(type.length > 0 && val.length > 0) )
+						if(validacaoVazio($(dialog))){
 							return;
+						}
 						
 						dialog.close();
 						
@@ -81,6 +81,8 @@ $(document).ready(function() {
 			$(dialog).find("#sn-exame-value").val("");
 			
 			$(dialog).find("#sn-exame-item-index").val("");
+			
+			removerLabelValidacao($(dialog));
 			
 			dialog.showModal();
 		});

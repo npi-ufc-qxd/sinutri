@@ -240,8 +240,8 @@
 				<input type="hidden" id="sn-exame-item-index" />
 
 				<div class="sn-selectfield mdl-cell mdl-cell--12-col">
-					<label class="sn-selectfield__label" for="sn-exame-type">Tipo
-						do Exame</label> <select class="sn-selectfield__select" id="sn-exame-type">
+					<label class="sn-selectfield__label" for="sn-exame-type">Tipo do Exame</label> 
+					<select class="validate sn-selectfield__select" id="sn-exame-type">
 						<option value="">Selecione um tipo</option>
 						<option th:each="exame : ${exames}" th:value="${exame}"
 							th:text="${exame.nome}"></option>
@@ -250,7 +250,7 @@
 
 				<div class="sn-textfield mdl-cell mdl-cell--12-col">
 					<label class="sn-textfield__label" for="sn-exame-value">Resultado</label>
-					<input class="sn-textfield__input" type="number" step="0.01"
+					<input class="validate sn-textfield__input" type="number" step="0.01"
 						id="sn-exame-value" required="required" />
 				</div>
 			</div>
@@ -264,6 +264,7 @@
 <section layout:fragment="js">
 
 	<script type="text/javascript" th:src="@{/js/moment.js}"></script>
+	<script type="text/javascript" th:src="@{/js/validacao.js}"></script>
 	<script type="text/javascript" th:src="@{/js/material-date-picker.js}"></script>
 	<script type="text/javascript"
 		th:src="@{/js/avaliacao-laboratorial/editar.js}"></script>
