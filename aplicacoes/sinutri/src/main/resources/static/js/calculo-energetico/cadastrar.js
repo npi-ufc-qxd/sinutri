@@ -30,16 +30,19 @@ $(document).ready(function() {
 
 	});
 	
-	$("#inputGlicidio").on('keyup', function(){
+	$("#inputGlicidio").on('keyup change', function(){
 		updateAll("#inputGlicidio", "#inputGramasGlicidio", "#inputCaloriasGlicidio", Number(4));
+		calcularGlicidio();
 	});
 	
-	$("#inputProteina").on('keyup', function(){
+	$("#inputProteina").on('keyup change', function(){
 		updateAll("#inputProteina", "#inputGramasProteina", "#inputCaloriasProteina", Number(4));
+		calcularProteina();
 	});
 	
-	$("#inputLipidio").on('keyup', function(){
+	$("#inputLipidio").on('keyup change', function(){
 		updateAll("#inputLipidio", "#inputGramasLipidio", "#inputCaloriasLipidio", Number(9));
+		calcularLipidio();
 	});
 
 	$(".numero-porcao").on('keyup change', function(){
@@ -100,22 +103,26 @@ function calcularVetComReducao() {
 }
 
 function calcularGlicidio(){
-	$("#inputTotalGlicidio").val(getTotalValor(".glicidio"));
-	$("#inputPorcentagemGlicidio").val(getTotalPorcentagem(".glicidio", "#inputGramasGlicidio"));
+	updateValue("#inputTotalGlicidio", getTotalValor(".glicidio"));
+	updateValue("#inputPorcentagemGlicidio", getTotalPorcentagem(".glicidio", "#inputGramasGlicidio"));
 }
 
 function calcularProteina(){
-	$("#inputTotalProteina").val(getTotalValor(".proteina"));
-	$("#inputPorcentagemProteina").val(getTotalPorcentagem(".proteina", "#inputGramasProteina"));
+	updateValue("#inputTotalProteina", getTotalValor(".proteina"));
+	updateValue("#inputPorcentagemProteina", getTotalPorcentagem(".proteina", "#inputGramasProteina"));
 }
 
 function calcularLipidio(){
-	$("#inputTotalLipidio").val(getTotalValor(".lipidio"));
-	$("#inputPorcentagemLipidio").val(getTotalPorcentagem(".lipidio", "#inputGramasLipidio"));
+	updateValue("#inputTotalLipidio", getTotalValor(".lipidio"));
+	updateValue("#inputPorcentagemLipidio", getTotalPorcentagem(".lipidio", "#inputGramasLipidio"));
 }
 
-function updateValue(nomeCampo, valor){
-	$(nomeCampo).val(valor);
+function updateValue(nomeCampo, valor){	
+	if(isNaN(valor) || valor==Infinity){
+		$(nomeCampo).val("");
+	}else{
+		$(nomeCampo).val(Number(valor).toFixed(2));
+	}
 }
 
 function updateAll(campo, campoGramas, campoCalorias, fator){
@@ -139,15 +146,9 @@ function updateCampos(){
 	updateAll("#inputGlicidio", "#inputGramasGlicidio", "#inputCaloriasGlicidio", Number(4))
 	updateAll("#inputProteina", "#inputGramasProteina", "#inputCaloriasProteina", Number(4))
 	updateAll("#inputLipidio" , "#inputGramasLipidio" , "#inputCaloriasLipidio", Number(9))
-	
-	$("#inputTotalGlicidio").val(getTotalValor(".glicidio"));
-	$("#inputPorcentagemGlicidio").val(getTotalPorcentagem(".glicidio", "#inputGramasGlicidio"));
-
-	$("#inputTotalProteina").val(getTotalValor(".proteina"));
-	$("#inputPorcentagemProteina").val(getTotalPorcentagem(".proteina", "#inputGramasProteina"));
-	
-	$("#inputTotalLipidio").val(getTotalValor(".lipidio"));
-	$("#inputPorcentagemLipidio").val(getTotalPorcentagem(".lipidio", "#inputGramasLipidio"));
+	calcularGlicidio();
+	calcularLipidio();
+	calcularProteina();
 }
 
 function updateMaxCard1(valor){
@@ -182,7 +183,7 @@ function updateMaxCard3(data_id, max){
 	updateMax("input.porcao-colacao[data-id-grupo="+data_id+"]", max);
 }
 
-function zerarQtdPorcao(index){
+function zerarQtdPorcao(index){	
 	$("input.porcao-desjejum[data-id-grupo="+index+"]").val(0);
 	$("input.porcao-cafe-manha[data-id-grupo="+index+"]").val(0);
 	$("input.porcao-almoco[data-id-grupo="+index+"]").val(0);
@@ -217,11 +218,7 @@ function getTotalValor(classe){
 }
 
 function getTotalPorcentagem(classe, campo){
-	var total = Number(getTotalValor(classe));
-	console.log(campo);
-	console.log(total);
-	console.log(Number($(campo).val()));
-	console.log();
+	var total = Number(getTotalValor(classe));	
 	total = total/Number($(campo).val());
 	return total*Number(100.0);
 }
