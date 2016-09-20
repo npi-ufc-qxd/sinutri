@@ -120,14 +120,14 @@
 						</div>
 
 						<div class="sn-form__hdivider mdl-cell mdl-cell--6-col"></div>
-						<label class="sn-textfield__label mdl-cell mdl-cell--6-col">Refeições</label> <label
-							class="sn-textfield__messages sn-error-text" for="sn-text"
-							th:if="${#fields.hasErrors('refeicoes')}"
+						<label class="sn-textfield__label mdl-cell mdl-cell--1-col">Refeições</label>
+						<label
+							class="sn-textfield__messages sn-error-text mdl-cell mdl-cell--3-col"
+							for="sn-text" th:if="${#fields.hasErrors('refeicoes')}"
 							th:errors="*{refeicoes}"></label>
 						<div th:if="${#lists.isEmpty(planoAlimentar.refeicoes)}"
 							class="mdl-cell mdl-offset--6-col mdl-cell--12-col demo-list-three mdl-list mdl-color--grey-200">
-							<ul id="refeicoes"
-								class="sn-list-refeicoes">
+							<ul id="refeicoes" class="sn-list-refeicoes">
 
 								<li
 									class="mdl-list__item mdl-list__item--three-line mdl-shadow--2dp sn-card sn-cloneable">
@@ -210,8 +210,7 @@
 
 						<div th:if="!${#fields.hasErrors('refeicoes')}"
 							class="mdl-cell mdl-offset--6-col mdl-cell--12-col demo-list-three mdl-list mdl-color--grey-200">
-							<ul id="refeicoes"
-								class="sn-list-refeicoes">
+							<ul id="refeicoes" class="sn-list-refeicoes">
 
 								<li
 									class="mdl-list__item mdl-list__item--three-line mdl-shadow--2dp sn-card sn-cloneable">
@@ -442,82 +441,86 @@
 							</div>
 
 							<input type="hidden" id="sn-alimento-item-index" /> <label
-								class="sn-textfield__label mdl-cell mdl-cell--2-col" for="alimentos">Alimentos</label>
+								class="sn-textfield__label mdl-cell mdl-cell--2-col"
+								for="alimentos">Alimentos</label>
 							<div
-							class="mdl-cell mdl-offset--6-col mdl-cell--12-col demo-list-three mdl-list mdl-color--grey-200">
-							<ul id="alimentos"
-								class="sn-list-alimento-porcao">
+								class="mdl-cell mdl-offset--6-col mdl-cell--12-col demo-list-three mdl-list mdl-color--grey-200">
+								<ul id="alimentos" class="sn-list-alimento-porcao">
 
-								<li
-									class="mdl-list__item mdl-list__item--three-line mdl-shadow--2dp sn-card sn-cloneable">
+									<li
+										class="mdl-list__item mdl-list__item--three-line mdl-shadow--2dp sn-card sn-cloneable">
 
-									<input type="hidden"
-									th:field="*{refeicoes[0].porcoesAlimentos[0].alimento.id}"
-									class="sn-alimento-input-nome" value="00:00" /> <input
-									type="hidden"
-									th:field="*{refeicoes[0].porcoesAlimentos[0].quantidade}"
-									class="sn-alimento-input-quantidade" value="CAFEMANHA" /> <span
-									class="mdl-list__item-primary-content"> <span
-										class="hidden sn-alimento-input-fonte"></span>
-										<div class="mdl-grid mdl-grid--no-spacing">
+										<input type="hidden"
+										th:field="*{refeicoes[0].porcoesAlimentos[0].alimento.id}"
+										class="sn-alimento-input-nome" value="00:00" /> <input
+										type="hidden"
+										th:field="*{refeicoes[0].porcoesAlimentos[0].quantidade}"
+										class="sn-alimento-input-quantidade" value="CAFEMANHA" /> <span
+										class="mdl-list__item-primary-content"> <span
+											class="hidden sn-alimento-input-fonte"></span>
+											<div class="mdl-grid mdl-grid--no-spacing">
 
-											<div class="mdl-cell mdl-cell--4-col">
+												<div class="mdl-cell mdl-cell--4-col">
 
-												<span>Nome</span> <span
-													class="mdl-list__item-text-body sn-alimento-nome">
-													Bryan Cranston played the role of Walter in Breaking Bad.
-													He is also known for playing Hal in Malcom in the Middle. </span>
+													<span>Nome</span> <span
+														class="mdl-list__item-text-body sn-alimento-nome">
+														Bryan Cranston played the role of Walter in Breaking Bad.
+														He is also known for playing Hal in Malcom in the Middle.
+													</span>
 
+												</div>
+
+												<div class="mdl-cell mdl-cell--4-col">
+
+													<span>Quantidade</span> <span
+														class="mdl-list__item-text-body sn-alimento-quantidade">
+														Bryan Cranston played the role of Walter in Breaking Bad.
+														He is also known for playing Hal in Malcom in the Middle.
+													</span>
+
+												</div>
 											</div>
 
-											<div class="mdl-cell mdl-cell--4-col">
+									</span> <span class="mdl-list__item-secondary-content">
 
-												<span>Quantidade</span> <span
-													class="mdl-list__item-text-body sn-alimento-quantidade">
-													Bryan Cranston played the role of Walter in Breaking Bad.
-													He is also known for playing Hal in Malcom in the Middle. </span>
+											<button type="button"
+												class="mdl-button mdl-js-button mdl-button--icon sn-alimento-editar">
 
-											</div>
-										</div>
+												<i class="material-icons mdl-color-text--grey-700">mode_edit</i>
 
-								</span> <span class="mdl-list__item-secondary-content">
+											</button>
 
-										<button type="button"
-											class="mdl-button mdl-js-button mdl-button--icon sn-alimento-editar">
+									</span> <span class="mdl-list__item-secondary-content">
 
-											<i class="material-icons mdl-color-text--grey-700">mode_edit</i>
+											<button type="button"
+												class="mdl-button mdl-js-button mdl-button--icon sn-alimento-duplicar">
 
-										</button>
+												<i class="material-icons mdl-color-text--grey-700">content_copy</i>
 
-								</span> <span class="mdl-list__item-secondary-content">
+											</button>
 
-										<button type="button"
-											class="mdl-button mdl-js-button mdl-button--icon sn-alimento-duplicar">
+									</span> <span class="mdl-list__item-secondary-content">
 
-											<i class="material-icons mdl-color-text--grey-700">content_copy</i>
+											<button type="button"
+												class="mdl-button mdl-js-button mdl-button--icon sn-alimento-remover">
 
-										</button>
+												<i class="material-icons mdl-color-text--grey-700">close</i>
 
-								</span> <span class="mdl-list__item-secondary-content">
+											</button>
 
-										<button type="button"
-											class="mdl-button mdl-js-button mdl-button--icon sn-alimento-remover">
+									</span>
 
-											<i class="material-icons mdl-color-text--grey-700">close</i>
-
-										</button>
-
-								</span>
-
-								</li>
-							</ul>
-							<div class="sn-list-refeicao__actions">
-								<button id="sn-add-alimento-button" type="button"
-									class="mdl-button mdl-button--primary mdl-js-button mdl-js-ripple-effect">Adicionar
-									Alimento</button>
+									</li>
+								</ul>
+								<div class="sn-list-refeicao__actions">
+									<button id="sn-add-alimento-button" type="button"
+										class="mdl-button mdl-button--primary mdl-js-button mdl-js-ripple-effect">Adicionar
+										Alimento</button>
+								</div>
 							</div>
-							</div>
-							<label id="validate" class="sn-textfield__messages sn-error-text mdl-cell mdl-cell--5-col" style="display:none">Adicione pelo menos um alimento</label>
+							<label id="validate"
+								class="sn-textfield__messages sn-error-text mdl-cell mdl-cell--5-col"
+								style="display: none">Adicione pelo menos um alimento</label>
 						</div>
 
 					</div>
@@ -526,27 +529,31 @@
 
 						<input type="hidden" id="sn-alimento-item-index" val="" />
 						<div class="mdl-cell mdl-cell--6-col">
-							<label>Fonte:</label> <select id="sn-alimento-fonte"
+							<<<<<<< HEAD <label>Fonte:</label> <select id="sn-alimento-fonte"
 								class="validate sn-selectfield__select" data-role="select">
-								<option value="">Escolha uma fonte</option>
-								<option value="MEUSALIMENTOS">MEUS ALIMENTOS</option>
-								<option value="TACO">TACO</option>
-								<option value="TUCUNDUVA">TUCUNDUVA</option>
+								=======
+								<label class="sn-textfield__label">Fonte:</label>
+								<select id="sn-alimento-fonte" class="sn-selectfield__select"
+								data-role="select"> >>>>>>> refs/heads/master
+									<option value="">Escolha uma fonte</option>
+									<option value="MEUSALIMENTOS">MEUS ALIMENTOS</option>
+									<option value="TACO">TACO</option>
+									<option value="TUCUNDUVA">TUCUNDUVA</option>
 							</select>
 						</div>
 
 						<div class="mdl-cell mdl-cell--6-col">
-							<label>Alimento:</label> <select id="sn-alimento-nome"
-								class="sn-selectfield__select select2"
+							<label class="sn-textfield__label">Alimento:</label> <select
+								id="sn-alimento-nome" class="sn-selectfield__select select2"
 								th:attr="data-url=@{/Paciente/__${idPaciente}__/PlanoAlimentar/Alimentos/?fonte=}">
 								<option value="">Escolha um alimento</option>
 							</select>
 						</div>
 
 						<div class="mdl-cell mdl-cell--16-col">
-							<label>Quantidade:</label> <input id="sn-alimento-quantidade"
-								type="number" min="0" max="999999" class="validate sn-textfield__input"
-								step="0.01" />
+							<label class="sn-textfield__label">Quantidade:</label> <input
+								id="sn-alimento-quantidade" type="number" min="0" max="999999"
+								class="validate sn-textfield__input" step="0.01" />
 						</div>
 
 					</div>

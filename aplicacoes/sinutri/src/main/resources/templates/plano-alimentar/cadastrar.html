@@ -115,9 +115,10 @@
 
 						<div class="sn-form__hdivider mdl-cell mdl-cell--6-col"></div>
 
-						<label class="sn-textfield__label mdl-cell mdl-cell--6-col">Refeições</label>
-						<label class="sn-textfield__messages sn-error-text" for="sn-text"
-							th:if="${#fields.hasErrors('refeicoes')}"
+						<label class="sn-textfield__label mdl-cell mdl-cell--1-col">Refeições</label>
+						<label
+							class="sn-textfield__messages sn-error-text mdl-cell mdl-cell--3-col"
+							for="sn-text" th:if="${#fields.hasErrors('refeicoes')}"
 							th:errors="*{refeicoes}"></label>
 						<div
 							class="mdl-cell mdl-offset--6-col mdl-cell--12-col demo-list-three mdl-list mdl-color--grey-200">
@@ -256,8 +257,9 @@
 									name="snrefeicaoobservacao"></textarea>
 							</div>
 
-							<label class="sn-textfield__label mdl-cell mdl-cell--2-col" for="alimentos">Alimentos</label>
-							<input type="hidden" id="sn-alimento-item-index" /> 
+							<label class="sn-textfield__label mdl-cell mdl-cell--2-col"
+								for="alimentos">Alimentos</label> <input type="hidden"
+								id="sn-alimento-item-index" />
 							<div
 								class="mdl-cell mdl-offset--6-col mdl-cell--12-col demo-list-three mdl-list mdl-color--grey-200">
 
@@ -336,7 +338,9 @@
 								</div>
 
 							</div>
-							<label id="validate" class="sn-textfield__messages sn-error-text mdl-cell mdl-cell--5-col" style="display:none">Adicione pelo menos um alimento</label>
+							<label id="validate"
+								class="sn-textfield__messages sn-error-text mdl-cell mdl-cell--5-col"
+								style="display: none">Adicione pelo menos um alimento</label>
 						</div>
 
 					</div>
@@ -345,27 +349,31 @@
 
 						<input type="hidden" id="sn-alimento-item-index" val="" />
 						<div class="mdl-cell mdl-cell--6-col">
-							<label>Fonte:</label> <select id="sn-alimento-fonte"
+							<<<<<<< HEAD <label>Fonte:</label> <select id="sn-alimento-fonte"
 								class="validate sn-selectfield__select" data-role="select">
-								<option value="">Escolha uma fonte</option>
-								<option value="MEUSALIMENTOS">MEUS ALIMENTOS</option>
-								<option value="TACO">TACO</option>
-								<option value="TUCUNDUVA">TUCUNDUVA</option>
+								=======
+								<label class="sn-textfield__label">Fonte:</label>
+								<select id="sn-alimento-fonte" class="sn-selectfield__select"
+								data-role="select"> >>>>>>> refs/heads/master
+									<option value="">Escolha uma fonte</option>
+									<option value="MEUSALIMENTOS">MEUS ALIMENTOS</option>
+									<option value="TACO">TACO</option>
+									<option value="TUCUNDUVA">TUCUNDUVA</option>
 							</select>
 						</div>
 
 						<div class="mdl-cell mdl-cell--6-col">
-							<label>Alimento:</label> <select id="sn-alimento-nome"
-								class="sn-selectfield__select select2"
+							<label class="sn-textfield__label">Alimento:</label> <select
+								id="sn-alimento-nome" class="sn-selectfield__select select2"
 								th:attr="data-url=@{/Paciente/__${idPaciente}__/PlanoAlimentar/Alimentos/?fonte=}">
 								<option value="">Escolha um alimento</option>
 							</select>
 						</div>
 
 						<div class="mdl-cell mdl-cell--16-col">
-							<label>Quantidade:</label> <input id="sn-alimento-quantidade"
-								type="number" min="0" max="999999" class="validate sn-textfield__input"
-								step="0.01" />
+							<label class="sn-textfield__label">Quantidade:</label> <input
+								id="sn-alimento-quantidade" type="number" min="0" max="999999"
+								class="validate sn-textfield__input" step="0.01" />
 						</div>
 
 					</div>

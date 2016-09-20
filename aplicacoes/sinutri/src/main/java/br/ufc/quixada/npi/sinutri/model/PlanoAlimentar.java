@@ -42,7 +42,7 @@ public class PlanoAlimentar {
 	@OneToMany (cascade = CascadeType.REMOVE)
 	@JoinColumn(name = "plano_alimentar_id")
 	@Valid
-	@NotEmpty(message = " (Adicione pelo menos um exame.)")
+	@NotEmpty(message = " (Adicione pelo menos uma refeição.)")
 	private List<RefeicaoPlanoAlimentar> refeicoes;
 	
 	public PlanoAlimentar() {
