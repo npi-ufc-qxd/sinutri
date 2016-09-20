@@ -1,3 +1,10 @@
+function removerLabelValidacao(modal, nomeLista ){
+	if(nomeLista != undefined){
+		$(modal).find("#validate").attr('style', 'display:none');
+	}
+	modal.find(".erro").remove();
+}
+
 function validacaoVazio(modal, nomeLista){
 	result = false;
 	if(nomeLista != undefined){

@@ -102,6 +102,8 @@ $(function()
 			
 			$(dialog).find("#sn-refeicao-item-index").val("");
 			
+			removerLabelValidacao($(dialog));
+			
 			dialog.showModal();
 		});
 		

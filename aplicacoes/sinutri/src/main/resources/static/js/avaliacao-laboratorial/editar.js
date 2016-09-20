@@ -83,6 +83,8 @@ $(document).ready(function() {
 			
 			$(dialog).find("#sn-exame-item-index").val("");
 			
+			removerLabelValidacao($(dialog));
+			
 			dialog.showModal();
 		});
 		

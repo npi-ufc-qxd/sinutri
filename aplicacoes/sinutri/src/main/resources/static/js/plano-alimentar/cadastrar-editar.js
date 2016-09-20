@@ -246,6 +246,8 @@ $(function()  {
 			
 			dynamicListAlimento.doClearItems();
 			
+			removerLabelValidacao($(dialog), "alimentos");
+			
 			dialog.showModal();
 		});
 		
@@ -257,6 +259,8 @@ $(function()  {
 			
 			dialog.find("#sn-alimento-nome").empty();
 			dialog.find("#sn-alimento-item-index").val("");
+			
+			removerLabelValidacao($(dialog));
 			
 			dialog.showModal();
 		});
