@@ -50,7 +50,11 @@
 
 .sn-fill--width { width: 100%; }
 
+.sn-half-fill--width { width: 25%; }
+
 .sn-fill--height { height: 100%; }
+
+.sn-half-fill--height { height: 50%; }
 
 .sn-margin--none {margin: 0px !important;}
 
@@ -636,6 +640,9 @@ color: var(--color-danger--500); }
 
 }
 
+.sn-adapter{
+	height: 350px;
+}
 .sn-rounded-card__icon {
 
 	font-size: 96px;
@@ -910,6 +917,18 @@ table {
 .mdl-layout-title {
 	line-height: 32px;
 	font-size: 24px;
+	text-decoration: none;
+}
+
+.mdl-title {
+	line-height: 32px;
+	font-size: 22px;
+	text-decoration: none;
+}
+
+.mdl-subtitle {
+	line-height: 34px;
+	font-size: 18px;
 	text-decoration: none;
 }
 

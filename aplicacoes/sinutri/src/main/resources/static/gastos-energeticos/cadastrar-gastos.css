@@ -1,0 +1,39 @@
+.sn-textfield__input_gastos{
+
+	width: calc(100% - 32px);
+	font-size: 16px;
+	padding-top: 6px;
+	padding-bottom: 6px;
+	padding-left: 8px;
+	padding-right: 8px;
+	
+	background-color: #fff;
+
+	border: none;
+	border-style: solid;
+	border-width: 1px;
+	border-radius: 2px;
+	border-color: #ddd;
+	outline: none !important;
+
+}
+
+.sn-textfield__input_grupo{
+
+	width: calc(100% - 32px);
+	font-size: 16px;
+	padding-top: 6px;
+	padding-bottom: 6px;
+	padding-left: 2px;
+	padding-right: 2px;
+	
+	background-color: #fff;
+
+	border: none;
+	border-style: solid;
+	border-width: 1px;
+	border-radius: 2px;
+	border-color: #ddd;
+	outline: none !important;
+
+}
