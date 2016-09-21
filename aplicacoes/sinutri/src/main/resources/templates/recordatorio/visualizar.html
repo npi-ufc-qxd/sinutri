@@ -1,16 +1,18 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" 
+<html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:th="http://www.thymeleaf.org"
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-    layout:decorator="estrutura/dashboard">
+	layout:decorator="estrutura/dashboard">
 
 <head>
-	
-	<title>Sinutri | Adicionar Recordatório</title>
-	<meta charset="UTF-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0"/>
-	<link rel="stylesheet" type="text/css" th:href="@{/css/material-date-picker.css}"/>
-	
+
+<title>Sinutri | Adicionar Recordatório</title>
+<meta charset="UTF-8" />
+<meta name="viewport"
+	content="width=device-width, initial-scale=1.0, minimum-scale=1.0" />
+<link rel="stylesheet" type="text/css"
+	th:href="@{/css/material-date-picker.css}" />
+
 </head>
 
 <body>
@@ -19,188 +21,179 @@
 	</section>
 	<section layout:fragment="conteudo">
 		<div class="mdl-grid">
-			<div class="mdl-cell mdl-cell--11-col mdl-cell--1-offset-desktop">
-				<a th:href="@{/Nutricao/Buscar}" class="sn-breadcrumbs sn-attribute__title">Início</a>
-				<a th:href="@{${'/Paciente/'+paciente.id}}" class="sn-breadcrumbs sn-attribute__title">Paciente</a>
-				<a class="sn-attribute__title sn-breadcrumbs">Visualizar Recordatório</a>
-			</div>
-			<div class="
-	              mdl-cell
-	              mdl-cell--7-col-desktop mdl-cell--1-offset-desktop
-	              mdl-cell--8-col-tablet
-	              mdl-cell--4-col-phone
-	              mdl-grid mdl-grid--no-spacing
-	              sn-main-card">
-	
-	              <div class="mdl-cell mdl-cell--12-col sn-card sn-padding--48 mdl-color--white">
-	
-	                      <div class="mdl-layout-title mdl-color-text--indigo-600">Recordatório</div>
-	
-	                      <fabgroup class="sn-fab--bottom-right">
-	
-	                              <a th:href="@{/Paciente/__${paciente.id}__/Recordatorio/__${recordatorio.id}__/Excluir}" 
-	                              class="sn-fab sn-fab--hide mdl-button mdl-js-button 
-	                              mdl-button--fab mdl-button--mini-fab 
-	                              mdl-js-ripple-effect mdl-color--red-700 bt-excluir-recordatorio">
-	                                      <i class="material-icons mdl-color-text--white">delete</i>
-	                              </a>
-	
-	                              <a th:href="@{/Paciente/__${paciente.id}__/Recordatorio/__${recordatorio.id}__/Editar}" 
-	                              class="sn-fab sn-fab--hide mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-js-ripple-effect mdl-color--purple">
-	                                      <i class="material-icons mdl-color-text--white">edit</i>
-	                              </a>
-	
-	                              <button class="sn-float--launcher mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored">
-	                                      <i class="material-icons mdl-color-text--white">more_horiz</i>
-	                              </button>
-	                              
-	                      </fabgroup>
-	
-	              </div>
-	
-	              <div class="sn-card-top mdl-cell mdl-cell--12-col sn-card sn-padding--48 mdl-color--white mdl-grid">
-	
-	                      <!-- Text atribute -->
-	                      <div class="sn-attribute mdl-cell mdl-cell--6-col">
-	                              <div class="sn-attribute__title">Criado em</div>
-	                              <div class="sn-attribute__value" th:text="${#dates.format(recordatorio.criadoEm, 'dd/MM/yyyy')}"></div>
-	                      </div>
-	
-	                      <!-- Text atribute -->
-	                      <div class="sn-attribute mdl-cell mdl-cell--6-col">
-	                              <div class="sn-attribute__title">Atualizado em</div>
-	                              <div class="sn-attribute__value" th:text="${#dates.format(recordatorio.atualizadoEm, 'dd/MM/yyyy')}"></div>
-	                      </div>
-	                      
-	              </div>
-	
-	              <div class="sn-card-top mdl-cell mdl-cell--12-col sn-card sn-padding--48 mdl-color--white mdl-grid">
-						   <!-- Text atribute -->
-	                       <div class="sn-attribute mdl-cell mdl-cell--6-col">
-	                              <div class="sn-attribute__title">Refeições</div>
-	                       </div>
-	                      
-	                       <table class="mdl-data-table mdl-js-data-table">
-	                      		   
-                      		   		<thead>
-                      		   			
-                      		   			<tr>
-							    			<th th:class="mdl-data-table__cell--non-numeric">Hora</th>
-							    			<th th:class="mdl-data-table__cell--non-numeric">Descrição</th>
-							    			<th th:class="mdl-data-table__cell--non-numeric">Itens</th>
-							    			<th th:class="mdl-data-table__cell--non-numeric">Observação</th>
-							    		</tr>
-                      		   		
-                      		   		</thead>
-                      		   		
-                      		   		<tbody>
-                      		   			
-                      		   			<tr th:each="refeicao : ${recordatorio.refeicoes}">
-	                      		   			<td style="width:20%" 
-							    			class="mdl-data-table__cell--non-numeric sn-refeicao-hora"
-							    			th:text="${#dates.format(refeicao.hora, 'HH:mm')}">
-							    			</td>
-							    			
-							    			<td style="width:20%" 
-							    			class="mdl-data-table__cell--non-numeric sn-refeicao-descricao"
-							    			th:text="${refeicao.descricao.nome}">
-							    			</td>
-							    			
-							    			<td style="width:20%" 
-							    			class="mdl-data-table__cell--non-numeric sn-refeicao-itens"
-							    			th:text="${#strings.length(refeicao.itens) > 27}? ${#strings.append(#strings.substring(refeicao.itens, 0, 26), '...')} : ${refeicao.itens}">
-							    			</td>
-							    			
-							    			<td style="width:20%" 
-							    			class="mdl-data-table__cell--non-numeric sn-refeicao-observacao"
-							    			th:text="${#strings.length(refeicao.observacao) > 27}? ${#strings.append(#strings.substring(refeicao.observacao, 0, 26), '...')} : ${refeicao.observacao}">
-							    			</td>
-                      		   			</tr>
-                      		   			
-                      		   		</tbody>
-                      		   		
-                      		   </table>
-	
-	              </div>
-	
-	      </div>
-	      
-	      <div class="mdl-cell
-	              mdl-cell--3-col-desktop
-	              mdl-cell--8-col-tablet
-	              mdl-cell--4-col-phone">
-	
-	              <div class="sn-card sn-padding--48">
-	                      <div class="mdl-layout-title">Informações do Paciente</div>
-	              </div>
-	              
-	              <div class="sn-card sn-padding--48">
-	              		  <!-- Text atribute -->
-	                      <div th:if="${paciente.pessoa.nome != null}" class="sn-attribute mdl-cell mdl-cell--6-col">
-	                              <div class="sn-attribute__title">Nome</div>
-	                              <div class="sn-attribute__value" 
-	                              th:text="${paciente.pessoa.nome}"></div>
-	                      </div>
-	                      
-	                      <!-- Text atribute -->
-	                      <div th:if="${paciente.pessoa.sexo != null}" class="sn-attribute mdl-cell mdl-cell--6-col">
-	                              <div class="sn-attribute__title">Sexo</div>
-	                              <div class="sn-attribute__value" th:text="${paciente.pessoa.sexo}"></div>
-	                      </div>
-	                      
-	                      <!-- Text atribute -->
-	                      <div th:if="${paciente.pessoa.idade != null}" class="sn-attribute mdl-cell mdl-cell--6-col">
-	                              <div class="sn-attribute__title">Idade</div>
-	                              <div class="sn-attribute__value" th:text="${paciente.pessoa.idade}"></div>
-	                      </div>
-	                      
-	                      <!-- Text atribute -->
-	                      <div th:if="${paciente.pessoa.cpf != null}" class="sn-attribute mdl-cell mdl-cell--6-col">
-	                              <div class="sn-attribute__title">CPF</div>
-	                              <div class="sn-attribute__value" th:text="${paciente.pessoa.cpf}"></div>
-	                      </div>
-	                      
-	                      <!-- Text atribute -->
-	                      <div th:if="${paciente.pessoa.telefone != null}" class="sn-attribute mdl-cell mdl-cell--6-col">
-	                              <div class="sn-attribute__title">Telefone</div>
-	                              <div class="sn-attribute__value" th:text="${paciente.pessoa.telefone}"></div>
-	                      </div>	      
-	                      
-	                      <!-- Text atribute -->
-	                      <div th:if="${paciente.pessoa.ocupacaoOuCargo != null}" class="sn-attribute mdl-cell mdl-cell--6-col">
-	                              <div class="sn-attribute__title">Cargo/Ocupação</div>
-	                              <div class="sn-attribute__value" th:text="${paciente.pessoa.ocupacaoOuCargo}"></div>
-	                      </div>                
 
-	                      <!-- Text atribute -->
-	                      <div th:if="${paciente.pessoa.email != null}" class="sn-attribute mdl-cell mdl-cell--6-col">
-	                              <div class="sn-attribute__title">Email</div>
-	                              <div class="sn-attribute__value" th:text="${paciente.pessoa.email}"></div>
-	                      </div>
-	                      
-	                      <!-- Text atribute -->
-	                      <div th:if="${paciente.pessoa.vinculo !=  null}" class="sn-attribute mdl-cell mdl-cell--6-col">
-	                              <div class="sn-attribute__title">Vinculo</div>
-	                              <div class="sn-attribute__value" th:text="${paciente.pessoa.vinculo}"></div>
-	                      </div>
-	              </div>
-	
-	      </div>
-	      
+			<div
+				class="sn-breadcrumbs__position mdl-cell mdl-cell--10-col-desktop mdl-cell--1-offset-desktop mdl-cell--8-col-tablet mdl-cell--4-col-phone mdl-grid sn-main-grid">
+				<div class="mdl-cell mdl-cell--12-col">
+					<a th:href="@{/Nutricao/Buscar}"
+						class="sn-breadcrumbs sn-attribute__title">Início</a> <a
+						th:href="@{${'/Paciente/'+paciente.id}}"
+						class="sn-breadcrumbs sn-attribute__title">Paciente</a> <a
+						class="sn-attribute__title sn-breadcrumbs">Visualizar
+						Recordatório</a>
+				</div>
+
+				<div class="mdl-cell mdl-cell--12-col sn-card">
+					<div
+						class="mdl-layout-title mdl-color-text--indigo-600 sn-padding--48">
+						Recordatório
+						<div id="div_arrow" class="sn-colapse-div sn-attribute__title">
+							<span
+								th:text="${recordatorio.paciente.pessoa.nome+', '+recordatorio.paciente.pessoa.getIdade()+' anos'}"></span>
+							<i
+								class="sn-breadcrumbs__icon material-icons arrow_icon_position">keyboard_arrow_down</i>
+						</div>
+
+						<fabgroup class="sn-fab--bottom-right"> <a
+							th:href="@{${'/Paciente/' + recordatorio.paciente.id +'/Recordatorio/'+ recordatorio.id +'/Excluir/'}}"
+							class="sn-fab sn-fab--hide mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-js-ripple-effect mdl-color--red-700 bt-excluir-recordatorio">
+							<i class="material-icons mdl-color-text--white">delete</i>
+						</a> <a
+							th:href="@{${'/Paciente/' + recordatorio.paciente.id +'/Recordatorio/'+ recordatorio.id +'/Editar/'}}"
+							class="sn-fab sn-fab--hide mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-js-ripple-effect mdl-color--purple">
+							<i class="material-icons mdl-color-text--white">edit</i>
+						</a>
+
+
+						<button
+							class="sn-float--launcher mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored">
+							<i class="material-icons mdl-color-text--white">more_horiz</i>
+						</button>
+
+						</fabgroup>
+
+					</div>
+					<div class="sn-form__hdivider sn-margin--none"></div>
+					<div class="sn-colapsable-div sn-padding--48 mdl-color--white">
+
+						<div class="mdl-grid mdl-grid--no-spacing">
+
+							<div class="sn-attribute mdl-cell mdl-cell--4-col">
+								<div class="sn-attribute__title">Sexo</div>
+								<div class="sn-attribute__value"
+									th:text="${recordatorio.paciente.pessoa.sexo}"></div>
+							</div>
+
+							<div class="sn-attribute mdl-cell mdl-cell--4-col">
+								<div class="sn-attribute__title">Telefone</div>
+								<div class="sn-attribute__value"
+									th:text="${recordatorio.paciente.pessoa.telefone}"></div>
+							</div>
+
+							<div class="sn-attribute mdl-cell mdl-cell--4-col">
+								<div class="sn-attribute__title">Email</div>
+								<div class="sn-attribute__value"
+									th:text="${recordatorio.paciente.pessoa.email}"></div>
+							</div>
+
+							<div class="sn-attribute mdl-cell mdl-cell--4-col">
+								<div class="sn-attribute__title">CPF</div>
+								<div class="sn-attribute__value"
+									th:text="${recordatorio.paciente.pessoa.cpf}"></div>
+							</div>
+
+							<div class="sn-attribute mdl-cell mdl-cell--4-col">
+								<div class="sn-attribute__title">Cargo/Ocupação</div>
+								<div class="sn-attribute__value"
+									th:text="${recordatorio.paciente.pessoa.ocupacaoOuCargo}"></div>
+							</div>
+
+							<div class="sn-attribute mdl-cell mdl-cell--4-col">
+								<div class="sn-attribute__title">Vínculo</div>
+								<div class="sn-attribute__value"
+									th:text="${recordatorio.paciente.pessoa.vinculo}"></div>
+							</div>
+						</div>
+					</div>
+
+				</div>
+				<div
+					class="sn-form mdl-cell mdl-cell--12-col-desktop mdl-cell--8-col-tablet mdl-cell--4-col-phone mdl-grid mdl-grid--no-spacing sn-main-card">
+
+					<div
+						class="sn-card-top mdl-cell mdl-cell--12-col sn-card sn-padding--48 mdl-color--white mdl-grid">
+
+						<!-- Text atribute -->
+						<div class="sn-attribute mdl-cell mdl-cell--6-col">
+							<div class="sn-attribute__title">Criado em</div>
+							<div class="sn-attribute__value"
+								th:text="${#dates.format(recordatorio.criadoEm, 'dd/MM/yyyy')}"></div>
+						</div>
+
+						<!-- Text atribute -->
+						<div class="sn-attribute mdl-cell mdl-cell--6-col">
+							<div class="sn-attribute__title">Atualizado em</div>
+							<div class="sn-attribute__value"
+								th:text="${#dates.format(recordatorio.atualizadoEm, 'dd/MM/yyyy')}"></div>
+						</div>
+
+					</div>
+
+					<div
+						class="sn-card-top mdl-cell mdl-cell--12-col sn-card sn-padding--48 mdl-color--white mdl-grid">
+						<!-- Text atribute -->
+						<div class="sn-attribute mdl-cell mdl-cell--6-col">
+							<div class="sn-attribute__title">Refeições</div>
+						</div>
+
+						<table class="mdl-data-table mdl-js-data-table">
+
+							<thead>
+
+								<tr>
+									<th th:class="mdl-data-table__cell--non-numeric">Hora</th>
+									<th th:class="mdl-data-table__cell--non-numeric">Descrição</th>
+									<th th:class="mdl-data-table__cell--non-numeric">Itens</th>
+									<th th:class="mdl-data-table__cell--non-numeric">Observação</th>
+								</tr>
+
+							</thead>
+
+							<tbody>
+
+								<tr th:each="refeicao : ${recordatorio.refeicoes}">
+									<td style="width: 20%"
+										class="mdl-data-table__cell--non-numeric sn-refeicao-hora"
+										th:text="${#dates.format(refeicao.hora, 'HH:mm')}"></td>
+
+									<td style="width: 20%"
+										class="mdl-data-table__cell--non-numeric sn-refeicao-descricao"
+										th:text="${refeicao.descricao.nome}"></td>
+
+									<td style="width: 20%"
+										class="mdl-data-table__cell--non-numeric sn-refeicao-itens"
+										th:text="${refeicao.itens}">
+									</td>
+
+									<td style="width: 20%"
+										class="mdl-data-table__cell--non-numeric sn-refeicao-observacao"
+										th:text="${refeicao.observacao}">
+									</td>
+								</tr>
+
+							</tbody>
+
+						</table>
+
+					</div>
+
+				</div>
+
+			</div>
 		</div>
-		
+
 		<div id="modal-exclusao-recordatorio" class="sn-display-none">
-			Você realmente deseja excluir este Recordatório?
-		</div>
-		
+			Você realmente deseja excluir este Recordatório?</div>
+
 	</section>
-	
-	<section layout:fragment="js">	
-		
+
+	<section layout:fragment="js">
+
 		<script type="text/javascript" th:src="@{/js/moment.js}"></script>
 		<script type="text/javascript" th:src="@{/js/material-date-picker.js}"></script>
-		<script type="text/javascript" th:src="@{/js/recordatorio/visualizar.js}"></script>
-		
+		<script type="text/javascript"
+			th:src="@{/js/recordatorio/visualizar.js}"></script>
+
 	</section>
 
 </body>

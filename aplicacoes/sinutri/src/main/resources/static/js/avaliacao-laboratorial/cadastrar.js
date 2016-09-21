@@ -1,5 +1,4 @@
 $(document).ready(function() {
-
 	componentHandler.registerUpgradedCallback("MaterialLayout", function(elem) {
 		
 		var dialog = null;
@@ -11,10 +10,12 @@ $(document).ready(function() {
 			onItemEdit: function(el, index) {
 
 				if(dialog != null) {
-					var type = el.find(".sn-exame-type").text();
+					var type = el.find(".sn-exame-input-nome").val();
 					var val = el.find(".sn-exame-value").text();
-					
-					$(dialog).find("#sn-exame-type").val(type);
+					var filter = "[value=" + type + "]";
+										
+					$(dialog).find("#sn-exame-type").removeAttr("selected");
+					$(dialog).find("#sn-exame-type option"+filter).prop("selected", true);
 					$(dialog).find("#sn-exame-value").val(val);
 					$(dialog).find("#sn-exame-item-index").val(index);
 
@@ -39,8 +40,9 @@ $(document).ready(function() {
 						var val = $(dialog).find("#sn-exame-value").val();
 						var text  = $(dialog).find("#sn-exame-type option:selected").text();
 						
-						if( !(type.length > 0 && val.length > 0) )
+						if(validacaoVazio($(dialog))){
 							return;
+						}
 						
 						dialog.close();
 						
@@ -78,7 +80,9 @@ $(document).ready(function() {
 			$(dialog).find("#sn-exame-type").selectedIndex = 0;
 			$(dialog).find("#sn-exame-value").val("");
 			
-			$(dialog).find("##sn-exame-item-index").val("");
+			$(dialog).find("#sn-exame-item-index").val("");
+			
+			removerLabelValidacao($(dialog));
 			
 			dialog.showModal();
 		});

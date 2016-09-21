@@ -7,126 +7,164 @@
 <head>
 
 <title>Sinutri | Cadastrar Avaliação Laboratorial</title>
-<link rel="stylesheet" type="text/css" th:href="@{/css/material-date-picker.css}" />
-<link rel="stylesheet" type="text/css" th:href="@{/css/avaliacao-laboratorial/visualizar.css}" />
+<link rel="stylesheet" type="text/css"
+	th:href="@{/css/material-date-picker.css}" />
+<link rel="stylesheet" type="text/css"
+	th:href="@{/css/avaliacao-laboratorial/visualizar.css}" />
 
 </head>
 <section layout:fragment="title">
-	<label class="mdl-layout-title">Visualizar Avaliação Laboratorial</label>
+	<label class="mdl-layout-title">Visualizar Avaliação
+		Laboratorial</label>
 </section>
 <section layout:fragment="conteudo">
 	<div class="mdl-grid">
-		<div class="mdl-cell mdl-cell--11-col mdl-cell--1-offset-desktop">
-			<a th:href="@{/Nutricao/Buscar}" class="sn-breadcrumbs sn-attribute__title">Início</a>
-		    <a th:href="@{${'/Paciente/'+avaliacaoLaboratorial.paciente.id}}" class="sn-breadcrumbs sn-attribute__title">Paciente</a>
-		    <a class="sn-attribute__title sn-breadcrumbs">Visualizar Avaliação Laboratorial</a>
-		</div>
-		<div class="mdl-cell mdl-cell--7-col-desktop mdl-cell--1-offset-desktop">
+		<div
+			class="sn-breadcrumbs__position mdl-cell mdl-cell--10-col-desktop mdl-cell--1-offset-desktop mdl-cell--8-col-tablet mdl-cell--4-col-phone mdl-grid sn-main-grid">
+			<div class="mdl-cell mdl-cell--11-col ">
+				<a th:href="@{/Nutricao/Buscar}"
+					class="sn-breadcrumbs sn-attribute__title">Início</a> <a
+					th:href="@{${'/Paciente/'+avaliacaoLaboratorial.paciente.id}}"
+					class="sn-breadcrumbs sn-attribute__title">Paciente</a> <a
+					class="sn-attribute__title sn-breadcrumbs">Visualizar Avaliação
+					Laboratorial</a>
+			</div>
+			<div class="mdl-cell mdl-cell--12-col">
 
-			<div class="mdl-grid mdl-grid--no-spacing">
+				<div class="mdl-grid mdl-grid--no-spacing">
 
-				<div class="mdl-layout-title mdl-cell mdl-cell--12-col sn-padding--48 mdl-color--white mdl-color-text--orange-600 sn-card">
-					Avaliação Laboratorial
+					<div class="mdl-cell mdl-cell--12-col sn-card">
+						<div
+							class="mdl-layout-title mdl-color-text--red-600 sn-padding--48">
+							AvaliacaoLaboratorial
+							<div id="div_arrow" class="sn-colapse-div sn-attribute__title">
+								<span
+									th:text="${avaliacaoLaboratorial.paciente.pessoa.nome+', '+avaliacaoLaboratorial.paciente.pessoa.getIdade()+' anos'}"></span>
+								<i
+									class="sn-breadcrumbs__icon material-icons arrow_icon_position">keyboard_arrow_down</i>
+							</div>
 
-					<fabgroup class="sn-fab--bottom-right">
-
-						<a id="sn-excluir" th:href="@{/Paciente/__${avaliacaoLaboratorial.paciente.id}__/AvaliacaoLaboratorial/__${avaliacaoLaboratorial.id}__/Excluir}" class="sn-fab sn-fab--hide mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-js-ripple-effect mdl-color--red-700 bt-excluir-avaliacao-laboratorial">
-							<i class="material-icons mdl-color-text--white">delete</i>
-						</a>
-
-						<a th:href="@{/Paciente/__${avaliacaoLaboratorial.paciente.id}__/AvaliacaoLaboratorial/__${avaliacaoLaboratorial.id}__/Editar}" class="sn-fab sn-fab--hide mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-js-ripple-effect mdl-color--purple">
-							<i class="material-icons mdl-color-text--white">edit</i>
-						</a>
-
-						<a class="sn-float--launcher mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored">
-							<i class="material-icons mdl-color-text--white">more_horiz</i>
-						</a>
-					</fabgroup>
-
-				</div>
-
-
-
+							<fabgroup class="sn-fab--bottom-right"> <a
+								th:href="@{${'/Paciente/' + avaliacaoLaboratorial.paciente.id +'/AvaliacaoLaboratorial/'+ avaliacaoLaboratorial.id +'/Excluir/'}}"
+								class="sn-fab sn-fab--hide mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-js-ripple-effect mdl-color--red-700 bt-excluir-avaliacao-laboratorial">
+								<i class="material-icons mdl-color-text--white">delete</i>
+							</a> <a
+								th:href="@{${'/Paciente/' + avaliacaoLaboratorial.paciente.id +'/AvaliacaoLaboratorial/'+ avaliacaoLaboratorial.id +'/Editar/'}}"
+								class="sn-fab sn-fab--hide mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-js-ripple-effect mdl-color--purple">
+								<i class="material-icons mdl-color-text--white">edit</i>
+							</a>
 
 
-				<div class="mdl-grid mdl-cell mdl-cell--12-col sn-padding--48 mdl-color--white sn-card">
-					
-					<div class="sn-attribute mdl-cell mdl-cell--6-col">
-						<div class="sn-attribute__title">Data de Criação</div>
-						<div class="sn-attribute__value" th:text="${#dates.format(avaliacaoLaboratorial.criadoEm,'dd/MM/yyyy')}">01/01/1995</div>
+							<button
+								class="sn-float--launcher mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored">
+								<i class="material-icons mdl-color-text--white">more_horiz</i>
+							</button>
+
+							</fabgroup>
+
+						</div>
+						<div class="sn-form__hdivider sn-margin--none"></div>
+						<div class="sn-colapsable-div sn-padding--48 mdl-color--white">
+
+							<div class="mdl-grid mdl-grid--no-spacing">
+
+								<div class="sn-attribute mdl-cell mdl-cell--4-col">
+									<div class="sn-attribute__title">Sexo</div>
+									<div class="sn-attribute__value"
+										th:text="${avaliacaoLaboratorial.paciente.pessoa.sexo}"></div>
+								</div>
+
+								<div class="sn-attribute mdl-cell mdl-cell--4-col">
+									<div class="sn-attribute__title">Telefone</div>
+									<div class="sn-attribute__value"
+										th:text="${avaliacaoLaboratorial.paciente.pessoa.telefone}"></div>
+								</div>
+
+								<div class="sn-attribute mdl-cell mdl-cell--4-col">
+									<div class="sn-attribute__title">Email</div>
+									<div class="sn-attribute__value"
+										th:text="${avaliacaoLaboratorial.paciente.pessoa.email}"></div>
+								</div>
+
+								<div class="sn-attribute mdl-cell mdl-cell--4-col">
+									<div class="sn-attribute__title">CPF</div>
+									<div class="sn-attribute__value"
+										th:text="${avaliacaoLaboratorial.paciente.pessoa.cpf}"></div>
+								</div>
+
+								<div class="sn-attribute mdl-cell mdl-cell--4-col">
+									<div class="sn-attribute__title">Cargo/Ocupação</div>
+									<div class="sn-attribute__value"
+										th:text="${avaliacaoLaboratorial.paciente.pessoa.ocupacaoOuCargo}"></div>
+								</div>
+
+								<div class="sn-attribute mdl-cell mdl-cell--4-col">
+									<div class="sn-attribute__title">Vínculo</div>
+									<div class="sn-attribute__value"
+										th:text="${avaliacaoLaboratorial.paciente.pessoa.vinculo}"></div>
+								</div>
+							</div>
+						</div>
+
 					</div>
-					
-					<div class="sn-attribute mdl-cell mdl-cell--6-col">
-						<div class="sn-attribute__title">Última atualização</div>
-						<div class="sn-attribute__value" th:text="${#dates.format(avaliacaoLaboratorial.atualizado,'dd/MM/yyyy')}">01/01/1995</div>
-					</div>
-					
-					<div class="sn-attribute mdl-cell mdl-cell--12-col">
-						<div class="sn-attribute__title">Observação</div>
-						<div class="sn-attribute__value" th:text="${avaliacaoLaboratorial.observacao}">está bem!</div>
-					</div>
-					
-					<div class="sn-attribute mdl-cell mdl-cell--12-col">
-						<div class="sn-attribute__title">Exames</div>
-						<ul class="sn-list-exames mdl-list">
-							<li th:each="exame : ${avaliacaoLaboratorial.exames}" class="mdl-list__item mdl-list__item--two-line mdl-color--grey-100">
-								<span class="mdl-list__item-primary-content">
-									<span class="sn-exame-type" th:text="${exame.nome.nome}">Exame tal</span>
-									<span class="mdl-list__item-sub-title sn-exame-value" th:text="${exame.resultado}">5.56 kg</span>
+
+
+					<div
+						class="mdl-grid mdl-cell mdl-cell--12-col sn-padding--48 mdl-color--white sn-card">
+
+						<div class="sn-attribute mdl-cell mdl-cell--6-col">
+							<div class="sn-attribute__title">Data de Criação</div>
+							<div class="sn-attribute__value"
+								th:text="${#dates.format(avaliacaoLaboratorial.criadoEm,'dd/MM/yyyy')}">01/01/1995</div>
+						</div>
+
+						<div class="sn-attribute mdl-cell mdl-cell--6-col">
+							<div class="sn-attribute__title">Última atualização</div>
+							<div class="sn-attribute__value"
+								th:text="${#dates.format(avaliacaoLaboratorial.atualizado,'dd/MM/yyyy')}">01/01/1995</div>
+						</div>
+
+						<div class="sn-attribute mdl-cell mdl-cell--12-col">
+							<div class="sn-attribute__title">Observação</div>
+							<div class="sn-attribute__value"
+								th:text="${avaliacaoLaboratorial.observacao}">está bem!</div>
+						</div>
+
+						<div class="sn-attribute mdl-cell mdl-cell--12-col">
+							<div class="sn-attribute__title">Exames</div>
+							<ul class="sn-list-exames mdl-list">
+								<li th:each="exame : ${avaliacaoLaboratorial.exames}"
+									class="mdl-list__item mdl-list__item--two-line mdl-color--grey-100">
+									<span class="mdl-list__item-primary-content"> <span
+										class="sn-exame-type" th:text="${exame.nome.nome}">Exame
+											tal</span> <span class="mdl-list__item-sub-title sn-exame-value"
+										th:text="${exame.resultado}">5.56 kg</span>
 								</span>
-							</li>
-						</ul>
+								</li>
+							</ul>
+						</div>
+
 					</div>
-					
+
 				</div>
 
 			</div>
-
-		</div>
-
-		<div class="mdl-cell mdl-cell--3-col-desktop mdl-cell--8-col-tablet mdl-cell--4-col-phone">
-			<div class="sn-card sn-padding--48">
-				<div class="mdl-layout-title">Informações do Paciente</div>
-										
-				<div class="sn-attribute__title">Nome</div>
-				<div class="sn-attribute__value" th:text="${avaliacaoLaboratorial.paciente.pessoa.nome}"></div>
-					
-				<div class="sn-attribute__title">Sexo</div>
-				<div class="sn-attribute__value" th:text="${avaliacaoLaboratorial.paciente.pessoa.sexo}"></div>
-					
-				<div class="sn-attribute__title">Idade</div>
-				<div class="sn-attribute__value" th:text="${avaliacaoLaboratorial.paciente.pessoa.getIdade()}"></div>
-					
-				<div class="sn-attribute__title">CPF</div>
-				<div class="sn-attribute__value" th:text="${avaliacaoLaboratorial.paciente.pessoa.cpf}"></div>
-					
-				<div class="sn-attribute__title">Telefone</div>
-				<div class="sn-attribute__value" th:text="${avaliacaoLaboratorial.paciente.pessoa.telefone}"></div>
-					
-				<div class="sn-attribute__title">Cargo/Ocupação</div>
-				<div class="sn-attribute__value" th:text="${avaliacaoLaboratorial.paciente.pessoa.ocupacaoOuCargo}"></div>
-					
-				<div class="sn-attribute__title">Email</div>
-				<div class="sn-attribute__value" th:text="${avaliacaoLaboratorial.paciente.pessoa.email}"></div>
-							
-				<div class="sn-attribute__title">Vínculo</div>
-				<div class="sn-attribute__value" th:text="${avaliacaoLaboratorial.paciente.pessoa.vinculo}"></div>
-			</div>
+	<div id="modal-exclusao-avaliacao-laboratorial" class="sn-display-none">Você
+		realmente deseja excluir esta Avaliação Laboratorial?</div>
 		</div>
 
 	</div>
+
 	
-	<div id="modal-exclusao-avaliacao-laboratorial" class="sn-display-none">
-		Você realmente deseja excluir esta Avaliação Laboratorial?
-	</div>
-		
+
 </section>
 
 <section layout:fragment="js">
 
 	<script type="text/javascript" th:src="@{/js/moment.js}"></script>
 	<script type="text/javascript" th:src="@{/js/material-date-picker.js}"></script>
-	<script type="text/javascript" th:src="@{/js/avaliacao-laboratorial/visualizar.js}"></script>
+	<script type="text/javascript"
+		th:src="@{/js/avaliacao-laboratorial/visualizar.js}"></script>
 </section>
 
 </html>

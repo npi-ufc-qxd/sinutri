@@ -7,7 +7,7 @@ import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.util.Date;
 import java.util.List;
-import javax.persistence.Column;
+
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -19,23 +19,24 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
-import javax.validation.Valid;
+
+import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.format.annotation.DateTimeFormat;
+
 import br.ufc.quixada.npi.sinutri.model.enuns.Sexo;
 
 @Entity
 //@EntityListeners(PessoaEntityListener.class)
-@Table(uniqueConstraints = @UniqueConstraint(columnNames = { "id", "cpf" }))
+@Table(uniqueConstraints = @UniqueConstraint(columnNames = { "id" }))
 public class Pessoa {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@Valid
-	@Column(unique = true)
 	private String cpf;	
 
+	@NotEmpty(message = "Especifique um nome.")
 	private String nome;
 
 	@DateTimeFormat(pattern = "dd/MM/yyyy")

@@ -272,21 +272,21 @@
 							<a th:href="@{${'/Paciente/' + paciente.id + '/PlanoAlimentar'}}" class="sn-card-add mdl-button mdl-button--raised mdl-js-button mdl-color-text--white mdl-js-ripple-effect sn-float--right mdl-color--brown-500">ADICIONAR</a>
 						</div>
 
-						<div class="sn-card-list-container mdl-cell mdl-cell--12-col">
+						<div th:id="planoAlimentares" class="sn-card-list-container mdl-cell mdl-cell--12-col">
 							<ul class="sn-card-list mdl-list list">
-								<li class="sn-card-list__item mdl-list__item mdl-list__item--one-line mdl-color--grey-200">
+								<li th:each="planoAlimentar,iterationStatus : ${paciente.planosAlimentares}" class="sn-card-list__item mdl-list__item mdl-list__item--one-line mdl-color--grey-200">
 									<span class="mdl-list__item-primary-content">
-										<span class="sn-card-list__item-text timestamp">dd/MM/yyyy</span>
+										<span class="sn-card-list__item-text timestamp" th:attr="data-timestamp=${#dates.format(planoAlimentar.criadoEm,'yyyyMMdd')}" th:text="${#dates.format(planoAlimentar.criadoEm,'dd/MM/yyyy')}">dd/MMM/yyyy</span>
 									</span>
 									<span class="mdl-list__item-secondary-content">
-										<button id="sn-plano-alimentar-0" class="mdl-button mdl-js-button mdl-button--icon">
+										<button th:id="|sn-planoAlimentar-${iterationStatus.index}|" class="mdl-button mdl-js-button mdl-button--icon">
 											<i class="material-icons">more_vert</i>
 										</button>
-										<div class="mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect" for="sn-plano-alimentar-0">
-											<a class="mdl-menu__item">Visualizar</a>
-											<a class="mdl-menu__item">Editar</a>
+										<div class="mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect" th:attr="for=|sn-planoAlimentar-${iterationStatus.index}|">
+											<a th:href="@{/Paciente/__${paciente.id}__/PlanoAlimentar/__${planoAlimentar.id}__}" class="mdl-menu__item">Visualizar</a>
+											<a th:href="@{/Paciente/__${paciente.id}__/PlanoAlimentar/__${planoAlimentar.id}__/Editar}" class="mdl-menu__item">Editar</a>
 											<div class="mdl-menu__item--full-bleed-divider"></div>
-											<a class="mdl-menu__item">Excluir</a>
+											<a th:href="@{/Paciente/__${paciente.id}__/PlanoAlimentar/__${planoAlimentar.id}__/Excluir}" class="mdl-menu__item bt-excluir-plano-alimentar">Excluir</a>
 										</div>
 									</span>
 
@@ -331,6 +331,44 @@
 
 				</div>
 				
+				<!-- Falta ajustar  -->
+				<div class="sn-card-paciente mdl-cell mdl-cell--6-col-desktop mdl-cell--8-col-tablet mdl-cell--4-col-phone sn-card ">
+
+					<div class="mdl-grid mdl-grid--no-spacing">
+
+						<div class="mdl-cell mdl-cell--12-col sn-padding--48">
+							<div class="sn-card-title mdl-layout-title sn-display--inline mdl-color-text--pink-600">Cálculo Gastos Energéticos</div>
+							<a th:href="@{${'/Paciente/' + paciente.id + '/GastosEnergeticos'}}" class="sn-card-add mdl-button mdl-button--raised mdl-js-button mdl-color-text--white mdl-js-ripple-effect sn-float--right mdl-color--pink-500">ADICIONAR</a>
+						</div>
+
+						<div class="sn-card-list-container mdl-cell mdl-cell--12-col">
+							<ul class="sn-card-list mdl-list list">
+								<li class="sn-card-list__item mdl-list__item mdl-list__item--one-line mdl-color--grey-200">
+									<span class="mdl-list__item-primary-content">
+										<span class="sn-card-list__item-text timestamp">dd/MM/yyyy</span>
+									</span>
+									<span class="mdl-list__item-secondary-content">
+										<button id="sn-gastos-energeticos-0" class="mdl-button mdl-js-button mdl-button--icon">
+											<i class="material-icons">more_vert</i>
+										</button>
+										<div class="mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect" for="sn-gastos-energeticos-0">
+											<a class="mdl-menu__item">Visualizar</a>
+											<a class="mdl-menu__item">Editar</a>
+											<div class="mdl-menu__item--full-bleed-divider"></div>
+											<a class="mdl-menu__item">Excluir</a>
+										</div>
+									</span>
+
+								</li>
+							</ul>
+						</div>
+					</div>
+
+				</div>				
+				
+				
+				
+				
 			</div>
             	
         </div>
@@ -364,6 +402,9 @@
 		<div id="modal-exclusao-plano-alimentar" class="sn-display-none">
 			Você realmente deseja excluir este Plano Alimentar?
 		</div>  
+		
+		<!-- Falta o modal dos gastos energeticos -->
+		
         
 	</section>	
 	
@@ -371,6 +412,7 @@
 		<script type="text/javascript" th:src="@{/js/anamnese/visualizar.js}"></script>
 		<script type="text/javascript" th:src="@{/js/antropometria/visualizar.js}"></script>
 		<script type="text/javascript" th:src="@{/js/recordatorio/visualizar.js}"></script>
+		<script type="text/javascript" th:src="@{/js/plano-alimentar/visualizar.js}"></script>
 		<script type="text/javascript" th:src="@{/js/prescricao/visualizar.js}"></script>
 		<script type="text/javascript" th:src="@{/js/inquerito-alimentar/visualizar.js}"></script>
 		<script type="text/javascript" th:src="@{/js/avaliacao-laboratorial/visualizar.js}"></script>
@@ -385,11 +427,12 @@
 	
 			var anamnese = new List('anamneses', options).sort('timestamp', { order: "desc" });
  			var avaliacaoAntropometrica = new List('avaliacoesAntropometricas', options).sort('timestamp', { order: "desc" });
- //			var recordatorio = new List('recordatorios', options).sort('timestamp', { order: "desc" });
+ 			var recordatorio = new List('recordatorios', options).sort('timestamp', { order: "desc" });
  			var prescricao = new List('prescricoes', options).sort('timestamp', { order: "desc" });
  			var inqueritoAlimentar = new List('inqueritosAlimentares', options).sort('timestamp', { order: "desc" });
  			var avaliacaoLaboratorial = new List('avaliacoesLaboratoriais', options).sort('timestamp', { order: "desc" });
  			var planoAlimentar = new List('planosAlimentares', options).sort('timestamp', { order: "desc" });
+ 			var gastosEnergeticos = new List('gastosEnergeticos', options).sort('timestamp', { order: "desc" });
 			
 		
 		

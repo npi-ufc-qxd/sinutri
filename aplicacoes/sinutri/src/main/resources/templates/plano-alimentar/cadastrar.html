@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="estrutura/dashboard">
+
+<head>
+<title>Sinutri | Novo Plano Alimentar</title>
+<link rel="stylesheet" type="text/css"
+	th:href="@{/css/material-date-picker.css}" />
+<link rel="stylesheet" type="text/css"
+	th:href="@{/css/plano-alimentar/cadastrar-editar.css}" />
+<link rel="stylesheet" type="text/css" th:href="@{/css/select2.min.css}" />
+</head>
+
+
+<body>
+	<section layout:fragment="title">
+		<label class="mdl-layout-title">Cadastrar Plano Alimentar</label>
+	</section>
+	<section layout:fragment="conteudo">
+
+		<div class="mdl-grid">
+			<div
+				class="sn-breadcrumbs__position mdl-cell mdl-cell--10-col-desktop mdl-cell--1-offset-desktop mdl-cell--8-col-tablet mdl-cell--4-col-phone mdl-grid sn-main-grid">
+				<div class="mdl-cell mdl-cell--12-col">
+					<a th:href="@{/Nutricao/Buscar}"
+						class="sn-breadcrumbs sn-attribute__title">Início</a> <a
+						th:href="@{/Paciente/__${planoAlimentar.paciente.id}__}"
+						class="sn-breadcrumbs sn-attribute__title">Paciente</a> <a
+						class="sn-attribute__title sn-breadcrumbs">Cadastrar Plano
+						Alimentar</a>
+				</div>
+				<div class="mdl-cell mdl-cell--12-col sn-card">
+					<div
+						class="mdl-layout-title mdl-color-text--brown-600 sn-padding--48">
+						Cadastrar Plano Alimentar
+						<div id="div_arrow" class="sn-colapse-div sn-attribute__title">
+							<span
+								th:text="${planoAlimentar.paciente.pessoa.nome+', '+planoAlimentar.paciente.pessoa.getIdade()+' anos'}"></span>
+							<i
+								class="sn-breadcrumbs__icon material-icons arrow_icon_position">keyboard_arrow_down</i>
+						</div>
+					</div>
+					<div class="sn-form__hdivider sn-margin--none"></div>
+					<div class="sn-colapsable-div sn-padding--48 mdl-color--white">
+
+						<div class="mdl-grid mdl-grid--no-spacing">
+							<div class="sn-attribute mdl-cell mdl-cell--4-col">
+								<div class="sn-attribute__title">Nome</div>
+								<div class="sn-attribute__value"
+									th:text="${planoAlimentar.paciente.pessoa.nome+', '+planoAlimentar.paciente.pessoa.getIdade()+' anos'}"></div>
+							</div>
+
+							<div class="sn-attribute mdl-cell mdl-cell--4-col">
+								<div class="sn-attribute__title">Sexo</div>
+								<div class="sn-attribute__value"
+									th:text="${planoAlimentar.paciente.pessoa.sexo}"></div>
+							</div>
+
+							<div class="sn-attribute mdl-cell mdl-cell--4-col">
+								<div class="sn-attribute__title">Telefone</div>
+								<div class="sn-attribute__value"
+									th:text="${planoAlimentar.paciente.pessoa.telefone}"></div>
+							</div>
+
+							<div class="sn-attribute mdl-cell mdl-cell--4-col">
+								<div class="sn-attribute__title">Email</div>
+								<div class="sn-attribute__value"
+									th:text="${planoAlimentar.paciente.pessoa.email}"></div>
+							</div>
+
+							<div class="sn-attribute mdl-cell mdl-cell--4-col">
+								<div class="sn-attribute__title">CPF</div>
+								<div class="sn-attribute__value"
+									th:text="${planoAlimentar.paciente.pessoa.cpf}"></div>
+							</div>
+
+							<div class="sn-attribute mdl-cell mdl-cell--4-col">
+								<div class="sn-attribute__title">Cargo/Ocupação</div>
+								<div class="sn-attribute__value"
+									th:text="${planoAlimentar.paciente.pessoa.ocupacaoOuCargo}"></div>
+							</div>
+
+							<div class="sn-attribute mdl-cell mdl-cell--4-col">
+								<div class="sn-attribute__title">Vínculo</div>
+								<div class="sn-attribute__value"
+									th:text="${planoAlimentar.paciente.pessoa.vinculo}"></div>
+							</div>
+						</div>
+					</div>
+
+				</div>
+
+				<form action="#" id="formAdicionarPlanoAlimentar" method="post"
+					class="sn-form 
+		    mdl-cell 
+		    mdl-cell--12-col-desktop 
+		    mdl-cell--8-col-tablet 
+		    mdl-cell--4-col-phone 
+		    mdl-grid 
+		    mdl-grid--no-spacing 
+		    sn-main-card"
+					th:action="@{/Paciente/__${idPaciente}__/PlanoAlimentar/}"
+					th:object="${planoAlimentar}" accept-charset="utf-8">
+					<div
+						class="sn-card-top mdl-cell mdl-cell--12-col sn-card sn-padding--48 mdl-color--white mdl-grid">
+
+						<div class="sn-textfield mdl-cell mdl-cell--6-col">
+							<label class="sn-textfield__label" for="criadoEm">Data de
+								criação</label> <input class="sn-textfield__input sn-date-picker"
+								type="text" id="criadoEm" th:field="*{criadoEm}" />
+
+						</div>
+
+						<div class="sn-form__hdivider mdl-cell mdl-cell--6-col"></div>
+
+						<label class="sn-textfield__label mdl-cell mdl-cell--1-col">Refeições</label>
+						<label
+							class="sn-textfield__messages sn-error-text mdl-cell mdl-cell--3-col"
+							for="sn-text" th:if="${#fields.hasErrors('refeicoes')}"
+							th:errors="*{refeicoes}"></label>
+						<div
+							class="mdl-cell mdl-offset--6-col mdl-cell--12-col demo-list-three mdl-list mdl-color--grey-200">
+							<ul id="refeicoes" class="sn-list-refeicoes">
+
+								<li
+									class="mdl-list__item mdl-list__item--three-line mdl-shadow--2dp sn-card sn-cloneable">
+
+									<input type="hidden" th:field="*{refeicoes[0].hora}"
+									class="sn-refeicao-input-hora" value="00:00" /> <input
+									type="hidden" th:field="*{refeicoes[0].descricao}"
+									class="sn-refeicao-input-descricao" value="CAFEMANHA" /> <input
+									type="hidden" th:field="*{refeicoes[0].observacao}"
+									class="sn-refeicao-input-observacao" value="akhggf" /> <span
+									class="mdl-list__item-primary-content">
+
+										<div class="mdl-grid mdl-grid--no-spacing">
+											<div class="mdl-cell mdl-cell--4-col">
+
+												<span>Hora</span> <span
+													class="mdl-list__item-text-body sn-refeicao-hora">
+													Bryan Cranston played the role of Walter in Breaking Bad.
+													He is also known for playing Hal in Malcom in the Middle. </span>
+
+											</div>
+
+											<div class="mdl-cell mdl-cell--4-col">
+
+												<span>Descrição</span> <span
+													class="mdl-list__item-text-body sn-refeicao-descricao">
+													Bryan Cranston played the role of Walter in Breaking Bad.
+													He is also known for playing Hal in Malcom in the Middle. </span>
+
+											</div>
+
+											<div class="mdl-cell mdl-cell--12-col">
+
+												<span>Observação</span> <span
+													class="mdl-list__item-text-body sn-refeicao-observacao">
+													Bryan Cranston played the role of Walter in Breaking Bad.
+													He is also known for playing Hal in Malcom in the Middle. </span>
+
+											</div>
+										</div>
+
+								</span> <span class="mdl-list__item-secondary-content">
+
+										<button type="button"
+											class="mdl-button mdl-js-button mdl-button--icon sn-refeicao-editar">
+
+											<i class="material-icons mdl-color-text--grey-700">mode_edit</i>
+
+										</button>
+
+								</span> <span class="mdl-list__item-secondary-content">
+
+										<button type="button"
+											class="mdl-button mdl-js-button mdl-button--icon sn-refeicao-duplicar">
+
+											<i class="material-icons mdl-color-text--grey-700">content_copy</i>
+
+										</button>
+
+								</span> <span class="mdl-list__item-secondary-content">
+
+										<button type="button"
+											class="mdl-button mdl-js-button mdl-button--icon sn-refeicao-remover">
+
+											<i class="material-icons mdl-color-text--grey-700">close</i>
+
+										</button>
+
+								</span>
+
+								</li>
+
+							</ul>
+							<div class="sn-list-refeicao__actions">
+								<button id="sn-add-refeicao-button" type="button"
+									class="mdl-button mdl-button--primary mdl-js-button mdl-js-ripple-effect">Adicionar
+									Refeição</button>
+							</div>
+						</div>
+						<div class="sn-form-actions">
+							<input type="submit" id="btnAdicionarRecordatorio"
+								class="mdl-button mdl-js-button mdl-button--raised mdl-button--primary mdl-js-ripple-effect"
+								value="Cadastrar" />
+
+							<button type="button" id="btnCancelar"
+								class="mdl-button mdl-js-button mdl-button--colored mdl-js-ripple-effect"
+								th:attr="link=@{/Paciente/__${idPaciente}__}">Cancelar
+							</button>
+						</div>
+
+					</div>
+
+
+
+
+					<div id="sn-add-refeicao-modal">
+
+						<div class="mdl-grid">
+							<input type="hidden" id="sn-refeicao-item-index" />
+							<div class="sn-textfield mdl-cell mdl-cell--3-col">
+
+								<label for="sn-refeicao-hora" class="sn-textfield__label">
+									Hora </label> <input type="text"
+									pattern="^(0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$"
+									class="validate sn-textfield__input sn-time-picker"
+									id="sn-refeicao-hora" name="snrefeicaohora" />
+
+							</div>
+
+							<div class="sn-selectfield mdl-cell mdl-cell--9-col">
+
+								<label for="sn-refeicao-descricao" class="sn-textfield__label">
+									Tipo </label> <select class="validate sn-selectfield__select"
+									id="sn-refeicao-descricao" name="snrefeicaodescricao">
+
+									<option value="">Selecione uma opção</option>
+
+									<option th:each="tipo : ${tiposRefeicao}" th:value="${tipo}"
+										th:text="${tipo.nome}"></option>
+
+								</select>
+
+							</div>
+
+
+							<div class="sn-textfield mdl-cell mdl-cell--12-col">
+
+								<label for="sn-refeicao-observacao" class="sn-textfield__label">
+									Observação </label>
+								<textarea class="sn-textfield__input"
+									id="sn-refeicao-observacao" maxlength="255"
+									name="snrefeicaoobservacao"></textarea>
+							</div>
+
+							<label class="sn-textfield__label mdl-cell mdl-cell--2-col"
+								for="alimentos">Alimentos</label> <input type="hidden"
+								id="sn-alimento-item-index" />
+							<div
+								class="mdl-cell mdl-offset--6-col mdl-cell--12-col demo-list-three mdl-list mdl-color--grey-200">
+
+								<ul id="alimentos" class="sn-list-alimento-porcao">
+
+									<li
+										class="mdl-list__item mdl-list__item--three-line mdl-shadow--2dp sn-card sn-cloneable">
+
+										<input type="hidden"
+										th:field="*{refeicoes[0].porcoesAlimentos[0].alimento.id}"
+										class="sn-alimento-input-nome" value="00:00" /> <input
+										type="hidden"
+										th:field="*{refeicoes[0].porcoesAlimentos[0].quantidade}"
+										class="sn-alimento-input-quantidade" value="CAFEMANHA" /> <span
+										class="hidden sn-alimento-input-fonte"></span> <span
+										class="mdl-list__item-primary-content">
+
+											<div class="mdl-grid mdl-grid--no-spacing">
+
+												<div class="mdl-cell mdl-cell--4-col">
+
+													<span>Nome</span> <span
+														class="mdl-list__item-text-body sn-alimento-nome">
+														Bryan Cranston played the role of Walter in Breaking Bad.
+														He is also known for playing Hal in Malcom in the Middle.
+													</span>
+
+												</div>
+
+												<div class="mdl-cell mdl-cell--4-col">
+
+													<span>Quantidade</span> <span
+														class="mdl-list__item-text-body sn-alimento-quantidade">
+														Bryan Cranston played the role of Walter in Breaking Bad.
+														He is also known for playing Hal in Malcom in the Middle.
+													</span>
+
+												</div>
+											</div>
+
+									</span> <span class="mdl-list__item-secondary-content">
+
+											<button type="button"
+												class="mdl-button mdl-js-button mdl-button--icon sn-alimento-editar">
+
+												<i class="material-icons mdl-color-text--grey-700">mode_edit</i>
+
+											</button>
+
+									</span> <span class="mdl-list__item-secondary-content">
+
+											<button type="button"
+												class="mdl-button mdl-js-button mdl-button--icon sn-alimento-duplicar">
+
+												<i class="material-icons mdl-color-text--grey-700">content_copy</i>
+
+											</button>
+
+									</span> <span class="mdl-list__item-secondary-content">
+
+											<button type="button"
+												class="mdl-button mdl-js-button mdl-button--icon sn-alimento-remover">
+
+												<i class="material-icons mdl-color-text--grey-700">close</i>
+
+											</button>
+
+									</span>
+
+									</li>
+								</ul>
+								<div class="sn-list-refeicao__actions">
+									<button id="sn-add-alimento-button" type="button"
+										class="mdl-button mdl-button--primary mdl-js-button mdl-js-ripple-effect">Adicionar
+										Alimento</button>
+								</div>
+
+							</div>
+							<label id="validate"
+								class="sn-textfield__messages sn-error-text mdl-cell mdl-cell--5-col"
+								style="display: none">Adicione pelo menos um alimento</label>
+						</div>
+
+					</div>
+
+					<div id="sn-add-alimento-modal" class="mdl-grid">
+
+						<input type="hidden" id="sn-alimento-item-index" val="" />
+						<div class="mdl-cell mdl-cell--6-col">
+							<<<<<<< HEAD <label>Fonte:</label> <select id="sn-alimento-fonte"
+								class="validate sn-selectfield__select" data-role="select">
+								=======
+								<label class="sn-textfield__label">Fonte:</label>
+								<select id="sn-alimento-fonte" class="sn-selectfield__select"
+								data-role="select"> >>>>>>> refs/heads/master
+									<option value="">Escolha uma fonte</option>
+									<option value="MEUSALIMENTOS">MEUS ALIMENTOS</option>
+									<option value="TACO">TACO</option>
+									<option value="TUCUNDUVA">TUCUNDUVA</option>
+							</select>
+						</div>
+
+						<div class="mdl-cell mdl-cell--6-col">
+							<label class="sn-textfield__label">Alimento:</label> <select
+								id="sn-alimento-nome" class="sn-selectfield__select select2"
+								th:attr="data-url=@{/Paciente/__${idPaciente}__/PlanoAlimentar/Alimentos/?fonte=}">
+								<option value="">Escolha um alimento</option>
+							</select>
+						</div>
+
+						<div class="mdl-cell mdl-cell--16-col">
+							<label class="sn-textfield__label">Quantidade:</label> <input
+								id="sn-alimento-quantidade" type="number" min="0" max="999999"
+								class="validate sn-textfield__input" step="0.01" />
+						</div>
+
+					</div>
+
+				</form>
+			</div>
+			<div id="sn-confirma-cancelar-modal">Você realmente deseja
+				descartar as alterações?</div>
+		</div>
+	</section>
+
+	<section layout:fragment="js">
+		<script type="text/javascript" th:src="@{/js/moment.js}"></script>
+		<script type="text/javascript" th:src="@{/js/validacao.js}"></script>
+		<script type="text/javascript" th:src="@{/js/material-date-picker.js}"></script>
+		<script type="text/javascript"
+			th:src="@{/js/plano-alimentar/cadastrar-editar.js}"></script>
+		<script type="text/javascript" th:src="@{/js/select2.min.js}"></script>
+	</section>
+
+</body>
+</html>

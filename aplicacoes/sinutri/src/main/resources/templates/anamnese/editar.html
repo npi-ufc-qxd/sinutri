@@ -14,420 +14,440 @@
 </section>
 <section layout:fragment="conteudo">
 	<div class="mdl-grid">
-		<div class="mdl-cell mdl-cell--11-col mdl-cell--1-offset-desktop">
-			<a th:href="@{/Nutricao/Buscar}" class="sn-breadcrumbs sn-attribute__title">Início</a>
-			<a th:href="@{${'/Paciente/'+anamnese.paciente.id}}" class="sn-breadcrumbs sn-attribute__title">Paciente</a>
-			<a class="sn-attribute__title sn-breadcrumbs">Editar Anamnese</a>
-		</div>
-		<form
-			class="
-	           sn-form mdl-cell
-	           mdl-cell--7-col-desktop mdl-cell--1-offset-desktop
-	           mdl-cell--8-col-tablet
-	           mdl-cell--4-col-phone
-	           mdl-grid mdl-grid--no-spacing
-	           sn-main-card"
-			id="form-anamnese" method="post"
-			th:action="@{${'/Paciente/'+anamnese.paciente.id+'/Anamnese/'+anamnese.id+'/Editar'}}"
-			th:object="${anamnese}">
-
-			<div
-				class="mdl-cell mdl-cell--12-col sn-card sn-padding--48 mdl-color--white">
-				<div class="mdl-layout-title mdl-color-text--red-600">Editar Anamnese</div>
+		<div  class="sn-breadcrumbs__position mdl-cell mdl-cell--10-col-desktop mdl-cell--1-offset-desktop mdl-cell--8-col-tablet mdl-cell--4-col-phone mdl-grid sn-main-grid">
+			<div class="mdl-cell mdl-cell--12-col">
+				<a th:href="@{/Nutricao/Buscar}" class="sn-breadcrumbs sn-attribute__title">Início</a>
+				<a th:href="@{${'/Paciente/'+anamnese.paciente.id}}" class="sn-breadcrumbs sn-attribute__title">Paciente</a>
+				<a class="sn-attribute__title sn-breadcrumbs">Editar Anamnese</a>
 			</div>
-
-			<div class="sn-card-top mdl-cell mdl-cell--12-col sn-card sn-padding--48 mdl-color--white mdl-grid">
-
-				<input type="hidden" th:field="*{id}" name="id" /> <input
-					type="hidden" th:field="*{paciente.id}" /> <input type="hidden"
-					th:field="*{criadoEm}" />
-
-				<div class="sn-textfield mdl-cell mdl-cell--6-col">
-					<label class="sn-textfield__label" for="dataModificacao">Data
-						de Edição</label> <input class="sn-textfield__input sn-date-picker"
-						type="text" id="dataModificacao" th:field="*{atualizadoEm}" /> <label
-						class="sn-textfield__messages sn-error-text"
-						th:if="${#fields.hasErrors('atualizadoEm')}"
-						th:errors="*{atualizadoEm}">Error message</label>
+	
+			<div class="mdl-cell mdl-cell--12-col sn-card">
+				<div
+					class="mdl-layout-title mdl-color-text--red-600 sn-padding--48">
+					Editar Anamnese
+					<div id="div_arrow" class="sn-colapse-div sn-attribute__title">
+						<span
+							th:text="${anamnese.paciente.pessoa.nome+', '+anamnese.paciente.pessoa.getIdade()+' anos'}"></span>
+						<i class="sn-breadcrumbs__icon material-icons arrow_icon_position">keyboard_arrow_down</i>
+					</div>
+					
+	
 				</div>
-
-				<div class="sn-textfield mdl-cell mdl-cell--12-col">
-					<label class="sn-textfield__label" for="textObjetivoConsulta">Objetivo
-						da consulta</label>
-					<textarea class="sn-textfield__input" rows="5"
-						id="textObjetivoConsulta" th:field="*{objetivoConsulta}" maxlength="255"
-						placeholder="Descreva aqui o objetivo da consulta..."></textarea>
-					<label class="sn-textfield__messages sn-error-text"
-						th:if="${#fields.hasErrors('objetivoConsulta')}"
-						th:errors="*{objetivoConsulta}">Error message</label>
+				<div class="sn-form__hdivider sn-margin--none"></div>
+				<div class="sn-colapsable-div sn-padding--48 mdl-color--white">
+	
+					<div class="mdl-grid mdl-grid--no-spacing">
+							
+						<div class="sn-attribute mdl-cell mdl-cell--4-col">
+							<div class="sn-attribute__title">Sexo</div>
+							<div class="sn-attribute__value"
+								th:text="${anamnese.paciente.pessoa.sexo}"></div>
+						</div>
+	
+						<div class="sn-attribute mdl-cell mdl-cell--4-col">
+							<div class="sn-attribute__title">Telefone</div>
+							<div class="sn-attribute__value"
+								th:text="${anamnese.paciente.pessoa.telefone}"></div>
+						</div>
+	
+						<div class="sn-attribute mdl-cell mdl-cell--4-col">
+							<div class="sn-attribute__title">Email</div>
+							<div class="sn-attribute__value"
+								th:text="${anamnese.paciente.pessoa.email}"></div>
+						</div>
+	
+						<div class="sn-attribute mdl-cell mdl-cell--4-col">
+							<div class="sn-attribute__title">CPF</div>
+							<div class="sn-attribute__value"
+								th:text="${anamnese.paciente.pessoa.cpf}"></div>
+						</div>
+	
+						<div class="sn-attribute mdl-cell mdl-cell--4-col">
+							<div class="sn-attribute__title">Cargo/Ocupação</div>
+							<div class="sn-attribute__value"
+								th:text="${anamnese.paciente.pessoa.ocupacaoOuCargo}"></div>
+						</div>
+	
+						<div class="sn-attribute mdl-cell mdl-cell--4-col">
+							<div class="sn-attribute__title">Vínculo</div>
+							<div class="sn-attribute__value"
+								th:text="${anamnese.paciente.pessoa.vinculo}"></div>
+						</div>
+					</div>
 				</div>
+	
 			</div>
-			<div class="sn-card-top mdl-cell mdl-cell--12-col sn-card sn-padding--48 mdl-color--white mdl-grid">
-				<h5 class="mdl-cell mdl-cell--12-col">Hábitos de Vida</h5>
-				<label
-					class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect mdl-cell mdl-cell--12-col"
-					for="checkAtividadeFisica"> <input type="checkbox"
-					id="checkAtividadeFisica" th:field="*{atividadeFisica}"
-					class="mdl-checkbox__input"
-					onClick="checkChange('AtividadeFisica')" /> <span
-					class="mdl-checkbox__label">Atividade Física</span>
-				</label>
-				<div class="sn-textfield mdl-cell mdl-cell--12-col">
-					<label class="sn-textfield__label" for="inputTextAtividadeFisica">Quais
-						atividades?</label> <input id="inputTextAtividadeFisica" type="text"
-						th:field="*{atividadeFisicaComentario}" maxlength="255"
-						class="sn-textfield__input" /> <label
-						class="sn-textfield__messages sn-error-text"
-						th:if="${#fields.hasErrors('atividadeFisicaComentario')}"
-						th:errors="*{atividadeFisicaComentario}">Error
-						message</label>
+			
+			<form class="sn-form mdl-cell mdl-cell--12-col-desktop mdl-cell--8-col-tablet mdl-cell--4-col-phone mdl-grid mdl-grid--no-spacing sn-main-card"
+				id="form-anamnese" method="post"
+				th:action="@{${'/Paciente/'+anamnese.paciente.id+'/Anamnese/'+anamnese.id+'/Editar'}}"
+				th:object="${anamnese}">
+	
+				<div class="sn-card-top mdl-cell mdl-cell--12-col sn-card sn-padding--48 mdl-color--white mdl-grid">
+	
+					<input type="hidden" th:field="*{id}" name="id" /> <input
+						type="hidden" th:field="*{paciente.id}" /> <input type="hidden"
+						th:field="*{criadoEm}" />
+	
+					<div class="sn-textfield mdl-cell mdl-cell--6-col">
+						<label class="sn-textfield__label" for="dataModificacao">Data
+							de Edição</label> <input class="sn-textfield__input sn-date-picker"
+							type="text" id="dataModificacao" th:field="*{atualizadoEm}" /> <label
+							class="sn-textfield__messages sn-error-text"
+							th:if="${#fields.hasErrors('atualizadoEm')}"
+							th:errors="*{atualizadoEm}">Error message</label>
+					</div>
+	
+					<div class="sn-textfield mdl-cell mdl-cell--12-col">
+						<label class="sn-textfield__label" for="textObjetivoConsulta">Objetivo
+							da consulta</label>
+						<textarea class="sn-textfield__input" rows="5"
+							id="textObjetivoConsulta" th:field="*{objetivoConsulta}" maxlength="255"
+							placeholder="Descreva aqui o objetivo da consulta..."></textarea>
+						<label class="sn-textfield__messages sn-error-text"
+							th:if="${#fields.hasErrors('objetivoConsulta')}"
+							th:errors="*{objetivoConsulta}">Error message</label>
+					</div>
 				</div>
-
-				<label
-					class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect mdl-cell mdl-cell--12-col"
-					for="checkDormeBem"> <input type="checkbox"
-					id="checkDormeBem" th:field="*{dormeBem}"
-					class="mdl-checkbox__input" onClick="checkChange('DormeBem')" /> <span
-					class="mdl-checkbox__label">Dorme bem?</span>
-				</label>
-				<div class="sn-textfield mdl-cell mdl-cell--12-col">
-					<label class="sn-textfield__label" for="inputTextDormeBem">Comentários</label>
-					<input id="inputTextDormeBem" type="text" maxlength="255"
-						th:field="*{dormeBemComentario}" class="sn-textfield__input" />
-					<label class="sn-textfield__messages sn-error-text"
-						th:if="${#fields.hasErrors('dormeBemComentario')}"
-						th:errors="*{dormeBemComentario}">Error message</label>
-				</div>
-
-				<label
-					class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect mdl-cell mdl-cell--12-col"
-					for="checkBebidaAlcoolica"> <input type="checkbox"
-					id="checkBebidaAlcoolica" th:field="*{bebidaAlcoolica}"
-					class="mdl-checkbox__input"
-					onClick="checkChange('BebidaAlcoolica')" /> <span
-					class="mdl-checkbox__label">Bebida alcóolica</span>
-				</label>
-				<div class="sn-textfield mdl-cell mdl-cell--12-col">
-					<label class="sn-textfield__label" for="inputTextBebidaAlcoolica">Comentários</label>
-					<input id="inputTextBebidaAlcoolica" type="text" maxlength="255"
-						th:field="*{bebidaAlcoolicaComentario}"
-						class="sn-textfield__input" /> <label
-						class="sn-textfield__messages sn-error-text"
-						th:if="${#fields.hasErrors('bebidaAlcoolicaComentario')}"
-						th:errors="*{bebidaAlcoolicaComentario}">Error
-						message</label>
-				</div>
-			</div>
-			<div class="sn-card-top mdl-cell mdl-cell--12-col sn-card sn-padding--48 mdl-color--white mdl-grid">
-				<h5 class="mdl-cell mdl-cell--12-col">Patologias</h5>
-				<div class="sn-textfield mdl-cell mdl-cell--12-col">
-					<label class="sn-textfield__label" for="inputTextPatologias">Comentários</label>
-					<input class="sn-textfield__input" type="text" maxlength="255"
-						id="inputTextPatologias" th:field="*{patologiasComentario}" />
-					<label class="sn-textfield__messages sn-error-text"
-						th:if="${#fields.hasErrors('patologiasComentario')}"
-						th:errors="*{patologiasComentario}">Error message</label>
-				</div>
-
-				<label
-					class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect mdl-cell mdl-cell--12-col"
-					for="checkMedicamento"> <input type="checkbox"
-					id="checkMedicamento" th:field="*{medicamento}"
-					class="mdl-checkbox__input" onclick="checkChange('Medicamento')" />
-					<span class="mdl-checkbox__label">Medicação</span>
-				</label>
-				<div class="sn-textfield mdl-cell mdl-cell--12-col">
-					<label class="sn-textfield__label" for="inputTextMedicamento">Comentários</label>
-					<input id="inputTextMedicamento" type="text" maxlength="255"
-						th:field="*{medicamentoComentario}" class="sn-textfield__input" />
-					<label class="sn-textfield__messages sn-error-text"
-						th:if="${#fields.hasErrors('medicamentoComentario')}"
-						th:errors="*{medicamentoComentario}">Error message</label>
-				</div>
-			</div>
-			<div class="sn-card-top mdl-cell mdl-cell--12-col sn-card sn-padding--48 mdl-color--white mdl-grid">
-				<h5 class="mdl-cell mdl-cell--12-col">Avaliação Clínica</h5>
-
-				<div class="sn-selectfield mdl-cell mdl-cell--6-col">
-					<label class="sn-textfield__label" for="selectApetite">Apetite</label>
-					<select id="selectApetite" th:field="*{apetite}"
-						class="sn-selectfield__select" onchange="selectChange('Apetite')">
-						<option value="">Selecione</option>
-						<option th:each="t: ${tiposApetite}" th:value="${t.tipo}"
-							th:text="${t.tipo}"></option>
-					</select>
-				</div>
-				<div class="sn-textfield mdl-cell mdl-cell--6-col">
-					<label class="sn-textfield__label" for="inputTextApetite">Comentário</label>
-					<input id="inputTextApetite" th:field="*{apetiteComentario}"
-						class="sn-textfield__input" type="text" maxlength="255" /> <label
-						class="sn-textfield__messages sn-error-text"
-						th:if="${#fields.hasErrors('apetiteComentario')}"
-						th:errors="*{apetiteComentario}">Error message</label>
-				</div>
-
-				<div class="sn-selectfield mdl-cell mdl-cell--6-col">
-					<label class="sn-textfield__label" for="selectApetite">Sistema
-						Urinário</label> <select id="selectSistemaUrinario"
-						th:field="*{sistemaUrinario}" class="sn-selectfield__select"
-						onchange="selectChange('SistemaUrinario')">
-						<option value="">Selecione</option>
-						<option th:each="t: ${tiposSistemaUrinario}" th:value="${t.tipo}"
-							th:text="${t.tipo}"></option>
-					</select>
-				</div>
-				<div class="sn-textfield mdl-cell mdl-cell--6-col">
-					<label class="sn-textfield__label" for="inputTextSistemaUrinario">Comentário</label>
-					<input id="inputTextSistemaUrinario"
-						th:field="*{sistemaUrinarioComentario}"
-						class="sn-textfield__input" type="text" maxlength="255" /> <label
-						class="sn-textfield__messages sn-error-text"
-						th:if="${#fields.hasErrors('sistemaUrinarioComentario')}"
-						th:errors="*{sistemaUrinarioComentario}">Error
-						message</label>
-				</div>
-
-
-				<div class="sn-selectfield mdl-cell mdl-cell--6-col">
-					<label class="sn-textfield__label" for="selectApetite">Sistema Gastrointestinal</label> 
-						<select id="selectSistemaGastrointestinal"
-						th:field="*{sistemaGastrointestinal}"
-						class="sn-selectfield__select"
-						onchange="selectChange('SistemaGastrointestinal')">
-						<option value="">Selecione</option>
-						<option th:each="t: ${tiposSistemaGastrointestinal}"
-							th:value="${t.tipo}" th:text="${t.tipo}"></option>
-					</select>
-				</div>
-				<div class="sn-textfield mdl-cell mdl-cell--6-col">
-					<label class="sn-textfield__label"
-						for="inputTextSistemaGastrointestinal">Comentário</label> <input
-						id="inputTextSistemaGastrointestinal"
-						th:field="*{sistemaGastrointestinalComentario}"
-						class="sn-textfield__input" type="text" maxlength="255"/> <label
-						class="sn-textfield__messages sn-error-text"
-						th:if="${#fields.hasErrors('sistemaGastrointestinalComentario')}"
-						th:errors="*{sistemaGastrointestinalComentario}">Error
-						message</label>
-				</div>
-
-				<div class="sn-textfield mdl-cell mdl-cell--12-col">
-					<label class="sn-textfield__label" for="inputTextAgua">Consumo
-						de água (copos)</label> <input id="inputTextAgua" th:field="*{agua}"
-						class="sn-textfield__input" type="number" step="0.01" min="0"
-						max="9999999" pattern="-?[0-9]*(\.[0-9]+)?" />
-					<div class="error-validation">
-						<label class=" label label-danger"
-							th:if="${#fields.hasErrors('agua')}" th:errors="*{agua}">Error
+				<div class="sn-card-top mdl-cell mdl-cell--12-col sn-card sn-padding--48 mdl-color--white mdl-grid">
+					<h5 class="mdl-cell mdl-cell--12-col">Hábitos de Vida</h5>
+					<label
+						class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect mdl-cell mdl-cell--12-col"
+						for="checkAtividadeFisica"> <input type="checkbox"
+						id="checkAtividadeFisica" th:field="*{atividadeFisica}"
+						class="mdl-checkbox__input"
+						onClick="checkChange('AtividadeFisica')" /> <span
+						class="mdl-checkbox__label">Atividade Física</span>
+					</label>
+					<div class="sn-textfield mdl-cell mdl-cell--12-col">
+						<label class="sn-textfield__label" for="inputTextAtividadeFisica">Quais
+							atividades?</label> <input id="inputTextAtividadeFisica" type="text"
+							th:field="*{atividadeFisicaComentario}" maxlength="255"
+							class="sn-textfield__input" /> <label
+							class="sn-textfield__messages sn-error-text"
+							th:if="${#fields.hasErrors('atividadeFisicaComentario')}"
+							th:errors="*{atividadeFisicaComentario}">Error
+							message</label>
+					</div>
+	
+					<label
+						class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect mdl-cell mdl-cell--12-col"
+						for="checkSono"> <input type="checkbox"
+						id="checkSono" th:field="*{sono}"
+						class="mdl-checkbox__input" onClick="checkChange('Sono')" /> <span
+						class="mdl-checkbox__label">Sono</span>
+					</label>
+					<div class="sn-textfield mdl-cell mdl-cell--12-col">
+						<label class="sn-textfield__label" for="inputTextSono">Comentários</label>
+						<input id="inputTextSono" type="text" maxlength="255"
+							th:field="*{sonoComentario}" class="sn-textfield__input" />
+						<label class="sn-textfield__messages sn-error-text"
+							th:if="${#fields.hasErrors('sonoComentario')}"
+							th:errors="*{sonoComentario}">Error message</label>
+					</div>
+	
+					<label
+						class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect mdl-cell mdl-cell--12-col"
+						for="checkBebidaAlcoolica"> <input type="checkbox"
+						id="checkBebidaAlcoolica" th:field="*{bebidaAlcoolica}"
+						class="mdl-checkbox__input"
+						onClick="checkChange('BebidaAlcoolica')" /> <span
+						class="mdl-checkbox__label">Bebida alcóolica</span>
+					</label>
+					<div class="sn-textfield mdl-cell mdl-cell--12-col">
+						<label class="sn-textfield__label" for="inputTextBebidaAlcoolica">Comentários</label>
+						<input id="inputTextBebidaAlcoolica" type="text" maxlength="255"
+							th:field="*{bebidaAlcoolicaComentario}"
+							class="sn-textfield__input" /> <label
+							class="sn-textfield__messages sn-error-text"
+							th:if="${#fields.hasErrors('bebidaAlcoolicaComentario')}"
+							th:errors="*{bebidaAlcoolicaComentario}">Error
 							message</label>
 					</div>
 				</div>
-
-				<label
-					class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect mdl-cell mdl-cell--12-col"
-					for="checkMastigacao"> <input type="checkbox"
-					id="checkMastigacao" th:field="*{mastigacao}"
-					class="mdl-checkbox__input" onclick="checkChange('Mastigacao')" />
-					<span class="mdl-checkbox__label">Mastigação</span>
-				</label>
-				<div class="sn-textfield mdl-cell mdl-cell--12-col">
-					<label class="sn-textfield__label" for="inputTextMastigacao">Comentários</label>
-					<input id="inputTextMastigacao" type="text" maxlength="255"
-						th:field="*{mastigacaoComentario}" class="sn-textfield__input" />
-					<label class="sn-textfield__messages sn-error-text"
-						th:if="${#fields.hasErrors('mastigacaoComentario')}"
-						th:errors="*{mastigacaoComentario}">Error message</label>
+				<div class="sn-card-top mdl-cell mdl-cell--12-col sn-card sn-padding--48 mdl-color--white mdl-grid">
+					<h5 class="mdl-cell mdl-cell--12-col">Patologias</h5>
+					<div class="sn-textfield mdl-cell mdl-cell--12-col">
+						<label class="sn-textfield__label" for="inputTextPatologias">Comentários</label>
+						<input class="sn-textfield__input" type="text" maxlength="255"
+							id="inputTextPatologias" th:field="*{patologiasComentario}" />
+						<label class="sn-textfield__messages sn-error-text"
+							th:if="${#fields.hasErrors('patologiasComentario')}"
+							th:errors="*{patologiasComentario}">Error message</label>
+					</div>
+	
+					<label
+						class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect mdl-cell mdl-cell--12-col"
+						for="checkMedicamento"> <input type="checkbox"
+						id="checkMedicamento" th:field="*{medicamento}"
+						class="mdl-checkbox__input" onclick="checkChange('Medicamento')" />
+						<span class="mdl-checkbox__label">Medicação</span>
+					</label>
+					<div class="sn-textfield mdl-cell mdl-cell--12-col">
+						<label class="sn-textfield__label" for="inputTextMedicamento">Comentários</label>
+						<input id="inputTextMedicamento" type="text" maxlength="255"
+							th:field="*{medicamentoComentario}" class="sn-textfield__input" />
+						<label class="sn-textfield__messages sn-error-text"
+							th:if="${#fields.hasErrors('medicamentoComentario')}"
+							th:errors="*{medicamentoComentario}">Error message</label>
+					</div>
 				</div>
-
-				<label
-					class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect mdl-cell mdl-cell--12-col"
-					for="checkDisfagia"> <input type="checkbox"
-					id="checkDisfagia" th:field="*{disfagia}"
-					class="mdl-checkbox__input" onclick="checkChange('Disfagia')" /> <span
-					class="mdl-checkbox__label">Disfagia</span>
-				</label>
-				<div class="sn-textfield mdl-cell mdl-cell--12-col">
-					<label class="sn-textfield__label" for="inputTextDisfagia">Comentários</label>
-					<input id="inputTextDisfagia" type="text" maxlength="255"
-						th:field="*{disfagiaComentario}" class="sn-textfield__input" />
-					<label class="sn-textfield__messages sn-error-text"
-						th:if="${#fields.hasErrors('disfagiaComentario')}"
-						th:errors="*{disfagiaComentario}">Error message</label>
+				<div class="sn-card-top mdl-cell mdl-cell--12-col sn-card sn-padding--48 mdl-color--white mdl-grid">
+					<h5 class="mdl-cell mdl-cell--12-col">Avaliação Clínica</h5>
+	
+					<div class="sn-selectfield mdl-cell mdl-cell--6-col">
+						<label class="sn-textfield__label" for="selectApetite">Apetite</label>
+						<select id="selectApetite" th:field="*{apetite}"
+							class="sn-selectfield__select" onchange="selectChange('Apetite')">
+							<option value="">Selecione</option>
+							<option th:each="t: ${tiposApetite}" th:value="${t.tipo}"
+								th:text="${t.tipo}"></option>
+						</select>
+					</div>
+					<div class="sn-textfield mdl-cell mdl-cell--6-col">
+						<label class="sn-textfield__label" for="inputTextApetite">Comentário</label>
+						<input id="inputTextApetite" th:field="*{apetiteComentario}"
+							class="sn-textfield__input" type="text" maxlength="255" /> <label
+							class="sn-textfield__messages sn-error-text"
+							th:if="${#fields.hasErrors('apetiteComentario')}"
+							th:errors="*{apetiteComentario}">Error message</label>
+					</div>
+	
+					<div class="sn-selectfield mdl-cell mdl-cell--6-col">
+						<label class="sn-textfield__label" for="selectApetite">Sistema
+							Urinário</label> <select id="selectSistemaUrinario"
+							th:field="*{sistemaUrinario}" class="sn-selectfield__select"
+							onchange="selectChange('SistemaUrinario')">
+							<option value="">Selecione</option>
+							<option th:each="t: ${tiposSistemaUrinario}" th:value="${t.tipo}"
+								th:text="${t.tipo}"></option>
+						</select>
+					</div>
+					<div class="sn-textfield mdl-cell mdl-cell--6-col">
+						<label class="sn-textfield__label" for="inputTextSistemaUrinario">Comentário</label>
+						<input id="inputTextSistemaUrinario"
+							th:field="*{sistemaUrinarioComentario}"
+							class="sn-textfield__input" type="text" maxlength="255" /> <label
+							class="sn-textfield__messages sn-error-text"
+							th:if="${#fields.hasErrors('sistemaUrinarioComentario')}"
+							th:errors="*{sistemaUrinarioComentario}">Error
+							message</label>
+					</div>
+	
+	
+					<div class="sn-selectfield mdl-cell mdl-cell--6-col">
+						<label class="sn-textfield__label" for="selectApetite">Sistema Gastrointestinal</label> 
+							<select id="selectSistemaGastrointestinal"
+							th:field="*{sistemaGastrointestinal}"
+							class="sn-selectfield__select"
+							onchange="selectChange('SistemaGastrointestinal')">
+							<option value="">Selecione</option>
+							<option th:each="t: ${tiposSistemaGastrointestinal}"
+								th:value="${t.tipo}" th:text="${t.tipo}"></option>
+						</select>
+					</div>
+					<div class="sn-textfield mdl-cell mdl-cell--6-col">
+						<label class="sn-textfield__label"
+							for="inputTextSistemaGastrointestinal">Comentário</label> <input
+							id="inputTextSistemaGastrointestinal"
+							th:field="*{sistemaGastrointestinalComentario}"
+							class="sn-textfield__input" type="text" maxlength="255"/> <label
+							class="sn-textfield__messages sn-error-text"
+							th:if="${#fields.hasErrors('sistemaGastrointestinalComentario')}"
+							th:errors="*{sistemaGastrointestinalComentario}">Error
+							message</label>
+					</div>
+	
+					<div class="sn-textfield mdl-cell mdl-cell--12-col">
+						<label class="sn-textfield__label" for="inputTextAgua">Consumo
+							de água (copos)</label> <input id="inputTextAgua" th:field="*{agua}"
+							class="sn-textfield__input" type="number" step="0.01" min="0"
+							max="9999999" pattern="-?[0-9]*(\.[0-9]+)?" />
+						<div class="error-validation">
+							<label class=" label label-danger"
+								th:if="${#fields.hasErrors('agua')}" th:errors="*{agua}">Error
+								message</label>
+						</div>
+					</div>
+	
+					<label
+						class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect mdl-cell mdl-cell--12-col"
+						for="checkMastigacao"> <input type="checkbox"
+						id="checkMastigacao" th:field="*{mastigacao}"
+						class="mdl-checkbox__input" onclick="checkChange('Mastigacao')" />
+						<span class="mdl-checkbox__label">Mastigação</span>
+					</label>
+					<div class="sn-textfield mdl-cell mdl-cell--12-col">
+						<label class="sn-textfield__label" for="inputTextMastigacao">Comentários</label>
+						<input id="inputTextMastigacao" type="text" maxlength="255"
+							th:field="*{mastigacaoComentario}" class="sn-textfield__input" />
+						<label class="sn-textfield__messages sn-error-text"
+							th:if="${#fields.hasErrors('mastigacaoComentario')}"
+							th:errors="*{mastigacaoComentario}">Error message</label>
+					</div>
+	
+					<label
+						class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect mdl-cell mdl-cell--12-col"
+						for="checkDisfagia"> <input type="checkbox"
+						id="checkDisfagia" th:field="*{disfagia}"
+						class="mdl-checkbox__input" onclick="checkChange('Disfagia')" /> <span
+						class="mdl-checkbox__label">Disfagia</span>
+					</label>
+					<div class="sn-textfield mdl-cell mdl-cell--12-col">
+						<label class="sn-textfield__label" for="inputTextDisfagia">Comentários</label>
+						<input id="inputTextDisfagia" type="text" maxlength="255"
+							th:field="*{disfagiaComentario}" class="sn-textfield__input" />
+						<label class="sn-textfield__messages sn-error-text"
+							th:if="${#fields.hasErrors('disfagiaComentario')}"
+							th:errors="*{disfagiaComentario}">Error message</label>
+					</div>
+	
+					<label
+						class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect mdl-cell mdl-cell--12-col"
+						for="checkOdinofagia"> <input type="checkbox"
+						id="checkOdinofagia" th:field="*{odinofagia}"
+						class="mdl-checkbox__input" onclick="checkChange('Odinofagia')" />
+						<span class="mdl-checkbox__label">Odinofagia</span>
+					</label>
+					<div class="sn-textfield mdl-cell mdl-cell--12-col">
+						<label class="sn-textfield__label" for="inputTextOdinofagia">Comentários</label>
+						<input id="inputTextOdinofagia" type="text" maxlength="255"
+							th:field="*{odinofagiaComentario}" class="sn-textfield__input" />
+						<label class="sn-textfield__messages sn-error-text"
+							th:if="${#fields.hasErrors('odinofagiaComentario')}"
+							th:errors="*{odinofagiaComentario}">Error message</label>
+					</div>
+	
+					<label
+						class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect mdl-cell mdl-cell--12-col"
+						for="checkPirose"> <input type="checkbox" id="checkPirose"
+						th:field="*{pirose}" class="mdl-checkbox__input"
+						onclick="checkChange('Pirose')" /> <span
+						class="mdl-checkbox__label">Pirose</span>
+					</label>
+					<div class="sn-textfield mdl-cell mdl-cell--12-col">
+						<label class="sn-textfield__label" for="inputTextPirose">Comentários</label>
+						<input id="inputTextPirose" type="text" maxlength="255"
+							th:field="*{piroseComentario}" class="sn-textfield__input" />
+						<label class="sn-textfield__messages sn-error-text"
+							th:if="${#fields.hasErrors('piroseComentario')}"
+							th:errors="*{piroseComentario}">Error message</label>
+					</div>
+	
+					<label
+						class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect mdl-cell mdl-cell--12-col"
+						for="checkNausea"> <input type="checkbox" id="checkNausea"
+						th:field="*{nausea}" class="mdl-checkbox__input"
+						onclick="checkChange('Nausea')" /> <span
+						class="mdl-checkbox__label">Nausea</span>
+					</label>
+					<div class="sn-textfield mdl-cell mdl-cell--12-col">
+						<label class="sn-textfield__label" for="inputTextNausea">Comentários</label>
+						<input id="inputTextNausea" type="text" maxlength="255"
+							th:field="*{nauseaComentario}" class="sn-textfield__input" />
+						<label class="sn-textfield__messages sn-error-text"
+							th:if="${#fields.hasErrors('nauseaComentario')}"
+							th:errors="*{nauseaComentario}">Error message</label>
+					</div>
+	
+					<label
+						class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect mdl-cell mdl-cell--12-col"
+						for="checkVomito"> <input type="checkbox" id="checkVomito"
+						th:field="*{vomito}" class="mdl-checkbox__input"
+						onclick="checkChange('Vomito')" /> <span
+						class="mdl-checkbox__label">Vomito</span>
+					</label>
+					<div class="sn-textfield mdl-cell mdl-cell--12-col">
+						<label class="sn-textfield__label" for="inputTextVomito">Comentários</label>
+						<input id="inputTextVomito" type="text" maxlength="255"
+							th:field="*{vomitoComentario}" class="sn-textfield__input" />
+						<label class="sn-textfield__messages sn-error-text"
+							th:if="${#fields.hasErrors('vomitoComentario')}"
+							th:errors="*{vomitoComentario}">Error message</label>
+					</div>
+	
+					<label
+						class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect mdl-cell mdl-cell--12-col"
+						for="checkDiarreia"> <input type="checkbox"
+						id="checkDiarreia" th:field="*{diarreia}"
+						class="mdl-checkbox__input" onclick="checkChange('Diarreia')" /> <span
+						class="mdl-checkbox__label">Diarréia</span>
+					</label>
+					<div class="sn-textfield mdl-cell mdl-cell--12-col">
+						<label class="sn-textfield__label" for="inputTextDiarreia">Comentários</label>
+						<input id="inputTextDiarreia" type="text" maxlength="255"
+							th:field="*{diarreiaComentario}" class="sn-textfield__input" />
+						<label class="sn-textfield__messages sn-error-text"
+							th:if="${#fields.hasErrors('diarreiaComentario')}"
+							th:errors="*{diarreiaComentario}">Error message</label>
+					</div>
+	
+					<label
+						class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect mdl-cell mdl-cell--12-col"
+						for="checkConstipacao"> <input type="checkbox"
+						id="checkConstipacao" th:field="*{constipacao}"
+						class="mdl-checkbox__input" onclick="checkChange('Constipacao')" />
+						<span class="mdl-checkbox__label">Constipacao</span>
+					</label>
+					<div class="sn-textfield mdl-cell mdl-cell--12-col">
+						<label class="sn-textfield__label" for="inputTextConstipacao">Comentários</label>
+						<input id="inputTextConstipacao" type="text" maxlength="255"
+							th:field="*{constipacaoComentario}" class="sn-textfield__input" />
+						<label class="sn-textfield__messages sn-error-text"
+							th:if="${#fields.hasErrors('constipacaoComentario')}"
+							th:errors="*{constipacaoComentario}">Error message</label>
+					</div>
 				</div>
-
-				<label
-					class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect mdl-cell mdl-cell--12-col"
-					for="checkOdinofagia"> <input type="checkbox"
-					id="checkOdinofagia" th:field="*{odinofagia}"
-					class="mdl-checkbox__input" onclick="checkChange('Odinofagia')" />
-					<span class="mdl-checkbox__label">Odinofagia</span>
-				</label>
-				<div class="sn-textfield mdl-cell mdl-cell--12-col">
-					<label class="sn-textfield__label" for="inputTextOdinofagia">Comentários</label>
-					<input id="inputTextOdinofagia" type="text" maxlength="255"
-						th:field="*{odinofagiaComentario}" class="sn-textfield__input" />
-					<label class="sn-textfield__messages sn-error-text"
-						th:if="${#fields.hasErrors('odinofagiaComentario')}"
-						th:errors="*{odinofagiaComentario}">Error message</label>
+				<div class="sn-card-top mdl-cell mdl-cell--12-col sn-card sn-padding--48 mdl-color--white mdl-grid">			
+					<h5 class="mdl-cell mdl-cell--12-col">Hábitos Alimentares</h5>
+					<label
+						class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect mdl-cell mdl-cell--12-col"
+						for="checkAlergia"> <input type="checkbox"
+						id="checkAlergia" th:field="*{alergia}" class="mdl-checkbox__input"
+						onclick="checkChange('Alergia')" /> <span
+						class="mdl-checkbox__label">Alergia</span>
+					</label>
+					<div class="sn-textfield mdl-cell mdl-cell--12-col">
+						<label class="sn-textfield__label" for="inputTextAlergia">Comentários</label>
+						<input id="inputTextAlergia" type="text" maxlength="255"
+							th:field="*{alergiaComentario}" class="sn-textfield__input" />
+						<label class="sn-textfield__messages sn-error-text"
+							th:if="${#fields.hasErrors('alergiaComentario')}"
+							th:errors="*{alergiaComentario}">Error message</label>
+					</div>
+	
+					<label
+						class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect mdl-cell mdl-cell--12-col"
+						for="checkIntolerancia"> <input type="checkbox"
+						id="checkIntolerancia" th:field="*{intolerancia}"
+						class="mdl-checkbox__input" onclick="checkChange('Intolerancia')" />
+						<span class="mdl-checkbox__label">Intolerância</span>
+					</label>
+					<div class="sn-textfield mdl-cell mdl-cell--12-col">
+						<label class="sn-textfield__label" for="inputTextIntolerancia">Comentários</label>
+						<input id="inputTextIntolerancia" type="text" maxlength="255"
+							th:field="*{intoleranciaComentario}" class="sn-textfield__input" />
+						<label class="sn-textfield__messages sn-error-text"
+							th:if="${#fields.hasErrors('intoleranciaComentario')}"
+							th:errors="*{intoleranciaComentario}">Error
+							message</label>
+					</div>
+	
+					<div class="sn-form-actions">
+						<input type="submit"
+							class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect"
+							value="Salvar" /> 
+							<a id="bt-cancelar"
+								class="mdl-button mdl-js-button mdl-button--colored mdl-js-ripple-effect"
+								th:href="@{${'/Paciente/'+anamnese.paciente.id+'/Anamnese/'+anamnese.id}}">CANCELAR</a>
+	
+					</div>
 				</div>
-
-				<label
-					class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect mdl-cell mdl-cell--12-col"
-					for="checkPirose"> <input type="checkbox" id="checkPirose"
-					th:field="*{pirose}" class="mdl-checkbox__input"
-					onclick="checkChange('Pirose')" /> <span
-					class="mdl-checkbox__label">Pirose</span>
-				</label>
-				<div class="sn-textfield mdl-cell mdl-cell--12-col">
-					<label class="sn-textfield__label" for="inputTextPirose">Comentários</label>
-					<input id="inputTextPirose" type="text" maxlength="255"
-						th:field="*{piroseComentario}" class="sn-textfield__input" />
-					<label class="sn-textfield__messages sn-error-text"
-						th:if="${#fields.hasErrors('piroseComentario')}"
-						th:errors="*{piroseComentario}">Error message</label>
-				</div>
-
-				<label
-					class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect mdl-cell mdl-cell--12-col"
-					for="checkNausea"> <input type="checkbox" id="checkNausea"
-					th:field="*{nausea}" class="mdl-checkbox__input"
-					onclick="checkChange('Nausea')" /> <span
-					class="mdl-checkbox__label">Nausea</span>
-				</label>
-				<div class="sn-textfield mdl-cell mdl-cell--12-col">
-					<label class="sn-textfield__label" for="inputTextNausea">Comentários</label>
-					<input id="inputTextNausea" type="text" maxlength="255"
-						th:field="*{nauseaComentario}" class="sn-textfield__input" />
-					<label class="sn-textfield__messages sn-error-text"
-						th:if="${#fields.hasErrors('nauseaComentario')}"
-						th:errors="*{nauseaComentario}">Error message</label>
-				</div>
-
-				<label
-					class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect mdl-cell mdl-cell--12-col"
-					for="checkVomito"> <input type="checkbox" id="checkVomito"
-					th:field="*{vomito}" class="mdl-checkbox__input"
-					onclick="checkChange('Vomito')" /> <span
-					class="mdl-checkbox__label">Vomito</span>
-				</label>
-				<div class="sn-textfield mdl-cell mdl-cell--12-col">
-					<label class="sn-textfield__label" for="inputTextVomito">Comentários</label>
-					<input id="inputTextVomito" type="text" maxlength="255"
-						th:field="*{vomitoComentario}" class="sn-textfield__input" />
-					<label class="sn-textfield__messages sn-error-text"
-						th:if="${#fields.hasErrors('vomitoComentario')}"
-						th:errors="*{vomitoComentario}">Error message</label>
-				</div>
-
-				<label
-					class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect mdl-cell mdl-cell--12-col"
-					for="checkDiarreia"> <input type="checkbox"
-					id="checkDiarreia" th:field="*{diarreia}"
-					class="mdl-checkbox__input" onclick="checkChange('Diarreia')" /> <span
-					class="mdl-checkbox__label">Diarréia</span>
-				</label>
-				<div class="sn-textfield mdl-cell mdl-cell--12-col">
-					<label class="sn-textfield__label" for="inputTextDiarreia">Comentários</label>
-					<input id="inputTextDiarreia" type="text" maxlength="255"
-						th:field="*{diarreiaComentario}" class="sn-textfield__input" />
-					<label class="sn-textfield__messages sn-error-text"
-						th:if="${#fields.hasErrors('diarreiaComentario')}"
-						th:errors="*{diarreiaComentario}">Error message</label>
-				</div>
-
-				<label
-					class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect mdl-cell mdl-cell--12-col"
-					for="checkConstipacao"> <input type="checkbox"
-					id="checkConstipacao" th:field="*{constipacao}"
-					class="mdl-checkbox__input" onclick="checkChange('Constipacao')" />
-					<span class="mdl-checkbox__label">Constipacao</span>
-				</label>
-				<div class="sn-textfield mdl-cell mdl-cell--12-col">
-					<label class="sn-textfield__label" for="inputTextConstipacao">Comentários</label>
-					<input id="inputTextConstipacao" type="text" maxlength="255"
-						th:field="*{constipacaoComentario}" class="sn-textfield__input" />
-					<label class="sn-textfield__messages sn-error-text"
-						th:if="${#fields.hasErrors('constipacaoComentario')}"
-						th:errors="*{constipacaoComentario}">Error message</label>
-				</div>
+			</form>
+			
+			<div id="modal-cancelar">
+			
 			</div>
-			<div class="sn-card-top mdl-cell mdl-cell--12-col sn-card sn-padding--48 mdl-color--white mdl-grid">			
-				<h5 class="mdl-cell mdl-cell--12-col">Hábitos Alimentares</h5>
-				<label
-					class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect mdl-cell mdl-cell--12-col"
-					for="checkAlergia"> <input type="checkbox"
-					id="checkAlergia" th:field="*{alergia}" class="mdl-checkbox__input"
-					onclick="checkChange('Alergia')" /> <span
-					class="mdl-checkbox__label">Alergia</span>
-				</label>
-				<div class="sn-textfield mdl-cell mdl-cell--12-col">
-					<label class="sn-textfield__label" for="inputTextAlergia">Comentários</label>
-					<input id="inputTextAlergia" type="text" maxlength="255"
-						th:field="*{alergiaComentario}" class="sn-textfield__input" />
-					<label class="sn-textfield__messages sn-error-text"
-						th:if="${#fields.hasErrors('alergiaComentario')}"
-						th:errors="*{alergiaComentario}">Error message</label>
-				</div>
-
-				<label
-					class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect mdl-cell mdl-cell--12-col"
-					for="checkIntolerancia"> <input type="checkbox"
-					id="checkIntolerancia" th:field="*{intolerancia}"
-					class="mdl-checkbox__input" onclick="checkChange('Intolerancia')" />
-					<span class="mdl-checkbox__label">Intolerância</span>
-				</label>
-				<div class="sn-textfield mdl-cell mdl-cell--12-col">
-					<label class="sn-textfield__label" for="inputTextIntolerancia">Comentários</label>
-					<input id="inputTextIntolerancia" type="text" maxlength="255"
-						th:field="*{intoleranciaComentario}" class="sn-textfield__input" />
-					<label class="sn-textfield__messages sn-error-text"
-						th:if="${#fields.hasErrors('intoleranciaComentario')}"
-						th:errors="*{intoleranciaComentario}">Error
-						message</label>
-				</div>
-
-				<div class="sn-form-actions">
-					<input type="submit"
-						class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect"
-						value="Salvar" /> 
-						<a id="bt-cancelar"
-							class="mdl-button mdl-js-button mdl-button--colored mdl-js-ripple-effect"
-							th:href="@{${'/Paciente/'+anamnese.paciente.id+'/Anamnese/'+anamnese.id}}">CANCELAR</a>
-
-				</div>
-			</div>
-		</form>
-		<div class="mdl-cell mdl-cell--3-col-desktop mdl-cell--8-col-tablet mdl-cell--4-col-phone">
-			<div class="sn-card sn-padding--48">
-				 <div class="mdl-layout-title">Informações do Paciente</div>
-					
-					<div class="sn-attribute__title">Nome</div>
-					<div class="sn-attribute__value" th:text="${anamnese.paciente.pessoa.nome}"></div>
-					
-					<div class="sn-attribute__title">Sexo</div>
-					<div class="sn-attribute__value" th:text="${anamnese.paciente.pessoa.sexo}"></div>
-					
-					<div class="sn-attribute__title">Idade</div>
-					<div class="sn-attribute__value" th:text="${anamnese.paciente.pessoa.getIdade()}"></div>
-					
-					<div class="sn-attribute__title">CPF</div>
-					<div class="sn-attribute__value" th:text="${anamnese.paciente.pessoa.cpf}"></div>
-					
-					<div class="sn-attribute__title">Telefone</div>
-					<div class="sn-attribute__value" th:text="${anamnese.paciente.pessoa.telefone}"></div>
-					
-					<div class="sn-attribute__title">Cargo/Ocupação</div>
-					<div class="sn-attribute__value" th:text="${anamnese.paciente.pessoa.ocupacaoOuCargo}"></div>
-					
-					<div class="sn-attribute__title">Email</div>
-					<div class="sn-attribute__value" th:text="${anamnese.paciente.pessoa.email}"></div>
-							
-					<div class="sn-attribute__title">Vínculo</div>
-					<div class="sn-attribute__value" th:text="${anamnese.paciente.pessoa.vinculo}"></div>
-			</div>
-		</div>
-		<div id="modal-cancelar">
-		
 		</div>
 	</div>
 </section>

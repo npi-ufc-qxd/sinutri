@@ -50,9 +50,9 @@ $(function()
 						  var itens      = $(dialog).find("#sn-refeicao-itens").val();
 						  var observacao = $(dialog).find("#sn-refeicao-observacao").val();
 						  
-						  if( !(hora.length > 0 && descricao.length > 0
-						  &&  itens.trim().length > 0 && observacao.trim().length > 0) )
-							  return;
+						  if(validacaoVazio($(dialog))){
+								return;
+							}
 						  
 					      dialog.close();
 						  
@@ -67,8 +67,8 @@ $(function()
 								  sortValue: d.getTime(),
 								  ".sn-refeicao-hora": 			   {text:  hora},
 								  ".sn-refeicao-descricao":		   {text:  textdescricao},
-								  ".sn-refeicao-itens": 		   {text:  itens.length > 27 ? itens.substr(0, 26).concat('...') : itens},
-								  ".sn-refeicao-observacao": 	   {text:  observacao.length > 27 ? observacao.substr(0, 26).concat('...') : observacao},
+								  ".sn-refeicao-itens": 		   {text:  itens},
+								  ".sn-refeicao-observacao": 	   {text:  observacao},
 								  ".sn-refeicao-input-hora": 	   {value: hora},
 								  ".sn-refeicao-input-descricao":  {value: descricao},
 								  ".sn-refeicao-input-itens": 	   {value: itens},
@@ -101,6 +101,8 @@ $(function()
 			$(dialog).find("#sn-refeicao-observacao").val("");
 			
 			$(dialog).find("#sn-refeicao-item-index").val("");
+			
+			removerLabelValidacao($(dialog));
 			
 			dialog.showModal();
 		});

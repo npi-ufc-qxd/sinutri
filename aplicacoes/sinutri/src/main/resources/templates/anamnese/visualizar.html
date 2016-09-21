@@ -15,527 +15,540 @@
 
 <section layout:fragment="conteudo">
 	<div class="mdl-grid">
-		<div class="mdl-cell mdl-cell--11-col mdl-cell--1-offset-desktop">
-			<a th:href="@{/Nutricao/Buscar}" class="sn-breadcrumbs sn-attribute__title">Início</a>
-			<a th:href="@{${'/Paciente/'+anamnese.paciente.id}}" class="sn-breadcrumbs sn-attribute__title">Paciente</a>
-			<a class="sn-attribute__title sn-breadcrumbs">Visualizar Anamnese</a>
-		</div>
-      <!-- Célula de informações do formulário -->
-		
-      <div class="
-              mdl-cell
-              mdl-cell--7-col-desktop mdl-cell--1-offset-desktop
-              mdl-cell--8-col-tablet
-              mdl-cell--4-col-phone
-              mdl-grid mdl-grid--no-spacing
-              sn-main-card">
-
-              <div class="mdl-cell mdl-cell--12-col sn-card sn-padding--48 mdl-color--white">
-
-                      <div class="mdl-layout-title mdl-color-text--red-600">Anamnese</div>
-
-                      <fabgroup class="sn-fab--bottom-right">
-
-                              <a th:href="@{${'/Paciente/' + anamnese.paciente.id +'/Anamnese/'+ anamnese.id +'/Excluir/'}}" 
-                              		class="sn-fab sn-fab--hide mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-js-ripple-effect mdl-color--red-700 bt-excluir-anamnese">
-                                    <i class="material-icons mdl-color-text--white">delete</i>
-                              </a>
-
-                              <a th:href="@{${'/Paciente/' + anamnese.paciente.id +'/Anamnese/'+ anamnese.id +'/Editar/'}}" 
-                              class="sn-fab sn-fab--hide mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-js-ripple-effect mdl-color--purple">
-                                      <i class="material-icons mdl-color-text--white">edit</i>
-                              </a>
-
-
-                              <button class="sn-float--launcher mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored">
-                                      <i class="material-icons mdl-color-text--white">more_horiz</i>
-                              </button>
-                              
-                      </fabgroup>
-
-              </div>
-
-              <div class="sn-card-top mdl-cell mdl-cell--12-col sn-card sn-padding--48 mdl-color--white mdl-grid">
-					<div class="sn-attribute mdl-cell mdl-cell--6-col">
-                        <div class="sn-attribute__title">Criação</div>
-                        <div class="sn-attribute__value" th:text="${#dates.format(anamnese.criadoEm,'dd/MM/yyyy')}">01/01/1995</div>
-                    </div>
-                    <div class="sn-attribute mdl-cell mdl-cell--6-col">
-                        <div class="sn-attribute__title">Última atualização</div>
-                        <div class="sn-attribute__value" th:text="${#dates.format(anamnese.atualizadoEm,'dd/MM/yyyy')}">01/01/1995</div>
-                    </div>					
-										
-					<div class="sn-attribute mdl-cell mdl-cell--6-col">
-						<div class="sn-attribute__title">Paciente</div>
-						<div class="sn-attribute__value">
-							<label th:text="${anamnese.paciente.pessoa.nome}">Nome paciente</label>
-						</div>
-					</div>									
-					
-					<div class="sn-attribute mdl-cell mdl-cell--12-col">
-						<div class="sn-attribute__title">Objetivo</div>
-						<div class="sn-attribute__value">
-							<label th:text="${anamnese.objetivoConsulta}">Objetivo</label>
-						</div>
-					</div>
-
-              </div>
-
-              <div class="sn-card-top mdl-cell mdl-cell--12-col sn-card sn-padding--48 mdl-color--white mdl-grid">
-
-                    <h5 class="mdl-cell mdl-cell--12-col">Hábitos de Vida</h5>
-                      					
-					<div class="sn-attribute mdl-cell mdl-cell--6-col">
-						<label 
-							class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect"
-							for="checkbox-1"> 
-							<input type="checkbox"
-								th:checked="${anamnese.atividadeFisica}"
-								class="mdl-checkbox__input" readonly="true" disabled="true" />
-							<span class="mdl-checkbox__label sn-attribute__title">Atividade Física</span>
-						</label>
+		<div  class="sn-breadcrumbs__position mdl-cell mdl-cell--10-col-desktop mdl-cell--1-offset-desktop mdl-cell--8-col-tablet mdl-cell--4-col-phone mdl-grid sn-main-grid">
+			<div class="mdl-cell mdl-cell--12-col">
+				<a th:href="@{/Nutricao/Buscar}" class="sn-breadcrumbs sn-attribute__title">Início</a>
+				<a th:href="@{${'/Paciente/'+anamnese.paciente.id}}" class="sn-breadcrumbs sn-attribute__title">Paciente</a>
+				<a class="sn-attribute__title sn-breadcrumbs">Visualizar Anamnese</a>
+			</div>
+	
+			<div class="mdl-cell mdl-cell--12-col sn-card">
+				<div
+					class="mdl-layout-title mdl-color-text--red-600 sn-padding--48">
+					Anamnese
+					<div id="div_arrow" class="sn-colapse-div sn-attribute__title">
+						<span
+							th:text="${anamnese.paciente.pessoa.nome+', '+anamnese.paciente.pessoa.getIdade()+' anos'}"></span>
+						<i class="sn-breadcrumbs__icon material-icons arrow_icon_position">keyboard_arrow_down</i>
 					</div>
 					
-					<div class="sn-attribute__value mdl-cell mdl-cell--6-col">
-						<div class="sn-attribute__title ">Comentário</div>
-							<label th:text=
-								"${anamnese.atividadeFisicaComentario}? 
-								(${#strings.length(anamnese.atividadeFisicaComentario) != 0?
-								anamnese.atividadeFisicaComentario:
-								'Não há comentário!'}): 
-								'Não há comentário!'">
-								Comentário
-							</label>
-					</div>
-					<div class="sn-attribute mdl-cell mdl-cell--6-col">
-						<label 
-							class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect"
-							for="checkbox-1"> 
-							<input type="checkbox"
-								th:checked="${anamnese.dormeBem}"
-								class="mdl-checkbox__input" readonly="true" disabled="true" />
-							<span class="mdl-checkbox__label sn-attribute__title">Dorme Bem</span>
-						</label>
-					</div>
-					
-					<div class="sn-attribute__value mdl-cell mdl-cell--6-col">
-						<div class="sn-attribute__title ">Comentário</div>
-							<label th:text=
-								"${anamnese.dormeBemComentario}? 
-								(${#strings.length(anamnese.dormeBemComentario) != 0?
-								anamnese.dormeBemComentario:
-								'Não há comentário!'}): 
-								'Não há comentário!'">
-								Comentário
-							</label>
-					</div>
-					<div class="sn-attribute mdl-cell mdl-cell--6-col">
-						<label 
-							class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect"
-							for="checkbox-1"> 
-							<input type="checkbox"
-								th:checked="${anamnese.bebidaAlcoolica}"
-								class="mdl-checkbox__input" readonly="true" disabled="true" />
-							<span class="mdl-checkbox__label sn-attribute__title">Bebida Alcoólica</span>
-						</label>
-					</div>
-					
-					<div class="sn-attribute__value mdl-cell mdl-cell--6-col">
-						<div class="sn-attribute__title ">Comentário</div>
-							<label th:text=
-								"${anamnese.bebidaAlcoolicaComentario}? 
-								(${#strings.length(anamnese.bebidaAlcoolicaComentario) != 0?
-								anamnese.bebidaAlcoolicaComentario:
-								'Não há comentário!'}): 
-								'Não há comentário!'">
-								Comentário
-							</label>
-					</div>
-
-
-              </div>              
-              
-              <div class="sn-card-top mdl-cell mdl-cell--12-col sn-card sn-padding--48 mdl-color--white mdl-grid">
-					<h5 class="mdl-cell mdl-cell--12-col">Patologias</h5>
-					 
-					<div class="sn-attribute mdl-cell mdl-cell--12-col" >
-						<div class="sn-attribute__title ">Patologias</div>
-						<div class="sn-attribute__value">
-						<label th:text=
-								"${anamnese.patologiasComentario}? 
-								(${#strings.length(anamnese.patologiasComentario) != 0?
-								 anamnese.patologiasComentario:
-								'Não há comentário!'}): 
-								'Não há comentário!'">
-								Comentário
-						</label>
-						</div>			
-					</div>						
-					
-					<div class="sn-attribute mdl-cell mdl-cell--6-col">
-						<label 
-							class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect"
-							for="checkbox-1"> 
-							<input type="checkbox" 
-								th:checked="${anamnese.medicamento}"
-								class="mdl-checkbox__input" readonly="true" disabled="true" /> 
-							<span class="mdl-checkbox__label sn-attribute__title">Medicamento</span>
-						</label>			
-					</div>
-					<div class="sn-attribute__value mdl-cell mdl-cell--6-col">
-						<div class="sn-attribute__title ">Comentário</div>
-						<label th:text=
-								"${anamnese.medicamentoComentario}? 
-								(${#strings.length(anamnese.medicamentoComentario) != 0?
-								 anamnese.medicamentoComentario:
-								'Não há comentário!'}): 
-								'Não há comentário!'">
-								Comentário
-						</label>
-					</div>             
-              </div>
-              
-              
-              
-              <div class="sn-card-top mdl-cell mdl-cell--12-col sn-card sn-padding--48 mdl-color--white mdl-grid">
-					<h5 class="mdl-cell mdl-cell--12-col">Avaliação Clínica</h5>
-					
-					<div class="sn-attribute mdl-cell mdl-cell--6-col">
-						<div class="sn-attribute__title ">Apetite</div>
-						<div class="sn-attribute__value">
-							<label th:text="${anamnese.apetite}">Apetite</label>
-						</div>						
-					</div>
-					<div class="sn-attribute__value  mdl-cell mdl-cell--6-col">
-						<div class="sn-attribute__title ">Comentário</div>
-						<label th:text=
-								"${anamnese.apetiteComentario}? 
-								(${#strings.length(anamnese.apetiteComentario) != 0?
-								 anamnese.apetiteComentario:
-								'Não há comentário!'}): 
-								'Não há comentário!'">
-								Comentário
-						</label>
-					</div>					
-
-					<div class="sn-attribute mdl-cell mdl-cell--6-col">
-						<div class="sn-attribute__title ">Sistema Urinário</div>
-						<div class="sn-attribute__value">
-							<label th:text="${anamnese.sistemaUrinario}">Sistema Urinário</label>
-						</div>						
-					</div>
-					<div class="sn-attribute__value  mdl-cell mdl-cell--6-col">
-						<div class="sn-attribute__title ">Comentário</div>
-						<label th:text=
-								"${anamnese.sistemaUrinarioComentario}? 
-								(${#strings.length(anamnese.sistemaUrinarioComentario) != 0?
-								 anamnese.sistemaUrinarioComentario:
-								'Não há comentário!'}): 
-								'Não há comentário!'">
-								Comentário
-						</label>
-					</div>					
-
-					<div class="sn-attribute mdl-cell mdl-cell--6-col">
-						<div class="sn-attribute__title ">Sistema Gastrointestinal</div>
-						<div class="sn-attribute__value">
-							<label th:text="${anamnese.sistemaGastrointestinal}">Sistema Gastrointestinal</label>
-						</div>						
-					</div>
-					<div class="sn-attribute__value  mdl-cell mdl-cell--6-col">
-						<div class="sn-attribute__title ">Comentário</div>
-						<label th:text=
-								"${anamnese.sistemaGastrointestinalComentario}? 
-								(${#strings.length(anamnese.sistemaGastrointestinalComentario) != 0?
-								 anamnese.sistemaGastrointestinalComentario:
-								'Não há comentário!'}): 
-								'Não há comentário!'">
-								Comentário
-						</label>
-					</div>
-					
-					<div class="sn-attribute mdl-cell mdl-cell--12-col">
-						<div class="sn-attribute__title">Água</div>
-						<div class="sn-attribute__value">
-							<label th:text=
-								"${anamnese.agua}? 
-								(${#strings.length(anamnese.agua) != 0?
-								 anamnese.agua:
-								'Não há informações!'}): 
-								'Não há informações!'">
-								Informações
-						</label>
-						</div>
-					</div>				
-
-					<div class="sn-attribute mdl-cell mdl-cell--6-col">
-						<label 
-							class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect"
-							for="checkbox-1"> 
-							<input type="checkbox" 
-								th:checked="${anamnese.mastigacao}"
-								class="mdl-checkbox__input" readonly="true" disabled="true" /> 
-							<span class="mdl-checkbox__label sn-attribute__title">Mastigação</span>
-						</label>			
-					</div>
-					<div class="sn-attribute__value mdl-cell mdl-cell--6-col">
-						<div class="sn-attribute__title ">Comentário</div>
-						<label th:text=
-								"${anamnese.mastigacaoComentario}? 
-								(${#strings.length(anamnese.mastigacaoComentario) != 0?
-								 anamnese.mastigacaoComentario:
-								'Não há comentário!'}): 
-								'Não há comentário!'">
-								Comentário
-						</label>
-					</div>  
-
-					<div class="sn-attribute mdl-cell mdl-cell--6-col">
-						<label 
-							class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect"
-							for="checkbox-1"> 
-							<input type="checkbox" 
-								th:checked="${anamnese.disfagia}"
-								class="mdl-checkbox__input" readonly="true" disabled="true" /> 
-							<span class="mdl-checkbox__label sn-attribute__title">Disfagia</span>
-						</label>			
-					</div>
-					<div class="sn-attribute__value mdl-cell mdl-cell--6-col">
-						<div class="sn-attribute__title ">Comentário</div>
-						<label th:text=
-								"${anamnese.disfagiaComentario}? 
-								(${#strings.length(anamnese.disfagiaComentario) != 0?
-								 anamnese.disfagiaComentario:
-								'Não há comentário!'}): 
-								'Não há comentário!'">
-								Comentário
-						</label>
-					</div>  
-
-					<div class="sn-attribute mdl-cell mdl-cell--6-col">
-						<label 
-							class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect"
-							for="checkbox-1"> 
-							<input type="checkbox" 
-								th:checked="${anamnese.odinofagia}"
-								class="mdl-checkbox__input" readonly="true" disabled="true" /> 
-							<span class="mdl-checkbox__label sn-attribute__title">Odinofagia</span>
-						</label>			
-					</div>
-					<div class="sn-attribute__value mdl-cell mdl-cell--6-col">
-						<div class="sn-attribute__title ">Comentário</div>
-						<label th:text=
-								"${anamnese.odinofagiaComentario}? 
-								(${#strings.length(anamnese.odinofagiaComentario) != 0?
-								 anamnese.odinofagiaComentario:
-								'Não há comentário!'}): 
-								'Não há comentário!'">
-								Comentário
-						</label>
-					</div>  
-
-					<div class="sn-attribute mdl-cell mdl-cell--6-col">
-						<label 
-							class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect"
-							for="checkbox-1"> 
-							<input type="checkbox" 
-								th:checked="${anamnese.pirose}"
-								class="mdl-checkbox__input" readonly="true" disabled="true" /> 
-							<span class="mdl-checkbox__label sn-attribute__title">Pirose</span>
-						</label>			
-					</div>
-					<div class="sn-attribute__value mdl-cell mdl-cell--6-col">
-						<div class="sn-attribute__title ">Comentário</div>
-						<label th:text=
-								"${anamnese.piroseComentario}? 
-								(${#strings.length(anamnese.piroseComentario) != 0?
-								 anamnese.piroseComentario:
-								'Não há comentário!'}): 
-								'Não há comentário!'">
-								Comentário
-						</label>
-					</div>  
-
-					<div class="sn-attribute mdl-cell mdl-cell--6-col">
-						<label 
-							class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect"
-							for="checkbox-1"> 
-							<input type="checkbox" 
-								th:checked="${anamnese.nausea}"
-								class="mdl-checkbox__input" readonly="true" disabled="true" /> 
-							<span class="mdl-checkbox__label sn-attribute__title">Náusea</span>
-						</label>			
-					</div>
-					<div class="sn-attribute__value mdl-cell mdl-cell--6-col">
-						<div class="sn-attribute__title ">Comentário</div>
-						<label th:text=
-								"${anamnese.nauseaComentario}? 
-								(${#strings.length(anamnese.nauseaComentario) != 0?
-								 anamnese.nauseaComentario:
-								'Não há comentário!'}): 
-								'Não há comentário!'">
-								Comentário
-						</label>
-					</div>  
-
-					<div class="sn-attribute mdl-cell mdl-cell--6-col">
-						<label 
-							class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect"
-							for="checkbox-1"> 
-							<input type="checkbox" 
-								th:checked="${anamnese.vomito}"
-								class="mdl-checkbox__input" readonly="true" disabled="true" /> 
-							<span class="mdl-checkbox__label sn-attribute__title">Vômito</span>
-						</label>			
-					</div>
-					<div class="sn-attribute__value mdl-cell mdl-cell--6-col">
-						<div class="sn-attribute__title ">Comentário</div>
-						<label th:text=
-								"${anamnese.vomitoComentario}? 
-								(${#strings.length(anamnese.vomitoComentario) != 0?
-								 anamnese.vomitoComentario:
-								'Não há comentário!'}): 
-								'Não há comentário!'">
-								Comentário
-						</label>
-					</div>  
-
-					<div class="sn-attribute mdl-cell mdl-cell--6-col">
-						<label 
-							class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect"
-							for="checkbox-1"> 
-							<input type="checkbox" 
-								th:checked="${anamnese.diarreia}"
-								class="mdl-checkbox__input" readonly="true" disabled="true" /> 
-							<span class="mdl-checkbox__label sn-attribute__title">Diarréia</span>
-						</label>			
-					</div>
-					<div class="sn-attribute__value mdl-cell mdl-cell--6-col">
-						<div class="sn-attribute__title ">Comentário</div>
-						<label th:text=
-								"${anamnese.diarreiaComentario}? 
-								(${#strings.length(anamnese.diarreiaComentario) != 0?
-								 anamnese.diarreiaComentario:
-								'Não há comentário!'}): 
-								'Não há comentário!'">
-								Comentário
-						</label>
-					</div>  
-
-					<div class="sn-attribute mdl-cell mdl-cell--6-col">
-						<label 
-							class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect"
-							for="checkbox-1"> 
-							<input type="checkbox" 
-								th:checked="${anamnese.constipacao}"
-								class="mdl-checkbox__input" readonly="true" disabled="true" /> 
-							<span class="mdl-checkbox__label sn-attribute__title">Constipação</span>
-						</label>			
-					</div>
-					<div class="sn-attribute__value mdl-cell mdl-cell--6-col">
-						<div class="sn-attribute__title ">Comentário</div>
-						<label th:text=
-								"${anamnese.constipacaoComentario}? 
-								(${#strings.length(anamnese.constipacaoComentario) != 0?
-								 anamnese.constipacaoComentario:
-								'Não há comentário!'}): 
-								'Não há comentário!'">
-								Comentário
-						</label>
-					</div>  
-
-              </div>
-              
-              
-              <div class="sn-card-top mdl-cell mdl-cell--12-col sn-card sn-padding--48 mdl-color--white mdl-grid">
-					<h5 class="mdl-cell mdl-cell--12-col">Hábitos Alimentares</h5>
-
-					<div class="sn-attribute mdl-cell mdl-cell--6-col">
-						<label 
-							class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect"
-							for="checkbox-1"> 
-							<input type="checkbox" 
-								th:checked="${anamnese.alergia}"
-								class="mdl-checkbox__input" readonly="true" disabled="true" /> 
-							<span class="mdl-checkbox__label sn-attribute__title">Alergia</span>
-						</label>			
-					</div>
-					<div class="sn-attribute__value mdl-cell mdl-cell--6-col">
-						<div class="sn-attribute__title ">Comentário</div>
-						<label th:text=
-								"${anamnese.alergiaComentario}? 
-								(${#strings.length(anamnese.alergiaComentario) != 0?
-								 anamnese.alergiaComentario:
-								'Não há comentário!'}): 
-								'Não há comentário!'">
-								Comentário
-						</label>
-					</div>  
-
-					<div class="sn-attribute mdl-cell mdl-cell--6-col">
-						<label 
-							class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect"
-							for="checkbox-1"> 
-							<input type="checkbox" 
-								th:checked="${anamnese.intolerancia}"
-								class="mdl-checkbox__input" readonly="true" disabled="true" /> 
-							<span class="mdl-checkbox__label sn-attribute__title">Intolerância</span>
-						</label>			
-					</div>
-					<div class="sn-attribute__value mdl-cell mdl-cell--6-col">
-						<div class="sn-attribute__title ">Comentário</div>
-						<label th:text=
-								"${anamnese.intoleranciaComentario}? 
-								(${#strings.length(anamnese.intoleranciaComentario) != 0?
-								 anamnese.intoleranciaComentario:
-								'Não há comentário!'}): 
-								'Não há comentário!'">
-								Comentário
-						</label>
-					</div>                      
-
-              </div>
-              
-              
-              
-      </div>
-
-      <!-- Célula de informações do paciente -->
-
-      <div class="mdl-cell mdl-cell--3-col-desktop mdl-cell--8-col-tablet mdl-cell--4-col-phone">
-              <div class="sn-card sn-padding--48">
-                    <div class="mdl-layout-title">Informações do Paciente</div>
-					
-					<div class="sn-attribute__title">Nome</div>
-					<div class="sn-attribute__value" th:text="${anamnese.paciente.pessoa.nome}"></div>
-					
-					<div class="sn-attribute__title">Sexo</div>
-					<div class="sn-attribute__value" th:text="${anamnese.paciente.pessoa.sexo}"></div>
-					
-					<div class="sn-attribute__title">Idade</div>
-					<div class="sn-attribute__value" th:text="${anamnese.paciente.pessoa.getIdade()}"></div>
-					
-					<div class="sn-attribute__title">CPF</div>
-					<div class="sn-attribute__value" th:text="${anamnese.paciente.pessoa.cpf}"></div>
-					
-					<div class="sn-attribute__title">Telefone</div>
-					<div class="sn-attribute__value" th:text="${anamnese.paciente.pessoa.telefone}"></div>
-					
-					<div class="sn-attribute__title">Cargo/Ocupação</div>
-					<div class="sn-attribute__value" th:text="${anamnese.paciente.pessoa.ocupacaoOuCargo}"></div>
-					
-					<div class="sn-attribute__title">Email</div>
-					<div class="sn-attribute__value" th:text="${anamnese.paciente.pessoa.email}"></div>
+					<fabgroup class="sn-fab--bottom-right">
+	
+	                              <a th:href="@{${'/Paciente/' + anamnese.paciente.id +'/Anamnese/'+ anamnese.id +'/Excluir/'}}" 
+	                              		class="sn-fab sn-fab--hide mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-js-ripple-effect mdl-color--red-700 bt-excluir-anamnese">
+	                                    <i class="material-icons mdl-color-text--white">delete</i>
+	                              </a>
+	
+	                              <a th:href="@{${'/Paciente/' + anamnese.paciente.id +'/Anamnese/'+ anamnese.id +'/Editar/'}}" 
+	                              class="sn-fab sn-fab--hide mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-js-ripple-effect mdl-color--purple">
+	                                      <i class="material-icons mdl-color-text--white">edit</i>
+	                              </a>
+	
+	
+	                              <button class="sn-float--launcher mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored">
+	                                      <i class="material-icons mdl-color-text--white">more_horiz</i>
+	                              </button>
+	                              
+	                      </fabgroup>
+	
+				</div>
+				<div class="sn-form__hdivider sn-margin--none"></div>
+				<div class="sn-colapsable-div sn-padding--48 mdl-color--white">
+	
+					<div class="mdl-grid mdl-grid--no-spacing">
 							
-					<div class="sn-attribute__title">Vínculo</div>
-					<div class="sn-attribute__value" th:text="${anamnese.paciente.pessoa.vinculo}"></div>
-              </div>
-      </div>
-      
-      <div id="modal-exclusao-anamnese" class="sn-display-none">
-		Você realmente deseja excluir esta Anamnese?
-	  </div> 
-
+						<div class="sn-attribute mdl-cell mdl-cell--4-col">
+							<div class="sn-attribute__title">Sexo</div>
+							<div class="sn-attribute__value"
+								th:text="${anamnese.paciente.pessoa.sexo}"></div>
+						</div>
+	
+						<div class="sn-attribute mdl-cell mdl-cell--4-col">
+							<div class="sn-attribute__title">Telefone</div>
+							<div class="sn-attribute__value"
+								th:text="${anamnese.paciente.pessoa.telefone}"></div>
+						</div>
+	
+						<div class="sn-attribute mdl-cell mdl-cell--4-col">
+							<div class="sn-attribute__title">Email</div>
+							<div class="sn-attribute__value"
+								th:text="${anamnese.paciente.pessoa.email}"></div>
+						</div>
+	
+						<div class="sn-attribute mdl-cell mdl-cell--4-col">
+							<div class="sn-attribute__title">CPF</div>
+							<div class="sn-attribute__value"
+								th:text="${anamnese.paciente.pessoa.cpf}"></div>
+						</div>
+	
+						<div class="sn-attribute mdl-cell mdl-cell--4-col">
+							<div class="sn-attribute__title">Cargo/Ocupação</div>
+							<div class="sn-attribute__value"
+								th:text="${anamnese.paciente.pessoa.ocupacaoOuCargo}"></div>
+						</div>
+	
+						<div class="sn-attribute mdl-cell mdl-cell--4-col">
+							<div class="sn-attribute__title">Vínculo</div>
+							<div class="sn-attribute__value"
+								th:text="${anamnese.paciente.pessoa.vinculo}"></div>
+						</div>
+					</div>
+				</div>
+	
+			</div>
+	      <!-- Célula de informações do formulário -->
+			
+	      <div class="sn-form mdl-cell mdl-cell--12-col-desktop mdl-cell--8-col-tablet mdl-cell--4-col-phone mdl-grid mdl-grid--no-spacing sn-main-card">
+	
+	              <div class="sn-card-top mdl-cell mdl-cell--12-col sn-card sn-padding--48 mdl-color--white mdl-grid">
+						<div class="sn-attribute mdl-cell mdl-cell--6-col">
+	                        <div class="sn-attribute__title">Criação</div>
+	                        <div class="sn-attribute__value" th:text="${#dates.format(anamnese.criadoEm,'dd/MM/yyyy')}">01/01/1995</div>
+	                    </div>
+	                    <div class="sn-attribute mdl-cell mdl-cell--6-col">
+	                        <div class="sn-attribute__title">Última atualização</div>
+	                        <div class="sn-attribute__value" th:text="${#dates.format(anamnese.atualizadoEm,'dd/MM/yyyy')}">01/01/1995</div>
+	                    </div>					
+											
+						<div class="sn-attribute mdl-cell mdl-cell--6-col">
+							<div class="sn-attribute__title">Paciente</div>
+							<div class="sn-attribute__value">
+								<label th:text="${anamnese.paciente.pessoa.nome}">Nome paciente</label>
+							</div>
+						</div>									
+						
+						<div class="sn-attribute mdl-cell mdl-cell--12-col">
+							<div class="sn-attribute__title">Objetivo</div>
+							<div class="sn-attribute__value">
+								<label th:text="${anamnese.objetivoConsulta}">Objetivo</label>
+							</div>
+						</div>
+	
+	              </div>
+	
+	              <div class="sn-card-top mdl-cell mdl-cell--12-col sn-card sn-padding--48 mdl-color--white mdl-grid">
+	
+	                    <h5 class="mdl-cell mdl-cell--12-col">Hábitos de Vida</h5>
+	                      					
+						<div class="sn-attribute mdl-cell mdl-cell--6-col">
+							<label 
+								class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect"
+								for="checkbox-1"> 
+								<input type="checkbox"
+									th:checked="${anamnese.atividadeFisica}"
+									class="mdl-checkbox__input" readonly="true" disabled="true" />
+								<span class="mdl-checkbox__label sn-attribute__title">Atividade Física</span>
+							</label>
+						</div>
+						
+						<div class="sn-attribute__value mdl-cell mdl-cell--6-col">
+							<div class="sn-attribute__title ">Comentário</div>
+								<label th:text=
+									"${anamnese.atividadeFisicaComentario}? 
+									(${#strings.length(anamnese.atividadeFisicaComentario) != 0?
+									anamnese.atividadeFisicaComentario:
+									'Não há comentário!'}): 
+									'Não há comentário!'">
+									Comentário
+								</label>
+						</div>
+						<div class="sn-attribute mdl-cell mdl-cell--6-col">
+							<label 
+								class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect"
+								for="checkbox-1"> 
+								<input type="checkbox"
+									th:checked="${anamnese.sono}"
+									class="mdl-checkbox__input" readonly="true" disabled="true" />
+								<span class="mdl-checkbox__label sn-attribute__title">Sono</span>
+							</label>
+						</div>
+						
+						<div class="sn-attribute__value mdl-cell mdl-cell--6-col">
+							<div class="sn-attribute__title ">Comentário</div>
+								<label th:text=
+									"${anamnese.sonoComentario}? 
+									(${#strings.length(anamnese.sonoComentario) != 0?
+									anamnese.sonoComentario:
+									'Não há comentário!'}): 
+									'Não há comentário!'">
+									Comentário
+								</label>
+						</div>
+						<div class="sn-attribute mdl-cell mdl-cell--6-col">
+							<label 
+								class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect"
+								for="checkbox-1"> 
+								<input type="checkbox"
+									th:checked="${anamnese.bebidaAlcoolica}"
+									class="mdl-checkbox__input" readonly="true" disabled="true" />
+								<span class="mdl-checkbox__label sn-attribute__title">Bebida Alcoólica</span>
+							</label>
+						</div>
+						
+						<div class="sn-attribute__value mdl-cell mdl-cell--6-col">
+							<div class="sn-attribute__title ">Comentário</div>
+								<label th:text=
+									"${anamnese.bebidaAlcoolicaComentario}? 
+									(${#strings.length(anamnese.bebidaAlcoolicaComentario) != 0?
+									anamnese.bebidaAlcoolicaComentario:
+									'Não há comentário!'}): 
+									'Não há comentário!'">
+									Comentário
+								</label>
+						</div>
+	
+	
+	              </div>              
+	              
+	              <div class="sn-card-top mdl-cell mdl-cell--12-col sn-card sn-padding--48 mdl-color--white mdl-grid">
+						<h5 class="mdl-cell mdl-cell--12-col">Patologias</h5>
+						 
+						<div class="sn-attribute mdl-cell mdl-cell--12-col" >
+							<div class="sn-attribute__title ">Patologias</div>
+							<div class="sn-attribute__value">
+							<label th:text=
+									"${anamnese.patologiasComentario}? 
+									(${#strings.length(anamnese.patologiasComentario) != 0?
+									 anamnese.patologiasComentario:
+									'Não há comentário!'}): 
+									'Não há comentário!'">
+									Comentário
+							</label>
+							</div>			
+						</div>						
+						
+						<div class="sn-attribute mdl-cell mdl-cell--6-col">
+							<label 
+								class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect"
+								for="checkbox-1"> 
+								<input type="checkbox" 
+									th:checked="${anamnese.medicamento}"
+									class="mdl-checkbox__input" readonly="true" disabled="true" /> 
+								<span class="mdl-checkbox__label sn-attribute__title">Medicamento</span>
+							</label>			
+						</div>
+						<div class="sn-attribute__value mdl-cell mdl-cell--6-col">
+							<div class="sn-attribute__title ">Comentário</div>
+							<label th:text=
+									"${anamnese.medicamentoComentario}? 
+									(${#strings.length(anamnese.medicamentoComentario) != 0?
+									 anamnese.medicamentoComentario:
+									'Não há comentário!'}): 
+									'Não há comentário!'">
+									Comentário
+							</label>
+						</div>             
+	              </div>
+	              
+	              
+	              
+	              <div class="sn-card-top mdl-cell mdl-cell--12-col sn-card sn-padding--48 mdl-color--white mdl-grid">
+						<h5 class="mdl-cell mdl-cell--12-col">Avaliação Clínica</h5>
+						
+						<div class="sn-attribute mdl-cell mdl-cell--6-col">
+							<div class="sn-attribute__title ">Apetite</div>
+							<div class="sn-attribute__value">
+								<label th:text="${anamnese.apetite}">Apetite</label>
+							</div>						
+						</div>
+						<div class="sn-attribute__value  mdl-cell mdl-cell--6-col">
+							<div class="sn-attribute__title ">Comentário</div>
+							<label th:text=
+									"${anamnese.apetiteComentario}? 
+									(${#strings.length(anamnese.apetiteComentario) != 0?
+									 anamnese.apetiteComentario:
+									'Não há comentário!'}): 
+									'Não há comentário!'">
+									Comentário
+							</label>
+						</div>					
+	
+						<div class="sn-attribute mdl-cell mdl-cell--6-col">
+							<div class="sn-attribute__title ">Sistema Urinário</div>
+							<div class="sn-attribute__value">
+								<label th:text="${anamnese.sistemaUrinario}">Sistema Urinário</label>
+							</div>						
+						</div>
+						<div class="sn-attribute__value  mdl-cell mdl-cell--6-col">
+							<div class="sn-attribute__title ">Comentário</div>
+							<label th:text=
+									"${anamnese.sistemaUrinarioComentario}? 
+									(${#strings.length(anamnese.sistemaUrinarioComentario) != 0?
+									 anamnese.sistemaUrinarioComentario:
+									'Não há comentário!'}): 
+									'Não há comentário!'">
+									Comentário
+							</label>
+						</div>					
+	
+						<div class="sn-attribute mdl-cell mdl-cell--6-col">
+							<div class="sn-attribute__title ">Sistema Gastrointestinal</div>
+							<div class="sn-attribute__value">
+								<label th:text="${anamnese.sistemaGastrointestinal}">Sistema Gastrointestinal</label>
+							</div>						
+						</div>
+						<div class="sn-attribute__value  mdl-cell mdl-cell--6-col">
+							<div class="sn-attribute__title ">Comentário</div>
+							<label th:text=
+									"${anamnese.sistemaGastrointestinalComentario}? 
+									(${#strings.length(anamnese.sistemaGastrointestinalComentario) != 0?
+									 anamnese.sistemaGastrointestinalComentario:
+									'Não há comentário!'}): 
+									'Não há comentário!'">
+									Comentário
+							</label>
+						</div>
+						
+						<div class="sn-attribute mdl-cell mdl-cell--12-col">
+							<div class="sn-attribute__title">Água</div>
+							<div class="sn-attribute__value">
+								<label th:text=
+									"${anamnese.agua}? 
+									(${#strings.length(anamnese.agua) != 0?
+									 anamnese.agua:
+									'Não há informações!'}): 
+									'Não há informações!'">
+									Informações
+							</label>
+							</div>
+						</div>				
+	
+						<div class="sn-attribute mdl-cell mdl-cell--6-col">
+							<label 
+								class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect"
+								for="checkbox-1"> 
+								<input type="checkbox" 
+									th:checked="${anamnese.mastigacao}"
+									class="mdl-checkbox__input" readonly="true" disabled="true" /> 
+								<span class="mdl-checkbox__label sn-attribute__title">Mastigação</span>
+							</label>			
+						</div>
+						<div class="sn-attribute__value mdl-cell mdl-cell--6-col">
+							<div class="sn-attribute__title ">Comentário</div>
+							<label th:text=
+									"${anamnese.mastigacaoComentario}? 
+									(${#strings.length(anamnese.mastigacaoComentario) != 0?
+									 anamnese.mastigacaoComentario:
+									'Não há comentário!'}): 
+									'Não há comentário!'">
+									Comentário
+							</label>
+						</div>  
+	
+						<div class="sn-attribute mdl-cell mdl-cell--6-col">
+							<label 
+								class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect"
+								for="checkbox-1"> 
+								<input type="checkbox" 
+									th:checked="${anamnese.disfagia}"
+									class="mdl-checkbox__input" readonly="true" disabled="true" /> 
+								<span class="mdl-checkbox__label sn-attribute__title">Disfagia</span>
+							</label>			
+						</div>
+						<div class="sn-attribute__value mdl-cell mdl-cell--6-col">
+							<div class="sn-attribute__title ">Comentário</div>
+							<label th:text=
+									"${anamnese.disfagiaComentario}? 
+									(${#strings.length(anamnese.disfagiaComentario) != 0?
+									 anamnese.disfagiaComentario:
+									'Não há comentário!'}): 
+									'Não há comentário!'">
+									Comentário
+							</label>
+						</div>  
+	
+						<div class="sn-attribute mdl-cell mdl-cell--6-col">
+							<label 
+								class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect"
+								for="checkbox-1"> 
+								<input type="checkbox" 
+									th:checked="${anamnese.odinofagia}"
+									class="mdl-checkbox__input" readonly="true" disabled="true" /> 
+								<span class="mdl-checkbox__label sn-attribute__title">Odinofagia</span>
+							</label>			
+						</div>
+						<div class="sn-attribute__value mdl-cell mdl-cell--6-col">
+							<div class="sn-attribute__title ">Comentário</div>
+							<label th:text=
+									"${anamnese.odinofagiaComentario}? 
+									(${#strings.length(anamnese.odinofagiaComentario) != 0?
+									 anamnese.odinofagiaComentario:
+									'Não há comentário!'}): 
+									'Não há comentário!'">
+									Comentário
+							</label>
+						</div>  
+	
+						<div class="sn-attribute mdl-cell mdl-cell--6-col">
+							<label 
+								class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect"
+								for="checkbox-1"> 
+								<input type="checkbox" 
+									th:checked="${anamnese.pirose}"
+									class="mdl-checkbox__input" readonly="true" disabled="true" /> 
+								<span class="mdl-checkbox__label sn-attribute__title">Pirose</span>
+							</label>			
+						</div>
+						<div class="sn-attribute__value mdl-cell mdl-cell--6-col">
+							<div class="sn-attribute__title ">Comentário</div>
+							<label th:text=
+									"${anamnese.piroseComentario}? 
+									(${#strings.length(anamnese.piroseComentario) != 0?
+									 anamnese.piroseComentario:
+									'Não há comentário!'}): 
+									'Não há comentário!'">
+									Comentário
+							</label>
+						</div>  
+	
+						<div class="sn-attribute mdl-cell mdl-cell--6-col">
+							<label 
+								class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect"
+								for="checkbox-1"> 
+								<input type="checkbox" 
+									th:checked="${anamnese.nausea}"
+									class="mdl-checkbox__input" readonly="true" disabled="true" /> 
+								<span class="mdl-checkbox__label sn-attribute__title">Náusea</span>
+							</label>			
+						</div>
+						<div class="sn-attribute__value mdl-cell mdl-cell--6-col">
+							<div class="sn-attribute__title ">Comentário</div>
+							<label th:text=
+									"${anamnese.nauseaComentario}? 
+									(${#strings.length(anamnese.nauseaComentario) != 0?
+									 anamnese.nauseaComentario:
+									'Não há comentário!'}): 
+									'Não há comentário!'">
+									Comentário
+							</label>
+						</div>  
+	
+						<div class="sn-attribute mdl-cell mdl-cell--6-col">
+							<label 
+								class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect"
+								for="checkbox-1"> 
+								<input type="checkbox" 
+									th:checked="${anamnese.vomito}"
+									class="mdl-checkbox__input" readonly="true" disabled="true" /> 
+								<span class="mdl-checkbox__label sn-attribute__title">Vômito</span>
+							</label>			
+						</div>
+						<div class="sn-attribute__value mdl-cell mdl-cell--6-col">
+							<div class="sn-attribute__title ">Comentário</div>
+							<label th:text=
+									"${anamnese.vomitoComentario}? 
+									(${#strings.length(anamnese.vomitoComentario) != 0?
+									 anamnese.vomitoComentario:
+									'Não há comentário!'}): 
+									'Não há comentário!'">
+									Comentário
+							</label>
+						</div>  
+	
+						<div class="sn-attribute mdl-cell mdl-cell--6-col">
+							<label 
+								class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect"
+								for="checkbox-1"> 
+								<input type="checkbox" 
+									th:checked="${anamnese.diarreia}"
+									class="mdl-checkbox__input" readonly="true" disabled="true" /> 
+								<span class="mdl-checkbox__label sn-attribute__title">Diarréia</span>
+							</label>			
+						</div>
+						<div class="sn-attribute__value mdl-cell mdl-cell--6-col">
+							<div class="sn-attribute__title ">Comentário</div>
+							<label th:text=
+									"${anamnese.diarreiaComentario}? 
+									(${#strings.length(anamnese.diarreiaComentario) != 0?
+									 anamnese.diarreiaComentario:
+									'Não há comentário!'}): 
+									'Não há comentário!'">
+									Comentário
+							</label>
+						</div>  
+	
+						<div class="sn-attribute mdl-cell mdl-cell--6-col">
+							<label 
+								class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect"
+								for="checkbox-1"> 
+								<input type="checkbox" 
+									th:checked="${anamnese.constipacao}"
+									class="mdl-checkbox__input" readonly="true" disabled="true" /> 
+								<span class="mdl-checkbox__label sn-attribute__title">Constipação</span>
+							</label>			
+						</div>
+						<div class="sn-attribute__value mdl-cell mdl-cell--6-col">
+							<div class="sn-attribute__title ">Comentário</div>
+							<label th:text=
+									"${anamnese.constipacaoComentario}? 
+									(${#strings.length(anamnese.constipacaoComentario) != 0?
+									 anamnese.constipacaoComentario:
+									'Não há comentário!'}): 
+									'Não há comentário!'">
+									Comentário
+							</label>
+						</div>  
+	
+	              </div>
+	              
+	              
+	              <div class="sn-card-top mdl-cell mdl-cell--12-col sn-card sn-padding--48 mdl-color--white mdl-grid">
+						<h5 class="mdl-cell mdl-cell--12-col">Hábitos Alimentares</h5>
+	
+						<div class="sn-attribute mdl-cell mdl-cell--6-col">
+							<label 
+								class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect"
+								for="checkbox-1"> 
+								<input type="checkbox" 
+									th:checked="${anamnese.alergia}"
+									class="mdl-checkbox__input" readonly="true" disabled="true" /> 
+								<span class="mdl-checkbox__label sn-attribute__title">Alergia</span>
+							</label>			
+						</div>
+						<div class="sn-attribute__value mdl-cell mdl-cell--6-col">
+							<div class="sn-attribute__title ">Comentário</div>
+							<label th:text=
+									"${anamnese.alergiaComentario}? 
+									(${#strings.length(anamnese.alergiaComentario) != 0?
+									 anamnese.alergiaComentario:
+									'Não há comentário!'}): 
+									'Não há comentário!'">
+									Comentário
+							</label>
+						</div>  
+	
+						<div class="sn-attribute mdl-cell mdl-cell--6-col">
+							<label 
+								class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect"
+								for="checkbox-1"> 
+								<input type="checkbox" 
+									th:checked="${anamnese.intolerancia}"
+									class="mdl-checkbox__input" readonly="true" disabled="true" /> 
+								<span class="mdl-checkbox__label sn-attribute__title">Intolerância</span>
+							</label>			
+						</div>
+						<div class="sn-attribute__value mdl-cell mdl-cell--6-col">
+							<div class="sn-attribute__title ">Comentário</div>
+							<label th:text=
+									"${anamnese.intoleranciaComentario}? 
+									(${#strings.length(anamnese.intoleranciaComentario) != 0?
+									 anamnese.intoleranciaComentario:
+									'Não há comentário!'}): 
+									'Não há comentário!'">
+									Comentário
+							</label>
+						</div>                      
+	
+	              </div>
+	              
+	              
+	              
+	      </div>	      
+	      
+	      <div id="modal-exclusao-anamnese" class="sn-display-none">
+			Você realmente deseja excluir esta Anamnese?
+		  </div> 
+	</div>
 </div>
 
 	

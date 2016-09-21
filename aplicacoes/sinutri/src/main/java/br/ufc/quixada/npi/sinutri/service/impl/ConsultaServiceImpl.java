@@ -6,26 +6,35 @@ import java.util.List;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import br.ufc.quixada.npi.sinutri.model.AvaliacaoLaboratorial;
+import br.ufc.quixada.npi.sinutri.model.Alimento;
 import br.ufc.quixada.npi.sinutri.model.Anamnese;
 import br.ufc.quixada.npi.sinutri.model.AvaliacaoAntropometrica;
+import br.ufc.quixada.npi.sinutri.model.AvaliacaoLaboratorial;
 import br.ufc.quixada.npi.sinutri.model.CalculoGastoEnergetico;
 import br.ufc.quixada.npi.sinutri.model.DistribuicaoAlimentar;
 import br.ufc.quixada.npi.sinutri.model.Grupo;
 import br.ufc.quixada.npi.sinutri.model.InqueritoAlimentar;
 import br.ufc.quixada.npi.sinutri.model.Paciente;
-import br.ufc.quixada.npi.sinutri.repository.AvaliacaoLaboratorialRepository;
+import br.ufc.quixada.npi.sinutri.model.PlanoAlimentar;
+import br.ufc.quixada.npi.sinutri.model.PorcaoAlimento;
 import br.ufc.quixada.npi.sinutri.model.Prescricao;
 import br.ufc.quixada.npi.sinutri.model.Recordatorio;
+import br.ufc.quixada.npi.sinutri.model.RefeicaoPlanoAlimentar;
 import br.ufc.quixada.npi.sinutri.model.RefeicaoRecordatorio;
+import br.ufc.quixada.npi.sinutri.model.enuns.FonteAlimento;
+import br.ufc.quixada.npi.sinutri.repository.AlimentoRepository;
 import br.ufc.quixada.npi.sinutri.repository.AnamneseRepository;
 import br.ufc.quixada.npi.sinutri.repository.AvaliacaoAntropometricaRepository;
+import br.ufc.quixada.npi.sinutri.repository.AvaliacaoLaboratorialRepository;
 import br.ufc.quixada.npi.sinutri.repository.CalculoGastosEnergeticosRepository;
 import br.ufc.quixada.npi.sinutri.repository.DistribuicaoAlimentarRepository;
 import br.ufc.quixada.npi.sinutri.repository.GrupoRepository;
 import br.ufc.quixada.npi.sinutri.repository.InqueritoAlimentarRepository;
+import br.ufc.quixada.npi.sinutri.repository.PlanoAlimentarRepository;
+import br.ufc.quixada.npi.sinutri.repository.PorcaoAlimentoRepository;
 import br.ufc.quixada.npi.sinutri.repository.PrescricaoRepository;
 import br.ufc.quixada.npi.sinutri.repository.RecordatorioRepository;
+import br.ufc.quixada.npi.sinutri.repository.RefeicaoPlanoAlimentarRepository;
 import br.ufc.quixada.npi.sinutri.repository.RefeicaoRecordatorioRepository;
 import br.ufc.quixada.npi.sinutri.service.ConsultaService;
 
@@ -39,7 +48,13 @@ public class ConsultaServiceImpl implements ConsultaService {
 	private InqueritoAlimentarRepository inqueritoAlimentarRepository;
 	
 	@Inject
+	private PlanoAlimentarRepository planoAlimentarRepository;
+	
+	@Inject
 	private AvaliacaoAntropometricaRepository avaliacaoAntropometricaRepository;
+	
+	@Inject
+	private AlimentoRepository alimentoRepository;
 
 	@Inject
 	private PrescricaoRepository prescricaoRepository;
@@ -52,6 +67,12 @@ public class ConsultaServiceImpl implements ConsultaService {
 	
 	@Inject
 	private RefeicaoRecordatorioRepository refeicaoRecordatorioRepository;
+	
+	@Inject
+	private RefeicaoPlanoAlimentarRepository refeicaoPlanoAlimentarRepository;
+	
+	@Inject
+	private PorcaoAlimentoRepository porcaoAlimentoRepository;
 	
 	@Inject
 	private CalculoGastosEnergeticosRepository calculoGastosEnergeticosRepository;
@@ -166,6 +187,39 @@ public class ConsultaServiceImpl implements ConsultaService {
 	}
 
 	@Override
+	public void adicionarPlanoAlimentar(PlanoAlimentar planoAlimentar) {
+		planoAlimentar.setAtualizadoEm(new Date());
+		for (RefeicaoPlanoAlimentar	refeicao: planoAlimentar.getRefeicoes()) {
+			refeicaoPlanoAlimentarRepository.save(refeicao);
+			for (PorcaoAlimento porcaoAlimento: refeicao.getPorcoesAlimentos()) {
+				porcaoAlimento.setRefeicaoPlanoAlimentar(refeicao);
+				porcaoAlimentoRepository.save(porcaoAlimento);
+			}
+		}
+		planoAlimentarRepository.save(planoAlimentar);
+	}
+
+	@Override
+	public PlanoAlimentar buscarPlanoAlimentarPorId(Long idPlanoAlimentar) {
+		return planoAlimentarRepository.findOne(idPlanoAlimentar);
+	}
+
+	@Override
+	public void editarPlanoAlimentar(PlanoAlimentar planoAlimentar) {
+		this.excluirPlanoAlimentar(planoAlimentar);
+		planoAlimentar.setAtualizadoEm(new Date());
+		planoAlimentar.setId(null);
+		this.adicionarPlanoAlimentar(planoAlimentar);
+		
+	}
+
+	@Override
+	public void excluirPlanoAlimentar(PlanoAlimentar planoAlimentar) {
+		planoAlimentarRepository.delete(planoAlimentar);
+		
+	}
+
+	@Override
 	public void adicionarAvaliacaoAntropometrica(AvaliacaoAntropometrica antropometria) {
 		avaliacaoAntropometricaRepository.save(antropometria);
 		
@@ -186,7 +240,12 @@ public class ConsultaServiceImpl implements ConsultaService {
 		return avaliacaoAntropometricaRepository.findOne(id);
 		
 	}
-	
+
+	@Override
+	public List<Alimento> buscarAlimentosPorFonte(FonteAlimento fonte) {
+		return alimentoRepository.getAlimentosByFonte(fonte);
+	}
+
 	@Override
 	public void adicionarAnamnese(Anamnese anamnese) {
 		anamnese.setAtualizadoEm(new Date());
