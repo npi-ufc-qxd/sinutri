@@ -1,5 +1,5 @@
 $(function() {
-	$(".bt-excluir-inquerito-alimentar").click( function(event) {
+	$(".bt-excluir-inqueritoAlimentar").click( function(event) {
 		$("#modal-exclusao-inquerito-alimentar").removeClass("sn-display-none");
 		var dialog = sn_base.doRegistryDialog({
 			title: "Excluir Inquérito Alimentar",
