@@ -1,5 +1,5 @@
 $(function() {
-	$(".bt-excluir-prescricao").click( function(event) {
+	$(".bt-excluir-calculo-energetico").click( function(event) {
 		$("#modal-exclusao-calculo-energetico").removeClass("sn-display-none");
 		var dialog = sn_base.doRegistryDialog({
 			title: "Excluir Cálculo Energético",

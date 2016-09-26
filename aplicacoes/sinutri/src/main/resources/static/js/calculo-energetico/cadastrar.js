@@ -79,9 +79,7 @@ $(document).ready(function() {
 });
 
 function validarPorcentagem() {
-//	alert("entrou");
 	var max = Number(100) - getInputTotal();
-//	alert(max);
 	updateMaxCard1(max);
 	updateValue("#inputTotal", getInputTotal());
 }
