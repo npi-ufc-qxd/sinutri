@@ -119,5 +119,14 @@ public class Paciente implements Serializable {
 	public void setPlanosAlimentares(List<PlanoAlimentar> planosAlimentares) {
 		this.planosAlimentares = planosAlimentares;
 	}
+
+	public List<CalculoGastoEnergetico> getCalculosGastosEnergeticos() {
+		return calculosGastosEnergeticos;
+	}
+
+	public void setCalculosGastosEnergeticos(
+			List<CalculoGastoEnergetico> calculosGastosEnergeticos) {
+		this.calculosGastosEnergeticos = calculosGastosEnergeticos;
+	}
 	
 }

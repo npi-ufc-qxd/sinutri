@@ -85,6 +85,8 @@
 					class="mdl-grid mdl-cell mdl-cell--12-col sn-card sn-padding--48 mdl-color--white">
 
 					<input type="hidden" id="id" th:field="*{id}"/>
+					<input type="hidden" th:field="*{criadoEm}" />
+					<input type="hidden" th:field="*{atualizadoEm}" />
 					<input type="hidden" id="id" th:field="*{paciente.id}"/>
 					<input type="hidden" id="id" th:field="*{nutricionista.id}"/>
 					
@@ -132,7 +134,7 @@
 					<div class="sn-textfield mdl-cell mdl-cell--4-col">
 						<label class="mdl-cell--3-col sn-textfield__label">VET
 							Ajuste:</label> <input id="inputVetAjuste" type="number" th:field="*{ajuste}" min="0" max="9999"
-							class="mdl-cell--8-col  " step="0.01" />
+							class="mdl-cell--8-col  " step="0.1" />
 					</div>
 
 					<div class="sn-textfield mdl-cell mdl-cell--3-col">
@@ -172,13 +174,12 @@
 						<input id="inputCaloriasLipidio" type="text" th:readonly="true"
 							class="mdl-cell--12-col" th:value="calorias"/>
 					</div>
-					<div class="sn-textfield mdl-cell mdl-cell--6-col mdl-grid--no-spacing" th:align="right">
-						<input id="inputTotal" type="text" th:readonly="true" th:align="center"
-							class="mdl-grid--no-spacing mdl-cell--1-col" th:value="total"/>
+					<div class="sn-textfield mdl-cell mdl-cell--5-col mdl-grid--no-spacing" th:align="right">
+						<label class="mdl-cell--3-col sn-textfield__label">Total:</label>
 					</div>
-					<div class="sn-textfield mdl-cell mdl-cell--6-col mdl-grid--no-spacing" th:align="left">
+					<div class="sn-textfield mdl-cell mdl-cell--7-col mdl-grid--no-spacing" th:align="left">
 						<input id="inputTotal" type="text" th:readonly="true" th:align="center"
-							class="mdl-grid--no-spacing mdl-cell--1-col"/>
+							class="mdl-grid--no-spacing mdl-cell--2-col"/>
 					</div>
 				</div>
 				
