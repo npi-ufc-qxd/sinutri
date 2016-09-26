@@ -337,25 +337,25 @@
 					<div class="mdl-grid mdl-grid--no-spacing">
 
 						<div class="mdl-cell mdl-cell--12-col sn-padding--48">
-							<div class="sn-card-title mdl-layout-title sn-display--inline mdl-color-text--pink-600">Cálculo Gastos Energéticos</div>
+							<div class="sn-card-title mdl-layout-title sn-display--inline mdl-color-text--pink-600">Cálculo Energético</div>
 							<a th:href="@{${'/Paciente/' + paciente.id + '/CalculoEnergetico'}}" class="sn-card-add mdl-button mdl-button--raised mdl-js-button mdl-color-text--white mdl-js-ripple-effect sn-float--right mdl-color--pink-500">ADICIONAR</a>
 						</div>
 
-						<div class="sn-card-list-container mdl-cell mdl-cell--12-col">
+						<div th:id="calculosEnergeticos" class="sn-card-list-container mdl-cell mdl-cell--12-col">
 							<ul class="sn-card-list mdl-list list">
-								<li class="sn-card-list__item mdl-list__item mdl-list__item--one-line mdl-color--grey-200">
+								<li th:each="calculoEnergetico,iterationStatus : ${paciente.calculosGastosEnergeticos}" class="sn-card-list__item mdl-list__item mdl-list__item--one-line mdl-color--grey-200">
 									<span class="mdl-list__item-primary-content">
-										<span class="sn-card-list__item-text timestamp">dd/MM/yyyy</span>
+										<span class="sn-card-list__item-text timestamp" th:attr="data-timestamp=${#dates.format(calculoEnergetico.criadoEm,'yyyyMMdd')}" th:text="${#dates.format(calculoEnergetico.criadoEm,'dd/MM/yyyy')}">dd/MMM/yyyy</span>										
 									</span>
 									<span class="mdl-list__item-secondary-content">
-										<button id="sn-gastos-energeticos-0" class="mdl-button mdl-js-button mdl-button--icon">
+										<button th:id="|sn-calculoEnergetico-${iterationStatus.index}|" class="mdl-button mdl-js-button mdl-button--icon">
 											<i class="material-icons">more_vert</i>
 										</button>
-										<div class="mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect" for="sn-gastos-energeticos-0">
-											<a class="mdl-menu__item">Visualizar</a>
-											<a class="mdl-menu__item">Editar</a>
+										<div class="mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect" th:attr="for=|sn-calculoEnergetico-${iterationStatus.index}|">
+											<a th:href="@{${'/Paciente/' + paciente.id + '/CalculoEnergetico/'+ calculoEnergetico.id }}" class="mdl-menu__item">Visualizar</a>
+											<a th:href="@{${'/Paciente/' + paciente.id + '/CalculoEnergetico/' + calculoEnergetico.id + '/Editar'}}" class="mdl-menu__item">Editar</a>
 											<div class="mdl-menu__item--full-bleed-divider"></div>
-											<a class="mdl-menu__item">Excluir</a>
+											<a th:href="@{${'/Paciente/' + paciente.id + '/CalculoEnergetico/' + calculoEnergetico.id + '/Excluir'}}" class="mdl-menu__item  bt-excluir-calculoEnergetico">Excluir</a>
 										</div>
 									</span>
 
@@ -364,11 +364,7 @@
 						</div>
 					</div>
 
-				</div>				
-				
-				
-				
-				
+				</div>
 			</div>
             	
         </div>
@@ -403,6 +399,10 @@
 			Você realmente deseja excluir este Plano Alimentar?
 		</div>  
 		
+		<div id="modal-exclusao-calculo-energetico" class="sn-display-none">
+			Você realmente deseja excluir este Cálculo Energético?
+		</div> 
+		
 		<!-- Falta o modal dos gastos energeticos -->
 		
         
@@ -416,6 +416,7 @@
 		<script type="text/javascript" th:src="@{/js/prescricao/visualizar.js}"></script>
 		<script type="text/javascript" th:src="@{/js/inquerito-alimentar/visualizar.js}"></script>
 		<script type="text/javascript" th:src="@{/js/avaliacao-laboratorial/visualizar.js}"></script>
+		<script type="text/javascript" th:src="@{/js/calculo-energetico/visualizar.js}"></script>
 		<script type="text/javascript" th:src="@{/js/list.js}"></script>
 
 		<script type="text/javascript">

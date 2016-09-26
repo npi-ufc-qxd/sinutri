@@ -10,18 +10,6 @@ $(document).ready(function() {
 		updateCampos();
 	});
 
-	$("#inputGlicidio").on('change', function(){
-		validarPorcentagem();
-	});
-	
-	$("#inputProteina").on('change', function(){
-		validarPorcentagem();
-	});
-	
-	$("#inputLipidio").on('change', function(){
-		validarPorcentagem();
-	});
-
 	$(".porcao").on('change', function(){
 		var data_id = $(this).data("id-grupo");
 		var max = $("input.numero-porcao[data-id-grupo="+data_id+"]").val();
@@ -32,22 +20,26 @@ $(document).ready(function() {
 	
 	$("#inputGlicidio").on('keyup change', function(){
 		updateAll("#inputGlicidio", "#inputGramasGlicidio", "#inputCaloriasGlicidio", Number(4));
+		validarPorcentagem();
 		calcularGlicidio();
 	});
 	
 	$("#inputProteina").on('keyup change', function(){
 		updateAll("#inputProteina", "#inputGramasProteina", "#inputCaloriasProteina", Number(4));
+		validarPorcentagem();
 		calcularProteina();
 	});
 	
 	$("#inputLipidio").on('keyup change', function(){
 		updateAll("#inputLipidio", "#inputGramasLipidio", "#inputCaloriasLipidio", Number(9));
+		validarPorcentagem();
 		calcularLipidio();
 	});
 
 	$(".numero-porcao").on('keyup change', function(){
+		validarNumero(this, "");
 		var data_id = $(this).data("id-grupo");		
-		var valor = $(this).val();
+		var valor = $(this).val();		
 		zerarQtdPorcao(data_id);
 		updateMaxCard3(data_id, valor);
 		calcularGlicidio();
@@ -56,13 +48,14 @@ $(document).ready(function() {
 	});
 	
 	$(".porcao").on('keyup change', function(){
-		var data_id = $(this).data("id-grupo");
+		validarNumero(this, "");
+		var data_id = $(this).data("id-grupo");		
 		var valor = $(this).val();
 		var max = Number($(this).attr("max"));
 		
 		if(valor>max){
 			valor = max;
-		}
+		}		
 		$(this).val(valor);
 		var somaCampos = getTotalQtdPorcao(data_id);
 		var qtd_porcao = $("input.numero-porcao[data-id-grupo="+data_id+"]").val();
@@ -86,19 +79,19 @@ $(document).ready(function() {
 });
 
 function validarPorcentagem() {
-	var max = 100 - getInputTotal();
+	var max = Number(100) - getInputTotal();
 	updateMaxCard1(max);
 	updateValue("#inputTotal", getInputTotal());
 }
 
 function calcularVet() {
-	var valorCampo = $("#inputPesoDesejado").val()*30;
+	var valorCampo = Number($("#inputPesoDesejado").val())*30;
 	updateValue("#inputVet", valorCampo);
 }
 
 function calcularVetComReducao() {
 	var vet = Number($("#inputVet").val());
-	var vetAjuste = Number($("#inputVetAjuste").val());
+	var vetAjuste = Number($("#inputVetAjuste").val()/100);
 	updateValue("#inputVetReducao", ((vetAjuste*vet)+vet));
 }
 
@@ -119,17 +112,17 @@ function calcularLipidio(){
 
 function updateValue(nomeCampo, valor){	
 	if(isNaN(valor) || valor==Infinity){
-		$(nomeCampo).val("");
+		$(nomeCampo).val("0.00");
 	}else{
 		$(nomeCampo).val(Number(valor).toFixed(2));
 	}
 }
 
 function updateAll(campo, campoGramas, campoCalorias, fator){
-	var valor = Number($(campo).val());
+	var valor = Number($(campo).val());	
 	var max = Number($(campo).attr("max"));
-	var vetReducao = Number($("#inputVetReducao").val());
-			
+	if(!validarNumero(campo, max)) return;
+	var vetReducao = Number($("#inputVetReducao").val());	
 	if(valor > max ){			
 		$(campo).val(max);
 		valor = max;
@@ -171,7 +164,7 @@ function getInputTotal(){
 	var valorProteina = Number($("#inputProteina").val());
 	var valorLipidio  = Number($("#inputLipidio").val());
 	
-	return valorGlicidio + valorLipidio + valorProteina;
+	return Number(valorGlicidio + valorLipidio + valorProteina);
 }
 
 function updateMaxCard3(data_id, max){
@@ -221,4 +214,14 @@ function getTotalPorcentagem(classe, campo){
 	var total = Number(getTotalValor(classe));	
 	total = total/Number($(campo).val());
 	return total*Number(100.0);
+}
+
+function validarNumero(campo, valorPadrao){
+	$(campo).val($(campo).val());
+	var valor = Number($(campo).val());	
+	if(valor < 0){
+		$(campo).val(valorPadrao);
+		return false;
+	}
+	return true;
 }

@@ -1110,6 +1110,8 @@ public class PacienteController {
 		}
 		CalculoGastoEnergetico calculoEnergetico = new CalculoGastoEnergetico();
 		calculoEnergetico.setPaciente(paciente);
+		calculoEnergetico.setCriadoEm(new Date());
+		calculoEnergetico.setCriadoEm(new Date());
 		calculoEnergetico.setDistribuicoesAlimentares(distribuicoesAlimentares);
 		
 		model.addAttribute("calculoEnergetico",calculoEnergetico);

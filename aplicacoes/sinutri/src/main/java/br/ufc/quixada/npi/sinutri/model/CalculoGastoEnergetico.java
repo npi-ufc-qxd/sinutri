@@ -1,5 +1,6 @@
 package br.ufc.quixada.npi.sinutri.model;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -9,6 +10,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 public class CalculoGastoEnergetico {
@@ -24,6 +27,12 @@ public class CalculoGastoEnergetico {
 	private Double proteina;
 	private Double glicidio;
 	private Double totalCalorias;
+	
+	@DateTimeFormat(pattern = "dd/MM/yyyy")
+	private Date criadoEm;
+	
+	@DateTimeFormat(pattern = "dd/MM/yyyy")
+	private Date atualizadoEm;
 	
 	@ManyToOne
 	private Servidor nutricionista;
@@ -101,4 +110,17 @@ public class CalculoGastoEnergetico {
 	public void setId(Long id) {
 		this.id = id;
 	}
+	public Date getCriadoEm() {
+		return criadoEm;
+	}
+	public void setCriadoEm(Date criadoEm) {
+		this.criadoEm = criadoEm;
+	}
+	public Date getAtualizadoEm() {
+		return atualizadoEm;
+	}
+	public void setAtualizadoEm(Date atualizadoEm) {
+		this.atualizadoEm = atualizadoEm;
+	}
+	
 }
