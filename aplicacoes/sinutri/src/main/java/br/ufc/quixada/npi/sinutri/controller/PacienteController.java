@@ -1150,7 +1150,7 @@ public class PacienteController {
 		 consultaService.adicionarCalculoGastoEnergetico(calculoEnergetico);
 		 Mensagem mensagem = new Mensagem("Salvo com sucesso!", Mensagem.Tipo.SUCESSO, Mensagem.Prioridade.MEDIA);
 		 redirectAttributes.addFlashAttribute("mensagem", mensagem);
-		 return "redirect:/Paciente/"+paciente.getId()+"/calculoEnergetico/"+calculoEnergetico.getId();
+		 return "redirect:/Paciente/"+paciente.getId()+"/CalculoEnergetico/"+calculoEnergetico.getId();
 	}
 	
 	@RequestMapping(value="/{idPaciente}/CalculoEnergetico/{idCalculoEnergetico}/Editar", method = RequestMethod.GET)
