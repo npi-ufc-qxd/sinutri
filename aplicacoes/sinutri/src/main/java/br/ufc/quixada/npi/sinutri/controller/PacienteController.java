@@ -1198,7 +1198,7 @@ public class PacienteController {
 		redirectAttributes.addFlashAttribute("mensagem", mensagem);
 		return "redirect:/Paciente/"+idPaciente+"/CalculoEnergetico/"+idCalculoEnergetico;
 	}
-	
+	@RequestMapping(value="/{idPaciente}/CalculoEnergetico/{idCalculoEnergetico}", method = RequestMethod.GET)
 	public String visualizarCalculoGastoEnergetico(@PathVariable("idPaciente") Long idPaciente, @PathVariable("idCalculoEnergetico") Long idCalculoEnergetico, 
 			Model model, RedirectAttributes redirectAttributes){
 		

@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" 
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorator="estrutura/dashboard">
+<head>
+	<title>Sinutri | Visualizar Cálculo Energético</title>
+</head>
+<body>
+	<section layout:fragment="title">
+		<label class="mdl-layout-title">Visualizar Cálculo Energético</label>
+	</section>
+	<section layout:fragment="conteudo">
+	<div class="mdl-grid">
+	<div  class="sn-breadcrumbs__position mdl-cell mdl-cell--10-col-desktop mdl-cell--1-offset-desktop mdl-cell--8-col-tablet mdl-cell--4-col-phone mdl-grid sn-main-grid">	
+		<div class="mdl-cell mdl-cell--12-col">
+			<a th:href="@{/Nutricao/Buscar}" class="sn-breadcrumbs sn-attribute__title">Início</a>
+			<a th:href="@{${'/Paciente/'+calculoEnergetico.paciente.id}}" class="sn-breadcrumbs sn-attribute__title">Paciente</a>
+			<a class="sn-attribute__title sn-breadcrumbs">Visualizar Cálculo Energético</a>
+		</div>
+		
+	<div class="mdl-cell mdl-cell--12-col sn-card">
+				<div
+					class="mdl-layout-title mdl-color-text--red-600 sn-padding--48">
+					Cálculo Energético
+					<div id="div_arrow" class="sn-colapse-div sn-attribute__title">
+						<span
+							th:text="${calculoEnergetico.paciente.pessoa.nome+', '+calculoEnergetico.paciente.pessoa.getIdade()+' anos'}"></span>
+						<i class="sn-breadcrumbs__icon material-icons arrow_icon_position">keyboard_arrow_down</i>
+					</div>
+					
+					<fabgroup class="sn-fab--bottom-right">
+	
+	                              <a th:href="@{${'/Paciente/' + calculoEnergetico.paciente.id +'/Antropometria/'+ calculoEnergetico.id +'/Excluir/'}}" 
+	                              		class="sn-fab sn-fab--hide mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-js-ripple-effect mdl-color--red-700 bt-excluir-calculoEnergetico">
+	                                    <i class="material-icons mdl-color-text--white">delete</i>
+	                              </a>
+	
+	                              <a th:href="@{${'/Paciente/' + calculoEnergetico.paciente.id +'/Antropometria/'+ calculoEnergetico.id +'/Editar/'}}" 
+	                              class="sn-fab sn-fab--hide mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-js-ripple-effect mdl-color--purple">
+	                                      <i class="material-icons mdl-color-text--white">edit</i>
+	                              </a>
+	
+	
+	                              <button class="sn-float--launcher mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored">
+	                                      <i class="material-icons mdl-color-text--white">more_horiz</i>
+	                              </button>
+	                              
+	                      </fabgroup>
+	
+				</div>
+				<div class="sn-form__hdivider sn-margin--none"></div>
+				<div class="sn-colapsable-div sn-padding--48 mdl-color--white">
+	
+					<div class="mdl-grid mdl-grid--no-spacing">
+							
+						<div class="sn-attribute mdl-cell mdl-cell--4-col">
+							<div class="sn-attribute__title">Sexo</div>
+							<div class="sn-attribute__value"
+								th:text="${calculoEnergetico.paciente.pessoa.sexo}"></div>
+						</div>
+	
+						<div class="sn-attribute mdl-cell mdl-cell--4-col">
+							<div class="sn-attribute__title">Telefone</div>
+							<div class="sn-attribute__value"
+								th:text="${calculoEnergetico.paciente.pessoa.telefone}"></div>
+						</div>
+	
+						<div class="sn-attribute mdl-cell mdl-cell--4-col">
+							<div class="sn-attribute__title">Email</div>
+							<div class="sn-attribute__value"
+								th:text="${calculoEnergetico.paciente.pessoa.email}"></div>
+						</div>
+	
+						<div class="sn-attribute mdl-cell mdl-cell--4-col">
+							<div class="sn-attribute__title">CPF</div>
+							<div class="sn-attribute__value"
+								th:text="${calculoEnergetico.paciente.pessoa.cpf}"></div>
+						</div>
+	
+						<div class="sn-attribute mdl-cell mdl-cell--4-col">
+							<div class="sn-attribute__title">Cargo/Ocupação</div>
+							<div class="sn-attribute__value"
+								th:text="${calculoEnergetico.paciente.pessoa.ocupacaoOuCargo}"></div>
+						</div>
+	
+						<div class="sn-attribute mdl-cell mdl-cell--4-col">
+							<div class="sn-attribute__title">Vínculo</div>
+							<div class="sn-attribute__value"
+								th:text="${calculoEnergetico.paciente.pessoa.vinculo}"></div>
+						</div>
+					</div>
+				</div>
+	
+			</div>
+		<div class="sn-form mdl-cell mdl-cell--12-col-desktop mdl-cell--8-col-tablet mdl-cell--4-col-phone mdl-grid mdl-grid--no-spacing sn-main-card">
+			
+		
+ 			<div class="sn-card-top mdl-cell mdl-cell--12-col sn-card sn-padding--48 mdl-color--white mdl-grid">
+				<div class="sn-textfield mdl-cell mdl-cell--12-col">
+					<h5>INFORMAÇÕES GERAIS</h5>
+				</div>
+				
+				<div class="sn-attribute mdl-cell mdl-cell--12-col">
+					<div class="sn-attribute__title">Data</div>
+					<div class="sn-attribute__value" th:text="${#dates.format(calculoEnergetico.criadoEm,'dd/MM/yyyy')}">01/01/1995</div>
+				</div>
+				<div class="sn-attribute mdl-cell mdl-cell--4-col">
+					<div class="sn-attribute__title">Peso (%):</div>
+					<div class="sn-attribute__value" th:text="${calculoEnergetico.pesoSugerido}">10</div>
+				</div>
+				<div class="sn-attribute mdl-cell mdl-cell--4-col">
+					<div class="sn-attribute__title">Fator Atividade</div>
+					<div class="sn-attribute__value" th:text="${calculoEnergetico.fatorAtividade}">10</div>
+				</div>
+				<div class="sn-attribute mdl-cell mdl-cell--4-col">
+					<div class="sn-attribute__title">VET (cal)</div>
+					<div class="sn-attribute__value" th:text="${calculoEnergetico.fatorAtividade * calculoEnergetico.pesoSugerido}">10</div>
+				</div>
+				<div class="sn-attribute mdl-cell mdl-cell--4-col">
+					<div class="sn-attribute__title">VET Ajuste (%)</div>
+					<div class="sn-attribute__value" th:text="${calculoEnergetico.ajuste}">10</div>
+				</div>
+				<div class="sn-attribute mdl-cell mdl-cell--4-col">
+					<div class="sn-attribute__title">VET Redução (cal)</div>
+					<div class="sn-attribute__value" th:text="${(calculoEnergetico.fatorAtividade * calculoEnergetico.pesoSugerido) - (calculoEnergetico.fatorAtividade * calculoEnergetico.pesoSugerido * calculoEnergetico.ajuste / 100)}">10</div>
+				</div>
+			</div>
+			
+			<div class="sn-card-top mdl-cell mdl-cell--12-col sn-card sn-padding--48 mdl-color--white mdl-grid">
+				<div class="sn-textfield mdl-cell mdl-cell--12-col">
+					<h5>GRUPO ALIMENTAR</h5>
+				</div>
+			</div>
+		
+			<div class="sn-card-top mdl-cell mdl-cell--12-col sn-card sn-padding--48 mdl-color--white mdl-grid">
+				<div class="sn-textfield mdl-cell mdl-cell--12-col">
+					<h5>REDISTRIBUIÇÃO</h5>
+				</div>
+		
+			</div>
+		</div>
+		</div>		
+	</div>
+	
+	<div id="modal-exclusao-avaliacao-antropometrica" class="sn-display-none">
+		Você realmente deseja excluir este Cálculo Energético?
+	</div>
+	
+	</section>	
+	
+	
+	<section layout:fragment="js">
+         <script type="text/javascript" th:src="@{/js/antropometria/visualizar.js}"></script>
+    </section>
+	
+</body>
+</html>
