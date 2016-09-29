@@ -1,4 +1,18 @@
 $(document).ready(function() {
+	$(".porcao").each(function(){
+		validarNumero(this, "");
+		var data_id = $(this).data("id-grupo");		
+		var valor = $(this).val();
+		var max = Number($(this).attr("max"));
+		updateMaxCard3(data_id, max);		
+		$(this).val(valor);
+		var somaCampos = getTotalQtdPorcao(data_id);
+		var qtd_porcao = $("input.numero-porcao[data-id-grupo="+data_id+"]").val();
+		valor = qtd_porcao - somaCampos;
+		$("input.porcao-distribuicao[data-id-grupo="+data_id+"]").val(valor);
+		
+	});
+	
 	calcularVet();
 	calcularVetComReducao();
 	updateCampos();
