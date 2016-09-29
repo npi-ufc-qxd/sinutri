@@ -4,113 +4,376 @@
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
     layout:decorator="estrutura/dashboard">
 <head>
-	<title>Cadastrar</title>
+	<title>Sinutri | Cálculo dos Gastos Energético</title>
 	<link rel="stylesheet" type="text/css" th:href="@{/css/material--picker.css}"/>
 
 </head>
 <body>
  
 	<section layout:fragment="title">
-		<label class="mdl-layout-title">Cadastrar Cálculo Energético</label>
+		<label class="mdl-layout-title">Editar Cálculo Energético</label>
 	</section>
 	
 	<section layout:fragment="conteudo">
-	<div class="mdl-grid">
 	
-		<form th:object="${calculoEnergetico}" 
-		th:action="@{${'/Paciente/'+calculoEnergetico.paciente.id+'/CalculoEnergetico/'+calculoEnergetico.id+'/Editar'}}" th:method="post">
-	            
-			<input type="hidden" id="id" th:field="*{id}"/>
-			<input type="hidden" id="id" th:field="*{paciente.id}"/>
-			<input type="hidden" id="id" th:field="*{nutricionista.id}"/>
-			
-			<div class="sn-textfield mdl-cell mdl-cell--6-col">
-				<label th:for="${#ids.next('pesoSugerido')}" class="sn-textfield__label">Peso sugerido (kg):</label>
-				<label class="sn-textfield__messages sn-error-text" th:for="${#ids.next('pesoSugerido')}" th:if="${#fields.hasErrors('pesoSugerido')}" 
-					th:errors="*{pesoSugerido}">Erro no peso</label>
-				<input type="number" min="0"  max="999999" th:field="*{pesoSugerido}" class="sn-textfield__input"  step="0.01"/>
+	<div class="mdl-grid">
+		<div class="sn-breadcrumbs__position mdl-cell mdl-cell--10-col-desktop mdl-cell--1-offset-desktop mdl-cell--8-col-tablet mdl-cell--4-col-phone mdl-grid sn-main-grid">
+		<div class="mdl-cell mdl-cell--12-col">
+			<a th:href="@{/Nutricao/Buscar}" class="sn-breadcrumbs sn-attribute__title">SiNutri</a>
+			<a th:href="@{${'/Paciente/'+calculoEnergetico.paciente.id}}" class="sn-breadcrumbs sn-attribute__title">Paciente</a>
+			<a class="sn-attribute__title sn-breadcrumbs">Gastos Energéticos</a>
+		</div>
+			<div class="mdl-cell mdl-cell--12-col sn-card">
+				<div class="mdl-layout-title mdl-color-text--pink-600 sn-padding--48">
+					Editar Cálculo dos Gastos Energéticos
+					<div id="div_arrow" class="sn-colapse-div sn-attribute__title">
+						<span
+							th:text="${calculoEnergetico.paciente.pessoa.nome+', '+calculoEnergetico.paciente.pessoa.getIdade()+' anos'}"></span>
+						<i class="sn-breadcrumbs__icon material-icons arrow_icon_position">keyboard_arrow_down</i>
+					</div>
+
+				</div>
+				<div class="sn-form__hdivider sn-margin--none"></div>
+				<div class="sn-colapsable-div sn-padding--48 mdl-color--white">
+
+					<div class="mdl-grid mdl-grid--no-spacing">
+
+						<div class="sn-attribute mdl-cell mdl-cell--4-col">
+							<div class="sn-attribute__title">Sexo</div>
+							<div class="sn-attribute__value"
+								th:text="${calculoEnergetico.paciente.pessoa.sexo}"></div>
+						</div>
+
+						<div class="sn-attribute mdl-cell mdl-cell--4-col">
+							<div class="sn-attribute__title">Telefone</div>
+							<div class="sn-attribute__value"
+								th:text="${calculoEnergetico.paciente.pessoa.telefone}"></div>
+						</div>
+
+						<div class="sn-attribute mdl-cell mdl-cell--4-col">
+							<div class="sn-attribute__title">Email</div>
+							<div class="sn-attribute__value"
+								th:text="${calculoEnergetico.paciente.pessoa.email}"></div>
+						</div>
+
+						<div class="sn-attribute mdl-cell mdl-cell--4-col">
+							<div class="sn-attribute__title">CPF</div>
+							<div class="sn-attribute__value"
+								th:text="${calculoEnergetico.paciente.pessoa.cpf}"></div>
+						</div>
+
+						<div class="sn-attribute mdl-cell mdl-cell--4-col">
+							<div class="sn-attribute__title">Cargo/Ocupação</div>
+							<div class="sn-attribute__value"
+								th:text="${calculoEnergetico.paciente.pessoa.ocupacaoOuCargo}"></div>
+						</div>
+
+						<div class="sn-attribute mdl-cell mdl-cell--4-col">
+							<div class="sn-attribute__title">Vínculo</div>
+							<div class="sn-attribute__value"
+								th:text="${calculoEnergetico.paciente.pessoa.vinculo}"></div>
+						</div>
+					</div>
+				</div>
+
 			</div>
 			
-			<div class="sn-textfield mdl-cell mdl-cell--6-col">
-				<label th:for="${#ids.next('ajuste')}" class="sn-textfield__label">Ajuste:</label>
-				<label class="sn-textfield__messages sn-error-text" th:for="${#ids.next('ajuste')}" th:if="${#fields.hasErrors('ajuste')}" 
-					th:errors="*{ajuste}">Erro no ajuste</label>
-				<input type="number" min="0"  max="999999" th:field="*{ajuste}" class="sn-textfield__input"  step="0.01"/>
-			</div>
-			
-			<div class="sn-textfield mdl-cell mdl-cell--6-col">
-				<label th:for="${#ids.next('glicidio')}" class="sn-textfield__label">glicidio:</label>
-				<label class="sn-textfield__messages sn-error-text" th:for="${#ids.next('glicidio')}" th:if="${#fields.hasErrors('glicidio')}" 
-					th:errors="*{glicidio}">Erro no peso</label>
-				<input type="number" min="0"  max="999999" th:field="*{glicidio}" class="sn-textfield__input"  step="0.01"/>
-			</div>
-			
-			<div class="sn-textfield mdl-cell mdl-cell--6-col">
-				<label th:for="${#ids.next('lipidio')}" class="sn-textfield__label">lipidio:</label>
-				<label class="sn-textfield__messages sn-error-text" th:for="${#ids.next('lipidio')}" th:if="${#fields.hasErrors('lipidio')}" 
-					th:errors="*{lipidio}">Erro no peso</label>
-				<input type="number" min="0"  max="999999" th:field="*{lipidio}" class="sn-textfield__input"  step="0.01"/>
-			</div>
-			
-			<div class="sn-textfield mdl-cell mdl-cell--6-col">
-				<label th:for="${#ids.next('proteina')}" class="sn-textfield__label">proteina:</label>
-				<label class="sn-textfield__messages sn-error-text" th:for="${#ids.next('proteina')}" th:if="${#fields.hasErrors('proteina')}" 
-					th:errors="*{proteina}">Erro no peso</label>
-				<input type="number" min="0"  max="999999" th:field="*{proteina}" class="sn-textfield__input"  step="0.01"/>
-			</div>
-			
-			
-			<div th:each="distribuicao, state : *{distribuicoesAlimentares}" class="sn-textfield mdl-cell mdl-cell--6-col">
+			<form class="sn-form mdl-cell mdl-cell--12-col-desktop mdl-cell--8-col-tablet mdl-cell--4-col-phone mdl-grid mdl-grid--no-spacing sn-main-card" th:object="${calculoEnergetico}" 
+			th:action="@{${'/Paciente/'+calculoEnergetico.paciente.id+'/CalculoEnergetico/'+calculoEnergetico.id+'/Editar'}}" th:method="post">
+		            
+				<div
+					class="mdl-grid mdl-cell mdl-cell--12-col sn-card sn-padding--48 mdl-color--white">
+
+					<input type="hidden" id="id" th:field="*{id}"/>
+					<input type="hidden" th:field="*{criadoEm}" />
+					<input type="hidden" th:field="*{atualizadoEm}" />
+					<input type="hidden" id="id" th:field="*{paciente.id}"/>
+					<input type="hidden" id="id" th:field="*{nutricionista.id}"/>
+					
+					<div class="sn-textfield mdl-cell mdl-cell--2-col ">							
+						<label class="sn-textfield__label">Peso (kg):
+						</label> 
+						<input id="inputPesoDesejado"
+							type="number" th:field="*{pesoSugerido}" min="0" max="9999"
+							class="sn-textfield__input" step="0.01" />
+					</div>
+					<div class="sn-textfield mdl-cell mdl-cell--2-col ">							
+						<label class="sn-textfield__label">Fator Atividade:
+						</label> 
+						<input id="inputFatorAtividade"
+							type="number" th:field="*{fatorAtividade}" min="0" max="9999"
+							class="sn-textfield__input" step="0.01" />
+					</div>
+					<div class="mdl-call mdl-cell--8-col" ></div>
+					<div class="sn-textfield mdl-cell mdl-cell--4-col">
+						<label class="sn-textfield__label">VET (cal):</label> 
+						<input id="inputVet" type="number" min="0" max="9999" th:readonly="true"
+							class="sn-textfield__input" step="0.01" />
+					</div>
+					
+					<div class="sn-textfield mdl-cell mdl-cell--4-col">
+						<label class="sn-textfield__label" >Glicídio (%):</label>
+						<input id="inputGlicidio" max="100" min="0" type="number" th:field="*{glicidio}"
+							class="sn-textfield__input" step="0.01" />
+					</div>
+
+					<div class="sn-textfield mdl-cell mdl-cell--2-col">
+						<label class="sn-textfield__label">Gramas</label>
+						<input id="inputGramasGlicidio" type="text" th:readonly="true"
+							class="sn-textfield__input"/>
+					</div>
+
+					<div class="sn-textfield mdl-cell mdl-cell--2-col">
+						<label class="sn-textfield__label">Calorias</label>
+						<input id="inputCaloriasGlicidio" type="text" th:readonly="true"
+							class="sn-textfield__input"/>
+					</div>
+					<div class="sn-textfield mdl-cell mdl-cell--4-col">
+						<label class="sn-textfield__label">VET
+							Ajuste (%):</label> <input id="inputVetAjuste" type="number" th:field="*{ajuste}" min="0" max="9999"
+							class="sn-textfield__input" step="0.1" />
+					</div>
+
+					<div class="sn-textfield mdl-cell mdl-cell--4-col">
+						<label class="sn-textfield__label">Proteina (%):</label>
+						<input id="inputProteina" max="100" min="0"  type="number" th:field="*{proteina}"
+							class="sn-textfield__input" step="0.01" />
+					</div>
+
+					<div class="sn-textfield mdl-cell mdl-cell--2-col">
+						<label class="sn-textfield__label">Gramas</label>
+						<input id="inputGramasProteina" type="text" th:readonly="true"
+							class="sn-textfield__input"/>
+					</div>
+
+					<div class="sn-textfield mdl-cell mdl-cell--2-col">
+						<label class="sn-textfield__label">Calorias</label>
+						<input id="inputCaloriasProteina" type="text" th:readonly="true"
+							class="sn-textfield__input"/>
+					</div>
+					
+					<div class="sn-textfield mdl-cell mdl-cell--4-col">
+						<label class="sn-textfield__label">
+						VET redução (cal):</label> <input id="inputVetReducao" th:readonly="true" type="number" min="0" max="9999"
+							class="sn-textfield__input" step="0.01" />
+					</div>
+
+
+					<div class="sn-textfield mdl-cell mdl-cell--4-col">
+						<label class="sn-textfield__label">Lipídio (%):</label>
+						<input id="inputLipidio" max="100" min="0" type="number" th:field="*{lipidio}" 
+							class="sn-textfield__input  " step="0.01" />
+					</div>
+
+					<div class="sn-textfield mdl-cell mdl-cell--2-col">
+						<label class="sn-textfield__label">Gramas</label>
+						<input id="inputGramasLipidio" type="text" th:readonly="true"
+							class="sn-textfield__input"/>
+					</div>
+
+					<div class="sn-textfield mdl-cell mdl-cell--2-col">
+						<label class="sn-textfield__label">Calorias</label>
+						<input id="inputCaloriasLipidio" type="text" th:readonly="true"
+							class="sn-textfield__input"/>
+					</div>
+					
+					<div class="mdl-cell mdl-cell--4-col"></div>
+					
+					<div class="sn-textfield mdl-cell mdl-cell--4-col">
+						<label class="sn-textfield__label">Total (%):</label>
+						<input id="inputTotal" type="text" th:readonly="true"
+							class="sn-textfield__input"/>
+					</div>
+				</div>
 				
-				<input hidden="true" th:name = "distribuicoesAlimentares[__${state.index}__].grupo.id" th:value="${distribuicao.grupo.id}"/>
-				<p th:text = "${distribuicao.grupo.nome}" class="sn-textfield__label">Porção:</p>				
-				<label th:for="${#ids.next('distribuicao.porcao')}" class="sn-textfield__label">Porção:</label>								
-				<input type="number" min="0"  max="999999" th:field="*{distribuicoesAlimentares[__${state.index}__].porcao}" class="sn-textfield__input"  step="1.0"/>
+				<!-- Inicio do Segundo card ********************************************************************* -->
+					<div
+					class="mdl-cell mdl-cell--12-col mdl-grid sn-card sn-padding--48 mdl-color--white mdl-grid" >
+					
+					<div class="mdl-cell mdl-cell--8-col mdl-grid">
 				
-				<label th:for="${#ids.next('distribuicao.valorGlicidio')}" class="sn-textfield__label">Valor Glicídio:</label>				
-				<input type="number"  min="0"  max="999999" th:name="distribuicoesAlimentares[__${state.index}__].valorGlicidio" th:value="${distribuicao.grupo.valorGlicidio}" class="sn-textfield__input"  step="0.1"/>
-								
-				<label th:for="${#ids.next('distribuicao.valorProteina')}" class="sn-textfield__label">Valor Proteína:</label>				
-				<input type="number"  min="0"  max="999999" th:name="distribuicoesAlimentares[__${state.index}__].valorProteina" th:value="${distribuicao.grupo.valorProteina}" class="sn-textfield__input"  step="0.1"/>
-				
-				<label th:for="${#ids.next('distribuicao.valorLipidio')}" class="sn-textfield__label">Valor Lipídio:</label>				
-				<input type="number"  min="0"  max="999999" th:name="distribuicoesAlimentares[__${state.index}__].valorLipidio" th:value="${distribuicao.grupo.valorLipidio}" class="sn-textfield__input"  step="0.1"/>
-				
-				<label th:for="${#ids.next('distribuicao.porcaoDesjejum')}" class="sn-textfield__label">porcao Desjejum:</label>				
-				<input type="number" min="0"  max="999999" th:field="*{distribuicoesAlimentares[__${state.index}__].porcaoDesjejum}" class="sn-textfield__input"  step="1.0"/>
+						<div class="mdl-title mdl-color-text--black mdl-cell--12-col">Grupo Alimentar</div>
+						
+						<div id="divListaGrupoAlimentar" th:each="distribuicao, state : *{distribuicoesAlimentares}" class="sn-textfield mdl-cell mdl-grid mdl-cell--12-col">
+							<input hidden="true" th:name = "distribuicoesAlimentares[__${state.index}__].grupo.id" th:value="${distribuicao.grupo.id}"/>
+							
+							<div class="mdl-subtitle mdl-color-text--black mdl-cell--12-col" th:text = "${distribuicao.grupo.nome}"> o caina é bonito</div>
+							
+							<div class="sn-textfield mdl-cell mdl-cell--3-col">
+								<label class="sn-textfield__label">N° de Porções:</label>
+								<input type="number" min="0"  max="9999" th:field="*{distribuicoesAlimentares[__${state.index}__].porcao}" class="sn-textfield__input numero-porcao" step="1.0" th:attr="data-id-grupo=${distribuicao.grupo.id}"/>
+							</div>
+							
+							<div class="sn-textfield mdl-cell mdl-cell--3-col">
+								<label th:for="${#ids.next('distribuicao.valorGlicidio')}" class="sn-textfield__label">Valor Glicídio:</label>				
+								<input type="number"  min="0"  max="999999" th:name="distribuicoesAlimentares[__${state.index}__].valorGlicidio" th:value="${distribuicao.grupo.valorGlicidio}" class="sn-textfield__input glicidio" th:attr="data-id-grupo=${distribuicao.grupo.id}" step="0.1"/>
+							</div>
+							
+							<div class="sn-textfield mdl-cell mdl-cell--3-col">
+								<label th:for="${#ids.next('distribuicao.valorProteina')}" class="sn-textfield__label">Valor Proteína:</label>				
+								<input type="number"  min="0"  max="999999" th:name="distribuicoesAlimentares[__${state.index}__].valorProteina" th:value="${distribuicao.grupo.valorProteina}" class="sn-textfield__input proteina" th:attr="data-id-grupo=${distribuicao.grupo.id}" step="0.1"/>
+							</div>
+							
+							<div class="sn-textfield mdl-cell mdl-cell--3-col">				
+								<label th:for="${#ids.next('distribuicao.valorLipidio')}" class="sn-textfield__label">Valor Lipídio:</label>				
+								<input type="number"  min="0"  max="999999" th:name="distribuicoesAlimentares[__${state.index}__].valorLipidio" th:value="${distribuicao.grupo.valorLipidio}"  class="sn-textfield__input lipidio" th:attr="data-id-grupo=${distribuicao.grupo.id}" step="0.1"/>
+							</div>
+						</div>
+		        	</div>
+		        		
+					<!--  2ª card -->
+					
+					<div class="mdl-cell mdl-cell--4-col sn-adapter mdl-grid sn-card mdl-color--white mdl-grid" >
+						<div class="mdl-title mdl-color-text--black mdl-cell--12-col" th:align="center"></div>
+						<div class="mdl-title mdl-color-text--black mdl-cell--12-col" th:align="center">Adequação</div>
+						<div class="mdl-subtitle mdl-color-text--black mdl-cell--9-col" th:align="right">Variação</div>
+						
+						<!--  Não apague!!! -->
+						<div class="mdl-cell mdl-cell--1-col mdl-grid--no-spacing">
+						</div>
+						
+						<div class="mdl-subtitle mdl-color-text--black mdl-cell--4-col">Glicídio:</div>
+						<div class="sn-textfield mdl-cell mdl-cell--3-col mdl-grid--no-spacing">
+							<input id="inputPorcentagemGlicidio" type="text" th:readonly="true"
+								class="mdl-cell--12-col" th:value="0"/>
+						</div>
+						<div class="mdl-cell mdl-cell--1-col mdl-grid--no-spacing">
+							<span>%</span>	
+						</div>
+						<div class="sn-textfield mdl-cell mdl-cell--3-col mdl-grid--no-spacing">
+							<input id="inputTotalGlicidio" type="text" th:readonly="true"
+								class="mdl-cell--12-col" th:value="0" />
+						</div>
+						<div class="mdl-cell mdl-cell--1-col mdl-grid--no-spacing">
+							<span>g</span>	
+						</div>
+						
+						
+						<div class="mdl-subtitle mdl-color-text--black mdl-cell--4-col">Proteina:</div>
+						<div
+							class="sn-textfield mdl-cell mdl-cell--3-col mdl-grid--no-spacing">
+							<input id="inputPorcentagemProteina" type="text" th:readonly="true"
+								class="mdl-cell--12-col " th:value="0"/>
+						</div>
+						<div class="mdl-cell mdl-cell--1-col mdl-grid--no-spacing">
+							<span>%</span>
+						</div>
+						<div
+							class="sn-textfield mdl-cell mdl-cell--3-col mdl-grid--no-spacing">
+							<input id="inputTotalProteina" type="text" th:readonly="true"
+								class="mdl-cell--12-col  " th:value="0"/>
+						</div>
+						<div class="mdl-cell mdl-cell--1-col mdl-grid--no-spacing">
+							<span>g</span>
+						</div>
 
-				<label th:for="${#ids.next('distribuicao.porcaoCafeManha')}" class="sn-textfield__label">porcao Cafe Manha:</label>				
-				<input type="number" min="0"  max="999999" th:field="*{distribuicoesAlimentares[__${state.index}__].porcaoCafeManha}" class="sn-textfield__input"  step="1.0"/>
 
-				<label th:for="${#ids.next('distribuicao.porcaoColacao')}" class="sn-textfield__label">porcao Colacao:</label>				
-				<input type="number" min="0"  max="999999" th:field="*{distribuicoesAlimentares[__${state.index}__].porcaoColacao}" class="sn-textfield__input"  step="1.0"/>
+						<div class="mdl-subtitle mdl-color-text--black mdl-cell--4-col">Lipídio</div>
+						<div
+							class="sn-textfield mdl-cell mdl-cell--3-col mdl-grid--no-spacing">
+							<input id="inputPorcentagemLipidio" type="text" th:readonly="true"
+								class="mdl-cell--12-col  " th:value="0"/>
+						</div>
+						<div class="mdl-cell mdl-cell--1-col mdl-grid--no-spacing">
+							<span>%</span>
+						</div>
+						<div
+							class="sn-textfield mdl-cell mdl-cell--3-col mdl-grid--no-spacing">
+							<input id="inputTotalLipidio" type="text" th:readonly="true"
+								class="mdl-cell--12-col  " th:value="0"/>
+						</div>
+						<div class="mdl-cell mdl-cell--1-col mdl-grid--no-spacing">
+							<span>g</span>
+						</div>
+					</div>
+					
+				</div>
+<!-- Fim do Segundo card ********************************************************************* -->				
 
-				<label th:for="${#ids.next('distribuicao.porcaoAlmoco')}" class="sn-textfield__label">porcao Almoco:</label>				
-				<input type="number" min="0"  max="999999" th:field="*{distribuicoesAlimentares[__${state.index}__].porcaoAlmoco}" class="sn-textfield__input"  step="1.0"/>
+<!-- Inicio do Terceiro card ********************************************************************* -->
+				<div class="mdl-cell mdl-grid mdl-cell--12-col sn-card sn-padding--48 mdl-color--white">
+					<div class="mdl-title mdl-color-text--black mdl-cell--12-col">Redistribuição</div>
+					
+					<div class="mdl-title mdl-color-text--black mdl-cell--12-col" th:align="center">Refeições</div>
+					
+					<div class="mdl-subtitle mdl-color-text--black mdl-cell--4-col"></div>					
+						<div class="mdl-cell mdl-cell--1-col" th:align="center" >
+							<label class="mdl-cell--3-col sn-textfield__label">Desjejum</label>
+						</div>
+						<div class="mdl-cell mdl-cell--1-col" th:align="center">
+							<label class="mdl-cell--3-col sn-textfield__label">Lanche</label>
+						</div>
+						<div class="mdl-cell mdl-cell--1-col" th:align="center">
+							<label class="mdl-cell--3-col sn-textfield__label">Almoço</label>
+						</div>
+						<div class="mdl-cell mdl-cell--1-col" th:align="center">
+							<label class="mdl-cell--3-col sn-textfield__label">Merenda</label>
+						</div>
+						<div class="mdl-cell mdl-cell--1-col" th:align="center">
+							<label class="mdl-cell--3-col sn-textfield__label">Janta</label>
+						</div>
+						<div class="mdl-cell mdl-cell--1-col" th:align="center">
+							<label class="mdl-cell--3-col sn-textfield__label">Colação</label>
+						</div>
+						<div class="mdl-subtitle mdl-color-text--black mdl-cell--1-col" th:align="center">Porções</div>
+					
+					<div th:each="distribuicao, state : *{distribuicoesAlimentares}" class="mdl-subtitle mdl-grid mdl-color-text--black mdl-cell--12-col">
+							<input hidden="true" th:name = "distribuicoesAlimentares[__${state.index}__].grupo.id" th:value="${distribuicao.grupo.id}"/>
+							
+							<div class="mdl-subtitle mdl-color-text--black mdl-cell--4-col" th:text = "${distribuicao.grupo.nome}">o caina é bonito</div>
+							
+							<div class="sn-textfield mdl-cell mdl-cell--1-col mdl-grid--no-spacing update" th:align="center">
+								<input type="number" min="0"  max="0" class="sn-textfield__input porcao porcao-desjejum" th:attr="data-id-grupo=${distribuicao.grupo.id}" th:field="*{distribuicoesAlimentares[__${state.index}__].porcaoDesjejum}" step="1.0"/>
+							</div>
+							
+							<div class="sn-textfield mdl-cell mdl-cell--1-col mdl-grid--no-spacing" th:align="center">
+								<input type="number" min="0"  max="0" class="sn-textfield__input porcao porcao-cafe-manha" th:attr="data-id-grupo=${distribuicao.grupo.id}" th:field="*{distribuicoesAlimentares[__${state.index}__].porcaoCafeManha}" step="1.0"/>
+							</div>
+							
+							<div class="sn-textfield mdl-cell mdl-cell--1-col mdl-grid--no-spacing" th:align="center">
+								<input type="number" min="0"  max="0" class="sn-textfield__input porcao porcao-almoco" th:attr="data-id-grupo=${distribuicao.grupo.id}" th:field="*{distribuicoesAlimentares[__${state.index}__].porcaoAlmoco}" step="1.0"/>
+							</div>
+							
+							<div class="sn-textfield mdl-cell mdl-cell--1-col mdl-grid--no-spacing" th:align="center">
+								<input type="number" min="0"  max="0" class="sn-textfield__input porcao porcao-lanche-tarde" th:attr="data-id-grupo=${distribuicao.grupo.id}" th:field="*{distribuicoesAlimentares[__${state.index}__].porcaoLancheTarde}" step="1.0"/>
+							</div>
+							
+							<div class="sn-textfield mdl-cell mdl-cell--1-col mdl-grid--no-spacing" th:align="center">
+								<input type="number" min="0"  max="0" class="sn-textfield__input porcao porcao-jantar" th:attr="data-id-grupo=${distribuicao.grupo.id}" th:field="*{distribuicoesAlimentares[__${state.index}__].porcaoJantar}" step="1.0"/>
+							</div>
+							
+							<div class="sn-textfield mdl-cell mdl-cell--1-col mdl-grid--no-spacing" th:align="center">
+								<input type="number" min="0"  max="0" class="sn-textfield__input porcao porcao-colacao" th:attr="data-id-grupo=${distribuicao.grupo.id}" th:field="*{distribuicoesAlimentares[__${state.index}__].porcaoColacao}" step="1.0"/>
+							</div>
+					
+							<div class="sn-textfield mdl-cell mdl-cell--1-col mdl-grid--no-spacing" th:align="center">
+								<input type="text" th:readonly="true" class="sn-textfield__input porcao-distribuicao" th:attr="data-id-grupo=${distribuicao.grupo.id}" />
+							</div>
+					</div>
+					
+										
+					<!-- botões -->
+					<div class="sn-form-actions">
 
-				<label th:for="${#ids.next('distribuicao.porcaoLancheTarde')}" class="sn-textfield__label">porcao Lanche Tarde:</label>				
-				<input type="number" min="0"  max="999999" th:field="*{distribuicoesAlimentares[__${state.index}__].porcaoLancheTarde}" class="sn-textfield__input"  step="1.0"/>
-
-				<label th:for="${#ids.next('distribuicao.porcaoJantar')}" class="sn-textfield__label">porcao Jantar:</label>				
-				<input type="number" min="0"  max="999999" th:field="*{distribuicoesAlimentares[__${state.index}__].porcaoJantar}" class="sn-textfield__input"  step="1.0"/>
-
-				<label th:for="${#ids.next('distribuicao.preTreino')}" class="sn-textfield__label">pre Treino:</label>				
-				<input type="number" min="0"  max="999999" th:field="*{distribuicoesAlimentares[__${state.index}__].preTreino}" class="sn-textfield__input"  step="1.0"/>
-
-				<label th:for="${#ids.next('distribuicao.posTreino')}" class="sn-textfield__label">pos Treino:</label>				
-				<input type="number" min="0"  max="999999" th:field="*{distribuicoesAlimentares[__${state.index}__].posTreino}" class="sn-textfield__input"  step="1.0"/>
-
-				
-			</div>
+						<input type="submit"
+							class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect"
+							value="Cadastrar" /> <a id="cancelar"
+							th:href="@{${'/Paciente/'+calculoEnergetico.paciente.id+'/CalculosEnergetico/'+calculoEnergetico.id}}"
+							class="mdl-button mdl-js-button mdl-button--colored mdl-js-ripple-effect">Cancelar</a>
+					</div>
+					
+				</div>
 			
-			
-			<div class="sn-form-actions">
-				<input type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect" value="Cadastrar" />
-				<a id="cancelar" th:href="@{${'/Paciente/'+calculoEnergetico.paciente.id}}" class="mdl-button mdl-js-button mdl-button--colored mdl-js-ripple-effect">Cancelar</a>
-			</div>			
-			
-		</form>
-	</div>	
+			</form>
+		</div>	
+	   </div>
 	</section>
+	
+	<section layout:fragment="js">
+		<script type="text/javascript" th:src="@{/js/moment.js}"></script>
+		<script type="text/javascript" th:src="@{/js/material-date-picker.js}"></script>
+		<script type="text/javascript" th:src="@{/js/calculo-energetico/cadastrar.js}"></script>	
+	</section>
+	
 </body>
 </html>

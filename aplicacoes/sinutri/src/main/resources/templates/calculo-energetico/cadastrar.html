@@ -200,23 +200,23 @@
 							<div class="mdl-subtitle mdl-color-text--black mdl-cell--12-col" th:text = "${distribuicao.grupo.nome}"> o caina é bonito</div>
 							
 							<div class="sn-textfield mdl-cell mdl-cell--3-col">
-								<label class="mdl-cell--3-col sn-textfield__label">N° de Porções:</label>
-								<input type="number" min="0"  max="9999" th:field="*{distribuicoesAlimentares[__${state.index}__].porcao}" class="mdl-cell--10-col numero-porcao" step="1.0" th:attr="data-id-grupo=${distribuicao.grupo.id}"/>
+								<label class="sn-textfield__label">N° de Porções:</label>
+								<input type="number" min="0"  max="9999" th:field="*{distribuicoesAlimentares[__${state.index}__].porcao}" class="sn-textfield__input numero-porcao" step="1.0" th:attr="data-id-grupo=${distribuicao.grupo.id}"/>
 							</div>
 							
 							<div class="sn-textfield mdl-cell mdl-cell--3-col">
-								<label th:for="${#ids.next('distribuicao.valorGlicidio')}" class="mdl-cell--3-col sn-textfield__label">Valor Glicídio:</label>				
-								<input type="number"  min="0"  max="999999" th:name="distribuicoesAlimentares[__${state.index}__].valorGlicidio" th:value="${distribuicao.grupo.valorGlicidio}" class="mdl-cell--10-col glicidio" th:attr="data-id-grupo=${distribuicao.grupo.id}" step="0.1"/>
+								<label th:for="${#ids.next('distribuicao.valorGlicidio')}" class="sn-textfield__label">Valor Glicídio:</label>				
+								<input type="number"  min="0"  max="999999" th:name="distribuicoesAlimentares[__${state.index}__].valorGlicidio" th:value="${distribuicao.grupo.valorGlicidio}" class="sn-textfield__input glicidio" th:attr="data-id-grupo=${distribuicao.grupo.id}" step="0.1"/>
 							</div>
 							
 							<div class="sn-textfield mdl-cell mdl-cell--3-col">
-								<label th:for="${#ids.next('distribuicao.valorProteina')}" class="mdl-cell--3-col sn-textfield__label">Valor Proteína:</label>				
-								<input type="number"  min="0"  max="999999" th:name="distribuicoesAlimentares[__${state.index}__].valorProteina" th:value="${distribuicao.grupo.valorProteina}" class="mdl-cell--10-col proteina" th:attr="data-id-grupo=${distribuicao.grupo.id}" step="0.1"/>
+								<label th:for="${#ids.next('distribuicao.valorProteina')}" class="sn-textfield__label">Valor Proteína:</label>				
+								<input type="number"  min="0"  max="999999" th:name="distribuicoesAlimentares[__${state.index}__].valorProteina" th:value="${distribuicao.grupo.valorProteina}" class="sn-textfield__input proteina" th:attr="data-id-grupo=${distribuicao.grupo.id}" step="0.1"/>
 							</div>
 							
 							<div class="sn-textfield mdl-cell mdl-cell--3-col">				
-								<label th:for="${#ids.next('distribuicao.valorLipidio')}" class="mdl-cell--3-col sn-textfield__label">Valor Lipídio:</label>				
-								<input type="number"  min="0"  max="999999" th:name="distribuicoesAlimentares[__${state.index}__].valorLipidio" th:value="${distribuicao.grupo.valorLipidio}"  class="mdl-cell--10-col lipidio" th:attr="data-id-grupo=${distribuicao.grupo.id}" step="0.1"/>
+								<label th:for="${#ids.next('distribuicao.valorLipidio')}" class="sn-textfield__label">Valor Lipídio:</label>				
+								<input type="number"  min="0"  max="999999" th:name="distribuicoesAlimentares[__${state.index}__].valorLipidio" th:value="${distribuicao.grupo.valorLipidio}"  class="sn-textfield__input lipidio" th:attr="data-id-grupo=${distribuicao.grupo.id}" step="0.1"/>
 							</div>
 						</div>
 		        	</div>
@@ -323,31 +323,31 @@
 							<div class="mdl-subtitle mdl-color-text--black mdl-cell--4-col" th:text = "${distribuicao.grupo.nome}">o caina é bonito</div>
 							
 							<div class="sn-textfield mdl-cell mdl-cell--1-col mdl-grid--no-spacing" th:align="center">
-								<input type="number" min="0"  max="0" class="mdl-cell--10-col porcao porcao-desjejum" th:attr="data-id-grupo=${distribuicao.grupo.id}" th:field="*{distribuicoesAlimentares[__${state.index}__].porcaoDesjejum}" step="1.0"/>
+								<input type="number" min="0"  max="0" class="sn-textfield__input porcao porcao-desjejum" th:attr="data-id-grupo=${distribuicao.grupo.id}" th:field="*{distribuicoesAlimentares[__${state.index}__].porcaoDesjejum}" step="1.0"/>
 							</div>
 							
 							<div class="sn-textfield mdl-cell mdl-cell--1-col mdl-grid--no-spacing" th:align="center">
-								<input type="number" min="0"  max="0" class="mdl-cell--10-col porcao porcao-cafe-manha" th:attr="data-id-grupo=${distribuicao.grupo.id}" th:field="*{distribuicoesAlimentares[__${state.index}__].porcaoCafeManha}" step="1.0"/>
+								<input type="number" min="0"  max="0" class="sn-textfield__input porcao porcao-cafe-manha" th:attr="data-id-grupo=${distribuicao.grupo.id}" th:field="*{distribuicoesAlimentares[__${state.index}__].porcaoCafeManha}" step="1.0"/>
 							</div>
 							
 							<div class="sn-textfield mdl-cell mdl-cell--1-col mdl-grid--no-spacing" th:align="center">
-								<input type="number" min="0"  max="0" class="mdl-cell--10-col porcao porcao-almoco" th:attr="data-id-grupo=${distribuicao.grupo.id}" th:field="*{distribuicoesAlimentares[__${state.index}__].porcaoAlmoco}" step="1.0"/>
+								<input type="number" min="0"  max="0" class="sn-textfield__input porcao porcao-almoco" th:attr="data-id-grupo=${distribuicao.grupo.id}" th:field="*{distribuicoesAlimentares[__${state.index}__].porcaoAlmoco}" step="1.0"/>
 							</div>
 							
 							<div class="sn-textfield mdl-cell mdl-cell--1-col mdl-grid--no-spacing" th:align="center">
-								<input type="number" min="0"  max="0" class="mdl-cell--10-col porcao porcao-lanche-tarde" th:attr="data-id-grupo=${distribuicao.grupo.id}" th:field="*{distribuicoesAlimentares[__${state.index}__].porcaoLancheTarde}" step="1.0"/>
+								<input type="number" min="0"  max="0" class="sn-textfield__input porcao porcao-lanche-tarde" th:attr="data-id-grupo=${distribuicao.grupo.id}" th:field="*{distribuicoesAlimentares[__${state.index}__].porcaoLancheTarde}" step="1.0"/>
 							</div>
 							
 							<div class="sn-textfield mdl-cell mdl-cell--1-col mdl-grid--no-spacing" th:align="center">
-								<input type="number" min="0"  max="0" class="mdl-cell--10-col porcao porcao-jantar" th:attr="data-id-grupo=${distribuicao.grupo.id}" th:field="*{distribuicoesAlimentares[__${state.index}__].porcaoJantar}" step="1.0"/>
+								<input type="number" min="0"  max="0" class="sn-textfield__input porcao porcao-jantar" th:attr="data-id-grupo=${distribuicao.grupo.id}" th:field="*{distribuicoesAlimentares[__${state.index}__].porcaoJantar}" step="1.0"/>
 							</div>
 							
 							<div class="sn-textfield mdl-cell mdl-cell--1-col mdl-grid--no-spacing" th:align="center">
-								<input type="number" min="0"  max="0" class="mdl-cell--10-col porcao porcao-colacao" th:attr="data-id-grupo=${distribuicao.grupo.id}" th:field="*{distribuicoesAlimentares[__${state.index}__].porcaoColacao}" step="1.0"/>
+								<input type="number" min="0"  max="0" class="sn-textfield__input porcao porcao-colacao" th:attr="data-id-grupo=${distribuicao.grupo.id}" th:field="*{distribuicoesAlimentares[__${state.index}__].porcaoColacao}" step="1.0"/>
 							</div>
 					
 							<div class="sn-textfield mdl-cell mdl-cell--1-col mdl-grid--no-spacing" th:align="center">
-								<input type="text" th:readonly="true" class="mdl-cell--12-col porcao-distribuicao" th:attr="data-id-grupo=${distribuicao.grupo.id}" />
+								<input type="text" th:readonly="true" class="sn-textfield__input porcao-distribuicao" th:attr="data-id-grupo=${distribuicao.grupo.id}" />
 							</div>
 					</div>
 					

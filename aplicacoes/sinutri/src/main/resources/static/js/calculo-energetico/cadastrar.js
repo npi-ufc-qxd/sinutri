@@ -1,4 +1,8 @@
 $(document).ready(function() {
+	calcularVet();
+	calcularVetComReducao();
+	updateCampos();
+	
 	$("#inputPesoDesejado").on('keyup change', function(){	
 		calcularVet();
 		calcularVetComReducao();
