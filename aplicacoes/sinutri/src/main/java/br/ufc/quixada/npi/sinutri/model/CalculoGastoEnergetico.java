@@ -27,6 +27,7 @@ public class CalculoGastoEnergetico {
 	private Double proteina;
 	private Double glicidio;
 	private Double totalCalorias;
+	private Double fatorAtividade;
 	
 	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	private Date criadoEm;
@@ -121,6 +122,12 @@ public class CalculoGastoEnergetico {
 	}
 	public void setAtualizadoEm(Date atualizadoEm) {
 		this.atualizadoEm = atualizadoEm;
+	}
+	public Double getFatorAtividade() {
+		return fatorAtividade;
+	}
+	public void setFatorAtividade(Double fatorAtividade) {
+		this.fatorAtividade = fatorAtividade;
 	}
 	
 }

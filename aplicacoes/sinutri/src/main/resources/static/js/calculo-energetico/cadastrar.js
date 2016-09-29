@@ -5,6 +5,12 @@ $(document).ready(function() {
 		updateCampos();
 	});
 	
+	$("#inputFatorAtividade").on('keyup change', function(){	
+		calcularVet();
+		calcularVetComReducao();
+		updateCampos();
+	});
+	
 	$("#inputVetAjuste").on('keyup change', function(){
 		calcularVetComReducao();
 		updateCampos();
@@ -85,14 +91,15 @@ function validarPorcentagem() {
 }
 
 function calcularVet() {
-	var valorCampo = Number($("#inputPesoDesejado").val())*30;
-	updateValue("#inputVet", valorCampo);
+	var peso = Number($("#inputPesoDesejado").val())
+	var fator = Number($("#inputFatorAtividade").val());
+	updateValue("#inputVet", peso * fator);
 }
 
 function calcularVetComReducao() {
 	var vet = Number($("#inputVet").val());
 	var vetAjuste = Number($("#inputVetAjuste").val()/100);
-	updateValue("#inputVetReducao", ((vetAjuste*vet)+vet));
+	updateValue("#inputVetReducao", (vet - (vetAjuste*vet)));
 }
 
 function calcularGlicidio(){

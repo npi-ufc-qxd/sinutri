@@ -20,7 +20,7 @@
 		<div class="sn-breadcrumbs__position mdl-cell mdl-cell--10-col-desktop mdl-cell--1-offset-desktop mdl-cell--8-col-tablet mdl-cell--4-col-phone mdl-grid sn-main-grid">
 		<div class="mdl-cell mdl-cell--12-col">
 			<a th:href="@{/Nutricao/Buscar}" class="sn-breadcrumbs sn-attribute__title">SiNutri</a>
-			<a th:href="@{${'/Paciente/'+calculoEnergetico	.paciente.id}}" class="sn-breadcrumbs sn-attribute__title">Paciente</a>
+			<a th:href="@{${'/Paciente/'+calculoEnergetico.paciente.id}}" class="sn-breadcrumbs sn-attribute__title">Paciente</a>
 			<a class="sn-attribute__title sn-breadcrumbs">Gastos Energéticos</a>
 		</div>
 			<div class="mdl-cell mdl-cell--12-col sn-card">
@@ -90,96 +90,99 @@
 					<input type="hidden" id="id" th:field="*{paciente.id}"/>
 					<input type="hidden" id="id" th:field="*{nutricionista.id}"/>
 					
-					<div class="sn-textfield mdl-cell mdl-cell--7-col ">							
-						<label class="mdl-cell--3-col sn-textfield__label">Peso Desejado (kg):
+					<div class="sn-textfield mdl-cell mdl-cell--2-col ">							
+						<label class="sn-textfield__label">Peso (kg):
 						</label> 
 						<input id="inputPesoDesejado"
 							type="number" th:field="*{pesoSugerido}" min="0" max="9999"
-							class="mdl-cell--4-col  " step="0.01" />
+							class="sn-textfield__input" step="0.01" />
 					</div>
-						
-					<div class="sn-textfield mdl-cell mdl-cell--2-col">
-						<label class="mdl-cell--3-col sn-textfield__label">Gramas</label>
+					<div class="sn-textfield mdl-cell mdl-cell--2-col ">							
+						<label class="sn-textfield__label">Fator Atividade:
+						</label> 
+						<input id="inputFatorAtividade"
+							type="number" th:field="*{fatorAtividade}" min="0" max="9999"
+							class="sn-textfield__input" step="0.01" />
 					</div>
-
-					<div class="sn-textfield mdl-cell mdl-cell--2-col">
-						<label class="mdl-cell--3-col sn-textfield__label">Calorias</label>
-					</div>
-					
-					
-					
+					<div class="mdl-call mdl-cell--8-col" ></div>
 					<div class="sn-textfield mdl-cell mdl-cell--4-col">
-						<label class="mdl-cell--3-col sn-textfield__label">VET (cal):</label> 
+						<label class="sn-textfield__label">VET (cal):</label> 
 						<input id="inputVet" type="number" min="0" max="9999" th:readonly="true"
-							class="mdl-cell--9-col  " step="0.01" />
+							class="sn-textfield__input" step="0.01" />
 					</div>
-
-					<div class="sn-textfield mdl-cell mdl-cell--3-col">
-						<label class="mdl-cell--3-col sn-textfield__label" >Glicídio (%):</label>
+					
+					<div class="sn-textfield mdl-cell mdl-cell--4-col">
+						<label class="sn-textfield__label" >Glicídio (%):</label>
 						<input id="inputGlicidio" max="100" min="0" type="number" th:field="*{glicidio}"
-							class="mdl-cell--7-col" step="0.01" />
+							class="sn-textfield__input" step="0.01" />
 					</div>
 
 					<div class="sn-textfield mdl-cell mdl-cell--2-col">
+						<label class="sn-textfield__label">Gramas</label>
 						<input id="inputGramasGlicidio" type="text" th:readonly="true"
-							class="mdl-cell--12-col" th:value="gramas"/>
+							class="sn-textfield__input"/>
 					</div>
 
 					<div class="sn-textfield mdl-cell mdl-cell--2-col">
+						<label class="sn-textfield__label">Calorias</label>
 						<input id="inputCaloriasGlicidio" type="text" th:readonly="true"
-							class="mdl-cell--12-col" th:value="calorias"/>
+							class="sn-textfield__input"/>
 					</div>
-
+					<div class="sn-textfield mdl-cell mdl-cell--4-col">
+						<label class="sn-textfield__label">VET
+							Ajuste (%):</label> <input id="inputVetAjuste" type="number" th:field="*{ajuste}" min="0" max="9999"
+							class="sn-textfield__input" step="0.1" />
+					</div>
 
 					<div class="sn-textfield mdl-cell mdl-cell--4-col">
-						<label class="mdl-cell--3-col sn-textfield__label">VET
-							Ajuste:</label> <input id="inputVetAjuste" type="number" th:field="*{ajuste}" min="0" max="9999"
-							class="mdl-cell--8-col  " step="0.1" />
-					</div>
-
-					<div class="sn-textfield mdl-cell mdl-cell--3-col">
-						<label class="mdl-cell--3-col sn-textfield__label">Proteina (%):</label>
+						<label class="sn-textfield__label">Proteina (%):</label>
 						<input id="inputProteina" max="100" min="0"  type="number" th:field="*{proteina}"
-							class="mdl-cell--7-col  " step="0.01" />
+							class="sn-textfield__input" step="0.01" />
 					</div>
 
 					<div class="sn-textfield mdl-cell mdl-cell--2-col">
+						<label class="sn-textfield__label">Gramas</label>
 						<input id="inputGramasProteina" type="text" th:readonly="true"
-							class="mdl-cell--12-col" th:value="gramas"/>
+							class="sn-textfield__input"/>
 					</div>
 
 					<div class="sn-textfield mdl-cell mdl-cell--2-col">
+						<label class="sn-textfield__label">Calorias</label>
 						<input id="inputCaloriasProteina" type="text" th:readonly="true"
-							class="mdl-cell--12-col" th:value="calorias"/>
+							class="sn-textfield__input"/>
 					</div>
+					
+					<div class="sn-textfield mdl-cell mdl-cell--4-col">
+						<label class="sn-textfield__label">
+						VET redução (cal):</label> <input id="inputVetReducao" th:readonly="true" type="number" min="0" max="9999"
+							class="sn-textfield__input" step="0.01" />
+					</div>
+
 
 					<div class="sn-textfield mdl-cell mdl-cell--4-col">
-						<label class="mdl-cell--3-col sn-textfield__label">
-						VET redução (cal):</label> <input id="inputVetReducao" th:readonly="true" type="number" min="0" max="9999"
-							class="mdl-cell--6-col  " step="0.01" />
-					</div>
-
-					<div class="sn-textfield mdl-cell mdl-cell--3-col">
-						<label class="mdl-cell--3-col sn-textfield__label">Lipídio (%):</label>
+						<label class="sn-textfield__label">Lipídio (%):</label>
 						<input id="inputLipidio" max="100" min="0" type="number" th:field="*{lipidio}" 
-							class="mdl-cell--8-col  " step="0.01" />
+							class="sn-textfield__input  " step="0.01" />
 					</div>
 
 					<div class="sn-textfield mdl-cell mdl-cell--2-col">
+						<label class="sn-textfield__label">Gramas</label>
 						<input id="inputGramasLipidio" type="text" th:readonly="true"
-							class="mdl-cell--12-col" th:value="gramas" />
+							class="sn-textfield__input"/>
 					</div>
 
 					<div class="sn-textfield mdl-cell mdl-cell--2-col">
+						<label class="sn-textfield__label">Calorias</label>
 						<input id="inputCaloriasLipidio" type="text" th:readonly="true"
-							class="mdl-cell--12-col" th:value="calorias"/>
+							class="sn-textfield__input"/>
 					</div>
-					<div class="sn-textfield mdl-cell mdl-cell--5-col mdl-grid--no-spacing" th:align="right">
-						<label class="mdl-cell--3-col sn-textfield__label">Total:</label>
-					</div>
-					<div class="sn-textfield mdl-cell mdl-cell--7-col mdl-grid--no-spacing" th:align="left">
-						<input id="inputTotal" type="text" th:readonly="true" th:align="center"
-							class="mdl-grid--no-spacing mdl-cell--2-col"/>
+					
+					<div class="mdl-cell mdl-cell--4-col"></div>
+					
+					<div class="sn-textfield mdl-cell mdl-cell--4-col">
+						<label class="sn-textfield__label">Total (%):</label>
+						<input id="inputTotal" type="text" th:readonly="true"
+							class="sn-textfield__input"/>
 					</div>
 				</div>
 				
@@ -355,7 +358,7 @@
 						<input type="submit"
 							class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect"
 							value="Cadastrar" /> <a id="cancelar"
-							th:href="@{${'/Nutricao/Buscar'}}" href="#"
+							th:href="@{${'/Paciente/'+calculoEnergetico.paciente.id}}"
 							class="mdl-button mdl-js-button mdl-button--colored mdl-js-ripple-effect">Cancelar</a>
 					</div>
 					
