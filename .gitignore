@@ -8,4 +8,4 @@ target
 *.war
 *.ear
 *.log
-*.properties
+
