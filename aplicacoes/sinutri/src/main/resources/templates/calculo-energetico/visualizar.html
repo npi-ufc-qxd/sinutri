@@ -31,12 +31,12 @@
 					
 					<fabgroup class="sn-fab--bottom-right">
 	
-	                              <a th:href="@{${'/Paciente/' + calculoEnergetico.paciente.id +'/Antropometria/'+ calculoEnergetico.id +'/Excluir/'}}" 
-	                              		class="sn-fab sn-fab--hide mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-js-ripple-effect mdl-color--red-700 bt-excluir-calculoEnergetico">
+	                              <a th:href="@{${'/Paciente/' + calculoEnergetico.paciente.id +'/CalculoEnergetico/'+ calculoEnergetico.id +'/Excluir/'}}" 
+	                              		class="sn-fab sn-fab--hide mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-js-ripple-effect mdl-color--red-700 bt-excluir-calculo-energetico">
 	                                    <i class="material-icons mdl-color-text--white">delete</i>
 	                              </a>
 	
-	                              <a th:href="@{${'/Paciente/' + calculoEnergetico.paciente.id +'/Antropometria/'+ calculoEnergetico.id +'/Editar/'}}" 
+	                              <a th:href="@{${'/Paciente/' + calculoEnergetico.paciente.id +'/CalculoEnergetico/'+ calculoEnergetico.id +'/Editar/'}}" 
 	                              class="sn-fab sn-fab--hide mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-js-ripple-effect mdl-color--purple">
 	                                      <i class="material-icons mdl-color-text--white">edit</i>
 	                              </a>
@@ -119,31 +119,83 @@
 				</div>
 				<div class="sn-attribute mdl-cell mdl-cell--4-col">
 					<div class="sn-attribute__title">VET Ajuste (%)</div>
-					<div class="sn-attribute__value" th:text="${calculoEnergetico.ajuste}">10</div>
+					<div class="sn-attribute__value" th:text="${calculoEnergetico.ajuste != null? calculoEnergetico.ajuste : '0'}">0</div>
 				</div>
 				<div class="sn-attribute mdl-cell mdl-cell--4-col">
 					<div class="sn-attribute__title">VET Redução (cal)</div>
-					<div class="sn-attribute__value" th:text="${(calculoEnergetico.fatorAtividade * calculoEnergetico.pesoSugerido) - (calculoEnergetico.fatorAtividade * calculoEnergetico.pesoSugerido * calculoEnergetico.ajuste / 100)}">10</div>
+					<div class="sn-attribute__value" th:text="${calculoEnergetico.ajuste != null? (calculoEnergetico.fatorAtividade * calculoEnergetico.pesoSugerido) - (calculoEnergetico.fatorAtividade * calculoEnergetico.pesoSugerido * calculoEnergetico.ajuste / 100) : calculoEnergetico.fatorAtividade * calculoEnergetico.pesoSugerido}">10</div>
 				</div>
 			</div>
 			
-			<div class="sn-card-top mdl-cell mdl-cell--12-col sn-card sn-padding--48 mdl-color--white mdl-grid">
-				<div class="sn-textfield mdl-cell mdl-cell--12-col">
-					<h5>GRUPO ALIMENTAR</h5>
-				</div>
-			</div>
+			
 		
 			<div class="sn-card-top mdl-cell mdl-cell--12-col sn-card sn-padding--48 mdl-color--white mdl-grid">
 				<div class="sn-textfield mdl-cell mdl-cell--12-col">
 					<h5>REDISTRIBUIÇÃO</h5>
 				</div>
+				<div class="mdl-title mdl-color-text--black mdl-cell--12-col" th:align="center">Refeições</div>
+					
+					<div class="mdl-subtitle mdl-color-text--black mdl-cell--4-col"></div>					
+						<div class="mdl-cell mdl-cell--1-col" th:align="center" >
+							<label class="mdl-cell--3-col sn-textfield__label">Desjejum</label>
+						</div>
+						<div class="mdl-cell mdl-cell--1-col" th:align="center">
+							<label class="mdl-cell--3-col sn-textfield__label">Lanche</label>
+						</div>
+						<div class="mdl-cell mdl-cell--1-col" th:align="center">
+							<label class="mdl-cell--3-col sn-textfield__label">Almoço</label>
+						</div>
+						<div class="mdl-cell mdl-cell--1-col" th:align="center">
+							<label class="mdl-cell--3-col sn-textfield__label">Merenda</label>
+						</div>
+						<div class="mdl-cell mdl-cell--1-col" th:align="center">
+							<label class="mdl-cell--3-col sn-textfield__label">Janta</label>
+						</div>
+						<div class="mdl-cell mdl-cell--1-col" th:align="center">
+							<label class="mdl-cell--3-col sn-textfield__label">Colação</label>
+						</div>
+						<div class="mdl-subtitle mdl-color-text--black mdl-cell--2-col" th:align="center">Total Porções</div>
+						
+						<div th:each="distribuicao, state : ${calculoEnergetico.distribuicoesAlimentares}" class="mdl-subtitle mdl-grid mdl-color-text--black mdl-cell--12-col">
+							
+							<div class="mdl-subtitle mdl-color-text--black mdl-cell--4-col" th:text = "${distribuicao.grupo.nome}">Grupo</div>
+							
+							<div class="sn-textfield mdl-cell mdl-cell--1-col mdl-grid--no-spacing update" th:align="center">
+								<div class="sn-attribute__value" th:text="${calculoEnergetico.distribuicoesAlimentares[__${state.index}__].porcaoDesjejum}">10</div>
+							</div>
+										
+							<div class="sn-textfield mdl-cell mdl-cell--1-col mdl-grid--no-spacing update" th:align="center">
+								<div class="sn-attribute__value" th:text="${calculoEnergetico.distribuicoesAlimentares[__${state.index}__].porcaoCafeManha}">10</div>
+							</div>
+							
+							<div class="sn-textfield mdl-cell mdl-cell--1-col mdl-grid--no-spacing update" th:align="center">
+								<div class="sn-attribute__value" th:text="${calculoEnergetico.distribuicoesAlimentares[__${state.index}__].porcaoAlmoco}">10</div>
+							</div>
+							
+							<div class="sn-textfield mdl-cell mdl-cell--1-col mdl-grid--no-spacing update" th:align="center">
+								<div class="sn-attribute__value" th:text="${calculoEnergetico.distribuicoesAlimentares[__${state.index}__].porcaoLancheTarde}">10</div>
+							</div>
+							
+							<div class="sn-textfield mdl-cell mdl-cell--1-col mdl-grid--no-spacing update" th:align="center">
+								<div class="sn-attribute__value" th:text="${calculoEnergetico.distribuicoesAlimentares[__${state.index}__].porcaoJantar}">10</div>
+							</div>
+							
+							<div class="sn-textfield mdl-cell mdl-cell--1-col mdl-grid--no-spacing update" th:align="center">
+								<div class="sn-attribute__value" th:text="${calculoEnergetico.distribuicoesAlimentares[__${state.index}__].porcaoColacao}">10</div>
+							</div>
+							
+							<div class="sn-textfield mdl-cell mdl-cell--2-col mdl-grid--no-spacing update" th:align="center">
+								<div class="sn-attribute__value" th:text="${calculoEnergetico.distribuicoesAlimentares[__${state.index}__].porcaoDesjejum + calculoEnergetico.distribuicoesAlimentares[__${state.index}__].porcaoCafeManha + calculoEnergetico.distribuicoesAlimentares[__${state.index}__].porcaoAlmoco + calculoEnergetico.distribuicoesAlimentares[__${state.index}__].porcaoLancheTarde + calculoEnergetico.distribuicoesAlimentares[__${state.index}__].porcaoJantar + calculoEnergetico.distribuicoesAlimentares[__${state.index}__].porcaoColacao}">10</div>
+							</div>
+						
+						</div>
 		
 			</div>
 		</div>
 		</div>		
 	</div>
 	
-	<div id="modal-exclusao-avaliacao-antropometrica" class="sn-display-none">
+	<div id="modal-exclusao-calculo-energetico" class="sn-display-none">
 		Você realmente deseja excluir este Cálculo Energético?
 	</div>
 	
@@ -151,7 +203,7 @@
 	
 	
 	<section layout:fragment="js">
-         <script type="text/javascript" th:src="@{/js/antropometria/visualizar.js}"></script>
+         <script type="text/javascript" th:src="@{/js/calculo-energetico/visualizar.js}"></script>
     </section>
 	
 </body>

@@ -2,6 +2,7 @@ package br.ufc.quixada.npi.sinutri.controller;
 
 import javax.inject.Inject;
 
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -80,7 +81,9 @@ public class NutricaoController {
 	}
 
 	private String getCpfPessoaLogada() {
-		return SecurityContextHolder.getContext().getAuthentication().getName();
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		Usuario usuario = (Usuario) authentication.getPrincipal();
+		return usuario.getCpf();
 	}
 	
 }
