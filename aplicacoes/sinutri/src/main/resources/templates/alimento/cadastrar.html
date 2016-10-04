@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" 
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorator="estrutura/dashboard">
+
+<head>
+	<title>Sinutri | Novo Alimento</title>
+
+</head>
+<section layout:fragment="title">
+	<label class="mdl-layout-title">Cadastrar Alimento</label>
+</section>
+<section layout:fragment="conteudo">
+	
+	<div class="mdl-grid">
+		<div class="mdl-cell mdl-cell--11-col mdl-cell--1-offset-desktop">
+			<a th:href="@{/Nutricao/Buscar}" class="sn-breadcrumbs sn-attribute__title">Início</a>
+			<a class="sn-attribute__title sn-breadcrumbs">Cadastrar Alimento</a>
+		</div>
+		<div class="
+			mdl-cell mdl-cell--10-col-desktop
+			mdl-cell--7-col-desktop mdl-cell--1-offset-desktop
+			mdl-cell--8-col-tablet
+			mdl-cell--4-col-phone
+			mdl-grid mdl-grid--no-spacing
+			sn-main-card">
+	
+			<div class="mdl-cell mdl-cell--12-col sn-card sn-padding--48 mdl-color--teal">
+					
+				<div class="mdl-layout-title mdl-color-text--white">
+					<div class="mdl-layout-title">Cadastro Alimento</div>
+				</div>
+				
+			</div>
+
+			<form class="sn-form sn-card-top mdl-cell mdl-cell--12-col sn-card sn-padding--48 mdl-color--white mdl-grid" th:object="${alimento}" th:method="post" th:action="@{${'/Nutricao/Cadastrar/Alimento'}}">
+	
+				<input type="hidden" id="id" th:field="*{id}"/>
+	
+				<div class="sn-textfield mdl-cell mdl-cell--12-col">
+					<label class="sn-textfield__label" for="nome">Nome</label>
+					<label class="sn-textfield__messages sn-error-text" for="sn-text" th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}"></label>
+					<input class="sn-textfield__input" type="text" th:field="*{nome}" id="nome" />
+				</div>
+				
+				<div class="sn-selectfield mdl-cell mdl-cell--6-col">
+					<label class="sn-selectfield__label" for="grupo">Grupo</label>
+							
+					<select class="sn-selectfield__select" th:field="*{grupo}" id="grupo" >
+						<option value="">Selecione um grupo</option>							
+						
+	
+					</select>
+				</div>
+				
+				<div class="sn-selectfield mdl-cell mdl-cell--6-col">
+					<label class="sn-selectfield__label" for="medidasCaseira">Medida caseira</label>
+					
+					<select class="sn-selectfield__select" th:field="*{medidasCaseira}" id="medidasCaseira" >
+						<option value="">Selecione uma medida caseira</option>							
+						
+	
+					</select>
+				</div>
+				
+	
+				<div class="sn-form-actions">
+	
+					<input type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect" value="Cadastrar" />
+					<a id="cancelar" th:href="@{${'/Nutricao/Buscar'}}" href="#" class="mdl-button mdl-js-button mdl-button--colored mdl-js-ripple-effect">Cancelar</a> 
+					
+				</div>
+	
+			</form>
+		
+		</div>
+	
+	</div>
+	
+</section>
+
+<section layout:fragment="js">
+				
+        <script type="text/javascript" th:src="@{/js/moment.js}"></script>
+        <script type="text/javascript" th:src="@{/js/jquery.mask.min.js}"></script>
+              
+</section>
+
+</html>

@@ -317,6 +317,12 @@ public class ConsultaServiceImpl implements ConsultaService {
 	@Override
 	public List<Grupo> getGrupos() {
 		return grupoRepository.findAll();
+	}
+
+	@Override
+	public void cadastrarAlimento(Alimento alimento) {
+		alimentoRepository.save(alimento);
+		
 	}	
 	
 }
