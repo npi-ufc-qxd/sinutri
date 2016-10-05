@@ -593,7 +593,7 @@ public class PacienteController {
 	}
 	
 	@RequestMapping(value = "/Cadastrar", method = RequestMethod.POST)
-	public String adicionarPacienteExterno(Model model, @Valid @ModelAttribute("pessoa") Pessoa pessoa, BindingResult bindingResult, RedirectAttributes redirectAttributes){
+	String adicionarPacienteExterno(Model model, @Valid @ModelAttribute("pessoa") Pessoa pessoa, BindingResult bindingResult, RedirectAttributes redirectAttributes){
 		
 		if (bindingResult.hasErrors()) {
 			
@@ -1121,10 +1121,11 @@ public class PacienteController {
 	}
 	
 	@RequestMapping(value="/{idPaciente}/CalculoEnergetico", method = RequestMethod.POST)
-	public String adicionarCalculoGastosEnergeticos(@PathVariable("idPaciente") Long idPaciente, Model model, @Valid CalculoGastoEnergetico calculoEnergetico,
+	String adicionarCalculoGastosEnergeticos(@PathVariable("idPaciente") Long idPaciente, Model model, CalculoGastoEnergetico calculoEnergetico,
 	 		BindingResult result, RedirectAttributes redirectAttributes){
 		
 		if(result.hasErrors()){
+			model.addAttribute("idPaciente", idPaciente);
 			model.addAttribute("calculoEnergetico", calculoEnergetico);
 			Mensagem mensagem = new Mensagem("Erro ao adicionar cálculo energético!", Mensagem.Tipo.ERRO, Mensagem.Prioridade.MEDIA);
 			redirectAttributes.addFlashAttribute("mensagem", mensagem);
@@ -1147,6 +1148,7 @@ public class PacienteController {
 			redirectAttributes.addFlashAttribute("mensagem", mensagem);
 			return "redirect:/Nutricao/Buscar";
 		 }
+		 
 		 calculoEnergetico.setNutricionista(nutricionista);
 		 consultaService.adicionarCalculoGastoEnergetico(calculoEnergetico);
 		 Mensagem mensagem = new Mensagem("Salvo com sucesso!", Mensagem.Tipo.SUCESSO, Mensagem.Prioridade.MEDIA);

@@ -107,8 +107,8 @@
 					<div class="mdl-call mdl-cell--8-col" ></div>
 					<div class="sn-textfield mdl-cell mdl-cell--4-col">
 						<label class="sn-textfield__label">VET (cal):</label> 
-						<input id="inputVet" type="number" min="0" max="9999" th:readonly="true"
-							class="sn-textfield__input" step="0.01" />
+						<input id="inputVet" min="0" max="9999" th:readonly="true"
+							class="sn-textfield__input mdl-color--grey-300" />
 					</div>
 					
 					<div class="sn-textfield mdl-cell mdl-cell--4-col">
@@ -120,13 +120,13 @@
 					<div class="sn-textfield mdl-cell mdl-cell--2-col">
 						<label class="sn-textfield__label">Gramas</label>
 						<input id="inputGramasGlicidio" type="text" th:readonly="true"
-							class="sn-textfield__input"/>
+							class="sn-textfield__input mdl-color--grey-300"/>
 					</div>
 
 					<div class="sn-textfield mdl-cell mdl-cell--2-col">
 						<label class="sn-textfield__label">Calorias</label>
 						<input id="inputCaloriasGlicidio" type="text" th:readonly="true"
-							class="sn-textfield__input"/>
+							class="sn-textfield__input mdl-color--grey-300"/>
 					</div>
 					<div class="sn-textfield mdl-cell mdl-cell--4-col">
 						<label class="sn-textfield__label">VET
@@ -143,38 +143,38 @@
 					<div class="sn-textfield mdl-cell mdl-cell--2-col">
 						<label class="sn-textfield__label">Gramas</label>
 						<input id="inputGramasProteina" type="text" th:readonly="true"
-							class="sn-textfield__input"/>
+							class="sn-textfield__input mdl-color--grey-300"/>
 					</div>
 
 					<div class="sn-textfield mdl-cell mdl-cell--2-col">
 						<label class="sn-textfield__label">Calorias</label>
 						<input id="inputCaloriasProteina" type="text" th:readonly="true"
-							class="sn-textfield__input"/>
+							class="sn-textfield__input mdl-color--grey-300"/>
 					</div>
 					
 					<div class="sn-textfield mdl-cell mdl-cell--4-col">
 						<label class="sn-textfield__label">
-						VET redução (cal):</label> <input id="inputVetReducao" th:readonly="true" type="number" min="0" max="9999"
-							class="sn-textfield__input" step="0.01" />
+						VET redução (cal):</label> <input id="inputVetReducao" th:readonly="true" min="0" max="9999"
+							class="sn-textfield__input mdl-color--grey-300" />
 					</div>
 
 
 					<div class="sn-textfield mdl-cell mdl-cell--4-col">
 						<label class="sn-textfield__label">Lipídio (%):</label>
 						<input id="inputLipidio" max="100" min="0" type="number" th:field="*{lipidio}" 
-							class="sn-textfield__input  " step="0.01" />
+							class="sn-textfield__input" step="0.01" />
 					</div>
 
 					<div class="sn-textfield mdl-cell mdl-cell--2-col">
 						<label class="sn-textfield__label">Gramas</label>
 						<input id="inputGramasLipidio" type="text" th:readonly="true"
-							class="sn-textfield__input"/>
+							class="sn-textfield__input mdl-color--grey-300"/>
 					</div>
 
 					<div class="sn-textfield mdl-cell mdl-cell--2-col">
 						<label class="sn-textfield__label">Calorias</label>
 						<input id="inputCaloriasLipidio" type="text" th:readonly="true"
-							class="sn-textfield__input"/>
+							class="sn-textfield__input mdl-color--grey-300"/>
 					</div>
 					
 					<div class="mdl-cell mdl-cell--4-col"></div>
@@ -182,7 +182,7 @@
 					<div class="sn-textfield mdl-cell mdl-cell--4-col">
 						<label class="sn-textfield__label">Total (%):</label>
 						<input id="inputTotal" type="text" th:readonly="true"
-							class="sn-textfield__input"/>
+							class="sn-textfield__input mdl-color--grey-300"/>
 					</div>
 				</div>
 				
@@ -347,7 +347,7 @@
 							</div>
 					
 							<div class="sn-textfield mdl-cell mdl-cell--1-col mdl-grid--no-spacing" th:align="center">
-								<input type="text" th:readonly="true" class="sn-textfield__input porcao-distribuicao" th:attr="data-id-grupo=${distribuicao.grupo.id}" />
+								<input type="text" th:readonly="true" class="sn-textfield__input mdl-color--grey-300 porcao-distribuicao " th:attr="data-id-grupo=${distribuicao.grupo.id}" />
 							</div>
 					</div>
 					
@@ -367,6 +367,7 @@
 			</form>
 		</div>	
 	   </div>
+	   
 	</section>
 	
 	<section layout:fragment="js">
