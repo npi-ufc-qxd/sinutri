@@ -10,7 +10,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.validation.constraints.NotNull;
 
+import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
@@ -19,7 +21,6 @@ public class CalculoGastoEnergetico {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
 	private Double pesoSugerido;
 	private Double vet;
 	private Double ajuste;
@@ -27,6 +28,7 @@ public class CalculoGastoEnergetico {
 	private Double proteina;
 	private Double glicidio;
 	private Double totalCalorias;
+	private Double fatorAtividade;
 	
 	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	private Date criadoEm;
@@ -121,6 +123,12 @@ public class CalculoGastoEnergetico {
 	}
 	public void setAtualizadoEm(Date atualizadoEm) {
 		this.atualizadoEm = atualizadoEm;
+	}
+	public Double getFatorAtividade() {
+		return fatorAtividade;
+	}
+	public void setFatorAtividade(Double fatorAtividade) {
+		this.fatorAtividade = fatorAtividade;
 	}
 	
 }
