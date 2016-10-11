@@ -1,5 +1,29 @@
 $(document).ready(function() {
+	$(".porcao").each(function(){
+		validarNumero(this, "");
+		var data_id = $(this).data("id-grupo");		
+		var valor = $(this).val();
+		var max = Number($(this).attr("max"));
+		updateMaxCard3(data_id, max);		
+		$(this).val(valor);
+		var somaCampos = getTotalQtdPorcao(data_id);
+		var qtd_porcao = $("input.numero-porcao[data-id-grupo="+data_id+"]").val();
+		valor = qtd_porcao - somaCampos;
+		$("input.porcao-distribuicao[data-id-grupo="+data_id+"]").val(valor);
+		
+	});
+	
+	calcularVet();
+	calcularVetComReducao();
+	updateCampos();
+	
 	$("#inputPesoDesejado").on('keyup change', function(){	
+		calcularVet();
+		calcularVetComReducao();
+		updateCampos();
+	});
+	
+	$("#inputFatorAtividade").on('keyup change', function(){	
 		calcularVet();
 		calcularVetComReducao();
 		updateCampos();
@@ -85,14 +109,15 @@ function validarPorcentagem() {
 }
 
 function calcularVet() {
-	var valorCampo = Number($("#inputPesoDesejado").val())*30;
-	updateValue("#inputVet", valorCampo);
+	var peso = Number($("#inputPesoDesejado").val())
+	var fator = Number($("#inputFatorAtividade").val());
+	updateValue("#inputVet", peso * fator);
 }
 
 function calcularVetComReducao() {
 	var vet = Number($("#inputVet").val());
 	var vetAjuste = Number($("#inputVetAjuste").val()/100);
-	updateValue("#inputVetReducao", ((vetAjuste*vet)+vet));
+	updateValue("#inputVetReducao", (vet - (vetAjuste*vet)));
 }
 
 function calcularGlicidio(){
@@ -225,3 +250,28 @@ function validarNumero(campo, valorPadrao){
 	}
 	return true;
 }
+
+$( "#cancelar" ).click(function(event) {
+	var dialog = sn_base.doRegistryDialog({
+		title: "Você realmente deseja descartar as alterações?", 
+		dialog: "#modal-cancelar", 
+		buttons: [
+		          {
+		        	  label: "Sim",
+		        	  attrs: {href: $(this).attr("href")}, 
+		        	  action: function() {
+		        		  dialog.close();
+		        	  }
+		          }, 
+		          {
+		        	  label: "Não",
+		        	  action: function() {
+		        		  dialog.close();
+		        	  }
+		          }
+		          ]
+	});    	   
+
+	dialog.showModal();
+	event.preventDefault();
+});

@@ -7,6 +7,7 @@ import java.util.List;
 import javax.inject.Inject;
 import javax.validation.Valid;
 
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -592,7 +593,7 @@ public class PacienteController {
 	}
 	
 	@RequestMapping(value = "/Cadastrar", method = RequestMethod.POST)
-	public String adicionarPacienteExterno(Model model, @Valid @ModelAttribute("pessoa") Pessoa pessoa, BindingResult bindingResult, RedirectAttributes redirectAttributes){
+	String adicionarPacienteExterno(Model model, @Valid @ModelAttribute("pessoa") Pessoa pessoa, BindingResult bindingResult, RedirectAttributes redirectAttributes){
 		
 		if (bindingResult.hasErrors()) {
 			
@@ -1120,10 +1121,11 @@ public class PacienteController {
 	}
 	
 	@RequestMapping(value="/{idPaciente}/CalculoEnergetico", method = RequestMethod.POST)
-	public String adicionarCalculoGastosEnergeticos(@PathVariable("idPaciente") Long idPaciente, Model model, @Valid CalculoGastoEnergetico calculoEnergetico,
+	String adicionarCalculoGastosEnergeticos(@PathVariable("idPaciente") Long idPaciente, Model model, CalculoGastoEnergetico calculoEnergetico,
 	 		BindingResult result, RedirectAttributes redirectAttributes){
 		
 		if(result.hasErrors()){
+			model.addAttribute("idPaciente", idPaciente);
 			model.addAttribute("calculoEnergetico", calculoEnergetico);
 			Mensagem mensagem = new Mensagem("Erro ao adicionar cálculo energético!", Mensagem.Tipo.ERRO, Mensagem.Prioridade.MEDIA);
 			redirectAttributes.addFlashAttribute("mensagem", mensagem);
@@ -1146,11 +1148,12 @@ public class PacienteController {
 			redirectAttributes.addFlashAttribute("mensagem", mensagem);
 			return "redirect:/Nutricao/Buscar";
 		 }
+		 
 		 calculoEnergetico.setNutricionista(nutricionista);
 		 consultaService.adicionarCalculoGastoEnergetico(calculoEnergetico);
 		 Mensagem mensagem = new Mensagem("Salvo com sucesso!", Mensagem.Tipo.SUCESSO, Mensagem.Prioridade.MEDIA);
 		 redirectAttributes.addFlashAttribute("mensagem", mensagem);
-		 return "redirect:/Paciente/"+paciente.getId()+"/calculoEnergetico/"+calculoEnergetico.getId();
+		 return "redirect:/Paciente/"+paciente.getId()+"/CalculoEnergetico/"+calculoEnergetico.getId();
 	}
 	
 	@RequestMapping(value="/{idPaciente}/CalculoEnergetico/{idCalculoEnergetico}/Editar", method = RequestMethod.GET)
@@ -1198,7 +1201,7 @@ public class PacienteController {
 		redirectAttributes.addFlashAttribute("mensagem", mensagem);
 		return "redirect:/Paciente/"+idPaciente+"/CalculoEnergetico/"+idCalculoEnergetico;
 	}
-	
+	@RequestMapping(value="/{idPaciente}/CalculoEnergetico/{idCalculoEnergetico}", method = RequestMethod.GET)
 	public String visualizarCalculoGastoEnergetico(@PathVariable("idPaciente") Long idPaciente, @PathVariable("idCalculoEnergetico") Long idCalculoEnergetico, 
 			Model model, RedirectAttributes redirectAttributes){
 		
@@ -1284,7 +1287,9 @@ public class PacienteController {
 	}
 	
 	private String getCpfPessoaLogada() {
-		return SecurityContextHolder.getContext().getAuthentication().getName();
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		Usuario usuario = (Usuario) authentication.getPrincipal();
+		return usuario.getCpf();
 	}
 	
 	private boolean isInvalido(Paciente paciente){
