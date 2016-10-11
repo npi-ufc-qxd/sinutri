@@ -83,6 +83,7 @@ public class ConsultaServiceImpl implements ConsultaService {
 	@Inject
 	private GrupoRepository grupoRepository;
 	
+	
 	@Override
 	public void adicionarAvaliacaoLaboratorial(AvaliacaoLaboratorial avaliacaoLaboratorial, Paciente paciente) {
 		
@@ -323,6 +324,22 @@ public class ConsultaServiceImpl implements ConsultaService {
 	public void cadastrarAlimento(Alimento alimento) {
 		alimentoRepository.save(alimento);
 		
+	}
+
+	@Override
+	public Alimento buscarAlimentoPorId(Long idAlimento) {
+		
+		return alimentoRepository.findOne(idAlimento);
+	}
+
+	@Override
+	public void excluirAlimento(Alimento alimento) {
+		alimentoRepository.delete(alimento);
+	}
+
+	@Override
+	public void editarAlimento(Alimento alimento) {
+		alimentoRepository.save(alimento);
 	}	
 	
 }

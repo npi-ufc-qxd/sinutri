@@ -48,8 +48,6 @@ public class Grupo {
 	}
 	public void setValorLipidio(Double valorLipidio) {
 		this.valorLipidio = valorLipidio;
-	}
-	
-	
+	}	
 	
 }

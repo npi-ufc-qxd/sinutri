@@ -5,11 +5,11 @@
     layout:decorator="estrutura/dashboard">
 
 <head>
-	<title>Sinutri | Novo Alimento</title>
+	<title>Sinutri | Alimento</title>
 
 </head>
 <section layout:fragment="title">
-	<label class="mdl-layout-title">Cadastrar Alimento</label>
+	<label class="mdl-layout-title">Editar Alimento</label>
 </section>
 <section layout:fragment="conteudo">
 	
@@ -17,7 +17,7 @@
 		<div class="mdl-cell mdl-cell--11-col mdl-cell--1-offset-desktop">
 			<a th:href="@{/Nutricao/Buscar}" class="sn-breadcrumbs sn-attribute__title">Início</a>
 			<a th:href="@{/Nutricao/Listar/Alimentos}" class="sn-breadcrumbs sn-attribute__title">Lista Alimento</a>
-			<a class="sn-attribute__title sn-breadcrumbs">Cadastrar Alimento</a>
+			<a class="sn-attribute__title sn-breadcrumbs">Editar Alimento</a>
 		</div>
 		<div class="
 			mdl-cell mdl-cell--10-col-desktop
@@ -30,12 +30,12 @@
 			<div class="mdl-cell mdl-cell--12-col sn-card sn-padding--48 mdl-color--teal">
 					
 				<div class="mdl-layout-title mdl-color-text--white">
-					<div class="mdl-layout-title">Cadastro Alimento</div>
+					<div class="mdl-layout-title">Editar Alimento</div>
 				</div>
 				
 			</div>
 
-			<form class="sn-form sn-card-top mdl-cell mdl-cell--12-col sn-card sn-padding--48 mdl-color--white mdl-grid" th:object="${alimento}" th:method="post" th:action="@{${'/Nutricao/Cadastrar/Alimento'}}">
+			<form class="sn-form sn-card-top mdl-cell mdl-cell--12-col sn-card sn-padding--48 mdl-color--white mdl-grid" th:object="${alimento}" th:method="post" th:action="@{${'/Nutricao/Alimento/'+alimento.id+'/Editar'}}">
 	
 				<input type="hidden" id="id" th:field="*{id}"/>
 	
@@ -76,7 +76,7 @@
 	
 				<div class="sn-form-actions">
 	
-					<input type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect" value="Cadastrar" />
+					<input type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect" value="Salvar" />
 					<a id="cancelar" th:href="@{${'/Nutricao/Listar/Alimentos'}}" href="#" class="mdl-button mdl-js-button mdl-button--colored mdl-js-ripple-effect">Cancelar</a> 
 					
 				</div>
@@ -92,9 +92,6 @@
 </section>
 
 <section layout:fragment="js">
-				
-        <script type="text/javascript" th:src="@{/js/moment.js}"></script>
-        <script type="text/javascript" th:src="@{/js/jquery.mask.min.js}"></script>
         <script type="text/javascript" th:src="@{/js/alimento/cadastrar-editar.js}"></script>      
 </section>
 

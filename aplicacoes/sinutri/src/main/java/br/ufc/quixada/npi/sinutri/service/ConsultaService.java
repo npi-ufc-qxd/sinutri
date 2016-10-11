@@ -101,5 +101,11 @@ public interface ConsultaService {
 	List<Grupo> getGrupos();
 	
 	void cadastrarAlimento(Alimento alimento);
+	
+	Alimento buscarAlimentoPorId(Long idAlimento);
+	
+	void editarAlimento(Alimento alimento);
+	
+	void excluirAlimento(Alimento alimento);
 
 }
