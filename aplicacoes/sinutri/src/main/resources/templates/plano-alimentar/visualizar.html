@@ -155,22 +155,19 @@
 									</tr>
 
 								</tbody>
-								<thead>
-									<tr>
-										<th colspan="2"
-											class="sn-attribute__title mdl-data-table__cell--non-numeric">Observações</th>
-									</tr>
-								</thead>
-								<tbody>
-									<tr>
-										<td colspan="2" style="width: 20%"
-											class="mdl-data-table__cell--non-numeric"
-											th:text="${refeicao.observacao}"></td>
-									</tr>
-
-								</tbody>
+							
 							</table>
 						</div>
+						
+						<div class="sn-form__hdivider-5"></div>
+						
+						<div class="mdl-grid--no-spacing mdl-cell mdl-cell--12-col sn-padding--16">
+							<h5>Observações</h5>
+							<div class="sn-attribute__value"
+								th:text="${planoAlimentar.observacao}">
+							</div>
+						</div>
+							
 					</div>
 				</div>
 			</div>
@@ -179,6 +176,7 @@
 
 		<div id="modal-exclusao-plano-alimentar" class="sn-display-none">Você realmente deseja
 			excluir este Plano Alimentar?</div>
+			
 
 	</section>
 

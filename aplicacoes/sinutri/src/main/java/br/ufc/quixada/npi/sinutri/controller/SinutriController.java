@@ -58,5 +58,6 @@ public class SinutriController {
 		model.addAttribute("message", "Ops, o site teve um erro técnico.");
 		return "500";
 	}
+	
 
 }

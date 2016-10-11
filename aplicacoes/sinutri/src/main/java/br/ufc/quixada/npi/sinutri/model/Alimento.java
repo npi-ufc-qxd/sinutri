@@ -51,6 +51,10 @@ public class Alimento {
 	private Double vitaminaDCalciferol;
 	private Double vitaminaETocoferol;
 	private Double zinco;
+	private String medidaCaseira;
+	private String medidaPadrao;
+	private Double valorMedidaCaseira;
+	private Double valorMedidaPadrao;
 
 	@ManyToOne
 	private Grupo grupo;
@@ -58,6 +62,38 @@ public class Alimento {
 	@Enumerated(EnumType.STRING)
 	private FonteAlimento fonte;
 	
+	public String getMedidaCaseira() {
+		return medidaCaseira;
+	}
+
+	public void setMedidaCaseira(String medidaCaseira) {
+		this.medidaCaseira = medidaCaseira;
+	}
+
+	public String getMedidaPadrao() {
+		return medidaPadrao;
+	}
+
+	public void setMedidaPadrao(String medidaPadrao) {
+		this.medidaPadrao = medidaPadrao;
+	}
+
+	public Double getValorMedidaCaseira() {
+		return valorMedidaCaseira;
+	}
+
+	public void setValorMedidaCaseira(Double valorMedidaCaseira) {
+		this.valorMedidaCaseira = valorMedidaCaseira;
+	}
+
+	public Double getValorMedidaPadrao() {
+		return valorMedidaPadrao;
+	}
+
+	public void setValorMedidaPadrao(Double valorMedidaPadrao) {
+		this.valorMedidaPadrao = valorMedidaPadrao;
+	}
+
 	@OneToMany
 	@JoinColumn(name = "alimento_id")
 	private List<MedidaCaseira> medidasCaseira;

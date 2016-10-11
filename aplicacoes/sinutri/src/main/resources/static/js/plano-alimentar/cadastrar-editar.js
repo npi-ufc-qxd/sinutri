@@ -265,7 +265,6 @@ $(function()  {
 			dialog.showModal();
 		});
 		
-		/***********/
 		
 		var confirmacao = sn_base.doRegistryDialog({
 			title: "Cancelar",
@@ -293,20 +292,84 @@ $(function()  {
 			buscarAlimentos(fonte);
 		});
 		
+		/***********Unidade de Médida***********/
+		
+		function atualizarUnidadeDeMedida(){
+			var data = $("#sn-alimento-nome").select2('data')[0];
+			
+			var id = data.id; 
+			var text = data.text; 
+			var medidaCaseira = data.medidaCaseira; 
+			var medidaPadrao = data.medidaPadrao; 
+			var valorMedidaCaseira = data.valorMedidaCaseira; 
+			var valorMedidaPadrao = data.valorMedidaPadrao;
+			
+			$("#input-medidaCaseira").val(valorMedidaCaseira + " " + medidaCaseira);
+			$("#input-medidaCaseira").data("valorMedidaCaseira", valorMedidaCaseira);
+			$("#input-medidaCaseira").data("medidaCaseira", medidaCaseira);
+			
+			$("#input-medidaPadrao").val(valorMedidaPadrao + " " + medidaPadrao);
+			$("#input-medidaPadrao").data("medidaPadrao", medidaPadrao);
+			$("#input-medidaPadrao").data("valorMedidaPadrao", valorMedidaPadrao);
+			
+			atualizarMedidas();
+		};
+		
+		function atualizarMedidas() {
+			var value = $(this).val();
+			
+			if(value && !isNaN(value)) {
+				
+				var medidaCaseira = $("#input-medidaCaseira").data("medidaCaseira");
+				var valorMedidaCaseira = $("#input-medidaCaseira").data("valorMedidaCaseira");
+				
+				var medidaPadrao = $("#input-medidaPadrao").data("medidaPadrao");
+				var valorMedidaPadrao = $("#input-medidaPadrao").data("valorMedidaPadrao");
+				
+				$("#input-medidaCaseira").val((value * valorMedidaCaseira) + " " + medidaCaseira);
+				$("#input-medidaPadrao").val((value * valorMedidaPadrao) + " " + medidaPadrao);
+				
+			}
+		}
+		
 		function buscarAlimentos(fonte, value){
 			var alimento_nome = $("#sn-alimento-nome");
 			var url = alimento_nome.attr("data-url") + fonte;
-			$.getJSON(url, function(data, status){
+			$.getJSON(url, function(alimentos, status){
+				
+				var data = alimentos.map(function(a) {
+					return {
+						id: a[0], 
+						text: a[1], 
+						medidaCaseira: a[2], 
+						medidaPadrao: a[3], 
+						valorMedidaCaseira: a[4], 
+						valorMedidaPadrao: a[5]
+					};
+				});
+				
+				console.log(JSON.stringify(data));
+				
 				alimento_nome.empty();
 				alimento_nome.select2({
 					 'data' : data,
 					 'dropdownParent': $("#sn-add-alimento-modal")
 				});
+				
 				if(value != undefined){
 					alimento_nome.val(value, value).change();
 				}
+				
+				$('select').on('select2:select', function (e) {
+					atualizarUnidadeDeMedida();
+				})
+				
+				atualizarUnidadeDeMedida();
+				
 			});
 		};
+		
+		$("#sn-alimento-quantidade").on("change keyup paste", atualizarMedidas);
 		
 	});
 	
