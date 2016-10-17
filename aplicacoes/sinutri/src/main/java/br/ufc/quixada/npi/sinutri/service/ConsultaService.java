@@ -99,5 +99,13 @@ public interface ConsultaService {
 	DistribuicaoAlimentar buscarDistribuicaoAlimentar(Long id);
 	
 	List<Grupo> getGrupos();
+	
+	void cadastrarAlimento(Alimento alimento);
+	
+	Alimento buscarAlimentoPorId(Long idAlimento);
+	
+	void editarAlimento(Alimento alimento);
+	
+	void excluirAlimento(Alimento alimento);
 
 }

@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="estrutura/dashboard">
+<head>
+<title>Sinutri | Meus Alimentos</title>
+
+<style type="text/css">
+</style>
+
+</head>
+
+<body>
+
+	<section layout:fragment="title">
+		<label class="mdl-layout-title">Meus Alimentos</label>
+	</section>
+
+	<section layout:fragment="conteudo">
+		<div class="mdl-grid">
+			<div
+				class="sn-breadcrumbs__position mdl-cell mdl-cell--10-col-desktop mdl-cell--1-offset-desktop mdl-cell--8-col-tablet mdl-cell--4-col-phone mdl-grid">
+				<div class="mdl-cell mdl-cell--12-col">
+					<a th:href="@{/Nutricao/Buscar}"
+						class="sn-breadcrumbs sn-attribute__title">Início</a> <a
+						class="sn-attribute__title sn-breadcrumbs">Meus alimentos</a>
+				</div>
+
+
+				<div class="mdl-cell mdl-cell--12-col sn-card">
+					<div
+						class="mdl-layout-title mdl-color-text--white sn-padding--48 mdl-color--teal">
+						Meus Alimentos</div>
+
+					<fabgroup class="sn-fab--bottom-right"> <a
+						th:href="@{${'/Nutricao/Cadastrar/Alimento'}}"
+						class="sn-float--launcher mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored mdl-color--red-700">
+						<i class="material-icons mdl-color-text--white">add</i>
+					</a> </fabgroup>
+
+				</div>
+
+				<div class="mdl-cell mdl-cell--12-col sn-card">
+					
+					<div class="sn-padding--48 mdl-color--white">
+					
+						<div th:id="alimentos" class="sn-card-list-container mdl-cell mdl-cell--12-col">
+								
+							<ul class="demo-list-two mdl-list list">
+							
+								<li th:each="alimento,iterationStatus : ${alimentos}">
+									<ul class="demo-list-two mdl-list list">
+										<li>
+											<div class="sn-form__hdivider"></div>
+										</li>
+										<li class="mdl-list__item">
+											<span class="mdl-list__item-primary-content"> 
+												<span class="sn-card-list__item-text name" th:text="${alimento[1]}"></span>
+											</span>
+											
+											<span class="mdl-list__item-secondary-content">
+												<button th:id="|sn-alimento-${iterationStatus.index}|" class="mdl-button mdl-js-button mdl-button--icon">
+													<i class="material-icons">more_vert</i>
+												</button>
+												<div class="mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect" th:attr="for=|sn-alimento-${iterationStatus.index}|">
+													<a th:href="@{${'/Nutricao/Alimento/'+ alimento[0]}}" class="mdl-menu__item">Visualizar</a>
+													
+													
+													<a th:href="@{${'/Nutricao/Alimento/' + alimento[0] +'/Editar/'}}" class="mdl-menu__item">Editar</a>
+													<div class="mdl-menu__item--full-bleed-divider"></div>
+													<a th:href="@{${'/Nutricao/Alimento/'+ alimento[0] +'/Excluir/'}}" class="mdl-menu__item  bt-excluir-alimento">Excluir</a>
+													
+													
+												</div>
+											</span>
+										
+										</li>
+										
+									</ul>
+								</li>
+					
+							</ul>
+
+						</div>
+	
+					</div>
+					
+				</div>
+
+			</div>
+
+		</div>
+
+	</section>
+
+<section layout:fragment="js">
+
+	<script type="text/javascript" th:src="@{/js/list.js}"></script>
+	<script type="text/javascript" th:src="@{/js/alimento/visualizar.js}"></script>   
+	
+	<script type="text/javascript">
+		var options = {
+					valueNames: ['name']
+				  	};
+		
+		var list = new List('alimentos', options).sort('name');
+	</script>
+	
+</section>
+
+
+</body>
+</html>
