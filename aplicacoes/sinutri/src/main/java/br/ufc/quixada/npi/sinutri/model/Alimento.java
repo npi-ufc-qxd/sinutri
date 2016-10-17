@@ -1,16 +1,12 @@
 package br.ufc.quixada.npi.sinutri.model;
 
-import java.util.List;
-
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 
 import br.ufc.quixada.npi.sinutri.model.enuns.FonteAlimento;
 
@@ -52,8 +48,8 @@ public class Alimento {
 	private Double vitaminaETocoferol;
 	private Double zinco;
 	private String medidaCaseira;
-	private String medidaPadrao;
 	private Double valorMedidaCaseira;
+	private String medidaPadrao;
 	private Double valorMedidaPadrao;
 
 	@ManyToOne
@@ -61,42 +57,6 @@ public class Alimento {
 
 	@Enumerated(EnumType.STRING)
 	private FonteAlimento fonte;
-	
-	public String getMedidaCaseira() {
-		return medidaCaseira;
-	}
-
-	public void setMedidaCaseira(String medidaCaseira) {
-		this.medidaCaseira = medidaCaseira;
-	}
-
-	public String getMedidaPadrao() {
-		return medidaPadrao;
-	}
-
-	public void setMedidaPadrao(String medidaPadrao) {
-		this.medidaPadrao = medidaPadrao;
-	}
-
-	public Double getValorMedidaCaseira() {
-		return valorMedidaCaseira;
-	}
-
-	public void setValorMedidaCaseira(Double valorMedidaCaseira) {
-		this.valorMedidaCaseira = valorMedidaCaseira;
-	}
-
-	public Double getValorMedidaPadrao() {
-		return valorMedidaPadrao;
-	}
-
-	public void setValorMedidaPadrao(Double valorMedidaPadrao) {
-		this.valorMedidaPadrao = valorMedidaPadrao;
-	}
-
-	@OneToMany
-	@JoinColumn(name = "alimento_id")
-	private List<MedidaCaseira> medidasCaseira;
 	
 	public Grupo getGrupo() {
 		return grupo;
@@ -362,6 +322,38 @@ public class Alimento {
 		this.zinco = zinco;
 	}
 
+	public String getMedidaCaseira() {
+		return medidaCaseira;
+	}
+
+	public void setMedidaCaseira(String medidaCaseira) {
+		this.medidaCaseira = medidaCaseira;
+	}
+
+	public Double getValorMedidaCaseira() {
+		return valorMedidaCaseira;
+	}
+
+	public void setValorMedidaCaseira(Double valorMedidaCaseira) {
+		this.valorMedidaCaseira = valorMedidaCaseira;
+	}
+
+	public String getMedidaPadrao() {
+		return medidaPadrao;
+	}
+
+	public void setMedidaPadrao(String medidaPadrao) {
+		this.medidaPadrao = medidaPadrao;
+	}
+
+	public Double getValorMedidaPadrao() {
+		return valorMedidaPadrao;
+	}
+
+	public void setValorMedidaPadrao(Double valorMedidaPadrao) {
+		this.valorMedidaPadrao = valorMedidaPadrao;
+	}
+
 	public FonteAlimento getFonte() {
 		return fonte;
 	}
@@ -369,13 +361,4 @@ public class Alimento {
 	public void setFonte(FonteAlimento fonte) {
 		this.fonte = fonte;
 	}
-	
-	public List<MedidaCaseira> getMedidasCaseira() {
-		return medidasCaseira;
-	}
-
-	public void setMedidasCaseira(List<MedidaCaseira> medidasCaseira) {
-		this.medidasCaseira = medidasCaseira;
-	}
-
 }
