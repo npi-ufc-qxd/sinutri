@@ -359,7 +359,7 @@
 						<div class="sn-form-actions">
 							<input type="submit" id="btnAdicionarRecordatorio"
 								class="mdl-button mdl-js-button mdl-button--raised mdl-button--primary mdl-js-ripple-effect"
-								value="Editar" />
+								value="Salvar" />
 
 							<button type="button" id="btnCancelar"
 								class="mdl-button mdl-js-button mdl-button--colored mdl-js-ripple-effect"
@@ -506,10 +506,22 @@
 							</select>
 						</div>
 
-						<div class="mdl-cell mdl-cell--16-col">
+						<div class="mdl-cell mdl-cell--6-col">
 							<label class="sn-textfield__label">Quantidade:</label> <input
 								id="sn-alimento-quantidade" type="number" min="0" max="999999"
 								class="validate sn-textfield__input" step="0.5" />
+						</div>
+						
+						<div class="sn-textfield mdl-cell mdl-cell--3-col">
+							<label class="sn-textfield__label">Media Caseira</label> 
+							<input id="input-medidaCaseira" min="0" max="9999" th:readonly="true"
+							class="sn-textfield__input mdl-color--grey-300" />
+						</div>
+							
+						<div class="sn-textfield mdl-cell mdl-cell--3-col">
+							<label class="sn-textfield__label">Media padrão</label> 
+							<input id="input-medidaPadrao" min="0" max="9999" th:readonly="true"
+							class="sn-textfield__input mdl-color--grey-300" />
 						</div>
 
 					</div>

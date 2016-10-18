@@ -1,7 +1,6 @@
 $(function()  {	
 	componentHandler.registerUpgradedCallback("MaterialLayout", function(elem) {
 		var dialog = null;
-		
 		var dynamicList = $(".sn-list-refeicoes").dynamicList({
 			cloneableElement: ".sn-cloneable",
 			recurssiveIndex: 0, 
@@ -163,8 +162,7 @@ $(function()  {
 					var quantidade  =  el.find(".sn-alimento-input-quantidade").val();
 					var fonte		=  el.find(".sn-alimento-input-fonte").text();
 					var filtro1 = "[value=" + fonte + "]";
-					var value = id+","+nome;
-					
+					var value = id;
 					buscarAlimentos(fonte, value);
 					
 					$(dialogAlimento).find("#sn-alimento-item-index").val(index);
@@ -191,20 +189,19 @@ $(function()  {
 		        	  action: function() {
 		        		  
 		        		  var index 	 = $(dialogAlimento).find("#sn-alimento-item-index").val();
-		        		  var nome 		 = $(dialogAlimento).find("#sn-alimento-nome").val();
 		        		  var fonte		 = $(dialogAlimento).find("#sn-alimento-fonte").val();
 		        		  var quantidade  = $(dialogAlimento).find("#sn-alimento-quantidade").val();
+		        		  var valorMedidaCaseira = $(dialogAlimento).find("#input-medidaCaseira").val();
+		      			  var valorMedidaPadrao = $(dialogAlimento).find("#input-medidaPadrao").val();
 		        		  
-		        		  /* Extraindo id do name */
-		        		  regId = /^(\d+)/;
-		        		  regNome = /([a-zA-Z]+.+)/;
-		        		  
+		      			  var data = $(dialogAlimento).find("#sn-alimento-nome").select2('data')[0];
+		      			  
+		      			  var idAlimento = data.id; 
+		      			  var nomeAlimento = data.text;
+		      			  
 		        		  if(validacaoVazio($(dialogAlimento))){
 								return;
 						  }
-		        		  
-		        		  var idAlimento = nome.match(regId)[1];						  
-						  var nomeAlimento = nome.match(regNome)[1];
 						  
 					      dialogAlimento.close();
 					      var data = {
@@ -256,6 +253,8 @@ $(function()  {
 			dialog.find("#sn-alimento-quantidade").val("");
 			$(dialog).find("#sn-alimento-fonte").val("");
 			$(dialog).find("#sn-alimento-fonte").selectedIndex = 0;
+			$(dialog).find("#input-medidaCaseira").val("");
+			$(dialog).find("#input-medidaPadrao").val("");
 			
 			dialog.find("#sn-alimento-nome").empty();
 			dialog.find("#sn-alimento-item-index").val("");
@@ -316,10 +315,9 @@ $(function()  {
 		};
 		
 		function atualizarMedidas() {
-			var value = $(this).val();
-			
+			var value = $("#sn-alimento-quantidade").val();
 			if(value && !isNaN(value)) {
-				
+			
 				var medidaCaseira = $("#input-medidaCaseira").data("medidaCaseira");
 				var valorMedidaCaseira = $("#input-medidaCaseira").data("valorMedidaCaseira");
 				
@@ -348,7 +346,7 @@ $(function()  {
 					};
 				});
 				
-				console.log(JSON.stringify(data));
+				//console.log(JSON.stringify(data));
 				
 				alimento_nome.empty();
 				alimento_nome.select2({
@@ -367,6 +365,7 @@ $(function()  {
 				atualizarUnidadeDeMedida();
 				
 			});
+			
 		};
 		
 		$("#sn-alimento-quantidade").on("change keyup paste", atualizarMedidas);
