@@ -463,15 +463,17 @@
 						</div>
 						
 						<div class="sn-form-actions">
-							<input type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect" value="Editar" />
-							<a id="cancelar" class="mdl-button mdl-js-button mdl-button--colored mdl-js-ripple-effect" th:href="@{${'/Paciente/'+ inqueritoAlimentar.paciente.id +'/InqueritoAlimentar/'+inqueritoAlimentar.id}}">Cancelar</a>
+							<input type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect" value="Salvar" />
+							<a id="bt-cancelar" class="mdl-button mdl-js-button mdl-button--colored mdl-js-ripple-effect" th:href="@{${'/Paciente/'+ inqueritoAlimentar.paciente.id +'/InqueritoAlimentar/'+inqueritoAlimentar.id}}">Cancelar</a>
 						</div>
 					</div>
 				</form>
 				</div>
 			
 		</div>
-		<div id="modal-cancelar"></div>
+		<div id="modal-cancelar" class="sn-display-none">
+			Você realmente deseja descartar as alterações?		
+		</div>
 	</section>
 	<section layout:fragment="js">
 		<script type="text/javascript" th:src="@{/js/moment.js}"></script>

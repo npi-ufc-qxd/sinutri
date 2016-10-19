@@ -598,7 +598,6 @@ public class PacienteController {
 		if (bindingResult.hasErrors()) {
 			
 			model.addAttribute("pessoa", pessoa);
-		
 			return "/paciente/cadastrar";
 		}
 		
@@ -1121,14 +1120,16 @@ public class PacienteController {
 	}
 	
 	@RequestMapping(value="/{idPaciente}/CalculoEnergetico", method = RequestMethod.POST)
-	String adicionarCalculoGastosEnergeticos(@PathVariable("idPaciente") Long idPaciente, Model model, CalculoGastoEnergetico calculoEnergetico,
+	String adicionarCalculoGastosEnergeticos(@PathVariable("idPaciente") Long idPaciente, Model model, @Valid @ModelAttribute("calculoEnergetico") CalculoGastoEnergetico calculoEnergetico,
 	 		BindingResult result, RedirectAttributes redirectAttributes){
+		
+		Paciente paciente = pacienteService.buscarPacientePorId(idPaciente);
+		
+		calculoEnergetico.setPaciente(paciente);
 		
 		if(result.hasErrors()){
 			model.addAttribute("idPaciente", idPaciente);
 			model.addAttribute("calculoEnergetico", calculoEnergetico);
-			Mensagem mensagem = new Mensagem("Erro ao adicionar cálculo energético!", Mensagem.Tipo.ERRO, Mensagem.Prioridade.MEDIA);
-			redirectAttributes.addFlashAttribute("mensagem", mensagem);
 			return "/calculo-energetico/cadastrar";
 		}
 		
@@ -1141,7 +1142,7 @@ public class PacienteController {
 			 return "redirect:/Nutricao/Buscar";
 		 }
 		 
-		 Paciente paciente = pacienteService.buscarPacientePorId(idPaciente);
+		 
 		 
 		 if(paciente==null){
 			Mensagem mensagem = new Mensagem("Paciente inexistente!", Mensagem.Tipo.ERRO, Mensagem.Prioridade.MEDIA);
@@ -1181,16 +1182,25 @@ public class PacienteController {
 	
 	@RequestMapping(value="/{idPaciente}/CalculoEnergetico/{idCalculoEnergetico}/Editar", method = RequestMethod.POST)
 	public String editarCalculoGastosEnergeticos(@PathVariable("idPaciente") Long idPaciente, @PathVariable("idCalculoEnergetico") Long idCalculoEnergetico,
-			@Valid CalculoGastoEnergetico calculoEnergetico ,Model model, RedirectAttributes redirectAttributes){
+			@Valid @ModelAttribute("calculoEnergetico") CalculoGastoEnergetico calculoEnergetico , BindingResult result, Model model, RedirectAttributes redirectAttributes){
 		
 		Paciente paciente = pacienteService.buscarPacientePorId(idPaciente);
+		
+		calculoEnergetico.setPaciente(paciente);
+		
+		if(result.hasErrors()){
+			model.addAttribute("idPaciente", idPaciente);
+			model.addAttribute("calculoEnergetico", calculoEnergetico);
+			return "/calculo-energetico/editar";
+		}
+		
 		if(paciente == null){
 			Mensagem mensagem = new Mensagem("Paciente inexistente!", Mensagem.Tipo.ERRO, Mensagem.Prioridade.MEDIA);
 			redirectAttributes.addFlashAttribute("mensagem", mensagem);
 			return "redirect:/Nutricao/Buscar";
 		}
 		
-		if(calculoEnergetico == null){
+		if(calculoEnergetico == null) {
 			Mensagem mensagem = new Mensagem("Cálculo energético não encontrado!", Mensagem.Tipo.ERRO, Mensagem.Prioridade.MEDIA);
 			redirectAttributes.addFlashAttribute("mensagem", mensagem);
 			return "redirect:/Paciente/"+idPaciente+"/CalculoEnergetico/"+idCalculoEnergetico;

@@ -77,7 +77,7 @@
 				<div class="sn-form-actions">
 	
 					<input type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect" value="Cadastrar" />
-					<a id="cancelar" th:href="@{${'/Nutricao/Listar/Alimentos'}}" href="#" class="mdl-button mdl-js-button mdl-button--colored mdl-js-ripple-effect">Cancelar</a> 
+					<a id="bt-cancelar" th:href="@{${'/Nutricao/Listar/Alimentos'}}" href="#" class="mdl-button mdl-js-button mdl-button--colored mdl-js-ripple-effect">Cancelar</a> 
 					
 				</div>
 	
@@ -87,7 +87,9 @@
 	
 	</div>
 	
-	<div id="modal-cancelar"></div>
+	<div id="modal-cancelar" class="sn-display-none">
+		Você realmente deseja descartar as alterações?		
+	</div>
 	
 </section>
 

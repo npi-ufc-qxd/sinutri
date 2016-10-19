@@ -9,7 +9,7 @@
 </head>
 <body>
 	<section layout:fragment="title">
-		<label class="mdl-layout-title">Editar Antropometria</label>
+		<label class="mdl-layout-title">Editar Avaliação Antropométrica</label>
 	</section>
 	
 	<section layout:fragment="conteudo">
@@ -43,7 +43,7 @@
 			</div>
 			<div class="mdl-cell mdl-cell--12-col sn-card">
 								<div class="mdl-layout-title mdl-color-text--purple-600 sn-padding--48">
-									Cadastrar Avaliação Antropométrica
+									Editar Avaliação Antropométrica
 									<div id="div_arrow" class="sn-colapse-div sn-attribute__title">									
 										<span th:text="${avaliacaoAntropometrica.paciente.pessoa.nome+', '+avaliacaoAntropometrica.paciente.pessoa.getIdade()+' anos'}"></span>
 										<i class="sn-breadcrumbs__icon material-icons arrow_icon_position">keyboard_arrow_down</i>
@@ -321,15 +321,18 @@
 							</div>
 							
 							<div class="sn-form-actions">
-								<input type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect" value="Editar" />
-								<a id="cancelar" th:href="@{${'/Paciente/'+avaliacaoAntropometrica.paciente.id+'/Antropometria/' + avaliacaoAntropometrica.id + '/' }}" href="#" class="mdl-button mdl-js-button mdl-button--colored mdl-js-ripple-effect">Cancelar</a>					
+								<input type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect" value="Salvar" />
+								<a id="bt-cancelar" th:href="@{${'/Paciente/'+avaliacaoAntropometrica.paciente.id+'/Antropometria/' + avaliacaoAntropometrica.id + '/' }}" href="#" class="mdl-button mdl-js-button mdl-button--colored mdl-js-ripple-effect">Cancelar</a>					
 							</div>
 						</div>
 				</form>
 			
 		</div>
 		</div>
-		<div id="modal-cancelar"></div>
+		
+		<div id="modal-cancelar" class="sn-display-none">
+			Você realmente deseja descartar as alterações?
+		</div> 
 	</section>
 	
 	<section layout:fragment="js"> 

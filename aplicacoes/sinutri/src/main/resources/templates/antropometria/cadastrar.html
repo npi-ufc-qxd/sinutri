@@ -4,13 +4,14 @@
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
     layout:decorator="estrutura/dashboard">
 <head>
-	<title>Sinutri | Nova Avaliação Antropometrica</title>
+	<title>Sinutri |Cadastrar Avaliação Antropométrica</title>
 	<link rel="stylesheet" type="text/css" th:href="@{/css/material-date-picker.css}"/>
 </head>
 <body>
-		<label class="mdl-layout-title">Cadastrar Antropometria</label>
 	<section layout:fragment="title">
+		<label class="mdl-layout-title">Cadastrar Avaliação Antropométrica</label>
 	</section>
+	
 	<section layout:fragment="conteudo">
 		<!-- 
 		<div  class="sn-textfield__messages sn-error-text"  th:if="${erro != null}">
@@ -328,7 +329,7 @@
 						
 						<div class="sn-form-actions">
 							<input type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect" value="Cadastrar" />
-							<a id="cancelar" th:href="@{${'/Paciente/'+avaliacaoAntropometrica.paciente.id+'/'}}" href="#" class="mdl-button mdl-js-button mdl-button--colored mdl-js-ripple-effect">Cancelar</a>					
+							<a id="bt-cancelar" th:href="@{${'/Paciente/'+avaliacaoAntropometrica.paciente.id+'/'}}" href="#" class="mdl-button mdl-js-button mdl-button--colored mdl-js-ripple-effect">Cancelar</a>					
 						</div>
 					</div>	
 			</form>
@@ -336,7 +337,9 @@
 		</div>
 		</div>
 		
-		<div id="modal-cancelar"></div>
+		<div id="modal-cancelar" class="sn-display-none">
+			Você realmente deseja descartar as alterações?
+		</div> 
 		
 	</section>
 	
