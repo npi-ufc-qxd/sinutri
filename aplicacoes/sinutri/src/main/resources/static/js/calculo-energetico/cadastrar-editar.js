@@ -253,6 +253,7 @@ function validarNumero(campo, valorPadrao){
 
 $("#bt-cancelar").click( function(event) {
 	$("#modal-cancelar").removeClass("sn-display-none");
+
 	var dialog = sn_base.doRegistryDialog({
 		title: "Cancelar",
 		dialog: "#modal-cancelar",
