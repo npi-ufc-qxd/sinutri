@@ -1,7 +1,6 @@
 $(function()  {	
 	componentHandler.registerUpgradedCallback("MaterialLayout", function(elem) {
 		var dialog = null;
-		
 		var dynamicList = $(".sn-list-refeicoes").dynamicList({
 			cloneableElement: ".sn-cloneable",
 			recurssiveIndex: 0, 
@@ -163,8 +162,7 @@ $(function()  {
 					var quantidade  =  el.find(".sn-alimento-input-quantidade").val();
 					var fonte		=  el.find(".sn-alimento-input-fonte").text();
 					var filtro1 = "[value=" + fonte + "]";
-					var value = id+","+nome;
-					
+					var value = id;
 					buscarAlimentos(fonte, value);
 					
 					$(dialogAlimento).find("#sn-alimento-item-index").val(index);
@@ -191,20 +189,19 @@ $(function()  {
 		        	  action: function() {
 		        		  
 		        		  var index 	 = $(dialogAlimento).find("#sn-alimento-item-index").val();
-		        		  var nome 		 = $(dialogAlimento).find("#sn-alimento-nome").val();
 		        		  var fonte		 = $(dialogAlimento).find("#sn-alimento-fonte").val();
 		        		  var quantidade  = $(dialogAlimento).find("#sn-alimento-quantidade").val();
+		        		  var valorMedidaCaseira = $(dialogAlimento).find("#input-medidaCaseira").val();
+		      			  var valorMedidaPadrao = $(dialogAlimento).find("#input-medidaPadrao").val();
 		        		  
-		        		  /* Extraindo id do name */
-		        		  regId = /^(\d+)/;
-		        		  regNome = /([a-zA-Z]+.+)/;
-		        		  
+		      			  var data = $(dialogAlimento).find("#sn-alimento-nome").select2('data')[0];
+		      			  
+		      			  var idAlimento = data.id; 
+		      			  var nomeAlimento = data.text;
+		      			  
 		        		  if(validacaoVazio($(dialogAlimento))){
 								return;
 						  }
-		        		  
-		        		  var idAlimento = nome.match(regId)[1];						  
-						  var nomeAlimento = nome.match(regNome)[1];
 						  
 					      dialogAlimento.close();
 					      var data = {
@@ -256,6 +253,8 @@ $(function()  {
 			dialog.find("#sn-alimento-quantidade").val("");
 			$(dialog).find("#sn-alimento-fonte").val("");
 			$(dialog).find("#sn-alimento-fonte").selectedIndex = 0;
+			$(dialog).find("#input-medidaCaseira").val("");
+			$(dialog).find("#input-medidaPadrao").val("");
 			
 			dialog.find("#sn-alimento-nome").empty();
 			dialog.find("#sn-alimento-item-index").val("");
@@ -265,7 +264,6 @@ $(function()  {
 			dialog.showModal();
 		});
 		
-		/***********/
 		
 		var confirmacao = sn_base.doRegistryDialog({
 			title: "Cancelar",
@@ -293,20 +291,84 @@ $(function()  {
 			buscarAlimentos(fonte);
 		});
 		
+		/***********Unidade de Médida***********/
+		
+		function atualizarUnidadeDeMedida(){
+			var data = $("#sn-alimento-nome").select2('data')[0];
+			
+			var id = data.id; 
+			var text = data.text; 
+			var medidaCaseira = data.medidaCaseira; 
+			var medidaPadrao = data.medidaPadrao; 
+			var valorMedidaCaseira = data.valorMedidaCaseira; 
+			var valorMedidaPadrao = data.valorMedidaPadrao;
+			
+			$("#input-medidaCaseira").val(valorMedidaCaseira + " " + medidaCaseira);
+			$("#input-medidaCaseira").data("valorMedidaCaseira", valorMedidaCaseira);
+			$("#input-medidaCaseira").data("medidaCaseira", medidaCaseira);
+			
+			$("#input-medidaPadrao").val(valorMedidaPadrao + " " + medidaPadrao);
+			$("#input-medidaPadrao").data("medidaPadrao", medidaPadrao);
+			$("#input-medidaPadrao").data("valorMedidaPadrao", valorMedidaPadrao);
+			
+			atualizarMedidas();
+		};
+		
+		function atualizarMedidas() {
+			var value = $("#sn-alimento-quantidade").val();
+			if(value && !isNaN(value)) {
+			
+				var medidaCaseira = $("#input-medidaCaseira").data("medidaCaseira");
+				var valorMedidaCaseira = $("#input-medidaCaseira").data("valorMedidaCaseira");
+				
+				var medidaPadrao = $("#input-medidaPadrao").data("medidaPadrao");
+				var valorMedidaPadrao = $("#input-medidaPadrao").data("valorMedidaPadrao");
+				
+				$("#input-medidaCaseira").val((value * valorMedidaCaseira) + " " + medidaCaseira);
+				$("#input-medidaPadrao").val((value * valorMedidaPadrao) + " " + medidaPadrao);
+				
+			}
+		}
+		
 		function buscarAlimentos(fonte, value){
 			var alimento_nome = $("#sn-alimento-nome");
 			var url = alimento_nome.attr("data-url") + fonte;
-			$.getJSON(url, function(data, status){
+			$.getJSON(url, function(alimentos, status){
+				
+				var data = alimentos.map(function(a) {
+					return {
+						id: a[0], 
+						text: a[1], 
+						medidaCaseira: a[2], 
+						medidaPadrao: a[3], 
+						valorMedidaCaseira: a[4], 
+						valorMedidaPadrao: a[5]
+					};
+				});
+				
+				//console.log(JSON.stringify(data));
+				
 				alimento_nome.empty();
 				alimento_nome.select2({
 					 'data' : data,
 					 'dropdownParent': $("#sn-add-alimento-modal")
 				});
+				
 				if(value != undefined){
 					alimento_nome.val(value, value).change();
 				}
+				
+				$('select').on('select2:select', function (e) {
+					atualizarUnidadeDeMedida();
+				})
+				
+				atualizarUnidadeDeMedida();
+				
 			});
+			
 		};
+		
+		$("#sn-alimento-quantidade").on("change keyup paste", atualizarMedidas);
 		
 	});
 	

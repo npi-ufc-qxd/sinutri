@@ -251,6 +251,14 @@ function validarNumero(campo, valorPadrao){
 	return true;
 }
 
+function mostrarMedidaPadrao(campo, valorPadrao){
+	
+}
+
+function mostrarMedidaCaseira(campo, valorCaseiro){
+	
+}
+
 $( "#cancelar" ).click(function(event) {
 	var dialog = sn_base.doRegistryDialog({
 		title: "Você realmente deseja descartar as alterações?", 

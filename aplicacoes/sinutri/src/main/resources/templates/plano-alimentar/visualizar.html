@@ -127,50 +127,58 @@
 						class="sn-card-top mdl-cell mdl-cell--12-col sn-card sn-padding--48 mdl-color--white mdl-grid">
 						<!-- Text atribute -->
 						<div class="mdl-grid--no-spacing mdl-cell mdl-cell--12-col">
-							<h5>Refeições</h5>
+							<h4>Refeições</h4>
 						</div>
 						<div class="mdl-cell mdl-cell--12-col"
 							th:each="refeicao : ${planoAlimentar.refeicoes}">
 							<div class="sn-form__hdivider-5"></div>
 							<div class="sn-attribute__title"
-								th:text="${#dates.format(refeicao.hora, 'HH:mm')}+' | '+ ${refeicao.descricao.nome}"></div>
+								th:text="${#dates.format(refeicao.hora, 'HH:mm')}+' | '+ ${refeicao.descricao.nome}"></div>						
 							<table
 								class="mdl-cell mdl-cell--12-col mdl-data-table mdl-js-data-table">
 								<thead>
 									<tr>
 										<th
-											class="sn-attribute__title mdl-data-table__cell--non-numeric">Alimentos</th>
+											class="sn-attribute__title mdl-data-table__cell--non-numeric"><font size="4">Alimentos</font>
+										</th>
+										
 										<th
-											class="sn-attribute__title mdl-data-table__cell--non-numeric">Quantidade</th>
+											class="sn-attribute__title mdl-data-table__cell--non-numeric"><font size="4">Quantidade</font>
+										</th>
+										
+										<th
+											class="sn-attribute__title mdl-data-table__cell--non-numeric"><font size="4">Grupo Alimentar</font>
+										</th>	
 									</tr>
 								</thead>
 								<tbody>
 									<tr th:each="porcao : ${refeicao.porcoesAlimentos}">
+										<td width="5" 
+											style="width: 20%"
+											class="mdl-data-table__cell--non-numeric"
+											 th:text="${porcao.alimento.nome}"></td>
 										<td style="width: 20%"
 											class="mdl-data-table__cell--non-numeric"
-											th:text="${porcao.alimento.nome}"></td>
+											th:text="${porcao.quantidade + ' - ' + porcao.alimento.medidaCaseira}"></td>
 										<td style="width: 20%"
 											class="mdl-data-table__cell--non-numeric"
-											th:text="${porcao.quantidade}"></td>
+											th:text="${porcao.alimento.grupo.nome}"></td>	
 									</tr>
 
 								</tbody>
-								<thead>
-									<tr>
-										<th colspan="2"
-											class="sn-attribute__title mdl-data-table__cell--non-numeric">Observações</th>
-									</tr>
-								</thead>
-								<tbody>
-									<tr>
-										<td colspan="2" style="width: 20%"
-											class="mdl-data-table__cell--non-numeric"
-											th:text="${refeicao.observacao}"></td>
-									</tr>
-
-								</tbody>
+							
 							</table>
 						</div>
+						
+						<div class="sn-form__hdivider-5"></div>
+						
+						<div class="mdl-grid--no-spacing mdl-cell mdl-cell--12-col sn-padding--16">
+							<h5>Observações</h5>
+							<div class="sn-attribute__value"
+								th:text="${planoAlimentar.observacao}">
+							</div>
+						</div>
+							
 					</div>
 				</div>
 			</div>
@@ -179,6 +187,7 @@
 
 		<div id="modal-exclusao-plano-alimentar" class="sn-display-none">Você realmente deseja
 			excluir este Plano Alimentar?</div>
+			
 
 	</section>
 

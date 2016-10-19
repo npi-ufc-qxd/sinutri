@@ -14,6 +14,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -45,6 +46,10 @@ public class PlanoAlimentar {
 	@NotEmpty(message = " (Adicione pelo menos uma refeição.)")
 	private List<RefeicaoPlanoAlimentar> refeicoes;
 	
+	@Size(max=256, message="Máximo de caracteres excedido")
+	private String observacao;
+	
+
 	public PlanoAlimentar() {
 		this.refeicoes = new ArrayList<RefeicaoPlanoAlimentar>();
 	}
@@ -102,5 +107,12 @@ public class PlanoAlimentar {
 		this.refeicoes = refeicoes;
 	}
 
+	public String getObservacao() {
+		return observacao;
+	}
+	
+	public void setObservacao(String observacao) {
+		this.observacao = observacao;
+	}
 	
 }
