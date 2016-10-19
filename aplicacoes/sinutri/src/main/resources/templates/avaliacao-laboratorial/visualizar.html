@@ -35,8 +35,8 @@
 
 					<div class="mdl-cell mdl-cell--12-col sn-card">
 						<div
-							class="mdl-layout-title mdl-color-text--red-600 sn-padding--48">
-							AvaliacaoLaboratorial
+							class="mdl-layout-title mdl-color-text--orange-600 sn-padding--48">
+							Avaliação Laboratorial
 							<div id="div_arrow" class="sn-colapse-div sn-attribute__title">
 								<span
 									th:text="${avaliacaoLaboratorial.paciente.pessoa.nome+', '+avaliacaoLaboratorial.paciente.pessoa.getIdade()+' anos'}"></span>
@@ -149,8 +149,10 @@
 				</div>
 
 			</div>
-	<div id="modal-exclusao-avaliacao-laboratorial" class="sn-display-none">Você
-		realmente deseja excluir esta Avaliação Laboratorial?</div>
+		
+			<div id="modal-exclusao-avaliacao-laboratorial" class="sn-display-none">
+				Você realmente deseja excluir esta Avaliação Laboratorial?
+			</div>
 		</div>
 
 	</div>

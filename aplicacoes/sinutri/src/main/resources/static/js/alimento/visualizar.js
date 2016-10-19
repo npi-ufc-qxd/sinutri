@@ -3,7 +3,7 @@ $(function() {
 		$("#modal-exclusao-alimento").removeClass("sn-display-none");
 		var dialog = sn_base.doRegistryDialog({
 			title: "Excluir Alimento",
-			dialog: "#modal-exclusao-ialimento",
+			dialog: "#modal-exclusao-alimento",
 			buttons: [
 		          {
 		        	  label: "SIM",

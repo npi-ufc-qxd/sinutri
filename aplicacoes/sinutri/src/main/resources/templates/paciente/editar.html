@@ -92,7 +92,7 @@
 				<div class="sn-form-actions">
 	
 					<input type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect" value="Salvar" />
-					<a id="cancelar" th:href="@{${'/Nutricao/Buscar'}}" href="#" class="mdl-button mdl-js-button mdl-button--colored mdl-js-ripple-effect">Cancelar</a>
+					<a id="bt-cancelar" th:href="@{${'/Nutricao/Buscar'}}" href="#" class="mdl-button mdl-js-button mdl-button--colored mdl-js-ripple-effect">Cancelar</a>
 					
 				</div>
 				
@@ -103,7 +103,9 @@
 				
 	</div>
 	
-	<div class="sn-foreground"></div>
+	<div id="modal-cancelar" class="sn-display-none">
+		Você realmente deseja descartar as alterações?		
+	</div>
 	
 </section>
 

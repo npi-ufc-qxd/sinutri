@@ -21,7 +21,7 @@
 		<div class="mdl-cell mdl-cell--12-col">
 			<a th:href="@{/Nutricao/Buscar}" class="sn-breadcrumbs sn-attribute__title">SiNutri</a>
 			<a th:href="@{${'/Paciente/'+calculoEnergetico.paciente.id}}" class="sn-breadcrumbs sn-attribute__title">Paciente</a>
-			<a class="sn-attribute__title sn-breadcrumbs">Gastos Energéticos</a>
+			<a class="sn-attribute__title sn-breadcrumbs">Editar Cálculo Energético</a>
 		</div>
 			<div class="mdl-cell mdl-cell--12-col sn-card">
 				<div class="mdl-layout-title mdl-color-text--pink-600 sn-padding--48">
@@ -91,15 +91,15 @@
 					<input type="hidden" id="id" th:field="*{nutricionista.id}"/>
 					
 					<div class="sn-textfield mdl-cell mdl-cell--2-col ">							
-						<label class="sn-textfield__label">Peso (kg):
-						</label> 
+						<label class="sn-textfield__label">Peso (kg): </label> 
+						<label class="sn-textfield__messages sn-error-text" for="sn-text" th:if="${#fields.hasErrors('pesoSugerido')}" th:errors="*{pesoSugerido}"></label> 
 						<input id="inputPesoDesejado"
 							type="number" th:field="*{pesoSugerido}" min="0" max="9999"
 							class="sn-textfield__input" step="0.01" />
 					</div>
 					<div class="sn-textfield mdl-cell mdl-cell--2-col ">							
-						<label class="sn-textfield__label">Fator Atividade:
-						</label> 
+						<label class="sn-textfield__label">Fator Atividade: </label> 
+						<label class="sn-textfield__messages sn-error-text" for="sn-text" th:if="${#fields.hasErrors('fatorAtividade')}" th:errors="*{fatorAtividade}"></label>
 						<input id="inputFatorAtividade"
 							type="number" th:field="*{fatorAtividade}" min="0" max="9999"
 							class="sn-textfield__input" step="0.01" />
@@ -107,8 +107,8 @@
 					<div class="mdl-call mdl-cell--8-col" ></div>
 					<div class="sn-textfield mdl-cell mdl-cell--4-col">
 						<label class="sn-textfield__label">VET (cal):</label> 
-						<input id="inputVet" type="number" min="0" max="9999" th:readonly="true"
-							class="sn-textfield__input" step="0.01" />
+						<input id="inputVet" min="0" max="9999" th:readonly="true"
+							class="sn-textfield__input mdl-color--grey-300" />
 					</div>
 					
 					<div class="sn-textfield mdl-cell mdl-cell--4-col">
@@ -120,13 +120,13 @@
 					<div class="sn-textfield mdl-cell mdl-cell--2-col">
 						<label class="sn-textfield__label">Gramas</label>
 						<input id="inputGramasGlicidio" type="text" th:readonly="true"
-							class="sn-textfield__input"/>
+							class="sn-textfield__input mdl-color--grey-300"/>
 					</div>
 
 					<div class="sn-textfield mdl-cell mdl-cell--2-col">
 						<label class="sn-textfield__label">Calorias</label>
 						<input id="inputCaloriasGlicidio" type="text" th:readonly="true"
-							class="sn-textfield__input"/>
+							class="sn-textfield__input mdl-color--grey-300"/>
 					</div>
 					<div class="sn-textfield mdl-cell mdl-cell--4-col">
 						<label class="sn-textfield__label">VET
@@ -143,19 +143,19 @@
 					<div class="sn-textfield mdl-cell mdl-cell--2-col">
 						<label class="sn-textfield__label">Gramas</label>
 						<input id="inputGramasProteina" type="text" th:readonly="true"
-							class="sn-textfield__input"/>
+							class="sn-textfield__input mdl-color--grey-300"/>
 					</div>
 
 					<div class="sn-textfield mdl-cell mdl-cell--2-col">
 						<label class="sn-textfield__label">Calorias</label>
 						<input id="inputCaloriasProteina" type="text" th:readonly="true"
-							class="sn-textfield__input"/>
+							class="sn-textfield__input mdl-color--grey-300"/>
 					</div>
 					
 					<div class="sn-textfield mdl-cell mdl-cell--4-col">
 						<label class="sn-textfield__label">
-						VET redução (cal):</label> <input id="inputVetReducao" th:readonly="true" type="number" min="0" max="9999"
-							class="sn-textfield__input" step="0.01" />
+						VET redução (cal):</label> <input id="inputVetReducao" th:readonly="true" min="0" max="9999"
+							class="sn-textfield__input mdl-color--grey-300" />
 					</div>
 
 
@@ -168,13 +168,13 @@
 					<div class="sn-textfield mdl-cell mdl-cell--2-col">
 						<label class="sn-textfield__label">Gramas</label>
 						<input id="inputGramasLipidio" type="text" th:readonly="true"
-							class="sn-textfield__input"/>
+							class="sn-textfield__input mdl-color--grey-300"/>
 					</div>
 
 					<div class="sn-textfield mdl-cell mdl-cell--2-col">
 						<label class="sn-textfield__label">Calorias</label>
 						<input id="inputCaloriasLipidio" type="text" th:readonly="true"
-							class="sn-textfield__input"/>
+							class="sn-textfield__input mdl-color--grey-300"/>
 					</div>
 					
 					<div class="mdl-cell mdl-cell--4-col"></div>
@@ -182,7 +182,7 @@
 					<div class="sn-textfield mdl-cell mdl-cell--4-col">
 						<label class="sn-textfield__label">Total (%):</label>
 						<input id="inputTotal" type="text" th:readonly="true"
-							class="sn-textfield__input"/>
+							class="sn-textfield__input mdl-color--grey-300"/>
 					</div>
 				</div>
 				
@@ -347,7 +347,7 @@
 							</div>
 					
 							<div class="sn-textfield mdl-cell mdl-cell--1-col mdl-grid--no-spacing" th:align="center">
-								<input type="text" th:readonly="true" class="sn-textfield__input porcao-distribuicao" th:attr="data-id-grupo=${distribuicao.grupo.id}" />
+								<input type="text" th:readonly="true" class="sn-textfield__input mdl-color--grey-300 porcao-distribuicao" th:attr="data-id-grupo=${distribuicao.grupo.id}" />
 							</div>
 					</div>
 					
@@ -357,7 +357,7 @@
 
 						<input type="submit"
 							class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect"
-							value="Editar" /> <a id="cancelar"
+							value="Salvar" /> <a id="bt-cancelar"
 							th:href="@{${'/Paciente/'+calculoEnergetico.paciente.id+'/CalculosEnergetico/'+calculoEnergetico.id}}"
 							class="mdl-button mdl-js-button mdl-button--colored mdl-js-ripple-effect">Cancelar</a>
 					</div>
@@ -366,6 +366,10 @@
 			
 			</form>
 		</div>	
+		
+	   </div>
+	   <div id="modal-cancelar" class="sn-display-none">
+			Você realmente deseja descartar as alterações?		
 	   </div>
 	</section>
 	

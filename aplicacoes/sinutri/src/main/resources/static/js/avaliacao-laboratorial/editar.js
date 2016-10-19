@@ -88,30 +88,31 @@ $(document).ready(function() {
 			dialog.showModal();
 		});
 		
-		$( "#sn-cancelar" ).click(function(event) {
-	          var dialog = sn_base.doRegistryDialog({
-	              title: "Você realmente deseja descartar as alterações?", 
-	              dialog: "#sn-cancelar-modal", 
-	              buttons: [
-	                      {
-	                         label: "SIM",
-	                         attrs: {href: $(this).attr("href")}, 
-	                         action: function() {
-	                         dialog.close();
-	                         }
-	                      }, 
-	                  {
-	                      label: "NÃO",
+		$("#bt-cancelar").click( function(event) {
+			$("#modal-cancelar").removeClass("sn-display-none");
+			var dialog = sn_base.doRegistryDialog({
+				title: "Cancelar",
+				dialog: "#modal-cancelar",
+				buttons: [
+			          {
+			        	  label: "SIM",
+			        	  attrs: {href: $(this).attr("href")}, 
 	                      action: function() {
-	                      dialog.close();
+	                          dialog.close();
 	                      }
-	                }
-	              ]
-	        });          
-
-	          dialog.showModal();
-	          event.preventDefault();
-	    });	
+			          },
+			          {
+			        	  label: "NÃO",
+			        	  action: function() {
+			        		  dialog.close();
+			        	  }
+			          }
+				]
+			});
+			
+			dialog.showModal();
+			event.preventDefault();
+		});
 	});
 				
 });

@@ -130,7 +130,7 @@
 						<input type="submit"
 							class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect"
 							value="Cadastrar" data-upgraded=",MaterialButton,MaterialRipple"></input>
-						<a id="cancelar"
+						<a id="bt-cancelar"
 							th:href="@{${'/Paciente/'+prescricao.paciente.id}}" type="button"
 							class="mdl-button mdl-js-button mdl-button--colored mdl-js-ripple-effect"
 							data-upgraded=",MaterialButton,MaterialRipple"> Cancelar </a>
@@ -141,7 +141,9 @@
 
 		</div>
 
-		<div id="modal-cancelar"></div>
+		<div id="modal-cancelar" class="sn-display-none">
+			Você realmente deseja descartar as alterações?		
+		</div>
 	</div>
 
 </section>

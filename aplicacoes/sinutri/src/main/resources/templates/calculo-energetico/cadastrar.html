@@ -5,7 +5,7 @@
     layout:decorator="estrutura/dashboard">
 <head>
 	<title>Sinutri | Cálculo dos Gastos Energético</title>
-	<link rel="stylesheet" type="text/css" th:href="@{/css/material--picker.css}"/>
+	<link rel="stylesheet" type="text/css" th:href="@{/css/material-date-picker.css}"/>
 
 </head>
 <body>
@@ -21,7 +21,7 @@
 		<div class="mdl-cell mdl-cell--12-col">
 			<a th:href="@{/Nutricao/Buscar}" class="sn-breadcrumbs sn-attribute__title">SiNutri</a>
 			<a th:href="@{${'/Paciente/'+calculoEnergetico.paciente.id}}" class="sn-breadcrumbs sn-attribute__title">Paciente</a>
-			<a class="sn-attribute__title sn-breadcrumbs">Gastos Energéticos</a>
+			<a class="sn-attribute__title sn-breadcrumbs">Cadastrar Cálculo Energético</a>
 		</div>
 			<div class="mdl-cell mdl-cell--12-col sn-card">
 				<div class="mdl-layout-title mdl-color-text--pink-600 sn-padding--48">
@@ -89,17 +89,17 @@
 					<input type="hidden" th:field="*{atualizadoEm}" />
 					<input type="hidden" id="id" th:field="*{paciente.id}"/>
 					<input type="hidden" id="id" th:field="*{nutricionista.id}"/>
-					
-					<div class="sn-textfield mdl-cell mdl-cell--2-col ">							
-						<label class="sn-textfield__label">Peso (kg):
-						</label> 
+										
+					<div class="sn-textfield mdl-cell mdl-cell--2-col ">								
+						<label class="sn-textfield__label" for="inputPesoDesejado">Peso (kg): </label>
+						<label class="sn-textfield__messages sn-error-text" th:if="${#fields.hasErrors('pesoSugerido')}" th:errors="*{pesoSugerido}"></label> 
 						<input id="inputPesoDesejado"
 							type="number" th:field="*{pesoSugerido}" min="0" max="9999"
 							class="sn-textfield__input" step="0.01" />
 					</div>
 					<div class="sn-textfield mdl-cell mdl-cell--2-col ">							
-						<label class="sn-textfield__label">Fator Atividade:
-						</label> 
+						<label class="sn-textfield__label" for="inputFatorAtividade">Fator Atividade: </label> 
+						<label class="sn-textfield__messages sn-error-text" for="sn-text" th:if="${#fields.hasErrors('fatorAtividade')}" th:errors="*{fatorAtividade}"></label> 
 						<input id="inputFatorAtividade"
 							type="number" th:field="*{fatorAtividade}" min="0" max="9999"
 							class="sn-textfield__input" step="0.01" />
@@ -347,7 +347,7 @@
 							</div>
 					
 							<div class="sn-textfield mdl-cell mdl-cell--1-col mdl-grid--no-spacing" th:align="center">
-								<input type="text" th:readonly="true" class="sn-textfield__input mdl-color--grey-300 porcao-distribuicao " th:attr="data-id-grupo=${distribuicao.grupo.id}" />
+								<input type="text" th:readonly="true" class="sn-textfield__input mdl-color--grey-300 porcao-distribuicao" th:attr="data-id-grupo=${distribuicao.grupo.id}" />
 							</div>
 					</div>
 					
@@ -357,7 +357,7 @@
 
 						<input type="submit"
 							class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect"
-							value="Cadastrar" /> <a id="cancelar"
+							value="Cadastrar" /> <a id="bt-cancelar"
 							th:href="@{${'/Paciente/'+calculoEnergetico.paciente.id}}"
 							class="mdl-button mdl-js-button mdl-button--colored mdl-js-ripple-effect">Cancelar</a>
 					</div>
@@ -366,6 +366,11 @@
 			
 			</form>
 		</div>	
+		
+	   </div>
+	   
+	   <div id="modal-cancelar" class="sn-display-none">
+			Você realmente deseja descartar as alterações?		
 	   </div>
 	   
 	</section>

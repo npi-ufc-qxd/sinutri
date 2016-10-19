@@ -4,11 +4,11 @@
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
     layout:decorator="estrutura/dashboard">
 <head>
-	<title>Sinutri | Visualizar Avaliação Antropometrica</title>
+	<title>Sinutri | Visualizar Avaliação Antropométrica</title>
 </head>
 <body>
 	<section layout:fragment="title">
-		<label class="mdl-layout-title">Visualizar Antropometria</label>
+		<label class="mdl-layout-title">Visualizar Avaliação Antropométrica</label>
 	</section>
 	<section layout:fragment="conteudo">
 	<div class="mdl-grid">
@@ -32,7 +32,7 @@
 					<fabgroup class="sn-fab--bottom-right">
 	
 	                              <a th:href="@{${'/Paciente/' + avaliacaoAntropometrica.paciente.id +'/Antropometria/'+ avaliacaoAntropometrica.id +'/Excluir/'}}" 
-	                              		class="sn-fab sn-fab--hide mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-js-ripple-effect mdl-color--red-700 bt-excluir-avaliacaoAntropometrica">
+	                              		class="sn-fab sn-fab--hide mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-js-ripple-effect mdl-color--red-700 bt-excluir-avaliacao-antropometrica">
 	                                    <i class="material-icons mdl-color-text--white">delete</i>
 	                              </a>
 	
