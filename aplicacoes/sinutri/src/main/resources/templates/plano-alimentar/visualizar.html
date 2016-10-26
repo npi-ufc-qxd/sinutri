@@ -12,6 +12,9 @@
 	content="width=device-width, initial-scale=1.0, minimum-scale=1.0" />
 <link rel="stylesheet" type="text/css"
 	th:href="@{/css/material-date-picker.css}" />
+<!-- CORE CSS-->
+<link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"></link>
+<link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection"></link>
 
 </head>
 
@@ -124,35 +127,51 @@
 						</div>
 					</div>
 					<div
-						class="sn-card-top mdl-cell mdl-cell--12-col sn-card sn-padding--48 mdl-color--white mdl-grid">
+						class="sn-card-top mdl-cell mdl-cell--12-col sn-card sn-padding--48 mdl-color--white mdl-grid" id="tableToPDF">
 						<!-- Text atribute -->
-						<div class="mdl-grid--no-spacing mdl-cell mdl-cell--12-col">
-							<h4>Refeições</h4>
+						<div class="mdl-grid--no-spacing mdl-cell mdl-cell--12-col" id="naoAparecer">
+							<h4>Plano Alimentar Sugerido</h4>
 						</div>
-						<div class="mdl-cell mdl-cell--12-col"
-							th:each="refeicao : ${planoAlimentar.refeicoes}">
-							<div class="sn-form__hdivider-5"></div>
-							<div class="sn-attribute__title"
-								th:text="${#dates.format(refeicao.hora, 'HH:mm')}+' | '+ ${refeicao.descricao.nome}"></div>						
-							<table
-								class="mdl-cell mdl-cell--12-col mdl-data-table mdl-js-data-table">
+						
+						<div class="sn-attribute mdl-cell" hidden="true">
+								<div class="sn-textfield" th:text="${'Paciente: '+planoAlimentar.paciente.pessoa.nome}"></div>
+						</div>
+
+						<div class="mdl-cell mdl-cell--12-col" id="box1">	
+						<div class="sn-form__hdivider-5"></div>
+
+							<table class="mdl-cell mdl-cell--12-col mdl-data-table mdl-js-data-table">
 								<thead>
-									<tr>
-										<th
-											class="sn-attribute__title mdl-data-table__cell--non-numeric"><font size="4">Alimentos</font>
-										</th>
+								<tr>
+									<th	width="5"
+										style="width: 16%"
+										class="sn-attribute__title mdl-data-table__cell--non-numeric"><font
+										size="4">Refeição</font></th>
 										
-										<th
-											class="sn-attribute__title mdl-data-table__cell--non-numeric"><font size="4">Quantidade</font>
-										</th>
-										
-										<th
-											class="sn-attribute__title mdl-data-table__cell--non-numeric"><font size="4">Grupo Alimentar</font>
-										</th>	
-									</tr>
-								</thead>
-								<tbody>
+									<th width="5"
+										style="width: 16%"
+										class="sn-attribute__title mdl-data-table__cell--non-numeric"><font
+										size="4">Alimentos</font></th>
+
+									<th	width="5"
+										style="width: 15%"
+										class="sn-attribute__title mdl-data-table__cell--non-numeric"><font
+										size="4">Quantidade</font></th>
+
+									<th	width="5"
+										style="width: 20%"
+										class="sn-attribute__title mdl-data-table__cell--non-numeric"><font
+										size="4">Grupo Alimentar</font></th>
+								</tr>
+								
+							</thead>
+
+								<tbody th:each="refeicao : ${planoAlimentar.refeicoes}">	
 									<tr th:each="porcao : ${refeicao.porcoesAlimentos}">
+										<td width="5" 
+											style="width: 20%" 
+											class="mdl-data-table__cell--non-numeric" 
+											th:text="${refeicao.descricao.nome}+' | '+ ${#dates.format(refeicao.hora, 'HH:mm')}"></td>
 										<td width="5" 
 											style="width: 20%"
 											class="mdl-data-table__cell--non-numeric"
@@ -168,6 +187,7 @@
 								</tbody>
 							
 							</table>
+							
 						</div>
 						
 						<div class="sn-form__hdivider-5"></div>
@@ -178,6 +198,10 @@
 								th:text="${planoAlimentar.observacao}">
 							</div>
 						</div>
+						
+						<div class="mdl-grid--no-spacing mdl-cell mdl-cell--12-col sn-padding--16">
+							<a id="naoAparecer" href="#" onclick="gerarPdf()" class="btn btn-flat">Gerar PDF</a>
+						</div>
 							
 					</div>
 				</div>
@@ -187,17 +211,16 @@
 
 		<div id="modal-exclusao-plano-alimentar" class="sn-display-none">Você realmente deseja
 			excluir este Plano Alimentar?</div>
-			
 
 	</section>
 
 	<section layout:fragment="js">
-
 		<script type="text/javascript" th:src="@{/js/moment.js}"></script>
 		<script type="text/javascript" th:src="@{/js/material-date-picker.js}"></script>
-		<script type="text/javascript"
-			th:src="@{/js/plano-alimentar/visualizar.js}"></script>
-
+		<script type="text/javascript" th:src="@{/js/plano-alimentar/visualizar.js}"></script>
+		<script type="text/javascript" th:src="@{/js/jquery-1.11.2.min.js}"></script>
+		<script type="text/javascript" th:src="@{/js/jspdf.js}"></script>
+		<script type="text/javascript" th:src="@{/js/html2canvas.js}"></script>
 	</section>
 
 </body>
