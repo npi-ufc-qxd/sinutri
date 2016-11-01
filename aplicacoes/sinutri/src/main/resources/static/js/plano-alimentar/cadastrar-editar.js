@@ -303,6 +303,7 @@ $(function()  {
 			var valorMedidaCaseira = data.valorMedidaCaseira; 
 			var valorMedidaPadrao = data.valorMedidaPadrao;
 			
+			
 			$("#input-medidaCaseira").val(valorMedidaCaseira + " " + medidaCaseira);
 			$("#input-medidaCaseira").data("valorMedidaCaseira", valorMedidaCaseira);
 			$("#input-medidaCaseira").data("medidaCaseira", medidaCaseira);
@@ -317,16 +318,26 @@ $(function()  {
 		function atualizarMedidas() {
 			var value = $("#sn-alimento-quantidade").val();
 			if(value && !isNaN(value)) {
-			
+	
 				var medidaCaseira = $("#input-medidaCaseira").data("medidaCaseira");
 				var valorMedidaCaseira = $("#input-medidaCaseira").data("valorMedidaCaseira");
-				
 				var medidaPadrao = $("#input-medidaPadrao").data("medidaPadrao");
 				var valorMedidaPadrao = $("#input-medidaPadrao").data("valorMedidaPadrao");
 				
-				$("#input-medidaCaseira").val((value * valorMedidaCaseira) + " " + medidaCaseira);
-				$("#input-medidaPadrao").val((value * valorMedidaPadrao) + " " + medidaPadrao);
 				
+				if(medidaCaseira){
+					$("#input-medidaCaseira").val((value * valorMedidaCaseira) + " " + medidaCaseira);
+				}
+				if(!medidaCaseira){
+					$("#input-medidaCaseira").val((value * valorMedidaCaseira));
+					
+				}
+				if(!medidaPadrao){				
+					$("#input-medidaPadrao").val((value * valorMedidaPadrao));
+				}
+				if(medidaPadrao){				
+					$("#input-medidaPadrao").val((value * valorMedidaPadrao) + " " + medidaPadrao);
+				}
 			}
 		}
 		

@@ -383,8 +383,8 @@ public class PacienteController {
 			redirectAttributes.addFlashAttribute("mensagens", mensagens);
 			return "redirect:/Nutricao/Buscar";
 		}
-		Mensagem mensagem = new Mensagem("Editado com sucesso!", Tipo.SUCESSO, Prioridade.MEDIA);
-		redirectAttributes.addFlashAttribute("mensagens", mensagem);
+		Mensagem mensagem = new Mensagem("Salvo com sucesso!", Tipo.SUCESSO, Prioridade.MEDIA);
+		redirectAttributes.addFlashAttribute("mensagem", mensagem);
 		consultaService.editarPlanoAlimentar(planoAlimentar);
 		return "redirect:/Paciente/"+paciente.getId()+"/PlanoAlimentar/"+planoAlimentar.getId();
 	}
