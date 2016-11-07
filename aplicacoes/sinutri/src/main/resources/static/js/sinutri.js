@@ -20,6 +20,8 @@ $(document).ready(function() {
 
 	componentHandler.registerUpgradedCallback("MaterialLayout", function(elem) {
 		
+		jQuery.fn.exists = function() { return this.length > 0; }
+		
 		sn_base.doInit();
 		sn_parallax_background.doInit();
 		sn_toast.doInit();
@@ -37,9 +39,6 @@ $(document).ready(function() {
 	});
 
 });
-
-
-jQuery.fn.exists = function() { return this.length > 0; }
 
 
 var tryExecute = function(func, prefix, successMessage, errorMessage) {

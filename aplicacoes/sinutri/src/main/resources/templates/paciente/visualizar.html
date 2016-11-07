@@ -272,7 +272,7 @@
 							<a th:href="@{${'/Paciente/' + paciente.id + '/PlanoAlimentar'}}" class="sn-card-add mdl-button mdl-button--raised mdl-js-button mdl-color-text--white mdl-js-ripple-effect sn-float--right mdl-color--brown-500">ADICIONAR</a>
 						</div>
 
-						<div th:id="planoAlimentares" class="sn-card-list-container mdl-cell mdl-cell--12-col">
+						<div th:id="planosAlimentares" class="sn-card-list-container mdl-cell mdl-cell--12-col">
 							<ul class="sn-card-list mdl-list list">
 								<li th:each="planoAlimentar,iterationStatus : ${paciente.planosAlimentares}" class="sn-card-list__item mdl-list__item mdl-list__item--one-line mdl-color--grey-200">
 									<span class="mdl-list__item-primary-content">
