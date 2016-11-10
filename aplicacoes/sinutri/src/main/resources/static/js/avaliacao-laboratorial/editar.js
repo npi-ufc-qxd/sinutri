@@ -40,6 +40,7 @@ $(document).ready(function() {
 						var type = $(dialog).find("#sn-exame-type").val();
 						var val = $(dialog).find("#sn-exame-value").val();
 						var text  = $(dialog).find("#sn-exame-type option:selected").text();
+						var textUnidade = $(dialog).find("#input-medida").val();
 						
 						if(validacaoVazio($(dialog))){
 							return;
@@ -51,7 +52,8 @@ $(document).ready(function() {
 							".sn-exame-type": {text: text},
 							".sn-exame-value": {text: val},
 							".sn-exame-input-nome": {value: type},
-							".sn-exame-input-resultado": {value: val}
+							".sn-exame-input-resultado": {value: val},
+							".sn-exame-unidade-value": {text: textUnidade}
 						};
 						
 						var el;
@@ -68,12 +70,22 @@ $(document).ready(function() {
 
 						$(dialog).find("#sn-exame-item-index").val("");
 
-						componentHandler.upgradeDom();						
+						componentHandler.upgradeDom();		
+						
+						 var dataUnidadadeMedida = $(this).find(':selected').data("unidadademedida");
+							$("#exame-unidade-value").text(dataUnidadadeMedida);
 
 					}
 				}
 			]
 
+		});
+		
+		$("#sn-exame-type").change(function() {
+			 var value = this.value;
+			 var dataUnidadadeMedida = $(this).find(':selected').data("unidadademedida");
+			 $("#input-medida").val(dataUnidadadeMedida);
+			 
 		});
 		
 		$("#sn-add-exame-button").click(function() {
